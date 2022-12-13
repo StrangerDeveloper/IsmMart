@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_countdown_timer/current_remaining_time.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ism_mart/models/exports_model.dart';
 import 'package:intl/intl.dart';
+import 'package:ism_mart/models/exports_model.dart';
 
 const kPrimaryColor = Color(0xFFACC254);
 const kLightGreenColor = Color(0xFFDCEDC2);
@@ -128,6 +129,13 @@ class AppConstant {
     DateTime.fromMicrosecondsSinceEpoch(timestamp.microsecondsSinceEpoch);
 
     return DateFormat(customFormat).format(date);
+  }
+
+  static String getFormattedTime(CurrentRemainingTime? time) {
+    return "${time!.days != null && time.days! > 0 ? "${time.days} days &" : ""}"
+        "${time.hours != null ? time.hours! < 10 ? "0${time.hours}:" : "${time.hours}:" : ""}"
+        "${time.min != null ? time.min! < 10 ? "0${time.min}:" : "${time.min}:" : ""}"
+        "${time.sec! < 10 ? "0${time.sec}" : time.sec}";
   }
 
 

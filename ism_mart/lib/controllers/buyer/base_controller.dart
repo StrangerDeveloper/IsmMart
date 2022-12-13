@@ -104,7 +104,7 @@ class BaseController extends GetxController {
     }).catchError((error) {
       isProductsLoading(false);
       debugPrint(">>>fetchSliderDiscountProducts: $error");
-    });
+    });;
   }
 
   //End Fetch SliderImages Section

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_countdown_timer/current_remaining_time.dart';
+import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/api_service.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
@@ -20,6 +22,7 @@ class DashboardUI extends GetView<BaseController> {
             delegate: SliverChildListDelegate(
               [
                 _slider(controller.sliderImages),
+
                 _displayDiscountProducts(),
 
                 StickyLabelWithViewMoreOption(
@@ -136,68 +139,107 @@ class DashboardUI extends GetView<BaseController> {
   Widget _displayDiscountProducts() {
     return Obx(
       () => Container(
+          margin: const EdgeInsets.only(top: 10),
         color: kLightGreenColor,
-        height: 150,
-        child: controller.discountSliderProductsList.isEmpty
-            ? NoDataFound()
-            : ListView.builder(
-                shrinkWrap: true,
-                itemCount: controller.discountSliderProductsList.length,
-                itemBuilder: (_, index) {
-                  ProductModel model =
-                      controller.discountSliderProductsList[index];
-                  return Container();
-                },
-              ),
+        height: 280,
+        child: Column(
+          children: [
+            StickyLabel(text: "Latest Big Discount Deals",),
+            Expanded(child: controller.discountSliderProductsList.isEmpty
+                ? NoDataFound()
+                : ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: controller.discountSliderProductsList.length,
+              itemBuilder: (_, index) {
+                ProductModel model =
+                controller.discountSliderProductsList[index];
+                return _singleDiscountProductItem(model);
+              },
+            ))
+          ],
+        ),
       ),
     );
   }
 
   _singleDiscountProductItem(ProductModel model) {
-
-    return Container(
-      clipBehavior: Clip.hardEdge,
-      margin: const EdgeInsets.only(right: 4),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        color: Get.isDarkMode ? Colors.grey.shade700 : Colors.white60,
-        border: Border.all(
-            color: Get.isDarkMode ? Colors.transparent : Colors.grey.shade200,
-            width: 1),
-      ),
-      child: ListTile(
-        leading: CustomNetworkImage(
-          imageUrl: model.thumbnail,
+    var endTime =
+        DateTime.now().add(const Duration(days: 1)).millisecondsSinceEpoch;
+    return Padding(
+      padding: const EdgeInsets.all(3.0),
+      child: Container(
+       // clipBehavior: Clip.hardEdge,
+        padding: const EdgeInsets.all(8.0),
+        //margin: const EdgeInsets.only(right: 4),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          color: kWhiteColor,
+          border: Border.all(
+              color: Get.isDarkMode ? Colors.transparent : Colors.grey.shade200,
+              width: 1),
         ),
-        title: Row(
-          children: [
-            RichText(
-              text: TextSpan(children: [
-                TextSpan(text: "${model.discount} "),
-                TextSpan(text: "Off"),
-              ]),
+        child: ListTile(
+          leading: Container(
+            width: 80,
+            child: CustomNetworkImage(
+              imageUrl: model.thumbnail,
             ),
-            AppConstant.spaceWidget(width: 10),
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-              decoration: BoxDecoration(
-                color: kLightGreenColor,
-                borderRadius: BorderRadius.circular(15),
+          ),
+          title: Row(
+            children: [
+              RichText(
+                text: TextSpan(children: [
+                  TextSpan(text: "${model.discount}% ", style: bodyText1.copyWith(color: kRedColor)),
+                  TextSpan(text: "Off", style: bodyText1),
+                ]),
               ),
-              child: CustomText(
-                title: "Active",
-                color: kWhiteColor,
-                size: 13,
-                weight: FontWeight.w600,
+              AppConstant.spaceWidget(width: 20),
+              Container(
+                padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                decoration: BoxDecoration(
+                  color: kPrimaryColor,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: CustomText(
+                  title: "Active",
+                  color: kWhiteColor,
+                  size: 13,
+                  weight: FontWeight.w600,
+                ),
               ),
+            ],
+          ),
+          subtitle:Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppConstant.spaceWidget(height: 5),
+                CustomText(
+                  title: model.name,
+                  size: 15,
+                  weight: FontWeight.w600,
+                ),
+                CountdownTimer(
+                  endTime: endTime,
+                  widgetBuilder: (context, CurrentRemainingTime? time) {
+                    if (time == null) {
+                      endTime = DateTime.now()
+                          .add(const Duration(days: 1))
+                          .millisecondsSinceEpoch;
+                      return Text(
+                        'Time over',
+                        style: bodyText2,
+                      );
+                    }
+                    return Text(
+                      AppConstant.getFormattedTime(time),
+                      style: headline5.copyWith(color: kPrimaryColor),
+                    );
+                  },
+                ),
+              ],
             ),
-          ],
-        ),
-        subtitle: Column(
-          children: [
-
-          ],
-        ),
+          ),
       ),
     );
   }

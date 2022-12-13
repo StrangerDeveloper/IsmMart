@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
-import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
@@ -131,25 +130,22 @@ class SignUpUI extends GetView<AuthController> {
                             autofocus: false,
                             labelText: 'Phone',
                             autoValidateMode:
-                            AutovalidateMode.onUserInteraction,
-                            validator: (value) => !GetUtils.isPhoneNumber(value!)
-                                ? "Invalid phone number format"
-                                : null,
+                                AutovalidateMode.onUserInteraction,
+                            validator: (value) =>
+                                !GetUtils.isPhoneNumber(value!)
+                                    ? "Invalid phone number format"
+                                    : null,
                             onChanged: (value) => {},
-                            onSaved: (value){},
+                            onSaved: (value) {},
                             maxLines: 1,
                           ),
                           AppConstant.spaceWidget(height: 40),
                           Obx(() => controller.isLoading.isTrue
-                              ? CustomLoading(
-                                  isItForWidget: true,
-                                  color: kPrimaryColor,
-                                )
+                              ? CustomLoading(isItBtn: true)
                               : CustomButton(
                                   onTap: () async {
                                     if (formKey.currentState!.validate()) {
-                                      await controller
-                                          .register();
+                                      await controller.register();
                                     }
                                   },
                                   text: "Register",

@@ -128,23 +128,6 @@ class CategoriesUI extends GetView<CategoryController> {
                       );
                     })
 
-        /* ListView.builder(
-              itemCount: controller.subCategories.length,
-              itemBuilder: (_, index) {
-                SubCategory subCategory = controller.subCategories[index];
-                return Container(
-                  padding: const EdgeInsets.all(8.0),
-                  margin: const EdgeInsets.all( 5.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: kLightGreyColor),
-                  ),
-                  child: CustomText(
-                    title: subCategory.name,
-                    textAlign: TextAlign.center,
-                  ),
-                );
-              });*/
         );
   }
 }

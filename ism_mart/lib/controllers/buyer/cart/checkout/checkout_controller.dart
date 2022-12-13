@@ -210,6 +210,7 @@ class CheckoutController extends GetxController {
 
   Future<void> makePayment({String? amount}) async {
     try {
+      isLoading(true);
       //STEP 1: Create Payment Intent
       paymentIntent = await createPaymentIntent(amount!, 'USD');
 
@@ -226,6 +227,7 @@ class CheckoutController extends GetxController {
       //STEP 3: Display Payment sheet
       displayPaymentSheet();
     } catch (err) {
+      isLoading(false);
       throw Exception(err);
     }
   }
@@ -242,6 +244,7 @@ class CheckoutController extends GetxController {
       //Make post request to Stripe
       return _apiProvider.postStripePaymentInfo(data: body);
     } catch (err) {
+      isLoading(false);
       throw Exception(err.toString());
     }
   }
@@ -252,6 +255,7 @@ class CheckoutController extends GetxController {
   }
 
   displayPaymentSheet() async {
+    isLoading(false);
     try {
       await Stripe.instance.presentPaymentSheet().then((value) {
         //Clear paymentIntent variable after successful payment

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
-import 'package:ism_mart/api_helper/export_api_helper.dart';
-import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/ui/exports_ui.dart';
 import 'package:ism_mart/presentation/widgets/export_widgets.dart';
@@ -13,11 +11,9 @@ class SingleProductView extends GetView<ProductController> {
 
   @override
   Widget build(BuildContext context) {
-    //controller.fetchSliderImages();
+
     if (Get.parameters['id'] == null) {
-      return const Center(
-        child: CircularProgressIndicator(),
-      );
+      return const Center(child: CircularProgressIndicator());
     }
 
     controller.fetchProduct(int.parse(Get.parameters['id']!));
@@ -32,7 +28,6 @@ class SingleProductView extends GetView<ProductController> {
   }
 
   Widget _build({context, ProductModel? productModel}) {
-    debugPrint("ProductSingleView: ${productModel.toString()}");
     return Scaffold(
       backgroundColor: Colors.grey[300]!,
       body: CustomScrollView(
@@ -43,8 +38,7 @@ class SingleProductView extends GetView<ProductController> {
               [
                 productModel!.images!.isEmpty
                     ? CustomNetworkImage(
-                        imageUrl: productModel.thumbnail!,
-                        //fit: BoxFit.contain,
+                        imageUrl: productModel.thumbnail,
                         width: MediaQuery.of(Get.context!).size.width,
                         height: MediaQuery.of(Get.context!).size.height * 0.4,
                       )
@@ -63,9 +57,8 @@ class SingleProductView extends GetView<ProductController> {
   }
 
   SliverAppBar _sliverAppBar() {
-    var baseController = Get.find<BaseController>();
     return SliverAppBar(
-      //backgroundColor: kTransparent,
+      backgroundColor: kPrimaryColor,
       automaticallyImplyLeading: true,
       leadingWidth: 30,
       floating: true,
@@ -85,14 +78,10 @@ class SingleProductView extends GetView<ProductController> {
                     AppConstant.spaceWidget(width: 10),
                     CartIcon(
                       onTap: () {
-                          Get.toNamed(Routes.cartRoute);
-
-                        //Get.back();
-                        //baseController.changePage(2);
+                        Get.toNamed(Routes.cartRoute);
                       },
                       iconWidget: Icon(
                         IconlyLight.buy,
-                        color: kPrimaryColor,
                         size: 25,
                       ),
                     ),
@@ -197,11 +186,10 @@ class SingleProductView extends GetView<ProductController> {
             AppConstant.spaceWidget(height: 8),
             // reviews
             Row(
-              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
                   child: Container(
-                    width: 30,
                     height: 20,
                     padding: const EdgeInsets.symmetric(horizontal: 6),
                     decoration: BoxDecoration(
@@ -210,17 +198,15 @@ class SingleProductView extends GetView<ProductController> {
                         borderRadius: BorderRadius.circular(5)),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Icon(
                           Icons.star,
                           color: kWhiteColor,
-                          size: 9,
+                          size: 10,
                         ),
                         CustomText(
-                            title: "Top rated",
-                            style: textTheme.bodyText1!
-                                .copyWith(color: kWhiteColor, fontSize: 11)),
+                            title: "Top rated", size: 11, color: kWhiteColor),
                       ],
                     ),
                   ),
@@ -230,7 +216,9 @@ class SingleProductView extends GetView<ProductController> {
                   flex: 2,
                   child: Row(
                     children: [
-                      CustomText(title: "${productModel.rating}/5 (44)"),
+                      CustomText(
+                          title:
+                              "${productModel.rating!.toStringAsFixed(1)}/5 (44)"),
                       const Icon(
                         Icons.arrow_forward_ios_sharp,
                         color: kPrimaryColor,
@@ -240,29 +228,12 @@ class SingleProductView extends GetView<ProductController> {
                     ],
                   ),
                 ),
-                /*Expanded(
-                  //alignment: Alignment.centerRight,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      const Icon(
-                        Icons.favorite_rounded,
-                        color: kPrimaryColor,
-                        size: 15,
-                      ),
-                      CustomText(
-                          title: "1k",
-                          style: textTheme.bodyText2!
-                              .copyWith(fontWeight: FontWeight.w600))
-                    ],
-                  ),
-                ),*/
               ],
             ),
             AppConstant.spaceWidget(height: 8),
             ListTile(
               dense: true,
-              leading: const Icon(Icons.question_answer),
+              leading: const Icon(Icons.question_answer, color: kPrimaryColor,),
               title: CustomText(
                   title: "5 Product Questions and Answer",
                   style: textTheme.bodyText2),
@@ -274,13 +245,13 @@ class SingleProductView extends GetView<ProductController> {
             ),
             ListTile(
               dense: true,
-              leading: const Icon(Icons.store),
+              leading: const Icon(Icons.store, color: kPrimaryColor,),
               title: RichText(
                 text: TextSpan(
                   children: [
                     TextSpan(
                         text: "${productModel.brand} ",
-                        style: textTheme.bodyLarge),
+                        style: textTheme.bodyMedium),
                     TextSpan(
                       text: "${_getPositiveResponse()} ",
                       style: textTheme.bodySmall!.copyWith(
@@ -308,72 +279,43 @@ class SingleProductView extends GetView<ProductController> {
         padding: const EdgeInsets.all(10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            ListTile(
-              onTap: () => showVariationBottomSheet(productModel: productModel),
-              dense: true,
-              leading: const CustomText(title: "Variation"),
-              title: Obx(
-                () => CustomText(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CustomText(
+                  title: "Description",
+                  size: 18,
+                  weight: FontWeight.w600,
+                ),
+                CustomText(
                     title:
-                        "Size: ${controller.size.value}, Color: ${controller.color.value}",
-                    style: textTheme.bodyText2),
-              ),
-              trailing: const Icon(
-                Icons.arrow_forward_ios_sharp,
-                color: kPrimaryColor,
-                size: 15,
-              ),
+                        "Brand: ${productModel!.brand}, Sku: ${productModel.sku}", weight: FontWeight.w600,),
+              ],
             ),
-            ListTile(
-              dense: true,
-              leading: const CustomText(title: "Specification"),
-              title: CustomText(
-                  title:
-                      "Brand: ${productModel!.brand}, Sku: ${productModel.sku}",
-                  style: textTheme.bodyText2),
-              trailing: const Icon(
-                Icons.arrow_forward_ios_sharp,
-                color: kPrimaryColor,
-                size: 15,
-              ),
-            ),
-            ListTile(
-              dense: true,
-              leading: const CustomText(title: "Delivery"),
-              title: CustomText(title: "deliver to!", style: textTheme.caption),
-              subtitle: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CustomText(
-                      title: "Standard Delivery, 2 - 7 Days!",
-                      style: textTheme.caption),
-                  CustomText(
-                      title: "Rs. 109",
-                      style: textTheme.caption!.copyWith(color: Colors.blue)),
-                ],
-              ),
-              trailing: const Icon(
-                Icons.arrow_forward_ios_sharp,
-                color: kPrimaryColor,
-                size: 15,
-              ),
-            ),
-            ListTile(
-              dense: true,
-              leading: const CustomText(title: "Service"),
-              title: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: _getServices().map((e) {
-                    return CustomText(title: e, style: textTheme.caption);
-                  }).toList()),
-              trailing: const Icon(
-                Icons.arrow_forward_ios_sharp,
-                color: kPrimaryColor,
-                size: 15,
-              ),
-            ),
+           Container(
+             padding: const EdgeInsets.all(10.0),
+             child:
+
+             Column(
+               children: [
+                 CustomText(
+                   title: productModel.description ?? "", weight: FontWeight.w700,),
+
+                 Column(
+                     crossAxisAlignment: CrossAxisAlignment.start,
+                     children: _getServices().map((e) {
+                       return Padding(
+                         padding: const EdgeInsets.all(2.0),
+                         child: CustomText(
+                           title: e,
+                           //size: 13,
+                         ),
+                       );
+                     }).toList()),
+               ],
+             ),
+           )
           ],
         ),
       ),
@@ -386,9 +328,11 @@ class SingleProductView extends GetView<ProductController> {
 
   List<String> _getServices() {
     return <String>[
-      "• 100% Authentic",
+      "• Free shipping apply to all orders over shipping \$100",
+      "• Guaranteed 100% organic from natural products",
+      "• 7 Days returns money back guarantee",
       "• 14 days easy Return",
-      "• Change of mind not acceptable",
+      "• Cash on Delivery Available",
       "• Warranty not available"
     ];
   }
@@ -430,11 +374,7 @@ class SingleProductView extends GetView<ProductController> {
                               color: Colors.redAccent))
                     ],
                   ),
-                Obx(
-                  () => CustomText(
-                      title:
-                          "Size: ${controller.size.value}, Color: ${controller.color.value}"),
-                ),
+
               ],
             ),
           ),
@@ -517,6 +457,9 @@ class SingleProductView extends GetView<ProductController> {
           onDecrementPress: () => controller.decrement(),
           onIncrementPress: () => controller.increment(),
           textEditingController: controller.quantityController,
+          bgColor: kLightGreenColor,
+          textColor: kDarkColor,
+
         ),
       ],
     );
@@ -527,20 +470,20 @@ class SingleProductView extends GetView<ProductController> {
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        CustomButton(
+        /*CustomButton(
           onTap: () => LocalStorageHelper.deleteAllCart(),
           text: "Buy Now",
           color: Colors.yellow[800],
           width: 120,
           height: 35,
-        ),
+        ),*/
         CustomButton(
           onTap: () {
             controller.addItemToCart(product: productModel);
             Get.back();
           },
           text: "Add to Cart",
-          width: 120,
+          width: 320,
           height: 35,
         ),
       ],
@@ -551,24 +494,22 @@ class SingleProductView extends GetView<ProductController> {
     return BottomAppBar(
       elevation: 20,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            _getNavBarItems(icon: Icons.store),
-            _getNavBarItems(icon: Icons.message),
-            CustomButton(
-              onTap: () =>
-                  showVariationBottomSheet(productModel: controller.state),
-              text: "Buy Now",
-              color: Colors.yellow[800],
-              width: 100,
-              height: 35,
+            //_getNavBarItems(icon: Icons.store,),
+            ProductQuantityCounter(
+              onDecrementPress: () => controller.decrement(),
+              onIncrementPress: () => controller.increment(),
+              textEditingController: controller.quantityController,
+              bgColor: kLightGreenColor,
+              textColor: kDarkColor,
             ),
             CustomButton(
               onTap: () =>
                   showVariationBottomSheet(productModel: controller.state),
-              text: "Add to Cart",
+              text: "Next",
               width: 100,
               height: 35,
             ),
@@ -586,7 +527,7 @@ class SingleProductView extends GetView<ProductController> {
       child: Icon(
         icon,
         color: kPrimaryColor,
-        size: 22,
+        size: 30,
       ),
     );
   }

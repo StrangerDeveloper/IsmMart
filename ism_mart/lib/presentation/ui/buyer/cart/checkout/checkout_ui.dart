@@ -44,13 +44,16 @@ class CheckoutUI extends GetView<CheckoutController> {
               _subTotalDetails(),
               Column(
                 children: [
-                  CustomButton(
-                      width: 150,
-                      height: 40,
-                      onTap: () => controller.makePayment(
-                          amount: controller.cartController.totalCartAmount.value
-                              .toString()),
-                      text: "Confirm")
+                  Obx(() => controller.isLoading.isTrue
+                      ? CustomLoading(isItBtn: true)
+                      : CustomButton(
+                          width: 320,
+                          height: 40,
+                          onTap: () => controller.makePayment(
+                              amount: controller
+                                  .cartController.totalCartAmount.value
+                                  .toString()),
+                          text: "Confirm Order"))
                 ],
               ),
             ],

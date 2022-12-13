@@ -1,7 +1,8 @@
 import 'dart:convert';
 
-import 'package:ism_mart/api_helper/api_service.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'package:ism_mart/api_helper/api_service.dart';
 
 class ApiRepository {
   final ApiService _apiService;
@@ -30,8 +31,9 @@ class ApiRepository {
 
   }
   Future<List<dynamic>> fetchSliderDiscountProducts() async {
-    var queryParam = {"limit": 2};
-    var response = await _apiService.get(endpoint: "slider/getDiscountProduct", query: queryParam);
+    var queryParam = {"limit": "2"};
+    var response = await _apiService.get(endpoint: "slider/getDiscountProducts", query: queryParam);
+    debugPrint("FetchSlider: ${response.body['data']}");
     return response.body['data'];
   }
 

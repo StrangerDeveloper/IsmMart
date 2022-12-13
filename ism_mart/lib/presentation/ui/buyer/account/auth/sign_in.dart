@@ -90,7 +90,7 @@ class SignInUI extends GetView<AuthController> {
                           AppConstant.spaceWidget(height: 40),
                           Obx(
                             () => controller.isLoading.isTrue
-                                ? CustomLoading(isItForWidget: true, color: kPrimaryColor,)
+                                ? CustomLoading(isItBtn: true)
                                 : CustomButton(
                                     onTap: () {
                                       if (formKey.currentState!.validate()) {

@@ -6,12 +6,13 @@ class ProductQuantityCounter extends StatelessWidget {
       {Key? key,
       this.onDecrementPress,
       this.onIncrementPress,
-      this.textEditingController})
+      this.textEditingController, this.bgColor, this.textColor})
       : super(key: key);
 
   final VoidCallback? onDecrementPress;
   final VoidCallback? onIncrementPress;
   final TextEditingController? textEditingController;
+  final Color? bgColor, textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class ProductQuantityCounter extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 8),
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       decoration: BoxDecoration(
-        color: kPrimaryColor,
+        color: bgColor??kPrimaryColor,
         borderRadius: BorderRadius.circular(30),
       ),
       height: 40,
@@ -30,7 +31,7 @@ class ProductQuantityCounter extends StatelessWidget {
             iconSize: 18,
             alignment: Alignment.topCenter,
             onPressed: onDecrementPress,
-            icon: const Icon(Icons.remove, color: kWhiteColor,),
+            icon:  Icon(Icons.remove, color: textColor??kWhiteColor,),
           ),
           AppConstant.spaceWidget(width: 4),
           SizedBox(
@@ -39,17 +40,13 @@ class ProductQuantityCounter extends StatelessWidget {
             child: TextField(
               controller: textEditingController,
               enabled: false,
-              style: bodyText1.copyWith(color: kWhiteColor, fontSize: 16),
+              style: bodyText1.copyWith(color: textColor??kWhiteColor, fontSize: 16),
               textAlignVertical: TextAlignVertical.center,
               decoration:  InputDecoration(
-
                   contentPadding: EdgeInsets.only(bottom: 12),
                   border: InputBorder.none,
-                  //fillColor: kWhiteColor,
-                  //labelStyle: bodyText1.copyWith(color: kWhiteColor),
-                  //filled: true,
                   hintText: '1',
-                  hintStyle: bodyText1.copyWith(color: kWhiteColor, fontSize: 16)),
+                  hintStyle: bodyText1.copyWith(color: textColor??kWhiteColor, fontSize: 16)),
               textAlign: TextAlign.center,
 
               keyboardType: TextInputType.number,
@@ -60,7 +57,7 @@ class ProductQuantityCounter extends StatelessWidget {
             iconSize: 18,
             alignment: Alignment.topCenter,
             onPressed: onIncrementPress,
-            icon: const Icon(Icons.add,color: kWhiteColor),
+            icon:  Icon(Icons.add,color: textColor??kWhiteColor),
           ),
         ],
       ),
