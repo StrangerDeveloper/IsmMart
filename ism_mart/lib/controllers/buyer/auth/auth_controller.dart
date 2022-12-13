@@ -1,0 +1,266 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:ism_mart/api_helper/export_api_helper.dart';
+import 'package:ism_mart/models/exports_model.dart';
+import 'package:ism_mart/utils/exports_utils.dart';
+
+class AuthController extends GetxController {
+  final AuthProvider authProvider;
+
+  AuthController(this.authProvider);
+
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
+  var firstNameController = TextEditingController();
+  var lastNameController = TextEditingController();
+  var phoneController = TextEditingController();
+
+  var storeNameController = TextEditingController();
+  var storeDescController = TextEditingController();
+
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    //getCurrentUser();
+    //getToken();
+    getCountries();
+  }
+
+  @override
+  void onReady() {
+    // TODO: implement onReady
+    super.onReady();
+
+
+    getCurrentUser();
+    getToken();
+
+    LocalStorageHelper.localStorage.listenKey(LocalStorageHelper.currentUserKey,
+        (value) {
+      getCurrentUser();
+      getToken();
+    });
+  }
+
+  var isLoading = false.obs;
+
+  login() async {
+    isLoading(true);
+    await authProvider
+        .postLogin(
+            email: emailController.text.toString(),
+            password: passwordController.text.trim())
+        .then((UserResponse? userResponse) async {
+      isLoading(false);
+      if (userResponse != null) {
+        if (userResponse.success!) {
+
+          Get.back();
+          AppConstant.displaySnackBar("success", userResponse.message);
+          await LocalStorageHelper.storeUser(userModel: userResponse.userModel)
+              .then((value) {
+            clearLoginController();
+          });
+        } else {
+          AppConstant.displaySnackBar("error", userResponse.message);
+        }
+      } else {
+        AppConstant.displaySnackBar(
+            "error", "Something went wrong with credentials");
+      }
+    }).catchError((error) {
+      isLoading(false);
+      debugPrint("Error: $error");
+    });
+    //isLoading(false);
+  }
+
+  resendEmailVerificationLink() async {
+    isLoading(false);
+    String email = emailController.text.trim();
+
+    await authProvider
+        .resendVerificationLink(email: email)
+        .then((UserResponse? response) {
+      if (response != null) {
+        if (response.success!) {
+          Get.back();
+          debugPrint("Email: ${response.toString()}");
+          AppConstant.displaySnackBar("success", response.message);
+        } else {
+          AppConstant.displaySnackBar("error", response.message);
+        }
+      } else
+        AppConstant.displaySnackBar(
+            "error", "Something went wrong with credentials");
+    }).catchError((onError) {
+      debugPrint("Verification Link Error: $onError");
+    });
+  }
+
+  register() async {
+    isLoading(true);
+
+    UserModel newUser = UserModel(
+        firstName: firstNameController.text.trim(),
+        lastName: lastNameController.text.trim(),
+        email: emailController.text.trim(),
+        phone: phoneController.text.trim(),
+        password: passwordController.text.trim());
+
+    await authProvider
+        .postRegister(userModel: newUser)
+        .then((UserResponse? response) {
+      isLoading(false);
+      if (response != null) {
+        if (response.success!) {
+          Get.back();
+          AppConstant.displaySnackBar("success", response.message);
+          clearControllers();
+        } else
+          AppConstant.displaySnackBar('error', response.message);
+      } else
+        AppConstant.displaySnackBar('error', 'Something went wrong!');
+    }).catchError((error) {
+      isLoading(false);
+      AppConstant.displaySnackBar('error', "something went wrong!");
+    });
+  }
+
+  registerStore() async {
+    isLoading(true);
+    String storeName = storeNameController.text.trim();
+    String storeDesc = storeDescController.text;
+    if (userToken!.isNotEmpty) {
+      await authProvider
+          .postStoreRegister(
+              token: userToken!, storeName: storeName, storeDesc: storeDesc)
+          .then((UserResponse? userResponse) {
+        isLoading(false);
+        if (userResponse != null) {
+          if (userResponse.success!) {
+            Get.back();
+            AppConstant.displaySnackBar("success", userResponse.message);
+            clearStoreController();
+            getCurrentUser();
+          } else
+            AppConstant.displaySnackBar('error', userResponse.message);
+        } else
+          AppConstant.displaySnackBar('error', "something went wrong!");
+      }).catchError((error) {
+        isLoading(false);
+        debugPrint("RegisterStore: Error $error");
+      });
+    } else {
+      isLoading(false);
+      AppConstant.displaySnackBar('error', "Current User not found!");
+    }
+  }
+
+//TODO: Current User Info
+  var _userModel = UserModel().obs;
+
+  setUserModel(UserModel? userModel) => _userModel(userModel);
+
+  UserModel? get userModel => _userModel.value;
+  var _isSessionExpired = true.obs;
+  bool? get isSessionExpired => _isSessionExpired.value;
+
+  getCurrentUser() async {
+
+    await LocalStorageHelper.getStoredUser().then((user) async {
+      if (user.token != null) {
+        isLoading(true);
+        await authProvider
+            .getCurrentUser(token: user.token!)
+            .then((userResponse) {
+          isLoading(false);
+          if (userResponse.message != null &&
+              userResponse.message!.contains(ApiConstant.SESSION_EXPIRED)) {
+            _isSessionExpired(true);
+          } else
+            _isSessionExpired(false);
+
+          if (userResponse.errors != null && userResponse.errors!.isNotEmpty) {
+            setUserModel(UserModel(error: userResponse.errors!.first));
+          } else
+            setUserModel(userResponse.userModel!);
+
+        }).catchError((error) {
+          isLoading(false);
+          _isSessionExpired(true);
+          debugPrint(">>>GetCurrentUser: $error");
+        });
+      }
+    });
+
+    debugPrint(">>>GetCurrentUser: ${ApiConstant.SESSION_EXPIRED}: $isSessionExpired");
+  }
+
+  var _currUserToken = "".obs;
+
+  String? get userToken => _currUserToken.value;
+
+  getToken() async {
+    await LocalStorageHelper.getStoredUser().then((user) {
+      print("Auth Token: ${user.token}");
+      _currUserToken(user.token);
+    });
+  }
+
+  //TODO: getCountries and Cities
+  var countries = <CountryModel>[].obs;
+  var cities = <CountryModel>[].obs;
+  var selectedCountry = "Select Country".obs;
+  var selectedCity = "Select City".obs;
+
+  getCountries() async {
+    countries.clear();
+    countries.insert(0, CountryModel(name: selectedCountry.value, id: 0));
+    await authProvider.getCountries().then((data) {
+      countries.addAll(data);
+      cities.insert(0, CountryModel(name: selectedCity.value, id: 0));
+    }) .catchError((error) {
+      debugPrint(">>>>Countries: $error");
+    });
+  }
+
+  getCitiesByCountry({required countryId}) async {
+    cities.clear();
+    cities.insert(0, CountryModel(name: selectedCity.value, id: 0));
+    await authProvider.getCities(countryId: countryId).then((data) {
+      cities.addAll(data);
+    }).catchError((error) {
+      debugPrint(">>>>Cities: $error");
+    });
+  }
+
+  //END Current User
+
+  clearControllers() {
+    firstNameController.clear();
+    lastNameController.clear();
+    phoneController.clear();
+  }
+
+  clearLoginController() {
+    passwordController.clear();
+    emailController.clear();
+  }
+
+  clearStoreController() {
+    storeNameController.clear();
+    storeDescController.clear();
+    phoneController.clear();
+  }
+
+  @override
+  void onClose() {
+    // TODO: implement onClose
+    super.onClose();
+    clearControllers();
+    clearLoginController();
+    clearStoreController();
+  }
+}
