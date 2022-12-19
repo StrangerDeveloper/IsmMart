@@ -58,31 +58,14 @@ class SignUpUI extends GetView<AuthController> {
                           FormInputFieldWithIcon(
                             controller: controller.firstNameController,
                             iconPrefix: Icons.person,
-                            labelText: 'First Name',
+                            labelText: 'Full Name',
                             iconColor: kPrimaryColor,
                             autofocus: true,
                             textStyle: bodyText1,
                             autoValidateMode:
                                 AutovalidateMode.onUserInteraction,
                             validator: (value) => GetUtils.isBlank(value!)!
-                                ? "First Name is Required!"
-                                : null,
-                            keyboardType: TextInputType.name,
-                            onChanged: (value) {},
-                            onSaved: (value) {},
-                          ),
-                          AppConstant.spaceWidget(height: 15),
-                          FormInputFieldWithIcon(
-                            controller: controller.lastNameController,
-                            iconPrefix: Icons.person,
-                            labelText: 'Last Name',
-                            iconColor: kPrimaryColor,
-                            autofocus: true,
-                            textStyle: bodyText1,
-                            autoValidateMode:
-                                AutovalidateMode.onUserInteraction,
-                            validator: (value) => GetUtils.isBlank(value!)!
-                                ? "Last Name is Required!"
+                                ? "Full Name is Required!"
                                 : null,
                             keyboardType: TextInputType.name,
                             onChanged: (value) {},

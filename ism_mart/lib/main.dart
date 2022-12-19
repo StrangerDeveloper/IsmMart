@@ -16,6 +16,7 @@ void main() async {
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(statusBarColor: kPrimaryColor));
+
   runApp(const MyApp());
 }
 
@@ -26,11 +27,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //Get.put(AppInitBinding());
-    final ThemesController themeController = Get.put(ThemesController());
 
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "Ism-Mart",
+      title: "ISMMART",
       theme: Themes.lightTheme,
       darkTheme: Themes.darkTheme,
       themeMode: getThemeMode(themeController.theme.value),
@@ -38,6 +38,9 @@ class MyApp extends StatelessWidget {
       getPages: Routes.pages,
       defaultTransition: Transition.fadeIn,
       initialBinding: AppInitBinding(),
+      translations: AppTranslations(),
+      locale: getLocale(languageController.languageKey.value),
+      fallbackLocale: Locale('en', 'US'),
     );
   }
 
@@ -56,5 +59,12 @@ class MyApp extends StatelessWidget {
     }
 
     return themeMode;
+  }
+
+  Locale getLocale(String languageKey) {
+    // Locale? locale = Get.locale!;
+    return Locale(
+        languageController.optionsLocales[languageKey]['languageCode'],
+        languageController.optionsLocales[languageKey]['countryCode']);
   }
 }

@@ -86,37 +86,46 @@ class CategoriesUI extends GetView<CategoryController> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           buildSvgLogo(),
-          const Expanded(flex: 6, child: SearchBar()),
+          Obx(
+            () => Expanded(
+              flex: 6,
+              child: SearchBar(searchText: controller.selectedCategory.value),
+            ),
+          ),
         ],
       ),
     );
   }
 
   Widget _categoryBody() {
-    return Obx(() => controller.isCategoriesLoading.isTrue
-            ? CustomLoading(
-                isItForWidget: true,
-                color: kPrimaryColor,
-              )
-            : controller.subCategories.isEmpty
-                ? const NoDataFound(text: "No Sub Categories Found")
-                : GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                    ),
-                    itemCount: controller.subCategories.length,
-                    itemBuilder: (_, index) {
-                      SubCategory subCategory = controller.subCategories[index];
-                      return Card(
+    return Obx(
+      () => controller.isCategoriesLoading.isTrue
+          ? CustomLoading(
+              isItForWidget: true,
+              color: kPrimaryColor,
+            )
+          : controller.subCategories.isEmpty
+              ? NoDataFound(text: "no_sub_category_found".tr)
+              : GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                  ),
+                  itemCount: controller.subCategories.length,
+                  itemBuilder: (_, index) {
+                    SubCategory subCategory = controller.subCategories[index];
+                    return InkWell(
+                      onTap: () {
+                        Get.toNamed(Routes.searchRoute,
+                            arguments: {"searchText": "${subCategory.name}"});
+                      },
+                      child: Card(
                         shadowColor: Colors.black,
                         //color:kWhiteColor,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             CustomNetworkImage(
-                                imageUrl: AppConstant.defaultImgUrl,
-                                width: 50),
+                                imageUrl: AppConstant.defaultImgUrl, width: 50),
                             CustomText(
                               title: subCategory.name,
                               //color: kWhiteColor,
@@ -125,9 +134,10 @@ class CategoriesUI extends GetView<CategoryController> {
                             ),
                           ],
                         ),
-                      );
-                    })
-
-        );
+                      ),
+                    );
+                  },
+                ),
+    );
   }
 }

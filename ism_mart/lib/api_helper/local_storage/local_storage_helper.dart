@@ -25,6 +25,9 @@ class LocalStorageHelper {
     return UserModel();
   }
 
+
+
+
   static Future<void> addItemToCart({CartModel? cartModel}) async {
     var list = <CartModel>[];
     if (localStorage.read(cartItemKey) != null) {

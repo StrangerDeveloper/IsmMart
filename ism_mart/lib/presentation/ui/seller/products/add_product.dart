@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconly/iconly.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/presentation/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
@@ -12,6 +13,9 @@ class AddProductsUI extends GetView<SellersController> {
   @override
   Widget build(BuildContext context) {
     var formKey = GlobalKey<FormState>();
+    debugPrint("Categories List: ${controller.categoriesList.length}");
+    debugPrint("Categories List: ${controller.categoryController.categories.length}");
+
     return Obx(() => controller.isLoading.isTrue
         ? CustomLoading()
         : SafeArea(
@@ -40,7 +44,7 @@ class AddProductsUI extends GetView<SellersController> {
                               AppConstant.spaceWidget(height: 20),
                               FormInputFieldWithIcon(
                                 controller: controller.prodNameController,
-                                iconPrefix: Icons.shopping_bag_rounded,
+                                iconPrefix: IconlyLight.paper_plus,
                                 labelText: 'Product Name',
                                 iconColor: kPrimaryColor,
                                 autofocus: false,
@@ -57,7 +61,7 @@ class AddProductsUI extends GetView<SellersController> {
                               AppConstant.spaceWidget(height: 15),
                               FormInputFieldWithIcon(
                                 controller: controller.prodPriceController,
-                                iconPrefix: Icons.attach_money_rounded,
+                                iconPrefix: IconlyLight.wallet,
                                 labelText: 'Product Price',
                                 iconColor: kPrimaryColor,
                                 autofocus: false,
@@ -92,25 +96,25 @@ class AddProductsUI extends GetView<SellersController> {
                               ),
                               AppConstant.spaceWidget(height: 15),
                               FormInputFieldWithIcon(
-                                controller: controller.prodBrandController,
-                                iconPrefix: Icons.category_rounded,
-                                labelText: 'Product Brand',
+                                controller: controller.prodDiscountController,
+                                iconPrefix: IconlyLight.discount,
+                                labelText: 'Product Discount',
                                 iconColor: kPrimaryColor,
                                 autofocus: false,
                                 textStyle: bodyText2,
                                 autoValidateMode:
                                     AutovalidateMode.onUserInteraction,
-                                validator: (value) => GetUtils.isBlank(value!)!
-                                    ? "Brand is required?"
+                                validator: (value) => !GetUtils.isNumericOnly(value!)
+                                    ? "Discount is required?"
                                     : null,
-                                keyboardType: TextInputType.name,
+                                keyboardType: TextInputType.number,
                                 onChanged: (value) {},
                                 onSaved: (value) {},
                               ),
                               AppConstant.spaceWidget(height: 15),
                               FormInputFieldWithIcon(
                                 controller: controller.prodSKUController,
-                                iconPrefix: Icons.category_rounded,
+                                iconPrefix: IconlyLight.bookmark,
                                 labelText: 'Product sku',
                                 iconColor: kPrimaryColor,
                                 autofocus: false,
@@ -146,8 +150,7 @@ class AddProductsUI extends GetView<SellersController> {
                                       controller.setSelectedCategory(
                                           category: newValue.toString());
                                     },
-                                    items: controller
-                                        .categoryController.categories
+                                    items: controller.categoriesList
                                         .map((categoryModel) {
                                       String category = categoryModel.name!;
                                       return DropdownMenuItem(
@@ -165,8 +168,8 @@ class AddProductsUI extends GetView<SellersController> {
 
                               ///TODO: Sub Category
                               Obx(
-                                () => controller.categoryController
-                                        .subCategories.isEmpty
+                                () => controller
+                                        .subCategoriesList.isEmpty
                                     ? Container()
                                     : Container(
                                         padding: const EdgeInsets.symmetric(
@@ -188,8 +191,7 @@ class AddProductsUI extends GetView<SellersController> {
                                                 subCategory:
                                                     newValue.toString());
                                           },
-                                          items: controller
-                                              .categoryController.subCategories
+                                          items: controller.subCategoriesList
                                               .map((categoryModel) {
                                             String category =
                                                 categoryModel.name!;

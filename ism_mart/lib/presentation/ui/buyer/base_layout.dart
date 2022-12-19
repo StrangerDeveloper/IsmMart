@@ -30,20 +30,20 @@ class BaseLayout extends GetView<BaseController> {
           () => Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _getNavBarItems(icon: IconlyLight.home, title:"Home",page: 0),
-              _getNavBarItems(icon: IconlyLight.category, title:"Categories",page: 1),
-              _getNavBarItems(icon: IconlyLight.bag_2, title:"Deals",page: 4),
+              _getNavBarItems(icon: IconlyLight.home, title:"home".tr,page: 0),
+              _getNavBarItems(icon: IconlyLight.category, title:"categories".tr,page: 1),
+              _getNavBarItems(icon: IconlyLight.bag_2, title:"deals".tr,page: 4),
               controller.cartCount.value <= 0
-                  ? _getNavBarItems(icon: IconlyLight.buy,title:"Cart", page: 2)
+                  ? _getNavBarItems(icon: IconlyLight.buy,title:"cart".tr, page: 2)
                   : CartIcon(
                       onTap: () {
                         //Get.to(Routes.cartRoute);
                         controller.changePage(2);
                       },
                       iconWidget:
-                          _getNavBarItems(icon: IconlyLight.buy, title:"Cart", page: 2),
+                          _getNavBarItems(icon: IconlyLight.buy, title:"cart".tr, page: 2),
                     ),
-              _getNavBarItems(icon: Icons.menu, title:"Menu", page: 3),
+              _getNavBarItems(icon: Icons.menu, title:"menu".tr, page: 3),
             ],
           ),
         ),

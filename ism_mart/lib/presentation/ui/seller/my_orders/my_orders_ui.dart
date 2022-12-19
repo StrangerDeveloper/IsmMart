@@ -5,7 +5,7 @@ import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
-class MyOrdersUI extends GetView<BuyerOrderController> {
+class MyOrdersUI extends GetView<OrderController> {
   const MyOrdersUI({Key? key}) : super(key: key);
 
   @override
@@ -28,11 +28,11 @@ class MyOrdersUI extends GetView<BuyerOrderController> {
       backgroundColor: Colors.grey[100]!,
       appBar: AppBar(
         title: CustomText(
-          title: 'My Orders',
+          title: 'my_orders'.tr,
           style: textTheme.headline5,
         ),
       ),
-      body: NoDataFound(text: "No Orders Found"),
+      body: NoDataFound(text: "no_order_found".tr),
     ));
   }
 
@@ -46,7 +46,7 @@ class MyOrdersUI extends GetView<BuyerOrderController> {
           SliverList(
             delegate: SliverChildListDelegate([
               _orderStats(),
-              StickyLabel(text: "Recent Orders", textSize: 18),
+              StickyLabel(text: "recent_orders".tr, textSize: 18),
               _buildRecentOrders(list: listData),
             ]),
           ),
@@ -60,13 +60,17 @@ class MyOrdersUI extends GetView<BuyerOrderController> {
       //expandedHeight: 20.0,
       floating: true,
       pinned: false,
-      backgroundColor: kWhiteColor,
+     /* leading: InkWell(
+        onTap: ()=>Get.back(),
+        child: Icon(Icons.arrow_back_ios_new, size: 18, color: kWhiteColor,),
+      ),*/
+      backgroundColor: kPrimaryColor,
       flexibleSpace: FlexibleSpaceBar(
-        centerTitle: true,
+        //centerTitle: true,
         //titlePadding: const EdgeInsets.symmetric(horizontal: 30),
         title: CustomText(
-          title: 'My Orders',
-          style: textTheme.headline5,
+          title: 'my_orders'.tr,
+            style: textTheme.headline6!.copyWith(color: kWhiteColor)
         ),
       ),
     );

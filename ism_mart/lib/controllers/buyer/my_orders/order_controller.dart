@@ -5,10 +5,10 @@ import 'package:ism_mart/controllers/controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
-class BuyerOrderController extends GetxController with StateMixin {
+class OrderController extends GetxController with StateMixin {
   final OrderProvider _orderProvider;
 
-  BuyerOrderController(this._orderProvider);
+  OrderController(this._orderProvider);
 
   @override
   void onReady() {
@@ -26,8 +26,8 @@ class BuyerOrderController extends GetxController with StateMixin {
     isLoading(true);
 
     await _orderProvider
-        .getOrderStats(token: authController.userToken!)
-        .then((OrderResponse? response) {
+            .getOrderStats(token: authController.userToken!)
+            .then((OrderResponse? response) {
       isLoading(false);
       if (response != null) {
         if (response.success!) {
@@ -35,31 +35,35 @@ class BuyerOrderController extends GetxController with StateMixin {
         } else
           showSnackBar(message: response.message);
       }
-    }).catchError((error) {
+    }) /*.catchError((error) {
       isLoading(false);
       debugPrint(">>>>FetchOrderStats: $error");
-    });
+    })*/
+        ;
   }
+
+  var recentOrdersList = <OrderModel>[].obs;
 
   fetchOrders() async {
     change(null, status: RxStatus.loading());
+    recentOrdersList.clear();
     await _orderProvider
         .getMyOrders(token: authController.userToken)
         .then((data) {
       change(data, status: RxStatus.success());
-    }).catchError((error) {
+      recentOrdersList.addAll(data);
+    })/*.catchError((error) {
       debugPrint(">>>>FetchOrderStats: $error");
       change(null, status: RxStatus.error(error));
-    });
+    })*/;
   }
 
   fetchOrderById(OrderModel model) async {
-    await _orderProvider.getMyOrdersDetails(token: authController.userToken, orderId: model.id)
-       .then((value) {
-
-    }).catchError((error) {
+    await _orderProvider
+        .getMyOrdersDetails(token: authController.userToken, orderId: model.id)
+        .then((value) {})
+        .catchError((error) {
       debugPrint(">>>>fetchOrderById: $error");
-
     });
   }
 

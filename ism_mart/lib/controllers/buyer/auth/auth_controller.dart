@@ -15,6 +15,7 @@ class AuthController extends GetxController {
   var lastNameController = TextEditingController();
   var phoneController = TextEditingController();
 
+  var ownerNameController = TextEditingController();
   var storeNameController = TextEditingController();
   var storeDescController = TextEditingController();
 
@@ -31,7 +32,6 @@ class AuthController extends GetxController {
   void onReady() {
     // TODO: implement onReady
     super.onReady();
-
 
     getCurrentUser();
     getToken();
@@ -55,7 +55,6 @@ class AuthController extends GetxController {
       isLoading(false);
       if (userResponse != null) {
         if (userResponse.success!) {
-
           Get.back();
           AppConstant.displaySnackBar("success", userResponse.message);
           await LocalStorageHelper.storeUser(userModel: userResponse.userModel)
@@ -103,8 +102,9 @@ class AuthController extends GetxController {
     isLoading(true);
 
     UserModel newUser = UserModel(
+        //firstName: firstNameController.text.trim(),
+        //lastName: lastNameController.text.trim(),
         firstName: firstNameController.text.trim(),
-        lastName: lastNameController.text.trim(),
         email: emailController.text.trim(),
         phone: phoneController.text.trim(),
         password: passwordController.text.trim());
@@ -132,10 +132,16 @@ class AuthController extends GetxController {
     isLoading(true);
     String storeName = storeNameController.text.trim();
     String storeDesc = storeDescController.text;
+    String ownerName = ownerNameController.text.trim();
     if (userToken!.isNotEmpty) {
       await authProvider
           .postStoreRegister(
-              token: userToken!, storeName: storeName, storeDesc: storeDesc)
+              token: userToken!,
+              storeName: storeName,
+              storeDesc: storeDesc,
+              ownerName: ownerName,
+              phone: userModel?.phone,
+              websiteUrl: 'www.google.com')
           .then((UserResponse? userResponse) {
         isLoading(false);
         if (userResponse != null) {
@@ -164,11 +170,16 @@ class AuthController extends GetxController {
   setUserModel(UserModel? userModel) => _userModel(userModel);
 
   UserModel? get userModel => _userModel.value;
+
   var _isSessionExpired = true.obs;
+
   bool? get isSessionExpired => _isSessionExpired.value;
 
-  getCurrentUser() async {
+  void setSession(bool? value) {
+    _isSessionExpired.value = value!;
+  }
 
+  getCurrentUser() async {
     await LocalStorageHelper.getStoredUser().then((user) async {
       if (user.token != null) {
         isLoading(true);
@@ -178,24 +189,25 @@ class AuthController extends GetxController {
           isLoading(false);
           if (userResponse.message != null &&
               userResponse.message!.contains(ApiConstant.SESSION_EXPIRED)) {
-            _isSessionExpired(true);
+            setSession(true);
           } else
-            _isSessionExpired(false);
+            setSession(false);
 
           if (userResponse.errors != null && userResponse.errors!.isNotEmpty) {
             setUserModel(UserModel(error: userResponse.errors!.first));
           } else
             setUserModel(userResponse.userModel!);
-
         }).catchError((error) {
           isLoading(false);
-          _isSessionExpired(true);
+          setSession(true);
           debugPrint(">>>GetCurrentUser: $error");
         });
-      }
+      } else
+        setSession(true);
     });
 
-    debugPrint(">>>GetCurrentUser: ${ApiConstant.SESSION_EXPIRED}: $isSessionExpired");
+    debugPrint(
+        ">>>GetCurrentUser: ${ApiConstant.SESSION_EXPIRED}: $isSessionExpired");
   }
 
   var _currUserToken = "".obs;
@@ -207,6 +219,7 @@ class AuthController extends GetxController {
       print("Auth Token: ${user.token}");
       _currUserToken(user.token);
     });
+    update();
   }
 
   //TODO: getCountries and Cities
@@ -221,7 +234,7 @@ class AuthController extends GetxController {
     await authProvider.getCountries().then((data) {
       countries.addAll(data);
       cities.insert(0, CountryModel(name: selectedCity.value, id: 0));
-    }) .catchError((error) {
+    }).catchError((error) {
       debugPrint(">>>>Countries: $error");
     });
   }
@@ -250,6 +263,7 @@ class AuthController extends GetxController {
   }
 
   clearStoreController() {
+    ownerNameController.clear();
     storeNameController.clear();
     storeDescController.clear();
     phoneController.clear();

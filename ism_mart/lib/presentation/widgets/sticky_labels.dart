@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ism_mart/utils/constants.dart';
 
 
@@ -22,7 +23,7 @@ class StickyLabel extends StatelessWidget {
         top: kFixPadding,
       ),
       child: Text(
-        text!,
+        text!.tr,
         style: TextStyle(
           color: textColor ?? kDarkColor,
           fontWeight: FontWeight.bold,

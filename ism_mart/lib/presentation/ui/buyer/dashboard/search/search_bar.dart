@@ -3,15 +3,16 @@ import 'package:get/get.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
 class SearchBar extends StatelessWidget {
-  const SearchBar({Key? key}) : super(key: key);
+  const SearchBar({Key? key, this.searchText}) : super(key: key);
+  final String? searchText;
 
   @override
   Widget build(BuildContext context) {
     return Hero(
       tag: "productSearchBar",
       child: GestureDetector(
-        onTap: () =>
-            Get.toNamed(Routes.searchRoute, arguments: {"searchText": "computer"}),
+        onTap: () => Get.toNamed(Routes.searchRoute,
+            arguments: {"searchText": searchText ?? " "}),
         child: Container(
           height: 34.0,
           alignment: Alignment.center,
@@ -22,12 +23,12 @@ class SearchBar extends StatelessWidget {
             borderRadius: BorderRadius.circular(8.0),
           ),
           child: Row(
-            children: const [
+            children: [
               Icon(Icons.search, color: kPrimaryColor),
               Padding(
                 padding: EdgeInsets.only(left: 4.0),
                 child: Text(
-                  "What are you looking for?",
+                  "search_in".tr,
                   style: TextStyle(
                     color: kLightColor,
                     fontSize: 12.0,

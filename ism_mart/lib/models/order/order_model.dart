@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:ism_mart/api_helper/api_service.dart';
 import 'package:ism_mart/models/exports_model.dart';
 
@@ -24,7 +25,7 @@ class OrderModel {
 
   int? id;
   String? paymentMethod, status;
-  int? totalPrice, shippingPrice;
+  num? totalPrice, shippingPrice;
   DateTime? expectedDeliveryDate, createdAt, updatedAt;
   UserModel? billingDetail;
   List<OrderItem>? orderItems;

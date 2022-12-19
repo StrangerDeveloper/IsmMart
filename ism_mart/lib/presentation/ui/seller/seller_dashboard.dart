@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconly/iconly.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
+import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
@@ -15,9 +17,17 @@ class SellerDashboard extends GetView<SellersController> {
           SliverList(
             delegate: SliverChildListDelegate(
               [
-                _topHeaders(),
-                  
-                Center(child: NoDataFound(text: "You have no orders yet!",)),
+                _orderStats(),
+                StickyLabel(text: "recent_orders".tr, textSize: 18),
+                kSmallDivider,
+                if(controller.orderController.recentOrdersList.isEmpty)
+                 SizedBox(
+                   height: MediaQuery.of(Get.context!).size.height * 0.5,
+                   child: _ordersNotFound(),
+                 )
+                else
+                _buildRecentOrders(list: controller.orderController.recentOrdersList),
+
               ],
             ),
           ),
@@ -26,90 +36,191 @@ class SellerDashboard extends GetView<SellersController> {
     );
   }
 
-  Widget _topHeaders() {
-    return Container(
+  Widget _orderStats() {
+    return Obx(() => SizedBox(
       height: 200,
-      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-      child: GridView.builder(
-            //scrollDirection: Axis.horizontal,
-          //padding: const EdgeInsets.all(0.5),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            //maxCrossAxisExtent: 150,
-            crossAxisCount: 2,
-            childAspectRatio: 2,
-            mainAxisSpacing: 5.0,
-            crossAxisSpacing: 5.0,
-          ),
-          itemCount: controller.getTopCardsData().length,
-          itemBuilder: (context, index) {
-            var e = controller.getTopCardsData()[index];
-            return _singleTopHeaderItem(
-                onTap: () {},
-                title: e['title'],
-                icon: e['icon'],
-                count: e['count'],
-                iconColor: e['iconColor']);
-          }),
-    );
-  }
-
-  Widget _singleTopHeaderItem({onTap, title,count, icon, iconColor}) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-        decoration: BoxDecoration(
-          color: kWhiteColor,
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: kLightGreyColor),
-          boxShadow: [
-            BoxShadow(
-              color: kPrimaryColor.withOpacity(0.2),
-              offset: Offset(0, 1),
-              blurRadius: 8,
-            )
-          ],
-        ),
-        child: Row(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
           children: [
-            /// icon with colorful bg
-            Container(
-              width: 45,
-              height: 45,
-              decoration: BoxDecoration(
-                  color: iconColor.withOpacity(0.15), shape: BoxShape.circle),
-              child: Icon(
-                icon,
-                size: 25,
-                color: iconColor,
+            Expanded(
+              flex: 3,
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 3,
+                    child: CustomOrderStatsItem(
+                      onTap: () {},
+                      title: "total_orders".tr,
+                      icon: Icons.shopping_cart_outlined,
+                      iconColor: kRedColor,
+                      value: controller.orderController.orderStats!.totalOrders,
+                    ),
+                  ),
+                  AppConstant.spaceWidget(width: 5),
+                  Expanded(
+                    flex: 3,
+                    child: CustomOrderStatsItem(
+                      onTap: () {},
+                      title: "pending_orders".tr,
+                      icon: Icons.pending_outlined,
+                      iconColor: Colors.orange,
+                      value: controller.orderController.orderStats!.pendingOrders,
+                    ),
+                  ),
+                ],
               ),
             ),
-
-            AppConstant.spaceWidget(width: 5),
-            Flexible(
-              //flex: 4,
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CustomText(
-                      title: title,
-                      weight: FontWeight.w600,
-                      textAlign: TextAlign.center,
-                      size: 15,
+            AppConstant.spaceWidget(height: 5),
+            Expanded(
+              flex: 3,
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 3,
+                    child: CustomOrderStatsItem(
+                      onTap: () {},
+                      title: "Processing_orders".tr,
+                      icon: Icons.local_shipping_outlined,
+                      iconColor: Colors.blue,
+                      value: controller.orderController.orderStats!.activeOrders,
                     ),
-                    CustomText(
-                      title: "$count",
-                      weight: FontWeight.bold,
-                      size: 17,
+                  ),
+                  AppConstant.spaceWidget(width: 5),
+                  Expanded(
+                    flex: 3,
+                    child: CustomOrderStatsItem(
+                      onTap: () {},
+                      title: "completed_orders".tr,
+                      icon: Icons.done_outline_rounded,
+                      iconColor: Colors.teal,
+                      value: controller.orderController.orderStats!.completedOrders,
                     ),
-                  ],
-                ),
-              )
+                  ),
+                ],
+              ),
             ),
           ],
         ),
       ),
+    ));
+  }
+
+  _buildRecentOrders({List<OrderModel>? list}) {
+    return list!.isEmpty
+        ? NoDataFound(text: "No Orders Found")
+        : ListView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: list.length,
+      itemBuilder: (_, index) {
+        OrderModel model = list[index];
+        return _singleRecentOrderItem(model);
+      },
+    );
+  }
+
+  _singleRecentOrderItem(OrderModel? model) {
+    return Card(
+      color: kWhiteColor,
+      margin: const EdgeInsets.all(5.0),
+      child: Padding(
+        padding: const EdgeInsets.all(3.0),
+        child: Stack(
+          children: [
+            ListTile(
+              title: Row(
+                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CustomText(
+                      title: '${'order'.tr} #${model!.id}',
+                      weight: FontWeight.bold,
+                      size: 17),
+                  AppConstant.spaceWidget(width: 10),
+                  CustomText(
+                    title: model.status!.capitalizeFirst,
+                    weight: FontWeight.w600,
+                    color: getStatusColor(model),
+                  ),
+                ],
+              ),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomText(
+                      title:
+                      '${"order_time".tr}: ${AppConstant.formattedDataTime("MMM dd, yyyy", model.createdAt!)}',
+                      color: kLightColor),
+                  CustomText(
+                      title:
+                      '${'expected_delivery'.tr}: ${AppConstant.formattedDataTime("MMM dd, yyyy", model.expectedDeliveryDate!)}',
+                      color: kLightColor),
+                  AppConstant.spaceWidget(height: 10),
+                ],
+              ),
+            ),
+            Positioned(
+              top: 5,
+              right: 5,
+              child: CustomPriceWidget(
+                title: '${model.totalPrice}',
+                style: textTheme.bodyText2,
+              ),
+            ),
+            Positioned(
+              bottom: 5,
+              right: 5,
+              child: CustomButton(
+                onTap: () {},
+                text: "details".tr,
+                //color: Colors.orangeAccent,
+                width: 70,
+                height: 30,
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Color getStatusColor(OrderModel? model) {
+    switch (model!.status!.toLowerCase()) {
+      case "pending":
+        return Colors.deepOrange;
+      case "active":
+      case "completed":
+        return Colors.teal;
+      default:
+        return Colors.blue;
+    }
+  }
+
+ Widget _ordersNotFound(){
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Container(
+          width: 80,
+          height: 80,
+          decoration: BoxDecoration(
+              color: kPrimaryColor.withOpacity(0.22), shape: BoxShape.circle),
+          child: Icon(
+            IconlyLight.bag_2,
+            size: 40,
+            color: kPrimaryColor,
+          ),
+        ),
+
+        RichText(
+          textAlign: TextAlign.center,
+          text: TextSpan(
+              children: [
+                TextSpan(text: '\n${"no_order_found".tr}\n', style: textTheme.headline6),
+              ]
+          ),),
+      ],
     );
   }
 }

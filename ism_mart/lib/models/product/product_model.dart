@@ -107,6 +107,7 @@ class ProductModel {
       sold: json?["sold"] ?? 0,
       sku: json?["sku"] ?? "",
       brand: json?["brand"] ?? "",
+      description: json?['description'] ?? "",
       discountPrice: json?["discountPrice"]??json?["discountedPrice"],
       totalPrice: json?["totalPrice"],
       images: productImages,

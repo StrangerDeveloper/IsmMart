@@ -38,7 +38,7 @@ class ApiRepository {
   }
 
   Future<List<dynamic>> getAllCategories() async {
-    var response = await _apiService.get(endpoint: "category/all");
+    var response = await _apiService.get(endpoint: "category");
     return response.body['data'];
   }
 

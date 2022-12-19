@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -39,6 +40,8 @@ class BaseController extends GetxController {
       cartCount(LocalStorageHelper.getCartItemsCount());
       getCurrentUser();
     });
+
+    ever(categories, getRandomTextForSearch);
   }
 
   //TODO: Current User Info
@@ -126,6 +129,16 @@ class BaseController extends GetxController {
     await fetchProducts();
     await fetchProductsByTypes();
   }
+  var randomSearchText = "".obs;
+  void getRandomTextForSearch(List<CategoryModel> list){
+    int min = 1;
+    int max = list.length;
+
+    var rnd = new Random();
+    int r = min + rnd.nextInt(max - min);
+    //debugPrint(">>>rnd: $r >>>${categories.elementAt(r).name!}");
+     randomSearchText(list.elementAt(r).name!);
+  }
 
   //End Fetch Top Categories
 
@@ -199,7 +212,7 @@ class BaseController extends GetxController {
     const CategoriesUI(),
     const CartUI(),
     const SettingsUI(),
-    const SearchUI()
+    const SearchUI(isCalledForDeals: true,)
   ];
 
   var currentPage = 0.obs;

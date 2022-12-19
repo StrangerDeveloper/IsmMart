@@ -131,7 +131,7 @@ class SignInUI extends GetView<AuthController> {
                             ),
                           ),
 
-                          AppConstant.spaceWidget(height: 20),
+                         /* AppConstant.spaceWidget(height: 20),
                           Center(
                             child: InkWell(
                               onTap: () => showResendVerificationLinkDialog(),
@@ -147,7 +147,7 @@ class SignInUI extends GetView<AuthController> {
                                 ],
                               ),
                             ),
-                          ),
+                          ),*/
                         ],
                       ),
                     ),

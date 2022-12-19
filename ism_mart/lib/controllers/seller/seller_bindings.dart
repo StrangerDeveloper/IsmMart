@@ -14,6 +14,15 @@ class SellerBindings extends Bindings {
     Get.lazyPut<SellersApiRepo>(() => SellersApiRepo(Get.find()));
     Get.lazyPut<SellersApiProvider>(() => SellersApiProvider(Get.find()));
 
-    Get.lazyPut<SellersController>(() => SellersController(Get.find(), Get.find(), Get.find()));
+    Get.lazyPut<SellersController>(() =>
+        SellersController(Get.find(), Get.find(), Get.find<OrderController>()));
+
+
+    Get.lazyPut<OrderRepository>(()=>OrderRepository(Get.find()));
+    Get.lazyPut<OrderProvider>(()=>OrderProvider(Get.find()));
+
+    Get.lazyPut<OrderController>(() => OrderController(Get.find()));
+    Get.lazyPut<MembershipController>(() => MembershipController());
+
   }
 }

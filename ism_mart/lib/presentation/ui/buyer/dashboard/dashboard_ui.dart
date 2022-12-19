@@ -26,7 +26,7 @@ class DashboardUI extends GetView<BaseController> {
                 _displayDiscountProducts(),
 
                 StickyLabelWithViewMoreOption(
-                    title: "Top Categories",
+                    title: "top_categories".tr,
                     onTap: () => controller.changePage(1)),
                 _topCategoriesGrid(controller.categories),
                 kDivider,
@@ -54,7 +54,14 @@ class DashboardUI extends GetView<BaseController> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           buildSvgLogo(),
-          const Expanded(flex: 6, child: SearchBar()),
+          Expanded(
+            flex: 6,
+            child: Obx(
+              () => SearchBar(
+                searchText: controller.randomSearchText.value,
+              ),
+            ),
+          ),
           //const Expanded(flex:1,child:Center())
         ],
       ),
@@ -87,18 +94,19 @@ class DashboardUI extends GetView<BaseController> {
                             width: MediaQuery.of(context).size.width,
                           ),
                           Positioned(
-                            left: 5,
-                            top: 5,
+                            right: 5,
+                            top: 0,
                             child: Column(
                               children: [
                                 CustomText(
-                                  title: model.type,
-                                  size: 20,
+                                  title: model.title,
+                                  size: 15,
                                   weight: FontWeight.bold,
                                 ),
-                                CustomText(
+                                /* CustomText(
                                   title: model.title,
-                                )
+                                  size: 11,
+                                )*/
                               ],
                             ),
                           ),
@@ -139,24 +147,27 @@ class DashboardUI extends GetView<BaseController> {
   Widget _displayDiscountProducts() {
     return Obx(
       () => Container(
-          margin: const EdgeInsets.only(top: 10),
+        margin: const EdgeInsets.only(top: 10),
         color: kLightGreenColor,
         height: 280,
         child: Column(
           children: [
-            StickyLabel(text: "Latest Big Discount Deals",),
-            Expanded(child: controller.discountSliderProductsList.isEmpty
-                ? NoDataFound()
-                : ListView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: controller.discountSliderProductsList.length,
-              itemBuilder: (_, index) {
-                ProductModel model =
-                controller.discountSliderProductsList[index];
-                return _singleDiscountProductItem(model);
-              },
-            ))
+            StickyLabel(
+              text: "big_discount_deals".tr,
+            ),
+            Expanded(
+                child: controller.discountSliderProductsList.isEmpty
+                    ? NoDataFound()
+                    : ListView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: controller.discountSliderProductsList.length,
+                        itemBuilder: (_, index) {
+                          ProductModel model =
+                              controller.discountSliderProductsList[index];
+                          return _singleDiscountProductItem(model);
+                        },
+                      ))
           ],
         ),
       ),
@@ -169,7 +180,7 @@ class DashboardUI extends GetView<BaseController> {
     return Padding(
       padding: const EdgeInsets.all(3.0),
       child: Container(
-       // clipBehavior: Clip.hardEdge,
+        // clipBehavior: Clip.hardEdge,
         padding: const EdgeInsets.all(8.0),
         //margin: const EdgeInsets.only(right: 4),
         decoration: BoxDecoration(
@@ -190,19 +201,22 @@ class DashboardUI extends GetView<BaseController> {
             children: [
               RichText(
                 text: TextSpan(children: [
-                  TextSpan(text: "${model.discount}% ", style: bodyText1.copyWith(color: kRedColor)),
+                  TextSpan(
+                      text: "${model.discount}% ",
+                      style: bodyText1.copyWith(color: kRedColor)),
                   TextSpan(text: "Off", style: bodyText1),
                 ]),
               ),
               AppConstant.spaceWidget(width: 20),
               Container(
-                padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                 decoration: BoxDecoration(
                   color: kPrimaryColor,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: CustomText(
-                  title: "Active",
+                  title: "active".tr,
                   color: kWhiteColor,
                   size: 13,
                   weight: FontWeight.w600,
@@ -210,36 +224,36 @@ class DashboardUI extends GetView<BaseController> {
               ),
             ],
           ),
-          subtitle:Column(
+          subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                AppConstant.spaceWidget(height: 5),
-                CustomText(
-                  title: model.name,
-                  size: 15,
-                  weight: FontWeight.w600,
-                ),
-                CountdownTimer(
-                  endTime: endTime,
-                  widgetBuilder: (context, CurrentRemainingTime? time) {
-                    if (time == null) {
-                      endTime = DateTime.now()
-                          .add(const Duration(days: 1))
-                          .millisecondsSinceEpoch;
-                      return Text(
-                        'Time over',
-                        style: bodyText2,
-                      );
-                    }
+            children: [
+              AppConstant.spaceWidget(height: 5),
+              CustomText(
+                title: model.name,
+                size: 15,
+                weight: FontWeight.w600,
+              ),
+              CountdownTimer(
+                endTime: endTime,
+                widgetBuilder: (context, CurrentRemainingTime? time) {
+                  if (time == null) {
+                    endTime = DateTime.now()
+                        .add(const Duration(days: 1))
+                        .millisecondsSinceEpoch;
                     return Text(
-                      AppConstant.getFormattedTime(time),
-                      style: headline5.copyWith(color: kPrimaryColor),
+                      'Time over',
+                      style: bodyText2,
                     );
-                  },
-                ),
-              ],
-            ),
+                  }
+                  return Text(
+                    AppConstant.getFormattedTime(time),
+                    style: headline5.copyWith(color: kPrimaryColor),
+                  );
+                },
+              ),
+            ],
           ),
+        ),
       ),
     );
   }
@@ -326,7 +340,7 @@ class DashboardUI extends GetView<BaseController> {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: CustomText(
-                      title: "${model.discount}% Off",
+                      title: "${model.discount}% OFF",
                       color: kWhiteColor,
                       size: 12,
                       weight: FontWeight.w600,
@@ -373,7 +387,7 @@ class DashboardUI extends GetView<BaseController> {
               child: SizedBox(
                 height: 120,
                 child: list.isEmpty
-                    ? const NoDataFound(text: "No category found")
+                    ? NoDataFound(text: "no_category_found".tr)
                     : GridView.builder(
                         scrollDirection: Axis.horizontal,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -443,7 +457,7 @@ class DashboardUI extends GetView<BaseController> {
 
   _getChildAspectRatio(context) {
     double aspectRatio = MediaQuery.of(context).size.width /
-        (MediaQuery.of(context).size.height / 2.7);
+        (MediaQuery.of(context).size.height / 2.6);
     return aspectRatio;
   }
 }

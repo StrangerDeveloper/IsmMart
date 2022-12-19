@@ -75,7 +75,7 @@ class AppConstant {
   static const SECRET_KEY =
       "sk_test_51KdtNAHqJCPRIXprP3T8H3eIbJyxY883o7nGiyeiFxpcU017yPMeLu0n4aRPjWjXeoajnF1HxxSmGjRhy9xQXgLr00t7bOyMJd";
 
-  static const defaultImgUrl = "http://18.212.34.27:5173/assets/ISSMART.bc4ee033.png";
+  static const defaultImgUrl = "http://ismmart.com/assets/ISSMART.bc4ee033.png";
 
 
   static displaySnackBar(String title, message, {SnackPosition? position}) {
@@ -148,7 +148,7 @@ class AppConstant {
       case "uae":
         return "AED";
       default:
-        return "\$";
+        return "Rs";
     }
   }
 }

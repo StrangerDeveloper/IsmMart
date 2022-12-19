@@ -303,31 +303,56 @@ class CheckoutController extends GetxController {
 
   void showSuccessDialog({OrderResponse? response}) {
     Get.defaultDialog(
-        title: "Order Information",
-        barrierDismissible: false,
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              Icons.check_circle,
-              color: kPrimaryColor,
-              size: 100.0,
-            ),
-            SizedBox(height: 10.0),
-            CustomText(
-                title: "Payment Successful!, You're Order has been Placed!"),
-            CustomText(
-              title: "OrderID #${response!.data!.orderId!}",
-              size: 17,
-              weight: FontWeight.bold,
-            ),
-          ],
-        ),
-        textConfirm: "My Orders",
-        textCancel: "Home",
-        onCancel: () => Get.offAndToNamed(Routes.initRoute),
-        onConfirm: ()=>Get.offAndToNamed(Routes.buyerOrdersRoute)
-        );
+      title: "Order Information",
+      titleStyle: headline5,
+      barrierDismissible: false,
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            Icons.check_circle,
+            color: kPrimaryColor,
+            size: 70.0,
+          ),
+          AppConstant.spaceWidget(height: 10.0),
+          CustomText(
+            title: "Payment Successful!, You're Order has been Placed!",
+            textAlign: TextAlign.center,
+            weight: FontWeight.w600,
+          ),
+          CustomText(
+            title: "OrderID #${response!.data!.orderId!}",
+            size: 17,
+            weight: FontWeight.bold,
+          ),
+          AppConstant.spaceWidget(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+             /* CustomButton(
+                onTap: () {
+                  Get.offNamed(Routes.buyerOrdersRoute);
+                },
+                text: "My Orders",
+                width: 100,
+                height: 35,
+                color: kPrimaryColor,
+              ),*/
+              CustomButton(
+                onTap: () {
+                  Get.offAllNamed(Routes.initRoute);
+                  //Get.back();
+                },
+                text: "Continue Shopping",
+                width: 200,
+                height: 40,
+                color: kPrimaryColor,
+              ),
+            ],
+          )
+        ],
+      ),
+    );
   }
 
   clearControllers() {

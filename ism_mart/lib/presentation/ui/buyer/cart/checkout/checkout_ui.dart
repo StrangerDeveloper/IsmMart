@@ -16,11 +16,18 @@ class CheckoutUI extends GetView<CheckoutController> {
         backgroundColor: Colors.grey[100]!,
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: kWhiteColor,
-          title: CustomText(
-            title: 'Checkout',
-            style: textTheme.headline5,
+          backgroundColor: kPrimaryColor,
+          leading: InkWell(
+            onTap: () => Get.back(),
+            child: Icon(
+              Icons.arrow_back_ios_new,
+              size: 18,
+              color: kWhiteColor,
+            ),
           ),
+          title: CustomText(
+              title: 'checkout'.tr,
+              style: textTheme.headline6!.copyWith(color: kWhiteColor)),
         ),
         body: _body(),
       ),
@@ -33,27 +40,28 @@ class CheckoutUI extends GetView<CheckoutController> {
         SliverList(
           delegate: SliverChildListDelegate(
             [
-              StickyLabel(text: "Shipping Details"),
+              StickyLabel(text: "shipping_details".tr),
               Obx(() => controller.defaultAddressModel!.defaultAddress!
                   ? _shippingAddressDetails(controller.defaultAddressModel)
                   : _buildNewAddress()),
               /*StickyLabel(text: "Payment Details"),
               _buildPaymentDetails(),*/
-              StickyLabel(text: "Order Summary"),
+              StickyLabel(text: "order_summary".tr),
               _buildCartItemSection(),
               _subTotalDetails(),
               Column(
                 children: [
+                  AppConstant.spaceWidget(height: 20),
                   Obx(() => controller.isLoading.isTrue
                       ? CustomLoading(isItBtn: true)
                       : CustomButton(
-                          width: 320,
-                          height: 40,
+                          width: 280,
+                          height: 50,
                           onTap: () => controller.makePayment(
                               amount: controller
                                   .cartController.totalCartAmount.value
                                   .toString()),
-                          text: "Confirm Order"))
+                          text: "confirm_order".tr))
                 ],
               ),
             ],
@@ -100,7 +108,7 @@ class CheckoutUI extends GetView<CheckoutController> {
               children: [
                 // OutlinedButton(onPressed: () => showAddressesDialog(), child: CustomText(title: "Change",),)
                 _tileActionBtn(
-                    onTap: () => showAddressesDialog(), title: "Change")
+                    onTap: () => showAddressesDialog(), title: "change".tr)
               ],
             ),
           ),
@@ -128,7 +136,7 @@ class CheckoutUI extends GetView<CheckoutController> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             NoDataFound(
-              text: "No default address found",
+              text: "no_default_address_found".tr,
               fontSize: 13,
             ),
             OutlinedButton(
@@ -137,7 +145,7 @@ class CheckoutUI extends GetView<CheckoutController> {
                       widget: addNewORUpdateAddressContents());
                 },
                 child: CustomText(
-                    title: "Add new address", weight: FontWeight.w600))
+                    title: "add_new_address".tr, weight: FontWeight.w600))
           ],
         ),
       ),
@@ -162,7 +170,8 @@ class CheckoutUI extends GetView<CheckoutController> {
           child: Column(
             children: [
               CustomText(
-                title: "${calledForUpdate ? "Update" : "Add New"} Shipping",
+                title:
+                    "${calledForUpdate ? "update".tr : "add_new".tr} ${'shipping'.tr}",
                 style: headline5,
               ),
               AppConstant.spaceWidget(height: 15),
@@ -324,7 +333,7 @@ class CheckoutUI extends GetView<CheckoutController> {
                             }
                           }
                         },
-                        text: calledForUpdate ? "Update" : "Add",
+                        text: calledForUpdate ? "update".tr : "add".tr,
                         height: 50,
                         width: 300,
                       ),
@@ -342,7 +351,7 @@ class CheckoutUI extends GetView<CheckoutController> {
       content: Obx(
         () => controller.shippingAddressList.isEmpty
             ? NoDataFound(
-                text: "No Other Address Found!",
+                text: "no_address_found".tr,
               )
             : SingleChildScrollView(
                 child: Column(
@@ -357,7 +366,7 @@ class CheckoutUI extends GetView<CheckoutController> {
       confirm: OutlinedButton(
         onPressed: () => controller.changeDefaultShippingAddress(),
         child: CustomText(
-          title: "Set",
+          title: "set".tr,
         ),
       ),
       cancel: OutlinedButton(
@@ -368,7 +377,7 @@ class CheckoutUI extends GetView<CheckoutController> {
                   widget: addNewORUpdateAddressContents()));
         },
         child: CustomText(
-          title: "Add New Address",
+          title: "add_new_address".tr,
         ),
       ),
     );
@@ -391,7 +400,6 @@ class CheckoutUI extends GetView<CheckoutController> {
                       toggleable: true,
                       value: userModel!.id,
                       onChanged: (value) {
-                        print("Radio: $value");
                         controller.shippingAddressId(value!);
                       },
                       groupValue: controller.shippingAddressId.value,
@@ -491,7 +499,7 @@ class CheckoutUI extends GetView<CheckoutController> {
       padding: const EdgeInsets.all(8.0),
       child: Obx(
         () => controller.getCartItemsList().isEmpty
-            ? const NoDataFound(text: "No Cart Item Found")
+            ? NoDataFound(text: "no_cart_item_found".tr)
             : ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
@@ -562,7 +570,7 @@ class CheckoutUI extends GetView<CheckoutController> {
                         child: OutlinedButton(
                       onPressed: () {},
                       child: CustomText(
-                        title: "Apply",
+                        title: "apply".tr,
                         weight: FontWeight.w600,
                       ),
                     )),

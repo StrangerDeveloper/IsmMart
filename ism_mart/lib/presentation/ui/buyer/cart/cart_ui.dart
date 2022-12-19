@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconly/iconly.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
@@ -37,16 +38,42 @@ class CartUI extends GetView<CartController> {
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
         title: CustomText(
-          title: 'Shopping Cart',
+          title: 'cart'.tr,
           weight: FontWeight.w700,
           size: 20,
             color: kWhiteColor
           //style: textTheme.headline6!.copyWith(color: kWhiteColor),
         ),
       ),
-      body: NoDataFound(
-          text:
-              "Your cart is empty\n No items added in your cart.\n Please add product to your cart list."),
+      body:
+
+
+      Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            width: 100,
+            height: 100,
+            decoration: BoxDecoration(
+                color: kPrimaryColor.withOpacity(0.22), shape: BoxShape.circle),
+            child: Icon(
+              IconlyLight.buy,
+              size: 50,
+              color: kPrimaryColor,
+            ),
+          ),
+
+          RichText(
+            textAlign: TextAlign.center,
+            text: TextSpan(
+            children: [
+              TextSpan(text: '\n${"empty_cart".tr}\n', style: textTheme.headline6),
+              TextSpan(text: "empty_cart_message".tr, style: textTheme.bodySmall)
+            ]
+          ),),
+        ],
+      ),
     ));
   }
 
@@ -75,7 +102,7 @@ class CartUI extends GetView<CartController> {
 
   SliverAppBar _sliverAppBar() {
     return SliverAppBar(
-      expandedHeight: 10.0,
+      expandedHeight: 14.0,
       floating: true,
       pinned: false,
       automaticallyImplyLeading: false,
@@ -85,13 +112,11 @@ class CartUI extends GetView<CartController> {
         titlePadding: const EdgeInsets.symmetric(horizontal: 16),
         title: Obx(
           () => CustomText(
-            title: 'Cart (${controller.totalQtyCart.value} items)',
-              weight: FontWeight.w700,
-              size: 20,
-              color: kWhiteColor
+            title: 'cart (${controller.totalQtyCart.value} items)',
+              style: textTheme.headline6!.copyWith(color: kWhiteColor)),
           ),
         ),
-      ),
+
     );
   }
 

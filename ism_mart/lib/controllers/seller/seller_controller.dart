@@ -11,15 +11,15 @@ import 'package:ism_mart/utils/exports_utils.dart';
 
 class SellersController extends GetxController {
   final SellersApiProvider _apiProvider;
-  final AuthController authController;
   final CategoryController categoryController;
+  final OrderController orderController;
 
   SellersController(
-      this._apiProvider, this.authController, this.categoryController);
+      this._apiProvider,this.categoryController, this.orderController);
 
   var pageViewController = PageController(initialPage: 0);
 
-  var appBarTitle = "Seller Dashboard".obs;
+  var appBarTitle = "Dashboard".obs;
   var isLoading = false.obs;
 
   @override
@@ -27,9 +27,10 @@ class SellersController extends GetxController {
     // TODO: implement onReady
     super.onReady();
     getToken();
-    ever(categoryController.categories, initProductCategoryDropDown);
-    ever(categoryController.subCategories, initProductSubCategoryDropDown);
+    orderController.fetchOrders();
     fetchMyProducts();
+
+    fetchCategories();
     //myProductsList.bindStream(streamMyProducts());
   }
 
@@ -113,7 +114,46 @@ class SellersController extends GetxController {
   var prodPriceController = TextEditingController();
   var prodStockController = TextEditingController();
   var prodBrandController = TextEditingController();
+  var prodDiscountController = TextEditingController();
   var prodSKUController = TextEditingController();
+
+  static const chooseCategory = "Select Category";
+  var selectedCategory = chooseCategory.obs;
+  var selectedCategoryID = 1.obs;
+  var categoriesList = <CategoryModel>[].obs;
+
+
+  fetchCategories() async{
+    categoriesList.clear();
+    categoriesList.insert(0, CategoryModel(name: selectedCategory.value, id: 0));
+    if(categoryController.categories.isEmpty){
+      await categoryController.fetchCategories();
+      fetchCategories();
+    }else{
+      categoriesList.addAll(categoryController.categories);
+      categoriesList.refresh();
+    }
+  }
+
+  static const chooseSubCategory = "Select sub categories";
+  var selectedSubCategory = chooseSubCategory.obs;
+  var selectedSubCategoryID = 1.obs;
+  var subCategoriesList = <SubCategory>[].obs;
+
+  populateSubCategoriesList(){
+    isLoading(true);
+    subCategoriesList.clear();
+    subCategoriesList.insert(0, SubCategory(name: selectedSubCategory.value, id: 0));
+
+    if(categoryController.subCategories.isNotEmpty){
+      isLoading(false);
+      subCategoriesList.addAll(categoryController.subCategories);
+    }else{
+      setSelectedCategory(category: selectedCategory.value);
+    }
+
+  }
+
 
   addProduct() async {
     isLoading(true);
@@ -129,12 +169,12 @@ class SellersController extends GetxController {
 
     ProductModel newProduct = ProductModel(
         name: prodNameController.text.trim(),
-        price: double.parse(prodPriceController.text),
+        price: num.parse(prodPriceController.text),
         stock: int.parse(prodStockController.text),
         categoryId: selectedCategoryID.value,
         subCategoryId: selectedSubCategoryID.value,
         sku: prodSKUController.text,
-        brand: prodBrandController.text);
+        discount: num.parse(prodDiscountController.text));
 
     FormData form = FormData({});
     form.files.add(MapEntry(
@@ -145,7 +185,7 @@ class SellersController extends GetxController {
     form.fields.add(MapEntry("categoryId", newProduct.categoryId!.toString()));
     form.fields
         .add(MapEntry("subCategoryId", newProduct.subCategoryId!.toString()));
-    form.fields.add(MapEntry("brand", newProduct.brand!));
+    form.fields.add(MapEntry("discount", newProduct.discount!.toString()));
     form.fields.add(MapEntry("sku", newProduct.sku!));
 
     await _apiProvider
@@ -173,42 +213,25 @@ class SellersController extends GetxController {
     //isLoading(false);
   }
 
-  initProductCategoryDropDown(List<CategoryModel> list) {
-    setSelectedCategory(
-        category: list.isEmpty ? chooseCategory : list.first.name!);
-  }
 
-  initProductSubCategoryDropDown(List<SubCategory> list) {
-    if (list.isEmpty) list.add(SubCategory(name: chooseSubCategory));
-    setSelectedSubCategory(
-        subCategory: list.isEmpty ? chooseSubCategory : list.first.name!);
-  }
 
-  static const chooseCategory = "Select Category";
-  var selectedCategory = chooseCategory.obs;
-  var selectedCategoryID = 1.obs;
-
-  void setSelectedCategory({String? category}) {
+  void setSelectedCategory({String? category}) async{
     selectedCategory.value = category!;
     if (!category.contains(chooseCategory)) {
-      if (categoryController.categories.isNotEmpty) {
-        CategoryModel? model = categoryController.categories.firstWhere(
+      if (categoriesList.isNotEmpty) {
+        CategoryModel? model = categoriesList.firstWhere(
             (element) => element.name!.contains(category),
             orElse: () => CategoryModel());
         debugPrint("SelectedCategory: out ${model.id}");
         if (model.id != null) {
           selectedCategoryID(model.id);
-          categoryController.fetchSubCategories(model);
+          await categoryController.fetchSubCategories(model);
+          populateSubCategoriesList();
         }
       }
     }
   }
 
-  static const chooseSubCategory = "Select Sub Category";
-  var selectedSubCategory = chooseSubCategory.obs;
-  var selectedSubCategoryID = 1.obs;
-
-  //var subCategories = <SubCategory>[].obs;
 
   void setSelectedSubCategory({String? subCategory}) {
     selectedSubCategory.value = subCategory!;
@@ -256,9 +279,9 @@ class SellersController extends GetxController {
 //TDO: Seller Home Section
   List<Widget> NavScreens = [
     const SellerDashboard(),
-    //const AddProductsUI(),
     const MyProducts(),
-    const SellerOrders(),
+    const MyOrdersUI(),
+    const PremiumMembershipUI()
   ];
 
   var currentPage = 0.obs;
@@ -286,7 +309,7 @@ class SellersController extends GetxController {
       {
         'title': "Premium Membership",
         "icon": Icons.workspace_premium_outlined,
-        "page": 0
+        "page": 3
       },
     ];
   }

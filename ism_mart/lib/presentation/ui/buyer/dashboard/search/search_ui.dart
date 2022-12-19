@@ -6,8 +6,8 @@ import 'package:ism_mart/presentation/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
 class SearchUI extends GetView<SearchController> {
-  const SearchUI({Key? key}) : super(key: key);
-
+  const SearchUI( {Key? key, this.isCalledForDeals = false,}) : super(key: key);
+  final bool? isCalledForDeals;
   @override
   Widget build(BuildContext context) {
     controller.searchTextController.text =
@@ -44,29 +44,34 @@ class SearchUI extends GetView<SearchController> {
           Expanded(
             flex: 6,
             child: Container(
-              height: 34,
+              height: 36,
               //height: 40.0,
               padding: const EdgeInsets.symmetric(horizontal: 5),
-              margin: const EdgeInsets.symmetric(horizontal: 5),
+              margin: const EdgeInsets.symmetric(horizontal: 3),
               decoration: BoxDecoration(
                 color: kWhiteColor,
                 border: Border.all(color: kLightGreyColor),
                 borderRadius: BorderRadius.circular(8.0),
               ),
-              child: TextField(
-                controller: controller.searchTextController,
-                cursorColor: kPrimaryColor,
-                autofocus: false,
-                textInputAction: TextInputAction.search,
-                // onChanged: controller.search,
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  icon: const Icon(Icons.search, color: kPrimaryColor),
-                  hintText: "What are you looking for?",
-                  hintStyle: textTheme.bodyText1!.copyWith(
-                    color: kLightColor,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 13.0,
+              child: Directionality(
+                textDirection: TextDirection.ltr,
+                child: TextField(
+                  controller: controller.searchTextController,
+                  cursorColor: kPrimaryColor,
+                  autofocus: false,
+                  textInputAction: TextInputAction.search,
+                  // onChanged: controller.search,
+                  decoration: InputDecoration(
+                    isDense: true,
+                    contentPadding: const EdgeInsets.symmetric(vertical: 4),
+                    border: InputBorder.none,
+                    icon: const Icon(Icons.search, color: kPrimaryColor),
+                    hintText: "What are you looking for?",
+                    hintStyle: textTheme.bodyText1!.copyWith(
+                      color: kLightColor,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 12.0,
+                    ),
                   ),
                 ),
               ),
@@ -74,6 +79,7 @@ class SearchUI extends GetView<SearchController> {
           ),
 
           ///Cancel Button
+          if(!isCalledForDeals!)
           Expanded(
             child: InkWell(
               onTap: () => Get.back(),

@@ -10,24 +10,27 @@ class Routes {
   static const cartRoute = "/cart";
   static const checkOutRoute = "/checkout";
   static const profileRoute = "/profile";
-  static const settingsRoute = "/settings";
-  static const searchRoute = "/settings";
+
+  static const searchRoute = "/search";
   static const sellerHomeRoute = "/sellerDash";
 
   static const buyerOrdersRoute = "/buyerOrders";
 
+  static const settingsRoute = "/settings";
+  //static const aboutUsRoute = "/aboutUs";
 
 
   static final pages = [
     /* GetPage(
-      name: '/splash',
-      page: () => SplashPage(),
+      name: aboutUsRoute,
+      page: () => AboutUS(),
     ),*/
     GetPage(
       name: loginRoute,
       page: () => const SignInUI(),
       binding: BaseBindings(),
     ),
+
     GetPage(
       name: registerRoute,
       page: () => const SignUpUI(),
@@ -38,6 +41,7 @@ class Routes {
         name: initRoute,
         page: () => const BaseLayout(),
         binding: BaseBindings()),
+
     GetPage(
       name: searchRoute,
       page: () => const SearchUI(),
@@ -59,7 +63,7 @@ class Routes {
     GetPage(
       name: buyerOrdersRoute,
       page: () => MyOrdersUI(),
-      binding: BuyerOrdersBindings(),
+      binding: OrdersBindings(),
     ),
 
 

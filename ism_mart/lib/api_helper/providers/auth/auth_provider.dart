@@ -33,15 +33,33 @@ class AuthProvider {
     return UserResponse.fromResponse(response);
   }
 
-  Future<UserResponse> postStoreRegister({token, storeName, storeDesc}) async {
-    var response = await _authRepo.registerStore(
-        token: token, data: {"storeName": storeName, "storeDesc": storeDesc});
+  Future<UserResponse> postStoreRegister(
+      {token, storeName, storeDesc, ownerName, websiteUrl, phone}) async {
+    var jsonData = {
+      "phone": phone,
+      "storeName": storeName,
+      "storeDesc": storeDesc,
+      'ownerName': ownerName,
+      'storeURL': websiteUrl
+    };
+
+    var response = await _authRepo.registerStore(token: token, data: jsonData);
     return UserResponse.fromResponse(response);
   }
 
   Future<UserResponse> getCurrentUser({String? token}) async {
     var response = await _authRepo.fetchCurrentUser(token: token);
     debugPrint("UserResponse: ${response}");
+    return UserResponse.fromResponse(response);
+  }
+
+  Future<UserResponse> forgotPassword({data}) async {
+    var response = await _authRepo.forgotPassword(data: data);
+    return UserResponse.fromResponse(response);
+  }
+
+  Future<UserResponse> forgotPasswordOtp({data}) async {
+    var response = await _authRepo.recoverPasswordWithOtp(data: data);
     return UserResponse.fromResponse(response);
   }
 

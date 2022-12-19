@@ -9,15 +9,18 @@ class SellerHome extends GetView<SellersController> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("USERS: ${controller.authController.userModel!.firstName}");
+
     return Scaffold(
       appBar: AppBar(
-        title: Obx(() => CustomText(
+        elevation: 0,
+        title: Obx(
+          () => CustomText(
               title: controller.appBarTitle.value,
-              weight: FontWeight.w600,
-              size: 15,
-            )),
+              style: textTheme.headline6!.copyWith(color: kWhiteColor)),
+        ),
+        iconTheme: IconThemeData(color: kWhiteColor),
         centerTitle: true,
+        backgroundColor: kPrimaryColor,
       ),
       body: PageView(
         controller: controller.pageViewController,
@@ -51,13 +54,14 @@ class SellerHome extends GetView<SellersController> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     CustomText(
-                      title: "${controller.authController.userModel?.firstName} ${controller.authController.userModel?.lastName}",
+                      title:
+                          "${authController.userModel?.firstName} ${authController.userModel?.lastName}",
                       size: 20,
                       weight: FontWeight.bold,
                       color: kWhiteColor,
                     ),
                     CustomText(
-                      title: controller.authController.userModel?.email,
+                      title: authController.userModel?.email,
                       size: 15,
                       weight: FontWeight.w600,
                       color: kWhiteColor,

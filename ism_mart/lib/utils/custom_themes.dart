@@ -47,7 +47,7 @@ class Themes {
               fontSize: 24,
               fontWeight: FontWeight.w500),
           headline6: GoogleFonts.poppins(
-              color: Colors.black, fontSize: 18, fontWeight: FontWeight.w500),
+              color: Colors.black, fontSize: 18, fontWeight: FontWeight.w600),
           subtitle1: GoogleFonts.poppins(
               color: Colors.black, fontSize: 16, fontWeight: FontWeight.w500),
           subtitle2: GoogleFonts.poppins(
@@ -121,7 +121,7 @@ class Themes {
         headline6: GoogleFonts.poppins(
             color: Colors.grey.shade50,
             fontSize: 18,
-            fontWeight: FontWeight.w500),
+            fontWeight: FontWeight.w600),
         subtitle1: GoogleFonts.poppins(
             color: Colors.grey.shade50,
             fontSize: 16,

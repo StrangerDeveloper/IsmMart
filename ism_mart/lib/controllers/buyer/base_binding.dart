@@ -17,8 +17,8 @@ class BaseBindings extends Bindings {
     //Get.put<AuthController>(AuthController(Get.find()));
 
     Get.put<CartController>(CartController(Get.find()));
-    Get.lazyPut<CategoryController>(() => CategoryController(Get.find()));
-    Get.lazyPut<SearchController>(() => SearchController(Get.find()));
+    Get.put<CategoryController>(CategoryController(Get.find()));
+    Get.put<SearchController>(SearchController(Get.find()));
 
     Get.put<OrderRepository>(OrderRepository(Get.find()));
   }

@@ -45,8 +45,9 @@ class CategoryController extends GetxController with StateMixin {
   }
 
   var subCategories = <SubCategory>[].obs;
-
+  var selectedCategory = "".obs;
   getSubcategory(CategoryModel? categoryModel) async {
+    selectedCategory(categoryModel!.name);
     makeSelectedCategory(categoryModel);
     fetchSubCategories(categoryModel);
   }

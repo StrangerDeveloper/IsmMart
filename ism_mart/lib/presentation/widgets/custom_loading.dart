@@ -30,9 +30,13 @@ class CustomLoading extends StatelessWidget {
             shape: BoxShape.circle,
             color: kPrimaryColor
           ),
-          child: CircularProgressIndicator(
-            strokeWidth: 2,
-            color: kWhiteColor,
+          child: Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: CircularProgressIndicator(
+              strokeWidth: 2,
+              color: kWhiteColor,
+              //backgroundColor: kPrimaryColor,
+            ),
           ),
         ),
       );
