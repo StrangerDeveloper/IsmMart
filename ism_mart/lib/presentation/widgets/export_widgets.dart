@@ -1,6 +1,7 @@
 export 'custom_action_icon.dart';
 export 'custom_button.dart';
 export 'custom_cart_icon.dart';
+export 'custom_grey_border_container.dart';
 export 'custom_loading.dart';
 export 'custom_network_image.dart';
 export 'custom_orders_stats_items.dart';

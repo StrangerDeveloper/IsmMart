@@ -57,6 +57,9 @@ class AppTranslations extends Translations {
           'pending_orders':'Pending Orders',
           'total_orders':'Total Orders',
 
+
+          'profile':'Profile',
+
           'shipping_details': 'Shipping Details',
           'checkout': 'Checkout',
           'change': 'Change',

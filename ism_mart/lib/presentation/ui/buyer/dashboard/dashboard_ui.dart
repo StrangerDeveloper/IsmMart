@@ -58,7 +58,7 @@ class DashboardUI extends GetView<BaseController> {
             flex: 6,
             child: Obx(
               () => SearchBar(
-                searchText: controller.randomSearchText.value,
+                searchText: controller.randomSearchText.value
               ),
             ),
           ),

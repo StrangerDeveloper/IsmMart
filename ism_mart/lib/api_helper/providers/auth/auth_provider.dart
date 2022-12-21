@@ -53,6 +53,12 @@ class AuthProvider {
     return UserResponse.fromResponse(response);
   }
 
+  Future<UserResponse> updateUser({token, title, value}) async {
+    var data = {'$title': '$value'};
+    var response = await _authRepo.updateUser(token: token, data: data);
+    return UserResponse.fromResponse(response);
+  }
+
   Future<UserResponse> forgotPassword({data}) async {
     var response = await _authRepo.forgotPassword(data: data);
     return UserResponse.fromResponse(response);
@@ -62,6 +68,8 @@ class AuthProvider {
     var response = await _authRepo.recoverPasswordWithOtp(data: data);
     return UserResponse.fromResponse(response);
   }
+
+
 
   /*
   *

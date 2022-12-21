@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/models/exports_model.dart';
@@ -58,7 +56,6 @@ class ApiProvider {
     return products.map((product) => ProductModel.fromJson(product)).toList();
   }
 
-
   Future<ProductModel> getProductById(int id) async {
     var productResponse = await _apiRepository.getProductDetailsById(id: id);
     debugPrint("getProductById: ${productResponse.toString()}");
@@ -97,9 +94,19 @@ class ApiProvider {
    * Flutter Stripe
    * */
 
-  Future<JSON> postStripePaymentInfo({data}) async{
+  Future<JSON> postStripePaymentInfo({data}) async {
     var response = await _apiRepository.reqStripePayment(
         client_secret: AppConstant.SECRET_KEY, body: data);
     return response;
+  }
+
+  /**
+   *
+   * FAQs
+   * */
+
+  Future<List<FAQModel>> getAllFaqs({token}) async {
+    var response = await _apiRepository.fetchAllFAQ(token: token);
+    return response.map((e) => FAQModel.fromJson(e)).toList();
   }
 }

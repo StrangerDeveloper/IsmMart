@@ -19,6 +19,8 @@ class AuthController extends GetxController {
   var storeNameController = TextEditingController();
   var storeDescController = TextEditingController();
 
+  var editingTextController = TextEditingController();
+
   @override
   void onInit() {
     // TODO: implement onInit
@@ -210,6 +212,32 @@ class AuthController extends GetxController {
         ">>>GetCurrentUser: ${ApiConstant.SESSION_EXPIRED}: $isSessionExpired");
   }
 
+  List getProfileData() {
+    var profileData = [
+      {
+        "title": "firstName",
+        "subtitle": userModel!.firstName ?? '',
+        "icon": Icons.person_rounded,
+      },
+      {
+        "title": "lastName",
+        "subtitle": userModel!.lastName ?? '',
+        "icon": Icons.person_rounded,
+      },
+      {
+        "title": "Phone",
+        "subtitle": userModel!.phone ?? '',
+        "icon": Icons.phone_iphone_rounded,
+      },
+      {
+        "title": "Address",
+        "subtitle": userModel!.address ?? '',
+        "icon": Icons.location_on_rounded
+      },
+    ];
+    return profileData;
+  }
+
   var _currUserToken = "".obs;
 
   String? get userToken => _currUserToken.value;
@@ -220,6 +248,30 @@ class AuthController extends GetxController {
       _currUserToken(user.token);
     });
     update();
+  }
+
+  updateUser({title, value}) async {
+    if (userToken != null) {
+      isLoading(true);
+      await authProvider
+          .updateUser(token: userToken, title: title, value: value)
+          .then((UserResponse? userResponse) {
+        isLoading(false);
+        if (userResponse != null) {
+          if (userResponse.success!) {
+            Get.back();
+            AppConstant.displaySnackBar("success", userResponse.message);
+            editingTextController.clear();
+            getCurrentUser();
+          } else
+            AppConstant.displaySnackBar('error', userResponse.message);
+        } else
+          AppConstant.displaySnackBar('error', "something went wrong!");
+      }).catchError((error) {
+        isLoading(false);
+        debugPrint("RegisterStore: Error $error");
+      });
+    }
   }
 
   //TODO: getCountries and Cities

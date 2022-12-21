@@ -4,7 +4,6 @@ import 'package:iconly/iconly.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/presentation/export_presentation.dart';
-import 'package:ism_mart/presentation/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
 class SettingsUI extends GetView<AuthController> {
@@ -24,6 +23,7 @@ class SettingsUI extends GetView<AuthController> {
                       expandedHeight: 100.0,
                       floating: false,
                       pinned: true,
+                      backgroundColor: innerBoxIsScrolled ? kPrimaryColor: kWhiteColor,
                       flexibleSpace: FlexibleSpaceBar(
                         centerTitle: false,
                         titlePadding:

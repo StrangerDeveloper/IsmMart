@@ -281,7 +281,8 @@ class SellersController extends GetxController {
     const SellerDashboard(),
     const MyProducts(),
     const MyOrdersUI(),
-    const PremiumMembershipUI()
+    const PremiumMembershipUI(),
+    const ProfileUI()
   ];
 
   var currentPage = 0.obs;
@@ -305,7 +306,7 @@ class SellersController extends GetxController {
       //{'title': "Add Product", "icon": Icons.add_card_outlined, "page": 1},
       {'title': "My Products", "icon": Icons.list_outlined, "page": 1},
       {'title': "My Orders", "icon": Icons.shopping_bag_outlined, "page": 2},
-      {'title': "Profile", "icon": Icons.manage_accounts_outlined, "page": 0},
+      {'title': "Profile", "icon": Icons.manage_accounts_outlined, "page": 4},
       {
         'title': "Premium Membership",
         "icon": Icons.workspace_premium_outlined,

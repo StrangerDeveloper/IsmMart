@@ -35,12 +35,13 @@ class UserModel {
     this.zipCode,
     this.defaultAddress = false,
     this.name,
+    this.imageUrl,
   });
 
   int? id, attempt, countryId, cityId;
   String? firstName, lastName, name, email, token;
   String? address, phone, password, zipCode;
-  String? role, gender, stripeCustomerId;
+  String? role, gender, stripeCustomerId, imageUrl;
   bool? emailVerified, defaultAddress;
   DateTime? createdAt, loggedOutAt, updatedAt;
   CountryModel? country, city;
@@ -62,6 +63,7 @@ class UserModel {
                 ? null
                 : json["phoneNumber"]
             : json["phone"],
+        imageUrl: json['image'] == null ? "" : json['image'],
         password: json["password"],
         role: json["role"],
         attempt: json["attempt"] == null ? null : json["attempt"],
@@ -69,7 +71,9 @@ class UserModel {
         gender: json["gender"],
         emailVerified: json["email_verified"],
         stripeCustomerId: json["stripeCustomerId"],
-        country: json["Country"] == null ? null : CountryModel.fromJson(json["Country"]),
+        country: json["Country"] == null
+            ? null
+            : CountryModel.fromJson(json["Country"]),
         city: json["City"] == null ? null : CountryModel.fromJson(json["City"]),
         zipCode: json['zipCode'] == null ? null : json['zipCode'],
         defaultAddress: json['default'] == null ? false : json['default'],

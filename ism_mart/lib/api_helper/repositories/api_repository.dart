@@ -26,13 +26,14 @@ class ApiRepository {
   }
 
   Future<List<dynamic>> getSliderImages() async {
-     var response = await _apiService.get(endpoint: "slider");
+    var response = await _apiService.get(endpoint: "slider");
     return response.body['data'];
-
   }
+
   Future<List<dynamic>> fetchSliderDiscountProducts() async {
     var queryParam = {"limit": "2"};
-    var response = await _apiService.get(endpoint: "slider/getDiscountProducts", query: queryParam);
+    var response = await _apiService.get(
+        endpoint: "slider/getDiscountProducts", query: queryParam);
     debugPrint("FetchSlider: ${response.body['data']}");
     return response.body['data'];
   }
@@ -42,7 +43,7 @@ class ApiRepository {
     return response.body['data'];
   }
 
-  Future<List<JSON>> getCategoriesWithSubCategories() async {
+  Future<List<dynamic>> getCategoriesWithSubCategories() async {
     var response = await _apiService.get(endpoint: "category/");
     return response.body['data'];
   }
@@ -53,9 +54,7 @@ class ApiRepository {
   }
 
   Future<List<dynamic>> getProductsByType(
-      {int? limit = 10,
-      int? page = 1,
-      String? type = "Discount"}) async {
+      {int? limit = 10, int? page = 1, String? type = "Discount"}) async {
     final queryParameters = {"limit": "$limit", "page": "$page", "type": type};
     var response =
         await _apiService.get(endpoint: "products/", query: queryParameters);
@@ -121,10 +120,22 @@ class ApiRepository {
         endpoint: "order/createOrder",
         body: data,
         requiresAuthToken: true,
-        token: token
-    );
+        token: token);
     return response.body;
   }
+
+  /**
+   * FAQ Api
+   *
+   * */
+
+  Future<List<dynamic>> fetchAllFAQ({token}) async {
+    var response = await _apiService.get(
+        endpoint: 'faq/allFaq', token: token, requiresAuthToken: true);
+    return response.body['body'];
+  }
+
+
 
   /**
    *
@@ -132,7 +143,6 @@ class ApiRepository {
    * */
 
   Future<dynamic> reqStripePayment({client_secret, body}) async {
-
     var response = await http.post(
       Uri.parse('https://api.stripe.com/v1/payment_intents'),
       headers: {
@@ -142,6 +152,5 @@ class ApiRepository {
       body: body,
     );
     return json.decode(response.body);
-
   }
 }

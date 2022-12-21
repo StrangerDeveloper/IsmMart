@@ -57,7 +57,7 @@ class SignUpUI extends GetView<AuthController> {
                           AppConstant.spaceWidget(height: 15),
                           FormInputFieldWithIcon(
                             controller: controller.firstNameController,
-                            iconPrefix: Icons.person,
+                            iconPrefix: Icons.title,
                             labelText: 'Full Name',
                             iconColor: kPrimaryColor,
                             autofocus: true,

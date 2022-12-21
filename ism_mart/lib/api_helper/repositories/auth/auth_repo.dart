@@ -53,13 +53,23 @@ class AuthRepository {
     return response.body['data'];
   }
 
+  Future<dynamic> updateUser({token, data}) async {
+    var response = await _apiService.patch(
+        endpoint: 'user/update',
+        body: data,
+        token: token,
+        requiresAuthToken: true);
+
+    return response.body;
+  }
+
   Future<dynamic> fetchCurrentUser({String? token}) async {
     var response = await _apiService.get(
         endpoint: "user/profile", requiresAuthToken: true, token: token);
     return response.body;
   }
 
-  Future<dynamic> forgotPassword({data}) async{
+  Future<dynamic> forgotPassword({data}) async {
     var response = await _apiService.post(
       endpoint: "auth/forgetPassword",
       body: data,
@@ -67,15 +77,13 @@ class AuthRepository {
     return response.body;
   }
 
-  Future<dynamic> recoverPasswordWithOtp({data}) async{
+  Future<dynamic> recoverPasswordWithOtp({data}) async {
     var response = await _apiService.post(
       endpoint: "auth/forgetPasswordOtp",
       body: data,
     );
     return response.body;
   }
-
-
 
   /**
    *
@@ -94,16 +102,19 @@ class AuthRepository {
 
   Future<List<dynamic>> getShippingDetails({token}) async {
     var response = await _apiService.get(
-        endpoint: "user/getShippingDetails", requiresAuthToken: true, token: token);
+        endpoint: "user/getShippingDetails",
+        requiresAuthToken: true,
+        token: token);
     return response.body['data'];
   }
 
   Future<dynamic> getDefaultShippingDetails({token}) async {
     var response = await _apiService.get(
-        endpoint: "user/getDefaultShippingDetails", requiresAuthToken: true, token: token);
+        endpoint: "user/getDefaultShippingDetails",
+        requiresAuthToken: true,
+        token: token);
     return response.body['data'];
   }
-
 
   Future<dynamic> changeDefaultShippingAddress({int? addressId, token}) async {
     var response = await _apiService.get(
@@ -114,10 +125,11 @@ class AuthRepository {
     return response.body;
   }
 
-
   Future<dynamic> deleteShippingDetails({token, id}) async {
     var response = await _apiService.delete(
-        endpoint: 'user/deleteShippingDetails/$id', token: token, requiresAuthToken: true);
+        endpoint: 'user/deleteShippingDetails/$id',
+        token: token,
+        requiresAuthToken: true);
     return response.body;
   }
 
@@ -129,5 +141,4 @@ class AuthRepository {
         requiresAuthToken: true);
     return response.body;
   }
-
 }
