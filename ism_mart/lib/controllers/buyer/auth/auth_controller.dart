@@ -277,26 +277,29 @@ class AuthController extends GetxController {
   //TODO: getCountries and Cities
   var countries = <CountryModel>[].obs;
   var cities = <CountryModel>[].obs;
-  var selectedCountry = "Select Country".obs;
-  var selectedCity = "Select City".obs;
+  var selectedCountry = CountryModel().obs;
+  var selectedCity = CountryModel().obs;
 
   getCountries() async {
     countries.clear();
-    countries.insert(0, CountryModel(name: selectedCountry.value, id: 0));
+    countries.insert(0, CountryModel(name: "Select Country", id: 0));
     await authProvider.getCountries().then((data) {
       countries.addAll(data);
-      cities.insert(0, CountryModel(name: selectedCity.value, id: 0));
+      cities.insert(0, CountryModel(name: "Select City", id: 0));
     }).catchError((error) {
       debugPrint(">>>>Countries: $error");
     });
   }
 
   getCitiesByCountry({required countryId}) async {
+    isLoading(true);
     cities.clear();
-    cities.insert(0, CountryModel(name: selectedCity.value, id: 0));
+    cities.insert(0, CountryModel(name: "Select City", id: 0));
     await authProvider.getCities(countryId: countryId).then((data) {
       cities.addAll(data);
+      isLoading(false);
     }).catchError((error) {
+      isLoading(false);
       debugPrint(">>>>Cities: $error");
     });
   }

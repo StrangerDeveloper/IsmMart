@@ -8,6 +8,7 @@ import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/ui/exports_ui.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class SellersController extends GetxController {
   final SellersApiProvider _apiProvider;
@@ -15,7 +16,7 @@ class SellersController extends GetxController {
   final OrderController orderController;
 
   SellersController(
-      this._apiProvider,this.categoryController, this.orderController);
+      this._apiProvider, this.categoryController, this.orderController);
 
   var pageViewController = PageController(initialPage: 0);
 
@@ -115,57 +116,100 @@ class SellersController extends GetxController {
   var prodStockController = TextEditingController();
   var prodBrandController = TextEditingController();
   var prodDiscountController = TextEditingController();
+  var prodDescriptionController = TextEditingController();
   var prodSKUController = TextEditingController();
 
   static const chooseCategory = "Select Category";
-  var selectedCategory = chooseCategory.obs;
+  //var selectedCategory = chooseCategory.obs;
+
+  var selectedCategory = CategoryModel().obs;
   var selectedCategoryID = 1.obs;
   var categoriesList = <CategoryModel>[].obs;
 
-
-  fetchCategories() async{
+  fetchCategories() async {
     categoriesList.clear();
-    categoriesList.insert(0, CategoryModel(name: selectedCategory.value, id: 0));
-    if(categoryController.categories.isEmpty){
+    categoriesList.insert(
+        0, CategoryModel(name: chooseCategory, id: 0));
+    if (categoryController.categories.isEmpty) {
       await categoryController.fetchCategories();
       fetchCategories();
-    }else{
+    } else {
       categoriesList.addAll(categoryController.categories);
       categoriesList.refresh();
     }
   }
 
   static const chooseSubCategory = "Select sub categories";
-  var selectedSubCategory = chooseSubCategory.obs;
+  //var selectedSubCategory = chooseSubCategory.obs;
+  var selectedSubCategory = SubCategory().obs;
   var selectedSubCategoryID = 1.obs;
   var subCategoriesList = <SubCategory>[].obs;
 
-  populateSubCategoriesList(){
+  populateSubCategoriesList() {
     isLoading(true);
     subCategoriesList.clear();
-    subCategoriesList.insert(0, SubCategory(name: selectedSubCategory.value, id: 0));
+    selectedSubCategory(SubCategory(name: chooseSubCategory, id: 0));
+    subCategoriesList.insert(
+        0, SubCategory(name: chooseSubCategory, id: 0));
 
-    if(categoryController.subCategories.isNotEmpty){
+    if (categoryController.subCategories.isNotEmpty) {
       isLoading(false);
       subCategoriesList.addAll(categoryController.subCategories);
-    }else{
+    } else {
       setSelectedCategory(category: selectedCategory.value);
     }
-
   }
 
+
+  void setSelectedCategory({CategoryModel? category}) async {
+    selectedCategory.value = category!;
+    //CategoryModel? model = category!;
+    if (!category.name!.contains(chooseCategory)) {
+      /*if (categoriesList.isNotEmpty) {
+        CategoryModel? model = categoriesList.firstWhere(
+                (element) => element.name!.contains(category.name!),
+            orElse: () => CategoryModel());
+        debugPrint("SelectedCategory: out ${model.id}");
+        if (model.id != null) {
+          selectedCategoryID(model.id);
+          await categoryController.fetchSubCategories(model);
+          populateSubCategoriesList();
+        }
+      }*/
+
+      selectedCategoryID(category.id!);
+      subCategoriesList.clear();
+      await categoryController.fetchSubCategories(category);
+      await populateSubCategoriesList();
+    }
+  }
+
+  void setSelectedSubCategory({SubCategory? subCategory}) {
+    selectedSubCategory.value = subCategory!;
+    if (!subCategory.name!.contains(chooseSubCategory)) {
+      selectedSubCategoryID(subCategory.id!.isNaN ? 1 : subCategory.id!);
+
+      /*if (categoryController.subCategories.isNotEmpty) {
+        int? id = categoryController.subCategories
+            .firstWhere((element) => element.name! == subCategory,
+            orElse: () => SubCategory())
+            .id!;
+        selectedSubCategoryID(id.isNaN ? 1 : id);
+      }*/
+    }
+  }
 
   addProduct() async {
     isLoading(true);
     //debugPrint("ImagePath: ${imagePath.value}");
-    var fileName = imagePath.value.split("/").last;
+    //var fileName = imagePath.value.split("/").last;
 
     //debugPrint("ImagePath: ${File(imagePath.value).lengthSync()}");
-    var mpf = MultipartFile(
+    /*var mpf = MultipartFile(
       File(imagePath.value),
       filename: fileName,
-    );
-    debugPrint("ImagePath mpf: ${mpf.length}");
+    );*/
+    //debugPrint("ImagePath mpf: ${mpf.length}");
 
     ProductModel newProduct = ProductModel(
         name: prodNameController.text.trim(),
@@ -174,11 +218,30 @@ class SellersController extends GetxController {
         categoryId: selectedCategoryID.value,
         subCategoryId: selectedSubCategoryID.value,
         sku: prodSKUController.text,
+        description: prodDescriptionController.text,
         discount: num.parse(prodDiscountController.text));
 
+    // var listMultiPart = [];
+    // for(XFile file in pickedImagesList){
+    //   listMultiPart.add(MultipartFile(File(file.path), filename: file.name));
+    // }
+
+    /*pickedImagesList.forEach((element) {
+      form.files.add(MapEntry(
+          "images", MultipartFile(File(element.path), filename: element.name)));
+    });*/
+
+    //MultipartFile(File(element.path), filename: element.name)
+
+    /*form.files.add(MapEntry(
+        "images", pickedImagesList.forEach((element)=> MultipartFile(File(element.path), filename: element.name))));
+  */
+    var mpf = MultipartFile(
+      File(pickedImagesList[0].path),
+      filename: pickedImagesList[0].name,
+    );
     FormData form = FormData({});
-    form.files.add(MapEntry(
-        "thumbnail", MultipartFile(File(imagePath.value), filename: fileName)));
+    form.files.add(MapEntry("images", mpf));
     form.fields.add(MapEntry("name", newProduct.name!));
     form.fields.add(MapEntry("price", newProduct.price!.toString()));
     form.fields.add(MapEntry("stock", newProduct.stock!.toString()));
@@ -187,11 +250,18 @@ class SellersController extends GetxController {
         .add(MapEntry("subCategoryId", newProduct.subCategoryId!.toString()));
     form.fields.add(MapEntry("discount", newProduct.discount!.toString()));
     form.fields.add(MapEntry("sku", newProduct.sku!));
-
+    form.fields.add(MapEntry("description", newProduct.description!));
+    // var mpf = MultipartFile(
+    //   File(pickedImagesList[0].path),
+    //   filename: pickedImagesList[0].name,
+    //
+    // );
     await _apiProvider
-        .addProduct(token: currUserToken.value, model: form)
+        .addProduct(
+            token: currUserToken.value,
+            formData: form,
+            imagesList: pickedImagesList)
         .then((ProductResponse? response) {
-
       if (response != null) {
         if (response.success != null) {
           AppConstant.displaySnackBar('success', "${response.message}");
@@ -200,9 +270,9 @@ class SellersController extends GetxController {
           AppConstant.displaySnackBar('error',
               "${response.message != null ? response.message : "Something went wrong"}");
         }
+        Get.back();
         isLoading(false);
         fetchMyProducts();
-        Get.back();
         clearControllers();
       }
     }).catchError((error) {
@@ -214,38 +284,6 @@ class SellersController extends GetxController {
   }
 
 
-
-  void setSelectedCategory({String? category}) async{
-    selectedCategory.value = category!;
-    if (!category.contains(chooseCategory)) {
-      if (categoriesList.isNotEmpty) {
-        CategoryModel? model = categoriesList.firstWhere(
-            (element) => element.name!.contains(category),
-            orElse: () => CategoryModel());
-        debugPrint("SelectedCategory: out ${model.id}");
-        if (model.id != null) {
-          selectedCategoryID(model.id);
-          await categoryController.fetchSubCategories(model);
-          populateSubCategoriesList();
-        }
-      }
-    }
-  }
-
-
-  void setSelectedSubCategory({String? subCategory}) {
-    selectedSubCategory.value = subCategory!;
-    if (!subCategory.contains(chooseSubCategory)) {
-      if (categoryController.subCategories.isNotEmpty) {
-        int? id = categoryController.subCategories
-            .firstWhere((element) => element.name! == subCategory,
-                orElse: () => SubCategory())
-            .id!;
-        selectedSubCategoryID(id.isNaN ? 1 : id);
-      }
-    }
-  }
-
   /// Profile Image Capture/Pick Section
   ///
   /// callingType
@@ -253,6 +291,22 @@ class SellersController extends GetxController {
   ///  1 for Gallery
   var imagePath = "".obs;
   var _picker = ImagePicker();
+  var pickedImagesList = <XFile>[].obs;
+
+  pickMultipleImages() async {
+    checkPermissions().then((isGranted) async {
+      if (isGranted) {
+        List<XFile> images = await _picker.pickMultiImage();
+        if (images.isNotEmpty) {
+          pickedImagesList.addAll(images);
+        } else {
+          debugPrint("No Images were selected");
+        }
+      } else {
+        requestPhotoAndCameraPermissions();
+      }
+    });
+  }
 
   pickOrCaptureImageGallery(int? callingType) async {
     try {
@@ -281,7 +335,7 @@ class SellersController extends GetxController {
     const SellerDashboard(),
     const MyProducts(),
     const MyOrdersUI(),
-    const PremiumMembershipUI(),
+    //const PremiumMembershipUI(),
     const ProfileUI()
   ];
 
@@ -307,11 +361,11 @@ class SellersController extends GetxController {
       {'title': "My Products", "icon": Icons.list_outlined, "page": 1},
       {'title': "My Orders", "icon": Icons.shopping_bag_outlined, "page": 2},
       {'title': "Profile", "icon": Icons.manage_accounts_outlined, "page": 4},
-      {
+      /*{
         'title': "Premium Membership",
         "icon": Icons.workspace_premium_outlined,
         "page": 3
-      },
+      },*/
     ];
   }
 
@@ -321,27 +375,51 @@ class SellersController extends GetxController {
         'title': "Total Orders",
         "icon": Icons.shopping_cart_outlined,
         "iconColor": kRedColor,
-        "count":0
+        "count": 0
       },
       {
         'title': "Pending Orders",
         "icon": Icons.pending_outlined,
         "iconColor": Colors.orange,
-        "count":0
+        "count": 0
       },
       {
         'title': "Processing Orders",
         "icon": Icons.local_shipping_outlined,
         "iconColor": Colors.blue,
-        "count":0
+        "count": 0
       },
       {
         'title': "Completed Orders",
         "icon": Icons.done_outline_rounded,
         "iconColor": Colors.teal,
-        "count":0
+        "count": 0
       },
     ];
+  }
+
+  Future<bool> checkPermissions() async {
+    return //await Permission.manageExternalStorage.isGranted &&
+        await Permission.storage.isGranted &&
+        //await Permission.photos.isGranted &&
+        await Permission.camera.isGranted;
+  }
+
+  void requestPhotoAndCameraPermissions() async {
+    Map<Permission, PermissionStatus> statuses = await [
+      Permission.manageExternalStorage,
+      Permission.camera,
+      Permission.photos,
+      Permission.storage,
+      //Permission.mediaLibrary,
+      //add more permission to request here.
+    ].request();
+    if (statuses[Permission.manageExternalStorage]!.isDenied &&
+        statuses[Permission.camera]!.isDenied &&
+        statuses[Permission.photos]!.isDenied) {
+      //check each permission status after.
+      debugPrint(">>>>permission is denied.");
+    }
   }
 
   clearControllers() {
@@ -350,6 +428,15 @@ class SellersController extends GetxController {
     prodBrandController.clear();
     prodStockController.clear();
     prodPriceController.clear();
+    prodDescriptionController.clear();
+    prodDiscountController.clear();
+    pickedImagesList.clear();
+    /*categoriesList.clear();
+    categoriesList.insert(
+        0, CategoryModel(name: selectedCategory.value, id: 0));
+    subCategoriesList.clear();
+    subCategoriesList.insert(
+        0, SubCategory(name: selectedSubCategory.value, id: 0));*/
   }
 
   @override

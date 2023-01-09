@@ -22,7 +22,6 @@ class ProductController extends GetxController with StateMixin {
 
   //TODO: minimum Order Qty Limit
   int moq = 10;
-  var cartCount = 99.obs;
 
   ///end Lists
   @override
@@ -31,18 +30,33 @@ class ProductController extends GetxController with StateMixin {
     super.onInit();
     quantityController.text = count.value.toString();
 
-    LocalStorageHelper.localStorage.listen(() {
-      debugPrint("Storage Length: changed");
-      cartCount(LocalStorageHelper.getCartItemsCount());
-    });
+
   }
 
-  fetchProduct(int id) {
+  void fetchProduct(int id) {
     change(null, status: RxStatus.loading());
     _apiProvider.getProductById(id).then((product) {
       change(product, status: RxStatus.success());
+      fetchProductBySubCategory(subCategoryId: product.subCategory!.id);
     }).catchError((error) {
       change(null, status: RxStatus.error(error));
+    });
+  }
+
+  var subCategoryProductList = <ProductModel>[].obs;
+  var isLoading = false.obs;
+  void fetchProductBySubCategory({int? subCategoryId}) async {
+    isLoading(true);
+    await _apiProvider
+        .getProductsBySubCategory(subCategoryId!)
+        .then((products) {
+
+      subCategoryProductList.clear();
+      subCategoryProductList.addAll(products);
+      isLoading(false);
+    }).catchError((error) {
+      isLoading(false);
+      debugPrint(">>>fetchProductBySubCategory $error");
     });
   }
 
@@ -72,7 +86,6 @@ class ProductController extends GetxController with StateMixin {
   //TODO: Add item to cart
 
   addItemToCart({ProductModel? product}) async {
-    debugPrint(">>>SingleProduct>>GetCurrentUser: ${ApiConstant.SESSION_EXPIRED}: ${authController.isSessionExpired}");
 
     CartModel cart = CartModel(
         productModel: product,
@@ -81,14 +94,14 @@ class ProductController extends GetxController with StateMixin {
         onQuantityClicked: false,
         color: color.value);
 
-    if(authController.isSessionExpired!){
+    if (authController.isSessionExpired!) {
       debugPrint(">>>AddItemToCart: Session is expired");
-       await LocalStorageHelper.addItemToCart(cartModel: cart).then((value) {
-      AppConstant.displaySnackBar("Added", "Added to Cart!",
-          position: SnackPosition.TOP);
-      clearControllers();
-      count(1);
-    });
+      await LocalStorageHelper.addItemToCart(cartModel: cart).then((value) {
+        AppConstant.displaySnackBar("Added", "Added to Cart!",
+            position: SnackPosition.TOP);
+        clearControllers();
+        count(1);
+      });
     } else {
       await LocalStorageHelper.getStoredUser().then((user) async {
         var cartData = {"productId": product!.id, "quantity": cart.quantity};
@@ -109,6 +122,8 @@ class ProductController extends GetxController with StateMixin {
         });
       });
     }
+
+    baseController.setCartItemCount();
   }
 
   showSnackBar(title, message) {

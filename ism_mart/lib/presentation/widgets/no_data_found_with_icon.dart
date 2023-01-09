@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iconly/iconly.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
 class NoDataFoundWithIcon extends StatelessWidget {
@@ -20,7 +21,7 @@ class NoDataFoundWithIcon extends StatelessWidget {
           decoration: BoxDecoration(
               color: iconColor!.withOpacity(0.22), shape: BoxShape.circle),
           child: Icon(
-            icon,
+            icon ?? IconlyLight.bag_2,
             size: 50,
             color: iconColor,
           ),
@@ -28,9 +29,9 @@ class NoDataFoundWithIcon extends StatelessWidget {
         RichText(
           textAlign: TextAlign.center,
           text: TextSpan(children: [
-            TextSpan(text: '\n${"$title"}\n', style: textTheme.headline6),
+            TextSpan(text: '\n${"$title"}\n', style: headline2),
             if (subTitle != null)
-              TextSpan(text: "$subTitle", style: textTheme.bodySmall)
+              TextSpan(text: "$subTitle", style: bodyText2)
           ]),
         ),
       ],

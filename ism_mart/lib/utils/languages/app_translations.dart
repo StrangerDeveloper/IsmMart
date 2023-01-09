@@ -29,23 +29,29 @@ class AppTranslations extends Translations {
           'appearance': 'Appearance',
           'terms_conditions': 'Terms & Conditions',
           'faq': 'FAQ',
+          'privacy_policy':'Privacy Policy',
+          'return_exchange':'Return & Exchange',
+
 
           'select_language': 'Select Language',
 
-          'search_in': 'What are you looking?',
+          'search_in': 'What are you looking for?',
           'logout': 'Log out',
           'home': 'Home',
           'categories': 'Categories',
           'deals': 'Deals',
           'menu': 'Menu',
-          'cart': 'Cart',
+          'cart': 'My Cart',
           'top_categories': 'Top Categories',
-          'big_discount_deals': 'Latest Big Discount Deals',
+          'big_discount_deals': 'Discount Deals',
           'active': 'Active',
+          'see_all': 'See All',
+          'view_all': 'View All',
+          'view_more': 'View more',
           'cart_items': 'cart @item',
           'empty_cart': 'Your cart is empty',
           'empty_cart_message':
-              'No items have been added to your cart. Please add the product to your cart.',
+          'No items have been added to your cart. Please add the product to your cart.',
 
           'order_summary': 'Order Summary',
           'confirm_order': 'Confirm Order',
@@ -59,6 +65,7 @@ class AppTranslations extends Translations {
 
 
           'profile':'Profile',
+          'personal_info': 'Personal Information',
 
           'shipping_details': 'Shipping Details',
           'checkout': 'Checkout',
@@ -71,6 +78,8 @@ class AppTranslations extends Translations {
           'total': 'Total',
           'shipping': 'Shipping',
           'details': 'Details',
+          'sort_by':'Sort By',
+          'status': 'Status',
 
           'add_new_address': 'Add new address',
 
@@ -78,6 +87,10 @@ class AppTranslations extends Translations {
           'owner_name':'Owner Name',
           'owner_name_required':'Owner name required',
 
+
+          'no_search_result_message': "Sorry! Your search didn't match any products \n please try again",
+          'no_search_product_found':'No search product found',
+          'no_product_found':'You have not added products Yet!',
           'no_order_found':'You have no orders Yet!',
           'no_address_found': 'No address found',
           'no_default_address_found': 'No default address found',
@@ -204,3 +217,5 @@ class AppTranslations extends Translations {
         },
       };
 }
+
+

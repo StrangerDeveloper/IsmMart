@@ -2,18 +2,38 @@ import 'package:flutter/cupertino.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/models/exports_model.dart';
 
+
 class SellersApiProvider {
   final SellersApiRepo _sellersApiRepo;
 
   SellersApiProvider(this._sellersApiRepo);
 
-  Future<ProductResponse> addProduct({String? token, model}) async {
+  Future<ProductResponse> addProduct({String? token, formData, imagesList}) async {
+    //var tokenNew = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQ4LCJpYW0iOiJ2ZW5kb3IiLCJ2aWQiOjQzLCJpYXQiOjE2NzIwNDcyNDk0NTUsImV4cCI6MTY3MjIyMDA0OTQ1NX0.B85lvOzdzG-EK261Wbd1hEfn1mZjxggXBfKf8k3xfDE";
     var response =
-        await _sellersApiRepo.postProduct(token: token, formData: model);
+        await _sellersApiRepo.postProduct(token: token, formData: formData);
     //debugPrint("Add Prod provider Response: $response");
-    return response != null
+
+
+    // var headers = {
+    //   'Authorization': token!,
+    //   'Accept': '*/*'
+    // };
+
+   /*  var response = await await http.post(
+         Uri.parse('${ApiConstant.baseUrl}vendor/products/add'),
+       headers: {
+         'Authorization': '$token',
+         'Content-Type': 'application/json'
+       },
+       body: json.encode(formData),
+       //encoding: 'charset=utf-8',
+     );*/
+
+    return ProductResponse.fromResponse(response);
+    /*return response != null
         ? ProductResponse.fromResponse(response)
-        : ProductResponse();
+        : ProductResponse();*/
   }
 
   Future<List<ProductModel>> fetchMyProducts({String? token}) async {

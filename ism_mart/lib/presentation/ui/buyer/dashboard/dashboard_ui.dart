@@ -23,17 +23,19 @@ class DashboardUI extends GetView<BaseController> {
               [
                 _slider(controller.sliderImages),
 
-                _displayDiscountProducts(),
-
-                StickyLabelWithViewMoreOption(
-                    title: "top_categories".tr,
-                    onTap: () => controller.changePage(1)),
+                StickyLabel(
+                  text: "top_categories".tr
+                ),
                 _topCategoriesGrid(controller.categories),
-                kDivider,
+                //kDivider,
+                _displayDiscountProducts(),
+                // kDivider,
                 Obx(() => _displayProducts(
                     productMap: controller.productsWithTypesMap)),
                 kDivider,
-                Obx(() => _displayProducts(productMap: controller.productsMap)),
+                Obx(() => _displayProducts(
+                    productMap: controller.productsMap,
+                    calledForCategoryProducts: true)),
                 // _productByCategories(),
               ],
             ),
@@ -45,7 +47,7 @@ class DashboardUI extends GetView<BaseController> {
 
   SliverAppBar _sliverAppBar() {
     return SliverAppBar(
-      backgroundColor: kPrimaryColor,
+      backgroundColor: kAppBarColor,
       // elevation: 5,
       floating: true,
       pinned: true,
@@ -55,11 +57,9 @@ class DashboardUI extends GetView<BaseController> {
         children: [
           buildSvgLogo(),
           Expanded(
-            flex: 6,
+            flex: 5,
             child: Obx(
-              () => SearchBar(
-                searchText: controller.randomSearchText.value
-              ),
+              () => SearchBar(searchText: controller.randomSearchText.value),
             ),
           ),
           //const Expanded(flex:1,child:Center())
@@ -71,14 +71,11 @@ class DashboardUI extends GetView<BaseController> {
   Widget _slider(List<SliderModel> list) {
     return Obx(
       () => controller.isSliderLoading.isTrue
-          ? CustomLoading(
-              isDarkMode: Get.isDarkMode,
-              isItForWidget: true,
-            )
+          ? CustomLoading(isDarkMode: Get.isDarkMode, isItForWidget: true)
           : Stack(
               children: [
                 SizedBox(
-                  height: 170.0,
+                  height: AppConstant.getSize().height * 0.15,
                   child: PageView.builder(
                     controller: controller.sliderPageController,
                     onPageChanged: (value) {
@@ -87,30 +84,14 @@ class DashboardUI extends GetView<BaseController> {
                     itemCount: list.length,
                     itemBuilder: (context, index) {
                       SliderModel model = list[index];
-                      return Stack(
-                        children: [
-                          CustomNetworkImage(
-                            imageUrl: model.image!,
-                            width: MediaQuery.of(context).size.width,
-                          ),
-                          Positioned(
-                            right: 5,
-                            top: 0,
-                            child: Column(
-                              children: [
-                                CustomText(
-                                  title: model.title,
-                                  size: 15,
-                                  weight: FontWeight.bold,
-                                ),
-                                /* CustomText(
-                                  title: model.title,
-                                  size: 11,
-                                )*/
-                              ],
-                            ),
-                          ),
-                        ],
+                      return InkWell(
+                        onTap: () => Get.toNamed(Routes.registerRoute),
+                        child: CustomNetworkImage(
+                          imageUrl: model.image!,
+                          fit: BoxFit.fill,
+                          width: AppConstant.getSize().width,
+                          //height: 190,
+                        ),
                       );
                     },
                   ),
@@ -147,27 +128,32 @@ class DashboardUI extends GetView<BaseController> {
   Widget _displayDiscountProducts() {
     return Obx(
       () => Container(
-        margin: const EdgeInsets.only(top: 10),
-        color: kLightGreenColor,
-        height: 280,
+        //margin: const EdgeInsets.only(top: 10),
+        color: kWhiteColor,
+        height: AppConstant.getSize().height * 0.35,
         child: Column(
           children: [
             StickyLabel(
-              text: "big_discount_deals".tr,
+              text: "big_discount_deals".tr
             ),
-            Expanded(
-                child: controller.discountSliderProductsList.isEmpty
-                    ? NoDataFound()
-                    : ListView.builder(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: controller.discountSliderProductsList.length,
-                        itemBuilder: (_, index) {
-                          ProductModel model =
-                              controller.discountSliderProductsList[index];
-                          return _singleDiscountProductItem(model);
-                        },
-                      ))
+            AppConstant.spaceWidget(height: 10),
+            controller.discountSliderProductsList.isEmpty
+                ? NoDataFound()
+                : SizedBox(
+                    width: AppConstant.getSize().width * 0.9,
+                    height: AppConstant.getSize().height * 0.25,
+                    child: ListView.builder(
+                      //shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      //physics: const AlwaysScrollableScrollPhysics(),
+                      itemCount: controller.discountSliderProductsList.length,
+                      itemBuilder: (_, index) {
+                        ProductModel model =
+                            controller.discountSliderProductsList[index];
+                        return _singleDiscountProductItem(model);
+                      },
+                    ),
+                  )
           ],
         ),
       ),
@@ -176,198 +162,173 @@ class DashboardUI extends GetView<BaseController> {
 
   _singleDiscountProductItem(ProductModel model) {
     var endTime =
-        DateTime.now().add(const Duration(days: 1)).millisecondsSinceEpoch;
-    return Padding(
-      padding: const EdgeInsets.all(3.0),
-      child: Container(
-        // clipBehavior: Clip.hardEdge,
-        padding: const EdgeInsets.all(8.0),
-        //margin: const EdgeInsets.only(right: 4),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          color: kWhiteColor,
-          border: Border.all(
-              color: Get.isDarkMode ? Colors.transparent : Colors.grey.shade200,
-              width: 1),
-        ),
-        child: ListTile(
-          leading: Container(
-            width: 80,
+        DateTime.now().add(const Duration(hours: 17)).millisecondsSinceEpoch;
+    return InkWell(
+      onTap: () {
+        Get.toNamed('/product/${model.id}',
+            arguments: {"calledFor": "customer"});
+      },
+      child: Stack(
+        fit: StackFit.loose,
+        children: [
+          Container(
+            width: AppConstant.getSize().width * 0.9,
+            height: AppConstant.getSize().height * 0.2,
+            margin: const EdgeInsets.symmetric(horizontal: 4),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: Colors.grey.shade200, width: 1),
+            ),
             child: CustomNetworkImage(
               imageUrl: model.thumbnail,
             ),
           ),
-          title: Row(
-            children: [
-              RichText(
-                text: TextSpan(children: [
-                  TextSpan(
-                      text: "${model.discount}% ",
-                      style: bodyText1.copyWith(color: kRedColor)),
-                  TextSpan(text: "Off", style: bodyText1),
-                ]),
-              ),
-              AppConstant.spaceWidget(width: 20),
-              Container(
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Container(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                decoration: BoxDecoration(
-                  color: kPrimaryColor,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: CustomText(
-                  title: "active".tr,
-                  color: kWhiteColor,
-                  size: 13,
-                  weight: FontWeight.w600,
-                ),
-              ),
-            ],
-          ),
-          subtitle: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              AppConstant.spaceWidget(height: 5),
-              CustomText(
-                title: model.name,
-                size: 15,
-                weight: FontWeight.w600,
-              ),
-              CountdownTimer(
-                endTime: endTime,
-                widgetBuilder: (context, CurrentRemainingTime? time) {
-                  if (time == null) {
-                    endTime = DateTime.now()
-                        .add(const Duration(days: 1))
-                        .millisecondsSinceEpoch;
-                    return Text(
-                      'Time over',
-                      style: bodyText2,
-                    );
-                  }
-                  return Text(
-                    AppConstant.getFormattedTime(time),
-                    style: headline5.copyWith(color: kPrimaryColor),
-                  );
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _trendingProducts(List<ProductModel> list) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: SizedBox(
-        height: 200,
-        child: ListView.builder(
-          // padding: const EdgeInsets.only(left: 10),
-          scrollDirection: Axis.horizontal,
-          itemCount: list.length,
-          itemBuilder: (context, index) {
-            ProductModel productModel = list[index];
-            return _buildProductItem(model: productModel);
-          },
-        ),
-      ),
-    );
-  }
-
-  _buildProductItem({ProductModel? model}) {
-    return AspectRatio(
-      aspectRatio: 0.75,
-      child: GestureDetector(
-        onTap: () {
-          Get.toNamed('/product/${model.id}',
-              arguments: {"calledFor": "customer"});
-        },
-        child: Container(
-          clipBehavior: Clip.hardEdge,
-          margin: const EdgeInsets.only(right: 4),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            color: Get.isDarkMode ? Colors.grey.shade700 : Colors.white60,
-            border: Border.all(
-                color:
-                    Get.isDarkMode ? Colors.transparent : Colors.grey.shade200,
-                width: 1),
-          ),
-          child: Stack(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 100,
-                    width: double.infinity,
-                    child: CustomNetworkImage(imageUrl: model!.thumbnail),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CustomText(title: "Sold: ${model.sold!}"),
-                        CustomText(title: model.name!, maxLines: 1),
-                        AppConstant.spaceWidget(height: 5),
-                        CustomPriceWidget(title: "${model.discountPrice!}"),
-                        if (model.discount != 0)
-                          CustomText(
-                            title:
-                                "${AppConstant.getCurrencySymbol()}${model.price!}",
-                            style: textTheme.caption?.copyWith(
-                                decoration: TextDecoration.lineThrough,
-                                fontSize: 14,
-                                color: kLightGreyColor),
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 0),
+                //height: AppConstant.getSize().height * 0.15,
+                child: Column(
+                  children: [
+                    CountdownTimer(
+                      endTime: endTime,
+                      widgetBuilder: (context, CurrentRemainingTime? time) {
+                        if (time == null) {
+                          endTime = DateTime.now()
+                              .add(const Duration(hours: 4))
+                              .millisecondsSinceEpoch;
+                          return Text(
+                            '',
+                            style: bodyText2,
+                          );
+                        }
+                        return singleTimeWidget(time);
+                      },
+                    ),
+                    Card(
+                      shadowColor: kDarkColor,
+                      child: SizedBox(
+                        height: 90,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              CustomText(
+                                title: model.name,
+                                size: 16,
+                                weight: FontWeight.bold,
+                              ),
+                              Row(
+                                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  CustomPriceWidget(
+                                    title: "${model.discountPrice!}",
+                                    style: headline2,
+                                  ),
+                                  AppConstant.spaceWidget(width: 5),
+                                  CustomPriceWidget(
+                                    title: "${model.price!}",
+                                    style: bodyText1.copyWith(
+                                        decoration: TextDecoration.lineThrough,
+                                        fontSize: 15),
+                                  ),
+                                  AppConstant.spaceWidget(width: 8),
+                                  RichText(
+                                    text: TextSpan(children: [
+                                      TextSpan(
+                                          text: "${model.discount}% ",
+                                          style: bodyText1.copyWith(
+                                              color: kRedColor)),
+                                      TextSpan(text: "OFF", style: bodyText1),
+                                    ]),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
-                      ],
+                        ),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              if (model.discount != 0)
-                Positioned(
-                  top: 5,
-                  right: 5,
-                  child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                    decoration: BoxDecoration(
-                      color: kOrangeColor,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: CustomText(
-                      title: "${model.discount}% OFF",
-                      color: kWhiteColor,
-                      size: 12,
-                      weight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-            ],
+                  ],
+                )),
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget singleTimeWidget(CurrentRemainingTime? time) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (time!.days != null) _timeCard(time.days!, "days"),
+        if (time.hours != null) _timeCard(time.hours!, "hours"),
+        if (time.min != null) _timeCard(time.min!, "min"),
+        if (time.sec != null) _timeCard(time.sec!, "sec"),
+      ],
+    );
+  }
+
+  _timeCard(int timePart, String format) {
+    return Card(
+      child: SizedBox(
+        width: 40,
+        height: 40,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            CustomText(
+              title: "$timePart",
+              style: bodyText1,
+            ),
+            CustomText(
+                title: "$format",
+                style:
+                    bodyText2),
+          ],
         ),
       ),
     );
   }
 
-  Widget _displayProducts({JSON? productMap}) {
+  Widget _displayProducts(
+      {JSON? productMap, bool? calledForCategoryProducts = false}) {
+    var isPopular = false;
     return Column(
         children: productMap!.entries.map((e) {
       List list = e.value;
-      if (list.isNotEmpty) {
+      if (list.isNotEmpty && list.length > 1) {
+        if (e.key.toLowerCase().contains("popular"))
+          isPopular = true;
+        else
+          isPopular = false;
         return Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
+            /*calledForCategoryProducts!
+                ?*/
             StickyLabelWithViewMoreOption(
                 title: e.key,
+                textSize: 20,
                 onTap: () {
                   Get.toNamed(Routes.searchRoute,
                       arguments: {"searchText": "${e.key}"});
                 }),
-            _trendingProducts(e.value as List<ProductModel>)
+            /* : StickyLabel(
+                    text: e.key,
+                    textSize: 20,
+                  ),*/
+            AppConstant.spaceWidget(height: 10),
+            _trendingProducts(list as List<ProductModel>, isPopular,
+                calledForCategoryProducts)
           ],
         );
       }
@@ -376,8 +337,54 @@ class DashboardUI extends GetView<BaseController> {
     }).toList());
   }
 
+  Widget _trendingProducts(
+      List<ProductModel> list, bool? isPopular, bool? isCategoryProducts) {
+    if (isPopular!)
+      return Padding(
+        padding: const EdgeInsets.all(6.0),
+        child: SizedBox(
+          //height: AppConstant.getSize().height * 0.5,
+          child: GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisExtent: AppConstant.getSize().height * 0.25,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10),
+              itemCount: list.length,
+              itemBuilder: (_, index) {
+                ProductModel productModel = list[index];
+                return SingleProductItems(
+                  productModel: productModel,
+                  isCategoryProducts: isCategoryProducts,
+                );
+              }),
+        ),
+      );
+
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: SizedBox(
+        height:
+            AppConstant.getSize().height * (isCategoryProducts! ? 0.2 : 0.25),
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: list.length,
+          itemBuilder: (context, index) {
+            ProductModel productModel = list[index];
+            return SingleProductItems(
+              productModel: productModel,
+              isCategoryProducts: isCategoryProducts,
+            );
+          },
+        ),
+      ),
+    );
+  }
+
   Widget _topCategoriesGrid(List<CategoryModel> list) {
-    var theme = Theme.of(Get.context!);
+    //var theme = Theme.of(Get.context!);
     return Obx(
       () => controller.isCategoriesLoading.isTrue
           ? CustomLoading(isDarkMode: Get.isDarkMode, isItForWidget: true)
@@ -385,14 +392,14 @@ class DashboardUI extends GetView<BaseController> {
               padding:
                   const EdgeInsets.symmetric(horizontal: 12, vertical: 8.0),
               child: SizedBox(
-                height: 120,
+                height: AppConstant.getSize().height * 0.25,
                 child: list.isEmpty
                     ? NoDataFound(text: "no_category_found".tr)
                     : GridView.builder(
                         scrollDirection: Axis.horizontal,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           //maxCrossAxisExtent: 150,
-                          crossAxisCount: 1,
+                          crossAxisCount: 2,
                           childAspectRatio: _getChildAspectRatio(Get.context!),
                           mainAxisSpacing: 5.0,
                           crossAxisSpacing: 5.0,
@@ -400,7 +407,7 @@ class DashboardUI extends GetView<BaseController> {
                         itemCount: list.length,
                         itemBuilder: (context, index) {
                           CategoryModel model = list[index];
-                          return _buildCategory(model, index, theme);
+                          return SingleCategoryItem(categoryModel: model);
                         },
                       ),
               ),
@@ -408,56 +415,9 @@ class DashboardUI extends GetView<BaseController> {
     );
   }
 
-  Widget _buildCategory(CategoryModel category, index, theme) {
-    return InkWell(
-      onTap: () {
-        Get.toNamed(Routes.searchRoute,
-            arguments: {"searchText": "${category.name}"});
-      },
-      child: Container(
-        clipBehavior: Clip.hardEdge,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        margin: EdgeInsets.only(
-            right: controller.categories.length - 1 == index ? 0 : 5),
-        child: Stack(
-          children: [
-            SizedBox(
-              width: 130,
-              height: 130,
-              child: CustomNetworkImage(imageUrl: category.image!),
-            ),
-            Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              child: Container(
-                height: 120,
-                decoration: BoxDecoration(
-                  color: Colors.black.withAlpha(110),
-                ),
-                child: Center(
-                  child: Text(
-                    category.name ?? "",
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.center,
-                    style: textTheme.subtitle2?.copyWith(color: Colors.white),
-                  ),
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
   _getChildAspectRatio(context) {
     double aspectRatio = MediaQuery.of(context).size.width /
-        (MediaQuery.of(context).size.height / 2.6);
+        (MediaQuery.of(context).size.height / 2.75);
     return aspectRatio;
   }
 }

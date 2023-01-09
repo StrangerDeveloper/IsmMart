@@ -25,7 +25,7 @@ class SignInUI extends GetView<AuthController> {
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    buildSvgLogo(),
+                    buildSvgLogo(color: kPrimaryColor),
                     InkWell(
                       onTap: () => Get.back(),
                       child: const Icon(Icons.close),
@@ -38,13 +38,11 @@ class SignInUI extends GetView<AuthController> {
               delegate: SliverChildListDelegate(
                 [
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20.0,
-                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: CustomText(
                       title:
                           "Greetings! Welcome back!\nSign in to your Account",
-                      style: headline3,
+                      style: headline2,
                     ),
                   ),
                   AppConstant.spaceWidget(height: 40),
@@ -80,9 +78,10 @@ class SignInUI extends GetView<AuthController> {
                             labelText: 'Password',
                             autoValidateMode:
                                 AutovalidateMode.onUserInteraction,
-                            validator: (value) => !GetUtils.isPassport(value!)
-                                ? "Password must be at least 6 characters long?"
-                                : null,
+                            validator: (value) => //!GetUtils.isPassport(value!)
+                                value!.length < 6
+                                    ? "Password must be at least 6 characters long?"
+                                    : null,
                             obscureText: true,
                             onChanged: (value) => {},
                             maxLines: 1,
@@ -107,9 +106,9 @@ class SignInUI extends GetView<AuthController> {
                             alignment: Alignment.centerRight,
                             child: InkWell(
                               onTap: () => {},
-                              child: CustomText(
-                                title: "Forgot your Password?",
-                                style: bodyText3,
+                              child: Text(
+                                 "Forgot your Password?",
+                                style: headline3.copyWith(decoration: TextDecoration.underline),
                               ),
                             ),
                           ),
@@ -124,6 +123,7 @@ class SignInUI extends GetView<AuthController> {
                                   Text(
                                     "Sign up here",
                                     style: bodyText1.copyWith(
+                                      decoration: TextDecoration.underline,
                                         color: kPrimaryColor),
                                   ),
                                 ],
@@ -131,7 +131,7 @@ class SignInUI extends GetView<AuthController> {
                             ),
                           ),
 
-                         /* AppConstant.spaceWidget(height: 20),
+                          /* AppConstant.spaceWidget(height: 20),
                           Center(
                             child: InkWell(
                               onTap: () => showResendVerificationLinkDialog(),
@@ -161,62 +161,59 @@ class SignInUI extends GetView<AuthController> {
     );
   }
 
-  void showResendVerificationLinkDialog(){
+  void showResendVerificationLinkDialog() {
     final formKey = GlobalKey<FormState>();
     Get.defaultDialog(
-      title: "Resend Verification Link",
-      content: Form(
-        key: formKey,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              AppConstant.spaceWidget(height: 20),
-              FormInputFieldWithIcon(
-                controller: controller.emailController,
-                iconPrefix: Icons.email,
-                labelText: 'Email',
-                iconColor: kPrimaryColor,
-                autofocus: false,
-                textStyle: bodyText1,
-                autoValidateMode:
-                AutovalidateMode.onUserInteraction,
-                validator: (value) => !GetUtils.isEmail(value!)
-                    ? "Invalid Email Format?"
-                    : null,
-                keyboardType: TextInputType.emailAddress,
-                onChanged: (value) {},
-                onSaved: (value) {},
-              ),
-              AppConstant.spaceWidget(height: 20),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CustomButton(
-                    onTap: () {
-                      Get.back();
-                    },
-                    text: "Cancel",
-                    width: 100,
-                    height: 35,
-                    color: kPrimaryColor,
-                  ),
-                  CustomButton(
-                    onTap: () async{
-                     await controller.resendEmailVerificationLink();
-                    },
-                    text: "Send",
-                    width: 100,
-                    height: 35,
-                    color: kPrimaryColor,
-                  ),
-                ],
-              ),
-            ],
+        title: "Resend Verification Link",
+        content: Form(
+          key: formKey,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                AppConstant.spaceWidget(height: 20),
+                FormInputFieldWithIcon(
+                  controller: controller.emailController,
+                  iconPrefix: Icons.email,
+                  labelText: 'Email',
+                  iconColor: kPrimaryColor,
+                  autofocus: false,
+                  textStyle: bodyText1,
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (value) => !GetUtils.isEmail(value!)
+                      ? "Invalid Email Format?"
+                      : null,
+                  keyboardType: TextInputType.emailAddress,
+                  onChanged: (value) {},
+                  onSaved: (value) {},
+                ),
+                AppConstant.spaceWidget(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CustomButton(
+                      onTap: () {
+                        Get.back();
+                      },
+                      text: "Cancel",
+                      width: 100,
+                      height: 35,
+                      color: kPrimaryColor,
+                    ),
+                    CustomButton(
+                      onTap: () async {
+                        await controller.resendEmailVerificationLink();
+                      },
+                      text: "Send",
+                      width: 100,
+                      height: 35,
+                      color: kPrimaryColor,
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
-        ),
-      )
-    );
+        ));
   }
 }

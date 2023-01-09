@@ -45,7 +45,7 @@ class SellerModel {
       phone: json["phone"] == null ? null : json["phone"],
       premium: json["premium"],
       membership: json["membership"],
-      createdAt: DateTime.parse(json["createdAt"]),
+      createdAt: json["createdAt"]==null? null:DateTime.parse(json["createdAt"]),
       userId: json["userId"] == null ? null : json["userId"],
       updatedAt:
           json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),

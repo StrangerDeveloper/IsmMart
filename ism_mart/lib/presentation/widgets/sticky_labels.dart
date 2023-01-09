@@ -5,13 +5,11 @@ import 'package:ism_mart/utils/constants.dart';
 
 class StickyLabel extends StatelessWidget {
   final String? text;
-  final Color? textColor;
-  final double? textSize;
+  final TextStyle? style;
   const StickyLabel({
     Key? key,
-    this.text,
-    this.textColor,
-    this.textSize = 17,
+    this.text, this.style,
+
   }) : super(key: key);
 
   @override
@@ -24,11 +22,14 @@ class StickyLabel extends StatelessWidget {
       ),
       child: Text(
         text!.tr,
-        style: TextStyle(
+        style: style??headline3,
+
+
+        /*TextStyle(
           color: textColor ?? kDarkColor,
           fontWeight: FontWeight.bold,
           fontSize: textSize,
-        ),
+        ),*/
       ),
     );
   }

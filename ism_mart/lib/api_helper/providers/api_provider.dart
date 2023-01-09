@@ -9,8 +9,8 @@ class ApiProvider {
   ApiProvider(this._apiRepository);
 
   //TODO: Search Provider
-  Future<List<ProductModel>> search({text}) async {
-    var products = await _apiRepository.searchProduct(text: text);
+  Future<List<ProductModel>> search({text, page, limit, sortBy}) async {
+    var products = await _apiRepository.searchProduct(text: text, page: page, limit: limit, sortBy: sortBy);
     return products.map((product) => ProductModel.fromJson(product)).toList();
   }
 
@@ -46,6 +46,12 @@ class ApiProvider {
   Future<List<ProductModel>> getProductsByCategory(int id) async {
     var products = await _apiRepository.getProductsByCategory(
         endPoint: "getByCategory", id: id);
+
+    return products.map((product) => ProductModel.fromJson(product)).toList();
+  }
+  Future<List<ProductModel>> getProductsBySubCategory(int id) async {
+    var products = await _apiRepository.getProductsByCategory(
+        endPoint: "getBySubCategory", id: id);
 
     return products.map((product) => ProductModel.fromJson(product)).toList();
   }

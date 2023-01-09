@@ -13,44 +13,28 @@ class ProfileUI extends GetView<AuthController> {
       () => SafeArea(
         child: controller.isLoading.isTrue
             ? CustomLoading(isItForWidget: true, color: kPrimaryColor)
-            : NestedScrollView(
-                headerSliverBuilder: (_, innerBoxIsScrolled) {
-                  return _headerSliverBuilder(innerBoxIsScrolled);
-                },
-                body: _body(),
-              ),
+            : CustomScrollView(
+          slivers: [
+            SliverList(delegate: SliverChildListDelegate(
+              [
+                CustomHeader(title: "profile".tr,),
+                _body(),
+              ]
+            )),
+          ],
+        ),
+
       ),
     );
   }
-
-  _headerSliverBuilder(bool? innerBoxIsScrolled) {
-    return [
-      SliverAppBar(
-        expandedHeight: 100.0,
-        floating: true,
-        pinned: true,
-        snap: true,
-        automaticallyImplyLeading: false,
-        backgroundColor: innerBoxIsScrolled! ? kPrimaryColor : kWhiteColor,
-        flexibleSpace: FlexibleSpaceBar(
-          centerTitle: false,
-          titlePadding: const EdgeInsets.symmetric(horizontal: 16),
-          title: Text(
-            'profile'.tr,
-            style: textTheme.headline6,
-          ),
-        ),
-      ),
-    ];
-  }
-
   _body() {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: ListView(
+        shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         children: [
-          StickyLabel(text: "Personal Information"),
+          StickyLabel(text: "personal_info".tr),
           AppConstant.spaceWidget(height: 10),
           CustomGreyBorderContainer(
             child: Padding(
@@ -157,17 +141,9 @@ class ProfileUI extends GetView<AuthController> {
       child: ListTile(
         dense: true,
         contentPadding: EdgeInsets.only(left: 10.0, right: 10.0),
-        title: Text(
-          '$title',
-          style: bodyText1.copyWith(
-              fontSize: 13, color: Colors.black54, fontWeight: FontWeight.w600),
-        ),
-        subtitle: Text(
-          //'+92 302-5580842',
-          '$subtitle',
-          style: bodyText1.copyWith(
-              fontSize: 13, color: Colors.black87, fontWeight: FontWeight.w600),
-        ),
+        title: CustomText(title: title, color: Colors.black54, weight: FontWeight.w600,),
+
+        subtitle: CustomText(title: subtitle, style: bodyText1,),
         leading: Icon(icon),
         trailing: InkWell(
           onTap: () => showEditDialog(title, subtitle),
@@ -186,7 +162,7 @@ class ProfileUI extends GetView<AuthController> {
     var _formKey = GlobalKey<FormState>();
     Get.defaultDialog(
       title: "Update $title",
-      titleStyle: headline6,
+      titleStyle: appBarTitleSize,
       contentPadding: const EdgeInsets.all(20),
       content: Form(
         key: _formKey,

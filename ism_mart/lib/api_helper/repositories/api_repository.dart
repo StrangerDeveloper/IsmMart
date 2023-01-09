@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:ism_mart/api_helper/api_service.dart';
 
@@ -9,12 +9,14 @@ class ApiRepository {
 
   ApiRepository(this._apiService);
 
-  Future<List<dynamic>> searchProduct({text, page = 1, limit = 10}) async {
+  Future<List<dynamic>> searchProduct(
+      {text, page = 1, limit = 10, sortBy}) async {
     final queryParameters = {
       "text": "$text",
       "limit": "$limit",
       "page": "$page"
     };
+    queryParameters.addIf(sortBy != null, 'sort', '$sortBy');
     var response =
         await _apiService.get(endpoint: "search/", query: queryParameters);
     return response.body['data'];
@@ -31,10 +33,10 @@ class ApiRepository {
   }
 
   Future<List<dynamic>> fetchSliderDiscountProducts() async {
-    var queryParam = {"limit": "2"};
+    var queryParam = {"limit": "3"};
     var response = await _apiService.get(
         endpoint: "slider/getDiscountProducts", query: queryParam);
-    debugPrint("FetchSlider: ${response.body['data']}");
+    //debugPrint("FetchSlider: ${response.body['data']}");
     return response.body['data'];
   }
 
@@ -61,7 +63,7 @@ class ApiRepository {
     return response.body['data'];
   }
 
-  // same for categoryById and SubCategory
+  // same for categoryById and SubCategoryById
   Future<List<dynamic>> getProductsByCategory(
       {required String? endPoint,
       int? limit = 10,
@@ -132,10 +134,8 @@ class ApiRepository {
   Future<List<dynamic>> fetchAllFAQ({token}) async {
     var response = await _apiService.get(
         endpoint: 'faq/allFaq', token: token, requiresAuthToken: true);
-    return response.body['body'];
+    return response.body['data'];
   }
-
-
 
   /**
    *

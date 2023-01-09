@@ -35,7 +35,7 @@ class CustomButton extends StatelessWidget {
           title: text!,
           color: Colors.white,
           style:
-              textStyle ?? textTheme.bodyText1!.copyWith(color: kWhiteColor, fontWeight: FontWeight.bold),
+              textStyle ?? headline3.copyWith(color: kWhiteColor),
         ),
       ),
     );

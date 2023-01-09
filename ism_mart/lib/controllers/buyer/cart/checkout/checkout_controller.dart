@@ -39,9 +39,14 @@ class CheckoutController extends GetxController {
     getAllShippingAddresses();
   }
 
-  void setSelectedCountry(String name) {
-    authController.selectedCountry(name);
-    getCityByCountryName(name);
+  void setSelectedCountry(CountryModel? model) async{
+    authController.selectedCountry(model);
+    //getCityByCountryName(name);
+    countryId(model!.id);
+    authController.cities.clear();
+    authController.update();
+    await authController.getCitiesByCountry(countryId: model.id!);
+
   }
 
   void getCityByCountryName(String name) {
@@ -56,9 +61,10 @@ class CheckoutController extends GetxController {
     }
   }
 
-  void setSelectedCity(String value) {
-    authController.selectedCity(value);
-    getCityIdByName(value);
+  void setSelectedCity(CountryModel model) {
+    authController.selectedCity(model);
+    cityId(model.id);
+    //getCityIdByName(value);
   }
 
   getCityIdByName(String? city) {
@@ -212,21 +218,37 @@ class CheckoutController extends GetxController {
     try {
       isLoading(true);
       //STEP 1: Create Payment Intent
-      paymentIntent = await createPaymentIntent(amount!, 'USD');
+      paymentIntent = await createPaymentIntent(amount!, 'PKR');
 
       //STEP 2: Initialize Payment Sheet
       await Stripe.instance
           .initPaymentSheet(
               paymentSheetParameters: SetupPaymentSheetParameters(
+                appearance: PaymentSheetAppearance(
+                  primaryButton: PaymentSheetPrimaryButtonAppearance(
+
+                    shapes: PaymentSheetPrimaryButtonShape(blurRadius: 8),
+
+                    colors: PaymentSheetPrimaryButtonTheme(
+                      light: PaymentSheetPrimaryButtonThemeColors(
+                        background: kPrimaryColor,
+                        text: kWhiteColor,
+                        border: kLightGreyColor,
+                      ),
+                    ),
+                  )
+                ),
                   paymentIntentClientSecret: paymentIntent![
-                      'client_secret'], //Gotten from payment intent
+                      'client_secret'],
+                 // customFlow: true,
+                  //Gotten from payment intent
                   //style: ThemeMode.light,
                   merchantDisplayName: 'ISMMART'))
           .then((value) {});
 
       //STEP 3: Display Payment sheet
       displayPaymentSheet();
-    } catch (err) {
+     } catch (err) {
       isLoading(false);
       throw Exception(err);
     }
@@ -238,7 +260,7 @@ class CheckoutController extends GetxController {
 
       Map<String, dynamic> body = {
         'amount': calculateAmount(amount),
-        'currency': currency,
+        'currency': currency
       };
 
       //Make post request to Stripe
@@ -293,6 +315,8 @@ class CheckoutController extends GetxController {
           showSnackBar(title: 'success', message: response.message!);
           showSuccessDialog(response: response);
           paymentIntent = null;
+
+          LocalStorageHelper.clearAllCart();
         } else
           showSnackBar(title: 'error', message: response.message!);
       } else
@@ -304,7 +328,7 @@ class CheckoutController extends GetxController {
   void showSuccessDialog({OrderResponse? response}) {
     Get.defaultDialog(
       title: "Order Information",
-      titleStyle: headline5,
+      titleStyle: appBarTitleSize,
       barrierDismissible: false,
       content: Column(
         mainAxisSize: MainAxisSize.min,

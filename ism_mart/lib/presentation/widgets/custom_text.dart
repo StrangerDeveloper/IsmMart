@@ -10,15 +10,16 @@ class CustomText extends StatelessWidget {
   final FontWeight? weight;
   final TextAlign? textAlign;
 
-  const CustomText(
-      {Key? key,
-      required this.title,
-      this.style,
-      this.size,
-      this.color,
-      this.textAlign,
-      this.weight, this.maxLines = 2,})
-      : super(key: key);
+  const CustomText({
+    Key? key,
+    required this.title,
+    this.style,
+    this.size,
+    this.color,
+    this.textAlign,
+    this.weight,
+    this.maxLines = 2,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +29,8 @@ class CustomText extends StatelessWidget {
       maxLines: maxLines,
       textAlign: textAlign ?? TextAlign.start,
       style: style ??
-          textTheme.bodyText1!.copyWith(
-              fontSize: size ?? 14,
+          bodyText1.copyWith(
+              fontSize: size ?? 13,
               color: color ?? Colors.black,
               fontWeight: weight ?? FontWeight.normal),
     );

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ism_mart/controllers/export_controllers.dart';
+import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
-class FaqUI extends StatelessWidget {
+class FaqUI extends GetView<BaseController> {
   const FaqUI({Key? key}) : super(key: key);
 
   @override
@@ -17,28 +19,27 @@ class FaqUI extends StatelessWidget {
             shrinkWrap: true,
             //physics: const NeverScrollableScrollPhysics(),
             children: [
-              CustomText(
-                  title: "Frequently Asked Questions",
-                  style: textTheme.headline4),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: getData().map((e) {
+             CustomHeader(title: "Frequently Asked Questions"),
+              Obx(()=> Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: controller.faqsList.map((FAQModel? faq) {
 
-                  return ExpansionTile(
-                    title: CustomText(
-                      title: e['q'],
-                      style: textTheme.bodyText1!.copyWith(fontSize: 16,fontWeight: FontWeight.w700),
-                    ),
-                    children:[
-                      Text(
-                        e['ans'],
-                        style: textTheme.bodyMedium,
+                    return ExpansionTile(
+                      title: CustomText(
+                        title: faq!.questions,
+                        style: headline3,
                       ),
-                    ]
+                      children:[
+                        Text(
+                          faq.answer!,
+                          style: bodyText1,
+                        ),
+                      ]
 
-                  );
-                }).toList(),
+                    );
+                  }).toList(),
+                ),
               ),
             ],
           ),
@@ -50,18 +51,18 @@ class FaqUI extends StatelessWidget {
   _appBar() {
     return AppBar(
       elevation: 0,
-      backgroundColor: kPrimaryColor,
+      backgroundColor: kAppBarColor,
       leading: InkWell(
         onTap: () => Get.back(),
         child: Icon(
           Icons.arrow_back_ios_new,
           size: 18,
-          color: kWhiteColor,
+          color: kPrimaryColor,
         ),
       ),
       title: CustomText(
           title: 'faq'.tr,
-          style: textTheme.headline6!.copyWith(color: kWhiteColor)),
+          style: appBarTitleSize),
     );
   }
 

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:ism_mart/api_helper/api_service.dart';
 import 'package:ism_mart/models/exports_model.dart';
 
+
 class SellersApiRepo {
   final ApiService _apiService;
 
@@ -10,8 +11,13 @@ class SellersApiRepo {
   Future<dynamic> postProduct({String? token, formData}) async {
     var headers = {
       'Authorization': token!,
-      'Accept': "*/*"
+      'Accept': '*/*',
+      //'Content-Type': 'application/x-www-form-urlencoded'
     };
+
+
+
+
     var response = await _apiService.postImage(
         endpoint: "vendor/products/add", headers: headers, body: formData);
 

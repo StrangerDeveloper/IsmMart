@@ -8,7 +8,7 @@ class Themes {
       brightness: Brightness.light,
       appBarTheme: AppBarTheme(
           titleTextStyle:
-              GoogleFonts.poppins(color: Colors.black, fontWeight: FontWeight.w600),
+              GoogleFonts.lato(color: Colors.black, fontWeight: FontWeight.w600),
           iconTheme: const IconThemeData(color: Colors.black),
           backgroundColor: Colors.grey.shade50,
           elevation: 0),
@@ -16,57 +16,57 @@ class Themes {
           border: OutlineInputBorder(
               borderSide: BorderSide.none,
               borderRadius: BorderRadius.circular(10)),
-          hintStyle: GoogleFonts.poppins(
+          hintStyle: GoogleFonts.lato(
             fontSize: 14,
           )),
       progressIndicatorTheme: const ProgressIndicatorThemeData(color: kPrimaryColor),
       textTheme: TextTheme(
-          headline1: GoogleFonts.poppins(
+          headline1: GoogleFonts.lato(
               letterSpacing: -1.5,
               fontSize: 48,
               color: Colors.black,
               fontWeight: FontWeight.bold),
-          headline2: GoogleFonts.poppins(
+          headline2: GoogleFonts.lato(
               letterSpacing: -1.0,
               fontSize: 40,
               color: Colors.black,
               fontWeight: FontWeight.bold),
-          headline3: GoogleFonts.poppins(
+          headline3: GoogleFonts.lato(
               letterSpacing: -1.0,
               fontSize: 32,
               color: Colors.black,
               fontWeight: FontWeight.bold),
-          headline4: GoogleFonts.poppins(
+          headline4: GoogleFonts.lato(
               letterSpacing: -1.0,
               color: Colors.black,
               fontSize: 28,
               fontWeight: FontWeight.w600),
-          headline5: GoogleFonts.poppins(
+          headline5: GoogleFonts.lato(
               letterSpacing: -1.0,
               color: Colors.black,
               fontSize: 24,
               fontWeight: FontWeight.w500),
-          headline6: GoogleFonts.poppins(
+          headline6: GoogleFonts.lato(
               color: Colors.black, fontSize: 18, fontWeight: FontWeight.w600),
-          subtitle1: GoogleFonts.poppins(
+          subtitle1: GoogleFonts.lato(
               color: Colors.black, fontSize: 16, fontWeight: FontWeight.w500),
-          subtitle2: GoogleFonts.poppins(
+          subtitle2: GoogleFonts.lato(
               color: Colors.black, fontSize: 14, fontWeight: FontWeight.w500),
-          bodyText1: GoogleFonts.poppins(
+          bodyText1: GoogleFonts.lato(
               color: Colors.grey.shade700,
               fontSize: 16,
               fontWeight: FontWeight.w400),
-          bodyText2: GoogleFonts.poppins(
+          bodyText2: GoogleFonts.lato(
               color: Colors.grey.shade600,
               fontSize: 14,
               fontWeight: FontWeight.w400),
-          button: GoogleFonts.poppins(
+          button: GoogleFonts.lato(
               color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
-          caption: GoogleFonts.poppins(
+          caption: GoogleFonts.lato(
               color: Colors.grey.shade800,
               fontSize: 12,
               fontWeight: FontWeight.w400),
-          overline: GoogleFonts.poppins(
+          overline: GoogleFonts.lato(
               color: Colors.grey.shade700,
               fontSize: 10,
               fontWeight: FontWeight.w400,
@@ -87,64 +87,64 @@ class Themes {
         border: OutlineInputBorder(
             borderSide: BorderSide.none,
             borderRadius: BorderRadius.circular(10)),
-        hintStyle: GoogleFonts.poppins(
+        hintStyle: GoogleFonts.lato(
           fontSize: 14,
         )),
     progressIndicatorTheme:
         const ProgressIndicatorThemeData(color: kPrimaryColor),
     textTheme: TextTheme(
-        headline1: GoogleFonts.poppins(
+        headline1: GoogleFonts.lato(
             letterSpacing: -1.5,
             fontSize: 48,
             color: Colors.grey.shade50,
             fontWeight: FontWeight.bold),
-        headline2: GoogleFonts.poppins(
+        headline2: GoogleFonts.lato(
             letterSpacing: -1.0,
             fontSize: 40,
             color: Colors.grey.shade50,
             fontWeight: FontWeight.bold),
-        headline3: GoogleFonts.poppins(
+        headline3: GoogleFonts.lato(
             letterSpacing: -1.0,
             fontSize: 32,
             color: Colors.grey.shade50,
             fontWeight: FontWeight.bold),
-        headline4: GoogleFonts.poppins(
+        headline4: GoogleFonts.lato(
             letterSpacing: -1.0,
             color: Colors.grey.shade50,
             fontSize: 28,
             fontWeight: FontWeight.w600),
-        headline5: GoogleFonts.poppins(
+        headline5: GoogleFonts.lato(
             letterSpacing: -1.0,
             color: Colors.grey.shade50,
             fontSize: 24,
             fontWeight: FontWeight.w500),
-        headline6: GoogleFonts.poppins(
+        headline6: GoogleFonts.lato(
             color: Colors.grey.shade50,
             fontSize: 18,
             fontWeight: FontWeight.w600),
-        subtitle1: GoogleFonts.poppins(
+        subtitle1: GoogleFonts.lato(
             color: Colors.grey.shade50,
             fontSize: 16,
             fontWeight: FontWeight.w500),
-        subtitle2: GoogleFonts.poppins(
+        subtitle2: GoogleFonts.lato(
             color: Colors.grey.shade50,
             fontSize: 14,
             fontWeight: FontWeight.w500),
-        bodyText1: GoogleFonts.poppins(
+        bodyText1: GoogleFonts.lato(
             color: Colors.grey.shade50,
             fontSize: 16,
             fontWeight: FontWeight.w400),
-        bodyText2: GoogleFonts.poppins(
+        bodyText2: GoogleFonts.lato(
             color: Colors.grey.shade50,
             fontSize: 14,
             fontWeight: FontWeight.w400),
-        button: GoogleFonts.poppins(
+        button: GoogleFonts.lato(
             color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
-        caption: GoogleFonts.poppins(
+        caption: GoogleFonts.lato(
             color: Colors.grey.shade50,
             fontSize: 12,
             fontWeight: FontWeight.w500),
-        overline: GoogleFonts.poppins(
+        overline: GoogleFonts.lato(
             color: Colors.grey.shade50,
             fontSize: 10,
             fontWeight: FontWeight.w400)),

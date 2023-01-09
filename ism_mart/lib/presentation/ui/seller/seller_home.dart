@@ -16,11 +16,11 @@ class SellerHome extends GetView<SellersController> {
         title: Obx(
           () => CustomText(
               title: controller.appBarTitle.value,
-              style: textTheme.headline6!.copyWith(color: kWhiteColor)),
+              style: appBarTitleSize),
         ),
-        iconTheme: IconThemeData(color: kWhiteColor),
+        iconTheme: IconThemeData(color: kPrimaryColor),
         centerTitle: true,
-        backgroundColor: kPrimaryColor,
+        backgroundColor: kAppBarColor,
       ),
       body: PageView(
         controller: controller.pageViewController,

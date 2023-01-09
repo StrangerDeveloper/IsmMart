@@ -18,7 +18,7 @@ class CustomLoading extends StatelessWidget {
     if (isItForWidget!) {
       return Center(
         child: CircularProgressIndicator(
-          strokeWidth: 2,
+          strokeWidth: 1,
           color: color!,
         ),
       );
@@ -33,7 +33,7 @@ class CustomLoading extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(5.0),
             child: CircularProgressIndicator(
-              strokeWidth: 2,
+              strokeWidth: 1,
               color: kWhiteColor,
               //backgroundColor: kPrimaryColor,
             ),
@@ -45,7 +45,7 @@ class CustomLoading extends StatelessWidget {
     return const Scaffold(
       body: Center(
         child: CircularProgressIndicator(
-          strokeWidth: 2,
+          strokeWidth: 1,
           //color: Colors.white,
         ),
       ),

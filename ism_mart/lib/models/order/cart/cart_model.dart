@@ -10,7 +10,8 @@ String cartModelToJson(List<CartModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class CartModel {
-  int? id;
+  int? id, productId;
+
   ProductModel? productModel;
   String? quantity, size, color;
   bool? onQuantityClicked;
@@ -18,6 +19,7 @@ class CartModel {
 
   CartModel({
     this.id,
+    this.productId,
     this.productModel,
     this.quantity,
     this.size,
@@ -33,6 +35,7 @@ class CartModel {
 
     return CartModel(
       id: json['id'],
+      productId: json['productId'],
       productModel: ProductModel.fromJson(json['Product']),
       color: json['color'],
       size: json['size'],
@@ -45,6 +48,7 @@ class CartModel {
       {
         'Product': productModel!.toJson(),
         'color': color,
+        'productId': productId,
         'size': size,
         'productId': productModel!.id,
         'quantity': quantity,

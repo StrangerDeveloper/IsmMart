@@ -3,31 +3,33 @@ import 'package:flutter/services.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
 class FormInputFieldWithIcon extends StatelessWidget {
-  const FormInputFieldWithIcon(
-      {Key? key,
-      required this.controller,
-      required this.iconPrefix,
-      required this.labelText,
-      this.suffix,
-      this.iconColor,
-      this.textStyle,
-      this.validator,
-      this.keyboardType = TextInputType.text,
-      this.minLines = 1,
-      this.maxLines = 1,
-      this.isExpanded = false,
-      this.maxLength,
-      this.autofocus,
-      this.enableBorder,
-      this.textCapitalization = TextCapitalization.none,
-      this.maxLengthEnforcement,
-      required this.onChanged,
-      required this.onSaved, this.autoValidateMode})
-      : super(key: key);
+  const FormInputFieldWithIcon({
+    Key? key,
+    required this.controller,
+    required this.iconPrefix,
+    this.labelText,
+    this.hintText,
+    this.suffix,
+    this.iconColor,
+    this.textStyle,
+    this.validator,
+    this.keyboardType = TextInputType.text,
+    this.minLines = 1,
+    this.maxLines = 1,
+    this.isExpanded = false,
+    this.maxLength,
+    this.autofocus,
+    this.enableBorder,
+    this.textCapitalization = TextCapitalization.none,
+    this.maxLengthEnforcement,
+    required this.onChanged,
+    required this.onSaved,
+    this.autoValidateMode,
+  }) : super(key: key);
   final AutovalidateMode? autoValidateMode;
   final TextEditingController controller;
   final IconData iconPrefix;
-  final String labelText;
+  final String? labelText, hintText;
   final bool? autofocus;
   final Widget? suffix;
   final String? Function(String?)? validator;
@@ -52,6 +54,7 @@ class FormInputFieldWithIcon extends StatelessWidget {
       textAlignVertical: TextAlignVertical.top,
       autovalidateMode: autoValidateMode,
       scrollPhysics: const AlwaysScrollableScrollPhysics(),
+      //textAlign: TextAlign.center,
       decoration: InputDecoration(
         filled: false,
         suffix: suffix,
@@ -61,26 +64,21 @@ class FormInputFieldWithIcon extends StatelessWidget {
         ),
         labelText: labelText,
         labelStyle: textStyle,
-        enabledBorder: enableBorder ?? OutlineInputBorder(
-          //borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(
-            color: Colors.black87??Colors.black45,
-            width: 1.0,
-          ),
-          //borderRadius: BorderRadius.circular(20)
-        ),
-            /*UnderlineInputBorder(
-              borderSide: BorderSide(
-                color: iconColor ?? kPrimaryColor,
-                width: 2.0,
-              ),
-              //borderRadius: BorderRadius.circular(20)
-            ),*/
+        hintText: hintText,
+        enabledBorder: enableBorder?? OutlineInputBorder(
+      borderSide: BorderSide(
+      color: Colors.black,
+          width: 1,
+          style: BorderStyle.solid), //B
+      borderRadius: BorderRadius.circular(8),
+    ),
         focusedBorder: enableBorder ??
-            UnderlineInputBorder(
-              borderSide:
-                  BorderSide(color: iconColor ?? kPrimaryColor, width: 1.5),
-              //borderRadius: BorderRadius.circular(25.0),
+            OutlineInputBorder(
+              borderSide: BorderSide(
+                  color: Colors.black,
+                  width: 1,
+                  style: BorderStyle.solid), //B
+              borderRadius: BorderRadius.circular(8),
             ),
       ),
       controller: controller,

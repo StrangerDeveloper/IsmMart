@@ -10,32 +10,56 @@ class PremiumMembershipUI extends GetView<MembershipController> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: CustomScrollView(
-      slivers: [
-        SliverList(
-          delegate: SliverChildListDelegate(
-            [
-              Column(
-                children: [
-                  CustomText(
-                      title: 'membership_plans'.tr, style: textTheme.headline4),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: CustomText(title: 'membership_desc'.tr, size: 12),
+      child: Scaffold(
+        appBar: appBar(),
+        body: CustomScrollView(
+          slivers: [
+            SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  Column(
+                    children: [
+                      CustomHeader(
+                          title: 'membership_plans'.tr
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child:
+                            CustomText(title: 'membership_desc'.tr, size: 15),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: controller.getPlansData().map((e) {
+                      MembershipModel model = MembershipModel.fromJson(e);
+                      return _singleMemberShipListItem(model);
+                    }).toList(),
                   ),
                 ],
               ),
-              Column(
-                children: controller.getPlansData().map((e) {
-                  MembershipModel model = MembershipModel.fromJson(e);
-                  return _singleMemberShipListItem(model);
-                }).toList(),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
-      ],
-    ));
+      ),
+    );
+  }
+
+  appBar() {
+    return AppBar(
+      backgroundColor: kAppBarColor,
+      elevation: 0,
+      leading: InkWell(
+        onTap: () => Get.back(),
+        child: Icon(
+          Icons.arrow_back_ios_new,
+          size: 18,
+          color: kPrimaryColor,
+        ),
+      ),
+      title: CustomText(
+          title: "Premium Membership",
+          style: appBarTitleSize),
+    );
   }
 
   Widget _singleMemberShipListItem(MembershipModel model) {
@@ -46,7 +70,11 @@ class PremiumMembershipUI extends GetView<MembershipController> {
         decoration: BoxDecoration(
           color: kWhiteColor,
           borderRadius: BorderRadius.circular(8),
-          border: Border.all( color: model.title!.toLowerCase().contains("start")? kPrimaryColor: Colors.grey,),
+          border: Border.all(
+            color: model.title!.toLowerCase().contains("start")
+                ? kPrimaryColor
+                : Colors.grey,
+          ),
           boxShadow: [
             BoxShadow(
               color: kPrimaryColor.withOpacity(0.2),
@@ -64,14 +92,14 @@ class PremiumMembershipUI extends GetView<MembershipController> {
                 AppConstant.spaceWidget(height: 10),
                 CustomText(
                   title: model.title,
-                  style: textTheme.caption,
+                  style: caption,
                   textAlign: TextAlign.start,
                 ),
                 RichText(
                     text: TextSpan(children: [
-                  TextSpan(text: "${model.price}", style: textTheme.headline3),
+                  TextSpan(text: "${model.price}", style: headline3),
                   if (!model.title!.toLowerCase().contains('start'))
-                    TextSpan(text: "/mo", style: textTheme.bodyMedium)
+                    TextSpan(text: "/mo", style: bodyText1)
                 ])),
                 kSmallDivider,
                 ListView(
@@ -81,7 +109,9 @@ class PremiumMembershipUI extends GetView<MembershipController> {
                     return ListTile(
                       leading: Icon(
                         Icons.check_circle,
-                        color: kLightGreyColor,
+                        color:model.title!.toLowerCase().contains("start")
+                            ? kPrimaryColor
+                            :  kLightGreyColor,
                       ),
                       title: CustomText(
                         title: e,
@@ -96,7 +126,9 @@ class PremiumMembershipUI extends GetView<MembershipController> {
                   text: model.title!.toLowerCase().contains("start")
                       ? "Subscribed"
                       : "Subscribe",
-                  color: model.title!.toLowerCase().contains("start")? kPrimaryColor: Colors.grey,
+                  color: model.title!.toLowerCase().contains("start")
+                      ? kPrimaryColor
+                      : Colors.grey,
                   width: 200,
                   height: 40,
                 ),

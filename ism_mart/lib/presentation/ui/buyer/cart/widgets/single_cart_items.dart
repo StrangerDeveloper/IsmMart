@@ -49,23 +49,19 @@ class SingleCartItems extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             CustomText(
-                              title: cartModel.productModel!.vendorId.toString(),
-                              style: bodyText3,
-                            ),
-                            AppConstant.spaceWidget(height: 5),
-                            CustomText(
                               title: cartModel.productModel!.name,
-                              style: headline6,
+                              style: headline3,
                             ),
-                            AppConstant.spaceWidget(height: 8),
-                            _buildPrice(
-                              title: cartModel.productModel!.discountPrice,
-                            ),
-                            if (cartModel.productModel!.discount!=null&&cartModel.productModel!.discount! > 0)
+                            AppConstant.spaceWidget(height: 4),
+                            CustomPriceWidget(
+                                title:
+                                    "${cartModel.productModel!.discountPrice}"),
+                            if (cartModel.productModel!.discount != null &&
+                                cartModel.productModel!.discount! > 0)
                               Row(
                                 children: [
-                                  _buildPrice(
-                                    title: cartModel.productModel!.price,
+                                  CustomPriceWidget(
+                                    title:"${cartModel.productModel!.price}",
                                     style: bodyText1.copyWith(
                                         fontWeight: FontWeight.bold,
                                         color: kLightColor,
@@ -75,7 +71,7 @@ class SingleCartItems extends StatelessWidget {
                                   CustomText(
                                       title:
                                           "${cartModel.productModel!.discount!}% OFF",
-                                      style: bodyText3.copyWith(
+                                      style: bodyText2.copyWith(
                                           fontWeight: FontWeight.w700,
                                           color: Colors.red))
                                 ],
@@ -167,6 +163,9 @@ class SingleCartItems extends StatelessWidget {
                                         ),
                                   child: CustomText(
                                     title: "${index + 1}",
+                                    textAlign: TextAlign.center,
+                                    color: int.parse(cartModel.quantity!) ==
+                                        (index + 1) ? kWhiteColor: kPrimaryColor,
                                     weight: FontWeight.w600,
                                   ),
                                 ),
@@ -192,231 +191,11 @@ class SingleCartItems extends StatelessWidget {
                 iconColor: kRedColor,
               ),
             ),
-            /* Positioned(
-              right: 5,
-              bottom: 0,
-              child:
-            ),*/
           ],
         ),
       ),
     );
   }
 
-  /* Widget _singleCartItemInDetails(){
-    return  Card(
-      elevation: 0,
-      margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: SizedBox(
-                    height: 120,
-                    child: CustomNetworkImage(
-                      imageUrl: cartModel!.productModel!.thumbnail!,
-                      height: 120,
-                    ),
-                  ),
-                ),
-                AppConstant.spaceWidget(width: 10),
-                Expanded(
-                  flex: 4,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(
-                          title: cartModel!.productModel!.brand,
-                          style: bodyText3,
-                        ),
-                        AppConstant.spaceWidget(height: 5),
-                        CustomText(
-                          title: cartModel!.productModel!.name,
-                          style: headline6,
-                        ),
-                        AppConstant.spaceWidget(height: 8),
-                        _buildPrice(
-                          title: cartModel!.productModel!.discountPrice,
-                        ),
-                        if (cartModel!.productModel!.discount! > 0)
-                          Row(
-                            children: [
-                              _buildPrice(
-                                title: cartModel!.productModel!.price,
-                                style: bodyText1.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    color: kLightColor,
-                                    decoration: TextDecoration.lineThrough),
-                              ),
-                              AppConstant.spaceWidget(width: 5),
-                              CustomText(
-                                  title:
-                                  "${cartModel!.productModel!.discount!}% OFF",
-                                  style: bodyText3.copyWith(
-                                      fontWeight: FontWeight.w700,
-                                      color: Colors.red))
-                            ],
-                          ),
-                        AppConstant.spaceWidget(height: 8),
-                        CustomText(title: "Order in 8H 30min", style: caption),
-                        RichText(
-                          text: TextSpan(
-                            children: [
-                              TextSpan(
-                                  text: "Free Delivery ", style: bodyText3),
-                              TextSpan(
-                                  text: "by ",
-                                  style: caption.copyWith(color: kGrey800)),
-                              TextSpan(
-                                  text: AppConstant.formattedDataTime(
-                                      "EE, MMM d.",
-                                      DateTime.now()
-                                          .add(const Duration(days: 6))),
-                                  style: bodyText3.copyWith(
-                                      color: kPrimaryColor,
-                                      fontWeight: FontWeight.w600)),
-                            ],
-                          ),
-                        ),
-                        RichText(
-                          text: TextSpan(children: [
-                            TextSpan(
-                              text: "Sold by ",
-                              style: bodyText1.copyWith(color: kGrey800),
-                            ),
-                            TextSpan(
-                              text: " ISMMART",
-                              style: headline6.copyWith(
-                                  fontWeight: FontWeight.w800),
-                            ),
-                          ]),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                InkWell(
-                  onTap: () {
-                    cartModel!.onQuantityClicked =
-                    !cartModel!.onQuantityClicked!;
-                    controller!.cartItemsList.refresh();
-                  },
-                  child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 12.0, vertical: 5),
-                      decoration: BoxDecoration(
-                        color: kWhiteColor,
-                        border: Border.all(
-                            color: cartModel!.onQuantityClicked!
-                                ? kDarkColor
-                                : kLightColor),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      child: Row(
-                        children: [
-                          CustomText(
-                            title: cartModel!.quantity!,
-                            size: 16,
-                            color: kDarkColor,
-                            weight: FontWeight.bold,
-                          ),
-                          AppConstant.spaceWidget(width: 5),
-                          Icon(
-                            cartModel!.onQuantityClicked!
-                                ? Icons.keyboard_arrow_up
-                                : Icons.keyboard_arrow_down,
-                            size: 20,
-                            color: cartModel!.onQuantityClicked!
-                                ? kDarkColor
-                                : kLightColor,
-                          ),
-                        ],
-                      )),
-                ),
-                OutlinedButton.icon(
-                    onPressed: () {
-                      controller!.cartItemsList.removeAt(index!);
-                      LocalStorageHelper.removeSingleItem(
-                          cartList: controller!.cartItemsList);
-                      // showDeleteConfirmationDialog();
-                    },
-                    icon: const Icon(
-                      Icons.delete_rounded,
-                      color: kRedColor,
-                    ),
-                    label: CustomText(
-                      title: "Remove Item",
-                      style: bodyText3.copyWith(color: kLightColor),
-                    ))
-              ],
-            ),
-            cartModel!.onQuantityClicked!
-                ? AnimatedContainer(
-              duration: const Duration(milliseconds: 1500),
-              curve: Curves.fastOutSlowIn,
-              width: double.infinity,
-              height: 40,
-              child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: controller!.moq,
-                  itemBuilder: (_, index) {
-                    return InkWell(
-                      onTap: () {
-                        cartModel!.quantity = "${(index + 1)}";
-                        LocalStorageHelper.updateCartItems(
-                            cartModel: cartModel);
-                        controller!.cartItemsList.refresh();
-                        controller!.update();
-                      },
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 5, vertical: 3),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 12.0, vertical: 5),
-                        decoration: int.parse(cartModel!.quantity!) ==
-                            (index + 1)
-                            ? BoxDecoration(
-                          color: kPrimaryColor,
-                          border: Border.all(color: kDarkColor),
-                          borderRadius: BorderRadius.circular(8.0),
-                        )
-                            : BoxDecoration(
-                          color: kWhiteColor,
-                          border: Border.all(color: kDarkColor),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        child: CustomText(
-                          title: "${index + 1}",
-                          weight: FontWeight.w600,
-                        ),
-                      ),
-                    );
-                  }),
-            )
-                : Container(),
-          ],
-        ),
-      ),
-    );
-  }*/
 
-  Widget _buildPrice({title, style}) {
-    return CustomText(
-      title: "${AppConstant.getCurrencySymbol()}$title",
-      style: style ?? headline5,
-    );
-  }
 }

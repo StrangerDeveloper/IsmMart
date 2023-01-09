@@ -31,7 +31,8 @@ class SearchBar extends StatelessWidget {
                   "search_in".tr,
                   style: TextStyle(
                     color: kLightColor,
-                    fontSize: 12.0,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 13.0,
                   ),
                 ),
               ),

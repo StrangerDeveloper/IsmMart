@@ -83,7 +83,7 @@ class LocalStorageHelper {
         .isNotEmpty;
   }
 
-  static deleteAllCart() {
+  static clearAllCart() {
     localStorage.remove(cartItemKey);
   }
 

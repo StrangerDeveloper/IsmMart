@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/presentation/widgets/custom_text.dart';
+import 'package:ism_mart/utils/constants.dart';
 
 class NoDataFound extends StatelessWidget {
   const NoDataFound(
@@ -16,12 +17,12 @@ class NoDataFound extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-
     return Center(
       child: CustomText(
         title: text ?? "no_data_found".tr,
         maxLines: maxLines ?? 4,
         textAlign: textAlign ?? TextAlign.center,
+        style: headline3,
         weight: FontWeight.w600,
         size: fontSize ?? 17,
       ),

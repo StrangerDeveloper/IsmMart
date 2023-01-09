@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
+import 'package:ism_mart/controllers/controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/ui/exports_ui.dart';
 
@@ -32,16 +33,45 @@ class BaseController extends GetxController {
     fetchCategories();
 
     getCurrentUser();
+    getAllFAQs();
 
-    cartCount(LocalStorageHelper.getCartItemsCount());
-
+    //setCartCount(LocalStorageHelper.getCartItemsCount());
+    setCartItemCount();
     LocalStorageHelper.localStorage.listen(() {
-      debugPrint("localStorage listening started...");
-      cartCount(LocalStorageHelper.getCartItemsCount());
+     //.. debugPrint("localStorage listening started...");
+      //setCartCount(LocalStorageHelper.getCartItemsCount());
+      setCartItemCount();
       getCurrentUser();
     });
 
     ever(categories, getRandomTextForSearch);
+  }
+
+  setCartItemCount() async {
+    if (authController.isSessionExpired!)
+      await LocalStorageHelper.fetchCartItems()
+          .then((List<CartModel> list) async {
+        if (list.isNotEmpty) {
+          debugPrint("");
+          setCartCount(list.length);
+        } else {
+          setCartCount(0);
+        }
+      });
+    else if (!authController.isSessionExpired! &&
+        authController.userToken!.isNotEmpty) {
+      await _apiProvider
+          .getCartItems(token: authController.userToken)
+          .then((data) {
+        setCartCount(data.length);
+      });
+    }else {
+      setCartCount(0);
+    }
+  }
+
+  setCartCount(int count){
+    cartCount(count);
   }
 
   //TODO: Current User Info
@@ -107,7 +137,8 @@ class BaseController extends GetxController {
     }).catchError((error) {
       isProductsLoading(false);
       debugPrint(">>>fetchSliderDiscountProducts: $error");
-    });;
+    });
+    ;
   }
 
   //End Fetch SliderImages Section
@@ -127,17 +158,22 @@ class BaseController extends GetxController {
     });
 
     await fetchProducts();
+
     await fetchProductsByTypes();
+
+
   }
+
   var randomSearchText = "".obs;
-  void getRandomTextForSearch(List<CategoryModel> list){
+
+  void getRandomTextForSearch(List<CategoryModel> list) {
     int min = 1;
     int max = list.length;
 
     var rnd = new Random();
     int r = min + rnd.nextInt(max - min);
     //debugPrint(">>>rnd: $r >>>${categories.elementAt(r).name!}");
-     randomSearchText(list.elementAt(r).name!);
+    randomSearchText(list.elementAt(r).name!);
   }
 
   //End Fetch Top Categories
@@ -171,9 +207,9 @@ class BaseController extends GetxController {
     productsWithTypesMap.clear();
 
     _getProductsType().forEach((element) async {
-      await _apiProvider.getProductsByType(type: element).then((value) {
+      await _apiProvider.getProductsByType(type: element['key']).then((value) {
         isProductsLoading(false);
-        productsWithTypesMap.putIfAbsent(element, () => value);
+        productsWithTypesMap.putIfAbsent(element['value'], () => value);
       }).catchError((error) {
         isProductsLoading(false);
         debugPrint(">>>FetchProductsByType $error");
@@ -181,13 +217,12 @@ class BaseController extends GetxController {
     });
   }
 
-  List<String> _getProductsType() {
+  _getProductsType() {
     return [
-      "Best Seller",
-      "Discounts",
-      "Latest",
-      "Featured",
-      "IsmmartOriginal",
+      {"key": "Latest", "value": "Popular Products"},
+      {"key": "Featured", "value": "Featured Products"},
+      //{"key": "IsmmartOriginal", "value": "ISMMART Originals"},
+      //{"key": "Best Seller", "value": "Best Seller"},
     ];
   }
 
@@ -205,6 +240,16 @@ class BaseController extends GetxController {
 
   //END Fetch Product
 
+  //TOD:: fetch All FAQ
+  var faqsList = <FAQModel>[].obs;
+
+  getAllFAQs() async {
+    faqsList.clear();
+    await _apiProvider.getAllFaqs(token: authController.userToken).then((faqs) {
+      faqsList.addAll(faqs);
+    });
+  }
+
   //TODO: Start Bottom Navigation setup
   var bottomNavPageController = PageController(initialPage: 0);
   List<Widget> bottomNavScreens = [
@@ -212,7 +257,9 @@ class BaseController extends GetxController {
     const CategoriesUI(),
     const CartUI(),
     const SettingsUI(),
-    const SearchUI(isCalledForDeals: true,)
+    const SearchUI(
+      isCalledForDeals: true,
+    )
   ];
 
   var currentPage = 0.obs;

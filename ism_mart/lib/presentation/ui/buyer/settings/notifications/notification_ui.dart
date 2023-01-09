@@ -32,7 +32,7 @@ class NotificationUI extends StatelessWidget {
       ),
       title: CustomText(
           title: 'notifications'.tr,
-          style: textTheme.headline6!.copyWith(color: kWhiteColor)),
+          style: appBarTitleSize),
     );
   }
 }

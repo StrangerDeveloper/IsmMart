@@ -7,10 +7,15 @@ class OrderProvider {
   OrderProvider(this._orderRepo);
 
 
-  Future<List<OrderModel>> getMyOrders({token}) async {
-    var response = await _orderRepo.fetchMyOrders(token: token);
+  Future<List<OrderModel>> getBuyerOrders({token}) async {
+    var response = await _orderRepo.fetchBuyerOrders(token: token);
     return response.map((e) => OrderModel.fromJson(e)).toList();
   }
+  Future<List<OrderModel>> getVendorOrders({token, status}) async {
+    var response = await _orderRepo.fetchVendorOrders(token: token, status: status);
+    return response.map((e) => OrderModel.fromJson(e)).toList();
+  }
+
 
 
   Future<OrderModel> getMyOrdersDetails({token, orderId}) async {

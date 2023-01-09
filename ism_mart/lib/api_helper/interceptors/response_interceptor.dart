@@ -18,6 +18,9 @@ dynamic handelResponse(response) {
   switch (response.statusCode) {
     case 200:
       return response;
+    case 300:
+    case 301:
+      return response;
     case 400:
     case 404:
     case 403:

@@ -28,6 +28,19 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+
+	<!-- Permission options for the `camera` group -->
+      <key>NSCameraUsageDescription</key>
+      <string>Camera is required for capturing photo</string>
+
+    <!-- Permission options for the `microphone` group -->
+       <key>NSMicrophoneUsageDescription</key>
+       <string>Microphone will be used for recording video</string>
+
+     <!-- Permission options for the `photos` group -->
+        <key>NSPhotoLibraryUsageDescription</key>
+        <string>Photo Library required for choosing photo from library</string>
+
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

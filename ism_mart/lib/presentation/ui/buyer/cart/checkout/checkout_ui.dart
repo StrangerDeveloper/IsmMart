@@ -1,9 +1,9 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/export_presentation.dart';
-import 'package:ism_mart/presentation/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
 class CheckoutUI extends GetView<CheckoutController> {
@@ -16,23 +16,25 @@ class CheckoutUI extends GetView<CheckoutController> {
         backgroundColor: Colors.grey[100]!,
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: kPrimaryColor,
+          backgroundColor: kAppBarColor,
           leading: InkWell(
             onTap: () => Get.back(),
             child: Icon(
               Icons.arrow_back_ios_new,
               size: 18,
-              color: kWhiteColor,
+              color: kPrimaryColor,
             ),
           ),
           title: CustomText(
               title: 'checkout'.tr,
-              style: textTheme.headline6!.copyWith(color: kWhiteColor)),
+              style: appBarTitleSize),
         ),
         body: _body(),
       ),
     );
   }
+
+  ///
 
   Widget _body() {
     return CustomScrollView(
@@ -57,10 +59,24 @@ class CheckoutUI extends GetView<CheckoutController> {
                       : CustomButton(
                           width: 280,
                           height: 50,
-                          onTap: () => controller.makePayment(
-                              amount: controller
-                                  .cartController.totalCartAmount.value
-                                  .toString()),
+                          onTap: () {
+                            if (controller.defaultAddressModel!.id != null) {
+                              if (controller
+                                  .cartController.cartItemsList.isNotEmpty) {
+                                controller.makePayment(
+                                    amount: controller
+                                        .cartController.totalCartAmount.value
+                                        .toString());
+                              } else {
+                                controller.showSnackBar(
+                                    title: "error",
+                                    message: "Cart must not be empty");
+                              }
+                            } else
+                              controller.showSnackBar(
+                                  title: "error",
+                                  message: "no_default_address_found".tr);
+                          },
                           text: "confirm_order".tr))
                 ],
               ),
@@ -71,7 +87,6 @@ class CheckoutUI extends GetView<CheckoutController> {
     );
   }
 
-  ///
   ///TODO: Shipping Details
   ///
   Widget _shippingAddressDetails(UserModel? userModel) {
@@ -172,7 +187,7 @@ class CheckoutUI extends GetView<CheckoutController> {
               CustomText(
                 title:
                     "${calledForUpdate ? "update".tr : "add_new".tr} ${'shipping'.tr}",
-                style: headline5,
+                style: appBarTitleSize,
               ),
               AppConstant.spaceWidget(height: 15),
               FormInputFieldWithIcon(
@@ -242,7 +257,8 @@ class CheckoutUI extends GetView<CheckoutController> {
               if (!calledForUpdate)
                 Column(
                   children: [
-                    Obx(
+                    //Countries
+                    /*  Obx(
                       () => Container(
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         decoration: BoxDecoration(
@@ -274,11 +290,48 @@ class CheckoutUI extends GetView<CheckoutController> {
                               controller.authController.selectedCountry.value,
                         ),
                       ),
+                    ),*/
+                    Obx(
+                      () => DropdownSearch<CountryModel>(
+                        popupProps: PopupProps.dialog(
+                            showSearchBox: true,
+                            dialogProps: DialogProps(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10))),
+                            searchFieldProps: AppConstant.searchFieldProp()),
+                        //showSelectedItems: true),
+
+                        items: controller.authController.countries,
+                        itemAsString: (model) => model.name ?? "",
+                        dropdownDecoratorProps: DropDownDecoratorProps(
+                          baseStyle: bodyText1,
+                          dropdownSearchDecoration: InputDecoration(
+                            labelText: "Select Country",
+                            labelStyle: bodyText1,
+                            hintText: "Choose Country",
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Colors.black,
+                                  width: 1,
+                                  style: BorderStyle.solid), //B
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                        ),
+
+                        onChanged: (CountryModel? newValue) {
+                          controller.setSelectedCountry(newValue!);
+                          //debugPrint(">>> $newValue");
+                        },
+                        selectedItem:
+                            controller.authController.selectedCountry.value,
+                      ),
                     ),
+
                     AppConstant.spaceWidget(height: 15),
 
-                    ///TODO: Sub Cities
-                    Obx(
+                    ///TOO: Sub Cities
+                    /* Obx(
                       () => Container(
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         decoration: BoxDecoration(
@@ -309,6 +362,47 @@ class CheckoutUI extends GetView<CheckoutController> {
                           value: controller.authController.selectedCity.value,
                         ),
                       ),
+                    ),*/
+
+                    Obx(
+                      () => authController.cities.isEmpty
+                          ? Container()
+                            :authController.isLoading.isTrue? CustomLoading(isItForWidget: true, color: kPrimaryColor, )
+                          : DropdownSearch<CountryModel>(
+                              popupProps: PopupProps.dialog(
+                                  showSearchBox: true,
+                                  dialogProps: DialogProps(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10))),
+                                  searchFieldProps:
+                                      AppConstant.searchFieldProp()),
+                              //showSelectedItems: true),
+
+                              items: controller.authController.cities,
+                              itemAsString: (model) => model.name ?? "",
+                              dropdownDecoratorProps: DropDownDecoratorProps(
+                                baseStyle: bodyText1,
+                                dropdownSearchDecoration: InputDecoration(
+                                  labelText: "Select City",
+                                  labelStyle: bodyText1,
+                                  hintText: "Choose City",
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.black,
+                                        width: 1,
+                                        style: BorderStyle.solid), //B
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                ),
+                              ),
+
+                              onChanged: (CountryModel? newValue) {
+                                controller.setSelectedCity(newValue!);
+                              },
+                              selectedItem:
+                                  controller.authController.selectedCity.value,
+                            ),
                     ),
                   ],
                 ),
@@ -348,11 +442,10 @@ class CheckoutUI extends GetView<CheckoutController> {
   void showAddressesDialog() {
     Get.defaultDialog(
       title: "Shipping Address details",
+      titleStyle: appBarTitleSize,
       content: Obx(
         () => controller.shippingAddressList.isEmpty
-            ? NoDataFound(
-                text: "no_address_found".tr,
-              )
+            ? NoDataFound(text: "no_address_found".tr)
             : SingleChildScrollView(
                 child: Column(
                   children: controller.shippingAddressList.map((element) {
@@ -415,13 +508,12 @@ class CheckoutUI extends GetView<CheckoutController> {
                       children: [
                         CustomText(
                             title: userModel!.name!,
-                            size: 16,
-                            weight: FontWeight.bold),
+                            style: headline3,),
                         CustomText(
                             title: userModel.phone!,
-                            style: bodyText2.copyWith(color: kDarkColor)),
+                            style: bodyText1),
                         CustomText(
-                            style: bodyText2.copyWith(color: kDarkColor),
+                            style: bodyText1,
                             title: "${userModel.address!}, "
                                 "${userModel.zipCode!}, "
                                 "${userModel.city!.name!},"
@@ -535,15 +627,10 @@ class CheckoutUI extends GetView<CheckoutController> {
                     Expanded(
                       flex: 3,
                       child: Container(
-                        height: 35,
+                        height: 36,
                         //height: 40.0,
                         padding: const EdgeInsets.symmetric(horizontal: 5),
                         margin: const EdgeInsets.symmetric(horizontal: 5),
-                        decoration: BoxDecoration(
-                          color: kWhiteColor,
-                          border: Border.all(color: kLightGreyColor),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
                         child: TextField(
                           controller: controller.couponCodeController,
                           cursorColor: kPrimaryColor,
@@ -551,11 +638,26 @@ class CheckoutUI extends GetView<CheckoutController> {
                           textInputAction: TextInputAction.search,
                           // onChanged: controller.search,
                           decoration: InputDecoration(
-                            border: InputBorder.none,
-                            icon:
-                                const Icon(Icons.search, color: kPrimaryColor),
-                            hintText: "Input your Coupon Code",
-                            hintStyle: textTheme.bodyText1!.copyWith(
+                            filled: true,
+                            prefixIcon: Icon(Icons.search, color: kPrimaryColor),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: kLightGreyColor,
+                                width: 0.5,
+                              ), //BorderSide.none,
+                              borderRadius: BorderRadius.all(Radius.circular(8)),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: kLightGreyColor,
+                                width: 0.5,
+                              ), //BorderSide.none,
+                              borderRadius: BorderRadius.all(Radius.circular(8)),
+                            ),
+                            fillColor: kWhiteColor,
+                            contentPadding: EdgeInsets.zero,
+                            hintText: 'Input your coupon code',
+                            hintStyle: TextStyle(
                               color: kLightColor,
                               fontWeight: FontWeight.w600,
                               fontSize: 13.0,
@@ -613,7 +715,7 @@ class CheckoutUI extends GetView<CheckoutController> {
                     Text.rich(
                       TextSpan(
                         children: [
-                          TextSpan(text: "Total ", style: headline5),
+                          TextSpan(text: "Total ", style: headline2),
                           TextSpan(text: "(Inclusive of GST)", style: caption),
                         ],
                       ),

@@ -23,14 +23,14 @@ class SettingsUI extends GetView<AuthController> {
                       expandedHeight: 100.0,
                       floating: false,
                       pinned: true,
-                      backgroundColor: innerBoxIsScrolled ? kPrimaryColor: kWhiteColor,
+                      backgroundColor: kAppBarColor,
                       flexibleSpace: FlexibleSpaceBar(
                         centerTitle: false,
                         titlePadding:
                             const EdgeInsets.symmetric(horizontal: 16),
                         title: Text(
                           'settings'.tr,
-                          style: textTheme.headline6,
+                          style: appBarTitleSize,
                         ),
                       ),
                     ),
@@ -83,12 +83,11 @@ class SettingsUI extends GetView<AuthController> {
               child: ListTile(
                 title: CustomText(
                   title: "${"welcome".tr} ${controller.userModel!.firstName}",
-                  weight: FontWeight.w600,
-                  size: 17,
+                  style: headline2,
                 ),
                 subtitle: CustomText(
                   title: "${controller.userModel!.email}",
-                  size: 14,
+                  style: bodyText1,
                 ),
               ),
             ),
@@ -113,7 +112,7 @@ class SettingsUI extends GetView<AuthController> {
           ),
           title: Text(
             "${"login".tr} / ${"register".tr}",
-            style: textTheme.bodyText1!.copyWith(color: Colors.blue),
+            style: bodyText1.copyWith(color: Colors.blue),
           ),
         ),
       ),
@@ -140,16 +139,16 @@ class SettingsUI extends GetView<AuthController> {
               icon: Icons.dashboard_rounded,
               iconColor: kPrimaryColor,
               title: "vendor_dashboard".tr),
-         /* _singleSettingsItem(
+          /* _singleSettingsItem(
               onTap: () => Get.toNamed(Routes.buyerOrdersRoute),
               icon: IconlyBold.bag,
               iconColor: Colors.purpleAccent,
               title: "my_orders".tr),*/
-         /* _singleSettingsItem(
-              onTap: () {},
-              icon: Icons.wallet_membership_rounded,
+          _singleSettingsItem(
+              onTap: () => Get.to(() => PremiumMembershipUI()),
+              icon: Icons.workspace_premium_outlined,
               iconColor: kOrangeColor,
-              title: "membership_plans".tr),*/
+              title: "membership_plans".tr),
         ],
       ),
     );
@@ -165,7 +164,7 @@ class SettingsUI extends GetView<AuthController> {
           children: [
             CustomText(
               title: "vendor_registration".tr,
-              style: headline5,
+              style: appBarTitleSize,
             ),
             Expanded(
               child: ListView(
@@ -262,23 +261,39 @@ class SettingsUI extends GetView<AuthController> {
                 title: "language".tr,
                 value: languageController.language.value),
           ),
-          _singleSettingsItem(
+          /*_singleSettingsItem(
               onTap: () => Get.to(() => NotificationUI()),
               icon: IconlyLight.notification,
               iconColor: Colors.lightBlue,
-              title: "notifications".tr),
+              title: "notifications".tr),*/
+
           _singleSettingsItem(
-              onTap: () => Get.to(() => AboutUS()),
-              icon: IconlyLight.info_circle,
-              iconColor: Colors.pinkAccent,
-              title: "about_us".tr),
-          _singleSettingsItem(
-              onTap: () => Get.to(() => TermsAndConditionsUI()),
+              onTap: () => Get.to(
+                  () => GeneralSettingsDataUI(title: 'terms_conditions'.tr)),
               icon: Icons.rule_outlined,
               iconColor: Colors.indigo,
               title: "terms_conditions".tr),
           _singleSettingsItem(
-              onTap: () => Get.to(() => ContactUsUI()),
+              onTap: () => Get.to(
+                  () => GeneralSettingsDataUI(title: 'privacy_policy'.tr)),
+              icon: IconlyLight.paper,
+              iconColor: Colors.purpleAccent,
+              title: "privacy_policy".tr),
+          _singleSettingsItem(
+              onTap: () => Get.to(
+                  () => GeneralSettingsDataUI(title: 'return_exchange'.tr)),
+              icon: Icons.assignment_return_rounded,
+              iconColor: Colors.lime,
+              title: "return_exchange".tr),
+          _singleSettingsItem(
+              onTap: () =>
+                  Get.to(() => GeneralSettingsDataUI(title: 'about_us'.tr)),
+              icon: IconlyLight.info_circle,
+              iconColor: Colors.pinkAccent,
+              title: "about_us".tr),
+          _singleSettingsItem(
+              onTap: () => Get.to(() => GeneralSettingsDataUI(
+                  isContactUsCalled: true, title: "contact_us".tr)),
               icon: Icons.contactless_outlined,
               iconColor: Colors.green,
               title: "contact_us".tr),
@@ -327,6 +342,7 @@ class SettingsUI extends GetView<AuthController> {
               flex: 4,
               child: CustomText(
                 title: title,
+                size: 14,
                 weight: FontWeight.w600,
               ),
             ),
@@ -335,7 +351,7 @@ class SettingsUI extends GetView<AuthController> {
                 if (value != null && value != "")
                   CustomText(
                       title: value,
-                      style: textTheme.caption!
+                      style: caption
                           .copyWith(fontWeight: FontWeight.w600)),
                 AppConstant.spaceWidget(width: 5),
                 const Align(

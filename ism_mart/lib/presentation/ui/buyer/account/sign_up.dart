@@ -25,7 +25,7 @@ class SignUpUI extends GetView<AuthController> {
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    buildSvgLogo(),
+                    buildSvgLogo(color: kPrimaryColor),
                     InkWell(
                       onTap: () => Get.back(),
                       child: const Icon(Icons.close),
@@ -43,7 +43,7 @@ class SignUpUI extends GetView<AuthController> {
                     ),
                     child: CustomText(
                       title: "Create an ISMMART Account!",
-                      style: headline3,
+                      style: headline2,
                     ),
                   ),
                   AppConstant.spaceWidget(height: 40),
@@ -60,7 +60,7 @@ class SignUpUI extends GetView<AuthController> {
                             iconPrefix: Icons.title,
                             labelText: 'Full Name',
                             iconColor: kPrimaryColor,
-                            autofocus: true,
+                            autofocus: false,
                             textStyle: bodyText1,
                             autoValidateMode:
                                 AutovalidateMode.onUserInteraction,
@@ -74,10 +74,10 @@ class SignUpUI extends GetView<AuthController> {
                           AppConstant.spaceWidget(height: 15),
                           FormInputFieldWithIcon(
                             controller: controller.emailController,
-                            iconPrefix: Icons.email,
+                            iconPrefix: Icons.email_outlined,
                             labelText: 'Email',
                             iconColor: kPrimaryColor,
-                            autofocus: true,
+                            autofocus: false,
                             textStyle: bodyText1,
                             autoValidateMode:
                                 AutovalidateMode.onUserInteraction,
@@ -91,15 +91,16 @@ class SignUpUI extends GetView<AuthController> {
                           AppConstant.spaceWidget(height: 15),
                           FormPasswordInputFieldWithIcon(
                             controller: controller.passwordController,
-                            iconPrefix: Icons.lock_rounded,
+                            iconPrefix: Icons.lock_outline_rounded,
                             iconColor: kPrimaryColor,
                             textStyle: bodyText1,
                             labelText: 'Password',
                             autoValidateMode:
                                 AutovalidateMode.onUserInteraction,
-                            validator: (value) => !GetUtils.isPassport(value!)
-                                ? "Password must be at least 6 characters long?"
-                                : null,
+                            validator: (value) => //!GetUtils.isPassport(value!)
+                                value!.length < 6
+                                    ? "Password must be at least 6 characters long?"
+                                    : null,
                             obscureText: true,
                             onChanged: (value) => {},
                             maxLines: 1,
@@ -107,17 +108,17 @@ class SignUpUI extends GetView<AuthController> {
                           AppConstant.spaceWidget(height: 15),
                           FormInputFieldWithIcon(
                             controller: controller.phoneController,
-                            iconPrefix: Icons.phone_iphone_rounded,
+                            iconPrefix: Icons.phone_iphone_outlined,
                             iconColor: kPrimaryColor,
                             textStyle: bodyText1,
                             autofocus: false,
-                            labelText: 'Phone',
-                            autoValidateMode:
+                            labelText: 'Phone (Optional)',
+                            /*autoValidateMode:
                                 AutovalidateMode.onUserInteraction,
                             validator: (value) =>
                                 !GetUtils.isPhoneNumber(value!)
                                     ? "Invalid phone number format"
-                                    : null,
+                                    : null,*/
                             onChanged: (value) => {},
                             onSaved: (value) {},
                             maxLines: 1,
@@ -131,7 +132,7 @@ class SignUpUI extends GetView<AuthController> {
                                       await controller.register();
                                     }
                                   },
-                                  text: "Register",
+                                  text: "Sign Up",
                                   height: 50,
                                   width: 300,
                                 )),
@@ -144,8 +145,9 @@ class SignUpUI extends GetView<AuthController> {
                                   Text("Already have an Account?",
                                       style: bodyText1),
                                   Text(
-                                    "Sign In here",
+                                    "Sign in here",
                                     style: bodyText1.copyWith(
+                                      decoration: TextDecoration.underline,
                                         color: kPrimaryColor),
                                   ),
                                 ],

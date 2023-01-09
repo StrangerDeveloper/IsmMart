@@ -1,4 +1,5 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flip_card/flip_card_controller.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/models/exports_model.dart';
@@ -14,12 +15,12 @@ class CategoryController extends GetxController with StateMixin {
     super.onInit();
   }*/
 
+  var flipCardController = FlipCardController();
+
   @override
   void onReady() {
     super.onReady();
     fetchCategories();
-
-
   }
 
   var categories = <CategoryModel>[].obs;
@@ -35,7 +36,6 @@ class CategoryController extends GetxController with StateMixin {
       isCategoriesLoading(false);
 
       getSubcategory(categories.first);
-
     }).catchError((error) {
       debugPrint("FetchCategoriesError $error");
       isCategoriesLoading(false);
@@ -46,13 +46,14 @@ class CategoryController extends GetxController with StateMixin {
 
   var subCategories = <SubCategory>[].obs;
   var selectedCategory = "".obs;
+
   getSubcategory(CategoryModel? categoryModel) async {
     selectedCategory(categoryModel!.name);
     makeSelectedCategory(categoryModel);
     fetchSubCategories(categoryModel);
   }
 
-  fetchSubCategories(CategoryModel? categoryModel) async{
+  fetchSubCategories(CategoryModel? categoryModel) async {
     if (categories.isNotEmpty) {
       isCategoriesLoading(true);
       subCategories.clear();
@@ -61,7 +62,7 @@ class CategoryController extends GetxController with StateMixin {
           .then((value) {
         subCategories.addAll(value);
         isCategoriesLoading(false);
-      }).catchError((error){
+      }).catchError((error) {
         debugPrint(">>>fetchSubCategories $error");
         isCategoriesLoading(false);
       });
@@ -80,7 +81,8 @@ class CategoryController extends GetxController with StateMixin {
         }
         list.add(model);
       }
-      change(list, status: RxStatus.success());
+
+        change(list, status: RxStatus.success());
       /*categories.clear();
       categories.addAll(list);
       categories.refresh();*/

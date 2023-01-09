@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconly/iconly.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/presentation/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
-import 'package:iconly/iconly.dart';
 
 class CartIcon extends StatelessWidget {
   const CartIcon({Key? key,  this.iconWidget, required this.onTap, this.badgeWidth, this.badgeHeight})
@@ -16,7 +16,7 @@ class CartIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var controller = Get.find<BaseController>();
+
     return
 
       InkWell(
@@ -25,11 +25,11 @@ class CartIcon extends StatelessWidget {
         children: [
          iconWidget?? Icon(
            IconlyLight.buy,
-            color: controller.currentPage == 2 ? kPrimaryColor : kLightColor,
+            color: baseController.currentPage == 2 ? kPrimaryColor : kLightColor,
             size: 25,
           ),
           Obx(
-            () => controller.cartCount.value <= 0
+            () => baseController.cartCount.value <= 0
                 ? Container()
                 : Positioned(
                     top: 0,
@@ -43,7 +43,7 @@ class CartIcon extends StatelessWidget {
                           color: kOrangeColor,
                           borderRadius: BorderRadius.circular(15)),
                       child: CustomText(
-                        title: "${controller.cartCount.value}",
+                        title: "${baseController.cartCount.value}",
                         size: 10,
                         color: kWhiteColor,
                         maxLines: 1,

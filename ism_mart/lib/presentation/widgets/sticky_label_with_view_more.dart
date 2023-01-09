@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ism_mart/presentation/widgets/export_widgets.dart';
-import 'package:ism_mart/utils/constants.dart';
+import 'package:ism_mart/utils/exports_utils.dart';
 
 class StickyLabelWithViewMoreOption extends StatelessWidget {
   final String? title;
@@ -23,16 +24,15 @@ class StickyLabelWithViewMoreOption extends StatelessWidget {
       children: [
         StickyLabel(
           text: title!,
-          textSize: textSize,
+          style: headline3,
         ),
         GestureDetector(
           onTap: onTap,
-          child: const Padding(
+          child:  Padding(
             padding: EdgeInsets.only(right: kDefaultPadding),
             child: StickyLabel(
-              text: "view more",
-              textColor: kPrimaryColor,
-              textSize: 14,
+              text: "see_all".tr,
+              style: bodyText1,
             ),
           ),
         ),

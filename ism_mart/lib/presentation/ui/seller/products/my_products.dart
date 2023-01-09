@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconly/iconly.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/ui/exports_ui.dart';
@@ -11,7 +12,7 @@ class MyProducts extends GetView<SellersController> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("myProducts: ${controller.myProductsList.length}");
+    //debugPrint("myProducts: ${controller.myProductsList.length}");
 
     return SafeArea(
       child: Column(
@@ -21,8 +22,8 @@ class MyProducts extends GetView<SellersController> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: CustomButton(
-                  onTap: () =>  AppConstant.showBottomSheet(
-                      widget: AddProductsUI()),
+                  onTap: () =>
+                      AppConstant.showBottomSheet(widget: AddProductsUI()),
                   //controller.changePage(1),
                   text: "Add Product",
                   width: 110,
@@ -36,11 +37,16 @@ class MyProducts extends GetView<SellersController> {
     );
   }
 
-
   Widget _buildProductBody() {
     return Obx(
       () => controller.myProductsList.isEmpty
-          ? Center(child: NoDataFound())
+          ? Center(
+              child: NoDataFoundWithIcon(
+                icon: IconlyLight.bag_2,
+                title: 'no_product_found'.tr,
+                iconColor: kPrimaryColor,
+              ),
+            )
           : Padding(
               padding: const EdgeInsets.all(10.0),
               child: GridView.builder(
@@ -71,10 +77,9 @@ class MyProducts extends GetView<SellersController> {
           margin: const EdgeInsets.only(right: 4),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
-            color: Get.isDarkMode ? Colors.grey.shade700 : Colors.white60,
+            color: Colors.white60,
             border: Border.all(
-                color:
-                    Get.isDarkMode ? Colors.transparent : Colors.grey.shade400,
+                color: Colors.grey.shade400,
                 width: 0.5),
           ),
           child: Stack(
@@ -85,7 +90,9 @@ class MyProducts extends GetView<SellersController> {
                   SizedBox(
                     height: 100,
                     width: double.infinity,
-                    child: CustomNetworkImage(imageUrl: model!.thumbnail ?? AppConstant.defaultImgUrl),
+                    child: CustomNetworkImage(
+                        imageUrl:
+                            model!.thumbnail ?? AppConstant.defaultImgUrl),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8),
@@ -98,33 +105,39 @@ class MyProducts extends GetView<SellersController> {
                           maxLines: 1,
                         ),
                         AppConstant.spaceWidget(height: 5),
-                        CustomText(
-                          title:
-                              "${AppConstant.getCurrencySymbol()}${model.discount != 0 ? model.discountPrice! : model.price}",
-                          weight: FontWeight.bold,
-                          size: 16,
-                        ),
+                       CustomPriceWidget(title: "${model.discountPrice!}"),
+
                         if (model.discount != 0)
                           Row(
                             //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              CustomText(
-                                title:
-                                    "${AppConstant.getCurrencySymbol()}${model.price!}",
-                                style: theme.textTheme.caption?.copyWith(
-                                    decoration: TextDecoration.lineThrough,
-                                    fontSize: 14,
-                                    color: kLightColor),
-                              ),
+                             CustomPriceWidget(title: "${model.price!}",style: bodyText1.copyWith(
+                                 decoration: TextDecoration.lineThrough,
+                                 fontSize: 13,
+                                 color: kLightColor)),
                               AppConstant.spaceWidget(width: 10),
                               CustomText(
-                                title: "${model.discount}% Off",
+                                title: "${model.discount}% OFF",
                                 color: kOrangeColor,
-                                size: 14,
                                 weight: FontWeight.w600,
                               ),
                             ],
                           ),
+
+                        Row(
+                          children: [
+                            CustomText(
+                              title: '${'status'.tr}:',
+                              style: bodyText1,
+                            ),
+                            AppConstant.spaceWidget(width: 2),
+                            CustomText(
+                              title: model.status!.capitalizeFirst,
+                              weight: FontWeight.w600,
+                              color: getStatusColor(model),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ),
@@ -132,20 +145,20 @@ class MyProducts extends GetView<SellersController> {
               ),
               Positioned(
                 top: 2,
-                //bottom: 10,
                 right: 2,
                 child: Row(
                   //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    CustomActionIcon(
+                    /*CustomActionIcon(
                         onTap: () {
-                          controller.updateProduct(model: model);
+                          //controller.updateProduct(model: model);
                         },
                         icon: Icons.edit_rounded,
                         bgColor: kPrimaryColor),
-                    AppConstant.spaceWidget(width: 5),
+                    AppConstant.spaceWidget(width: 5),*/
                     CustomActionIcon(
-                        onTap: () => showConfirmDeleteDialog(productModel: model),
+                        onTap: () =>
+                            showConfirmDeleteDialog(productModel: model),
                         icon: Icons.delete_rounded,
                         bgColor: kRedColor)
                   ],
@@ -161,7 +174,7 @@ class MyProducts extends GetView<SellersController> {
   void showConfirmDeleteDialog({ProductModel? productModel}) {
     Get.defaultDialog(
       title: "Delete Product",
-      titleStyle: headline5,
+      titleStyle: appBarTitleSize,
       content: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -202,4 +215,17 @@ class MyProducts extends GetView<SellersController> {
       ),
     );
   }
+
+  Color getStatusColor(ProductModel? model) {
+    switch (model!.status!.toLowerCase()) {
+      case "pending":
+        return Colors.deepOrange;
+      case "approve":
+      case "completed":
+        return Colors.teal;
+      default:
+        return Colors.blue;
+    }
+  }
+
 }

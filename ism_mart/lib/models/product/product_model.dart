@@ -65,6 +65,7 @@ class ProductModel {
       this.sellerModel,
       this.colors,
       this.sizes,
+        this.status,
       this.images,
       this.categoryId,
       this.subCategoryId,
@@ -74,7 +75,7 @@ class ProductModel {
 
   int? id, stock, sold, vendorId, categoryId, subCategoryId;
   num? price, discountPrice, discount, rating, totalPrice;
-  String? name, thumbnail, description;
+  String? name, thumbnail, description, status;
   String? brand, model, weight, sku;
   CategoryModel? category;
   SubCategory? subCategory;
@@ -102,6 +103,7 @@ class ProductModel {
       thumbnail: json?["thumbnail"],
       stock: json?["stock"],
       price: json?["price"],
+      status: json?['status'],
       discount: json?["discount"],
       rating: json?["rating"] ?? 0.0,
       sold: json?["sold"] ?? 0,

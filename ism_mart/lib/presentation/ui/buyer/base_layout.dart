@@ -67,7 +67,7 @@ class BaseLayout extends GetView<BaseController> {
           controller.changePage(page);
       },
       child: SizedBox(
-        height: 40,
+        height: 42,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -75,11 +75,10 @@ class BaseLayout extends GetView<BaseController> {
             Icon(
               icon,
               color: controller.currentPage.value == page ? kPrimaryColor : kLightColor,
-              size: 21,
+              size: 22,
             ),
             CustomText(
               title: title,
-              size: 13,
               color: controller.currentPage.value == page ? kPrimaryColor : kLightColor,
             )
           ],
