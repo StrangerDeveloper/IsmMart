@@ -105,9 +105,9 @@ const membershipPlans = "membershipPlans", membershipDesc = "membershipDesc";
 
 const add = "add",
     addNew = "addNew",
-    update = "update",
-    delete = "delete",
-    change = "change",
+    updateBtn = "update",
+    deleteBtn = "delete",
+    changeBtn = "change",
     confirm = "confirm",
     sortBy = "sortBy",
     filter = "filterBy",

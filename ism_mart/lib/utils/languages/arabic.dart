@@ -1,8 +1,5 @@
 class Arabic {
 
-
-
-
   Map<String, String> get translations => {
         'settings': 'الإعدادات',
         'general': 'جنرال لواء',

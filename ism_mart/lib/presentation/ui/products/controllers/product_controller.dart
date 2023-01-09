@@ -1,9 +1,9 @@
-import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:get/get.dart';
 
 class ProductController extends GetxController with StateMixin {
   final ApiProvider _apiProvider;
@@ -34,6 +34,7 @@ class ProductController extends GetxController with StateMixin {
   }
 
   void fetchProduct(int id) {
+
     change(null, status: RxStatus.loading());
     _apiProvider.getProductById(id).then((product) {
       change(product, status: RxStatus.success());

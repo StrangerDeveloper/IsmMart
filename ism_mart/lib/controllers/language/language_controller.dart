@@ -72,7 +72,8 @@ class LanguageController extends GetxController{
     Get.updateLocale(Locale(languageCode, countryCode));
     // Update obs
     locale.value = Get.locale.toString();
-
+    if(storage.read('key') == null)
+      languageKey(key);
     storage.write('key', key);
     //storage.write('languageCode', languageCode);
 
