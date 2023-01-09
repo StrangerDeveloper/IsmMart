@@ -29,8 +29,6 @@ class ProductController extends GetxController with StateMixin {
     // TODO: implement onInit
     super.onInit();
     quantityController.text = count.value.toString();
-
-
   }
 
   void fetchProduct(int id) {
