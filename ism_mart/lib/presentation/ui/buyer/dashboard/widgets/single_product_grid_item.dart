@@ -37,6 +37,13 @@ class SingleProductItems extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
             color: Colors.grey.shade200,
             border: Border.all(color: Colors.grey.shade200, width: 1),
+            boxShadow: [
+              BoxShadow(
+                  color: kPrimaryColor.withOpacity(0.22),
+                  offset: const Offset(0, 1),
+                  blurRadius: 10
+              )
+            ],
           ),
           child: Stack(
             children: [

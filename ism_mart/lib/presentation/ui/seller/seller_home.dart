@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/presentation/widgets/custom_text.dart';
 import 'package:ism_mart/utils/constants.dart';
+import 'package:iconly/iconly.dart';
 
 class SellerHome extends GetView<SellersController> {
   const SellerHome({Key? key}) : super(key: key);
@@ -21,6 +22,15 @@ class SellerHome extends GetView<SellersController> {
         iconTheme: IconThemeData(color: kPrimaryColor),
         centerTitle: true,
         backgroundColor: kAppBarColor,
+        actions: [
+          InkWell(
+            onTap: ()=>Get.back(),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Icon(IconlyLight.logout, color: kRedColor,),
+            ),
+          ),
+        ],
       ),
       body: PageView(
         controller: controller.pageViewController,

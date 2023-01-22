@@ -37,7 +37,7 @@ class SellersApiRepo {
     return response.body;
   }
 
-  Future<List<dynamic>> getMyProducts(
+  Future<dynamic> getMyProducts(
       {String? token, int? limit = 15, int? page = 1}) async {
     final queryParameters = {"limit": "$limit", "page": "$page"};
     debugPrint("token: $token");

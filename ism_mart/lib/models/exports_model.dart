@@ -14,3 +14,4 @@ export 'questions/answer_model.dart';
 export 'questions/questions_model.dart';
 export 'category/product_variants_model.dart';
 export 'product/search_model.dart';
+export 'product/seller_product_model.dart';

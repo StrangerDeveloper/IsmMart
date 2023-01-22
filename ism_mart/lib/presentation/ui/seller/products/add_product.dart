@@ -117,7 +117,7 @@ class AddProductsUI extends GetView<SellersController> {
                                   itemAsString: (model) => model.name ?? "",
                                   dropdownDecoratorProps:
                                       DropDownDecoratorProps(
-                                        baseStyle: bodyText1,
+                                    baseStyle: bodyText1,
                                     dropdownSearchDecoration: InputDecoration(
                                       labelText: langKey.selectSubCategory.tr,
                                       labelStyle: headline3,
@@ -171,22 +171,43 @@ class AddProductsUI extends GetView<SellersController> {
                           onSaved: (value) {},
                         ),
                         AppConstant.spaceWidget(height: 15),
-                        FormInputFieldWithIcon(
-                          controller: controller.prodPriceController,
-                          iconPrefix: IconlyLight.wallet,
-                          labelText: langKey.prodPrice.tr,
-                          iconColor: kPrimaryColor,
-                          autofocus: false,
-                          textStyle: bodyText1,
-                          autoValidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (value) => !GetUtils.isNumericOnly(value!)
-                              ? langKey.prodPriceReq.tr
-                              : null,
-                          keyboardType: TextInputType.number,
-                          onChanged: (value) {
-
-                          },
-                          onSaved: (value) {},
+                        Column(
+                          children: [
+                            FormInputFieldWithIcon(
+                              controller: controller.prodPriceController,
+                              iconPrefix: IconlyLight.wallet,
+                              labelText: langKey.prodPrice.tr,
+                              iconColor: kPrimaryColor,
+                              autofocus: false,
+                              textStyle: bodyText1,
+                              autoValidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                              validator: (value) =>
+                                  !GetUtils.isNumericOnly(value!)
+                                      ? langKey.prodPriceReq.tr
+                                      : null,
+                              keyboardType: TextInputType.number,
+                              onChanged: (value) {
+                                if (value.isNotEmpty) {
+                                  int amount = int.parse(value);
+                                  int totalAfter = amount + (amount * 0.05).round();
+                                  controller.priceAfterCommission(totalAfter);
+                                } else {
+                                  controller.priceAfterCommission(0);
+                                }
+                              },
+                              onSaved: (value) {},
+                            ),
+                            Obx(() => Visibility(
+                                  visible: controller
+                                      .prodPriceController.text.isNotEmpty,
+                                  child: CustomText(
+                                    title:
+                                        "Final price would be Rs ${controller.priceAfterCommission.value} after platform fee of 5%",
+                                    color: kRedColor,
+                                  ),
+                                ))
+                          ],
                         ),
                         AppConstant.spaceWidget(height: 15),
                         FormInputFieldWithIcon(
@@ -259,10 +280,19 @@ class AddProductsUI extends GetView<SellersController> {
                               ? CustomLoading(isItBtn: true)
                               : CustomButton(
                                   onTap: () {
-                                    for (var value in controller.dynamicFieldsValuesList.entries) {
+                                    //var array = [][];
+                                   /* for (var value in controller
+                                        .dynamicFieldsValuesList.entries) {
                                       print(value.value);
                                       print(value.key);
+                                      //print("features[${value.}][]");
+                                    }*/
+
+                                    for(var i=0; i<controller.dynamicFieldsValuesList.entries.length; i++){
+                                      print("features[$i][id] = ${controller.dynamicFieldsValuesList.entries.elementAt(i).key}");
+                                      print("features[$i][value] = ${controller.dynamicFieldsValuesList.entries.elementAt(i).value}");
                                     }
+
                                     if (formKey.currentState!.validate()) {
                                       if (controller.categoryController
                                           .subCategories.isNotEmpty) {
@@ -297,7 +327,8 @@ class AddProductsUI extends GetView<SellersController> {
         style: bodyText1,
         cursorColor: kPrimaryColor,
         keyboardType: TextInputType.text,
-        onChanged: (value)=>controller.onDynamicFieldsValueChanged(value, model),
+        onChanged: (value) =>
+            controller.onDynamicFieldsValueChanged(value, model),
         decoration: InputDecoration(
           labelText: model.label,
           //hintText: model.placeholder,

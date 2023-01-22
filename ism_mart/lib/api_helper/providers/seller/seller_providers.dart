@@ -44,10 +44,11 @@ class SellersApiProvider {
         : ProductResponse();*/
   }
 
-  Future<List<ProductModel>> fetchMyProducts({String? token}) async {
+  Future<SellerProductModel> fetchMyProducts({String? token}) async {
     debugPrint("token: $token");
     var products = await _sellersApiRepo.getMyProducts(token: token);
-    return products.map((product) => ProductModel.fromJson(product)).toList();
+    return SellerProductModel.fromJson(products);
+    //return products.map((product) => ProductModel.fromJson(product)).toList();
   }
 
   Future<ProductResponse> deleteProductById({id, token}) async {

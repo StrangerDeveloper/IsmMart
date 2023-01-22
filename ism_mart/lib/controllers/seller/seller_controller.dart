@@ -31,17 +31,6 @@ class SellersController extends GetxController {
 
     fetchCategories();
     //myProductsList.bindStream(streamMyProducts());
-  ///price of product after adding 5% platform fee.
-    prodPriceController.addListener(() {
-      if(prodPriceController.text.isNotEmpty){
-        int amount = int.parse(prodPriceController.text);
-        double netCommission =0.05;
-        int netTotal = (amount * netCommission).round();
-        int totalAfter = amount + netTotal;
-        priceAfterCommission(totalAfter);
-      }
-      print("PriceAfterCommission: ${priceAfterCommission.value}");
-    });
   }
 
   //TOO: fetch MY Products
@@ -51,9 +40,11 @@ class SellersController extends GetxController {
     /*await LocalStorageHelper.getStoredUser().then((user) async {
 
     });*/
-    await _apiProvider.fetchMyProducts(token: authController.userToken).then((products) {
+    await _apiProvider
+        .fetchMyProducts(token: authController.userToken)
+        .then((response) {
       myProductsList.clear();
-      myProductsList.addAll(products);
+      myProductsList.addAll(response.products!);
     });
   }
 
@@ -120,8 +111,8 @@ class SellersController extends GetxController {
   var prodPriceController = TextEditingController();
   var priceAfterCommission = 0.obs;
 
-
   static const chooseCategory = "Select Category";
+
   //var selectedCategory = chooseCategory.obs;
 
   var selectedCategory = CategoryModel().obs;
@@ -130,8 +121,7 @@ class SellersController extends GetxController {
 
   fetchCategories() async {
     categoriesList.clear();
-    categoriesList.insert(
-        0, CategoryModel(name: chooseCategory, id: 0));
+    categoriesList.insert(0, CategoryModel(name: chooseCategory, id: 0));
     if (categoryController.categories.isEmpty) {
       await categoryController.fetchCategories();
       fetchCategories();
@@ -142,6 +132,7 @@ class SellersController extends GetxController {
   }
 
   static const chooseSubCategory = "Select sub categories";
+
   //var selectedSubCategory = chooseSubCategory.obs;
   var selectedSubCategory = SubCategory().obs;
   var selectedSubCategoryID = 1.obs;
@@ -151,8 +142,7 @@ class SellersController extends GetxController {
     isLoading(true);
     subCategoriesList.clear();
     selectedSubCategory(SubCategory(name: chooseSubCategory, id: 0));
-    subCategoriesList.insert(
-        0, SubCategory(name: chooseSubCategory, id: 0));
+    subCategoriesList.insert(0, SubCategory(name: chooseSubCategory, id: 0));
 
     if (categoryController.subCategories.isNotEmpty) {
       isLoading(false);
@@ -161,7 +151,6 @@ class SellersController extends GetxController {
       setSelectedCategory(category: selectedCategory.value);
     }
   }
-
 
   void setSelectedCategory({CategoryModel? category}) async {
     selectedCategory.value = category!;
@@ -194,21 +183,30 @@ class SellersController extends GetxController {
     }
   }
 
-var productVariantsFieldsList = <ProductVariantsModel>[].obs;
-  getVariantsFields() async{
+  var productVariantsFieldsList = <ProductVariantsModel>[].obs;
+
+  getVariantsFields() async {
     isLoading(true);
-    await _apiProvider.getProductVariantsFieldsByCategories(catId: selectedCategoryID.value, subCatId: selectedSubCategoryID.value)
-    .then((fieldsList){
+    await _apiProvider
+        .getProductVariantsFieldsByCategories(
+            catId: selectedCategoryID.value,
+            subCatId: selectedSubCategoryID.value)
+        .then((fieldsList) {
       isLoading(false);
       productVariantsFieldsList.clear();
       productVariantsFieldsList.addAll(fieldsList);
     });
   }
+
   var dynamicFieldsValuesList = Map<String, dynamic>().obs;
-  onDynamicFieldsValueChanged(String? value, ProductVariantsModel? model){
-    if(dynamicFieldsValuesList.containsValue(value)) dynamicFieldsValuesList.removeWhere((key, v) => v == value);
-    dynamicFieldsValuesList.addIf(!dynamicFieldsValuesList.containsValue(value), "${model!.id}", value);
+
+  onDynamicFieldsValueChanged(String? value, ProductVariantsModel? model) {
+    if (dynamicFieldsValuesList.containsValue(value))
+      dynamicFieldsValuesList.removeWhere((key, v) => v == value);
+    dynamicFieldsValuesList.addIf(
+        !dynamicFieldsValuesList.containsValue(value), "${model!.id}", value);
   }
+
   addProduct() async {
     isLoading(true);
     //debugPrint("ImagePath: ${imagePath.value}");
@@ -223,11 +221,10 @@ var productVariantsFieldsList = <ProductVariantsModel>[].obs;
 
     ProductModel newProduct = ProductModel(
         name: prodNameController.text.trim(),
-        price: num.parse(prodPriceController.text),
+        price: priceAfterCommission.value,
         stock: int.parse(prodStockController.text),
         categoryId: selectedCategoryID.value,
         subCategoryId: selectedSubCategoryID.value,
-        sku: prodSKUController.text,
         description: prodDescriptionController.text,
         discount: num.parse(prodDiscountController.text));
 
@@ -246,12 +243,16 @@ var productVariantsFieldsList = <ProductVariantsModel>[].obs;
     /*form.files.add(MapEntry(
         "images", pickedImagesList.forEach((element)=> MultipartFile(File(element.path), filename: element.name))));
   */
-    var mpf = MultipartFile(
-      File(pickedImagesList[0].path),
-      filename: pickedImagesList[0].name,
-    );
+
+
     FormData form = FormData({});
-    form.files.add(MapEntry("images", mpf));
+    if (pickedImagesList.isNotEmpty) {
+      var mpf = MultipartFile(
+        File(pickedImagesList[0].path),
+        filename: pickedImagesList[0].name,
+      );
+      form.files.add(MapEntry("images", mpf));
+    }
     form.fields.add(MapEntry("name", newProduct.name!));
     form.fields.add(MapEntry("price", newProduct.price!.toString()));
     form.fields.add(MapEntry("stock", newProduct.stock!.toString()));
@@ -261,6 +262,14 @@ var productVariantsFieldsList = <ProductVariantsModel>[].obs;
     form.fields.add(MapEntry("discount", newProduct.discount!.toString()));
     //form.fields.add(MapEntry("sku", newProduct.sku!));
     form.fields.add(MapEntry("description", newProduct.description!));
+
+    for (var i = 0; i < dynamicFieldsValuesList.entries.length; i++) {
+      form.fields.add(MapEntry("features[$i][id]",
+          dynamicFieldsValuesList.entries.elementAt(i).key));
+      form.fields.add(MapEntry("features[$i][value]",
+          dynamicFieldsValuesList.entries.elementAt(i).value));
+    }
+
     //dynamicFieldsValuesList.map((key, value) => form.fields.add(MapEntry("description", newProduct.description!)););
     // var mpf = MultipartFile(
     //   File(pickedImagesList[0].path),
@@ -294,7 +303,6 @@ var productVariantsFieldsList = <ProductVariantsModel>[].obs;
     //isLoading(false);
   }
 
-
   /// Profile Image Capture/Pick Section
   ///
   /// callingType
@@ -305,14 +313,14 @@ var productVariantsFieldsList = <ProductVariantsModel>[].obs;
   var pickedImagesList = <XFile>[].obs;
 
   pickMultipleImages() async {
-    if(Platform.isIOS){
+    if (Platform.isIOS) {
       List<XFile> images = await _picker.pickMultiImage();
       if (images.isNotEmpty) {
         pickedImagesList.addAll(images);
       } else {
         debugPrint("No Images were selected");
       }
-    }else {
+    } else {
       checkPermissions().then((isGranted) async {
         if (isGranted) {
           List<XFile> images = await _picker.pickMultiImage();
@@ -421,8 +429,8 @@ var productVariantsFieldsList = <ProductVariantsModel>[].obs;
   Future<bool> checkPermissions() async {
     return //await Permission.manageExternalStorage.isGranted &&
         await Permission.storage.isGranted &&
-        //await Permission.photos.isGranted &&
-        await Permission.camera.isGranted;
+            //await Permission.photos.isGranted &&
+            await Permission.camera.isGranted;
   }
 
   void requestPhotoAndCameraPermissions() async {
