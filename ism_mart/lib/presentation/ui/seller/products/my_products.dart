@@ -6,6 +6,7 @@ import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/ui/exports_ui.dart';
 import 'package:ism_mart/presentation/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class MyProducts extends GetView<SellersController> {
   const MyProducts({Key? key}) : super(key: key);
@@ -15,25 +16,49 @@ class MyProducts extends GetView<SellersController> {
     //debugPrint("myProducts: ${controller.myProductsList.length}");
 
     return SafeArea(
-      child: Column(
-        children: [
-          Align(
-              alignment: Alignment.centerRight,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: CustomButton(
-                  onTap: () =>
-                      AppConstant.showBottomSheet(widget: AddProductsUI()),
-                  //controller.changePage(1),
-                  text: "Add Product",
-                  width: 110,
-                  height: 35,
-                ),
-              )),
-          //AppConstant.spaceWidget(height: 10),
-          Expanded(child: _buildProductBody()),
-        ],
+      child: Scaffold(
+        body: Column(
+          children: [
+            Align(
+                alignment: Alignment.centerRight,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: CustomButton(
+                    onTap: () => Scaffold.of(context).showBottomSheet(
+                      (context) => AddProductsUI(),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(15),
+                            topRight: Radius.circular(15)),
+                      ),
+                      backgroundColor: Colors.white,
+                    ),
+                    //AppConstant.showBottomSheet(widget: AddProductsUI()),
+                    //controller.changePage(1),
+                    text: langKey.addProduct.tr,
+                    width: 110,
+                    height: 35,
+                  ),
+                )),
+            //AppConstant.spaceWidget(height: 10),
+            Expanded(child: _buildProductBody()),
+          ],
+        ),
       ),
+    );
+  }
+
+  showAddProductBottomSheet() {
+    showBottomSheet(
+      context: Get.context!,
+      builder: (_) {
+        return AddProductsUI();
+      },
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(15), topRight: Radius.circular(15)),
+      ),
+      backgroundColor: Colors.white,
     );
   }
 
@@ -43,7 +68,7 @@ class MyProducts extends GetView<SellersController> {
           ? Center(
               child: NoDataFoundWithIcon(
                 icon: IconlyLight.bag_2,
-                title: 'no_product_found'.tr,
+                title: langKey.noProductFound.tr,
                 iconColor: kPrimaryColor,
               ),
             )
@@ -78,9 +103,7 @@ class MyProducts extends GetView<SellersController> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             color: Colors.white60,
-            border: Border.all(
-                color: Colors.grey.shade400,
-                width: 0.5),
+            border: Border.all(color: Colors.grey.shade400, width: 0.5),
           ),
           child: Stack(
             children: [
@@ -99,22 +122,23 @@ class MyProducts extends GetView<SellersController> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        CustomText(title: "Sold: ${model.sold!}"),
+                        CustomText(title: "${langKey.sold.tr}: ${model.sold!}"),
                         CustomText(
                           title: model.name!,
                           maxLines: 1,
                         ),
                         AppConstant.spaceWidget(height: 5),
-                       CustomPriceWidget(title: "${model.discountPrice!}"),
-
+                        CustomPriceWidget(title: "${model.discountPrice!}"),
                         if (model.discount != 0)
                           Row(
                             //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                             CustomPriceWidget(title: "${model.price!}",style: bodyText1.copyWith(
-                                 decoration: TextDecoration.lineThrough,
-                                 fontSize: 13,
-                                 color: kLightColor)),
+                              CustomPriceWidget(
+                                  title: "${model.price!}",
+                                  style: bodyText1.copyWith(
+                                      decoration: TextDecoration.lineThrough,
+                                      fontSize: 13,
+                                      color: kLightColor)),
                               AppConstant.spaceWidget(width: 10),
                               CustomText(
                                 title: "${model.discount}% OFF",
@@ -123,11 +147,10 @@ class MyProducts extends GetView<SellersController> {
                               ),
                             ],
                           ),
-
                         Row(
                           children: [
                             CustomText(
-                              title: '${'status'.tr}:',
+                              title: '${langKey.status.tr}:',
                               style: bodyText1,
                             ),
                             AppConstant.spaceWidget(width: 2),
@@ -173,14 +196,14 @@ class MyProducts extends GetView<SellersController> {
 
   void showConfirmDeleteDialog({ProductModel? productModel}) {
     Get.defaultDialog(
-      title: "Delete Product",
+      title: langKey.deleteProd.tr,
       titleStyle: appBarTitleSize,
       content: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
             CustomText(
-              title: "Are you sure you want to delete?",
+              title: langKey.delProdMsg.tr,
               weight: FontWeight.w600,
             ),
             AppConstant.spaceWidget(height: 10),
@@ -193,7 +216,7 @@ class MyProducts extends GetView<SellersController> {
                   onTap: () {
                     Get.back();
                   },
-                  text: "No",
+                  text: langKey.noBtn.tr,
                   width: 100,
                   height: 35,
                   color: kRedColor,
@@ -203,7 +226,7 @@ class MyProducts extends GetView<SellersController> {
                     controller.deleteProduct(id: productModel!.id);
                     Get.back();
                   },
-                  text: "Yes",
+                  text: langKey.yesBtn.tr,
                   width: 100,
                   height: 35,
                   color: kRedColor,
@@ -227,5 +250,4 @@ class MyProducts extends GetView<SellersController> {
         return Colors.blue;
     }
   }
-
 }

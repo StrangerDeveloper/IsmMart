@@ -4,6 +4,7 @@ import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class SearchUI extends GetView<SearchController> {
   const SearchUI({
@@ -98,7 +99,7 @@ class SearchUI extends GetView<SearchController> {
             ),
             fillColor: kWhiteColor,
             contentPadding: EdgeInsets.zero,
-            hintText: 'search_in'.tr,
+            hintText: langKey.searchIn.tr,
             hintStyle: TextStyle(
               color: kLightColor,
               fontWeight: FontWeight.w600,
@@ -111,14 +112,15 @@ class SearchUI extends GetView<SearchController> {
   }
 
   _body() {
+    //print("ProductList: ${controller.productList.length}");
     return Obx(() =>
     controller.isLoading.isTrue
         ? CustomLoading(isItForWidget: true, color: kPrimaryColor)
         : controller.productList.isEmpty
         ? Center(
       child: NoDataFoundWithIcon(
-        title: "no_search_product_found".tr,
-        subTitle: 'no_search_result_message'.tr,
+        title: langKey.emptyProductSearch.tr,
+        subTitle: langKey.emptyProductSearchMsg.tr,
       ),
     )
         : _buildProductView(controller.productList));
@@ -157,7 +159,7 @@ class SearchUI extends GetView<SearchController> {
                           color: kPrimaryColor,
                         ),
                         label: CustomText(
-                          title: "Sort",
+                          title: langKey.sortBy.tr,
                           color: kPrimaryColor,
                           weight: FontWeight.bold,
                         ),
@@ -172,7 +174,7 @@ class SearchUI extends GetView<SearchController> {
                           color: kPrimaryColor,
                         ),
                         label: CustomText(
-                          title: "Filter",
+                          title: langKey.filter.tr,
                           color: kPrimaryColor,
                           weight: FontWeight.bold,
                         ),

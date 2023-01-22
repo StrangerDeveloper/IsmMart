@@ -138,6 +138,7 @@ class AppConstant {
     var bgColor = kLimeGreenColor;
     var icon = Icons.gpp_good_sharp;
 
+
     if (title.toLowerCase().contains('error')) {
       bgColor = kRedColor;
       icon = Icons.error_outline;
@@ -205,6 +206,9 @@ class AppConstant {
       default:
         return "Rs";
     }
+  }
+  static int roundCurrency(String value){
+    return double.parse(value).round();
   }
 
   static Size getSize() {

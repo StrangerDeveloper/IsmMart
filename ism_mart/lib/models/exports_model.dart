@@ -9,3 +9,8 @@ export 'slider/slider_model.dart';
 export 'user/country_city_model.dart';
 export 'user/seller_model.dart';
 export 'user/user_model.dart';
+export 'reviews/review_model.dart';
+export 'questions/answer_model.dart';
+export 'questions/questions_model.dart';
+export 'category/product_variants_model.dart';
+export 'product/search_model.dart';

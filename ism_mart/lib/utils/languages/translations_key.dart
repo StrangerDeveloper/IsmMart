@@ -42,8 +42,10 @@ const topCategories = "topCategories",
     viewMore = "viewMore",
     viewAll = "viewAll";
 
-/// buyer Check out
+///View Product
+const productDetails = "productDetails";
 
+/// buyer Check out
 const shipping = "shipping",
     shippingDetails = "shippingDetails",
     orderSummary = "orderSummary",
@@ -57,18 +59,34 @@ const shipping = "shipping",
 const vendorDashboard = "vendorDashboard",
     vendorRegistration = "vendorRegistration",
     myOrders = "myOrders",
+    myProducts = "myProducts",
     recentOrders = "recentOrders";
 
 const completedOrder = "completedOrders",
     pendingOrders = "pendingOrders",
     processingOrders = "processingOrders",
-    totalOrders = "totalOrders";
+    totalOrders = "totalOrders",
+    userOrders = "userOrders",
+    vendorOrders = "vendorOrders";
 
 ///
 /// Profile
 ///
 
-const profile = "profile", personalInfo = "profileInfo";
+const profile = "profile",
+    personalInfo = "profileInfo",
+    phone = "phone",
+    phoneReq = "Phone is required",
+    firstName = "firstName",
+    lastName = "lastName",
+    address = "address";
+
+///
+/// Add Product
+///
+
+const addProduct = "addProduct";
+const deleteProd = "deleteProd", delProdMsg = "delProdMsg";
 
 /**
  *  Login and register and form validations text
@@ -76,6 +94,13 @@ const profile = "profile", personalInfo = "profileInfo";
 
 const login = "login",
     register = "register",
+    loginGreetings = "loginGreetings",
+    registerGreetings = "registerGreetings",
+    donTHaveAccount = "donTHaveAccount",
+    send = "send",
+    verification = "verification",
+    optional = "optional",
+    alreadyHaveAccount = "alreadyHaveAccount",
     signIn = "singIn",
     signUp = "singUp";
 
@@ -83,6 +108,20 @@ const login = "login",
  * Form Validations
  *
  */
+const email = "email",
+    emailReq = "emailReq",
+    password = "password",
+    passwordLengthReq = "passwordReq",
+    otp = "otp",
+    otpReq = "otpReq",
+    fullName = "fullName",
+    fullNameReq = "fullNameReq",
+    newPassword = "newPassword",
+    newPassReq = "newPassReq",
+    confirmPass = "confirmPass",
+    confirmPassReq = "confirmPassReq",
+    passwordNotMatched = "passNotMatched",
+    forgotPassword = "forgotPassword";
 
 const storeName = "storeName",
     storeNameReq = "storeNameRequired",
@@ -91,12 +130,61 @@ const storeName = "storeName",
     description = "description",
     descriptionReq = "descriptionRequired";
 
+///Add Product
+final productName = "productName",
+    productNameReq = "productNameReq",
+    prodPrice = "prodPrice",
+    prodPriceReq = "prodPriceReq",
+    prodStock = "prodStock",
+    prodStockReq = "prodStockReq",
+    prodDiscount = "prodDiscount",
+    prodDiscountReq = "prodDiscountReq",
+    prodSku = "prodSku",
+    prodSkuReq = "prodSkuReq",
+    selectCategory = "selectCategory",
+    selectSubCategory = "selectSubCategory";
+
 /**
  * Membership Plans
  *
  */
 
-const membershipPlans = "membershipPlans", membershipDesc = "membershipDesc";
+const membershipPlans = "membershipPlans",
+    membershipDesc = "membershipDesc",
+    subscribeBtn = "subscribe",
+    subscribedBtn = "subscribed",
+    popular = "popular",
+    perMonth = "perMonth";
+
+///free membership.
+const titleStart = "titleS",
+    free = "free",
+    descS1 = "descS1",
+    descS2 = "descS2",
+    descS3 = "descS3",
+    descS4 = "descS4";
+
+///Pro Membership
+const titlePro = "titleP",
+    descP1 = "descP1",
+    descP2 = "descP2",
+    descP3 = "descP3",
+    descP4 = "descP4",
+    descP5 = "descP5",
+    descP6 = "descP6",
+    descP7 = "descP7";
+
+///Business Membership
+const titleBusiness = "titleB",
+    descB1 = "descB1",
+    descB2 = "descB2",
+    descB3 = "descB3",
+    descB4 = "descB4",
+    descB5 = "descB5",
+    descB6 = "descB6",
+    descB7 = "descB7",
+    descB8 = "descB8",
+    descB9 = "descB9";
 
 /**
  *
@@ -112,6 +200,10 @@ const add = "add",
     sortBy = "sortBy",
     filter = "filterBy",
     set = "set",
+    sold = "sold",
+    noBtn = "noBtn",
+    cancelBtn = "cancelBtn",
+    yesBtn = "yesBtn",
     order = "Order",
     active = "active",
     apply = "apply",
@@ -132,7 +224,6 @@ const add = "add",
  */
 
 const emptyCart = "emptyCart", emptyCartMsg = "emptyCartMsg";
-
 const emptyProductSearch = "emptyProductSearch",
     emptyProductSearchMsg = "emptyProductSearchMsg";
 
@@ -144,3 +235,20 @@ const noProductFound = "noProductFound",
     noCategoryFound = "noCategoryFound",
     noSubCategoryFound = "noSubCategoryFound",
     noDataFound = "noDataFound";
+
+/**
+ *
+ * With params
+ * */
+const titleReq = "titleReq";
+
+/// Snack bar errors or success Messages
+
+const errorTitle = "error",
+    errorMsg = "errorMsg",
+    successTitle = "success",
+    successMsg = "successMsg";
+
+///error messages
+const plzSelectSubCategory = "plzSelectSubCategory",
+    someThingWentWrong = "someThingWentWrong";

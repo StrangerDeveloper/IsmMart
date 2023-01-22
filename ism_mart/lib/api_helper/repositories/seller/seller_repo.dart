@@ -7,6 +7,15 @@ class SellersApiRepo {
   final ApiService _apiService;
 
   SellersApiRepo(this._apiService);
+  ///Product Variants
+  Future<List<dynamic>> fetchCategoriesFields({categoryId, subCategoryId}) async{
+    var params = {
+      "categoryId": "$categoryId",
+      "subcategoryId": "$subCategoryId"
+    };
+    var response  = await _apiService.get(endpoint: "categoryFields", query: params);
+    return response.body['data'];
+  }
 
   Future<dynamic> postProduct({String? token, formData}) async {
     var headers = {

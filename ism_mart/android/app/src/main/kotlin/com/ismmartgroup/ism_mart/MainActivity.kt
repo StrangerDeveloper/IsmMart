@@ -1,4 +1,4 @@
-package com.example.ism_mart
+package com.ismmartgroup.ism_mart
 
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.android.FlutterFragmentActivity

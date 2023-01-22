@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:ism_mart/controllers/buyer/auth/auth_controller.dart';
 import 'package:ism_mart/presentation/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class ProfileUI extends GetView<AuthController> {
   const ProfileUI({Key? key}) : super(key: key);
@@ -14,19 +15,20 @@ class ProfileUI extends GetView<AuthController> {
         child: controller.isLoading.isTrue
             ? CustomLoading(isItForWidget: true, color: kPrimaryColor)
             : CustomScrollView(
-          slivers: [
-            SliverList(delegate: SliverChildListDelegate(
-              [
-                CustomHeader(title: "profile".tr,),
-                _body(),
-              ]
-            )),
-          ],
-        ),
-
+                slivers: [
+                  SliverList(
+                      delegate: SliverChildListDelegate([
+                    CustomHeader(
+                      title: langKey.profile.tr,
+                    ),
+                    _body(),
+                  ])),
+                ],
+              ),
       ),
     );
   }
+
   _body() {
     return Padding(
       padding: const EdgeInsets.all(16.0),
@@ -34,7 +36,7 @@ class ProfileUI extends GetView<AuthController> {
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         children: [
-          StickyLabel(text: "personal_info".tr),
+          StickyLabel(text: langKey.personalInfo.tr),
           AppConstant.spaceWidget(height: 10),
           CustomGreyBorderContainer(
             child: Padding(
@@ -129,7 +131,7 @@ class ProfileUI extends GetView<AuthController> {
     );
   }
 
-  Widget profileCards(title, subtitle, icon) {
+  Widget profileCards(String title, subtitle, icon) {
     return Container(
       width: 290,
       height: 65,
@@ -141,9 +143,15 @@ class ProfileUI extends GetView<AuthController> {
       child: ListTile(
         dense: true,
         contentPadding: EdgeInsets.only(left: 10.0, right: 10.0),
-        title: CustomText(title: title, color: Colors.black54, weight: FontWeight.w600,),
-
-        subtitle: CustomText(title: subtitle, style: bodyText1,),
+        title: CustomText(
+          title: title,
+          color: Colors.black54,
+          weight: FontWeight.w600,
+        ),
+        subtitle: CustomText(
+          title: subtitle,
+          style: bodyText1,
+        ),
         leading: Icon(icon),
         trailing: InkWell(
           onTap: () => showEditDialog(title, subtitle),
@@ -161,7 +169,7 @@ class ProfileUI extends GetView<AuthController> {
     controller.editingTextController.text = subtitle;
     var _formKey = GlobalKey<FormState>();
     Get.defaultDialog(
-      title: "Update $title",
+      title: "${langKey.updateBtn} $title",
       titleStyle: appBarTitleSize,
       contentPadding: const EdgeInsets.all(20),
       content: Form(
@@ -177,9 +185,11 @@ class ProfileUI extends GetView<AuthController> {
           validator: (value) {
             if (title.toString().toLowerCase() == "phone")
               return !GetUtils.isPhoneNumber(value!)
-                  ? "Phone is required"
+                  ? langKey.phoneReq.tr
                   : null;
-            return GetUtils.isBlank(value!)! ? "$title is Required!" : null;
+            return GetUtils.isBlank(value!)!
+                ? langKey.titleReq.trParams({"title": "$title"})
+                : null;
           },
           keyboardType: title.toString().toLowerCase() == "phone"
               ? TextInputType.phone
@@ -194,10 +204,12 @@ class ProfileUI extends GetView<AuthController> {
             : CustomButton(
                 onTap: () async {
                   if (_formKey.currentState!.validate()) {
-                    await controller.updateUser(title: title, value: controller.editingTextController.text);
+                    await controller.updateUser(
+                        title: title,
+                        value: controller.editingTextController.text);
                   }
                 },
-                text: "update".tr,
+                text: langKey.updateBtn.tr,
                 height: 40,
                 width: 200,
               ),

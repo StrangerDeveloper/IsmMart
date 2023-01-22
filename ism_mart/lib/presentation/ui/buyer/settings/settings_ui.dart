@@ -5,6 +5,7 @@ import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/presentation/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class SettingsUI extends GetView<AuthController> {
   const SettingsUI({Key? key}) : super(key: key);
@@ -29,7 +30,7 @@ class SettingsUI extends GetView<AuthController> {
                         titlePadding:
                             const EdgeInsets.symmetric(horizontal: 16),
                         title: Text(
-                          'settings'.tr,
+                          langKey.settings.tr,
                           style: appBarTitleSize,
                         ),
                       ),
@@ -43,7 +44,7 @@ class SettingsUI extends GetView<AuthController> {
                     children: [
                       _accountSetup(),
                       AppConstant.spaceWidget(height: 10),
-                      const StickyLabel(text: "general"),
+                      const StickyLabel(text: langKey.general),
                       _generalSettings(),
                     ],
                   ),
@@ -61,13 +62,13 @@ class SettingsUI extends GetView<AuthController> {
           ? Column(
               children: [
                 _userCard(),
-                const StickyLabel(text: "my_account"),
+                const StickyLabel(text: langKey.myAccount),
                 _accountSettings()
               ],
             )
           : Column(
               children: [
-                const StickyLabel(text: "account"),
+                const StickyLabel(text: langKey.account),
                 _account(),
               ],
             ),
@@ -82,7 +83,7 @@ class SettingsUI extends GetView<AuthController> {
               padding: const EdgeInsets.all(8.0),
               child: ListTile(
                 title: CustomText(
-                  title: "${"welcome".tr} ${controller.userModel!.firstName}",
+                  title: "${langKey.welcome.tr} ${controller.userModel!.firstName}",
                   style: headline2,
                 ),
                 subtitle: CustomText(
@@ -111,7 +112,7 @@ class SettingsUI extends GetView<AuthController> {
             size: 30,
           ),
           title: Text(
-            "${"login".tr} / ${"register".tr}",
+            "${langKey.signIn.tr} / ${langKey.signUp.tr}",
             style: bodyText1.copyWith(color: Colors.blue),
           ),
         ),
@@ -138,7 +139,7 @@ class SettingsUI extends GetView<AuthController> {
               },
               icon: Icons.dashboard_rounded,
               iconColor: kPrimaryColor,
-              title: "vendor_dashboard".tr),
+              title: langKey.vendorDashboard.tr),
           /* _singleSettingsItem(
               onTap: () => Get.toNamed(Routes.buyerOrdersRoute),
               icon: IconlyBold.bag,
@@ -148,7 +149,7 @@ class SettingsUI extends GetView<AuthController> {
               onTap: () => Get.to(() => PremiumMembershipUI()),
               icon: Icons.workspace_premium_outlined,
               iconColor: kOrangeColor,
-              title: "membership_plans".tr),
+              title: langKey.membershipPlans.tr),
         ],
       ),
     );
@@ -163,7 +164,7 @@ class SettingsUI extends GetView<AuthController> {
         child: Column(
           children: [
             CustomText(
-              title: "vendor_registration".tr,
+              title: langKey.vendorRegistration.tr,
               style: appBarTitleSize,
             ),
             Expanded(
@@ -175,13 +176,13 @@ class SettingsUI extends GetView<AuthController> {
                   FormInputFieldWithIcon(
                     controller: controller.ownerNameController,
                     iconPrefix: Icons.store_rounded,
-                    labelText: 'owner_name'.tr,
+                    labelText: langKey.ownerName.tr,
                     iconColor: kPrimaryColor,
                     autofocus: false,
                     textStyle: bodyText1,
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                     validator: (value) => GetUtils.isBlank(value!)!
-                        ? "owner_name_required".tr
+                        ? langKey.ownerNameReq.tr
                         : null,
                     keyboardType: TextInputType.name,
                     onChanged: (value) {},
@@ -191,13 +192,13 @@ class SettingsUI extends GetView<AuthController> {
                   FormInputFieldWithIcon(
                     controller: controller.storeNameController,
                     iconPrefix: Icons.store_rounded,
-                    labelText: 'store_name'.tr,
+                    labelText: langKey.storeName.tr,
                     iconColor: kPrimaryColor,
                     autofocus: false,
                     textStyle: bodyText1,
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                     validator: (value) => GetUtils.isBlank(value!)!
-                        ? "store_name_required!".tr
+                        ? langKey.storeNameReq.tr
                         : null,
                     keyboardType: TextInputType.name,
                     onChanged: (value) {},
@@ -207,13 +208,13 @@ class SettingsUI extends GetView<AuthController> {
                   FormInputFieldWithIcon(
                     controller: controller.storeDescController,
                     iconPrefix: Icons.description,
-                    labelText: 'description'.tr,
+                    labelText: langKey.description.tr,
                     iconColor: kPrimaryColor,
                     autofocus: false,
                     textStyle: bodyText1,
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                     validator: (value) => GetUtils.isBlank(value!)!
-                        ? "description_required".tr
+                        ? langKey.descriptionReq.tr
                         : null,
                     keyboardType: TextInputType.name,
                     onChanged: (value) {},
@@ -228,7 +229,7 @@ class SettingsUI extends GetView<AuthController> {
                               await controller.registerStore();
                             }
                           },
-                          text: "register".tr,
+                          text: langKey.register.tr,
                           height: 40,
                           width: 150,
                         )),
@@ -258,50 +259,50 @@ class SettingsUI extends GetView<AuthController> {
                 onTap: () => _showLanguageChangeBottomSheet(),
                 icon: Icons.language,
                 iconColor: Colors.orange,
-                title: "language".tr,
+                title: langKey.language.tr,
                 value: languageController.language.value),
           ),
           /*_singleSettingsItem(
               onTap: () => Get.to(() => NotificationUI()),
               icon: IconlyLight.notification,
               iconColor: Colors.lightBlue,
-              title: "notifications".tr),*/
+              title: langKey.notifications.tr),*/
 
           _singleSettingsItem(
               onTap: () => Get.to(
-                  () => GeneralSettingsDataUI(title: 'terms_conditions'.tr)),
+                  () => GeneralSettingsDataUI(title: langKey.termsAndConditions.tr)),
               icon: Icons.rule_outlined,
               iconColor: Colors.indigo,
-              title: "terms_conditions".tr),
+              title: langKey.termsAndConditions.tr),
           _singleSettingsItem(
               onTap: () => Get.to(
-                  () => GeneralSettingsDataUI(title: 'privacy_policy'.tr)),
+                  () => GeneralSettingsDataUI(title: langKey.privacyPolicy.tr)),
               icon: IconlyLight.paper,
               iconColor: Colors.purpleAccent,
-              title: "privacy_policy".tr),
+              title: langKey.privacyPolicy.tr),
           _singleSettingsItem(
               onTap: () => Get.to(
-                  () => GeneralSettingsDataUI(title: 'return_exchange'.tr)),
+                  () => GeneralSettingsDataUI(title: langKey.returnAndExchange.tr)),
               icon: Icons.assignment_return_rounded,
               iconColor: Colors.lime,
-              title: "return_exchange".tr),
+              title: langKey.returnAndExchange.tr),
           _singleSettingsItem(
               onTap: () =>
-                  Get.to(() => GeneralSettingsDataUI(title: 'about_us'.tr)),
+                  Get.to(() => GeneralSettingsDataUI(title: langKey.aboutUs.tr)),
               icon: IconlyLight.info_circle,
               iconColor: Colors.pinkAccent,
-              title: "about_us".tr),
+              title: langKey.aboutUs.tr),
           _singleSettingsItem(
               onTap: () => Get.to(() => GeneralSettingsDataUI(
-                  isContactUsCalled: true, title: "contact_us".tr)),
+                  isContactUsCalled: true, title: langKey.contactUs.tr)),
               icon: Icons.contactless_outlined,
               iconColor: Colors.green,
-              title: "contact_us".tr),
+              title: langKey.contactUs.tr),
           _singleSettingsItem(
               onTap: () => Get.to(() => FaqUI()),
               icon: Icons.question_answer,
               iconColor: Colors.purple,
-              title: "faq".tr),
+              title: langKey.faqs.tr),
           Obx(() => controller.userModel!.email != null &&
                   !controller.isSessionExpired! &&
                   controller.userToken != null
@@ -312,7 +313,7 @@ class SettingsUI extends GetView<AuthController> {
                   },
                   icon: IconlyLight.logout,
                   iconColor: Colors.red,
-                  title: "logout".tr)
+                  title: langKey.logout.tr)
               : Container()),
         ],
       ),
@@ -375,7 +376,7 @@ class SettingsUI extends GetView<AuthController> {
           child: Column(
             children: [
               StickyLabel(
-                text: "select_language".tr,
+                text: langKey.selectLanguage.tr,
               ),
               Column(
                 children: languageController.optionsLocales.entries.map((item) {

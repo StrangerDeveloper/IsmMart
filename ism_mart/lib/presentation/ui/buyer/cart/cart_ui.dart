@@ -6,6 +6,7 @@ import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 //final cartController = Get.find<CartController>();
 class CartUI extends GetView<CartController> {
@@ -43,7 +44,7 @@ class CartUI extends GetView<CartController> {
               buildSvgLogo(),
               AppConstant.spaceWidget(width: 10),
               CustomText(
-                title: 'cart'.tr,
+                title: langKey.myCart.tr,
                 style: appBarTitleSize,
                 //style: textTheme.headline6!.copyWith(color: kWhiteColor),
               ),
@@ -52,8 +53,8 @@ class CartUI extends GetView<CartController> {
         ),
         body: NoDataFoundWithIcon(
           icon: IconlyLight.buy,
-          title: "empty_cart".tr,
-          subTitle: "empty_cart_message".tr,
+          title: langKey.emptyCart.tr,
+          subTitle: langKey.emptyCartMsg.tr,
         ),
       ),
     );
@@ -205,7 +206,7 @@ class CartUI extends GetView<CartController> {
                         child: Container(
                             width: 60,
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 12.0, vertical: 5),
+                                horizontal: 11.0, vertical: 5),
                             decoration: BoxDecoration(
                               color: kWhiteColor,
                               border: Border.all(

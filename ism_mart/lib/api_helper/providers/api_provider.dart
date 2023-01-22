@@ -9,9 +9,16 @@ class ApiProvider {
   ApiProvider(this._apiRepository);
 
   //TODO: Search Provider
-  Future<List<ProductModel>> search({text, page, limit, sortBy}) async {
-    var products = await _apiRepository.searchProduct(text: text, page: page, limit: limit, sortBy: sortBy);
+  /*Future<List<ProductModel>> search({text, page, limit, sortBy}) async {
+    var products = await _apiRepository.searchProduct(
+        text: text, page: page, limit: limit, sortBy: sortBy);
     return products.map((product) => ProductModel.fromJson(product)).toList();
+  }*/
+  Future<SearchProductResponse> search({text, page, limit, sortBy}) async {
+    var products = await _apiRepository.searchProduct(
+        text: text, page: page, limit: limit, sortBy: sortBy);
+
+    return SearchProductResponse.fromJson(products['data']);
   }
 
   Future<List<ProductModel>> filterSearch({appliedFilters}) async {
@@ -20,7 +27,7 @@ class ApiProvider {
     return products.map((product) => ProductModel.fromJson(product)).toList();
   }
 
-  //TODO: Fetch Slider Provider
+  //TOO: Fetch Slider Provider
   Future<List<SliderModel>> fetchSliderImages() async {
     var response = await _apiRepository.getSliderImages();
     return response.map((json) => SliderModel.fromJson(json)).toList();
@@ -31,7 +38,7 @@ class ApiProvider {
     return response.map((json) => ProductModel.fromJson(json)).toList();
   }
 
-//TODO: Fetch Category Provider
+//TDO: Fetch Category Provider
   Future<List<CategoryModel>> fetchCategories() async {
     var response = await _apiRepository.getAllCategories();
     return response.map((json) => CategoryModel.fromJson(json)).toList();
@@ -49,12 +56,15 @@ class ApiProvider {
 
     return products.map((product) => ProductModel.fromJson(product)).toList();
   }
+
   Future<List<ProductModel>> getProductsBySubCategory(int id) async {
     var products = await _apiRepository.getProductsByCategory(
         endPoint: "getBySubCategory", id: id);
 
     return products.map((product) => ProductModel.fromJson(product)).toList();
   }
+
+
 
   Future<List<ProductModel>> getProductsByType({String? type}) async {
     var products = await _apiRepository.getProductsByType(type: type);
@@ -70,8 +80,17 @@ class ApiProvider {
     //return products.map((product) => ProductModel.fromJson(product)).first;
   }
 
-  //TODO: Cart Item APIs
-  //TODO:
+  Future<List<ReviewModel>> getProductReviews({productId, token}) async {
+    var reviewResponse = await _apiRepository.fetchProductsReviews(
+        productId: productId, token: token);
+    return reviewResponse
+        .map((reviews) => ReviewModel.fromJson(reviews))
+        .toList();
+  }
+
+  ///Answer and Questions of product
+
+  //TDO: Cart Item APIs
 
   Future<List<CartModel>> getCartItems({String? token}) async {
     var cartResponse = await _apiRepository.getCartItem(token: token);

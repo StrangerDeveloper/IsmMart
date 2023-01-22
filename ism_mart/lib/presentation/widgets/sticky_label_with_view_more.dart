@@ -31,7 +31,7 @@ class StickyLabelWithViewMoreOption extends StatelessWidget {
           child:  Padding(
             padding: EdgeInsets.only(right: kDefaultPadding),
             child: StickyLabel(
-              text: "see_all".tr,
+              text: seeAll.tr,
               style: bodyText1,
             ),
           ),

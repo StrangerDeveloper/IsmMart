@@ -59,22 +59,23 @@ class SearchController extends GetxController {
     isLoading(true);
     page = 1;
     searchLimit = 32 * 2;
-
+    debugPrint("Search(): cLLEDr");
     await _apiProvider
         .search(
             text: query!.toLowerCase(),
             page: page,
             limit: searchLimit,
             sortBy: sortBy)
-        .then((products) {
-      //change(products, status: RxStatus.success());
-      productList.clear();
-      productList.addAll(products);
+        .then((response) {
       isLoading(false);
-    }).catchError((error) {
+      debugPrint("Search(): ${response.toString()}r");
+      productList.clear();
+      productList.addAll(response.products.productRows!);
+
+    })/*.catchError((error) {
       isLoading(false);
       //change(null, status: RxStatus.error(error));
-    });
+    })*/;
   }
 
   void loadMore(String? searchQuery) async {
@@ -92,10 +93,10 @@ class SearchController extends GetxController {
               page: page,
               limit: searchLimit,
               sortBy: sortBy)
-          .then((products) {
+          .then((response) {
         //change(products, status: RxStatus.success());
         // productList.clear();
-        productList.addAll(products);
+        productList.addAll(response.products.productRows!);
         isLoadingMore(false);
       }).catchError((error) {
         isLoadingMore(false);

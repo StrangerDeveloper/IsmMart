@@ -8,6 +8,7 @@ import 'package:ism_mart/presentation/ui/exports_ui.dart';
 import 'package:ism_mart/presentation/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
+
 class SingleProductView extends GetView<ProductController> {
   const SingleProductView({Key? key}) : super(key: key);
 
@@ -40,6 +41,7 @@ class SingleProductView extends GetView<ProductController> {
                 productModel.images!.isEmpty
                     ? CustomNetworkImage(
                         imageUrl: productModel.thumbnail,
+                        fit:BoxFit.fill,
                         width: MediaQuery.of(Get.context!).size.width,
                         height: MediaQuery.of(Get.context!).size.height * 0.4,
                       )

@@ -1,58 +1,126 @@
+import 'translations_key.dart' as key;
+
 class Urdu {
   Map<String, String> get translations => {
-        'settings': 'ترتیبات',
-        'general': 'جنرل',
-        'account': 'کھاتہ',
-        'my_account': 'میرا اکاونٹ',
-        'welcome': 'خوش آمدید',
-        'login': 'لاگ ان کریں',
-        'register': 'اندراج',
-        'vendor_dashboard': 'وینڈر ڈیش بورڈ',
-        'vendor_registration': 'وینڈر رجسٹریشن',
-        'my_orders': 'میرے آرڈرز',
-        'store_name': 'دکان کا نام',
-        'store_name_required': 'دکان کا نام درکار ہے',
-        'description': 'تفصيل',
-        'description_required': 'تفصیل درکار ہے',
-        'language': 'زبان',
-        'notifications': 'اطلاعات',
-        'about_us': 'ہمارے بارے میں معلومات',
-        'membership_plans': 'رکنیت کے پلان',
-        'contact_us': 'ہم سے رابطہ کریں',
-        'terms_conditions': 'شرائط و ضوابط',
-        'faq': 'عمومی سوالات',
-        'select_language': 'زبان منتخب کریں',
-        'search_in': 'پروڈکٹ تلاش کریں',
-        'logout': 'لاگ آوٹ',
-        'home': 'ہوم',
-        'categories': 'زمرہ جات',
-        'deals': 'ڈیلز',
-        'menu': 'مینو',
-        'cart': 'ٹوکری',
-        'top_categories': 'سر فہرست زمرہ جات',
-        'big_discount_deals': 'بڑی رعایتی ڈیلز',
-        'active': 'فعال',
-        'empty_cart': 'آپ کی کارٹ خالی ہے',
-        'empty_cart_message':
+        ///settings screen
+        key.settings: 'ترتیبات',
+        key.general: 'جنرل',
+        key.account: 'کھاتہ',
+        key.myAccount: 'میرا اکاونٹ',
+        key.welcome: 'خوش آمدید',
+        key.language: 'زبان',
+        key.notifications: 'اطلاعات',
+        key.aboutUs: 'ہمارے بارے میں معلومات',
+        key.contactUs: 'ہم سے رابطہ کریں',
+        key.appearance: 'اپیئرنس',
+        key.termsAndConditions: 'شرائط و ضوابط',
+        key.privacyPolicy: 'رازداری کی پالیسی',
+        key.returnAndExchange: 'واپسی اور تبادلہ',
+        key.faqs: 'عمومی سوالات',
+        key.selectLanguage: 'زبان منتخب کریں',
+        key.logout: 'لاگ آوٹ',
+
+        ///Login and register
+        key.login: 'لاگ ان کریں',
+        key.register: 'اندراج',
+        key.signIn: 'سائن ان',
+        key.signUp: 'سائن اپ',
+
+        ///bottom bar
+        key.home: 'ہوم',
+        key.categories: 'زمرہ جات',
+        key.deals: 'ڈیلز',
+        key.menu: 'مینو',
+        key.myCart: 'میرا کارٹ',
+
+        ///buyer dashboard
+        key.topCategories: 'سر فہرست زمرہ جات',
+        key.discountDeals: 'ڈسکاؤنٹ ڈیلز',
+        key.seeAll: 'تمام دیکھیں',
+        key.viewAll: 'سب دیکھیں',
+        key.viewMore: 'مزید دیکھیں',
+
+        ///buyer checkout
+        key.orderSummary: 'آرڈر کا خلاصہ',
+        key.shippingDetails: 'شپنگ کی تفصیلات',
+        key.orderTime: 'آرڈر کا وقت',
+        key.expectedDelivery: 'متوقع ترسیل',
+        key.shipping: 'شپنگ',
+
+        ///vendor section
+        key.vendorDashboard: 'وینڈر ڈیش بورڈ',
+        key.vendorRegistration: 'وینڈر رجسٹریشن',
+        key.myOrders: 'میرے آرڈرز',
+        key.recentOrders: 'حالیہ آرڈرز',
+        key.completedOrder: ' مکمل شدہ آرڈرز',
+        key.processingOrders: 'پروسیسنگ آرڈرز',
+        key.pendingOrders: 'زیر التواء آرڈرز',
+        key.totalOrders: 'ٹوٹل آرڈرز',
+
+        ///profile
+        key.profile: 'پروفائل',
+        key.personalInfo: 'ذاتی معلومات',
+        key.phone: 'فون',
+        key.firstName: 'پہلا نام',
+        key.lastName: 'آخری نام',
+        key.address: 'پتہ',
+
+        ///member ship
+        key.membershipPlans: 'رکنیت کے پلان',
+        key.membershipDesc:
+            'مزید آمدنی حاصل کریں، نئی مصنوعات یا کاروباری ماڈلز کو سپورٹ کریں، اور عالمی سطح پر بار بار چلنے والی ادائیگیوں کو قبول کریں۔',
+
+        /// general button or else texts
+        key.searchIn: 'پروڈکٹ تلاش کریں...',
+        key.active: 'فعال',
+        key.order: 'آرڈر',
+        key.checkout: 'چیک آوٹ',
+        key.changeBtn: 'تبدیل کریں',
+        key.updateBtn: 'اپ ڈیٹ',
+        key.deleteBtn: 'حذف کریں۔',
+        key.confirm: 'تصدیق کریں۔',
+        key.set: 'سیٹ',
+        key.add: 'شامل کریں۔',
+        key.apply: 'لاگو کریں',
+        key.addNew: 'نیا شامل کریں',
+        key.total: 'ٹوٹل',
+        key.details: 'تفصیلات',
+        key.sortBy: 'ترتیب دیں',
+        key.filter: 'فلٹر',
+        key.search: 'تلاش کریں۔',
+        key.status: 'حالت',
+        key.addNewAddress: 'نیا پتہ شامل کریں۔',
+        key.confirmOrder: 'تصدیق کریں',
+        key.proceedToCheckOut: 'چیک آؤٹ کریں',
+
+        ///Form Validations
+        key.storeName: 'دکان کا نام',
+        key.storeNameReq: 'دکان کا نام درکار ہے',
+        key.description: 'تفصيل',
+        key.descriptionReq: 'تفصیل درکار ہے',
+        key.ownerName: 'مالک کا نام',
+        key.ownerNameReq: 'مالک کا نام درکار ہے۔',
+        key.phoneReq: 'فون نمبر درکار ہے۔',
+
+        ///empty screens
+        key.emptyCart: 'آپ کی کارٹ خالی ہے',
+        key.emptyCartMsg:
             'آپ کی کارٹ میں کوئی آئٹم شامل نہیں کیا گیا ہے۔ براہ کرم پروڈکٹ کو اپنی کارٹ میں شامل کریں',
-        "order_summary": "آرڈر کا خلاصہ",
-        "confirm_order": "تصدیق کریں",
-        "shipping_details": "شپنگ کی تفصیلات",
-        "checkout": "چیک آوٹ",
-        'shipping': 'شپنگ',
-        'change': 'تبدیل کریں',
-        'update': 'اپ ڈیٹ',
-        'set': 'سیٹ',
-        'apply': 'لاگو کریں',
-        'total': 'کل',
-        'add': 'شامل کریں',
-        'add_new': 'نیا شامل کریں',
-        'add_new_address': 'نیا پتہ شامل کریں',
-        'no_address_found': 'کوئی پتہ نہیں ملا',
-        'no_default_address_found': 'کوئی طے شدہ پتہ نہیں ملا',
-        'no_cart_item_found': 'کوئی کارٹ آئٹم نہیں ملا',
-        'no_category_found': 'کوئی زمرہ نہیں ملا',
-        'no_sub_category_found': 'کوئی ذیلی زمرہ جات نہیں ملے',
-        'no_data_found': 'کوئی ڈیٹا نہیں ملا'
+        key.emptyProductSearch: 'کوئی سرچ پروڈکٹ نہیں ملا',
+        key.emptyProductSearchMsg:
+            "معذرت! آپ کی تلاش کسی پروڈکٹ سے مماثل نہیں ہے \n براہ کرم دوبارہ کوشش کریں۔",
+
+        ///no data found
+        key.noProductFound: 'آپ نے ابھی تک پروڈکٹ شامل نہیں کیں!',
+        key.noOrderFound: 'آپ کے پاس ابھی تک کوئی آرڈر نہیں ہے!',
+        key.noAddressFound: 'کوئی پتہ نہیں ملا',
+        key.noDefaultAddressFound: 'کوئی ڈیفالٹ پتہ نہیں ملا',
+        key.noCartItemFound: 'کوئی کارٹ آئٹم نہیں ملا',
+        key.noCategoryFound: 'کوئی زمرہ نہیں ملا',
+        key.noSubCategoryFound: 'کوئی ذیلی زمرہ جات نہیں ملے',
+        key.noDataFound: 'کوئی ڈیٹا نہیں ملا',
+
+        ///with Params
+        key.titleReq: "@title درکار ہے۔",
       };
 }

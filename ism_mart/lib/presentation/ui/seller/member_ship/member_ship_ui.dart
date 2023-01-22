@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/presentation/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class PremiumMembershipUI extends GetView<MembershipController> {
   const PremiumMembershipUI({Key? key}) : super(key: key);
@@ -20,12 +21,12 @@ class PremiumMembershipUI extends GetView<MembershipController> {
                   Column(
                     children: [
                       CustomHeader(
-                          title: 'membership_plans'.tr
+                          title: langKey.membershipPlans.tr
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child:
-                            CustomText(title: 'membership_desc'.tr, size: 15),
+                            CustomText(title: langKey.membershipDesc.tr, size: 15),
                       ),
                     ],
                   ),
@@ -57,7 +58,7 @@ class PremiumMembershipUI extends GetView<MembershipController> {
         ),
       ),
       title: CustomText(
-          title: "Premium Membership",
+          title: langKey.membershipPlans.tr,
           style: appBarTitleSize),
     );
   }
@@ -124,8 +125,8 @@ class PremiumMembershipUI extends GetView<MembershipController> {
                 CustomButton(
                   onTap: () {},
                   text: model.title!.toLowerCase().contains("start")
-                      ? "Subscribed"
-                      : "Subscribe",
+                      ? langKey.subscribedBtn.tr
+                      : langKey.subscribeBtn.tr,
                   color: model.title!.toLowerCase().contains("start")
                       ? kPrimaryColor
                       : Colors.grey,
@@ -147,7 +148,7 @@ class PremiumMembershipUI extends GetView<MembershipController> {
                     borderRadius: BorderRadius.circular(2),
                   ),
                   child: CustomText(
-                    title: "POPULAR",
+                    title: langKey.popular.tr,
                     color: kWhiteColor,
                     size: 12,
                     weight: FontWeight.w600,

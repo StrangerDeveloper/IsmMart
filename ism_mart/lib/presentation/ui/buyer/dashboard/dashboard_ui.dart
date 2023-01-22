@@ -8,6 +8,7 @@ import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/ui/exports_ui.dart';
 import 'package:ism_mart/presentation/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class DashboardUI extends GetView<BaseController> {
   const DashboardUI({Key? key}) : super(key: key);
@@ -24,7 +25,7 @@ class DashboardUI extends GetView<BaseController> {
                 _slider(controller.sliderImages),
 
                 StickyLabel(
-                  text: "top_categories".tr
+                  text: langKey.topCategories.tr
                 ),
                 _topCategoriesGrid(controller.categories),
                 //kDivider,
@@ -71,7 +72,7 @@ class DashboardUI extends GetView<BaseController> {
   Widget _slider(List<SliderModel> list) {
     return Obx(
       () => controller.isSliderLoading.isTrue
-          ? CustomLoading(isDarkMode: Get.isDarkMode, isItForWidget: true)
+          ? CustomLoading(isItForWidget: true)
           : Stack(
               children: [
                 SizedBox(
@@ -134,7 +135,7 @@ class DashboardUI extends GetView<BaseController> {
         child: Column(
           children: [
             StickyLabel(
-              text: "big_discount_deals".tr
+              text: langKey.discountDeals.tr
             ),
             AppConstant.spaceWidget(height: 10),
             controller.discountSliderProductsList.isEmpty
@@ -181,6 +182,7 @@ class DashboardUI extends GetView<BaseController> {
             ),
             child: CustomNetworkImage(
               imageUrl: model.thumbnail,
+              //fit: BoxFit.fill,
             ),
           ),
           Positioned(
@@ -394,7 +396,7 @@ class DashboardUI extends GetView<BaseController> {
               child: SizedBox(
                 height: AppConstant.getSize().height * 0.25,
                 child: list.isEmpty
-                    ? NoDataFound(text: "no_category_found".tr)
+                    ? NoDataFound(text: langKey.noCategoryFound.tr)
                     : GridView.builder(
                         scrollDirection: Axis.horizontal,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

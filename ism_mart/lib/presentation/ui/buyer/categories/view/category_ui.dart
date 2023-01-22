@@ -6,6 +6,7 @@ import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/ui/exports_ui.dart';
 import 'package:ism_mart/presentation/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class CategoriesUI extends GetView<CategoryController> {
   const CategoriesUI({Key? key}) : super(key: key);
@@ -19,8 +20,9 @@ class CategoriesUI extends GetView<CategoryController> {
       if (state is List<CategoryModel>) {
         return _build(state: state);
       }
-      return const NoDataFound(
-        text: "No Categories Found",
+      return NoDataFoundWithIcon(
+        icon: Icons.category_outlined,
+        title: langKey.noCategoryFound.tr,
       );
     }, onLoading: CustomLoading(isDarkMode: Get.isDarkMode));
   }
@@ -35,7 +37,7 @@ class CategoriesUI extends GetView<CategoryController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-                CustomText(title: "Categories", style: headline1.copyWith(fontSize: 22),),
+                CustomText(title: langKey.categories.tr, style: headline1.copyWith(fontSize: 22),),
               AppConstant.spaceWidget(height: 15),
               Expanded(
                 child: _buildBodyNew(categoryList: state),
@@ -295,7 +297,7 @@ class CategoriesUI extends GetView<CategoryController> {
               color: kPrimaryColor,
             )
           : controller.subCategories.isEmpty
-              ? NoDataFound(text: "no_sub_category_found".tr)
+              ? NoDataFoundWithIcon(icon:Icons.category_outlined,title: langKey.noSubCategoryFound.tr)
               : Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -341,7 +343,7 @@ class CategoriesUI extends GetView<CategoryController> {
               color: kPrimaryColor,
             )
           : controller.subCategories.isEmpty
-              ? NoDataFound(text: "no_sub_category_found".tr)
+              ? NoDataFoundWithIcon(icon:Icons.category_outlined,title: langKey.noSubCategoryFound.tr)
               : ListView.builder(
                   itemCount: controller.subCategories.length,
                   itemBuilder: (_, index) {

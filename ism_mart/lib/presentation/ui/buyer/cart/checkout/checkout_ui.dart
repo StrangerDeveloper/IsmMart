@@ -6,6 +6,8 @@ import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+
 class CheckoutUI extends GetView<CheckoutController> {
   const CheckoutUI({Key? key}) : super(key: key);
 
@@ -26,7 +28,7 @@ class CheckoutUI extends GetView<CheckoutController> {
             ),
           ),
           title: CustomText(
-              title: 'checkout'.tr,
+              title: langKey.checkout.tr,
               style: appBarTitleSize),
         ),
         body: _body(),
@@ -42,13 +44,13 @@ class CheckoutUI extends GetView<CheckoutController> {
         SliverList(
           delegate: SliverChildListDelegate(
             [
-              StickyLabel(text: "shipping_details".tr),
+              StickyLabel(text: langKey.shippingDetails.tr),
               Obx(() => controller.defaultAddressModel!.defaultAddress!
                   ? _shippingAddressDetails(controller.defaultAddressModel)
                   : _buildNewAddress()),
               /*StickyLabel(text: "Payment Details"),
               _buildPaymentDetails(),*/
-              StickyLabel(text: "order_summary".tr),
+              StickyLabel(text: langKey.orderSummary.tr),
               _buildCartItemSection(),
               _subTotalDetails(),
               Column(
@@ -75,9 +77,9 @@ class CheckoutUI extends GetView<CheckoutController> {
                             } else
                               controller.showSnackBar(
                                   title: "error",
-                                  message: "no_default_address_found".tr);
+                                  message: langKey.noDefaultAddressFound.tr);
                           },
-                          text: "confirm_order".tr))
+                          text: langKey.confirmOrder.tr))
                 ],
               ),
             ],
@@ -123,7 +125,7 @@ class CheckoutUI extends GetView<CheckoutController> {
               children: [
                 // OutlinedButton(onPressed: () => showAddressesDialog(), child: CustomText(title: "Change",),)
                 _tileActionBtn(
-                    onTap: () => showAddressesDialog(), title: "change".tr)
+                    onTap: () => showAddressesDialog(), title: langKey.changeBtn.tr)
               ],
             ),
           ),
@@ -151,7 +153,7 @@ class CheckoutUI extends GetView<CheckoutController> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             NoDataFound(
-              text: "no_default_address_found".tr,
+              text: langKey.noDefaultAddressFound.tr,
               fontSize: 13,
             ),
             OutlinedButton(
@@ -160,7 +162,7 @@ class CheckoutUI extends GetView<CheckoutController> {
                       widget: addNewORUpdateAddressContents());
                 },
                 child: CustomText(
-                    title: "add_new_address".tr, weight: FontWeight.w600))
+                    title: langKey.addNewAddress.tr, weight: FontWeight.w600))
           ],
         ),
       ),
@@ -186,7 +188,7 @@ class CheckoutUI extends GetView<CheckoutController> {
             children: [
               CustomText(
                 title:
-                    "${calledForUpdate ? "update".tr : "add_new".tr} ${'shipping'.tr}",
+                    "${calledForUpdate ? langKey.updateBtn.tr : langKey.addNew.tr} ${langKey.shipping.tr}",
                 style: appBarTitleSize,
               ),
               AppConstant.spaceWidget(height: 15),
@@ -208,7 +210,7 @@ class CheckoutUI extends GetView<CheckoutController> {
               FormInputFieldWithIcon(
                 controller: controller.phoneController,
                 iconPrefix: Icons.phone_iphone_rounded,
-                labelText: 'Phone Number',
+                labelText: langKey.phone,
                 iconColor: kPrimaryColor,
                 autofocus: false,
                 textStyle: bodyText1,
@@ -240,7 +242,7 @@ class CheckoutUI extends GetView<CheckoutController> {
               FormInputFieldWithIcon(
                 controller: controller.addressController,
                 iconPrefix: Icons.location_on_rounded,
-                labelText: 'Address',
+                labelText: langKey.address,
                 iconColor: kPrimaryColor,
                 autofocus: false,
                 textStyle: bodyText1,
@@ -258,39 +260,6 @@ class CheckoutUI extends GetView<CheckoutController> {
                 Column(
                   children: [
                     //Countries
-                    /*  Obx(
-                      () => Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                                color: Colors.black87,
-                                width: 1,
-                                style: BorderStyle.solid),
-                            borderRadius: BorderRadius.circular(8)),
-                        child: DropdownButton(
-                          isExpanded: true,
-                          style: bodyText2,
-                          hint: Text(
-                              '${controller.authController.selectedCountry.value}'),
-                          onChanged: (newValue) {
-                            debugPrint("Countries $newValue");
-                            controller.setSelectedCountry(newValue!.toString());
-                          },
-                          items: controller.authController.countries
-                              .map((countryModel) {
-                            String countryName = countryModel.name!;
-                            return DropdownMenuItem(
-                              child: Text(
-                                '$countryName',
-                              ),
-                              value: countryName,
-                            );
-                          }).toList(),
-                          value:
-                              controller.authController.selectedCountry.value,
-                        ),
-                      ),
-                    ),*/
                     Obx(
                       () => DropdownSearch<CountryModel>(
                         popupProps: PopupProps.dialog(
@@ -299,8 +268,6 @@ class CheckoutUI extends GetView<CheckoutController> {
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10))),
                             searchFieldProps: AppConstant.searchFieldProp()),
-                        //showSelectedItems: true),
-
                         items: controller.authController.countries,
                         itemAsString: (model) => model.name ?? "",
                         dropdownDecoratorProps: DropDownDecoratorProps(
@@ -331,39 +298,6 @@ class CheckoutUI extends GetView<CheckoutController> {
                     AppConstant.spaceWidget(height: 15),
 
                     ///TOO: Sub Cities
-                    /* Obx(
-                      () => Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                                color: Colors.black87,
-                                width: 1,
-                                style: BorderStyle.solid),
-                            borderRadius: BorderRadius.circular(8)),
-                        child: DropdownButton(
-                          isExpanded: true,
-                          style: bodyText2,
-                          hint: Text(
-                              '${controller.authController.selectedCity.value}'),
-                          onChanged: (newValue) {
-                            debugPrint("Cities $newValue");
-                            controller.setSelectedCity(newValue!.toString());
-                          },
-                          items: controller.authController.cities
-                              .map((countryModel) {
-                            String city = countryModel.name!;
-                            return DropdownMenuItem(
-                              child: Text(
-                                '$city',
-                              ),
-                              value: city,
-                            );
-                          }).toList(),
-                          value: controller.authController.selectedCity.value,
-                        ),
-                      ),
-                    ),*/
-
                     Obx(
                       () => authController.cities.isEmpty
                           ? Container()
@@ -445,7 +379,7 @@ class CheckoutUI extends GetView<CheckoutController> {
       titleStyle: appBarTitleSize,
       content: Obx(
         () => controller.shippingAddressList.isEmpty
-            ? NoDataFound(text: "no_address_found".tr)
+            ? NoDataFound(text: langKey.noAddressFound.tr)
             : SingleChildScrollView(
                 child: Column(
                   children: controller.shippingAddressList.map((element) {
@@ -459,7 +393,7 @@ class CheckoutUI extends GetView<CheckoutController> {
       confirm: OutlinedButton(
         onPressed: () => controller.changeDefaultShippingAddress(),
         child: CustomText(
-          title: "set".tr,
+          title: langKey.set.tr,
         ),
       ),
       cancel: OutlinedButton(
@@ -470,7 +404,7 @@ class CheckoutUI extends GetView<CheckoutController> {
                   widget: addNewORUpdateAddressContents()));
         },
         child: CustomText(
-          title: "add_new_address".tr,
+          title: langKey.addNewAddress.tr,
         ),
       ),
     );
@@ -591,7 +525,7 @@ class CheckoutUI extends GetView<CheckoutController> {
       padding: const EdgeInsets.all(8.0),
       child: Obx(
         () => controller.getCartItemsList().isEmpty
-            ? NoDataFound(text: "no_cart_item_found".tr)
+            ? NoDataFound(text: langKey.noCartItemFound.tr)
             : ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
@@ -672,7 +606,7 @@ class CheckoutUI extends GetView<CheckoutController> {
                         child: OutlinedButton(
                       onPressed: () {},
                       child: CustomText(
-                        title: "apply".tr,
+                        title: langKey.apply.tr,
                         weight: FontWeight.w600,
                       ),
                     )),

@@ -11,8 +11,10 @@ class AuthController extends GetxController {
 
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
+  var confirmPassController = TextEditingController();
+
   var firstNameController = TextEditingController();
-  var lastNameController = TextEditingController();
+  var otpController = TextEditingController();
   var phoneController = TextEditingController();
 
   var ownerNameController = TextEditingController();
@@ -21,6 +23,7 @@ class AuthController extends GetxController {
 
   var editingTextController = TextEditingController();
 
+  var isPasswordMatched = false.obs;
   @override
   void onInit() {
     // TODO: implement onInit
@@ -75,6 +78,53 @@ class AuthController extends GetxController {
       debugPrint("Error: $error");
     });
     //isLoading(false);
+  }
+  Future<void> forgotPasswordWithEmail()async{
+    isLoading(false);
+    String email = emailController.text.trim();
+    await authProvider.forgotPassword(data: {"email": email})
+    .then((UserResponse? response){
+      if (response != null) {
+        if (response.success!) {
+          Get.back();
+          debugPrint("Email: ${response.toString()}");
+          AppConstant.displaySnackBar("success", response.message);
+        } else {
+          AppConstant.displaySnackBar("error", response.message);
+        }
+      } else
+        AppConstant.displaySnackBar(
+            "error", "Something went wrong with credentials");
+    }).catchError((onError) {
+      debugPrint("resetPassword: $onError");
+    });
+  }
+
+   forgotPasswordOtp() async{
+    isLoading(true);
+    String email = emailController.text;
+    String password = passwordController.text;
+    String confirmPass = confirmPassController.text;
+    String otp = otpController.text;
+    await authProvider.forgotPasswordOtp(data: {
+      "email": email, "token": otp, "password": password, "confirmPassword": confirmPass
+    }).then((UserResponse? response) async{
+      isLoading(false);
+      if (response != null) {
+        if (response.success!) {
+          Get.back();
+          debugPrint("Email: ${response.toString()}");
+          AppConstant.displaySnackBar("success", response.message);
+        } else {
+          AppConstant.displaySnackBar("error", response.message);
+        }
+      } else
+        AppConstant.displaySnackBar(
+            "error", "Something went wrong with credentials");
+    }).catchError((onError) {
+      isLoading(false);
+      debugPrint("resetPassword: $onError");
+    });
   }
 
   resendEmailVerificationLink() async {
@@ -215,22 +265,22 @@ class AuthController extends GetxController {
   List getProfileData() {
     var profileData = [
       {
-        "title": "firstName",
+        "title": firstName.tr,
         "subtitle": userModel!.firstName ?? '',
         "icon": Icons.person_rounded,
       },
       {
-        "title": "lastName",
+        "title": lastName.tr,
         "subtitle": userModel!.lastName ?? '',
         "icon": Icons.person_rounded,
       },
       {
-        "title": "Phone",
+        "title": phone.tr,
         "subtitle": userModel!.phone ?? '',
         "icon": Icons.phone_iphone_rounded,
       },
       {
-        "title": "Address",
+        "title": address.tr,
         "subtitle": userModel!.address ?? '',
         "icon": Icons.location_on_rounded
       },
@@ -308,7 +358,7 @@ class AuthController extends GetxController {
 
   clearControllers() {
     firstNameController.clear();
-    lastNameController.clear();
+    otpController.clear();
     phoneController.clear();
   }
 

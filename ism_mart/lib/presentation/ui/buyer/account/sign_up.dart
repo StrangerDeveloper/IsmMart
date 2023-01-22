@@ -4,6 +4,8 @@ import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/presentation/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+
 class SignUpUI extends GetView<AuthController> {
   const SignUpUI({Key? key}) : super(key: key);
 
@@ -42,7 +44,7 @@ class SignUpUI extends GetView<AuthController> {
                       horizontal: 20.0,
                     ),
                     child: CustomText(
-                      title: "Create an ISMMART Account!",
+                      title: langKey.registerGreetings.tr,
                       style: headline2,
                     ),
                   ),
@@ -58,14 +60,14 @@ class SignUpUI extends GetView<AuthController> {
                           FormInputFieldWithIcon(
                             controller: controller.firstNameController,
                             iconPrefix: Icons.title,
-                            labelText: 'Full Name',
+                            labelText: langKey.fullName.tr,
                             iconColor: kPrimaryColor,
                             autofocus: false,
                             textStyle: bodyText1,
                             autoValidateMode:
                                 AutovalidateMode.onUserInteraction,
                             validator: (value) => GetUtils.isBlank(value!)!
-                                ? "Full Name is Required!"
+                                ? langKey.fullNameReq.tr
                                 : null,
                             keyboardType: TextInputType.name,
                             onChanged: (value) {},
@@ -75,14 +77,14 @@ class SignUpUI extends GetView<AuthController> {
                           FormInputFieldWithIcon(
                             controller: controller.emailController,
                             iconPrefix: Icons.email_outlined,
-                            labelText: 'Email',
+                            labelText: langKey.email.tr,
                             iconColor: kPrimaryColor,
                             autofocus: false,
                             textStyle: bodyText1,
                             autoValidateMode:
                                 AutovalidateMode.onUserInteraction,
                             validator: (value) => !GetUtils.isEmail(value!)
-                                ? "Invalid Email Format?"
+                                ? langKey.emailReq.tr
                                 : null,
                             keyboardType: TextInputType.emailAddress,
                             onChanged: (value) {},
@@ -94,12 +96,12 @@ class SignUpUI extends GetView<AuthController> {
                             iconPrefix: Icons.lock_outline_rounded,
                             iconColor: kPrimaryColor,
                             textStyle: bodyText1,
-                            labelText: 'Password',
+                            labelText: langKey.password.tr,
                             autoValidateMode:
                                 AutovalidateMode.onUserInteraction,
                             validator: (value) => //!GetUtils.isPassport(value!)
                                 value!.length < 6
-                                    ? "Password must be at least 6 characters long?"
+                                    ? langKey.passwordLengthReq.tr
                                     : null,
                             obscureText: true,
                             onChanged: (value) => {},
@@ -112,7 +114,8 @@ class SignUpUI extends GetView<AuthController> {
                             iconColor: kPrimaryColor,
                             textStyle: bodyText1,
                             autofocus: false,
-                            labelText: 'Phone (Optional)',
+                            labelText:
+                                '${langKey.phone.tr} (${langKey.optional.tr})',
                             /*autoValidateMode:
                                 AutovalidateMode.onUserInteraction,
                             validator: (value) =>
@@ -132,7 +135,7 @@ class SignUpUI extends GetView<AuthController> {
                                       await controller.register();
                                     }
                                   },
-                                  text: "Sign Up",
+                                  text: langKey.signUp.tr,
                                   height: 50,
                                   width: 300,
                                 )),
@@ -142,12 +145,13 @@ class SignUpUI extends GetView<AuthController> {
                               onTap: () => Get.offNamed(Routes.loginRoute),
                               child: Column(
                                 children: [
-                                  Text("Already have an Account?",
+                                  CustomText(
+                                      title: langKey.alreadyHaveAccount.tr,
                                       style: bodyText1),
-                                  Text(
-                                    "Sign in here",
+                                  CustomText(
+                                    title: langKey.signIn.tr,
                                     style: bodyText1.copyWith(
-                                      decoration: TextDecoration.underline,
+                                        decoration: TextDecoration.underline,
                                         color: kPrimaryColor),
                                   ),
                                 ],

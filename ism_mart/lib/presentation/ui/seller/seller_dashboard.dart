@@ -4,6 +4,7 @@ import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class SellerDashboard extends GetView<SellersController> {
   const SellerDashboard({Key? key}) : super(key: key);
@@ -17,13 +18,13 @@ class SellerDashboard extends GetView<SellersController> {
             delegate: SliverChildListDelegate(
               [
                 _orderStats(),
-                StickyLabel(text: "recent_orders".tr),
+                StickyLabel(text: langKey.recentOrders.tr),
                 kSmallDivider,
                 Obx(() => controller
                         .orderController.recentBuyerOrdersList.isEmpty
                     ? SizedBox(
                         height: MediaQuery.of(Get.context!).size.height * 0.5,
-                        child: NoDataFoundWithIcon(title: "no_order_found".tr),
+                        child: NoDataFoundWithIcon(title: langKey.noOrderFound.tr),
                       )
                     : _buildRecentOrders(
                         list:
@@ -51,7 +52,7 @@ class SellerDashboard extends GetView<SellersController> {
                         flex: 3,
                         child: CustomOrderStatsItem(
                           onTap: () {},
-                          title: "total_orders".tr,
+                          title: langKey.totalOrders.tr,
                           icon: Icons.shopping_cart_outlined,
                           iconColor: kRedColor,
                           value: controller
@@ -63,7 +64,7 @@ class SellerDashboard extends GetView<SellersController> {
                         flex: 3,
                         child: CustomOrderStatsItem(
                           onTap: () {},
-                          title: "pending_orders".tr,
+                          title: langKey.pendingOrders.tr,
                           icon: Icons.pending_outlined,
                           iconColor: Colors.orange,
                           value: controller
@@ -82,7 +83,7 @@ class SellerDashboard extends GetView<SellersController> {
                         flex: 3,
                         child: CustomOrderStatsItem(
                           onTap: () {},
-                          title: "Processing_orders".tr,
+                          title: langKey.processingOrders.tr,
                           icon: Icons.local_shipping_outlined,
                           iconColor: Colors.blue,
                           value: controller
@@ -94,7 +95,7 @@ class SellerDashboard extends GetView<SellersController> {
                         flex: 3,
                         child: CustomOrderStatsItem(
                           onTap: () {},
-                          title: "completed_orders".tr,
+                          title: langKey.completedOrder.tr,
                           icon: Icons.done_outline_rounded,
                           iconColor: Colors.teal,
                           value: controller

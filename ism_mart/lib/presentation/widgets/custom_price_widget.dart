@@ -14,6 +14,7 @@ class CustomPriceWidget extends StatelessWidget {
       title: currencyFormat(title!),
       style: style ?? headline3,
     );
+
   }
 
   String currencyFormat(String value) {

@@ -8,6 +8,14 @@ class SellersApiProvider {
 
   SellersApiProvider(this._sellersApiRepo);
 
+  Future<List<ProductVariantsModel>> getProductVariantsFieldsByCategories(
+      {catId, subCatId}) async {
+    var fieldsResponse = await _sellersApiRepo.fetchCategoriesFields(
+        categoryId: catId, subCategoryId: subCatId);
+    return fieldsResponse
+        .map((field) => ProductVariantsModel.fromJson(field))
+        .toList();
+  }
   Future<ProductResponse> addProduct({String? token, formData, imagesList}) async {
     //var tokenNew = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQ4LCJpYW0iOiJ2ZW5kb3IiLCJ2aWQiOjQzLCJpYXQiOjE2NzIwNDcyNDk0NTUsImV4cCI6MTY3MjIyMDA0OTQ1NX0.B85lvOzdzG-EK261Wbd1hEfn1mZjxggXBfKf8k3xfDE";
     var response =

@@ -20,13 +20,12 @@ class ProductController extends GetxController with StateMixin {
   var size = "L".obs;
   var color = "Black".obs;
 
-  //TODO: minimum Order Qty Limit
+  // minimum Order Qty Limit
   int moq = 10;
 
   ///end Lists
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
     quantityController.text = count.value.toString();
   }
@@ -37,9 +36,9 @@ class ProductController extends GetxController with StateMixin {
     _apiProvider.getProductById(id).then((product) {
       change(product, status: RxStatus.success());
       fetchProductBySubCategory(subCategoryId: product.subCategory!.id);
-    }).catchError((error) {
+    })/*.catchError((error) {
       change(null, status: RxStatus.error(error));
-    });
+    })*/;
   }
 
   var subCategoryProductList = <ProductModel>[].obs;

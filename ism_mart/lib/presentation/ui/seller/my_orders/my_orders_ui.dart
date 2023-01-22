@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/export_presentation.dart';
-import 'package:ism_mart/presentation/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class MyOrdersUI extends GetView<OrderController> {
   const MyOrdersUI({Key? key}) : super(key: key);
@@ -29,7 +29,7 @@ class MyOrdersUI extends GetView<OrderController> {
       backgroundColor: Colors.grey[100]!,
       body: Center(
           child: NoDataFoundWithIcon(
-        title: "no_order_found".tr,
+        title: langKey.noOrderFound.tr,
       )),
     ));
   }
@@ -63,7 +63,7 @@ class MyOrdersUI extends GetView<OrderController> {
                         flex: 3,
                         child: CustomOrderStatsItem(
                           onTap: () {},
-                          title: "Total Orders",
+                          title: langKey.totalOrders.tr,
                           icon: Icons.shopping_cart_outlined,
                           iconColor: kRedColor,
                           value: controller.orderStats!.totalOrders,
@@ -74,7 +74,7 @@ class MyOrdersUI extends GetView<OrderController> {
                         flex: 3,
                         child: CustomOrderStatsItem(
                           onTap: () {},
-                          title: "Pending Orders",
+                          title: langKey.pendingOrders.tr,
                           icon: Icons.pending_outlined,
                           iconColor: Colors.orange,
                           value: controller.orderStats!.pendingOrders,
@@ -92,7 +92,7 @@ class MyOrdersUI extends GetView<OrderController> {
                         flex: 3,
                         child: CustomOrderStatsItem(
                           onTap: () {},
-                          title: "Processing Orders",
+                          title: langKey.processingOrders.tr,
                           icon: Icons.local_shipping_outlined,
                           iconColor: Colors.blue,
                           value: controller.orderStats!.activeOrders,
@@ -103,7 +103,7 @@ class MyOrdersUI extends GetView<OrderController> {
                         flex: 3,
                         child: CustomOrderStatsItem(
                           onTap: () {},
-                          title: "Completed Orders",
+                          title: langKey.completedOrder.tr,
                           icon: Icons.done_outline_rounded,
                           iconColor: Colors.teal,
                           value: controller.orderStats!.completedOrders,
@@ -128,8 +128,8 @@ class MyOrdersUI extends GetView<OrderController> {
           labelColor: kPrimaryColor,
           indicatorColor: kPrimaryColor,
           tabs: [
-            Tab(text: 'User Orders'),
-            Tab(text: 'Vendor Orders'),
+            Tab(text: langKey.userOrders.tr),
+            Tab(text: langKey.vendorOrders.tr),
           ],
         ),
       ),
@@ -155,7 +155,7 @@ class MyOrdersUI extends GetView<OrderController> {
 
   _buildRecentOrders({List<OrderModel>? list}) {
     return list!.isEmpty
-        ? NoDataFound(text: "No Orders Found")
+        ? NoDataFound(text: langKey.noOrderFound.tr)
         : ListView.builder(
             shrinkWrap: true,
             physics: const AlwaysScrollableScrollPhysics(),

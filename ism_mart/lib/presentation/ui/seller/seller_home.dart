@@ -15,7 +15,7 @@ class SellerHome extends GetView<SellersController> {
         elevation: 0,
         title: Obx(
           () => CustomText(
-              title: controller.appBarTitle.value,
+              title: controller.appBarTitle.value.tr,
               style: appBarTitleSize),
         ),
         iconTheme: IconThemeData(color: kPrimaryColor),

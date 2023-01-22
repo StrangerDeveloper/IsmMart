@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/export_presentation.dart';
 import 'package:ism_mart/utils/constants.dart';
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class SingleRecentOrderItems extends StatelessWidget {
   const SingleRecentOrderItems({Key? key, this.orderModel}) : super(key: key);
@@ -25,7 +26,7 @@ class SingleRecentOrderItems extends StatelessWidget {
                 //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomText(
-                    title: '${'order'.tr} #${model!.id}',
+                    title: '${langKey.order.tr} #${model!.id}',
                     style: headline3,
                   ),
                   AppConstant.spaceWidget(width: 10),
@@ -41,11 +42,11 @@ class SingleRecentOrderItems extends StatelessWidget {
                 children: [
                   CustomText(
                       title:
-                      '${"order_time".tr}: ${AppConstant.formattedDataTime("MMM dd, yyyy", model.createdAt!)}',
+                      '${langKey.orderTime.tr}: ${AppConstant.formattedDataTime("MMM dd, yyyy", model.createdAt!)}',
                       color: kLightColor),
                   CustomText(
                       title:
-                      '${'expected_delivery'.tr}: ${AppConstant.formattedDataTime("MMM dd, yyyy", model.expectedDeliveryDate!)}',
+                      '${langKey.expectedDelivery.tr}: ${AppConstant.formattedDataTime("MMM dd, yyyy", model.expectedDeliveryDate!)}',
                       color: kLightColor),
                   AppConstant.spaceWidget(height: 10),
                 ],
@@ -64,7 +65,7 @@ class SingleRecentOrderItems extends StatelessWidget {
               right: 5,
               child: CustomButton(
                 onTap: () {},
-                text: "details".tr,
+                text: langKey.details.tr,
                 //color: Colors.orangeAccent,
                 width: 70,
                 height: 30,

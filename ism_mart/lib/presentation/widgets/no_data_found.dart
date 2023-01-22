@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:ism_mart/presentation/widgets/custom_text.dart';
 import 'package:ism_mart/utils/constants.dart';
 
+import '../../utils/languages/translations_key.dart' as langKey;
+
 class NoDataFound extends StatelessWidget {
   const NoDataFound(
       {Key? key, this.text, this.maxLines, this.textAlign, this.fontSize})
@@ -19,7 +21,7 @@ class NoDataFound extends StatelessWidget {
 
     return Center(
       child: CustomText(
-        title: text ?? "no_data_found".tr,
+        title: text ?? langKey.noDataFound.tr,
         maxLines: maxLines ?? 4,
         textAlign: textAlign ?? TextAlign.center,
         style: headline3,

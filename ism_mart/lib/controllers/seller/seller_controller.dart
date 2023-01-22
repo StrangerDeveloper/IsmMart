@@ -20,39 +20,40 @@ class SellersController extends GetxController {
 
   var pageViewController = PageController(initialPage: 0);
 
-  var appBarTitle = "Dashboard".obs;
+  var appBarTitle = vendorDashboard.obs;
   var isLoading = false.obs;
 
   @override
   void onReady() {
-    // TODO: implement onReady
     super.onReady();
-    getToken();
     orderController.fetchOrders();
     fetchMyProducts();
 
     fetchCategories();
     //myProductsList.bindStream(streamMyProducts());
-  }
-
-  var currUserToken = "".obs;
-
-  getToken() async {
-    await LocalStorageHelper.getStoredUser().then((user) {
-      print("Auth Token: ${user.token}");
-      currUserToken(user.token);
+  ///price of product after adding 5% platform fee.
+    prodPriceController.addListener(() {
+      if(prodPriceController.text.isNotEmpty){
+        int amount = int.parse(prodPriceController.text);
+        double netCommission =0.05;
+        int netTotal = (amount * netCommission).round();
+        int totalAfter = amount + netTotal;
+        priceAfterCommission(totalAfter);
+      }
+      print("PriceAfterCommission: ${priceAfterCommission.value}");
     });
   }
 
-  //TODO: fetch MY Products
+  //TOO: fetch MY Products
   var myProductsList = <ProductModel>[].obs;
 
   fetchMyProducts() async {
-    await LocalStorageHelper.getStoredUser().then((user) async {
-      await _apiProvider.fetchMyProducts(token: user.token).then((products) {
-        myProductsList.clear();
-        myProductsList.addAll(products);
-      });
+    /*await LocalStorageHelper.getStoredUser().then((user) async {
+
+    });*/
+    await _apiProvider.fetchMyProducts(token: authController.userToken).then((products) {
+      myProductsList.clear();
+      myProductsList.addAll(products);
     });
   }
 
@@ -63,30 +64,27 @@ class SellersController extends GetxController {
         .asStream();
   }
 */
-  //TODO: Update Product using PATCH request type
+  //TOO: Update Product using PATCH request type
 
   updateProduct({ProductModel? model}) async {
-    await LocalStorageHelper.getStoredUser().then((user) async {
-      await _apiProvider
-          .updateProduct(token: user.token, model: model)
-          .then((ProductResponse? response) {
-        //myProductsList.addAll(products);
-        if (response != null) {
-          if (response.success != null) {
-            AppConstant.displaySnackBar('success', "${response.message}");
-            clearControllers();
-          } else {
-            AppConstant.displaySnackBar('error', "${response.message}");
-          }
-        } else
-          AppConstant.displaySnackBar('error', "Something went wrong");
-      });
+    await _apiProvider
+        .updateProduct(token: authController.userToken, model: model)
+        .then((ProductResponse? response) {
+      if (response != null) {
+        if (response.success != null) {
+          AppConstant.displaySnackBar('success', "${response.message}");
+          clearControllers();
+        } else {
+          AppConstant.displaySnackBar('error', "${response.message}");
+        }
+      } else
+        AppConstant.displaySnackBar('error', someThingWentWrong.tr);
     });
   }
 
-  //TODO: END Product
+  //TDO: END Product
 
-  //TODO: Delete Product
+  //TDO: Delete Product
 
   deleteProduct({int? id}) async {
     await LocalStorageHelper.getStoredUser().then((user) async {
@@ -95,7 +93,7 @@ class SellersController extends GetxController {
           .then((response) {
         if (response.success != null) {
           if (response.success!) {
-            AppConstant.displaySnackBar('Success', response.message);
+            AppConstant.displaySnackBar('success', response.message);
           } else
             AppConstant.displaySnackBar('error', response.message);
         }
@@ -108,16 +106,20 @@ class SellersController extends GetxController {
     //myProductsList.refresh();
   }
 
-  //TODO: END
+  //TDO: END
 
-  ///TODO: Add product section
+  ///TDO: Add product section
   var prodNameController = TextEditingController();
-  var prodPriceController = TextEditingController();
+
   var prodStockController = TextEditingController();
   var prodBrandController = TextEditingController();
   var prodDiscountController = TextEditingController();
   var prodDescriptionController = TextEditingController();
   var prodSKUController = TextEditingController();
+
+  var prodPriceController = TextEditingController();
+  var priceAfterCommission = 0.obs;
+
 
   static const chooseCategory = "Select Category";
   //var selectedCategory = chooseCategory.obs;
@@ -188,17 +190,25 @@ class SellersController extends GetxController {
     selectedSubCategory.value = subCategory!;
     if (!subCategory.name!.contains(chooseSubCategory)) {
       selectedSubCategoryID(subCategory.id!.isNaN ? 1 : subCategory.id!);
-
-      /*if (categoryController.subCategories.isNotEmpty) {
-        int? id = categoryController.subCategories
-            .firstWhere((element) => element.name! == subCategory,
-            orElse: () => SubCategory())
-            .id!;
-        selectedSubCategoryID(id.isNaN ? 1 : id);
-      }*/
+      getVariantsFields();
     }
   }
 
+var productVariantsFieldsList = <ProductVariantsModel>[].obs;
+  getVariantsFields() async{
+    isLoading(true);
+    await _apiProvider.getProductVariantsFieldsByCategories(catId: selectedCategoryID.value, subCatId: selectedSubCategoryID.value)
+    .then((fieldsList){
+      isLoading(false);
+      productVariantsFieldsList.clear();
+      productVariantsFieldsList.addAll(fieldsList);
+    });
+  }
+  var dynamicFieldsValuesList = Map<String, dynamic>().obs;
+  onDynamicFieldsValueChanged(String? value, ProductVariantsModel? model){
+    if(dynamicFieldsValuesList.containsValue(value)) dynamicFieldsValuesList.removeWhere((key, v) => v == value);
+    dynamicFieldsValuesList.addIf(!dynamicFieldsValuesList.containsValue(value), "${model!.id}", value);
+  }
   addProduct() async {
     isLoading(true);
     //debugPrint("ImagePath: ${imagePath.value}");
@@ -249,8 +259,9 @@ class SellersController extends GetxController {
     form.fields
         .add(MapEntry("subCategoryId", newProduct.subCategoryId!.toString()));
     form.fields.add(MapEntry("discount", newProduct.discount!.toString()));
-    form.fields.add(MapEntry("sku", newProduct.sku!));
+    //form.fields.add(MapEntry("sku", newProduct.sku!));
     form.fields.add(MapEntry("description", newProduct.description!));
+    //dynamicFieldsValuesList.map((key, value) => form.fields.add(MapEntry("description", newProduct.description!)););
     // var mpf = MultipartFile(
     //   File(pickedImagesList[0].path),
     //   filename: pickedImagesList[0].name,
@@ -258,7 +269,7 @@ class SellersController extends GetxController {
     // );
     await _apiProvider
         .addProduct(
-            token: currUserToken.value,
+            token: authController.userToken,
             formData: form,
             imagesList: pickedImagesList)
         .then((ProductResponse? response) {
@@ -268,7 +279,7 @@ class SellersController extends GetxController {
         } else {
           debugPrint('Error: ${response.toString()}');
           AppConstant.displaySnackBar('error',
-              "${response.message != null ? response.message : "Something went wrong"}");
+              "${response.message != null ? response.message : someThingWentWrong.tr}");
         }
         Get.back();
         isLoading(false);
@@ -294,18 +305,27 @@ class SellersController extends GetxController {
   var pickedImagesList = <XFile>[].obs;
 
   pickMultipleImages() async {
-    checkPermissions().then((isGranted) async {
-      if (isGranted) {
-        List<XFile> images = await _picker.pickMultiImage();
-        if (images.isNotEmpty) {
-          pickedImagesList.addAll(images);
-        } else {
-          debugPrint("No Images were selected");
-        }
+    if(Platform.isIOS){
+      List<XFile> images = await _picker.pickMultiImage();
+      if (images.isNotEmpty) {
+        pickedImagesList.addAll(images);
       } else {
-        requestPhotoAndCameraPermissions();
+        debugPrint("No Images were selected");
       }
-    });
+    }else {
+      checkPermissions().then((isGranted) async {
+        if (isGranted) {
+          List<XFile> images = await _picker.pickMultiImage();
+          if (images.isNotEmpty) {
+            pickedImagesList.addAll(images);
+          } else {
+            debugPrint("No Images were selected");
+          }
+        } else {
+          requestPhotoAndCameraPermissions();
+        }
+      });
+    }
   }
 
   pickOrCaptureImageGallery(int? callingType) async {
@@ -353,14 +373,14 @@ class SellersController extends GetxController {
   List<JSON> getMenuItems() {
     return [
       {
-        'title': "Seller Dashboard",
+        'title': vendorDashboard.tr,
         "icon": Icons.dashboard_outlined,
         "page": 0
       },
       //{'title': "Add Product", "icon": Icons.add_card_outlined, "page": 1},
-      {'title': "My Products", "icon": Icons.list_outlined, "page": 1},
-      {'title': "My Orders", "icon": Icons.shopping_bag_outlined, "page": 2},
-      {'title': "Profile", "icon": Icons.manage_accounts_outlined, "page": 4},
+      {'title': myProducts.tr, "icon": Icons.list_outlined, "page": 1},
+      {'title': myOrders.tr, "icon": Icons.shopping_bag_outlined, "page": 2},
+      {'title': profile.tr, "icon": Icons.manage_accounts_outlined, "page": 4},
       /*{
         'title': "Premium Membership",
         "icon": Icons.workspace_premium_outlined,

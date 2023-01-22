@@ -10,6 +10,7 @@ import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class AddProductsUI extends GetView<SellersController> {
   const AddProductsUI({Key? key}) : super(key: key);
@@ -17,10 +18,6 @@ class AddProductsUI extends GetView<SellersController> {
   @override
   Widget build(BuildContext context) {
     var formKey = GlobalKey<FormState>();
-    debugPrint("Categories List: ${controller.categoriesList.length}");
-    debugPrint(
-        "Categories List: ${controller.categoryController.categories.length}");
-
     return SafeArea(
       child: CustomScrollView(
         slivers: [
@@ -29,9 +26,21 @@ class AddProductsUI extends GetView<SellersController> {
               [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: CustomText(
-                    title: "Add Product",
-                    style: headline2,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CustomText(
+                        title: langKey.addProduct.tr,
+                        style: headline2,
+                      ),
+                      CustomActionIcon(
+                        onTap: () => Get.back(),
+                        hasShadow: false,
+                        icon: Icons.close_rounded,
+                        bgColor: kPrimaryColor.withOpacity(0.2),
+                        iconColor: kPrimaryColor,
+                      ),
+                    ],
                   ),
                 ),
                 Form(
@@ -44,137 +53,8 @@ class AddProductsUI extends GetView<SellersController> {
                       children: [
                         _buildImageSection(),
                         AppConstant.spaceWidget(height: 20),
-                        FormInputFieldWithIcon(
-                          controller: controller.prodNameController,
-                          iconPrefix: IconlyLight.paper_plus,
-                          labelText: 'Product Name',
-                          iconColor: kPrimaryColor,
-                          autofocus: false,
-                          textStyle: bodyText1,
-                          autoValidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (value) => GetUtils.isBlank(value!)!
-                              ? "Name is required?"
-                              : null,
-                          keyboardType: TextInputType.name,
-                          onChanged: (value) {},
-                          onSaved: (value) {},
-                        ),
-                        AppConstant.spaceWidget(height: 15),
-                        FormInputFieldWithIcon(
-                          controller: controller.prodPriceController,
-                          iconPrefix: IconlyLight.wallet,
-                          labelText: 'Product Price',
-                          iconColor: kPrimaryColor,
-                          autofocus: false,
-                          textStyle: bodyText1,
-                          autoValidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (value) => !GetUtils.isNumericOnly(value!)
-                              ? "Price is required?"
-                              : null,
-                          keyboardType: TextInputType.number,
-                          onChanged: (value) {},
-                          onSaved: (value) {},
-                        ),
-                        AppConstant.spaceWidget(height: 15),
-                        FormInputFieldWithIcon(
-                          controller: controller.prodStockController,
-                          iconPrefix: Icons.inventory_outlined,
-                          labelText: 'Product Stock',
-                          iconColor: kPrimaryColor,
-                          autofocus: false,
-                          textStyle: bodyText1,
-                          autoValidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (value) => !GetUtils.isNumericOnly(value!)
-                              ? "Stock is required?"
-                              : null,
-                          keyboardType: TextInputType.number,
-                          onChanged: (value) {},
-                          onSaved: (value) {},
-                        ),
-                        AppConstant.spaceWidget(height: 15),
-                        FormInputFieldWithIcon(
-                          controller: controller.prodDiscountController,
-                          iconPrefix: IconlyLight.discount,
-                          labelText: 'Product Discount',
-                          iconColor: kPrimaryColor,
-                          autofocus: false,
-                          textStyle: bodyText1,
-                          autoValidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (value) => !GetUtils.isNumericOnly(value!)
-                              ? "Discount is required?"
-                              : null,
-                          keyboardType: TextInputType.number,
-                          onChanged: (value) {},
-                          onSaved: (value) {},
-                        ),
-                        AppConstant.spaceWidget(height: 15),
-                        FormInputFieldWithIcon(
-                          controller: controller.prodSKUController,
-                          iconPrefix: IconlyLight.bookmark,
-                          labelText: 'Product sku',
-                          iconColor: kPrimaryColor,
-                          autofocus: false,
-                          textStyle: bodyText1,
-                          autoValidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (value) => GetUtils.isBlank(value!)!
-                              ? "sku is required?"
-                              : null,
-                          keyboardType: TextInputType.name,
-                          onChanged: (value) {},
-                          onSaved: (value) {},
-                        ),
-                        AppConstant.spaceWidget(height: 15),
-                        FormInputFieldWithIcon(
-                          controller: controller.prodDescriptionController,
-                          iconPrefix: IconlyLight.document,
-                          labelText: 'Product Description',
-                          iconColor: kPrimaryColor,
-                          autofocus: false,
-                          textStyle: bodyText1,
-                          autoValidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (value) => GetUtils.isBlank(value!)!
-                              ? "Description is required?"
-                              : null,
-                          keyboardType: TextInputType.text,
-                          onChanged: (value) {},
-                          onSaved: (value) {},
-                        ),
-                        AppConstant.spaceWidget(height: 15),
 
                         ///TOO: Category
-                        /*  Obx(
-                          () => Container(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 10.0),
-                            decoration: BoxDecoration(
-                                border: Border.all(
-                                    color: Colors.black87,
-                                    width: 1,
-                                    style: BorderStyle.solid),
-                                borderRadius: BorderRadius.circular(8)),
-                            child: DropdownButton(
-                              isExpanded: true,
-                              style: bodyText1,
-                              hint:
-                                  Text('${controller.selectedCategory.value}'),
-                              onChanged: (newValue) {
-                                controller.setSelectedCategory(
-                                    category: newValue.toString());
-                              },
-                              items: controller.categoriesList
-                                  .map((categoryModel) {
-                                String category = categoryModel.name!;
-                                return DropdownMenuItem(
-                                  child: Text(
-                                    '$category',
-                                  ),
-                                  value: category,
-                                );
-                              }).toList(),
-                              value: controller.selectedCategory.value,
-                            ),
-                          ),
-                        ),*/
 
                         Obx(
                           () => DropdownSearch<CategoryModel>(
@@ -191,9 +71,11 @@ class AddProductsUI extends GetView<SellersController> {
                             items: controller.categoriesList,
                             itemAsString: (model) => model.name ?? "",
                             dropdownDecoratorProps: DropDownDecoratorProps(
+                              baseStyle: bodyText1,
                               dropdownSearchDecoration: InputDecoration(
-                                labelText: "Select Category",
-                                labelStyle: bodyText1,
+                                labelText: langKey.selectCategory.tr,
+                                labelStyle: headline3,
+
                                 // hintText: "Choose Sub Category",
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -235,9 +117,10 @@ class AddProductsUI extends GetView<SellersController> {
                                   itemAsString: (model) => model.name ?? "",
                                   dropdownDecoratorProps:
                                       DropDownDecoratorProps(
+                                        baseStyle: bodyText1,
                                     dropdownSearchDecoration: InputDecoration(
-                                      labelText: "Select Sub Category",
-                                      labelStyle: bodyText1,
+                                      labelText: langKey.selectSubCategory.tr,
+                                      labelStyle: headline3,
                                       // hintText: "Choose Sub Category",
                                       enabledBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
@@ -254,62 +137,143 @@ class AddProductsUI extends GetView<SellersController> {
                                         subCategory: newValue!);
                                     //debugPrint(">>> $newValue");
                                   },
+
                                   selectedItem:
                                       controller.selectedSubCategory.value,
                                 ),
                         ),
-                        /*  Obx(
-                          () => controller.subCategoriesList.isEmpty
-                              ? Container()
-                              : Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10.0),
-                                  decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: Colors.black87,
-                                          width: 1,
-                                          style: BorderStyle.solid),
-                                      borderRadius: BorderRadius.circular(8)),
-                                  child: DropdownButton(
-                                    isExpanded: true,
-                                    style: bodyText1,
-                                    hint: Text(
-                                        '${controller.selectedSubCategory.value}'),
-                                    onChanged: (newValue) {
-                                      controller.setSelectedSubCategory(
-                                          subCategory: newValue.toString());
-                                    },
-                                    items: controller.subCategoriesList
-                                        .map((categoryModel) {
-                                      String category = categoryModel.name!;
-                                      return DropdownMenuItem(
-                                        child: Text(
-                                          '$category',
-                                        ),
-                                        value: category,
-                                      );
-                                    }).toList(),
-                                    value: controller.selectedSubCategory.value,
-                                  ),
-                                ),
+                        AppConstant.spaceWidget(height: 15),
+                        Obx(() => controller.productVariantsFieldsList.isEmpty
+                            ? Container()
+                            : Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: controller.productVariantsFieldsList
+                                    .map((element) =>
+                                        _createDynamicFormFields(element))
+                                    .toList(),
+                              )),
+
+                        AppConstant.spaceWidget(height: 15),
+                        FormInputFieldWithIcon(
+                          controller: controller.prodNameController,
+                          iconPrefix: IconlyLight.paper_plus,
+                          labelText: langKey.productName.tr,
+                          iconColor: kPrimaryColor,
+                          autofocus: false,
+                          textStyle: bodyText1,
+                          autoValidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value) => GetUtils.isBlank(value!)!
+                              ? langKey.productNameReq.tr
+                              : null,
+                          keyboardType: TextInputType.name,
+                          onChanged: (value) {},
+                          onSaved: (value) {},
+                        ),
+                        AppConstant.spaceWidget(height: 15),
+                        FormInputFieldWithIcon(
+                          controller: controller.prodPriceController,
+                          iconPrefix: IconlyLight.wallet,
+                          labelText: langKey.prodPrice.tr,
+                          iconColor: kPrimaryColor,
+                          autofocus: false,
+                          textStyle: bodyText1,
+                          autoValidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value) => !GetUtils.isNumericOnly(value!)
+                              ? langKey.prodPriceReq.tr
+                              : null,
+                          keyboardType: TextInputType.number,
+                          onChanged: (value) {
+
+                          },
+                          onSaved: (value) {},
+                        ),
+                        AppConstant.spaceWidget(height: 15),
+                        FormInputFieldWithIcon(
+                          controller: controller.prodStockController,
+                          iconPrefix: Icons.inventory_outlined,
+                          labelText: langKey.prodStock.tr,
+                          iconColor: kPrimaryColor,
+                          autofocus: false,
+                          textStyle: bodyText1,
+                          autoValidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value) => !GetUtils.isNumericOnly(value!)
+                              ? langKey.prodStockReq.tr
+                              : null,
+                          keyboardType: TextInputType.number,
+                          onChanged: (value) {},
+                          onSaved: (value) {},
+                        ),
+                        AppConstant.spaceWidget(height: 15),
+                        FormInputFieldWithIcon(
+                          controller: controller.prodDiscountController,
+                          iconPrefix: IconlyLight.discount,
+                          labelText: langKey.prodDiscount.tr,
+                          iconColor: kPrimaryColor,
+                          autofocus: false,
+                          textStyle: bodyText1,
+                          /* autoValidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value) => !GetUtils.isNumericOnly(value!)
+                              ? langKey.prodDiscountReq
+                              : null,*/
+                          keyboardType: TextInputType.number,
+                          onChanged: (value) {},
+                          onSaved: (value) {},
+                        ),
+                        /* AppConstant.spaceWidget(height: 15),
+                        FormInputFieldWithIcon(
+                          controller: controller.prodSKUController,
+                          iconPrefix: IconlyLight.bookmark,
+                          labelText: langKey.prodSku.tr,
+                          iconColor: kPrimaryColor,
+                          autofocus: false,
+                          textStyle: bodyText1,
+                          autoValidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value) => GetUtils.isBlank(value!)!
+                              ? langKey.prodSkuReq.tr
+                              : null,
+                          keyboardType: TextInputType.name,
+                          onChanged: (value) {},
+                          onSaved: (value) {},
                         ),*/
+                        AppConstant.spaceWidget(height: 15),
+                        FormInputFieldWithIcon(
+                          controller: controller.prodDescriptionController,
+                          iconPrefix: IconlyLight.document,
+                          labelText: langKey.description.tr,
+                          iconColor: kPrimaryColor,
+                          autofocus: false,
+                          textStyle: bodyText1,
+                          autoValidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value) => GetUtils.isBlank(value!)!
+                              ? langKey.descriptionReq.tr
+                              : null,
+                          keyboardType: TextInputType.text,
+                          onChanged: (value) {},
+                          onSaved: (value) {},
+                        ),
+
                         AppConstant.spaceWidget(height: 40),
                         Obx(
                           () => controller.isLoading.isTrue
                               ? CustomLoading(isItBtn: true)
                               : CustomButton(
                                   onTap: () {
+                                    for (var value in controller.dynamicFieldsValuesList.entries) {
+                                      print(value.value);
+                                      print(value.key);
+                                    }
                                     if (formKey.currentState!.validate()) {
                                       if (controller.categoryController
                                           .subCategories.isNotEmpty) {
                                         controller.addProduct();
                                       } else {
-                                        AppConstant.displaySnackBar(
-                                            'error', "Plz select Sub Category");
+                                        AppConstant.displaySnackBar('error',
+                                            langKey.plzSelectSubCategory.tr);
                                       }
                                     }
                                   },
-                                  text: "Add Product",
+                                  text: langKey.addProduct.tr,
                                   height: 50,
                                   width: 300,
                                 ),
@@ -323,6 +287,52 @@ class AddProductsUI extends GetView<SellersController> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _createDynamicFormFields(ProductVariantsModel model) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: TextFormField(
+        style: bodyText1,
+        cursorColor: kPrimaryColor,
+        keyboardType: TextInputType.text,
+        onChanged: (value)=>controller.onDynamicFieldsValueChanged(value, model),
+        decoration: InputDecoration(
+          labelText: model.label,
+          //hintText: model.placeholder,
+          labelStyle: bodyText1,
+          prefixIcon: Icon(
+            IconlyLight.discovery,
+            color: kPrimaryColor,
+          ),
+          //hintStyle: bodyText2,
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+                color: Colors.black, width: 1, style: BorderStyle.solid), //B
+            borderRadius: BorderRadius.circular(8),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+                color: Colors.black, width: 1, style: BorderStyle.solid), //B
+            borderRadius: BorderRadius.circular(8),
+          ),
+        ),
+      ),
+    );
+    return FormInputFieldWithIcon(
+      controller: controller.prodDescriptionController,
+      iconPrefix: IconlyLight.document,
+      labelText: langKey.description.tr,
+      iconColor: kPrimaryColor,
+      autofocus: false,
+      textStyle: bodyText1,
+      autoValidateMode: AutovalidateMode.onUserInteraction,
+      validator: (value) =>
+          GetUtils.isBlank(value!)! ? langKey.descriptionReq.tr : null,
+      keyboardType: TextInputType.text,
+      onChanged: (value) {},
+      onSaved: (value) {},
     );
   }
 
@@ -454,7 +464,7 @@ class AddProductsUI extends GetView<SellersController> {
     );
   }
 
- /* _imageBtn({onTap, icon, title, color}) {
+/* _imageBtn({onTap, icon, title, color}) {
     return InkWell(
       onTap: onTap,
       child: Column(
