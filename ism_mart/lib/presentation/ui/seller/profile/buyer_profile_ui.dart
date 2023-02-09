@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/controllers/buyer/auth/auth_controller.dart';
+import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
@@ -17,12 +18,13 @@ class ProfileUI extends GetView<AuthController> {
             : CustomScrollView(
                 slivers: [
                   SliverList(
-                      delegate: SliverChildListDelegate([
-                    CustomHeader(
-                      title: langKey.profile.tr,
+                    delegate: SliverChildListDelegate(
+                      [
+                        CustomHeader(title: langKey.profile.tr),
+                        _body(),
+                      ],
                     ),
-                    _body(),
-                  ])),
+                  ),
                 ],
               ),
       ),
@@ -36,14 +38,12 @@ class ProfileUI extends GetView<AuthController> {
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         children: [
-          StickyLabel(text: langKey.personalInfo.tr),
-          AppConstant.spaceWidget(height: 10),
+          ///Personal Information
           CustomGreyBorderContainer(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  ///Profile
                   /*Stack(
                     children: [
                       Container(
@@ -111,20 +111,58 @@ class ProfileUI extends GetView<AuthController> {
                       ),
                     ],
                   ),*/
-
+                  StickyLabel(text: langKey.personalInfo.tr),
                   //Profile data
                   Column(
                     children: controller
                         .getProfileData()
-                        .map(
-                          (profile) => profileCards(profile["title"],
-                              profile["subtitle"], profile["icon"]),
-                        )
+                        .map((profile) => profileCards(profile["title"],
+                            profile["subtitle"], profile["icon"]))
                         .toList(),
                   ),
                 ],
               ),
             ),
+          ),
+          AppConstant.spaceWidget(height: 40),
+
+          ///delete account button
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Obx(
+                () => controller.isLoading.isTrue
+                    ? CustomLoading(
+                        isItBtn: true,
+                      )
+                    : InkWell(
+                        onTap: () => showConfirmDeleteDialog(
+                            userModel: controller.userModel!),
+                        child: Container(
+                          width: 150,
+                          padding: const EdgeInsets.symmetric(vertical: 15.0),
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            //color: kRedColor,
+                            borderRadius: BorderRadius.circular(8),
+                            //border: Border.all(color: kRedColor),
+                            boxShadow: [
+                              BoxShadow(
+                                color: kRedColor,
+                                offset: Offset(0, 1),
+                                blurRadius: 2,
+                              )
+                            ],
+                          ),
+                          child: CustomText(
+                            title: langKey.deactivateBtn.tr,
+                            color: kWhiteColor,
+                          ),
+                        ),
+                      ),
+              ),
+            ],
           ),
         ],
       ),
@@ -133,13 +171,13 @@ class ProfileUI extends GetView<AuthController> {
 
   Widget profileCards(String title, subtitle, icon) {
     return Container(
-      width: 290,
-      height: 65,
+      width: 320,
+      height: 60,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         border: Border.all(color: kPrimaryColor.withOpacity(0.7)),
       ),
-      margin: EdgeInsets.only(left: 12, top: 12, right: 12, bottom: 3),
+      margin: EdgeInsets.only(left: 8, top: 12, right: 8, bottom: 3),
       child: ListTile(
         dense: true,
         contentPadding: EdgeInsets.only(left: 10.0, right: 10.0),
@@ -213,6 +251,51 @@ class ProfileUI extends GetView<AuthController> {
                 height: 40,
                 width: 200,
               ),
+      ),
+    );
+  }
+
+  void showConfirmDeleteDialog({UserModel? userModel}) {
+    Get.defaultDialog(
+      title: langKey.deleteBtn.tr,
+      titleStyle: appBarTitleSize,
+      content: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            CustomText(
+              title: langKey.deActivateMsg.tr,
+              weight: FontWeight.w600,
+            ),
+            AppConstant.spaceWidget(height: 10),
+            buildConfirmDeleteIcon(),
+            AppConstant.spaceWidget(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CustomButton(
+                  onTap: () {
+                    Get.back();
+                  },
+                  text: langKey.noBtn.tr,
+                  width: 100,
+                  height: 35,
+                  color: kRedColor,
+                ),
+                CustomButton(
+                  onTap: () {
+                    Get.back();
+                    controller.deActivateAccount();
+                  },
+                  text: langKey.yesBtn.tr,
+                  width: 100,
+                  height: 35,
+                  color: kRedColor,
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

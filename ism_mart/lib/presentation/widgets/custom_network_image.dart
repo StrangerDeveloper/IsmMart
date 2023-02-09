@@ -17,7 +17,9 @@ class CustomNetworkImage extends StatelessWidget {
       placeholder: (context, url) => const Center(child: CircularProgressIndicator(
         strokeWidth: 0.5,
       )),
-      errorWidget: (context, url, error) => const Icon(Icons.error, color: kRedColor,),
+      errorWidget: (context, url, error) =>Image.network(AppConstant.defaultImgUrl),
+
+      //const Icon(Icons.error, color: kRedColor,),
     );
   }
 }

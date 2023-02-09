@@ -24,16 +24,8 @@ class MyProducts extends GetView<SellersController> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: CustomButton(
-                    onTap: () => Scaffold.of(context).showBottomSheet(
-                      (context) => AddProductsUI(),
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(15),
-                            topRight: Radius.circular(15)),
-                      ),
-                      backgroundColor: Colors.white,
-                    ),
-                    //AppConstant.showBottomSheet(widget: AddProductsUI()),
+                    onTap: () =>
+                    AppConstant.showBottomSheet(widget: AddProductsUI(), isGetXBottomSheet: false, buildContext: context),
                     //controller.changePage(1),
                     text: langKey.addProduct.tr,
                     width: 110,

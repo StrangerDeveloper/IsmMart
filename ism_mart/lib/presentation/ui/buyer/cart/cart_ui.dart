@@ -39,6 +39,16 @@ class CartUI extends GetView<CartController> {
         appBar: AppBar(
           backgroundColor: kAppBarColor,
           automaticallyImplyLeading: false,
+          leading: (Get.arguments != null && Get.arguments["calledFromSPV"])
+              ? InkWell(
+                  onTap: () => Get.back(),
+                  child: Icon(
+                    Icons.arrow_back_ios_new,
+                    size: 18,
+                    color: kPrimaryColor,
+                  ),
+                )
+              : null,
           title: Row(
             children: [
               buildSvgLogo(),
@@ -76,8 +86,7 @@ class CartUI extends GetView<CartController> {
             ),
           ],
         ),
-        bottomNavigationBar:
-            _checkOutBottomBar(items: controller.cartItemsList),
+        bottomNavigationBar: _checkOutBottomBar(),
       ),
     );
   }
@@ -98,15 +107,15 @@ class CartUI extends GetView<CartController> {
             AppConstant.spaceWidget(width: 10),
             Obx(
               () => CustomText(
-                  title: 'My Cart (${controller.totalQtyCart.value} items)',
-                  style: appBarTitleSize,),
+                title: 'My Cart (${controller.totalQtyCart.value} items)',
+                style: appBarTitleSize,
+              ),
             ),
           ],
         ),
       ),
     );
   }
-
 
   Widget _buildCartItemSection({List<CartModel>? cartItemsList}) {
     return ListView.builder(
@@ -218,9 +227,8 @@ class CartUI extends GetView<CartController> {
                             child: Row(
                               children: [
                                 CustomText(
-                                  title: cartModel.quantity!,
-                                  style: headline3
-                                ),
+                                    title: cartModel.quantity!,
+                                    style: headline3),
                                 AppConstant.spaceWidget(width: 5),
                                 Icon(
                                   cartModel.onQuantityClicked!
@@ -328,7 +336,7 @@ class CartUI extends GetView<CartController> {
     );
   }
 
-  _checkOutBottomBar({List<CartModel>? items}) {
+  _checkOutBottomBar() {
     return BottomAppBar(
       elevation: 22,
       child: Container(

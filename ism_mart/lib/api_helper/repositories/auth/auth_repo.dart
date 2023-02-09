@@ -63,6 +63,12 @@ class AuthRepository {
     return response.body;
   }
 
+  Future<dynamic> deActivateUserAccount({token}) async {
+    var response = await _apiService.get(
+        endpoint: "user/deactivate", requiresAuthToken: true, token: token);
+    return response.body;
+  }
+
   Future<dynamic> fetchCurrentUser({String? token}) async {
     var response = await _apiService.get(
         endpoint: "user/profile", requiresAuthToken: true, token: token);
@@ -134,11 +140,23 @@ class AuthRepository {
   }
 
   Future<dynamic> updateShippingDetails({token, data}) async {
-    var response = await _apiService.patch(
+    var response = await _apiService.put(
         endpoint: 'user/updateShippingDetails',
         body: data,
         token: token,
         requiresAuthToken: true);
+
+    return response.body;
+  }
+
+  /**
+   *
+   * Contact US
+   *
+   * */
+
+  Future<dynamic> postContactUs({data}) async {
+    var response = await _apiService.post(endpoint: 'user/contact', body: data);
     return response.body;
   }
 }

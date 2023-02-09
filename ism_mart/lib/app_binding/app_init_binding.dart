@@ -23,6 +23,8 @@ class AppInitBinding extends Bindings {
     Get.put<AuthProvider>( AuthProvider(Get.find()));
     Get.put<AuthController>(AuthController(Get.find()));
 
+    LocalStorageHelper.initUserStorage();
+
     //Get.lazyPut<AuthController>(() => null)
   }
 }

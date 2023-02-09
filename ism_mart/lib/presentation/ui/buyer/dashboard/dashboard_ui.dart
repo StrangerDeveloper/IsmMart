@@ -24,9 +24,7 @@ class DashboardUI extends GetView<BaseController> {
               [
                 _slider(controller.sliderImages),
 
-                StickyLabel(
-                  text: langKey.topCategories.tr
-                ),
+                StickyLabel(text: langKey.topCategories.tr),
                 _topCategoriesGrid(controller.categories),
                 //kDivider,
                 _displayDiscountProducts(),
@@ -70,13 +68,14 @@ class DashboardUI extends GetView<BaseController> {
   }
 
   Widget _slider(List<SliderModel> list) {
+    var height = AppConstant.getSize().height;
     return Obx(
       () => controller.isSliderLoading.isTrue
           ? CustomLoading(isItForWidget: true)
           : Stack(
               children: [
                 SizedBox(
-                  height: AppConstant.getSize().height * 0.15,
+                  height: height * (height > 800 ? 0.2 : 0.15),
                   child: PageView.builder(
                     controller: controller.sliderPageController,
                     onPageChanged: (value) {
@@ -134,9 +133,7 @@ class DashboardUI extends GetView<BaseController> {
         height: AppConstant.getSize().height * 0.35,
         child: Column(
           children: [
-            StickyLabel(
-              text: langKey.discountDeals.tr
-            ),
+            StickyLabel(text: langKey.discountDeals.tr),
             AppConstant.spaceWidget(height: 10),
             controller.discountSliderProductsList.isEmpty
                 ? NoDataFound()
@@ -291,10 +288,7 @@ class DashboardUI extends GetView<BaseController> {
               title: "$timePart",
               style: bodyText1,
             ),
-            CustomText(
-                title: "$format",
-                style:
-                    bodyText2),
+            CustomText(title: "$format", style: bodyText2),
           ],
         ),
       ),
@@ -341,6 +335,7 @@ class DashboardUI extends GetView<BaseController> {
 
   Widget _trendingProducts(
       List<ProductModel> list, bool? isPopular, bool? isCategoryProducts) {
+    var height = AppConstant.getSize().height;
     if (isPopular!)
       return Padding(
         padding: const EdgeInsets.all(6.0),
@@ -350,8 +345,8 @@ class DashboardUI extends GetView<BaseController> {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisExtent: AppConstant.getSize().height * 0.25,
+                  crossAxisCount: height > 800 ? 3 : 2,
+                  mainAxisExtent: height * 0.25,
                   mainAxisSpacing: 10,
                   crossAxisSpacing: 10),
               itemCount: list.length,
@@ -387,14 +382,14 @@ class DashboardUI extends GetView<BaseController> {
 
   Widget _topCategoriesGrid(List<CategoryModel> list) {
     //var theme = Theme.of(Get.context!);
+    double height = AppConstant.getSize().height;
     return Obx(
       () => controller.isCategoriesLoading.isTrue
-          ? CustomLoading(isDarkMode: Get.isDarkMode, isItForWidget: true)
+          ? CustomLoading(isItForWidget: true)
           : Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 12, vertical: 8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               child: SizedBox(
-                height: AppConstant.getSize().height * 0.25,
+                height: height * 0.23,
                 child: list.isEmpty
                     ? NoDataFound(text: langKey.noCategoryFound.tr)
                     : GridView.builder(
@@ -402,16 +397,15 @@ class DashboardUI extends GetView<BaseController> {
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           //maxCrossAxisExtent: 150,
                           crossAxisCount: 2,
-                          childAspectRatio: _getChildAspectRatio(Get.context!),
-                          mainAxisSpacing: 5.0,
-                          crossAxisSpacing: 5.0,
+                          // childAspectRatio: _getChildAspectRatio(Get.context!),
+                          //mainAxisSpacing: 3.0,
+                          //crossAxisSpacing: 3.0,
                         ),
                         itemCount: list.length,
                         itemBuilder: (context, index) {
                           CategoryModel model = list[index];
                           return SingleCategoryItem(categoryModel: model);
-                        },
-                      ),
+                        }),
               ),
             ),
     );
@@ -419,7 +413,8 @@ class DashboardUI extends GetView<BaseController> {
 
   _getChildAspectRatio(context) {
     double aspectRatio = MediaQuery.of(context).size.width /
-        (MediaQuery.of(context).size.height / 2.75);
+        (MediaQuery.of(context).size.height / 2.5);
+    print("aspectRatio: $aspectRatio");
     return aspectRatio;
   }
 }

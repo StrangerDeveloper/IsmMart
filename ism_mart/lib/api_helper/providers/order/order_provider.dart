@@ -11,9 +11,10 @@ class OrderProvider {
     var response = await _orderRepo.fetchBuyerOrders(token: token);
     return response.map((e) => OrderModel.fromJson(e)).toList();
   }
-  Future<List<OrderModel>> getVendorOrders({token, status}) async {
+
+  Future<List<VendorOrder>> getVendorOrders({token, status}) async {
     var response = await _orderRepo.fetchVendorOrders(token: token, status: status);
-    return response.map((e) => OrderModel.fromJson(e)).toList();
+    return response.map((e) => VendorOrder.fromJson(e)).toList();
   }
 
 
@@ -23,8 +24,12 @@ class OrderProvider {
     return OrderModel.fromJson(response);
   }
 
-  Future<OrderResponse> getOrderStats({token}) async{
-    var response = await _orderRepo.fetchOrderStats(token: token);
+  Future<OrderResponse> getBuyerOrderStats({token}) async{
+    var response = await _orderRepo.fetchBuyerOrderStats(token: token);
+    return OrderResponse.fromJson(response);
+  }
+  Future<OrderResponse> getVendorOrderStats({token}) async{
+    var response = await _orderRepo.fetchVendorOrderStats(token: token);
     return OrderResponse.fromJson(response);
   }
 

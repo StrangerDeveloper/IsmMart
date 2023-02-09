@@ -5,12 +5,14 @@ import 'user_model.dart';
 class SellerModel {
   int? id, userId;
   String? storeName, storeDesc, storeUrl;
-  String? ownerName, status, visibility;
+  String? ownerName, status, visibility, address;
   num? rating;
   String? stripeCustomerId, phone, membership;
   bool? premium;
   DateTime? createdAt, updatedAt;
   UserModel? user;
+  String? bankName, accountTitle, accountNumber;
+  String? storeImage, coverImage;
 
   SellerModel({
     this.id,
@@ -28,6 +30,12 @@ class SellerModel {
     this.createdAt,
     this.userId,
     this.updatedAt,
+    this.accountNumber,
+    this.accountTitle,
+    this.bankName,
+    this.coverImage,
+    this.storeImage,
+    this.address,
     this.user,
   });
 
@@ -45,10 +53,17 @@ class SellerModel {
       phone: json["phone"] == null ? null : json["phone"],
       premium: json["premium"],
       membership: json["membership"],
-      createdAt: json["createdAt"]==null? null:DateTime.parse(json["createdAt"]),
+      createdAt:
+          json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
       userId: json["userId"] == null ? null : json["userId"],
       updatedAt:
           json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
+      address: json["address"] == null ? null : json["updatedAt"],
+      bankName: json["bankName"],
+      accountTitle: json["accountTitle"],
+      accountNumber: json["accountNumber"],
+      storeImage: json["storeImage"],
+      coverImage: json["coverImage"],
       user: json['User'] != null ? UserModel.fromJson(json['User']) : null);
 
   Map<String, dynamic> toJson() => {
@@ -66,6 +81,11 @@ class SellerModel {
         "membership": membership,
         "createdAt": createdAt!.toIso8601String(),
         "userId": userId == null ? null : userId,
+        "bankName": bankName,
+        "accountTitle": accountTitle,
+        "accountNumber": accountNumber,
+        "storeImage": storeImage,
+        "coverImage": coverImage,
         "updatedAt": updatedAt == null ? null : updatedAt!.toIso8601String(),
       };
 }

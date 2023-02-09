@@ -16,8 +16,8 @@ class NoDataFoundWithIcon extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(
-          width: 100,
-          height: 100,
+          width: 90,
+          height: 90,
           decoration: BoxDecoration(
               color: iconColor!.withOpacity(0.22), shape: BoxShape.circle),
           child: Icon(

@@ -47,6 +47,7 @@ const productDetails = "productDetails";
 
 /// buyer Check out
 const shipping = "shipping",
+    shippingCost = "shippingCost",
     shippingDetails = "shippingDetails",
     orderSummary = "orderSummary",
     expectedDelivery = "expectedDelivery",
@@ -66,6 +67,10 @@ const completedOrder = "completedOrders",
     pendingOrders = "pendingOrders",
     processingOrders = "processingOrders",
     totalOrders = "totalOrders",
+    totalEarning = "totalEarning",
+    cMonthEarning = "cMonthEarning",
+    pendingAmount = "pendingAmount",
+    wallet = "wallet",
     userOrders = "userOrders",
     vendorOrders = "vendorOrders";
 
@@ -74,12 +79,24 @@ const completedOrder = "completedOrders",
 ///
 
 const profile = "profile",
+    vendorStoreDetails = "store",
     personalInfo = "profileInfo",
+    storeInfo = "storeInfo",
+    bankDetails = "bnkDetails",
     phone = "phone",
     phoneReq = "Phone is required",
     firstName = "firstName",
     lastName = "lastName",
-    address = "address";
+    address = "address",
+    country = "country",
+    city = "city",
+    bankName = "bankName",
+    bankNameReq = "bankNameReq",
+    bankAccount = "bankAccount",
+    bankAccountReq = "bankAccountReq",
+    bankAccountHolder = "bAccHolder",
+    bankAccHolderReq = "bankAccReq",
+    deActivateMsg = "deActivateMsg";
 
 ///
 /// Add Product
@@ -87,6 +104,15 @@ const profile = "profile",
 
 const addProduct = "addProduct";
 const deleteProd = "deleteProd", delProdMsg = "delProdMsg";
+
+///
+/// Contact us
+///
+const subject = "subject",
+    subjectReq = "subjectReq",
+    message = "message",
+    messageReq = "messageReq",
+    sendMessage = "sendMessage";
 
 /**
  *  Login and register and form validations text
@@ -195,6 +221,7 @@ const add = "add",
     addNew = "addNew",
     updateBtn = "update",
     deleteBtn = "delete",
+    deactivateBtn = "deActivate",
     changeBtn = "change",
     confirm = "confirm",
     sortBy = "sortBy",

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
@@ -20,13 +22,16 @@ class AuthController extends GetxController {
   var ownerNameController = TextEditingController();
   var storeNameController = TextEditingController();
   var storeDescController = TextEditingController();
+  var bankNameController = TextEditingController();
+  var bankAccController = TextEditingController();
+  var bankHolderTitleController = TextEditingController();
 
   var editingTextController = TextEditingController();
 
   var isPasswordMatched = false.obs;
+
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
     //getCurrentUser();
     //getToken();
@@ -35,7 +40,6 @@ class AuthController extends GetxController {
 
   @override
   void onReady() {
-    // TODO: implement onReady
     super.onReady();
 
     getCurrentUser();
@@ -43,8 +47,8 @@ class AuthController extends GetxController {
 
     LocalStorageHelper.localStorage.listenKey(LocalStorageHelper.currentUserKey,
         (value) {
-      getCurrentUser();
       getToken();
+      getCurrentUser();
     });
   }
 
@@ -79,11 +83,12 @@ class AuthController extends GetxController {
     });
     //isLoading(false);
   }
-  Future<void> forgotPasswordWithEmail()async{
+
+  Future<void> forgotPasswordWithEmail() async {
     isLoading(false);
     String email = emailController.text.trim();
-    await authProvider.forgotPassword(data: {"email": email})
-    .then((UserResponse? response){
+    await authProvider
+        .forgotPassword(data: {"email": email}).then((UserResponse? response) {
       if (response != null) {
         if (response.success!) {
           Get.back();
@@ -100,15 +105,18 @@ class AuthController extends GetxController {
     });
   }
 
-   forgotPasswordOtp() async{
+  forgotPasswordOtp() async {
     isLoading(true);
     String email = emailController.text;
     String password = passwordController.text;
     String confirmPass = confirmPassController.text;
     String otp = otpController.text;
     await authProvider.forgotPasswordOtp(data: {
-      "email": email, "token": otp, "password": password, "confirmPassword": confirmPass
-    }).then((UserResponse? response) async{
+      "email": email,
+      "token": otp,
+      "password": password,
+      "confirmPassword": confirmPass
+    }).then((UserResponse? response) async {
       isLoading(false);
       if (response != null) {
         if (response.success!) {
@@ -182,18 +190,22 @@ class AuthController extends GetxController {
 
   registerStore() async {
     isLoading(true);
-    String storeName = storeNameController.text.trim();
-    String storeDesc = storeDescController.text;
-    String ownerName = ownerNameController.text.trim();
+    SellerModel model = SellerModel(
+      storeName: storeNameController.text.trim(),
+      storeDesc: storeDescController.text,
+      ownerName: ownerNameController.text.trim(),
+      storeImage: profileImgPath.value,
+      coverImage: coverImgPath.value,
+      phone: phoneController.text.trim(),
+      membership: "Free",
+      premium: false,
+      bankName: bankNameController.text.trim(),
+      accountTitle: bankHolderTitleController.text.trim(),
+      accountNumber: bankAccController.text.trim(),
+    );
     if (userToken!.isNotEmpty) {
       await authProvider
-          .postStoreRegister(
-              token: userToken!,
-              storeName: storeName,
-              storeDesc: storeDesc,
-              ownerName: ownerName,
-              phone: userModel?.phone,
-              websiteUrl: 'www.google.com')
+          .postStoreRegister(token: userToken!, sellerModel: model)
           .then((UserResponse? userResponse) {
         isLoading(false);
         if (userResponse != null) {
@@ -216,7 +228,38 @@ class AuthController extends GetxController {
     }
   }
 
-//TODO: Current User Info
+  var coverImgPath = "".obs;
+  var profileImgPath = "".obs;
+  var _picker = ImagePicker();
+
+  pickOrCaptureImageGallery(int? imageSource, {calledForProfile = true}) async {
+    try {
+      XFile? imgFile = await _picker.pickImage(
+          source: imageSource == 0 ? ImageSource.camera : ImageSource.gallery);
+      if (imgFile != null) {
+        await imgFile.length().then((value) {
+          debugPrint("PickedImage: Length: $value");
+          var lengthInMb = (value * 0.000001);
+          debugPrint("PickedImage: Length in MB: $lengthInMb");
+          if (lengthInMb > 2) {
+            AppConstant.displaySnackBar('error', 'Image should be up to 2MB');
+          } else {
+            if (calledForProfile) {
+              profileImgPath(imgFile.path);
+            } else
+              coverImgPath(imgFile.path);
+            Get.back();
+          }
+        });
+      }
+
+      //uploadImage(imgFile);
+    } catch (e) {
+      debugPrint("UploadImage: $e");
+    }
+  }
+
+//TO: Current User Info
   var _userModel = UserModel().obs;
 
   setUserModel(UserModel? userModel) => _userModel(userModel);
@@ -256,10 +299,10 @@ class AuthController extends GetxController {
         });
       } else
         setSession(true);
+    }).catchError((e) {
+      isLoading(false);
+      print(">>>GetCurrentUser $e");
     });
-
-    debugPrint(
-        ">>>GetCurrentUser: ${ApiConstant.SESSION_EXPIRED}: $isSessionExpired");
   }
 
   List getProfileData() {
@@ -284,8 +327,58 @@ class AuthController extends GetxController {
         "subtitle": userModel!.address ?? '',
         "icon": Icons.location_on_rounded
       },
+      {
+        "title": country.tr,
+        "subtitle": userModel!.country?.name ?? '',
+        "icon": Icons.language_rounded,
+      },
+      {
+        "title": city.tr,
+        "subtitle": userModel!.city?.name ?? '',
+        "icon": Icons.villa_rounded,
+      },
     ];
     return profileData;
+  }
+
+  List getStoreInfo() {
+    return [
+      {
+        "title": storeName.tr,
+        "subtitle": userModel!.vendor?.storeName ?? '',
+        "icon": Icons.storefront,
+      },
+      {
+        "title": phone.tr,
+        "subtitle": userModel!.vendor?.phone ?? '',
+        "icon": Icons.phone_iphone_rounded,
+      },
+      {
+        "title": description.tr,
+        "subtitle": userModel!.vendor?.storeDesc ?? '',
+        "icon": Icons.info_outlined,
+      },
+    ];
+  }
+
+  List getBankDetails() {
+    return [
+      {
+        "title": bankName.tr,
+        "subtitle": userModel!.vendor?.bankName ?? '',
+        "icon": Icons.account_balance_rounded,
+      },
+      {
+        "title": bankAccountHolder.tr,
+        "subtitle": userModel!.vendor?.accountTitle ?? '',
+        "icon": Icons.person_rounded,
+      },
+      {
+        "title": bankAccount.tr,
+        "subtitle": userModel!.vendor?.accountNumber ?? '',
+        "icon": Icons.account_balance_wallet_rounded,
+      },
+    ];
   }
 
   var _currUserToken = "".obs;
@@ -296,6 +389,9 @@ class AuthController extends GetxController {
     await LocalStorageHelper.getStoredUser().then((user) {
       print("Auth Token: ${user.token}");
       _currUserToken(user.token);
+      isLoading(false);
+    }).onError((error, stackTrace) {
+      isLoading(false);
     });
     update();
   }
@@ -324,7 +420,30 @@ class AuthController extends GetxController {
     }
   }
 
-  //TODO: getCountries and Cities
+  deActivateAccount() async {
+    if (userToken != null) {
+      isLoading(true);
+      await authProvider
+          .deActivateUser(token: userToken)
+          .then((UserResponse? response) {
+        //isLoading(false);
+        if (response != null) {
+          if (response.success!) {
+            Get.back();
+            LocalStorageHelper.deleteUserData();
+            AppConstant.displaySnackBar("error", response.message);
+          } else
+            AppConstant.displaySnackBar("error", response.message);
+        } else
+          AppConstant.displaySnackBar('error', "something went wrong!");
+      }).catchError((error) {
+        isLoading(false);
+        debugPrint("deActivateAccount: Error $error");
+      });
+    }
+  }
+
+  //TOO: getCountries and Cities
   var countries = <CountryModel>[].obs;
   var cities = <CountryModel>[].obs;
   var selectedCountry = CountryModel().obs;
@@ -356,10 +475,44 @@ class AuthController extends GetxController {
 
   //END Current User
 
+  ///Contact us
+  var subjectController = TextEditingController();
+
+  postContactUs() async {
+    var data = {
+      "name": "${firstNameController.text}",
+      "email": "${emailController.text.trim()}",
+      "subject": "${subjectController.text}",
+      "message": "${storeDescController.text}"
+    };
+
+    await authProvider.contactUs(data: data).then((UserResponse? userResponse) {
+      if (userResponse != null) {
+        if (userResponse.success!) {
+          // Get.back();
+          AppConstant.displaySnackBar("success", userResponse.message);
+          clearContactUsControllers();
+        } else
+          AppConstant.displaySnackBar('error', userResponse.message);
+      } else
+        AppConstant.displaySnackBar('error', "something went wrong!");
+    }).catchError((e) {
+      AppConstant.displaySnackBar('error', "$e");
+    });
+  }
+
+  clearContactUsControllers() {
+    firstNameController.clear();
+    emailController.clear();
+    subjectController.clear();
+    storeDescController.clear();
+  }
+
   clearControllers() {
     firstNameController.clear();
     otpController.clear();
     phoneController.clear();
+    passwordController.clear();
   }
 
   clearLoginController() {
@@ -372,11 +525,21 @@ class AuthController extends GetxController {
     storeNameController.clear();
     storeDescController.clear();
     phoneController.clear();
+    coverImgPath(null);
+    profileImgPath(null);
+
+    clearBankControllers();
+
+  }
+
+  clearBankControllers() {
+    bankNameController.clear();
+    bankHolderTitleController.clear();
+    bankAccController.clear();
   }
 
   @override
   void onClose() {
-    // TODO: implement onClose
     super.onClose();
     clearControllers();
     clearLoginController();

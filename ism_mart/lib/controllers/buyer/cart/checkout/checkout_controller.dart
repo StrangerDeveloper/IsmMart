@@ -30,13 +30,32 @@ class CheckoutController extends GetxController {
 
   var shippingAddressId = 0.obs;
 
+  var shippingCost = 0.obs;
+  var totalAmount = 0.0.obs;
+
+  setShippingCost(int cost){
+    shippingCost(cost);
+    double totalCart = cartController.totalCartAmount.value;
+    double subTotal = totalCart + cost;
+    totalAmount(subTotal);
+  }
+
   @override
   void onInit() {
-    // TODO: implement onInit
+    // TO: implement onInit
     super.onInit();
 
     getDefaultAddress();
     getAllShippingAddresses();
+
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
+
+    ///Set Standard shipping by default
+    setShippingCost(250);
   }
 
   void setSelectedCountry(CountryModel? model) async{
@@ -100,6 +119,7 @@ class CheckoutController extends GetxController {
           AppConstant.displaySnackBar("success", userResponse.message);
           clearControllers();
           getDefaultAddress();
+          getAllShippingAddresses();
         } else
           AppConstant.displaySnackBar('error', userResponse.message);
       } else
@@ -119,9 +139,9 @@ class CheckoutController extends GetxController {
         .getDefaultShippingAddress(token: authController.userToken!)
         .then((user) {
       _userDefaultAddressModel(user);
-    }).catchError((error) {
+    })/*.catchError((error) {
       debugPrint(">>>>GetDefaultAddress: $error");
-    });
+    })*/;
   }
 
   var shippingAddressList = <UserModel>[].obs;
@@ -131,11 +151,11 @@ class CheckoutController extends GetxController {
     await authController.authProvider
         .getShippingAddress(token: authController.userToken!)
         .then((addresses) {
-      shippingAddressList.clear();
+          print(">>>>Addresses: ${addresses.last.toAddressJson()}");
       shippingAddressList.addAll(addresses);
-    }).catchError((error) {
+    })/*.catchError((error) {
       debugPrint(">>>>getAllShippingAddresses: $error");
-    });
+    })*/;
   }
 
   changeDefaultShippingAddress() async {
@@ -165,11 +185,15 @@ class CheckoutController extends GetxController {
   }
 
   updateShippingAddress(UserModel? userModel) async {
+
+    print("USERSADDRESS: ${userModel!.toAddressJson()}");
     userModel!.name = nameController.text;
     userModel.address = addressController.text;
     userModel.phone = phoneController.text;
     userModel.zipCode = zipCodeController.text;
     userModel.token = authController.userToken!;
+
+
 
     isLoading(true);
     await authController.authProvider

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
+import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
@@ -42,7 +43,7 @@ class SettingsUI extends GetView<AuthController> {
                   child: ListView(
                     physics: const NeverScrollableScrollPhysics(),
                     children: [
-                      _accountSetup(),
+                      _accountSetup(context),
                       AppConstant.spaceWidget(height: 10),
                       const StickyLabel(text: langKey.general),
                       _generalSettings(),
@@ -54,7 +55,7 @@ class SettingsUI extends GetView<AuthController> {
     );
   }
 
-  _accountSetup() {
+  _accountSetup(context) {
     return Obx(
       () => controller.userModel!.email != null &&
               !controller.isSessionExpired! &&
@@ -63,7 +64,7 @@ class SettingsUI extends GetView<AuthController> {
               children: [
                 _userCard(),
                 const StickyLabel(text: langKey.myAccount),
-                _accountSettings()
+                _accountSettings(buildContext: context)
               ],
             )
           : Column(
@@ -83,7 +84,8 @@ class SettingsUI extends GetView<AuthController> {
               padding: const EdgeInsets.all(8.0),
               child: ListTile(
                 title: CustomText(
-                  title: "${langKey.welcome.tr} ${controller.userModel!.firstName}",
+                  title:
+                      "${langKey.welcome.tr} ${controller.userModel!.firstName}",
                   style: headline2,
                 ),
                 subtitle: CustomText(
@@ -120,126 +122,55 @@ class SettingsUI extends GetView<AuthController> {
     );
   }
 
-  _accountSettings() {
+  _accountSettings({buildContext}) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
           _singleSettingsItem(
               onTap: () {
-                if (controller.userModel!.role != null) {
+                if (checkVendorAccountStatus(controller.userModel?.vendor)!) {
                   if (controller.userModel!.role!
                       .toLowerCase()
                       .contains("vendor")) {
                     Get.toNamed(Routes.sellerHomeRoute);
                   } else {
-                    AppConstant.showBottomSheet(widget: _registerSeller());
+                    //Get.toNamed(Routes.sellerHomeRoute);
+                    AppConstant.showBottomSheet(
+                        widget: RegisterVendorUI(),
+                        isGetXBottomSheet: false,
+                        buildContext: buildContext);
                   }
+                } else {
+                  AppConstant.displaySnackBar(
+                      'error', "Your store has been disabled");
                 }
               },
               icon: Icons.dashboard_rounded,
               iconColor: kPrimaryColor,
               title: langKey.vendorDashboard.tr),
-          /* _singleSettingsItem(
+
+          _singleSettingsItem(
               onTap: () => Get.toNamed(Routes.buyerOrdersRoute),
               icon: IconlyBold.bag,
-              iconColor: Colors.purpleAccent,
-              title: "my_orders".tr),*/
-          _singleSettingsItem(
+              iconColor: Colors.teal,
+              title: langKey.userOrders.tr),
+          /* _singleSettingsItem(
               onTap: () => Get.to(() => PremiumMembershipUI()),
               icon: Icons.workspace_premium_outlined,
               iconColor: kOrangeColor,
-              title: langKey.membershipPlans.tr),
+              title: langKey.membershipPlans.tr),*/
         ],
       ),
     );
   }
 
-  _registerSeller() {
-    var formKey = GlobalKey<FormState>();
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Form(
-        key: formKey,
-        child: Column(
-          children: [
-            CustomText(
-              title: langKey.vendorRegistration.tr,
-              style: appBarTitleSize,
-            ),
-            Expanded(
-              child: ListView(
-                shrinkWrap: true,
-                padding: const EdgeInsets.all(20),
-                physics: const AlwaysScrollableScrollPhysics(),
-                children: [
-                  FormInputFieldWithIcon(
-                    controller: controller.ownerNameController,
-                    iconPrefix: Icons.store_rounded,
-                    labelText: langKey.ownerName.tr,
-                    iconColor: kPrimaryColor,
-                    autofocus: false,
-                    textStyle: bodyText1,
-                    autoValidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (value) => GetUtils.isBlank(value!)!
-                        ? langKey.ownerNameReq.tr
-                        : null,
-                    keyboardType: TextInputType.name,
-                    onChanged: (value) {},
-                    onSaved: (value) {},
-                  ),
-                  AppConstant.spaceWidget(height: 15),
-                  FormInputFieldWithIcon(
-                    controller: controller.storeNameController,
-                    iconPrefix: Icons.store_rounded,
-                    labelText: langKey.storeName.tr,
-                    iconColor: kPrimaryColor,
-                    autofocus: false,
-                    textStyle: bodyText1,
-                    autoValidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (value) => GetUtils.isBlank(value!)!
-                        ? langKey.storeNameReq.tr
-                        : null,
-                    keyboardType: TextInputType.name,
-                    onChanged: (value) {},
-                    onSaved: (value) {},
-                  ),
-                  AppConstant.spaceWidget(height: 15),
-                  FormInputFieldWithIcon(
-                    controller: controller.storeDescController,
-                    iconPrefix: Icons.description,
-                    labelText: langKey.description.tr,
-                    iconColor: kPrimaryColor,
-                    autofocus: false,
-                    textStyle: bodyText1,
-                    autoValidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (value) => GetUtils.isBlank(value!)!
-                        ? langKey.descriptionReq.tr
-                        : null,
-                    keyboardType: TextInputType.name,
-                    onChanged: (value) {},
-                    onSaved: (value) {},
-                  ),
-                  AppConstant.spaceWidget(height: 40),
-                  Obx(() => controller.isLoading.isTrue
-                      ? CustomLoading(isItBtn: true)
-                      : CustomButton(
-                          onTap: () async {
-                            if (formKey.currentState!.validate()) {
-                              await controller.registerStore();
-                            }
-                          },
-                          text: langKey.register.tr,
-                          height: 40,
-                          width: 150,
-                        )),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+  bool? checkVendorAccountStatus(SellerModel? model) {
+    String? status = model!.status!.toLowerCase();
+    if (status.contains("disabled") ||
+        status.contains("terminated") ||
+        status.contains("suspended")) return false;
+    return true;
   }
 
   _generalSettings() {
@@ -269,8 +200,8 @@ class SettingsUI extends GetView<AuthController> {
               title: langKey.notifications.tr),*/
 
           _singleSettingsItem(
-              onTap: () => Get.to(
-                  () => GeneralSettingsDataUI(title: langKey.termsAndConditions.tr)),
+              onTap: () => Get.to(() =>
+                  GeneralSettingsDataUI(title: langKey.termsAndConditions.tr)),
               icon: Icons.rule_outlined,
               iconColor: Colors.indigo,
               title: langKey.termsAndConditions.tr),
@@ -281,14 +212,14 @@ class SettingsUI extends GetView<AuthController> {
               iconColor: Colors.purpleAccent,
               title: langKey.privacyPolicy.tr),
           _singleSettingsItem(
-              onTap: () => Get.to(
-                  () => GeneralSettingsDataUI(title: langKey.returnAndExchange.tr)),
+              onTap: () => Get.to(() =>
+                  GeneralSettingsDataUI(title: langKey.returnAndExchange.tr)),
               icon: Icons.assignment_return_rounded,
               iconColor: Colors.lime,
               title: langKey.returnAndExchange.tr),
           _singleSettingsItem(
-              onTap: () =>
-                  Get.to(() => GeneralSettingsDataUI(title: langKey.aboutUs.tr)),
+              onTap: () => Get.to(
+                  () => GeneralSettingsDataUI(title: langKey.aboutUs.tr)),
               icon: IconlyLight.info_circle,
               iconColor: Colors.pinkAccent,
               title: langKey.aboutUs.tr),
@@ -352,8 +283,7 @@ class SettingsUI extends GetView<AuthController> {
                 if (value != null && value != "")
                   CustomText(
                       title: value,
-                      style: caption
-                          .copyWith(fontWeight: FontWeight.w600)),
+                      style: caption.copyWith(fontWeight: FontWeight.w600)),
                 AppConstant.spaceWidget(width: 5),
                 const Align(
                     alignment: Alignment.centerRight,

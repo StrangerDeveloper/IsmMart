@@ -11,7 +11,10 @@ class LocalStorageHelper {
   static final localStorage = GetStorage();
   static const tag = "LocalStorage:";
 
-
+  static Future<void> initUserStorage() async {
+    if (localStorage.read(currentUserKey) == null)
+      await localStorage.write(currentUserKey, UserModel().toJson());
+  }
 
   static Future<void> storeUser({UserModel? userModel}) async {
     localStorage.write(currentUserKey, userModel!.toJson()).then((value) {});
@@ -20,13 +23,9 @@ class LocalStorageHelper {
   static Future<UserModel> getStoredUser() async {
     if (localStorage.read(currentUserKey) != null) {
       return UserModel.fromJson(localStorage.read(currentUserKey));
-
     }
     return UserModel();
   }
-
-
-
 
   static Future<void> addItemToCart({CartModel? cartModel}) async {
     var list = <CartModel>[];
@@ -87,7 +86,7 @@ class LocalStorageHelper {
     localStorage.remove(cartItemKey);
   }
 
-  static deleteUserData(){
+  static deleteUserData() {
     localStorage.remove(currentUserKey);
   }
 }

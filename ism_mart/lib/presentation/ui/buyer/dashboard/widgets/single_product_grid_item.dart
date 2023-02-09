@@ -17,12 +17,13 @@ class SingleProductItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var height = AppConstant.getSize().height;
     return isCategoryProducts!
-        ? _buildCategoryProductItem(model: productModel)
-        : _buildProductItemNew(model: productModel!);
+        ? _buildCategoryProductItem(model: productModel, height: height)
+        : _buildProductItemNew(model: productModel!, height: height);
   }
 
-  _buildCategoryProductItem({ProductModel? model}) {
+  _buildCategoryProductItem({ProductModel? model, double? height}) {
     return AspectRatio(
       aspectRatio: 0.8,
       child: GestureDetector(
@@ -51,7 +52,7 @@ class SingleProductItems extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: 100,
+                    height: height! >800? 150: 100,
                     width: double.infinity,
                     child: CustomNetworkImage(imageUrl: model!.thumbnail),
                   ),
@@ -90,8 +91,8 @@ class SingleProductItems extends StatelessWidget {
     );
   }
 
+  _buildProductItemNew({ProductModel? model, double? height}) {
 
-  _buildProductItemNew({ProductModel? model}) {
     return AspectRatio(
       aspectRatio: 0.75,
       child: GestureDetector(
@@ -113,7 +114,7 @@ class SingleProductItems extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: 100,
+                    height: height! >800? 150: 100,
                     width: double.infinity,
                     child: CustomNetworkImage(imageUrl: model!.thumbnail),
                   ),

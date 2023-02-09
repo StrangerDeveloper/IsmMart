@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
+import 'package:ism_mart/presentation/ui/buyer/settings/orders/buyer_orders_ui.dart';
 import 'package:ism_mart/presentation/ui/exports_ui.dart';
 
 class Routes {
@@ -62,7 +63,7 @@ class Routes {
 
     GetPage(
       name: buyerOrdersRoute,
-      page: () => MyOrdersUI(),
+      page: () => BuyerOrdersUI(),
       binding: OrdersBindings(),
     ),
 

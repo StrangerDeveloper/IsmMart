@@ -34,9 +34,14 @@ class OrderRepository {
     return response.body['data'];
   }
 
-  Future<dynamic> fetchOrderStats({token}) async {
+  Future<dynamic> fetchBuyerOrderStats({token}) async {
     var response = await _apiService.get(
         endpoint: 'order/userStats', requiresAuthToken: true, token: token);
+    return response.body;
+  }
+
+  Future<dynamic> fetchVendorOrderStats({token}) async{
+    var response =  await _apiService.get(endpoint: 'order/vendorStats', requiresAuthToken: true, token:token);
     return response.body;
   }
 

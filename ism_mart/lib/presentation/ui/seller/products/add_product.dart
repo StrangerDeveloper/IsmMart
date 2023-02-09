@@ -55,7 +55,6 @@ class AddProductsUI extends GetView<SellersController> {
                         AppConstant.spaceWidget(height: 20),
 
                         ///TOO: Category
-
                         Obx(
                           () => DropdownSearch<CategoryModel>(
                             popupProps: PopupProps.dialog(
@@ -280,19 +279,6 @@ class AddProductsUI extends GetView<SellersController> {
                               ? CustomLoading(isItBtn: true)
                               : CustomButton(
                                   onTap: () {
-                                    //var array = [][];
-                                   /* for (var value in controller
-                                        .dynamicFieldsValuesList.entries) {
-                                      print(value.value);
-                                      print(value.key);
-                                      //print("features[${value.}][]");
-                                    }*/
-
-                                    for(var i=0; i<controller.dynamicFieldsValuesList.entries.length; i++){
-                                      print("features[$i][id] = ${controller.dynamicFieldsValuesList.entries.elementAt(i).key}");
-                                      print("features[$i][value] = ${controller.dynamicFieldsValuesList.entries.elementAt(i).value}");
-                                    }
-
                                     if (formKey.currentState!.validate()) {
                                       if (controller.categoryController
                                           .subCategories.isNotEmpty) {
@@ -456,6 +442,7 @@ class AddProductsUI extends GetView<SellersController> {
   }
 
   _buildImageSection() {
+
     return GestureDetector(
       onTap: () => controller.pickMultipleImages(),
       child: DottedBorder(
@@ -476,12 +463,12 @@ class AddProductsUI extends GetView<SellersController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Icon(
-                        Icons.photo_library_rounded,
-                        size: 40,
+                        Icons.cloud_upload_rounded,
+                        size: 30,
                       ),
-                      const SizedBox(height: 15),
+                      const SizedBox(height: 5),
                       Text(
-                        'Select Product Images',
+                        'Click here to upload',
                         style: TextStyle(
                           fontSize: 15,
                           color: Colors.grey.shade400,

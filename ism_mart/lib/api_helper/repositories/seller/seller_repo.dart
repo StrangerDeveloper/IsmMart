@@ -24,9 +24,6 @@ class SellersApiRepo {
       //'Content-Type': 'application/x-www-form-urlencoded'
     };
 
-
-
-
     var response = await _apiService.postImage(
         endpoint: "vendor/products/add", headers: headers, body: formData);
 

@@ -20,11 +20,7 @@ class UserModel {
     this.phone,
     this.password,
     this.role,
-    this.attempt,
-    this.loggedOutAt,
-    this.gender,
     this.emailVerified,
-    this.stripeCustomerId,
     this.createdAt,
     this.updatedAt,
     this.error,
@@ -36,21 +32,23 @@ class UserModel {
     this.defaultAddress = false,
     this.name,
     this.imageUrl,
+    this.vendor,
   });
 
-  int? id, attempt, countryId, cityId;
+  int? id, countryId, cityId;
   String? firstName, lastName, name, email, token;
   String? address, phone, password, zipCode;
-  String? role, gender, stripeCustomerId, imageUrl;
+  String? role, imageUrl;
   bool? emailVerified, defaultAddress;
-  DateTime? createdAt, loggedOutAt, updatedAt;
+  DateTime? createdAt, updatedAt;
   CountryModel? country, city;
-
   String? error, message;
+  SellerModel? vendor;
 
   factory UserModel.fromErrorJson(json) => UserModel(error: json);
 
-  factory UserModel.fromJson(JSON json) => UserModel(
+  factory UserModel.fromJson(JSON json) =>
+      UserModel(
         id: json["id"],
         firstName: json["firstName"] ?? "",
         lastName: json["lastName"] ?? "",
@@ -60,21 +58,20 @@ class UserModel {
         address: json["address"] == null ? null : json["address"],
         phone: json["phone"] == null
             ? json["phoneNumber"] == null
-                ? null
-                : json["phoneNumber"]
+            ? null
+            : json["phoneNumber"]
             : json["phone"],
         imageUrl: json['image'] == null ? "" : json['image'],
         password: json["password"],
         role: json["role"],
-        attempt: json["attempt"] == null ? null : json["attempt"],
-        loggedOutAt: json["loggedOutAt"],
-        gender: json["gender"],
         emailVerified: json["email_verified"],
-        stripeCustomerId: json["stripeCustomerId"],
+        city: json["City"] == null ? null : CountryModel.fromJson(json["City"]),
         country: json["Country"] == null
             ? null
             : CountryModel.fromJson(json["Country"]),
-        city: json["City"] == null ? null : CountryModel.fromJson(json["City"]),
+        vendor: json["Vendor"] == null
+            ? null
+            : SellerModel.fromJson(json["Vendor"]),
         zipCode: json['zipCode'] == null ? null : json['zipCode'],
         defaultAddress: json['default'] == null ? false : json['default'],
         createdAt: json["createdAt"] == null
@@ -85,23 +82,35 @@ class UserModel {
             : DateTime.parse(json["updatedAt"]),
       );
 
-  JSON toJson() => {
+  JSON toJson() =>
+      {
         "id": id,
         "firstName": firstName,
         "lastName": lastName,
+
         "email": email,
         "token": token,
         "address": address == null ? null : address,
         "phone": phone,
         "password": password,
         "role": role,
-        "attempt": attempt == null ? null : attempt,
-        "loggedOutAt": loggedOutAt,
-        "gender": gender,
+        "country": country?.toJson(),
+        "city": city?.toJson(),
         "email_verified": emailVerified,
-        "stripeCustomerId": stripeCustomerId,
         "createdAt": createdAt?.toIso8601String(),
         "updatedAt": updatedAt?.toIso8601String(),
+      };
+
+  Map<String, dynamic> toAddressJson() =>
+      {
+        "id": id,
+        "name": name,
+        "phoneNumber": phone,
+        "address": address,
+        "zipCode": zipCode,
+        "default": defaultAddress,
+        "Country": country?.toJson(),
+        "City": city?.toJson(),
       };
 }
 
@@ -116,13 +125,12 @@ class UserResponse {
   UserModel? userModel;
   List<String>? errors;
 
-  UserResponse(
-      {this.success = false,
-      this.key,
-      this.message,
-      this.error,
-      this.errors,
-      this.userModel});
+  UserResponse({this.success = false,
+    this.key,
+    this.message,
+    this.error,
+    this.errors,
+    this.userModel});
 
   factory UserResponse.fromResponse(response) {
     return UserResponse(
@@ -133,8 +141,8 @@ class UserResponse {
             ? List<String>.from(response["errors"].map((x) => x))
             : null,
         userModel: response['data'] == null ||
-                response['data'] is String ||
-                response['data'] is List
+            response['data'] is String ||
+            response['data'] is List
             ? null
             : UserModel.fromJson(response['data']));
   }

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
+import 'package:ism_mart/controllers/controllers.dart';
 import 'package:ism_mart/presentation/export_presentation.dart';
-import 'package:ism_mart/utils/constants.dart';
+import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class GeneralSettingsDataUI extends StatelessWidget {
   const GeneralSettingsDataUI(
@@ -21,63 +23,11 @@ class GeneralSettingsDataUI extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: ListView(
             shrinkWrap: true,
-            //physics: const NeverScrollableScrollPhysics(),
+            physics: const AlwaysScrollableScrollPhysics(),
             children: [
-              CustomHeader(
-                title: title!
-              ),
+              CustomHeader(title: title!),
               if (isContactUsCalled!)
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: getContactUsData().map((e) {
-                    return Container(
-                      margin: const EdgeInsets.all(8.0),
-                      decoration: BoxDecoration(
-                        color: kWhiteColor,
-                        //shape: BoxShape.rectangle,
-                        border: Border.all(color: kLightGreyColor),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            AppConstant.spaceWidget(height: 5),
-                            Icon(
-                              e["icon"],
-                              size: 30,
-                              color: kPrimaryColor,
-                            ),
-                            AppConstant.spaceWidget(height: 8),
-                            CustomText(
-                              title: e['title'],
-                              style: headline3,
-                            ),
-                            AppConstant.spaceWidget(height: 3),
-                            if (e['subTitle'] != null)
-                              CustomText(
-                                title: e['subTitle'],
-                                style: bodyText1.copyWith(
-                                    color: kPrimaryColor,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            AppConstant.spaceWidget(height: 3),
-                            CustomText(
-                              title: e['description'],
-                              style: bodyText1.copyWith(
-                                color: kDarkColor,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                )
+                _buildContactUs()
               else
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -89,13 +39,28 @@ class GeneralSettingsDataUI extends StatelessWidget {
                       children: [
                         AppConstant.spaceWidget(height: 8),
                         CustomText(
-                          title: e['header'],
-                          style: headline3,
+                          title: "${e['header']}",
+                          style: headline2,
                         ),
-                        Text(
-                          e['body'],
-                          style: bodyText2,
-                        ),
+                        AppConstant.spaceWidget(height: 5),
+                        if (e['body'].toString().isNotEmpty)
+                          CustomGreyBorderContainer(
+                            borderColor: Colors.grey[300]!,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child:
+                                  //_bodyText(text:e['body']),
+                                  Text(
+                                "${e['body']}",
+                                softWrap: true,
+                                textAlign: TextAlign.justify,
+                                style: GoogleFonts.poppins(
+                                  fontSize: 14,
+                                  color: kDarkColor,
+                                ),
+                              ),
+                            ),
+                          ),
                       ],
                     );
                   }).toList(),
@@ -119,17 +84,202 @@ class GeneralSettingsDataUI extends StatelessWidget {
           color: kPrimaryColor,
         ),
       ),
-      title: CustomText(
-          title: title,
-          style: appBarTitleSize),
+      title: CustomText(title: title, style: appBarTitleSize),
+    );
+  }
+
+  Widget _buildContactUs() {
+    var formKey = GlobalKey<FormState>();
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ListView(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        //padding: const EdgeInsets.symmetric(vertical: 10),
+        children: [
+          CustomGreyBorderContainer(
+            child: Column(
+              children: getContactUsData()
+                  .map(
+                    (e) => Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: ListTile(
+                        leading: Icon(
+                          e["icon"],
+                          size: 30,
+                          color: kPrimaryColor,
+                        ),
+                        title: CustomText(
+                          title: e['title'],
+                          style: headline3,
+                        ),
+                        subtitle: CustomText(
+                          title: e['description'],
+                          maxLines: e['description'].length,
+                          style: bodyText1.copyWith(
+                            color: kDarkColor,
+                          ),
+                          //textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  )
+                  .toList(),
+            ),
+          ),
+          AppConstant.spaceWidget(height: 15),
+          CustomGreyBorderContainer(
+            child: Form(
+              key: formKey,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5),
+                child: Column(
+                  children: [
+                    StickyLabel(text: "For any support just send your query", style: headline1,),
+                    AppConstant.spaceWidget(height: 15),
+                    FormInputFieldWithIcon(
+                      controller: authController.firstNameController,
+                      iconPrefix: Icons.person_rounded,
+                      labelText: fullName.tr,
+                      iconColor: kPrimaryColor,
+                      autofocus: false,
+                      textStyle: bodyText1,
+                      autoValidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (value) =>
+                      GetUtils.isBlank(value!)! ? fullNameReq.tr : null,
+                      keyboardType: TextInputType.name,
+                      onChanged: (value) {},
+                      onSaved: (value) {},
+                    ),
+                    AppConstant.spaceWidget(height: 10),
+                    FormInputFieldWithIcon(
+                      controller: authController.emailController,
+                      iconPrefix: Icons.email_rounded,
+                      labelText: email.tr,
+                      iconColor: kPrimaryColor,
+                      autofocus: false,
+                      textStyle: bodyText1,
+                      autoValidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (value) =>
+                      !GetUtils.isEmail(value!) ? emailReq.tr : null,
+                      keyboardType: TextInputType.name,
+                      onChanged: (value) {},
+                      onSaved: (value) {},
+                    ),
+                    AppConstant.spaceWidget(height: 10),
+                    FormInputFieldWithIcon(
+                      controller: authController.subjectController,
+                      iconPrefix: Icons.subject_rounded,
+                      labelText: subject.tr,
+                      iconColor: kPrimaryColor,
+                      autofocus: false,
+                      textStyle: bodyText1,
+                      autoValidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (value) =>
+                      GetUtils.isBlank(value!)! ? subjectReq.tr : null,
+                      keyboardType: TextInputType.name,
+                      onChanged: (value) {},
+                      onSaved: (value) {},
+                    ),
+                    AppConstant.spaceWidget(height: 10),
+                    FormInputFieldWithIcon(
+                      controller: authController.storeDescController,
+                      iconPrefix: Icons.description,
+                      labelText: message.tr,
+                      iconColor: kPrimaryColor,
+                      autofocus: false,
+                      textStyle: bodyText1,
+                      autoValidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (value) =>
+                      GetUtils.isBlank(value!)! ? messageReq.tr : null,
+                      keyboardType: TextInputType.text,
+                      onChanged: (value) {},
+                      onSaved: (value) {},
+                    ),
+                    AppConstant.spaceWidget(height: 20),
+                    Obx(
+                          () => authController.isLoading.isTrue
+                          ? CustomLoading(isItBtn: true)
+                          : CustomButton(
+                        onTap: () async {
+                          if (formKey.currentState!.validate()) {
+                            await authController.postContactUs();
+                          }
+                        },
+                        text: send.tr,
+                        height: 40,
+                        width: 150,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+
+        ],
+      ),
+    );
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: getContactUsData().map((e) {
+        return Container(
+          margin: const EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+            color: kWhiteColor,
+            //shape: BoxShape.rectangle,
+            border: Border.all(color: kLightGreyColor),
+            borderRadius: BorderRadius.circular(8.0),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                AppConstant.spaceWidget(height: 5),
+                Icon(
+                  e["icon"],
+                  size: 30,
+                  color: kPrimaryColor,
+                ),
+                AppConstant.spaceWidget(height: 8),
+                CustomText(
+                  title: e['title'],
+                  style: headline3,
+                ),
+                AppConstant.spaceWidget(height: 3),
+                if (e['subTitle'] != null)
+                  CustomText(
+                    title: e['subTitle'],
+                    style: bodyText1.copyWith(
+                        color: kPrimaryColor, fontWeight: FontWeight.bold),
+                  ),
+                AppConstant.spaceWidget(height: 3),
+                CustomText(
+                  title: e['description'],
+                  style: bodyText1.copyWith(
+                    color: kDarkColor,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          ),
+        );
+      }).toList(),
     );
   }
 
   List getData() {
-    if (title!.contains("terms_conditions".tr))
+    if (title!.contains(termsAndConditions.tr)) {
+      print("$title");
       return getTermConditionData();
-    else if (title!.contains("privacy_policy".tr)) return getPrivacyData();
-    else if(title!.contains('return_exchange'.tr))
+    } else if (title!.contains(privacyPolicy.tr))
+      return getPrivacyData();
+    else if (title!.contains(returnAndExchange.tr))
       return getReturnExchangeData();
     return getAboutUsData();
   }
@@ -177,24 +327,29 @@ class GeneralSettingsDataUI extends StatelessWidget {
     return [
       {
         'icon': Icons.email_outlined,
-        'title': 'Email Us',
-        'subTitle': 'businesses@ismmart.com',
-        'description':
-            'Interactively grow empowered for process-centric total linkage.'
+        'title': 'Email',
+        'subTitle': null,
+        'description': 'businesses@ismmart.com'
       },
       {
         'icon': IconlyBold.calling,
-        'title': 'Call Us',
-        'subTitle': '+92 311 7216038',
-        'description':
-            'Distinctively disseminate focused solutions clicks-and-mortar mini-state.'
+        'title': "Call",
+        'subTitle': null,
+        'description': '+92 51 111 007 123\n+92 3329999969'
       },
       {
         'icon': IconlyLight.location,
-        'title': 'Location',
-        'subTitle': null,
+        'title': 'Central Headquarters',
+        'subTitle': ":",
         'description':
-            'Emirates Tower, Bhittai Road, F7 Markaz, Islamabad, Pakistan'
+            '2nd Floor, Emirates Tower, M-13, F7 Markaz, Islamabad. Pakistan'
+      },
+      {
+        'icon': IconlyLight.location,
+        'title': 'Global Headquarters',
+        'subTitle': ":",
+        'description':
+            'Tower 42, 25 Old Broad St, Cornhill, London, United Kingdom'
       }
     ];
   }
@@ -204,13 +359,13 @@ class GeneralSettingsDataUI extends StatelessWidget {
     return [
       {
         'header': '',
-        'body': 'ISMMART Stores respect your privacy and want to protect your personal information. This privacy statement aims to explain to you how we handle the personal data that we get from users of our platform or site and the services made available on the site.'
+        'body': '\t\t\tISMMART Stores respect your privacy and want to protect your personal information. This privacy statement aims to explain to you how we handle the personal data that we get from users of our platform or site and the services made available on the site.'
             'This policy also outlines your options for how your personal information will be collected, used, and disclosed. You agree to the procedures outlined in this Privacy Policy if you access this platform or site directly or through another website. Please read this Privacy Policy for more information.'
             'ISMMART Stores collect your personal data so that we can offer and constantly improve our products and services.'
       },
       {
         'header': 'Use of Your Personal information',
-        'body': 'In general, personal information you submit to us is used either to respond to requests that you make, aid us in serving you better, or market our services. We use your personal information in the following ways:'
+        'body': '\t\t\tIn general, personal information you submit to us is used either to respond to requests that you make, aid us in serving you better, or market our services. We use your personal information in the following ways:'
             '\n\t$dot Take orders, deliver products, process payments, and communicate with you about orders, products and services, and promotional offerings. Update you on the delivery of the products;'
             '\n\t$dot Collect and use your personal information to comply with certain laws.'
             '\n\t$dot Operate, maintain, and improve our site, products, and services'
@@ -228,7 +383,7 @@ class GeneralSettingsDataUI extends StatelessWidget {
       {
         'header': 'Information you provide:',
         'body':
-            'iSMMart Stores receive and store data you give us through your account profile when using our services.'
+            'ISMMART Stores receive and store data you give us through your account profile when using our services.'
       },
       {
         'header': 'Automatic information:',
@@ -444,25 +599,18 @@ class GeneralSettingsDataUI extends StatelessWidget {
     return [
       {
         'header': '',
-        'body': '\t\tCustomer satisfaction is guaranteed!! We guarantee the quality of the products sold through ISMMART Stores, and if you are not happy with your purchase, we will make it right. With the exception of a few conditions listed below, any item purchased from ISMMART Stores may be returned within 14 calendar days from the date shipment is received.'
-      },
-      {
-        'header': '',
-        'body': '$dot Discounted goods/products cannot be exchanged or returned for a refund. It can be exchanged or returned only if an obvious flaw is found.'
+        'body': '\tCustomer satisfaction is guaranteed!! We guarantee the quality of the products sold through ISMMART Stores, and if you are not happy with your purchase, we will make it right. With the exception of a few conditions listed below, any item purchased from ISMMART Stores may be returned within 14 calendar days from the date shipment is received.'
+            '$dot Discounted goods/products cannot be exchanged or returned for a refund. It can be exchanged or returned only if an obvious flaw is found.'
             '\n$dot Items being returned must be unworn, in its original packaging, with all safety seals and labels still intact/attached. The return will not be qualified for a refund or exchange if these conditions are not met'
             '\n$dot ISMMart Stores reserve the exclusive right/ authority to make exceptions in some circumstances.'
             '\n$dot If an item is returned due to obvious error that comes into our returns policy, customer will not be charged for courier services.'
             '\n$dot The return period for mobile phones, accessories, and other electrical and electronic products is only 5 calendar days beginning on the day the package is received. A replacement item will be given without charge if a flaw is found during the return window. Standard warranties from the manufacturer or supplier will be in effect after the return window has expired.'
-
       },
-
       {
         'header': 'How to return?',
         'body':
-        'Please get in touch with our customer support centre if an item meets all the requirements specified above.'
+            'Please get in touch with our customer support centre if an item meets all the requirements specified above.'
       },
-
     ];
   }
-
 }

@@ -57,7 +57,7 @@ class ApiRepository {
 
 
   Future<List<dynamic>> getProductsByType(
-      {int? limit = 10, int? page = 1, String? type = "Discount"}) async {
+      {int? limit = 15, int? page = 1, String? type = "Discount"}) async {
     final queryParameters = {"limit": "$limit", "page": "$page", "type": type};
     var response =
         await _apiService.get(endpoint: "products/", query: queryParameters);
@@ -67,7 +67,7 @@ class ApiRepository {
   // same for categoryById and SubCategoryById
   Future<List<dynamic>> getProductsByCategory(
       {required String? endPoint,
-      int? limit = 10,
+      int? limit = 20,
       int? page = 1,
       required int? id}) async {
     final queryParameters = {"limit": "$limit", "page": "$page", "id": "$id"};

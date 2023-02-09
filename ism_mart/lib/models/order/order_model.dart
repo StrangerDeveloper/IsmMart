@@ -34,7 +34,9 @@ class OrderModel {
         id: json["id"],
         paymentMethod: json["paymentMethod"],
         status: json["status"],
-        expectedDeliveryDate: DateTime.parse(json["expectedDeliveryDate"]),
+        expectedDeliveryDate: json["expectedDeliveryDate"] == null
+            ? null
+            : DateTime.parse(json["expectedDeliveryDate"]),
         totalPrice: json["totalPrice"],
         shippingPrice: json["shippingPrice"],
         createdAt: DateTime.parse(json["createdAt"]),
@@ -65,7 +67,6 @@ class OrderModel {
             : List<dynamic>.from(orderItems!.map((x) => x.toJson())),
       };
 }
-
 
 class OrderItem {
   OrderItem({
@@ -99,7 +100,6 @@ class OrderItem {
       };
 }
 
-
 class OrderResponse {
   OrderResponse({
     this.success,
@@ -109,19 +109,19 @@ class OrderResponse {
 
   bool? success;
   String? message;
-  OrderStats? data;
+  dynamic data;
 
   factory OrderResponse.fromJson(Map<String, dynamic> json) => OrderResponse(
-    success: json["success"],
-    message: json["message"],
-    data: OrderStats.fromJson(json["data"]),
-  );
+        success: json["success"],
+        message: json["message"],
+        data: OrderStats.fromJson(json["data"]),
+      );
 
   Map<String, dynamic> toJson() => {
-    "success": success,
-    "message": message,
-    "data": data!.toJson(),
-  };
+        "success": success,
+        "message": message,
+        "data": data!.toJson(),
+      };
 }
 
 class OrderStats {
@@ -130,26 +130,97 @@ class OrderStats {
     this.totalOrders,
     this.pendingOrders,
     this.activeOrders,
-    this.completedOrders,
+    this.deliveredOrders,
   });
 
   int? orderId, totalOrders, pendingOrders;
-  int? activeOrders,completedOrders;
+  int? activeOrders, deliveredOrders;
 
   factory OrderStats.fromJson(JSON json) => OrderStats(
-    orderId: json["orderId"],
-    totalOrders: json["totalOrders"],
-    pendingOrders: json["pendingOrders"],
-    activeOrders: json["activeOrders"],
-    completedOrders: json["completedOrders"],
-  );
+        orderId: json["orderId"],
+        totalOrders: json["totalOrders"],
+        pendingOrders: json["pendingOrders"],
+        activeOrders: json["activeOrders"],
+        deliveredOrders: json["deliveredOrders"],
+      );
 
   JSON toJson() => {
-    "orderId": orderId,
-    "totalOrders": totalOrders,
-    "pendingOrders": pendingOrders,
-    "activeOrders": activeOrders,
-    "completedOrders": completedOrders,
-  };
+        "orderId": orderId,
+        "totalOrders": totalOrders,
+        "pendingOrders": pendingOrders,
+        "activeOrders": activeOrders,
+        "deliveredOrders": deliveredOrders,
+      };
 }
 
+class VendorStats {
+  int? totalOrders, pendingOrders;
+  int? activeOrders, deliveredOrders;
+  int? totalEarning, pendingAmount;
+  int? cMonthEarning;
+
+  VendorStats({
+    this.totalOrders,
+    this.pendingOrders,
+    this.activeOrders,
+    this.deliveredOrders,
+    this.totalEarning,
+    this.pendingAmount,
+    this.cMonthEarning,
+  });
+
+  factory VendorStats.fromJson(Map<String, dynamic> json) => VendorStats(
+        totalOrders: json["totalOrders"],
+        pendingOrders: json["pendingOrders"],
+        activeOrders: json["activeOrders"],
+        deliveredOrders: json["deliveredOrders"],
+        totalEarning: json["totalEarning"],
+        pendingAmount: json["pendingAmount"],
+        cMonthEarning: json["cmonthEarning"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "totalOrders": totalOrders,
+        "pendingOrders": pendingOrders,
+        "activeOrders": activeOrders,
+        "deliveredOrders": deliveredOrders,
+        "totalEarning": totalEarning,
+        "pendingAmount": pendingAmount,
+        "cmonthEarning": cMonthEarning,
+      };
+}
+
+class VendorOrder {
+  int? id;
+  String? title;
+  String? text;
+  DateTime? createdAt;
+  OrderModel? orderModel;
+
+  VendorOrder({
+    this.id,
+    this.title,
+    this.text,
+    this.createdAt,
+    this.orderModel,
+  });
+
+  factory VendorOrder.fromJson(Map<String, dynamic> json) => VendorOrder(
+        id: json["id"],
+        title: json["title"],
+        text: json["text"],
+        createdAt: json["createdAt"] == null
+            ? null
+            : DateTime.parse(json["createdAt"]),
+        orderModel:
+            json["Order"] == null ? null : OrderModel.fromJson(json["Order"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "title": title,
+        "text": text,
+        "createdAt": createdAt?.toIso8601String(),
+        "Order": orderModel?.toJson(),
+      };
+}

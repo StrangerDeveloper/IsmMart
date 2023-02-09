@@ -1,6 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/models/exports_model.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:http_parser/http_parser.dart';
 
 class AuthProvider {
   final AuthRepository _authRepo;
@@ -34,8 +37,46 @@ class AuthProvider {
   }
 
   Future<UserResponse> postStoreRegister(
-      {token, storeName, storeDesc, ownerName, websiteUrl, phone}) async {
-    var jsonData = {
+      {token, SellerModel? sellerModel}) async {
+    final url = "${ApiConstant.baseUrl}auth/vendor/register";
+    final request = http.MultipartRequest('POST', Uri.parse(url));
+    request.headers['Authorization'] = '$token';
+    //request.headers['Content-Type'] = 'application/json';
+    request.headers['Content-Type'] = 'multipart/form-data';
+
+    request.fields['storeName'] = sellerModel!.storeName!;
+    request.fields['storeDesc'] = sellerModel.storeDesc!;
+    request.fields['phone'] = sellerModel.phone!;
+    request.fields['ownerName'] = sellerModel.ownerName!;
+    request.fields['premium'] = sellerModel.premium!.toString();
+    request.fields['membership'] = sellerModel.membership!;
+    request.fields['accountTitle'] = sellerModel.accountTitle!;
+    request.fields['accountNumber'] = sellerModel.accountNumber!;
+    request.fields['bankName'] = sellerModel.bankName!;
+
+    request.files.add(await http.MultipartFile.fromPath(
+      'storeImage',
+      sellerModel.storeImage!,
+      contentType: MediaType.parse('image/jpeg'),
+    ));
+
+    request.files.add(await http.MultipartFile.fromPath(
+      'coverImage',
+      sellerModel.coverImage!,
+      contentType: MediaType.parse('image/jpeg'),
+    ));
+    final response = await request.send();
+    if (response.statusCode == 200) {
+      final responseData = await response.stream.bytesToString();
+      final data = json.decode(responseData);
+      print(responseData);
+      print(data);
+      return UserResponse.fromResponse(data);
+    } else {
+      throw Exception('Failed to upload image');
+    }
+
+    /* var jsonData = {
       "phone": phone,
       "storeName": storeName,
       "storeDesc": storeDesc,
@@ -43,6 +84,16 @@ class AuthProvider {
       'storeURL': websiteUrl
     };
 
+    var response = await _authRepo.registerStore(token: token, data: jsonData);
+    return UserResponse.fromResponse(response);*/
+  }
+
+  Future<UserResponse> addBankAccount({token, SellerModel? sellerModel}) async {
+    var jsonData = {
+      "accountTitle": '${sellerModel!.accountTitle}',
+      "accountNumber": '${sellerModel.accountNumber}',
+      "bankName": '${sellerModel.bankName}',
+    };
     var response = await _authRepo.registerStore(token: token, data: jsonData);
     return UserResponse.fromResponse(response);
   }
@@ -59,6 +110,11 @@ class AuthProvider {
     return UserResponse.fromResponse(response);
   }
 
+  Future<UserResponse> deActivateUser({token}) async {
+    var response = await _authRepo.deActivateUserAccount(token: token);
+    return UserResponse.fromResponse(response);
+  }
+
   Future<UserResponse> forgotPassword({data}) async {
     var response = await _authRepo.forgotPassword(data: data);
     return UserResponse.fromResponse(response);
@@ -69,8 +125,6 @@ class AuthProvider {
     return UserResponse.fromResponse(response);
   }
 
-
-
   /*
   *
   * Shipping address CRUD
@@ -78,9 +132,7 @@ class AuthProvider {
 
   Future<List<UserModel>> getShippingAddress({token}) async {
     var response = await _authRepo.getShippingDetails(token: token);
-    return response
-        .map((data) => data != null ? UserModel.fromJson(data) : UserModel())
-        .toList();
+    return response.map((data) => UserModel.fromJson(data)).toList();
   }
 
   Future<UserModel> getDefaultShippingAddress({token}) async {
@@ -111,13 +163,13 @@ class AuthProvider {
   Future<UserResponse> updateShippingAddress(
       {int? addressId, UserModel? userModel}) async {
     Map<String, dynamic> jsonData = {
-      "id": addressId,
+      "id": "${userModel?.id}",
       "name": "${userModel?.name}",
       "address": "${userModel?.address}",
       "phoneNumber": "${userModel?.phone}",
       "zipCode": "${userModel?.zipCode}",
-      "countryId": userModel?.countryId,
-      "cityId": userModel?.cityId
+      "countryId": "${userModel?.country!.id}",
+      "cityId": "${userModel?.city!.id}"
     };
     var response = await _authRepo.updateShippingDetails(
         token: userModel?.token, data: jsonData);
@@ -127,6 +179,17 @@ class AuthProvider {
   Future<UserResponse> deleteShippingAddress({token, addressID}) async {
     var response =
         await _authRepo.deleteShippingDetails(token: token, id: addressID);
+    return UserResponse.fromResponse(response);
+  }
+
+  /**
+   *
+   * Contact US
+   *
+   * */
+
+  Future<UserResponse> contactUs({data}) async {
+    var response = await _authRepo.postContactUs(data: data);
     return UserResponse.fromResponse(response);
   }
 }

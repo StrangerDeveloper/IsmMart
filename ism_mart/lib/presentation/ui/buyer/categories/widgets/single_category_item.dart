@@ -18,50 +18,6 @@ class SingleCategoryItem extends StatelessWidget {
     return _buildCategoryNew(categoryModel!);
   }
 
-  Widget _buildCategory(CategoryModel? category) {
-    return InkWell(
-      onTap: () {
-        Get.toNamed(Routes.searchRoute,
-            arguments: {"searchText": "${category.name}"});
-      },
-      child: Container(
-        clipBehavior: Clip.hardEdge,
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-        margin: EdgeInsets.only(right: 3),
-        child: Stack(
-          children: [
-            SizedBox(
-              width: 130,
-              height: 130,
-              child: CustomNetworkImage(imageUrl: category!.image!),
-            ),
-            Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              child: Container(
-                height: 120,
-                decoration: BoxDecoration(
-                  color: Colors.black.withAlpha(110),
-                ),
-                child: Center(
-                  child: Text(
-                    category.name ?? "",
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.center,
-                    style: bodyText1.copyWith(color: Colors.white),
-                  ),
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
   Widget _buildCategoryNew(CategoryModel category) {
     return InkWell(
       onTap: onTap ??

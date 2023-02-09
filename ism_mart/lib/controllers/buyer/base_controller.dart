@@ -38,7 +38,7 @@ class BaseController extends GetxController {
     //setCartCount(LocalStorageHelper.getCartItemsCount());
     setCartItemCount();
     LocalStorageHelper.localStorage.listen(() {
-     //.. debugPrint("localStorage listening started...");
+      //.. debugPrint("localStorage listening started...");
       //setCartCount(LocalStorageHelper.getCartItemsCount());
       setCartItemCount();
       getCurrentUser();
@@ -65,12 +65,12 @@ class BaseController extends GetxController {
           .then((data) {
         setCartCount(data.length);
       });
-    }else {
+    } else {
       setCartCount(0);
     }
   }
 
-  setCartCount(int count){
+  setCartCount(int count) {
     cartCount(count);
   }
 
@@ -146,6 +146,7 @@ class BaseController extends GetxController {
   //TODO: Start Fetch Top Categories
   var categories = <CategoryModel>[].obs;
   var isCategoriesLoading = false.obs;
+  int _minNoOfCategoriesRequest = 3;
 
   fetchCategories() async {
     isCategoriesLoading(true);
@@ -153,15 +154,19 @@ class BaseController extends GetxController {
       categories.addAll(data);
       isCategoriesLoading(false);
     }).catchError((error) {
-      debugPrint("FetchCategoriesError $error");
-      isCategoriesLoading(false);
+      if (_minNoOfCategoriesRequest != 0) {
+        _minNoOfCategoriesRequest--;
+        fetchCategories();
+      }
+      else {
+        debugPrint("FetchCategoriesError $error");
+        isCategoriesLoading(false);
+      }
     });
 
     await fetchProducts();
 
     await fetchProductsByTypes();
-
-
   }
 
   var randomSearchText = "".obs;
@@ -178,7 +183,7 @@ class BaseController extends GetxController {
 
   //End Fetch Top Categories
 
-  //TODO: START Fetch Product
+  //TDO: START Fetch Product
 
   Map<String, dynamic> productsMap = Map<String, dynamic>().obs;
   var isProductsLoading = false.obs;

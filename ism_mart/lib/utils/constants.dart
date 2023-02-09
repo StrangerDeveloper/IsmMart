@@ -110,8 +110,8 @@ class AppConstant {
 
   static const SECRET_KEY = live_sk;
 
-  static const defaultImgUrl =
-      "https://ismmart.com/assets/ISSMART.bc4ee033.png";
+  static const defaultImgUrl = "https://i.ibb.co/dLxHqcR/vecteezy-icon-image-not-found-vector.jpg";
+
 
   static searchFieldProp() {
     return TextFieldProps(
@@ -138,7 +138,6 @@ class AppConstant {
     var bgColor = kLimeGreenColor;
     var icon = Icons.gpp_good_sharp;
 
-
     if (title.toLowerCase().contains('error')) {
       bgColor = kRedColor;
       icon = Icons.error_outline;
@@ -161,15 +160,27 @@ class AppConstant {
     );
   }
 
-  static showBottomSheet({Widget? widget}) {
-    Get.bottomSheet(
-      widget!,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(15), topRight: Radius.circular(15)),
-      ),
-      backgroundColor: Colors.white,
-    );
+  static showBottomSheet(
+      {Widget? widget, isGetXBottomSheet = true, buildContext}) {
+    if (isGetXBottomSheet) {
+      Get.bottomSheet(
+        widget!,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(15), topRight: Radius.circular(15)),
+        ),
+        backgroundColor: Colors.white,
+      );
+    } else {
+      Scaffold.of(buildContext).showBottomSheet(
+        (context) => widget!,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(15), topRight: Radius.circular(15)),
+        ),
+        backgroundColor: Colors.white,
+      );
+    }
   }
 
   static int getPercentage(ProductModel productModel) {
@@ -207,7 +218,8 @@ class AppConstant {
         return "Rs";
     }
   }
-  static int roundCurrency(String value){
+
+  static int roundCurrency(String value) {
     return double.parse(value).round();
   }
 

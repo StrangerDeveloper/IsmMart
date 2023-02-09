@@ -21,14 +21,15 @@ class SellerDashboard extends GetView<SellersController> {
                 StickyLabel(text: langKey.recentOrders.tr),
                 kSmallDivider,
                 Obx(() => controller
-                        .orderController.recentBuyerOrdersList.isEmpty
+                        .orderController.recentVendorOrdersList.isEmpty
                     ? SizedBox(
-                        height: MediaQuery.of(Get.context!).size.height * 0.5,
-                        child: NoDataFoundWithIcon(title: langKey.noOrderFound.tr),
+                        height: AppConstant.getSize().height * 0.35,
+                        child:
+                            NoDataFoundWithIcon(title: langKey.noOrderFound.tr),
                       )
                     : _buildRecentOrders(
                         list:
-                            controller.orderController.recentBuyerOrdersList)),
+                            controller.orderController.recentVendorOrdersList)),
               ],
             ),
           ),
@@ -39,7 +40,7 @@ class SellerDashboard extends GetView<SellersController> {
 
   Widget _orderStats() {
     return Obx(() => SizedBox(
-          height: 200,
+          height: 400,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -56,7 +57,8 @@ class SellerDashboard extends GetView<SellersController> {
                           icon: Icons.shopping_cart_outlined,
                           iconColor: kRedColor,
                           value: controller
-                              .orderController.orderStats!.totalOrders,
+                                  .orderController.vendorStats?.totalOrders ??
+                              0,
                         ),
                       ),
                       AppConstant.spaceWidget(width: 5),
@@ -68,7 +70,8 @@ class SellerDashboard extends GetView<SellersController> {
                           icon: Icons.pending_outlined,
                           iconColor: Colors.orange,
                           value: controller
-                              .orderController.orderStats!.pendingOrders,
+                                  .orderController.vendorStats?.pendingOrders ??
+                              0,
                         ),
                       ),
                     ],
@@ -87,7 +90,8 @@ class SellerDashboard extends GetView<SellersController> {
                           icon: Icons.local_shipping_outlined,
                           iconColor: Colors.blue,
                           value: controller
-                              .orderController.orderStats!.activeOrders,
+                                  .orderController.vendorStats?.activeOrders ??
+                              0,
                         ),
                       ),
                       AppConstant.spaceWidget(width: 5),
@@ -98,8 +102,73 @@ class SellerDashboard extends GetView<SellersController> {
                           title: langKey.completedOrder.tr,
                           icon: Icons.done_outline_rounded,
                           iconColor: Colors.teal,
+                          value: controller.orderController.vendorStats
+                                  ?.deliveredOrders ??
+                              0,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                AppConstant.spaceWidget(height: 5),
+                Expanded(
+                  flex: 3,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 3,
+                        child: CustomOrderStatsItem(
+                          onTap: () {},
+                          title: langKey.totalEarning.tr,
+                          icon: Icons.cases_rounded,
+                          iconColor: Colors.deepPurple,
                           value: controller
-                              .orderController.orderStats!.completedOrders,
+                                  .orderController.vendorStats?.totalEarning ??
+                              0,
+                        ),
+                      ),
+                      AppConstant.spaceWidget(width: 5),
+                      Expanded(
+                        flex: 3,
+                        child: CustomOrderStatsItem(
+                          onTap: () {},
+                          title: langKey.cMonthEarning.tr,
+                          icon: Icons.monetization_on_rounded,
+                          iconColor: Colors.pinkAccent,
+                          value: controller
+                                  .orderController.vendorStats?.cMonthEarning ??
+                              0,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                AppConstant.spaceWidget(height: 5),
+                Expanded(
+                  flex: 3,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 3,
+                        child: CustomOrderStatsItem(
+                          onTap: () {},
+                          title: langKey.pendingAmount.tr,
+                          icon: Icons.history_edu_rounded,
+                          iconColor: Colors.amber,
+                          value: controller
+                                  .orderController.vendorStats?.pendingAmount ??
+                              0,
+                        ),
+                      ),
+                      AppConstant.spaceWidget(width: 5),
+                      Expanded(
+                        flex: 3,
+                        child: CustomOrderStatsItem(
+                          onTap: () {},
+                          title: langKey.wallet.tr,
+                          icon: Icons.wallet,
+                          iconColor: Colors.blueGrey,
+                          value: 0,
                         ),
                       ),
                     ],
@@ -111,17 +180,15 @@ class SellerDashboard extends GetView<SellersController> {
         ));
   }
 
-  _buildRecentOrders({List<OrderModel>? list}) {
+  _buildRecentOrders({List<VendorOrder>? list}) {
     return ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: list!.length,
-            itemBuilder: (_, index) {
-              OrderModel model = list[index];
-              return SingleRecentOrderItems(orderModel: model);
-            },
-          );
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: list!.length,
+      itemBuilder: (_, index) {
+        VendorOrder model = list[index];
+        return SingleRecentOrderItems(orderModel: model.orderModel);
+      },
+    );
   }
-
-
 }

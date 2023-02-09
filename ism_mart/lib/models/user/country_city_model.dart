@@ -32,7 +32,5 @@ class CountryModel {
         "latitude": latitude == null ? 0 : latitude,
         "longitude": longitude == null ? 0.0 : longitude,
         "countryId": countryId == null ? 0.0 : countryId,
-        "createdAt": createdAt!.toIso8601String(),
-        "updatedAt": updatedAt!.toIso8601String(),
       };
 }

@@ -1,4 +1,4 @@
-import 'package:flip_card/flip_card_controller.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
@@ -7,25 +7,15 @@ import 'package:ism_mart/models/exports_model.dart';
 class CategoryController extends GetxController with StateMixin {
   final ApiProvider _apiProvider;
 
-  CategoryController(this._apiProvider);
-
-  /*@override
-  void onInit() {
-    // TODO: implement onInit
-    super.onInit();
-  }*/
-
-  var flipCardController = FlipCardController();
-
-  @override
-  void onReady() {
-    super.onReady();
-    fetchCategories();
-  }
-
   var categories = <CategoryModel>[].obs;
+
   var isCategoriesLoading = false.obs;
+
   var isCategorySelected = false.obs;
+  var subCategories = <SubCategory>[].obs;
+  var selectedCategory = "".obs;
+
+  CategoryController(this._apiProvider);
 
   fetchCategories() async {
     isCategoriesLoading(true);
@@ -43,16 +33,6 @@ class CategoryController extends GetxController with StateMixin {
       change(null, status: RxStatus.error(error));
     });
   }
-
-  var subCategories = <SubCategory>[].obs;
-  var selectedCategory = "".obs;
-
-  getSubcategory(CategoryModel? categoryModel) async {
-    selectedCategory(categoryModel!.name);
-    makeSelectedCategory(categoryModel);
-    fetchSubCategories(categoryModel);
-  }
-
   fetchSubCategories(CategoryModel? categoryModel) async {
     if (categories.isNotEmpty) {
       isCategoriesLoading(true);
@@ -67,6 +47,12 @@ class CategoryController extends GetxController with StateMixin {
         isCategoriesLoading(false);
       });
     }
+  }
+
+  getSubcategory(CategoryModel? categoryModel) async {
+    selectedCategory(categoryModel!.name);
+    makeSelectedCategory(categoryModel);
+    fetchSubCategories(categoryModel);
   }
 
   makeSelectedCategory(CategoryModel? categoryModel) {
@@ -89,14 +75,22 @@ class CategoryController extends GetxController with StateMixin {
     }
   }
 
-  _clearLists() {
-    categories.clear();
-  }
-
   @override
   void onClose() {
     // TODO: implement onClose
     super.onClose();
     _clearLists();
+  }
+
+
+
+  @override
+  void onReady() {
+    super.onReady();
+    fetchCategories();
+  }
+
+  _clearLists() {
+    categories.clear();
   }
 }

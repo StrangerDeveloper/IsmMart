@@ -30,8 +30,9 @@ class SingleRecentOrderItems extends StatelessWidget {
                     style: headline3,
                   ),
                   AppConstant.spaceWidget(width: 10),
+                  if(model.status!=null)
                   CustomText(
-                    title: model.status!.capitalizeFirst,
+                    title: model.status?.capitalizeFirst ?? "",
                     weight: FontWeight.w600,
                     color: getStatusColor(model),
                   ),

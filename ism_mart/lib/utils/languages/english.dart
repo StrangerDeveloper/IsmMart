@@ -16,7 +16,7 @@ class English {
         key.termsAndConditions: 'Terms & Conditions',
         key.privacyPolicy: 'Privacy Policy',
         key.returnAndExchange: 'Return & Exchange',
-        key.faqs: 'FAQ',
+        key.faqs: 'FAQs',
         key.selectLanguage: 'Select Language',
         key.logout: 'Log out',
 
@@ -53,6 +53,7 @@ class English {
         key.orderTime: 'Order Time',
         key.expectedDelivery: 'Expected Delivery',
         key.shipping: 'Shipping',
+        key.shippingCost: 'Shipping Cost',
 
         ///vendor section
         key.vendorDashboard: 'Dashboard',
@@ -62,6 +63,10 @@ class English {
         key.recentOrders: 'Recent Orders',
         key.completedOrder: 'Completed Orders',
         key.processingOrders: 'Processing Orders',
+        key.totalEarning:'Total Earning',
+        key.cMonthEarning:'Current Month Earning',
+        key.pendingAmount: 'Pending Amount',
+        key.wallet:'Wallet',
         key.userOrders: 'User Orders',
         key.vendorOrders: 'Vendor Orders',
         key.pendingOrders: 'Pending Orders',
@@ -72,11 +77,30 @@ class English {
 
         ///profile
         key.profile: 'Profile',
+        key.vendorStoreDetails: 'Vendor Details',
         key.personalInfo: 'Personal Information',
+        key.storeInfo:'Store Information',
         key.phone: 'Phone',
         key.firstName: 'First Name',
         key.lastName: 'Last Name',
         key.address: 'Address',
+        key.country :'Country',
+        key.city:'City',
+        key.deActivateMsg:'Are you sure to de-activate your account?',
+
+        key.bankDetails:'Bank Details',
+        key.bankName: 'Bank Name',
+        key.bankNameReq: 'Bank name required!',
+        key.bankAccount: 'Account Number',
+        key.bankAccountReq: 'Bank Account Number Required',
+        key.bankAccountHolder:'Account Title',
+        key.bankAccHolderReq: 'Account title required',
+
+        ///contact us
+        key.subject:'Subject',
+        key.subjectReq:'Subject is required',
+        key.message:'Message',
+        key.messageReq: 'Message body is required',
 
         ///member ship
         key.membershipPlans: 'Membership Plans',
@@ -94,6 +118,7 @@ class English {
         key.changeBtn: 'Change',
         key.updateBtn: 'Update',
         key.deleteBtn: 'Delete',
+        key.deactivateBtn: 'Delete Account',
         key.confirm: 'Confirm',
         key.set: 'Set',
         key.yesBtn: 'Yes',
@@ -174,6 +199,6 @@ class English {
         key.errorTitle: "error",
         key.plzSelectSubCategory: 'Plz select Sub Category',
         key.someThingWentWrong: 'Something went wrong',
-        key.delProdMsg: 'Are you sure you want to delete?',
+        key.delProdMsg: 'Are you sure to Delete this?',
       };
 }

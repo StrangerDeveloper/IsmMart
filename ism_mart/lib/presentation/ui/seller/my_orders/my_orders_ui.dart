@@ -11,14 +11,14 @@ class MyOrdersUI extends GetView<OrderController> {
 
   @override
   Widget build(BuildContext context) {
-    controller.fetchOrders();
+    controller.fetchVendorOrders(status: "pending");
     return controller.obx((state) {
-      if (state == null) {
+      /*if (state == null) {
         return noDataFound();
       }
       if (state is List<OrderModel> && state.isEmpty) {
         return noDataFound();
-      }
+      }*/
       return _build(listData: state);
     }, onLoading: CustomLoading(isDarkMode: Get.isDarkMode));
   }
@@ -39,10 +39,18 @@ class MyOrdersUI extends GetView<OrderController> {
         child: Scaffold(
       backgroundColor: Colors.grey[100]!,
       body: Column(
+        //mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          _orderStats(),
+          //_orderStats(),
           _tabBar(),
-          _tabularView(),
+          listData.isNotEmpty
+              ? _tabularView(vendorOrderList: listData)
+              : SizedBox(
+                  height: AppConstant.getSize().height * 0.7,
+                  child: NoDataFoundWithIcon(
+                    title: langKey.noOrderFound.tr,
+                  ),
+                ),
         ],
       ),
     ));
@@ -106,7 +114,7 @@ class MyOrdersUI extends GetView<OrderController> {
                           title: langKey.completedOrder.tr,
                           icon: Icons.done_outline_rounded,
                           iconColor: Colors.teal,
-                          value: controller.orderStats!.completedOrders,
+                          value: controller.orderStats!.deliveredOrders ?? 0,
                         ),
                       ),
                     ],
@@ -120,40 +128,69 @@ class MyOrdersUI extends GetView<OrderController> {
 
   Widget _tabBar() {
     return Container(
+      //width: 100,
       child: Align(
         alignment: Alignment.centerLeft,
         child: TabBar(
           controller: controller.tabController,
           labelStyle: headline3,
+          isScrollable: true,
+          physics: const AlwaysScrollableScrollPhysics(),
+          labelPadding: const EdgeInsets.symmetric(horizontal: 10.0),
           labelColor: kPrimaryColor,
           indicatorColor: kPrimaryColor,
+          onTap: (value) {
+            switch (value) {
+              case 0:
+                controller.fetchVendorOrders(status: "pending");
+                break;
+              case 1:
+                controller.fetchVendorOrders(status: "accepted");
+                break;
+              case 2:
+                controller.fetchVendorOrders(status: "shipped");
+                break;
+              case 3:
+                controller.fetchVendorOrders(status: "delivered");
+                break;
+              case 4:
+                controller.fetchVendorOrders(status: "cancelled");
+                break;
+              default:
+                controller.fetchVendorOrders(status: "pending");
+            }
+          },
           tabs: [
-            Tab(text: langKey.userOrders.tr),
-            Tab(text: langKey.vendorOrders.tr),
+            Tab(text: 'Pending'),
+            Tab(text: 'Accepted'),
+            Tab(text: 'Shipped'),
+            Tab(text: 'Delivered'),
+            Tab(text: 'Cancelled'),
           ],
         ),
       ),
     );
   }
 
-  Widget _tabularView() {
+  Widget _tabularView({vendorOrderList}) {
     return Flexible(
       child: Container(
         padding: const EdgeInsets.all(10),
-        child: TabBarView(
+        child: _buildRecentOrders(list: vendorOrderList),
+
+        /*TabBarView(
           controller: controller.tabController,
           children: [
-            Obx(() =>
-                _buildRecentOrders(list: controller.recentBuyerOrdersList)),
-            Obx(() =>
-                _buildRecentOrders(list: controller.recentVendorOrdersList)),
+            _buildRecentOrders(list: vendorOrderList)
+            */ /* Obx(() =>
+                _buildRecentOrders(list: controller.recentVendorOrdersList)),*/ /*
           ],
-        ),
+        ),*/
       ),
     );
   }
 
-  _buildRecentOrders({List<OrderModel>? list}) {
+  _buildRecentOrders({List<VendorOrder>? list}) {
     return list!.isEmpty
         ? NoDataFound(text: langKey.noOrderFound.tr)
         : ListView.builder(
@@ -161,13 +198,9 @@ class MyOrdersUI extends GetView<OrderController> {
             physics: const AlwaysScrollableScrollPhysics(),
             itemCount: list.length,
             itemBuilder: (_, index) {
-              OrderModel model = list[index];
-              return SingleRecentOrderItems(orderModel: model);
+              VendorOrder model = list[index];
+              return SingleRecentOrderItems(orderModel: model.orderModel);
             },
           );
   }
-
-
-
-
 }

@@ -9,6 +9,7 @@ import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/ui/exports_ui.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:http_parser/http_parser.dart';
 
 class SellersController extends GetxController {
   final SellersApiProvider _apiProvider;
@@ -27,6 +28,7 @@ class SellersController extends GetxController {
   void onReady() {
     super.onReady();
     orderController.fetchOrders();
+    orderController.fetchVendorOrders(status: "pending");
     fetchMyProducts();
 
     fetchCategories();
@@ -154,20 +156,8 @@ class SellersController extends GetxController {
 
   void setSelectedCategory({CategoryModel? category}) async {
     selectedCategory.value = category!;
-    //CategoryModel? model = category!;
     if (!category.name!.contains(chooseCategory)) {
-      /*if (categoriesList.isNotEmpty) {
-        CategoryModel? model = categoriesList.firstWhere(
-                (element) => element.name!.contains(category.name!),
-            orElse: () => CategoryModel());
-        debugPrint("SelectedCategory: out ${model.id}");
-        if (model.id != null) {
-          selectedCategoryID(model.id);
-          await categoryController.fetchSubCategories(model);
-          populateSubCategoriesList();
-        }
-      }*/
-
+      dynamicFieldsValuesList.clear();
       selectedCategoryID(category.id!);
       subCategoriesList.clear();
       await categoryController.fetchSubCategories(category);
@@ -244,12 +234,12 @@ class SellersController extends GetxController {
         "images", pickedImagesList.forEach((element)=> MultipartFile(File(element.path), filename: element.name))));
   */
 
-
     FormData form = FormData({});
     if (pickedImagesList.isNotEmpty) {
       var mpf = MultipartFile(
         File(pickedImagesList[0].path),
         filename: pickedImagesList[0].name,
+        contentType: "image/jpeg",
       );
       form.files.add(MapEntry("images", mpf));
     }
@@ -277,11 +267,17 @@ class SellersController extends GetxController {
     //
     // );
     await _apiProvider
-        .addProduct(
+        /*.addProduct(
             token: authController.userToken,
             formData: form,
-            imagesList: pickedImagesList)
+            imagesList: pickedImagesList)*/
+        .addProductWithHttp(
+            token: authController.userToken,
+            model: newProduct,
+            categoryFieldList: dynamicFieldsValuesList,
+            images: pickedImagesList)
         .then((ProductResponse? response) {
+      isLoading(false);
       if (response != null) {
         if (response.success != null) {
           AppConstant.displaySnackBar('success', "${response.message}");
@@ -291,7 +287,6 @@ class SellersController extends GetxController {
               "${response.message != null ? response.message : someThingWentWrong.tr}");
         }
         Get.back();
-        isLoading(false);
         fetchMyProducts();
         clearControllers();
       }
@@ -364,7 +359,8 @@ class SellersController extends GetxController {
     const MyProducts(),
     const MyOrdersUI(),
     //const PremiumMembershipUI(),
-    const ProfileUI()
+    const ProfileUI(),
+    const StoreProfileUI(),
   ];
 
   var currentPage = 0.obs;
@@ -388,7 +384,8 @@ class SellersController extends GetxController {
       //{'title': "Add Product", "icon": Icons.add_card_outlined, "page": 1},
       {'title': myProducts.tr, "icon": Icons.list_outlined, "page": 1},
       {'title': myOrders.tr, "icon": Icons.shopping_bag_outlined, "page": 2},
-      {'title': profile.tr, "icon": Icons.manage_accounts_outlined, "page": 4},
+      {'title': profile.tr, "icon": Icons.manage_accounts_outlined, "page": 3},
+      {'title': vendorStoreDetails.tr, "icon": Icons.storefront, "page": 4},
       /*{
         'title': "Premium Membership",
         "icon": Icons.workspace_premium_outlined,
@@ -459,6 +456,7 @@ class SellersController extends GetxController {
     prodDescriptionController.clear();
     prodDiscountController.clear();
     pickedImagesList.clear();
+    dynamicFieldsValuesList.clear();
     /*categoriesList.clear();
     categoriesList.insert(
         0, CategoryModel(name: selectedCategory.value, id: 0));

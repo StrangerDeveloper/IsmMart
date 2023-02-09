@@ -41,7 +41,7 @@ class SingleProductView extends GetView<ProductController> {
                 productModel.images!.isEmpty
                     ? CustomNetworkImage(
                         imageUrl: productModel.thumbnail,
-                        fit:BoxFit.fill,
+                        fit:BoxFit.cover,
                         width: MediaQuery.of(Get.context!).size.width,
                         height: MediaQuery.of(Get.context!).size.height * 0.4,
                       )
@@ -93,7 +93,8 @@ class SingleProductView extends GetView<ProductController> {
                     AppConstant.spaceWidget(width: 10),
                     CartIcon(
                       onTap: () {
-                        Get.offNamed(Routes.cartRoute,
+                        //called from SingleProductView (SPV)
+                        Get.offNamed(Routes.cartRoute, arguments: {"calledFromSPV":true},
                             preventDuplicates: false);
                       },
                       iconWidget: Icon(
@@ -125,24 +126,26 @@ class SingleProductView extends GetView<ProductController> {
             },
           ),
         ),
-        Positioned(
-          bottom: 16.0,
-          left: 0.0,
-          right: 0.0,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(
-              imagesList.length,
-              (index) => AnimatedContainer(
-                duration: const Duration(milliseconds: 400),
-                height: 6.0,
-                width: /*controller.sliderIndex.value == index ? 14.0 :*/ 6.0,
-                margin: const EdgeInsets.only(right: 4.0),
-                decoration: BoxDecoration(
-                  color: controller.pageIndex.value == index
-                      ? kPrimaryColor
-                      : kLightColor,
-                  borderRadius: BorderRadius.circular(8.0),
+        Obx(
+          ()=> Positioned(
+            bottom: 16.0,
+            left: 0.0,
+            right: 0.0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(
+                imagesList.length,
+                (index) => AnimatedContainer(
+                  duration: const Duration(milliseconds: 400),
+                  height: 6.0,
+                  width: /*controller.sliderIndex.value == index ? 14.0 :*/ 6.0,
+                  margin: const EdgeInsets.only(right: 4.0),
+                  decoration: BoxDecoration(
+                    color: controller.pageIndex.value == index
+                        ? kPrimaryColor
+                        : kLightColor,
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
                 ),
               ),
             ),
