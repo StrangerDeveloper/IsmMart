@@ -129,7 +129,8 @@ class SearchUI extends GetView<SearchController> {
   Widget _buildProductView(List<ProductModel> list) {
     return Column(
       children: [
-        //Material is used for elevation like appbar
+        ///Filter bar
+        ///Material is used for elevation like appbar
         Material(
           elevation: 1,
           child: Container(
@@ -195,12 +196,11 @@ class SearchUI extends GetView<SearchController> {
                   child: GridView.builder(
                     controller: controller.scrollController,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
+                        crossAxisCount: AppResponsiveness.getGridItemCount(),
                         mainAxisSpacing: 10,
                         crossAxisSpacing: 10,
-                        mainAxisExtent: AppConstant
-                            .getSize()
-                            .height * 0.25),
+                      mainAxisExtent: AppResponsiveness.getMainAxisExtentPoint25()
+                        ),
                     itemCount: list.length,
                     itemBuilder: (_, index) {
                       ProductModel productModel = list[index];

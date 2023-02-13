@@ -324,11 +324,13 @@ class CheckoutController extends GetxController {
   }
 
   void createOrder({paymentMethod = "COD"}) {
+
+
     JSON data = {
       "paymentMethod": paymentMethod,
-      "shippingPrice": 100,
+      "shippingPrice": shippingCost.value,
       "shippingDetailsId": defaultAddressModel!.id,
-      "cartItems": cartController.cartItemsList.toJson(),
+      "cartItems": cartController.cartItemsList,
     };
 
     _orderProvider

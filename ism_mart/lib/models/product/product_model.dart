@@ -141,6 +141,14 @@ class ProductModel {
         "subCategoryId": subCategoryId,
       };
 
+  JSON toOrderCheckoutJson()=>{
+      "name": name,
+      "thumbnail": thumbnail,
+      "vendorId": vendorId,
+      "discountPrice": discountPrice,
+      "totalPrice": totalPrice
+  };
+
   @override
   bool operator ==(Object other) {
     if (other is! ProductModel) return false;

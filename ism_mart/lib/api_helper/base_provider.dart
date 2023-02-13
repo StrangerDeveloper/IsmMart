@@ -17,7 +17,6 @@ class BaseProvider extends GetConnect implements GetxService{
 
   @override
   void onClose() {
-    // TODO: implement onClose
     super.onClose();
     httpClient.close();
   }

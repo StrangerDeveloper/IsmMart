@@ -52,8 +52,8 @@ class CheckoutUI extends GetView<CheckoutController> {
                   children: [
                     _singleShippingCostItem(
                         title: "Standard", price: 250, delivery: 7),
-                    _singleShippingCostItem(
-                        title: "Free", price: 0, delivery: 14),
+                    /*_singleShippingCostItem(
+                        title: "Free", price: 0, delivery: 14),*/
                   ],
                 ),
               ),
@@ -69,17 +69,19 @@ class CheckoutUI extends GetView<CheckoutController> {
                           width: 280,
                           height: 50,
                           onTap: () {
-                            if (controller.shippingCost.value == 0 &&
-                                controller.totalAmount.value <= 1000) {
+                            if (/*controller.shippingCost.value == 0 &&*/
+                                controller.cartController.totalCartAmount.value <= 1000) {
                               controller.showSnackBar(
                                   title: "error",
                                   message:
-                                      "You cannot use Free Shipping Service under Rs1000");
+                                      "Order Amount must not be under Rs 1000.");
+                              //You cannot use Free Shipping Service under Rs1000
                               return;
                             } else {
                               if (controller.defaultAddressModel!.id != null) {
                                 if (controller
                                     .cartController.cartItemsList.isNotEmpty) {
+
                                   controller.makePayment(
                                       amount: controller.totalAmount.value
                                           .toString());
@@ -658,7 +660,7 @@ class CheckoutUI extends GetView<CheckoutController> {
                       ),
                     ),
 
-                    ///Cancel Button
+                    ///Apply Button
                     Expanded(
                         child: OutlinedButton(
                       onPressed: () {},

@@ -50,10 +50,14 @@ class CartModel {
         'color': color,
         'productId': productId,
         'size': size,
-        'productId': productModel!.id,
         'quantity': quantity,
         'onQuantityClicked': onQuantityClicked
       };
+  JSON toOrderCreationJson()=>{
+    "productId": productId,
+    "quantity": quantity,
+    "Product": productModel!.toOrderCheckoutJson()
+  };
 }
 
 class CartResponse {

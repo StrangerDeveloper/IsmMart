@@ -4,11 +4,10 @@ import 'package:iconly/iconly.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
-import 'package:ism_mart/presentation/widgets/export_widgets.dart';
+import 'package:ism_mart/presentation/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
-//final cartController = Get.find<CartController>();
 class CartUI extends GetView<CartController> {
   const CartUI({Key? key}) : super(key: key);
 
@@ -61,10 +60,12 @@ class CartUI extends GetView<CartController> {
             ],
           ),
         ),
-        body: NoDataFoundWithIcon(
-          icon: IconlyLight.buy,
-          title: langKey.emptyCart.tr,
-          subTitle: langKey.emptyCartMsg.tr,
+        body: Center(
+          child: NoDataFoundWithIcon(
+            icon: IconlyLight.buy,
+            title: langKey.emptyCart.tr,
+            subTitle: langKey.emptyCartMsg.tr,
+          ),
         ),
       ),
     );
@@ -130,6 +131,7 @@ class CartUI extends GetView<CartController> {
   }
 
   Widget _singleCartItem({CartModel? cartModel, index}) {
+    print("cartModel: ${cartModel!.productId}");
     return InkWell(
       onTap: () {
         Get.toNamed('/product/${cartModel.productId}',
@@ -361,7 +363,7 @@ class CartUI extends GetView<CartController> {
             AppConstant.spaceWidget(height: 10),
             CustomButton(
               onTap: () => Get.toNamed(Routes.checkOutRoute),
-              text: "Proceed To Checkout",
+              text: langKey.proceedToCheckOut.tr,
               color: kPrimaryColor,
               height: 40,
             ),

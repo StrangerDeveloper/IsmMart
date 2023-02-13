@@ -68,14 +68,14 @@ class DashboardUI extends GetView<BaseController> {
   }
 
   Widget _slider(List<SliderModel> list) {
-    var height = AppConstant.getSize().height;
+    //var height = AppConstant.getSize().height;
     return Obx(
       () => controller.isSliderLoading.isTrue
           ? CustomLoading(isItForWidget: true)
           : Stack(
               children: [
                 SizedBox(
-                  height: height * (height > 800 ? 0.2 : 0.15),
+                  height: AppResponsiveness.getBoxHeightPoint15(),
                   child: PageView.builder(
                     controller: controller.sliderPageController,
                     onPageChanged: (value) {
@@ -130,8 +130,10 @@ class DashboardUI extends GetView<BaseController> {
       () => Container(
         //margin: const EdgeInsets.only(top: 10),
         color: kWhiteColor,
-        height: AppConstant.getSize().height * 0.35,
+        height: AppResponsiveness.getBoxHeightPoint30(),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             StickyLabel(text: langKey.discountDeals.tr),
             AppConstant.spaceWidget(height: 10),
@@ -189,7 +191,7 @@ class DashboardUI extends GetView<BaseController> {
             child: Container(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 30, vertical: 0),
-                //height: AppConstant.getSize().height * 0.15,
+                //height: 60,
                 child: Column(
                   children: [
                     CountdownTimer(
@@ -210,7 +212,7 @@ class DashboardUI extends GetView<BaseController> {
                     Card(
                       shadowColor: kDarkColor,
                       child: SizedBox(
-                        height: 90,
+                        height: AppResponsiveness.getHeight100_120(),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Column(
@@ -278,8 +280,8 @@ class DashboardUI extends GetView<BaseController> {
   _timeCard(int timePart, String format) {
     return Card(
       child: SizedBox(
-        width: 40,
-        height: 40,
+        width: AppResponsiveness.getWidth50(),
+        height: AppResponsiveness.getHeight50_60(),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -309,8 +311,6 @@ class DashboardUI extends GetView<BaseController> {
         return Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            /*calledForCategoryProducts!
-                ?*/
             StickyLabelWithViewMoreOption(
                 title: e.key,
                 textSize: 20,
@@ -318,10 +318,6 @@ class DashboardUI extends GetView<BaseController> {
                   Get.toNamed(Routes.searchRoute,
                       arguments: {"searchText": "${e.key}"});
                 }),
-            /* : StickyLabel(
-                    text: e.key,
-                    textSize: 20,
-                  ),*/
             AppConstant.spaceWidget(height: 10),
             _trendingProducts(list as List<ProductModel>, isPopular,
                 calledForCategoryProducts)
@@ -335,7 +331,7 @@ class DashboardUI extends GetView<BaseController> {
 
   Widget _trendingProducts(
       List<ProductModel> list, bool? isPopular, bool? isCategoryProducts) {
-    var height = AppConstant.getSize().height;
+    //var height = AppConstant.getSize().height;
     if (isPopular!)
       return Padding(
         padding: const EdgeInsets.all(6.0),
@@ -345,8 +341,8 @@ class DashboardUI extends GetView<BaseController> {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: height > 800 ? 3 : 2,
-                  mainAxisExtent: height * 0.25,
+                  crossAxisCount: AppResponsiveness.getGridItemCount(),
+                  mainAxisExtent: AppResponsiveness.getMainAxisExtentPoint25(),
                   mainAxisSpacing: 10,
                   crossAxisSpacing: 10),
               itemCount: list.length,
@@ -382,14 +378,14 @@ class DashboardUI extends GetView<BaseController> {
 
   Widget _topCategoriesGrid(List<CategoryModel> list) {
     //var theme = Theme.of(Get.context!);
-    double height = AppConstant.getSize().height;
+    //double height = AppConstant.getSize().height;
     return Obx(
       () => controller.isCategoriesLoading.isTrue
           ? CustomLoading(isItForWidget: true)
           : Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               child: SizedBox(
-                height: height * 0.23,
+                height: AppResponsiveness.getBoxHeightPoint25(),
                 child: list.isEmpty
                     ? NoDataFound(text: langKey.noCategoryFound.tr)
                     : GridView.builder(
@@ -397,7 +393,7 @@ class DashboardUI extends GetView<BaseController> {
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           //maxCrossAxisExtent: 150,
                           crossAxisCount: 2,
-                          // childAspectRatio: _getChildAspectRatio(Get.context!),
+                          //childAspectRatio: 1.8,
                           //mainAxisSpacing: 3.0,
                           //crossAxisSpacing: 3.0,
                         ),

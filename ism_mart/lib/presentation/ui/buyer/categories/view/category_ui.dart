@@ -72,11 +72,11 @@ class CategoriesUI extends GetView<CategoryController> {
 
   //having split but different design
   _buildBodyNew({List<CategoryModel>? categoryList}) {
-    var height = AppConstant.getSize().height;
+    //var height = AppConstant.getSize().height;
     return Row(
       children: [
         Container(
-          width: height > 800 ? 100 : 50,
+          width: AppResponsiveness.getHeight50_100(),
           margin: const EdgeInsets.symmetric(horizontal: 10),
           child: ListView.builder(
             //shrinkWrap: true,
@@ -90,7 +90,7 @@ class CategoriesUI extends GetView<CategoryController> {
                 child: Container(
                   //width: 50,
                   constraints:
-                      BoxConstraints(minHeight: height > 800 ? 200 : 150),
+                      BoxConstraints(minHeight: 150),
                   alignment: Alignment.center,
                   //padding: const EdgeInsets.all(8.0),
                   //margin: const EdgeInsets.symmetric(vertical: 5.0),
@@ -106,7 +106,7 @@ class CategoriesUI extends GetView<CategoryController> {
                     quarterTurns: -1,
                     child: CustomText(
                       title: categoryModel.name,
-                      size: height > 800 ? 16 : 13,
+                      size: AppResponsiveness.getTextSize13_16(),
                       color:
                           categoryModel.isPressed! ? kDarkColor : kWhiteColor,
                       weight: FontWeight.w600,
@@ -146,7 +146,7 @@ class CategoriesUI extends GetView<CategoryController> {
   }
 
   Widget _buildSubCategoryItem(SubCategory? subCategory) {
-    var height = AppConstant.getSize().height;
+   // var height = AppConstant.getSize().height;
     return InkWell(
       onTap: () {
         Get.toNamed(Routes.searchRoute,
@@ -166,7 +166,7 @@ class CategoriesUI extends GetView<CategoryController> {
               child: CustomText(
                 title: "${subCategory!.name}",
                 //color: kWhiteColor,
-                size: height>800?16:13,
+                size: AppResponsiveness.getTextSize13_16(),
                 textAlign: TextAlign.center,
                 weight: FontWeight.bold,
               ),

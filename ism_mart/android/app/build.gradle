@@ -61,6 +61,9 @@ android {
         targetSdkVersion localProperties.getProperty('flutter.targetSdkVersion').toInteger()
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        ndk {
+            debugSymbolLevel 'FULL'
+        }
     }
     signingConfigs {
         release {
@@ -72,7 +75,7 @@ android {
     }
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
+            // TOcd ..O: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
             //signingConfig signingConfigs.release

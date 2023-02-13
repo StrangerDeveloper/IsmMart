@@ -81,7 +81,7 @@ class ProductController extends GetxController with StateMixin {
     quantityController.text = count.value.toString();
   }
 
-  //TODO: Add item to cart
+  //TOO: Add item to cart
 
   addItemToCart({ProductModel? product}) async {
 
@@ -92,8 +92,7 @@ class ProductController extends GetxController with StateMixin {
         onQuantityClicked: false,
         color: color.value);
 
-    if (authController.isSessionExpired!) {
-      debugPrint(">>>AddItemToCart: Session is expired");
+    if (authController.isSessionExpired! && authController.userToken==null) {
       await LocalStorageHelper.addItemToCart(cartModel: cart).then((value) {
         AppConstant.displaySnackBar("Added", "Added to Cart!",
             position: SnackPosition.TOP);
@@ -101,23 +100,22 @@ class ProductController extends GetxController with StateMixin {
         count(1);
       });
     } else {
-      await LocalStorageHelper.getStoredUser().then((user) async {
-        var cartData = {"productId": product!.id, "quantity": cart.quantity};
-        await _apiProvider
-            .addCart(token: user.token, data: cartData)
-            .then((CartResponse? response) {
-          if (response != null) {
-            if (response.success!) {
-              clearControllers();
-              count(1);
-              showSnackBar('success', response.message);
-            } else
-              showSnackBar('error', response.message);
+      var cartData = {"productId": product!.id, "quantity": cart.quantity};
+      print("");
+      await _apiProvider
+          .addCart(token: authController.userToken, data: cartData)
+          .then((CartResponse? response) {
+        if (response != null) {
+          if (response.success!) {
+            clearControllers();
+            count(1);
+            showSnackBar('success', response.message);
           } else
-            showSnackBar('error', 'Something went wrong!');
-        }).catchError((error) {
-          debugPrint(">>>>addItemToCart $error");
-        });
+            showSnackBar('error', response.message);
+        } else
+          showSnackBar('error', 'Something went wrong!');
+      }).catchError((error) {
+        debugPrint(">>>>addItemToCart $error");
       });
     }
 
