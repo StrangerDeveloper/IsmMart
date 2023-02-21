@@ -1,6 +1,7 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
@@ -8,8 +9,6 @@ import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/ui/exports_ui.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:http_parser/http_parser.dart';
 
 class SellersController extends GetxController {
   final SellersApiProvider _apiProvider;
@@ -27,21 +26,15 @@ class SellersController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    orderController.fetchOrders();
     orderController.fetchVendorOrders(status: "pending");
     fetchMyProducts();
-
     fetchCategories();
-    //myProductsList.bindStream(streamMyProducts());
   }
 
   //TOO: fetch MY Products
   var myProductsList = <ProductModel>[].obs;
 
   fetchMyProducts() async {
-    /*await LocalStorageHelper.getStoredUser().then((user) async {
-
-    });*/
     await _apiProvider
         .fetchMyProducts(token: authController.userToken)
         .then((response) {
@@ -50,13 +43,6 @@ class SellersController extends GetxController {
     });
   }
 
-  /*Stream<List<ProductModel>> streamMyProducts() {
-
-    return _apiProvider
-        .fetchMyProducts(token: authController.userToken)
-        .asStream();
-  }
-*/
   //TOO: Update Product using PATCH request type
 
   updateProduct({ProductModel? model}) async {
@@ -199,15 +185,6 @@ class SellersController extends GetxController {
 
   addProduct() async {
     isLoading(true);
-    //debugPrint("ImagePath: ${imagePath.value}");
-    //var fileName = imagePath.value.split("/").last;
-
-    //debugPrint("ImagePath: ${File(imagePath.value).lengthSync()}");
-    /*var mpf = MultipartFile(
-      File(imagePath.value),
-      filename: fileName,
-    );*/
-    //debugPrint("ImagePath mpf: ${mpf.length}");
 
     ProductModel newProduct = ProductModel(
         name: prodNameController.text.trim(),
@@ -216,61 +193,10 @@ class SellersController extends GetxController {
         categoryId: selectedCategoryID.value,
         subCategoryId: selectedSubCategoryID.value,
         description: prodDescriptionController.text,
-        discount: num.parse(prodDiscountController.text));
-
-    // var listMultiPart = [];
-    // for(XFile file in pickedImagesList){
-    //   listMultiPart.add(MultipartFile(File(file.path), filename: file.name));
-    // }
-
-    /*pickedImagesList.forEach((element) {
-      form.files.add(MapEntry(
-          "images", MultipartFile(File(element.path), filename: element.name)));
-    });*/
-
-    //MultipartFile(File(element.path), filename: element.name)
-
-    /*form.files.add(MapEntry(
-        "images", pickedImagesList.forEach((element)=> MultipartFile(File(element.path), filename: element.name))));
-  */
-
-    FormData form = FormData({});
-    if (pickedImagesList.isNotEmpty) {
-      var mpf = MultipartFile(
-        File(pickedImagesList[0].path),
-        filename: pickedImagesList[0].name,
-        contentType: "image/jpeg",
-      );
-      form.files.add(MapEntry("images", mpf));
-    }
-    form.fields.add(MapEntry("name", newProduct.name!));
-    form.fields.add(MapEntry("price", newProduct.price!.toString()));
-    form.fields.add(MapEntry("stock", newProduct.stock!.toString()));
-    form.fields.add(MapEntry("categoryId", newProduct.categoryId!.toString()));
-    form.fields
-        .add(MapEntry("subCategoryId", newProduct.subCategoryId!.toString()));
-    form.fields.add(MapEntry("discount", newProduct.discount!.toString()));
-    //form.fields.add(MapEntry("sku", newProduct.sku!));
-    form.fields.add(MapEntry("description", newProduct.description!));
-
-    for (var i = 0; i < dynamicFieldsValuesList.entries.length; i++) {
-      form.fields.add(MapEntry("features[$i][id]",
-          dynamicFieldsValuesList.entries.elementAt(i).key));
-      form.fields.add(MapEntry("features[$i][value]",
-          dynamicFieldsValuesList.entries.elementAt(i).value));
-    }
-
-    //dynamicFieldsValuesList.map((key, value) => form.fields.add(MapEntry("description", newProduct.description!)););
-    // var mpf = MultipartFile(
-    //   File(pickedImagesList[0].path),
-    //   filename: pickedImagesList[0].name,
-    //
-    // );
+        discount: num.parse(prodDiscountController.text.isEmpty
+            ? "0"
+            : prodDiscountController.text));
     await _apiProvider
-        /*.addProduct(
-            token: authController.userToken,
-            formData: form,
-            imagesList: pickedImagesList)*/
         .addProductWithHttp(
             token: authController.userToken,
             model: newProduct,
@@ -280,15 +206,16 @@ class SellersController extends GetxController {
       isLoading(false);
       if (response != null) {
         if (response.success != null) {
+          fetchMyProducts();
+          Get.back();
+          clearControllers();
+          print(">>>AddProduct: ${response.message}");
           AppConstant.displaySnackBar('success', "${response.message}");
         } else {
           debugPrint('Error: ${response.toString()}');
           AppConstant.displaySnackBar('error',
               "${response.message != null ? response.message : someThingWentWrong.tr}");
         }
-        Get.back();
-        fetchMyProducts();
-        clearControllers();
       }
     }).catchError((error) {
       isLoading(false);
@@ -304,51 +231,74 @@ class SellersController extends GetxController {
   ///  0 for Camera
   ///  1 for Gallery
   var imagePath = "".obs;
-  var _picker = ImagePicker();
-  var pickedImagesList = <XFile>[].obs;
+  static var _picker = ImagePicker();
+  var pickedImagesList = <File>[].obs;
+  var imagesSizeInMb = 0.0.obs;
 
   pickMultipleImages() async {
-    if (Platform.isIOS) {
-      List<XFile> images = await _picker.pickMultiImage();
-      if (images.isNotEmpty) {
-        pickedImagesList.addAll(images);
-      } else {
-        debugPrint("No Images were selected");
-      }
-    } else {
-      checkPermissions().then((isGranted) async {
-        if (isGranted) {
-          List<XFile> images = await _picker.pickMultiImage();
+    await PermissionsHandler().checkPermissions().then((isGranted) async {
+      if (isGranted) {
+        try {
+          List<XFile> images = await _picker.pickMultiImage(imageQuality: 100);
           if (images.isNotEmpty) {
-            pickedImagesList.addAll(images);
+            images.forEach((XFile? file) async {
+              await file!.length().then((length) async {
+                var lengthInKb = length * 0.000001;
+                print(">>>Length: $lengthInKb");
+                await AppConstant.compressImage(file.path, fileLength: length)
+                    .then((compressedFile) {
+                  var lengthInMb = compressedFile.lengthSync() * 0.000001;
+                  print(">>>Length after: $lengthInMb");
+                  imagesSizeInMb.value += lengthInMb;
+                  if (lengthInMb > 2) {
+                    showSnackBar(message: 'Each file must be up to 2MB');
+                  } else {
+                    //TODO: needs to add check if file exist
+                    pickedImagesList.add(compressedFile);
+                  }
+                });
+              });
+            });
           } else {
-            debugPrint("No Images were selected");
+            print("No Images were selected");
           }
-        } else {
-          requestPhotoAndCameraPermissions();
+        } on PlatformException catch (e) {
+          print(e);
+          AppConstant.displaySnackBar('error', 'Invalid Image format!');
         }
-      });
-    }
+      } else {
+        print("called");
+        await PermissionsHandler().requestPermissions();
+      }
+    });
   }
 
   pickOrCaptureImageGallery(int? callingType) async {
-    try {
-      XFile? imgFile = await _picker.pickImage(
-          source: callingType == 0 ? ImageSource.camera : ImageSource.gallery);
-      if (imgFile != null) {
-        await imgFile
-            .length()
-            .then((value) => debugPrint("PickedImage: Length: $value"));
-        debugPrint("PickedImage: mimeType: ${imgFile.mimeType}");
-        debugPrint("PickedImage: Name: ${imgFile.name}");
-        imagePath(imgFile.path);
-        Get.back();
-      }
-
-      //uploadImage(imgFile);
-    } catch (e) {
-      debugPrint("UploadImage: $e");
-    }
+    await PermissionsHandler().checkPermissions().then((isGranted) async {
+      if (isGranted) {
+        try {
+          XFile? imgFile = await _picker.pickImage(
+              source:
+                  callingType == 0 ? ImageSource.camera : ImageSource.gallery);
+          if (imgFile != null) {
+            await imgFile.length().then((length) async {
+              await AppConstant.compressImage(imgFile.path, fileLength: length)
+                  .then((compressedFile) {
+                var lengthInMb = compressedFile.lengthSync() * 0.000001;
+                if (lengthInMb > 2) {
+                  showSnackBar(message: 'Image must be up to 2MB');
+                } else {
+                  imagePath(compressedFile.path);
+                }
+              });
+            });
+          }
+        } catch (e) {
+          print("UploadImage: $e");
+        }
+      } else
+        await PermissionsHandler().requestPermissions();
+    });
   }
 
   ///END Add Product
@@ -369,9 +319,6 @@ class SellersController extends GetxController {
     currentPage.value = index;
     //appBarTitle(titles[index]);
     pageViewController.jumpToPage(index);
-
-    /*bottomNavPageController.animateToPage(index,
-        duration: const Duration(milliseconds: 500), curve: Curves.easeIn);*/
   }
 
   List<JSON> getMenuItems() {
@@ -423,28 +370,8 @@ class SellersController extends GetxController {
     ];
   }
 
-  Future<bool> checkPermissions() async {
-    return //await Permission.manageExternalStorage.isGranted &&
-        await Permission.storage.isGranted &&
-            //await Permission.photos.isGranted &&
-            await Permission.camera.isGranted;
-  }
-
-  void requestPhotoAndCameraPermissions() async {
-    Map<Permission, PermissionStatus> statuses = await [
-      Permission.manageExternalStorage,
-      Permission.camera,
-      Permission.photos,
-      Permission.storage,
-      //Permission.mediaLibrary,
-      //add more permission to request here.
-    ].request();
-    if (statuses[Permission.manageExternalStorage]!.isDenied &&
-        statuses[Permission.camera]!.isDenied &&
-        statuses[Permission.photos]!.isDenied) {
-      //check each permission status after.
-      debugPrint(">>>>permission is denied.");
-    }
+  void showSnackBar({title = 'error', message = 'Something went wrong'}) {
+    AppConstant.displaySnackBar(title, message);
   }
 
   clearControllers() {
@@ -457,12 +384,7 @@ class SellersController extends GetxController {
     prodDiscountController.clear();
     pickedImagesList.clear();
     dynamicFieldsValuesList.clear();
-    /*categoriesList.clear();
-    categoriesList.insert(
-        0, CategoryModel(name: selectedCategory.value, id: 0));
-    subCategoriesList.clear();
-    subCategoriesList.insert(
-        0, SubCategory(name: selectedSubCategory.value, id: 0));*/
+    imagesSizeInMb(0.0);
   }
 
   @override

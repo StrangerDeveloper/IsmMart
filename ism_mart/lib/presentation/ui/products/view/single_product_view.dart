@@ -8,7 +8,6 @@ import 'package:ism_mart/presentation/ui/exports_ui.dart';
 import 'package:ism_mart/presentation/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
-
 class SingleProductView extends GetView<ProductController> {
   const SingleProductView({Key? key}) : super(key: key);
 
@@ -25,11 +24,11 @@ class SingleProductView extends GetView<ProductController> {
       if (state == null) {
         return CustomLoading(isDarkMode: isDarkMode);
       }
-      return _build(context: context, productModel: state);
+      return _build(productModel: state);
     }, onLoading: CustomLoading(isDarkMode: isDarkMode));
   }
 
-  Widget _build({context, ProductModel? productModel}) {
+  Widget _build({ ProductModel? productModel}) {
     return Scaffold(
       backgroundColor: Colors.grey[300]!,
       body: CustomScrollView(
@@ -41,7 +40,7 @@ class SingleProductView extends GetView<ProductController> {
                 productModel.images!.isEmpty
                     ? CustomNetworkImage(
                         imageUrl: productModel.thumbnail,
-                        fit:BoxFit.cover,
+                        fit: BoxFit.cover,
                         width: MediaQuery.of(Get.context!).size.width,
                         height: MediaQuery.of(Get.context!).size.height * 0.4,
                       )
@@ -94,7 +93,8 @@ class SingleProductView extends GetView<ProductController> {
                     CartIcon(
                       onTap: () {
                         //called from SingleProductView (SPV)
-                        Get.offNamed(Routes.cartRoute, arguments: {"calledFromSPV":true},
+                        Get.offNamed(Routes.cartRoute,
+                            arguments: {"calledFromSPV": true},
                             preventDuplicates: false);
                       },
                       iconWidget: Icon(
@@ -127,7 +127,7 @@ class SingleProductView extends GetView<ProductController> {
           ),
         ),
         Obx(
-          ()=> Positioned(
+          () => Positioned(
             bottom: 16.0,
             left: 0.0,
             right: 0.0,
@@ -217,7 +217,8 @@ class SingleProductView extends GetView<ProductController> {
               children: [
                 CustomText(title: "Category: ", style: bodyText2),
                 CustomText(
-                    title: "\t${productModel.category!.name}", style: bodyText1),
+                    title: "\t${productModel.category!.name}",
+                    style: bodyText1),
                 AppConstant.spaceWidget(width: 3),
                 const Icon(
                   Icons.arrow_forward_ios_sharp,
@@ -292,7 +293,6 @@ class SingleProductView extends GetView<ProductController> {
                         style: bodyText1),
                     TextSpan(
                       text: " ${_getPositiveResponse()}  ",
-
                       style: bodyText2.copyWith(
                           backgroundColor: Colors.blueGrey.withOpacity(0.2)),
                     )
@@ -350,7 +350,7 @@ class SingleProductView extends GetView<ProductController> {
                   CustomText(
                     title: productModel.description,
                     maxLines: productModel.description!.length,
-                    style: bodyText2,
+                    style: bodyText2Poppins,
                   ),
                   AppConstant.spaceWidget(height: 8),
                   /* CustomText(
@@ -512,9 +512,7 @@ class SingleProductView extends GetView<ProductController> {
           _buildQtyChosen(),
           kSmallDivider,
           _buildBuyNowAndCartBtn(productModel: productModel),
-          AppConstant.spaceWidget(
-            height: 20,
-          ),
+          AppConstant.spaceWidget(height: 20),
         ],
       ),
     );
@@ -563,13 +561,6 @@ class SingleProductView extends GetView<ProductController> {
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        /*CustomButton(
-          onTap: () => LocalStorageHelper.deleteAllCart(),
-          text: "Buy Now",
-          color: Colors.yellow[800],
-          width: 120,
-          height: 35,
-        ),*/
         CustomButton(
           onTap: () {
             controller.addItemToCart(product: productModel);
@@ -612,5 +603,4 @@ class SingleProductView extends GetView<ProductController> {
       ),
     );
   }
-
 }

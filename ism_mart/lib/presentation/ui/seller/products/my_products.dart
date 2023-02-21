@@ -200,9 +200,9 @@ class MyProducts extends GetView<SellersController> {
             ),
             AppConstant.spaceWidget(height: 10),
             buildConfirmDeleteIcon(),
-            AppConstant.spaceWidget(height: 10),
+            AppConstant.spaceWidget(height: 20),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 CustomButton(
                   onTap: () {
@@ -210,8 +210,8 @@ class MyProducts extends GetView<SellersController> {
                   },
                   text: langKey.noBtn.tr,
                   width: 100,
-                  height: 35,
-                  color: kRedColor,
+                  height: 30,
+                  color: kPrimaryColor,
                 ),
                 CustomButton(
                   onTap: () {
@@ -220,7 +220,7 @@ class MyProducts extends GetView<SellersController> {
                   },
                   text: langKey.yesBtn.tr,
                   width: 100,
-                  height: 35,
+                  height: 30,
                   color: kRedColor,
                 ),
               ],

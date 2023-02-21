@@ -14,3 +14,4 @@ export 'no_data_found_with_icon.dart';
 export 'product_quantity_counter.dart';
 export 'sticky_label_with_view_more.dart';
 export 'sticky_labels.dart';
+export 'show_picked_images_list.dart';

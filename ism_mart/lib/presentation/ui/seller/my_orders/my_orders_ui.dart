@@ -199,7 +199,7 @@ class MyOrdersUI extends GetView<OrderController> {
             itemCount: list.length,
             itemBuilder: (_, index) {
               VendorOrder model = list[index];
-              return SingleRecentOrderItems(orderModel: model.orderModel);
+              return SingleRecentOrderItems(orderModel: model.orderModel, calledForBuyerOrderDetails: false,);
             },
           );
   }

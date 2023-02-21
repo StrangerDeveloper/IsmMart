@@ -52,6 +52,7 @@ class AddProductsUI extends GetView<SellersController> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         _buildImageSection(),
+
                         AppConstant.spaceWidget(height: 20),
 
                         ///TOO: Category
@@ -189,7 +190,8 @@ class AddProductsUI extends GetView<SellersController> {
                               onChanged: (value) {
                                 if (value.isNotEmpty) {
                                   int amount = int.parse(value);
-                                  int totalAfter = amount + (amount * 0.05).round();
+                                  int totalAfter =
+                                      amount + (amount * 0.05).round();
                                   controller.priceAfterCommission(totalAfter);
                                 } else {
                                   controller.priceAfterCommission(0);
@@ -337,76 +339,14 @@ class AddProductsUI extends GetView<SellersController> {
         ),
       ),
     );
-    return FormInputFieldWithIcon(
-      controller: controller.prodDescriptionController,
-      iconPrefix: IconlyLight.document,
-      labelText: langKey.description.tr,
-      iconColor: kPrimaryColor,
-      autofocus: false,
-      textStyle: bodyText1,
-      autoValidateMode: AutovalidateMode.onUserInteraction,
-      validator: (value) =>
-          GetUtils.isBlank(value!)! ? langKey.descriptionReq.tr : null,
-      keyboardType: TextInputType.text,
-      onChanged: (value) {},
-      onSaved: (value) {},
-    );
   }
-
-  /*Widget _chooseProductImage() {
-    return InkWell(
-      onTap: () {
-        Get.defaultDialog(
-          title: "Pick from",
-          //barrierDismissible: false,
-          contentPadding: const EdgeInsets.all(10),
-          titleStyle: appBarTitleSize,
-          content: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              _imageBtn(
-                onTap: () => controller.pickOrCaptureImageGallery(0),
-                title: "Camera",
-                icon: Icons.camera_alt_rounded,
-                color: Colors.blue,
-              ),
-              _imageBtn(
-                onTap: () => controller.pickOrCaptureImageGallery(1),
-                title: "Gallery",
-                icon: Icons.photo_library_rounded,
-                color: Colors.redAccent,
-              ),
-            ],
-          ),
-          //onCancel: ()=>Get.back()
-        );
-      },
-      child: Obx(
-        () => Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            */ /* Container(
-                color: Colors.black12,
-                width: 80,
-                height: 80,
-                child: controller.imagePath.value.isNotEmpty
-                    ? Image.file(File(controller.imagePath.value))
-                    : Icon(Icons.image)),*/ /*
-            controller.pickedImagesList.isNotEmpty
-                ? _showImages()
-                : _buildImageSection(),
-          ],
-        ),
-      ),
-    );
-  }*/
 
   _showImages() {
     return ListView.builder(
       scrollDirection: Axis.horizontal,
       itemCount: controller.pickedImagesList.length,
       itemBuilder: (_, index) {
-        XFile? xFile = controller.pickedImagesList[index];
+        File file = controller.pickedImagesList[index];
         return Container(
           width: 60,
           margin: EdgeInsets.all(5),
@@ -418,13 +358,14 @@ class AddProductsUI extends GetView<SellersController> {
           child: Stack(
             fit: StackFit.expand,
             children: [
-              Image.file(File(xFile.path)),
+              Image.file(file),
               Positioned(
                 right: 0,
                 child: CustomActionIcon(
                   width: 25,
                   height: 25,
                   onTap: () {
+                    controller.imagesSizeInMb.value -= (file.lengthSync()  * 0.000001);
                     controller.pickedImagesList.removeAt(index);
                     controller.pickedImagesList.refresh();
                   },
@@ -442,65 +383,49 @@ class AddProductsUI extends GetView<SellersController> {
   }
 
   _buildImageSection() {
-
     return GestureDetector(
       onTap: () => controller.pickMultipleImages(),
-      child: DottedBorder(
-        borderType: BorderType.RRect,
-        radius: const Radius.circular(10),
-        dashPattern: const [10, 4],
-        strokeCap: StrokeCap.round,
-        child: Container(
-          width: double.infinity,
-          height: 150,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Obx(
-            () => controller.pickedImagesList.isNotEmpty
-                ? _showImages()
-                : Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(
-                        Icons.cloud_upload_rounded,
-                        size: 30,
-                      ),
-                      const SizedBox(height: 5),
-                      Text(
-                        'Click here to upload',
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.grey.shade400,
-                        ),
-                      ),
-                    ],
+      child: Obx(
+        () => Column(
+          children: [
+            DottedBorder(
+              borderType: BorderType.RRect,
+              radius: const Radius.circular(10),
+              dashPattern: const [10, 4],
+              strokeCap: StrokeCap.round,
+              color:
+                  controller.imagesSizeInMb.value > maxImageUploadSizeInMBs ? kRedColor : kPrimaryColor,
+              child: Container(
+                  width: double.infinity,
+                  height: 150,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
                   ),
-          ),
+                  child: controller.pickedImagesList.isNotEmpty
+                      ? _showImages()
+                      : Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(
+                              Icons.cloud_upload_rounded,
+                              size: 30,
+                            ),
+                            const SizedBox(height: 5),
+                            CustomText(title: 'Click here to upload', color: kLightColor,),
+                          ],
+                        )),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 8.0, vertical: 5),
+              child: CustomText(
+                title: "Upload images less than 2MB",
+                color: controller.imagesSizeInMb.value > maxImageUploadSizeInMBs ? kRedColor:kLightColor,
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
-
-/* _imageBtn({onTap, icon, title, color}) {
-    return InkWell(
-      onTap: onTap,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Icon(
-            icon,
-            color: color,
-            size: 30,
-          ),
-          AppConstant.spaceWidget(height: 10),
-          CustomText(
-            title: title,
-            color: color,
-          )
-        ],
-      ),
-    );
-  }*/
 }

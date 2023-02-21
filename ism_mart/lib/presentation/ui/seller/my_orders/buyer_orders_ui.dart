@@ -31,10 +31,7 @@ class BuyerOrdersUI extends GetView<OrderController> {
         body: Column(
           children: [
             _orderStats(),
-            Center(
-                child: NoDataFoundWithIcon(
-              title: langKey.noOrderFound.tr,
-            )),
+            Center(child: NoDataFoundWithIcon(title: langKey.noOrderFound.tr)),
           ],
         ),
       ),
@@ -88,7 +85,7 @@ class BuyerOrdersUI extends GetView<OrderController> {
 
   Widget _orderStats() {
     return Obx(() => SizedBox(
-          height: 200,
+          height: 250,//AppResponsiveness.getBoxHeightPoint22(),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -150,6 +147,25 @@ class BuyerOrdersUI extends GetView<OrderController> {
                     ],
                   ),
                 ),
+                AppConstant.spaceWidget(height: 5),
+                Expanded(
+                  flex: 3,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 3,
+                        child: CustomOrderStatsItem(
+                          onTap: () {},
+                          title: langKey.silverCoins.tr,
+                          icon: Icons.price_change_outlined,
+                          iconColor: Colors.grey,
+                          value: controller.coinsModel?.silver ?? 0,
+                        ),
+                      ),
+                      Expanded(flex: 3, child: Container())
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
@@ -164,7 +180,10 @@ class BuyerOrdersUI extends GetView<OrderController> {
         itemCount: list!.length,
         itemBuilder: (_, index) {
           OrderModel model = list[index];
-          return SingleRecentOrderItems(orderModel: model);
+          return SingleRecentOrderItems(
+            orderModel: model,
+            calledForBuyerOrderDetails: true,
+          );
         },
       ),
     );

@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
-import 'package:ism_mart/presentation/ui/buyer/settings/orders/buyer_orders_ui.dart';
 import 'package:ism_mart/presentation/ui/exports_ui.dart';
 
 class Routes {
@@ -79,6 +78,12 @@ class Routes {
       //arguments: ['calledFor'],
       page: () => const SingleProductView(),
       binding: ProductBinding(),
+    ),
+    GetPage(
+      name: '/orderDetails/:id',
+      //arguments: ['calledForBuyerOrderDetails'],
+      page: () => const SingleOrderDetailsUI(),
+      binding: OrdersBindings(),
     )
   ];
 

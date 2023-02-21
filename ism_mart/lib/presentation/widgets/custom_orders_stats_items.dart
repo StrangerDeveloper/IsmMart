@@ -4,13 +4,20 @@ import 'package:ism_mart/utils/exports_utils.dart';
 
 class CustomOrderStatsItem extends StatelessWidget {
   const CustomOrderStatsItem(
-      {Key? key, this.onTap, this.iconColor, this.icon, this.title, this.value})
+      {Key? key,
+      this.onTap,
+      this.iconColor,
+      this.icon,
+      this.title,
+      this.value,
+      this.isPriceWidget = false})
       : super(key: key);
   final GestureTapCallback? onTap;
   final Color? iconColor;
   final IconData? icon;
   final String? title;
   final num? value;
+  final bool? isPriceWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -59,12 +66,14 @@ class CustomOrderStatsItem extends StatelessWidget {
                     textAlign: TextAlign.start,
                     size: 15,
                   ),
-                  CustomText(
-                    title: "$value",
-                    weight: FontWeight.bold,
-                    textAlign: TextAlign.center,
-                    size: 20,
-                  ),
+                  isPriceWidget!
+                      ? CustomPriceWidget(title: "$value")
+                      : CustomText(
+                          title: "$value",
+                          weight: FontWeight.bold,
+                          textAlign: TextAlign.center,
+                          size: 20,
+                        ),
                 ],
               ),
             )),

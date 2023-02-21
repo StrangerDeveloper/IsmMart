@@ -5,6 +5,7 @@ class AppResponsiveness {
 
   //var width = AppConstant.getSize().width;
   static final height = AppConstant.getSize().height;
+  static final width = AppConstant.getSize().width;
 
   static bool _isTabletScreen() {
     return AppConstant.getSize().width >= 850 &&
@@ -39,12 +40,21 @@ class AppResponsiveness {
     return height * (_isTabletScreen() ? 0.2 : 0.15);
   }
 
+  static double getBoxHeightPoint22() {
+    return height * (_isTabletScreen() ? 0.25 : 0.30);
+  }
+
+
   static double getBoxHeightPoint25() {
     return height * (_isTabletScreen() ? 0.2 : 0.25);
   }
 
   static double getBoxHeightPoint30() {
-    return height * (_isTabletScreen() ? 0.35 : 0.30);
+    return height * (_isTabletScreen() ? 0.40 : 0.35);
+  }
+
+  static double getBoxHeightPoint55(){
+    return height * (_isTabletScreen() ? 0.65 : 0.55);
   }
 
 

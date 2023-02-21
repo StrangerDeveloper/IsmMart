@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/current_remaining_time.dart';
+import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -17,6 +20,7 @@ const kLightColor = Color(0xFF808080);
 const kLightGreyColor = Color(0xFFD1D1D1);
 const kLightBlueColor = Color(0xFFE2E8F0);
 const kRedColor = Color(0xFFF54141);
+const kGoldColor = Color(0xFFFFD700);
 const kOrangeColor = Colors.deepOrange;
 
 Color kGrey900 = Colors.grey[900]!;
@@ -50,6 +54,9 @@ const kVerticalDivider = VerticalDivider(
   width: 1,
   thickness: 0.5,
 );
+
+const maxImageUploadSizeInMBs = 2.0;
+const fixedRedeemCouponThreshold = 20;
 
 /*var headline1 = GoogleFonts.poppins(
     fontSize: 30, color: kGrey900, fontWeight: FontWeight.bold);
@@ -89,6 +96,8 @@ var bodyText1 = GoogleFonts.lato(
     fontSize: 13, fontWeight: FontWeight.w600, color: Colors.black);
 var bodyText2 = GoogleFonts.lato(
     fontSize: 12, fontWeight: FontWeight.w600, color: Colors.black);
+var bodyText2Poppins = GoogleFonts.poppins(
+    fontSize: 12, fontWeight: FontWeight.w400, color: Colors.black);
 
 var caption = GoogleFonts.lato(fontSize: 11, fontWeight: FontWeight.w500);
 
@@ -102,14 +111,14 @@ class AppConstant {
       "pk_live_51LrbOmEmpuNuAXn2Gq2LMtj73x7dlz4uX8UYQn1coVIFDK69qc3d2td9ttdGp5Pnv1u2vrdxyYXNoeuXMk4gbTFu00sENXZzqS";
   static const test_pk =
       "pk_test_51M7CqbAqAePi9vIiWwFEzU4UqZlhX1XvxeqKjZsrxb8QYmolTPiDPiHQRWGWoPQucDYqm6cduVTtovE3H8AhgCNd00UHzIuhbe";
-  static const PUBLISHABLE_KEY = /*kDebugMode ? test_pk :*/ live_pk;
+  static const PUBLISHABLE_KEY = kDebugMode ? test_pk : live_pk;
 
   static const live_sk =
       "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";
   static const test_sk =
       "sk_test_51M7CqbAqAePi9vIiIaBO0wAHIUmAmrUTTM89z5dx6MfbYK10pFs8YOJgxo3qrz2jXdRsWqbEuVNhaoLS4wkTfU3p00EweFGR7b";
 
-  static const SECRET_KEY = /*kDebugMode ? test_sk :*/ live_sk;
+  static const SECRET_KEY = kDebugMode ? test_sk : live_sk;
 
   static const defaultImgUrl =
       "https://i.ibb.co/dLxHqcR/vecteezy-icon-image-not-found-vector.jpg";
@@ -226,5 +235,34 @@ class AppConstant {
 
   static Size getSize() {
     return MediaQuery.of(Get.context!).size;
+  }
+
+  static Color getStatusColor(OrderModel? model) {
+    switch (model!.status!.toLowerCase()) {
+      case "pending":
+        return Colors.deepOrange;
+      case "active":
+      case "completed":
+        return Colors.teal;
+      default:
+        return Colors.blue;
+    }
+  }
+
+  static Future<File> compressImage(imagePath, {fileLength}) async {
+    return await FlutterNativeImage.compressImage(imagePath,
+        quality: 100, percentage: getCompressionPercentage(length: fileLength));
+  }
+
+  static int getCompressionPercentage({length}) {
+    var lengthInMb = length * 0.000001;
+
+    if (lengthInMb < 1) {
+      return 40;
+    } else if (lengthInMb > 1 && lengthInMb < 2.5) {
+      return 25;
+    } else {
+      return 15;
+    }
   }
 }

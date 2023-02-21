@@ -114,10 +114,6 @@ class UserModel {
       };
 }
 
-/*UserResponse userResponseFromApi(Response? jsonResponse){
-  if(jsonResponse.hasError)
-  return UserResponse.fromResponse(jsonResponse);
-}*/
 
 class UserResponse {
   bool? success, key;

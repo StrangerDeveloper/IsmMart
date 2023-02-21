@@ -192,7 +192,7 @@ class RegisterVendorUI extends GetView<AuthController> {
             padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5),
             child: CustomText(
                 title:
-                    "Your cover and profile must be a PNG or JPEG, up to 2 MB"),
+                    "Your cover and profile must be a PNG or JPG, up to 2 MB"),
           ),
           _formData()
         ],

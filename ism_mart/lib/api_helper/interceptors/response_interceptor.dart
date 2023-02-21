@@ -3,13 +3,14 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/request/request.dart';
+import 'package:http/http.dart' as http;
 
 FutureOr<dynamic> responseInterceptor(
     Request request, Response response) async {
-  return handelResponse(response);
+  return handleResponse(response);
 }
 
-dynamic handelResponse(response) {
+dynamic handleResponse(Response response) {
   debugPrint('RESPONSE START /////////////////');
   debugPrint('  Status Code: ${response.statusCode}');
   debugPrint('  Body: ${response.body}');
@@ -32,6 +33,29 @@ dynamic handelResponse(response) {
 
       throw UnknownException(
           'Error accrued while fetching data. : ${response.statusCode}');
+  }
+}
+
+dynamic handleStreamResponse(http.StreamedResponse response){
+  debugPrint('RESPONSE START /////////////////');
+  debugPrint('  Status Code: ${response.statusCode}');
+  //debugPrint('  Body: ${response.stream.bytesToString()}');
+  debugPrint('RESPONSE END /////////////////');
+
+  switch (response.statusCode) {
+    case 200:
+      return response;
+    case 300:
+    case 301:
+      return response;
+    case 400:
+    case 404:
+    case 403:
+      return response;
+    case 500:
+      return response;
+    default:
+      return response;
   }
 }
 

@@ -32,12 +32,28 @@ class CheckoutController extends GetxController {
 
   var shippingCost = 0.obs;
   var totalAmount = 0.0.obs;
+  var totalDiscount = 0.0.obs;
+  var amountAfterRedeeming = 0.0.obs;
 
-  setShippingCost(int cost){
+  setShippingCost(int cost) {
     shippingCost(cost);
     double totalCart = cartController.totalCartAmount.value;
     double subTotal = totalCart + cost;
     totalAmount(subTotal);
+  }
+
+  var _isRedeemApplied = false.obs;
+
+  applyRedeemCode(num? value) {
+    if (value!.isGreaterThan(0) &&
+        value.isGreaterThan(fixedRedeemCouponThreshold)) {
+      _isRedeemApplied(true);
+    } else {
+      _isRedeemApplied(true);
+    }
+    totalDiscount(value.toDouble());
+    var netAmount = totalAmount.value - value;
+    amountAfterRedeeming(netAmount);
   }
 
   @override
@@ -47,7 +63,6 @@ class CheckoutController extends GetxController {
 
     getDefaultAddress();
     getAllShippingAddresses();
-
   }
 
   @override
@@ -56,16 +71,20 @@ class CheckoutController extends GetxController {
 
     ///Set Standard shipping by default
     setShippingCost(250);
+
+    /// fetch users Coins
+    // authController.fetchUserCoins();
   }
 
-  void setSelectedCountry(CountryModel? model) async{
+  CoinsModel? get coinsModel => authController.coinsModel;
+
+  void setSelectedCountry(CountryModel? model) async {
     authController.selectedCountry(model);
     //getCityByCountryName(name);
     countryId(model!.id);
     authController.cities.clear();
     authController.update();
     await authController.getCitiesByCountry(countryId: model.id!);
-
   }
 
   void getCityByCountryName(String name) {
@@ -139,9 +158,9 @@ class CheckoutController extends GetxController {
         .getDefaultShippingAddress(token: authController.userToken!)
         .then((user) {
       _userDefaultAddressModel(user);
-    })/*.catchError((error) {
-      debugPrint(">>>>GetDefaultAddress: $error");
-    })*/;
+    }).catchError((error) {
+      print(">>>>GetDefaultAddress: $error");
+    });
   }
 
   var shippingAddressList = <UserModel>[].obs;
@@ -149,13 +168,14 @@ class CheckoutController extends GetxController {
   getAllShippingAddresses() async {
     shippingAddressList.clear();
     await authController.authProvider
-        .getShippingAddress(token: authController.userToken!)
-        .then((addresses) {
-          print(">>>>Addresses: ${addresses.last.toAddressJson()}");
+            .getShippingAddress(token: authController.userToken!)
+            .then((addresses) {
+      print(">>>>Addresses: ${addresses.last.toAddressJson()}");
       shippingAddressList.addAll(addresses);
-    })/*.catchError((error) {
+    }) /*.catchError((error) {
       debugPrint(">>>>getAllShippingAddresses: $error");
-    })*/;
+    })*/
+        ;
   }
 
   changeDefaultShippingAddress() async {
@@ -185,15 +205,12 @@ class CheckoutController extends GetxController {
   }
 
   updateShippingAddress(UserModel? userModel) async {
-
     print("USERSADDRESS: ${userModel!.toAddressJson()}");
     userModel!.name = nameController.text;
     userModel.address = addressController.text;
     userModel.phone = phoneController.text;
     userModel.zipCode = zipCodeController.text;
     userModel.token = authController.userToken!;
-
-
 
     isLoading(true);
     await authController.authProvider
@@ -248,11 +265,9 @@ class CheckoutController extends GetxController {
       await Stripe.instance
           .initPaymentSheet(
               paymentSheetParameters: SetupPaymentSheetParameters(
-                appearance: PaymentSheetAppearance(
-                  primaryButton: PaymentSheetPrimaryButtonAppearance(
-
+                  appearance: PaymentSheetAppearance(
+                      primaryButton: PaymentSheetPrimaryButtonAppearance(
                     shapes: PaymentSheetPrimaryButtonShape(blurRadius: 8),
-
                     colors: PaymentSheetPrimaryButtonTheme(
                       light: PaymentSheetPrimaryButtonThemeColors(
                         background: kPrimaryColor,
@@ -260,11 +275,9 @@ class CheckoutController extends GetxController {
                         border: kLightGreyColor,
                       ),
                     ),
-                  )
-                ),
-                  paymentIntentClientSecret: paymentIntent![
-                      'client_secret'],
-                 // customFlow: true,
+                  )),
+                  paymentIntentClientSecret: paymentIntent!['client_secret'],
+                  // customFlow: true,
                   //Gotten from payment intent
                   //style: ThemeMode.light,
                   merchantDisplayName: 'ISMMART'))
@@ -272,7 +285,7 @@ class CheckoutController extends GetxController {
 
       //STEP 3: Display Payment sheet
       displayPaymentSheet();
-     } catch (err) {
+    } catch (err) {
       isLoading(false);
       throw Exception(err);
     }
@@ -303,12 +316,11 @@ class CheckoutController extends GetxController {
   displayPaymentSheet() async {
     isLoading(false);
     try {
-      await Stripe.instance.presentPaymentSheet().then((value) {
+      await Stripe.instance.presentPaymentSheet().then((value) async {
         //Clear paymentIntent variable after successful payment
 
         debugPrint("PaymentResponse: ${paymentIntent}");
-
-        createOrder(paymentMethod: "Card");
+        await sendPaymentIntent(paymentId: paymentIntent!['id']);
       }).onError((error, stackTrace) {
         throw Exception(error);
       });
@@ -323,17 +335,36 @@ class CheckoutController extends GetxController {
     AppConstant.displaySnackBar(title, message);
   }
 
-  void createOrder({paymentMethod = "COD"}) {
+  sendPaymentIntent({paymentId}) async {
+    JSON data = {
+      "shippingPrice": shippingCost.value,
+      "paymentMethod": "$paymentId",
+      "redeemCoins": _isRedeemApplied.value,
+      "cartItems": getCartItemsList(),
+    };
+    await _orderProvider
+        .createPaymentIntent(token: authController.userToken, data: data)
+        .then((OrderResponse? response) async {
+      if (response != null) {
+        if (response.success!) {
+          await createOrder(paymentMethod: "Card");
+        } else
+          showSnackBar(title: 'error', message: response.message!);
+      } else
+        showSnackBar(
+            title: 'error', message: "Something went wrong! Order Not created");
+    });
+  }
 
-
+  createOrder({paymentMethod = "COD"}) async {
     JSON data = {
       "paymentMethod": paymentMethod,
       "shippingPrice": shippingCost.value,
       "shippingDetailsId": defaultAddressModel!.id,
-      "cartItems": cartController.cartItemsList,
+      "cartItems": getCartItemsList(),
     };
 
-    _orderProvider
+    await _orderProvider
         .createOrder(token: authController.userToken, data: data)
         .then((OrderResponse? response) {
       if (response != null) {
@@ -379,7 +410,7 @@ class CheckoutController extends GetxController {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-             /* CustomButton(
+              /* CustomButton(
                 onTap: () {
                   Get.offNamed(Routes.buyerOrdersRoute);
                 },

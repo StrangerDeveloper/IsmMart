@@ -1,7 +1,6 @@
 export 'category/category_model.dart';
 export 'category/sub_category_model.dart';
 export 'faq/faq_model.dart';
-export 'faq/faq_model.dart';
 export 'order/cart/cart_model.dart';
 export 'order/order_model.dart';
 export 'product/product_model.dart';
@@ -15,3 +14,5 @@ export 'questions/questions_model.dart';
 export 'category/product_variants_model.dart';
 export 'product/search_model.dart';
 export 'product/seller_product_model.dart';
+export 'dispute/dispute_model.dart';
+export 'coins/coins_model.dart';

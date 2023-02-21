@@ -20,16 +20,17 @@ class SellerDashboard extends GetView<SellersController> {
                 _orderStats(),
                 StickyLabel(text: langKey.recentOrders.tr),
                 kSmallDivider,
-                Obx(() => controller
-                        .orderController.recentVendorOrdersList.isEmpty
-                    ? SizedBox(
-                        height: AppConstant.getSize().height * 0.35,
-                        child:
-                            NoDataFoundWithIcon(title: langKey.noOrderFound.tr),
-                      )
-                    : _buildRecentOrders(
-                        list:
-                            controller.orderController.recentVendorOrdersList)),
+                Obx(() => controller.orderController.isLoading.isTrue
+                    ? CustomLoading(isItForWidget: true)
+                    : controller.orderController.recentVendorOrdersList.isEmpty
+                        ? SizedBox(
+                            height: AppConstant.getSize().height * 0.35,
+                            child: NoDataFoundWithIcon(
+                                title: langKey.noOrderFound.tr),
+                          )
+                        : _buildRecentOrders(
+                            list: controller
+                                .orderController.recentVendorOrdersList)),
               ],
             ),
           ),
@@ -40,7 +41,7 @@ class SellerDashboard extends GetView<SellersController> {
 
   Widget _orderStats() {
     return Obx(() => SizedBox(
-          height: 400,
+          height: AppResponsiveness.getBoxHeightPoint55(),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -122,6 +123,7 @@ class SellerDashboard extends GetView<SellersController> {
                           title: langKey.totalEarning.tr,
                           icon: Icons.cases_rounded,
                           iconColor: Colors.deepPurple,
+                          isPriceWidget: true,
                           value: controller
                                   .orderController.vendorStats?.totalEarning ??
                               0,
@@ -135,6 +137,7 @@ class SellerDashboard extends GetView<SellersController> {
                           title: langKey.cMonthEarning.tr,
                           icon: Icons.monetization_on_rounded,
                           iconColor: Colors.pinkAccent,
+                          isPriceWidget: true,
                           value: controller
                                   .orderController.vendorStats?.cMonthEarning ??
                               0,
@@ -154,7 +157,8 @@ class SellerDashboard extends GetView<SellersController> {
                           onTap: () {},
                           title: langKey.pendingAmount.tr,
                           icon: Icons.history_edu_rounded,
-                          iconColor: Colors.amber,
+                          iconColor: Colors.cyan,
+                          isPriceWidget: true,
                           value: controller
                                   .orderController.vendorStats?.pendingAmount ??
                               0,
@@ -167,10 +171,31 @@ class SellerDashboard extends GetView<SellersController> {
                           onTap: () {},
                           title: langKey.wallet.tr,
                           icon: Icons.wallet,
+                          isPriceWidget: true,
                           iconColor: Colors.blueGrey,
                           value: 0,
                         ),
                       ),
+                    ],
+                  ),
+                ),
+                AppConstant.spaceWidget(height: 5),
+                Expanded(
+                  flex: 3,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 3,
+                        child: CustomOrderStatsItem(
+                          onTap: () {},
+                          title: langKey.goldCoins.tr,
+                          icon: Icons.price_change_outlined,
+                          iconColor: Colors.amber,
+                          value:
+                              controller.orderController.coinsModel?.gold ?? 0,
+                        ),
+                      ),
+                      Expanded(flex: 3, child: Container())
                     ],
                   ),
                 ),
@@ -187,7 +212,11 @@ class SellerDashboard extends GetView<SellersController> {
       itemCount: list!.length,
       itemBuilder: (_, index) {
         VendorOrder model = list[index];
-        return SingleRecentOrderItems(orderModel: model.orderModel);
+        return SingleRecentOrderItems(
+          orderModel: model.orderModel,
+          calledFromSellerDashboard: true,
+          calledForBuyerOrderDetails: false,
+        );
       },
     );
   }

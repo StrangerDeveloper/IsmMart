@@ -70,7 +70,9 @@ class CheckoutUI extends GetView<CheckoutController> {
                           height: 50,
                           onTap: () {
                             if (/*controller.shippingCost.value == 0 &&*/
-                                controller.cartController.totalCartAmount.value <= 1000) {
+                                controller
+                                        .cartController.totalCartAmount.value <=
+                                    1000) {
                               controller.showSnackBar(
                                   title: "error",
                                   message:
@@ -81,7 +83,6 @@ class CheckoutUI extends GetView<CheckoutController> {
                               if (controller.defaultAddressModel!.id != null) {
                                 if (controller
                                     .cartController.cartItemsList.isNotEmpty) {
-
                                   controller.makePayment(
                                       amount: controller.totalAmount.value
                                           .toString());
@@ -135,7 +136,7 @@ class CheckoutUI extends GetView<CheckoutController> {
     );
   }
 
-  ///TODO: Shipping Details
+  ///TOO: Shipping Details
   ///
   Widget _shippingAddressDetails(UserModel? userModel) {
     return Padding(
@@ -400,7 +401,6 @@ class CheckoutUI extends GetView<CheckoutController> {
                         onTap: () {
                           if (formKey.currentState!.validate()) {
                             if (calledForUpdate) {
-
                               controller.updateShippingAddress(userModel);
                             } else {
                               if (controller.countryId.value > 0 &&
@@ -609,11 +609,11 @@ class CheckoutUI extends GetView<CheckoutController> {
               children: [
                 AppConstant.spaceWidget(height: 10),
 
-                ///:TODO Coupon Code
+                ///Redeem Coins
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    /// Search bar
+                    ///Search for Coins
                     Expanded(
                       flex: 3,
                       child: Container(
@@ -625,6 +625,9 @@ class CheckoutUI extends GetView<CheckoutController> {
                           controller: controller.couponCodeController,
                           cursorColor: kPrimaryColor,
                           autofocus: false,
+                          style: bodyText1,
+                          enabled: controller.coinsModel?.silver != null &&
+                              controller.coinsModel!.silver!.isGreaterThan(fixedRedeemCouponThreshold),
                           textInputAction: TextInputAction.search,
                           // onChanged: controller.search,
                           decoration: InputDecoration(
@@ -649,7 +652,8 @@ class CheckoutUI extends GetView<CheckoutController> {
                             ),
                             fillColor: kWhiteColor,
                             contentPadding: EdgeInsets.zero,
-                            hintText: 'Input your coupon code',
+                            hintText:
+                                'Want to redeem ${controller.coinsModel?.silver ?? 0} coins?',
                             hintStyle: TextStyle(
                               color: kLightColor,
                               fontWeight: FontWeight.w600,
@@ -663,9 +667,19 @@ class CheckoutUI extends GetView<CheckoutController> {
                     ///Apply Button
                     Expanded(
                         child: OutlinedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        String? value = controller.couponCodeController.text;
+                        if (controller.coinsModel != null &&
+                            controller.coinsModel!.silver!
+                                .isGreaterThan(fixedRedeemCouponThreshold) &&
+                            value.isNotEmpty)
+                          controller.applyRedeemCode(num.parse(value));
+                        else
+                          AppConstant.displaySnackBar(
+                              'error', "Need more Coins to redeem");
+                      },
                       child: CustomText(
-                        title: langKey.apply.tr,
+                        title: langKey.redeemBtn.tr,
                         weight: FontWeight.w600,
                       ),
                     )),
@@ -694,6 +708,7 @@ class CheckoutUI extends GetView<CheckoutController> {
                         style: bodyText1),
                   ],
                 ),
+                AppConstant.spaceWidget(height: 5),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -701,6 +716,16 @@ class CheckoutUI extends GetView<CheckoutController> {
                     Obx(() => CustomPriceWidget(
                         title: "${controller.shippingCost.value}",
                         style: bodyText1)),
+                  ],
+                ),
+                AppConstant.spaceWidget(height: 5),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CustomText(title: "Discount", style: bodyText1),
+                    Obx(() => CustomPriceWidget(
+                        title: "${controller.totalDiscount.value}",
+                        style: bodyText1.copyWith(color: Colors.amber))),
                   ],
                 ),
                 kSmallDivider,
@@ -715,7 +740,9 @@ class CheckoutUI extends GetView<CheckoutController> {
                         ],
                       ),
                     ),
-                    CustomPriceWidget(title: "${controller.totalAmount.value}"),
+                    CustomPriceWidget(
+                        title:
+                            "${controller.amountAfterRedeeming.value.isGreaterThan(0.0) ? controller.amountAfterRedeeming.value : controller.totalAmount.value}"),
                   ],
                 ),
                 AppConstant.spaceWidget(height: 10),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
@@ -36,19 +37,39 @@ class AuthController extends GetxController {
     //getCurrentUser();
     //getToken();
     getCountries();
+
+    getCurrentUser();
+    getToken();
   }
 
   @override
   void onReady() {
     super.onReady();
 
-    getCurrentUser();
-    getToken();
-
     LocalStorageHelper.localStorage.listenKey(LocalStorageHelper.currentUserKey,
         (value) {
       getToken();
       getCurrentUser();
+    });
+
+    fetchUserCoins();
+  }
+
+  var _coinsModel = CoinsModel().obs;
+
+  CoinsModel? get coinsModel => _coinsModel.value;
+
+  fetchUserCoins() async {
+    await authProvider
+        .getUserCoins(token: userToken)
+        .then((CoinsResponse? coinsResponse) {
+      if (coinsResponse != null) {
+        if (coinsResponse.success!) {
+          _coinsModel(coinsResponse.coinsModel!);
+        }
+      }
+    }).catchError((error) {
+      print(">>>FetchUserCoins: $error");
     });
   }
 
@@ -233,30 +254,35 @@ class AuthController extends GetxController {
   var _picker = ImagePicker();
 
   pickOrCaptureImageGallery(int? imageSource, {calledForProfile = true}) async {
-    try {
-      XFile? imgFile = await _picker.pickImage(
-          source: imageSource == 0 ? ImageSource.camera : ImageSource.gallery);
-      if (imgFile != null) {
-        await imgFile.length().then((value) {
-          debugPrint("PickedImage: Length: $value");
-          var lengthInMb = (value * 0.000001);
-          debugPrint("PickedImage: Length in MB: $lengthInMb");
-          if (lengthInMb > 2) {
-            AppConstant.displaySnackBar('error', 'Image should be up to 2MB');
-          } else {
-            if (calledForProfile) {
-              profileImgPath(imgFile.path);
-            } else
-              coverImgPath(imgFile.path);
-            Get.back();
+    await PermissionsHandler().checkPermissions().then((isGranted) async {
+      if (isGranted) {
+        try {
+          XFile? imgFile = await _picker.pickImage(
+              source:
+                  imageSource == 0 ? ImageSource.camera : ImageSource.gallery);
+          if (imgFile != null) {
+            await imgFile.length().then((length) async {
+              await AppConstant.compressImage(imgFile.path, fileLength: length)
+                  .then((compressedFile) {
+                var lengthInMb = compressedFile.lengthSync() * 0.000001;
+                if (lengthInMb > 2) {
+                  showSnackBar(message: 'Image must be up to 2MB');
+                } else {
+                  if (calledForProfile) {
+                    profileImgPath(compressedFile.path);
+                  } else
+                    coverImgPath(compressedFile.path);
+                }
+                Get.back();
+              });
+            });
           }
-        });
-      }
-
-      //uploadImage(imgFile);
-    } catch (e) {
-      debugPrint("UploadImage: $e");
-    }
+        } catch (e) {
+          print("UploadImage: $e");
+        }
+      } else
+        await PermissionsHandler().requestPermissions();
+    });
   }
 
 //TO: Current User Info
@@ -501,6 +527,10 @@ class AuthController extends GetxController {
     });
   }
 
+  void showSnackBar({title = 'error', message = 'Something went wrong'}) {
+    AppConstant.displaySnackBar(title, message);
+  }
+
   clearContactUsControllers() {
     firstNameController.clear();
     emailController.clear();
@@ -529,7 +559,6 @@ class AuthController extends GetxController {
     profileImgPath(null);
 
     clearBankControllers();
-
   }
 
   clearBankControllers() {

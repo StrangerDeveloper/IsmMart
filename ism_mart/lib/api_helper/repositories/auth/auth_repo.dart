@@ -159,4 +159,11 @@ class AuthRepository {
     var response = await _apiService.post(endpoint: 'user/contact', body: data);
     return response.body;
   }
+
+  ///Coins Api
+  Future<dynamic> fetchUserCoins({token}) async {
+    var response = await _apiService.get(
+        endpoint: 'coin/getUserCoins', requiresAuthToken: true, token: token);
+    return response.body;
+  }
 }

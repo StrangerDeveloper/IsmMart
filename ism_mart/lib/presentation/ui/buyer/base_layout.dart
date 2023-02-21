@@ -19,6 +19,16 @@ class BaseLayout extends GetView<BaseController> {
         children: [...controller.bottomNavScreens],
       ),
       bottomNavigationBar: _buildBottomNavBar(controller),
+      //TODO: Work remaining of reward button if needed
+      /*floatingActionButton: FloatingActionButton.extended(
+        onPressed: (){},
+        elevation: 5,
+        icon: Icon(Icons.shopping_bag, color: kPrimaryColor, ),
+        label: CustomText(title: 'Rewards', style: headline3,),
+        //foregroundColor: Colors.blueGrey,
+        backgroundColor:  Colors.indigo[100]!,
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,*/
     );
   }
 

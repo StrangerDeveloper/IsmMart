@@ -191,14 +191,17 @@ class ProfileUI extends GetView<AuthController> {
           style: bodyText1,
         ),
         leading: Icon(icon),
-        trailing: InkWell(
-          onTap: () => showEditDialog(title, subtitle),
-          child: Icon(
-            Icons.edit,
-            size: 20,
-            color: kPrimaryColor.withOpacity(0.8),
-          ),
-        ),
+        trailing: (title.toLowerCase().contains("country") ||
+                title.toLowerCase().contains("city"))
+            ? null
+            : InkWell(
+                onTap: () => showEditDialog(title, subtitle),
+                child: Icon(
+                  Icons.edit,
+                  size: 20,
+                  color: kPrimaryColor.withOpacity(0.8),
+                ),
+              ),
       ),
     );
   }

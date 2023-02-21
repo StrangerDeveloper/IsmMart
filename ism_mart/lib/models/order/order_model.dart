@@ -112,10 +112,7 @@ class OrderResponse {
   dynamic data;
 
   factory OrderResponse.fromJson(Map<String, dynamic> json) => OrderResponse(
-        success: json["success"],
-        message: json["message"],
-        data: OrderStats.fromJson(json["data"]),
-      );
+      success: json["success"], message: json["message"], data: json["data"]);
 
   Map<String, dynamic> toJson() => {
         "success": success,
@@ -125,24 +122,24 @@ class OrderResponse {
 }
 
 class OrderStats {
-  OrderStats({
-    this.orderId,
-    this.totalOrders,
-    this.pendingOrders,
-    this.activeOrders,
-    this.deliveredOrders,
-  });
+  OrderStats(
+      {this.orderId,
+      this.totalOrders,
+      this.pendingOrders,
+      this.activeOrders,
+      this.deliveredOrders,
+      this.silverCoin});
 
-  int? orderId, totalOrders, pendingOrders;
-  int? activeOrders, deliveredOrders;
+  num? orderId, totalOrders, pendingOrders;
+  num? activeOrders, deliveredOrders, silverCoin;
 
   factory OrderStats.fromJson(JSON json) => OrderStats(
-        orderId: json["orderId"],
-        totalOrders: json["totalOrders"],
-        pendingOrders: json["pendingOrders"],
-        activeOrders: json["activeOrders"],
-        deliveredOrders: json["deliveredOrders"],
-      );
+      orderId: json["orderId"],
+      totalOrders: json["totalOrders"],
+      pendingOrders: json["pendingOrders"],
+      activeOrders: json["activeOrders"],
+      deliveredOrders: json["deliveredOrders"],
+      silverCoin: json['sliver']);
 
   JSON toJson() => {
         "orderId": orderId,
@@ -150,14 +147,13 @@ class OrderStats {
         "pendingOrders": pendingOrders,
         "activeOrders": activeOrders,
         "deliveredOrders": deliveredOrders,
+        "sliver": silverCoin,
       };
 }
 
 class VendorStats {
-  int? totalOrders, pendingOrders;
-  int? activeOrders, deliveredOrders;
-  int? totalEarning, pendingAmount;
-  int? cMonthEarning;
+  num? totalOrders, pendingOrders, activeOrders, deliveredOrders;
+  num? totalEarning, pendingAmount, cMonthEarning, goldCoin;
 
   VendorStats({
     this.totalOrders,
@@ -167,6 +163,7 @@ class VendorStats {
     this.totalEarning,
     this.pendingAmount,
     this.cMonthEarning,
+    this.goldCoin,
   });
 
   factory VendorStats.fromJson(Map<String, dynamic> json) => VendorStats(
@@ -177,6 +174,7 @@ class VendorStats {
         totalEarning: json["totalEarning"],
         pendingAmount: json["pendingAmount"],
         cMonthEarning: json["cmonthEarning"],
+        goldCoin: json['gold'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -187,6 +185,7 @@ class VendorStats {
         "totalEarning": totalEarning,
         "pendingAmount": pendingAmount,
         "cmonthEarning": cMonthEarning,
+        "gold": goldCoin
       };
 }
 

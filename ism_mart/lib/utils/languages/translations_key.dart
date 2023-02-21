@@ -70,6 +70,8 @@ const completedOrder = "completedOrders",
     totalEarning = "totalEarning",
     cMonthEarning = "cMonthEarning",
     pendingAmount = "pendingAmount",
+    silverCoins = "sliverCoins",
+    goldCoins = "goldCoins",
     wallet = "wallet",
     userOrders = "userOrders",
     vendorOrders = "vendorOrders";
@@ -114,6 +116,11 @@ const subject = "subject",
     messageReq = "messageReq",
     sendMessage = "sendMessage";
 
+///
+/// Orders section
+///
+
+const title = "title", titleReq = "titleReq";
 /**
  *  Login and register and form validations text
  * */
@@ -227,6 +234,7 @@ const add = "add",
     sortBy = "sortBy",
     filter = "filterBy",
     set = "set",
+    submit = "submit",
     sold = "sold",
     noBtn = "noBtn",
     cancelBtn = "cancelBtn",
@@ -242,7 +250,7 @@ const add = "add",
     searchIn = "searchIn",
     confirmOrder = "confirmOrder",
     addNewAddress = "addNewAddress",
-    proceedToCheckOut = "proceedToCheckOut";
+    proceedToCheckOut = "proceedToCheckOut", redeemBtn = "redeem";
 
 /**
  * No Page found messages
@@ -262,12 +270,6 @@ const noProductFound = "noProductFound",
     noCategoryFound = "noCategoryFound",
     noSubCategoryFound = "noSubCategoryFound",
     noDataFound = "noDataFound";
-
-/**
- *
- * With params
- * */
-const titleReq = "titleReq";
 
 /// Snack bar errors or success Messages
 

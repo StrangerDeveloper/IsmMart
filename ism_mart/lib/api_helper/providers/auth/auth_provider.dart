@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:http/http.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:http/http.dart' as http;
@@ -41,7 +42,6 @@ class AuthProvider {
     final url = "${ApiConstant.baseUrl}auth/vendor/register";
     final request = http.MultipartRequest('POST', Uri.parse(url));
     request.headers['Authorization'] = '$token';
-    //request.headers['Content-Type'] = 'application/json';
     request.headers['Content-Type'] = 'multipart/form-data';
 
     request.fields['storeName'] = sellerModel!.storeName!;
@@ -69,10 +69,11 @@ class AuthProvider {
     if (response.statusCode == 200) {
       final responseData = await response.stream.bytesToString();
       final data = json.decode(responseData);
-      print(responseData);
-      print(data);
       return UserResponse.fromResponse(data);
     } else {
+      //TODO: Still needs to test this one properly
+      http.StreamedResponse res = handleStreamResponse(response);
+      return UserResponse.fromResponse(json.decode(await res.stream.bytesToString()));
       throw Exception('Failed to upload image');
     }
 
@@ -191,5 +192,16 @@ class AuthProvider {
   Future<UserResponse> contactUs({data}) async {
     var response = await _authRepo.postContactUs(data: data);
     return UserResponse.fromResponse(response);
+  }
+
+  /**
+  *
+  *  Coins Api
+  *
+  * */
+
+  Future<CoinsResponse> getUserCoins({token})async{
+    var response = await _authRepo.fetchUserCoins(token: token);
+    return CoinsResponse.fromJson(response);
   }
 }

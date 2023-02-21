@@ -132,16 +132,14 @@ class DashboardUI extends GetView<BaseController> {
         color: kWhiteColor,
         height: AppResponsiveness.getBoxHeightPoint30(),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             StickyLabel(text: langKey.discountDeals.tr),
             AppConstant.spaceWidget(height: 10),
             controller.discountSliderProductsList.isEmpty
-                ? NoDataFound()
+                ? Center(child: NoDataFound())
                 : SizedBox(
                     width: AppConstant.getSize().width * 0.9,
-                    height: AppConstant.getSize().height * 0.25,
+                    height: AppConstant.getSize().height * 0.28,
                     child: ListView.builder(
                       //shrinkWrap: true,
                       scrollDirection: Axis.horizontal,

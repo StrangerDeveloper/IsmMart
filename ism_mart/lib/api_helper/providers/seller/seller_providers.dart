@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
+import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/models/exports_model.dart';
@@ -28,10 +31,7 @@ class SellersApiProvider {
   }
 
   Future<ProductResponse> addProductWithHttp(
-      {String? token,
-      ProductModel? model,
-      categoryFieldList,
-      images}) async {
+      {String? token, ProductModel? model, categoryFieldList, images}) async {
     final url = "${ApiConstant.baseUrl}vendor/products/add";
     final request = http.MultipartRequest('POST', Uri.parse(url));
     request.headers['Authorization'] = '$token';
@@ -53,22 +53,26 @@ class SellersApiProvider {
             "${categoryFieldList.entries.elementAt(i).value}";
       }
 
-    for (XFile image in images) {
+    for (File image in images) {
       request.files.add(await http.MultipartFile.fromPath(
         'images',
         image.path,
         contentType: MediaType.parse('image/jpeg'),
       ));
     }
-
+//TODO: Response handling remaining
     final response = await request.send();
+
     if (response.statusCode == 200) {
       final responseData = await response.stream.bytesToString();
       final data = json.decode(responseData);
       print(data);
-      return ProductResponse.fromResponse(responseData);
+      return ProductResponse.fromResponse(data);
     } else {
-       throw Exception('Failed to upload image ${response.statusCode} ${json.decode(await response.stream.bytesToString())}');
+      //TODO: Still needs to test this one properly
+      http.StreamedResponse res = handleStreamResponse(response);
+      return ProductResponse.fromResponse(json.decode(await res.stream.bytesToString()));
+      throw Exception('Failed to upload image ${response.statusCode} ${json.decode(await response.stream.bytesToString())}');
     }
     return ProductResponse.fromResponse(response);
   }
