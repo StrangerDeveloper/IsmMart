@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-class LanguageController extends GetxController{
+class LanguageController extends GetxController {
   final storage = GetStorage();
 
   var languageKey = "".obs;
@@ -10,37 +10,42 @@ class LanguageController extends GetxController{
 
   var locale = Get.locale.toString().obs;
 
-
   final Map<String, dynamic> optionsLocales = {
     'en_US': {
       'languageCode': 'en',
       'countryCode': 'US',
       'description': 'English',
       'selected': false,
+      'color': Colors.blue[600],
     },
-    'ar_UAE': {
+    'ar_AE': {
       'languageCode': 'ar',
-      'countryCode': 'UAE',
+      'countryCode': 'AE',
       'description': 'العربية',
       'selected': false,
+      'color': Colors.black,
     },
     'ur_PK': {
       'languageCode': 'ur',
       'countryCode': 'PK',
       'description': 'اردو',
       'selected': false,
+      'color': Colors.green[700],
     },
-
-    /*'zh_CN': {
+    'zh_CN': {
       'languageCode': 'zh',
       'countryCode': 'CN',
-      'description': '中国人'
+      'description': '中国人',
+      'selected': false,
+      'color': Colors.red[900],
     },
     'ru_RU': {
       'languageCode': 'ru',
       'countryCode': 'RU',
-      'description': 'русский'
-    },*/
+      'description': 'русский',
+      'selected': false,
+      'color': Colors.blue[900],
+    },
   };
 
   /*final List locale =[
@@ -49,40 +54,35 @@ class LanguageController extends GetxController{
     {'name':'हिंदी','locale': Locale('hi','IN')},
   ];*/
 
-
   @override
   void onInit() {
     super.onInit();
     getLanguageState();
   }
 
-   getLanguageState(){
+  getLanguageState() {
     if (storage.read('key') != null) {
       languageKey(storage.read('key'));
       return setLanguage(key: storage.read('key'));
     }
 
     setLanguage(key: 'en_US');
+
   }
 
-  void setLanguage({key}){
+  void setLanguage({key}) {
     final String languageCode = optionsLocales[key]['languageCode'];
     final String countryCode = optionsLocales[key]['countryCode'];
     // Update App
     Get.updateLocale(Locale(languageCode, countryCode));
     // Update obs
     locale.value = Get.locale.toString();
-    if(storage.read('key') == null)
-      languageKey(key);
+    if (storage.read('key') == null) languageKey(key);
     storage.write('key', key);
     //storage.write('languageCode', languageCode);
 
     language(optionsLocales[key]['description']);
 
-
     update();
   }
-
-
-
 }

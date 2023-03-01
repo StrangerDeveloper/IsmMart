@@ -56,9 +56,9 @@ class OrderProvider {
     return DisputeResponse.fromJson(response);
   }
 
-  Future<OrderResponse> createPaymentIntent({token, data}) async{
+  Future<PaymentIntentResponse> createPaymentIntent({token, data}) async{
     var response = await _orderRepo.postPaymentIntent(token: token, data: data);
-    return OrderResponse.fromJson(response);
+    return PaymentIntentResponse.fromJson(response);
   }
 
 

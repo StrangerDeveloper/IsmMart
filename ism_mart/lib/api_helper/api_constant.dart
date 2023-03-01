@@ -7,9 +7,10 @@ class ApiConstant {
   //static const baseUrl = "http://3.83.164.216:5000/api/";
   ///Development
   //static const baseUrl = "http://18.212.34.27:5000/api/";
-  static const baseUrl = kDebugMode
-      ? "https://ismmart-api.com/api/"
-      : "https://ismmart-backend.com/api/";
+  static const testBaseUrl = "https://ismmart-api.com/api/";
+  static const liveBaseUrl = "https://ismmart-backend.com/api/";
+
+  static const baseUrl = kDebugMode ? testBaseUrl : liveBaseUrl;
 
   ///Production
   //static const baseUrl = "http://3.6.43.56:5000/api/";

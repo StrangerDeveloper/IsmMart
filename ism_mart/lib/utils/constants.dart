@@ -110,7 +110,7 @@ class AppConstant {
   static const live_pk =
       "pk_live_51LrbOmEmpuNuAXn2Gq2LMtj73x7dlz4uX8UYQn1coVIFDK69qc3d2td9ttdGp5Pnv1u2vrdxyYXNoeuXMk4gbTFu00sENXZzqS";
   static const test_pk =
-      "pk_test_51M7CqbAqAePi9vIiWwFEzU4UqZlhX1XvxeqKjZsrxb8QYmolTPiDPiHQRWGWoPQucDYqm6cduVTtovE3H8AhgCNd00UHzIuhbe";
+      "pk_test_51LrbOmEmpuNuAXn2fUnpk1ER8KmDmnjMgWf4bE8Bd7TyQt9pr5IpGGi5y9rBf3cSTj6jNxMUo71bBKb009L7Ws2T000Tf2jBP4";
   static const PUBLISHABLE_KEY = kDebugMode ? test_pk : live_pk;
 
   static const live_sk =

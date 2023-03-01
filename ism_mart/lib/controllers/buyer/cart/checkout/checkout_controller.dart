@@ -37,11 +37,28 @@ class CheckoutController extends GetxController {
 
   setShippingCost(int cost) {
     shippingCost(cost);
-    double totalCart = cartController.totalCartAmount.value;
-    double subTotal = totalCart + cost;
-    totalAmount(subTotal);
+    setTotalAmount();
   }
 
+  setTotalAmount() {
+    double netTotal =
+        (cartController.totalCartAmount.value + shippingCost.value) -
+            totalDiscount.value;
+
+    totalAmount.value = netTotal;
+  }
+
+  var isCardPaymentEnabled = false.obs;
+  var _paymentType = "".obs;
+
+  enableCardPayment(String? value) {
+    _paymentType.value = value!;
+    isCardPaymentEnabled(value.contains("Credit Card") ? true : false);
+  }
+
+  String? get paymentType => _paymentType.value;
+
+  //bool? get isCreditCardEnabled => _isCardPaymentEnabled.value;
   var _isRedeemApplied = false.obs;
 
   applyRedeemCode(num? value) {
@@ -52,8 +69,9 @@ class CheckoutController extends GetxController {
       _isRedeemApplied(true);
     }
     totalDiscount(value.toDouble());
-    var netAmount = totalAmount.value - value;
-    amountAfterRedeeming(netAmount);
+    setTotalAmount();
+    /*var netAmount = totalAmount.value - value;
+    amountAfterRedeeming(netAmount);*/
   }
 
   @override
@@ -71,6 +89,10 @@ class CheckoutController extends GetxController {
 
     ///Set Standard shipping by default
     setShippingCost(250);
+    cartController.totalCartAmount.listen((p0) {
+      print(">>>Amount: $p0");
+      setTotalAmount();
+    });
 
     /// fetch users Coins
     // authController.fetchUserCoins();
@@ -143,10 +165,7 @@ class CheckoutController extends GetxController {
           AppConstant.displaySnackBar('error', userResponse.message);
       } else
         AppConstant.displaySnackBar('error', "something went wrong!");
-    }).catchError((error) {
-      isLoading(false);
-      debugPrint("RegisterStore: Error $error");
-    });
+    }).catchError(onError);
   }
 
   var _userDefaultAddressModel = UserModel().obs;
@@ -158,9 +177,7 @@ class CheckoutController extends GetxController {
         .getDefaultShippingAddress(token: authController.userToken!)
         .then((user) {
       _userDefaultAddressModel(user);
-    }).catchError((error) {
-      print(">>>>GetDefaultAddress: $error");
-    });
+    }).catchError(onError);
   }
 
   var shippingAddressList = <UserModel>[].obs;
@@ -168,14 +185,11 @@ class CheckoutController extends GetxController {
   getAllShippingAddresses() async {
     shippingAddressList.clear();
     await authController.authProvider
-            .getShippingAddress(token: authController.userToken!)
-            .then((addresses) {
+        .getShippingAddress(token: authController.userToken!)
+        .then((addresses) {
       print(">>>>Addresses: ${addresses.last.toAddressJson()}");
       shippingAddressList.addAll(addresses);
-    }) /*.catchError((error) {
-      debugPrint(">>>>getAllShippingAddresses: $error");
-    })*/
-        ;
+    }).catchError(onError);
   }
 
   changeDefaultShippingAddress() async {
@@ -196,16 +210,12 @@ class CheckoutController extends GetxController {
           AppConstant.displaySnackBar('error', userResponse.message);
       } else
         AppConstant.displaySnackBar('error', "something went wrong!");
-    }).catchError((error) {
-      isLoading(false);
-      debugPrint(">>>>changeShippingAddress: Error $error");
-    });
+    }).catchError(onError);
 
     update();
   }
 
   updateShippingAddress(UserModel? userModel) async {
-    print("USERSADDRESS: ${userModel!.toAddressJson()}");
     userModel!.name = nameController.text;
     userModel.address = addressController.text;
     userModel.phone = phoneController.text;
@@ -226,10 +236,7 @@ class CheckoutController extends GetxController {
           AppConstant.displaySnackBar('error', userResponse.message);
       } else
         AppConstant.displaySnackBar('error', "something went wrong!");
-    }).catchError((error) {
-      isLoading(false);
-      debugPrint(">>>>UpdateShippingAddress: Error $error");
-    });
+    }).catchError(onError);
 
     update();
   }
@@ -246,20 +253,27 @@ class CheckoutController extends GetxController {
           AppConstant.displaySnackBar('error', userResponse.message);
       } else
         AppConstant.displaySnackBar('error', "something went wrong!");
-    }).catchError((error) {
-      debugPrint(">>>>DeleteShippingAddress: Error $error");
-    });
-
-    update();
+    }).catchError(onError);
   }
 
-  late Map<String, dynamic>? paymentIntent;
+  //late Map<String, dynamic>? paymentIntent;
+  //var paymentIntent = Map<String, dynamic>().obs;
+  var _paymentMethodId = "".obs;
+
+  setPaymentIntentId(paymentMethodId) {
+    _paymentMethodId(paymentMethodId);
+  }
 
   Future<void> makePayment({String? amount}) async {
     try {
       isLoading(true);
-      //STEP 1: Create Payment Intent
-      paymentIntent = await createPaymentIntent(amount!, 'PKR');
+      if (_paymentMethodId.isNotEmpty)
+        await sendPaymentIntent(paymentId: _paymentMethodId.value);
+      else
+        print("Payment intent is null");
+
+      /*  //STEP 1: Create Payment Intent
+     // paymentIntent = await createPaymentIntent(amount!, 'PKR');
 
       //STEP 2: Initialize Payment Sheet
       await Stripe.instance
@@ -284,14 +298,14 @@ class CheckoutController extends GetxController {
           .then((value) {});
 
       //STEP 3: Display Payment sheet
-      displayPaymentSheet();
+      displayPaymentSheet();*/
     } catch (err) {
       isLoading(false);
       throw Exception(err);
     }
   }
 
-  createPaymentIntent(String amount, String currency) async {
+  /*createPaymentIntent(String amount, String currency) async {
     try {
       //Request body
 
@@ -306,20 +320,23 @@ class CheckoutController extends GetxController {
       isLoading(false);
       throw Exception(err.toString());
     }
-  }
+  }*/
 
-  calculateAmount(String amount) {
+  /* calculateAmount(String amount) {
     final a = ((double.parse(amount)) * 100).round();
     return a.toString();
-  }
+  }*/
 
-  displayPaymentSheet() async {
+  /* displayPaymentSheet() async {
     isLoading(false);
     try {
       await Stripe.instance.presentPaymentSheet().then((value) async {
         //Clear paymentIntent variable after successful payment
 
-        debugPrint("PaymentResponse: ${paymentIntent}");
+        debugPrint("PaymentResponse: ${paymentIntent!['id']}");
+        debugPrint("PaymentResponse: ${paymentIntent!['payment_method']}");
+        print("PaymentResponse: ${paymentIntent}");
+
         await sendPaymentIntent(paymentId: paymentIntent!['id']);
       }).onError((error, stackTrace) {
         throw Exception(error);
@@ -329,7 +346,7 @@ class CheckoutController extends GetxController {
     } catch (e) {
       print('$e');
     }
-  }
+  }*/
 
   void showSnackBar({title, message}) {
     AppConstant.displaySnackBar(title, message);
@@ -344,16 +361,38 @@ class CheckoutController extends GetxController {
     };
     await _orderProvider
         .createPaymentIntent(token: authController.userToken, data: data)
-        .then((OrderResponse? response) async {
+        .then((PaymentIntentResponse? response) async {
       if (response != null) {
         if (response.success!) {
-          await createOrder(paymentMethod: "Card");
+          await Stripe.instance
+              .confirmPayment(
+                  paymentIntentClientSecret: response.data!.clientSecret!,
+                  data: PaymentMethodParams.card(
+                    paymentMethodData: PaymentMethodData(
+                      billingDetails: BillingDetails(
+                        name: defaultAddressModel?.name ?? "",
+                        email: defaultAddressModel?.email ?? "",
+                        phone: defaultAddressModel?.phone ?? "",
+                        address: null,
+                      ),
+                    ),
+                  ))
+              .then((PaymentIntent paymentIntent) async {
+            await createOrder(
+                paymentMethod: isCardPaymentEnabled.isTrue ? "Card" : "COD");
+          }).catchError(onError);
         } else
           showSnackBar(title: 'error', message: response.message!);
       } else
         showSnackBar(
             title: 'error', message: "Something went wrong! Order Not created");
-    });
+    }).catchError(onError);
+  }
+
+  onError(error) {
+    isLoading(false);
+    debugPrint(">>>>ConfirmPayment: $error");
+    showSnackBar(title: 'error', message: error);
   }
 
   createOrder({paymentMethod = "COD"}) async {
@@ -367,19 +406,19 @@ class CheckoutController extends GetxController {
     await _orderProvider
         .createOrder(token: authController.userToken, data: data)
         .then((OrderResponse? response) {
+      isLoading(false);
       if (response != null) {
         if (response.success!) {
           showSnackBar(title: 'success', message: response.message!);
           showSuccessDialog(response: response);
-          paymentIntent = null;
-
+          // paymentIntent = null;
           LocalStorageHelper.clearAllCart();
         } else
           showSnackBar(title: 'error', message: response.message!);
       } else
         showSnackBar(
             title: 'error', message: "Something went wrong! Order Not created");
-    });
+    }).catchError(onError);
   }
 
   void showSuccessDialog({OrderResponse? response}) {

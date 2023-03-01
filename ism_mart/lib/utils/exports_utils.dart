@@ -7,5 +7,7 @@ export 'svg_helper.dart';
 export 'languages/english.dart';
 export 'languages/urdu.dart';
 export 'languages/arabic.dart';
+export 'languages/russian.dart';
+export 'languages/chinese.dart';
 export 'responsiveness.dart';
 export 'helpers/permission_handler.dart';

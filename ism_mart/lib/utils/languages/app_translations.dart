@@ -5,8 +5,10 @@ class AppTranslations extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'en_US': English().translations,
-        'ar_UAE': Arabic().translations,
+        'ar_AE': Arabic().translations,
         'ur_PK': Urdu().translations,
+        'ru_RU': Russian().translations,
+        'zh_CN': Chinese().translations,
       };
 }
 

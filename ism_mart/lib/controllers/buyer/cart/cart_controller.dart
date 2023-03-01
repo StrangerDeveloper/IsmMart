@@ -151,6 +151,7 @@ class CartController extends GetxController
         totalQty += qty;
       }
     }
+
     totalCartAmount(totalAmount);
     totalQtyCart(totalQty);
   }

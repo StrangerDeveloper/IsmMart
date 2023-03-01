@@ -1,11 +1,11 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
-
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class CheckoutUI extends GetView<CheckoutController> {
@@ -52,13 +52,15 @@ class CheckoutUI extends GetView<CheckoutController> {
                   children: [
                     _singleShippingCostItem(
                         title: "Standard", price: 250, delivery: 7),
-                    /*_singleShippingCostItem(
-                        title: "Free", price: 0, delivery: 14),*/
+                    _singleShippingCostItem(
+                        title: "Free", price: 0, delivery: 14),
                   ],
                 ),
               ),
               StickyLabel(text: langKey.orderSummary.tr),
               _buildCartItemSection(),
+              StickyLabel(text: langKey.paymentMethod.tr),
+              _buildPaymentDetails(),
               _subTotalDetails(),
               Column(
                 children: [
@@ -69,10 +71,9 @@ class CheckoutUI extends GetView<CheckoutController> {
                           width: 280,
                           height: 50,
                           onTap: () {
-                            if (/*controller.shippingCost.value == 0 &&*/
-                                controller
-                                        .cartController.totalCartAmount.value <=
-                                    1000) {
+                            if (controller
+                                    .cartController.totalCartAmount.value <=
+                                1000) {
                               controller.showSnackBar(
                                   title: "error",
                                   message:
@@ -80,6 +81,12 @@ class CheckoutUI extends GetView<CheckoutController> {
                               //You cannot use Free Shipping Service under Rs1000
                               return;
                             } else {
+                              if (controller.isCardPaymentEnabled.isFalse) {
+                                controller.showSnackBar(
+                                    title: "error",
+                                    message: "Please select payment method");
+                                return;
+                              }
                               if (controller.defaultAddressModel!.id != null) {
                                 if (controller
                                     .cartController.cartItemsList.isNotEmpty) {
@@ -97,7 +104,8 @@ class CheckoutUI extends GetView<CheckoutController> {
                                     message: langKey.noDefaultAddressFound.tr);
                             }
                           },
-                          text: langKey.confirmOrder.tr))
+                          text: langKey.confirmOrder.tr)),
+                  AppConstant.spaceWidget(height: 20),
                 ],
               ),
             ],
@@ -112,8 +120,10 @@ class CheckoutUI extends GetView<CheckoutController> {
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
       child: Column(
         children: [
-          Card(
-            child: RadioListTile(
+          CustomCard(
+            child: IgnorePointer(
+              ignoring: controller.cartController.totalCartAmount.value <= 1000,
+              child: RadioListTile(
                 activeColor: kPrimaryColor,
                 toggleable: false,
                 //selected: true,
@@ -127,7 +137,9 @@ class CheckoutUI extends GetView<CheckoutController> {
                 groupValue: controller.shippingCost.value,
                 onChanged: (value) {
                   controller.setShippingCost(value!);
-                }),
+                },
+              ),
+            ),
           ),
           if (price == 0)
             CustomText(title: "FREE SHIPPING ON ALL ORDERS ABOVE PKR 1000")
@@ -141,7 +153,7 @@ class CheckoutUI extends GetView<CheckoutController> {
   Widget _shippingAddressDetails(UserModel? userModel) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Card(
+      child: CustomCard(
         color: kWhiteColor,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -198,19 +210,19 @@ class CheckoutUI extends GetView<CheckoutController> {
       padding: const EdgeInsets.all(8.0),
       child: Container(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             NoDataFound(
               text: langKey.noDefaultAddressFound.tr,
               fontSize: 13,
             ),
-            OutlinedButton(
-                onPressed: () {
-                  AppConstant.showBottomSheet(
-                      widget: addNewORUpdateAddressContents());
-                },
-                child: CustomText(
-                    title: langKey.addNewAddress.tr, weight: FontWeight.w600))
+            AppConstant.spaceWidget(height: 10),
+            CustomButton(
+                width: 150,
+                height: 40,
+                onTap: () => AppConstant.showBottomSheet(
+                    widget: addNewORUpdateAddressContents()),
+                text: langKey.addNewAddress.tr),
           ],
         ),
       ),
@@ -237,7 +249,7 @@ class CheckoutUI extends GetView<CheckoutController> {
               CustomText(
                 title:
                     "${calledForUpdate ? langKey.updateBtn.tr : langKey.addNew.tr} ${langKey.shipping.tr}",
-                style: appBarTitleSize,
+                style: headline1,
               ),
               AppConstant.spaceWidget(height: 15),
               FormInputFieldWithIcon(
@@ -466,7 +478,7 @@ class CheckoutUI extends GetView<CheckoutController> {
   }
 
   Widget _singleDialogListItem(UserModel? userModel) {
-    return Card(
+    return CustomCard(
       margin: const EdgeInsets.all(5.0),
       color: Colors.white,
       child: Padding(
@@ -549,25 +561,99 @@ class CheckoutUI extends GetView<CheckoutController> {
   }
 
   ///
-  ///TODO: Payments Details
+  ///TOO: Payments Details
   ///
   Widget _buildPaymentDetails() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            NoDataFound(
-              text: "No payment method found",
-              fontSize: 13,
-            ),
-            OutlinedButton(
-                onPressed: () {},
-                child:
-                    CustomText(title: "Add Payments", weight: FontWeight.w600))
-          ],
+    return Obx(
+      () => Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _singlePaymentOptionItem(
+                  title: "Cash On Delivery (Not Available)",
+                  icon: Icons.wallet,
+                  value: false,
+                  isEnabled: true),
+              _singlePaymentOptionItem(
+                  title: "Credit Card",
+                  icon: Icons.credit_card,
+                  value: true,
+                  isEnabled: false),
+              CustomCard(
+                color: Colors.white,
+                child: Visibility(
+                    visible: controller.isCardPaymentEnabled.isTrue,
+                    child: CardField(
+                        enablePostalCode: true,
+                        onCardChanged: (card) async {
+                          //await Stripe.instance.createPaymentMethod(params);
+                          try {
+                            var paymentMethod =
+                                await Stripe.instance.createPaymentMethod(
+                              params: PaymentMethodParams.card(
+                                paymentMethodData: PaymentMethodData(
+                                  billingDetails: BillingDetails(
+                                    name:
+                                        controller.defaultAddressModel?.name ??
+                                            "",
+                                    email:
+                                        controller.defaultAddressModel?.email ??
+                                            "",
+                                    phone:
+                                        controller.defaultAddressModel?.phone ??
+                                            "",
+                                    address: null,
+                                  ),
+                                ),
+                              ),
+                            );
+                            debugPrint(
+                                ">>>CardPaymentMethod: ${paymentMethod.id}");
+                            controller.setPaymentIntentId(paymentMethod.id);
+                          } on StripeException catch (e) {
+                            print(">>>stripeException: $e");
+                          }
+                        })),
+              ),
+            ],
+          ),
         ),
+      ),
+    );
+  }
+
+  _singlePaymentOptionItem({title, value, icon, isEnabled}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
+      child: Column(
+        children: [
+          CustomCard(
+            child: IgnorePointer(
+              ignoring: isEnabled,
+              child: RadioListTile(
+                activeColor: kPrimaryColor,
+                toggleable: false,
+                //selected: true,
+                value: title,
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CustomText(
+                      title: "$title",
+                    ),
+                    Icon(icon),
+                  ],
+                ),
+                groupValue: controller.paymentType,
+                onChanged: (value) {
+                  controller.enableCardPayment(value);
+                },
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -602,7 +688,7 @@ class CheckoutUI extends GetView<CheckoutController> {
     return Obx(
       () => Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Card(
+        child: CustomCard(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -627,7 +713,8 @@ class CheckoutUI extends GetView<CheckoutController> {
                           autofocus: false,
                           style: bodyText1,
                           enabled: controller.coinsModel?.silver != null &&
-                              controller.coinsModel!.silver!.isGreaterThan(fixedRedeemCouponThreshold),
+                              controller.coinsModel!.silver!
+                                  .isGreaterThan(fixedRedeemCouponThreshold),
                           textInputAction: TextInputAction.search,
                           // onChanged: controller.search,
                           decoration: InputDecoration(
@@ -740,9 +827,11 @@ class CheckoutUI extends GetView<CheckoutController> {
                         ],
                       ),
                     ),
-                    CustomPriceWidget(
-                        title:
-                            "${controller.amountAfterRedeeming.value.isGreaterThan(0.0) ? controller.amountAfterRedeeming.value : controller.totalAmount.value}"),
+                    Obx(
+                      () => CustomPriceWidget(
+                          title:
+                              "${/*controller.amountAfterRedeeming.value.isGreaterThan(0.0) ? controller.amountAfterRedeeming.value : */controller.totalAmount.value}"),
+                    ),
                   ],
                 ),
                 AppConstant.spaceWidget(height: 10),

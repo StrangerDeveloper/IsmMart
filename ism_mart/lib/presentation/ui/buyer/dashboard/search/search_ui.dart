@@ -423,7 +423,7 @@ class SearchUI extends GetView<SearchController> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            CustomText(title: "sort_by".tr, size: 20, weight: FontWeight.bold),
+            CustomText(title: langKey.sortBy.tr, size: 20, weight: FontWeight.bold),
             AppConstant.spaceWidget(height: 10),
             RadioListTile(
               //selected: controller.sortBy!.contains("low-to-high"),

@@ -28,6 +28,9 @@ class AppResponsiveness {
   static double getHeight100_120() {
     return _isTabletScreen() ? 100 : 120;
   }
+  static double getHeight100_150() {
+    return _isTabletScreen() ? 150 : 100;
+  }
 
   //container widths
   static double getWidth50() {
@@ -70,4 +73,7 @@ class AppResponsiveness {
     return height * (_isTabletScreen() ? 0.30 : 0.25);
   }
 
+  static double getMainAxisExtentPoint28() {
+    return height * (_isTabletScreen() ? 0.32 : 0.28);
+  }
 }

@@ -8,6 +8,10 @@ import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
 void main() async {
+  /*for(int i=1; i<=21; i++ ){
+    debugPrint("key.tCHeader$i\nkey.tCBody$i");
+  }*/
+
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
 

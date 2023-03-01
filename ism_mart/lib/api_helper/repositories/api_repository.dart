@@ -160,7 +160,7 @@ class ApiRepository {
     var response = await http.post(
       Uri.parse('https://api.stripe.com/v1/payment_intents'),
       headers: {
-        'Authorization': 'Bearer $client_secret',
+        //'Authorization': 'Bearer $client_secret',
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       body: body,

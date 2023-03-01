@@ -28,7 +28,7 @@ class SingleProductView extends GetView<ProductController> {
     }, onLoading: CustomLoading(isDarkMode: isDarkMode));
   }
 
-  Widget _build({ ProductModel? productModel}) {
+  Widget _build({ProductModel? productModel}) {
     return Scaffold(
       backgroundColor: Colors.grey[300]!,
       body: CustomScrollView(
@@ -262,22 +262,30 @@ class SingleProductView extends GetView<ProductController> {
                 ),
               ],
             ),
+
             AppConstant.spaceWidget(height: 8),
-            /*ListTile(
-              dense: true,
-              leading: const Icon(
-                Icons.question_answer,
-                color: kPrimaryColor,
-              ),
-              title: CustomText(
-                  title: "5 Product Questions and Answer",
-                  style: textTheme.bodyText2),
-              trailing: const Icon(
-                Icons.arrow_forward_ios_sharp,
-                color: kPrimaryColor,
-                size: 15,
-              ),
-            ),*/
+
+            ///Variants
+
+            /*if (productModel.productFeatures! .isNotEmpty)
+              ListTile(
+                dense: true,
+                leading: const Icon(
+                  Icons.account_tree_sharp,
+                  color: kPrimaryColor,
+                ),
+                title: CustomText(title: "Variants", style: bodyText1),
+                subtitle: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: productModel.productFeatures!
+                      .map((e) => CustomText(
+                            title: '${e.value}',
+                            maxLines: 3,
+                            style: bodyText2Poppins,
+                          ))
+                      .toList(),
+                ),
+              ),*/
             ListTile(
               dense: true,
               leading: const Icon(
@@ -323,10 +331,7 @@ class SingleProductView extends GetView<ProductController> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CustomText(
-                  title: "Description",
-                  style: headline2,
-                ),
+                CustomText(title: "Description", style: headline2),
                 RichText(
                   text: TextSpan(
                     children: [
@@ -479,31 +484,16 @@ class SingleProductView extends GetView<ProductController> {
               ],
             ),
           ),
-          productModel.colors == null
+          productModel.productFeatures!.isEmpty
               ? Container()
               : Column(
                   children: [
-                    const StickyLabel(text: "Colors"),
+                    const StickyLabel(text: "Product Variants"),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: productModel.colors!
-                          .map((e) => _buildChip(label: e))
-                          .toList(),
-                    )
-                  ],
-                ),
-          productModel.sizes == null
-              ? Container()
-              : Column(
-                  children: [
-                    const StickyLabel(text: "Sizes"),
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      //mainAxisAlignment: MainAxisAlignment.sp,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: productModel.sizes!
-                          .map((e) =>
-                              _buildChip(label: e, calledForColors: false))
+                      children: productModel.productFeatures!
+                          .map((e) => _buildChip(
+                              value: e.value, variantsModel: e.categoryField))
                           .toList(),
                     )
                   ],
@@ -518,21 +508,24 @@ class SingleProductView extends GetView<ProductController> {
     );
   }
 
-  Widget _buildChip({String? label, calledForColors = true}) {
+  Widget _buildChip(
+      {String? value,
+      ProductVariantsModel? variantsModel,
+      calledForColors = true}) {
     return Obx(
       () => ChoiceChip(
         label: CustomText(
-            title: label, style: bodyText1.copyWith(color: Colors.white)),
-        selected: label!.toLowerCase() ==
+            title: value, style: bodyText1.copyWith(color: Colors.white)),
+        selected: value!.toLowerCase() ==
             (calledForColors
                 ? controller.color.value.toLowerCase()
                 : controller.size.value.toLowerCase()),
         selectedColor: kPrimaryColor,
-        onSelected: (value) {
+        onSelected: (v) {
           if (calledForColors) {
-            value ? controller.color(label) : controller.color("Black");
+            v ? controller.color(value) : controller.color("Black");
           } else {
-            value ? controller.size(label) : controller.color("L");
+            v ? controller.size(value) : controller.color("L");
           }
         },
       ),

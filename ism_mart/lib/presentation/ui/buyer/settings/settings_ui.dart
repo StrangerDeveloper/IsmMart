@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
@@ -149,7 +150,6 @@ class SettingsUI extends GetView<AuthController> {
               icon: Icons.dashboard_rounded,
               iconColor: kPrimaryColor,
               title: langKey.vendorDashboard.tr),
-
           _singleSettingsItem(
               onTap: () => Get.toNamed(Routes.buyerOrdersRoute),
               icon: IconlyBold.bag,
@@ -300,7 +300,7 @@ class SettingsUI extends GetView<AuthController> {
   _showLanguageChangeBottomSheet() {
     AppConstant.showBottomSheet(
       widget: SizedBox(
-        height: MediaQuery.of(Get.context!).size.height / 3,
+        //height: MediaQuery.of(Get.context!).size.height / 2.5,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -315,6 +315,9 @@ class SettingsUI extends GetView<AuthController> {
                       languageController.setLanguage(key: item.key);
                       Get.back();
                     },
+                    leading: _countryFlag(
+                        countryCode: item.value['countryCode'],
+                        color: item.value['color']),
                     title: Text(item.value["description"],
                         style: bodyText1.copyWith(fontWeight: FontWeight.w600)),
                     trailing: item.value["description"] ==
@@ -331,6 +334,29 @@ class SettingsUI extends GetView<AuthController> {
     );
   }
 
+  Widget _countryFlag({String? countryCode, Color? color}) {
+    var imageUrl =
+        "https://raw.githubusercontent.com/hampusborgos/country-flags/main/png1000px/${countryCode!.toLowerCase()}.png";
+    return Container(
+      height: 45,
+      width: 45,
+      padding: EdgeInsets.all(8),
+      // Border width
+      decoration: BoxDecoration(
+        color: color!.withOpacity(0.3),
+        shape: BoxShape.circle,
+        image: DecorationImage(
+          fit: BoxFit.fill,
+          image: NetworkImage(imageUrl),
+        ),
+      ),
+      /* child: SvgPicture.network(
+        "https://flagicons.lipis.dev/flags/4x3/${countryCode.toLowerCase()}.svg",
+        width: 40,
+        height: 40,
+      ),*/
+    );
+  }
 /*_showThemeChangeBottomSheet() {
     var listThemeItems = [
       {

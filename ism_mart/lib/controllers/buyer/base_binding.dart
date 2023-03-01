@@ -5,7 +5,7 @@ import 'package:ism_mart/controllers/export_controllers.dart';
 class BaseBindings extends Bindings {
   @override
   void dependencies() {
-    // TODO: implement dependencies
+
 
 
 

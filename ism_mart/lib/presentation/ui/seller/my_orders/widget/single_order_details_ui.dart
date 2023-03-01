@@ -199,42 +199,53 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
           Column(
             children: model!.orderItems!.isEmpty
                 ? [NoDataFound()]
-                : model.orderItems!
-                    .map((OrderItem orderItems) => Container(
-                          padding: const EdgeInsets.all(8.0),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: kPrimaryColor),
-                            borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(8),
-                                bottomRight: Radius.circular(8)),
-                          ),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                  flex: 2,
-                                  child: _dataCell(
-                                      text: '${orderItems.product?.name}')),
-                              Expanded(
-                                  child: _dataCell(
-                                      text: '${orderItems.quantity}')),
-                              Expanded(
-                                  child: _dataCell(
-                                      text:
-                                          '${orderItems.product?.discountPrice}')),
-                              Expanded(
-                                  child:
-                                      _dataCell(text: '${orderItems.price}')),
-                              Expanded(
-                                  child: model!.status!.contains("pending")
-                                      ? Container()
-                                      : _dataAction(
-                                          orderItemModel: orderItems)),
-                            ],
-                          ),
-                        ))
-                    .toList(),
+                : model.orderItems!.map((OrderItem orderItem) {
+                    return Container(
+                      padding: const EdgeInsets.all(8.0),
+                      decoration: _boxDecoration(
+                          lastIndex: model.orderItems!.indexOf(orderItem) + 1,
+                          length: model.orderItems!.length),
+                      child: Row(
+                        children: [
+                          Expanded(
+                              flex: 2,
+                              child: _dataCell(
+                                  text: '${orderItem.product?.name}')),
+                          Expanded(
+                              child: _dataCell(text: '${orderItem.quantity}')),
+                          Expanded(
+                              child: _dataCell(
+                                  text: '${orderItem.product?.discountPrice}')),
+                          Expanded(
+                              child: _dataCell(text: '${orderItem.price}')),
+                          Expanded(
+                              child: model.status!.contains("pending")
+                                  ? Container()
+                                  : _dataAction(orderItemModel: orderItem)),
+                        ],
+                      ),
+                    );
+                  }).toList(),
           ),
         ],
+      ),
+    );
+  }
+
+  BoxDecoration _boxDecoration({int? lastIndex, length}) {
+    final borderSide = BorderSide(color: kPrimaryColor);
+    if (lastIndex!.isEqual(length))
+      return BoxDecoration(
+        border: Border.all(color: kPrimaryColor),
+        borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(8), bottomRight: Radius.circular(8)),
+      );
+
+    return BoxDecoration(
+      border: Border(
+        left: borderSide,
+        right: borderSide,
+        top: borderSide,
       ),
     );
   }
