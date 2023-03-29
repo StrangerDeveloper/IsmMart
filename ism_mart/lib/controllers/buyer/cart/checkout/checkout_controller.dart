@@ -91,6 +91,7 @@ class CheckoutController extends GetxController {
     setShippingCost(250);
     cartController.totalCartAmount.listen((p0) {
       print(">>>Amount: $p0");
+      cartController.totalCartAmount(p0);
       setTotalAmount();
     });
 
@@ -265,14 +266,14 @@ class CheckoutController extends GetxController {
   }
 
   Future<void> makePayment({String? amount}) async {
-    try {
-      isLoading(true);
-      if (_paymentMethodId.isNotEmpty)
-        await sendPaymentIntent(paymentId: _paymentMethodId.value);
-      else
-        print("Payment intent is null");
+    // try {
+    isLoading(true);
+    if (_paymentMethodId.isNotEmpty)
+      await sendPaymentIntent(paymentId: _paymentMethodId.value);
+    else
+      print("Payment intent is null");
 
-      /*  //STEP 1: Create Payment Intent
+    /*  //STEP 1: Create Payment Intent
      // paymentIntent = await createPaymentIntent(amount!, 'PKR');
 
       //STEP 2: Initialize Payment Sheet
@@ -299,10 +300,11 @@ class CheckoutController extends GetxController {
 
       //STEP 3: Display Payment sheet
       displayPaymentSheet();*/
-    } catch (err) {
+    /*} catch (err) {
       isLoading(false);
+      print(">>>MakePaymentError: $err");
       throw Exception(err);
-    }
+    }*/
   }
 
   /*createPaymentIntent(String amount, String currency) async {
@@ -349,15 +351,20 @@ class CheckoutController extends GetxController {
   }*/
 
   void showSnackBar({title, message}) {
+    isLoading(false);
     AppConstant.displaySnackBar(title, message);
   }
 
   sendPaymentIntent({paymentId}) async {
+    var cartItems = [];
+    cartController.cartItemsList.forEach((element) {
+      cartItems.addAll([element.toOrderCreationJson()]);
+    });
     JSON data = {
       "shippingPrice": shippingCost.value,
       "paymentMethod": "$paymentId",
       "redeemCoins": _isRedeemApplied.value,
-      "cartItems": getCartItemsList(),
+      "cartItems": cartItems,
     };
     await _orderProvider
         .createPaymentIntent(token: authController.userToken, data: data)
@@ -366,7 +373,7 @@ class CheckoutController extends GetxController {
         if (response.success!) {
           await Stripe.instance
               .confirmPayment(
-                  paymentIntentClientSecret: response.data!.clientSecret!,
+                  paymentIntentClientSecret: response.data["client_secret"],
                   data: PaymentMethodParams.card(
                     paymentMethodData: PaymentMethodData(
                       billingDetails: BillingDetails(
@@ -379,10 +386,12 @@ class CheckoutController extends GetxController {
                   ))
               .then((PaymentIntent paymentIntent) async {
             await createOrder(
-                paymentMethod: isCardPaymentEnabled.isTrue ? "Card" : "COD");
+                paymentMethod: isCardPaymentEnabled.isTrue ? "Card" : "COD",
+                cartItems: cartItems);
           }).catchError(onError);
-        } else
+        } else {
           showSnackBar(title: 'error', message: response.message!);
+        }
       } else
         showSnackBar(
             title: 'error', message: "Something went wrong! Order Not created");
@@ -395,12 +404,13 @@ class CheckoutController extends GetxController {
     showSnackBar(title: 'error', message: error);
   }
 
-  createOrder({paymentMethod = "COD"}) async {
+  createOrder({paymentMethod = "COD", cartItems}) async {
     JSON data = {
       "paymentMethod": paymentMethod,
       "shippingPrice": shippingCost.value,
       "shippingDetailsId": defaultAddressModel!.id,
-      "cartItems": getCartItemsList(),
+      "redeemCoins": _isRedeemApplied.value,
+      "cartItems": cartItems,
     };
 
     await _orderProvider
@@ -441,7 +451,7 @@ class CheckoutController extends GetxController {
             weight: FontWeight.w600,
           ),
           CustomText(
-            title: "OrderID #${response!.data!.orderId!}",
+            title: "OrderID #${response!.data["orderId"]}",
             size: 17,
             weight: FontWeight.bold,
           ),

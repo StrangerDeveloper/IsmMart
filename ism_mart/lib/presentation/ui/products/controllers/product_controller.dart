@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
-import 'package:get/get.dart';
 
 class ProductController extends GetxController with StateMixin {
   final ApiProvider _apiProvider;
 
   ProductController(this._apiProvider);
+
+  var questionController = TextEditingController();
+  FocusNode focusNode = FocusNode();
 
   var pageController = PageController(initialPage: 0);
   var pageIndex = 0.obs;
@@ -17,8 +20,8 @@ class ProductController extends GetxController with StateMixin {
 
   var count = 1.obs;
 
-  var size = "L".obs;
-  var color = "Black".obs;
+  var size = "".obs;
+  var color = "".obs;
 
   // minimum Order Qty Limit
   int moq = 10;
@@ -30,31 +33,94 @@ class ProductController extends GetxController with StateMixin {
     quantityController.text = count.value.toString();
   }
 
-  void fetchProduct(int id) {
-
+  fetchProduct(int id) async {
     change(null, status: RxStatus.loading());
-    _apiProvider.getProductById(id).then((product) {
+    await _apiProvider.getProductById(id).then((product) {
       change(product, status: RxStatus.success());
+
       fetchProductBySubCategory(subCategoryId: product.subCategory!.id);
-    })/*.catchError((error) {
+      fetchProductReviewsById(productId: id);
+      getProductQuestions(productId: id);
+    }).catchError((error) {
       change(null, status: RxStatus.error(error));
-    })*/;
+      print(">>>FetchProduct $error");
+    });
   }
 
   var subCategoryProductList = <ProductModel>[].obs;
   var isLoading = false.obs;
+
   void fetchProductBySubCategory({int? subCategoryId}) async {
     isLoading(true);
     await _apiProvider
         .getProductsBySubCategory(subCategoryId!)
         .then((products) {
-
       subCategoryProductList.clear();
       subCategoryProductList.addAll(products);
       isLoading(false);
     }).catchError((error) {
       isLoading(false);
       debugPrint(">>>fetchProductBySubCategory $error");
+    });
+  }
+
+  var _reviewResponse = ReviewModelResponse().obs;
+
+  ReviewModelResponse? get reviewResponse => _reviewResponse.value;
+
+  fetchProductReviewsById({productId}) async {
+    isLoading(true);
+    await _apiProvider
+        .getProductReviews(productId: productId)
+        .then((ReviewModelResponse? response) {
+      isLoading(false);
+      _reviewResponse(response);
+    }).catchError((e) {
+      debugPrint(">>>FetchProductReviews:  $e");
+      isLoading(false);
+    });
+  }
+
+  var sellerStoreResponse = SellerModelResponse().obs;
+
+  fetchStoreDetailsByID({storeID}) async {
+    //change(null, status: RxStatus.loading());
+    await _apiProvider
+            .getVendorStoreById(
+                storeID: storeID, token: authController.userToken)
+            .then((sellerModelResponse) {
+      sellerStoreResponse(sellerModelResponse);
+      //change(sellerModelResponse, status: RxStatus.success());
+      getVendorProducts(vendorId: sellerModelResponse.vendorStore!.id);
+    }) /*.catchError((error) {
+      //change(null, status: RxStatus.empty());
+      print(">>>StoreDetails $error");
+    })*/
+        ;
+  }
+
+  var vendorProductList = <ProductModel>[].obs;
+
+  getVendorProducts({vendorId}) async {
+    await _apiProvider
+        .geVendorProductById(token: authController.userToken, storeID: vendorId)
+        .then((value) {
+      vendorProductList.addAll(value);
+    }).catchError((e) {
+      print(">>>>GetVendorProduct: $e");
+    });
+  }
+
+  var productQuestionsList = <QuestionModel>[].obs;
+
+  getProductQuestions({productId}) async {
+    await _apiProvider
+        .geProductQuestionsById(productID: productId)
+        .then((value) {
+      productQuestionsList.clear();
+      productQuestionsList.addAll(value);
+    }).catchError((e) {
+      print(">>>GetProductQuestions: $e");
     });
   }
 
@@ -81,18 +147,70 @@ class ProductController extends GetxController with StateMixin {
     quantityController.text = count.value.toString();
   }
 
+  var selectedFeatureIDsList = <int>[].obs;
+  var selectedFeatureNamesList = <String>[].obs;
+
   //TOO: Add item to cart
+  addItemLocalCart({ProductModel? product}) async {
+    product!.totalPrice = int.parse(
+            quantityController.text.isEmpty ? "1" : quantityController.text) *
+        product.discountPrice!.toDouble();
+    product.vendorId = product.sellerModel!.id;
+    CartModel cart = CartModel(
+      productId: product.id!,
+      productModel: product,
+      quantity: quantityController.text,
+      featuresID: selectedFeatureIDsList,
+      featuresName: selectedFeatureNamesList,
+      onQuantityClicked: false,
+    );
+
+    await LocalStorageHelper.addItemToCart(cartModel: cart).then((value) {
+      Get.back();
+      AppConstant.displaySnackBar("success", "Added to Cart!");
+      clearControllers();
+      count(1);
+    });
+  }
+
+  postQuestion({productId}) async {
+    String question = questionController.text;
+    if (question.isNotEmpty) {
+
+      var data = {"productId": productId, "question": question};
+      print(">>>QuestionData: ${data.toString()}");
+
+      QuestionModel questionModel = QuestionModel(
+        productId: productId,
+        question: question,
+      );
+
+      await _apiProvider
+          .postProductQuestion(token: authController.userToken, model: questionModel.toJson())
+          .then((ResponseModel? responseModel) {
+        if (responseModel != null) {
+          if (responseModel.success!) {
+            clearControllers();
+            showSnackBar("success", responseModel.message);
+            getProductQuestions(productId: productId);
+          } else
+            showSnackBar("success", responseModel.message);
+        }
+      }).catchError((e) {
+        print(">>>PostQuestion: $e");
+      });
+    }
+  }
 
   addItemToCart({ProductModel? product}) async {
-
     CartModel cart = CartModel(
-        productModel: product,
-        quantity: quantityController.text,
-        size: size.value,
-        onQuantityClicked: false,
-        color: color.value);
+      productModel: product,
+      quantity: quantityController.text,
+      //size: size.value,
+      onQuantityClicked: false,
+    );
 
-    if (authController.isSessionExpired! && authController.userToken==null) {
+    if (authController.isSessionExpired! && authController.userToken == null) {
       await LocalStorageHelper.addItemToCart(cartModel: cart).then((value) {
         AppConstant.displaySnackBar("Added", "Added to Cart!",
             position: SnackPosition.TOP);
@@ -128,6 +246,8 @@ class ProductController extends GetxController with StateMixin {
 
   clearControllers() {
     quantityController.clear();
+    questionController.clear();
+    focusNode.unfocus();
   }
 
   @override

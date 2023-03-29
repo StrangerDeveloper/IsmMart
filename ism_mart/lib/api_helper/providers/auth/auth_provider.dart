@@ -38,7 +38,7 @@ class AuthProvider {
   }
 
   Future<UserResponse> postStoreRegister(
-      {token, SellerModel? sellerModel}) async {
+      {token, SellerModel? sellerModel, bool? calledForUpdate = false}) async {
     final url = "${ApiConstant.baseUrl}auth/vendor/register";
     final request = http.MultipartRequest('POST', Uri.parse(url));
     request.headers['Authorization'] = '$token';
@@ -54,17 +54,24 @@ class AuthProvider {
     request.fields['accountNumber'] = sellerModel.accountNumber!;
     request.fields['bankName'] = sellerModel.bankName!;
 
-    request.files.add(await http.MultipartFile.fromPath(
-      'storeImage',
-      sellerModel.storeImage!,
-      contentType: MediaType.parse('image/jpeg'),
-    ));
-
-    request.files.add(await http.MultipartFile.fromPath(
-      'coverImage',
-      sellerModel.coverImage!,
-      contentType: MediaType.parse('image/jpeg'),
-    ));
+    if(sellerModel.storeImage!.isNotEmpty) {
+      request.files.add(await http.MultipartFile.fromPath(
+        'storeImage',
+        sellerModel.storeImage!,
+        contentType: MediaType.parse('image/jpeg'),
+      ));
+    }else {
+      request.fields['storeImage'] = sellerModel.storeName!;
+    }
+if(sellerModel.coverImage!.isNotEmpty){
+      request.files.add(await http.MultipartFile.fromPath(
+        'coverImage',
+        sellerModel.coverImage!,
+        contentType: MediaType.parse('image/jpeg'),
+      ));
+    }else{
+  request.fields['coverImage'] = sellerModel.coverImage!;
+    }
     final response = await request.send();
     if (response.statusCode == 200) {
       final responseData = await response.stream.bytesToString();

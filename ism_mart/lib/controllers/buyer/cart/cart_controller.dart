@@ -39,7 +39,6 @@ class CartController extends GetxController
 
   @override
   void onReady() {
-    // TODO: implement onReady
     super.onReady();
 
     LocalStorageHelper.localStorage.listenKey(LocalStorageHelper.cartItemKey,
@@ -51,7 +50,7 @@ class CartController extends GetxController
     ever(cartItemsList, getTotalCartAmount);
   }
 
-  //TODO: Start Cart Items
+  //TDO: Start Cart Items
 
   var cartItemsList = <CartModel>[].obs;
 
@@ -59,7 +58,7 @@ class CartController extends GetxController
     change(null, status: RxStatus.loading());
     //isLoading(true);
     cartItemsList.clear();
-    LocalStorageHelper.fetchCartItems().asStream().listen((value) {
+    LocalStorageHelper.fetchCartItems().then((value) {
       cartItemsList.addAll(value);
       isLoading(false);
       change(value, status: RxStatus.success());
@@ -85,8 +84,6 @@ class CartController extends GetxController
     });
     // ever(cartItemsList, getTotalCartAmount);
   }
-
-
 
   updateCart({cartItemId, quantity}) async {
     var cartData = {"cartItemId": "$cartItemId", "quantity": quantity};
@@ -140,13 +137,11 @@ class CartController extends GetxController
     int totalQty = 0;
     if (list.isNotEmpty) {
       for (var value in list) {
-        double discountPrice = double.parse(value.productModel!.discountPrice !=
-                null
-            ? value.productModel!.discountPrice.toString()
-            : 0.0
-                .toString()); //double.parse(value.productModel!.discountPrice!.replaceAll("\$", ""));
-        int qty = int.parse(value.quantity!);
-
+        double discountPrice = double.parse(
+            value.productModel!.discountPrice != null
+                ? value.productModel!.discountPrice.toString()
+                : "0");
+        int qty = int.parse(value.quantity ?? "1");
         totalAmount += (discountPrice * qty);
         totalQty += qty;
       }
@@ -157,24 +152,6 @@ class CartController extends GetxController
   }
 
   //ENd Cart Items
-
-  void increment({CartModel? cartModel}) {
-    if (count.value == moq) return;
-    count.value++;
-
-    quantityController.text = count.value.toString();
-    cartModel!.quantity = quantityController.text;
-    LocalStorageHelper.updateCartItems(cartModel: cartModel);
-  }
-
-  void decrement({CartModel? cartModel}) {
-    if (count.value == 1) return;
-    count.value--;
-
-    quantityController.text = count.value.toString();
-    cartModel!.quantity = quantityController.text;
-    LocalStorageHelper.updateCartItems(cartModel: cartModel);
-  }
 
   @override
   void onClose() {

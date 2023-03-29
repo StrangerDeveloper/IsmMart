@@ -104,7 +104,7 @@ const profile = "profile",
 /// Add Product
 ///
 
-const addProduct = "addProduct";
+const addProduct = "addProduct", updateProduct="updateProduct";
 const deleteProd = "deleteProd", delProdMsg = "delProdMsg";
 
 ///
@@ -120,7 +120,7 @@ const subject = "subject",
 /// Orders section
 ///
 
-const title = "title", titleReq = "titleReq";
+const titleKey = "title", titleReq = "titleReq";
 /**
  *  Login and register and form validations text
  * */
@@ -236,6 +236,7 @@ const add = "add",
     set = "set",
     submit = "submit",
     sold = "sold",
+    stock = "stock",
     noBtn = "noBtn",
     cancelBtn = "cancelBtn",
     yesBtn = "yesBtn",

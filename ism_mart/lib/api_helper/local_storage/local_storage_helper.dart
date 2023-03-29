@@ -33,7 +33,7 @@ class LocalStorageHelper {
       list = getCartItems();
       if (isItemExistsInCart(cartModel)) {
         list.removeWhere(
-            (element) => element.productModel! == cartModel!.productModel);
+            (element) => element.productId! == cartModel!.productId);
       }
     }
     list.add(cartModel!);
@@ -47,16 +47,15 @@ class LocalStorageHelper {
   }
 
   static saveCart(cartItems) {
+    print(">>>Cart: Save: ${cartItems}");
     localStorage.write(cartItemKey, cartItems).then((value) {});
   }
 
   static updateCartItems({CartModel? cartModel}) async {
-    debugPrint("SaveCart UpdateCartItems: ${cartModel!.quantity}");
     if (localStorage.read(cartItemKey) != null) {
       List<CartModel> list = getCartItems();
-      list.removeWhere(
-          (element) => element.productModel == cartModel.productModel);
-      list.add(cartModel);
+      list.removeWhere((element)=> element.productId == cartModel!.productId);
+      list.add(cartModel!);
       String carts = cartModelToJson(list);
       await saveCart(carts);
     }

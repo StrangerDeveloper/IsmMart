@@ -67,7 +67,6 @@ class OrderController extends GetxController
         .getBuyerOrdersDetails(
             token: authController.userToken, orderId: orderId)
         .then((data) {
-      print(">>>FetchOrderById: ${data.status}");
       _orderDetailsModel(data);
       //change(data, status: RxStatus.success());
     }).catchError((error) {

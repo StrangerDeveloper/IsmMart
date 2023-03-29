@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/presentation/ui/exports_ui.dart';
+import 'package:ism_mart/presentation/ui/products/view/seller_store_details_ui.dart';
 
 class Routes {
   static const initRoute = "/";
@@ -18,6 +19,11 @@ class Routes {
 
   static const settingsRoute = "/settings";
   //static const aboutUsRoute = "/aboutUs";
+
+  ///Pages with passing :ID
+  static const productDetailsRoute = "/product/:id";
+  static const orderDetailsRoute = "/orderDetails/:id";
+  static const storeDetailsRoute = "/storeDetails/:id";
 
 
   static final pages = [
@@ -84,30 +90,13 @@ class Routes {
       //arguments: ['calledForBuyerOrderDetails'],
       page: () => const SingleOrderDetailsUI(),
       binding: OrdersBindings(),
+    ),
+    GetPage(
+      name: '/storeDetails/:storeId',
+      page: () => const SellerStoreDetailsUI(),
+      binding: ProductBinding(),
     )
+
   ];
 
-/*static Route? onGeneratedRoute(RouteSettings? settings) {
-    switch (settings!.name) {
-      case dashboardRoute:
-        return MaterialPageRoute(
-          builder: (context) => MultiBlocProvider(
-            providers: [
-              BlocProvider(
-              create: (context)=> BottomNavCubit(),
-              ),
-
-              BlocProvider(
-                create: (context) => SliderCubit(SliderRepository()),
-              ),
-            ],
-            child: const BaseLayout(),
-          ),
-        );
-      */ /*case categoriesRoute:
-        return Navigator.pushNamed(context, categoriesRoute);*/ /*
-      default:
-        return null;
-    }
-  }*/
 }

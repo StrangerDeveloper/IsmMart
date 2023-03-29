@@ -2,6 +2,30 @@ import 'package:ism_mart/api_helper/export_api_helper.dart';
 
 import 'user_model.dart';
 
+class SellerModelResponse {
+  SellerModelResponse({
+    this.totalProducts,
+    this.totalCustomers,
+    this.vendorStore,
+  });
+
+  int? totalProducts;
+  int? totalCustomers;
+  SellerModel? vendorStore;
+
+  factory SellerModelResponse.fromJson(Map<String, dynamic> json) => SellerModelResponse(
+    totalProducts: json["totalProducts"],
+    totalCustomers: json["totalCustomers"],
+    vendorStore: json["vendorStore"] == null ? null : SellerModel.fromJson(json["vendorStore"]),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "totalProducts": totalProducts,
+    "totalCustomers": totalCustomers,
+    "vendorStore": vendorStore?.toJson(),
+  };
+}
+
 class SellerModel {
   int? id, userId;
   String? storeName, storeDesc, storeUrl;
@@ -12,7 +36,8 @@ class SellerModel {
   DateTime? createdAt, updatedAt;
   UserModel? user;
   String? bankName, accountTitle, accountNumber;
-  String? storeImage, coverImage;
+  String? storeImage, coverImage, totalSold;
+
 
   SellerModel({
     this.id,
@@ -37,6 +62,7 @@ class SellerModel {
     this.storeImage,
     this.address,
     this.user,
+    this.totalSold
   });
 
   factory SellerModel.fromJson(JSON json) => SellerModel(
@@ -47,7 +73,7 @@ class SellerModel {
       ownerName: json["ownerName"] == null ? null : json["ownerName"],
       status: json["status"],
       visibility: json["visibility"],
-      rating: json["rating"],
+      rating: json["rating"] == null ? 0.0 : json["rating"],
       stripeCustomerId:
           json["stripeCustomerId"] == null ? null : json["stripeCustomerId"],
       phone: json["phone"] == null ? null : json["phone"],
@@ -64,6 +90,7 @@ class SellerModel {
       accountNumber: json["accountNumber"],
       storeImage: json["storeImage"],
       coverImage: json["coverImage"],
+      totalSold: json["totalSold"],
       user: json['User'] != null ? UserModel.fromJson(json['User']) : null);
 
   Map<String, dynamic> toJson() => {

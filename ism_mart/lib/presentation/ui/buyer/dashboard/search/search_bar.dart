@@ -3,16 +3,25 @@ import 'package:get/get.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
 class SearchBar extends StatelessWidget {
-  const SearchBar({Key? key, this.searchText}) : super(key: key);
+  const SearchBar({Key? key, this.searchText, this.calledFromSPV = false}) : super(key: key);
   final String? searchText;
+  final bool? calledFromSPV;
 
   @override
   Widget build(BuildContext context) {
     return Hero(
       tag: "productSearchBar",
       child: GestureDetector(
-        onTap: () => Get.toNamed(Routes.searchRoute,
-            arguments: {"searchText": searchText ?? " "}),
+        onTap: () {
+          if(calledFromSPV!){
+            Get.offNamed(Routes.searchRoute,
+                arguments: {"searchText": searchText ?? " "},
+                preventDuplicates: false);
+          }else {
+            Get.toNamed(Routes.searchRoute,
+              arguments: {"searchText": searchText ?? " "});
+          }
+        },
         child: Container(
           height: 34.0,
           alignment: Alignment.center,

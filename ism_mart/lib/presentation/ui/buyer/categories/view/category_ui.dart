@@ -23,7 +23,12 @@ class CategoriesUI extends GetView<CategoryController> {
         icon: Icons.category_outlined,
         title: langKey.noCategoryFound.tr,
       );
-    }, onLoading: CustomLoading(isDarkMode: Get.isDarkMode));
+    },
+        onLoading: CustomLoading(isDarkMode: Get.isDarkMode),
+        onEmpty: NoDataFoundWithIcon(
+          icon: Icons.category_outlined,
+          title: langKey.noCategoryFound.tr,
+        ));
   }
 
   Widget _build({state}) {
@@ -89,8 +94,7 @@ class CategoriesUI extends GetView<CategoryController> {
                 },
                 child: Container(
                   //width: 50,
-                  constraints:
-                      BoxConstraints(minHeight: 150),
+                  constraints: BoxConstraints(minHeight: 150),
                   alignment: Alignment.center,
                   //padding: const EdgeInsets.all(8.0),
                   //margin: const EdgeInsets.symmetric(vertical: 5.0),
@@ -146,7 +150,7 @@ class CategoriesUI extends GetView<CategoryController> {
   }
 
   Widget _buildSubCategoryItem(SubCategory? subCategory) {
-   // var height = AppConstant.getSize().height;
+    // var height = AppConstant.getSize().height;
     return InkWell(
       onTap: () {
         Get.toNamed(Routes.searchRoute,

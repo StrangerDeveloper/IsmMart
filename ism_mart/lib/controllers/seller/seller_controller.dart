@@ -1,7 +1,7 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
@@ -10,7 +10,7 @@ import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/ui/exports_ui.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
-class SellersController extends GetxController {
+class SellersController extends GetxController with StateMixin<ProductModel> {
   final SellersApiProvider _apiProvider;
   final CategoryController categoryController;
   final OrderController orderController;
@@ -19,9 +19,21 @@ class SellersController extends GetxController {
       this._apiProvider, this.categoryController, this.orderController);
 
   var pageViewController = PageController(initialPage: 0);
-
+  ScrollController scrollController = ScrollController();
   var appBarTitle = vendorDashboard.obs;
   var isLoading = false.obs;
+
+  var discountMessage = "".obs;
+
+  void setDiscount(int? discount) {
+    if (discount! > 0 && discount < 10) {
+      discountMessage("Discount should be greater than 10");
+    } else if (discount >= 100) {
+      discountMessage("Discount should not be greater or equal to 100");
+    } else {
+      discountMessage("");
+    }
+  }
 
   @override
   void onReady() {
@@ -29,28 +41,69 @@ class SellersController extends GetxController {
     orderController.fetchVendorOrders(status: "pending");
     fetchMyProducts();
     fetchCategories();
+
+    scrollController..addListener(() => loadMore());
+  }
+
+  getProductById(id) async {
+    change(null, status: RxStatus.loading());
+    await _apiProvider.getProductById(id).then((response) {
+      if (response.success!)
+        change(ProductModel.fromJson(response.data),
+            status: RxStatus.success());
+      else {
+        change(null, status: RxStatus.empty());
+      }
+    }).catchError((error) {
+      change(null, status: RxStatus.error(error));
+    });
   }
 
   //TOO: fetch MY Products
   var myProductsList = <ProductModel>[].obs;
+  int productsLimit = 20;
+  int page = 1;
 
   fetchMyProducts() async {
     await _apiProvider
-        .fetchMyProducts(token: authController.userToken)
+        .fetchMyProducts(
+            token: authController.userToken, limit: productsLimit, page: page)
         .then((response) {
       myProductsList.clear();
       myProductsList.addAll(response.products!);
     });
   }
 
+  var isLoadingMore = false.obs;
+
+  void loadMore() async {
+    if (scrollController.hasClients &&
+        isLoadingMore.isFalse &&
+        scrollController.position.maxScrollExtent == scrollController.offset) {
+      isLoadingMore(true);
+      page++;
+      await _apiProvider
+          .fetchMyProducts(
+              token: authController.userToken, limit: productsLimit, page: page)
+          .then((response) {
+        myProductsList.addAll(response.products!);
+        isLoadingMore(false);
+      }).catchError(onError);
+    }
+  }
+
   //TOO: Update Product using PATCH request type
 
   updateProduct({ProductModel? model}) async {
+    isLoading(true);
     await _apiProvider
         .updateProduct(token: authController.userToken, model: model)
         .then((ProductResponse? response) {
+      isLoading(false);
       if (response != null) {
         if (response.success != null) {
+          fetchMyProducts();
+          Get.back();
           AppConstant.displaySnackBar('success', "${response.message}");
           clearControllers();
         } else {
@@ -58,7 +111,13 @@ class SellersController extends GetxController {
         }
       } else
         AppConstant.displaySnackBar('error', someThingWentWrong.tr);
-    });
+    }).catchError(onError);
+  }
+
+  onError(e) async {
+    isLoading(false);
+    print(">>>SellerController: $e");
+    showSnackBar(title: 'error', message: e);
   }
 
   //TDO: END Product
@@ -76,10 +135,7 @@ class SellersController extends GetxController {
           } else
             AppConstant.displaySnackBar('error', response.message);
         }
-      }).catchError((error) {
-        debugPrint("DeleteProduct: $error");
-        AppConstant.displaySnackBar('error', '$error');
-      });
+      }).catchError(onError);
     });
     fetchMyProducts();
     //myProductsList.refresh();
@@ -209,7 +265,6 @@ class SellersController extends GetxController {
           fetchMyProducts();
           Get.back();
           clearControllers();
-          print(">>>AddProduct: ${response.message}");
           AppConstant.displaySnackBar('success', "${response.message}");
         } else {
           debugPrint('Error: ${response.toString()}');
@@ -217,11 +272,7 @@ class SellersController extends GetxController {
               "${response.message != null ? response.message : someThingWentWrong.tr}");
         }
       }
-    }).catchError((error) {
-      isLoading(false);
-      debugPrint("AddProductError: $error");
-      AppConstant.displaySnackBar('error', "Something went wrong!");
-    });
+    }).catchError(onError);
     //isLoading(false);
   }
 
@@ -385,11 +436,12 @@ class SellersController extends GetxController {
     pickedImagesList.clear();
     dynamicFieldsValuesList.clear();
     imagesSizeInMb(0.0);
+    priceAfterCommission(0);
   }
 
   @override
   void onClose() {
-    // TODO: implement onClose
+    // TOO: implement onClose
     super.onClose();
     pageViewController.dispose();
     clearControllers();

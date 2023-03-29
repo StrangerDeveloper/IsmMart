@@ -156,8 +156,9 @@ class Russian {
         key.confirmPass: 'Подтвердите пароль',
         key.confirmPassReq: 'Подтвердите пароль требуется',
         key.passwordNotMatched: 'Пароль не соответствует!',
-        key.title: 'Заголовок',
+        key.titleKey: 'Заголовок',
         key.titleReq: 'Название требуется',
+        key.updateProduct: 'Обновить продукт',
         key.emptyCart: 'Ваша корзина пуста',
         key.emptyCartMsg:
             'В вашу корзину не было добавлено. Пожалуйста, добавьте продукт в свою корзину.',
@@ -175,6 +176,7 @@ class Russian {
         key.plzSelectSubCategory: 'Пожалуйста',
         key.someThingWentWrong: 'Что-то пошло не так',
         key.delProdMsg: 'Вы обязательно удалите это?',
+        key.stock: 'Запас',
 
         ///About US
         key.aboutHeader1: 'Что такое ISMMART?',

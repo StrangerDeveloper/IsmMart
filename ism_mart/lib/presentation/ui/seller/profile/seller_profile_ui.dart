@@ -21,6 +21,22 @@ class StoreProfileUI extends GetView<AuthController> {
                     SliverList(
                       delegate: SliverChildListDelegate(
                         [
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: CustomButton(
+                                onTap: () => AppConstant.showBottomSheet(
+                                    widget: RegisterVendorUI(model: controller.userModel?.vendor),
+                                    isGetXBottomSheet: false,
+                                    buildContext: context),
+                                //controller.changePage(1),
+                                text: langKey.updateBtn.tr,
+                                width: 110,
+                                height: 35,
+                              ),
+                            ),
+                          ),
                           ///Store data
                           CustomGreyBorderContainer(
                             child: Padding(
@@ -48,7 +64,7 @@ class StoreProfileUI extends GetView<AuthController> {
                                               ]),
                                           child: CustomNetworkImage(
                                             width: AppConstant.getSize().width *
-                                                0.89,
+                                                0.90,
                                             imageUrl: controller
                                                 .userModel!.vendor?.coverImage,
                                             fit: BoxFit.cover,
@@ -88,7 +104,7 @@ class StoreProfileUI extends GetView<AuthController> {
                                             ),
                                           ),
                                         ),
-                                        /*Positioned(
+                                       /* Positioned(
                                          top: 1,
                                          right: 1,
                                          child: InkWell(
@@ -104,7 +120,7 @@ class StoreProfileUI extends GetView<AuthController> {
                                            ),
                                          ),
                                        ),*/
-                                        /* Stack(
+                                         /*Stack(
                                          children: [
                                            Container(
                                              height: 90,
@@ -287,7 +303,7 @@ class StoreProfileUI extends GetView<AuthController> {
           style: bodyText1,
         ),
         leading: Icon(icon),
-        /*trailing: InkWell(
+       /* trailing: InkWell(
           onTap: () => showEditDialog(title, subtitle),
           child: Icon(
             Icons.edit,
@@ -338,9 +354,7 @@ class StoreProfileUI extends GetView<AuthController> {
             : CustomButton(
                 onTap: () async {
                   if (_formKey.currentState!.validate()) {
-                    await controller.updateUser(
-                        title: title,
-                        value: controller.editingTextController.text);
+                    controller.registerStore();
                   }
                 },
                 text: langKey.updateBtn.tr,

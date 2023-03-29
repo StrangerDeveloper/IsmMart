@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -36,11 +37,15 @@ dynamic handleResponse(Response response) {
   }
 }
 
-dynamic handleStreamResponse(http.StreamedResponse response){
-  debugPrint('RESPONSE START /////////////////');
+dynamic handleStreamResponse(http.StreamedResponse response) async{
+  debugPrint('//// Stream RESPONSE START /////////////////');
   debugPrint('  Status Code: ${response.statusCode}');
-  //debugPrint('  Body: ${response.stream.bytesToString()}');
-  debugPrint('RESPONSE END /////////////////');
+
+
+  await response.stream.bytesToString().then((value) => debugPrint('  Body: ${value}'));
+
+  //debugPrint('  Body: ${json.decode(await response.stream.bytesToString())['message']}');
+  debugPrint('//// RESPONSE END /////////////////');
 
   switch (response.statusCode) {
     case 200:

@@ -10,3 +10,4 @@ export 'profile/register_seller_ui.dart';
 export 'profile/seller_profile_ui.dart';
 export 'my_orders/buyer_orders_ui.dart';
 export 'my_orders/widget/single_order_details_ui.dart';
+export 'products/update_product.dart';

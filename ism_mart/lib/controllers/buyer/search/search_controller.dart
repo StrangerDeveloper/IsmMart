@@ -39,7 +39,7 @@ class SearchController extends GetxController {
   }
 @override
   void onReady() {
-    // TODO: implement onReady
+    // TOO: implement onReady
     super.onReady();
     searchTextController.addListener(() {
       search(searchTextController.text);
@@ -59,7 +59,6 @@ class SearchController extends GetxController {
     isLoading(true);
     page = 1;
     searchLimit = 32 * 2;
-    debugPrint("Search(): cLLEDr");
     await _apiProvider
         .search(
             text: query!.toLowerCase(),
@@ -68,14 +67,13 @@ class SearchController extends GetxController {
             sortBy: sortBy)
         .then((response) {
       isLoading(false);
-      debugPrint("Search(): ${response.toString()}r");
       productList.clear();
       productList.addAll(response.products.productRows!);
 
-    })/*.catchError((error) {
+    }).catchError((error) {
       isLoading(false);
       //change(null, status: RxStatus.error(error));
-    })*/;
+    });
   }
 
   void loadMore(String? searchQuery) async {

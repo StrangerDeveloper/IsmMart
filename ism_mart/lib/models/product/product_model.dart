@@ -13,7 +13,7 @@ String productModelToJson(List<ProductModel> data) =>
 class ProductResponse {
   bool? success, key;
   String? message, error;
-  ProductModel? productModel;
+  dynamic data;
   List<String>? errors;
 
   ProductResponse(
@@ -22,7 +22,7 @@ class ProductResponse {
       this.message,
       this.error,
       this.errors,
-      this.productModel});
+      this.data});
 
   factory ProductResponse.fromResponse(response) => ProductResponse(
         success: response['success'] == null ? false : response['success'],
@@ -31,6 +31,8 @@ class ProductResponse {
         errors: response['errors'] != null
             ? List<String>.from(response["errors"].map((x) => x))
             : null,
+        data: response['data']
+
         /*productModel: response['data'] == null && response['data'].isBlank!
           ? null
           : ProductModel.fromJson(response['data'])*/
@@ -38,7 +40,7 @@ class ProductResponse {
 
   @override
   String toString() {
-    return 'ProductResponse{success: $success, key: $key, message: $message, error: $error, productModel: $productModel, errors: $errors}';
+    return 'ProductResponse{success: $success, key: $key, message: $message, error: $error, errors: $errors}';
   }
 }
 
@@ -84,7 +86,7 @@ class ProductModel {
   MultipartFile? productImageFile;
   bool? isPopular, hasSalesOn;
 
-  List<ProductFeature>? productFeatures;
+  ProductFeature? productFeatures;
 
   factory ProductModel.fromJson(JSON? json) {
     List<ProductImages> productImages = [];
@@ -98,36 +100,34 @@ class ProductModel {
     }
 
     return ProductModel(
-      id: json?["id"],
-      vendorId: json?['vendorId'],
-      name: json?["name"],
-      thumbnail: json?["thumbnail"],
-      stock: json?["stock"],
-      price: json?["price"],
-      status: json?['status'],
-      discount: json?["discount"],
-      rating: json?["rating"] ?? 0.0,
-      sold: json?["sold"] ?? 0,
-      sku: json?["sku"] ?? "",
-      brand: json?["brand"] ?? "",
-      description: json?['description'] ?? "",
-      discountPrice: json?["discountPrice"] ?? json?["discountedPrice"],
-      totalPrice: json?["totalPrice"],
-      images: productImages,
-      sellerModel: json?['Vendor'] == null
-          ? null
-          : SellerModel.fromJson(json?['Vendor']),
-      category: json?["Category"] == null
-          ? null
-          : CategoryModel.fromJson(json?["Category"]),
-      subCategory: json?["SubCategory"] == null
-          ? null
-          : SubCategory.fromJson(json?["SubCategory"]),
-      productFeatures: json!["ProductFeatures"] == null
-          ? []
-          : List<ProductFeature>.from(
-              json["ProductFeatures"]!.map((x) => ProductFeature.fromJson(x))),
-    );
+        id: json?["id"],
+        vendorId: json?['vendorId'],
+        name: json?["name"],
+        thumbnail: json?["thumbnail"],
+        stock: json?["stock"],
+        price: json?["price"],
+        status: json?['status'],
+        discount: json?["discount"],
+        rating: json?["rating"] ?? 0.0,
+        sold: json?["sold"] ?? 0,
+        sku: json?["sku"] ?? "",
+        brand: json?["brand"] ?? "",
+        description: json?['description'] ?? "",
+        discountPrice: json?["discountPrice"] ?? json?["discountedPrice"],
+        totalPrice: json?["totalPrice"],
+        images: productImages,
+        sellerModel: json?['Vendor'] == null
+            ? null
+            : SellerModel.fromJson(json?['Vendor']),
+        category: json?["Category"] == null
+            ? null
+            : CategoryModel.fromJson(json?["Category"]),
+        subCategory: json?["SubCategory"] == null
+            ? null
+            : SubCategory.fromJson(json?["SubCategory"]),
+        productFeatures: json!["ProductFeatures"] == null
+            ? null
+            : ProductFeature.fromJson(json["ProductFeatures"]));
   }
 
   JSON toJson() => {
@@ -153,6 +153,15 @@ class ProductModel {
         "discountPrice": discountPrice,
         "totalPrice": totalPrice
       };
+
+  JSON toUpdateProductJson()=>{
+    "id": id,
+    "name": name,
+    "description": description,
+    "stock": stock,
+    "price": price,
+    "discount": discount,
+  };
 
   @override
   bool operator ==(Object other) {
@@ -186,17 +195,47 @@ class ProductImages {
 }
 
 class ProductFeature {
-  int? id;
-  String? value;
-  ProductVariantsModel? categoryField;
-
   ProductFeature({
+    this.colors,
+    this.sizes,
+  });
+
+  List<Feature>? colors;
+  List<Feature>? sizes;
+
+  factory ProductFeature.fromJson(Map<String, dynamic> json) => ProductFeature(
+        colors: json["Colors"] == null
+            ? []
+            : List<Feature>.from(
+                json["Colors"]!.map((x) => Feature.fromJson(x))),
+        sizes: json["Sizes"] == null
+            ? []
+            : List<Feature>.from(
+                json["Sizes"]!.map((x) => Feature.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "Colors": colors == null
+            ? []
+            : List<dynamic>.from(colors!.map((x) => x.toJson())),
+        "Sizes": sizes == null
+            ? []
+            : List<dynamic>.from(sizes!.map((x) => x.toJson())),
+      };
+}
+
+class Feature {
+  Feature({
     this.id,
     this.value,
     this.categoryField,
   });
 
-  factory ProductFeature.fromJson(Map<String, dynamic> json) => ProductFeature(
+  int? id;
+  String? value;
+  ProductVariantsModel? categoryField;
+
+  factory Feature.fromJson(Map<String, dynamic> json) => Feature(
         id: json["id"],
         value: json["value"],
         categoryField: json["CategoryField"] == null

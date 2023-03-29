@@ -29,7 +29,7 @@ class SingleProductItems extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           Get.toNamed('/product/${model.id}',
-              arguments: {"calledFor": "customer"});
+              arguments: {"calledFor": "customer"}, preventDuplicates: false);
         },
         child: Container(
           clipBehavior: Clip.hardEdge,
@@ -114,7 +114,7 @@ class SingleProductItems extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: AppResponsiveness.getHeight100_150(),
+                    height: AppResponsiveness.getHeight90_100(),
                     width: double.infinity,
                     child: CustomNetworkImage(imageUrl: model!.thumbnail),
                   ),
@@ -138,6 +138,7 @@ class SingleProductItems extends StatelessWidget {
                             style: bodyText1.copyWith(
                                 decoration: TextDecoration.lineThrough),
                           ),
+
                       ],
                     ),
                   ),

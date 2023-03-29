@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
-import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/export_presentation.dart';
@@ -13,11 +12,11 @@ class CartUI extends GetView<CartController> {
 
   @override
   Widget build(BuildContext context) {
-    if (authController.isSessionExpired!) {
-      controller.fetchCartItemsFromLocal();
-    } else {
+    //if (authController.isSessionExpired!) {
+    controller.fetchCartItemsFromLocal();
+    /*} else {
       controller.fetchCartItems();
-    }
+    }*/
 
     return controller.obx((state) {
       if (state == null) {
@@ -28,7 +27,7 @@ class CartUI extends GetView<CartController> {
         return noDataFound();
       }
       return _build(listData: state);
-    }, onLoading: CustomLoading(isDarkMode: Get.isDarkMode));
+    }, onLoading: CustomLoading(isDarkMode: Get.isDarkMode), onEmpty: noDataFound());
   }
 
   Widget noDataFound() {
@@ -125,216 +124,8 @@ class CartUI extends GetView<CartController> {
       itemCount: cartItemsList!.length,
       itemBuilder: (context, index) {
         CartModel cartModel = cartItemsList[index];
-        return _singleCartItem(cartModel: cartModel, index: index);
+        return SingleCartItems(cartModel: cartModel, index: index);
       },
-    );
-  }
-
-  Widget _singleCartItem({CartModel? cartModel, index}) {
-    print("cartModel: ${cartModel!.productId}");
-    return InkWell(
-      onTap: () {
-        Get.toNamed('/product/${cartModel.productId}',
-            preventDuplicates: false, arguments: {"calledFor": "seller"});
-      },
-      child: Card(
-        elevation: 0,
-        margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Stack(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: CircleAvatar(
-                            radius: 40,
-                            backgroundImage: NetworkImage(
-                                cartModel!.productModel!.thumbnail ??
-                                    AppConstant.defaultImgUrl)),
-                      ),
-                      AppConstant.spaceWidget(width: 5),
-                      Expanded(
-                        flex: 4,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              CustomText(
-                                title: cartModel.productModel!.brand,
-                                weight: FontWeight.w600,
-                              ),
-                              AppConstant.spaceWidget(height: 5),
-                              CustomText(
-                                title: cartModel.productModel!.name,
-                                style: headline3,
-                              ),
-                              AppConstant.spaceWidget(height: 8),
-                              CustomPriceWidget(
-                                title:
-                                    "${cartModel.productModel!.discountPrice!}",
-                              ),
-                              if (cartModel.productModel!.discount != null &&
-                                  cartModel.productModel!.discount! > 0)
-                                Row(
-                                  children: [
-                                    CustomPriceWidget(
-                                      title: "${cartModel.productModel!.price}",
-                                      style: bodyText1.copyWith(
-                                          decoration:
-                                              TextDecoration.lineThrough),
-                                    ),
-                                    AppConstant.spaceWidget(width: 5),
-                                    CustomText(
-                                        title:
-                                            "${cartModel.productModel!.discount!}% OFF",
-                                        style: bodyText2.copyWith(
-                                            fontWeight: FontWeight.w700,
-                                            color: Colors.red))
-                                  ],
-                                ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          cartModel.onQuantityClicked =
-                              !cartModel.onQuantityClicked!;
-                          controller.update();
-                        },
-                        child: Container(
-                            width: 60,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 11.0, vertical: 5),
-                            decoration: BoxDecoration(
-                              color: kWhiteColor,
-                              border: Border.all(
-                                  color: cartModel.onQuantityClicked!
-                                      ? kDarkColor
-                                      : kLightColor),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            child: Row(
-                              children: [
-                                CustomText(
-                                    title: cartModel.quantity!,
-                                    style: headline3),
-                                AppConstant.spaceWidget(width: 5),
-                                Icon(
-                                  cartModel.onQuantityClicked!
-                                      ? Icons.keyboard_arrow_up
-                                      : Icons.keyboard_arrow_down,
-                                  size: 20,
-                                  color: cartModel.onQuantityClicked!
-                                      ? kDarkColor
-                                      : kLightColor,
-                                ),
-                              ],
-                            )),
-                      ),
-                    ],
-                  ),
-                  AppConstant.spaceWidget(height: 5),
-                  cartModel.onQuantityClicked!
-                      ? AnimatedContainer(
-                          duration: const Duration(milliseconds: 400),
-                          curve: Curves.fastOutSlowIn,
-                          width: double.infinity,
-                          height: 40,
-                          child: ListView.builder(
-                              shrinkWrap: true,
-                              scrollDirection: Axis.horizontal,
-                              itemCount: controller.moq,
-                              itemBuilder: (_, index) {
-                                return InkWell(
-                                  onTap: () async {
-                                    if (authController.isSessionExpired!) {
-                                      cartModel.quantity = "${(index + 1)}";
-                                      debugPrint(
-                                          ">>>Sessions: ${authController.isSessionExpired!}");
-                                      await LocalStorageHelper.updateCartItems(
-                                          cartModel: cartModel);
-                                      controller.update();
-                                    } else {
-                                      await controller.updateCart(
-                                          cartItemId: cartModel.id,
-                                          quantity: (index + 1));
-                                    }
-                                  },
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    margin: const EdgeInsets.symmetric(
-                                        horizontal: 5, vertical: 3),
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 12.0, vertical: 5),
-                                    decoration: int.parse(
-                                                cartModel.quantity!) ==
-                                            (index + 1)
-                                        ? BoxDecoration(
-                                            color: kPrimaryColor,
-                                            border:
-                                                Border.all(color: kDarkColor),
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                          )
-                                        : BoxDecoration(
-                                            color: kWhiteColor,
-                                            border:
-                                                Border.all(color: kDarkColor),
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                          ),
-                                    child: CustomText(
-                                      title: "${index + 1}",
-                                      textAlign: TextAlign.center,
-                                      color: int.parse(cartModel.quantity!) ==
-                                              (index + 1)
-                                          ? kWhiteColor
-                                          : kDarkColor,
-                                      weight: FontWeight.w600,
-                                    ),
-                                  ),
-                                );
-                              }),
-                        )
-                      : Container(),
-                ],
-              ),
-              Positioned(
-                right: 0,
-                child: CustomActionIcon(
-                  onTap: () {
-                    if (authController.isSessionExpired!) {
-                      controller.cartItemsList.removeAt(index);
-                      LocalStorageHelper.removeSingleItem(
-                          cartList: controller.cartItemsList);
-                    } else {
-                      controller.deleteCartItem(cartItemId: cartModel.id);
-                    }
-                    controller.update();
-                  },
-                  hasShadow: false,
-                  icon: Icons.close_rounded,
-                  bgColor: kRedColor.withOpacity(0.2),
-                  iconColor: kRedColor,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 

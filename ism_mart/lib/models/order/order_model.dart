@@ -20,6 +20,7 @@ class OrderModel {
     this.createdAt,
     this.updatedAt,
     this.billingDetail,
+    this.vendorDetails,
     this.orderItems,
   });
 
@@ -27,7 +28,7 @@ class OrderModel {
   String? paymentMethod, status;
   num? totalPrice, shippingPrice;
   DateTime? expectedDeliveryDate, createdAt, updatedAt;
-  UserModel? billingDetail;
+  UserModel? billingDetail, vendorDetails;
   List<OrderItem>? orderItems;
 
   factory OrderModel.fromJson(Map<String, dynamic> json) => OrderModel(
@@ -46,6 +47,9 @@ class OrderModel {
         billingDetail: json["BillingDetail"] == null
             ? null
             : UserModel.fromJson(json["BillingDetail"]),
+        vendorDetails: json["User"] == null
+            ? null
+            : UserModel.fromJson(json["User"]),
         orderItems: json["OrderItems"] == null
             ? null
             : List<OrderItem>.from(

@@ -22,28 +22,17 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
   Widget build(BuildContext context) {
     //if (Get.parameters['id'] == null ||Get.arguments==null || Get.arguments['calledForBuyerOrderDetails'] == null) {
     if (orderModel?.id == null) {
-      //return noDataFound();
       return CustomLoading();
     }
-    //if (Get.arguments['calledForBuyerOrderDetails']) {
     if (calledForBuyerOrderDetails!) {
-      //controller.fetchOrderById(int.parse(Get.parameters['id']!));
       controller.fetchOrderById(orderModel!.id!);
     } else {
-      //controller.fetchVendorOrderById(int.parse(Get.parameters['id']!));
       controller.fetchVendorOrderById(orderModel!.id!);
     }
 
     return Obx(() => controller.orderDetailsModel?.id == null
         ? noDataFound()
         : _build(model: controller.orderDetailsModel));
-
-    /* return controller.obx((state) {
-      if (state == null) {
-        return CustomLoading();
-      }
-      return _build(orderModel: state);
-    }, onLoading: CustomLoading());*/
   }
 
   Widget noDataFound() {
@@ -115,15 +104,45 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                       ),
 
                       ///Invoice TO:
-                      ListTile(
-                        title: CustomText(
-                          title: "Billing Details:",
-                          style: appBarTitleSize,
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+
+                        child: CustomGreyBorderContainer(
+                          hasShadow: false,
+                          padding: const EdgeInsets.all(8.0),
+                          child: ListTile(
+                            contentPadding: const EdgeInsets.all(8.0),
+                            title: CustomText(
+                              title: "Billing Details:",
+                              style: appBarTitleSize,
+                            ),
+                            subtitle: CustomText(
+                              title: getAddress(model: model.billingDetail),
+                              style: bodyText2.copyWith(color: kLightColor),
+                              maxLines: 5,
+                            ),
+                          ),
                         ),
-                        subtitle: CustomText(
-                          title: getAddress(model: model.billingDetail),
-                          style: bodyText2,
-                          maxLines: 5,
+                      ),
+
+                      ///Invoice From:
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: CustomGreyBorderContainer(
+                          hasShadow: false,
+                          padding: const EdgeInsets.all(8.0),
+                          child: ListTile(
+                            contentPadding: const EdgeInsets.all(8.0),
+                            title: CustomText(
+                              title: "Vendor Details:",
+                              style: appBarTitleSize,
+                            ),
+                            subtitle: CustomText(
+                              title: getVendorDetails(vendor: model.vendorDetails),
+                              style: bodyText2.copyWith(color: kLightColor),
+                              maxLines: 5,
+                            ),
+                          ),
                         ),
                       ),
 
@@ -174,6 +193,9 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
     return "${model?.name ?? null}\n ${model?.phone ?? null}\n ${model?.address ?? ""}, ${model?.zipCode ?? null}\n ${model?.city?.name ?? null}, ${model?.country?.name ?? null}";
   }
 
+  String getVendorDetails({UserModel? vendor}) {
+    return "${ vendor?.vendor!.storeName?? vendor?.firstName  ?? null}\n ${vendor!.vendor?.phone ?? null}";
+  }
   Widget _invoiceBody({OrderModel? model}) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -200,6 +222,7 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
             children: model!.orderItems!.isEmpty
                 ? [NoDataFound()]
                 : model.orderItems!.map((OrderItem orderItem) {
+
                     return Container(
                       padding: const EdgeInsets.all(8.0),
                       decoration: _boxDecoration(
@@ -209,15 +232,22 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                         children: [
                           Expanded(
                               flex: 2,
-                              child: _dataCell(
-                                  text: '${orderItem.product?.name}')),
+                              child: Column(
+                                children: [
+                                  _dataCell(
+                                      text: '${orderItem.product?.name  }'),
+
+                                ],
+                              ),),
                           Expanded(
                               child: _dataCell(text: '${orderItem.quantity}')),
                           Expanded(
-                              child: _dataCell(
-                                  text: '${orderItem.product?.discountPrice}')),
+                              child: CustomPriceWidget( title: "${orderItem.product?.discountPrice}", style: bodyText2Poppins),
+                              /*_dataCell(
+                                  text: orderItem.product?.discountPrice)*/),
                           Expanded(
-                              child: _dataCell(text: '${orderItem.price}')),
+                              child:CustomPriceWidget( title: "${orderItem.price}",style: bodyText2Poppins)
+                            /*_dataCell(text: '${orderItem.price}')*/),
                           Expanded(
                               child: model.status!.contains("pending")
                                   ? Container()
@@ -400,7 +430,7 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
             FormInputFieldWithIcon(
               controller: controller.titleController,
               iconPrefix: Icons.title,
-              labelText: title.tr,
+              labelText: titleKey.tr,
               iconColor: kPrimaryColor,
               autofocus: false,
               textStyle: bodyText1,

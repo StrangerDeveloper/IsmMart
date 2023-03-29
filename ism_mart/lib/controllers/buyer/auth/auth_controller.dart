@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/models/exports_model.dart';
@@ -36,21 +34,23 @@ class AuthController extends GetxController {
     super.onInit();
     //getCurrentUser();
     //getToken();
-    getCountries();
-
-    getCurrentUser();
     getToken();
+    //getCurrentUser();
+
   }
 
   @override
   void onReady() {
     super.onReady();
+    getCountries();
+
 
     LocalStorageHelper.localStorage.listenKey(LocalStorageHelper.currentUserKey,
         (value) {
       getToken();
       getCurrentUser();
     });
+    getCurrentUser();
 
     fetchUserCoins();
   }
@@ -106,14 +106,14 @@ class AuthController extends GetxController {
   }
 
   Future<void> forgotPasswordWithEmail() async {
-    isLoading(false);
+    isLoading(true);
     String email = emailController.text.trim();
     await authProvider
         .forgotPassword(data: {"email": email}).then((UserResponse? response) {
+      isLoading(false);
       if (response != null) {
         if (response.success!) {
           Get.back();
-          debugPrint("Email: ${response.toString()}");
           AppConstant.displaySnackBar("success", response.message);
         } else {
           AppConstant.displaySnackBar("error", response.message);
@@ -122,6 +122,7 @@ class AuthController extends GetxController {
         AppConstant.displaySnackBar(
             "error", "Something went wrong with credentials");
     }).catchError((onError) {
+      isLoading(false);
       debugPrint("resetPassword: $onError");
     });
   }
@@ -209,8 +210,9 @@ class AuthController extends GetxController {
     });
   }
 
-  registerStore() async {
+  registerStore({SellerModel? updatedModel}) async {
     isLoading(true);
+
     SellerModel model = SellerModel(
       storeName: storeNameController.text.trim(),
       storeDesc: storeDescController.text,
@@ -226,7 +228,10 @@ class AuthController extends GetxController {
     );
     if (userToken!.isNotEmpty) {
       await authProvider
-          .postStoreRegister(token: userToken!, sellerModel: model)
+          .postStoreRegister(
+              token: userToken!,
+              calledForUpdate: updatedModel!=null,
+              sellerModel: model)
           .then((UserResponse? userResponse) {
         isLoading(false);
         if (userResponse != null) {
@@ -301,34 +306,29 @@ class AuthController extends GetxController {
   }
 
   getCurrentUser() async {
-    await LocalStorageHelper.getStoredUser().then((user) async {
-      if (user.token != null) {
-        isLoading(true);
-        await authProvider
-            .getCurrentUser(token: user.token!)
-            .then((userResponse) {
-          isLoading(false);
-          if (userResponse.message != null &&
-              userResponse.message!.contains(ApiConstant.SESSION_EXPIRED)) {
-            setSession(true);
-          } else
-            setSession(false);
-
-          if (userResponse.errors != null && userResponse.errors!.isNotEmpty) {
-            setUserModel(UserModel(error: userResponse.errors!.first));
-          } else
-            setUserModel(userResponse.userModel!);
-        }).catchError((error) {
-          isLoading(false);
+    if (userToken != null) {
+      isLoading(true);
+      await authProvider
+          .getCurrentUser(token: userToken)
+          .then((userResponse) {
+        isLoading(false);
+        if (userResponse.message != null &&
+            userResponse.message!.toLowerCase().contains(AppConstant.SESSION_EXPIRED)) {
           setSession(true);
-          debugPrint(">>>GetCurrentUser: $error");
-        });
-      } else
+        } else
+          setSession(false);
+
+        if (userResponse.errors != null && userResponse.errors!.isNotEmpty) {
+          setUserModel(UserModel(error: userResponse.errors!.first));
+        } else
+          setUserModel(userResponse.userModel!);
+      }).catchError((error) {
+        isLoading(false);
         setSession(true);
-    }).catchError((e) {
-      isLoading(false);
-      print(">>>GetCurrentUser $e");
-    });
+      });
+    } else
+      setSession(true);
+
   }
 
   List getProfileData() {
@@ -411,13 +411,14 @@ class AuthController extends GetxController {
 
   String? get userToken => _currUserToken.value;
 
+  //String? get userToken => "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQ4LCJpYW0iOiJ2ZW5kb3IiLCJ2aWQiOjQzLCJpYXQiOjE2NzgwNzY4MTE2MjcsImV4cCI6MTY3ODI0OTYxMTYyN30.eWj8W9zsP_mDBf81ho08HGmtwz8ufDpKUP2YBghyCN8";
+
   getToken() async {
     await LocalStorageHelper.getStoredUser().then((user) {
       print("Auth Token: ${user.token}");
       _currUserToken(user.token);
-      isLoading(false);
     }).onError((error, stackTrace) {
-      isLoading(false);
+      print(">>>Token: $error");
     });
     update();
   }

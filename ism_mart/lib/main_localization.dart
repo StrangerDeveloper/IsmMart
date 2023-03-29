@@ -1,3 +1,4 @@
+/*
 import 'dart:io';
 import 'dart:async';
 import 'dart:convert';
@@ -12,13 +13,14 @@ Future updateLocalizationFile() async {
   //the document id for your google sheet
   String documentId = "1KOwB8NH_O3UvoIuWweapOL_gbxEfEkGSqD9wPjJSBpA";
   //the sheetid of your google sheet
-    /** SheetID
+*/
+/*SheetID
      0-->General and All app widget Text
      1423501492--> About US
      80287141-->TermsAndConditions
-     */
+     15336104---> General Single Data*//*
 
-  String sheetId = "80287141";
+  String sheetId = "15336104";
 
   String _phraseKey = '';
   List<LocalizationModel> _localizations = [];
@@ -116,9 +118,9 @@ class AppTranslations extends Translations {
     stdout.writeln('---------------------------------------');
     //stdout.writeln('Saving app_translation_new.g.dart');
     //stdout.writeln('Saving app_translation_about_us.g.dart');
-    stdout.writeln('Saving app_translation_TANDC.g.dart');
+    stdout.writeln('Saving app_translation_GSingle.g.dart');
     stdout.writeln('---------------------------------------');
-    final file = File('app_translation_term_c.g.dart');
+    final file = File('app_translation_si.g.dart');
     await file.writeAsString(_localizationFile);
     stdout.writeln('Done...');
   } catch (e) {
@@ -176,3 +178,4 @@ class PhraseModel {
         "phrase": phrase,
       };
 }
+*/

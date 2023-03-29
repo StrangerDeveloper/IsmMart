@@ -51,7 +51,7 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        // TDO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.ismmartgroup.ism_mart"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration.
@@ -61,9 +61,6 @@ android {
         targetSdkVersion localProperties.getProperty('flutter.targetSdkVersion').toInteger()
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
-        ndk {
-            debugSymbolLevel 'FULL'
-        }
     }
     signingConfigs {
         release {
@@ -77,8 +74,15 @@ android {
         release {
             // TOcd ..O: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
-            //signingConfig signingConfigs.release
+           // signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            //useProguard true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            // Add the following lines
+            ndk {
+                debugSymbolLevel 'FULL'
+            }
         }
     }
     namespace 'com.ismmartgroup.ism_mart'

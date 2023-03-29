@@ -9,8 +9,7 @@ class ApiRepository {
 
   ApiRepository(this._apiService);
 
-  Future<dynamic> searchProduct(
-      {text, page = 1, limit = 10, sortBy}) async {
+  Future<dynamic> searchProduct({text, page = 1, limit = 10, sortBy}) async {
     final queryParameters = {
       "text": "$text",
       "limit": "$limit",
@@ -53,8 +52,6 @@ class ApiRepository {
     var response = await _apiService.get(endpoint: "subcategory/$categoryId");
     return response.body['data'];
   }
-  
-
 
   Future<List<dynamic>> getProductsByType(
       {int? limit = 15, int? page = 1, String? type = "Discount"}) async {
@@ -81,17 +78,44 @@ class ApiRepository {
     return response.body;
   }
 
-  Future<List<dynamic>> fetchProductsReviews({productId, token}) async{
-    var response  = await _apiService.get(endpoint: 'productReviews/allReviews/$productId', requiresAuthToken: true, token: token);
+  Future<dynamic> fetchProductsReviews({productId, token}) async {
+    var response =
+        await _apiService.get(endpoint: 'productReviews/allReviews/$productId');
     return response.body['data'];
   }
 
+  ///Fetch store details by id customerSide
+  Future<dynamic> fetchStoreDetailsByID({token, storeId}) async {
+    var response = await _apiService.get(endpoint: 'vendor/store/$storeId');
+    return response.body['data'];
+  }
+
+  Future<List<dynamic>> fetchStoreProductsById(
+      {token, storeID, limit = 100, page = 1}) async {
+    final queryParameters = {"limit": "$limit", "page": "$page"};
+    var response = await _apiService.get(
+        endpoint: 'vendor/products/$storeID',
+        requiresAuthToken: true,
+        token: token,
+        query: queryParameters);
+    return response.body['data'];
+  }
 
   /// Product Answer and Questions
 
-  Future<List<dynamic>> fetchProductQuestions({productId}) async{
-    var response =  await _apiService.get(endpoint: 'product/questions/$productId');
+  Future<List<dynamic>> fetchProductQuestions({productId}) async {
+    var response =
+        await _apiService.get(endpoint: 'product/questions/$productId');
     return response.body['data'];
+  }
+
+  Future<dynamic> postQuestion({token, data}) async {
+    var response = await _apiService.post(
+        endpoint: "product/questions/add",
+        body: data,
+        requiresAuthToken: true,
+        token: token);
+    return response.body;
   }
 
   //TDO: Cart Repo

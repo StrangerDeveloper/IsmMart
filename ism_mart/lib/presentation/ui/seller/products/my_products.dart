@@ -20,37 +20,26 @@ class MyProducts extends GetView<SellersController> {
         body: Column(
           children: [
             Align(
-                alignment: Alignment.centerRight,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: CustomButton(
-                    onTap: () =>
-                    AppConstant.showBottomSheet(widget: AddProductsUI(), isGetXBottomSheet: false, buildContext: context),
-                    //controller.changePage(1),
-                    text: langKey.addProduct.tr,
-                    width: 110,
-                    height: 35,
-                  ),
-                )),
+              alignment: Alignment.centerRight,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CustomButton(
+                  onTap: () => AppConstant.showBottomSheet(
+                      widget: AddProductsUI(),
+                      isGetXBottomSheet: false,
+                      buildContext: context),
+                  //controller.changePage(1),
+                  text: langKey.addProduct.tr,
+                  width: 110,
+                  height: 35,
+                ),
+              ),
+            ),
             //AppConstant.spaceWidget(height: 10),
             Expanded(child: _buildProductBody()),
           ],
         ),
       ),
-    );
-  }
-
-  showAddProductBottomSheet() {
-    showBottomSheet(
-      context: Get.context!,
-      builder: (_) {
-        return AddProductsUI();
-      },
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(15), topRight: Radius.circular(15)),
-      ),
-      backgroundColor: Colors.white,
     );
   }
 
@@ -64,26 +53,39 @@ class MyProducts extends GetView<SellersController> {
                 iconColor: kPrimaryColor,
               ),
             )
-          : Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 10,
-                    childAspectRatio: 0.8),
-                itemCount: controller.myProductsList.length,
-                itemBuilder: (_, index) {
-                  ProductModel productModel = controller.myProductsList[index];
-                  return _buildProductItem(model: productModel);
-                },
-              ),
+          : Column(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: GridView.builder(
+                      controller: controller.scrollController,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: AppResponsiveness.getGridItemCount(),
+                        mainAxisExtent:
+                            AppResponsiveness.getMainAxisExtentPoint25(),
+                        mainAxisSpacing: 5,
+                        //childAspectRatio: 0.8,
+                      ),
+                      itemCount: controller.myProductsList.length,
+                      itemBuilder: (_, index) {
+                        ProductModel productModel =
+                            controller.myProductsList[index];
+                        return _buildProductItem(model: productModel);
+                      },
+                    ),
+                  ),
+                ),
+                if (controller.isLoadingMore.isTrue)
+                  CustomLoading(isItForWidget: true)
+              ],
             ),
     );
   }
 
   _buildProductItem({ProductModel? model}) {
     return AspectRatio(
-      aspectRatio: 0.75,
+      aspectRatio: 0.5,
       child: GestureDetector(
         onTap: () {
           Get.toNamed('/product/${model.id}',
@@ -103,7 +105,7 @@ class MyProducts extends GetView<SellersController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: 100,
+                    height: AppResponsiveness.getHeight100_120(),
                     width: double.infinity,
                     child: CustomNetworkImage(
                         imageUrl:
@@ -114,7 +116,17 @@ class MyProducts extends GetView<SellersController> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        CustomText(title: "${langKey.sold.tr}: ${model.sold!}"),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            CustomText(
+                                title: "${langKey.sold.tr}: ${model.sold!}"),
+                            CustomText(
+                              title: "${langKey.stock.tr}: ${model.stock!}",
+                              color: kLimeGreenColor,
+                            ),
+                          ],
+                        ),
                         CustomText(
                           title: model.name!,
                           maxLines: 1,
@@ -164,13 +176,16 @@ class MyProducts extends GetView<SellersController> {
                 child: Row(
                   //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    /*CustomActionIcon(
+                    CustomActionIcon(
                         onTap: () {
-                          //controller.updateProduct(model: model);
+                          AppConstant.showBottomSheet(
+                              widget: UpdateProductUI(productId: model.id),
+                              isGetXBottomSheet: true,
+                              buildContext: Get.context!);
                         },
                         icon: Icons.edit_rounded,
                         bgColor: kPrimaryColor),
-                    AppConstant.spaceWidget(width: 5),*/
+                    AppConstant.spaceWidget(width: 5),
                     CustomActionIcon(
                         onTap: () =>
                             showConfirmDeleteDialog(productModel: model),
@@ -179,6 +194,25 @@ class MyProducts extends GetView<SellersController> {
                   ],
                 ),
               ),
+              if (model.stock == 0)
+                Positioned(
+                  top: 0,
+                  left: 0,
+                  child: Container(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                    decoration: BoxDecoration(
+                      color: kOrangeColor,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: CustomText(
+                      title: "Out of stock",
+                      color: kWhiteColor,
+                      size: 12,
+                      weight: FontWeight.w600,
+                    ),
+                  ),
+                ),
             ],
           ),
         ),

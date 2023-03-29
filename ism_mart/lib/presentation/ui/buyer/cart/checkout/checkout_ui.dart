@@ -77,14 +77,15 @@ class CheckoutUI extends GetView<CheckoutController> {
                               controller.showSnackBar(
                                   title: "error",
                                   message:
-                                      "Order Amount must not be under Rs 1000.");
+                                      "To proceed with your purchase, kindly note that the minimum order amount required is Rs 1000.");
                               //You cannot use Free Shipping Service under Rs1000
                               return;
                             } else {
                               if (controller.isCardPaymentEnabled.isFalse) {
                                 controller.showSnackBar(
                                     title: "error",
-                                    message: "Please select payment method");
+                                    message:
+                                        "Please choose your preferred payment method to complete your order.");
                                 return;
                               }
                               if (controller.defaultAddressModel!.id != null) {
@@ -659,12 +660,12 @@ class CheckoutUI extends GetView<CheckoutController> {
   }
 
   ///
-  ///TODO: Order Summery
+  ///TOO: Order Summery
   ///
 
   Widget _buildCartItemSection() {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(5.0),
       child: Obx(
         () => controller.getCartItemsList().isEmpty
             ? NoDataFound(text: langKey.noCartItemFound.tr)
@@ -674,10 +675,7 @@ class CheckoutUI extends GetView<CheckoutController> {
                 itemCount: controller.getCartItemsList().length,
                 itemBuilder: (context, index) {
                   CartModel cartModel = controller.getCartItemsList()[index];
-                  return SingleCartItems(
-                    cartModel: cartModel,
-                    index: index,
-                  );
+                  return SingleCartItems(cartModel: cartModel, index: index);
                 },
               ),
       ),
@@ -830,7 +828,7 @@ class CheckoutUI extends GetView<CheckoutController> {
                     Obx(
                       () => CustomPriceWidget(
                           title:
-                              "${/*controller.amountAfterRedeeming.value.isGreaterThan(0.0) ? controller.amountAfterRedeeming.value : */controller.totalAmount.value}"),
+                              "${/*controller.amountAfterRedeeming.value.isGreaterThan(0.0) ? controller.amountAfterRedeeming.value : */ controller.totalAmount.value}"),
                     ),
                   ],
                 ),

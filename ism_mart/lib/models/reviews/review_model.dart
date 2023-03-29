@@ -1,19 +1,24 @@
 import 'package:ism_mart/models/exports_model.dart';
 
-class ReviewModel {
-  ReviewModel({
+class ReviewModelResponse {
+  ReviewModelResponse({
     this.count,
+    this.rating,
     this.reviewsList,
+
   });
 
-  int? count;
-  List<Review?>? reviewsList;
+  num? count, rating;
+  List<ReviewModel>? reviewsList;
 
-  factory ReviewModel.fromJson(Map<String, dynamic> json) => ReviewModel(
+  factory ReviewModelResponse.fromJson(Map<String, dynamic> json) =>
+      ReviewModelResponse(
         count: json["count"],
-    reviewsList: json["rows"] == null
+        rating: json['rating'] == null ? 0.0: json['rating'],
+        reviewsList: json["rows"] == null
             ? []
-            : List<Review?>.from(json["rows"]!.map((x) => Review.fromJson(x))),
+            : List<ReviewModel>.from(
+                json["rows"]!.map((x) => ReviewModel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -24,8 +29,8 @@ class ReviewModel {
       };
 }
 
-class Review {
-  Review({
+class ReviewModel {
+  ReviewModel({
     this.id,
     this.text,
     this.rating,
@@ -34,10 +39,10 @@ class Review {
 
   int? id;
   String? text;
-  int? rating;
+  num? rating;
   UserModel? user;
 
-  factory Review.fromJson(Map<String, dynamic> json) => Review(
+  factory ReviewModel.fromJson(Map<String, dynamic> json) => ReviewModel(
         id: json["id"],
         text: json["text"],
         rating: json["rating"],

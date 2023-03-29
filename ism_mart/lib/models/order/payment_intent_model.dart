@@ -1,3 +1,5 @@
+import 'package:get/get.dart';
+
 class PaymentIntentResponse {
   PaymentIntentResponse({
     this.success,
@@ -7,15 +9,15 @@ class PaymentIntentResponse {
 
   bool? success;
   String? message;
-  PaymentIntentModel? data;
+  dynamic data;
 
   factory PaymentIntentResponse.fromJson(Map<String, dynamic> json) =>
       PaymentIntentResponse(
           success: json["success"],
           message: json["message"],
-          data: json["data"] == null
+          data: json["data"] /*== null || (json['data'] is List)
               ? null
-              : PaymentIntentModel.fromJson(json["data"]));
+              : PaymentIntentModel.fromJson(json["data"])*/);
 
   Map<String, dynamic> toJson() => {
         "success": success,

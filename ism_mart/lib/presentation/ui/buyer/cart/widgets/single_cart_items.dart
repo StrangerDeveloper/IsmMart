@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/widgets/export_widgets.dart';
@@ -24,7 +25,7 @@ class SingleCartItems extends StatelessWidget {
       elevation: 0,
       margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(6.0),
         child: Stack(
           children: [
             Column(
@@ -32,21 +33,22 @@ class SingleCartItems extends StatelessWidget {
               children: [
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
+                  //mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Expanded(
                       child: CircleAvatar(
                           radius: 40,
                           backgroundImage: NetworkImage(
-                              cartModel!.productModel!.thumbnail!)),
+                              cartModel!.productModel!.thumbnail ?? AppConstant.defaultImgUrl)),
                     ),
                     AppConstant.spaceWidget(width: 5),
                     Expanded(
-                      flex: 4,
+                      flex: 5,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             CustomText(
                               title: cartModel.productModel!.name,
@@ -56,26 +58,69 @@ class SingleCartItems extends StatelessWidget {
                             CustomPriceWidget(
                                 title:
                                     "${cartModel.productModel!.discountPrice}"),
-                            if (cartModel.productModel!.discount != null &&
-                                cartModel.productModel!.discount! > 0)
+                            (cartModel.productModel!.discount != null &&
+                                    cartModel.productModel!.discount! > 0)
+                                ? Row(
+                                    children: [
+                                      CustomPriceWidget(
+                                        title:
+                                            "${cartModel.productModel!.price}",
+                                        style: bodyText1.copyWith(
+                                            fontWeight: FontWeight.bold,
+                                            color: kLightColor,
+                                            decoration:
+                                                TextDecoration.lineThrough),
+                                      ),
+                                      AppConstant.spaceWidget(width: 5),
+                                      CustomText(
+                                          title:
+                                              "${cartModel.productModel!.discount!}% OFF",
+                                          style: bodyText2.copyWith(
+                                              fontWeight: FontWeight.w700,
+                                              color: Colors.red))
+                                    ],
+                                  )
+                                : Container(),
+
+                            ///Product selected Features
+                            if(cartModel.featuresName!.isNotEmpty)
                               Row(
-                                children: [
-                                  CustomPriceWidget(
-                                    title:"${cartModel.productModel!.price}",
-                                    style: bodyText1.copyWith(
-                                        fontWeight: FontWeight.bold,
-                                        color: kLightColor,
-                                        decoration: TextDecoration.lineThrough),
-                                  ),
-                                  AppConstant.spaceWidget(width: 5),
-                                  CustomText(
-                                      title:
-                                          "${cartModel.productModel!.discount!}% OFF",
-                                      style: bodyText2.copyWith(
-                                          fontWeight: FontWeight.w700,
-                                          color: Colors.red))
-                                ],
-                              ),
+                                  children: [
+                                    CustomText(
+                                      title: "Features:",
+                                      style: bodyText2,
+                                    ),
+                                    SizedBox(
+                                      width: 170,
+                                      height: 30,
+                                      child: ListView.builder(
+                                          scrollDirection: Axis.horizontal,
+                                          shrinkWrap: true,
+
+                                          itemCount:
+                                              cartModel.featuresName?.length,
+                                          itemBuilder: (_, index) {
+                                            String name = cartModel
+                                                .featuresName![index];
+                                            return Padding(
+                                              padding: const EdgeInsets.symmetric(horizontal: 3.0, vertical: 5),
+                                              child: CustomGreyBorderContainer(
+                                                  hasShadow: false,
+                                                  //borderColor: kWhiteColor,
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
+                                                      horizontal: 5,
+                                                      vertical: 2),
+                                                  child: CustomText(
+                                                    title: name,
+                                                    style: caption.copyWith(
+                                                        color: kPrimaryColor),
+                                                  )),
+                                            );
+                                          }),
+                                    ),
+                                  ],
+                                ),
                           ],
                         ),
                       ),
@@ -87,6 +132,7 @@ class SingleCartItems extends StatelessWidget {
                           cartModel.onQuantityClicked =
                               !cartModel.onQuantityClicked!;
                           controller!.cartItemsList.refresh();
+                          controller.update();
                         },
                         child: Container(
                             padding: const EdgeInsets.symmetric(
@@ -138,9 +184,14 @@ class SingleCartItems extends StatelessWidget {
                               return InkWell(
                                 onTap: () async {
                                   // cartModel.quantity = "${(index + 1)}";
-                                  await controller.updateCart(
+                                  /* await controller.updateCart(
                                       cartItemId: cartModel.id,
-                                      quantity: (index + 1));
+                                      quantity: (index + 1));*/
+                                  cartModel.quantity = "${(index + 1)}";
+                                  cartModel.productModel!.totalPrice = controller.totalCartAmount.value;
+                                  await LocalStorageHelper.updateCartItems(
+                                      cartModel: cartModel);
+                                  controller.update();
                                 },
                                 child: Container(
                                   margin: const EdgeInsets.symmetric(
@@ -165,7 +216,9 @@ class SingleCartItems extends StatelessWidget {
                                     title: "${index + 1}",
                                     textAlign: TextAlign.center,
                                     color: int.parse(cartModel.quantity!) ==
-                                        (index + 1) ? kWhiteColor: kPrimaryColor,
+                                            (index + 1)
+                                        ? kWhiteColor
+                                        : kPrimaryColor,
                                     weight: FontWeight.w600,
                                   ),
                                 ),
@@ -179,11 +232,11 @@ class SingleCartItems extends StatelessWidget {
               right: 0,
               child: CustomActionIcon(
                 onTap: () {
-                  /*controller.cartItemsList.removeAt(index);
+                  controller!.cartItemsList.removeAt(index);
                   LocalStorageHelper.removeSingleItem(
-                      cartList: controller.cartItemsList);*/
+                      cartList: controller.cartItemsList);
 
-                  controller!.deleteCartItem(cartItemId: cartModel.id);
+                  //controller!.deleteCartItem(cartItemId: cartModel.id);
                 },
                 hasShadow: false,
                 icon: Icons.close_rounded,
@@ -196,6 +249,4 @@ class SingleCartItems extends StatelessWidget {
       ),
     );
   }
-
-
 }

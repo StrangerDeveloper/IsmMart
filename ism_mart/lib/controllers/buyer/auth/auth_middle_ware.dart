@@ -19,12 +19,18 @@ class AuthMiddleWare extends GetMiddleware {
         : RouteSettings(name: Routes.loginRoute);
   }
 
+  @override
+  GetPageBuilder? onPageBuildStart(GetPageBuilder? page) {
+    findOrInit.getToken();
+    findOrInit.getCurrentUser();
+
+    return super.onPageBuildStart(page);
+  }
+
   AuthController get findOrInit {
     try {
       return Get.find();
     } catch (e) {
-      debugPrint(">>>>AuthMiddleWare: $e");
-
       Get.put<AuthRepository>(AuthRepository(Get.find()));
       Get.put<AuthProvider>(AuthProvider(Get.find()));
       Get.put<AuthController>(AuthController(Get.find()));

@@ -154,8 +154,9 @@ class Chinese {
         key.confirmPass: '确认密码',
         key.confirmPassReq: '需要确认密码',
         key.passwordNotMatched: '密码不匹配！',
-        key.title: '标题',
+        key.titleKey: '标题',
         key.titleReq: '标题是必需的',
+        key.updateProduct: '更新产品',
         key.emptyCart: '您的购物车是空的',
         key.emptyCartMsg: '您的购物车没有添加物品。请将产品添加到您的购物车中。',
         key.emptyProductSearch: '找不到搜索产品',
@@ -171,6 +172,8 @@ class Chinese {
         key.plzSelectSubCategory: 'PLZ选择子类别',
         key.someThingWentWrong: '出了些问题',
         key.delProdMsg: '您一定会删除这个吗？',
+        key.stock: '库存',
+
 
         ///About US
         key.aboutHeader1: '什么是ISMMART？',

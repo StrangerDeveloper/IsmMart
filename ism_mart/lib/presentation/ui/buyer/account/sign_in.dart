@@ -165,6 +165,7 @@ class SignInUI extends GetView<AuthController> {
     final formKey = GlobalKey<FormState>();
     Get.defaultDialog(
       title: "Reset Password",
+      titleStyle: appBarTitleSize,
       content: Form(
         key: formKey,
         child: Padding(
@@ -303,8 +304,8 @@ class SignInUI extends GetView<AuthController> {
                     await controller.forgotPasswordOtp();
                   },
                   text: langKey.send.tr,
-                  width: 100,
-                  height: 35,
+                  width: 120,
+                  height: 40,
                   color: kPrimaryColor,
                 ),
               ],

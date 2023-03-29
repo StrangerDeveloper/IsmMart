@@ -2,17 +2,32 @@ import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-import 'package:ism_mart/controllers/buyer/auth/auth_controller.dart';
-import 'package:ism_mart/presentation/export_presentation.dart';
-import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import 'package:get/get.dart';
+import 'package:ism_mart/controllers/buyer/auth/auth_controller.dart';
+import 'package:ism_mart/models/exports_model.dart';
+import 'package:ism_mart/presentation/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class RegisterVendorUI extends GetView<AuthController> {
-  const RegisterVendorUI({Key? key}) : super(key: key);
+  const RegisterVendorUI({Key? key, this.isCalledForUpdate, this.model})
+      : super(key: key);
+
+  final bool? isCalledForUpdate;
+  final SellerModel? model;
 
   @override
   Widget build(BuildContext context) {
+    if (model != null) {
+      controller.storeNameController.text = model?.storeName ?? "";
+      controller.storeDescController.text = model?.storeDesc ?? "";
+      controller.phoneController.text = model?.phone ?? "";
+      controller.bankNameController.text = model?.bankName ?? "";
+      controller.bankAccController.text = model?.accountNumber ?? "";
+      controller.bankHolderTitleController.text = model?.accountTitle ?? "";
+      controller.ownerNameController.text = model?.ownerName ?? "";
+    }
+
     return Scaffold(
       body: SafeArea(
           child: ListView(
@@ -25,7 +40,7 @@ class RegisterVendorUI extends GetView<AuthController> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 CustomText(
-                  title: langKey.vendorRegistration.tr,
+                  title: model!=null? "Update Vendor Details":langKey.vendorRegistration.tr,
                   style: headline2,
                 ),
                 CustomActionIcon(
@@ -159,8 +174,8 @@ class RegisterVendorUI extends GetView<AuthController> {
                             child: Container(
                               child: Padding(
                                 padding: const EdgeInsets.all(2.0),
-                                child:
-                                    Icon(Icons.add_a_photo, color: kPrimaryColor),
+                                child: Icon(Icons.add_a_photo,
+                                    color: kPrimaryColor),
                               ),
                               decoration: BoxDecoration(
                                   border: Border.all(
@@ -374,11 +389,12 @@ class RegisterVendorUI extends GetView<AuthController> {
                           await controller.registerStore();
                         }
                       },
-                      text: langKey.register.tr,
+                      text: model!=null?langKey.updateBtn.tr:langKey.register.tr,
                       height: 40,
                       width: 150,
                     ),
             ),
+            AppConstant.spaceWidget(height: 10),
           ],
         ),
       ),

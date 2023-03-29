@@ -1,13 +1,10 @@
+import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
-import 'package:http/http.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/models/exports_model.dart';
-import 'package:http_parser/http_parser.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class SellersApiProvider {
   final SellersApiRepo _sellersApiRepo;
@@ -71,17 +68,24 @@ class SellersApiProvider {
     } else {
       //TODO: Still needs to test this one properly
       http.StreamedResponse res = handleStreamResponse(response);
-      return ProductResponse.fromResponse(json.decode(await res.stream.bytesToString()));
-      throw Exception('Failed to upload image ${response.statusCode} ${json.decode(await response.stream.bytesToString())}');
+      return ProductResponse.fromResponse(
+          json.decode(await res.stream.bytesToString()));
+      throw Exception(
+          'Failed to upload image ${response.statusCode} ${json.decode(await response.stream.bytesToString())}');
     }
     return ProductResponse.fromResponse(response);
   }
 
-  Future<SellerProductModel> fetchMyProducts({String? token}) async {
-    debugPrint("token: $token");
-    var products = await _sellersApiRepo.getMyProducts(token: token);
+  Future<SellerProductModel> fetchMyProducts(
+      {String? token, limit, page}) async {
+    var products = await _sellersApiRepo.getMyProducts(
+        token: token, limit: limit, page: page);
     return SellerProductModel.fromJson(products);
-    //return products.map((product) => ProductModel.fromJson(product)).toList();
+  }
+
+  Future<ProductResponse> getProductById(int id) async {
+    var response = await _sellersApiRepo.getProductDetailsById(id: id);
+    return ProductResponse.fromResponse(response);
   }
 
   Future<ProductResponse> deleteProductById({id, token}) async {
@@ -91,11 +95,62 @@ class SellersApiProvider {
 
   Future<ProductResponse> updateProduct(
       {String? token, ProductModel? model}) async {
-    var response =
+    /* var response =
         await _sellersApiRepo.updateProduct(token: token, productModel: model);
-    debugPrint("Update Prod provider Response: $response");
-    return response != null
-        ? ProductResponse.fromResponse(response)
-        : ProductResponse();
+   print("Update Prod provider Response: $response");
+    return ProductResponse.fromResponse(response);*/
+
+    /*final data = {
+      "id": "${model!.id}",
+      "name": "${model.name}",
+      "price": "${model.price}",
+      "stock": "${model.stock}",
+      "discount": "${model.discount ?? 0}",
+      "description": "${model.description}",
+    };
+    final body = data.keys.map((key) {
+      final value = data[key];
+      return '$key=${Uri.encodeComponent(value.toString())}';
+    }).join('&');
+    final response = await http.patch(
+      Uri.parse(url),
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'Authorization': '$token'
+      },
+      body: body,
+    );*/
+
+    final url = "${ApiConstant.baseUrl}vendor/products/update";
+    final request = http.MultipartRequest('PATCH', Uri.parse(url));
+    //request.headers['Accept'] = 'multipart/form-data';
+    request.headers['content-type'] = 'multipart/form-data';
+    request.headers['authorization'] = '$token';
+
+    request.fields['id'] = model!.id!.toString();
+    request.fields['name'] = model.name!;
+    request.fields['thumbnail'] = model.thumbnail!;
+    request.fields['price'] = "${model.price}";
+    request.fields['discount'] = "${model.discount}";
+    request.fields['description'] = "${model.description}";
+
+    requestInterceptorMultipart(request);
+
+    final response = await request.send();
+
+    if (response.statusCode == 200) {
+      final responseData = await response.stream.bytesToString();
+      final data = json.decode(responseData);
+      print(data);
+      return ProductResponse.fromResponse(data);
+    } else {
+      http.StreamedResponse res = handleStreamResponse(response);
+      return ProductResponse.fromResponse(
+          json.decode(await res.stream.bytesToString()));
+      throw http.ClientException(
+          'Failed to update resource: ${response.reasonPhrase}');
+    }
   }
+
+
 }

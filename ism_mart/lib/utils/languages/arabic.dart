@@ -155,8 +155,12 @@ class Arabic {
         key.confirmPass: 'تأكيد كلمة المرور',
         key.confirmPassReq: 'تأكيد كلمة المرور مطلوب',
         key.passwordNotMatched: 'كلمة المرور غير متطابقة!',
-        key.title: 'عنوان',
+        key.titleKey: 'عنوان',
         key.titleReq: 'العنوان مطلوب',
+        key.updateProduct: 'تحديث المنتج',
+        key.stock: 'مخزون',
+
+
         key.emptyCart: 'عربة التسوق فارغة',
         key.emptyCartMsg:
             'لم تتم إضافة عناصر إلى عربة التسوق الخاصة بك. الرجاء إضافة المنتج إلى عربة التسوق الخاصة بك.',

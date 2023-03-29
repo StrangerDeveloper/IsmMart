@@ -18,7 +18,7 @@ class ApiConstant {
 
   static const stripeBaseUrl = "https://api.stripe.com/v1/";
 
-  static const SESSION_EXPIRED = "Session is expired";
+ // static const SESSION_EXPIRED = "Session is expired";
 
   static String getBaseUrl({calledStripe = false}) {
     if (calledStripe) return stripeBaseUrl;

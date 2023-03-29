@@ -24,13 +24,13 @@ class CategoryController extends GetxController with StateMixin {
       change(data, status: RxStatus.success());
       categories.addAll(data);
       isCategoriesLoading(false);
-
       getSubcategory(categories.first);
     }).catchError((error) {
       debugPrint("FetchCategoriesError $error");
       isCategoriesLoading(false);
       //fetchCategories();
-      change(null, status: RxStatus.error(error));
+      //change(null, status: RxStatus.error(error));
+      change(null, status: RxStatus.empty());
     });
   }
   fetchSubCategories(CategoryModel? categoryModel) async {

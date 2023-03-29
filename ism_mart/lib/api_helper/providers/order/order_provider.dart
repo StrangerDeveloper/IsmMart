@@ -41,7 +41,9 @@ class OrderProvider {
   }
 
   Future<OrderResponse> createOrder({token, data}) async {
+    print(">>>CreateOrder: ${data.toString()}");
     var response = await _orderRepo.postOrder(token: token, data: data);
+
     return OrderResponse.fromJson(response);
   }
 

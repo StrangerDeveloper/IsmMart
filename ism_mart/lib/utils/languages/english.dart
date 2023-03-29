@@ -180,8 +180,10 @@ class English {
         key.confirmPass: 'Confirm Password',
         key.confirmPassReq: 'Confirm Password is required',
         key.passwordNotMatched: 'Password not matched!',
-        key.title: 'title',
+        key.titleKey: 'title',
         key.titleReq: 'Title is required',
+        key.updateProduct: 'Update Product',
+        key.stock: 'Stock',
 
         ///empty screens
         key.emptyCart: 'Your cart is empty',

@@ -5,7 +5,6 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/export_presentation.dart';
@@ -143,6 +142,8 @@ class AddProductsUI extends GetView<SellersController> {
                                 ),
                         ),
                         AppConstant.spaceWidget(height: 15),
+
+                        ///Product Category fields or variants or features
                         Obx(() => controller.productVariantsFieldsList.isEmpty
                             ? Container()
                             : Column(
@@ -227,20 +228,38 @@ class AddProductsUI extends GetView<SellersController> {
                           onSaved: (value) {},
                         ),
                         AppConstant.spaceWidget(height: 15),
-                        FormInputFieldWithIcon(
-                          controller: controller.prodDiscountController,
-                          iconPrefix: IconlyLight.discount,
-                          labelText: langKey.prodDiscount.tr,
-                          iconColor: kPrimaryColor,
-                          autofocus: false,
-                          textStyle: bodyText1,
-                          /* autoValidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (value) => !GetUtils.isNumericOnly(value!)
-                              ? langKey.prodDiscountReq
-                              : null,*/
-                          keyboardType: TextInputType.number,
-                          onChanged: (value) {},
-                          onSaved: (value) {},
+                        Column(
+                          children: [
+                            FormInputFieldWithIcon(
+                              controller: controller.prodDiscountController,
+                              iconPrefix: IconlyLight.discount,
+                              labelText: langKey.prodDiscount.tr,
+                              iconColor: kPrimaryColor,
+                              autofocus: false,
+                              textStyle: bodyText1,
+                              /* autoValidateMode: AutovalidateMode.onUserInteraction,
+                              validator: (value) => !GetUtils.isNumericOnly(value!)
+                                  ? langKey.prodDiscountReq
+                                  : null,*/
+                              keyboardType: TextInputType.number,
+                              onChanged: (String? value) {
+                                int discount =
+                                    value!.isNotEmpty ? int.parse(value) : 0;
+                                controller.setDiscount(discount);
+                              },
+                              onSaved: (value) {},
+                            ),
+                            Obx(
+                              () => Visibility(
+                                visible: controller
+                                    .prodDiscountController.text.isNotEmpty,
+                                child: CustomText(
+                                  title: controller.discountMessage.value,
+                                  color: kRedColor,
+                                ),
+                              ),
+                            )
+                          ],
                         ),
                         /* AppConstant.spaceWidget(height: 15),
                         FormInputFieldWithIcon(
@@ -284,7 +303,13 @@ class AddProductsUI extends GetView<SellersController> {
                                     if (formKey.currentState!.validate()) {
                                       if (controller.categoryController
                                           .subCategories.isNotEmpty) {
-                                        controller.addProduct();
+                                        if (controller
+                                            .discountMessage.isEmpty) {
+                                          controller.addProduct();
+                                        } else {
+                                          AppConstant.displaySnackBar('error',
+                                              "Your discount should be between 10 and 100 percent. Please try again!");
+                                        }
                                       } else {
                                         AppConstant.displaySnackBar('error',
                                             langKey.plzSelectSubCategory.tr);
@@ -365,7 +390,8 @@ class AddProductsUI extends GetView<SellersController> {
                   width: 25,
                   height: 25,
                   onTap: () {
-                    controller.imagesSizeInMb.value -= (file.lengthSync()  * 0.000001);
+                    controller.imagesSizeInMb.value -=
+                        (file.lengthSync() * 0.000001);
                     controller.pickedImagesList.removeAt(index);
                     controller.pickedImagesList.refresh();
                   },
@@ -393,8 +419,9 @@ class AddProductsUI extends GetView<SellersController> {
               radius: const Radius.circular(10),
               dashPattern: const [10, 4],
               strokeCap: StrokeCap.round,
-              color:
-                  controller.imagesSizeInMb.value > maxImageUploadSizeInMBs ? kRedColor : kPrimaryColor,
+              color: controller.imagesSizeInMb.value > maxImageUploadSizeInMBs
+                  ? kRedColor
+                  : kPrimaryColor,
               child: Container(
                   width: double.infinity,
                   height: 150,
@@ -411,16 +438,20 @@ class AddProductsUI extends GetView<SellersController> {
                               size: 30,
                             ),
                             const SizedBox(height: 5),
-                            CustomText(title: 'Click here to upload', color: kLightColor,),
+                            CustomText(
+                              title: 'Click here to upload',
+                              color: kLightColor,
+                            ),
                           ],
                         )),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 8.0, vertical: 5),
+              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5),
               child: CustomText(
                 title: "Upload images less than 2MB",
-                color: controller.imagesSizeInMb.value > maxImageUploadSizeInMBs ? kRedColor:kLightColor,
+                color: controller.imagesSizeInMb.value > maxImageUploadSizeInMBs
+                    ? kRedColor
+                    : kLightColor,
               ),
             ),
           ],

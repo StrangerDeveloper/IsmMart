@@ -8,12 +8,6 @@ class ApiProvider {
 
   ApiProvider(this._apiRepository);
 
-  //TODO: Search Provider
-  /*Future<List<ProductModel>> search({text, page, limit, sortBy}) async {
-    var products = await _apiRepository.searchProduct(
-        text: text, page: page, limit: limit, sortBy: sortBy);
-    return products.map((product) => ProductModel.fromJson(product)).toList();
-  }*/
   Future<SearchProductResponse> search({text, page, limit, sortBy}) async {
     var products = await _apiRepository.searchProduct(
         text: text, page: page, limit: limit, sortBy: sortBy);
@@ -64,8 +58,6 @@ class ApiProvider {
     return products.map((product) => ProductModel.fromJson(product)).toList();
   }
 
-
-
   Future<List<ProductModel>> getProductsByType({String? type}) async {
     var products = await _apiRepository.getProductsByType(type: type);
 
@@ -76,19 +68,38 @@ class ApiProvider {
     var productResponse = await _apiRepository.getProductDetailsById(id: id);
     debugPrint("getProductById: ${productResponse.toString()}");
     return ProductModel.fromJson(productResponse['data']);
-
-    //return products.map((product) => ProductModel.fromJson(product)).first;
   }
 
-  Future<List<ReviewModel>> getProductReviews({productId, token}) async {
-    var reviewResponse = await _apiRepository.fetchProductsReviews(
-        productId: productId, token: token);
-    return reviewResponse
-        .map((reviews) => ReviewModel.fromJson(reviews))
-        .toList();
+  Future<ReviewModelResponse> getProductReviews({productId, token}) async {
+    var response =
+        await _apiRepository.fetchProductsReviews(productId: productId);
+    return ReviewModelResponse.fromJson(response);
+  }
+
+  /// Get Vendor seller details by ID customer Side
+  Future<SellerModelResponse> getVendorStoreById({token, storeID}) async {
+    var response = await _apiRepository.fetchStoreDetailsByID(
+        token: token, storeId: storeID);
+    return SellerModelResponse.fromJson(response);
+  }
+
+  Future<List<ProductModel>> geVendorProductById({token, storeID}) async {
+    var response = await _apiRepository.fetchStoreProductsById(
+        token: token, storeID: storeID);
+    return response.map((e) => ProductModel.fromJson(e)).toList();
   }
 
   ///Answer and Questions of product
+  Future<List<QuestionModel>> geProductQuestionsById({productID}) async {
+    var response =
+        await _apiRepository.fetchProductQuestions(productId: productID);
+    return response.map((e) => QuestionModel.fromJson(e)).toList();
+  }
+
+  Future<ResponseModel> postProductQuestion({token, model}) async{
+    var response =  await _apiRepository.postQuestion(token: token, data: model);
+    return ResponseModel.fromResponse(response);
+  }
 
   //TDO: Cart Item APIs
 

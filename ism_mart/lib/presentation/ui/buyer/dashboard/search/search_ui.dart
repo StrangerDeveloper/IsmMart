@@ -221,58 +221,6 @@ class SearchUI extends GetView<SearchController> {
     );
   }
 
-  Widget _filterBar() {
-    return IntrinsicHeight(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            width: 100,
-            height: 35,
-            decoration: BoxDecoration(
-                color: kPrimaryColor,
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    bottomLeft: Radius.circular(20))),
-            child: TextButton.icon(
-              onPressed: () => showSortBottomSheet(),
-              icon: Icon(
-                Icons.sort_rounded,
-                color: kWhiteColor,
-              ),
-              label: CustomText(
-                title: "Sort",
-                color: kWhiteColor,
-                weight: FontWeight.bold,
-              ),
-            ),
-          ),
-          kVerticalDivider,
-          Container(
-            width: 100,
-            height: 35,
-            decoration: BoxDecoration(
-                color: kPrimaryColor,
-                borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(20),
-                    bottomRight: Radius.circular(20))),
-            child: TextButton.icon(
-              onPressed: () => showFilterBottomSheet(),
-              icon: Icon(
-                Icons.filter_alt_rounded,
-                color: kWhiteColor,
-              ),
-              label: CustomText(
-                title: "Filter",
-                color: kWhiteColor,
-                weight: FontWeight.bold,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 
   void showFilterBottomSheet() {
     //var categoryController = Get.find<CategoryController>();

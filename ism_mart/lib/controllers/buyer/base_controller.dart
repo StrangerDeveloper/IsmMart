@@ -16,15 +16,9 @@ class BaseController extends GetxController {
   var searchController = TextEditingController();
   var cartCount = 0.obs;
 
-  @override
-  void onInit() {
-    // TODO: implement onInit
-    super.onInit();
-  }
 
   @override
   void onReady() {
-    // TODO: implement onReady
     super.onReady();
     fetchSliderImages();
     runSliderTimer();
@@ -37,9 +31,8 @@ class BaseController extends GetxController {
 
     //setCartCount(LocalStorageHelper.getCartItemsCount());
     setCartItemCount();
+
     LocalStorageHelper.localStorage.listen(() {
-      //.. debugPrint("localStorage listening started...");
-      //setCartCount(LocalStorageHelper.getCartItemsCount());
       setCartItemCount();
       getCurrentUser();
     });
@@ -48,7 +41,16 @@ class BaseController extends GetxController {
   }
 
   setCartItemCount() async {
-    if (authController.isSessionExpired!)
+    await LocalStorageHelper.fetchCartItems()
+        .then((List<CartModel> list) async {
+      if (list.isNotEmpty) {
+        setCartCount(list.length);
+      } else {
+        setCartCount(0);
+      }
+    });
+
+   /* if (authController.isSessionExpired!)
       await LocalStorageHelper.fetchCartItems()
           .then((List<CartModel> list) async {
         if (list.isNotEmpty) {
@@ -67,14 +69,14 @@ class BaseController extends GetxController {
       });
     } else {
       setCartCount(0);
-    }
+    }*/
   }
 
   setCartCount(int count) {
     cartCount(count);
   }
 
-  //TODO: Current User Info
+  //TDO: Current User Info
   var _userModel = UserModel().obs;
 
   setUserModel(UserModel? userModel) => _userModel(userModel);
@@ -89,7 +91,7 @@ class BaseController extends GetxController {
 
   //END Current User
 
-  //TODO:Start Fetch SliderImages Section
+  //TDO:Start Fetch SliderImages Section
 
   var sliderImages = <SliderModel>[].obs;
   var isSliderLoading = true.obs;
@@ -143,7 +145,7 @@ class BaseController extends GetxController {
 
   //End Fetch SliderImages Section
 
-  //TODO: Start Fetch Top Categories
+  //TOO: Start Fetch Top Categories
   var categories = <CategoryModel>[].obs;
   var isCategoriesLoading = false.obs;
   int _minNoOfCategoriesRequest = 3;
@@ -226,7 +228,7 @@ class BaseController extends GetxController {
     return [
       {"key": "Latest", "value": "Popular Products"},
       {"key": "Featured", "value": "Featured Products"},
-      //{"key": "IsmmartOriginal", "value": "ISMMART Originals"},
+      {"key": "IsmmartOriginal", "value": "ISMMART Originals"},
       //{"key": "Best Seller", "value": "Best Seller"},
     ];
   }
