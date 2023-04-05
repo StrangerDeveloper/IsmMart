@@ -47,8 +47,7 @@ class UserModel {
 
   factory UserModel.fromErrorJson(json) => UserModel(error: json);
 
-  factory UserModel.fromJson(JSON json) =>
-      UserModel(
+  factory UserModel.fromJson(JSON json) => UserModel(
         id: json["id"],
         firstName: json["firstName"] ?? "",
         lastName: json["lastName"] ?? "",
@@ -58,8 +57,8 @@ class UserModel {
         address: json["address"] == null ? null : json["address"],
         phone: json["phone"] == null
             ? json["phoneNumber"] == null
-            ? null
-            : json["phoneNumber"]
+                ? null
+                : json["phoneNumber"]
             : json["phone"],
         imageUrl: json['image'] == null ? "" : json['image'],
         password: json["password"],
@@ -82,12 +81,10 @@ class UserModel {
             : DateTime.parse(json["updatedAt"]),
       );
 
-  JSON toJson() =>
-      {
+  JSON toJson() => {
         "id": id,
         "firstName": firstName,
         "lastName": lastName,
-
         "email": email,
         "token": token,
         "address": address == null ? null : address,
@@ -101,8 +98,14 @@ class UserModel {
         "updatedAt": updatedAt?.toIso8601String(),
       };
 
-  Map<String, dynamic> toAddressJson() =>
-      {
+  JSON toTokenJson() => {
+        "firstName": firstName,
+        "lastName": lastName,
+        "email": email,
+        "token": token,
+      };
+
+  Map<String, dynamic> toAddressJson() => {
         "id": id,
         "name": name,
         "phoneNumber": phone,
@@ -114,19 +117,19 @@ class UserModel {
       };
 }
 
-
 class UserResponse {
   bool? success, key;
   String? message, error;
   UserModel? userModel;
   List<String>? errors;
 
-  UserResponse({this.success = false,
-    this.key,
-    this.message,
-    this.error,
-    this.errors,
-    this.userModel});
+  UserResponse(
+      {this.success = false,
+      this.key,
+      this.message,
+      this.error,
+      this.errors,
+      this.userModel});
 
   factory UserResponse.fromResponse(response) {
     return UserResponse(
@@ -137,8 +140,8 @@ class UserResponse {
             ? List<String>.from(response["errors"].map((x) => x))
             : null,
         userModel: response['data'] == null ||
-            response['data'] is String ||
-            response['data'] is List
+                response['data'] is String ||
+                response['data'] is List
             ? null
             : UserModel.fromJson(response['data']));
   }

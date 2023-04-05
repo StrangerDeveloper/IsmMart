@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
@@ -241,6 +240,7 @@ class SettingsUI extends GetView<AuthController> {
                   onTap: () {
                     LocalStorageHelper.deleteUserData();
                     controller.update();
+                    authController.update();
                   },
                   icon: IconlyLight.logout,
                   iconColor: Colors.red,

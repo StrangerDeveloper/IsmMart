@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:convert';
+
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -12,10 +12,10 @@ FutureOr<dynamic> responseInterceptor(
 }
 
 dynamic handleResponse(Response response) {
-  debugPrint('RESPONSE START /////////////////');
+  /*debugPrint('RESPONSE START /////////////////');
   debugPrint('  Status Code: ${response.statusCode}');
   debugPrint('  Body: ${response.body}');
-  debugPrint('RESPONSE END /////////////////');
+  debugPrint('RESPONSE END /////////////////');*/
 
   switch (response.statusCode) {
     case 200:
@@ -32,14 +32,14 @@ dynamic handleResponse(Response response) {
     default:
       return response;
 
-      throw UnknownException(
-          'Error accrued while fetching data. : ${response.statusCode}');
+    /*  throw UnknownException(
+          'Error accrued while fetching data. : ${response.statusCode}');*/
   }
 }
 
 dynamic handleStreamResponse(http.StreamedResponse response) async{
-  debugPrint('//// Stream RESPONSE START /////////////////');
-  debugPrint('  Status Code: ${response.statusCode}');
+ /* debugPrint('//// Stream RESPONSE START /////////////////');
+  debugPrint('  Status Code: ${response.statusCode}');*/
 
 
   await response.stream.bytesToString().then((value) => debugPrint('  Body: ${value}'));

@@ -7,48 +7,36 @@ import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class SearchUI extends GetView<SearchController> {
-  const SearchUI({
+ const SearchUI({
     Key? key,
     this.isCalledForDeals = false,
   }) : super(key: key);
   final bool? isCalledForDeals;
 
+
+
+ // final controller = Get.find<SearchController>();
   @override
   Widget build(BuildContext context) {
+
     controller.search(
         Get.arguments != null ? Get.arguments["searchText"].toString() : " ");
 
     return Hero(
       tag: "productSearchBar",
       child: SafeArea(
-        child: _scaffold(),
+        child: Scaffold(
+          backgroundColor: Colors.grey[100]!,
+          appBar: _searchAppBar(),
+          body: _body(),
+          //floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+          //floatingActionButton: _filterBar(),
+        ),
       ),
     );
     /* return controller.obx((state) {
 
     },onLoading: NoDataFound());*/
-  }
-
-  Widget _bodyNew() {
-    return CustomScrollView(
-      slivers: [
-        // _searchBar(),
-        SliverList(
-            delegate: SliverChildListDelegate([
-              _body(),
-            ])),
-      ],
-    );
-  }
-
-  Widget _scaffold() {
-    return Scaffold(
-      backgroundColor: Colors.grey[100]!,
-      appBar: _searchAppBar(),
-      body: _body(),
-      //floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      //floatingActionButton: _filterBar(),
-    );
   }
 
   _searchAppBar() {
@@ -60,13 +48,13 @@ class SearchUI extends GetView<SearchController> {
       leading: isCalledForDeals!
           ? null
           : InkWell(
-        onTap: () => Get.back(),
-        child: Icon(
-          Icons.arrow_back_ios_new,
-          size: 18,
-          color: kPrimaryColor,
-        ),
-      ),
+              onTap: () => Get.back(),
+              child: Icon(
+                Icons.arrow_back_ios_new,
+                size: 18,
+                color: kPrimaryColor,
+              ),
+            ),
       title: Container(
         height: 36,
         child: TextField(
@@ -113,17 +101,28 @@ class SearchUI extends GetView<SearchController> {
 
   _body() {
     //print("ProductList: ${controller.productList.length}");
-    return Obx(() =>
-    controller.isLoading.isTrue
+   /* return GetBuilder<SearchController>(
+        builder: (_) => *//*controller.isLoading.isTrue
+            ? CustomLoading(isItForWidget: true, color: kPrimaryColor)
+            : *//*controller.productList.isEmpty
+                ? Center(
+                    child: NoDataFoundWithIcon(
+                      title: langKey.emptyProductSearch.tr,
+                      subTitle: langKey.emptyProductSearchMsg.tr,
+                    ),
+                  )
+                : _buildProductView(controller.productList));*/
+
+    return Obx(() => controller.isLoading.isTrue
         ? CustomLoading(isItForWidget: true, color: kPrimaryColor)
         : controller.productList.isEmpty
-        ? Center(
-      child: NoDataFoundWithIcon(
-        title: langKey.emptyProductSearch.tr,
-        subTitle: langKey.emptyProductSearchMsg.tr,
-      ),
-    )
-        : _buildProductView(controller.productList));
+            ? Center(
+                child: NoDataFoundWithIcon(
+                  title: langKey.emptyProductSearch.tr,
+                  subTitle: langKey.emptyProductSearchMsg.tr,
+                ),
+              )
+            : _buildProductView(controller.productList));
   }
 
   Widget _buildProductView(List<ProductModel> list) {
@@ -134,9 +133,7 @@ class SearchUI extends GetView<SearchController> {
         Material(
           elevation: 1,
           child: Container(
-            height: AppConstant
-                .getSize()
-                .height * 0.05,
+            height: AppConstant.getSize().height * 0.05,
             color: kWhiteColor,
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Row(
@@ -199,8 +196,8 @@ class SearchUI extends GetView<SearchController> {
                         crossAxisCount: AppResponsiveness.getGridItemCount(),
                         mainAxisSpacing: 10,
                         crossAxisSpacing: 10,
-                      mainAxisExtent: AppResponsiveness.getMainAxisExtentPoint25()
-                        ),
+                        mainAxisExtent:
+                            AppResponsiveness.getMainAxisExtentPoint25()),
                     itemCount: list.length,
                     itemBuilder: (_, index) {
                       ProductModel productModel = list[index];
@@ -221,7 +218,6 @@ class SearchUI extends GetView<SearchController> {
     );
   }
 
-
   void showFilterBottomSheet() {
     //var categoryController = Get.find<CategoryController>();
     debugPrint(">>> ${controller.categoriesList.length}");
@@ -234,56 +230,54 @@ class SearchUI extends GetView<SearchController> {
               delegate: SliverChildListDelegate(
                 [
                   StickyLabel(text: "Categories"),
-                  Obx(() =>
-                        Container(
-                          height: 70,
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: ListView.builder(
-                            //shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            itemCount: controller.categoriesList.length,
-                            itemBuilder: (_, index) {
-                              CategoryModel categoryModel =
+                  Obx(
+                    () => Container(
+                      height: 70,
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: ListView.builder(
+                        //shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemCount: controller.categoriesList.length,
+                        itemBuilder: (_, index) {
+                          CategoryModel categoryModel =
                               controller.categoriesList[index];
-                              return Padding(
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: InkWell(
+                              onTap: () {
+                                controller
+                                    .selectedCategoryId(categoryModel.id!);
+                                controller.makeSelectedCategory(categoryModel);
+                              },
+                              child: Container(
+                                //height: 50,
+                                constraints: BoxConstraints(minWidth: 50),
+                                alignment: Alignment.center,
                                 padding: const EdgeInsets.all(8.0),
-                                child: InkWell(
-                                  onTap: () {
-                                    controller.selectedCategoryId(
-                                        categoryModel.id!);
-                                    controller.makeSelectedCategory(
-                                        categoryModel);
-                                    },
-                                  child: Container(
-                                    //height: 50,
-                                    constraints: BoxConstraints(minWidth: 50),
-                                    alignment: Alignment.center,
-                                    padding: const EdgeInsets.all(8.0),
-                                    margin: const EdgeInsets.symmetric(
-                                        vertical: 5.0),
-                                    // margin: const EdgeInsets.only(bottom: 20.0),
-                                    decoration: BoxDecoration(
-                                        color: categoryModel.isPressed!
-                                            ? kPrimaryColor
-                                            : kTransparent,
-                                        border: categoryModel.isPressed!
-                                            ? Border()
-                                            : Border.all(),
-                                        borderRadius: BorderRadius.circular(
-                                            5.0)),
-                                    child: CustomText(
-                                      title: categoryModel.name,
-                                      color: categoryModel.isPressed!
-                                          ? kWhiteColor
-                                          : kDarkColor,
-                                      weight: FontWeight.w600,
-                                    ),
-                                  ),
+                                margin:
+                                    const EdgeInsets.symmetric(vertical: 5.0),
+                                // margin: const EdgeInsets.only(bottom: 20.0),
+                                decoration: BoxDecoration(
+                                    color: categoryModel.isPressed!
+                                        ? kPrimaryColor
+                                        : kTransparent,
+                                    border: categoryModel.isPressed!
+                                        ? Border()
+                                        : Border.all(),
+                                    borderRadius: BorderRadius.circular(5.0)),
+                                child: CustomText(
+                                  title: categoryModel.name,
+                                  color: categoryModel.isPressed!
+                                      ? kWhiteColor
+                                      : kDarkColor,
+                                  weight: FontWeight.w600,
                                 ),
-                              );
-                            },
-                          ),
-                        ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
                   ),
                   StickyLabel(text: "Price"),
                   Row(
@@ -299,7 +293,7 @@ class SearchUI extends GetView<SearchController> {
                           iconColor: kPrimaryColor,
                           enableBorder: UnderlineInputBorder(
                             borderSide:
-                            BorderSide(color: kPrimaryColor, width: 1.5),
+                                BorderSide(color: kPrimaryColor, width: 1.5),
                             //borderRadius: BorderRadius.circular(25.0),
                           ),
                           autofocus: false,
@@ -320,7 +314,7 @@ class SearchUI extends GetView<SearchController> {
                           autofocus: false,
                           enableBorder: UnderlineInputBorder(
                             borderSide:
-                            BorderSide(color: kPrimaryColor, width: 1.5),
+                                BorderSide(color: kPrimaryColor, width: 1.5),
                             //borderRadius: BorderRadius.circular(25.0),
                           ),
                           textStyle: bodyText1,
@@ -371,7 +365,8 @@ class SearchUI extends GetView<SearchController> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            CustomText(title: langKey.sortBy.tr, size: 20, weight: FontWeight.bold),
+            CustomText(
+                title: langKey.sortBy.tr, size: 20, weight: FontWeight.bold),
             AppConstant.spaceWidget(height: 10),
             RadioListTile(
               //selected: controller.sortBy!.contains("low-to-high"),

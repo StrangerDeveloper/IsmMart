@@ -23,12 +23,12 @@ PODS:
     - StripeUICore (= 23.3.4)
   - stripe_ios (0.0.1):
     - Flutter
-    - Stripe (~> 23.3.0)
-    - StripeApplePay (~> 23.3.0)
-    - StripeFinancialConnections (~> 23.3.0)
-    - StripePayments (~> 23.3.0)
-    - StripePaymentSheet (~> 23.3.0)
-    - StripePaymentsUI (~> 23.3.0)
+    - Stripe (~> 23.3.3)
+    - StripeApplePay (~> 23.3.3)
+    - StripeFinancialConnections (~> 23.3.3)
+    - StripePayments (~> 23.3.3)
+    - StripePaymentSheet (~> 23.3.3)
+    - StripePaymentsUI (~> 23.3.3)
   - StripeApplePay (23.3.4):
     - StripeCore (= 23.3.4)
   - StripeCore (23.3.4)
@@ -98,7 +98,7 @@ SPEC CHECKSUMS:
   permission_handler_apple: 44366e37eaf29454a1e7b1b7d736c2cceaeb17ce
   sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904
   Stripe: 7393b16fe555d4a68e6555044e7b57eff11ae547
-  stripe_ios: f93762c5b513f456e82ac57cf7cab2aacc6ec7f7
+  stripe_ios: 1be2c6f10dcf1e33c14625ad02099e0ff3cfe6d8
   StripeApplePay: 174b09c0211134417e340c68af199a3dd34f3cd6
   StripeCore: babb08ec2b961f7cde8663dad3b4cbb77e0ae63b
   StripeFinancialConnections: 484096f2dc5d3c20cc24a5ad4d261953ba806ef0
@@ -109,4 +109,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 30517025a2fecca2d72dac25f08abb5b9a8f1a56
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.12.0

@@ -22,7 +22,6 @@ class AuthMiddleWare extends GetMiddleware {
   @override
   GetPageBuilder? onPageBuildStart(GetPageBuilder? page) {
     findOrInit.getToken();
-    findOrInit.getCurrentUser();
 
     return super.onPageBuildStart(page);
   }

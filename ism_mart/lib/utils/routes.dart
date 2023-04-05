@@ -50,8 +50,12 @@ class Routes {
 
     GetPage(
       name: searchRoute,
-      page: () => const SearchUI(),
-      binding: SearchBindings(),
+      page: () =>  SearchUI(),
+      //binding: SearchBindings(),
+      bindings: [
+        SearchBindings(),
+        ProductBinding(),
+      ]
     ),
 
     GetPage(

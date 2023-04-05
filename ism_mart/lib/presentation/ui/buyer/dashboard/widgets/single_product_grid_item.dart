@@ -17,10 +17,9 @@ class SingleProductItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return isCategoryProducts!
         ? _buildCategoryProductItem(model: productModel)
-        : _buildProductItemNew(model: productModel);
+        : _buildProductItemNew(model: productModel, buildContext: context);
   }
 
   _buildCategoryProductItem({ProductModel? model}) {
@@ -42,8 +41,7 @@ class SingleProductItems extends StatelessWidget {
               BoxShadow(
                   color: kPrimaryColor.withOpacity(0.22),
                   offset: const Offset(0, 1),
-                  blurRadius: 10
-              )
+                  blurRadius: 10)
             ],
           ),
           child: Stack(
@@ -91,14 +89,36 @@ class SingleProductItems extends StatelessWidget {
     );
   }
 
-  _buildProductItemNew({ProductModel? model}) {
-
+  _buildProductItemNew({ProductModel? model, buildContext}) {
+    //print("This one is called>>>>>>>>>>>>>>>>>>");
     return AspectRatio(
       aspectRatio: 0.75,
       child: GestureDetector(
         onTap: onTap ??
-            () => Get.toNamed('/product/${model!.id}',
-                arguments: {"calledFor": "customer"}),
+            //()=>Navigator.pushReplacementNamed(Get.context!, '/product/${model!.id}', arguments: {"calledFor": "customer"}),
+            () {
+              // if (!Get.isOverlaysOpen) Get.toNamed('/product/${model!.id}', arguments: {"calledFor": "customer"},);
+              showModalBottomSheet(
+                //isDismissible: false,
+                  isScrollControlled: true,
+                  context: buildContext,
+                  backgroundColor: kWhiteColor,
+                  enableDrag: true,
+                  elevation: 0,
+                  builder: (_) {
+                    return SafeArea(
+                      child: Container(
+                        height: AppResponsiveness.height*0.91,
+                        child: SingleProductView(
+                          productId: "${model!.id}",
+                        ),
+                      ),
+                    );
+                  });
+
+              // AppConstant.showBottomSheet(widget: SingleProductView(productId: "${model!.id}",), isGetXBottomSheet: false, buildContext: buildContext);
+            },
+        // () => Get.to(() => SingleProductView(), binding: ProductBinding(), arguments: {"calledFor": "customer", "id":"${model!.id}"},  opaque: true, fullscreenDialog: true),
         child: Container(
           clipBehavior: Clip.hardEdge,
           margin: const EdgeInsets.symmetric(horizontal: 5),
@@ -138,7 +158,6 @@ class SingleProductItems extends StatelessWidget {
                             style: bodyText1.copyWith(
                                 decoration: TextDecoration.lineThrough),
                           ),
-
                       ],
                     ),
                   ),
@@ -170,4 +189,15 @@ class SingleProductItems extends StatelessWidget {
       ),
     );
   }
+}
+
+class CustomRoute<T> extends MaterialPageRoute<T> {
+  CustomRoute({
+    required WidgetBuilder builder,
+    required RouteSettings settings,
+  }) : super(
+            builder: builder,
+            settings: settings,
+            maintainState: true,
+            fullscreenDialog: false);
 }

@@ -34,7 +34,7 @@ class AuthController extends GetxController {
     super.onInit();
     //getCurrentUser();
     //getToken();
-    getToken();
+
     //getCurrentUser();
 
   }
@@ -44,15 +44,15 @@ class AuthController extends GetxController {
     super.onReady();
     getCountries();
 
-
+    getToken();
     LocalStorageHelper.localStorage.listenKey(LocalStorageHelper.currentUserKey,
         (value) {
+      print(">>>Listening... currentUserKey");
       getToken();
-      getCurrentUser();
+      //getCurrentUser();
     });
-    getCurrentUser();
 
-    fetchUserCoins();
+
   }
 
   var _coinsModel = CoinsModel().obs;
@@ -60,17 +60,19 @@ class AuthController extends GetxController {
   CoinsModel? get coinsModel => _coinsModel.value;
 
   fetchUserCoins() async {
-    await authProvider
-        .getUserCoins(token: userToken)
-        .then((CoinsResponse? coinsResponse) {
-      if (coinsResponse != null) {
-        if (coinsResponse.success!) {
-          _coinsModel(coinsResponse.coinsModel!);
+    if(userToken!.isNotEmpty) {
+      await authProvider
+          .getUserCoins(token: userToken)
+          .then((CoinsResponse? coinsResponse) {
+        if (coinsResponse != null) {
+          if (coinsResponse.success!) {
+            _coinsModel(coinsResponse.coinsModel!);
+          }
         }
-      }
-    }).catchError((error) {
-      print(">>>FetchUserCoins: $error");
-    });
+      }).catchError((error) {
+        print(">>>FetchUserCoins: $error");
+      });
+    }
   }
 
   var isLoading = false.obs;
@@ -306,7 +308,7 @@ class AuthController extends GetxController {
   }
 
   getCurrentUser() async {
-    if (userToken != null) {
+    if (userToken!.isNotEmpty) {
       isLoading(true);
       await authProvider
           .getCurrentUser(token: userToken)
@@ -409,18 +411,27 @@ class AuthController extends GetxController {
 
   var _currUserToken = "".obs;
 
+  setCurrUserToken(token){
+    _currUserToken.value = token;
+  }
+
   String? get userToken => _currUserToken.value;
 
   //String? get userToken => "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQ4LCJpYW0iOiJ2ZW5kb3IiLCJ2aWQiOjQzLCJpYXQiOjE2NzgwNzY4MTE2MjcsImV4cCI6MTY3ODI0OTYxMTYyN30.eWj8W9zsP_mDBf81ho08HGmtwz8ufDpKUP2YBghyCN8";
 
   getToken() async {
-    await LocalStorageHelper.getStoredUser().then((user) {
+    await LocalStorageHelper.getStoredUser().then((user) async{
       print("Auth Token: ${user.token}");
-      _currUserToken(user.token);
+      _currUserToken.value = user.token??'';
+
+      await getCurrentUser();
+      await fetchUserCoins();
     }).onError((error, stackTrace) {
-      print(">>>Token: $error");
+      print(">>>Token: $error, $stackTrace");
     });
-    update();
+
+
+    //update();
   }
 
   updateUser({title, value}) async {

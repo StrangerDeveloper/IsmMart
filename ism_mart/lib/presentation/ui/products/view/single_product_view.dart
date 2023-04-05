@@ -10,15 +10,29 @@ import 'package:ism_mart/presentation/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
 class SingleProductView extends GetView<ProductController> {
-  const SingleProductView({Key? key}) : super(key: key);
-
+  const SingleProductView( {Key? key, this.productId,}) : super(key: key);
+  final productId;
   @override
   Widget build(BuildContext context) {
-    if (Get.parameters['id'] == null) {
+    if(Get.parameters['id'] == null && productId == null){
+      return Scaffold(body: Center(child: CustomLoading()));
+    }else
+      if(productId!=null){
+        controller.fetchProduct(int.parse(productId));
+      }else
+        controller.fetchProduct(int.parse(Get.parameters['id']!));
+
+    /*if (Get.parameters['id'] == null) {
       return const Center(child: CircularProgressIndicator());
     }
 
-    controller.fetchProduct(int.parse(Get.parameters['id']!));
+    controller.fetchProduct(int.parse(Get.parameters['id']!));*/
+
+    /*if (Get.arguments['id'] == null) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
+    controller.fetchProduct(int.parse(Get.arguments['id']!));*/
     final isDarkMode = Get.isDarkMode;
 
     return controller.obx((state) {

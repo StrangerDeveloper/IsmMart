@@ -20,21 +20,20 @@ class BaseController extends GetxController {
   @override
   void onReady() {
     super.onReady();
+
+
     fetchSliderImages();
     runSliderTimer();
 
     fetchSliderDiscountProducts();
     fetchCategories();
 
-    getCurrentUser();
     getAllFAQs();
 
     //setCartCount(LocalStorageHelper.getCartItemsCount());
     setCartItemCount();
-
     LocalStorageHelper.localStorage.listen(() {
       setCartItemCount();
-      getCurrentUser();
     });
 
     ever(categories, getRandomTextForSearch);
@@ -76,7 +75,7 @@ class BaseController extends GetxController {
     cartCount(count);
   }
 
-  //TDO: Current User Info
+  /*//TDO: Current User Info
   var _userModel = UserModel().obs;
 
   setUserModel(UserModel? userModel) => _userModel(userModel);
@@ -87,7 +86,7 @@ class BaseController extends GetxController {
     await LocalStorageHelper.getStoredUser().then((user) {
       setUserModel(user);
     });
-  }
+  }*/
 
   //END Current User
 
@@ -196,9 +195,10 @@ class BaseController extends GetxController {
       categories.forEach((element) async {
         await _apiProvider.getProductsByCategory(element.id!).then((data) {
           //debugPrint("FetchProducts: inside $data");
-
           productsMap.putIfAbsent(element.name!, () => data);
           //debugPrint("FetchProducts: inside Ln ${productList.first}");
+        }).catchError((error){
+          print(">>>FetchProductByCategory: $error");
         });
       });
     }
@@ -252,19 +252,22 @@ class BaseController extends GetxController {
 
   getAllFAQs() async {
     faqsList.clear();
+
     await _apiProvider.getAllFaqs(token: authController.userToken).then((faqs) {
       faqsList.addAll(faqs);
+    }).catchError((error){
+      print(">>>GetAllFaqs: $error");
     });
   }
 
-  //TODO: Start Bottom Navigation setup
+  //TOO: Start Bottom Navigation setup
   var bottomNavPageController = PageController(initialPage: 0);
   List<Widget> bottomNavScreens = [
     const DashboardUI(),
     const CategoriesUI(),
     const CartUI(),
     const SettingsUI(),
-    const SearchUI(
+     SearchUI(
       isCalledForDeals: true,
     )
   ];

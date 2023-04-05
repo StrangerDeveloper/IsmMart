@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+
 import 'package:get_storage/get_storage.dart';
 import 'package:ism_mart/models/exports_model.dart';
 
@@ -12,8 +12,11 @@ class LocalStorageHelper {
   static const tag = "LocalStorage:";
 
   static Future<void> initUserStorage() async {
-    if (localStorage.read(currentUserKey) == null)
+    if (localStorage.read(currentUserKey) == null) {
+      print(">>>FirstTimeUserTokenKeyInMemory: ");
       await localStorage.write(currentUserKey, UserModel().toJson());
+    } else
+      print(">>>SecondTimeUserTokenKeyInMemory: ");
   }
 
   static Future<void> storeUser({UserModel? userModel}) async {
@@ -54,7 +57,7 @@ class LocalStorageHelper {
   static updateCartItems({CartModel? cartModel}) async {
     if (localStorage.read(cartItemKey) != null) {
       List<CartModel> list = getCartItems();
-      list.removeWhere((element)=> element.productId == cartModel!.productId);
+      list.removeWhere((element) => element.productId == cartModel!.productId);
       list.add(cartModel!);
       String carts = cartModelToJson(list);
       await saveCart(carts);

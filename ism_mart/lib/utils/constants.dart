@@ -198,6 +198,7 @@ class AppConstant {
     } else {
       Scaffold.of(buildContext).showBottomSheet(
         (context) => widget!,
+
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(15), topRight: Radius.circular(15)),
