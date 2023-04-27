@@ -1,5 +1,3 @@
-import 'package:get/get.dart';
-
 class PaymentIntentResponse {
   PaymentIntentResponse({
     this.success,
@@ -15,9 +13,11 @@ class PaymentIntentResponse {
       PaymentIntentResponse(
           success: json["success"],
           message: json["message"],
-          data: json["data"] /*== null || (json['data'] is List)
+          data: json[
+              "data"] /*== null || (json['data'] is List)
               ? null
-              : PaymentIntentModel.fromJson(json["data"])*/);
+              : PaymentIntentModel.fromJson(json["data"])*/
+          );
 
   Map<String, dynamic> toJson() => {
         "success": success,

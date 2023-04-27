@@ -176,7 +176,6 @@ class ProductController extends GetxController with StateMixin {
   postQuestion({productId}) async {
     String question = questionController.text;
     if (question.isNotEmpty) {
-
       var data = {"productId": productId, "question": question};
       print(">>>QuestionData: ${data.toString()}");
 
@@ -186,7 +185,8 @@ class ProductController extends GetxController with StateMixin {
       );
 
       await _apiProvider
-          .postProductQuestion(token: authController.userToken, model: questionModel.toJson())
+          .postProductQuestion(
+              token: authController.userToken, model: questionModel.toJson())
           .then((ResponseModel? responseModel) {
         if (responseModel != null) {
           if (responseModel.success!) {
@@ -252,7 +252,6 @@ class ProductController extends GetxController with StateMixin {
 
   @override
   void onClose() {
-    // TODO: implement onClose
     super.onClose();
 
     clearControllers();

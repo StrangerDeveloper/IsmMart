@@ -57,7 +57,7 @@ class SellersApiProvider {
         contentType: MediaType.parse('image/jpeg'),
       ));
     }
-//TODO: Response handling remaining
+//TDO: Response handling remaining
     final response = await request.send();
 
     if (response.statusCode == 200) {
@@ -66,14 +66,11 @@ class SellersApiProvider {
       print(data);
       return ProductResponse.fromResponse(data);
     } else {
-      //TODO: Still needs to test this one properly
+      //: Still needs to test this one properly
       http.StreamedResponse res = handleStreamResponse(response);
       return ProductResponse.fromResponse(
           json.decode(await res.stream.bytesToString()));
-      throw Exception(
-          'Failed to upload image ${response.statusCode} ${json.decode(await response.stream.bytesToString())}');
     }
-    return ProductResponse.fromResponse(response);
   }
 
   Future<SellerProductModel> fetchMyProducts(
@@ -147,10 +144,6 @@ class SellersApiProvider {
       http.StreamedResponse res = handleStreamResponse(response);
       return ProductResponse.fromResponse(
           json.decode(await res.stream.bytesToString()));
-      throw http.ClientException(
-          'Failed to update resource: ${response.reasonPhrase}');
     }
   }
-
-
 }

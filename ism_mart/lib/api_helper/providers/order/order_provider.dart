@@ -1,5 +1,4 @@
 import 'package:ism_mart/api_helper/export_api_helper.dart';
-import 'package:ism_mart/models/dispute/dispute_model.dart';
 import 'package:ism_mart/models/exports_model.dart';
 
 class OrderProvider {
@@ -58,11 +57,8 @@ class OrderProvider {
     return DisputeResponse.fromJson(response);
   }
 
-  Future<PaymentIntentResponse> createPaymentIntent({token, data}) async{
+  Future<PaymentIntentResponse> createPaymentIntent({token, data}) async {
     var response = await _orderRepo.postPaymentIntent(token: token, data: data);
     return PaymentIntentResponse.fromJson(response);
   }
-
-
-
 }

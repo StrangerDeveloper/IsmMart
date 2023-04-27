@@ -16,11 +16,9 @@ class BaseController extends GetxController {
   var searchController = TextEditingController();
   var cartCount = 0.obs;
 
-
   @override
   void onReady() {
     super.onReady();
-
 
     fetchSliderImages();
     runSliderTimer();
@@ -49,7 +47,7 @@ class BaseController extends GetxController {
       }
     });
 
-   /* if (authController.isSessionExpired!)
+    /* if (authController.isSessionExpired!)
       await LocalStorageHelper.fetchCartItems()
           .then((List<CartModel> list) async {
         if (list.isNotEmpty) {
@@ -158,8 +156,7 @@ class BaseController extends GetxController {
       if (_minNoOfCategoriesRequest != 0) {
         _minNoOfCategoriesRequest--;
         fetchCategories();
-      }
-      else {
+      } else {
         debugPrint("FetchCategoriesError $error");
         isCategoriesLoading(false);
       }
@@ -197,7 +194,7 @@ class BaseController extends GetxController {
           //debugPrint("FetchProducts: inside $data");
           productsMap.putIfAbsent(element.name!, () => data);
           //debugPrint("FetchProducts: inside Ln ${productList.first}");
-        }).catchError((error){
+        }).catchError((error) {
           print(">>>FetchProductByCategory: $error");
         });
       });
@@ -255,7 +252,7 @@ class BaseController extends GetxController {
 
     await _apiProvider.getAllFaqs(token: authController.userToken).then((faqs) {
       faqsList.addAll(faqs);
-    }).catchError((error){
+    }).catchError((error) {
       print(">>>GetAllFaqs: $error");
     });
   }
@@ -267,7 +264,7 @@ class BaseController extends GetxController {
     const CategoriesUI(),
     const CartUI(),
     const SettingsUI(),
-     SearchUI(
+    SearchUI(
       isCalledForDeals: true,
     )
   ];
@@ -284,7 +281,6 @@ class BaseController extends GetxController {
 
   //End Bottom Navigation Setup
 
-  //TODO:Start Clear Lists
   _clearLists() {
     sliderImages.clear();
     categories.clear();
@@ -292,7 +288,6 @@ class BaseController extends GetxController {
 
   //END Clear Lists
 
-  //TODO:START clear Controllers
   _clearControllers() {
     bottomNavPageController.dispose();
     sliderPageController.dispose();
@@ -302,7 +297,6 @@ class BaseController extends GetxController {
 
   @override
   void onClose() {
-    // TODO: implement onClose
     super.onClose();
 
     timer?.cancel();

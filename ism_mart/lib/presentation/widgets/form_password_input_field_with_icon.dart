@@ -20,7 +20,8 @@ class FormPasswordInputFieldWithIcon extends StatefulWidget {
       this.maxLengthEnforcement,
       this.onPasswordVisible,
       required this.onChanged,
-      this.onSaved, this.autoValidateMode})
+      this.onSaved,
+      this.autoValidateMode})
       : super(key: key);
   final AutovalidateMode? autoValidateMode;
   final TextEditingController controller;
@@ -61,12 +62,12 @@ class _FormPasswordInputFieldWithIconState
             filled: false,
             prefixIcon: Icon(
               widget.iconPrefix,
-              color: Colors.black87 ?? Colors.black,
+              color: kPrimaryColor,
             ),
             enabledBorder: OutlineInputBorder(
               //borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(
-                color: Colors.black87??Colors.black45,
+                color: kPrimaryColor,
                 width: 1.0,
               ),
               //borderRadius: BorderRadius.circular(20)
@@ -87,7 +88,7 @@ class _FormPasswordInputFieldWithIconState
                       passVisibility.isTrue
                           ? Icons.visibility
                           : Icons.visibility_off,
-                      color: Colors.black87??widget.iconColor,
+                      color: Colors.black87,
                     ),
                   )
                 : null),

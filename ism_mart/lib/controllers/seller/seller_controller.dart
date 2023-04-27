@@ -304,7 +304,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
                   if (lengthInMb > 2) {
                     showSnackBar(message: 'Each file must be up to 2MB');
                   } else {
-                    //TODO: needs to add check if file exist
+                    //: needs to add check if file exist
                     pickedImagesList.add(compressedFile);
                   }
                 });

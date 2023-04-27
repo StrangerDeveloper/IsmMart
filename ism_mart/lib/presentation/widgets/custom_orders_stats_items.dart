@@ -81,6 +81,5 @@ class CustomOrderStatsItem extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }

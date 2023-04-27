@@ -19,7 +19,7 @@ class BaseLayout extends GetView<BaseController> {
         children: [...controller.bottomNavScreens],
       ),
       bottomNavigationBar: _buildBottomNavBar(controller),
-      //TODO: Work remaining of reward button if needed
+      //: Work remaining of reward button if needed
       /*floatingActionButton: FloatingActionButton.extended(
         onPressed: (){},
         elevation: 5,
@@ -41,20 +41,29 @@ class BaseLayout extends GetView<BaseController> {
           () => Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _getNavBarItems(icon: IconlyLight.home, title:langKey.home.tr,page: 0),
-              _getNavBarItems(icon: IconlyLight.category, title:langKey.categories.tr,page: 1),
-              _getNavBarItems(icon: IconlyLight.bag_2, title:langKey.deals.tr,page: 4),
+              _getNavBarItems(
+                  icon: IconlyLight.home, title: langKey.home.tr, page: 0),
+              _getNavBarItems(
+                  icon: IconlyLight.category,
+                  title: langKey.categories.tr,
+                  page: 1),
+              _getNavBarItems(
+                  icon: IconlyLight.bag_2, title: langKey.deals.tr, page: 4),
               controller.cartCount.value <= 0
-                  ? _getNavBarItems(icon: IconlyLight.buy,title:langKey.myCart.tr, page: 2)
+                  ? _getNavBarItems(
+                      icon: IconlyLight.buy, title: langKey.myCart.tr, page: 2)
                   : CartIcon(
                       onTap: () {
                         //Get.to(Routes.cartRoute);
                         controller.changePage(2);
                       },
-                      iconWidget:
-                          _getNavBarItems(icon: IconlyLight.buy, title:langKey.myCart.tr, page: 2),
+                      iconWidget: _getNavBarItems(
+                          icon: IconlyLight.buy,
+                          title: langKey.myCart.tr,
+                          page: 2),
                     ),
-              _getNavBarItems(icon: Icons.menu, title:langKey.menu.tr, page: 3),
+              _getNavBarItems(
+                  icon: Icons.menu, title: langKey.menu.tr, page: 3),
             ],
           ),
         ),
@@ -75,7 +84,7 @@ class BaseLayout extends GetView<BaseController> {
           controller.currentPage(page);
           Get.toNamed(Routes.searchRoute, arguments: {"searchText": " "});
         }else*/
-          controller.changePage(page);
+        controller.changePage(page);
       },
       child: SizedBox(
         height: 50,
@@ -85,14 +94,18 @@ class BaseLayout extends GetView<BaseController> {
           children: [
             Icon(
               icon,
-              color: controller.currentPage.value == page ? kPrimaryColor : kLightColor,
+              color: controller.currentPage.value == page
+                  ? kPrimaryColor
+                  : kLightColor,
               size: 20,
             ),
             Flexible(
               child: CustomText(
                 title: title,
                 size: 12,
-                color: controller.currentPage.value == page ? kPrimaryColor : kLightColor,
+                color: controller.currentPage.value == page
+                    ? kPrimaryColor
+                    : kLightColor,
               ),
             )
           ],

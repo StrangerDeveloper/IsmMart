@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_image/flutter_native_image.dart';
@@ -187,7 +186,7 @@ class OrderController extends GetxController
               if (lengthInMb > 2) {
                 showSnackBar(message: 'Each file must be up to 2MB');
               } else {
-                //TODO: needs to add check if file exist
+                //: needs to add check if file exist
                 pickedImagesList.add(compressedFile);
               }
             });

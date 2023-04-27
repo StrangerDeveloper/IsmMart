@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/presentation/ui/exports_ui.dart';
-import 'package:ism_mart/presentation/ui/products/view/seller_store_details_ui.dart';
 
 class Routes {
   static const initRoute = "/";
@@ -25,7 +24,6 @@ class Routes {
   static const orderDetailsRoute = "/orderDetails/:id";
   static const storeDetailsRoute = "/storeDetails/:id";
 
-
   static final pages = [
     /* GetPage(
       name: aboutUsRoute,
@@ -36,28 +34,23 @@ class Routes {
       page: () => const SignInUI(),
       binding: BaseBindings(),
     ),
-
     GetPage(
       name: registerRoute,
       page: () => const SignUpUI(),
       binding: BaseBindings(),
     ),
-
     GetPage(
         name: initRoute,
         page: () => const BaseLayout(),
         binding: BaseBindings()),
-
     GetPage(
-      name: searchRoute,
-      page: () =>  SearchUI(),
-      //binding: SearchBindings(),
-      bindings: [
-        SearchBindings(),
-        ProductBinding(),
-      ]
-    ),
-
+        name: searchRoute,
+        page: () => SearchUI(),
+        //binding: SearchBindings(),
+        bindings: [
+          SearchBindings(),
+          ProductBinding(),
+        ]),
     GetPage(
       name: cartRoute,
       page: () => CartUI(),
@@ -69,20 +62,15 @@ class Routes {
       binding: CheckoutBinding(),
       middlewares: [AuthMiddleWare(priority: 5)],
     ),
-
     GetPage(
       name: buyerOrdersRoute,
       page: () => BuyerOrdersUI(),
       binding: OrdersBindings(),
     ),
-
-
     GetPage(
         name: sellerHomeRoute,
         page: () => const SellerHome(),
         binding: SellerBindings()),
-
-
     GetPage(
       name: '/product/:id',
       //arguments: ['calledFor'],
@@ -100,7 +88,5 @@ class Routes {
       page: () => const SellerStoreDetailsUI(),
       binding: ProductBinding(),
     )
-
   ];
-
 }

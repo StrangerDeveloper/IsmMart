@@ -4,7 +4,6 @@ import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:iconly/iconly.dart';
-import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class SellerStoreDetailsUI extends GetView<ProductController> {
   const SellerStoreDetailsUI({Key? key}) : super(key: key);
@@ -97,7 +96,6 @@ class SellerStoreDetailsUI extends GetView<ProductController> {
   }
 
   _storeRatingAndCustomerCard({SellerModelResponse? modelResponse}) {
-
     return SizedBox(
       height: AppResponsiveness.getBoxHeightPoint25(),
       child: Padding(
@@ -155,7 +153,8 @@ class SellerStoreDetailsUI extends GetView<ProductController> {
                       title: "Sold Items",
                       icon: IconlyBold.bookmark,
                       iconColor: Colors.teal,
-                      value: num.parse(modelResponse.vendorStore!.totalSold ?? "0"),
+                      value: num.parse(
+                          modelResponse.vendorStore!.totalSold ?? "0"),
                     ),
                   ),
                 ],
@@ -165,7 +164,6 @@ class SellerStoreDetailsUI extends GetView<ProductController> {
         ),
       ),
     );
-
   }
 
   Widget _storeBasicDetails({SellerModel? model}) {
