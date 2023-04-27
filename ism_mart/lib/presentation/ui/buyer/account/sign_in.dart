@@ -4,6 +4,7 @@ import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/presentation/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+
 class SignInUI extends GetView<AuthController> {
   const SignInUI({Key? key}) : super(key: key);
 
@@ -25,7 +26,7 @@ class SignInUI extends GetView<AuthController> {
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    buildSvgLogo(color: kPrimaryColor),
+                    buildSvgLogo(),
                     InkWell(
                       onTap: () => Get.back(),
                       child: const Icon(Icons.close),
@@ -40,7 +41,7 @@ class SignInUI extends GetView<AuthController> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: CustomText(
-                      title:langKey.loginGreetings.tr,
+                      title: langKey.loginGreetings.tr,
                       style: headline2,
                     ),
                   ),
@@ -282,7 +283,9 @@ class SignInUI extends GetView<AuthController> {
                   obscureText: true,
                   onChanged: (value) {
                     if (value.toLowerCase().trim() !=
-                        controller.passwordController.text.toLowerCase().trim()) {
+                        controller.passwordController.text
+                            .toLowerCase()
+                            .trim()) {
                       controller.isPasswordMatched(false);
                     } else
                       controller.isPasswordMatched(true);
@@ -291,7 +294,7 @@ class SignInUI extends GetView<AuthController> {
                 ),
                 AppConstant.spaceWidget(height: 10),
                 Obx(
-                  ()=> Visibility(
+                  () => Visibility(
                       visible: controller.isPasswordMatched.isTrue,
                       child: CustomText(
                         title: langKey.passwordNotMatched.tr,

@@ -316,7 +316,7 @@ class CheckoutUI extends GetView<CheckoutController> {
               ),
               AppConstant.spaceWidget(height: 15),
 
-              ///TODO: Countries
+              ///: Countries
               if (!calledForUpdate)
                 Column(
                   children: [

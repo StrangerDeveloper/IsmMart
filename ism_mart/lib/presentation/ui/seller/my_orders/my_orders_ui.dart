@@ -56,7 +56,8 @@ class MyOrdersUI extends GetView<OrderController> {
     ));
   }
 
-  Widget _orderStats() {
+  /*Widget _orderStats() 
+  {
     return Obx(() => SizedBox(
           height: 200,
           child: Padding(
@@ -124,7 +125,7 @@ class MyOrdersUI extends GetView<OrderController> {
             ),
           ),
         ));
-  }
+  }*/
 
   Widget _tabBar() {
     return Container(
@@ -199,7 +200,10 @@ class MyOrdersUI extends GetView<OrderController> {
             itemCount: list.length,
             itemBuilder: (_, index) {
               VendorOrder model = list[index];
-              return SingleRecentOrderItems(orderModel: model.orderModel, calledForBuyerOrderDetails: false,);
+              return SingleRecentOrderItems(
+                orderModel: model.orderModel,
+                calledForBuyerOrderDetails: false,
+              );
             },
           );
   }

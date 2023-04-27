@@ -60,24 +60,21 @@ class FormInputFieldWithIcon extends StatelessWidget {
         suffix: suffix,
         prefixIcon: Icon(
           iconPrefix,
-          color: Colors.black87 ?? kPrimaryColor,
+          color: kPrimaryColor,
         ),
         labelText: labelText,
         labelStyle: textStyle,
         hintText: hintText,
-        enabledBorder: enableBorder?? OutlineInputBorder(
-      borderSide: BorderSide(
-      color: Colors.black,
-          width: 1,
-          style: BorderStyle.solid), //B
-      borderRadius: BorderRadius.circular(8),
-    ),
+        enabledBorder: enableBorder ??
+            OutlineInputBorder(
+              borderSide: BorderSide(
+                  color: Colors.black, width: 1, style: BorderStyle.solid), //B
+              borderRadius: BorderRadius.circular(8),
+            ),
         focusedBorder: enableBorder ??
             OutlineInputBorder(
               borderSide: BorderSide(
-                  color: Colors.black,
-                  width: 1,
-                  style: BorderStyle.solid), //B
+                  color: Colors.black, width: 1, style: BorderStyle.solid), //B
               borderRadius: BorderRadius.circular(8),
             ),
       ),

@@ -5,7 +5,6 @@ class ReviewModelResponse {
     this.count,
     this.rating,
     this.reviewsList,
-
   });
 
   num? count, rating;
@@ -14,7 +13,7 @@ class ReviewModelResponse {
   factory ReviewModelResponse.fromJson(Map<String, dynamic> json) =>
       ReviewModelResponse(
         count: json["count"],
-        rating: json['rating'] == null ? 0.0: json['rating'],
+        rating: json['rating'] == null ? 0.0 : json['rating'],
         reviewsList: json["rows"] == null
             ? []
             : List<ReviewModel>.from(
@@ -25,7 +24,7 @@ class ReviewModelResponse {
         "count": count,
         "rows": reviewsList == null
             ? []
-            : List<dynamic>.from(reviewsList!.map((x) => x!.toJson())),
+            : List<dynamic>.from(reviewsList!.map((x) => x.toJson())),
       };
 }
 

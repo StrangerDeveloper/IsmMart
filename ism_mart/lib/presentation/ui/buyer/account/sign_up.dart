@@ -27,7 +27,7 @@ class SignUpUI extends GetView<AuthController> {
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    buildSvgLogo(color: kPrimaryColor),
+                    buildSvgLogo(),
                     InkWell(
                       onTap: () => Get.back(),
                       child: const Icon(Icons.close),

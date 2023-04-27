@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
-import 'package:ism_mart/controllers/controllers.dart';
-import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/utils/constants.dart';
 
@@ -34,10 +32,9 @@ class SearchController extends GetxController {
   void onInit() {
     super.onInit();
     //change(null, status: RxStatus.loading());
-
-
   }
-@override
+
+  @override
   void onReady() {
     // TOO: implement onReady
     super.onReady();
@@ -45,9 +42,8 @@ class SearchController extends GetxController {
       search(searchTextController.text);
     });
     scrollController..addListener(() => loadMore(searchTextController.text));
-
-
   }
+
   var isLoading = false.obs;
   var productList = <ProductModel>[].obs;
 
@@ -69,7 +65,6 @@ class SearchController extends GetxController {
       isLoading(false);
       productList.clear();
       productList.addAll(response.products.productRows!);
-
     }).catchError((error) {
       isLoading(false);
       //change(null, status: RxStatus.error(error));
@@ -102,10 +97,10 @@ class SearchController extends GetxController {
       });
     }
   }
-   var categoriesList = <CategoryModel>[].obs;
 
-  setCategories(List<CategoryModel> list){
+  var categoriesList = <CategoryModel>[].obs;
 
+  setCategories(List<CategoryModel> list) {
     categoriesList.clear();
 
     categoriesList.addAll(list);
@@ -130,8 +125,6 @@ class SearchController extends GetxController {
       setCategories(list);
     }
   }
-
-
 
   applyFilter() async {
     int? categoryId = selectedCategoryId.value;
@@ -188,7 +181,6 @@ class SearchController extends GetxController {
 
   @override
   void onClose() {
-    // TODO: implement onClose
     super.onClose();
     searchTextController.clear();
   }

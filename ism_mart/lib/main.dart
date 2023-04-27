@@ -8,8 +8,6 @@ import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
 void main() async {
-
-
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
 
@@ -46,8 +44,6 @@ class MyApp extends StatelessWidget {
     );
   }
 
-
-
   ThemeMode getThemeMode(String theme) {
     ThemeMode themeMode = ThemeMode.system;
     switch (theme) {
@@ -72,6 +68,3 @@ class MyApp extends StatelessWidget {
         languageController.optionsLocales[languageKey]['countryCode']);
   }
 }
-
-
-

@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:http/http.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:http/http.dart' as http;
@@ -54,23 +53,23 @@ class AuthProvider {
     request.fields['accountNumber'] = sellerModel.accountNumber!;
     request.fields['bankName'] = sellerModel.bankName!;
 
-    if(sellerModel.storeImage!.isNotEmpty) {
+    if (sellerModel.storeImage!.isNotEmpty) {
       request.files.add(await http.MultipartFile.fromPath(
         'storeImage',
         sellerModel.storeImage!,
         contentType: MediaType.parse('image/jpeg'),
       ));
-    }else {
+    } else {
       request.fields['storeImage'] = sellerModel.storeName!;
     }
-if(sellerModel.coverImage!.isNotEmpty){
+    if (sellerModel.coverImage!.isNotEmpty) {
       request.files.add(await http.MultipartFile.fromPath(
         'coverImage',
         sellerModel.coverImage!,
         contentType: MediaType.parse('image/jpeg'),
       ));
-    }else{
-  request.fields['coverImage'] = sellerModel.coverImage!;
+    } else {
+      request.fields['coverImage'] = sellerModel.coverImage!;
     }
     final response = await request.send();
     if (response.statusCode == 200) {
@@ -78,10 +77,10 @@ if(sellerModel.coverImage!.isNotEmpty){
       final data = json.decode(responseData);
       return UserResponse.fromResponse(data);
     } else {
-      //TODO: Still needs to test this one properly
+      //ODO: Still needs to test this one properly
       http.StreamedResponse res = handleStreamResponse(response);
-      return UserResponse.fromResponse(json.decode(await res.stream.bytesToString()));
-      throw Exception('Failed to upload image');
+      return UserResponse.fromResponse(
+          json.decode(await res.stream.bytesToString()));
     }
 
     /* var jsonData = {
@@ -207,7 +206,7 @@ if(sellerModel.coverImage!.isNotEmpty){
   *
   * */
 
-  Future<CoinsResponse> getUserCoins({token})async{
+  Future<CoinsResponse> getUserCoins({token}) async {
     var response = await _authRepo.fetchUserCoins(token: token);
     return CoinsResponse.fromJson(response);
   }

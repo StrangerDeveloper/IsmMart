@@ -182,7 +182,7 @@ class CategoriesUI extends GetView<CategoryController> {
     );
   }
 
-  Widget _buildSubCategoryItemNew(SubCategory? subCategory) {
+  /*Widget _buildSubCategoryItemNew(SubCategory? subCategory) {
     return InkWell(
       onTap: () {
         Get.toNamed(Routes.searchRoute,
@@ -217,5 +217,5 @@ class CategoriesUI extends GetView<CategoryController> {
         ),
       ),
     );
-  }
+  }*/
 }

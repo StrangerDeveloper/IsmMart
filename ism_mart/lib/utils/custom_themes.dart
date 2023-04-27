@@ -7,8 +7,8 @@ class Themes {
       primarySwatch: Colors.green,
       brightness: Brightness.light,
       appBarTheme: AppBarTheme(
-          titleTextStyle:
-              GoogleFonts.lato(color: Colors.black, fontWeight: FontWeight.w600),
+          titleTextStyle: GoogleFonts.lato(
+              color: Colors.black, fontWeight: FontWeight.w600),
           iconTheme: const IconThemeData(color: Colors.black),
           backgroundColor: Colors.grey.shade50,
           elevation: 0),
@@ -19,7 +19,8 @@ class Themes {
           hintStyle: GoogleFonts.lato(
             fontSize: 14,
           )),
-      progressIndicatorTheme: const ProgressIndicatorThemeData(color: kPrimaryColor),
+      progressIndicatorTheme:
+          const ProgressIndicatorThemeData(color: kPrimaryColor),
       textTheme: TextTheme(
           headline1: GoogleFonts.lato(
               letterSpacing: -1.5,
@@ -82,7 +83,6 @@ class Themes {
       elevation: 0,
       iconTheme: const IconThemeData(color: Colors.white),
     ),
-    bottomAppBarColor: kGrey800,
     inputDecorationTheme: InputDecorationTheme(
         border: OutlineInputBorder(
             borderSide: BorderSide.none,
@@ -147,8 +147,6 @@ class Themes {
         overline: GoogleFonts.lato(
             color: Colors.grey.shade50,
             fontSize: 10,
-            fontWeight: FontWeight.w400)),
+            fontWeight: FontWeight.w400)), bottomAppBarTheme: BottomAppBarTheme(color: kGrey800),
   );
-
-
 }

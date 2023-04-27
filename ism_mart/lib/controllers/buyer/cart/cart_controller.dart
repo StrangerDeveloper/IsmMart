@@ -26,13 +26,12 @@ class CartController extends GetxController
   var count = 1.obs;
   var onQuantityClick = false.obs;
 
-  //TODO: minimum Order Qty Limit
+  ///: minimum Order Qty Limit
   int moq = 10;
   var isLoading = false.obs;
 
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
     quantityController.text = count.value.toString();
   }
@@ -155,7 +154,6 @@ class CartController extends GetxController
 
   @override
   void onClose() {
-    // TODO: implement onClose
     super.onClose();
   }
 }

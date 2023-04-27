@@ -8,13 +8,12 @@ import 'package:ism_mart/presentation/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
 class CheckoutController extends GetxController {
-  final ApiProvider _apiProvider;
   final OrderProvider _orderProvider;
   final AuthController authController;
   final CartController cartController;
 
-  CheckoutController(this._orderProvider, this._apiProvider,
-      this.authController, this.cartController);
+  CheckoutController(
+      this._orderProvider, this.authController, this.cartController);
 
   var countryId = 0.obs;
   var cityId = 0.obs;
@@ -494,7 +493,6 @@ class CheckoutController extends GetxController {
 
   @override
   void onClose() {
-    // TODO: implement onClose
     super.onClose();
     clearControllers();
   }

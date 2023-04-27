@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -106,7 +104,6 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                       ///Invoice TO:
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-
                         child: CustomGreyBorderContainer(
                           hasShadow: false,
                           padding: const EdgeInsets.all(8.0),
@@ -138,7 +135,8 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                               style: appBarTitleSize,
                             ),
                             subtitle: CustomText(
-                              title: getVendorDetails(vendor: model.vendorDetails),
+                              title:
+                                  getVendorDetails(vendor: model.vendorDetails),
                               style: bodyText2.copyWith(color: kLightColor),
                               maxLines: 5,
                             ),
@@ -194,8 +192,9 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
   }
 
   String getVendorDetails({UserModel? vendor}) {
-    return "${ vendor?.vendor!.storeName?? vendor?.firstName  ?? null}\n ${vendor!.vendor?.phone ?? null}";
+    return "${vendor?.vendor!.storeName ?? vendor?.firstName ?? null}\n ${vendor!.vendor?.phone ?? null}";
   }
+
   Widget _invoiceBody({OrderModel? model}) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -222,7 +221,6 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
             children: model!.orderItems!.isEmpty
                 ? [NoDataFound()]
                 : model.orderItems!.map((OrderItem orderItem) {
-
                     return Container(
                       padding: const EdgeInsets.all(8.0),
                       decoration: _boxDecoration(
@@ -231,23 +229,27 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                       child: Row(
                         children: [
                           Expanded(
-                              flex: 2,
-                              child: Column(
-                                children: [
-                                  _dataCell(
-                                      text: '${orderItem.product?.name  }'),
-
-                                ],
-                              ),),
+                            flex: 2,
+                            child: Column(
+                              children: [
+                                _dataCell(text: '${orderItem.product?.name}'),
+                              ],
+                            ),
+                          ),
                           Expanded(
                               child: _dataCell(text: '${orderItem.quantity}')),
                           Expanded(
-                              child: CustomPriceWidget( title: "${orderItem.product?.discountPrice}", style: bodyText2Poppins),
-                              /*_dataCell(
-                                  text: orderItem.product?.discountPrice)*/),
+                            child: CustomPriceWidget(
+                                title: "${orderItem.product?.discountPrice}",
+                                style: bodyText2Poppins),
+                            /*_dataCell(
+                                  text: orderItem.product?.discountPrice)*/
+                          ),
                           Expanded(
-                              child:CustomPriceWidget( title: "${orderItem.price}",style: bodyText2Poppins)
-                            /*_dataCell(text: '${orderItem.price}')*/),
+                              child: CustomPriceWidget(
+                                  title: "${orderItem.price}",
+                                  style:
+                                      bodyText2Poppins) /*_dataCell(text: '${orderItem.price}')*/),
                           Expanded(
                               child: model.status!.contains("pending")
                                   ? Container()
@@ -334,7 +336,7 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
         Row(
           children: [
             _textWidget(
-                title: "Shipping Cost", value: orderModel?.shippingPrice ?? 0),
+                title: "Shipping Cost", value: orderModel.shippingPrice ?? 0),
             _textWidget(
                 title: "Total Price",
                 value: orderModel.totalPrice ?? 0,
