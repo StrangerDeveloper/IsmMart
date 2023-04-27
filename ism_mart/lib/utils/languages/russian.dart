@@ -145,7 +145,7 @@ class Russian {
         key.emailReq: 'Неверный формат электронной почты?',
         key.password: 'Пароль',
         key.passwordLengthReq:
-            'Пароль должен содержать как минимум 6 символов?',
+            'Пароль должен содержать как минимум 8 символов?',
         key.fullName: 'Полное имя',
         key.fullNameReq: 'Имя требуется',
         key.registerGreetings: 'Создайте учетную запись ismmart!',

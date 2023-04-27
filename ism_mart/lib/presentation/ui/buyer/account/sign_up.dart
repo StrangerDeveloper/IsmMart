@@ -100,7 +100,7 @@ class SignUpUI extends GetView<AuthController> {
                             autoValidateMode:
                                 AutovalidateMode.onUserInteraction,
                             validator: (value) => //!GetUtils.isPassport(value!)
-                                value!.length < 6
+                                value!.length < 8
                                     ? langKey.passwordLengthReq.tr
                                     : null,
                             obscureText: true,

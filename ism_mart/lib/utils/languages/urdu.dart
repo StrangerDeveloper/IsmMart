@@ -145,7 +145,7 @@ class Urdu {
         key.email: 'ای میل',
         key.emailReq: 'غلط ای میل کی شکل؟',
         key.password: 'پاس ورڈ',
-        key.passwordLengthReq: 'پاس ورڈ کم از کم 6 حروف لمبا ہونا چاہئے؟',
+        key.passwordLengthReq: 'پاس ورڈ کم از کم 8 حروف لمبا ہونا چاہئے؟',
         key.fullName: 'پورا نام',
         key.fullNameReq: 'نام کی ضرورت ہے',
         key.registerGreetings: 'ایک ismmart اکاؤنٹ بنائیں!',

@@ -36,7 +36,6 @@ class AuthController extends GetxController {
     //getToken();
 
     //getCurrentUser();
-
   }
 
   @override
@@ -51,8 +50,6 @@ class AuthController extends GetxController {
       getToken();
       //getCurrentUser();
     });
-
-
   }
 
   var _coinsModel = CoinsModel().obs;
@@ -60,7 +57,7 @@ class AuthController extends GetxController {
   CoinsModel? get coinsModel => _coinsModel.value;
 
   fetchUserCoins() async {
-    if(userToken!.isNotEmpty) {
+    if (userToken!.isNotEmpty) {
       await authProvider
           .getUserCoins(token: userToken)
           .then((CoinsResponse? coinsResponse) {
@@ -232,7 +229,7 @@ class AuthController extends GetxController {
       await authProvider
           .postStoreRegister(
               token: userToken!,
-              calledForUpdate: updatedModel!=null,
+              calledForUpdate: updatedModel != null,
               sellerModel: model)
           .then((UserResponse? userResponse) {
         isLoading(false);
@@ -310,12 +307,12 @@ class AuthController extends GetxController {
   getCurrentUser() async {
     if (userToken!.isNotEmpty) {
       isLoading(true);
-      await authProvider
-          .getCurrentUser(token: userToken)
-          .then((userResponse) {
+      await authProvider.getCurrentUser(token: userToken).then((userResponse) {
         isLoading(false);
         if (userResponse.message != null &&
-            userResponse.message!.toLowerCase().contains(AppConstant.SESSION_EXPIRED)) {
+            userResponse.message!
+                .toLowerCase()
+                .contains(AppConstant.SESSION_EXPIRED)) {
           setSession(true);
         } else
           setSession(false);
@@ -330,7 +327,6 @@ class AuthController extends GetxController {
       });
     } else
       setSession(true);
-
   }
 
   List getProfileData() {
@@ -411,7 +407,7 @@ class AuthController extends GetxController {
 
   var _currUserToken = "".obs;
 
-  setCurrUserToken(token){
+  setCurrUserToken(token) {
     _currUserToken.value = token;
   }
 
@@ -420,16 +416,15 @@ class AuthController extends GetxController {
   //String? get userToken => "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQ4LCJpYW0iOiJ2ZW5kb3IiLCJ2aWQiOjQzLCJpYXQiOjE2NzgwNzY4MTE2MjcsImV4cCI6MTY3ODI0OTYxMTYyN30.eWj8W9zsP_mDBf81ho08HGmtwz8ufDpKUP2YBghyCN8";
 
   getToken() async {
-    await LocalStorageHelper.getStoredUser().then((user) async{
+    await LocalStorageHelper.getStoredUser().then((user) async {
       print("Auth Token: ${user.token}");
-      _currUserToken.value = user.token??'';
+      _currUserToken.value = user.token ?? '';
 
       await getCurrentUser();
       await fetchUserCoins();
     }).onError((error, stackTrace) {
       print(">>>Token: $error, $stackTrace");
     });
-
 
     //update();
   }

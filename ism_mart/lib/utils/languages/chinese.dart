@@ -143,7 +143,7 @@ class Chinese {
         key.email: '电子邮件',
         key.emailReq: '无效的电子邮件格式？',
         key.password: '密码',
-        key.passwordLengthReq: '密码必须至少有6个字符长？',
+        key.passwordLengthReq: '密码必须至少有8个字符长？',
         key.fullName: '全名',
         key.fullNameReq: '需要名称',
         key.registerGreetings: '创建一个ISMMART帐户！',
@@ -173,7 +173,6 @@ class Chinese {
         key.someThingWentWrong: '出了些问题',
         key.delProdMsg: '您一定会删除这个吗？',
         key.stock: '库存',
-
 
         ///About US
         key.aboutHeader1: '什么是ISMMART？',

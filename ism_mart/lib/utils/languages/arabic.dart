@@ -144,7 +144,7 @@ class Arabic {
         key.email: 'بريد إلكتروني',
         key.emailReq: 'تنسيق بريد إلكتروني غير صالح؟',
         key.password: 'كلمة المرور',
-        key.passwordLengthReq: 'الرقم السري يجب الا يقل عن 6 احرف على الاقل؟',
+        key.passwordLengthReq: 'الرقم السري يجب الا يقل عن 8 احرف على الاقل؟',
         key.fullName: 'الاسم الكامل',
         key.fullNameReq: 'مطلوب اسم',
         key.registerGreetings: 'إنشاء حساب isMMART!',
@@ -159,7 +159,6 @@ class Arabic {
         key.titleReq: 'العنوان مطلوب',
         key.updateProduct: 'تحديث المنتج',
         key.stock: 'مخزون',
-
 
         key.emptyCart: 'عربة التسوق فارغة',
         key.emptyCartMsg:

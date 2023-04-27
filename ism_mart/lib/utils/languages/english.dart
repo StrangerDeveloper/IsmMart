@@ -169,7 +169,7 @@ class English {
         key.email: "Email",
         key.emailReq: 'Invalid Email Format?',
         key.password: 'Password',
-        key.passwordLengthReq: 'Password must be at least 6 characters long?',
+        key.passwordLengthReq: 'Password must be at least 8 characters long?',
         key.fullName: 'Full Name',
         key.fullNameReq: 'Name is required',
         key.registerGreetings: 'Create an ISMMART Account!',
