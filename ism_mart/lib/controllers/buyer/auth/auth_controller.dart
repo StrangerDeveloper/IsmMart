@@ -28,6 +28,10 @@ class AuthController extends GetxController {
   var editingTextController = TextEditingController();
 
   var isPasswordMatched = false.obs;
+  getpassmatchFu(value) {
+    isPasswordMatched.value = value;
+    print("match is ===> ${isPasswordMatched.value}   comming $value");
+  }
 
   @override
   void onInit() {

@@ -204,6 +204,7 @@ class SignInUI extends GetView<AuthController> {
                   CustomButton(
                     onTap: () async {
                       await controller.forgotPasswordWithEmail().then((value) {
+                        controller.emailController.clear();
                         Get.back();
                         showRenewPasswordBottomSheet();
                       });
@@ -259,7 +260,7 @@ class SignInUI extends GetView<AuthController> {
                   validator: (value) => //!GetUtils.isPassport(value!)
                       value!.isEmpty
                           ? langKey.newPassReq.tr
-                          : value.length < 6
+                          : value.length < 8
                               ? langKey.passwordLengthReq.tr
                               : null,
                   obscureText: true,
@@ -277,25 +278,23 @@ class SignInUI extends GetView<AuthController> {
                   validator: (value) => //!GetUtils.isPassport(value!)
                       value!.isEmpty
                           ? langKey.confirmPassReq.tr
-                          : value.length < 6
+                          : value.length < 8
                               ? langKey.passwordLengthReq.tr
                               : null,
                   obscureText: true,
                   onChanged: (value) {
-                    if (value.toLowerCase().trim() !=
-                        controller.passwordController.text
-                            .toLowerCase()
-                            .trim()) {
-                      controller.isPasswordMatched(false);
+                    if (value != controller.passwordController.text) {
+                      print("change value $value");
+                      controller.getpassmatchFu(true);
                     } else
-                      controller.isPasswordMatched(true);
+                      controller.getpassmatchFu(false);
                   },
                   maxLines: 1,
                 ),
                 AppConstant.spaceWidget(height: 10),
                 Obx(
                   () => Visibility(
-                      visible: controller.isPasswordMatched.isTrue,
+                      visible: controller.isPasswordMatched.value,
                       child: CustomText(
                         title: langKey.passwordNotMatched.tr,
                         color: kRedColor,
