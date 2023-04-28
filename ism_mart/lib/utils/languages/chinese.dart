@@ -173,7 +173,7 @@ class Chinese {
         key.someThingWentWrong: '出了些问题',
         key.delProdMsg: '您一定会删除这个吗？',
         key.stock: '库存',
-
+        key.currency: '貨幣',
         ///About US
         key.aboutHeader1: '什么是ISMMART？',
         key.aboutHeader2: '我们的任务',

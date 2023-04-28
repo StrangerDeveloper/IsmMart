@@ -10,6 +10,7 @@ const settings = "settings",
     language = "language",
     notifications = "notifications",
     appearance = "appearance",
+    currency = "currency",
     faqs = "faqs",
     logout = "logout",
     aboutUs = "aboutUs",
@@ -104,7 +105,7 @@ const profile = "profile",
 /// Add Product
 ///
 
-const addProduct = "addProduct", updateProduct="updateProduct";
+const addProduct = "addProduct", updateProduct = "updateProduct";
 const deleteProd = "deleteProd", delProdMsg = "delProdMsg";
 
 ///

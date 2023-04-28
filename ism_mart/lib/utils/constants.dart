@@ -58,30 +58,6 @@ const kVerticalDivider = VerticalDivider(
 const maxImageUploadSizeInMBs = 2.0;
 const fixedRedeemCouponThreshold = 20;
 
-/*var headline1 = GoogleFonts.poppins(
-    fontSize: 30, color: kGrey900, fontWeight: FontWeight.bold);
-var headline2 = GoogleFonts.poppins(
-    fontSize: 25, color: kGrey900, fontWeight: FontWeight.bold);
-var headline3 = GoogleFonts.poppins(
-    fontSize: 22, color: kGrey900, fontWeight: FontWeight.bold);
-var headline4 = GoogleFonts.poppins(
-    fontSize: 20, color: kGrey900, fontWeight: FontWeight.bold);
-var headline5 = GoogleFonts.poppins(
-    fontSize: 18, color: kGrey900, fontWeight: FontWeight.bold);
-var headline6 = GoogleFonts.poppins(
-    fontSize: 15, color: kGrey900, fontWeight: FontWeight.bold);
-
-var bodyText1 = GoogleFonts.poppins(
-    fontSize: 14, fontWeight: FontWeight.w600, color: Colors.black);
-var bodyText2 = GoogleFonts.poppins(
-    fontSize: 13, fontWeight: FontWeight.w600, color: Colors.black);
-var bodyText3 = GoogleFonts.poppins(
-    fontSize: 12, fontWeight: FontWeight.w600, color: Colors.black);
-
-var caption = GoogleFonts.poppins(fontSize: 11, fontWeight: FontWeight.w600);
-
-var theme = Theme.of(Get.context!);
-TextTheme textTheme = theme.textTheme;*/
 var themeNew = Theme.of(Get.context!);
 TextTheme textThemeNew = themeNew.textTheme;
 
@@ -252,7 +228,7 @@ class AppConstant {
       case "uae":
         return "AED";
       default:
-        return "Rs";
+        return "Rs.";
     }
   }
 

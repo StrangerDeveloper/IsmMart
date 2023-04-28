@@ -13,7 +13,6 @@ class SettingsUI extends GetView<AuthController> {
 
   @override
   Widget build(BuildContext context) {
-    //var authController = Get.find<AuthController>();
     return Obx(
       () => SafeArea(
         child: controller.isLoading.isTrue
@@ -177,12 +176,12 @@ class SettingsUI extends GetView<AuthController> {
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
-          /* _singleSettingsItem(
-              onTap: () => _showThemeChangeBottomSheet(),
+           _singleSettingsItem(
+              onTap: () => _showLanguageChangeBottomSheet(),
               icon: IconlyLight.setting,
-              iconColor: Colors.deepPurple,
-              title: "appearance".tr,
-              value: themeController.theme.value),*/
+              iconColor: Color.fromARGB(255, 160, 235, 94),
+              title: langKey.currency.tr,
+              value: themeController.theme.value),
 
           Obx(
             () => _singleSettingsItem(
@@ -333,6 +332,8 @@ class SettingsUI extends GetView<AuthController> {
       ),
     );
   }
+
+  
 
   Widget _countryFlag({String? countryCode, Color? color}) {
     var imageUrl =
