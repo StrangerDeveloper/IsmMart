@@ -177,7 +177,6 @@ class Russian {
         key.someThingWentWrong: 'Что-то пошло не так',
         key.delProdMsg: 'Вы обязательно удалите это?',
         key.stock: 'Запас',
-        key.currency: 'валюта',
 
         ///About US
         key.aboutHeader1: 'Что такое ISMMART?',

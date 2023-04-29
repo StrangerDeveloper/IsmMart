@@ -27,16 +27,18 @@ class CustomActionIcon extends StatelessWidget {
       child: Container(
         height: height,
         width: width,
-        decoration: bgColor==null? null:BoxDecoration(
-            color: bgColor?? Colors.transparent, //?.withOpacity(0.6),
-            shape: BoxShape.circle,
-            boxShadow: [
-              if(hasShadow!)
-              BoxShadow(
-                  color: kDarkColor.withOpacity(0.2),
-                  offset: Offset(0, 1),
-                  blurRadius: 10.7)
-            ]),
+        decoration: bgColor == null
+            ? null
+            : BoxDecoration(
+                color: bgColor ?? Colors.transparent, //?.withOpacity(0.6),
+                shape: BoxShape.circle,
+                boxShadow: [
+                    if (hasShadow!)
+                      BoxShadow(
+                          color: kDarkColor.withOpacity(0.2),
+                          offset: Offset(0, 1),
+                          blurRadius: 10.7)
+                  ]),
         child: Icon(icon, size: size, color: iconColor ?? kWhiteColor),
       ),
     );

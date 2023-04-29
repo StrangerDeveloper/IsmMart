@@ -27,7 +27,9 @@ class CartUI extends GetView<CartController> {
         return noDataFound();
       }
       return _build(listData: state);
-    }, onLoading: CustomLoading(isDarkMode: Get.isDarkMode), onEmpty: noDataFound());
+    },
+        onLoading: CustomLoading(isDarkMode: Get.isDarkMode),
+        onEmpty: noDataFound());
   }
 
   Widget noDataFound() {

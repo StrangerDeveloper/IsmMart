@@ -22,52 +22,52 @@ class Themes {
       progressIndicatorTheme:
           const ProgressIndicatorThemeData(color: kPrimaryColor),
       textTheme: TextTheme(
-          headline1: GoogleFonts.lato(
+          displayLarge: GoogleFonts.lato(
               letterSpacing: -1.5,
               fontSize: 48,
               color: Colors.black,
               fontWeight: FontWeight.bold),
-          headline2: GoogleFonts.lato(
+          displayMedium: GoogleFonts.lato(
               letterSpacing: -1.0,
               fontSize: 40,
               color: Colors.black,
               fontWeight: FontWeight.bold),
-          headline3: GoogleFonts.lato(
+          displaySmall: GoogleFonts.lato(
               letterSpacing: -1.0,
               fontSize: 32,
               color: Colors.black,
               fontWeight: FontWeight.bold),
-          headline4: GoogleFonts.lato(
+          headlineMedium: GoogleFonts.lato(
               letterSpacing: -1.0,
               color: Colors.black,
               fontSize: 28,
               fontWeight: FontWeight.w600),
-          headline5: GoogleFonts.lato(
+          headlineSmall: GoogleFonts.lato(
               letterSpacing: -1.0,
               color: Colors.black,
               fontSize: 24,
               fontWeight: FontWeight.w500),
-          headline6: GoogleFonts.lato(
+          titleLarge: GoogleFonts.lato(
               color: Colors.black, fontSize: 18, fontWeight: FontWeight.w600),
-          subtitle1: GoogleFonts.lato(
+          titleMedium: GoogleFonts.lato(
               color: Colors.black, fontSize: 16, fontWeight: FontWeight.w500),
-          subtitle2: GoogleFonts.lato(
+          titleSmall: GoogleFonts.lato(
               color: Colors.black, fontSize: 14, fontWeight: FontWeight.w500),
-          bodyText1: GoogleFonts.lato(
+          bodyLarge: GoogleFonts.lato(
               color: Colors.grey.shade700,
               fontSize: 16,
               fontWeight: FontWeight.w400),
-          bodyText2: GoogleFonts.lato(
+          bodyMedium: GoogleFonts.lato(
               color: Colors.grey.shade600,
               fontSize: 14,
               fontWeight: FontWeight.w400),
-          button: GoogleFonts.lato(
+          labelLarge: GoogleFonts.lato(
               color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
-          caption: GoogleFonts.lato(
+          bodySmall: GoogleFonts.lato(
               color: Colors.grey.shade800,
               fontSize: 12,
               fontWeight: FontWeight.w400),
-          overline: GoogleFonts.lato(
+          labelSmall: GoogleFonts.lato(
               color: Colors.grey.shade700,
               fontSize: 10,
               fontWeight: FontWeight.w400,
@@ -93,60 +93,61 @@ class Themes {
     progressIndicatorTheme:
         const ProgressIndicatorThemeData(color: kPrimaryColor),
     textTheme: TextTheme(
-        headline1: GoogleFonts.lato(
+        displayLarge: GoogleFonts.lato(
             letterSpacing: -1.5,
             fontSize: 48,
             color: Colors.grey.shade50,
             fontWeight: FontWeight.bold),
-        headline2: GoogleFonts.lato(
+        displayMedium: GoogleFonts.lato(
             letterSpacing: -1.0,
             fontSize: 40,
             color: Colors.grey.shade50,
             fontWeight: FontWeight.bold),
-        headline3: GoogleFonts.lato(
+        displaySmall: GoogleFonts.lato(
             letterSpacing: -1.0,
             fontSize: 32,
             color: Colors.grey.shade50,
             fontWeight: FontWeight.bold),
-        headline4: GoogleFonts.lato(
+        headlineMedium: GoogleFonts.lato(
             letterSpacing: -1.0,
             color: Colors.grey.shade50,
             fontSize: 28,
             fontWeight: FontWeight.w600),
-        headline5: GoogleFonts.lato(
+        headlineSmall: GoogleFonts.lato(
             letterSpacing: -1.0,
             color: Colors.grey.shade50,
             fontSize: 24,
             fontWeight: FontWeight.w500),
-        headline6: GoogleFonts.lato(
+        titleLarge: GoogleFonts.lato(
             color: Colors.grey.shade50,
             fontSize: 18,
             fontWeight: FontWeight.w600),
-        subtitle1: GoogleFonts.lato(
+        titleMedium: GoogleFonts.lato(
             color: Colors.grey.shade50,
             fontSize: 16,
             fontWeight: FontWeight.w500),
-        subtitle2: GoogleFonts.lato(
+        titleSmall: GoogleFonts.lato(
             color: Colors.grey.shade50,
             fontSize: 14,
             fontWeight: FontWeight.w500),
-        bodyText1: GoogleFonts.lato(
+        bodyLarge: GoogleFonts.lato(
             color: Colors.grey.shade50,
             fontSize: 16,
             fontWeight: FontWeight.w400),
-        bodyText2: GoogleFonts.lato(
+        bodyMedium: GoogleFonts.lato(
             color: Colors.grey.shade50,
             fontSize: 14,
             fontWeight: FontWeight.w400),
-        button: GoogleFonts.lato(
+        labelLarge: GoogleFonts.lato(
             color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
-        caption: GoogleFonts.lato(
+        bodySmall: GoogleFonts.lato(
             color: Colors.grey.shade50,
             fontSize: 12,
             fontWeight: FontWeight.w500),
-        overline: GoogleFonts.lato(
+        labelSmall: GoogleFonts.lato(
             color: Colors.grey.shade50,
             fontSize: 10,
-            fontWeight: FontWeight.w400)), bottomAppBarTheme: BottomAppBarTheme(color: kGrey800),
+            fontWeight: FontWeight.w400)),
+    bottomAppBarTheme: BottomAppBarTheme(color: kGrey800),
   );
 }

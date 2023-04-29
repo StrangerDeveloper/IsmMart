@@ -47,29 +47,6 @@ class LanguageController extends GetxController {
       'color': Colors.blue[900],
     },
   };
-  final Map<String, dynamic> currencyLocales = {
-     'ar_AE': {
-      'languageCode': 'ar',
-      'countryCode': 'AE',
-      'description': 'AED',
-      'selected': false,
-      'color': Colors.black,
-    },
-    'ur_PK': {
-      'languageCode': 'ur',
-      'countryCode': 'PK',
-      'description': 'PKR',
-      'selected': false,
-      'color': Colors.green[700],
-    },
-    'en_gbp': {
-      'languageCode': 'ur',
-      'countryCode': 'PK',
-      'description': 'GBP',
-      'selected': false,
-      'color': Colors.green[700],
-    }
-  };
 
   /*final List locale =[
     {'name':'ENGLISH','locale': Locale('en','US')},
@@ -90,6 +67,7 @@ class LanguageController extends GetxController {
     }
 
     setLanguage(key: 'en_US');
+
   }
 
   void setLanguage({key}) {

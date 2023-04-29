@@ -19,25 +19,23 @@ class FaqUI extends GetView<BaseController> {
             shrinkWrap: true,
             //physics: const NeverScrollableScrollPhysics(),
             children: [
-             CustomHeader(title: "Frequently Asked Questions"),
-              Obx(()=> Column(
+              CustomHeader(title: "Frequently Asked Questions"),
+              Obx(
+                () => Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: controller.faqsList.map((FAQModel? faq) {
-
                     return ExpansionTile(
-                      title: CustomText(
-                        title: faq!.questions,
-                        style: headline3,
-                      ),
-                      children:[
-                        Text(
-                          faq.answer!,
-                          style: bodyText1,
+                        title: CustomText(
+                          title: faq!.questions,
+                          style: headline3,
                         ),
-                      ]
-
-                    );
+                        children: [
+                          Text(
+                            faq.answer!,
+                            style: bodyText1,
+                          ),
+                        ]);
                   }).toList(),
                 ),
               ),
@@ -60,9 +58,7 @@ class FaqUI extends GetView<BaseController> {
           color: kPrimaryColor,
         ),
       ),
-      title: CustomText(
-          title: 'faq'.tr,
-          style: appBarTitleSize),
+      title: CustomText(title: 'faq'.tr, style: appBarTitleSize),
     );
   }
 
@@ -95,6 +91,5 @@ class FaqUI extends GetView<BaseController> {
             'Distinctively initiate error-free channels with highly efficient ROI. Intrinsic envision world-class data via best-of-breed best practices. Efficiently enable empowered e-tilers after cross-unit services. Uniquely expedite seamless retailers via cooperative interfaces. Monotonically myocardial customer directed meta-services whereas error-free scenarios.'
       },
     ];
-
   }
 }

@@ -39,7 +39,8 @@ class SingleCartItems extends StatelessWidget {
                       child: CircleAvatar(
                           radius: 40,
                           backgroundImage: NetworkImage(
-                              cartModel!.productModel!.thumbnail ?? AppConstant.defaultImgUrl)),
+                              cartModel!.productModel!.thumbnail ??
+                                  AppConstant.defaultImgUrl)),
                     ),
                     AppConstant.spaceWidget(width: 5),
                     Expanded(
@@ -83,44 +84,44 @@ class SingleCartItems extends StatelessWidget {
                                 : Container(),
 
                             ///Product selected Features
-                            if(cartModel.featuresName!.isNotEmpty)
+                            if (cartModel.featuresName!.isNotEmpty)
                               Row(
-                                  children: [
-                                    CustomText(
-                                      title: "Features:",
-                                      style: bodyText2,
-                                    ),
-                                    SizedBox(
-                                      width: 170,
-                                      height: 30,
-                                      child: ListView.builder(
-                                          scrollDirection: Axis.horizontal,
-                                          shrinkWrap: true,
-
-                                          itemCount:
-                                              cartModel.featuresName?.length,
-                                          itemBuilder: (_, index) {
-                                            String name = cartModel
-                                                .featuresName![index];
-                                            return Padding(
-                                              padding: const EdgeInsets.symmetric(horizontal: 3.0, vertical: 5),
-                                              child: CustomGreyBorderContainer(
-                                                  hasShadow: false,
-                                                  //borderColor: kWhiteColor,
-                                                  padding: const EdgeInsets
-                                                          .symmetric(
-                                                      horizontal: 5,
-                                                      vertical: 2),
-                                                  child: CustomText(
-                                                    title: name,
-                                                    style: caption.copyWith(
-                                                        color: kPrimaryColor),
-                                                  )),
-                                            );
-                                          }),
-                                    ),
-                                  ],
-                                ),
+                                children: [
+                                  CustomText(
+                                    title: "Features:",
+                                    style: bodyText2,
+                                  ),
+                                  SizedBox(
+                                    width: 170,
+                                    height: 30,
+                                    child: ListView.builder(
+                                        scrollDirection: Axis.horizontal,
+                                        shrinkWrap: true,
+                                        itemCount:
+                                            cartModel.featuresName?.length,
+                                        itemBuilder: (_, index) {
+                                          String name =
+                                              cartModel.featuresName![index];
+                                          return Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 3.0, vertical: 5),
+                                            child: CustomGreyBorderContainer(
+                                                hasShadow: false,
+                                                //borderColor: kWhiteColor,
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 5,
+                                                        vertical: 2),
+                                                child: CustomText(
+                                                  title: name,
+                                                  style: caption.copyWith(
+                                                      color: kPrimaryColor),
+                                                )),
+                                          );
+                                        }),
+                                  ),
+                                ],
+                              ),
                           ],
                         ),
                       ),
@@ -188,7 +189,8 @@ class SingleCartItems extends StatelessWidget {
                                       cartItemId: cartModel.id,
                                       quantity: (index + 1));*/
                                   cartModel.quantity = "${(index + 1)}";
-                                  cartModel.productModel!.totalPrice = controller.totalCartAmount.value;
+                                  cartModel.productModel!.totalPrice =
+                                      controller.totalCartAmount.value;
                                   await LocalStorageHelper.updateCartItems(
                                       cartModel: cartModel);
                                   controller.update();
@@ -250,3 +252,21 @@ class SingleCartItems extends StatelessWidget {
     );
   }
 }
+
+
+  // ProductQuantityCounter(
+  //                         h: 30.0,
+  //                         w: 10.0,
+  //                         horiz: 0.0,
+  //                         verti: 3.0,
+  //                         margin: 0.0,
+  //                         spaceW: 0.0,
+  //                         bottomP: 15.0,
+  //                         onDecrementPress: () => productController.decrement(),
+  //                         onIncrementPress: () => productController.increment(),
+  //                         textEditingController:
+  //                             productController.quantityController,
+  //                         bgColor: kPrimaryColor,
+  //                         textColor: kWhiteColor,
+  //                       ),
+                    

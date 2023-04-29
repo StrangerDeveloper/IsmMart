@@ -1,4 +1,3 @@
-
 import 'package:get_storage/get_storage.dart';
 import 'package:ism_mart/models/exports_model.dart';
 
@@ -32,6 +31,7 @@ class LocalStorageHelper {
 
   static Future<void> addItemToCart({CartModel? cartModel}) async {
     var list = <CartModel>[];
+ 
     if (localStorage.read(cartItemKey) != null) {
       list = getCartItems();
       if (isItemExistsInCart(cartModel)) {

@@ -140,7 +140,7 @@ class CartController extends GetxController
             value.productModel!.discountPrice != null
                 ? value.productModel!.discountPrice.toString()
                 : "0");
-        int qty = int.parse(value.quantity ?? "1");
+        var qty = int.parse(value.quantity.toString());
         totalAmount += (discountPrice * qty);
         totalQty += qty;
       }
@@ -149,6 +149,36 @@ class CartController extends GetxController
     totalCartAmount(totalAmount);
     totalQtyCart(totalQty);
   }
+
+  CartModel? cartModel;
+  int moqq = 10;
+  var counter = 1.obs;
+  void increment() async {
+    if (counter.value == moqq) return;
+    counter.value++;
+
+    quantityController.text = counter.value.toString();
+    quantityController.text = counter.value.toString();
+
+    cartModel!.quantity = quantityController.text.toString();
+    cartModel!.productModel!.totalPrice = totalCartAmount.value;
+    await LocalStorageHelper.updateCartItems(cartModel: cartModel);
+    update();
+  }
+
+  void decrement() async {
+    if (counter.value == 1) return;
+    counter.value--;
+
+    quantityController.text = counter.value.toString();
+  }
+
+  //    cartModel.quantity = "${(index + 1)}";
+  // cartModel.productModel!.totalPrice =
+  //     controller.totalCartAmount.value;
+  // await LocalStorageHelper.updateCartItems(
+  //     cartModel: cartModel);
+  // controller.update();
 
   //ENd Cart Items
 

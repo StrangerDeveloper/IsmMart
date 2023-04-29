@@ -21,19 +21,20 @@ class CartResponse {
   });
 
   factory CartResponse.fromJson(Map<String, dynamic> json) => CartResponse(
-    success: json["success"],
-    message: json["message"],
-    errors: json["errors"] == null
-        ? []
-        : List<String>.from(json["errors"].map((x) => x)),
-  );
+        success: json["success"],
+        message: json["message"],
+        errors: json["errors"] == null
+            ? []
+            : List<String>.from(json["errors"].map((x) => x)),
+      );
 
   Map<String, dynamic> toJson() => {
-    "success": success,
-    "message": message,
-    "errors": List<dynamic>.from(errors!.map((x) => x)),
-  };
+        "success": success,
+        "message": message,
+        "errors": List<dynamic>.from(errors!.map((x) => x)),
+      };
 }
+
 class CartModel {
   int? id, productId;
 
@@ -67,8 +68,7 @@ class CartModel {
     );
   }
 
-  JSON toJson() =>
-      {
+  JSON toJson() => {
         'Product': productModel!.toOrderCheckoutJson(),
         'features': featuresID,
         'featuresName': featuresName,
@@ -76,12 +76,10 @@ class CartModel {
         'quantity': quantity,
         'onQuantityClicked': onQuantityClicked
       };
-  JSON toOrderCreationJson()=>{
-    "productId": productId,
-    "quantity": quantity,
-    "features": featuresID,
-    "Product": productModel!.toOrderCheckoutJson()
-  };
+  JSON toOrderCreationJson() => {
+        "productId": productId,
+        "quantity": quantity,
+        "features": featuresID,
+        "Product": productModel!.toOrderCheckoutJson()
+      };
 }
-
-

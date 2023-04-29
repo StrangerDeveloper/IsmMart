@@ -177,7 +177,6 @@ class Urdu {
         key.someThingWentWrong: 'کچھ غلط ہو گیا',
         key.delProdMsg: 'کیا آپ کو یقین ہے کہ اسے حذف کرنا ہے؟',
         key.stock: 'اسٹاک',
-        key.currency: 'کرنسی',
 
         ///About US
         key.aboutHeader1: 'ISMMART کیا ہے؟',
