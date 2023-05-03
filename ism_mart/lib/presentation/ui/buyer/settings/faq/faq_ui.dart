@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/export_presentation.dart';
@@ -23,19 +24,25 @@ class FaqUI extends GetView<BaseController> {
               Obx(
                 () => Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: controller.faqsList.map((FAQModel? faq) {
                     return ExpansionTile(
-                        title: CustomText(
-                          title: faq!.questions,
-                          style: headline3,
-                        ),
-                        children: [
-                          Text(
-                            faq.answer!,
-                            style: bodyText1,
+                      childrenPadding: EdgeInsets.only(left: 15.8),
+                      expandedAlignment: Alignment.centerLeft,
+                      title: CustomText(
+                        title: faq!.questions,
+                        style: headline3,
+                      ),
+                      children: [
+                        Text(
+                          faq.answer!,
+                          style: GoogleFonts.lato(
+                            fontSize: 14.5,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black,
                           ),
-                        ]);
+                        ),
+                      ],
+                    );
                   }).toList(),
                 ),
               ),

@@ -512,6 +512,7 @@ class AuthController extends GetxController {
   var subjectController = TextEditingController();
 
   postContactUs() async {
+    isLoading(true);
     var data = {
       "name": "${firstNameController.text}",
       "email": "${emailController.text.trim()}",
@@ -520,16 +521,19 @@ class AuthController extends GetxController {
     };
 
     await authProvider.contactUs(data: data).then((UserResponse? userResponse) {
+      isLoading(false);
       if (userResponse != null) {
         if (userResponse.success!) {
-          // Get.back();
+
           AppConstant.displaySnackBar("success", userResponse.message);
           clearContactUsControllers();
         } else
           AppConstant.displaySnackBar('error', userResponse.message);
-      } else
+      } else {
         AppConstant.displaySnackBar('error', "something went wrong!");
+      }
     }).catchError((e) {
+      isLoading(false);
       AppConstant.displaySnackBar('error', "$e");
     });
   }
