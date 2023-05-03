@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/controllers/controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/ui/exports_ui.dart';
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class BaseController extends GetxController {
   BaseController(this._apiProvider);
@@ -284,8 +284,8 @@ class BaseController extends GetxController {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Exit App'),
-            content: const Text('Are you sure you want to exit?'),
+            title: Text(langKey.exitApp.tr),
+            content: Text(langKey.exitDialogDesc.tr),
             actions: [
               Row(
                 children: [
@@ -295,8 +295,8 @@ class BaseController extends GetxController {
                         minimumSize: Size(double.infinity, 40),
                         foregroundColor: Colors.grey,
                       ),
-                      child: const Text(
-                        'No',
+                      child: Text(
+                        langKey.noBtn.tr,
                         style: TextStyle(
                           color: Colors.black,
                         ),
@@ -312,8 +312,8 @@ class BaseController extends GetxController {
                         minimumSize: Size(double.infinity, 40),
                         foregroundColor: Colors.grey,
                       ),
-                      child: const Text(
-                        'Yes',
+                      child: Text(
+                        langKey.yesBtn.tr,
                         style: TextStyle(
                           color: Colors.black,
                         ),

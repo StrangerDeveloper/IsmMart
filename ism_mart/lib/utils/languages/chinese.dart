@@ -2,6 +2,10 @@ import 'translations_key.dart' as key;
 
 class Chinese {
   Map<String, String> get translations => {
+        ///base
+        key.exitApp: 'Exit App',
+        key.exitDialogDesc: 'Are you sure you want to exit?',
+
         key.settings: '设置',
         key.general: '一般的',
         key.account: '帐户',

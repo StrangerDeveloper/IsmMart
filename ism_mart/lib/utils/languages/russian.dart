@@ -2,6 +2,10 @@ import 'translations_key.dart' as key;
 
 class Russian {
   Map<String, String> get translations => {
+        ///base
+        key.exitApp: 'Exit App',
+        key.exitDialogDesc: 'Are you sure you want to exit?',
+
         key.settings: 'Настройки',
         key.general: 'Общий',
         key.account: 'Счет',
