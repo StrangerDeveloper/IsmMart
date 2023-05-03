@@ -140,7 +140,7 @@ class CartController extends GetxController
             value.productModel!.discountPrice != null
                 ? value.productModel!.discountPrice.toString()
                 : "0");
-        var qty = int.parse(value.quantity.toString());
+        var qty = 1;
         totalAmount += (discountPrice * qty);
         totalQty += qty;
       }

@@ -1,10 +1,12 @@
 import 'package:get/get.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
+import 'package:ism_mart/presentation/ui/buyer/account/forgot_password.dart';
 import 'package:ism_mart/presentation/ui/exports_ui.dart';
 
 class Routes {
   static const initRoute = "/";
   static const loginRoute = "/signIn";
+  static const forgotPasswordRoute = "/forgotPassword";
   static const registerRoute = "/register";
   static const categoriesRoute = "/categories";
   static const cartRoute = "/cart";
@@ -38,6 +40,10 @@ class Routes {
       name: registerRoute,
       page: () => const SignUpUI(),
       binding: BaseBindings(),
+    ),
+    GetPage(
+        name: forgotPasswordRoute,
+        page: () => const ForgotPassword(),
     ),
     GetPage(
         name: initRoute,

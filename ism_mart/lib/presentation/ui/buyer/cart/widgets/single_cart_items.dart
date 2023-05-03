@@ -6,6 +6,8 @@ import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
+import 'package:ism_mart/utils/constants.dart';
+
 class SingleCartItems extends StatelessWidget {
   const SingleCartItems({Key? key, this.cartModel, this.index})
       : super(key: key);
@@ -128,45 +130,84 @@ class SingleCartItems extends StatelessWidget {
                     ),
                     Align(
                       alignment: Alignment.bottomRight,
-                      child: InkWell(
-                        onTap: () {
-                          cartModel.onQuantityClicked =
-                              !cartModel.onQuantityClicked!;
-                          controller!.cartItemsList.refresh();
+                      child: ProductQuantityCounterr(
+                        h: 30.0,
+                        w: 25.0,
+                        horiz: 0.0,
+                        verti: 3.0,
+                        margin: 0.0,
+                        spaceW: 0.0,
+                        bottomP: 15.0,
+                        onDecrementPress: () async {
+                          var a = int.parse(cartModel.quantity.toString());
+                          if (a <= -1) {
+                            a = 0;
+                          }
+                          a--;
+                          cartModel.quantity = "$a";
+                          cartModel.productModel!.totalPrice =
+                              controller!.totalCartAmount.value;
+                          await LocalStorageHelper.updateCartItems(
+                              cartModel: cartModel);
                           controller.update();
                         },
-                        child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 12.0, vertical: 5),
-                            decoration: BoxDecoration(
-                              color: kWhiteColor,
-                              border: Border.all(
-                                  color: cartModel.onQuantityClicked!
-                                      ? kDarkColor
-                                      : kLightColor),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            child: Row(
-                              children: [
-                                CustomText(
-                                  title: cartModel.quantity!,
-                                  size: 16,
-                                  color: kDarkColor,
-                                  weight: FontWeight.bold,
-                                ),
-                                AppConstant.spaceWidget(width: 5),
-                                Icon(
-                                  cartModel.onQuantityClicked!
-                                      ? Icons.keyboard_arrow_up
-                                      : Icons.keyboard_arrow_down,
-                                  size: 20,
-                                  color: cartModel.onQuantityClicked!
-                                      ? kDarkColor
-                                      : kLightColor,
-                                ),
-                              ],
-                            )),
+                        onIncrementPress: () async {
+                          var a = int.parse(cartModel.quantity.toString());
+                          if (a == 10) {
+                            a = 0;
+                          }
+                          a++;
+                          cartModel.quantity = "$a";
+                          cartModel.productModel!.totalPrice =
+                              controller!.totalCartAmount.value;
+                          await LocalStorageHelper.updateCartItems(
+                              cartModel: cartModel);
+                          controller.update();
+                        },
+                        bgColor: kPrimaryColor,
+                        textColor: kWhiteColor,
+                        quantity: cartModel.quantity,
                       ),
+
+                      // InkWell(
+                      //   onTap: () {
+                      //     cartModel.onQuantityClicked =
+                      //         !cartModel.onQuantityClicked!;
+                      //     controller!.cartItemsList.refresh();
+                      //     controller.update();
+                      //   },
+                      //   child: Container(
+                      //       padding: const EdgeInsets.symmetric(
+                      //           horizontal: 12.0, vertical: 5),
+                      //       decoration: BoxDecoration(
+                      //         color: kWhiteColor,
+                      //         border: Border.all(
+                      //             color: cartModel.onQuantityClicked!
+                      //                 ? kDarkColor
+                      //                 : kLightColor),
+                      //         borderRadius: BorderRadius.circular(8.0),
+                      //       ),
+                      //       child: Row(
+                      //         children: [
+                      //           CustomText(
+                      //             title: cartModel.quantity!,
+                      //             size: 16,
+                      //             color: kDarkColor,
+                      //             weight: FontWeight.bold,
+                      //           ),
+                      //           AppConstant.spaceWidget(width: 5),
+                      //           Icon(
+                      //             cartModel.onQuantityClicked!
+                      //                 ? Icons.keyboard_arrow_up
+                      //                 : Icons.keyboard_arrow_down,
+                      //             size: 20,
+                      //             color: cartModel.onQuantityClicked!
+                      //                 ? kDarkColor
+                      //                 : kLightColor,
+                      //           ),
+                      //         ],
+                      //       )),
+                      // ),
                     ),
                   ],
                 ),
@@ -253,20 +294,91 @@ class SingleCartItems extends StatelessWidget {
   }
 }
 
+// ProductQuantityCounter(
+//                         h: 30.0,
+//                         w: 10.0,
+//                         horiz: 0.0,
+//                         verti: 3.0,
+//                         margin: 0.0,
+//                         spaceW: 0.0,
+//                         bottomP: 15.0,
+//                         onDecrementPress: () => productController.decrement(),
+//                         onIncrementPress: () => productController.increment(),
+//                         textEditingController:
+//                             productController.quantityController,
+//                         bgColor: kPrimaryColor,
+//                         textColor: kWhiteColor,
+//                       ),
 
-  // ProductQuantityCounter(
-  //                         h: 30.0,
-  //                         w: 10.0,
-  //                         horiz: 0.0,
-  //                         verti: 3.0,
-  //                         margin: 0.0,
-  //                         spaceW: 0.0,
-  //                         bottomP: 15.0,
-  //                         onDecrementPress: () => productController.decrement(),
-  //                         onIncrementPress: () => productController.increment(),
-  //                         textEditingController:
-  //                             productController.quantityController,
-  //                         bgColor: kPrimaryColor,
-  //                         textColor: kWhiteColor,
-  //                       ),
-                    
+class ProductQuantityCounterr extends StatelessWidget {
+  ProductQuantityCounterr(
+      {Key? key,
+      this.onDecrementPress,
+      this.onIncrementPress,
+      this.quantity,
+      this.bgColor,
+      this.textColor,
+      this.w = 30.0,
+      this.h = 40.0,
+      this.horiz = 10.0,
+      this.verti = 5.0,
+      this.margin = 8.0,
+      this.spaceW = 4.0,
+      this.bottomP = 12.0})
+      : super(key: key);
+
+  final VoidCallback? onDecrementPress;
+  final VoidCallback? onIncrementPress;
+  String? quantity;
+  final Color? bgColor, textColor;
+  var w;
+  var h;
+  final horiz;
+  final verti;
+  final margin;
+  final spaceW;
+  final bottomP;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: margin),
+      padding: EdgeInsets.symmetric(horizontal: horiz, vertical: verti),
+      decoration: BoxDecoration(
+        color: bgColor ?? kPrimaryColor,
+        borderRadius: BorderRadius.circular(30),
+      ),
+      height: 40,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          IconButton(
+            iconSize: 18,
+            alignment: Alignment.topCenter,
+            onPressed: onDecrementPress,
+            icon: Icon(
+              Icons.remove,
+              color: textColor ?? kWhiteColor,
+            ),
+          ),
+          AppConstant.spaceWidget(width: spaceW),
+          SizedBox(
+              width: w,
+              height: h,
+              child: Text(
+                quantity.toString(),
+                style: bodyText1.copyWith(
+                    color: textColor ?? kWhiteColor, fontSize: 16),
+              )),
+          AppConstant.spaceWidget(width: spaceW),
+          IconButton(
+            iconSize: 18,
+            alignment: Alignment.topCenter,
+            onPressed: onIncrementPress,
+            icon: Icon(Icons.add, color: textColor ?? kWhiteColor),
+          ),
+        ],
+      ),
+    );
+  }
+}

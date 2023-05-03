@@ -10,6 +10,7 @@ class AuthController extends GetxController {
 
   AuthController(this.authProvider);
 
+  var forgotPasswordEmailController = TextEditingController();
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
   var confirmPassController = TextEditingController();
@@ -106,9 +107,8 @@ class AuthController extends GetxController {
 
   Future<void> forgotPasswordWithEmail() async {
     isLoading(true);
-    String email = emailController.text.trim();
-    await authProvider
-        .forgotPassword(data: {"email": email}).then((UserResponse? response) {
+    String email = forgotPasswordEmailController.text.trim();
+    await authProvider.forgotPassword(data: {"email": email}).then((UserResponse? response) {
       isLoading(false);
       if (response != null) {
         if (response.success!) {

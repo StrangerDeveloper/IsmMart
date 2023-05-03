@@ -60,11 +60,15 @@ class SignInUI extends GetView<AuthController> {
                             iconColor: kPrimaryColor,
                             autofocus: false,
                             textStyle: bodyText1,
-                            autoValidateMode:
-                                AutovalidateMode.onUserInteraction,
-                            validator: (value) => !GetUtils.isEmail(value!)
-                                ? langKey.emailReq.tr
-                                : null,
+                            autoValidateMode: AutovalidateMode.onUserInteraction,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return "Email is required for this field";
+                              } else
+                                return !GetUtils.isEmail(value)
+                                    ? langKey.emailReq.tr
+                                    : null;
+                            },
                             keyboardType: TextInputType.emailAddress,
                             onChanged: (value) {},
                             onSaved: (value) {},
@@ -76,12 +80,11 @@ class SignInUI extends GetView<AuthController> {
                             iconColor: kPrimaryColor,
                             textStyle: bodyText1,
                             labelText: langKey.password.tr,
-                            autoValidateMode:
-                                AutovalidateMode.onUserInteraction,
+                            autoValidateMode: AutovalidateMode.onUserInteraction,
                             validator: (value) => //!GetUtils.isPassport(value!)
-                                value!.length < 6
-                                    ? langKey.passwordLengthReq.tr
-                                    : null,
+                            value!.length < 6
+                                ? langKey.passwordLengthReq.tr
+                                : null,
                             obscureText: true,
                             onChanged: (value) => {},
                             maxLines: 1,
@@ -164,161 +167,178 @@ class SignInUI extends GetView<AuthController> {
 
   void showForgotPasswordDialog() {
     final formKey = GlobalKey<FormState>();
-    Get.defaultDialog(
-      title: "Reset Password",
-      titleStyle: appBarTitleSize,
-      content: Form(
-        key: formKey,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              AppConstant.spaceWidget(height: 20),
-              FormInputFieldWithIcon(
-                controller: controller.emailController,
-                iconPrefix: Icons.email,
-                labelText: langKey.email.tr,
-                iconColor: kPrimaryColor,
-                autofocus: false,
-                textStyle: bodyText1,
-                autoValidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value) =>
-                    !GetUtils.isEmail(value!) ? langKey.emailReq.tr : null,
-                keyboardType: TextInputType.emailAddress,
-                onChanged: (value) {},
-                onSaved: (value) {},
+    Get.dialog(
+      Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            AlertDialog(
+            title: Center(child: Text("Reset Password", style: appBarTitleSize,)),
+            content: Form(
+              key: formKey,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    AppConstant.spaceWidget(height: 20),
+                    FormInputFieldWithIcon(
+                      controller: controller.forgotPasswordEmailController,
+                      iconPrefix: Icons.email,
+                      labelText: langKey.email.tr,
+                      iconColor: kPrimaryColor,
+                      autofocus: false,
+                      textStyle: bodyText1,
+                      autoValidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Email is required for this field";
+                        } else
+                          return !GetUtils.isEmail(value)
+                              ? langKey.emailReq.tr
+                              : null;
+                      },
+                      keyboardType: TextInputType.emailAddress,
+                      onChanged: (value) {},
+                      onSaved: (value) {},
+                    ),
+                    AppConstant.spaceWidget(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CustomButton(
+                          onTap: () {
+                            Get.back();
+                          },
+                          text: langKey.cancelBtn.tr,
+                          width: 100,
+                          height: 35,
+                          color: kPrimaryColor,
+                        ),
+                        CustomButton(
+                          onTap: () async {
+                            if(formKey.currentState!.validate()) {
+                              await controller.forgotPasswordWithEmail().then((value) {
+                                controller.forgotPasswordEmailController.clear();
+                                Navigator.pop(Get.context!);
+                                Get.toNamed(Routes.forgotPasswordRoute);
+                              });
+                            }
+                          },
+                          text: langKey.send.tr,
+                          width: 100,
+                          height: 35,
+                          color: kPrimaryColor,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-              AppConstant.spaceWidget(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CustomButton(
-                    onTap: () {
-                      Get.back();
-                    },
-                    text: langKey.cancelBtn.tr,
-                    width: 100,
-                    height: 35,
-                    color: kPrimaryColor,
-                  ),
-                  CustomButton(
-                    onTap: () async {
-                      await controller.forgotPasswordWithEmail().then((value) {
-                        controller.emailController.clear();
-                        Get.back();
-                        showRenewPasswordBottomSheet();
-                      });
-                    },
-                    text: langKey.send.tr,
-                    width: 100,
-                    height: 35,
-                    color: kPrimaryColor,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  void showRenewPasswordBottomSheet() {
-    final formKey = GlobalKey<FormState>();
-    AppConstant.showBottomSheet(
-      widget: Form(
-        key: formKey,
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                StickyLabel(text: langKey.verification.tr),
-                AppConstant.spaceWidget(height: 15),
-                FormInputFieldWithIcon(
-                  controller: controller.otpController,
-                  iconPrefix: Icons.title,
-                  labelText: langKey.otp.tr,
-                  iconColor: kPrimaryColor,
-                  autofocus: false,
-                  textStyle: bodyText1,
-                  autoValidateMode: AutovalidateMode.onUserInteraction,
-                  validator: (value) =>
-                      GetUtils.isBlank(value!)! ? langKey.otpReq.tr : null,
-                  keyboardType: TextInputType.number,
-                  onChanged: (value) {},
-                  onSaved: (value) {},
-                ),
-                AppConstant.spaceWidget(height: 10),
-                FormPasswordInputFieldWithIcon(
-                  controller: controller.passwordController,
-                  iconPrefix: Icons.lock_rounded,
-                  iconColor: kPrimaryColor,
-                  textStyle: bodyText1,
-                  labelText: langKey.newPassword.tr,
-                  autoValidateMode: AutovalidateMode.onUserInteraction,
-                  validator: (value) => //!GetUtils.isPassport(value!)
-                      value!.isEmpty
-                          ? langKey.newPassReq.tr
-                          : value.length < 8
-                              ? langKey.passwordLengthReq.tr
-                              : null,
-                  obscureText: true,
-                  onChanged: (value) => {},
-                  maxLines: 1,
-                ),
-                AppConstant.spaceWidget(height: 10),
-                FormPasswordInputFieldWithIcon(
-                  controller: controller.confirmPassController,
-                  iconPrefix: Icons.lock_rounded,
-                  iconColor: kPrimaryColor,
-                  textStyle: bodyText1,
-                  labelText: langKey.confirmPass.tr,
-                  autoValidateMode: AutovalidateMode.onUserInteraction,
-                  validator: (value) => //!GetUtils.isPassport(value!)
-                      value!.isEmpty
-                          ? langKey.confirmPassReq.tr
-                          : value.length < 8
-                              ? langKey.passwordLengthReq.tr
-                              : null,
-                  obscureText: true,
-                  onChanged: (value) {
-                    if (value.toLowerCase().trim() ==
-                        controller.passwordController.text
-                            .toLowerCase()
-                            .trim()) {
-                      controller.isPasswordMatched(true);
-                    } else
-                      controller.isPasswordMatched(false);
-                  },
-                  maxLines: 1,
-                ),
-                AppConstant.spaceWidget(height: 10),
-                Obx(
-                  () => Visibility(
-                      visible: controller.isPasswordMatched.value,
-                      child: CustomText(
-                        title: langKey.passwordNotMatched.tr,
-                        color: kRedColor,
-                      )),
-                ),
-                AppConstant.spaceWidget(height: 20),
-                CustomButton(
-                  onTap: () async {
-                    await controller.forgotPasswordOtp();
-                  },
-                  text: langKey.send.tr,
-                  width: 120,
-                  height: 40,
-                  color: kPrimaryColor,
-                ),
-              ],
             ),
-          ),
+            ),
+          ],
         ),
       ),
+      barrierDismissible: false
     );
   }
+  //
+  // void showRenewPasswordBottomSheet() {
+  //   final formKey = GlobalKey<FormState>();
+  //   AppConstant.showBottomSheet(
+  //     widget: Form(
+  //       key: formKey,
+  //       child: SingleChildScrollView(
+  //         child: Padding(
+  //           padding: const EdgeInsets.all(8.0),
+  //           child: Column(
+  //             children: [
+  //               StickyLabel(text: langKey.verification.tr),
+  //               AppConstant.spaceWidget(height: 15),
+  //               FormInputFieldWithIcon(
+  //                 controller: controller.otpController,
+  //                 iconPrefix: Icons.title,
+  //                 labelText: langKey.otp.tr,
+  //                 iconColor: kPrimaryColor,
+  //                 autofocus: false,
+  //                 textStyle: bodyText1,
+  //                 autoValidateMode: AutovalidateMode.onUserInteraction,
+  //                 validator: (value) =>
+  //                     GetUtils.isBlank(value!)! ? langKey.otpReq.tr : null,
+  //                 keyboardType: TextInputType.number,
+  //                 onChanged: (value) {},
+  //                 onSaved: (value) {},
+  //               ),
+  //               AppConstant.spaceWidget(height: 10),
+  //               FormPasswordInputFieldWithIcon(
+  //                 controller: controller.passwordController,
+  //                 iconPrefix: Icons.lock_rounded,
+  //                 iconColor: kPrimaryColor,
+  //                 textStyle: bodyText1,
+  //                 labelText: langKey.newPassword.tr,
+  //                 autoValidateMode: AutovalidateMode.onUserInteraction,
+  //                 validator: (value) => //!GetUtils.isPassport(value!)
+  //                     value!.isEmpty
+  //                         ? langKey.newPassReq.tr
+  //                         : value.length < 8
+  //                             ? langKey.passwordLengthReq.tr
+  //                             : null,
+  //                 obscureText: true,
+  //                 onChanged: (value) => {},
+  //                 maxLines: 1,
+  //               ),
+  //               AppConstant.spaceWidget(height: 10),
+  //               FormPasswordInputFieldWithIcon(
+  //                 controller: controller.confirmPassController,
+  //                 iconPrefix: Icons.lock_rounded,
+  //                 iconColor: kPrimaryColor,
+  //                 textStyle: bodyText1,
+  //                 labelText: langKey.confirmPass.tr,
+  //                 autoValidateMode: AutovalidateMode.onUserInteraction,
+  //                 validator: (value) => //!GetUtils.isPassport(value!)
+  //                     value!.isEmpty
+  //                         ? langKey.confirmPassReq.tr
+  //                         : value.length < 8
+  //                             ? langKey.passwordLengthReq.tr
+  //                             : null,
+  //                 obscureText: true,
+  //                 onChanged: (value) {
+  //                   if (value.toLowerCase().trim() ==
+  //                       controller.passwordController.text
+  //                           .toLowerCase()
+  //                           .trim()) {
+  //                     controller.isPasswordMatched(true);
+  //                   } else
+  //                     controller.isPasswordMatched(false);
+  //                 },
+  //                 maxLines: 1,
+  //               ),
+  //               AppConstant.spaceWidget(height: 10),
+  //               Obx(
+  //                 () => Visibility(
+  //                     visible: controller.isPasswordMatched.value,
+  //                     child: CustomText(
+  //                       title: langKey.passwordNotMatched.tr,
+  //                       color: kRedColor,
+  //                     )),
+  //               ),
+  //               AppConstant.spaceWidget(height: 20),
+  //               CustomButton(
+  //                 onTap: () async {
+  //                   await controller.forgotPasswordOtp();
+  //                 },
+  //                 text: langKey.send.tr,
+  //                 width: 120,
+  //                 height: 40,
+  //                 color: kPrimaryColor,
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   void showResendVerificationLinkDialog() {
     final formKey = GlobalKey<FormState>();
