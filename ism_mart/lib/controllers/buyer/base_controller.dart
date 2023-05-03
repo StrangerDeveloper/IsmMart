@@ -273,10 +273,68 @@ class BaseController extends GetxController {
 
   void changePage(int index) {
     currentPage.value = index;
-
     bottomNavPageController.jumpToPage(index);
     /*bottomNavPageController.animateToPage(index,
         duration: const Duration(milliseconds: 500), curve: Curves.easeIn);*/
+  }
+
+  Future<bool> onBackPressed(BuildContext context) async {
+    if (currentPage == 0) {
+      final value = await showDialog<bool>(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Exit App'),
+            content: const Text('Are you sure you want to exit?'),
+            actions: [
+              Row(
+                children: [
+                  Expanded(
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        minimumSize: Size(double.infinity, 40),
+                        foregroundColor: Colors.grey,
+                      ),
+                      child: const Text(
+                        'No',
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                      onPressed: () {
+                        Get.back();
+                      },
+                    ),
+                  ),
+                  Expanded(
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        minimumSize: Size(double.infinity, 40),
+                        foregroundColor: Colors.grey,
+                      ),
+                      child: const Text(
+                        'Yes',
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pop(true);
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          );
+        },
+      );
+
+      return value == true;
+    } else {
+      changePage(0);
+      return false;
+    }
   }
 
   //End Bottom Navigation Setup
