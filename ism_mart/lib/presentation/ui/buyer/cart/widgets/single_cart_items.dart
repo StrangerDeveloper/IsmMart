@@ -131,8 +131,8 @@ class SingleCartItems extends StatelessWidget {
                     Align(
                       alignment: Alignment.bottomRight,
                       child: ProductQuantityCounterr(
-                        h: 30.0,
-                        w: 10.0,
+                        h: 20.0,
+                        w: 20.0,
                         horiz: 0.0,
                         verti: 3.0,
                         margin: 0.0,
@@ -140,7 +140,10 @@ class SingleCartItems extends StatelessWidget {
                         bottomP: 15.0,
                         onDecrementPress: () async {
                           var a = int.parse(cartModel.quantity.toString());
-                          a--;
+                          if (a > 0) {
+                            a--;
+                          }
+
                           cartModel.quantity = "$a";
                           cartModel.productModel!.totalPrice =
                               controller!.totalCartAmount.value;
@@ -150,7 +153,10 @@ class SingleCartItems extends StatelessWidget {
                         },
                         onIncrementPress: () async {
                           var a = int.parse(cartModel.quantity.toString());
-                          a++;
+                          if (a < 10) {
+                            a++;
+                          }
+
                           cartModel.quantity = "$a";
                           cartModel.productModel!.totalPrice =
                               controller!.totalCartAmount.value;
@@ -205,64 +211,64 @@ class SingleCartItems extends StatelessWidget {
                     ),
                   ],
                 ),
-                AppConstant.spaceWidget(height: 5),
-                cartModel.onQuantityClicked!
-                    ? AnimatedContainer(
-                        duration: const Duration(milliseconds: 1500),
-                        curve: Curves.fastOutSlowIn,
-                        width: double.infinity,
-                        height: 40,
-                        child: ListView.builder(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            itemCount: controller!.moq,
-                            itemBuilder: (_, index) {
-                              return InkWell(
-                                onTap: () async {
-                                  // cartModel.quantity = "${(index + 1)}";
-                                  /* await controller.updateCart(
-                                      cartItemId: cartModel.id,
-                                      quantity: (index + 1));*/
-                                  cartModel.quantity = "${(index + 1)}";
-                                  cartModel.productModel!.totalPrice =
-                                      controller.totalCartAmount.value;
-                                  await LocalStorageHelper.updateCartItems(
-                                      cartModel: cartModel);
-                                  controller.update();
-                                },
-                                child: Container(
-                                  margin: const EdgeInsets.symmetric(
-                                      horizontal: 5, vertical: 3),
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 12.0, vertical: 5),
-                                  decoration: int.parse(cartModel.quantity!) ==
-                                          (index + 1)
-                                      ? BoxDecoration(
-                                          color: kPrimaryColor,
-                                          border: Border.all(color: kDarkColor),
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                        )
-                                      : BoxDecoration(
-                                          color: kWhiteColor,
-                                          border: Border.all(color: kDarkColor),
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                        ),
-                                  child: CustomText(
-                                    title: "${index + 1}",
-                                    textAlign: TextAlign.center,
-                                    color: int.parse(cartModel.quantity!) ==
-                                            (index + 1)
-                                        ? kWhiteColor
-                                        : kPrimaryColor,
-                                    weight: FontWeight.w600,
-                                  ),
-                                ),
-                              );
-                            }),
-                      )
-                    : Container(),
+                // AppConstant.spaceWidget(height: 5),
+                // cartModel.onQuantityClicked!
+                //     ? AnimatedContainer(
+                //         duration: const Duration(milliseconds: 1500),
+                //         curve: Curves.fastOutSlowIn,
+                //         width: double.infinity,
+                //         height: 40,
+                //         child: ListView.builder(
+                //             shrinkWrap: true,
+                //             scrollDirection: Axis.horizontal,
+                //             itemCount: controller!.moq,
+                //             itemBuilder: (_, index) {
+                //               return InkWell(
+                //                 onTap: () async {
+                //                   // cartModel.quantity = "${(index + 1)}";
+                //                   /* await controller.updateCart(
+                //                       cartItemId: cartModel.id,
+                //                       quantity: (index + 1));*/
+                //                   cartModel.quantity = "${(index + 1)}";
+                //                   cartModel.productModel!.totalPrice =
+                //                       controller.totalCartAmount.value;
+                //                   await LocalStorageHelper.updateCartItems(
+                //                       cartModel: cartModel);
+                //                   controller.update();
+                //                 },
+                //                 child: Container(
+                //                   margin: const EdgeInsets.symmetric(
+                //                       horizontal: 5, vertical: 3),
+                //                   padding: const EdgeInsets.symmetric(
+                //                       horizontal: 12.0, vertical: 5),
+                //                   decoration: int.parse(cartModel.quantity!) ==
+                //                           (index + 1)
+                //                       ? BoxDecoration(
+                //                           color: kPrimaryColor,
+                //                           border: Border.all(color: kDarkColor),
+                //                           borderRadius:
+                //                               BorderRadius.circular(8.0),
+                //                         )
+                //                       : BoxDecoration(
+                //                           color: kWhiteColor,
+                //                           border: Border.all(color: kDarkColor),
+                //                           borderRadius:
+                //                               BorderRadius.circular(8.0),
+                //                         ),
+                //                   child: CustomText(
+                //                     title: "${index + 1}",
+                //                     textAlign: TextAlign.center,
+                //                     color: int.parse(cartModel.quantity!) ==
+                //                             (index + 1)
+                //                         ? kWhiteColor
+                //                         : kPrimaryColor,
+                //                     weight: FontWeight.w600,
+                //                   ),
+                //                 ),
+                //               );
+                //             }),
+                //       )
+                //     : Container(),
               ],
             ),
             Positioned(
@@ -275,6 +281,7 @@ class SingleCartItems extends StatelessWidget {
 
                   //controller!.deleteCartItem(cartItemId: cartModel.id);
                 },
+                height: 17,
                 hasShadow: false,
                 icon: Icons.close_rounded,
                 bgColor: kRedColor.withOpacity(0.2),

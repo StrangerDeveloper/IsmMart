@@ -62,9 +62,14 @@ class SignInUI extends GetView<AuthController> {
                             textStyle: bodyText1,
                             autoValidateMode:
                                 AutovalidateMode.onUserInteraction,
-                            validator: (value) => !GetUtils.isEmail(value!)
-                                ? langKey.emailReq.tr
-                                : null,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return "Email is required For This Field";
+                              } else
+                                return !GetUtils.isEmail(value)
+                                    ? langKey.emailReq.tr
+                                    : null;
+                            },
                             keyboardType: TextInputType.emailAddress,
                             onChanged: (value) {},
                             onSaved: (value) {},
@@ -182,8 +187,10 @@ class SignInUI extends GetView<AuthController> {
                 autofocus: false,
                 textStyle: bodyText1,
                 autoValidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value) =>
-                    !GetUtils.isEmail(value!) ? langKey.emailReq.tr : null,
+                validator: (value) {
+                  !GetUtils.isEmail(value!) ? langKey.emailReq.tr : Text("re");
+                  return null;
+                },
                 keyboardType: TextInputType.emailAddress,
                 onChanged: (value) {},
                 onSaved: (value) {},
