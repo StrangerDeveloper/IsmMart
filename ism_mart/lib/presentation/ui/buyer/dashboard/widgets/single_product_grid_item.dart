@@ -17,6 +17,10 @@ class SingleProductItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // currencyController.convertCurrency(
+    //     toCurrency: "AED",
+    //     fromCurrency: "PKR",
+    //     amount: productModel!.discountPrice);
     return isCategoryProducts!
         ? _buildCategoryProductItem(model: productModel)
         : _buildProductItemNew(model: productModel, buildContext: context);
@@ -99,7 +103,7 @@ class SingleProductItems extends StatelessWidget {
             () {
               // if (!Get.isOverlaysOpen) Get.toNamed('/product/${model!.id}', arguments: {"calledFor": "customer"},);
               showModalBottomSheet(
-                //isDismissible: false,
+                  //isDismissible: false,
                   isScrollControlled: true,
                   context: buildContext,
                   backgroundColor: kWhiteColor,
@@ -108,7 +112,7 @@ class SingleProductItems extends StatelessWidget {
                   builder: (_) {
                     return SafeArea(
                       child: Container(
-                        height: AppResponsiveness.height*0.91,
+                        height: AppResponsiveness.height * 0.91,
                         child: SingleProductView(
                           productId: "${model!.id}",
                         ),
@@ -152,9 +156,8 @@ class SingleProductItems extends StatelessWidget {
                         AppConstant.spaceWidget(height: 5),
                         CustomPriceWidget(title: "${model.discountPrice!}"),
                         if (model.discount != 0)
-                          CustomText(
-                            title:
-                                "${AppConstant.getCurrencySymbol()} ${model.price!}",
+                          CustomPriceWidget(
+                            title: "${model.price!}",
                             style: bodyText1.copyWith(
                                 decoration: TextDecoration.lineThrough),
                           ),
@@ -189,15 +192,4 @@ class SingleProductItems extends StatelessWidget {
       ),
     );
   }
-}
-
-class CustomRoute<T> extends MaterialPageRoute<T> {
-  CustomRoute({
-    required WidgetBuilder builder,
-    required RouteSettings settings,
-  }) : super(
-            builder: builder,
-            settings: settings,
-            maintainState: true,
-            fullscreenDialog: false);
 }

@@ -191,4 +191,21 @@ class ApiRepository {
     );
     return json.decode(response.body);
   }
+
+  /**
+   *
+   * Flutter Api Layer exchange currency Api
+   * */
+
+  Future<dynamic> reqCurrencyConverter({to, from, amount}) async {
+    var response = await http.get(
+      Uri.parse(
+          'https://api.apilayer.com/exchangerates_data/convert?to=$to&from=$from&amount=$amount'),
+      headers: {
+        //'Authorization': 'Bearer $client_secret',
+        'apikey': '28ctJvWImBjcvSKiiGTJ3GH3frjz3Nj7'
+      },
+    );
+    return json.decode(response.body);
+  }
 }

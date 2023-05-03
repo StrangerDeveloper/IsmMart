@@ -44,6 +44,7 @@ class CartModel {
   List<String>? errors;
   List<int>? featuresID;
   List<String>? featuresName;
+  num? itemPrice; //quantity * itemPrice
 
   CartModel({
     this.id,
@@ -54,18 +55,21 @@ class CartModel {
     this.featuresName,
     this.errors,
     this.onQuantityClicked = false,
+    this.itemPrice,
   });
 
   factory CartModel.fromJson(JSON value) {
     return CartModel(
-      id: value['id'],
-      productId: value['productId'],
-      productModel: ProductModel.fromJson(value['Product']),
-      quantity: value['quantity'].toString(),
-      featuresName: List<String>.from(value['featuresName'].map((x) => x)),
-      featuresID: List<int>.from(value["features"].map((x) => x)),
-      //onQuantityClicked: json['onQuantityClicked'],
-    );
+        id: value['id'],
+        productId: value['productId'],
+        productModel: ProductModel.fromJson(value['Product']),
+        quantity: value['quantity'].toString(),
+        featuresName: List<String>.from(value['featuresName'].map((x) => x)),
+        featuresID: List<int>.from(value["features"].map((x) => x)),
+        itemPrice: value['itemPrice']
+
+        //onQuantityClicked: json['onQuantityClicked'],
+        );
   }
 
   JSON toJson() => {
@@ -74,7 +78,8 @@ class CartModel {
         'featuresName': featuresName,
         'productId': productId,
         'quantity': quantity,
-        'onQuantityClicked': onQuantityClicked
+        'onQuantityClicked': onQuantityClicked,
+        "itemPrice": itemPrice,
       };
   JSON toOrderCreationJson() => {
         "productId": productId,
@@ -82,4 +87,10 @@ class CartModel {
         "features": featuresID,
         "Product": productModel!.toOrderCheckoutJson()
       };
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other.runtimeType != runtimeType) return false;
+    return other is CartModel && other.id == id && other.productId == productId;
+  }
 }

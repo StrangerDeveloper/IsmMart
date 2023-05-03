@@ -24,27 +24,35 @@ class ProductController extends GetxController with StateMixin {
   var color = "".obs;
 
   // minimum Order Qty Limit
-  int moq = 10;
+  var moq = 0.obs;
 
   ///end Lists
   @override
   void onInit() {
     super.onInit();
-    quantityController.text = count.value.toString();
   }
 
   fetchProduct(int id) async {
     change(null, status: RxStatus.loading());
+
     await _apiProvider.getProductById(id).then((product) {
       change(product, status: RxStatus.success());
 
       fetchProductBySubCategory(subCategoryId: product.subCategory!.id);
       fetchProductReviewsById(productId: id);
       getProductQuestions(productId: id);
+
+      setCountAndMOQ(productModel: product);
     }).catchError((error) {
       change(null, status: RxStatus.error(error));
       print(">>>FetchProduct $error");
     });
+  }
+
+  setCountAndMOQ({ProductModel? productModel}) {
+    count.value = 1;
+    moq.value = productModel!.stock!;
+    quantityController.text = count.value.toString();
   }
 
   var subCategoryProductList = <ProductModel>[].obs;
@@ -134,7 +142,8 @@ class ProductController extends GetxController with StateMixin {
   }
 
   void increment() {
-    if (count.value == moq) return;
+    print("Count: ${count.value} && MOQ: ${moq.value}");
+    if (count.value >= moq.value) return;
     count.value++;
 
     quantityController.text = count.value.toString();
@@ -159,6 +168,7 @@ class ProductController extends GetxController with StateMixin {
     CartModel cart = CartModel(
       productId: product.id!,
       productModel: product,
+      itemPrice: product.totalPrice,
       quantity: quantityController.text,
       featuresID: selectedFeatureIDsList,
       featuresName: selectedFeatureNamesList,

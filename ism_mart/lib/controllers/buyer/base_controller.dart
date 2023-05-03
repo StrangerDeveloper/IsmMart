@@ -273,7 +273,6 @@ class BaseController extends GetxController {
 
   void changePage(int index) {
     currentPage.value = index;
-
     bottomNavPageController.jumpToPage(index);
     /*bottomNavPageController.animateToPage(index,
         duration: const Duration(milliseconds: 500), curve: Curves.easeIn);*/
