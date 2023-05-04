@@ -26,14 +26,18 @@ class FaqUI extends GetView<BaseController> {
                   //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: controller.faqsList.map((FAQModel? faq) {
                     return ExpansionTile(
+                        childrenPadding: EdgeInsets.only(left: 16),
+                        expandedAlignment: Alignment.centerLeft,
                         title: CustomText(
                           title: faq!.questions,
                           style: headline3,
                         ),
                         children: [
-                          Text(
-                            faq.answer!,
-                            style: bodyText1,
+                          CustomText(
+                            title: faq.answer!,
+                            size: 14.5,
+                            weight: FontWeight.w600,
+                            color: Colors.black,
                           ),
                         ]);
                   }).toList(),

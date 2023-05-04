@@ -62,9 +62,14 @@ class SignInUI extends GetView<AuthController> {
                             textStyle: bodyText1,
                             autoValidateMode:
                                 AutovalidateMode.onUserInteraction,
-                            validator: (value) => !GetUtils.isEmail(value!)
-                                ? langKey.emailReq.tr
-                                : null,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return "Email is required!";
+                              } else
+                                return !GetUtils.isEmail(value!)
+                                    ? langKey.emailReq.tr
+                                    : null;
+                            },
                             keyboardType: TextInputType.emailAddress,
                             onChanged: (value) {},
                             onSaved: (value) {},
@@ -79,7 +84,7 @@ class SignInUI extends GetView<AuthController> {
                             autoValidateMode:
                                 AutovalidateMode.onUserInteraction,
                             validator: (value) => //!GetUtils.isPassport(value!)
-                                value!.length < 6
+                                value!.length < 8
                                     ? langKey.passwordLengthReq.tr
                                     : null,
                             obscureText: true,
@@ -105,7 +110,10 @@ class SignInUI extends GetView<AuthController> {
                           Container(
                             alignment: Alignment.centerRight,
                             child: InkWell(
-                              onTap: () => showForgotPasswordDialog(),
+                              onTap: () =>
+                                  Get.toNamed(Routes.passwordResetEmailInput),
+
+                              //showForgotPasswordDialog(),
                               child: Text(
                                 langKey.forgotPassword.tr,
                                 style: headline3.copyWith(

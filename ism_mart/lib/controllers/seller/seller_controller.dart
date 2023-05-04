@@ -96,6 +96,13 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
 
   updateProduct({ProductModel? model}) async {
     isLoading(true);
+
+    model!.price = int.parse("${prodPriceController.text}");
+    model.name = prodNameController.text;
+    model.discount = int.parse("${prodDiscountController.text}");
+    model.description = prodDescriptionController.text;
+    model.stock = int.parse("${prodStockController.text}");
+
     await _apiProvider
         .updateProduct(token: authController.userToken, model: model)
         .then((ProductResponse? response) {
@@ -252,9 +259,9 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
         stock: int.parse(prodStockController.text),
         categoryId: selectedCategoryID.value,
         subCategoryId: selectedSubCategoryID.value,
-        description: prodDescriptionController.text,
-        discount: discount);
-    print(">>>Discount: ${newProduct.discount}");
+        discount: discount,
+        description: prodDescriptionController.text);
+
     await _apiProvider
         .addProductWithHttp(
             token: authController.userToken,
@@ -275,7 +282,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
               "${response.message != null ? response.message : someThingWentWrong.tr}");
         }
       }
-    }).catchError(onError);
+    }); //.catchError(onError);
     //isLoading(false);
   }
 

@@ -10,6 +10,7 @@ class AuthController extends GetxController {
 
   AuthController(this.authProvider);
 
+  var forgotPasswordEmailController = TextEditingController();
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
   var confirmPassController = TextEditingController();
@@ -104,7 +105,7 @@ class AuthController extends GetxController {
     //isLoading(false);
   }
 
-  Future<void> forgotPasswordWithEmail() async {
+  Future<bool?> forgotPasswordWithEmail() async {
     isLoading(true);
     String email = emailController.text.trim();
     await authProvider
@@ -112,18 +113,22 @@ class AuthController extends GetxController {
       isLoading(false);
       if (response != null) {
         if (response.success!) {
-          Get.back();
+          //Get.back();
           AppConstant.displaySnackBar("success", response.message);
+          return true;
         } else {
           AppConstant.displaySnackBar("error", response.message);
         }
       } else
         AppConstant.displaySnackBar(
             "error", "Something went wrong with credentials");
+      return false;
     }).catchError((onError) {
       isLoading(false);
       debugPrint("resetPassword: $onError");
+      return false;
     });
+    return false;
   }
 
   forgotPasswordOtp() async {
@@ -512,6 +517,7 @@ class AuthController extends GetxController {
   var subjectController = TextEditingController();
 
   postContactUs() async {
+    isLoading(true);
     var data = {
       "name": "${firstNameController.text}",
       "email": "${emailController.text.trim()}",
@@ -520,6 +526,7 @@ class AuthController extends GetxController {
     };
 
     await authProvider.contactUs(data: data).then((UserResponse? userResponse) {
+      isLoading(false);
       if (userResponse != null) {
         if (userResponse.success!) {
           // Get.back();
@@ -530,6 +537,7 @@ class AuthController extends GetxController {
       } else
         AppConstant.displaySnackBar('error', "something went wrong!");
     }).catchError((e) {
+      isLoading(false);
       AppConstant.displaySnackBar('error', "$e");
     });
   }

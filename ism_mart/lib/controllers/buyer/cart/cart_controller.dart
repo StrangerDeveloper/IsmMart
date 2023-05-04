@@ -175,15 +175,6 @@ class CartController extends GetxController
     quantityController.text = counter.value.toString();
   }
 
-  //    cartModel.quantity = "${(index + 1)}";
-  // cartModel.productModel!.totalPrice =
-  //     controller.totalCartAmount.value;
-  // await LocalStorageHelper.updateCartItems(
-  //     cartModel: cartModel);
-  // controller.update();
-
-  //ENd Cart Items
-
   @override
   void onClose() {
     super.onClose();

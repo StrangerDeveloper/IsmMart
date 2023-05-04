@@ -20,6 +20,10 @@ class OrderController extends GetxController
   var descriptionController = TextEditingController();
   var reviewController = TextEditingController();
 
+  GlobalKey<FormState> reviewFormKey = GlobalKey<FormState>();
+  RxDouble rating = 5.0.obs;
+  TextEditingController reviewTxtFieldController = TextEditingController();
+
   late var tabController;
 
   var isLoading = false.obs;
@@ -215,6 +219,7 @@ class OrderController extends GetxController
   void onClose() {
     super.onClose();
     clearControllers();
+    reviewTxtFieldController.dispose();
   }
 
   @override
@@ -230,6 +235,38 @@ class OrderController extends GetxController
     fetchVendorOrderStats();
 
     authController.fetchUserCoins();
+  }
+
+  submitReviewBtn({OrderItem? orderItem}) async {
+    if (reviewFormKey.currentState?.validate() ?? false) {
+      isLoading(true);
+      JSON data = {
+        "text": reviewTxtFieldController.text,
+        "rating": rating.value,
+        "productId": orderItem!.product!.id,
+        "orderItemId": orderItem.id
+      };
+      await _orderProvider
+          .createReview(token: authController.userToken, data: data)
+          .then((PaymentIntentResponse? response) {
+        print(response?.message);
+        isLoading(false);
+        if (response != null) {
+          if (response.success!) {
+            Get.back();
+            rating.value = 0;
+            reviewTxtFieldController.clear();
+            showSnackBar(title: 'success', message: response.message);
+          } else
+            showSnackBar(message: response.message);
+        } else {
+          showSnackBar();
+        }
+      }).catchError((e) {
+        isLoading(false);
+        print(">>>Dispute $e");
+      });
+    }
   }
 
   void showSnackBar({title = 'error', message = 'Something went wrong'}) {

@@ -11,24 +11,29 @@ class BaseLayout extends GetView<BaseController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      body: PageView(
-        controller: controller.bottomNavPageController,
-        physics: const NeverScrollableScrollPhysics(),
-        children: [...controller.bottomNavScreens],
+    return WillPopScope(
+      onWillPop: () {
+        return controller.onBackPressed(context);
+      },
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        body: PageView(
+          controller: controller.bottomNavPageController,
+          physics: const NeverScrollableScrollPhysics(),
+          children: [...controller.bottomNavScreens],
+        ),
+        bottomNavigationBar: _buildBottomNavBar(controller),
+        //: Work remaining of reward button if needed
+        /*floatingActionButton: FloatingActionButton.extended(
+          onPressed: (){},
+          elevation: 5,
+          icon: Icon(Icons.shopping_bag, color: kPrimaryColor, ),
+          label: CustomText(title: 'Rewards', style: headline3,),
+          //foregroundColor: Colors.blueGrey,
+          backgroundColor:  Colors.indigo[100]!,
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,*/
       ),
-      bottomNavigationBar: _buildBottomNavBar(controller),
-      //: Work remaining of reward button if needed
-      /*floatingActionButton: FloatingActionButton.extended(
-        onPressed: (){},
-        elevation: 5,
-        icon: Icon(Icons.shopping_bag, color: kPrimaryColor, ),
-        label: CustomText(title: 'Rewards', style: headline3,),
-        //foregroundColor: Colors.blueGrey,
-        backgroundColor:  Colors.indigo[100]!,
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,*/
     );
   }
 

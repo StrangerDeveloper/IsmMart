@@ -7,6 +7,7 @@ import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/controllers/controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/ui/exports_ui.dart';
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class BaseController extends GetxController {
   BaseController(this._apiProvider);
@@ -279,6 +280,63 @@ class BaseController extends GetxController {
   }
 
   //End Bottom Navigation Setup
+  Future<bool> onBackPressed(BuildContext context) async {
+    if (currentPage == 0) {
+      final value = await showDialog<bool>(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(langKey.exitApp.tr),
+            content: Text(langKey.exitDialogDesc.tr),
+            actions: [
+              Row(
+                children: [
+                  Expanded(
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        minimumSize: Size(double.infinity, 40),
+                        foregroundColor: Colors.grey,
+                      ),
+                      child: Text(
+                        langKey.noBtn.tr,
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                      onPressed: () {
+                        Get.back();
+                      },
+                    ),
+                  ),
+                  Expanded(
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        minimumSize: Size(double.infinity, 40),
+                        foregroundColor: Colors.grey,
+                      ),
+                      child: Text(
+                        langKey.yesBtn.tr,
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pop(true);
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          );
+        },
+      );
+      return value == true;
+    } else {
+      changePage(0);
+      return false;
+    }
+  }
 
   _clearLists() {
     sliderImages.clear();
