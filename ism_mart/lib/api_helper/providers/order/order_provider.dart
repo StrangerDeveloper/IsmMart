@@ -61,4 +61,9 @@ class OrderProvider {
     var response = await _orderRepo.postPaymentIntent(token: token, data: data);
     return PaymentIntentResponse.fromJson(response);
   }
+
+  Future<PaymentIntentResponse> createReview({token, data}) async {
+    var response = await _orderRepo.postReview(token: token, data: data);
+    return PaymentIntentResponse.fromJson(response);
+  }
 }

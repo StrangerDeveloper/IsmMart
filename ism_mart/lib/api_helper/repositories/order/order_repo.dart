@@ -114,4 +114,13 @@ class OrderRepository {
         token: token);
     return response.body;
   }
+
+  Future<dynamic> postReview({token, data}) async {
+    var response = await _apiService.post(
+        endpoint: "productReviews/add",
+        body: data,
+        requiresAuthToken: true,
+        token: token);
+    return response.body;
+  }
 }

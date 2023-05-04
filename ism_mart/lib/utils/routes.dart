@@ -1,10 +1,14 @@
 import 'package:get/get.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
+import 'package:ism_mart/presentation/ui/buyer/account/forgot_password/email_input.dart';
+import 'package:ism_mart/presentation/ui/buyer/account/forgot_password/reset_password.dart';
 import 'package:ism_mart/presentation/ui/exports_ui.dart';
 
 class Routes {
   static const initRoute = "/";
   static const loginRoute = "/signIn";
+  static const resetPasswordRoute = "/resetPassword";
+  static const passwordResetEmailInput = "/inputEmail";
   static const registerRoute = "/register";
   static const categoriesRoute = "/categories";
   static const cartRoute = "/cart";
@@ -38,6 +42,16 @@ class Routes {
       name: registerRoute,
       page: () => const SignUpUI(),
       binding: BaseBindings(),
+    ),
+    GetPage(
+      name: resetPasswordRoute,
+      page: () => const ForgotPassword(),
+      binding: BaseBindings()
+    ),
+    GetPage(
+        name: passwordResetEmailInput,
+        page: () => const EmailInput(),
+      binding: BaseBindings()
     ),
     GetPage(
         name: initRoute,

@@ -36,10 +36,10 @@ class PermissionsHandler {
       //Permission.mediaLibrary,
       //add more permission to request here.
     ].request();
-    if (//statuses[Permission.manageExternalStorage]!.isDenied &&
+    if ( //statuses[Permission.manageExternalStorage]!.isDenied &&
         statuses[Permission.camera]!.isDenied &&
-        //statuses[Permission.photos]!.isDenied &&
-        statuses[Permission.storage]!.isDenied) {
+            //statuses[Permission.photos]!.isDenied &&
+            statuses[Permission.storage]!.isDenied) {
       //check each permission status after.
       print(">>>>permission is denied.");
     }
@@ -63,12 +63,14 @@ class PermissionsHandler {
             statuses[Permission.photos]!.isDenied) {
       //check each permission status after.
       print(">>>>permission is denied.");
-    }if ( //statuses[Permission.mediaLibrary]!.isDenied &&
+    }
+    if ( //statuses[Permission.mediaLibrary]!.isDenied &&
         statuses[Permission.camera]!.isRestricted &&
             statuses[Permission.photos]!.isRestricted) {
       //check each permission status after.
       print(">>>>permission is Restricted.");
-    }if ( //statuses[Permission.mediaLibrary]!.isDenied &&
+    }
+    if ( //statuses[Permission.mediaLibrary]!.isDenied &&
         statuses[Permission.camera]!.isPermanentlyDenied &&
             statuses[Permission.photos]!.isPermanentlyDenied) {
       //check each permission status after.

@@ -119,21 +119,36 @@ class SellersApiProvider {
     );*/
 
     final url = "${ApiConstant.baseUrl}vendor/products/update";
-    final request = http.MultipartRequest('PATCH', Uri.parse(url));
+    //  final request = http.MultipartRequest('PATCH', Uri.parse(url));
     //request.headers['Accept'] = 'multipart/form-data';
-    request.headers['content-type'] = 'multipart/form-data';
-    request.headers['authorization'] = '$token';
+    // request.headers['content-type'] = 'multipart/form-data';
+    // request.headers['authorization'] = '$token';
 
-    request.fields['id'] = model!.id!.toString();
-    request.fields['name'] = model.name!;
-    request.fields['thumbnail'] = model.thumbnail!;
-    request.fields['price'] = "${model.price}";
-    request.fields['discount'] = "${model.discount}";
-    request.fields['description'] = "${model.description}";
+    // request.fields['id'] = model!.id!.toString();
+    // request.fields['name'] = model.name!;
+    // // request.fields['thumbnail'] = model.thumbnail!;
+    // request.fields['price'] = "${model.price}";
 
-    requestInterceptorMultipart(request);
+    // request.fields['discount'] = "${model.discount}";
+    // request.fields['description'] = "${model.description}";
 
-    final response = await request.send();
+    // requestInterceptorMultipart(request);
+
+    // final response = await request.send();
+
+    var headers = {'authorization': '$token', 'Cookie': 'XSRF-token=$token'};
+    var request = http.MultipartRequest('PATCH', Uri.parse(url));
+    request.fields.addAll({
+      'name': 'Apple Machbook Pro M2',
+      'id': '329',
+      'discount': '15',
+      'price': '300'
+    });
+    // request.files.add(await http.MultipartFile.fromPath('thumbnail',
+    //     '/C:/Users/moizu/Pictures/Screenshots/Screenshot (2).png'));
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
       final responseData = await response.stream.bytesToString();

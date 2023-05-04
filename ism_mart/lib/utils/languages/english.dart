@@ -2,6 +2,11 @@ import 'translations_key.dart' as key;
 
 class English {
   Map<String, String> get translations => {
+        ///New
+        key.exitApp: 'Exit App',
+        key.exitDialogDesc: 'Are you sure you want to exit?',
+        key.resetPass: 'Reset Password',
+
         ///settings screen
         key.settings: 'Settings',
         key.general: 'General',

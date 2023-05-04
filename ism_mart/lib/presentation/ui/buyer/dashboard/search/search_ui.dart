@@ -7,18 +7,15 @@ import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class SearchUI extends GetView<SearchController> {
- const SearchUI({
+  const SearchUI({
     Key? key,
     this.isCalledForDeals = false,
   }) : super(key: key);
   final bool? isCalledForDeals;
 
-
-
- // final controller = Get.find<SearchController>();
+  // final controller = Get.find<SearchController>();
   @override
   Widget build(BuildContext context) {
-
     controller.search(
         Get.arguments != null ? Get.arguments["searchText"].toString() : " ");
 
@@ -101,10 +98,10 @@ class SearchUI extends GetView<SearchController> {
 
   _body() {
     //print("ProductList: ${controller.productList.length}");
-   /* return GetBuilder<SearchController>(
-        builder: (_) => *//*controller.isLoading.isTrue
+    /* return GetBuilder<SearchController>(
+        builder: (_) => */ /*controller.isLoading.isTrue
             ? CustomLoading(isItForWidget: true, color: kPrimaryColor)
-            : *//*controller.productList.isEmpty
+            : */ /*controller.productList.isEmpty
                 ? Center(
                     child: NoDataFoundWithIcon(
                       title: langKey.emptyProductSearch.tr,
@@ -350,7 +347,11 @@ class SearchUI extends GetView<SearchController> {
           height: 35,
         ),
         CustomButton(
-          onTap: () => controller.applyFilter(),
+          onTap: () {
+            controller.applyFilter();
+            controller.minPriceController.clear();
+            controller.maxPriceController.clear();
+          },
           text: "Search",
           width: 120,
           height: 35,

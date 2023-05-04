@@ -3,6 +3,8 @@
  *  Settings
  * */
 
+const exitApp = "exitApp", exitDialogDesc = "exitDialogDesc";
+
 const settings = "settings",
     general = "general",
     account = "account",
@@ -106,7 +108,7 @@ const profile = "profile",
 /// Add Product
 ///
 
-const addProduct = "addProduct", updateProduct="updateProduct";
+const addProduct = "addProduct", updateProduct = "updateProduct";
 const deleteProd = "deleteProd", delProdMsg = "delProdMsg";
 
 ///
@@ -155,6 +157,7 @@ const email = "email",
     newPassReq = "newPassReq",
     confirmPass = "confirmPass",
     confirmPassReq = "confirmPassReq",
+    resetPass = 'resetPass',
     passwordNotMatched = "passNotMatched",
     forgotPassword = "forgotPassword";
 

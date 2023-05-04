@@ -1,11 +1,14 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/export_presentation.dart';
+import 'package:ism_mart/presentation/widgets/custom_textfield.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:iconly/iconly.dart';
+import 'package:ism_mart/utils/helpers/common_functions.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class SingleOrderDetailsUI extends GetView<OrderController> {
@@ -301,21 +304,130 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
     return Row(
       children: [
         CustomActionIcon(
-          onTap: () {},
+          onTap: () {
+            addReviewBottomSheet(orderItem: orderItemModel);
+          },
           icon: Icons.feedback_outlined,
           iconColor: kPrimaryColor,
         ),
         CustomActionIcon(
           onTap: () {
             AppConstant.showBottomSheet(
-                isGetXBottomSheet: true,
-                buildContext: Get.context,
-                widget: addDisputeItems(orderItem: orderItemModel));
+              isGetXBottomSheet: true,
+              buildContext: Get.context,
+              widget: addDisputeItems(orderItem: orderItemModel),
+            );
           },
           icon: Icons.cases_outlined,
           iconColor: kRedColor,
         ),
       ],
+    );
+  }
+
+  addReviewBottomSheet({OrderItem? orderItem}) {
+    controller.rating.value = 0;
+    showModalBottomSheet(
+      //enableDrag: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(15),
+          topRight: Radius.circular(15),
+        ),
+      ),
+      //constraints: BoxConstraints.expand(height: Get.height * 0.9),
+      context: Get.context!,
+      //isScrollControlled: true,
+      builder: (BuildContext context) {
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Form(
+            key: controller.reviewFormKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              //mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    StickyLabel(
+                      text: "Review",
+                      style: headline1,
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 5, bottom: 5),
+                  child: RichText(
+                    text: TextSpan(
+                      text: 'Rating',
+                      style: const TextStyle(
+                        //fontSize: 12,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      children: [
+                        const TextSpan(
+                          text: '*',
+                          style: TextStyle(
+                            color: Colors.red,
+                            fontSize: 16.0,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                RatingBar.builder(
+                  onRatingUpdate: (rating) {
+                    controller.rating.value = rating;
+                  },
+                  initialRating: controller.rating.value,
+                  glowColor: Color(0xFFFFCC80),
+                  direction: Axis.horizontal,
+                  unratedColor: Color(0xffC4C4C4),
+                  itemCount: 5,
+                  itemSize: 25,
+                  itemBuilder: (context, _) => Icon(
+                    Icons.star,
+                    color: Color(0xFFFFA726),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10, bottom: 20),
+                  child: CustomTextField1(
+                    controller: controller.reviewTxtFieldController,
+                    title: 'Review',
+                    asterisk: true,
+                    minLines: 4,
+                    maxLines: 6,
+                    autoValidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) {
+                      return CommonFunctions.validateDefaultTxtField(value);
+                    },
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.center,
+                  child: Obx(
+                    () => controller.isLoading.isTrue
+                        ? CustomLoading(isItBtn: true)
+                        : CustomButton(
+                            onTap: () async {
+                              await controller.submitReviewBtn(orderItem: orderItem);
+                            },
+                            text: submit.tr,
+                            height: 40,
+                            width: 200,
+                          ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        );
+        ;
+      },
     );
   }
 
