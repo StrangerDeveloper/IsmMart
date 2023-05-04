@@ -145,6 +145,7 @@ const login = "login",
  */
 const email = "email",
     emailReq = "emailReq",
+    invalidEmail = "invalidEmail",
     password = "password",
     passwordLengthReq = "passwordReq",
     otp = "otp",
