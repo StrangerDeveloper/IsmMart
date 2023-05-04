@@ -23,23 +23,23 @@ class FaqUI extends GetView<BaseController> {
               Obx(
                 () => Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: controller.faqsList.map((FAQModel? faq) {
                     return ExpansionTile(
-                        childrenPadding: EdgeInsets.only(left: 16),
-                        expandedAlignment: Alignment.centerLeft,
-                        title: CustomText(
-                          title: faq!.questions,
-                          style: headline3,
+                      childrenPadding: EdgeInsets.only(left: 16),
+                      expandedAlignment: Alignment.centerLeft,
+                      title: CustomText(
+                        title: faq!.questions,
+                        style: headline3,
+                      ),
+                      children: [
+                        CustomText(
+                          title: faq.answer!,
+                          size: 14.5,
+                          weight: FontWeight.w600,
+                          color: Colors.black,
                         ),
-                        children: [
-                          CustomText(
-                            title: faq.answer!,
-                            size: 14.5,
-                            weight: FontWeight.w600,
-                            color: Colors.black,
-                          ),
-                        ]);
+                      ],
+                    );
                   }).toList(),
                 ),
               ),

@@ -5,6 +5,8 @@ import 'package:ism_mart/presentation/ui/exports_ui.dart';
 class Routes {
   static const initRoute = "/";
   static const loginRoute = "/signIn";
+  static const resetPasswordRoute = "/resetPassword";
+  static const passwordResetEmailInput = "/inputEmail";
   static const registerRoute = "/register";
   static const categoriesRoute = "/categories";
   static const cartRoute = "/cart";
@@ -17,9 +19,6 @@ class Routes {
   static const buyerOrdersRoute = "/buyerOrders";
 
   static const settingsRoute = "/settings";
-
-  static const resetPasswordRoute = "/resetPassword";
-  static const passwordResetEmailInput = "/inputEmail";
   //static const aboutUsRoute = "/aboutUs";
 
   ///Pages with passing :ID
@@ -34,7 +33,7 @@ class Routes {
     ),*/
     GetPage(
       name: loginRoute,
-      page: () => const SignInUI(),
+      page: () => SignInUI(),
       binding: BaseBindings(),
     ),
     GetPage(
@@ -42,6 +41,14 @@ class Routes {
       page: () => const SignUpUI(),
       binding: BaseBindings(),
     ),
+    GetPage(
+        name: resetPasswordRoute,
+        page: () => const ForgotPassword(),
+        binding: BaseBindings()),
+    GetPage(
+        name: passwordResetEmailInput,
+        page: () => const EmailInput(),
+        binding: BaseBindings()),
     GetPage(
         name: initRoute,
         page: () => const BaseLayout(),

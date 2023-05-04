@@ -185,7 +185,7 @@ class SellerStoreDetailsUI extends GetView<ProductController> {
                   width: AppResponsiveness.width * 0.95,
                   child: CustomNetworkImage(
                     imageUrl: model?.coverImage ?? AppConstant.defaultImgUrl,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.fill,
                   ),
                 ),
               ),
@@ -223,7 +223,7 @@ class SellerStoreDetailsUI extends GetView<ProductController> {
                                 model?.storeImage ?? AppConstant.defaultImgUrl),
                           ),
                         ),
-                        AppConstant.spaceWidget(width: 50),
+                        AppConstant.spaceWidget(width: 33),
                         RichText(
                           text: TextSpan(children: [
                             TextSpan(
@@ -233,7 +233,7 @@ class SellerStoreDetailsUI extends GetView<ProductController> {
                             TextSpan(
                                 text: AppConstant.formattedDataTime("MMM, yyyy",
                                     model?.createdAt ?? DateTime.now()),
-                                style: bodyText1.copyWith(
+                                style: bodyText2.copyWith(
                                     fontWeight: FontWeight.bold)),
                           ]),
                         ),

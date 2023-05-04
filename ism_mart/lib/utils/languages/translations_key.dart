@@ -155,9 +155,9 @@ const email = "email",
     newPassReq = "newPassReq",
     confirmPass = "confirmPass",
     confirmPassReq = "confirmPassReq",
+    resetPass = 'resetPass',
     passwordNotMatched = "passNotMatched",
-    forgotPassword = "forgotPassword",
-    resetPass = 'resetPass';
+    forgotPassword = "forgotPassword";
 
 const storeName = "storeName",
     storeNameReq = "storeNameRequired",

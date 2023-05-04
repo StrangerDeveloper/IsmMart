@@ -37,6 +37,8 @@ class BaseLayout extends GetView<BaseController> {
     );
   }
 
+
+
   _buildBottomNavBar(BaseController navController) {
     return BottomAppBar(
       elevation: kLess,
@@ -47,16 +49,26 @@ class BaseLayout extends GetView<BaseController> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               _getNavBarItems(
-                  icon: IconlyLight.home, title: langKey.home.tr, page: 0),
+                icon: IconlyLight.home,
+                title: langKey.home.tr,
+                page: 0,
+              ),
               _getNavBarItems(
-                  icon: IconlyLight.category,
-                  title: langKey.categories.tr,
-                  page: 1),
+                icon: IconlyLight.category,
+                title: langKey.categories.tr,
+                page: 1,
+              ),
               _getNavBarItems(
-                  icon: IconlyLight.bag_2, title: langKey.deals.tr, page: 4),
+                icon: IconlyLight.bag_2,
+                title: langKey.deals.tr,
+                page: 4,
+              ),
               controller.cartCount.value <= 0
                   ? _getNavBarItems(
-                      icon: IconlyLight.buy, title: langKey.myCart.tr, page: 2)
+                      icon: IconlyLight.buy,
+                      title: langKey.myCart.tr,
+                      page: 2,
+                    )
                   : CartIcon(
                       onTap: () {
                         //Get.to(Routes.cartRoute);
@@ -68,7 +80,10 @@ class BaseLayout extends GetView<BaseController> {
                           page: 2),
                     ),
               _getNavBarItems(
-                  icon: Icons.menu, title: langKey.menu.tr, page: 3),
+                icon: Icons.menu,
+                title: langKey.menu.tr,
+                page: 3,
+              ),
             ],
           ),
         ),

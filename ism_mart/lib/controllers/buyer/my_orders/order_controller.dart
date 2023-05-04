@@ -13,16 +13,15 @@ import 'package:ism_mart/utils/exports_utils.dart';
 class OrderController extends GetxController
     with StateMixin, GetSingleTickerProviderStateMixin {
   final OrderProvider _orderProvider;
-
   OrderController(this._orderProvider);
-
-  var titleController = TextEditingController();
-  var descriptionController = TextEditingController();
-  var reviewController = TextEditingController();
 
   GlobalKey<FormState> reviewFormKey = GlobalKey<FormState>();
   RxDouble rating = 5.0.obs;
   TextEditingController reviewTxtFieldController = TextEditingController();
+
+  var titleController = TextEditingController();
+  var descriptionController = TextEditingController();
+  var reviewController = TextEditingController();
 
   late var tabController;
 

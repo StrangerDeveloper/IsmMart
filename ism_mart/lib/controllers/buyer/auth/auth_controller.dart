@@ -107,7 +107,7 @@ class AuthController extends GetxController {
 
   Future<bool?> forgotPasswordWithEmail() async {
     isLoading(true);
-    String email = emailController.text.trim();
+    String email = forgotPasswordEmailController.text.trim();
     await authProvider
         .forgotPassword(data: {"email": email}).then((UserResponse? response) {
       isLoading(false);
@@ -515,7 +515,6 @@ class AuthController extends GetxController {
 
   ///Contact us
   var subjectController = TextEditingController();
-
   postContactUs() async {
     isLoading(true);
     var data = {
@@ -529,13 +528,13 @@ class AuthController extends GetxController {
       isLoading(false);
       if (userResponse != null) {
         if (userResponse.success!) {
-          // Get.back();
           AppConstant.displaySnackBar("success", userResponse.message);
           clearContactUsControllers();
         } else
           AppConstant.displaySnackBar('error', userResponse.message);
-      } else
+      } else {
         AppConstant.displaySnackBar('error', "something went wrong!");
+      }
     }).catchError((e) {
       isLoading(false);
       AppConstant.displaySnackBar('error', "$e");

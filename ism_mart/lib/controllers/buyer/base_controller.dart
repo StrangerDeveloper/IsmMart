@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
@@ -279,7 +278,6 @@ class BaseController extends GetxController {
         duration: const Duration(milliseconds: 500), curve: Curves.easeIn);*/
   }
 
-  //End Bottom Navigation Setup
   Future<bool> onBackPressed(BuildContext context) async {
     if (currentPage == 0) {
       final value = await showDialog<bool>(
@@ -331,6 +329,7 @@ class BaseController extends GetxController {
           );
         },
       );
+
       return value == true;
     } else {
       changePage(0);

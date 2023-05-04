@@ -1,0 +1,28 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "ism_mart",
+            "cwd": "ism_mart",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "ism_mart (profile mode)",
+            "cwd": "ism_mart",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "ism_mart (release mode)",
+            "cwd": "ism_mart",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}

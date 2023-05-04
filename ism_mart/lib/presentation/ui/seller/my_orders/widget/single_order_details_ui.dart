@@ -311,9 +311,10 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
         CustomActionIcon(
           onTap: () {
             AppConstant.showBottomSheet(
-                isGetXBottomSheet: true,
-                buildContext: Get.context,
-                widget: addDisputeItems(orderItem: orderItemModel));
+              isGetXBottomSheet: true,
+              buildContext: Get.context,
+              widget: addDisputeItems(orderItem: orderItemModel),
+            );
           },
           icon: Icons.cases_outlined,
           iconColor: kRedColor,
