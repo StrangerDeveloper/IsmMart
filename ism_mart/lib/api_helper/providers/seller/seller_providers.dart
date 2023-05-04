@@ -90,8 +90,12 @@ class SellersApiProvider {
     return ProductResponse.fromResponse(response);
   }
 
-  Future<ProductResponse> updateProduct(
-      {String? token, ProductModel? model}) async {
+  Future<ProductResponse> updateProduct({
+    String? token,
+    ProductModel? model,
+  }) async {
+    print(
+        "Data form Model is === ${model!.id} ${model.name} ${model.price} ${model.discount} ");
     /* var response =
         await _sellersApiRepo.updateProduct(token: token, productModel: model);
    print("Update Prod provider Response: $response");
@@ -139,10 +143,11 @@ class SellersApiProvider {
     var headers = {'authorization': '$token', 'Cookie': 'XSRF-token=$token'};
     var request = http.MultipartRequest('PATCH', Uri.parse(url));
     request.fields.addAll({
-      'name': 'Apple Machbook Pro M2',
-      'id': '329',
-      'discount': '15',
-      'price': '300'
+      'name': '${model.name}',
+      'id': '${model.id}',
+      'discount': '${model.discount}',
+      'price': '${model.price}',
+      'stock': '${model.discount}'
     });
     // request.files.add(await http.MultipartFile.fromPath('thumbnail',
     //     '/C:/Users/moizu/Pictures/Screenshots/Screenshot (2).png'));
