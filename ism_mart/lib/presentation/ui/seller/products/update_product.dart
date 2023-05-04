@@ -192,6 +192,7 @@ class UpdateProductUI extends GetView<SellersController> {
                                   onTap: () {
                                     if (formKey.currentState!.validate()) {
                                       if (controller.discountMessage.isEmpty) {
+                                       
                                         controller.updateProduct(
                                             model: productModel);
                                       } else {
