@@ -64,7 +64,7 @@ class CustomOrderStatsItem extends StatelessWidget {
                     title: title,
                     weight: FontWeight.w600,
                     textAlign: TextAlign.start,
-                    size: 15,
+                    size: 13,
                   ),
                   isPriceWidget!
                       ? CustomPriceWidget(title: "$value")
@@ -72,7 +72,7 @@ class CustomOrderStatsItem extends StatelessWidget {
                           title: "$value",
                           weight: FontWeight.bold,
                           textAlign: TextAlign.center,
-                          size: 20,
+                          size: 16,
                         ),
                 ],
               ),

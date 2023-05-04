@@ -62,6 +62,8 @@ class CartController extends GetxController
       isLoading(false);
       change(value, status: RxStatus.success());
       //change(MyStates(state1: value,), status: RxStatus.success());
+    }).catchError((e) {
+      change(null, status: RxStatus.empty());
     });
   }
 

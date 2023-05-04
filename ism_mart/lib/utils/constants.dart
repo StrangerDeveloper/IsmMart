@@ -107,6 +107,7 @@ var appBarTitleSize = GoogleFonts.lato(
 class AppConstant {
   AppConstant._();
 
+  ///Stripe
   static const live_pk =
       "pk_live_51LrbOmEmpuNuAXn2Gq2LMtj73x7dlz4uX8UYQn1coVIFDK69qc3d2td9ttdGp5Pnv1u2vrdxyYXNoeuXMk4gbTFu00sENXZzqS";
   static const test_pk =
@@ -198,7 +199,6 @@ class AppConstant {
     } else {
       Scaffold.of(buildContext).showBottomSheet(
         (context) => widget!,
-
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(15), topRight: Radius.circular(15)),
@@ -243,14 +243,16 @@ class AppConstant {
     }
   }
 
-  static String getCurrencySymbol({String? languageCode}) {
-    switch (languageCode) {
+  static String getCurrencySymbol({String? countryCode}) {
+    switch (countryCode) {
       case "us":
         return "\$";
       case "pkr":
         return "Rs.";
       case "uae":
         return "AED";
+      case "gbp":
+        return "\£";
       default:
         return "Rs";
     }
@@ -274,6 +276,10 @@ class AppConstant {
       default:
         return Colors.blue;
     }
+  }
+
+  static Color getStockColor(int? stock) {
+    return stock! > 0 ? kLimeGreenColor : kRedColor;
   }
 
   static Future<File> compressImage(imagePath, {fileLength}) async {
