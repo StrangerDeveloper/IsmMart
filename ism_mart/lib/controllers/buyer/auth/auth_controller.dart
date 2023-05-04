@@ -10,6 +10,7 @@ class AuthController extends GetxController {
 
   AuthController(this.authProvider);
 
+  var forgotPasswordEmailController = TextEditingController();
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
   var confirmPassController = TextEditingController();
@@ -104,26 +105,25 @@ class AuthController extends GetxController {
     //isLoading(false);
   }
 
-  Future<void> forgotPasswordWithEmail() async {
+  Future<bool?> forgotPasswordWithEmail() async {
     isLoading(true);
-    String email = emailController.text.trim();
-    await authProvider
-        .forgotPassword(data: {"email": email}).then((UserResponse? response) {
-      isLoading(false);
-      if (response != null) {
-        if (response.success!) {
-          Get.back();
-          AppConstant.displaySnackBar("success", response.message);
-        } else {
-          AppConstant.displaySnackBar("error", response.message);
-        }
-      } else
-        AppConstant.displaySnackBar(
-            "error", "Something went wrong with credentials");
-    }).catchError((onError) {
-      isLoading(false);
-      debugPrint("resetPassword: $onError");
-    });
+    String email = forgotPasswordEmailController.text.trim();
+    UserResponse? response =
+        await authProvider.forgotPassword(data: {"email": email});
+    isLoading(false);
+    if (response != null) {
+      if (response.success!) {
+        AppConstant.displaySnackBar("success", response.message);
+        return true;
+      } else {
+        AppConstant.displaySnackBar("error", response.message);
+        return false;
+      }
+    } else {
+      AppConstant.displaySnackBar(
+          "error", "Something went wrong with credentials");
+      return false;
+    }
   }
 
   forgotPasswordOtp() async {
@@ -510,8 +510,8 @@ class AuthController extends GetxController {
 
   ///Contact us
   var subjectController = TextEditingController();
-
   postContactUs() async {
+    isLoading(true);
     var data = {
       "name": "${firstNameController.text}",
       "email": "${emailController.text.trim()}",
@@ -520,16 +520,18 @@ class AuthController extends GetxController {
     };
 
     await authProvider.contactUs(data: data).then((UserResponse? userResponse) {
+      isLoading(false);
       if (userResponse != null) {
         if (userResponse.success!) {
-          // Get.back();
           AppConstant.displaySnackBar("success", userResponse.message);
           clearContactUsControllers();
         } else
           AppConstant.displaySnackBar('error', userResponse.message);
-      } else
+      } else {
         AppConstant.displaySnackBar('error', "something went wrong!");
+      }
     }).catchError((e) {
+      isLoading(false);
       AppConstant.displaySnackBar('error', "$e");
     });
   }

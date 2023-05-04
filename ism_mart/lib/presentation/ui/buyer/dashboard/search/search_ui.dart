@@ -242,8 +242,6 @@ class SearchUI extends GetView<SearchController> {
                             padding: const EdgeInsets.all(8.0),
                             child: InkWell(
                               onTap: () {
-                                controller.minPriceController.clear();
-                                controller.maxPriceController.clear();
                                 controller
                                     .selectedCategoryId(categoryModel.id!);
                                 controller.makeSelectedCategory(categoryModel);
@@ -349,7 +347,11 @@ class SearchUI extends GetView<SearchController> {
           height: 35,
         ),
         CustomButton(
-          onTap: () => controller.applyFilter(),
+          onTap: () {
+            controller.applyFilter();
+            controller.minPriceController.clear();
+            controller.maxPriceController.clear();
+          },
           text: "Search",
           width: 120,
           height: 35,

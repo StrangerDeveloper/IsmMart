@@ -11,26 +11,33 @@ class BaseLayout extends GetView<BaseController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      body: PageView(
-        controller: controller.bottomNavPageController,
-        physics: const NeverScrollableScrollPhysics(),
-        children: [...controller.bottomNavScreens],
+    return WillPopScope(
+      onWillPop: () {
+        return controller.onBackPressed(context);
+      },
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        body: PageView(
+          controller: controller.bottomNavPageController,
+          physics: const NeverScrollableScrollPhysics(),
+          children: [...controller.bottomNavScreens],
+        ),
+        bottomNavigationBar: _buildBottomNavBar(controller),
+        //: Work remaining of reward button if needed
+        /*floatingActionButton: FloatingActionButton.extended(
+          onPressed: (){},
+          elevation: 5,
+          icon: Icon(Icons.shopping_bag, color: kPrimaryColor, ),
+          label: CustomText(title: 'Rewards', style: headline3,),
+          //foregroundColor: Colors.blueGrey,
+          backgroundColor:  Colors.indigo[100]!,
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,*/
       ),
-      bottomNavigationBar: _buildBottomNavBar(controller),
-      //: Work remaining of reward button if needed
-      /*floatingActionButton: FloatingActionButton.extended(
-        onPressed: (){},
-        elevation: 5,
-        icon: Icon(Icons.shopping_bag, color: kPrimaryColor, ),
-        label: CustomText(title: 'Rewards', style: headline3,),
-        //foregroundColor: Colors.blueGrey,
-        backgroundColor:  Colors.indigo[100]!,
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,*/
     );
   }
+
+
 
   _buildBottomNavBar(BaseController navController) {
     return BottomAppBar(
@@ -42,16 +49,26 @@ class BaseLayout extends GetView<BaseController> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               _getNavBarItems(
-                  icon: IconlyLight.home, title: langKey.home.tr, page: 0),
+                icon: IconlyLight.home,
+                title: langKey.home.tr,
+                page: 0,
+              ),
               _getNavBarItems(
-                  icon: IconlyLight.category,
-                  title: langKey.categories.tr,
-                  page: 1),
+                icon: IconlyLight.category,
+                title: langKey.categories.tr,
+                page: 1,
+              ),
               _getNavBarItems(
-                  icon: IconlyLight.bag_2, title: langKey.deals.tr, page: 4),
+                icon: IconlyLight.bag_2,
+                title: langKey.deals.tr,
+                page: 4,
+              ),
               controller.cartCount.value <= 0
                   ? _getNavBarItems(
-                      icon: IconlyLight.buy, title: langKey.myCart.tr, page: 2)
+                      icon: IconlyLight.buy,
+                      title: langKey.myCart.tr,
+                      page: 2,
+                    )
                   : CartIcon(
                       onTap: () {
                         //Get.to(Routes.cartRoute);
@@ -63,7 +80,10 @@ class BaseLayout extends GetView<BaseController> {
                           page: 2),
                     ),
               _getNavBarItems(
-                  icon: Icons.menu, title: langKey.menu.tr, page: 3),
+                icon: Icons.menu,
+                title: langKey.menu.tr,
+                page: 3,
+              ),
             ],
           ),
         ),
