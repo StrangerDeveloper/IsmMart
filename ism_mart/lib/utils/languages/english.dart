@@ -6,6 +6,7 @@ class English {
         key.exitApp: 'Exit App',
         key.exitDialogDesc: 'Are you sure you want to exit?',
         key.resetPass: 'Reset Password',
+        key.phoneValidate:'Phone No Minimum Required 11 digits',
 
         ///settings screen
         key.settings: 'Settings',

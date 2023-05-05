@@ -111,9 +111,29 @@ class AuthProvider {
     return UserResponse.fromResponse(response);
   }
 
-  Future<UserResponse> updateUser({token, title, value}) async {
+  Future<UserResponse> updateUser({token, title, value, field}) async {
     var data = {'$title': '$value'};
-    var response = await _authRepo.updateUser(token: token, data: data);
+    // print("title is api => $title");
+
+    // var response = await _authRepo.updateUser(token: token, data: data);
+    var headers = {
+      'authorization': 'Bearer $token',
+      'Cookie': 'XSRF-token=$token'
+    };
+    var request = http.MultipartRequest(
+        'PATCH', Uri.parse('https://ismmart-api.com/api/user/update'));
+    request.fields.addAll({'$field': title.toString()});
+
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+    var res = http.Response.fromStream(response);
+
+    // if (response.statusCode == 200) {
+    //   print(await response.stream.bytesToString());
+    // } else {
+    //   print(response.reasonPhrase);
+    // }
     return UserResponse.fromResponse(response);
   }
 

@@ -11,6 +11,8 @@ import 'package:iconly/iconly.dart';
 import 'package:ism_mart/utils/helpers/common_functions.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
+import '../../../buyer/dispute_list/all_dispute_view.dart';
+
 class SingleOrderDetailsUI extends GetView<OrderController> {
   const SingleOrderDetailsUI(
       {Key? key, this.orderModel, this.calledForBuyerOrderDetails})
@@ -149,6 +151,13 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
 
                       AppConstant.spaceWidget(height: 20),
                       _invoiceBody(model: model),
+                      CustomTextBtn(
+                        width: 150,
+                        onPressed: () {
+                          Get.to(() => AllDisputeView());
+                        },
+                        child: Text('View All Disputes'),
+                      ),
 
                       AppConstant.spaceWidget(height: 10),
                       _invoiceFooter(orderModel: model),
@@ -414,7 +423,8 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                         ? CustomLoading(isItBtn: true)
                         : CustomButton(
                             onTap: () async {
-                              await controller.submitReviewBtn(orderItem: orderItem);
+                              await controller.submitReviewBtn(
+                                  orderItem: orderItem);
                             },
                             text: submit.tr,
                             height: 40,

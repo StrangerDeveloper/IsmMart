@@ -336,21 +336,25 @@ class AuthController extends GetxController {
         "title": firstName.tr,
         "subtitle": userModel!.firstName ?? '',
         "icon": Icons.person_rounded,
+        "field": "firstName",
       },
       {
         "title": lastName.tr,
         "subtitle": userModel!.lastName ?? '',
         "icon": Icons.person_rounded,
+        "field": "lastName"
       },
       {
         "title": phone.tr,
         "subtitle": userModel!.phone ?? '',
         "icon": Icons.phone_iphone_rounded,
+        "field": "phone",
       },
       {
         "title": address.tr,
         "subtitle": userModel!.address ?? '',
-        "icon": Icons.location_on_rounded
+        "icon": Icons.location_on_rounded,
+        "field": "address",
       },
       {
         "title": country.tr,
@@ -430,11 +434,15 @@ class AuthController extends GetxController {
     //update();
   }
 
-  updateUser({title, value}) async {
+  updateUser({title, value, field}) async {
+    title = editingTextController.text;
+    userModel!.firstName = title;
+    print("title is => $title");
     if (userToken != null) {
       isLoading(true);
       await authProvider
-          .updateUser(token: userToken, title: title, value: value)
+          .updateUser(
+              token: userToken, title: title, value: value, field: field)
           .then((UserResponse? userResponse) {
         isLoading(false);
         if (userResponse != null) {
