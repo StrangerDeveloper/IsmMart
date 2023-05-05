@@ -8,4 +8,3 @@ BaseController baseController = Get.find<BaseController>();
 ThemesController themeController = Get.put(ThemesController());
 
 LanguageController languageController = Get.put(LanguageController());
-CurrencyController currencyController = Get.find<CurrencyController>();

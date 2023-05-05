@@ -41,7 +41,6 @@ class SingleProductView extends GetView<ProductController> {
       if (state == null) {
         return CustomLoading(isDarkMode: isDarkMode);
       }
-
       return _build(productModel: state);
     },
         onLoading: CustomLoading(isDarkMode: isDarkMode),
@@ -228,28 +227,11 @@ class SingleProductView extends GetView<ProductController> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
-                  flex: 6,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        flex: 4,
-                        child: CustomText(
-                          title: productModel!.name,
-                          maxLines: 3,
-                          style: headline3,
-                        ),
-                      ),
-                      Expanded(
-                          flex: 2,
-                          child: CustomText(
-                            title: productModel.stock! > 0
-                                ? "In Stock"
-                                : "Out of Stock",
-                            size: 12,
-                            color:
-                                AppConstant.getStockColor(productModel.stock!),
-                          )),
-                    ],
+                  flex: 5,
+                  child: CustomText(
+                    title: productModel!.name,
+                    maxLines: 3,
+                    style: headline3,
                   ),
                 ),
                 AppConstant.spaceWidget(width: 5),
@@ -965,11 +947,7 @@ class SingleProductView extends GetView<ProductController> {
       children: [
         CustomButton(
           onTap: () async {
-            if (productModel!.stock! > 0)
-              await controller.addItemLocalCart(product: productModel);
-            else
-              AppConstant.displaySnackBar("error",
-                  "The item you want is not available right now. Please wait for it to be restocked");
+            await controller.addItemLocalCart(product: productModel);
             //controller.addItemToCart(product: productModel);
             //Get.back();
           },

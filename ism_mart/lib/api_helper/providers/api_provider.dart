@@ -96,8 +96,8 @@ class ApiProvider {
     return response.map((e) => QuestionModel.fromJson(e)).toList();
   }
 
-  Future<ResponseModel> postProductQuestion({token, model}) async {
-    var response = await _apiRepository.postQuestion(token: token, data: model);
+  Future<ResponseModel> postProductQuestion({token, model}) async{
+    var response =  await _apiRepository.postQuestion(token: token, data: model);
     return ResponseModel.fromResponse(response);
   }
 
@@ -133,17 +133,6 @@ class ApiProvider {
   Future<JSON> postStripePaymentInfo({data}) async {
     var response = await _apiRepository.reqStripePayment(
         client_secret: AppConstant.SECRET_KEY, body: data);
-    return response;
-  }
-
-  /**
-   *
-   * Flutter Stripe
-   * */
-
-  Future<JSON> convertCurrency({to, from, amount}) async {
-    var response = await _apiRepository.reqCurrencyConverter(
-        to: to, from: from, amount: amount);
     return response;
   }
 

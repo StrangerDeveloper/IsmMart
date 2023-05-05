@@ -23,12 +23,12 @@ class DashboardUI extends GetView<BaseController> {
             delegate: SliverChildListDelegate(
               [
                 _slider(controller.sliderImages),
+
                 StickyLabel(text: langKey.topCategories.tr),
                 _topCategoriesGrid(controller.categories),
                 //kDivider,
                 _displayDiscountProducts(),
                 // kDivider,
-                ///Popular, ismmart orginal,
                 Obx(() => _displayProducts(
                     productMap: controller.productsWithTypesMap)),
                 kDivider,

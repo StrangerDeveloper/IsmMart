@@ -16,4 +16,3 @@ export 'seller/membership/membership_controller.dart';
 export 'seller/seller_bindings.dart';
 export 'seller/seller_controller.dart';
 export 'theme/theme_controller.dart';
-export 'currency/currency_controller.dart';
