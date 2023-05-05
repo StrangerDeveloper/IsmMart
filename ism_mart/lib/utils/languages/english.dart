@@ -2,7 +2,7 @@ import 'translations_key.dart' as key;
 
 class English {
   Map<String, String> get translations => {
-        ///New
+        //new
         key.exitApp: 'Exit App',
         key.exitDialogDesc: 'Are you sure you want to exit?',
         key.resetPass: 'Reset Password',
@@ -172,7 +172,8 @@ class English {
         key.prodSkuReq: 'Product sku required',
 
         key.email: "Email",
-        key.emailReq: 'Invalid Email Format?',
+        key.emailReq: 'Email is required!.',
+        key.invalidEmail: 'Invalid Email Format?',
         key.password: 'Password',
         key.passwordLengthReq: 'Password must be at least 8 characters long?',
         key.fullName: 'Full Name',

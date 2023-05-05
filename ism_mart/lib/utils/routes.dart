@@ -1,7 +1,5 @@
 import 'package:get/get.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
-import 'package:ism_mart/presentation/ui/buyer/account/forgot_password/email_input.dart';
-import 'package:ism_mart/presentation/ui/buyer/account/forgot_password/reset_password.dart';
 import 'package:ism_mart/presentation/ui/exports_ui.dart';
 
 class Routes {
@@ -35,7 +33,7 @@ class Routes {
     ),*/
     GetPage(
       name: loginRoute,
-      page: () => const SignInUI(),
+      page: () => SignInUI(),
       binding: BaseBindings(),
     ),
     GetPage(
@@ -44,15 +42,13 @@ class Routes {
       binding: BaseBindings(),
     ),
     GetPage(
-      name: resetPasswordRoute,
-      page: () => const ForgotPassword(),
-      binding: BaseBindings()
-    ),
+        name: resetPasswordRoute,
+        page: () => const ForgotPassword(),
+        binding: BaseBindings()),
     GetPage(
         name: passwordResetEmailInput,
         page: () => const EmailInput(),
-      binding: BaseBindings()
-    ),
+        binding: BaseBindings()),
     GetPage(
         name: initRoute,
         page: () => const BaseLayout(),
@@ -65,6 +61,14 @@ class Routes {
           SearchBindings(),
           ProductBinding(),
         ]),
+    GetPage(
+        name: resetPasswordRoute,
+        page: () => const ForgotPassword(),
+        binding: BaseBindings()),
+    GetPage(
+        name: passwordResetEmailInput,
+        page: () => const EmailInput(),
+        binding: BaseBindings()),
     GetPage(
       name: cartRoute,
       page: () => CartUI(),

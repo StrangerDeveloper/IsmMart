@@ -5,10 +5,8 @@ import 'package:get/get.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/export_presentation.dart';
-import 'package:ism_mart/presentation/widgets/custom_textfield.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:iconly/iconly.dart';
-import 'package:ism_mart/utils/helpers/common_functions.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class SingleOrderDetailsUI extends GetView<OrderController> {
@@ -414,7 +412,8 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                         ? CustomLoading(isItBtn: true)
                         : CustomButton(
                             onTap: () async {
-                              await controller.submitReviewBtn(orderItem: orderItem);
+                              await controller.submitReviewBtn(
+                                  orderItem: orderItem);
                             },
                             text: submit.tr,
                             height: 40,

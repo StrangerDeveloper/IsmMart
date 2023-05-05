@@ -108,22 +108,27 @@ class AuthController extends GetxController {
   Future<bool?> forgotPasswordWithEmail() async {
     isLoading(true);
     String email = forgotPasswordEmailController.text.trim();
-    UserResponse? response =
-        await authProvider.forgotPassword(data: {"email": email});
-    isLoading(false);
-    if (response != null) {
-      if (response.success!) {
-        AppConstant.displaySnackBar("success", response.message);
-        return true;
-      } else {
-        AppConstant.displaySnackBar("error", response.message);
-        return false;
-      }
-    } else {
-      AppConstant.displaySnackBar(
-          "error", "Something went wrong with credentials");
+    await authProvider
+        .forgotPassword(data: {"email": email}).then((UserResponse? response) {
+      isLoading(false);
+      if (response != null) {
+        if (response.success!) {
+          //Get.back();
+          AppConstant.displaySnackBar("success", response.message);
+          return true;
+        } else {
+          AppConstant.displaySnackBar("error", response.message);
+        }
+      } else
+        AppConstant.displaySnackBar(
+            "error", "Something went wrong with credentials");
       return false;
-    }
+    }).catchError((onError) {
+      isLoading(false);
+      debugPrint("resetPassword: $onError");
+      return false;
+    });
+    return false;
   }
 
   forgotPasswordOtp() async {

@@ -90,68 +90,21 @@ class SellersApiProvider {
     return ProductResponse.fromResponse(response);
   }
 
-  Future<ProductResponse> updateProduct({
-    String? token,
-    ProductModel? model,
-  }) async {
-    print(
-        "Data form Model is === ${model!.id} ${model.name} ${model.price} ${model.discount} ");
-    /* var response =
-        await _sellersApiRepo.updateProduct(token: token, productModel: model);
-   print("Update Prod provider Response: $response");
-    return ProductResponse.fromResponse(response);*/
-
-    /*final data = {
-      "id": "${model!.id}",
-      "name": "${model.name}",
-      "price": "${model.price}",
-      "stock": "${model.stock}",
-      "discount": "${model.discount ?? 0}",
-      "description": "${model.description}",
-    };
-    final body = data.keys.map((key) {
-      final value = data[key];
-      return '$key=${Uri.encodeComponent(value.toString())}';
-    }).join('&');
-    final response = await http.patch(
-      Uri.parse(url),
-      headers: {
-        'Content-Type': 'multipart/form-data',
-        'Authorization': '$token'
-      },
-      body: body,
-    );*/
-
+  Future<ProductResponse> updateProduct(
+      {String? token, ProductModel? model}) async {
     final url = "${ApiConstant.baseUrl}vendor/products/update";
-    //  final request = http.MultipartRequest('PATCH', Uri.parse(url));
-    //request.headers['Accept'] = 'multipart/form-data';
-    // request.headers['content-type'] = 'multipart/form-data';
-    // request.headers['authorization'] = '$token';
-
-    // request.fields['id'] = model!.id!.toString();
-    // request.fields['name'] = model.name!;
-    // // request.fields['thumbnail'] = model.thumbnail!;
-    // request.fields['price'] = "${model.price}";
-
-    // request.fields['discount'] = "${model.discount}";
-    // request.fields['description'] = "${model.description}";
-
-    // requestInterceptorMultipart(request);
-
-    // final response = await request.send();
-
     var headers = {'authorization': '$token', 'Cookie': 'XSRF-token=$token'};
-    var request = http.MultipartRequest('PATCH', Uri.parse(url));
+    final request = http.MultipartRequest('PATCH', Uri.parse(url));
+
+    request.headers.addAll(headers);
+
     request.fields.addAll({
-      'name': '${model.name}',
+      'name': '${model!.name}',
       'id': '${model.id}',
       'discount': '${model.discount}',
       'price': '${model.price}',
       'stock': '${model.discount}'
     });
-    // request.files.add(await http.MultipartFile.fromPath('thumbnail',
-    //     '/C:/Users/moizu/Pictures/Screenshots/Screenshot (2).png'));
-    request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
 
@@ -161,7 +114,7 @@ class SellersApiProvider {
       print(data);
       return ProductResponse.fromResponse(data);
     } else {
-      http.StreamedResponse res = handleStreamResponse(response);
+      http.StreamedResponse res = await handleStreamResponse(response);
       return ProductResponse.fromResponse(
           json.decode(await res.stream.bytesToString()));
     }

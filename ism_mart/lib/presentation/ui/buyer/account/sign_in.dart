@@ -6,11 +6,11 @@ import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class SignInUI extends GetView<AuthController> {
-  const SignInUI({Key? key}) : super(key: key);
+  SignInUI({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final formKey = GlobalKey<FormState>();
+    final _formKey = GlobalKey<FormState>();
     return SafeArea(
       child: Scaffold(
         body: CustomScrollView(
@@ -47,7 +47,7 @@ class SignInUI extends GetView<AuthController> {
                   ),
                   AppConstant.spaceWidget(height: 40),
                   Form(
-                    key: formKey,
+                    key: _formKey,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20.0, vertical: 12),
@@ -64,11 +64,12 @@ class SignInUI extends GetView<AuthController> {
                                 AutovalidateMode.onUserInteraction,
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return "Email is required for this field";
-                              } else
+                                return langKey.emailReq.tr;
+                              } else {
                                 return !GetUtils.isEmail(value)
-                                    ? langKey.emailReq.tr
+                                    ? langKey.invalidEmail.tr
                                     : null;
+                              }
                             },
                             keyboardType: TextInputType.emailAddress,
                             onChanged: (value) {},
@@ -96,7 +97,7 @@ class SignInUI extends GetView<AuthController> {
                                 ? CustomLoading(isItBtn: true)
                                 : CustomButton(
                                     onTap: () {
-                                      if (formKey.currentState!.validate()) {
+                                      if (_formKey.currentState!.validate()) {
                                         controller.login();
                                       }
                                     },
@@ -111,6 +112,8 @@ class SignInUI extends GetView<AuthController> {
                             child: InkWell(
                               onTap: () =>
                                   Get.toNamed(Routes.passwordResetEmailInput),
+
+                              //showForgotPasswordDialog(),
                               child: Text(
                                 langKey.forgotPassword.tr,
                                 style: headline3.copyWith(
@@ -342,59 +345,59 @@ class SignInUI extends GetView<AuthController> {
   //   );
   // }
 
-  void showResendVerificationLinkDialog() {
-    final formKey = GlobalKey<FormState>();
-    Get.defaultDialog(
-        title: "Resend Verification Link",
-        content: Form(
-          key: formKey,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                AppConstant.spaceWidget(height: 20),
-                FormInputFieldWithIcon(
-                  controller: controller.emailController,
-                  iconPrefix: Icons.email,
-                  labelText: 'Email',
-                  iconColor: kPrimaryColor,
-                  autofocus: false,
-                  textStyle: bodyText1,
-                  autoValidateMode: AutovalidateMode.onUserInteraction,
-                  validator: (value) => !GetUtils.isEmail(value!)
-                      ? "Invalid Email Format?"
-                      : null,
-                  keyboardType: TextInputType.emailAddress,
-                  onChanged: (value) {},
-                  onSaved: (value) {},
-                ),
-                AppConstant.spaceWidget(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CustomButton(
-                      onTap: () {
-                        Get.back();
-                      },
-                      text: "Cancel",
-                      width: 100,
-                      height: 35,
-                      color: kPrimaryColor,
-                    ),
-                    CustomButton(
-                      onTap: () async {
-                        await controller.resendEmailVerificationLink();
-                      },
-                      text: "Send",
-                      width: 100,
-                      height: 35,
-                      color: kPrimaryColor,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ));
-  }
+  // void showResendVerificationLinkDialog() {
+  //   final formKey = GlobalKey<FormState>();
+  //   Get.defaultDialog(
+  //       title: "Resend Verification Link",
+  //       content: Form(
+  //         key: formKey,
+  //         child: Padding(
+  //           padding: const EdgeInsets.all(8.0),
+  //           child: Column(
+  //             children: [
+  //               AppConstant.spaceWidget(height: 20),
+  //               FormInputFieldWithIcon(
+  //                 controller: controller.emailController,
+  //                 iconPrefix: Icons.email,
+  //                 labelText: 'Email',
+  //                 iconColor: kPrimaryColor,
+  //                 autofocus: false,
+  //                 textStyle: bodyText1,
+  //                 autoValidateMode: AutovalidateMode.onUserInteraction,
+  //                 validator: (value) => !GetUtils.isEmail(value!)
+  //                     ? "Invalid Email Format?"
+  //                     : null,
+  //                 keyboardType: TextInputType.emailAddress,
+  //                 onChanged: (value) {},
+  //                 onSaved: (value) {},
+  //               ),
+  //               AppConstant.spaceWidget(height: 20),
+  //               Row(
+  //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                 children: [
+  //                   CustomButton(
+  //                     onTap: () {
+  //                       Get.back();
+  //                     },
+  //                     text: "Cancel",
+  //                     width: 100,
+  //                     height: 35,
+  //                     color: kPrimaryColor,
+  //                   ),
+  //                   CustomButton(
+  //                     onTap: () async {
+  //                       await controller.resendEmailVerificationLink();
+  //                     },
+  //                     text: "Send",
+  //                     width: 100,
+  //                     height: 35,
+  //                     color: kPrimaryColor,
+  //                   ),
+  //                 ],
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       ));
+  // }
 }
