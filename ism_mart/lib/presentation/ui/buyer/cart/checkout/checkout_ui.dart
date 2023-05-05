@@ -71,8 +71,6 @@ class CheckoutUI extends GetView<CheckoutController> {
                           width: 280,
                           height: 50,
                           onTap: () {
-                            print(
-                                ">>>TotalCart: ${controller.cartController.totalCartAmount.value}");
                             if (controller
                                     .cartController.totalCartAmount.value <=
                                 1000) {
@@ -677,11 +675,7 @@ class CheckoutUI extends GetView<CheckoutController> {
                 itemCount: controller.getCartItemsList().length,
                 itemBuilder: (context, index) {
                   CartModel cartModel = controller.getCartItemsList()[index];
-                  return SingleCartItems(
-                    cartModel: cartModel,
-                    index: index,
-                    calledFromCheckout: true,
-                  );
+                  return SingleCartItems(cartModel: cartModel, index: index);
                 },
               ),
       ),

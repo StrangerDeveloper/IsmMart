@@ -28,7 +28,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
   void setDiscount(int? discount) {
     if (discount! > 0 && discount < 10) {
       discountMessage("Discount should be greater than 10");
-    } else if (discount >= 90) {
+    } else if (discount >= 100) {
       discountMessage("Discount should not be greater or equal to 100");
     } else {
       discountMessage("");
@@ -65,11 +65,11 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
   int page = 1;
 
   fetchMyProducts() async {
-    myProductsList.clear();
     await _apiProvider
         .fetchMyProducts(
             token: authController.userToken, limit: productsLimit, page: page)
         .then((response) {
+      myProductsList.clear();
       myProductsList.addAll(response.products!);
     });
   }
@@ -111,8 +111,8 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
       isLoading(false);
       if (response != null) {
         if (response.success != null) {
-          Get.back();
           fetchMyProducts();
+          Get.back();
           AppConstant.displaySnackBar('success', "${response.message}");
           clearControllers();
         } else {
@@ -140,14 +140,13 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
           .then((response) {
         if (response.success != null) {
           if (response.success!) {
-            fetchMyProducts();
             AppConstant.displaySnackBar('success', response.message);
           } else
             AppConstant.displaySnackBar('error', response.message);
         }
       }).catchError(onError);
     });
-    //fetchMyProducts();
+    fetchMyProducts();
     //myProductsList.refresh();
   }
 
@@ -251,9 +250,6 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
 
   addProduct() async {
     isLoading(true);
-    var discount = prodDiscountController.text.isEmpty
-        ? 0
-        : num.parse(prodDiscountController.text);
 
     ProductModel newProduct = ProductModel(
         name: prodNameController.text.trim(),
@@ -262,8 +258,9 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
         categoryId: selectedCategoryID.value,
         subCategoryId: selectedSubCategoryID.value,
         description: prodDescriptionController.text,
-        discount: discount);
-    print(">>>Discount: ${newProduct.discount}");
+        discount: num.parse(prodDiscountController.text.isEmpty
+            ? "0"
+            : prodDiscountController.text));
     await _apiProvider
         .addProductWithHttp(
             token: authController.userToken,

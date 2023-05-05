@@ -61,13 +61,12 @@ class MyProducts extends GetView<SellersController> {
                     child: GridView.builder(
                       controller: controller.scrollController,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: AppResponsiveness.getGridItemCount(),
-                          mainAxisExtent:
-                              AppResponsiveness.getMainAxisExtentPoint28(),
-                          mainAxisSpacing: 10,
-                          crossAxisSpacing: 10
-                          //childAspectRatio: 0.8,
-                          ),
+                        crossAxisCount: AppResponsiveness.getGridItemCount(),
+                        mainAxisExtent:
+                            AppResponsiveness.getMainAxisExtentPoint25(),
+                        mainAxisSpacing: 5,
+                        //childAspectRatio: 0.8,
+                      ),
                       itemCount: controller.myProductsList.length,
                       itemBuilder: (_, index) {
                         ProductModel productModel =
@@ -106,7 +105,7 @@ class MyProducts extends GetView<SellersController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: AppResponsiveness.getHeight90_110(),
+                    height: AppResponsiveness.getHeight100_120(),
                     width: double.infinity,
                     child: CustomNetworkImage(
                         imageUrl:
@@ -149,7 +148,6 @@ class MyProducts extends GetView<SellersController> {
                                 title: "${model.discount}% OFF",
                                 color: kOrangeColor,
                                 weight: FontWeight.w600,
-                                size: 12,
                               ),
                             ],
                           ),
