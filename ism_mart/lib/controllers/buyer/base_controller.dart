@@ -337,8 +337,6 @@ class BaseController extends GetxController {
     }
   }
 
-  //End Bottom Navigation Setup
-
   _clearLists() {
     sliderImages.clear();
     categories.clear();

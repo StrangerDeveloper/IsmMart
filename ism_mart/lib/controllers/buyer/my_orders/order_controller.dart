@@ -236,24 +236,18 @@ class OrderController extends GetxController
     authController.fetchUserCoins();
   }
 
-  void showSnackBar({title = 'error', message = 'Something went wrong'}) {
-    AppConstant.displaySnackBar(title, message);
-  }
-
   submitReviewBtn({OrderItem? orderItem}) async {
     if (reviewFormKey.currentState?.validate() ?? false) {
       isLoading(true);
-
       JSON data = {
         "text": reviewTxtFieldController.text,
         "rating": rating.value,
         "productId": orderItem!.product!.id,
         "orderItemId": orderItem.id
       };
-
       await _orderProvider
-              .createReview(token: authController.userToken, data: data)
-              .then((PaymentIntentResponse? response) {
+          .createReview(token: authController.userToken, data: data)
+          .then((PaymentIntentResponse? response) {
         print(response?.message);
         isLoading(false);
         if (response != null) {
@@ -267,11 +261,14 @@ class OrderController extends GetxController
         } else {
           showSnackBar();
         }
-      }) /*.catchError((e) {
-      isLoading(false);
-      print(">>>Dispute $e");
-    })*/
-          ;
+      }).catchError((e) {
+        isLoading(false);
+        print(">>>Dispute $e");
+      });
     }
+  }
+
+  void showSnackBar({title = 'error', message = 'Something went wrong'}) {
+    AppConstant.displaySnackBar(title, message);
   }
 }

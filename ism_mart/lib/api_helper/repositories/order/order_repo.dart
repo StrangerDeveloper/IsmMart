@@ -105,19 +105,19 @@ class OrderRepository {
     }
   }
 
-  /// Payment Apis
-  Future<dynamic> postPaymentIntent({token, data}) async {
+  Future<dynamic> postReview({token, data}) async {
     var response = await _apiService.post(
-        endpoint: "payment/paymentIntent",
+        endpoint: "productReviews/add",
         body: data,
         requiresAuthToken: true,
         token: token);
     return response.body;
   }
 
-  Future<dynamic> postReview({token, data}) async {
+  /// Payment Apis
+  Future<dynamic> postPaymentIntent({token, data}) async {
     var response = await _apiService.post(
-        endpoint: "productReviews/add",
+        endpoint: "payment/paymentIntent",
         body: data,
         requiresAuthToken: true,
         token: token);

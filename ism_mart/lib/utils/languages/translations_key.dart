@@ -2,9 +2,7 @@
  *
  *  Settings
  * */
-
 const exitApp = "exitApp", exitDialogDesc = "exitDialogDesc";
-
 const settings = "settings",
     general = "general",
     account = "account",
@@ -145,6 +143,7 @@ const login = "login",
  */
 const email = "email",
     emailReq = "emailReq",
+    invalidEmail = "invalidEmail",
     password = "password",
     passwordLengthReq = "passwordReq",
       phoneValidate = "phonevalidate",
