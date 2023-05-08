@@ -307,11 +307,11 @@ class AddProductsUI extends GetView<SellersController> {
                                             .discountMessage.isEmpty) {
                                           controller.addProduct();
                                         } else {
-                                          AppConstant.displaySnackBar('error',
+                                          AppConstant.displaySnackBar(langKey.errorTitle,
                                               "Your discount should be between 10 and 100 percent. Please try again!");
                                         }
                                       } else {
-                                        AppConstant.displaySnackBar('error',
+                                        AppConstant.displaySnackBar(langKey.errorTitle,
                                             langKey.plzSelectSubCategory.tr);
                                       }
                                     }

@@ -45,7 +45,7 @@ class EmailInput extends GetView<AuthController> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Text(
-            'Enter Email To Recieve OTP',
+            langKey.enterEmail,
             style: headline2,
           ),
         ),
@@ -69,7 +69,7 @@ class EmailInput extends GetView<AuthController> {
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return "Empty field";
+                        return langKey.emptyField;
                       } else
                         return !GetUtils.isEmail(value)
                             ? langKey.emailReq.tr

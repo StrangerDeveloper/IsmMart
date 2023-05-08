@@ -51,9 +51,9 @@ class CheckoutUI extends GetView<CheckoutController> {
                 () => Column(
                   children: [
                     _singleShippingCostItem(
-                        title: "Standard", price: 250, delivery: 7),
+                        title: langKey.standard, price: 250, delivery: 7),
                     _singleShippingCostItem(
-                        title: "Free", price: 0, delivery: 14),
+                        title: langKey.free, price: 0, delivery: 14),
                   ],
                 ),
               ),
@@ -71,23 +71,21 @@ class CheckoutUI extends GetView<CheckoutController> {
                           width: 280,
                           height: 50,
                           onTap: () {
-                            print(
-                                ">>>TotalCart: ${controller.cartController.totalCartAmount.value}");
                             if (controller
                                     .cartController.totalCartAmount.value <=
                                 1000) {
                               controller.showSnackBar(
-                                  title: "error",
-                                  message:
-                                      "To proceed with your purchase, kindly note that the minimum order amount required is Rs 1000.");
+                                title: langKey.errorTitle,
+                                message: langKey.toProceedWithPurchase,
+                              );
                               //You cannot use Free Shipping Service under Rs1000
                               return;
                             } else {
                               if (controller.isCardPaymentEnabled.isFalse) {
                                 controller.showSnackBar(
-                                    title: "error",
-                                    message:
-                                        "Please choose your preferred payment method to complete your order.");
+                                  title: langKey.errorTitle,
+                                  message: langKey.preferredPayment,
+                                );
                                 return;
                               }
                               if (controller.defaultAddressModel!.id != null) {
@@ -98,13 +96,15 @@ class CheckoutUI extends GetView<CheckoutController> {
                                           .toString());
                                 } else {
                                   controller.showSnackBar(
-                                      title: "error",
-                                      message: "Cart must not be empty");
+                                    title: langKey.errorTitle,
+                                    message: langKey.cartMustNotEmpty,
+                                  );
                                 }
                               } else
                                 controller.showSnackBar(
-                                    title: "error",
-                                    message: langKey.noDefaultAddressFound.tr);
+                                  title: langKey.errorTitle,
+                                  message: langKey.noDefaultAddressFound.tr,
+                                );
                             }
                           },
                           text: langKey.confirmOrder.tr)),
@@ -132,10 +132,13 @@ class CheckoutUI extends GetView<CheckoutController> {
                 //selected: true,
                 value: price,
                 title: CustomText(
-                  title: "$title Delivery",
+                  title: "$title " + langKey.delivery,
                 ),
                 subtitle: CustomText(
-                  title: "Delivery: $delivery Days Cost : Rs $price.00",
+                  title: langKey.delivery +
+                      ": $delivery " +
+                      langKey.daysCost +
+                      " : Rs $price.00",
                 ),
                 groupValue: controller.shippingCost.value,
                 onChanged: (value) {
@@ -144,8 +147,7 @@ class CheckoutUI extends GetView<CheckoutController> {
               ),
             ),
           ),
-          if (price == 0)
-            CustomText(title: "FREE SHIPPING ON ALL ORDERS ABOVE PKR 1000")
+          if (price == 0) CustomText(title: langKey.freeShipping)
         ],
       ),
     );
@@ -289,13 +291,13 @@ class CheckoutUI extends GetView<CheckoutController> {
               FormInputFieldWithIcon(
                 controller: controller.zipCodeController,
                 iconPrefix: Icons.code,
-                labelText: 'Zip Code',
+                labelText: langKey.zipCode,
                 iconColor: kPrimaryColor,
                 autofocus: false,
                 textStyle: bodyText1,
                 autoValidateMode: AutovalidateMode.onUserInteraction,
                 validator: (value) =>
-                    GetUtils.isBlank(value!)! ? "Zip code required!" : null,
+                    GetUtils.isBlank(value!)! ? langKey.zipCodeRequired : null,
                 keyboardType: TextInputType.number,
                 onChanged: (value) {},
                 onSaved: (value) {},
@@ -311,7 +313,7 @@ class CheckoutUI extends GetView<CheckoutController> {
                 textStyle: bodyText1,
                 autoValidateMode: AutovalidateMode.onUserInteraction,
                 validator: (value) =>
-                    GetUtils.isBlank(value!)! ? "Address is required!" : null,
+                    GetUtils.isBlank(value!)! ? langKey.addressRequired : null,
                 keyboardType: TextInputType.name,
                 onChanged: (value) {},
                 onSaved: (value) {},
@@ -336,9 +338,9 @@ class CheckoutUI extends GetView<CheckoutController> {
                         dropdownDecoratorProps: DropDownDecoratorProps(
                           baseStyle: bodyText1,
                           dropdownSearchDecoration: InputDecoration(
-                            labelText: "Select Country",
+                            labelText: langKey.selectCountry,
                             labelStyle: bodyText1,
-                            hintText: "Choose Country",
+                            hintText: langKey.chooseCountry,
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                   color: Colors.black,
@@ -385,9 +387,9 @@ class CheckoutUI extends GetView<CheckoutController> {
                                       DropDownDecoratorProps(
                                     baseStyle: bodyText1,
                                     dropdownSearchDecoration: InputDecoration(
-                                      labelText: "Select City",
+                                      labelText: langKey.selectCity,
                                       labelStyle: bodyText1,
-                                      hintText: "Choose City",
+                                      hintText: langKey.chooseCity,
                                       enabledBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
                                             color: Colors.black,
@@ -423,12 +425,16 @@ class CheckoutUI extends GetView<CheckoutController> {
                                 controller.addShippingAddress();
                               } else {
                                 AppConstant.displaySnackBar(
-                                    'error', "Plz select Country and City");
+                                  langKey.errorTitle,
+                                  langKey.plzSelectCountry,
+                                );
                               }
                             }
                           }
                         },
-                        text: calledForUpdate ? "update".tr : "add".tr,
+                        text: calledForUpdate
+                            ? langKey.updateBtn.tr
+                            : langKey.add.tr,
                         height: 50,
                         width: 300,
                       ),
@@ -442,7 +448,7 @@ class CheckoutUI extends GetView<CheckoutController> {
 
   void showAddressesDialog() {
     Get.defaultDialog(
-      title: "Shipping Address details",
+      title: langKey.shippingAddressDetail,
       titleStyle: appBarTitleSize,
       content: Column(
         children: [
@@ -575,12 +581,12 @@ class CheckoutUI extends GetView<CheckoutController> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               _singlePaymentOptionItem(
-                  title: "Cash On Delivery (Not Available)",
+                  title: langKey.cashOnDelivery,
                   icon: Icons.wallet,
                   value: false,
                   isEnabled: true),
               _singlePaymentOptionItem(
-                  title: "Credit Card",
+                  title: langKey.creditCard,
                   icon: Icons.credit_card,
                   value: true,
                   isEnabled: false),
@@ -744,7 +750,7 @@ class CheckoutUI extends GetView<CheckoutController> {
                             fillColor: kWhiteColor,
                             contentPadding: EdgeInsets.zero,
                             hintText:
-                                'Want to redeem ${controller.coinsModel?.silver ?? 0} coins?',
+                                '${langKey.wantToRedeem} ${controller.coinsModel?.silver ?? 0} ${langKey.coins}?',
                             hintStyle: TextStyle(
                               color: kLightColor,
                               fontWeight: FontWeight.w600,
@@ -767,7 +773,9 @@ class CheckoutUI extends GetView<CheckoutController> {
                           controller.applyRedeemCode(num.parse(value));
                         else
                           AppConstant.displaySnackBar(
-                              'error', "Need more Coins to redeem");
+                            langKey.errorTitle,
+                            langKey.needMoreCoins,
+                          );
                       },
                       child: CustomText(
                         title: langKey.redeemBtn.tr,
@@ -785,10 +793,11 @@ class CheckoutUI extends GetView<CheckoutController> {
                     Text.rich(
                       TextSpan(
                         children: [
-                          TextSpan(text: "Subtotal ", style: bodyText1),
+                          TextSpan(
+                              text: langKey.subtotal + ' ', style: bodyText1),
                           TextSpan(
                               text:
-                                  "(${controller.cartController.totalQtyCart.value} items)",
+                                  "(${controller.cartController.totalQtyCart.value} ${langKey.items})",
                               style: caption),
                         ],
                       ),
@@ -803,7 +812,7 @@ class CheckoutUI extends GetView<CheckoutController> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    CustomText(title: "Shipping Fee", style: bodyText1),
+                    CustomText(title: langKey.shippingFee, style: bodyText1),
                     Obx(() => CustomPriceWidget(
                         title: "${controller.shippingCost.value}",
                         style: bodyText1)),
@@ -813,7 +822,7 @@ class CheckoutUI extends GetView<CheckoutController> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    CustomText(title: "Discount", style: bodyText1),
+                    CustomText(title: langKey.prodDiscount, style: bodyText1),
                     Obx(() => CustomPriceWidget(
                         title: "${controller.totalDiscount.value}",
                         style: bodyText1.copyWith(color: Colors.amber))),
@@ -826,8 +835,8 @@ class CheckoutUI extends GetView<CheckoutController> {
                     Text.rich(
                       TextSpan(
                         children: [
-                          TextSpan(text: "Total ", style: headline2),
-                          TextSpan(text: "(Inclusive of GST)", style: caption),
+                          TextSpan(text: langKey.total+" ", style: headline2),
+                          TextSpan(text: "(${langKey.inclusiveOfGst})", style: caption),
                         ],
                       ),
                     ),

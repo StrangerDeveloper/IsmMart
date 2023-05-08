@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -27,9 +27,9 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
 
   void setDiscount(int? discount) {
     if (discount! > 0 && discount < 10) {
-      discountMessage("Discount should be greater than 10");
+      discountMessage(langKey.discountMinValue);
     } else if (discount >= 100) {
-      discountMessage("Discount should not be greater or equal to 100");
+      discountMessage(langKey.discountMaxValue);
     } else {
       discountMessage("");
     }
@@ -113,21 +113,21 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
       if (response != null) {
         if (response.success!) {
           Get.back();
-          AppConstant.displaySnackBar('success', "${response.message}");
+          AppConstant.displaySnackBar(langKey.success, "${response.message}");
           clearControllers();
           fetchMyProducts();
         } else {
-          AppConstant.displaySnackBar('error', "${response.message}");
+          AppConstant.displaySnackBar(langKey.errorTitle, "${response.message}");
         }
       } else
-        AppConstant.displaySnackBar('error', someThingWentWrong.tr);
+        AppConstant.displaySnackBar(langKey.errorTitle, someThingWentWrong.tr);
     }).catchError(onError);
   }
 
   onError(e) async {
     isLoading(false);
     print(">>>SellerController: $e");
-    showSnackBar(title: 'error', message: e.toString());
+    showSnackBar(title: langKey.errorTitle, message: e.toString());
   }
 
   //TDO: END Product
@@ -140,10 +140,10 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
         .then((response) {
       if (response.success!) {
         if (response.success!) {
-          AppConstant.displaySnackBar('success', response.message);
+          AppConstant.displaySnackBar(langKey.success, response.message);
           fetchMyProducts();
         } else
-          AppConstant.displaySnackBar('error', response.message);
+          AppConstant.displaySnackBar(langKey.errorTitle, response.message);
       }
     }).catchError(onError);
     //fetchMyProducts();
@@ -273,11 +273,11 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
         if (response.success!) {
           Get.back();
           clearControllers();
-          AppConstant.displaySnackBar('success', "${response.message}");
+          AppConstant.displaySnackBar(langKey.success, "${response.message}");
           fetchMyProducts();
         } else {
           debugPrint('Error: ${response.toString()}');
-          AppConstant.displaySnackBar('error',
+          AppConstant.displaySnackBar(langKey.errorTitle,
               "${response.message != null ? response.message : someThingWentWrong.tr}");
         }
       }
@@ -311,7 +311,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
                   print(">>>Length after: $lengthInMb");
                   imagesSizeInMb.value += lengthInMb;
                   if (lengthInMb > 2) {
-                    showSnackBar(message: 'Each file must be up to 2MB');
+                    showSnackBar(message: langKey.fileMustBe+ ' 2MB');
                   } else {
                     //: needs to add check if file exist
                     pickedImagesList.add(compressedFile);
@@ -324,7 +324,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
           }
         } on PlatformException catch (e) {
           print(e);
-          AppConstant.displaySnackBar('error', 'Invalid Image format!');
+          AppConstant.displaySnackBar(langKey.errorTitle, langKey.invalidImageFormat);
         }
       } else {
         print("called");
@@ -346,7 +346,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
                   .then((compressedFile) {
                 var lengthInMb = compressedFile.lengthSync() * 0.000001;
                 if (lengthInMb > 2) {
-                  showSnackBar(message: 'Image must be up to 2MB');
+                  showSnackBar(message: langKey.imageSizeDesc + ' 2MB');
                 } else {
                   imagePath(compressedFile.path);
                 }
@@ -430,7 +430,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
     ];
   }
 
-  void showSnackBar({title = 'error', message = 'Something went wrong'}) {
+  void showSnackBar({title = langKey.errorTitle, message = langKey.someThingWentWrong}) {
     AppConstant.displaySnackBar(title, message);
   }
 

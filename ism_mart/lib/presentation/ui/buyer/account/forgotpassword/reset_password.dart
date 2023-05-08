@@ -45,7 +45,7 @@ class ForgotPassword extends GetView<AuthController> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Text(
-                'Enter Details To Create New Password',
+                langKey.enterEmail,
                 style: headline2,
               ),
             ),

@@ -7,6 +7,7 @@ import 'package:ism_mart/api_helper/errors.dart';
 import 'package:ism_mart/api_helper/global_variables.dart';
 import 'package:ism_mart/controllers/controllers.dart';
 import 'package:ism_mart/presentation/widgets/getx_helper.dart';
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class ApiBaseHelper {
   final String _baseUrl = ApiConstant.baseUrl;
@@ -57,7 +58,8 @@ class ApiBaseHelper {
   //   }
   // }
 
-  Future<dynamic> getMethod({required String url, bool withBearer = true}) async {
+  Future<dynamic> getMethod(
+      {required String url, bool withBearer = true}) async {
     print('hayat');
     print(token);
 
@@ -82,21 +84,24 @@ class ApiBaseHelper {
       return parsedJSON;
     } on SocketException {
       GlobalVariable.showLoader.value = false;
-      GetxHelper.showSnackBar(title: 'Error', message: Errors.noInternetError);
+      GetxHelper.showSnackBar(
+          title: langKey.errorTitle, message: Errors.noInternetError);
       throw Errors.noInternetError;
     } on TimeoutException {
       GlobalVariable.showLoader.value = false;
-      GetxHelper.showSnackBar(title: 'Error', message: Errors.timeOutException);
+      GetxHelper.showSnackBar(
+          title: langKey.errorTitle, message: Errors.timeOutException);
       throw Errors.timeOutException + url;
     } catch (e) {
       GlobalVariable.showLoader.value = false;
       print(e);
-      GetxHelper.showSnackBar(title: 'Error', message: e.toString());
+      GetxHelper.showSnackBar(title: langKey.errorTitle, message: e.toString());
       throw e.toString();
     }
   }
 
-  Future<dynamic> deleteMethod({required String url, bool withBearer = true}) async {
+  Future<dynamic> deleteMethod(
+      {required String url, bool withBearer = true}) async {
     print('hayat');
     print(token);
 
@@ -121,56 +126,58 @@ class ApiBaseHelper {
       return parsedJSON;
     } on SocketException {
       GlobalVariable.showLoader.value = false;
-      GetxHelper.showSnackBar(title: 'Error', message: Errors.noInternetError);
+      GetxHelper.showSnackBar(
+          title: langKey.errorTitle, message: Errors.noInternetError);
       throw Errors.noInternetError;
     } on TimeoutException {
       GlobalVariable.showLoader.value = false;
-      GetxHelper.showSnackBar(title: 'Error', message: Errors.timeOutException);
+      GetxHelper.showSnackBar(
+          title: langKey.errorTitle, message: Errors.timeOutException);
       throw Errors.timeOutException + url;
     } catch (e) {
       GlobalVariable.showLoader.value = false;
       print(e);
-      GetxHelper.showSnackBar(title: 'Error', message: e.toString());
+      GetxHelper.showSnackBar(title: langKey.errorTitle, message: e.toString());
       throw e.toString();
     }
   }
 
-  // Future<dynamic> postMethodForImage(
-  //     {required String url,
-  //     required List<http.MultipartFile> files,
-  //     required Map<String, String> fields}) async {
-  //   try {
-  //     Uri urlValue = Uri.parse(Urls.baseURL + url);
-  //     http.MultipartRequest request = http.MultipartRequest('POST', urlValue);
-  //     request.headers['Authorization'] = 'Bearer $token';
-  //     request.fields.addAll(fields);
-  //     request.files.addAll(files);
-  //     http.StreamedResponse response = await request.send();
-  //     Map<String, dynamic> parsedJson =
-  //         await jsonDecode(await response.stream.bytesToString());
-  //
-  //     print('********************** Response ********************************');
-  //     print(urlValue.toString());
-  //     print(parsedJson.toString());
-  //     print('&&&&&&&&&&&&&&&&&&&&&&& End of Response &&&&&&&&&&&&&&&&&&&&&&\n');
-  //     return parsedJson;
-  //   } on SocketException catch (_) {
-  //     GlobalVariable.showLoader.value = false;
-  //     //GetxHelper.showSnackBar(title: 'Error', message: Errors.noInternetError);
-  //     throw Errors.noInternetError;
-  //   } on TimeoutException catch (_) {
-  //     GlobalVariable.showLoader.value = false;
-  //     GetxHelper.showSnackBar(title: 'Error', message: Errors.timeOutException);
-  //     throw Errors.timeOutException;
-  //   } on FormatException catch (_) {
-  //     GlobalVariable.showLoader.value = false;
-  //     GetxHelper.showSnackBar(title: 'Error', message: Errors.formatException);
-  //     throw Errors.formatException;
-  //   } catch (e) {
-  //     GlobalVariable.showLoader.value = false;
-  //     GetxHelper.showSnackBar(title: 'Error', message: Errors.generalApiError);
-  //     throw e.toString();
-  //   }
-  // }
-  //
+// Future<dynamic> postMethodForImage(
+//     {required String url,
+//     required List<http.MultipartFile> files,
+//     required Map<String, String> fields}) async {
+//   try {
+//     Uri urlValue = Uri.parse(Urls.baseURL + url);
+//     http.MultipartRequest request = http.MultipartRequest('POST', urlValue);
+//     request.headers['Authorization'] = 'Bearer $token';
+//     request.fields.addAll(fields);
+//     request.files.addAll(files);
+//     http.StreamedResponse response = await request.send();
+//     Map<String, dynamic> parsedJson =
+//         await jsonDecode(await response.stream.bytesToString());
+//
+//     print('********************** Response ********************************');
+//     print(urlValue.toString());
+//     print(parsedJson.toString());
+//     print('&&&&&&&&&&&&&&&&&&&&&&& End of Response &&&&&&&&&&&&&&&&&&&&&&\n');
+//     return parsedJson;
+//   } on SocketException catch (_) {
+//     GlobalVariable.showLoader.value = false;
+//     //GetxHelper.showSnackBar(title: 'Error', message: Errors.noInternetError);
+//     throw Errors.noInternetError;
+//   } on TimeoutException catch (_) {
+//     GlobalVariable.showLoader.value = false;
+//     GetxHelper.showSnackBar(title: 'Error', message: Errors.timeOutException);
+//     throw Errors.timeOutException;
+//   } on FormatException catch (_) {
+//     GlobalVariable.showLoader.value = false;
+//     GetxHelper.showSnackBar(title: 'Error', message: Errors.formatException);
+//     throw Errors.formatException;
+//   } catch (e) {
+//     GlobalVariable.showLoader.value = false;
+//     GetxHelper.showSnackBar(title: 'Error', message: Errors.generalApiError);
+//     throw e.toString();
+//   }
+// }
+//
 }

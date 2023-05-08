@@ -85,7 +85,7 @@ class SignInUI extends GetView<AuthController> {
                             //autoValidateMode: AutovalidateMode.onUserInteraction,
                             validator: (value) => //!GetUtils.isPassport(value!)
                                 value!.isEmpty
-                                    ? "Password is required!."
+                                    ? langKey.passwordRequired
                                     : null,
                             obscureText: true,
                             onChanged: (value) => {},
