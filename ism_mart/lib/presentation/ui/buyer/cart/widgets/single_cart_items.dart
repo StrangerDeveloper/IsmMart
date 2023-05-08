@@ -17,8 +17,14 @@ class SingleCartItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var controller = Get.find<CartController>();
-    return _singleCartItem(
-        cartModel: cartModel, index: index, controller: controller);
+    return InkWell(
+      onTap: () {
+        Get.toNamed('/product/${cartModel!.productId!}',
+            arguments: {"calledFor": "seller"});
+      },
+      child: _singleCartItem(
+          cartModel: cartModel, index: index, controller: controller),
+    );
   }
 
   Widget _singleCartItem(
