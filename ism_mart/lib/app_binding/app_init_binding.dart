@@ -9,20 +9,22 @@ class AppInitBinding extends Bindings {
 
     Get.put(ApiService(Get.find()), permanent: true);
 
+
     Get.lazyPut<ApiRepository>(() => ApiRepository(Get.find()));
     Get.lazyPut<ApiProvider>(() => ApiProvider(Get.find()));
 
-    /* Get.lazyPut<OrderRepo>(() => OrderRepo(Get.find()));
+
+   /* Get.lazyPut<OrderRepo>(() => OrderRepo(Get.find()));
     Get.lazyPut<OrderProvider>(() => OrderProvider(Get.find()));*/
     // Get.lazyPut<AuthProvider>(() => AuthProvider(Get.find()));
     // Get.lazyPut<AuthController>(() => AuthController(Get.find()));
 
     Get.put<AuthRepository>(AuthRepository(Get.find()));
-    Get.put<AuthProvider>(AuthProvider(Get.find()));
-
+    Get.put<AuthProvider>( AuthProvider(Get.find()));
     Get.put<AuthController>(AuthController(Get.find()));
 
-    Get.put(CurrencyController(Get.find<ApiProvider>()));
     LocalStorageHelper.initUserStorage();
+
+    //Get.lazyPut<AuthController>(() => null)
   }
 }

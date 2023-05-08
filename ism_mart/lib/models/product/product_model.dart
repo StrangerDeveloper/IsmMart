@@ -153,8 +153,7 @@ class ProductModel {
         "thumbnail": thumbnail,
         "vendorId": vendorId,
         "discountPrice": discountPrice,
-        "totalPrice": totalPrice,
-        "stock": stock,
+        "totalPrice": totalPrice
       };
 
   JSON toUpdateProductJson() => {
@@ -168,11 +167,9 @@ class ProductModel {
 
   @override
   bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    if (other.runtimeType != runtimeType) {
-      return false;
-    }
-    return other is ProductModel && other.id == id && other.name == name;
+    if (other is! ProductModel) return false;
+    if (id != other.id) return false;
+    return true;
   }
 
   @override

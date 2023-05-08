@@ -2,43 +2,46 @@ import 'package:flutter/material.dart';
 import 'package:ism_mart/utils/constants.dart';
 
 class ProductQuantityCounter extends StatelessWidget {
-  const ProductQuantityCounter(
+  ProductQuantityCounter(
       {Key? key,
       this.onDecrementPress,
       this.onIncrementPress,
       this.textEditingController,
       this.bgColor,
       this.textColor,
-      this.height = 40,
-      this.width,
-      this.quantity = "1",
-      this.margin,
-      this.padding})
+      this.w = 30.0,
+      this.h = 40.0,
+      this.horiz = 10.0,
+      this.verti = 5.0,
+      this.margin = 8.0,
+      this.spaceW = 4.0,
+      this.bottomP = 12.0})
       : super(key: key);
 
   final VoidCallback? onDecrementPress;
   final VoidCallback? onIncrementPress;
   final TextEditingController? textEditingController;
   final Color? bgColor, textColor;
-  final double? height, width;
-  final EdgeInsetsGeometry? margin, padding;
-  final String? quantity;
+  var w;
+  var h;
+  final horiz;
+  final verti;
+  final margin;
+  final spaceW;
+  final bottomP;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: margin ?? const EdgeInsets.symmetric(vertical: 8),
-      padding:
-          padding ?? const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      margin: EdgeInsets.symmetric(vertical: margin),
+      padding: EdgeInsets.symmetric(horizontal: horiz, vertical: verti),
       decoration: BoxDecoration(
         color: bgColor ?? kPrimaryColor,
         borderRadius: BorderRadius.circular(30),
       ),
-      width: width,
-      height: height,
+      height: 40,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           IconButton(
             iconSize: 18,
@@ -49,27 +52,27 @@ class ProductQuantityCounter extends StatelessWidget {
               color: textColor ?? kWhiteColor,
             ),
           ),
-          AppConstant.spaceWidget(width: 4),
+          AppConstant.spaceWidget(width: spaceW),
           SizedBox(
-            width: 30,
-            height: 30,
+            width: w,
+            height: h,
             child: TextField(
               controller: textEditingController,
               enabled: false,
               style: bodyText1.copyWith(
-                  color: textColor ?? kWhiteColor, fontSize: 14),
+                  color: textColor ?? kWhiteColor, fontSize: 16),
               textAlignVertical: TextAlignVertical.center,
               decoration: InputDecoration(
-                  contentPadding: EdgeInsets.symmetric(vertical: 8),
+                  contentPadding: EdgeInsets.only(bottom: bottomP),
                   border: InputBorder.none,
-                  hintText: "$quantity",
+                  hintText: '1',
                   hintStyle: bodyText1.copyWith(
                       color: textColor ?? kWhiteColor, fontSize: 16)),
               textAlign: TextAlign.center,
               keyboardType: TextInputType.number,
             ),
           ),
-          AppConstant.spaceWidget(width: 4),
+          AppConstant.spaceWidget(width: spaceW),
           IconButton(
             iconSize: 18,
             alignment: Alignment.topCenter,
