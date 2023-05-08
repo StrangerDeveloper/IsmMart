@@ -13,7 +13,6 @@ class SettingsUI extends GetView<AuthController> {
 
   @override
   Widget build(BuildContext context) {
-    //var authController = Get.find<AuthController>();
     return Obx(
       () => SafeArea(
         child: controller.isLoading.isTrue
@@ -177,13 +176,12 @@ class SettingsUI extends GetView<AuthController> {
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
-          /* _singleSettingsItem(
-              onTap: () => _showThemeChangeBottomSheet(),
-              icon: IconlyLight.setting,
-              iconColor: Colors.deepPurple,
-              title: "appearance".tr,
-              value: themeController.theme.value),*/
-
+          _singleSettingsItem(
+              onTap: () => _showCurrencyChangeBS(),
+              icon: Icons.currency_exchange,
+              iconColor: Color.fromARGB(255, 160, 235, 94),
+              title: langKey.currencyKey.tr,
+              value: currencyController.currency.value),
           Obx(
             () => _singleSettingsItem(
                 onTap: () => _showLanguageChangeBottomSheet(),
@@ -334,17 +332,56 @@ class SettingsUI extends GetView<AuthController> {
     );
   }
 
+  _showCurrencyChangeBS() {
+    AppConstant.showBottomSheet(
+      widget: SizedBox(
+        height: MediaQuery.of(Get.context!).size.height / 2.5,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              StickyLabel(
+                text: langKey.selectCurrency.tr,
+              ),
+              Column(
+                children:
+                    currencyController.currencyLocales.entries.map((item) {
+                  return ListTile(
+                    onTap: () {
+                      currencyController.setCurrency(key: item.key);
+                      Get.back();
+                    },
+                    leading: _countryFlag(
+                        countryCode: item.value['countryCode'],
+                        color: item.value['color']),
+                    title: Text(item.value["description"],
+                        style: bodyText1.copyWith(fontWeight: FontWeight.w600)),
+                    trailing: item.value["description"] ==
+                            currencyController.currency.value
+                        ? const Icon(Icons.done)
+                        : null,
+                  );
+                }).toList(),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _countryFlag({String? countryCode, Color? color}) {
     var imageUrl =
         "https://raw.githubusercontent.com/hampusborgos/country-flags/main/png1000px/${countryCode!.toLowerCase()}.png";
     return Container(
-      height: 45,
-      width: 45,
+      height: 30,
+      width: 30,
       padding: EdgeInsets.all(8),
       // Border width
       decoration: BoxDecoration(
         color: color!.withOpacity(0.3),
         shape: BoxShape.circle,
+        border: Border.all(color: Colors.grey),
         image: DecorationImage(
           fit: BoxFit.fill,
           image: NetworkImage(imageUrl),
