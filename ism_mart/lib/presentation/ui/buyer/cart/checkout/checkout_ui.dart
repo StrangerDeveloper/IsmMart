@@ -71,6 +71,8 @@ class CheckoutUI extends GetView<CheckoutController> {
                           width: 280,
                           height: 50,
                           onTap: () {
+                            print(
+                                ">>>TotalCart: ${controller.cartController.totalCartAmount.value}");
                             if (controller
                                     .cartController.totalCartAmount.value <=
                                 1000) {
@@ -675,7 +677,11 @@ class CheckoutUI extends GetView<CheckoutController> {
                 itemCount: controller.getCartItemsList().length,
                 itemBuilder: (context, index) {
                   CartModel cartModel = controller.getCartItemsList()[index];
-                  return SingleCartItems(cartModel: cartModel, index: index);
+                  return SingleCartItems(
+                    cartModel: cartModel,
+                    index: index,
+                    calledFromCheckout: true,
+                  );
                 },
               ),
       ),
@@ -757,16 +763,9 @@ class CheckoutUI extends GetView<CheckoutController> {
                         if (controller.coinsModel != null &&
                             controller.coinsModel!.silver!
                                 .isGreaterThan(fixedRedeemCouponThreshold) &&
-                            value.isNotEmpty) {
-                          if (num.parse(value) <=
-                              controller.coinsModel!.silver!)
-                            controller.applyRedeemCode(num.parse(value));
-                          else
-                            controller.showSnackBar(
-                                title: 'error',
-                                message:
-                                    "You do not have enough coins to redeem!");
-                        } else
+                            value.isNotEmpty)
+                          controller.applyRedeemCode(num.parse(value));
+                        else
                           AppConstant.displaySnackBar(
                               'error', "Need more Coins to redeem");
                       },

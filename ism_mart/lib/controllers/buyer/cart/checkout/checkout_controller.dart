@@ -64,7 +64,6 @@ class CheckoutController extends GetxController {
     if (value!.isGreaterThan(0) &&
         value.isGreaterThan(fixedRedeemCouponThreshold)) {
       _isRedeemApplied(true);
-      couponCodeController.clear();
     } else {
       _isRedeemApplied(true);
     }
@@ -270,11 +269,8 @@ class CheckoutController extends GetxController {
     isLoading(true);
     if (_paymentMethodId.isNotEmpty)
       await sendPaymentIntent(paymentId: _paymentMethodId.value);
-    else {
-      isLoading(false);
-      showSnackBar(
-          title: "error", message: "Please enter payment card details!");
-    }
+    else
+      print("Payment intent is null");
 
     /*  //STEP 1: Create Payment Intent
      // paymentIntent = await createPaymentIntent(amount!, 'PKR');
