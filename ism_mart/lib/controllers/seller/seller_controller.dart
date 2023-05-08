@@ -138,7 +138,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
     await _apiProvider
         .deleteProductById(id: id, token: authController.userToken)
         .then((response) {
-      if (response.success != null) {
+      if (response.success!) {
         if (response.success!) {
           AppConstant.displaySnackBar('success', response.message);
           fetchMyProducts();
@@ -250,7 +250,9 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
 
   addProduct() async {
     isLoading(true);
-
+    num discount = prodDiscountController.text.isEmpty
+        ? 0
+        : num.parse(prodDiscountController.text);
     ProductModel newProduct = ProductModel(
         name: prodNameController.text.trim(),
         price: priceAfterCommission.value,
@@ -258,9 +260,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
         categoryId: selectedCategoryID.value,
         subCategoryId: selectedSubCategoryID.value,
         description: prodDescriptionController.text,
-        discount: num.parse(prodDiscountController.text.isEmpty
-            ? "0"
-            : prodDiscountController.text));
+        discount: discount);
     await _apiProvider
         .addProductWithHttp(
             token: authController.userToken,
