@@ -425,7 +425,6 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
             ),
           ),
         );
-        ;
       },
     );
   }

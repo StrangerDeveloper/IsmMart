@@ -26,7 +26,9 @@ class ProductResponse {
 
   factory ProductResponse.fromResponse(response) => ProductResponse(
       success: response['success'] == null ? false : response['success'],
-      message: response['message'] ?? "",
+      message: response['message'] is List
+          ? response['message'][0]
+          : response['message'] ?? "",
       error: response['error'],
       errors: response['errors'] != null
           ? List<String>.from(response["errors"].map((x) => x))

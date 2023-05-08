@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
-import 'package:ism_mart/controllers/currency/currency_controller.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 
 class AppInitBinding extends Bindings {

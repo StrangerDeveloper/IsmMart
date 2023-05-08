@@ -763,9 +763,16 @@ class CheckoutUI extends GetView<CheckoutController> {
                         if (controller.coinsModel != null &&
                             controller.coinsModel!.silver!
                                 .isGreaterThan(fixedRedeemCouponThreshold) &&
-                            value.isNotEmpty)
-                          controller.applyRedeemCode(num.parse(value));
-                        else
+                            value.isNotEmpty) {
+                          if (num.parse(value) <=
+                              controller.coinsModel!.silver!)
+                            controller.applyRedeemCode(num.parse(value));
+                          else
+                            controller.showSnackBar(
+                                title: 'error',
+                                message:
+                                    "You do not have enough coins to redeem!");
+                        } else
                           AppConstant.displaySnackBar(
                               'error', "Need more Coins to redeem");
                       },
@@ -833,8 +840,7 @@ class CheckoutUI extends GetView<CheckoutController> {
                     ),
                     Obx(
                       () => CustomPriceWidget(
-                          title:
-                              "${/*controller.amountAfterRedeeming.value.isGreaterThan(0.0) ? controller.amountAfterRedeeming.value : */ controller.totalAmount.value}"),
+                          title: "${controller.totalAmount.value}"),
                     ),
                   ],
                 ),

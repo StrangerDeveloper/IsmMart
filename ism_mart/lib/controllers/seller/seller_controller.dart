@@ -65,11 +65,11 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
   int page = 1;
 
   fetchMyProducts() async {
-    myProductsList.clear();
     await _apiProvider
         .fetchMyProducts(
             token: authController.userToken, limit: productsLimit, page: page)
         .then((response) {
+      myProductsList.clear();
       myProductsList.addAll(response.products!);
     });
   }
@@ -95,17 +95,11 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
   //TOO: Update Product using PATCH request type
 
   updateProduct({ProductModel? model}) async {
+    isLoading(true);
     model!.price = int.parse("${prodPriceController.text}");
     model.name = prodNameController.text;
-    model.discount = int.parse("${prodDiscountController.text}");
-    model.description = prodDescriptionController.text;
-    model.stock = int.parse("${prodStockController.text}");
-
-    isLoading(true);
-
-    model.price = int.parse("${prodPriceController.text}");
-    model.name = prodNameController.text;
-    model.discount = int.parse("${prodDiscountController.text}");
+    model.discount = int.parse(
+        "${prodDiscountController.text.isEmpty ? 0 : prodDiscountController.text}");
     model.description = prodDescriptionController.text;
     model.stock = int.parse("${prodStockController.text}");
 
@@ -119,9 +113,10 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
       if (response != null) {
         if (response.success != null) {
           Get.back();
-          fetchMyProducts();
+
           AppConstant.displaySnackBar('success', "${response.message}");
           clearControllers();
+          fetchMyProducts();
         } else {
           AppConstant.displaySnackBar('error', "${response.message}");
         }
@@ -133,7 +128,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
   onError(e) async {
     isLoading(false);
     print(">>>SellerController: $e");
-    showSnackBar(title: 'error', message: e);
+    showSnackBar(title: 'error', message: e.toString());
   }
 
   //TDO: END Product
@@ -141,19 +136,17 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
   //TDO: Delete Product
 
   deleteProduct({int? id}) async {
-    await LocalStorageHelper.getStoredUser().then((user) async {
-      await _apiProvider
-          .deleteProductById(id: id, token: user.token)
-          .then((response) {
-        if (response.success != null) {
-          if (response.success!) {
-            fetchMyProducts();
-            AppConstant.displaySnackBar('success', response.message);
-          } else
-            AppConstant.displaySnackBar('error', response.message);
-        }
-      }).catchError(onError);
-    });
+    await _apiProvider
+        .deleteProductById(id: id, token: authController.userToken)
+        .then((response) {
+      if (response.success != null) {
+        if (response.success!) {
+          AppConstant.displaySnackBar('success', response.message);
+          fetchMyProducts();
+        } else
+          AppConstant.displaySnackBar('error', response.message);
+      }
+    }).catchError(onError);
     //fetchMyProducts();
     //myProductsList.refresh();
   }
@@ -280,19 +273,22 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
         .then((ProductResponse? response) {
       isLoading(false);
       if (response != null) {
-        if (response.success != null) {
-          fetchMyProducts();
+        if (response.success!) {
           Get.back();
           clearControllers();
           AppConstant.displaySnackBar('success', "${response.message}");
+          fetchMyProducts();
         } else {
           debugPrint('Error: ${response.toString()}');
           AppConstant.displaySnackBar('error',
               "${response.message != null ? response.message : someThingWentWrong.tr}");
         }
       }
-    }); //.catchError(onError);
-    //isLoading(false);
+    });
+    // .catchError((e) {
+    //   isLoading(false);
+    //   print("");
+    // });
   }
 
   /// Profile Image Capture/Pick Section
