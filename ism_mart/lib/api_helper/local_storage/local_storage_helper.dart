@@ -11,6 +11,7 @@ class LocalStorageHelper {
   static final localStorage = GetStorage();
 
   static const tag = "LocalStorage:";
+  static const currCurrencyKey = "currCurrencyKey";
 
   static Future<void> initUserStorage() async {
     if (localStorage.read(currentUserKey) == null) {
@@ -18,6 +19,18 @@ class LocalStorageHelper {
       await localStorage.write(currentUserKey, UserModel().toJson());
     } else
       print(">>>SecondTimeUserTokenKeyInMemory: ");
+  }
+
+  static Future<void> storeCurrency({CurrencyModel? currencyModel}) async {
+    localStorage.write(currCurrencyKey, currencyModel!.toLocalStorageJson());
+  }
+
+  static Future<CurrencyModel> getStoredCurrency() async {
+    if (localStorage.read(currCurrencyKey) != null) {
+      return CurrencyModel.fromLocalStorageJson(
+          localStorage.read(currCurrencyKey));
+    }
+    return CurrencyModel(exchangeRate: 1, from: "pkr", to: "pkr");
   }
 
   static Future<void> storeUser({UserModel? userModel}) async {

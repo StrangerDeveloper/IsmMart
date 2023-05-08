@@ -95,11 +95,9 @@ class SingleProductItems extends StatelessWidget {
       aspectRatio: 0.75,
       child: GestureDetector(
         onTap: onTap ??
-            //()=>Navigator.pushReplacementNamed(Get.context!, '/product/${model!.id}', arguments: {"calledFor": "customer"}),
             () {
-              // if (!Get.isOverlaysOpen) Get.toNamed('/product/${model!.id}', arguments: {"calledFor": "customer"},);
               showModalBottomSheet(
-                //isDismissible: false,
+                  //isDismissible: false,
                   isScrollControlled: true,
                   context: buildContext,
                   backgroundColor: kWhiteColor,
@@ -108,17 +106,14 @@ class SingleProductItems extends StatelessWidget {
                   builder: (_) {
                     return SafeArea(
                       child: Container(
-                        height: AppResponsiveness.height*0.91,
+                        height: AppResponsiveness.height * 0.91,
                         child: SingleProductView(
                           productId: "${model!.id}",
                         ),
                       ),
                     );
                   });
-
-              // AppConstant.showBottomSheet(widget: SingleProductView(productId: "${model!.id}",), isGetXBottomSheet: false, buildContext: buildContext);
             },
-        // () => Get.to(() => SingleProductView(), binding: ProductBinding(), arguments: {"calledFor": "customer", "id":"${model!.id}"},  opaque: true, fullscreenDialog: true),
         child: Container(
           clipBehavior: Clip.hardEdge,
           margin: const EdgeInsets.symmetric(horizontal: 5),
@@ -189,15 +184,4 @@ class SingleProductItems extends StatelessWidget {
       ),
     );
   }
-}
-
-class CustomRoute<T> extends MaterialPageRoute<T> {
-  CustomRoute({
-    required WidgetBuilder builder,
-    required RouteSettings settings,
-  }) : super(
-            builder: builder,
-            settings: settings,
-            maintainState: true,
-            fullscreenDialog: false);
 }

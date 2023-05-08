@@ -141,10 +141,10 @@ class ApiProvider {
    * Api Layer
    * */
 
-  Future<JSON> convertCurrency({to, from, amount}) async {
+  Future<CurrencyModel> convertCurrency({to, from, amount}) async {
     var response = await _apiRepository.reqCurrencyConverter(
         to: to, from: from, amount: amount);
-    return response;
+    return CurrencyModel.fromJson(response);
   }
 
   /**
