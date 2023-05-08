@@ -5,7 +5,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:ism_mart/api_helper/api_base_helper.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
+import 'package:ism_mart/api_helper/global_variables.dart';
+import 'package:ism_mart/api_helper/urls.dart';
 import 'package:ism_mart/controllers/controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
@@ -13,6 +16,7 @@ import 'package:ism_mart/utils/exports_utils.dart';
 class OrderController extends GetxController
     with StateMixin, GetSingleTickerProviderStateMixin {
   final OrderProvider _orderProvider;
+
   OrderController(this._orderProvider);
 
   GlobalKey<FormState> reviewFormKey = GlobalKey<FormState>();
@@ -141,18 +145,19 @@ class OrderController extends GetxController
     });
   }
 
-  disputeOnOrders({orderId}) async {
+  disputeOnOrders({OrderItem? orderItem, orderId}) async {
     isLoading(false);
     String title = titleController.text;
     String description = descriptionController.text;
 
     await _orderProvider
             .createDispute(authController.userToken, title, description,
-                orderId, pickedImagesList)
+                orderItem!.id, pickedImagesList)
             .then((DisputeResponse? response) {
       isLoading(false);
       if (response != null) {
         if (response.success!) {
+          fetchOrderById(orderId);
           Get.back();
           clearControllers();
           showSnackBar(title: 'success', message: response.message);
@@ -166,6 +171,31 @@ class OrderController extends GetxController
       print(">>>Dispute $e");
     })*/
         ;
+  }
+
+
+  deleteTicket(String ticketId,String orderId) {
+    // GlobalVariable.showLoader.value = true;
+    isLoading(true);
+    ApiBaseHelper().deleteMethod(url: Urls.deleteTickets + ticketId, withBearer: false).then((parsedJson) {
+      isLoading(false);
+      if (parsedJson['success'] == true && parsedJson['data'] != null) {
+        fetchOrderById(orderId);
+        AppConstant.displaySnackBar(
+          'Success',
+          'Dispute deleted successfully',
+        );
+      } else {
+        AppConstant.displaySnackBar(
+          'error',
+          'Record does\'nt exist',
+        );
+      }
+    }).catchError((e) {
+      isLoading(false);
+      print(e);
+      // GlobalVariable.showLoader.value = false;
+    });
   }
 
   var _picker = ImagePicker();

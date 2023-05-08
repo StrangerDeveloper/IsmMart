@@ -73,36 +73,154 @@ class OrderModel {
 }
 
 class OrderItem {
-  OrderItem({
-    this.id,
-    this.quantity,
-    this.price,
-    this.reviewed,
-    this.product,
-  });
-
   int? id;
   String? quantity;
   double? price;
   bool? reviewed;
   ProductModel? product;
+  List<Tickets>? tickets;
 
-  factory OrderItem.fromJson(Map<String, dynamic> json) => OrderItem(
-        id: json["id"],
-        quantity: json["quantity"],
-        price: json["price"].toDouble(),
-        reviewed: json["reviewed"],
-        product: ProductModel.fromJson(json["Product"]),
-      );
+  OrderItem(
+      {this.id,
+        this.quantity,
+        this.price,
+        this.reviewed,
+        this.product,
+        this.tickets});
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "quantity": quantity,
-        "price": price,
-        "reviewed": reviewed,
-        "Product": product!.toJson(),
-      };
+  OrderItem.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    quantity = json['quantity'];
+    price = json['price'].toDouble();
+    reviewed = json['reviewed'];
+    product =
+    json['Product'] != null ? new ProductModel.fromJson(json['Product']) : null;
+    if (json['Tickets'] != null) {
+      tickets = <Tickets>[];
+      json['Tickets'].forEach((v) {
+        tickets!.add(new Tickets.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['quantity'] = this.quantity;
+    data['price'] = this.price;
+    data['reviewed'] = this.reviewed;
+    if (this.product != null) {
+      data['Product'] = this.product!.toJson();
+    }
+    if (this.tickets != null) {
+      data['Tickets'] = this.tickets!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
 }
+
+// class Product {
+//   int? id;
+//   String? name;
+//   String? thumbnail;
+//   int? discountPrice;
+//
+//   Product({this.id, this.name, this.thumbnail, this.discountPrice});
+//
+//   Product.fromJson(Map<String, dynamic> json) {
+//     id = json['id'];
+//     name = json['name'];
+//     thumbnail = json['thumbnail'];
+//     discountPrice = json['discountPrice'];
+//   }
+//
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     data['id'] = this.id;
+//     data['name'] = this.name;
+//     data['thumbnail'] = this.thumbnail;
+//     data['discountPrice'] = this.discountPrice;
+//     return data;
+//   }
+// }
+
+class Tickets {
+  int? id;
+  String? title;
+  String? description;
+  int? orderItemsId;
+  int? userId;
+  String? status;
+  String? createdAt;
+  String? updatedAt;
+
+  Tickets(
+      {this.id,
+        this.title,
+        this.description,
+        this.orderItemsId,
+        this.userId,
+        this.status,
+        this.createdAt,
+        this.updatedAt});
+
+  Tickets.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    title = json['title'];
+    description = json['description'];
+    orderItemsId = json['orderItemsId'];
+    userId = json['userId'];
+    status = json['status'];
+    createdAt = json['createdAt'];
+    updatedAt = json['updatedAt'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['title'] = this.title;
+    data['description'] = this.description;
+    data['orderItemsId'] = this.orderItemsId;
+    data['userId'] = this.userId;
+    data['status'] = this.status;
+    data['createdAt'] = this.createdAt;
+    data['updatedAt'] = this.updatedAt;
+    return data;
+  }
+}
+
+
+// class OrderItem {
+//   OrderItem({
+//     this.id,
+//     this.quantity,
+//     this.price,
+//     this.reviewed,
+//     this.product,
+//   });
+//
+//   int? id;
+//   String? quantity;
+//   double? price;
+//   bool? reviewed;
+//   ProductModel? product;
+//
+//   factory OrderItem.fromJson(Map<String, dynamic> json) => OrderItem(
+//         id: json["id"],
+//         quantity: json["quantity"],
+//         price: json["price"].toDouble(),
+//         reviewed: json["reviewed"],
+//         product: ProductModel.fromJson(json["Product"]),
+//       );
+//
+//   Map<String, dynamic> toJson() => {
+//         "id": id,
+//         "quantity": quantity,
+//         "price": price,
+//         "reviewed": reviewed,
+//         "Product": product!.toJson(),
+//       };
+// }
 
 class OrderResponse {
   OrderResponse({

@@ -33,7 +33,7 @@ class LocalStorageHelper {
 
   static Future<void> addItemToCart({CartModel? cartModel}) async {
     var list = <CartModel>[];
- 
+
     if (localStorage.read(cartItemKey) != null) {
       list = getCartItems();
 
