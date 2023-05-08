@@ -44,6 +44,7 @@ class CartModel {
   List<String>? errors;
   List<int>? featuresID;
   List<String>? featuresName;
+  num? itemPrice;
 
   CartModel({
     this.id,
@@ -54,6 +55,7 @@ class CartModel {
     this.featuresName,
     this.errors,
     this.onQuantityClicked = false,
+    this.itemPrice,
   });
 
   factory CartModel.fromJson(JSON value) {
@@ -74,12 +76,14 @@ class CartModel {
         'featuresName': featuresName,
         'productId': productId,
         'quantity': quantity,
-        'onQuantityClicked': onQuantityClicked
+        'onQuantityClicked': onQuantityClicked,
+        "itemPrice": itemPrice,
       };
   JSON toOrderCreationJson() => {
         "productId": productId,
         "quantity": quantity,
         "features": featuresID,
+        "itemPrice": itemPrice,
         "Product": productModel!.toOrderCheckoutJson()
       };
 }
