@@ -27,7 +27,10 @@ class SignInUI extends GetView<AuthController> {
                   children: [
                     buildSvgLogo(color: kPrimaryColor),
                     InkWell(
-                      onTap: () => Get.back(),
+                      onTap: () {
+                        Get.back();
+                        controller.clearLoginController();
+                      },
                       child: const Icon(Icons.close),
                     ),
                   ],
@@ -59,11 +62,23 @@ class SignInUI extends GetView<AuthController> {
                             iconColor: kPrimaryColor,
                             autofocus: false,
                             textStyle: bodyText1,
+<<<<<<< Updated upstream
                             autoValidateMode:
                                 AutovalidateMode.onUserInteraction,
                             validator: (value) => !GetUtils.isEmail(value!)
                                 ? langKey.emailReq.tr
                                 : null,
+=======
+                            autoValidateMode: AutovalidateMode.onUserInteraction,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return "Email is required for this field";
+                              } else
+                                return !GetUtils.isEmail(value)
+                                    ? langKey.emailReq.tr
+                                    : null;
+                            },
+>>>>>>> Stashed changes
                             keyboardType: TextInputType.emailAddress,
                             onChanged: (value) {},
                             onSaved: (value) {},
@@ -78,9 +93,15 @@ class SignInUI extends GetView<AuthController> {
                             autoValidateMode:
                                 AutovalidateMode.onUserInteraction,
                             validator: (value) => //!GetUtils.isPassport(value!)
+<<<<<<< Updated upstream
                                 value!.length < 6
                                     ? langKey.passwordLengthReq.tr
                                     : null,
+=======
+                            value!.length < 8
+                                ? langKey.passwordLengthReq.tr
+                                : null,
+>>>>>>> Stashed changes
                             obscureText: true,
                             onChanged: (value) => {},
                             maxLines: 1,
@@ -104,7 +125,11 @@ class SignInUI extends GetView<AuthController> {
                           Container(
                             alignment: Alignment.centerRight,
                             child: InkWell(
+<<<<<<< Updated upstream
                               onTap: () => showForgotPasswordDialog(),
+=======
+                              onTap: () => Get.toNamed(Routes.passwordResetEmailInput),
+>>>>>>> Stashed changes
                               child: Text(
                                 langKey.forgotPassword.tr,
                                 style: headline3.copyWith(
@@ -161,6 +186,7 @@ class SignInUI extends GetView<AuthController> {
     );
   }
 
+<<<<<<< Updated upstream
   void showForgotPasswordDialog() {
     final formKey = GlobalKey<FormState>();
     Get.defaultDialog(
@@ -316,6 +342,8 @@ class SignInUI extends GetView<AuthController> {
     );
   }
 
+=======
+>>>>>>> Stashed changes
   void showResendVerificationLinkDialog() {
     final formKey = GlobalKey<FormState>();
     Get.defaultDialog(
@@ -371,4 +399,8 @@ class SignInUI extends GetView<AuthController> {
           ),
         ));
   }
+<<<<<<< Updated upstream
 }
+=======
+}
+>>>>>>> Stashed changes

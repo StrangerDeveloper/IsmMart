@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/presentation/export_presentation.dart';
+import 'package:ism_mart/presentation/ui/buyer/dispute_list/all_dispute_view.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+
+enum AppBarMenuNames { disputes }
 
 class BuyerOrdersUI extends GetView<OrderController> {
   const BuyerOrdersUI({Key? key}) : super(key: key);
@@ -38,6 +42,46 @@ class BuyerOrdersUI extends GetView<OrderController> {
     );
   }
 
+  Widget appBarPopupMenu() {
+    return PopupMenuButton<AppBarMenuNames>(
+      offset: const Offset(-10, 23),
+      child: const Padding(
+        padding: EdgeInsets.only(right: 12, left: 12),
+        child: Icon(Icons.more_horiz_rounded),
+      ),
+      itemBuilder: (BuildContext context) {
+        return [
+          popUpMenuItemDesign(
+            title: 'User Order Disputes',
+            value: AppBarMenuNames.disputes,
+          ),
+        ];
+      },
+      onSelected: (value) {
+        if (value == AppBarMenuNames.disputes) {
+          Get.to(() => AllDisputeView());
+        }
+      },
+    );
+  }
+
+  PopupMenuItem<AppBarMenuNames> popUpMenuItemDesign({
+    required String title,
+    required AppBarMenuNames value,
+  }) {
+    return PopupMenuItem(
+      //padding: const EdgeInsets.symmetric(horizontal: 25),
+      height: 38,
+      value: value,
+      child: Text(
+        title,
+        style: GoogleFonts.lato(
+          fontSize: 14,
+        ),
+      ),
+    );
+  }
+
   _appBar() {
     return AppBar(
       backgroundColor: kAppBarColor,
@@ -51,6 +95,9 @@ class BuyerOrdersUI extends GetView<OrderController> {
         ),
       ),
       title: CustomText(title: langKey.userOrders.tr, style: appBarTitleSize),
+      actions: [
+        appBarPopupMenu(),
+      ],
     );
   }
 
@@ -85,7 +132,7 @@ class BuyerOrdersUI extends GetView<OrderController> {
 
   Widget _orderStats() {
     return Obx(() => SizedBox(
-          height: 250,//AppResponsiveness.getBoxHeightPoint22(),
+          height: 250, //AppResponsiveness.getBoxHeightPoint22(),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(

@@ -97,8 +97,16 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
   updateProduct({ProductModel? model}) async {
     isLoading(true);
     await _apiProvider
+<<<<<<< Updated upstream
         .updateProduct(token: authController.userToken, model: model)
         .then((ProductResponse? response) {
+=======
+        .updateProduct(
+      token: authController.userToken,
+      model: model,
+    )
+        .then((ApiResponse? response) {
+>>>>>>> Stashed changes
       isLoading(false);
       if (response != null) {
         if (response.success != null) {
@@ -258,7 +266,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
             model: newProduct,
             categoryFieldList: dynamicFieldsValuesList,
             images: pickedImagesList)
-        .then((ProductResponse? response) {
+        .then((ApiResponse? response) {
       isLoading(false);
       if (response != null) {
         if (response.success != null) {

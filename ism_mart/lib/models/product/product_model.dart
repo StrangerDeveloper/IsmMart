@@ -10,20 +10,21 @@ List<ProductModel> productModelFromJson(String str) => List<ProductModel>.from(
 String productModelToJson(List<ProductModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class ProductResponse {
-  bool? success, key;
-  String? message, error;
-  dynamic data;
-  List<String>? errors;
+// class ProductResponse {
+//   bool? success, key;
+//   String? message, error;
+//   dynamic data;
+//   List<String>? errors;
 
-  ProductResponse(
-      {this.success,
-      this.key,
-      this.message,
-      this.error,
-      this.errors,
-      this.data});
+//   ProductResponse(
+//       {this.success,
+//       this.key,
+//       this.message,
+//       this.error,
+//       this.errors,
+//       this.data});
 
+<<<<<<< Updated upstream
   factory ProductResponse.fromResponse(response) => ProductResponse(
         success: response['success'] == null ? false : response['success'],
         message: response['message'] ?? "",
@@ -37,12 +38,27 @@ class ProductResponse {
           ? null
           : ProductModel.fromJson(response['data'])*/
       );
+=======
+//   factory ProductResponse.fromResponse(response) => ProductResponse(
+//       success: response['success'] == null ? false : response['success'],
+//       message: response['message'] ?? "",
+//       error: response['error'],
+//       errors: response['errors'] != null
+//           ? List<String>.from(response["errors"].map((x) => x))
+//           : null,
+//       data: response['data']
 
-  @override
-  String toString() {
-    return 'ProductResponse{success: $success, key: $key, message: $message, error: $error, errors: $errors}';
-  }
-}
+//       /*productModel: response['data'] == null && response['data'].isBlank!
+//           ? null
+//           : ProductModel.fromJson(response['data'])*/
+//       );
+>>>>>>> Stashed changes
+
+//   @override
+//   String toString() {
+//     return 'ProductResponse{success: $success, key: $key, message: $message, error: $error, errors: $errors}';
+//   }
+// }
 
 class ProductModel {
   ProductModel(

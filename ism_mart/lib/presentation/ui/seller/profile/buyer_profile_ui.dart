@@ -8,7 +8,6 @@ import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class ProfileUI extends GetView<AuthController> {
   const ProfileUI({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -247,7 +246,15 @@ class ProfileUI extends GetView<AuthController> {
                   if (_formKey.currentState!.validate()) {
                     await controller.updateUser(
                         title: title,
+<<<<<<< Updated upstream
                         value: controller.editingTextController.text);
+=======
+                        value: controller.editingTextController.text,
+                        field: field);
+                    controller.login();
+
+                    Get.back();
+>>>>>>> Stashed changes
                   }
                 },
                 text: langKey.updateBtn.tr,

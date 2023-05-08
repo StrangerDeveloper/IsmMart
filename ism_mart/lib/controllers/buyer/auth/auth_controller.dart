@@ -63,10 +63,11 @@ class AuthController extends GetxController {
     if(userToken!.isNotEmpty) {
       await authProvider
           .getUserCoins(token: userToken)
-          .then((CoinsResponse? coinsResponse) {
-        if (coinsResponse != null) {
-          if (coinsResponse.success!) {
-            _coinsModel(coinsResponse.coinsModel!);
+          .then((ApiResponse? apiResponse) {
+        if (apiResponse != null) {
+          if (apiResponse.success!) {
+            var details = CoinsModel.fromJson(apiResponse.data);
+            _coinsModel(details);
           }
         }
       }).catchError((error) {
@@ -76,8 +77,8 @@ class AuthController extends GetxController {
   }
 
   var isLoading = false.obs;
-
   login() async {
+    print("email ${emailController.text} pass  ${passwordController.text}");
     isLoading(true);
     await authProvider
         .postLogin(
@@ -107,6 +108,7 @@ class AuthController extends GetxController {
     //isLoading(false);
   }
 
+<<<<<<< Updated upstream
   Future<void> forgotPasswordWithEmail() async {
     isLoading(true);
     String email = emailController.text.trim();
@@ -127,6 +129,27 @@ class AuthController extends GetxController {
       isLoading(false);
       debugPrint("resetPassword: $onError");
     });
+=======
+  Future<bool?> forgotPasswordWithEmail() async {
+    isLoading(false);
+    String email = emailController.text.trim();
+    ApiResponse? response =
+        await authProvider.forgotPassword(data: {"email": email});
+    isLoading(false);
+    if (response != null) {
+      if (response.success!) {
+        AppConstant.displaySnackBar("success", response.message);
+        return true;
+      } else {
+        AppConstant.displaySnackBar("error", response.message);
+        return false;
+      }
+    } else {
+      AppConstant.displaySnackBar(
+          "error", "Something went wrong with credentials");
+      return false;
+    }
+>>>>>>> Stashed changes
   }
 
   forgotPasswordOtp() async {
@@ -140,7 +163,7 @@ class AuthController extends GetxController {
       "token": otp,
       "password": password,
       "confirmPassword": confirmPass
-    }).then((UserResponse? response) async {
+    }).then((ApiResponse? response) async {
       isLoading(false);
       if (response != null) {
         if (response.success!) {
@@ -165,10 +188,11 @@ class AuthController extends GetxController {
 
     await authProvider
         .resendVerificationLink(email: email)
-        .then((UserResponse? response) {
+        .then((ApiResponse? response) {
       if (response != null) {
         if (response.success!) {
           Get.back();
+          clearLoginController();
           debugPrint("Email: ${response.toString()}");
           AppConstant.displaySnackBar("success", response.message);
         } else {
@@ -195,20 +219,20 @@ class AuthController extends GetxController {
 
     await authProvider
         .postRegister(userModel: newUser)
-        .then((UserResponse? response) {
+        .then((ApiResponse? response) {
       isLoading(false);
       if (response != null) {
         if (response.success!) {
-          Get.back();
+          //Get.back();
           AppConstant.displaySnackBar("success", response.message);
-          clearControllers();
+          //clearControllers();
         } else
           AppConstant.displaySnackBar('error', response.message);
       } else
         AppConstant.displaySnackBar('error', 'Something went wrong!');
     }).catchError((error) {
       isLoading(false);
-      AppConstant.displaySnackBar('error', "something went wrong!");
+      AppConstant.displaySnackBar('error', "Something went wrong!");
     });
   }
 
@@ -234,16 +258,16 @@ class AuthController extends GetxController {
               token: userToken!,
               calledForUpdate: updatedModel!=null,
               sellerModel: model)
-          .then((UserResponse? userResponse) {
+          .then((ApiResponse? apiResponse) {
         isLoading(false);
-        if (userResponse != null) {
-          if (userResponse.success!) {
+        if (apiResponse != null) {
+          if (apiResponse.success!) {
             Get.back();
-            AppConstant.displaySnackBar("success", userResponse.message);
+            AppConstant.displaySnackBar("success", apiResponse.message);
             clearStoreController();
             getCurrentUser();
           } else
-            AppConstant.displaySnackBar('error', userResponse.message);
+            AppConstant.displaySnackBar('error', apiResponse.message);
         } else
           AppConstant.displaySnackBar('error', "something went wrong!");
       }).catchError((error) {
@@ -312,18 +336,35 @@ class AuthController extends GetxController {
       isLoading(true);
       await authProvider
           .getCurrentUser(token: userToken)
+<<<<<<< Updated upstream
           .then((userResponse) {
         isLoading(false);
         if (userResponse.message != null &&
             userResponse.message!.toLowerCase().contains(AppConstant.SESSION_EXPIRED)) {
+=======
+          .then((apiResponse) async {
+        isLoading(false);
+        if (apiResponse.message != null &&
+            apiResponse.message!
+                .toLowerCase()
+                .contains(AppConstant.SESSION_EXPIRED)) {
+>>>>>>> Stashed changes
           setSession(true);
         } else
           setSession(false);
 
-        if (userResponse.errors != null && userResponse.errors!.isNotEmpty) {
-          setUserModel(UserModel(error: userResponse.errors!.first));
-        } else
-          setUserModel(userResponse.userModel!);
+        if (apiResponse.errors != null && apiResponse.errors!.isNotEmpty) {
+          setUserModel(UserModel(error: apiResponse.errors!.first));
+        } else {
+          UserModel? userDetailsFromApi = UserModel.fromJson(apiResponse.data);
+          UserModel? storedDetails = await LocalStorageHelper.getStoredUser();
+          if (userDetailsFromApi.emailVerified != storedDetails.emailVerified) {
+            updateUserEmailVerification(
+                fromApi: userDetailsFromApi, stored: storedDetails);
+          } else {
+            setUserModel(userDetailsFromApi);
+          }
+        }
       }).catchError((error) {
         isLoading(false);
         setSession(true);
@@ -331,6 +372,14 @@ class AuthController extends GetxController {
     } else
       setSession(true);
 
+  }
+
+  updateUserEmailVerification({UserModel? fromApi, UserModel? stored}) async {
+    if (fromApi!.emailVerified != stored!.emailVerified) {
+      await LocalStorageHelper.deleteUserData();
+      await LocalStorageHelper.storeUser(userModel: fromApi);
+    }
+    setUserModel(fromApi);
   }
 
   List getProfileData() {
@@ -434,7 +483,25 @@ class AuthController extends GetxController {
     //update();
   }
 
+<<<<<<< Updated upstream
   updateUser({title, value}) async {
+=======
+  updateUser({title, value, field}) async {
+    title = editingTextController.text;
+    if (field == "firstName") {
+      userModel!.firstName = title;
+    } else if (field == "lastName") {
+      userModel!.lastName = title;
+    } else if (field == "phone") {
+      userModel!.phone = title;
+    } else if (field == "address") {
+      userModel!.address = title;
+    }
+    // userModel!.firstName = title;
+    // userModel!.lastName = title;
+
+    print("title is => $title");
+>>>>>>> Stashed changes
     if (userToken != null) {
       isLoading(true);
       await authProvider
@@ -463,7 +530,7 @@ class AuthController extends GetxController {
       isLoading(true);
       await authProvider
           .deActivateUser(token: userToken)
-          .then((UserResponse? response) {
+          .then((ApiResponse? response) {
         //isLoading(false);
         if (response != null) {
           if (response.success!) {
@@ -524,6 +591,7 @@ class AuthController extends GetxController {
       "message": "${storeDescController.text}"
     };
 
+<<<<<<< Updated upstream
     await authProvider.contactUs(data: data).then((UserResponse? userResponse) {
       if (userResponse != null) {
         if (userResponse.success!) {
@@ -532,6 +600,16 @@ class AuthController extends GetxController {
           clearContactUsControllers();
         } else
           AppConstant.displaySnackBar('error', userResponse.message);
+=======
+    await authProvider.contactUs(data: data).then((ApiResponse? apiResponse) {
+      if (apiResponse != null) {
+        if (apiResponse.success!) {
+          // Get.back();
+          AppConstant.displaySnackBar("success", apiResponse.message);
+          clearContactUsControllers();
+        } else
+          AppConstant.displaySnackBar('error', apiResponse.message);
+>>>>>>> Stashed changes
       } else
         AppConstant.displaySnackBar('error', "something went wrong!");
     }).catchError((e) {

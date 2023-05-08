@@ -1,20 +1,20 @@
-class DisputeResponse {
-  bool? success;
-  String? message;
-  dynamic data;
+// class DisputeResponse {
+//   bool? success;
+//   String? message;
+//   dynamic data;
 
-  DisputeResponse({this.success, this.message, this.data});
+//   DisputeResponse({this.success, this.message, this.data});
 
-  factory DisputeResponse.fromJson(Map<String, dynamic> json) =>
-      DisputeResponse(
-          success: json["success"],
-          message: json["message"]);
+//   factory DisputeResponse.fromJson(Map<String, dynamic> json) =>
+//       DisputeResponse(
+//           success: json["success"],
+//           message: json["message"]);
 
-  Map<String, dynamic> toJson() => {
-        "success": success,
-        "message": message,
-      };
-}
+//   Map<String, dynamic> toJson() => {
+//         "success": success,
+//         "message": message,
+//       };
+// }
 
 class DisputeModel {
   DisputeModel({

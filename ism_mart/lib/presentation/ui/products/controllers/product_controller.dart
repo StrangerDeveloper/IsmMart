@@ -186,8 +186,14 @@ class ProductController extends GetxController with StateMixin {
       );
 
       await _apiProvider
+<<<<<<< Updated upstream
           .postProductQuestion(token: authController.userToken, model: questionModel.toJson())
           .then((ResponseModel? responseModel) {
+=======
+          .postProductQuestion(
+              token: authController.userToken, model: questionModel.toJson())
+          .then((ApiResponse? responseModel) {
+>>>>>>> Stashed changes
         if (responseModel != null) {
           if (responseModel.success!) {
             clearControllers();
@@ -222,7 +228,7 @@ class ProductController extends GetxController with StateMixin {
       print("");
       await _apiProvider
           .addCart(token: authController.userToken, data: cartData)
-          .then((CartResponse? response) {
+          .then((ApiResponse? response) {
         if (response != null) {
           if (response.success!) {
             clearControllers();

@@ -47,7 +47,7 @@ class OrderProvider {
     return OrderResponse.fromJson(response);
   }
 
-  Future<DisputeResponse> createDispute(
+  Future<ApiResponse> createDispute(
       token, title, description, orderItemId, imagesList) async {
     var response = await _orderRepo.postDispute(
         token: token,
@@ -55,14 +55,25 @@ class OrderProvider {
         description: description,
         orderItemId: orderItemId,
         imagesList: imagesList);
-    return DisputeResponse.fromJson(response);
+    return ApiResponse.fromJson(response);
   }
 
+<<<<<<< Updated upstream
   Future<PaymentIntentResponse> createPaymentIntent({token, data}) async{
+=======
+  Future<ApiResponse> createPaymentIntent({token, data}) async {
+>>>>>>> Stashed changes
     var response = await _orderRepo.postPaymentIntent(token: token, data: data);
-    return PaymentIntentResponse.fromJson(response);
+    return ApiResponse.fromJson(response);
   }
 
+<<<<<<< Updated upstream
 
 
+=======
+  Future<ApiResponse> createReview({token, data}) async {
+    var response = await _orderRepo.postReview(token: token, data: data);
+    return ApiResponse.fromJson(response);
+  }
+>>>>>>> Stashed changes
 }

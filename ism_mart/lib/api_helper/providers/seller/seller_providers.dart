@@ -20,14 +20,14 @@ class SellersApiProvider {
         .toList();
   }
 
-  Future<ProductResponse> addProduct(
+  Future<ApiResponse> addProduct(
       {String? token, formData, imagesList}) async {
     var response =
         await _sellersApiRepo.postProduct(token: token, formData: formData);
-    return ProductResponse.fromResponse(response);
+    return ApiResponse.fromJson(response);
   }
 
-  Future<ProductResponse> addProductWithHttp(
+  Future<ApiResponse> addProductWithHttp(
       {String? token, ProductModel? model, categoryFieldList, images}) async {
     final url = "${ApiConstant.baseUrl}vendor/products/add";
     final request = http.MultipartRequest('POST', Uri.parse(url));
@@ -64,11 +64,11 @@ class SellersApiProvider {
       final responseData = await response.stream.bytesToString();
       final data = json.decode(responseData);
       print(data);
-      return ProductResponse.fromResponse(data);
+      return ApiResponse.fromJson(data);
     } else {
       //TODO: Still needs to test this one properly
       http.StreamedResponse res = handleStreamResponse(response);
-      return ProductResponse.fromResponse(
+      return ApiResponse.fromJson(
           json.decode(await res.stream.bytesToString()));
       throw Exception(
           'Failed to upload image ${response.statusCode} ${json.decode(await response.stream.bytesToString())}');
@@ -83,17 +83,17 @@ class SellersApiProvider {
     return SellerProductModel.fromJson(products);
   }
 
-  Future<ProductResponse> getProductById(int id) async {
+  Future<ApiResponse> getProductById(int id) async {
     var response = await _sellersApiRepo.getProductDetailsById(id: id);
-    return ProductResponse.fromResponse(response);
+    return ApiResponse.fromJson(response);
   }
 
-  Future<ProductResponse> deleteProductById({id, token}) async {
+  Future<ApiResponse> deleteProductById({id, token}) async {
     var response = await _sellersApiRepo.deleteProduct(id: id, token: token);
-    return ProductResponse.fromResponse(response);
+    return ApiResponse.fromJson(response);
   }
 
-  Future<ProductResponse> updateProduct(
+  Future<ApiResponse> updateProduct(
       {String? token, ProductModel? model}) async {
     /* var response =
         await _sellersApiRepo.updateProduct(token: token, productModel: model);
@@ -136,16 +136,29 @@ class SellersApiProvider {
 
     requestInterceptorMultipart(request);
 
+<<<<<<< Updated upstream
     final response = await request.send();
+=======
+    // request.fields.addIf((model.discount! >9 && model.discount! <=90), 'discount', '${model.discount}');
+
+    // print(reques)
+
+    http.StreamedResponse response = await request.send();
+>>>>>>> Stashed changes
 
     if (response.statusCode == 200) {
       final responseData = await response.stream.bytesToString();
       final data = json.decode(responseData);
       print(data);
-      return ProductResponse.fromResponse(data);
+      return ApiResponse.fromJson(data);
     } else {
+<<<<<<< Updated upstream
       http.StreamedResponse res = handleStreamResponse(response);
       return ProductResponse.fromResponse(
+=======
+      http.StreamedResponse res = await handleStreamResponse(response);
+      return ApiResponse.fromJson(
+>>>>>>> Stashed changes
           json.decode(await res.stream.bytesToString()));
       throw http.ClientException(
           'Failed to update resource: ${response.reasonPhrase}');
