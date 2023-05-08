@@ -49,6 +49,20 @@ const discountMinValue = 'discountMinValue',
 ///sellerController
 const imageSizeDesc = 'imageSizeDesc';
 
+///singleCartItems
+const availableStock = 'availableStock',
+    itemPrice = 'itemPrice',
+    features = 'features';
+
+///dashboard'
+const itemsFound = 'itemsFound',
+    price = 'price',
+    minPrice = 'minPrice',
+    maxPrice = 'maxPrice',
+    clear = 'clear',
+    lowToHigh = 'lowToHigh',
+    highToLow = 'highToLow';
+
 //////////////////////////////////////////////////////////////////////
 /**
  *

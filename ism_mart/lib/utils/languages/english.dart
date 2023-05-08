@@ -56,6 +56,21 @@ class English {
         ///sellerController
         key.imageSizeDesc: 'Image must be up to',
 
+        ///singleCartItems
+        key.availableStock: 'Available Stock',
+        key.itemPrice: 'Item Price',
+        key.features: 'Features',
+
+        ///dashboard
+        key.itemsFound : 'items found',
+        key.price : 'Price',
+        key.minPrice : 'Min Price',
+        key.maxPrice : 'Max Price',
+        key.clear : 'Clear',
+        key.lowToHigh : 'Low to High',
+        key.highToLow : 'High to Low',
+
+
 //////////////////////////////////////////////////////////
         key.exitApp: 'Exit App',
         key.exitDialogDesc: 'Are you sure you want to exit?',
