@@ -138,7 +138,7 @@ class ApiProvider {
 
   /**
    *
-   * Flutter Stripe
+   * Api Layer
    * */
 
   Future<JSON> convertCurrency({to, from, amount}) async {

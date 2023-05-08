@@ -180,7 +180,7 @@ class SettingsUI extends GetView<AuthController> {
               onTap: () => _showCurrencyChangeBS(),
               icon: Icons.currency_exchange,
               iconColor: Color.fromARGB(255, 160, 235, 94),
-              title: langKey.currencyK.tr,
+              title: langKey.currencyKey.tr,
               value: currencyController.currency.value),
           Obx(
             () => _singleSettingsItem(
@@ -335,7 +335,7 @@ class SettingsUI extends GetView<AuthController> {
   _showCurrencyChangeBS() {
     AppConstant.showBottomSheet(
       widget: SizedBox(
-        //height: MediaQuery.of(Get.context!).size.height / 2.5,
+        height: MediaQuery.of(Get.context!).size.height / 2.5,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -374,13 +374,14 @@ class SettingsUI extends GetView<AuthController> {
     var imageUrl =
         "https://raw.githubusercontent.com/hampusborgos/country-flags/main/png1000px/${countryCode!.toLowerCase()}.png";
     return Container(
-      height: 45,
-      width: 45,
+      height: 30,
+      width: 30,
       padding: EdgeInsets.all(8),
       // Border width
       decoration: BoxDecoration(
         color: color!.withOpacity(0.3),
         shape: BoxShape.circle,
+        border: Border.all(color: Colors.grey),
         image: DecorationImage(
           fit: BoxFit.fill,
           image: NetworkImage(imageUrl),

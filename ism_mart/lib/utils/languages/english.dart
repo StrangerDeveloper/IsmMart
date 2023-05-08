@@ -42,7 +42,7 @@ class English {
         key.home: 'Home',
         key.categories: 'Categories',
         key.deals: 'Deals',
-        key.menu: 'Menu',
+        key.menu: 'More',
         key.myCart: 'My Cart',
 
         ///buyer dashboard

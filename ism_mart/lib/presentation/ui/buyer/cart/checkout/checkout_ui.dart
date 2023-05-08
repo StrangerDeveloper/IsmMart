@@ -833,8 +833,7 @@ class CheckoutUI extends GetView<CheckoutController> {
                     ),
                     Obx(
                       () => CustomPriceWidget(
-                          title:
-                              "${/*controller.amountAfterRedeeming.value.isGreaterThan(0.0) ? controller.amountAfterRedeeming.value : */ controller.totalAmount.value}"),
+                          title: "${controller.totalAmount.value}"),
                     ),
                   ],
                 ),

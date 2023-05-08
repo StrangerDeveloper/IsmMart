@@ -150,6 +150,7 @@ class AuthController extends GetxController {
           Get.back();
           debugPrint("Email: ${response.toString()}");
           AppConstant.displaySnackBar("success", response.message);
+          passwordController.clear();
         } else {
           AppConstant.displaySnackBar("error", response.message);
         }

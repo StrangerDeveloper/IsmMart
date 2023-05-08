@@ -28,7 +28,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
   void setDiscount(int? discount) {
     if (discount! > 0 && discount < 10) {
       discountMessage("Discount should be greater than 10");
-    } else if (discount >= 90) {
+    } else if (discount >= 100) {
       discountMessage("Discount should not be greater or equal to 100");
     } else {
       discountMessage("");
@@ -95,17 +95,11 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
   //TOO: Update Product using PATCH request type
 
   updateProduct({ProductModel? model}) async {
+    isLoading(true);
     model!.price = int.parse("${prodPriceController.text}");
     model.name = prodNameController.text;
-    model.discount = int.parse("${prodDiscountController.text}");
-    model.description = prodDescriptionController.text;
-    model.stock = int.parse("${prodStockController.text}");
-
-    isLoading(true);
-
-    model.price = int.parse("${prodPriceController.text}");
-    model.name = prodNameController.text;
-    model.discount = int.parse("${prodDiscountController.text}");
+    model.discount = int.parse(
+        "${prodDiscountController.text.isEmpty ? 0 : prodDiscountController.text}");
     model.description = prodDescriptionController.text;
     model.stock = int.parse("${prodStockController.text}");
 
@@ -117,11 +111,11 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
         .then((ProductResponse? response) {
       isLoading(false);
       if (response != null) {
-        if (response.success != null) {
+        if (response.success!) {
           Get.back();
-          fetchMyProducts();
           AppConstant.displaySnackBar('success', "${response.message}");
           clearControllers();
+          fetchMyProducts();
         } else {
           AppConstant.displaySnackBar('error', "${response.message}");
         }
@@ -133,7 +127,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
   onError(e) async {
     isLoading(false);
     print(">>>SellerController: $e");
-    showSnackBar(title: 'error', message: e);
+    showSnackBar(title: 'error', message: e.toString());
   }
 
   //TDO: END Product
@@ -141,19 +135,17 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
   //TDO: Delete Product
 
   deleteProduct({int? id}) async {
-    await LocalStorageHelper.getStoredUser().then((user) async {
-      await _apiProvider
-          .deleteProductById(id: id, token: user.token)
-          .then((response) {
-        if (response.success != null) {
-          if (response.success!) {
-            fetchMyProducts();
-            AppConstant.displaySnackBar('success', response.message);
-          } else
-            AppConstant.displaySnackBar('error', response.message);
-        }
-      }).catchError(onError);
-    });
+    await _apiProvider
+        .deleteProductById(id: id, token: authController.userToken)
+        .then((response) {
+      if (response.success!) {
+        if (response.success!) {
+          AppConstant.displaySnackBar('success', response.message);
+          fetchMyProducts();
+        } else
+          AppConstant.displaySnackBar('error', response.message);
+      }
+    }).catchError(onError);
     //fetchMyProducts();
     //myProductsList.refresh();
   }
@@ -258,19 +250,17 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
 
   addProduct() async {
     isLoading(true);
-    var discount = prodDiscountController.text.isEmpty
+    num discount = prodDiscountController.text.isEmpty
         ? 0
         : num.parse(prodDiscountController.text);
-
     ProductModel newProduct = ProductModel(
         name: prodNameController.text.trim(),
         price: priceAfterCommission.value,
         stock: int.parse(prodStockController.text),
         categoryId: selectedCategoryID.value,
         subCategoryId: selectedSubCategoryID.value,
-        discount: discount,
-        description: prodDescriptionController.text);
-
+        description: prodDescriptionController.text,
+        discount: discount);
     await _apiProvider
         .addProductWithHttp(
             token: authController.userToken,
@@ -280,18 +270,18 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
         .then((ProductResponse? response) {
       isLoading(false);
       if (response != null) {
-        if (response.success != null) {
-          fetchMyProducts();
+        if (response.success!) {
           Get.back();
           clearControllers();
           AppConstant.displaySnackBar('success', "${response.message}");
+          fetchMyProducts();
         } else {
           debugPrint('Error: ${response.toString()}');
           AppConstant.displaySnackBar('error',
               "${response.message != null ? response.message : someThingWentWrong.tr}");
         }
       }
-    }); //.catchError(onError);
+    }).catchError(onError);
     //isLoading(false);
   }
 

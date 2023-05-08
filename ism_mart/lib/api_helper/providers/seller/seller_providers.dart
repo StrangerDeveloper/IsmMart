@@ -39,7 +39,9 @@ class SellersApiProvider {
     request.fields['stock'] = "${model.stock}";
     request.fields['categoryId'] = "${model.categoryId}";
     request.fields['subCategoryId'] = "${model.subCategoryId}";
-    request.fields['discount'] = "${model.discount}";
+    if (model.discount != null &&
+        model.discount! >= 10 &&
+        model.discount! <= 90) request.fields['discount'] = "${model.discount}";
     request.fields['description'] = "${model.description}";
 
     if (categoryFieldList.isNotEmpty)
@@ -67,9 +69,10 @@ class SellersApiProvider {
       return ProductResponse.fromResponse(data);
     } else {
       //: Still needs to test this one properly
-      http.StreamedResponse res = handleStreamResponse(response);
-      return ProductResponse.fromResponse(
-          json.decode(await res.stream.bytesToString()));
+      http.StreamedResponse res = await handleStreamResponse(response);
+      final data = json.decode(await res.stream.bytesToString());
+      print(">>>AddProductHtTPREsponse: $data");
+      return ProductResponse.fromResponse(data);
     }
   }
 
@@ -101,9 +104,13 @@ class SellersApiProvider {
     request.fields.addAll({
       'name': '${model!.name}',
       'id': '${model.id}',
-      'discount': '${model.discount}',
       'price': '${model.price}',
-      'stock': '${model.discount}'
+      'stock': '${model.stock}',
+      'discription': '${model.description}',
+      // if (model.discount != null &&
+      //     model.discount! >= 10 &&
+      //     model.discount! <= 90)
+      'discount': '${model.discount}',
     });
 
     http.StreamedResponse response = await request.send();
@@ -115,6 +122,8 @@ class SellersApiProvider {
       return ProductResponse.fromResponse(data);
     } else {
       http.StreamedResponse res = await handleStreamResponse(response);
+      final data = json.decode(await res.stream.bytesToString());
+      print(">>>UpdateREsponse: $data");
       return ProductResponse.fromResponse(
           json.decode(await res.stream.bytesToString()));
     }
