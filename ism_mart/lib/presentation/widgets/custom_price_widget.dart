@@ -14,11 +14,11 @@ class CustomPriceWidget extends StatelessWidget {
       title: currencyFormat(title!),
       style: style ?? headline3,
     );
-
   }
 
   String currencyFormat(String value) {
-    int amount = double.parse(value).round();
+    print(">>>Value: $value");
+    int amount = num.parse(value).round();
     return NumberFormat.currency(
             locale: 'en_US',
             symbol: "Rs ",

@@ -7,7 +7,9 @@ class LocalStorageHelper {
   static const currentUserKey = "currentUser";
 
   static const cartItemKey = "cartItem";
+
   static final localStorage = GetStorage();
+
   static const tag = "LocalStorage:";
 
   static Future<void> initUserStorage() async {
@@ -31,9 +33,10 @@ class LocalStorageHelper {
 
   static Future<void> addItemToCart({CartModel? cartModel}) async {
     var list = <CartModel>[];
- 
+
     if (localStorage.read(cartItemKey) != null) {
       list = getCartItems();
+
       if (isItemExistsInCart(cartModel)) {
         list.removeWhere(
             (element) => element.productId! == cartModel!.productId);
@@ -55,12 +58,20 @@ class LocalStorageHelper {
   }
 
   static updateCartItems({CartModel? cartModel}) async {
+    print(">>>UpdateCartItem: ${cartModel!.toJson()}");
     if (localStorage.read(cartItemKey) != null) {
       List<CartModel> list = getCartItems();
-      list.removeWhere((element) => element.productId == cartModel!.productId);
-      list.add(cartModel!);
-      String carts = cartModelToJson(list);
-      await saveCart(carts);
+      final index = list
+          .indexWhere((element) => element.productId == cartModel.productId);
+      if (index != -1) {
+        list[index].quantity = cartModel.quantity;
+        list[index].itemPrice = cartModel.itemPrice;
+        String carts = cartModelToJson(list);
+        await saveCart(carts);
+      }
+
+      // list.removeWhere((element) => element.productId == cartModel!.productId);
+      // list.add(cartModel);
     }
   }
 
@@ -80,7 +91,7 @@ class LocalStorageHelper {
 
   static bool isItemExistsInCart(CartModel? cartModel) {
     return getCartItems()
-        .where((element) => element.productModel == cartModel!.productModel!)
+        .where((element) => element.productModel == cartModel!.productModel)
         .isNotEmpty;
   }
 

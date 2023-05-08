@@ -44,7 +44,7 @@ class CartModel {
   List<String>? errors;
   List<int>? featuresID;
   List<String>? featuresName;
-  num? itemPrice;
+  num? itemPrice; //quantity * itemPrice
 
   CartModel({
     this.id,
@@ -60,14 +60,16 @@ class CartModel {
 
   factory CartModel.fromJson(JSON value) {
     return CartModel(
-      id: value['id'],
-      productId: value['productId'],
-      productModel: ProductModel.fromJson(value['Product']),
-      quantity: value['quantity'].toString(),
-      featuresName: List<String>.from(value['featuresName'].map((x) => x)),
-      featuresID: List<int>.from(value["features"].map((x) => x)),
-      //onQuantityClicked: json['onQuantityClicked'],
-    );
+        id: value['id'],
+        productId: value['productId'],
+        productModel: ProductModel.fromJson(value['Product']),
+        quantity: value['quantity'].toString(),
+        featuresName: List<String>.from(value['featuresName'].map((x) => x)),
+        featuresID: List<int>.from(value["features"].map((x) => x)),
+        itemPrice: value['itemPrice']
+
+        //onQuantityClicked: json['onQuantityClicked'],
+        );
   }
 
   JSON toJson() => {
@@ -83,7 +85,12 @@ class CartModel {
         "productId": productId,
         "quantity": quantity,
         "features": featuresID,
-        "itemPrice": itemPrice,
         "Product": productModel!.toOrderCheckoutJson()
       };
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other.runtimeType != runtimeType) return false;
+    return other is CartModel && other.id == id && other.productId == productId;
+  }
 }
