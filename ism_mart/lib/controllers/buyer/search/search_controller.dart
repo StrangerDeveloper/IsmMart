@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/utils/constants.dart';
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class SearchController extends GetxController {
   final ApiProvider _apiProvider;
@@ -142,7 +143,7 @@ class SearchController extends GetxController {
       filters.addIf(maxPrice > 0, "maxPrice", "$maxPrice");
     } else
       AppConstant.displaySnackBar(
-          "error", "Min. Price shouldn't be greater than Max. price!");
+          langKey.errorTitle, langKey.minPriceShouldNotBe);
 
     int page = 1;
     int limit = 10;

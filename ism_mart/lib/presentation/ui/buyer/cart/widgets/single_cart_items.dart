@@ -5,6 +5,7 @@ import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class SingleCartItems extends StatelessWidget {
   const SingleCartItems(
@@ -67,14 +68,14 @@ class SingleCartItems extends StatelessWidget {
                             AppConstant.spaceWidget(height: 2),
                             CustomText(
                               title:
-                                  "Available Stock: ${cartModel.productModel!.stock}",
+                                  "${langKey.availableStock}: ${cartModel.productModel!.stock}",
                               size: 10,
                             ),
                             AppConstant.spaceWidget(height: 2),
                             Row(
                               children: [
                                 CustomText(
-                                  title: "Item Price: ",
+                                  title: "${langKey.itemPrice}: ",
                                   style: bodyText2.copyWith(color: kLightColor),
                                 ),
                                 CustomPriceWidget(
@@ -95,7 +96,7 @@ class SingleCartItems extends StatelessWidget {
                               Row(
                                 children: [
                                   CustomText(
-                                    title: "Features:",
+                                    title: "${langKey.features}:",
                                     style: bodyText2,
                                   ),
                                   SizedBox(

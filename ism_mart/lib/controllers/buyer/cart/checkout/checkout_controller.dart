@@ -6,6 +6,7 @@ import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class CheckoutController extends GetxController {
   final OrderProvider _orderProvider;
@@ -162,9 +163,9 @@ class CheckoutController extends GetxController {
           getDefaultAddress();
           getAllShippingAddresses();
         } else
-          AppConstant.displaySnackBar('error', userResponse.message);
+          AppConstant.displaySnackBar(langKey.errorTitle, userResponse.message);
       } else
-        AppConstant.displaySnackBar('error', "something went wrong!");
+        AppConstant.displaySnackBar(langKey.errorTitle, "something went wrong!");
     }).catchError(onError);
   }
 
@@ -207,9 +208,9 @@ class CheckoutController extends GetxController {
           AppConstant.displaySnackBar("success", userResponse.message);
           //getAllShippingAddresses();
         } else
-          AppConstant.displaySnackBar('error', userResponse.message);
+          AppConstant.displaySnackBar(langKey.errorTitle, userResponse.message);
       } else
-        AppConstant.displaySnackBar('error', "something went wrong!");
+        AppConstant.displaySnackBar(langKey.errorTitle, "something went wrong!");
     }).catchError(onError);
 
     update();
@@ -233,9 +234,9 @@ class CheckoutController extends GetxController {
           AppConstant.displaySnackBar("success", userResponse.message);
           clearControllers();
         } else
-          AppConstant.displaySnackBar('error', userResponse.message);
+          AppConstant.displaySnackBar(langKey.errorTitle, userResponse.message);
       } else
-        AppConstant.displaySnackBar('error', "something went wrong!");
+        AppConstant.displaySnackBar(langKey.errorTitle, "something went wrong!");
     }).catchError(onError);
 
     update();
@@ -250,9 +251,9 @@ class CheckoutController extends GetxController {
           Get.back();
           AppConstant.displaySnackBar("success", userResponse.message);
         } else
-          AppConstant.displaySnackBar('error', userResponse.message);
+          AppConstant.displaySnackBar(langKey.errorTitle, userResponse.message);
       } else
-        AppConstant.displaySnackBar('error', "something went wrong!");
+        AppConstant.displaySnackBar(langKey.errorTitle, "something went wrong!");
     }).catchError(onError);
   }
 
@@ -389,18 +390,18 @@ class CheckoutController extends GetxController {
                 cartItems: cartItems);
           }).catchError(onError);
         } else {
-          showSnackBar(title: 'error', message: response.message!);
+          showSnackBar(title: langKey.errorTitle, message: response.message!);
         }
       } else
         showSnackBar(
-            title: 'error', message: "Something went wrong! Order Not created");
+            title: langKey.errorTitle, message: "Something went wrong! Order Not created");
     }).catchError(onError);
   }
 
   onError(error) {
     isLoading(false);
     debugPrint(">>>>ConfirmPayment: $error");
-    showSnackBar(title: 'error', message: error);
+    showSnackBar(title: langKey.errorTitle, message: error);
   }
 
   createOrder({paymentMethod = "COD", cartItems}) async {
@@ -418,15 +419,15 @@ class CheckoutController extends GetxController {
       isLoading(false);
       if (response != null) {
         if (response.success!) {
-          showSnackBar(title: 'success', message: response.message!);
+          showSnackBar(title: langKey.success, message: response.message!);
           showSuccessDialog(response: response);
           // paymentIntent = null;
           LocalStorageHelper.clearAllCart();
         } else
-          showSnackBar(title: 'error', message: response.message!);
+          showSnackBar(title: langKey.errorTitle, message: response.message!);
       } else
         showSnackBar(
-            title: 'error', message: "Something went wrong! Order Not created");
+            title: langKey.errorTitle, message: "Something went wrong! Order Not created");
     }).catchError(onError);
   }
 

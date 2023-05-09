@@ -196,7 +196,7 @@ class UpdateProductUI extends GetView<SellersController> {
                                         controller.updateProduct(
                                             model: productModel);
                                       } else {
-                                        AppConstant.displaySnackBar('error',
+                                        AppConstant.displaySnackBar(langKey.errorTitle,
                                             "Your discount should be between 10 and 100 percent. Please try again!");
                                       }
                                     }

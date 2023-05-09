@@ -142,7 +142,7 @@ class SettingsUI extends GetView<AuthController> {
                   }
                 } else {
                   AppConstant.displaySnackBar(
-                      'error', "Your store has been disabled");
+                      langKey.errorTitle, "Your store has been disabled");
                 }
               },
               icon: Icons.dashboard_rounded,

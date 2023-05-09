@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class SingleProductItems extends StatelessWidget {
   const SingleProductItems(
@@ -75,7 +76,7 @@ class SingleProductItems extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: CustomText(
-                      title: "${model.discount}% OFF",
+                      title: "${model.discount}% ${langKey.OFF}",
                       color: kWhiteColor,
                       size: 12,
                       weight: FontWeight.w600,
@@ -171,7 +172,7 @@ class SingleProductItems extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: CustomText(
-                      title: "${model.discount}% OFF",
+                      title: "${model.discount}% ${langKey.OFF}",
                       color: kWhiteColor,
                       size: 12,
                       weight: FontWeight.w600,

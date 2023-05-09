@@ -5,6 +5,8 @@ import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+
 class ProductController extends GetxController with StateMixin {
   final ApiProvider _apiProvider;
 
@@ -237,11 +239,11 @@ class ProductController extends GetxController with StateMixin {
           if (response.success!) {
             clearControllers();
             count(1);
-            showSnackBar('success', response.message);
+            showSnackBar(langKey.success, response.message);
           } else
-            showSnackBar('error', response.message);
+            showSnackBar(langKey.errorTitle, response.message);
         } else
-          showSnackBar('error', 'Something went wrong!');
+          showSnackBar(langKey.errorTitle, langKey.someThingWentWrong);
       }).catchError((error) {
         debugPrint(">>>>addItemToCart $error");
       });

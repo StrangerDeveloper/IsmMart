@@ -4,6 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class AuthController extends GetxController {
   final AuthProvider authProvider;
@@ -206,12 +207,12 @@ class AuthController extends GetxController {
           AppConstant.displaySnackBar("success", response.message);
           clearControllers();
         } else
-          AppConstant.displaySnackBar('error', response.message);
+          AppConstant.displaySnackBar(langKey.errorTitle, response.message);
       } else
-        AppConstant.displaySnackBar('error', 'Something went wrong!');
+        AppConstant.displaySnackBar(langKey.errorTitle, langKey.someThingWentWrong);
     }).catchError((error) {
       isLoading(false);
-      AppConstant.displaySnackBar('error', "something went wrong!");
+      AppConstant.displaySnackBar(langKey.errorTitle, langKey.someThingWentWrong);
     });
   }
 
@@ -246,16 +247,16 @@ class AuthController extends GetxController {
             clearStoreController();
             getCurrentUser();
           } else
-            AppConstant.displaySnackBar('error', userResponse.message);
+            AppConstant.displaySnackBar(langKey.errorTitle, userResponse.message);
         } else
-          AppConstant.displaySnackBar('error', "something went wrong!");
+          AppConstant.displaySnackBar(langKey.errorTitle, "something went wrong!");
       }).catchError((error) {
         isLoading(false);
         debugPrint("RegisterStore: Error $error");
       });
     } else {
       isLoading(false);
-      AppConstant.displaySnackBar('error', "Current User not found!");
+      AppConstant.displaySnackBar(langKey.errorTitle, "Current User not found!");
     }
   }
 
@@ -276,7 +277,7 @@ class AuthController extends GetxController {
                   .then((compressedFile) {
                 var lengthInMb = compressedFile.lengthSync() * 0.000001;
                 if (lengthInMb > 2) {
-                  showSnackBar(message: 'Image must be up to 2MB');
+                  showSnackBar(message: langKey.imageSizeDesc + ' 2MB');
                 } else {
                   if (calledForProfile) {
                     profileImgPath(compressedFile.path);
@@ -310,7 +311,10 @@ class AuthController extends GetxController {
     _isSessionExpired.value = value!;
   }
 
+
+
   getCurrentUser() async {
+
     if (userToken!.isNotEmpty) {
       isLoading(true);
       await authProvider.getCurrentUser(token: userToken).then((userResponse) {
@@ -449,9 +453,9 @@ class AuthController extends GetxController {
             editingTextController.clear();
             getCurrentUser();
           } else
-            AppConstant.displaySnackBar('error', userResponse.message);
+            AppConstant.displaySnackBar(langKey.errorTitle, userResponse.message);
         } else
-          AppConstant.displaySnackBar('error', "something went wrong!");
+          AppConstant.displaySnackBar(langKey.errorTitle, "something went wrong!");
       }).catchError((error) {
         isLoading(false);
         debugPrint("RegisterStore: Error $error");
@@ -474,7 +478,7 @@ class AuthController extends GetxController {
           } else
             AppConstant.displaySnackBar("error", response.message);
         } else
-          AppConstant.displaySnackBar('error', "something went wrong!");
+          AppConstant.displaySnackBar(langKey.errorTitle, "something went wrong!");
       }).catchError((error) {
         isLoading(false);
         debugPrint("deActivateAccount: Error $error");
@@ -532,17 +536,17 @@ class AuthController extends GetxController {
           AppConstant.displaySnackBar("success", userResponse.message);
           clearContactUsControllers();
         } else
-          AppConstant.displaySnackBar('error', userResponse.message);
+          AppConstant.displaySnackBar(langKey.errorTitle, userResponse.message);
       } else {
-        AppConstant.displaySnackBar('error', "something went wrong!");
+        AppConstant.displaySnackBar(langKey.errorTitle, "something went wrong!");
       }
     }).catchError((e) {
       isLoading(false);
-      AppConstant.displaySnackBar('error', "$e");
+      AppConstant.displaySnackBar(langKey.errorTitle, "$e");
     });
   }
 
-  void showSnackBar({title = 'error', message = 'Something went wrong'}) {
+  void showSnackBar({title = langKey.errorTitle, message = 'Something went wrong'}) {
     AppConstant.displaySnackBar(title, message);
   }
 

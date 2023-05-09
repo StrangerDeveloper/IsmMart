@@ -1,8 +1,85 @@
+//////////////////////////////////////////////////////////////////////
+
+///email_input
+const enterEmail = "enterEmail", emptyField = "emptyField";
+
+///reset_password
+const enterDetails = 'enterDetails';
+
+///sign_in
+const passwordRequired = 'passwordRequired';
+
+///checkout
+const standard = 'standard',
+    toProceedWithPurchase = 'toProceedWithPurchase',
+    preferredPayment = 'preferredPayment',
+    cartMustNotEmpty = 'cartMustNotEmpty',
+    delivery = 'delivery',
+    daysCost = 'Days Cost',
+    freeShipping = 'freeShipping',
+    zipCode = 'zipCode',
+    zipCodeRequired = 'zipCodeRequired',
+    addressRequired = 'addressRequired',
+    selectCountry = 'selectCountry',
+    chooseCountry = 'chooseCountry',
+    selectCity = 'selectCity',
+    chooseCity = 'chooseCity',
+    success = 'success',
+    disputeDeleted = 'disputeDeleted',
+    recordDoNotExist = 'recordDoNotExist',
+    fileMustBe = 'fileMustBe',
+    invalidImageFormat = 'invalidImageFormat',
+    minPriceShouldNotBe = 'minPriceShouldNotBe',
+    plzSelectCountry = 'plzSelectCountry',
+    shippingAddressDetail = 'shippingAddressDetail',
+    cashOnDelivery = 'cashOnDelivery',
+    creditCard = 'creditCard',
+    wantToRedeem = 'wantToRedeem',
+    coins = 'coins',
+    needMoreCoins = 'needMoreCoins',
+    items = 'items',
+    shippingFee = 'shippingFee',
+    inclusiveOfGst = 'inclusiveOfGst',
+    subtotal = 'subtotal';
+
+///memberShip
+const discountMinValue = 'discountMinValue',
+    discountMaxValue = 'discountMaxValue';
+
+///sellerController
+const imageSizeDesc = 'imageSizeDesc';
+
+///singleCartItems
+const availableStock = 'availableStock',
+    itemPrice = 'itemPrice',
+    features = 'features';
+
+///dashboard'
+const itemsFound = 'itemsFound',
+    price = 'price',
+    minPrice = 'minPrice',
+    maxPrice = 'maxPrice',
+    clear = 'clear',
+    lowToHigh = 'lowToHigh',
+
+    OFF = 'OFF',
+    // highToLow = 'highToLow',
+    // highToLow = 'highToLow',
+    // highToLow = 'highToLow',
+    // highToLow = 'highToLow',
+    // highToLow = 'highToLow',
+    // highToLow = 'highToLow',
+    // highToLow = 'highToLow',
+
+    highToLow = 'highToLow';
+
+//////////////////////////////////////////////////////////////////////
 /**
  *
  *  Settings
  * */
 const exitApp = "exitApp", exitDialogDesc = "exitDialogDesc";
+
 const settings = "settings",
     general = "general",
     account = "account",

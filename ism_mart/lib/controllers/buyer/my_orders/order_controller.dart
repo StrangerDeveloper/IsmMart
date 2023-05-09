@@ -5,14 +5,19 @@ import 'package:flutter/services.dart';
 import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:ism_mart/api_helper/api_base_helper.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
+import 'package:ism_mart/api_helper/global_variables.dart';
+import 'package:ism_mart/api_helper/urls.dart';
 import 'package:ism_mart/controllers/controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class OrderController extends GetxController
     with StateMixin, GetSingleTickerProviderStateMixin {
   final OrderProvider _orderProvider;
+
   OrderController(this._orderProvider);
 
   GlobalKey<FormState> reviewFormKey = GlobalKey<FormState>();
@@ -141,21 +146,22 @@ class OrderController extends GetxController
     });
   }
 
-  disputeOnOrders({orderId}) async {
+  disputeOnOrders({OrderItem? orderItem, orderId}) async {
     isLoading(false);
     String title = titleController.text;
     String description = descriptionController.text;
 
     await _orderProvider
             .createDispute(authController.userToken, title, description,
-                orderId, pickedImagesList)
+                orderItem!.id, pickedImagesList)
             .then((DisputeResponse? response) {
       isLoading(false);
       if (response != null) {
         if (response.success!) {
+          fetchOrderById(orderId);
           Get.back();
           clearControllers();
-          showSnackBar(title: 'success', message: response.message);
+          showSnackBar(title: langKey.success, message: response.message);
         } else
           showSnackBar(message: response.message);
       } else {
@@ -166,6 +172,32 @@ class OrderController extends GetxController
       print(">>>Dispute $e");
     })*/
         ;
+  }
+
+  deleteTicket(String ticketId, String orderId) {
+    // GlobalVariable.showLoader.value = true;
+    isLoading(true);
+    ApiBaseHelper()
+        .deleteMethod(url: Urls.deleteTickets + ticketId, withBearer: false)
+        .then((parsedJson) {
+      isLoading(false);
+      if (parsedJson['success'] == true && parsedJson['data'] != null) {
+        fetchOrderById(orderId);
+        AppConstant.displaySnackBar(
+          langKey.success,
+          langKey.disputeDeleted,
+        );
+      } else {
+        AppConstant.displaySnackBar(
+          langKey.errorTitle,
+          langKey.recordDoNotExist,
+        );
+      }
+    }).catchError((e) {
+      isLoading(false);
+      print(e);
+      // GlobalVariable.showLoader.value = false;
+    });
   }
 
   var _picker = ImagePicker();
@@ -187,7 +219,7 @@ class OrderController extends GetxController
 
               imagesSizeInMb.value += lengthInMb;
               if (lengthInMb > 2) {
-                showSnackBar(message: 'Each file must be up to 2MB');
+                showSnackBar(message: langKey.fileMustBe + ' 2MB');
               } else {
                 //: needs to add check if file exist
                 pickedImagesList.add(compressedFile);
@@ -198,7 +230,10 @@ class OrderController extends GetxController
           }
         } on PlatformException catch (e) {
           print(e);
-          AppConstant.displaySnackBar('error', 'Invalid Image format!');
+          AppConstant.displaySnackBar(
+            langKey.errorTitle,
+            langKey.invalidImageFormat,
+          );
         }
       } else {
         print("called");
@@ -255,7 +290,7 @@ class OrderController extends GetxController
             Get.back();
             rating.value = 0;
             reviewTxtFieldController.clear();
-            showSnackBar(title: 'success', message: response.message);
+            showSnackBar(title: langKey.success, message: response.message);
           } else
             showSnackBar(message: response.message);
         } else {
@@ -268,7 +303,8 @@ class OrderController extends GetxController
     }
   }
 
-  void showSnackBar({title = 'error', message = 'Something went wrong'}) {
+  void showSnackBar(
+      {title = langKey.errorTitle, message = langKey.someThingWentWrong}) {
     AppConstant.displaySnackBar(title, message);
   }
 }

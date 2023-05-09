@@ -2,7 +2,77 @@ import 'translations_key.dart' as key;
 
 class English {
   Map<String, String> get translations => {
-        //new
+//////////////////////////////////////////////////////////
+        ///email_input
+        key.enterEmail: 'Enter Email To Recieve OTP',
+        key.emptyField: 'Empty field',
+
+        ///reset_password
+        key.enterDetails: 'Enter Details To Create New Password',
+
+        ///sign_in
+        key.passwordRequired: 'Password is required!.',
+
+        ///checkout
+        key.standard: "Standard",
+        key.toProceedWithPurchase:
+            'To proceed with your purchase, kindly note that the minimum order amount required is Rs 1000.',
+        key.preferredPayment:
+            'Please choose your preferred payment method to complete your order.',
+        key.cartMustNotEmpty: 'Cart must not be empty',
+        key.delivery: 'Delivery',
+        key.daysCost: 'Days Cost',
+        key.freeShipping: 'FREE SHIPPING ON ALL ORDERS ABOVE PKR 1000',
+        key.zipCode: 'Zip Code',
+        key.zipCodeRequired: 'Zip code required!',
+        key.addressRequired: 'Address is required!',
+        key.selectCountry: 'Select Country',
+        key.chooseCountry: 'Choose Country',
+        key.selectCity: 'Select City',
+        key.chooseCity: 'Choose City',
+        key.success: 'success',
+        key.disputeDeleted: 'Dispute deleted successfully',
+        key.recordDoNotExist: 'Record do not exist',
+        key.fileMustBe: 'Each file must be up to',
+        key.invalidImageFormat: 'Invalid Image format!',
+        key.minPriceShouldNotBe:
+            'Min. Price should not be greater than Max. price!',
+        key.plzSelectCountry: 'Plz select Country and City',
+        key.shippingAddressDetail: 'Shipping Address details',
+        key.cashOnDelivery: 'Cash On Delivery (Not Available)',
+        key.creditCard: 'Credit Card',
+        key.wantToRedeem: 'Want to redeem',
+        key.coins: 'coins',
+        key.needMoreCoins: 'Need more Coins to redeem',
+        key.subtotal: 'Subtotal',
+        key.items: 'items',
+        key.shippingFee: 'Shipping Fee',
+        key.inclusiveOfGst: 'Inclusive of GST',
+
+        ///memberShip
+        key.discountMinValue: 'Discount should be greater than 10',
+        key.discountMaxValue: 'Discount should not be greater or equal to 100',
+
+        ///sellerController
+        key.imageSizeDesc: 'Image must be up to',
+
+        ///singleCartItems
+        key.availableStock: 'Available Stock',
+        key.itemPrice: 'Item Price',
+        key.features: 'Features',
+
+        ///dashboard
+        key.itemsFound : 'items found',
+        key.price : 'Price',
+        key.minPrice : 'Min Price',
+        key.maxPrice : 'Max Price',
+        key.clear : 'Clear',
+        key.lowToHigh : 'Low to High',
+        key.highToLow : 'High to Low',
+        key.OFF : 'OFF',
+
+
+//////////////////////////////////////////////////////////
         key.exitApp: 'Exit App',
         key.exitDialogDesc: 'Are you sure you want to exit?',
         key.resetPass: 'Reset Password',
