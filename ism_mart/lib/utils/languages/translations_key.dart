@@ -61,6 +61,16 @@ const itemsFound = 'itemsFound',
     maxPrice = 'maxPrice',
     clear = 'clear',
     lowToHigh = 'lowToHigh',
+
+    OFF = 'OFF',
+    // highToLow = 'highToLow',
+    // highToLow = 'highToLow',
+    // highToLow = 'highToLow',
+    // highToLow = 'highToLow',
+    // highToLow = 'highToLow',
+    // highToLow = 'highToLow',
+    // highToLow = 'highToLow',
+
     highToLow = 'highToLow';
 
 //////////////////////////////////////////////////////////////////////

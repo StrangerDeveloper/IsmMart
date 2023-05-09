@@ -69,6 +69,7 @@ class English {
         key.clear : 'Clear',
         key.lowToHigh : 'Low to High',
         key.highToLow : 'High to Low',
+        key.OFF : 'OFF',
 
 
 //////////////////////////////////////////////////////////
