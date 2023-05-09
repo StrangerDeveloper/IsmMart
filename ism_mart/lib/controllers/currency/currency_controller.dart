@@ -107,6 +107,7 @@ class CurrencyController extends GetxController with StateMixin {
     LocalStorageHelper.getStoredCurrency().then((CurrencyModel? model) {
       if (model != null) {
         _currencyModel(model);
+        setCurrency(key: model.to);
       } else
         setCurrency(key: "pkr");
     });
