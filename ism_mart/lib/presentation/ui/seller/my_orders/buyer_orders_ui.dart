@@ -132,7 +132,7 @@ class BuyerOrdersUI extends GetView<OrderController> {
 
   Widget _orderStats() {
     return Obx(() => SizedBox(
-          height: 250,//AppResponsiveness.getBoxHeightPoint22(),
+          height: 250, //AppResponsiveness.getBoxHeightPoint22(),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(

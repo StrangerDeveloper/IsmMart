@@ -154,16 +154,16 @@ class OrderController extends GetxController
     await _orderProvider
             .createDispute(authController.userToken, title, description,
                 orderItem!.id, pickedImagesList)
-            .then((DisputeResponse? response) {
+            .then((ApiResponse? apiResponse) {
       isLoading(false);
-      if (response != null) {
-        if (response.success!) {
+      if (apiResponse != null) {
+        if (apiResponse.success!) {
           fetchOrderById(orderId);
           Get.back();
           clearControllers();
-          showSnackBar(title: langKey.success, message: response.message);
+          showSnackBar(title: 'success', message: apiResponse.message);
         } else
-          showSnackBar(message: response.message);
+          showSnackBar(message: apiResponse.message);
       } else {
         showSnackBar();
       }
@@ -282,17 +282,17 @@ class OrderController extends GetxController
       };
       await _orderProvider
           .createReview(token: authController.userToken, data: data)
-          .then((PaymentIntentResponse? response) {
-        print(response?.message);
+          .then((ApiResponse? apiResponse) {
+        print(apiResponse?.message);
         isLoading(false);
-        if (response != null) {
-          if (response.success!) {
+        if (apiResponse != null) {
+          if (apiResponse.success!) {
             Get.back();
             rating.value = 0;
             reviewTxtFieldController.clear();
-            showSnackBar(title: langKey.success, message: response.message);
+            showSnackBar(title: 'success', message: apiResponse.message);
           } else
-            showSnackBar(message: response.message);
+            showSnackBar(message: apiResponse.message);
         } else {
           showSnackBar();
         }
@@ -304,7 +304,7 @@ class OrderController extends GetxController
   }
 
   void showSnackBar(
-      {title = langKey.errorTitle, message = langKey.someThingWentWrong}) {
+      {title = langKey.errorTitle, message = "Something wen't wrong!"}) {
     AppConstant.displaySnackBar(title, message);
   }
 }

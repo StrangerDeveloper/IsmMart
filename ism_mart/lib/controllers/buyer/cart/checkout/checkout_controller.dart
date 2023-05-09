@@ -153,19 +153,20 @@ class CheckoutController extends GetxController {
     isLoading(true);
     await authController.authProvider
         .addShippingAddress(userModel: newUserAddress)
-        .then((UserResponse? userResponse) {
+        .then((ApiResponse? apiResponse) {
       isLoading(false);
-      if (userResponse != null) {
-        if (userResponse.success!) {
+      if (apiResponse != null) {
+        if (apiResponse.success!) {
           Get.back();
-          AppConstant.displaySnackBar("success", userResponse.message);
+          AppConstant.displaySnackBar("success", apiResponse.message);
           clearControllers();
           getDefaultAddress();
           getAllShippingAddresses();
         } else
-          AppConstant.displaySnackBar(langKey.errorTitle, userResponse.message);
+          AppConstant.displaySnackBar('error', apiResponse.message);
       } else
-        AppConstant.displaySnackBar(langKey.errorTitle, "something went wrong!");
+        AppConstant.displaySnackBar(
+            langKey.errorTitle, "something went wrong!");
     }).catchError(onError);
   }
 
@@ -199,18 +200,19 @@ class CheckoutController extends GetxController {
         .changeDefaultAddress(
             token: authController.userToken!,
             addressId: shippingAddressId.value)
-        .then((UserResponse? userResponse) {
+        .then((ApiResponse? apiResponse) {
       isLoading(false);
-      if (userResponse != null) {
-        if (userResponse.success!) {
+      if (apiResponse != null) {
+        if (apiResponse.success!) {
           //getDefaultAddress();
           Get.back();
-          AppConstant.displaySnackBar("success", userResponse.message);
+          AppConstant.displaySnackBar("success", apiResponse.message);
           //getAllShippingAddresses();
         } else
-          AppConstant.displaySnackBar(langKey.errorTitle, userResponse.message);
+          AppConstant.displaySnackBar('error', apiResponse.message);
       } else
-        AppConstant.displaySnackBar(langKey.errorTitle, "something went wrong!");
+        AppConstant.displaySnackBar(
+            langKey.errorTitle, "something went wrong!");
     }).catchError(onError);
 
     update();
@@ -226,17 +228,18 @@ class CheckoutController extends GetxController {
     isLoading(true);
     await authController.authProvider
         .updateShippingAddress(userModel: userModel)
-        .then((UserResponse? userResponse) {
+        .then((ApiResponse? apiResponse) {
       isLoading(false);
-      if (userResponse != null) {
-        if (userResponse.success!) {
+      if (apiResponse != null) {
+        if (apiResponse.success!) {
           Get.back();
-          AppConstant.displaySnackBar("success", userResponse.message);
+          AppConstant.displaySnackBar("success", apiResponse.message);
           clearControllers();
         } else
-          AppConstant.displaySnackBar(langKey.errorTitle, userResponse.message);
+          AppConstant.displaySnackBar('error', apiResponse.message);
       } else
-        AppConstant.displaySnackBar(langKey.errorTitle, "something went wrong!");
+        AppConstant.displaySnackBar(
+            langKey.errorTitle, "something went wrong!");
     }).catchError(onError);
 
     update();
@@ -245,15 +248,16 @@ class CheckoutController extends GetxController {
   deleteShippingAddress(id) async {
     await authController.authProvider
         .deleteShippingAddress(token: authController.userToken, addressID: id)
-        .then((UserResponse? userResponse) {
-      if (userResponse != null) {
-        if (userResponse.success!) {
+        .then((ApiResponse? apiResponse) {
+      if (apiResponse != null) {
+        if (apiResponse.success!) {
           Get.back();
-          AppConstant.displaySnackBar("success", userResponse.message);
+          AppConstant.displaySnackBar("success", apiResponse.message);
         } else
-          AppConstant.displaySnackBar(langKey.errorTitle, userResponse.message);
+          AppConstant.displaySnackBar('error', apiResponse.message);
       } else
-        AppConstant.displaySnackBar(langKey.errorTitle, "something went wrong!");
+        AppConstant.displaySnackBar(
+            langKey.errorTitle, "something went wrong!");
     }).catchError(onError);
   }
 
@@ -368,12 +372,12 @@ class CheckoutController extends GetxController {
     };
     await _orderProvider
         .createPaymentIntent(token: authController.userToken, data: data)
-        .then((PaymentIntentResponse? response) async {
-      if (response != null) {
-        if (response.success!) {
+        .then((ApiResponse? apiResponse) async {
+      if (apiResponse != null) {
+        if (apiResponse.success!) {
           await Stripe.instance
               .confirmPayment(
-                  paymentIntentClientSecret: response.data["client_secret"],
+                  paymentIntentClientSecret: apiResponse.data["client_secret"],
                   data: PaymentMethodParams.card(
                     paymentMethodData: PaymentMethodData(
                       billingDetails: BillingDetails(
@@ -390,11 +394,12 @@ class CheckoutController extends GetxController {
                 cartItems: cartItems);
           }).catchError(onError);
         } else {
-          showSnackBar(title: langKey.errorTitle, message: response.message!);
+          showSnackBar(title: 'error', message: apiResponse.message!);
         }
       } else
         showSnackBar(
-            title: langKey.errorTitle, message: "Something went wrong! Order Not created");
+            title: langKey.errorTitle,
+            message: "Something went wrong! Order Not created");
     }).catchError(onError);
   }
 
@@ -427,7 +432,8 @@ class CheckoutController extends GetxController {
           showSnackBar(title: langKey.errorTitle, message: response.message!);
       } else
         showSnackBar(
-            title: langKey.errorTitle, message: "Something went wrong! Order Not created");
+            title: langKey.errorTitle,
+            message: "Something went wrong! Order Not created");
     }).catchError(onError);
   }
 

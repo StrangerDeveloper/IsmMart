@@ -108,7 +108,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
       token: authController.userToken,
       model: model,
     )
-        .then((ProductResponse? response) {
+        .then((ApiResponse? response) {
       isLoading(false);
       if (response != null) {
         if (response.success!) {
@@ -117,7 +117,8 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
           clearControllers();
           fetchMyProducts();
         } else {
-          AppConstant.displaySnackBar(langKey.errorTitle, "${response.message}");
+          AppConstant.displaySnackBar(
+              langKey.errorTitle, "${response.message}");
         }
       } else
         AppConstant.displaySnackBar(langKey.errorTitle, someThingWentWrong.tr);
@@ -267,7 +268,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
             model: newProduct,
             categoryFieldList: dynamicFieldsValuesList,
             images: pickedImagesList)
-        .then((ProductResponse? response) {
+        .then((ApiResponse? response) {
       isLoading(false);
       if (response != null) {
         if (response.success!) {
@@ -311,7 +312,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
                   print(">>>Length after: $lengthInMb");
                   imagesSizeInMb.value += lengthInMb;
                   if (lengthInMb > 2) {
-                    showSnackBar(message: langKey.fileMustBe+ ' 2MB');
+                    showSnackBar(message: langKey.fileMustBe + ' 2MB');
                   } else {
                     //: needs to add check if file exist
                     pickedImagesList.add(compressedFile);
@@ -324,7 +325,8 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
           }
         } on PlatformException catch (e) {
           print(e);
-          AppConstant.displaySnackBar(langKey.errorTitle, langKey.invalidImageFormat);
+          AppConstant.displaySnackBar(
+              langKey.errorTitle, langKey.invalidImageFormat);
         }
       } else {
         print("called");
@@ -430,7 +432,8 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
     ];
   }
 
-  void showSnackBar({title = langKey.errorTitle, message = langKey.someThingWentWrong}) {
+  void showSnackBar(
+      {title = langKey.errorTitle, message = langKey.someThingWentWrong}) {
     AppConstant.displaySnackBar(title, message);
   }
 

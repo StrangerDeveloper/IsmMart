@@ -25,18 +25,18 @@ class AuthProvider {
     return UserResponse.fromResponse(response);
   }
 
-  Future<UserResponse> postRegister({UserModel? userModel}) async {
+  Future<ApiResponse> postRegister({UserModel? userModel}) async {
     var response = await _authRepo.register(userModel: userModel);
-    return UserResponse.fromResponse(response);
+    return ApiResponse.fromJson(response);
   }
 
-  Future<UserResponse> resendVerificationLink({email}) async {
+  Future<ApiResponse> resendVerificationLink({email}) async {
     var response = await _authRepo.resendVerificationLink(email: email);
 
-    return UserResponse.fromResponse(response);
+    return ApiResponse.fromJson(response);
   }
 
-  Future<UserResponse> postStoreRegister(
+  Future<ApiResponse> postStoreRegister(
       {token, SellerModel? sellerModel, bool? calledForUpdate = false}) async {
     final url = "${ApiConstant.baseUrl}auth/vendor/register";
     final request = http.MultipartRequest('POST', Uri.parse(url));
@@ -75,11 +75,11 @@ class AuthProvider {
     if (response.statusCode == 200) {
       final responseData = await response.stream.bytesToString();
       final data = json.decode(responseData);
-      return UserResponse.fromResponse(data);
+      return ApiResponse.fromJson(data);
     } else {
       //ODO: Still needs to test this one properly
       http.StreamedResponse res = handleStreamResponse(response);
-      return UserResponse.fromResponse(
+      return ApiResponse.fromJson(
           json.decode(await res.stream.bytesToString()));
     }
 
@@ -95,20 +95,20 @@ class AuthProvider {
     return UserResponse.fromResponse(response);*/
   }
 
-  Future<UserResponse> addBankAccount({token, SellerModel? sellerModel}) async {
+  Future<ApiResponse> addBankAccount({token, SellerModel? sellerModel}) async {
     var jsonData = {
       "accountTitle": '${sellerModel!.accountTitle}',
       "accountNumber": '${sellerModel.accountNumber}',
       "bankName": '${sellerModel.bankName}',
     };
     var response = await _authRepo.registerStore(token: token, data: jsonData);
-    return UserResponse.fromResponse(response);
+    return ApiResponse.fromJson(response);
   }
 
-  Future<UserResponse> getCurrentUser({String? token}) async {
+  Future<ApiResponse> getCurrentUser({String? token}) async {
     var response = await _authRepo.fetchCurrentUser(token: token);
     debugPrint("UserResponse: ${response}");
-    return UserResponse.fromResponse(response);
+    return ApiResponse.fromJson(response);
   }
 
   Future<UserResponse> updateUser({token, title, value}) async {
@@ -117,19 +117,19 @@ class AuthProvider {
     return UserResponse.fromResponse(response);
   }
 
-  Future<UserResponse> deActivateUser({token}) async {
+  Future<ApiResponse> deActivateUser({token}) async {
     var response = await _authRepo.deActivateUserAccount(token: token);
-    return UserResponse.fromResponse(response);
+    return ApiResponse.fromJson(response);
   }
 
-  Future<UserResponse> forgotPassword({data}) async {
+  Future<ApiResponse> forgotPassword({data}) async {
     var response = await _authRepo.forgotPassword(data: data);
-    return UserResponse.fromResponse(response);
+    return ApiResponse.fromJson(response);
   }
 
-  Future<UserResponse> forgotPasswordOtp({data}) async {
+  Future<ApiResponse> forgotPasswordOtp({data}) async {
     var response = await _authRepo.recoverPasswordWithOtp(data: data);
-    return UserResponse.fromResponse(response);
+    return ApiResponse.fromJson(response);
   }
 
   /*
@@ -147,13 +147,13 @@ class AuthProvider {
     return UserModel.fromJson(response);
   }
 
-  Future<UserResponse> changeDefaultAddress({token, addressId}) async {
+  Future<ApiResponse> changeDefaultAddress({token, addressId}) async {
     var response = await _authRepo.changeDefaultShippingAddress(
         token: token, addressId: addressId);
-    return UserResponse.fromResponse(response);
+    return ApiResponse.fromJson(response);
   }
 
-  Future<UserResponse> addShippingAddress({UserModel? userModel}) async {
+  Future<ApiResponse> addShippingAddress({UserModel? userModel}) async {
     Map<String, dynamic> jsonData = {
       "name": "${userModel?.name}",
       "address": "${userModel?.address}",
@@ -164,10 +164,10 @@ class AuthProvider {
     };
     var response = await _authRepo.addShippingDetails(
         token: userModel?.token, data: jsonData);
-    return UserResponse.fromResponse(response);
+    return ApiResponse.fromJson(response);
   }
 
-  Future<UserResponse> updateShippingAddress(
+  Future<ApiResponse> updateShippingAddress(
       {int? addressId, UserModel? userModel}) async {
     Map<String, dynamic> jsonData = {
       "id": "${userModel?.id}",
@@ -180,13 +180,13 @@ class AuthProvider {
     };
     var response = await _authRepo.updateShippingDetails(
         token: userModel?.token, data: jsonData);
-    return UserResponse.fromResponse(response);
+    return ApiResponse.fromJson(response);
   }
 
-  Future<UserResponse> deleteShippingAddress({token, addressID}) async {
+  Future<ApiResponse> deleteShippingAddress({token, addressID}) async {
     var response =
         await _authRepo.deleteShippingDetails(token: token, id: addressID);
-    return UserResponse.fromResponse(response);
+    return ApiResponse.fromJson(response);
   }
 
   /**
@@ -195,9 +195,9 @@ class AuthProvider {
    *
    * */
 
-  Future<UserResponse> contactUs({data}) async {
+  Future<ApiResponse> contactUs({data}) async {
     var response = await _authRepo.postContactUs(data: data);
-    return UserResponse.fromResponse(response);
+    return ApiResponse.fromJson(response);
   }
 
   /**
@@ -206,8 +206,8 @@ class AuthProvider {
   *
   * */
 
-  Future<CoinsResponse> getUserCoins({token}) async {
+  Future<ApiResponse> getUserCoins({token}) async {
     var response = await _authRepo.fetchUserCoins(token: token);
-    return CoinsResponse.fromJson(response);
+    return ApiResponse.fromJson(response);
   }
 }
