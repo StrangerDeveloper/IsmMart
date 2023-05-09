@@ -93,6 +93,8 @@ class English {
         key.faqs: 'FAQs',
         key.selectLanguage: 'Select Language',
         key.logout: 'Log out',
+        key.selectCurrency: 'Select Currency',
+        key.currencyKey: "Currency",
 
         ///Login and register
         key.login: 'Login',

@@ -22,7 +22,7 @@ class MembershipController extends GetxController {
       },
       {
         'title': 'PRO',
-        'price': '${AppConstant.getCurrencySymbol(languageCode: 'us')}9.5',
+        'price': '${AppConstant.getCurrencySymbol(currencyCode: 'usd')}9.5',
         'isPopular': true,
         'description': [
           'A free one month trial',
@@ -36,7 +36,7 @@ class MembershipController extends GetxController {
       },
       {
         'title': 'BUSINESS',
-        'price': '${AppConstant.getCurrencySymbol(languageCode: 'us')}12.5',
+        'price': '${AppConstant.getCurrencySymbol(currencyCode: 'usd')}12.5',
         'isPopular': false,
         'description': [
           '2 month free trial',

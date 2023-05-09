@@ -203,7 +203,8 @@ class ApiRepository {
           'https://api.apilayer.com/exchangerates_data/convert?to=$to&from=$from&amount=$amount'),
       headers: {
         //'Authorization': 'Bearer $client_secret',
-        'apikey': '28ctJvWImBjcvSKiiGTJ3GH3frjz3Nj7'
+        'apikey':
+            'O8SwtgaidFLGnv15tOvXenR7f8Zeodfc' //'28ctJvWImBjcvSKiiGTJ3GH3frjz3Nj7'
       },
     );
     return json.decode(response.body);

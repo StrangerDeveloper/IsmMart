@@ -30,11 +30,14 @@ class BaseController extends GetxController {
 
     //setCartCount(LocalStorageHelper.getCartItemsCount());
     setCartItemCount();
-    LocalStorageHelper.localStorage.listen(() {
+    LocalStorageHelper.localStorage.listenKey(LocalStorageHelper.cartItemKey,
+        (value) {
       setCartItemCount();
     });
 
     ever(categories, getRandomTextForSearch);
+    LocalStorageHelper.localStorage
+        .listenKey(LocalStorageHelper.currCurrencyKey, (value) {});
   }
 
   setCartItemCount() async {

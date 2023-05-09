@@ -334,37 +334,39 @@ class SettingsUI extends GetView<AuthController> {
 
   _showCurrencyChangeBS() {
     AppConstant.showBottomSheet(
-      widget: SizedBox(
-        height: MediaQuery.of(Get.context!).size.height / 2.5,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              StickyLabel(
-                text: langKey.selectCurrency.tr,
+      widget: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            StickyLabel(
+              text: langKey.selectCurrency.tr,
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children:
+                      currencyController.currencyLocales.entries.map((item) {
+                    return ListTile(
+                      onTap: () {
+                        currencyController.setCurrency(key: item.key);
+                        Get.back();
+                      },
+                      leading: _countryFlag(
+                          countryCode: item.value['countryCode'],
+                          color: item.value['color']),
+                      title: Text(item.value["description"],
+                          style:
+                              bodyText1.copyWith(fontWeight: FontWeight.w600)),
+                      trailing: item.value["description"] ==
+                              currencyController.currency.value
+                          ? const Icon(Icons.done)
+                          : null,
+                    );
+                  }).toList(),
+                ),
               ),
-              Column(
-                children:
-                    currencyController.currencyLocales.entries.map((item) {
-                  return ListTile(
-                    onTap: () {
-                      currencyController.setCurrency(key: item.key);
-                      Get.back();
-                    },
-                    leading: _countryFlag(
-                        countryCode: item.value['countryCode'],
-                        color: item.value['color']),
-                    title: Text(item.value["description"],
-                        style: bodyText1.copyWith(fontWeight: FontWeight.w600)),
-                    trailing: item.value["description"] ==
-                            currencyController.currency.value
-                        ? const Icon(Icons.done)
-                        : null,
-                  );
-                }).toList(),
-              )
-            ],
-          ),
+            )
+          ],
         ),
       ),
     );
@@ -383,7 +385,7 @@ class SettingsUI extends GetView<AuthController> {
         shape: BoxShape.circle,
         border: Border.all(color: Colors.grey),
         image: DecorationImage(
-          fit: BoxFit.fill,
+          fit: BoxFit.cover,
           image: NetworkImage(imageUrl),
         ),
       ),

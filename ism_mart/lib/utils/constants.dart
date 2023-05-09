@@ -198,7 +198,6 @@ class AppConstant {
     } else {
       Scaffold.of(buildContext).showBottomSheet(
         (context) => widget!,
-
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(15), topRight: Radius.circular(15)),
@@ -243,14 +242,31 @@ class AppConstant {
     }
   }
 
-  static String getCurrencySymbol({String? languageCode}) {
-    switch (languageCode) {
-      case "us":
+  static String getCurrencySymbol({String? currencyCode}) {
+    switch (currencyCode?.toLowerCase()) {
+      case "usd":
         return "\$";
       case "pkr":
-        return "Rs.";
-      case "uae":
-        return "AED";
+        return "Rs ";
+      case "aed":
+        return "AED ";
+      case "gbp":
+        return "\£";
+      case "eur":
+        return "\€";
+      case "inr":
+        return "\₹";
+      case "cny":
+        return "\¥";
+      case "aud":
+        return "A\$";
+      case "cad":
+        return "CA\$";
+      case "jpy":
+        return "JP\¥";
+      case "sgd":
+        return "\$";
+
       default:
         return "Rs";
     }
