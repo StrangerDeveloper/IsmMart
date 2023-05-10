@@ -51,10 +51,6 @@ const standard = 'standard',
     orderNotCreated = 'orderNotCreated',
     orderInformation = 'orderInformation';
 
-///memberShip
-const discountMinValue = 'discountMinValue',
-    discountMaxValue = 'discountMaxValue';
-
 ///sellerController
 const imageSizeDesc = 'imageSizeDesc';
 
@@ -149,6 +145,87 @@ const gallery = 'gallery',
     yourCoverAndProfile = 'yourCoverAndProfile',
     updateVendorDetails = 'updateVendorDetails',
     fieldIsRequired = 'fieldIsRequired';
+
+///faq
+const q1 = 'q1',
+    q2 = 'q2',
+    q3 = 'q3',
+    q4 = 'q4',
+    q5 = 'q5',
+    ans1 = 'ans1',
+    ans2 = 'ans2',
+    ans3 = 'ans3',
+    ans4 = 'ans4',
+    ans5 = 'ans5';
+
+///general
+const call = 'call',
+    centralHeadquarters = 'centralHeadquarters',
+    centralHeadquartersValue = 'centralHeadquartersValue',
+    globalHeadquarters = 'globalHeadquarters',
+    globalHeadquartersValue = 'globalHeadquartersValue',
+    privacyHeader1 = 'privacyHeader1',
+    privacyHeader2 = 'privacyHeader2',
+    privacyHeader3 = 'privacyHeader3',
+    privacyHeader4 = 'privacyHeader4',
+    privacyHeader5 = 'privacyHeader5',
+    privacyHeader6 = 'privacyHeader6',
+    privacyHeader7 = 'privacyHeader7',
+    privacyHeader8 = 'privacyHeader8',
+    privacyHeader9 = 'privacyHeader9',
+    privacyHeader10 = 'privacyHeader10',
+    privacyHeader11 = 'privacyHeader11',
+    privacyHeader12 = 'privacyHeader12',
+    privacyHeader13 = 'privacyHeader13',
+    privacyHeader14 = 'privacyHeader14',
+    privacyHeader15 = 'privacyHeader15',
+    privacyBody1 = 'privacyBody1',
+    privacyBody2 = 'privacyBody2',
+    privacyBody3 = 'privacyBody3',
+    privacyBody4 = 'privacyBody4',
+    privacyBody5 = 'privacyBody5',
+    privacyBody6 = 'privacyBody6',
+    privacyBody7 = 'privacyBody7',
+    privacyBody8 = 'privacyBody8',
+    privacyBody9 = 'privacyBody9',
+    privacyBody10 = 'privacyBody10',
+    privacyBody11 = 'privacyBody11',
+    privacyBody12 = 'privacyBody12',
+    privacyBody13 = 'privacyBody13',
+    privacyBody14 = 'privacyBody14',
+    privacyBody15 = 'privacyBody15',
+    exchangeHeader1 = 'exchangeHeader1',
+    exchangeHeader2 = 'exchangeHeader2',
+    exchangeBody1 = 'exchangeBody1',
+    exchangeBody2 = 'exchangeBody2';
+
+///memberShip
+const discountMinValue = 'discountMinValue',
+    discountMaxValue = 'discountMaxValue',
+    memPlan1Title = 'memPlan1Title',
+    memPlan1Price = 'memPlan1Price',
+    memPlan1Desc1 = 'memPlan1Desc1',
+    memPlan1Desc2 = 'memPlan1Desc2',
+    memPlan1Desc3 = 'memPlan1Desc3',
+    memPlan1Desc4 = 'memPlan1Desc4',
+    memPlan2Title = 'memPlan2Title',
+    memPlan2Desc1 = 'memPlan2Desc1',
+    memPlan2Desc2 = 'memPlan2Desc2',
+    memPlan2Desc3 = 'memPlan2Desc3',
+    memPlan2Desc4 = 'memPlan2Desc4',
+    memPlan2Desc5 = 'memPlan2Desc5',
+    memPlan2Desc6 = 'memPlan2Desc6',
+    memPlan2Desc7 = 'memPlan2Desc7',
+    memPlan3Title = 'memPlan3Title',
+    memPlan3Desc1 = 'memPlan3Desc1',
+    memPlan3Desc2 = 'memPlan3Desc2',
+    memPlan3Desc3 = 'memPlan3Desc3',
+    memPlan3Desc4 = 'memPlan3Desc4',
+    memPlan3Desc5 = 'memPlan3Desc5',
+    memPlan3Desc6 = 'memPlan3Desc6',
+    memPlan3Desc7 = 'memPlan3Desc7',
+    memPlan3Desc8 = 'memPlan3Desc8',
+    memPlan3Desc9 = 'memPlan3Desc9';
 
 //////////////////////////////////////////////////////////////////////
 /**
