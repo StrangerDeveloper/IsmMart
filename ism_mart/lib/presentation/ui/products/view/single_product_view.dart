@@ -10,17 +10,19 @@ import 'package:ism_mart/presentation/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
 class SingleProductView extends GetView<ProductController> {
-  const SingleProductView( {Key? key, this.productId,}) : super(key: key);
+  const SingleProductView({
+    Key? key,
+    this.productId,
+  }) : super(key: key);
   final productId;
   @override
   Widget build(BuildContext context) {
-    if(Get.parameters['id'] == null && productId == null){
+    if (Get.parameters['id'] == null && productId == null) {
       return Scaffold(body: Center(child: CustomLoading()));
-    }else
-      if(productId!=null){
-        controller.fetchProduct(int.parse(productId));
-      }else
-        controller.fetchProduct(int.parse(Get.parameters['id']!));
+    } else if (productId != null) {
+      controller.fetchProduct(int.parse(productId));
+    } else
+      controller.fetchProduct(int.parse(Get.parameters['id']!));
 
     /*if (Get.parameters['id'] == null) {
       return const Center(child: CircularProgressIndicator());
@@ -641,9 +643,9 @@ class SingleProductView extends GetView<ProductController> {
               CustomText(title: "Product Questions", style: headline2),
               controller.productQuestionsList.isEmpty
                   ? Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: NoDataFound(text: "No Questions found"),
-                  )
+                      padding: const EdgeInsets.all(8.0),
+                      child: NoDataFound(text: "No Questions found"),
+                    )
                   : ListView.builder(
                       shrinkWrap: true,
                       padding: EdgeInsets.zero,
@@ -653,13 +655,14 @@ class SingleProductView extends GetView<ProductController> {
                         QuestionModel? model =
                             controller.productQuestionsList[index];
                         return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8.0, vertical: 15),
                           child: Column(
                             //mainAxisAlignment: MainAxisAlignment.spaceAround,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               _singleQuestionListItem(
-                                  icon:"Q", //Icons.question_mark,
+                                  icon: "Q", //Icons.question_mark,
                                   iconColor: kRedColor,
                                   title: model.question,
                                   firstName: model.user!.firstName!,
@@ -667,7 +670,7 @@ class SingleProductView extends GetView<ProductController> {
                               AppConstant.spaceWidget(height: 10),
                               if (model.answer != null)
                                 _singleQuestionListItem(
-                                    icon: "A",//Icons.question_answer,
+                                    icon: "A", //Icons.question_answer,
                                     title: model.answer!.answer,
                                     iconColor: kLightColor,
                                     firstName:
@@ -683,14 +686,20 @@ class SingleProductView extends GetView<ProductController> {
                     ),
               //kSmallDivider,
               InkWell(
-                onTap: (){
-                  Get.to(()=>ProductQuestionAnswerUI(productModel: productModel,));
+                onTap: () {
+                  Get.to(() => ProductQuestionAnswerUI(
+                        productModel: productModel,
+                      ));
                 },
                 child: CustomGreyBorderContainer(
                   width: double.infinity,
                   height: 30,
                   borderColor: kWhiteColor,
-                  child: Center(child: CustomText(title: "Ask Question", color: kRedColor,)),
+                  child: Center(
+                      child: CustomText(
+                    title: "Ask Question",
+                    color: kRedColor,
+                  )),
                 ),
               ),
             ],
@@ -700,7 +709,8 @@ class SingleProductView extends GetView<ProductController> {
     );
   }
 
-  Widget _singleQuestionListItem({icon,  iconColor, String? title, firstName, date}) {
+  Widget _singleQuestionListItem(
+      {icon, iconColor, String? title, firstName, date}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -711,7 +721,11 @@ class SingleProductView extends GetView<ProductController> {
           height: 25,
           decoration: BoxDecoration(
               color: iconColor!.withOpacity(0.75), shape: BoxShape.circle),
-          child: Center(child: CustomText(title: icon, color: kWhiteColor,)),
+          child: Center(
+              child: CustomText(
+            title: icon,
+            color: kWhiteColor,
+          )),
 
           /*Icon(
             icon,

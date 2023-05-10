@@ -40,7 +40,9 @@ class RegisterVendorUI extends GetView<AuthController> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 CustomText(
-                  title: model!=null? "Update Vendor Details":langKey.vendorRegistration.tr,
+                  title: model != null
+                      ? "Update Vendor Details"
+                      : langKey.vendorRegistration.tr,
                   style: headline2,
                 ),
                 CustomActionIcon(
@@ -389,7 +391,9 @@ class RegisterVendorUI extends GetView<AuthController> {
                           await controller.registerStore();
                         }
                       },
-                      text: model!=null?langKey.updateBtn.tr:langKey.register.tr,
+                      text: model != null
+                          ? langKey.updateBtn.tr
+                          : langKey.register.tr,
                       height: 40,
                       width: 150,
                     ),

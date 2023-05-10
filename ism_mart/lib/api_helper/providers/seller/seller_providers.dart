@@ -57,7 +57,7 @@ class SellersApiProvider {
         contentType: MediaType.parse('image/jpeg'),
       ));
     }
-//TODO: Response handling remaining
+//TDO: Response handling remaining
     final response = await request.send();
 
     if (response.statusCode == 200) {
@@ -66,14 +66,11 @@ class SellersApiProvider {
       print(data);
       return ApiResponse.fromJson(data);
     } else {
-      //TODO: Still needs to test this one properly
+      //: Still needs to test this one properly
       http.StreamedResponse res = handleStreamResponse(response);
       return ApiResponse.fromJson(
           json.decode(await res.stream.bytesToString()));
-      throw Exception(
-          'Failed to upload image ${response.statusCode} ${json.decode(await response.stream.bytesToString())}');
     }
-    return ProductResponse.fromResponse(response);
   }
 
   Future<SellerProductModel> fetchMyProducts(
@@ -95,56 +92,25 @@ class SellersApiProvider {
 
   Future<ApiResponse> updateProduct(
       {String? token, ProductModel? model}) async {
-    /* var response =
-        await _sellersApiRepo.updateProduct(token: token, productModel: model);
-   print("Update Prod provider Response: $response");
-    return ProductResponse.fromResponse(response);*/
-
-    /*final data = {
-      "id": "${model!.id}",
-      "name": "${model.name}",
-      "price": "${model.price}",
-      "stock": "${model.stock}",
-      "discount": "${model.discount ?? 0}",
-      "description": "${model.description}",
-    };
-    final body = data.keys.map((key) {
-      final value = data[key];
-      return '$key=${Uri.encodeComponent(value.toString())}';
-    }).join('&');
-    final response = await http.patch(
-      Uri.parse(url),
-      headers: {
-        'Content-Type': 'multipart/form-data',
-        'Authorization': '$token'
-      },
-      body: body,
-    );*/
-
     final url = "${ApiConstant.baseUrl}vendor/products/update";
+    var headers = {'authorization': '$token', 'Cookie': 'XSRF-token=$token'};
     final request = http.MultipartRequest('PATCH', Uri.parse(url));
-    //request.headers['Accept'] = 'multipart/form-data';
-    request.headers['content-type'] = 'multipart/form-data';
-    request.headers['authorization'] = '$token';
 
-    request.fields['id'] = model!.id!.toString();
-    request.fields['name'] = model.name!;
-    request.fields['thumbnail'] = model.thumbnail!;
-    request.fields['price'] = "${model.price}";
-    request.fields['discount'] = "${model.discount}";
-    request.fields['description'] = "${model.description}";
+    request.headers.addAll(headers);
 
-    requestInterceptorMultipart(request);
+    request.fields.addAll({
+      'name': '${model!.name}',
+      'id': '${model.id}',
+      'discount': '${model.discount}',
+      'price': '${model.price}',
+      'stock': '${model.discount}'
+    });
 
-<<<<<<< Updated upstream
-    final response = await request.send();
-=======
     // request.fields.addIf((model.discount! >9 && model.discount! <=90), 'discount', '${model.discount}');
 
     // print(reques)
 
     http.StreamedResponse response = await request.send();
->>>>>>> Stashed changes
 
     if (response.statusCode == 200) {
       final responseData = await response.stream.bytesToString();
@@ -152,18 +118,9 @@ class SellersApiProvider {
       print(data);
       return ApiResponse.fromJson(data);
     } else {
-<<<<<<< Updated upstream
-      http.StreamedResponse res = handleStreamResponse(response);
-      return ProductResponse.fromResponse(
-=======
       http.StreamedResponse res = await handleStreamResponse(response);
       return ApiResponse.fromJson(
->>>>>>> Stashed changes
           json.decode(await res.stream.bytesToString()));
-      throw http.ClientException(
-          'Failed to update resource: ${response.reasonPhrase}');
     }
   }
-
-
 }

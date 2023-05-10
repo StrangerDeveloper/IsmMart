@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:http/http.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:http/http.dart' as http;
@@ -26,9 +25,9 @@ class AuthProvider {
     return UserResponse.fromResponse(response);
   }
 
-  Future<ApiResponse> postRegister({UserModel? userModel}) async {
+  Future<UserResponse> postRegister({UserModel? userModel}) async {
     var response = await _authRepo.register(userModel: userModel);
-    return ApiResponse.fromJson(response);
+    return UserResponse.fromResponse(response);
   }
 
   Future<ApiResponse> resendVerificationLink({email}) async {
@@ -37,7 +36,7 @@ class AuthProvider {
     return ApiResponse.fromJson(response);
   }
 
-  Future<ApiResponse> postStoreRegister(
+  Future<UserResponse> postStoreRegister(
       {token, SellerModel? sellerModel, bool? calledForUpdate = false}) async {
     final url = "${ApiConstant.baseUrl}auth/vendor/register";
     final request = http.MultipartRequest('POST', Uri.parse(url));
@@ -54,39 +53,38 @@ class AuthProvider {
     request.fields['accountNumber'] = sellerModel.accountNumber!;
     request.fields['bankName'] = sellerModel.bankName!;
 
-    if(sellerModel.storeImage!.isNotEmpty) {
+    if (sellerModel.storeImage!.isNotEmpty) {
+      print(
+          "API profile ${sellerModel.storeImage!}  \n covet= ${sellerModel.coverImage!}");
+
       request.files.add(await http.MultipartFile.fromPath(
         'storeImage',
         sellerModel.storeImage!,
         contentType: MediaType.parse('image/jpeg'),
       ));
-    }else {
+    } else {
       request.fields['storeImage'] = sellerModel.storeName!;
     }
-if(sellerModel.coverImage!.isNotEmpty){
+    if (sellerModel.coverImage!.isNotEmpty) {
       request.files.add(await http.MultipartFile.fromPath(
         'coverImage',
         sellerModel.coverImage!,
         contentType: MediaType.parse('image/jpeg'),
       ));
-    }else{
-  request.fields['coverImage'] = sellerModel.coverImage!;
+    } else {
+      request.fields['coverImage'] = sellerModel.coverImage!;
     }
     final response = await request.send();
     if (response.statusCode == 200) {
       final responseData = await response.stream.bytesToString();
       final data = json.decode(responseData);
-      return ApiResponse.fromJson(data);
+
+      return UserResponse.fromResponse(data);
     } else {
-      //TODO: Still needs to test this one properly
+      //ODO: Still needs to test this one properly
       http.StreamedResponse res = handleStreamResponse(response);
-<<<<<<< Updated upstream
-      return UserResponse.fromResponse(json.decode(await res.stream.bytesToString()));
-      throw Exception('Failed to upload image');
-=======
-      return ApiResponse.fromJson(
+      return UserResponse.fromResponse(
           json.decode(await res.stream.bytesToString()));
->>>>>>> Stashed changes
     }
 
     /* var jsonData = {
@@ -101,30 +99,29 @@ if(sellerModel.coverImage!.isNotEmpty){
     return UserResponse.fromResponse(response);*/
   }
 
-  Future<ApiResponse> addBankAccount({token, SellerModel? sellerModel}) async {
+  Future<UserResponse> addBankAccount({token, SellerModel? sellerModel}) async {
     var jsonData = {
       "accountTitle": '${sellerModel!.accountTitle}',
       "accountNumber": '${sellerModel.accountNumber}',
       "bankName": '${sellerModel.bankName}',
     };
     var response = await _authRepo.registerStore(token: token, data: jsonData);
-    return ApiResponse.fromJson(response);
+    return UserResponse.fromResponse(response);
   }
 
-  Future<ApiResponse> getCurrentUser({String? token}) async {
+  Future<UserResponse> getCurrentUser({String? token}) async {
     var response = await _authRepo.fetchCurrentUser(token: token);
     debugPrint("UserResponse: ${response}");
-    return ApiResponse.fromJson(response);
+    return UserResponse.fromResponse(response);
   }
 
-  Future<UserResponse> updateUser({token, title, value}) async {
+  Future<UserResponse> updateUser({token, title, value, field}) async {
     var data = {'$title': '$value'};
-<<<<<<< Updated upstream
-    var response = await _authRepo.updateUser(token: token, data: data);
-=======
     print("title is api => field $field $title  $value");
 
     // var response = await _authRepo.updateUser(token: token, data: data);
+
+
     var headers = {
       'authorization': 'Bearer $token',
       'Cookie': 'XSRF-token=$token'
@@ -132,9 +129,7 @@ if(sellerModel.coverImage!.isNotEmpty){
     var request = http.MultipartRequest(
         'PATCH', Uri.parse('https://ismmart-api.com/api/user/update'));
     request.fields.addAll({'$field': title.toString()});
-
     request.headers.addAll(headers);
-
     http.StreamedResponse response = await request.send();
     var res = http.Response.fromStream(response);
 
@@ -143,7 +138,6 @@ if(sellerModel.coverImage!.isNotEmpty){
     // } else {
     //   print(response.reasonPhrase);
     // }
->>>>>>> Stashed changes
     return UserResponse.fromResponse(response);
   }
 
@@ -236,11 +230,7 @@ if(sellerModel.coverImage!.isNotEmpty){
   *
   * */
 
-<<<<<<< Updated upstream
-  Future<CoinsResponse> getUserCoins({token})async{
-=======
   Future<ApiResponse> getUserCoins({token}) async {
->>>>>>> Stashed changes
     var response = await _authRepo.fetchUserCoins(token: token);
     return ApiResponse.fromJson(response);
   }

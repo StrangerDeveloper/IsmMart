@@ -24,21 +24,6 @@ String productModelToJson(List<ProductModel> data) =>
 //       this.errors,
 //       this.data});
 
-<<<<<<< Updated upstream
-  factory ProductResponse.fromResponse(response) => ProductResponse(
-        success: response['success'] == null ? false : response['success'],
-        message: response['message'] ?? "",
-        error: response['error'],
-        errors: response['errors'] != null
-            ? List<String>.from(response["errors"].map((x) => x))
-            : null,
-        data: response['data']
-
-        /*productModel: response['data'] == null && response['data'].isBlank!
-          ? null
-          : ProductModel.fromJson(response['data'])*/
-      );
-=======
 //   factory ProductResponse.fromResponse(response) => ProductResponse(
 //       success: response['success'] == null ? false : response['success'],
 //       message: response['message'] ?? "",
@@ -52,7 +37,6 @@ String productModelToJson(List<ProductModel> data) =>
 //           ? null
 //           : ProductModel.fromJson(response['data'])*/
 //       );
->>>>>>> Stashed changes
 
 //   @override
 //   String toString() {
@@ -170,14 +154,14 @@ class ProductModel {
         "totalPrice": totalPrice
       };
 
-  JSON toUpdateProductJson()=>{
-    "id": id,
-    "name": name,
-    "description": description,
-    "stock": stock,
-    "price": price,
-    "discount": discount,
-  };
+  JSON toUpdateProductJson() => {
+        "id": id,
+        "name": name,
+        "description": description,
+        "stock": stock,
+        "price": price,
+        "discount": discount,
+      };
 
   @override
   bool operator ==(Object other) {

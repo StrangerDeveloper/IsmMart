@@ -26,13 +26,12 @@ class CartController extends GetxController
   var count = 1.obs;
   var onQuantityClick = false.obs;
 
-  //TODO: minimum Order Qty Limit
+  ///: minimum Order Qty Limit
   int moq = 10;
   var isLoading = false.obs;
 
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
     quantityController.text = count.value.toString();
   }
@@ -141,7 +140,7 @@ class CartController extends GetxController
             value.productModel!.discountPrice != null
                 ? value.productModel!.discountPrice.toString()
                 : "0");
-        int qty = int.parse(value.quantity ?? "1");
+        var qty = int.parse(value.quantity.toString());
         totalAmount += (discountPrice * qty);
         totalQty += qty;
       }
@@ -151,11 +150,31 @@ class CartController extends GetxController
     totalQtyCart(totalQty);
   }
 
-  //ENd Cart Items
+  CartModel? cartModel;
+  int moqq = 10;
+  var counter = 1.obs;
+  void increment() async {
+    if (counter.value == moqq) return;
+    counter.value++;
+
+    quantityController.text = counter.value.toString();
+    quantityController.text = counter.value.toString();
+
+    cartModel!.quantity = quantityController.text.toString();
+    cartModel!.productModel!.totalPrice = totalCartAmount.value;
+    await LocalStorageHelper.updateCartItems(cartModel: cartModel);
+    update();
+  }
+
+  void decrement() async {
+    if (counter.value == 1) return;
+    counter.value--;
+
+    quantityController.text = counter.value.toString();
+  }
 
   @override
   void onClose() {
-    // TODO: implement onClose
     super.onClose();
   }
 }

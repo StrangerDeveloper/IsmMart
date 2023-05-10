@@ -6,12 +6,7 @@ import 'package:ism_mart/presentation/ui/products/controllers/product_controller
 class BaseBindings extends Bindings {
   @override
   void dependencies() {
-
-
-
-
     Get.lazyPut<BaseController>(() => BaseController(Get.find()));
-
 
     //Get.lazyPut<OrderProvider>(() => OrderProvider(Get.find()));
 
@@ -19,8 +14,6 @@ class BaseBindings extends Bindings {
 
     Get.put<CartController>(CartController(Get.find()));
     Get.put<CategoryController>(CategoryController(Get.find()));
-
-
 
     Get.put<OrderRepository>(OrderRepository(Get.find()));
     Get.put<MembershipController>(MembershipController());

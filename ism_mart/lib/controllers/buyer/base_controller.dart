@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/controllers/controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/ui/exports_ui.dart';
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class BaseController extends GetxController {
   BaseController(this._apiProvider);
@@ -16,11 +16,9 @@ class BaseController extends GetxController {
   var searchController = TextEditingController();
   var cartCount = 0.obs;
 
-
   @override
   void onReady() {
     super.onReady();
-
 
     fetchSliderImages();
     runSliderTimer();
@@ -49,7 +47,7 @@ class BaseController extends GetxController {
       }
     });
 
-   /* if (authController.isSessionExpired!)
+    /* if (authController.isSessionExpired!)
       await LocalStorageHelper.fetchCartItems()
           .then((List<CartModel> list) async {
         if (list.isNotEmpty) {
@@ -158,8 +156,7 @@ class BaseController extends GetxController {
       if (_minNoOfCategoriesRequest != 0) {
         _minNoOfCategoriesRequest--;
         fetchCategories();
-      }
-      else {
+      } else {
         debugPrint("FetchCategoriesError $error");
         isCategoriesLoading(false);
       }
@@ -197,7 +194,7 @@ class BaseController extends GetxController {
           //debugPrint("FetchProducts: inside $data");
           productsMap.putIfAbsent(element.name!, () => data);
           //debugPrint("FetchProducts: inside Ln ${productList.first}");
-        }).catchError((error){
+        }).catchError((error) {
           print(">>>FetchProductByCategory: $error");
         });
       });
@@ -255,7 +252,7 @@ class BaseController extends GetxController {
 
     await _apiProvider.getAllFaqs(token: authController.userToken).then((faqs) {
       faqsList.addAll(faqs);
-    }).catchError((error){
+    }).catchError((error) {
       print(">>>GetAllFaqs: $error");
     });
   }
@@ -267,7 +264,7 @@ class BaseController extends GetxController {
     const CategoriesUI(),
     const CartUI(),
     const SettingsUI(),
-     SearchUI(
+    SearchUI(
       isCalledForDeals: true,
     )
   ];
@@ -276,15 +273,70 @@ class BaseController extends GetxController {
 
   void changePage(int index) {
     currentPage.value = index;
-
     bottomNavPageController.jumpToPage(index);
     /*bottomNavPageController.animateToPage(index,
         duration: const Duration(milliseconds: 500), curve: Curves.easeIn);*/
   }
 
-  //End Bottom Navigation Setup
+  Future<bool> onBackPressed(BuildContext context) async {
+    if (currentPage == 0) {
+      final value = await showDialog<bool>(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(langKey.exitApp.tr),
+            content: Text(langKey.exitDialogDesc.tr),
+            actions: [
+              Row(
+                children: [
+                  Expanded(
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        minimumSize: Size(double.infinity, 40),
+                        foregroundColor: Colors.grey,
+                      ),
+                      child: Text(
+                        langKey.noBtn.tr,
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                      onPressed: () {
+                        Get.back();
+                      },
+                    ),
+                  ),
+                  Expanded(
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        minimumSize: Size(double.infinity, 40),
+                        foregroundColor: Colors.grey,
+                      ),
+                      child: Text(
+                        langKey.yesBtn.tr,
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pop(true);
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          );
+        },
+      );
 
-  //TODO:Start Clear Lists
+      return value == true;
+    } else {
+      changePage(0);
+      return false;
+    }
+  }
+
   _clearLists() {
     sliderImages.clear();
     categories.clear();
@@ -292,7 +344,6 @@ class BaseController extends GetxController {
 
   //END Clear Lists
 
-  //TODO:START clear Controllers
   _clearControllers() {
     bottomNavPageController.dispose();
     sliderPageController.dispose();
@@ -302,7 +353,6 @@ class BaseController extends GetxController {
 
   @override
   void onClose() {
-    // TODO: implement onClose
     super.onClose();
 
     timer?.cancel();

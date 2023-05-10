@@ -405,10 +405,10 @@ class DashboardUI extends GetView<BaseController> {
     );
   }
 
-  _getChildAspectRatio(context) {
+  /* _getChildAspectRatio(context) {
     double aspectRatio = MediaQuery.of(context).size.width /
         (MediaQuery.of(context).size.height / 2.5);
     print("aspectRatio: $aspectRatio");
     return aspectRatio;
-  }
+  }*/
 }

@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
@@ -99,13 +98,20 @@ class OrderRepository {
         print(data);
         return data;
       } else {
-        //TODO: Still needs to test this one properly
+        //TDO: Still needs to test this one properly
         http.StreamedResponse res = handleStreamResponse(response);
         return json.decode(await res.stream.bytesToString());
-        throw Exception(
-            'Failed to upload image ${response.statusCode} ${json.decode(await response.stream.bytesToString())}');
       }
     }
+  }
+
+  Future<dynamic> postReview({token, data}) async {
+    var response = await _apiService.post(
+        endpoint: "productReviews/add",
+        body: data,
+        requiresAuthToken: true,
+        token: token);
+    return response.body;
   }
 
   /// Payment Apis
@@ -117,6 +123,4 @@ class OrderRepository {
         token: token);
     return response.body;
   }
-
-
 }

@@ -20,7 +20,11 @@ class UpdateProductUI extends GetView<SellersController> {
         return CustomLoading();
       }
       return _build(productModel: state);
-    }, onLoading: CustomLoading(), onEmpty: NoDataFound(text: "Product Not Found",));
+    },
+        onLoading: CustomLoading(),
+        onEmpty: NoDataFound(
+          text: "Product Not Found",
+        ));
   }
 
   Widget _build({ProductModel? productModel}) {
@@ -188,6 +192,7 @@ class UpdateProductUI extends GetView<SellersController> {
                                   onTap: () {
                                     if (formKey.currentState!.validate()) {
                                       if (controller.discountMessage.isEmpty) {
+                                       
                                         controller.updateProduct(
                                             model: productModel);
                                       } else {

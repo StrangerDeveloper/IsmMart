@@ -36,7 +36,6 @@ class AuthController extends GetxController {
     //getToken();
 
     //getCurrentUser();
-
   }
 
   @override
@@ -51,8 +50,6 @@ class AuthController extends GetxController {
       getToken();
       //getCurrentUser();
     });
-
-
   }
 
   var _coinsModel = CoinsModel().obs;
@@ -60,7 +57,7 @@ class AuthController extends GetxController {
   CoinsModel? get coinsModel => _coinsModel.value;
 
   fetchUserCoins() async {
-    if(userToken!.isNotEmpty) {
+    if (userToken!.isNotEmpty) {
       await authProvider
           .getUserCoins(token: userToken)
           .then((ApiResponse? apiResponse) {
@@ -108,28 +105,6 @@ class AuthController extends GetxController {
     //isLoading(false);
   }
 
-<<<<<<< Updated upstream
-  Future<void> forgotPasswordWithEmail() async {
-    isLoading(true);
-    String email = emailController.text.trim();
-    await authProvider
-        .forgotPassword(data: {"email": email}).then((UserResponse? response) {
-      isLoading(false);
-      if (response != null) {
-        if (response.success!) {
-          Get.back();
-          AppConstant.displaySnackBar("success", response.message);
-        } else {
-          AppConstant.displaySnackBar("error", response.message);
-        }
-      } else
-        AppConstant.displaySnackBar(
-            "error", "Something went wrong with credentials");
-    }).catchError((onError) {
-      isLoading(false);
-      debugPrint("resetPassword: $onError");
-    });
-=======
   Future<bool?> forgotPasswordWithEmail() async {
     isLoading(false);
     String email = emailController.text.trim();
@@ -149,7 +124,6 @@ class AuthController extends GetxController {
           "error", "Something went wrong with credentials");
       return false;
     }
->>>>>>> Stashed changes
   }
 
   forgotPasswordOtp() async {
@@ -170,6 +144,7 @@ class AuthController extends GetxController {
           Get.back();
           debugPrint("Email: ${response.toString()}");
           AppConstant.displaySnackBar("success", response.message);
+          passwordController.clear();
         } else {
           AppConstant.displaySnackBar("error", response.message);
         }
@@ -210,16 +185,17 @@ class AuthController extends GetxController {
     isLoading(true);
 
     UserModel newUser = UserModel(
-        //firstName: firstNameController.text.trim(),
-        //lastName: lastNameController.text.trim(),
-        firstName: firstNameController.text.trim(),
-        email: emailController.text.trim(),
-        phone: phoneController.text.trim(),
-        password: passwordController.text.trim());
+      //firstName: firstNameController.text.trim(),
+      //lastName: lastNameController.text.trim(),
+      firstName: firstNameController.text.trim(),
+      email: emailController.text.trim(),
+      phone: phoneController.text.trim(),
+      password: passwordController.text.trim(),
+    );
 
     await authProvider
         .postRegister(userModel: newUser)
-        .then((ApiResponse? response) {
+        .then((UserResponse? response) {
       isLoading(false);
       if (response != null) {
         if (response.success!) {
@@ -236,9 +212,11 @@ class AuthController extends GetxController {
     });
   }
 
-  registerStore({SellerModel? updatedModel}) async {
+  registerStore({UserModel? updatedModel}) async {
     isLoading(true);
 
+    print(
+        "controller profile ${profileImgPath.value}  \n covet= ${coverImgPath.value}");
     SellerModel model = SellerModel(
       storeName: storeNameController.text.trim(),
       storeDesc: storeDescController.text,
@@ -252,19 +230,21 @@ class AuthController extends GetxController {
       accountTitle: bankHolderTitleController.text.trim(),
       accountNumber: bankAccController.text.trim(),
     );
+
     if (userToken!.isNotEmpty) {
+      // UserModel user = UserModel(vendor: model);
       await authProvider
           .postStoreRegister(
               token: userToken!,
-              calledForUpdate: updatedModel!=null,
+              calledForUpdate: updatedModel != null,
               sellerModel: model)
-          .then((ApiResponse? apiResponse) {
+          .then((UserResponse? apiResponse) {
         isLoading(false);
         if (apiResponse != null) {
           if (apiResponse.success!) {
             Get.back();
             AppConstant.displaySnackBar("success", apiResponse.message);
-            clearStoreController();
+            //    clearStoreController();
             getCurrentUser();
           } else
             AppConstant.displaySnackBar('error', apiResponse.message);
@@ -334,44 +314,26 @@ class AuthController extends GetxController {
   getCurrentUser() async {
     if (userToken!.isNotEmpty) {
       isLoading(true);
-      await authProvider
-          .getCurrentUser(token: userToken)
-<<<<<<< Updated upstream
-          .then((userResponse) {
+      await authProvider.getCurrentUser(token: userToken).then((userResponse) {
         isLoading(false);
         if (userResponse.message != null &&
-            userResponse.message!.toLowerCase().contains(AppConstant.SESSION_EXPIRED)) {
-=======
-          .then((apiResponse) async {
-        isLoading(false);
-        if (apiResponse.message != null &&
-            apiResponse.message!
+            userResponse.message!
                 .toLowerCase()
                 .contains(AppConstant.SESSION_EXPIRED)) {
->>>>>>> Stashed changes
           setSession(true);
         } else
           setSession(false);
 
-        if (apiResponse.errors != null && apiResponse.errors!.isNotEmpty) {
-          setUserModel(UserModel(error: apiResponse.errors!.first));
-        } else {
-          UserModel? userDetailsFromApi = UserModel.fromJson(apiResponse.data);
-          UserModel? storedDetails = await LocalStorageHelper.getStoredUser();
-          if (userDetailsFromApi.emailVerified != storedDetails.emailVerified) {
-            updateUserEmailVerification(
-                fromApi: userDetailsFromApi, stored: storedDetails);
-          } else {
-            setUserModel(userDetailsFromApi);
-          }
-        }
+        if (userResponse.errors != null && userResponse.errors!.isNotEmpty) {
+          setUserModel(UserModel(error: userResponse.errors!.first));
+        } else
+          setUserModel(userResponse.userModel!);
       }).catchError((error) {
         isLoading(false);
         setSession(true);
       });
     } else
       setSession(true);
-
   }
 
   updateUserEmailVerification({UserModel? fromApi, UserModel? stored}) async {
@@ -388,21 +350,25 @@ class AuthController extends GetxController {
         "title": firstName.tr,
         "subtitle": userModel!.firstName ?? '',
         "icon": Icons.person_rounded,
+        "field": "firstName",
       },
       {
         "title": lastName.tr,
         "subtitle": userModel!.lastName ?? '',
         "icon": Icons.person_rounded,
+        "field": "lastName"
       },
       {
         "title": phone.tr,
         "subtitle": userModel!.phone ?? '',
         "icon": Icons.phone_iphone_rounded,
+        "field": "phone",
       },
       {
         "title": address.tr,
         "subtitle": userModel!.address ?? '',
-        "icon": Icons.location_on_rounded
+        "icon": Icons.location_on_rounded,
+        "field": "address",
       },
       {
         "title": country.tr,
@@ -460,7 +426,7 @@ class AuthController extends GetxController {
 
   var _currUserToken = "".obs;
 
-  setCurrUserToken(token){
+  setCurrUserToken(token) {
     _currUserToken.value = token;
   }
 
@@ -469,9 +435,9 @@ class AuthController extends GetxController {
   //String? get userToken => "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQ4LCJpYW0iOiJ2ZW5kb3IiLCJ2aWQiOjQzLCJpYXQiOjE2NzgwNzY4MTE2MjcsImV4cCI6MTY3ODI0OTYxMTYyN30.eWj8W9zsP_mDBf81ho08HGmtwz8ufDpKUP2YBghyCN8";
 
   getToken() async {
-    await LocalStorageHelper.getStoredUser().then((user) async{
+    await LocalStorageHelper.getStoredUser().then((user) async {
       print("Auth Token: ${user.token}");
-      _currUserToken.value = user.token??'';
+      _currUserToken.value = user.token ?? '';
 
       await getCurrentUser();
       await fetchUserCoins();
@@ -479,13 +445,9 @@ class AuthController extends GetxController {
       print(">>>Token: $error, $stackTrace");
     });
 
-
     //update();
   }
 
-<<<<<<< Updated upstream
-  updateUser({title, value}) async {
-=======
   updateUser({title, value, field}) async {
     title = editingTextController.text;
     if (field == "firstName") {
@@ -501,11 +463,11 @@ class AuthController extends GetxController {
     // userModel!.lastName = title;
 
     print("title is => $title");
->>>>>>> Stashed changes
     if (userToken != null) {
       isLoading(true);
       await authProvider
-          .updateUser(token: userToken, title: title, value: value)
+          .updateUser(
+              token: userToken, title: title, value: value, field: field)
           .then((UserResponse? userResponse) {
         isLoading(false);
         if (userResponse != null) {
@@ -591,16 +553,6 @@ class AuthController extends GetxController {
       "message": "${storeDescController.text}"
     };
 
-<<<<<<< Updated upstream
-    await authProvider.contactUs(data: data).then((UserResponse? userResponse) {
-      if (userResponse != null) {
-        if (userResponse.success!) {
-          // Get.back();
-          AppConstant.displaySnackBar("success", userResponse.message);
-          clearContactUsControllers();
-        } else
-          AppConstant.displaySnackBar('error', userResponse.message);
-=======
     await authProvider.contactUs(data: data).then((ApiResponse? apiResponse) {
       if (apiResponse != null) {
         if (apiResponse.success!) {
@@ -609,7 +561,6 @@ class AuthController extends GetxController {
           clearContactUsControllers();
         } else
           AppConstant.displaySnackBar('error', apiResponse.message);
->>>>>>> Stashed changes
       } else
         AppConstant.displaySnackBar('error', "something went wrong!");
     }).catchError((e) {

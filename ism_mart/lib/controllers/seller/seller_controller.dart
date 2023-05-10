@@ -95,18 +95,19 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
   //TOO: Update Product using PATCH request type
 
   updateProduct({ProductModel? model}) async {
+    model!.price = int.parse("${prodPriceController.text}");
+    model.name = prodNameController.text;
+    model.discount = int.parse("${prodDiscountController.text}");
+    model.description = prodDescriptionController.text;
+    model.stock = int.parse("${prodStockController.text}");
+
     isLoading(true);
     await _apiProvider
-<<<<<<< Updated upstream
-        .updateProduct(token: authController.userToken, model: model)
-        .then((ProductResponse? response) {
-=======
         .updateProduct(
       token: authController.userToken,
       model: model,
     )
         .then((ApiResponse? response) {
->>>>>>> Stashed changes
       isLoading(false);
       if (response != null) {
         if (response.success != null) {
@@ -312,7 +313,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
                   if (lengthInMb > 2) {
                     showSnackBar(message: 'Each file must be up to 2MB');
                   } else {
-                    //TODO: needs to add check if file exist
+                    //: needs to add check if file exist
                     pickedImagesList.add(compressedFile);
                   }
                 });

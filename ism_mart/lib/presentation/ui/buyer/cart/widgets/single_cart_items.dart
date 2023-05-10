@@ -41,12 +41,8 @@ class SingleCartItems extends StatelessWidget {
                       child: CircleAvatar(
                           radius: 40,
                           backgroundImage: NetworkImage(
-<<<<<<< Updated upstream
-                              cartModel!.productModel!.thumbnail ?? AppConstant.defaultImgUrl)),
-=======
                               cartModel!.productModel!.thumbnail ??
                                   AppConstant.defaultImgUrl)),
->>>>>>> Stashed changes
                     ),
                     AppConstant.spaceWidget(width: 5),
                     Expanded(
@@ -90,46 +86,6 @@ class SingleCartItems extends StatelessWidget {
                                 : Container(),
 
                             ///Product selected Features
-<<<<<<< Updated upstream
-                            if(cartModel.featuresName!.isNotEmpty)
-                              Row(
-                                  children: [
-                                    CustomText(
-                                      title: "Features:",
-                                      style: bodyText2,
-                                    ),
-                                    SizedBox(
-                                      width: 170,
-                                      height: 30,
-                                      child: ListView.builder(
-                                          scrollDirection: Axis.horizontal,
-                                          shrinkWrap: true,
-
-                                          itemCount:
-                                              cartModel.featuresName?.length,
-                                          itemBuilder: (_, index) {
-                                            String name = cartModel
-                                                .featuresName![index];
-                                            return Padding(
-                                              padding: const EdgeInsets.symmetric(horizontal: 3.0, vertical: 5),
-                                              child: CustomGreyBorderContainer(
-                                                  hasShadow: false,
-                                                  //borderColor: kWhiteColor,
-                                                  padding: const EdgeInsets
-                                                          .symmetric(
-                                                      horizontal: 5,
-                                                      vertical: 2),
-                                                  child: CustomText(
-                                                    title: name,
-                                                    style: caption.copyWith(
-                                                        color: kPrimaryColor),
-                                                  )),
-                                            );
-                                          }),
-                                    ),
-                                  ],
-                                ),
-=======
                             if (cartModel.featuresName!.isNotEmpty)
                               Row(
                                 children: [
@@ -168,114 +124,12 @@ class SingleCartItems extends StatelessWidget {
                                   ),
                                 ],
                               ),
->>>>>>> Stashed changes
                           ],
                         ),
                       ),
                     ),
                     Align(
                       alignment: Alignment.bottomRight,
-<<<<<<< Updated upstream
-                      child: InkWell(
-                        onTap: () {
-                          cartModel.onQuantityClicked =
-                              !cartModel.onQuantityClicked!;
-                          controller!.cartItemsList.refresh();
-                          controller.update();
-                        },
-                        child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 12.0, vertical: 5),
-                            decoration: BoxDecoration(
-                              color: kWhiteColor,
-                              border: Border.all(
-                                  color: cartModel.onQuantityClicked!
-                                      ? kDarkColor
-                                      : kLightColor),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            child: Row(
-                              children: [
-                                CustomText(
-                                  title: cartModel.quantity!,
-                                  size: 16,
-                                  color: kDarkColor,
-                                  weight: FontWeight.bold,
-                                ),
-                                AppConstant.spaceWidget(width: 5),
-                                Icon(
-                                  cartModel.onQuantityClicked!
-                                      ? Icons.keyboard_arrow_up
-                                      : Icons.keyboard_arrow_down,
-                                  size: 20,
-                                  color: cartModel.onQuantityClicked!
-                                      ? kDarkColor
-                                      : kLightColor,
-                                ),
-                              ],
-                            )),
-                      ),
-                    ),
-                  ],
-                ),
-                AppConstant.spaceWidget(height: 5),
-                cartModel.onQuantityClicked!
-                    ? AnimatedContainer(
-                        duration: const Duration(milliseconds: 1500),
-                        curve: Curves.fastOutSlowIn,
-                        width: double.infinity,
-                        height: 40,
-                        child: ListView.builder(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            itemCount: controller!.moq,
-                            itemBuilder: (_, index) {
-                              return InkWell(
-                                onTap: () async {
-                                  // cartModel.quantity = "${(index + 1)}";
-                                  /* await controller.updateCart(
-                                      cartItemId: cartModel.id,
-                                      quantity: (index + 1));*/
-                                  cartModel.quantity = "${(index + 1)}";
-                                  cartModel.productModel!.totalPrice = controller.totalCartAmount.value;
-                                  await LocalStorageHelper.updateCartItems(
-                                      cartModel: cartModel);
-                                  controller.update();
-                                },
-                                child: Container(
-                                  margin: const EdgeInsets.symmetric(
-                                      horizontal: 5, vertical: 3),
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 12.0, vertical: 5),
-                                  decoration: int.parse(cartModel.quantity!) ==
-                                          (index + 1)
-                                      ? BoxDecoration(
-                                          color: kPrimaryColor,
-                                          border: Border.all(color: kDarkColor),
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                        )
-                                      : BoxDecoration(
-                                          color: kWhiteColor,
-                                          border: Border.all(color: kDarkColor),
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                        ),
-                                  child: CustomText(
-                                    title: "${index + 1}",
-                                    textAlign: TextAlign.center,
-                                    color: int.parse(cartModel.quantity!) ==
-                                            (index + 1)
-                                        ? kWhiteColor
-                                        : kPrimaryColor,
-                                    weight: FontWeight.w600,
-                                  ),
-                                ),
-                              );
-                            }),
-                      )
-                    : Container(),
-=======
                       child: ProductQuantityCounterr(
                         h: 20.0,
                         w: 20.0,
@@ -415,7 +269,6 @@ class SingleCartItems extends StatelessWidget {
                 //             }),
                 //       )
                 //     : Container(),
->>>>>>> Stashed changes
               ],
             ),
             Positioned(

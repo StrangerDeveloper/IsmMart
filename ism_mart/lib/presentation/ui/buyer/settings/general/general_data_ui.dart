@@ -378,7 +378,6 @@ class GeneralSettingsDataUI extends StatelessWidget {
   }
 
   List getTermConditionData() {
-    String dot = "\u2022";
     return [
       {'header': langKey.tCHeader1.tr, 'body': langKey.tCBody1.tr},
       {'header': langKey.tCHeader2.tr, 'body': langKey.tCBody2.tr},
@@ -401,10 +400,7 @@ class GeneralSettingsDataUI extends StatelessWidget {
       {'header': langKey.tCHeader19.tr, 'body': langKey.tCBody19.tr},
       {'header': langKey.tCHeader20.tr, 'body': langKey.tCBody20.tr},
       {'header': langKey.tCHeader21.tr, 'body': langKey.tCBody21.tr},
-      {
-        'header': '',
-        'body': ''
-      },
+      {'header': '', 'body': ''},
     ];
   }
 

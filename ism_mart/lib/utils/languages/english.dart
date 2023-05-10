@@ -2,6 +2,12 @@ import 'translations_key.dart' as key;
 
 class English {
   Map<String, String> get translations => {
+        //new
+        key.exitApp: 'Exit App',
+        key.exitDialogDesc: 'Are you sure you want to exit?',
+        key.resetPass: 'Reset Password',
+        key.phoneValidate:'Phone No Minimum Required 11 digits',
+
         ///settings screen
         key.settings: 'Settings',
         key.general: 'General',
@@ -167,9 +173,10 @@ class English {
         key.prodSkuReq: 'Product sku required',
 
         key.email: "Email",
-        key.emailReq: 'Invalid Email Format?',
+        key.emailReq: 'Email is required!.',
+        key.invalidEmail: 'Invalid Email Format?',
         key.password: 'Password',
-        key.passwordLengthReq: 'Password must be at least 6 characters long?',
+        key.passwordLengthReq: 'Password must be at least 8 characters long?',
         key.fullName: 'Full Name',
         key.fullNameReq: 'Name is required',
         key.registerGreetings: 'Create an ISMMART Account!',

@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_image/flutter_native_image.dart';
@@ -14,13 +13,12 @@ import 'package:ism_mart/utils/exports_utils.dart';
 class OrderController extends GetxController
     with StateMixin, GetSingleTickerProviderStateMixin {
   final OrderProvider _orderProvider;
-<<<<<<< Updated upstream
-=======
 
   OrderController(this._orderProvider);
->>>>>>> Stashed changes
 
-  OrderController(this._orderProvider);
+  GlobalKey<FormState> reviewFormKey = GlobalKey<FormState>();
+  RxDouble rating = 5.0.obs;
+  TextEditingController reviewTxtFieldController = TextEditingController();
 
   var titleController = TextEditingController();
   var descriptionController = TextEditingController();
@@ -193,7 +191,7 @@ class OrderController extends GetxController
               if (lengthInMb > 2) {
                 showSnackBar(message: 'Each file must be up to 2MB');
               } else {
-                //TODO: needs to add check if file exist
+                //: needs to add check if file exist
                 pickedImagesList.add(compressedFile);
               }
             });
@@ -222,6 +220,7 @@ class OrderController extends GetxController
   void onClose() {
     super.onClose();
     clearControllers();
+    reviewTxtFieldController.dispose();
   }
 
   @override
@@ -239,8 +238,6 @@ class OrderController extends GetxController
     authController.fetchUserCoins();
   }
 
-<<<<<<< Updated upstream
-=======
   submitReviewBtn({OrderItem? orderItem}) async {
     if (reviewFormKey.currentState?.validate() ?? false) {
       isLoading(true);
@@ -273,7 +270,6 @@ class OrderController extends GetxController
     }
   }
 
->>>>>>> Stashed changes
   void showSnackBar({title = 'error', message = 'Something went wrong'}) {
     AppConstant.displaySnackBar(title, message);
   }

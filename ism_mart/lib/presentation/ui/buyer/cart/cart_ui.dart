@@ -27,7 +27,9 @@ class CartUI extends GetView<CartController> {
         return noDataFound();
       }
       return _build(listData: state);
-    }, onLoading: CustomLoading(isDarkMode: Get.isDarkMode), onEmpty: noDataFound());
+    },
+        onLoading: CustomLoading(isDarkMode: Get.isDarkMode),
+        onEmpty: noDataFound());
   }
 
   Widget noDataFound() {
@@ -118,8 +120,10 @@ class CartUI extends GetView<CartController> {
   }
 
   Widget _buildCartItemSection({List<CartModel>? cartItemsList}) {
+    int selectedItem = 0;
     return ListView.builder(
       shrinkWrap: true,
+      reverse: true,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: cartItemsList!.length,
       itemBuilder: (context, index) {

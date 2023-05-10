@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
@@ -33,6 +32,7 @@ class CategoryController extends GetxController with StateMixin {
       change(null, status: RxStatus.empty());
     });
   }
+
   fetchSubCategories(CategoryModel? categoryModel) async {
     if (categories.isNotEmpty) {
       isCategoriesLoading(true);
@@ -68,7 +68,7 @@ class CategoryController extends GetxController with StateMixin {
         list.add(model);
       }
 
-        change(list, status: RxStatus.success());
+      change(list, status: RxStatus.success());
       /*categories.clear();
       categories.addAll(list);
       categories.refresh();*/
@@ -77,12 +77,9 @@ class CategoryController extends GetxController with StateMixin {
 
   @override
   void onClose() {
-    // TODO: implement onClose
     super.onClose();
     _clearLists();
   }
-
-
 
   @override
   void onReady() {

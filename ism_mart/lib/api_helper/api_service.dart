@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 
@@ -72,8 +71,7 @@ class ApiService {
     dynamic body,
     Map<String, String>? headers,
   }) async {
-
-   // _baseProvider.httpClient.baseUrl = ApiConstant.baseUrl;
+    // _baseProvider.httpClient.baseUrl = ApiConstant.baseUrl;
     final response = await _baseProvider.post(
       endpoint,
       body,
@@ -81,7 +79,6 @@ class ApiService {
     );
     return response;
   }
-
 
   Future<Response> postStripe<T>({
     required String endpoint,
@@ -107,7 +104,6 @@ class ApiService {
     debugPrint("STripe: ${response.statusCode}");*/
     return response;
   }
-
 
   Future<Response> put<T>({
     required String endpoint,
@@ -179,7 +175,4 @@ class ApiService {
 
     return response;
   }
-
-
-
 }

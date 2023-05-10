@@ -3,13 +3,14 @@ import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/presentation/ui/buyer/account/forgot_password/email_input.dart';
 import 'package:ism_mart/presentation/ui/buyer/account/forgot_password/reset_password.dart';
 import 'package:ism_mart/presentation/ui/exports_ui.dart';
-import 'package:ism_mart/presentation/ui/products/view/seller_store_details_ui.dart';
 
 import '../presentation/ui/buyer/account/email_verification/resend_email_verification_link.dart';
 
 class Routes {
   static const initRoute = "/";
   static const loginRoute = "/signIn";
+  static const resetPasswordRoute = "/resetPassword";
+  static const passwordResetEmailInput = "/inputEmail";
   static const registerRoute = "/register";
   static const emailVerificationLinkRoute = "/emailVerificationLink";
   static const categoriesRoute = "/categories";
@@ -30,7 +31,6 @@ class Routes {
   static const orderDetailsRoute = "/orderDetails/:id";
   static const storeDetailsRoute = "/storeDetails/:id";
 
-
   static final pages = [
     /* GetPage(
       name: aboutUsRoute,
@@ -41,13 +41,19 @@ class Routes {
       page: () => const SignInUI(),
       binding: BaseBindings(),
     ),
-
     GetPage(
       name: registerRoute,
       page: () => const SignUpUI(),
       binding: BaseBindings(),
     ),
-
+    GetPage(
+        name: resetPasswordRoute,
+        page: () => const ForgotPassword(),
+        binding: BaseBindings()),
+    GetPage(
+        name: passwordResetEmailInput,
+        page: () => const EmailInput(),
+        binding: BaseBindings()),
     GetPage(
         name: emailVerificationLinkRoute,
         page: () => ResendEmailVerificationLink(),
@@ -56,19 +62,7 @@ class Routes {
         name: initRoute,
         page: () => const BaseLayout(),
         binding: BaseBindings()),
-
     GetPage(
-<<<<<<< Updated upstream
-      name: searchRoute,
-      page: () =>  SearchUI(),
-      //binding: SearchBindings(),
-      bindings: [
-        SearchBindings(),
-        ProductBinding(),
-      ]
-    ),
-
-=======
         name: searchRoute,
         page: () => SearchUI(),
         //binding: SearchBindings(),
@@ -76,7 +70,6 @@ class Routes {
           SearchBindings(),
           ProductBinding(),
         ]),
->>>>>>> Stashed changes
     GetPage(
       name: cartRoute,
       page: () => CartUI(),
@@ -88,20 +81,15 @@ class Routes {
       binding: CheckoutBinding(),
       middlewares: [AuthMiddleWare(priority: 5)],
     ),
-
     GetPage(
       name: buyerOrdersRoute,
       page: () => BuyerOrdersUI(),
       binding: OrdersBindings(),
     ),
-
-
     GetPage(
         name: sellerHomeRoute,
         page: () => const SellerHome(),
         binding: SellerBindings()),
-
-
     GetPage(
       name: '/product/:id',
       //arguments: ['calledFor'],
@@ -119,7 +107,5 @@ class Routes {
       page: () => const SellerStoreDetailsUI(),
       binding: ProductBinding(),
     )
-
   ];
-
 }
