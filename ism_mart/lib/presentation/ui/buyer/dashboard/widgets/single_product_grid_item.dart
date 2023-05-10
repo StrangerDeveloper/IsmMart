@@ -148,12 +148,18 @@ class SingleProductItems extends StatelessWidget {
                         AppConstant.spaceWidget(height: 5),
                         CustomPriceWidget(title: "${model.discountPrice!}"),
                         if (model.discount != 0)
-                          CustomText(
-                            title:
-                                "${AppConstant.getCurrencySymbol()} ${model.price!}",
+                          CustomPriceWidget(
+                            title: "${model.price!}",
                             style: bodyText1.copyWith(
                                 decoration: TextDecoration.lineThrough),
                           ),
+
+                        // CustomText(
+                        //   title:
+                        //       "${AppConstant.getCurrencySymbol()} ${model.price!}",
+                        //   style: bodyText1.copyWith(
+                        //       decoration: TextDecoration.lineThrough),
+                        // ),
                       ],
                     ),
                   ),

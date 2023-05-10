@@ -51,9 +51,9 @@ class CheckoutUI extends GetView<CheckoutController> {
                 () => Column(
                   children: [
                     _singleShippingCostItem(
-                        title: langKey.standard, price: 250, delivery: 7),
+                        title: langKey.standard.tr, price: 250, delivery: 7),
                     _singleShippingCostItem(
-                        title: langKey.free, price: 0, delivery: 14),
+                        title: langKey.free.tr, price: 0, delivery: 14),
                   ],
                 ),
               ),
@@ -73,19 +73,18 @@ class CheckoutUI extends GetView<CheckoutController> {
                           onTap: () {
                             if (controller
                                     .cartController.totalCartAmount.value <=
-                                1000) {
+                                num.parse(convertStaticPrice(price: 1000))) {
                               controller.showSnackBar(
-                                title: langKey.errorTitle,
-                                message: langKey.toProceedWithPurchase,
+                                title: langKey.errorTitle.tr,
+                                message: langKey.toProceedWithPurchase.tr,
                               );
                               //You cannot use Free Shipping Service under Rs1000
                               return;
                             } else {
                               if (controller.isCardPaymentEnabled.isFalse) {
                                 controller.showSnackBar(
-                                  title: langKey.errorTitle,
-                                  message: langKey.preferredPayment,
-                                );
+                                    title: langKey.errorTitle.tr,
+                                    message: langKey.preferredPayment.tr);
                                 return;
                               }
                               if (controller.defaultAddressModel!.id != null) {
@@ -96,13 +95,12 @@ class CheckoutUI extends GetView<CheckoutController> {
                                           .toString());
                                 } else {
                                   controller.showSnackBar(
-                                    title: langKey.errorTitle,
-                                    message: langKey.cartMustNotEmpty,
-                                  );
+                                      title: langKey.errorTitle.tr,
+                                      message: langKey.cartMustNotEmpty.tr);
                                 }
                               } else
                                 controller.showSnackBar(
-                                  title: langKey.errorTitle,
+                                  title: 'error',
                                   message: langKey.noDefaultAddressFound.tr,
                                 );
                             }
@@ -132,13 +130,13 @@ class CheckoutUI extends GetView<CheckoutController> {
                 //selected: true,
                 value: price,
                 title: CustomText(
-                  title: "$title " + langKey.delivery,
+                  title: "$title " + langKey.delivery.tr,
                 ),
                 subtitle: CustomText(
-                  title: langKey.delivery +
+                  title: langKey.delivery.tr +
                       ": $delivery " +
-                      langKey.daysCost +
-                      " : Rs $price.00",
+                      langKey.daysCost.tr +
+                      " :${convertStaticPrice(price: price!)}",
                 ),
                 groupValue: controller.shippingCost.value,
                 onChanged: (value) {
@@ -147,10 +145,19 @@ class CheckoutUI extends GetView<CheckoutController> {
               ),
             ),
           ),
-          if (price == 0) CustomText(title: langKey.freeShipping)
+          if (price == 0)
+            CustomText(
+                title:
+                    "${langKey.freeShipping.tr} ${convertStaticPrice(price: 1000)}")
         ],
       ),
     );
+  }
+
+  String convertStaticPrice({num? price}) {
+    num? priceAfter = num.parse(
+        currencyController.convertCurrency(currentPrice: price.toString())!);
+    return "${AppConstant.getCurrencySymbol(currencyCode: currencyController.currency.value)} ${priceAfter.toStringAsFixed(2)}";
   }
 
   ///TOO: Shipping Details
@@ -189,7 +196,7 @@ class CheckoutUI extends GetView<CheckoutController> {
               children: [
                 // OutlinedButton(onPressed: () => showAddressesDialog(), child: CustomText(title: "Change",),)
                 _tileActionBtn(
-                    onTap: () => showAddressesDialog(),
+                    onTap: () => Get.toNamed(Routes.changeAddressRoute),
                     title: langKey.changeBtn.tr)
               ],
             ),
@@ -225,344 +232,8 @@ class CheckoutUI extends GetView<CheckoutController> {
             CustomButton(
                 width: 150,
                 height: 40,
-                onTap: () => AppConstant.showBottomSheet(
-                    widget: addNewORUpdateAddressContents()),
+                onTap: () => Get.toNamed(Routes.changeAddressRoute),
                 text: langKey.addNewAddress.tr),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget addNewORUpdateAddressContents(
-      {UserModel? userModel, calledForUpdate = false}) {
-    var formKey = GlobalKey<FormState>();
-    if (calledForUpdate) {
-      controller.nameController.text = userModel!.name ?? "";
-      controller.addressController.text = userModel.address ?? "";
-      controller.phoneController.text = userModel.phone ?? "";
-      controller.zipCodeController.text = userModel.zipCode ?? "";
-    }
-
-    return SingleChildScrollView(
-      child: Form(
-        key: formKey,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 20),
-          child: Column(
-            children: [
-              CustomText(
-                title:
-                    "${calledForUpdate ? langKey.updateBtn.tr : langKey.addNew.tr} ${langKey.shipping.tr}",
-                style: headline1,
-              ),
-              AppConstant.spaceWidget(height: 15),
-              FormInputFieldWithIcon(
-                controller: controller.nameController,
-                iconPrefix: Icons.person,
-                labelText: langKey.fullName.tr,
-                iconColor: kPrimaryColor,
-                autofocus: false,
-                textStyle: bodyText1,
-                autoValidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value) =>
-                    GetUtils.isBlank(value!)! ? langKey.fullNameReq.tr : null,
-                keyboardType: TextInputType.name,
-                onChanged: (value) {},
-                onSaved: (value) {},
-              ),
-              AppConstant.spaceWidget(height: 10),
-              FormInputFieldWithIcon(
-                controller: controller.phoneController,
-                iconPrefix: Icons.phone_iphone_rounded,
-                labelText: langKey.phone,
-                iconColor: kPrimaryColor,
-                autofocus: false,
-                textStyle: bodyText1,
-                autoValidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value) => !GetUtils.isPhoneNumber(value!)
-                    ? langKey.phoneReq.tr
-                    : null,
-                keyboardType: TextInputType.number,
-                onChanged: (value) {},
-                onSaved: (value) {},
-              ),
-              AppConstant.spaceWidget(height: 10),
-              FormInputFieldWithIcon(
-                controller: controller.zipCodeController,
-                iconPrefix: Icons.code,
-                labelText: langKey.zipCode,
-                iconColor: kPrimaryColor,
-                autofocus: false,
-                textStyle: bodyText1,
-                autoValidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value) =>
-                    GetUtils.isBlank(value!)! ? langKey.zipCodeRequired : null,
-                keyboardType: TextInputType.number,
-                onChanged: (value) {},
-                onSaved: (value) {},
-              ),
-              AppConstant.spaceWidget(height: 10),
-
-              FormInputFieldWithIcon(
-                controller: controller.addressController,
-                iconPrefix: Icons.location_on_rounded,
-                labelText: langKey.address.tr,
-                iconColor: kPrimaryColor,
-                autofocus: false,
-                textStyle: bodyText1,
-                autoValidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value) =>
-                    GetUtils.isBlank(value!)! ? langKey.addressRequired : null,
-                keyboardType: TextInputType.name,
-                onChanged: (value) {},
-                onSaved: (value) {},
-              ),
-              AppConstant.spaceWidget(height: 15),
-
-              ///: Countries
-              if (!calledForUpdate)
-                Column(
-                  children: [
-                    //Countries
-                    Obx(
-                      () => DropdownSearch<CountryModel>(
-                        popupProps: PopupProps.dialog(
-                            showSearchBox: true,
-                            dialogProps: DialogProps(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10))),
-                            searchFieldProps: AppConstant.searchFieldProp()),
-                        items: controller.authController.countries,
-                        itemAsString: (model) => model.name ?? "",
-                        dropdownDecoratorProps: DropDownDecoratorProps(
-                          baseStyle: bodyText1,
-                          dropdownSearchDecoration: InputDecoration(
-                            labelText: langKey.selectCountry,
-                            labelStyle: bodyText1,
-                            hintText: langKey.chooseCountry,
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Colors.black,
-                                  width: 1,
-                                  style: BorderStyle.solid), //B
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                          ),
-                        ),
-                        onChanged: (CountryModel? newValue) {
-                          controller.setSelectedCountry(newValue!);
-                          //debugPrint(">>> $newValue");
-                        },
-                        selectedItem:
-                            controller.authController.selectedCountry.value,
-                      ),
-                    ),
-
-                    AppConstant.spaceWidget(height: 15),
-
-                    ///TOO: Sub Cities
-                    Obx(
-                      () => authController.cities.isEmpty
-                          ? Container()
-                          : authController.isLoading.isTrue
-                              ? CustomLoading(
-                                  isItForWidget: true,
-                                  color: kPrimaryColor,
-                                )
-                              : DropdownSearch<CountryModel>(
-                                  popupProps: PopupProps.dialog(
-                                      showSearchBox: true,
-                                      dialogProps: DialogProps(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10))),
-                                      searchFieldProps:
-                                          AppConstant.searchFieldProp()),
-                                  //showSelectedItems: true),
-
-                                  items: controller.authController.cities,
-                                  itemAsString: (model) => model.name ?? "",
-                                  dropdownDecoratorProps:
-                                      DropDownDecoratorProps(
-                                    baseStyle: bodyText1,
-                                    dropdownSearchDecoration: InputDecoration(
-                                      labelText: langKey.selectCity,
-                                      labelStyle: bodyText1,
-                                      hintText: langKey.chooseCity,
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: Colors.black,
-                                            width: 1,
-                                            style: BorderStyle.solid), //B
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                    ),
-                                  ),
-
-                                  onChanged: (CountryModel? newValue) {
-                                    controller.setSelectedCity(newValue!);
-                                  },
-                                  selectedItem: controller
-                                      .authController.selectedCity.value,
-                                ),
-                    ),
-                  ],
-                ),
-
-              AppConstant.spaceWidget(height: 40),
-              Obx(
-                () => controller.isLoading.isTrue
-                    ? CustomLoading(isItForWidget: true, color: kPrimaryColor)
-                    : CustomButton(
-                        onTap: () {
-                          if (formKey.currentState!.validate()) {
-                            if (calledForUpdate) {
-                              controller.updateShippingAddress(userModel);
-                            } else {
-                              if (controller.countryId.value > 0 &&
-                                  controller.cityId.value > 0) {
-                                controller.addShippingAddress();
-                              } else {
-                                AppConstant.displaySnackBar(
-                                  langKey.errorTitle,
-                                  langKey.plzSelectCountry,
-                                );
-                              }
-                            }
-                          }
-                        },
-                        text: calledForUpdate
-                            ? langKey.updateBtn.tr
-                            : langKey.add.tr,
-                        height: 50,
-                        width: 300,
-                      ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  void showAddressesDialog() {
-    Get.defaultDialog(
-      title: langKey.shippingAddressDetail,
-      titleStyle: appBarTitleSize,
-      content: Column(
-        children: [
-          Obx(
-            () => controller.shippingAddressList.isEmpty
-                ? NoDataFound(text: langKey.noAddressFound.tr)
-                : SingleChildScrollView(
-                    child: Column(
-                      children: controller.shippingAddressList.map((element) {
-                        if (element.defaultAddress!)
-                          controller.shippingAddressId(element.id);
-                        return _singleDialogListItem(element);
-                      }).toList(),
-                    ),
-                  ),
-          )
-        ],
-      ),
-      confirm: OutlinedButton(
-        onPressed: () => controller.changeDefaultShippingAddress(),
-        child: CustomText(
-          title: langKey.set.tr,
-        ),
-      ),
-      cancel: OutlinedButton(
-        onPressed: () {
-          if (Get.isDialogOpen!) Get.back();
-          AppConstant.showBottomSheet(
-              widget: addNewORUpdateAddressContents(), isGetXBottomSheet: true);
-        },
-        child: CustomText(
-          title: langKey.addNewAddress.tr,
-        ),
-      ),
-    );
-  }
-
-  Widget _singleDialogListItem(UserModel? userModel) {
-    return CustomCard(
-      margin: const EdgeInsets.all(5.0),
-      color: Colors.white,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Stack(
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: Obx(
-                    () => Radio(
-                      activeColor: kPrimaryColor,
-                      toggleable: true,
-                      value: userModel!.id,
-                      onChanged: (value) {
-                        controller.shippingAddressId(value!);
-                      },
-                      groupValue: controller.shippingAddressId.value,
-                    ),
-                  ),
-                ),
-                Expanded(
-                    flex: 4,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CustomText(
-                          title: userModel!.name!,
-                          style: headline3,
-                        ),
-                        CustomText(
-                            title: userModel.phone ?? '', style: bodyText1),
-                        CustomText(
-                            style: bodyText1,
-                            title: "${userModel.address!}, "
-                                "${userModel.zipCode!}, "
-                                "${userModel.city!.name!},"
-                                " ${userModel.country!.name!}"),
-                      ],
-                    )),
-              ],
-            ),
-            Positioned(
-              top: 0,
-              //bottom: 10,
-              right: 0,
-              child: Row(
-                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CustomActionIcon(
-                      onTap: () {
-                        print(">>USERSADDRESS: ${userModel.toAddressJson()}");
-                        AppConstant.showBottomSheet(
-                            widget: addNewORUpdateAddressContents(
-                                userModel: userModel, calledForUpdate: true));
-                      },
-                      size: 15,
-                      height: 25,
-                      width: 25,
-                      icon: Icons.edit_rounded,
-                      bgColor: kPrimaryColor),
-                  AppConstant.spaceWidget(width: 5),
-                  CustomActionIcon(
-                      onTap: () =>
-                          controller.deleteShippingAddress(userModel.id),
-                      size: 15,
-                      height: 25,
-                      width: 25,
-                      icon: Icons.delete_rounded,
-                      bgColor: kRedColor)
-                ],
-              ),
-            ),
           ],
         ),
       ),
@@ -581,12 +252,12 @@ class CheckoutUI extends GetView<CheckoutController> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               _singlePaymentOptionItem(
-                  title: langKey.cashOnDelivery,
+                  title: langKey.cashOnDelivery.tr,
                   icon: Icons.wallet,
                   value: false,
                   isEnabled: true),
               _singlePaymentOptionItem(
-                  title: langKey.creditCard,
+                  title: langKey.creditCard.tr,
                   icon: Icons.credit_card,
                   value: true,
                   isEnabled: false),
@@ -750,7 +421,7 @@ class CheckoutUI extends GetView<CheckoutController> {
                             fillColor: kWhiteColor,
                             contentPadding: EdgeInsets.zero,
                             hintText:
-                                '${langKey.wantToRedeem} ${controller.coinsModel?.silver ?? 0} ${langKey.coins}?',
+                                '${langKey.wantToRedeem.tr} ${controller.coinsModel?.silver ?? 0} ${langKey.coins.tr}?',
                             hintStyle: TextStyle(
                               color: kLightColor,
                               fontWeight: FontWeight.w600,
@@ -765,17 +436,21 @@ class CheckoutUI extends GetView<CheckoutController> {
                     Expanded(
                         child: OutlinedButton(
                       onPressed: () {
-                        String? value = controller.couponCodeController.text;
-                        if (controller.coinsModel != null &&
-                            controller.coinsModel!.silver!
-                                .isGreaterThan(fixedRedeemCouponThreshold) &&
-                            value.isNotEmpty)
-                          controller.applyRedeemCode(num.parse(value));
-                        else
-                          AppConstant.displaySnackBar(
-                            langKey.errorTitle,
-                            langKey.needMoreCoins,
-                          );
+                        String? value =
+                            controller.couponCodeController.text.isEmpty
+                                ? "0"
+                                : controller.couponCodeController.text;
+                        controller.applyRedeemCode(num.parse(value));
+                        // if (controller.coinsModel != null &&
+                        //     controller.coinsModel!.silver!
+                        //         .isGreaterThan(fixedRedeemCouponThreshold) &&
+                        //     value.isNotEmpty)
+                        //   controller.applyRedeemCode(num.parse(value));
+                        // else
+                        //   AppConstant.displaySnackBar(
+                        //     langKey.errorTitle.tr,
+                        //     langKey.needMoreCoins.tr,
+                        //   );
                       },
                       child: CustomText(
                         title: langKey.redeemBtn.tr,
@@ -794,10 +469,11 @@ class CheckoutUI extends GetView<CheckoutController> {
                       TextSpan(
                         children: [
                           TextSpan(
-                              text: langKey.subtotal + ' ', style: bodyText1),
+                              text: langKey.subtotal.tr + ' ',
+                              style: bodyText1),
                           TextSpan(
                               text:
-                                  "(${controller.cartController.totalQtyCart.value} ${langKey.items})",
+                                  "(${controller.cartController.totalQtyCart.value} ${langKey.items.tr})",
                               style: caption),
                         ],
                       ),
@@ -812,7 +488,7 @@ class CheckoutUI extends GetView<CheckoutController> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    CustomText(title: langKey.shippingFee, style: bodyText1),
+                    CustomText(title: langKey.shippingFee.tr, style: bodyText1),
                     Obx(() => CustomPriceWidget(
                         title: "${controller.shippingCost.value}",
                         style: bodyText1)),
@@ -822,7 +498,8 @@ class CheckoutUI extends GetView<CheckoutController> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    CustomText(title: langKey.prodDiscount, style: bodyText1),
+                    CustomText(
+                        title: langKey.prodDiscount.tr, style: bodyText1),
                     Obx(() => CustomPriceWidget(
                         title: "${controller.totalDiscount.value}",
                         style: bodyText1.copyWith(color: Colors.amber))),
@@ -835,8 +512,11 @@ class CheckoutUI extends GetView<CheckoutController> {
                     Text.rich(
                       TextSpan(
                         children: [
-                          TextSpan(text: langKey.total+" ", style: headline2),
-                          TextSpan(text: "(${langKey.inclusiveOfGst})", style: caption),
+                          TextSpan(
+                              text: langKey.total.tr + " ", style: headline2),
+                          TextSpan(
+                              text: "(${langKey.inclusiveOfGst.tr})",
+                              style: caption),
                         ],
                       ),
                     ),

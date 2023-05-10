@@ -13,7 +13,7 @@ class CustomPriceWidget extends GetView<CurrencyController> {
   @override
   Widget build(BuildContext context) {
     return CustomText(
-      title: currencyFormat(controller.convertCurrency(currenctPrice: title!)!),
+      title: currencyFormat(controller.convertCurrency(currentPrice: title!)!),
       style: style ?? headline3,
     );
     // return controller.obx((state) {
@@ -28,7 +28,16 @@ class CustomPriceWidget extends GetView<CurrencyController> {
     // String amount = currencyController.currency.value.contains("pkr")
     //     ? num.parse(value).round().toString()
     //     : num.parse(value).toStringAsFixed(2); //;
-    int amount = num.parse(value).round();
+
+    num? amount = num.parse(value);
+    var decimalDigits = 0;
+    if (controller.currency.value.contains("pkr")) {
+      amount = amount.round();
+      decimalDigits = 0;
+    } else {
+      amount = num.parse(amount.toStringAsFixed(2));
+      decimalDigits = 2;
+    }
 
     print(
         ">>>Value: ${AppConstant.getCurrencySymbol(currencyCode: controller.currency.value)}$amount");
@@ -36,9 +45,9 @@ class CustomPriceWidget extends GetView<CurrencyController> {
             locale: 'en_US',
             symbol: AppConstant.getCurrencySymbol(
                 currencyCode: controller.currency.value),
-            decimalDigits: 0,
-            customPattern:
-                "${AppConstant.getCurrencySymbol(currencyCode: controller.currency.value)}#,##0")
+            decimalDigits: decimalDigits)
+        // customPattern:
+        //     "${AppConstant.getCurrencySymbol(currencyCode: controller.currency.value)}#,##0")
         .format(amount);
   }
 }

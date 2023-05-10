@@ -266,6 +266,12 @@ class AppConstant {
         return "JP\¥";
       case "sgd":
         return "\$";
+      case "try":
+        return "\₺";
+      case "hkd":
+        return "HK\$";
+      case "chf":
+        return "CHF";
 
       default:
         return "Rs";

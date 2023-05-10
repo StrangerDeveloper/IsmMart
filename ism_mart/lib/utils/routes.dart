@@ -16,6 +16,8 @@ class Routes {
   static const categoriesRoute = "/categories";
   static const cartRoute = "/cart";
   static const checkOutRoute = "/checkout";
+  static const changeAddressRoute = "/changeAddress";
+
   static const profileRoute = "/profile";
 
   static const searchRoute = "/search";
@@ -24,6 +26,7 @@ class Routes {
   static const buyerOrdersRoute = "/buyerOrders";
 
   static const settingsRoute = "/settings";
+
   //static const aboutUsRoute = "/aboutUs";
 
   ///Pages with passing :ID
@@ -36,6 +39,11 @@ class Routes {
       name: aboutUsRoute,
       page: () => AboutUS(),
     ),*/
+
+    GetPage(
+        name: initRoute,
+        page: () => const BaseLayout(),
+        binding: BaseBindings()),
     GetPage(
       name: loginRoute,
       page: () => SignInUI(),
@@ -59,18 +67,6 @@ class Routes {
         page: () => ResendEmailVerificationLink(),
         binding: BaseBindings()),
     GetPage(
-        name: initRoute,
-        page: () => const BaseLayout(),
-        binding: BaseBindings()),
-    GetPage(
-        name: searchRoute,
-        page: () => SearchUI(),
-        //binding: SearchBindings(),
-        bindings: [
-          SearchBindings(),
-          ProductBinding(),
-        ]),
-    GetPage(
         name: searchRoute,
         page: () => SearchUI(),
         //binding: SearchBindings(),
@@ -88,6 +84,12 @@ class Routes {
       page: () => CheckoutUI(),
       binding: CheckoutBinding(),
       middlewares: [AuthMiddleWare(priority: 5)],
+    ),
+    GetPage(
+      name: changeAddressRoute,
+      page: () => ChangeAddressUI(),
+      binding: CheckoutBinding(),
+      middlewares: [AuthMiddleWare(priority: 1)],
     ),
     GetPage(
       name: buyerOrdersRoute,

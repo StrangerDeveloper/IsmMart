@@ -6,12 +6,14 @@ class English {
         ///email_input
         key.enterEmail: 'Enter Email To Recieve OTP',
         key.emptyField: 'Empty field',
+        key.free: "Free",
 
         ///reset_password
         key.enterDetails: 'Enter Details To Create New Password',
 
         ///sign_in
         key.passwordRequired: 'Password is required!.',
+        key.nameAlphabaticReq: 'Alphabatics required only',
 
         ///checkout
         key.standard: "Standard",
@@ -22,7 +24,7 @@ class English {
         key.cartMustNotEmpty: 'Cart must not be empty',
         key.delivery: 'Delivery',
         key.daysCost: 'Days Cost',
-        key.freeShipping: 'FREE SHIPPING ON ALL ORDERS ABOVE PKR 1000',
+        key.freeShipping: 'FREE SHIPPING ON ALL ORDERS ABOVE',
         key.zipCode: 'Zip Code',
         key.zipCodeRequired: 'Zip code required!',
         key.addressRequired: 'Address is required!',
@@ -51,7 +53,7 @@ class English {
 
         ///memberShip
         key.discountMinValue: 'Discount should be greater than 10',
-        key.discountMaxValue: 'Discount should not be greater or equal to 100',
+        key.discountMaxValue: 'Discount should not be greater or equal to 90',
 
         ///sellerController
         key.imageSizeDesc: 'Image must be up to',
@@ -62,15 +64,14 @@ class English {
         key.features: 'Features',
 
         ///dashboard
-        key.itemsFound : 'items found',
-        key.price : 'Price',
-        key.minPrice : 'Min Price',
-        key.maxPrice : 'Max Price',
-        key.clear : 'Clear',
-        key.lowToHigh : 'Low to High',
-        key.highToLow : 'High to Low',
-        key.OFF : 'OFF',
-
+        key.itemsFound: 'items found',
+        key.price: 'Price',
+        key.minPrice: 'Min Price',
+        key.maxPrice: 'Max Price',
+        key.clear: 'Clear',
+        key.lowToHigh: 'Low to High',
+        key.highToLow: 'High to Low',
+        key.OFF: 'OFF',
 
 //////////////////////////////////////////////////////////
         key.exitApp: 'Exit App',

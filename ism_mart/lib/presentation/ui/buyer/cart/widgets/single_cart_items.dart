@@ -30,14 +30,15 @@ class SingleCartItems extends StatelessWidget {
 
   Widget _singleCartItem(
       {CartModel? cartModel, index, CartController? controller}) {
-    return Card(
-      elevation: 0,
-      margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5),
-      child: Padding(
-        padding: const EdgeInsets.all(3.0),
-        child: Stack(
-          children: [
-            Column(
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Stack(
+        children: [
+          CustomGreyBorderContainer(
+            //elevation: 0,
+            borderColor: kWhiteColor,
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Column(
               children: [
                 Row(
                   children: [
@@ -211,8 +212,11 @@ class SingleCartItems extends StatelessWidget {
                 AppConstant.spaceWidget(height: 5),
               ],
             ),
+          ),
+          if (!calledFromCheckout!)
             Positioned(
-              right: 0,
+              right: 5,
+              top: 5,
               child: CustomActionIcon(
                 onTap: () {
                   controller!.cartItemsList.removeAt(index);
@@ -221,15 +225,14 @@ class SingleCartItems extends StatelessWidget {
 
                   //controller!.deleteCartItem(cartItemId: cartModel.id);
                 },
-                height: 17,
+                height: 20,
                 hasShadow: false,
                 icon: Icons.close_rounded,
                 bgColor: kRedColor.withOpacity(0.2),
                 iconColor: kRedColor,
               ),
             ),
-          ],
-        ),
+        ],
       ),
     );
   }
