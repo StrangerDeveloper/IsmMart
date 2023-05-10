@@ -62,13 +62,20 @@ class CheckoutController extends GetxController {
   var _isRedeemApplied = false.obs;
 
   applyRedeemCode(num? value) {
-    if (value!.isGreaterThan(0) &&
-        value.isGreaterThan(fixedRedeemCouponThreshold)) {
+    if (coinsModel != null &&
+        value!.isGreaterThan(0) &&
+        coinsModel!.silver!.isGreaterThan(fixedRedeemCouponThreshold)) {
       _isRedeemApplied(true);
+      print(">>>Caleedd true");
     } else {
-      _isRedeemApplied(true);
+      print(">>>Caleedd");
+      AppConstant.displaySnackBar(
+        langKey.errorTitle.tr,
+        langKey.needMoreCoins.tr,
+      );
+      _isRedeemApplied(false);
     }
-    totalDiscount(value.toDouble());
+    totalDiscount(value!.toDouble());
     setTotalAmount();
     /*var netAmount = totalAmount.value - value;
     amountAfterRedeeming(netAmount);*/
@@ -185,27 +192,28 @@ class CheckoutController extends GetxController {
   var shippingAddressList = <UserModel>[].obs;
 
   getAllShippingAddresses() async {
-    shippingAddressList.clear();
     await authController.authProvider
         .getShippingAddress(token: authController.userToken!)
         .then((addresses) {
-      print(">>>>Addresses: ${addresses.last.toAddressJson()}");
+      shippingAddressList.clear();
       shippingAddressList.addAll(addresses);
     }).catchError(onError);
   }
 
-  changeDefaultShippingAddress() async {
+  changeDefaultShippingAddress({addressId}) async {
     isLoading(true);
     await authController.authProvider
         .changeDefaultAddress(
             token: authController.userToken!,
-            addressId: shippingAddressId.value)
+            addressId: addressId ?? shippingAddressId.value)
         .then((ApiResponse? apiResponse) {
       isLoading(false);
       if (apiResponse != null) {
         if (apiResponse.success!) {
-          //getDefaultAddress();
-          Get.back();
+          //shippingAddressList.refresh();
+          //update();
+          getAllShippingAddresses();
+          //Get.back();
           AppConstant.displaySnackBar("success", apiResponse.message);
           //getAllShippingAddresses();
         } else
@@ -214,8 +222,6 @@ class CheckoutController extends GetxController {
         AppConstant.displaySnackBar(
             langKey.errorTitle, "something went wrong!");
     }).catchError(onError);
-
-    update();
   }
 
   updateShippingAddress(UserModel? userModel) async {
@@ -232,9 +238,10 @@ class CheckoutController extends GetxController {
       isLoading(false);
       if (apiResponse != null) {
         if (apiResponse.success!) {
-          Get.back();
+          //Get.back();
           AppConstant.displaySnackBar("success", apiResponse.message);
           clearControllers();
+          getAllShippingAddresses();
         } else
           AppConstant.displaySnackBar('error', apiResponse.message);
       } else
@@ -242,7 +249,7 @@ class CheckoutController extends GetxController {
             langKey.errorTitle, "something went wrong!");
     }).catchError(onError);
 
-    update();
+    //update();
   }
 
   deleteShippingAddress(id) async {
@@ -251,8 +258,9 @@ class CheckoutController extends GetxController {
         .then((ApiResponse? apiResponse) {
       if (apiResponse != null) {
         if (apiResponse.success!) {
-          Get.back();
+          //Get.back();
           AppConstant.displaySnackBar("success", apiResponse.message);
+          getAllShippingAddresses();
         } else
           AppConstant.displaySnackBar('error', apiResponse.message);
       } else

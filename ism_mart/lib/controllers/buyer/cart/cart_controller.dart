@@ -57,11 +57,13 @@ class CartController extends GetxController
   fetchCartItemsFromLocal() {
     change(null, status: RxStatus.loading());
     //isLoading(true);
-    cartItemsList.clear();
+
     LocalStorageHelper.fetchCartItems().then((value) {
+      cartItemsList.clear();
       cartItemsList.addAll(value);
       isLoading(false);
       change(value, status: RxStatus.success());
+
       //change(MyStates(state1: value,), status: RxStatus.success());
     });
   }

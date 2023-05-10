@@ -8,7 +8,7 @@ class CurrencyController extends GetxController with StateMixin {
 
   CurrencyController(this._apiProvider);
 
-  var currencyKey = "".obs;
+  var countryCode = "".obs;
   var currency = "".obs;
 
   final Map<String, dynamic> currencyLocales = {
@@ -16,6 +16,7 @@ class CurrencyController extends GetxController with StateMixin {
       'currencyCode': 'pkr',
       'countryCode': 'PK',
       'description': 'PKR',
+      'longDesc': "Pakistani Rupee",
       'selected': false,
       'color': Colors.green[700],
     },
@@ -23,6 +24,7 @@ class CurrencyController extends GetxController with StateMixin {
       'currencyCode': 'aed',
       'countryCode': 'AE',
       'description': 'AED',
+      'longDesc': 'United Arab Emirates Dirhaam',
       'selected': false,
       'color': Color.fromARGB(255, 89, 45, 208),
     },
@@ -30,6 +32,7 @@ class CurrencyController extends GetxController with StateMixin {
       'currencyCode': 'usd',
       'countryCode': 'US',
       'description': 'USD',
+      'longDesc': 'Unitedstate Dollar',
       'selected': false,
       'color': Color.fromARGB(255, 222, 32, 32),
     },
@@ -37,6 +40,7 @@ class CurrencyController extends GetxController with StateMixin {
       'currencyCode': 'gbp',
       'countryCode': 'GB',
       'description': 'GBP',
+      'longDesc': 'Pound sterling',
       'selected': false,
       'color': Colors.blue[700],
     },
@@ -44,6 +48,7 @@ class CurrencyController extends GetxController with StateMixin {
       'currencyCode': 'cny',
       'countryCode': 'CN',
       'description': 'CNY',
+      'longDesc': 'Chinese Yuan',
       'selected': false,
       'color': Color.fromARGB(255, 241, 114, 100),
     },
@@ -51,6 +56,7 @@ class CurrencyController extends GetxController with StateMixin {
       'currencyCode': 'jpy',
       'countryCode': 'JP',
       'description': 'JPY',
+      'longDesc': 'Japanese Yen',
       'selected': false,
       'color': Color.fromARGB(255, 221, 61, 143),
     },
@@ -58,6 +64,7 @@ class CurrencyController extends GetxController with StateMixin {
       'currencyCode': 'aud',
       'countryCode': 'AU',
       'description': 'AUD',
+      'longDesc': 'Australian Dollar',
       'selected': false,
       'color': Color.fromARGB(255, 89, 45, 208),
     },
@@ -65,6 +72,7 @@ class CurrencyController extends GetxController with StateMixin {
       'currencyCode': 'cad',
       'countryCode': 'CA',
       'description': 'CAD',
+      'longDesc': 'Candian Dollar',
       'selected': false,
       'color': Color.fromARGB(255, 211, 209, 51),
     },
@@ -72,6 +80,7 @@ class CurrencyController extends GetxController with StateMixin {
       'currencyCode': 'eur',
       'countryCode': 'EU',
       'description': 'EUR',
+      'longDesc': 'European Union Euro',
       'selected': false,
       'color': Color.fromARGB(255, 1, 10, 176),
     },
@@ -79,6 +88,7 @@ class CurrencyController extends GetxController with StateMixin {
       'currencyCode': 'inr',
       'countryCode': 'IN',
       'description': 'INR',
+      'longDesc': 'Indian Rupee',
       'selected': false,
       'color': Color.fromARGB(255, 89, 45, 208),
     },
@@ -86,9 +96,34 @@ class CurrencyController extends GetxController with StateMixin {
       'currencyCode': 'sgd',
       'countryCode': 'SG',
       'description': 'SGD',
+      'longDesc': 'Singapore Dollar',
       'selected': false,
       'color': Color.fromARGB(255, 253, 32, 168),
-    }
+    },
+    'TRY': {
+      'currencyCode': 'try',
+      'countryCode': 'TR',
+      'description': 'TRY',
+      'longDesc': 'Turkish Lira',
+      'selected': false,
+      'color': Color.fromARGB(255, 251, 52, 2),
+    },
+    'HKD': {
+      'currencyCode': 'hkd',
+      'countryCode': 'HK',
+      'description': 'HKD',
+      'longDesc': 'Hong Kong Dollar',
+      'selected': false,
+      'color': Color.fromARGB(255, 87, 26, 141),
+    },
+    'CHF': {
+      'currencyCode': 'chf',
+      'countryCode': 'CH',
+      'description': 'CHF',
+      'longDesc': 'Swiss Franc',
+      'selected': false,
+      'color': Color.fromARGB(255, 126, 40, 93),
+    },
   };
 
   @override
@@ -97,8 +132,6 @@ class CurrencyController extends GetxController with StateMixin {
     getCurrencyState();
     LocalStorageHelper.localStorage
         .listenKey(LocalStorageHelper.currCurrencyKey, (value) {
-      //fetchCurrencyExchangeRate(toCurrency: currency.value);
-      print(">>Currency changed: $value: ${currency.value}");
       getCurrencyState();
     });
   }
@@ -107,7 +140,9 @@ class CurrencyController extends GetxController with StateMixin {
     LocalStorageHelper.getStoredCurrency().then((CurrencyModel? model) {
       if (model != null) {
         _currencyModel(model);
-        setCurrency(key: model.to);
+        currency(currencyLocales[model.to]['currencyCode']);
+        countryCode(currencyLocales[model.to]['countryCode']);
+        //setCurrency(key: model.to);
       } else
         setCurrency(key: "pkr");
     });
@@ -115,6 +150,7 @@ class CurrencyController extends GetxController with StateMixin {
 
   setCurrency({key}) {
     currency(currencyLocales[key]['currencyCode']);
+    countryCode(currencyLocales[key]['countryCode']);
     fetchCurrencyExchangeRate(toCurrency: currency.value);
     // if (storage.read('currency') == null) currencyKey(key);
     // storage.write('currency', key);
@@ -141,18 +177,21 @@ class CurrencyController extends GetxController with StateMixin {
         .then((CurrencyModel? model) {
       if (model != null) {
         //_currencyModel(model);
+        print(">>Model: ${model.exchangeRate}");
         LocalStorageHelper.storeCurrency(
             currencyModel: CurrencyModel(
                 to: toCurrency, from: "pkr", exchangeRate: model.exchangeRate));
-      } else {}
+      } else {
+        print(">>Model is null");
+      }
     });
 
     //return currency.value;
   }
 
-  String? convertCurrency({String? currenctPrice}) {
+  String? convertCurrency({String? currentPrice}) {
     return currencyModel != null
-        ? "${(num.parse(currenctPrice!) * currencyModel!.exchangeRate!)}"
-        : currenctPrice!;
+        ? "${(num.parse(currentPrice!) * (currencyModel!.exchangeRate!))}"
+        : currentPrice!;
   }
 }

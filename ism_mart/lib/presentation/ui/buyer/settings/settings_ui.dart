@@ -181,14 +181,16 @@ class SettingsUI extends GetView<AuthController> {
               icon: Icons.currency_exchange,
               iconColor: Color.fromARGB(255, 160, 235, 94),
               title: langKey.currencyKey.tr,
-              value: currencyController.currency.value),
+              value: currencyController.currency.value,
+              countryCode: currencyController.countryCode.value),
           Obx(
             () => _singleSettingsItem(
                 onTap: () => _showLanguageChangeBottomSheet(),
                 icon: Icons.language,
                 iconColor: Colors.orange,
                 title: langKey.language.tr,
-                value: languageController.language.value),
+                value: languageController.language.value,
+                countryCode: languageController.countryKey.value),
           ),
           /*_singleSettingsItem(
               onTap: () => Get.to(() => NotificationUI()),
@@ -249,7 +251,8 @@ class SettingsUI extends GetView<AuthController> {
     );
   }
 
-  _singleSettingsItem({required onTap, icon, iconColor, title, value}) {
+  _singleSettingsItem(
+      {required onTap, icon, iconColor, title, value, countryCode}) {
     return InkWell(
       onTap: onTap,
       child: Container(
@@ -278,10 +281,14 @@ class SettingsUI extends GetView<AuthController> {
             ),
             Row(
               children: [
+                if (countryCode != null && countryCode != "")
+                  _countryFlag(countryCode: countryCode, height: 15, width: 25),
+                AppConstant.spaceWidget(width: 8),
                 if (value != null && value != "")
                   CustomText(
-                      title: value,
-                      style: caption.copyWith(fontWeight: FontWeight.w600)),
+                      title: value.toString().capitalizeFirst,
+                      style: caption.copyWith(
+                          fontWeight: FontWeight.w600, fontSize: 13)),
                 AppConstant.spaceWidget(width: 5),
                 const Align(
                     alignment: Alignment.centerRight,
@@ -351,12 +358,23 @@ class SettingsUI extends GetView<AuthController> {
                         currencyController.setCurrency(key: item.key);
                         Get.back();
                       },
-                      leading: _countryFlag(
-                          countryCode: item.value['countryCode'],
-                          color: item.value['color']),
+                      leading: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          _countryFlag(
+                              countryCode: item.value['countryCode'],
+                              color: item.value['color']),
+                        ],
+                      ),
                       title: Text(item.value["description"],
                           style:
                               bodyText1.copyWith(fontWeight: FontWeight.w600)),
+                      subtitle: CustomText(
+                        title: item.value["longDesc"],
+                        color: kLightColor,
+                        size: 11,
+                      ),
                       trailing: item.value["description"] ==
                               currencyController.currency.value
                           ? const Icon(Icons.done)
@@ -372,28 +390,27 @@ class SettingsUI extends GetView<AuthController> {
     );
   }
 
-  Widget _countryFlag({String? countryCode, Color? color}) {
+  Widget _countryFlag(
+      {String? countryCode,
+      Color? color = Colors.amber,
+      double? height = 20,
+      double? width = 30}) {
     var imageUrl =
         "https://raw.githubusercontent.com/hampusborgos/country-flags/main/png1000px/${countryCode!.toLowerCase()}.png";
     return Container(
-      height: 30,
-      width: 30,
+      height: height,
+      width: width,
       padding: EdgeInsets.all(8),
       // Border width
       decoration: BoxDecoration(
         color: color!.withOpacity(0.3),
-        shape: BoxShape.circle,
+        //shape: BoxShape.circle,
         border: Border.all(color: Colors.grey),
         image: DecorationImage(
           fit: BoxFit.cover,
           image: NetworkImage(imageUrl),
         ),
       ),
-      /* child: SvgPicture.network(
-        "https://flagicons.lipis.dev/flags/4x3/${countryCode.toLowerCase()}.svg",
-        width: 40,
-        height: 40,
-      ),*/
     );
   }
 /*_showThemeChangeBottomSheet() {

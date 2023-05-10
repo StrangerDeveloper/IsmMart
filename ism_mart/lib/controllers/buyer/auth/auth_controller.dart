@@ -43,6 +43,7 @@ class AuthController extends GetxController {
   @override
   void onReady() {
     super.onReady();
+
     getCountries();
 
     getToken();
@@ -319,6 +320,7 @@ class AuthController extends GetxController {
   }
 
   getCurrentUser() async {
+    print("Auth Token: ${userToken}");
     if (userToken!.isNotEmpty) {
       isLoading(true);
       await authProvider
@@ -449,10 +451,9 @@ class AuthController extends GetxController {
 
   getToken() async {
     await LocalStorageHelper.getStoredUser().then((user) async {
-      print("Auth Token: ${user.token}");
       _currUserToken.value = user.token ?? '';
 
-      await getCurrentUser();
+      getCurrentUser();
       await fetchUserCoins();
     }).onError((error, stackTrace) {
       print(">>>Token: $error, $stackTrace");

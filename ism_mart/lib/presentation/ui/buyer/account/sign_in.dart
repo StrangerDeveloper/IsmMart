@@ -90,9 +90,7 @@ class SignInUI extends GetView<AuthController> {
                                 //!GetUtils.isPassport(value!)<<<<<<< HEAD
                                 value!.isEmpty
                                     ? langKey.passwordRequired
-                                    : value.length < 8
-                                        ? langKey.passwordLengthReq.tr
-                                        : null,
+                                    : null,
                             obscureText: true,
                             onChanged: (value) => {},
                             maxLines: 1,

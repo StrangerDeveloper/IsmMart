@@ -56,23 +56,30 @@ class MyProducts extends GetView<SellersController> {
           : Column(
               children: [
                 Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: GridView.builder(
-                      controller: controller.scrollController,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: AppResponsiveness.getGridItemCount(),
-                        mainAxisExtent:
-                            AppResponsiveness.getMainAxisExtentPoint25(),
-                        mainAxisSpacing: 5,
-                        //childAspectRatio: 0.8,
+                  child: RefreshIndicator(
+                    onRefresh: () {
+                      return Future.delayed(Duration(milliseconds: 100), () {
+                        controller.fetchMyProducts();
+                      });
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: GridView.builder(
+                        controller: controller.scrollController,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: AppResponsiveness.getGridItemCount(),
+                          mainAxisExtent:
+                              AppResponsiveness.getMainAxisExtentPoint28(),
+                          mainAxisSpacing: 5,
+                          //childAspectRatio: 0.8,
+                        ),
+                        itemCount: controller.myProductsList.length,
+                        itemBuilder: (_, index) {
+                          ProductModel productModel =
+                              controller.myProductsList[index];
+                          return _buildProductItem(model: productModel);
+                        },
                       ),
-                      itemCount: controller.myProductsList.length,
-                      itemBuilder: (_, index) {
-                        ProductModel productModel =
-                            controller.myProductsList[index];
-                        return _buildProductItem(model: productModel);
-                      },
                     ),
                   ),
                 ),

@@ -27,9 +27,9 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
 
   void setDiscount(int? discount) {
     if (discount! > 0 && discount < 10) {
-      discountMessage(langKey.discountMinValue);
-    } else if (discount >= 100) {
-      discountMessage(langKey.discountMaxValue);
+      discountMessage(langKey.discountMinValue.tr);
+    } else if (discount >= 90) {
+      discountMessage(langKey.discountMaxValue.tr);
     } else {
       discountMessage("");
     }
@@ -64,12 +64,12 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
   int productsLimit = 20;
   int page = 1;
 
-  fetchMyProducts() async {
-    myProductsList.clear();
-    await _apiProvider
+  fetchMyProducts() {
+    _apiProvider
         .fetchMyProducts(
             token: authController.userToken, limit: productsLimit, page: page)
         .then((response) {
+      myProductsList.clear();
       myProductsList.addAll(response.products!);
     });
   }
@@ -104,18 +104,15 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
     model.stock = int.parse("${prodStockController.text}");
 
     await _apiProvider
-        .updateProduct(
-      token: authController.userToken,
-      model: model,
-    )
+        .updateProduct(token: authController.userToken, model: model)
         .then((ApiResponse? response) {
       isLoading(false);
       if (response != null) {
         if (response.success!) {
+          fetchMyProducts();
           Get.back();
           AppConstant.displaySnackBar(langKey.success, "${response.message}");
           clearControllers();
-          fetchMyProducts();
         } else {
           AppConstant.displaySnackBar(
               langKey.errorTitle, "${response.message}");
@@ -282,8 +279,11 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
               "${response.message != null ? response.message : someThingWentWrong.tr}");
         }
       }
-    }).catchError(onError);
-    //isLoading(false);
+    }).catchError((e) {
+      debugPrint('Error: ${e.toString()}');
+      isLoading(false);
+      AppConstant.displaySnackBar(langKey.errorTitle, "${e.message}");
+    });
   }
 
   /// Profile Image Capture/Pick Section

@@ -67,8 +67,7 @@ class SellersApiProvider {
       print(data);
       return ApiResponse.fromJson(data);
     } else {
-      //TODO: Still needs to test this one properly
-      http.StreamedResponse res = handleStreamResponse(response);
+      http.StreamedResponse res = await handleStreamResponse(response);
       return ApiResponse.fromJson(
           json.decode(await res.stream.bytesToString()));
     }
