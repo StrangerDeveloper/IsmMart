@@ -1,7 +1,5 @@
 import 'package:get/get.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
-import 'package:ism_mart/presentation/ui/buyer/account/forgot_password/email_input.dart';
-import 'package:ism_mart/presentation/ui/buyer/account/forgot_password/reset_password.dart';
 import 'package:ism_mart/presentation/ui/exports_ui.dart';
 
 import '../presentation/ui/buyer/account/email_verification/resend_email_verification_link.dart';
