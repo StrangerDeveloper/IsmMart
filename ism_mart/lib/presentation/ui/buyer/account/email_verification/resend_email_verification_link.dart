@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:ism_mart/controllers/buyer/auth/auth_controller.dart';
 import 'package:ism_mart/utils/svg_helper.dart';
+import 'package:ism_mart/presentation/widgets/form_input_field_with_icon.dart';
+import 'package:get/get.dart';
 import 'package:ism_mart/utils/constants.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
-import '../../../../../utils/routes.dart';
-import '../../../../widgets/custom_button.dart';
-import '../../../../widgets/form_input_field_with_icon.dart';
+import 'package:ism_mart/presentation/widgets/custom_button.dart';
 
-class EmailInput extends GetView<AuthController> {
-  const EmailInput({Key? key}) : super(key: key);
+class ResendEmailVerificationLink extends GetView<AuthController> {
+  ResendEmailVerificationLink({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +30,8 @@ class EmailInput extends GetView<AuthController> {
               buildSvgLogo(),
               InkWell(
                 onTap: () {
-                  controller.forgotPasswordEmailController.clear();
                   Get.back();
+                  controller.clearLoginController();
                 },
                 child: const Icon(Icons.close),
               ),
@@ -45,7 +44,7 @@ class EmailInput extends GetView<AuthController> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Text(
-            langKey.enterEmail,
+            'Enter Email To Receive Verification Link',
             style: headline2,
           ),
         ),
@@ -60,7 +59,7 @@ class EmailInput extends GetView<AuthController> {
                 children: [
                   AppConstant.spaceWidget(height: 20),
                   FormInputFieldWithIcon(
-                    controller: controller.forgotPasswordEmailController,
+                    controller: controller.emailController,
                     iconPrefix: Icons.email,
                     labelText: langKey.email.tr,
                     iconColor: kPrimaryColor,
@@ -69,7 +68,7 @@ class EmailInput extends GetView<AuthController> {
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return langKey.emptyField;
+                        return "Email is required for this field";
                       } else
                         return !GetUtils.isEmail(value)
                             ? langKey.emailReq.tr
@@ -87,7 +86,7 @@ class EmailInput extends GetView<AuthController> {
                         onTap: () {
                           Get.back();
                         },
-                        text: langKey.cancelBtn.tr,
+                        text: "Cancel",
                         width: 100,
                         height: 35,
                         color: kPrimaryColor,
@@ -95,19 +94,10 @@ class EmailInput extends GetView<AuthController> {
                       CustomButton(
                         onTap: () async {
                           if (formKey.currentState!.validate()) {
-                            await controller
-                                .forgotPasswordWithEmail()
-                                .then((value) {
-                              if (value == true) {
-                                Navigator.pop(Get.context!);
-                                Get.toNamed(Routes.resetPasswordRoute);
-                                controller.forgotPasswordEmailController
-                                    .clear();
-                              }
-                            });
+                            await controller.resendEmailVerificationLink();
                           }
                         },
-                        text: langKey.send.tr,
+                        text: "Send",
                         width: 100,
                         height: 35,
                         color: kPrimaryColor,

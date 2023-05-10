@@ -96,9 +96,9 @@ class ApiProvider {
     return response.map((e) => QuestionModel.fromJson(e)).toList();
   }
 
-  Future<ResponseModel> postProductQuestion({token, model}) async {
+  Future<ApiResponse> postProductQuestion({token, model}) async {
     var response = await _apiRepository.postQuestion(token: token, data: model);
-    return ResponseModel.fromResponse(response);
+    return ApiResponse.fromJson(response);
   }
 
   //TDO: Cart Item APIs
@@ -108,9 +108,9 @@ class ApiProvider {
     return cartResponse.map((e) => CartModel.fromJson(e)).toList();
   }
 
-  Future<CartResponse> addCart({String? token, JSON? data}) async {
+  Future<ApiResponse> addCart({String? token, JSON? data}) async {
     var response = await _apiRepository.postCartItem(token: token, data: data);
-    return CartResponse.fromJson(response);
+    return ApiResponse.fromJson(response);
   }
 
   Future<CartResponse> deleteCartItem({String? token, int? cartId}) async {

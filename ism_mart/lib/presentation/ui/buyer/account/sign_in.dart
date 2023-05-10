@@ -28,7 +28,10 @@ class SignInUI extends GetView<AuthController> {
                   children: [
                     buildSvgLogo(),
                     InkWell(
-                      onTap: () => Get.back(),
+                      onTap: () {
+                        Get.back();
+                        controller.clearLoginController();
+                      },
                       child: const Icon(Icons.close),
                     ),
                   ],
@@ -83,10 +86,13 @@ class SignInUI extends GetView<AuthController> {
                             textStyle: bodyText1,
                             labelText: langKey.password.tr,
                             //autoValidateMode: AutovalidateMode.onUserInteraction,
-                            validator: (value) => //!GetUtils.isPassport(value!)
+                            validator: (value) =>
+                                //!GetUtils.isPassport(value!)<<<<<<< HEAD
                                 value!.isEmpty
                                     ? langKey.passwordRequired
-                                    : null,
+                                    : value.length < 8
+                                        ? langKey.passwordLengthReq.tr
+                                        : null,
                             obscureText: true,
                             onChanged: (value) => {},
                             maxLines: 1,
@@ -112,8 +118,6 @@ class SignInUI extends GetView<AuthController> {
                             child: InkWell(
                               onTap: () =>
                                   Get.toNamed(Routes.passwordResetEmailInput),
-
-                              //showForgotPasswordDialog(),
                               child: Text(
                                 langKey.forgotPassword.tr,
                                 style: headline3.copyWith(
@@ -400,4 +404,59 @@ class SignInUI extends GetView<AuthController> {
   //         ),
   //       ));
   // }
+  void showResendVerificationLinkDialog() {
+    final formKey = GlobalKey<FormState>();
+    Get.defaultDialog(
+        title: "Resend Verification Link",
+        content: Form(
+          key: formKey,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                AppConstant.spaceWidget(height: 20),
+                FormInputFieldWithIcon(
+                  controller: controller.emailController,
+                  iconPrefix: Icons.email,
+                  labelText: 'Email',
+                  iconColor: kPrimaryColor,
+                  autofocus: false,
+                  textStyle: bodyText1,
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (value) => !GetUtils.isEmail(value!)
+                      ? "Invalid Email Format?"
+                      : null,
+                  keyboardType: TextInputType.emailAddress,
+                  onChanged: (value) {},
+                  onSaved: (value) {},
+                ),
+                AppConstant.spaceWidget(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CustomButton(
+                      onTap: () {
+                        Get.back();
+                      },
+                      text: "Cancel",
+                      width: 100,
+                      height: 35,
+                      color: kPrimaryColor,
+                    ),
+                    CustomButton(
+                      onTap: () async {
+                        await controller.resendEmailVerificationLink();
+                      },
+                      text: "Send",
+                      width: 100,
+                      height: 35,
+                      color: kPrimaryColor,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ));
+  }
 }

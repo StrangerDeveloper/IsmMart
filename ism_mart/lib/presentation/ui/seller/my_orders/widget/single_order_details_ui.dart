@@ -8,8 +8,6 @@ import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/export_presentation.dart';
 import 'package:ism_mart/presentation/ui/buyer/dispute_detail/dispute_detail_view.dart';
-import 'package:ism_mart/presentation/ui/buyer/dispute_list/all_dispute_model.dart';
-import 'package:ism_mart/presentation/ui/buyer/dispute_list/all_dispute_view.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:iconly/iconly.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
@@ -151,13 +149,6 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
 
                       AppConstant.spaceWidget(height: 20),
                       _invoiceBody(model: model),
-                      // CustomTextBtn(
-                      //   width: 150,
-                      //   onPressed: () {
-                      //     Get.to(() => AllDisputeView());
-                      //   },
-                      //   child: Text('View All Disputes'),
-                      // ),
                       AppConstant.spaceWidget(height: 10),
                       _invoiceFooter(orderModel: model),
                     ],
@@ -321,6 +312,7 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
         ),
         CustomActionIcon(
           onTap: () {
+            disputeActionsBottomSheet(orderItem: orderItemModel);
             disputeActionsBottomSheet(orderItem: orderItemModel);
           },
           icon: Icons.cases_outlined,
@@ -488,39 +480,33 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
               BottomSheetItemRow(
                 title: 'Add Dispute',
                 icon: CupertinoIcons.add,
-                isDisabled:
-                    (orderItem?.tickets?.isEmpty ?? false) ? false : true,
                 onTap: () {
                   Navigator.of(context).pop();
-                  AppConstant.showBottomSheet(
-                    isGetXBottomSheet: true,
-                    buildContext: Get.context,
-                    widget: addDisputeItems(orderItem: orderItem),
-                  );
+                  if (orderItem?.tickets?.isEmpty ?? false) {
+                    AppConstant.showBottomSheet(
+                      isGetXBottomSheet: true,
+                      buildContext: Get.context,
+                      widget: addDisputeItems(orderItem: orderItem),
+                    );
+                  } else {
+                    AppConstant.displaySnackBar(
+                        'error', 'Dispute already added');
+                  }
                 },
               ),
               BottomSheetItemRow(
                 title: 'View Dispute',
                 icon: IconlyLight.document,
-                isDisabled:
-                    (orderItem?.tickets?.isNotEmpty ?? false) ? false : true,
                 onTap: () {
                   Navigator.of(context).pop();
-                  Get.to(() => DisputeDetailView(),
-                      arguments: {'id': orderItem!.tickets![0].id.toString()});
-                },
-              ),
-              BottomSheetItemRow(
-                title: 'Delete Dispute',
-                icon: IconlyLight.delete,
-                isDisabled:
-                    (orderItem?.tickets?.isNotEmpty ?? false) ? false : true,
-                onTap: () {
-                  Navigator.of(context).pop();
-                  controller.deleteTicket(
-                    orderItem!.tickets![0].id.toString(),
-                    orderModel!.id.toString(),
-                  );
+                  if (orderItem?.tickets?.isNotEmpty ?? false) {
+                    Get.to(() => DisputeDetailView(), arguments: {
+                      'id': orderItem!.tickets![0].id.toString()
+                    });
+                  } else {
+                    AppConstant.displaySnackBar(
+                        'error', 'Dispute not added yet');
+                  }
                 },
               ),
             ],
@@ -617,8 +603,7 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                     child: Obx(
                       () => controller.pickedImagesList.isNotEmpty
                           ? ShowPickedImagesList(
-                              pickedImagesList: controller.pickedImagesList,
-                            )
+                              pickedImagesList: controller.pickedImagesList)
                           : Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -679,9 +664,7 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                         onTap: () async {
                           if (formKey.currentState!.validate()) {
                             await controller.disputeOnOrders(
-                              orderItem: orderItem,
-                              orderId: orderModel!.id!,
-                            );
+                                orderItem: orderItem, orderId: orderModel!.id!);
                           }
                         },
                         text: submit.tr,
@@ -701,21 +684,19 @@ class BottomSheetItemRow extends StatelessWidget {
   final String title;
   final IconData icon;
   final GestureTapCallback? onTap;
-  final bool isDisabled;
 
   const BottomSheetItemRow({
     Key? key,
     required this.title,
     required this.icon,
     this.onTap,
-    required this.isDisabled,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(8),
-      onTap: isDisabled ? null : onTap,
+      onTap: onTap,
       child: Padding(
         padding: const EdgeInsets.only(left: 10, top: 10, bottom: 10),
         child: Row(
@@ -726,13 +707,11 @@ class BottomSheetItemRow extends StatelessWidget {
                 shape: BoxShape.circle,
                 border: Border.all(
                   width: 0.5,
-                  color: isDisabled ? Colors.grey : Colors.black,
                 ),
               ),
               child: Icon(
                 icon,
                 size: 20,
-                color: isDisabled ? Colors.grey : Colors.black,
               ),
             ),
             SizedBox(width: 13),
@@ -740,7 +719,7 @@ class BottomSheetItemRow extends StatelessWidget {
               title,
               style: GoogleFonts.lato(
                 fontSize: 15,
-                color: isDisabled ? Colors.grey : Colors.black,
+                color: Colors.black,
               ),
             ),
           ],

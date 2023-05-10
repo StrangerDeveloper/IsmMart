@@ -1,6 +1,10 @@
 import 'package:get/get.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
+import 'package:ism_mart/presentation/ui/buyer/account/forgot_password/email_input.dart';
+import 'package:ism_mart/presentation/ui/buyer/account/forgot_password/reset_password.dart';
 import 'package:ism_mart/presentation/ui/exports_ui.dart';
+
+import '../presentation/ui/buyer/account/email_verification/resend_email_verification_link.dart';
 
 class Routes {
   static const initRoute = "/";
@@ -8,6 +12,7 @@ class Routes {
   static const resetPasswordRoute = "/resetPassword";
   static const passwordResetEmailInput = "/inputEmail";
   static const registerRoute = "/register";
+  static const emailVerificationLinkRoute = "/emailVerificationLink";
   static const categoriesRoute = "/categories";
   static const cartRoute = "/cart";
   static const checkOutRoute = "/checkout";
@@ -43,11 +48,15 @@ class Routes {
     ),
     GetPage(
         name: resetPasswordRoute,
-        page: () => const ForgotPassword(),
+        page: () => const ResetForgotPassword(),
         binding: BaseBindings()),
     GetPage(
         name: passwordResetEmailInput,
         page: () => const EmailInput(),
+        binding: BaseBindings()),
+    GetPage(
+        name: emailVerificationLinkRoute,
+        page: () => ResendEmailVerificationLink(),
         binding: BaseBindings()),
     GetPage(
         name: initRoute,
@@ -62,13 +71,13 @@ class Routes {
           ProductBinding(),
         ]),
     GetPage(
-        name: resetPasswordRoute,
-        page: () => const ForgotPassword(),
-        binding: BaseBindings()),
-    GetPage(
-        name: passwordResetEmailInput,
-        page: () => const EmailInput(),
-        binding: BaseBindings()),
+        name: searchRoute,
+        page: () => SearchUI(),
+        //binding: SearchBindings(),
+        bindings: [
+          SearchBindings(),
+          ProductBinding(),
+        ]),
     GetPage(
       name: cartRoute,
       page: () => CartUI(),

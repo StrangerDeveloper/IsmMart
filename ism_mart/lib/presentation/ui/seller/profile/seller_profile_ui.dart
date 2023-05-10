@@ -27,7 +27,8 @@ class StoreProfileUI extends GetView<AuthController> {
                               padding: const EdgeInsets.all(8.0),
                               child: CustomButton(
                                 onTap: () => AppConstant.showBottomSheet(
-                                    widget: RegisterVendorUI(model: controller.userModel?.vendor),
+                                    widget: RegisterVendorUI(
+                                        model: controller.userModel?.vendor),
                                     isGetXBottomSheet: false,
                                     buildContext: context),
                                 //controller.changePage(1),
@@ -37,6 +38,7 @@ class StoreProfileUI extends GetView<AuthController> {
                               ),
                             ),
                           ),
+
                           ///Store data
                           CustomGreyBorderContainer(
                             child: Padding(
@@ -104,7 +106,7 @@ class StoreProfileUI extends GetView<AuthController> {
                                             ),
                                           ),
                                         ),
-                                       /* Positioned(
+                                        /* Positioned(
                                          top: 1,
                                          right: 1,
                                          child: InkWell(
@@ -120,7 +122,7 @@ class StoreProfileUI extends GetView<AuthController> {
                                            ),
                                          ),
                                        ),*/
-                                         /*Stack(
+                                        /*Stack(
                                          children: [
                                            Container(
                                              height: 90,
@@ -303,7 +305,7 @@ class StoreProfileUI extends GetView<AuthController> {
           style: bodyText1,
         ),
         leading: Icon(icon),
-       /* trailing: InkWell(
+        /* trailing: InkWell(
           onTap: () => showEditDialog(title, subtitle),
           child: Icon(
             Icons.edit,

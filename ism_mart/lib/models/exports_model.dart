@@ -17,5 +17,5 @@ export 'product/seller_product_model.dart';
 export 'dispute/dispute_model.dart';
 export 'coins/coins_model.dart';
 export 'order/payment_intent_model.dart';
-export 'response_model.dart';
+export 'api_response/api_response_model.dart';
 export 'currency/currency_model.dart';

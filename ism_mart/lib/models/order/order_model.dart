@@ -47,9 +47,8 @@ class OrderModel {
         billingDetail: json["BillingDetail"] == null
             ? null
             : UserModel.fromJson(json["BillingDetail"]),
-        vendorDetails: json["User"] == null
-            ? null
-            : UserModel.fromJson(json["User"]),
+        vendorDetails:
+            json["User"] == null ? null : UserModel.fromJson(json["User"]),
         orderItems: json["OrderItems"] == null
             ? null
             : List<OrderItem>.from(
@@ -82,19 +81,20 @@ class OrderItem {
 
   OrderItem(
       {this.id,
-        this.quantity,
-        this.price,
-        this.reviewed,
-        this.product,
-        this.tickets});
+      this.quantity,
+      this.price,
+      this.reviewed,
+      this.product,
+      this.tickets});
 
   OrderItem.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     quantity = json['quantity'];
     price = json['price'].toDouble();
     reviewed = json['reviewed'];
-    product =
-    json['Product'] != null ? new ProductModel.fromJson(json['Product']) : null;
+    product = json['Product'] != null
+        ? new ProductModel.fromJson(json['Product'])
+        : null;
     if (json['Tickets'] != null) {
       tickets = <Tickets>[];
       json['Tickets'].forEach((v) {
@@ -103,46 +103,15 @@ class OrderItem {
     }
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['quantity'] = this.quantity;
-    data['price'] = this.price;
-    data['reviewed'] = this.reviewed;
-    if (this.product != null) {
-      data['Product'] = this.product!.toJson();
-    }
-    if (this.tickets != null) {
-      data['Tickets'] = this.tickets!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "quantity": quantity,
+        "price": price,
+        "reviewed": reviewed,
+        "product": product!.toJson(),
+        "Tickets": tickets!.map((v) => v.toJson()).toList()
+      };
 }
-
-// class Product {
-//   int? id;
-//   String? name;
-//   String? thumbnail;
-//   int? discountPrice;
-//
-//   Product({this.id, this.name, this.thumbnail, this.discountPrice});
-//
-//   Product.fromJson(Map<String, dynamic> json) {
-//     id = json['id'];
-//     name = json['name'];
-//     thumbnail = json['thumbnail'];
-//     discountPrice = json['discountPrice'];
-//   }
-//
-//   Map<String, dynamic> toJson() {
-//     final Map<String, dynamic> data = new Map<String, dynamic>();
-//     data['id'] = this.id;
-//     data['name'] = this.name;
-//     data['thumbnail'] = this.thumbnail;
-//     data['discountPrice'] = this.discountPrice;
-//     return data;
-//   }
-// }
 
 class Tickets {
   int? id;
@@ -156,13 +125,13 @@ class Tickets {
 
   Tickets(
       {this.id,
-        this.title,
-        this.description,
-        this.orderItemsId,
-        this.userId,
-        this.status,
-        this.createdAt,
-        this.updatedAt});
+      this.title,
+      this.description,
+      this.orderItemsId,
+      this.userId,
+      this.status,
+      this.createdAt,
+      this.updatedAt});
 
   Tickets.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -188,39 +157,6 @@ class Tickets {
     return data;
   }
 }
-
-
-// class OrderItem {
-//   OrderItem({
-//     this.id,
-//     this.quantity,
-//     this.price,
-//     this.reviewed,
-//     this.product,
-//   });
-//
-//   int? id;
-//   String? quantity;
-//   double? price;
-//   bool? reviewed;
-//   ProductModel? product;
-//
-//   factory OrderItem.fromJson(Map<String, dynamic> json) => OrderItem(
-//         id: json["id"],
-//         quantity: json["quantity"],
-//         price: json["price"].toDouble(),
-//         reviewed: json["reviewed"],
-//         product: ProductModel.fromJson(json["Product"]),
-//       );
-//
-//   Map<String, dynamic> toJson() => {
-//         "id": id,
-//         "quantity": quantity,
-//         "price": price,
-//         "reviewed": reviewed,
-//         "Product": product!.toJson(),
-//       };
-// }
 
 class OrderResponse {
   OrderResponse({

@@ -142,22 +142,33 @@ class SingleCartItems extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     calledFromCheckout!
-                        ? Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 12.0, vertical: 5),
-                            decoration: BoxDecoration(
-                              color: kWhiteColor,
-                              border: Border.all(
-                                  color: cartModel.onQuantityClicked!
-                                      ? kDarkColor
-                                      : kLightColor),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            child: CustomText(
-                              title: cartModel.quantity!,
-                              size: 16,
-                              color: kDarkColor,
-                              weight: FontWeight.bold,
+                        ? Align(
+                            alignment: Alignment.bottomRight,
+                            child: InkWell(
+                              onTap: () {
+                                cartModel.onQuantityClicked =
+                                    !cartModel.onQuantityClicked!;
+                                controller!.cartItemsList.refresh();
+                                controller.update();
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 12.0, vertical: 5),
+                                decoration: BoxDecoration(
+                                  color: kWhiteColor,
+                                  border: Border.all(
+                                      color: cartModel.onQuantityClicked!
+                                          ? kDarkColor
+                                          : kLightColor),
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                child: CustomText(
+                                  title: cartModel.quantity!,
+                                  size: 16,
+                                  color: kDarkColor,
+                                  weight: FontWeight.bold,
+                                ),
+                              ),
                             ),
                           )
                         : ProductQuantityCounter(
@@ -210,6 +221,7 @@ class SingleCartItems extends StatelessWidget {
 
                   //controller!.deleteCartItem(cartItemId: cartModel.id);
                 },
+                height: 17,
                 hasShadow: false,
                 icon: Icons.close_rounded,
                 bgColor: kRedColor.withOpacity(0.2),
