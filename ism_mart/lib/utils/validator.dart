@@ -19,7 +19,7 @@ class Validator {
     RegExp regex = RegExp(pattern);
     if (value!.isEmpty) {
       return langKey.passwordRequired.tr;
-    } else if (!regex.hasMatch(value!)) {
+    } else if (!regex.hasMatch(value)) {
       return langKey.passwordLengthReq.tr;
     } else {
       return null;
@@ -77,9 +77,9 @@ class Validator {
 
   String? notEmpty(String? value, String? message) {
     //String pattern = r"^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$";
-    String pattern = r'/^(?!\s*$).+/';
+    //String pattern = r'/^(?!\s*$).+/';
     // String pattern = "/(.|\s)*\S(.|\s)*/gm";
-    RegExp regex = RegExp(pattern);
+    //RegExp regex = RegExp(pattern);
     // if (!regex.hasMatch(value!.trim())) {
     if (value == null || value.isEmpty) {
       return message;
