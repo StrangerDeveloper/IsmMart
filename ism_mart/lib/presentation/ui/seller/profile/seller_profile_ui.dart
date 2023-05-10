@@ -28,10 +28,10 @@ class StoreProfileUI extends GetView<AuthController> {
                               child: CustomButton(
                                 onTap: () => AppConstant.showBottomSheet(
                                     widget: RegisterVendorUI(
-                                        model: controller.userModel?.vendor),
+                                      model: controller.userModel?.vendor,
+                                    ),
                                     isGetXBottomSheet: false,
                                     buildContext: context),
-                                //controller.changePage(1),
                                 text: langKey.updateBtn.tr,
                                 width: 110,
                                 height: 35,
@@ -98,10 +98,10 @@ class StoreProfileUI extends GetView<AuthController> {
                                                 backgroundColor:
                                                     Colors.grey[200],
                                                 backgroundImage: NetworkImage(
-                                                    controller.userModel!.vendor
-                                                            ?.storeImage ??
-                                                        AppConstant
-                                                            .defaultImgUrl),
+                                                  controller.userModel!.vendor
+                                                          ?.storeImage ??
+                                                      AppConstant.defaultImgUrl,
+                                                ),
                                               ),
                                             ),
                                           ),

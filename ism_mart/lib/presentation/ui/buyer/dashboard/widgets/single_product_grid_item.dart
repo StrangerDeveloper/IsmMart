@@ -76,7 +76,7 @@ class SingleProductItems extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: CustomText(
-                      title: "${model.discount}% ${langKey.OFF}",
+                      title: "${model.discount}% ${langKey.OFF.tr}",
                       color: kWhiteColor,
                       size: 12,
                       weight: FontWeight.w600,
@@ -172,7 +172,7 @@ class SingleProductItems extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: CustomText(
-                      title: "${model.discount}% ${langKey.OFF}",
+                      title: "${model.discount}% ${langKey.OFF.tr}",
                       color: kWhiteColor,
                       size: 12,
                       weight: FontWeight.w600,

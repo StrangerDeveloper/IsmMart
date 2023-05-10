@@ -1,5 +1,9 @@
 //////////////////////////////////////////////////////////////////////
 
+///authController
+const currentUserNotFound = "currentUserNotFound",
+    wrongWithCredentials = 'wrongWithCredentials';
+
 ///email_input
 const enterEmail = "enterEmail", emptyField = "emptyField";
 
@@ -15,7 +19,7 @@ const standard = 'standard',
     preferredPayment = 'preferredPayment',
     cartMustNotEmpty = 'cartMustNotEmpty',
     delivery = 'delivery',
-    daysCost = 'Days Cost',
+    daysCost = 'daysCost',
     freeShipping = 'freeShipping',
     zipCode = 'zipCode',
     zipCodeRequired = 'zipCodeRequired',
@@ -40,7 +44,12 @@ const standard = 'standard',
     items = 'items',
     shippingFee = 'shippingFee',
     inclusiveOfGst = 'inclusiveOfGst',
-    subtotal = 'subtotal';
+    subtotal = 'subtotal',
+    continueShopping = 'continueShopping',
+    orderId = 'orderId',
+    paymentSuccessful = 'paymentSuccessful',
+    orderNotCreated = 'orderNotCreated',
+    orderInformation = 'orderInformation';
 
 ///memberShip
 const discountMinValue = 'discountMinValue',
@@ -61,17 +70,85 @@ const itemsFound = 'itemsFound',
     maxPrice = 'maxPrice',
     clear = 'clear',
     lowToHigh = 'lowToHigh',
+    highToLow = 'highToLow',
+    OFF = 'OFF';
 
-    OFF = 'OFF',
-    // highToLow = 'highToLow',
-    // highToLow = 'highToLow',
-    // highToLow = 'highToLow',
-    // highToLow = 'highToLow',
-    // highToLow = 'highToLow',
-    // highToLow = 'highToLow',
-    // highToLow = 'highToLow',
+///SingleOrderDetailsUI
+const orderDetail = 'orderDetail';
 
-    highToLow = 'highToLow';
+///email_verification
+const cancel = 'cancel', emailVerificationLink = 'emailVerificationLink';
+
+///DisputeDetailView
+const id = 'id';
+const disputeDetail = 'disputeDetail';
+
+///AllDisputeView
+const disputes = 'disputes';
+
+///settings
+const frequentlyAsked = 'frequentlyAsked',
+    forAnyQueryJust = 'forAnyQueryJust',
+    youStoreHas = 'youStoreHas';
+
+///products
+const addToCart = 'addToCart',
+    added = 'added',
+    noQuestionFound = 'noQuestionFound',
+    productQuestions = 'productQuestions',
+    askQuestion = 'askQuestion',
+    peopleAlsoViewed = 'peopleAlsoViewed',
+    color = 'color',
+    size = 'size',
+    quantity = 'quantity',
+    next = 'next',
+    questionBody = 'questionBody',
+    storeDetail = 'storeDetail',
+    sellerRating = 'sellerRating',
+    customers = 'customers',
+    totalProducts = 'totalProducts',
+    soldItems = 'soldItems',
+    thisStoreHasBeen = 'thisStoreHasBeen',
+    topProducts = 'topProducts',
+    finalPriceWould = 'finalPriceWould',
+    afterPlatformFee = 'afterPlatformFee',
+    yourDiscountShould = 'yourDiscountShould',
+    outOfStock = 'outOfStock',
+    productNotFound = 'productNotFound',
+    uploadImageLessThan = 'uploadImageLessThan';
+
+///my_orders
+const invoiceNo = 'invoiceNo',
+    Date = 'Date',
+    billingDetails = 'billingDetails',
+    qty = 'qty',
+    amount = 'amount',
+    pending = 'Pending',
+    accepted = 'Accepted',
+    shipped = 'Shipped',
+    delivered = 'Delivered',
+    cancelled = 'Cancelled',
+    action = 'action',
+    reviews = 'reviews',
+    rating = 'rating',
+    addDisputes = 'addDisputes',
+    disputeAlreadyAdded = 'disputeAlreadyAdded',
+    viewDispute = 'viewDispute',
+    paymentMethod = 'paymentMethod',
+    deliveryDate = 'deliveryDate',
+    totalPrice = 'totalPrice',
+    claimCanBeMade = 'claimCanBeMade',
+    clickHereToUpload = 'clickHereToUpload',
+    userOrderDispute = 'userOrderDispute',
+    disputeNotAddedYet = 'disputeNotAddedYet';
+
+///profile
+const gallery = 'gallery',
+    camera = 'camera',
+    pickFrom = 'pickFrom',
+    yourCoverAndProfile = 'yourCoverAndProfile',
+    updateVendorDetails = 'updateVendorDetails',
+    fieldIsRequired = 'fieldIsRequired';
 
 //////////////////////////////////////////////////////////////////////
 /**
@@ -333,7 +410,6 @@ const add = "add",
     confirmOrder = "confirmOrder",
     addNewAddress = "addNewAddress",
     addPayment = "addPayments",
-    paymentMethod = "paymentMethod",
     proceedToCheckOut = "proceedToCheckOut",
     redeemBtn = "redeem";
 

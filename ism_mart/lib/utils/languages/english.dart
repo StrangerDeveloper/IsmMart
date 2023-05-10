@@ -3,6 +3,11 @@ import 'translations_key.dart' as key;
 class English {
   Map<String, String> get translations => {
 //////////////////////////////////////////////////////////
+
+        ///authController
+        key.currentUserNotFound: 'Current User not found',
+        key.wrongWithCredentials: 'Something went wrong with credentials',
+
         ///email_input
         key.enterEmail: 'Enter Email To Recieve OTP',
         key.emptyField: 'Empty field',
@@ -30,7 +35,7 @@ class English {
         key.chooseCountry: 'Choose Country',
         key.selectCity: 'Select City',
         key.chooseCity: 'Choose City',
-        key.success: 'success',
+        key.success: 'Success',
         key.disputeDeleted: 'Dispute deleted successfully',
         key.recordDoNotExist: 'Record do not exist',
         key.fileMustBe: 'Each file must be up to',
@@ -45,9 +50,15 @@ class English {
         key.coins: 'coins',
         key.needMoreCoins: 'Need more Coins to redeem',
         key.subtotal: 'Subtotal',
-        key.items: 'items',
+        key.items: 'Items',
         key.shippingFee: 'Shipping Fee',
         key.inclusiveOfGst: 'Inclusive of GST',
+        key.continueShopping: 'Continue Shopping',
+        key.orderId: 'OrderID',
+        key.paymentSuccessful:
+            'Payment Successful!, You\'re Order has been Placed!',
+        key.orderInformation: 'Order Information',
+        key.orderNotCreated: 'Something went wrong! Order Not created',
 
         ///memberShip
         key.discountMinValue: 'Discount should be greater than 10',
@@ -62,15 +73,93 @@ class English {
         key.features: 'Features',
 
         ///dashboard
-        key.itemsFound : 'items found',
-        key.price : 'Price',
-        key.minPrice : 'Min Price',
-        key.maxPrice : 'Max Price',
-        key.clear : 'Clear',
-        key.lowToHigh : 'Low to High',
-        key.highToLow : 'High to Low',
-        key.OFF : 'OFF',
+        key.itemsFound: 'Items found',
+        key.price: 'Price',
+        key.minPrice: 'Min Price',
+        key.maxPrice: 'Max Price',
+        key.clear: 'Clear',
+        key.lowToHigh: 'Low to High',
+        key.highToLow: 'High to Low',
+        key.OFF: 'OFF',
 
+        ///SingleOrderDetailsUI
+        key.orderDetail: 'Order Details',
+
+        ///email_verification
+        key.cancel: 'Cancel',
+        key.emailVerificationLink: 'Enter Email To Receive Verification Link',
+
+        ///DisputeDetailView
+        key.id: 'Id',
+        key.disputeDetail: 'Dispute Detail',
+
+        ///AllDisputeView
+        key.disputes: 'Disputes',
+
+        ///setting
+        key.frequentlyAsked: 'Frequently Asked Questions',
+        key.forAnyQueryJust: 'For any support just send your query',
+        key.youStoreHas: 'Your store has been disabled',
+
+        ///products
+        key.addToCart: 'Added to Cart',
+        key.added: 'Added!',
+        key.noQuestionFound: 'No questions found',
+        key.productQuestions: 'Product Questions',
+        key.askQuestion: 'Ask Question',
+        key.peopleAlsoViewed: 'People Also Viewed',
+        key.color: 'Color',
+        key.size: 'Size',
+        key.quantity: 'Quantity',
+        key.next: 'Next',
+        key.questionBody: 'Question body',
+        key.storeDetail: 'Store Details',
+        key.sellerRating: 'Seller Rating',
+        key.customers: 'Customers',
+        key.totalProducts: 'Total Products',
+        key.soldItems: 'Sold Items',
+        key.thisStoreHasBeen: 'This store has been open since',
+        key.topProducts: 'Top Products',
+        key.finalPriceWould: 'Final price would be Rs',
+        key.afterPlatformFee: 'after platform fee of',
+        key.yourDiscountShould:
+            'Your discount should be between 10 and 100 percent. Please try again!',
+        key.uploadImageLessThan: 'Upload images less than',
+        key.outOfStock: 'Out of stock',
+        key.productNotFound: 'Product Not Found',
+
+        ///my_orders
+        key.invoiceNo: 'INVOICE NO',
+        key.billingDetails: 'Billing Details',
+        key.qty: 'Qty',
+        key.amount: 'Amount',
+        key.action: 'Action',
+        key.reviews: 'Reviews',
+        key.rating: 'Rating',
+        key.addDisputes: 'Add Disputes',
+        key.disputeAlreadyAdded: 'Dispute Already Added',
+        key.viewDispute: 'View Dispute',
+        key.disputeNotAddedYet: 'Dispute Not Added Yet',
+        key.paymentMethod: 'Payment Method',
+        key.deliveryDate: 'Delivery Date',
+        key.totalPrice: 'Total Price',
+        key.claimCanBeMade:
+            'Claims can be made only in the event of the loss or damage of a parcel',
+        key.clickHereToUpload: 'Click Here To Upload',
+        key.userOrderDispute: 'User Order Dispute',
+        key.pending: 'Pending',
+        key.accepted: 'Accepted',
+        key.shipped: 'Shipped',
+        key.delivered: 'Delivered',
+        key.cancelled: 'Cancelled',
+
+        ///profile
+        key.gallery: 'Gallery',
+        key.camera: 'Camera',
+        key.pickFrom: 'Pick from',
+        key.yourCoverAndProfile: 'Your cover and profile must be a PNG or JPG, up to',
+        key.updateVendorDetails: 'Update Vendor Details',
+        key.fieldIsRequired: 'Field is required',
 
 //////////////////////////////////////////////////////////
         key.exitApp: 'Exit App',
@@ -217,7 +306,6 @@ class English {
         key.status: 'Status',
         key.addNewAddress: 'Add new address',
         key.addPayment: 'Add Payment',
-        key.paymentMethod: 'Payment Details',
         key.confirmOrder: 'Confirm Order',
         key.proceedToCheckOut: 'Proceed To Checkout',
         key.addProduct: 'Add Product',

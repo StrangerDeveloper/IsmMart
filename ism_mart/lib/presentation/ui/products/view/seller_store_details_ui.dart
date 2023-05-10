@@ -4,6 +4,7 @@ import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:iconly/iconly.dart';
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class SellerStoreDetailsUI extends GetView<ProductController> {
   const SellerStoreDetailsUI({Key? key}) : super(key: key);
@@ -73,7 +74,7 @@ class SellerStoreDetailsUI extends GetView<ProductController> {
           buildSvgLogo(),
           AppConstant.spaceWidget(width: 10),
           CustomText(
-            title: "Store Details",
+            title: langKey.storeDetail.tr,
             style: appBarTitleSize,
           )
         ],
@@ -110,7 +111,7 @@ class SellerStoreDetailsUI extends GetView<ProductController> {
                     flex: 3,
                     child: CustomOrderStatsItem(
                       onTap: () {},
-                      title: "Seller Rating",
+                      title: langKey.sellerRating.tr,
                       icon: Icons.rate_review,
                       iconColor: kRedColor,
                       value: modelResponse!.vendorStore?.rating,
@@ -121,7 +122,7 @@ class SellerStoreDetailsUI extends GetView<ProductController> {
                     flex: 3,
                     child: CustomOrderStatsItem(
                       onTap: () {},
-                      title: "Customers",
+                      title: langKey.customers.tr,
                       icon: IconlyBold.work,
                       iconColor: Colors.orange,
                       value: modelResponse.totalCustomers,
@@ -139,7 +140,7 @@ class SellerStoreDetailsUI extends GetView<ProductController> {
                     flex: 3,
                     child: CustomOrderStatsItem(
                       onTap: () {},
-                      title: "Total Products",
+                      title: langKey.totalProducts.tr,
                       icon: Icons.dataset_rounded,
                       iconColor: Colors.blue,
                       value: modelResponse.totalProducts,
@@ -150,7 +151,7 @@ class SellerStoreDetailsUI extends GetView<ProductController> {
                     flex: 3,
                     child: CustomOrderStatsItem(
                       onTap: () {},
-                      title: "Sold Items",
+                      title: langKey.soldItems.tr,
                       icon: IconlyBold.bookmark,
                       iconColor: Colors.teal,
                       value: num.parse(
@@ -225,17 +226,23 @@ class SellerStoreDetailsUI extends GetView<ProductController> {
                         ),
                         AppConstant.spaceWidget(width: 33),
                         RichText(
-                          text: TextSpan(children: [
-                            TextSpan(
-                                text: "This store has been open since ",
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: langKey.thisStoreHasBeen.tr + ' ',
                                 style: bodyText2.copyWith(
-                                    fontWeight: FontWeight.w200)),
-                            TextSpan(
+                                  fontWeight: FontWeight.w200,
+                                ),
+                              ),
+                              TextSpan(
                                 text: AppConstant.formattedDataTime("MMM, yyyy",
                                     model?.createdAt ?? DateTime.now()),
                                 style: bodyText2.copyWith(
-                                    fontWeight: FontWeight.bold)),
-                          ]),
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -277,7 +284,7 @@ class SellerStoreDetailsUI extends GetView<ProductController> {
                         //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           CustomText(
-                            title: "Top Products",
+                            title: langKey.topProducts.tr,
                             size: 18,
                             weight: FontWeight.w600,
                           ),
@@ -291,9 +298,11 @@ class SellerStoreDetailsUI extends GetView<ProductController> {
                                 return SingleProductItems(
                                   productModel: productModel,
                                   onTap: () {
-                                    Get.offNamed('/product/${productModel.id}',
-                                        preventDuplicates: false,
-                                        arguments: {"calledFor": "customer"});
+                                    Get.offNamed(
+                                      '/product/${productModel.id}',
+                                      preventDuplicates: false,
+                                      arguments: {"calledFor": "customer"},
+                                    );
                                   },
                                 );
                               },

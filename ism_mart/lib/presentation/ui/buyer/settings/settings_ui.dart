@@ -44,7 +44,7 @@ class SettingsUI extends GetView<AuthController> {
                     children: [
                       _accountSetup(context),
                       AppConstant.spaceWidget(height: 10),
-                      const StickyLabel(text: langKey.general),
+                      StickyLabel(text: langKey.general.tr),
                       _generalSettings(),
                     ],
                   ),
@@ -62,13 +62,13 @@ class SettingsUI extends GetView<AuthController> {
           ? Column(
               children: [
                 _userCard(),
-                const StickyLabel(text: langKey.myAccount),
+                StickyLabel(text: langKey.myAccount.tr),
                 _accountSettings(buildContext: context)
               ],
             )
           : Column(
               children: [
-                const StickyLabel(text: langKey.account),
+                StickyLabel(text: langKey.account.tr),
                 _account(),
               ],
             ),
@@ -142,7 +142,9 @@ class SettingsUI extends GetView<AuthController> {
                   }
                 } else {
                   AppConstant.displaySnackBar(
-                      langKey.errorTitle, "Your store has been disabled");
+                    langKey.errorTitle.tr,
+                    langKey.youStoreHas.tr,
+                  );
                 }
               },
               icon: Icons.dashboard_rounded,
@@ -242,7 +244,8 @@ class SettingsUI extends GetView<AuthController> {
                   },
                   icon: IconlyLight.logout,
                   iconColor: Colors.red,
-                  title: langKey.logout.tr)
+                  title: langKey.logout.tr,
+                )
               : Container()),
         ],
       ),

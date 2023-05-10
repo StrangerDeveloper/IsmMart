@@ -109,7 +109,7 @@ class CartUI extends GetView<CartController> {
             AppConstant.spaceWidget(width: 10),
             Obx(
               () => CustomText(
-                title: '${langKey.myCart} (${controller.totalQtyCart.value} ${langKey.items})',
+                title: '${langKey.myCart} (${controller.totalQtyCart.value} ${langKey.items.tr})',
                 style: appBarTitleSize,
               ),
             ),
@@ -146,7 +146,7 @@ class CartUI extends GetView<CartController> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomText(
-                    title: "${controller.totalQtyCart.value} ${langKey.items}",
+                    title: "${controller.totalQtyCart.value} ${langKey.items.tr}",
                     style: headline3,
                   ),
                   CustomPriceWidget(

@@ -139,7 +139,7 @@ class GeneralSettingsDataUI extends StatelessWidget {
                 child: Column(
                   children: [
                     StickyLabel(
-                      text: "For any support just send your query",
+                      text: langKey.forAnyQueryJust.tr,
                       style: headline1,
                     ),
                     AppConstant.spaceWidget(height: 15),

@@ -399,13 +399,14 @@ class DashboardUI extends GetView<BaseController> {
                         itemBuilder: (context, index) {
                           CategoryModel model = list[index];
                           return SingleCategoryItem(categoryModel: model);
-                        }),
+                        },
+                      ),
               ),
             ),
     );
   }
 
-  /* _getChildAspectRatio(context) {
+/* _getChildAspectRatio(context) {
     double aspectRatio = MediaQuery.of(context).size.width /
         (MediaQuery.of(context).size.height / 2.5);
     print("aspectRatio: $aspectRatio");

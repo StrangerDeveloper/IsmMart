@@ -4,6 +4,7 @@ import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class FaqUI extends GetView<BaseController> {
   const FaqUI({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class FaqUI extends GetView<BaseController> {
             shrinkWrap: true,
             //physics: const NeverScrollableScrollPhysics(),
             children: [
-              CustomHeader(title: "Frequently Asked Questions"),
+              CustomHeader(title: langKey.frequentlyAsked.tr),
               Obx(
                 () => Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

@@ -4,6 +4,7 @@ import 'package:iconly/iconly.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/export_presentation.dart';
 import 'package:ism_mart/utils/constants.dart';
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class ProductQuestionAnswerUI extends GetView<ProductController> {
   const ProductQuestionAnswerUI({Key? key, this.productModel})
@@ -22,53 +23,56 @@ class ProductQuestionAnswerUI extends GetView<ProductController> {
             Container(
               width: double.infinity,
               height: double.infinity,
-              child: Obx(() => controller.productQuestionsList.isEmpty
-                  ? NoDataFoundWithIcon(
-                      icon: IconlyLight.search,
-                      title: "No questions found",
-                    )
-                  : ListView.builder(
-                      shrinkWrap: true,
-                      padding: EdgeInsets.zero,
-                      //physics: const NeverScrollableScrollPhysics(),
-                      itemCount: controller.productQuestionsList.length,
-                      itemBuilder: (_, index) {
-                        QuestionModel? model =
-                            controller.productQuestionsList[index];
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 5.0, vertical: 5),
-                          child: Column(
-                            //mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              _singleQuestionListItem(
-                                  icon: "Q",
-                                  //Icons.question_mark,
-                                  iconColor: kRedColor,
-                                  title: model.question,
-                                  firstName: model.user!.firstName!,
-                                  date: model.createdAt),
-                              AppConstant.spaceWidget(height: 5),
-                              if (model.answer != null)
+              child: Obx(
+                () => controller.productQuestionsList.isEmpty
+                    ? NoDataFoundWithIcon(
+                        icon: IconlyLight.search,
+                        title: langKey.noQuestionFound.tr,
+                      )
+                    : ListView.builder(
+                        shrinkWrap: true,
+                        padding: EdgeInsets.zero,
+                        //physics: const NeverScrollableScrollPhysics(),
+                        itemCount: controller.productQuestionsList.length,
+                        itemBuilder: (_, index) {
+                          QuestionModel? model =
+                              controller.productQuestionsList[index];
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 5.0, vertical: 5),
+                            child: Column(
+                              //mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
                                 _singleQuestionListItem(
-                                    icon: "A",
-                                    //Icons.question_answer,
-                                    title: model.answer!.answer,
-                                    iconColor: kLightColor,
-                                    firstName:
-                                        productModel!.sellerModel!.storeName ??
-                                            productModel!
-                                                .sellerModel!.user!.firstName,
-                                    date: model.answer!.createdAt),
-                              Divider(
-                                color: kLightGreyColor,
-                                thickness: 1.0,
-                              ),
-                            ],
-                          ),
-                        );
-                      })),
+                                    icon: "Q",
+                                    //Icons.question_mark,
+                                    iconColor: kRedColor,
+                                    title: model.question,
+                                    firstName: model.user!.firstName!,
+                                    date: model.createdAt),
+                                AppConstant.spaceWidget(height: 5),
+                                if (model.answer != null)
+                                  _singleQuestionListItem(
+                                      icon: "A",
+                                      //Icons.question_answer,
+                                      title: model.answer!.answer,
+                                      iconColor: kLightColor,
+                                      firstName: productModel!
+                                              .sellerModel!.storeName ??
+                                          productModel!
+                                              .sellerModel!.user!.firstName,
+                                      date: model.answer!.createdAt),
+                                Divider(
+                                  color: kLightGreyColor,
+                                  thickness: 1.0,
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+              ),
             ),
             Positioned(
               bottom: 0,
@@ -85,7 +89,6 @@ class ProductQuestionAnswerUI extends GetView<ProductController> {
 
   Widget _singleQuestionListItem(
       {icon, iconColor, String? title, firstName, date}) {
-
     return CustomGreyBorderContainer(
       borderColor: kWhiteColor,
       child: Padding(
@@ -99,12 +102,15 @@ class ProductQuestionAnswerUI extends GetView<ProductController> {
               width: 25,
               height: 25,
               decoration: BoxDecoration(
-                  color: iconColor!.withOpacity(0.75), shape: BoxShape.circle),
+                color: iconColor!.withOpacity(0.75),
+                shape: BoxShape.circle,
+              ),
               child: Center(
-                  child: CustomText(
-                title: icon,
-                color: kWhiteColor,
-              )),
+                child: CustomText(
+                  title: icon,
+                  color: kWhiteColor,
+                ),
+              ),
 
               /*Icon(
                 icon,
@@ -128,9 +134,12 @@ class ProductQuestionAnswerUI extends GetView<ProductController> {
                           text: firstName,
                           style: caption.copyWith(color: kLightColor)),
                       TextSpan(
-                          text:
-                              " - ${AppConstant.formattedDataTime("dd-MMM-yy hh:mm a", date)}",
-                          style: caption.copyWith(color: kLightColor)),
+                        text:
+                            " - ${AppConstant.formattedDataTime("dd-MMM-yy hh:mm a", date)}",
+                        style: caption.copyWith(
+                          color: kLightColor,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -153,7 +162,7 @@ class ProductQuestionAnswerUI extends GetView<ProductController> {
         ),
       ),
       title: CustomText(
-        title: "Product Questions",
+        title: langKey.productQuestions.tr,
         style: appBarTitleSize,
       ),
     );
@@ -203,7 +212,7 @@ class ProductQuestionAnswerUI extends GetView<ProductController> {
                       ),
                       fillColor: kWhiteColor,
                       //contentPadding: EdgeInsets.zero,
-                      hintText: "Question body",
+                      hintText: langKey.questionBody.tr,
                       hintStyle: TextStyle(
                         color: kLightColor,
                         fontWeight: FontWeight.w600,
@@ -215,16 +224,17 @@ class ProductQuestionAnswerUI extends GetView<ProductController> {
               ),
               Expanded(
                 child: InkWell(
-                  onTap: (){
+                  onTap: () {
                     controller.postQuestion(productId: productModel!.id);
                   },
                   child: Container(
                     width: 40,
                     height: 40,
                     decoration: BoxDecoration(
-                        color: kWhiteColor,
-                        border: Border.all(color: Colors.blue.withOpacity(0.35)),
-                        shape: BoxShape.circle),
+                      color: kWhiteColor,
+                      border: Border.all(color: Colors.blue.withOpacity(0.35)),
+                      shape: BoxShape.circle,
+                    ),
                     child: Icon(
                       IconlyBold.send,
                       color: Colors.blue.withOpacity(0.75),

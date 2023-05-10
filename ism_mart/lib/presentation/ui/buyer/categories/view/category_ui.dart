@@ -138,7 +138,8 @@ class CategoriesUI extends GetView<CategoryController> {
           : controller.subCategories.isEmpty
               ? NoDataFoundWithIcon(
                   icon: Icons.category_outlined,
-                  title: langKey.noSubCategoryFound.tr)
+                  title: langKey.noSubCategoryFound.tr,
+                )
               : ListView.builder(
                   itemCount: controller.subCategories.length,
                   itemBuilder: (_, index) {
@@ -182,7 +183,7 @@ class CategoriesUI extends GetView<CategoryController> {
     );
   }
 
-  /*Widget _buildSubCategoryItemNew(SubCategory? subCategory) {
+/*Widget _buildSubCategoryItemNew(SubCategory? subCategory) {
     return InkWell(
       onTap: () {
         Get.toNamed(Routes.searchRoute,

@@ -68,14 +68,14 @@ class SingleCartItems extends StatelessWidget {
                             AppConstant.spaceWidget(height: 2),
                             CustomText(
                               title:
-                                  "${langKey.availableStock}: ${cartModel.productModel!.stock}",
+                                  "${langKey.availableStock.tr}: ${cartModel.productModel!.stock}",
                               size: 10,
                             ),
                             AppConstant.spaceWidget(height: 2),
                             Row(
                               children: [
                                 CustomText(
-                                  title: "${langKey.itemPrice}: ",
+                                  title: "${langKey.itemPrice.tr}: ",
                                   style: bodyText2.copyWith(color: kLightColor),
                                 ),
                                 CustomPriceWidget(
@@ -96,7 +96,7 @@ class SingleCartItems extends StatelessWidget {
                               Row(
                                 children: [
                                   CustomText(
-                                    title: "${langKey.features}:",
+                                    title: "${langKey.features.tr}:",
                                     style: bodyText2,
                                   ),
                                   SizedBox(

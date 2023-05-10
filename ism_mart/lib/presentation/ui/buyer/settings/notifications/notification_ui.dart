@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 import 'package:ism_mart/presentation/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class NotificationUI extends StatelessWidget {
   const NotificationUI({Key? key}) : super(key: key);
@@ -15,7 +16,7 @@ class NotificationUI extends StatelessWidget {
       body: Center(
         child: NoDataFoundWithIcon(
           icon: IconlyLight.notification,
-          title: 'no_data_found'.tr,
+          title: langKey.noDataFound.tr,
           iconColor: Colors.lightBlue,
         ),
       ),
@@ -27,12 +28,17 @@ class NotificationUI extends StatelessWidget {
       elevation: 0,
       backgroundColor: kPrimaryColor,
       leading: InkWell(
-        onTap: ()=>Get.back(),
-        child: Icon(Icons.arrow_back_ios_new, size: 18,  color: kWhiteColor,),
+        onTap: () => Get.back(),
+        child: Icon(
+          Icons.arrow_back_ios_new,
+          size: 18,
+          color: kWhiteColor,
+        ),
       ),
       title: CustomText(
-          title: 'notifications'.tr,
-          style: appBarTitleSize),
+        title: langKey.notifications.tr,
+        style: appBarTitleSize,
+      ),
     );
   }
 }

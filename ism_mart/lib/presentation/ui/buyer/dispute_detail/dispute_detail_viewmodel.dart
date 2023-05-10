@@ -4,6 +4,7 @@ import 'package:ism_mart/api_helper/global_variables.dart';
 import 'package:ism_mart/api_helper/urls.dart';
 import 'package:ism_mart/presentation/ui/buyer/dispute_detail/dispute_detail_model.dart';
 import 'package:ism_mart/utils/constants.dart';
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class DisputeDetailViewModel extends GetxController {
   Rx<DisputeDetailModel> disputeDetailModel = DisputeDetailModel().obs;
@@ -39,8 +40,8 @@ class DisputeDetailViewModel extends GetxController {
         print(disputeDetailModel.toJson());
       } else {
         AppConstant.displaySnackBar(
-          'error',
-          'Record does\'nt exist',
+          langKey.errorTitle.tr,
+          langKey.recordDoNotExist.tr,
         );
       }
     }).catchError((e) {

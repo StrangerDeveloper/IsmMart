@@ -8,6 +8,7 @@ import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/ui/exports_ui.dart';
 import 'package:ism_mart/presentation/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class SingleProductView extends GetView<ProductController> {
   const SingleProductView({
@@ -15,6 +16,7 @@ class SingleProductView extends GetView<ProductController> {
     this.productId,
   }) : super(key: key);
   final productId;
+
   @override
   Widget build(BuildContext context) {
     if (Get.parameters['id'] == null && productId == null) {
@@ -640,11 +642,11 @@ class SingleProductView extends GetView<ProductController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              CustomText(title: "Product Questions", style: headline2),
+              CustomText(title: langKey.productQuestions.tr, style: headline2),
               controller.productQuestionsList.isEmpty
                   ? Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: NoDataFound(text: "No Questions found"),
+                      child: NoDataFound(text: langKey.noQuestionFound.tr),
                     )
                   : ListView.builder(
                       shrinkWrap: true,
@@ -662,7 +664,8 @@ class SingleProductView extends GetView<ProductController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               _singleQuestionListItem(
-                                  icon: "Q", //Icons.question_mark,
+                                  icon: "Q",
+                                  //Icons.question_mark,
                                   iconColor: kRedColor,
                                   title: model.question,
                                   firstName: model.user!.firstName!,
@@ -670,7 +673,8 @@ class SingleProductView extends GetView<ProductController> {
                               AppConstant.spaceWidget(height: 10),
                               if (model.answer != null)
                                 _singleQuestionListItem(
-                                    icon: "A", //Icons.question_answer,
+                                    icon: "A",
+                                    //Icons.question_answer,
                                     title: model.answer!.answer,
                                     iconColor: kLightColor,
                                     firstName:
@@ -697,7 +701,7 @@ class SingleProductView extends GetView<ProductController> {
                   borderColor: kWhiteColor,
                   child: Center(
                       child: CustomText(
-                    title: "Ask Question",
+                    title: langKey.askQuestion.tr,
                     color: kRedColor,
                   )),
                 ),
@@ -779,7 +783,7 @@ class SingleProductView extends GetView<ProductController> {
                         //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           CustomText(
-                            title: "People Also Viewed",
+                            title: langKey.peopleAlsoViewed.tr,
                             size: 18,
                             weight: FontWeight.w600,
                           ),
@@ -854,7 +858,7 @@ class SingleProductView extends GetView<ProductController> {
                               decoration: TextDecoration.lineThrough)),
                       AppConstant.spaceWidget(width: 5),
                       CustomText(
-                          title: "${productModel.discount}% OFF",
+                          title: "${productModel.discount}% ${langKey.OFF.tr}",
                           style: bodyText2.copyWith(color: Colors.redAccent))
                     ],
                   ),
@@ -864,16 +868,17 @@ class SingleProductView extends GetView<ProductController> {
           AppConstant.spaceWidget(height: 10),
           if (productModel.productFeatures!.colors!.isNotEmpty)
             _productVariantWidget(
-                title: "Color",
+                title: langKey.color.tr,
                 featureList: productModel.productFeatures!.colors!,
                 isNextBtnClicked: true,
                 isCalledForColors: true),
           if (productModel.productFeatures!.sizes!.isNotEmpty)
             _productVariantWidget(
-                title: "Size",
-                featureList: productModel.productFeatures!.sizes!,
-                isNextBtnClicked: true,
-                isCalledForColors: false),
+              title: langKey.size.tr,
+              featureList: productModel.productFeatures!.sizes!,
+              isNextBtnClicked: true,
+              isCalledForColors: false,
+            ),
 
           /* productModel.productFeatures!.sizes!.isEmpty
               ? Container()
@@ -928,7 +933,7 @@ class SingleProductView extends GetView<ProductController> {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const StickyLabel(text: "Quantity"),
+        StickyLabel(text: langKey.quantity.tr),
         ProductQuantityCounter(
           onDecrementPress: () => controller.decrement(),
           onIncrementPress: () => controller.increment(),
@@ -951,7 +956,7 @@ class SingleProductView extends GetView<ProductController> {
             //controller.addItemToCart(product: productModel);
             //Get.back();
           },
-          text: "Add to Cart",
+          text: langKey.addToCart.tr,
           width: 320,
           height: 40,
         ),
@@ -988,7 +993,7 @@ class SingleProductView extends GetView<ProductController> {
             CustomButton(
               onTap: () =>
                   showVariationBottomSheet(productModel: controller.state),
-              text: "Next",
+              text: langKey.next.tr,
               width: 100,
               height: 40,
             ),

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:ism_mart/api_helper/api_constant.dart';
 import 'package:ism_mart/api_helper/errors.dart';
@@ -85,17 +86,17 @@ class ApiBaseHelper {
     } on SocketException {
       GlobalVariable.showLoader.value = false;
       GetxHelper.showSnackBar(
-          title: langKey.errorTitle, message: Errors.noInternetError);
+          title: langKey.errorTitle.tr, message: Errors.noInternetError);
       throw Errors.noInternetError;
     } on TimeoutException {
       GlobalVariable.showLoader.value = false;
       GetxHelper.showSnackBar(
-          title: langKey.errorTitle, message: Errors.timeOutException);
+          title: langKey.errorTitle.tr, message: Errors.timeOutException);
       throw Errors.timeOutException + url;
     } catch (e) {
       GlobalVariable.showLoader.value = false;
       print(e);
-      GetxHelper.showSnackBar(title: langKey.errorTitle, message: e.toString());
+      GetxHelper.showSnackBar(title: langKey.errorTitle.tr, message: e.toString());
       throw e.toString();
     }
   }
@@ -127,17 +128,17 @@ class ApiBaseHelper {
     } on SocketException {
       GlobalVariable.showLoader.value = false;
       GetxHelper.showSnackBar(
-          title: langKey.errorTitle, message: Errors.noInternetError);
+          title: langKey.errorTitle.tr, message: Errors.noInternetError);
       throw Errors.noInternetError;
     } on TimeoutException {
       GlobalVariable.showLoader.value = false;
       GetxHelper.showSnackBar(
-          title: langKey.errorTitle, message: Errors.timeOutException);
+          title: langKey.errorTitle.tr, message: Errors.timeOutException);
       throw Errors.timeOutException + url;
     } catch (e) {
       GlobalVariable.showLoader.value = false;
       print(e);
-      GetxHelper.showSnackBar(title: langKey.errorTitle, message: e.toString());
+      GetxHelper.showSnackBar(title: langKey.errorTitle.tr, message: e.toString());
       throw e.toString();
     }
   }

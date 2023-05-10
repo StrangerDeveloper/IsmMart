@@ -25,13 +25,15 @@ class MyOrdersUI extends GetView<OrderController> {
 
   Widget noDataFound() {
     return SafeArea(
-        child: Scaffold(
-      backgroundColor: Colors.grey[100]!,
-      body: Center(
+      child: Scaffold(
+        backgroundColor: Colors.grey[100]!,
+        body: Center(
           child: NoDataFoundWithIcon(
-        title: langKey.noOrderFound.tr,
-      )),
-    ));
+            title: langKey.noOrderFound.tr,
+          ),
+        ),
+      ),
+    );
   }
 
   Widget _build({listData}) {
@@ -56,7 +58,7 @@ class MyOrdersUI extends GetView<OrderController> {
     ));
   }
 
-  /*Widget _orderStats() 
+  /*Widget _orderStats()
   {
     return Obx(() => SizedBox(
           height: 200,
@@ -162,11 +164,11 @@ class MyOrdersUI extends GetView<OrderController> {
             }
           },
           tabs: [
-            Tab(text: 'Pending'),
-            Tab(text: 'Accepted'),
-            Tab(text: 'Shipped'),
-            Tab(text: 'Delivered'),
-            Tab(text: 'Cancelled'),
+            Tab(text: langKey.pending.tr),
+            Tab(text: langKey.accepted.tr),
+            Tab(text: langKey.shipped.tr),
+            Tab(text: langKey.delivered.tr),
+            Tab(text: langKey.cancelled.tr),
           ],
         ),
       ),
