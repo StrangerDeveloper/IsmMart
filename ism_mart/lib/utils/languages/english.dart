@@ -9,14 +9,14 @@ class English {
         key.wrongWithCredentials: 'Something went wrong with credentials',
 
         ///email_input
-        key.enterEmail: 'Enter Email To Recieve OTP',
+        key.enterEmail: 'Enter Email To Receive OTP',
         key.emptyField: 'Empty field',
 
         ///reset_password
         key.enterDetails: 'Enter Details To Create New Password',
 
         ///sign_in
-        key.passwordRequired: 'Password is required!.',
+        key.passwordRequired: 'Password is required!',
 
         ///checkout
         key.standard: "Standard",
@@ -43,7 +43,7 @@ class English {
         key.minPriceShouldNotBe:
             'Min. Price should not be greater than Max. price!',
         key.plzSelectCountry: 'Plz select Country and City',
-        key.shippingAddressDetail: 'Shipping Address details',
+        key.shippingAddressDetail: 'Plz select Country and City',
         key.cashOnDelivery: 'Cash On Delivery (Not Available)',
         key.creditCard: 'Credit Card',
         key.wantToRedeem: 'Want to redeem',
@@ -61,8 +61,8 @@ class English {
         key.orderNotCreated: 'Something went wrong! Order Not created',
 
         ///memberShip
-        key.discountMinValue: 'Discount should be greater than 10',
-        key.discountMaxValue: 'Discount should not be greater or equal to 100',
+        key.discountMinValue: 'Discount should be greater than',
+        key.discountMaxValue: 'Discount should not be greater or equal to',
 
         ///sellerController
         key.imageSizeDesc: 'Image must be up to',
@@ -121,7 +121,7 @@ class English {
         key.thisStoreHasBeen: 'This store has been open since',
         key.topProducts: 'Top Products',
         key.finalPriceWould: 'Final price would be Rs',
-        key.afterPlatformFee: 'after platform fee of',
+        key.afterPlatformFee: 'After platform fee of',
         key.yourDiscountShould:
             'Your discount should be between 10 and 100 percent. Please try again!',
         key.uploadImageLessThan: 'Upload images less than',
@@ -157,7 +157,8 @@ class English {
         key.gallery: 'Gallery',
         key.camera: 'Camera',
         key.pickFrom: 'Pick from',
-        key.yourCoverAndProfile: 'Your cover and profile must be a PNG or JPG, up to',
+        key.yourCoverAndProfile:
+            'Your cover and profile must be a PNG or JPG, up to',
         key.updateVendorDetails: 'Update Vendor Details',
         key.fieldIsRequired: 'Field is required',
 
