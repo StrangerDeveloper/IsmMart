@@ -28,7 +28,7 @@ class AllDisputeView extends StatelessWidget {
     return AppBar(
       backgroundColor: Colors.white,
       title: Text(
-        'Disputes',
+        langKey.disputes.tr,
         style: appBarTitleSize,
       ),
       centerTitle: true,
@@ -57,7 +57,7 @@ class AllDisputeView extends StatelessWidget {
             )
           : Center(
               child: Text(
-                'No data found',
+                langKey.noDataFound.tr,
                 style: bodyText2.copyWith(
                   fontSize: 14,
                   color: Colors.black45,

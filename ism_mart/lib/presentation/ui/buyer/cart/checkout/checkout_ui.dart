@@ -64,47 +64,56 @@ class CheckoutUI extends GetView<CheckoutController> {
               Column(
                 children: [
                   AppConstant.spaceWidget(height: 20),
-                  Obx(() => controller.isLoading.isTrue
-                      ? CustomLoading(isItBtn: true)
-                      : CustomButton(
-                          width: 280,
-                          height: 50,
-                          onTap: () {
-                            if (controller
-                                    .cartController.totalCartAmount.value <=
-                                num.parse(convertStaticPrice(price: 1000))) {
-                              controller.showSnackBar(
-                                title: langKey.errorTitle.tr,
-                                message: langKey.toProceedWithPurchase.tr,
-                              );
-                              //You cannot use Free Shipping Service under Rs1000
-                              return;
-                            } else {
-                              if (controller.isCardPaymentEnabled.isFalse) {
+                  Obx(
+                    () => controller.isLoading.isTrue
+                        ? CustomLoading(isItBtn: true)
+                        : CustomButton(
+                            width: 280,
+                            height: 50,
+                            text: langKey.confirmOrder.tr,
+                            onTap: () {
+                              if (controller
+                                      .cartController.totalCartAmount.value <=
+                                  num.parse(convertStaticPrice(price: 1000))) {
+                                controller.showSnackBar(
+                                  title: langKey.errorTitle.tr,
+                                  message: langKey.toProceedWithPurchase.tr,
+                                );
+                                //You cannot use Free Shipping Service under Rs1000
+                                return;
+                              } else if (controller
+                                  .isCardPaymentEnabled.isFalse) {
                                 controller.showSnackBar(
                                     title: langKey.errorTitle.tr,
                                     message: langKey.preferredPayment.tr);
                                 return;
-                              }
-                              if (controller.defaultAddressModel!.id != null) {
-                                if (controller
-                                    .cartController.cartItemsList.isNotEmpty) {
-                                  controller.makePayment(
-                                      amount: controller.totalAmount.value
-                                          .toString());
-                                } else {
-                                  controller.showSnackBar(
-                                      title: langKey.errorTitle.tr,
-                                      message: langKey.cartMustNotEmpty.tr);
-                                }
-                              } else
+                              } else if (controller
+                                  .isCardPaymentEnabled.isFalse) {
                                 controller.showSnackBar(
-                                  title: 'error',
-                                  message: langKey.noDefaultAddressFound.tr,
+                                  title: langKey.errorTitle.tr,
+                                  message: langKey.preferredPayment.tr,
                                 );
-                            }
-                          },
-                          text: langKey.confirmOrder.tr)),
+                                return;
+                              } else if (controller.defaultAddressModel!.id ==
+                                  null) {
+                                controller.showSnackBar(
+                                    title: langKey.errorTitle.tr,
+                                    message: langKey.noDefaultAddressFound.tr);
+                                return;
+                              } else if (controller
+                                  .cartController.cartItemsList.isNotEmpty) {
+                                controller.showSnackBar(
+                                    title: langKey.errorTitle.tr,
+                                    message: langKey.cartMustNotEmpty.tr);
+                                return;
+                              } else {
+                                controller.makePayment(
+                                    amount: controller.totalAmount.value
+                                        .toString());
+                              }
+                            },
+                          ),
+                  ),
                   AppConstant.spaceWidget(height: 20),
                 ],
               ),

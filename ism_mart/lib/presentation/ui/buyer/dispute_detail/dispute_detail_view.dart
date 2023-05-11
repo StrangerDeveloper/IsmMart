@@ -6,6 +6,7 @@ import 'package:ism_mart/presentation/ui/buyer/dispute_detail/dispute_detail_vie
 import 'package:ism_mart/presentation/widgets/loader_view.dart';
 import 'package:ism_mart/utils/constants.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class DisputeDetailView extends StatelessWidget {
   DisputeDetailView({Key? key}) : super(key: key);
@@ -30,8 +31,8 @@ class DisputeDetailView extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          titleItem('Id'),
-                          titleItem('Status'),
+                          titleItem(langKey.id.tr),
+                          titleItem(langKey.status.tr),
                         ],
                       ),
                       Row(
@@ -64,13 +65,13 @@ class DisputeDetailView extends StatelessWidget {
                         ],
                       ),
                       Divider(),
-                      titleItem('Title'),
+                      titleItem(langKey.titleKey.tr),
                       Obx(
                         () => valueItem(
                           viewModel.disputeDetailModel.value.title ?? 'N/A',
                         ),
                       ),
-                      titleItem('Description'),
+                      titleItem(langKey.description.tr),
                       Obx(
                         () => valueItem(
                           viewModel.disputeDetailModel.value.description ??
@@ -92,7 +93,7 @@ class DisputeDetailView extends StatelessWidget {
   PreferredSizeWidget appBar() {
     return AppBar(
       title: Text(
-        'Dispute Detail',
+        langKey.disputeDetail.tr,
         style: appBarTitleSize,
       ),
       backgroundColor: Colors.white,

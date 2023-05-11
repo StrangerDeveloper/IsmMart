@@ -160,7 +160,7 @@ class OrderController extends GetxController
           fetchOrderById(orderId);
           Get.back();
           clearControllers();
-          showSnackBar(title: 'success', message: apiResponse.message);
+          showSnackBar(title: langKey.successTitle.tr, message: apiResponse.message);
         } else
           showSnackBar(message: apiResponse.message);
       } else {
@@ -183,13 +183,13 @@ class OrderController extends GetxController
       if (parsedJson['success'] == true && parsedJson['data'] != null) {
         fetchOrderById(orderId);
         AppConstant.displaySnackBar(
-          langKey.success,
-          langKey.disputeDeleted,
+          langKey.success.tr,
+          langKey.disputeDeleted.tr,
         );
       } else {
         AppConstant.displaySnackBar(
-          langKey.errorTitle,
-          langKey.recordDoNotExist,
+          langKey.errorTitle.tr,
+          langKey.recordDoNotExist.tr,
         );
       }
     }).catchError((e) {
@@ -218,7 +218,7 @@ class OrderController extends GetxController
 
               imagesSizeInMb.value += lengthInMb;
               if (lengthInMb > 2) {
-                showSnackBar(message: langKey.fileMustBe + ' 2MB');
+                showSnackBar(message: langKey.fileMustBe.tr + ' 2MB');
               } else {
                 //: needs to add check if file exist
                 pickedImagesList.add(compressedFile);
@@ -230,8 +230,8 @@ class OrderController extends GetxController
         } on PlatformException catch (e) {
           print(e);
           AppConstant.displaySnackBar(
-            langKey.errorTitle,
-            langKey.invalidImageFormat,
+            langKey.errorTitle.tr,
+            langKey.invalidImageFormat.tr,
           );
         }
       } else {
@@ -289,7 +289,7 @@ class OrderController extends GetxController
             Get.back();
             rating.value = 0;
             reviewTxtFieldController.clear();
-            showSnackBar(title: 'success', message: apiResponse.message);
+            showSnackBar(title: langKey.successTitle.tr, message: apiResponse.message);
           } else
             showSnackBar(message: apiResponse.message);
         } else {
@@ -303,7 +303,7 @@ class OrderController extends GetxController
   }
 
   void showSnackBar(
-      {title = langKey.errorTitle, message = "Something wen't wrong!"}) {
+      {title = 'error', message = "Something went wrong!"}) {
     AppConstant.displaySnackBar(title, message);
   }
 }

@@ -179,7 +179,7 @@ class ProductController extends GetxController with StateMixin {
 
     await LocalStorageHelper.addItemToCart(cartModel: cart).then((value) {
       Get.back();
-      AppConstant.displaySnackBar("success", "Added to Cart!");
+      AppConstant.displaySnackBar(langKey.successTitle.tr, langKey.addToCart.tr);
       clearControllers();
       count(1);
     });
@@ -224,7 +224,7 @@ class ProductController extends GetxController with StateMixin {
 
     if (authController.isSessionExpired! && authController.userToken == null) {
       await LocalStorageHelper.addItemToCart(cartModel: cart).then((value) {
-        AppConstant.displaySnackBar("Added", "Added to Cart!",
+        AppConstant.displaySnackBar(langKey.added.tr, langKey.addToCart.tr,
             position: SnackPosition.TOP);
         clearControllers();
         count(1);
@@ -239,11 +239,11 @@ class ProductController extends GetxController with StateMixin {
           if (response.success!) {
             clearControllers();
             count(1);
-            showSnackBar(langKey.success, response.message);
+            showSnackBar(langKey.success.tr, response.message);
           } else
-            showSnackBar(langKey.errorTitle, response.message);
+            showSnackBar(langKey.errorTitle.tr, response.message);
         } else
-          showSnackBar(langKey.errorTitle, langKey.someThingWentWrong);
+          showSnackBar(langKey.errorTitle.tr, langKey.someThingWentWrong.tr);
       }).catchError((error) {
         debugPrint(">>>>addItemToCart $error");
       });

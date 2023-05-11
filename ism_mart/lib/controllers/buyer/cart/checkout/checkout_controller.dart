@@ -165,15 +165,18 @@ class CheckoutController extends GetxController {
       if (apiResponse != null) {
         if (apiResponse.success!) {
           Get.back();
-          AppConstant.displaySnackBar("success", apiResponse.message);
+          AppConstant.displaySnackBar(langKey.success.tr, apiResponse.message);
           clearControllers();
           getDefaultAddress();
           getAllShippingAddresses();
         } else
-          AppConstant.displaySnackBar('error', apiResponse.message);
+          AppConstant.displaySnackBar(
+              langKey.errorTitle.tr, apiResponse.message);
       } else
         AppConstant.displaySnackBar(
-            langKey.errorTitle, "something went wrong!");
+          langKey.errorTitle,
+          langKey.someThingWentWrong.tr,
+        );
     }).catchError(onError);
   }
 
@@ -217,10 +220,13 @@ class CheckoutController extends GetxController {
           AppConstant.displaySnackBar("success", apiResponse.message);
           //getAllShippingAddresses();
         } else
-          AppConstant.displaySnackBar('error', apiResponse.message);
+          AppConstant.displaySnackBar(
+              langKey.errorTitle.tr, apiResponse.message);
       } else
         AppConstant.displaySnackBar(
-            langKey.errorTitle, "something went wrong!");
+          langKey.errorTitle,
+          langKey.someThingWentWrong.tr,
+        );
     }).catchError(onError);
   }
 
@@ -243,10 +249,11 @@ class CheckoutController extends GetxController {
           clearControllers();
           getAllShippingAddresses();
         } else
-          AppConstant.displaySnackBar('error', apiResponse.message);
+          AppConstant.displaySnackBar(
+              langKey.errorTitle.tr, apiResponse.message);
       } else
         AppConstant.displaySnackBar(
-            langKey.errorTitle, "something went wrong!");
+            langKey.errorTitle, langKey.someThingWentWrong.tr);
     }).catchError(onError);
 
     //update();
@@ -262,10 +269,11 @@ class CheckoutController extends GetxController {
           AppConstant.displaySnackBar("success", apiResponse.message);
           getAllShippingAddresses();
         } else
-          AppConstant.displaySnackBar('error', apiResponse.message);
+          AppConstant.displaySnackBar(
+              langKey.errorTitle.tr, apiResponse.message);
       } else
         AppConstant.displaySnackBar(
-            langKey.errorTitle, "something went wrong!");
+            langKey.errorTitle, langKey.someThingWentWrong.tr);
     }).catchError(onError);
   }
 
@@ -398,16 +406,19 @@ class CheckoutController extends GetxController {
                   ))
               .then((PaymentIntent paymentIntent) async {
             await createOrder(
-                paymentMethod: isCardPaymentEnabled.isTrue ? "Card" : "COD",
-                cartItems: cartItems);
+              paymentMethod: isCardPaymentEnabled.isTrue ? "Card" : "COD",
+              cartItems: cartItems,
+            );
           }).catchError(onError);
         } else {
-          showSnackBar(title: 'error', message: apiResponse.message!);
+          showSnackBar(
+              title: langKey.errorTitle.tr, message: apiResponse.message!);
         }
       } else
         showSnackBar(
-            title: langKey.errorTitle,
-            message: "Something went wrong! Order Not created");
+          title: langKey.errorTitle,
+          message: langKey.orderNotCreated.tr,
+        );
     }).catchError(onError);
   }
 
@@ -440,14 +451,15 @@ class CheckoutController extends GetxController {
           showSnackBar(title: langKey.errorTitle, message: response.message!);
       } else
         showSnackBar(
-            title: langKey.errorTitle,
-            message: "Something went wrong! Order Not created");
+          title: langKey.errorTitle,
+          message: langKey.orderNotCreated.tr,
+        );
     }).catchError(onError);
   }
 
   void showSuccessDialog({OrderResponse? response}) {
     Get.defaultDialog(
-      title: "Order Information",
+      title: langKey.orderInformation.tr,
       titleStyle: appBarTitleSize,
       barrierDismissible: false,
       content: Column(
@@ -460,12 +472,12 @@ class CheckoutController extends GetxController {
           ),
           AppConstant.spaceWidget(height: 10.0),
           CustomText(
-            title: "Payment Successful!, You're Order has been Placed!",
+            title: langKey.paymentSuccessful.tr,
             textAlign: TextAlign.center,
             weight: FontWeight.w600,
           ),
           CustomText(
-            title: "OrderID #${response!.data["orderId"]}",
+            title: "${langKey.orderId.tr} #${response!.data["orderId"]}",
             size: 17,
             weight: FontWeight.bold,
           ),
@@ -487,7 +499,7 @@ class CheckoutController extends GetxController {
                   Get.offAllNamed(Routes.initRoute);
                   //Get.back();
                 },
-                text: "Continue Shopping",
+                text: langKey.continueShopping.tr,
                 width: 200,
                 height: 40,
                 color: kPrimaryColor,

@@ -52,7 +52,7 @@ class BuyerOrdersUI extends GetView<OrderController> {
       itemBuilder: (BuildContext context) {
         return [
           popUpMenuItemDesign(
-            title: 'User Order Disputes',
+            title: langKey.userOrderDispute.tr,
             value: AppBarMenuNames.disputes,
           ),
         ];

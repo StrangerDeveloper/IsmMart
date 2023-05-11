@@ -55,7 +55,7 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              CustomText(title: "Order Details", style: appBarTitleSize),
+              CustomText(title: langKey.orderDetail.tr, style: appBarTitleSize),
               buildSvgLogo(),
             ],
           ),
@@ -89,12 +89,13 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             CustomText(
-                              title: "INVOICE NO: ${model?.id ?? 0}",
+                              title: "${langKey.invoiceNo}: ${model?.id ?? 0}",
                               style: headline3,
                             ),
                             CustomText(
-                                title:
-                                    "Date: ${AppConstant.formattedDataTime("MMMM dd, yyyy", model!.createdAt ?? DateTime.now())}"),
+                              title:
+                                  "${langKey.Date.tr}: ${AppConstant.formattedDataTime("MMMM dd, yyyy", model!.createdAt ?? DateTime.now())}",
+                            ),
                           ],
                         ),
                         trailing: CustomText(
@@ -113,7 +114,7 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                           child: ListTile(
                             contentPadding: const EdgeInsets.all(8.0),
                             title: CustomText(
-                              title: "Billing Details:",
+                              title: "${langKey.billingDetails.tr}:",
                               style: appBarTitleSize,
                             ),
                             subtitle: CustomText(
@@ -134,7 +135,7 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                           child: ListTile(
                             contentPadding: const EdgeInsets.all(8.0),
                             title: CustomText(
-                              title: "Vendor Details:",
+                              title: "${langKey.vendorStoreDetails.tr}:",
                               style: appBarTitleSize,
                             ),
                             subtitle: CustomText(
@@ -182,7 +183,8 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          CustomText(title: "Order Details", style: appBarTitleSize),
+          CustomText(
+              title: "${langKey.orderDetail.tr}", style: appBarTitleSize),
           buildSvgLogo(),
         ],
       ),
@@ -211,11 +213,12 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
             ),
             child: Row(
               children: [
-                Expanded(flex: 2, child: _dataHeader(text: "Product Name")),
-                Expanded(child: _dataHeader(text: "Qty")),
-                Expanded(child: _dataHeader(text: "Price")),
-                Expanded(child: _dataHeader(text: "Amount")),
-                Expanded(child: _dataHeader(text: "Action")),
+                Expanded(
+                    flex: 2, child: _dataHeader(text: langKey.productName.tr)),
+                Expanded(child: _dataHeader(text: langKey.qty.tr)),
+                Expanded(child: _dataHeader(text: langKey.price.tr)),
+                Expanded(child: _dataHeader(text: langKey.amount.tr)),
+                Expanded(child: _dataHeader(text: langKey.action.tr)),
               ],
             ),
           ),
@@ -240,23 +243,27 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                             ),
                           ),
                           Expanded(
-                              child: _dataCell(text: '${orderItem.quantity}')),
+                            child: _dataCell(text: '${orderItem.quantity}'),
+                          ),
                           Expanded(
                             child: CustomPriceWidget(
-                                title: "${orderItem.product?.discountPrice}",
-                                style: bodyText2Poppins),
+                              title: "${orderItem.product?.discountPrice}",
+                              style: bodyText2Poppins,
+                            ),
                             /*_dataCell(
                                   text: orderItem.product?.discountPrice)*/
                           ),
                           Expanded(
-                              child: CustomPriceWidget(
-                                  title: "${orderItem.price}",
-                                  style:
-                                      bodyText2Poppins) /*_dataCell(text: '${orderItem.price}')*/),
+                            child: CustomPriceWidget(
+                                title: "${orderItem.price}",
+                                style:
+                                    bodyText2Poppins) /*_dataCell(text: '${orderItem.price}')*/,
+                          ),
                           Expanded(
-                              child: model.status!.contains("pending")
-                                  ? Container()
-                                  : _dataAction(orderItemModel: orderItem)),
+                            child: model.status!.contains("pending")
+                                ? Container()
+                                : _dataAction(orderItemModel: orderItem),
+                          ),
                         ],
                       ),
                     );
@@ -351,7 +358,7 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           StickyLabel(
-                            text: "Review",
+                            text: langKey.reviews.tr,
                             style: headline1,
                           ),
                         ],
@@ -360,7 +367,7 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                         padding: const EdgeInsets.only(top: 5, bottom: 5),
                         child: RichText(
                           text: TextSpan(
-                            text: 'Rating',
+                            text: langKey.rating.tr,
                             style: const TextStyle(
                               //fontSize: 12,
                               color: Colors.black,
@@ -397,7 +404,7 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                         padding: const EdgeInsets.only(top: 10, bottom: 20),
                         child: CustomTextField1(
                           controller: controller.reviewTxtFieldController,
-                          title: 'Review',
+                          title: langKey.reviews.tr,
                           asterisk: true,
                           minLines: 4,
                           maxLines: 6,
@@ -459,7 +466,7 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                   Padding(
                     padding: const EdgeInsets.only(left: 5),
                     child: Text(
-                      'Dispute',
+                      langKey.disputes.tr,
                       style: GoogleFonts.lato(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -478,7 +485,7 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
               ),
               Divider(),
               BottomSheetItemRow(
-                title: 'Add Dispute',
+                title: langKey.addDisputes.tr,
                 icon: CupertinoIcons.add,
                 onTap: () {
                   Navigator.of(context).pop();
@@ -490,12 +497,14 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                     );
                   } else {
                     AppConstant.displaySnackBar(
-                        'error', 'Dispute already added');
+                      langKey.errorTitle.tr,
+                      langKey.disputeAlreadyAdded.tr,
+                    );
                   }
                 },
               ),
               BottomSheetItemRow(
-                title: 'View Dispute',
+                title: langKey.viewDispute.tr,
                 icon: IconlyLight.document,
                 onTap: () {
                   Navigator.of(context).pop();
@@ -505,7 +514,9 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                     });
                   } else {
                     AppConstant.displaySnackBar(
-                        'error', 'Dispute not added yet');
+                      langKey.errorTitle.tr,
+                      langKey.disputeNotAddedYet.tr,
+                    );
                   }
                 },
               ),
@@ -522,20 +533,26 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
         Row(
           children: [
             _textWidget(
-                title: "Payment Method",
-                value: orderModel?.paymentMethod ?? ""),
+              title: langKey.paymentMethod.tr,
+              value: orderModel?.paymentMethod ?? "",
+            ),
             _textWidget(
-                title: "Delivery Date",
-                value: AppConstant.formattedDataTime(
-                    "MMMM dd, yyyy", orderModel!.expectedDeliveryDate!)),
+              title: langKey.deliveryDate.tr,
+              value: AppConstant.formattedDataTime(
+                "MMMM dd, yyyy",
+                orderModel!.expectedDeliveryDate!,
+              ),
+            ),
           ],
         ),
         Row(
           children: [
             _textWidget(
-                title: "Shipping Cost", value: orderModel.shippingPrice ?? 0),
+              title: langKey.shippingCost.tr,
+              value: orderModel.shippingPrice ?? 0,
+            ),
             _textWidget(
-                title: "Total Price",
+                title: langKey.totalPrice.tr,
                 value: orderModel.totalPrice ?? 0,
                 valueColor: kRedColor),
           ],
@@ -575,7 +592,7 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   StickyLabel(
-                    text: "Dispute",
+                    text: langKey.disputes.tr,
                     style: headline1,
                   ),
                 ],
@@ -583,7 +600,7 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
               AppConstant.spaceWidget(height: 5),
               CustomText(
                 title:
-                    "Claims can be made only in the event of the loss or damage of a parcel",
+                    langKey.claimCanBeMade.tr,
                 style: headline3.copyWith(color: kLightColor),
               ),
               AppConstant.spaceWidget(height: 15),
@@ -614,7 +631,7 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                                 ),
                                 const SizedBox(height: 5),
                                 Text(
-                                  'Click here to upload',
+                                  langKey.clickHereToUpload.tr,
                                   style: TextStyle(
                                     fontSize: 15,
                                     color: Colors.grey.shade400,

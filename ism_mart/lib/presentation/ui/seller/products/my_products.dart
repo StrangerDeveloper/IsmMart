@@ -13,7 +13,6 @@ class MyProducts extends GetView<SellersController> {
 
   @override
   Widget build(BuildContext context) {
-    //debugPrint("myProducts: ${controller.myProductsList.length}");
 
     return SafeArea(
       child: Scaffold(
@@ -152,7 +151,7 @@ class MyProducts extends GetView<SellersController> {
                                       color: kLightColor)),
                               AppConstant.spaceWidget(width: 10),
                               CustomText(
-                                title: "${model.discount}% OFF",
+                                title: "${model.discount}% ${langKey.OFF.tr}",
                                 color: kOrangeColor,
                                 weight: FontWeight.w600,
                               ),
@@ -213,7 +212,7 @@ class MyProducts extends GetView<SellersController> {
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: CustomText(
-                      title: "Out of stock",
+                      title: langKey.outOfStock.tr,
                       color: kWhiteColor,
                       size: 12,
                       weight: FontWeight.w600,

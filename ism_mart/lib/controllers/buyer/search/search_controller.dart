@@ -143,7 +143,9 @@ class SearchController extends GetxController {
       filters.addIf(maxPrice > 0, "maxPrice", "$maxPrice");
     } else
       AppConstant.displaySnackBar(
-          langKey.errorTitle, langKey.minPriceShouldNotBe);
+        langKey.errorTitle.tr,
+        langKey.minPriceShouldNotBe.tr,
+      );
 
     int page = 1;
     int limit = 10;

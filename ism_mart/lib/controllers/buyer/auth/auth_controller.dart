@@ -77,6 +77,7 @@ class AuthController extends GetxController {
   }
 
   var isLoading = false.obs;
+
   login() async {
     print("email ${emailController.text} pass  ${passwordController.text}");
     isLoading(true);
@@ -89,17 +90,21 @@ class AuthController extends GetxController {
       if (userResponse != null) {
         if (userResponse.success!) {
           Get.back();
-          AppConstant.displaySnackBar("success", userResponse.message);
+          AppConstant.displaySnackBar(
+              langKey.successTitle.tr, userResponse.message);
           await LocalStorageHelper.storeUser(userModel: userResponse.userModel)
               .then((value) {
             clearLoginController();
           });
         } else {
-          AppConstant.displaySnackBar("error", userResponse.message);
+          AppConstant.displaySnackBar(
+              langKey.errorTitle.tr, userResponse.message);
         }
       } else {
         AppConstant.displaySnackBar(
-            "error", "Something went wrong with credentials");
+          langKey.errorTitle.tr,
+          langKey.wrongWithCredentials.tr,
+        );
       }
     }).catchError((error) {
       isLoading(false);
@@ -118,14 +123,15 @@ class AuthController extends GetxController {
       if (response != null) {
         if (response.success!) {
           //Get.back();
-          AppConstant.displaySnackBar("success", response.message);
+          AppConstant.displaySnackBar(
+              langKey.successTitle.tr, response.message);
           return true;
         } else {
-          AppConstant.displaySnackBar("error", response.message);
+          AppConstant.displaySnackBar(langKey.errorTitle.tr, response.message);
         }
       } else
         AppConstant.displaySnackBar(
-            "error", "Something went wrong with credentials");
+            langKey.errorTitle.tr, langKey.wrongWithCredentials.tr);
       return false;
     }).catchError((onError) {
       isLoading(false);
@@ -152,14 +158,15 @@ class AuthController extends GetxController {
         if (response.success!) {
           Get.back();
           debugPrint("Email: ${response.toString()}");
-          AppConstant.displaySnackBar("success", response.message);
+          AppConstant.displaySnackBar(
+              langKey.successTitle.tr, response.message);
           passwordController.clear();
         } else {
-          AppConstant.displaySnackBar("error", response.message);
+          AppConstant.displaySnackBar(langKey.errorTitle.tr, response.message);
         }
       } else
         AppConstant.displaySnackBar(
-            "error", "Something went wrong with credentials");
+            langKey.errorTitle.tr, langKey.wrongWithCredentials.tr);
     }).catchError((onError) {
       isLoading(false);
       debugPrint("resetPassword: $onError");
@@ -178,13 +185,16 @@ class AuthController extends GetxController {
           Get.back();
           clearLoginController();
           debugPrint("Email: ${response.toString()}");
-          AppConstant.displaySnackBar("success", response.message);
+          AppConstant.displaySnackBar(
+              langKey.successTitle.tr, response.message);
         } else {
-          AppConstant.displaySnackBar("error", response.message);
+          AppConstant.displaySnackBar(langKey.errorTitle.tr, response.message);
         }
       } else
         AppConstant.displaySnackBar(
-            "error", "Something went wrong with credentials");
+          langKey.errorTitle.tr,
+          langKey.wrongWithCredentials.tr,
+        );
     }).catchError((onError) {
       debugPrint("Verification Link Error: $onError");
     });
@@ -208,17 +218,18 @@ class AuthController extends GetxController {
       if (response != null) {
         if (response.success!) {
           //Get.back();
-          AppConstant.displaySnackBar("success", response.message);
+          AppConstant.displaySnackBar(
+              langKey.successTitle.tr, response.message);
           //clearControllers();
         } else
-          AppConstant.displaySnackBar(langKey.errorTitle, response.message);
+          AppConstant.displaySnackBar(langKey.errorTitle.tr, response.message);
       } else
         AppConstant.displaySnackBar(
-            langKey.errorTitle, langKey.someThingWentWrong.tr);
+            langKey.errorTitle.tr, langKey.someThingWentWrong.tr);
     }).catchError((error) {
       isLoading(false);
       AppConstant.displaySnackBar(
-          langKey.errorTitle, langKey.someThingWentWrong.tr);
+          langKey.errorTitle.tr, langKey.someThingWentWrong.tr);
     });
   }
 
@@ -249,14 +260,16 @@ class AuthController extends GetxController {
         if (apiResponse != null) {
           if (apiResponse.success!) {
             Get.back();
-            AppConstant.displaySnackBar("success", apiResponse.message);
+            AppConstant.displaySnackBar(
+                langKey.successTitle.tr, apiResponse.message);
             clearStoreController();
             getCurrentUser();
           } else
-            AppConstant.displaySnackBar('error', apiResponse.message);
+            AppConstant.displaySnackBar(
+                langKey.errorTitle.tr, apiResponse.message);
         } else
           AppConstant.displaySnackBar(
-              langKey.errorTitle, "something went wrong!");
+              langKey.errorTitle.tr, langKey.someThingWentWrong.tr);
       }).catchError((error) {
         isLoading(false);
         debugPrint("RegisterStore: Error $error");
@@ -264,7 +277,9 @@ class AuthController extends GetxController {
     } else {
       isLoading(false);
       AppConstant.displaySnackBar(
-          langKey.errorTitle, "Current User not found!");
+        langKey.errorTitle.tr,
+        langKey.currentUserNotFound.tr,
+      );
     }
   }
 
@@ -482,15 +497,16 @@ class AuthController extends GetxController {
         if (userResponse != null) {
           if (userResponse.success!) {
             Get.back();
-            AppConstant.displaySnackBar("success", userResponse.message);
+            AppConstant.displaySnackBar(
+                langKey.successTitle.tr, userResponse.message);
             editingTextController.clear();
             getCurrentUser();
           } else
             AppConstant.displaySnackBar(
-                langKey.errorTitle, userResponse.message);
+                langKey.errorTitle.tr, userResponse.message);
         } else
           AppConstant.displaySnackBar(
-              langKey.errorTitle, "something went wrong!");
+              langKey.errorTitle.tr, langKey.someThingWentWrong.tr);
       }).catchError((error) {
         isLoading(false);
         debugPrint("RegisterStore: Error $error");
@@ -509,12 +525,14 @@ class AuthController extends GetxController {
           if (response.success!) {
             Get.back();
             LocalStorageHelper.deleteUserData();
-            AppConstant.displaySnackBar("error", response.message);
+            AppConstant.displaySnackBar(
+                langKey.errorTitle.tr, response.message);
           } else
-            AppConstant.displaySnackBar("error", response.message);
+            AppConstant.displaySnackBar(
+                langKey.errorTitle.tr, response.message);
         } else
           AppConstant.displaySnackBar(
-              langKey.errorTitle, "something went wrong!");
+              langKey.errorTitle.tr, langKey.someThingWentWrong.tr);
       }).catchError((error) {
         isLoading(false);
         debugPrint("deActivateAccount: Error $error");
@@ -556,6 +574,7 @@ class AuthController extends GetxController {
 
   ///Contact us
   var subjectController = TextEditingController();
+
   postContactUs() async {
     isLoading(true);
     var data = {
@@ -568,20 +587,22 @@ class AuthController extends GetxController {
       if (apiResponse != null) {
         if (apiResponse.success!) {
           // Get.back();
-          AppConstant.displaySnackBar("success", apiResponse.message);
+          AppConstant.displaySnackBar(
+              langKey.successTitle.tr, apiResponse.message);
           clearContactUsControllers();
         } else
-          AppConstant.displaySnackBar('error', apiResponse.message);
+          AppConstant.displaySnackBar(
+              langKey.errorTitle.tr, apiResponse.message);
       } else
-        AppConstant.displaySnackBar('error', "something went wrong!");
+        AppConstant.displaySnackBar(
+            langKey.errorTitle.tr, langKey.someThingWentWrong.tr);
     }).catchError((e) {
       isLoading(false);
-      AppConstant.displaySnackBar(langKey.errorTitle, "$e");
+      AppConstant.displaySnackBar(langKey.errorTitle.tr, "$e");
     });
   }
 
-  void showSnackBar(
-      {title = langKey.errorTitle, message = 'Something went wrong'}) {
+  void showSnackBar({title = 'error', message = 'Something went wrong'}) {
     AppConstant.displaySnackBar(title, message);
   }
 

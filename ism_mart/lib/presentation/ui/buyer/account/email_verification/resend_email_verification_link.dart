@@ -14,102 +14,111 @@ class ResendEmailVerificationLink extends GetView<AuthController> {
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
     return SafeArea(
-        child: Scaffold(
-            body: CustomScrollView(slivers: [
-      SliverAppBar(
-        expandedHeight: 100.0,
-        floating: false,
-        pinned: true,
-        automaticallyImplyLeading: false,
-        flexibleSpace: FlexibleSpaceBar(
-          centerTitle: false,
-          titlePadding: const EdgeInsets.symmetric(horizontal: 16),
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              buildSvgLogo(),
-              InkWell(
-                onTap: () {
-                  Get.back();
-                  controller.clearLoginController();
-                },
-                child: const Icon(Icons.close),
+      child: Scaffold(
+        body: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              expandedHeight: 100.0,
+              floating: false,
+              pinned: true,
+              automaticallyImplyLeading: false,
+              flexibleSpace: FlexibleSpaceBar(
+                centerTitle: false,
+                titlePadding: const EdgeInsets.symmetric(horizontal: 16),
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    buildSvgLogo(),
+                    InkWell(
+                      onTap: () {
+                        Get.back();
+                        controller.clearLoginController();
+                      },
+                      child: const Icon(Icons.close),
+                    ),
+                  ],
+                ),
               ),
-            ],
-          ),
-        ),
-      ),
-      SliverList(
-          delegate: SliverChildListDelegate([
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: Text(
-            'Enter Email To Receive Verification Link',
-            style: headline2,
-          ),
-        ),
-        AppConstant.spaceWidget(height: 90),
-        Center(
-          child: Form(
-            key: formKey,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  AppConstant.spaceWidget(height: 20),
-                  FormInputFieldWithIcon(
-                    controller: controller.emailController,
-                    iconPrefix: Icons.email,
-                    labelText: langKey.email.tr,
-                    iconColor: kPrimaryColor,
-                    autofocus: false,
-                    textStyle: bodyText1,
-                    autoValidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Email is required for this field";
-                      } else
-                        return !GetUtils.isEmail(value)
-                            ? langKey.emailReq.tr
-                            : null;
-                    },
-                    keyboardType: TextInputType.emailAddress,
-                    onChanged: (value) {},
-                    onSaved: (value) {},
+            ),
+            SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: Text(
+                      langKey.emailVerificationLink.tr,
+                      style: headline2,
+                    ),
                   ),
-                  AppConstant.spaceWidget(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      CustomButton(
-                        onTap: () {
-                          Get.back();
-                        },
-                        text: "Cancel",
-                        width: 100,
-                        height: 35,
-                        color: kPrimaryColor,
+                  AppConstant.spaceWidget(height: 90),
+                  Center(
+                    child: Form(
+                      key: formKey,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            AppConstant.spaceWidget(height: 20),
+                            FormInputFieldWithIcon(
+                              controller: controller.emailController,
+                              iconPrefix: Icons.email,
+                              labelText: langKey.email.tr,
+                              iconColor: kPrimaryColor,
+                              autofocus: false,
+                              textStyle: bodyText1,
+                              autoValidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return langKey.emailReq.tr;
+                                } else
+                                  return !GetUtils.isEmail(value)
+                                      ? langKey.emailReq.tr
+                                      : null;
+                              },
+                              keyboardType: TextInputType.emailAddress,
+                              onChanged: (value) {},
+                              onSaved: (value) {},
+                            ),
+                            AppConstant.spaceWidget(height: 20),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                CustomButton(
+                                  onTap: () {
+                                    Get.back();
+                                  },
+                                  text: langKey.cancel.tr,
+                                  width: 100,
+                                  height: 35,
+                                  color: kPrimaryColor,
+                                ),
+                                CustomButton(
+                                  onTap: () async {
+                                    if (formKey.currentState!.validate()) {
+                                      await controller
+                                          .resendEmailVerificationLink();
+                                    }
+                                  },
+                                  text: langKey.send.tr,
+                                  width: 100,
+                                  height: 35,
+                                  color: kPrimaryColor,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                      CustomButton(
-                        onTap: () async {
-                          if (formKey.currentState!.validate()) {
-                            await controller.resendEmailVerificationLink();
-                          }
-                        },
-                        text: "Send",
-                        width: 100,
-                        height: 35,
-                        color: kPrimaryColor,
-                      ),
-                    ],
+                    ),
                   ),
                 ],
               ),
-            ),
-          ),
+            )
+          ],
         ),
-      ]))
-    ])));
+      ),
+    );
   }
 }

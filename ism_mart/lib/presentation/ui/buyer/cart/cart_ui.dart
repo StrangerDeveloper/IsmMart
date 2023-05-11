@@ -110,7 +110,7 @@ class CartUI extends GetView<CartController> {
             Obx(
               () => CustomText(
                 title:
-                    '${langKey.myCart} (${controller.totalQtyCart.value} ${langKey.items})',
+                    '${langKey.myCart.tr} (${controller.totalQtyCart.value} ${langKey.items.tr})',
                 style: appBarTitleSize,
               ),
             ),

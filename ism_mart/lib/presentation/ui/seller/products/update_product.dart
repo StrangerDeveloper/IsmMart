@@ -23,7 +23,7 @@ class UpdateProductUI extends GetView<SellersController> {
     },
         onLoading: CustomLoading(),
         onEmpty: NoDataFound(
-          text: "Product Not Found",
+          text: langKey.productNotFound.tr,
         ));
   }
 
@@ -112,7 +112,7 @@ class UpdateProductUI extends GetView<SellersController> {
                                       .prodPriceController.text.isNotEmpty,
                                   child: CustomText(
                                     title:
-                                        "Final price would be Rs ${controller.priceAfterCommission.value} after platform fee of 5%",
+                                        "${langKey.finalPriceWould.tr} ${controller.priceAfterCommission.value} ${langKey.afterPlatformFee.tr} 5%",
                                     color: kRedColor,
                                   ),
                                 ))
@@ -192,12 +192,13 @@ class UpdateProductUI extends GetView<SellersController> {
                                   onTap: () {
                                     if (formKey.currentState!.validate()) {
                                       if (controller.discountMessage.isEmpty) {
-                                       
                                         controller.updateProduct(
                                             model: productModel);
                                       } else {
-                                        AppConstant.displaySnackBar(langKey.errorTitle,
-                                            "Your discount should be between 10 and 100 percent. Please try again!");
+                                        AppConstant.displaySnackBar(
+                                          langKey.errorTitle.tr,
+                                          langKey.yourDiscountShould.tr,
+                                        );
                                       }
                                     }
                                   },

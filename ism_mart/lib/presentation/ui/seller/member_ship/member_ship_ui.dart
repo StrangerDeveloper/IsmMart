@@ -20,13 +20,13 @@ class PremiumMembershipUI extends GetView<MembershipController> {
                 [
                   Column(
                     children: [
-                      CustomHeader(
-                          title: langKey.membershipPlans.tr
-                      ),
+                      CustomHeader(title: langKey.membershipPlans.tr),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child:
-                            CustomText(title: langKey.membershipDesc.tr, size: 15),
+                        child: CustomText(
+                          title: langKey.membershipDesc.tr,
+                          size: 15,
+                        ),
                       ),
                     ],
                   ),
@@ -58,8 +58,9 @@ class PremiumMembershipUI extends GetView<MembershipController> {
         ),
       ),
       title: CustomText(
-          title: langKey.membershipPlans.tr,
-          style: appBarTitleSize),
+        title: langKey.membershipPlans.tr,
+        style: appBarTitleSize,
+      ),
     );
   }
 
@@ -110,9 +111,9 @@ class PremiumMembershipUI extends GetView<MembershipController> {
                     return ListTile(
                       leading: Icon(
                         Icons.check_circle,
-                        color:model.title!.toLowerCase().contains("start")
+                        color: model.title!.toLowerCase().contains("start")
                             ? kPrimaryColor
-                            :  kLightGreyColor,
+                            : kLightGreyColor,
                       ),
                       title: CustomText(
                         title: e,

@@ -20,17 +20,21 @@ class SellerDashboard extends GetView<SellersController> {
                 _orderStats(),
                 StickyLabel(text: langKey.recentOrders.tr),
                 kSmallDivider,
-                Obx(() => controller.orderController.isLoading.isTrue
-                    ? CustomLoading(isItForWidget: true)
-                    : controller.orderController.recentVendorOrdersList.isEmpty
-                        ? SizedBox(
-                            height: AppConstant.getSize().height * 0.35,
-                            child: NoDataFoundWithIcon(
-                                title: langKey.noOrderFound.tr),
-                          )
-                        : _buildRecentOrders(
-                            list: controller
-                                .orderController.recentVendorOrdersList)),
+                Obx(
+                  () => controller.orderController.isLoading.isTrue
+                      ? CustomLoading(isItForWidget: true)
+                      : controller
+                              .orderController.recentVendorOrdersList.isEmpty
+                          ? SizedBox(
+                              height: AppConstant.getSize().height * 0.35,
+                              child: NoDataFoundWithIcon(
+                                  title: langKey.noOrderFound.tr),
+                            )
+                          : _buildRecentOrders(
+                              list: controller
+                                  .orderController.recentVendorOrdersList,
+                            ),
+                ),
               ],
             ),
           ),

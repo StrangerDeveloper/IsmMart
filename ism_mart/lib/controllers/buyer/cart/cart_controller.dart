@@ -95,12 +95,12 @@ class CartController extends GetxController
           .then((CartResponse? response) {
         if (response != null) {
           if (response.success!) {
-            showSnackBar(langKey.success, response.message);
+            showSnackBar(langKey.success.tr, response.message);
             fetchCartItems();
           } else
-            showSnackBar(langKey.errorTitle, response.message);
+            showSnackBar(langKey.errorTitle.tr, response.message);
         } else
-          showSnackBar(langKey.errorTitle, langKey.someThingWentWrong);
+          showSnackBar(langKey.errorTitle.tr, langKey.someThingWentWrong.tr);
       }).catchError((error) {
         debugPrint(">>>>updateCart $error");
       });
@@ -114,12 +114,12 @@ class CartController extends GetxController
           .then((CartResponse? response) {
         if (response != null) {
           if (response.success!) {
-            showSnackBar(langKey.success, response.message);
+            showSnackBar(langKey.success.tr, response.message);
             fetchCartItems();
           } else
-            showSnackBar(langKey.errorTitle, response.message);
+            showSnackBar(langKey.errorTitle.tr, response.message);
         } else
-          showSnackBar(langKey.errorTitle, langKey.someThingWentWrong);
+          showSnackBar(langKey.errorTitle.tr, langKey.someThingWentWrong.tr);
       }).catchError((error) {
         debugPrint(">>>>DeleteItem $error");
       });

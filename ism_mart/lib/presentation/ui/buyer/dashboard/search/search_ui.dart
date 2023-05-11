@@ -138,7 +138,7 @@ class SearchUI extends GetView<SearchController> {
                 Expanded(
                   flex: 2,
                   child: CustomText(
-                    title: "${list.length} ${langKey.itemsFound}",
+                    title: "${list.length} ${langKey.itemsFound.tr}",
                     weight: FontWeight.w600,
                   ),
                 ),
@@ -226,7 +226,7 @@ class SearchUI extends GetView<SearchController> {
             SliverList(
               delegate: SliverChildListDelegate(
                 [
-                  StickyLabel(text: langKey.categories),
+                  StickyLabel(text: langKey.categories.tr),
                   Obx(
                     () => Container(
                       height: 70,
@@ -276,7 +276,7 @@ class SearchUI extends GetView<SearchController> {
                       ),
                     ),
                   ),
-                  StickyLabel(text: langKey.price),
+                  StickyLabel(text: langKey.price.tr),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -286,7 +286,7 @@ class SearchUI extends GetView<SearchController> {
                         child: FormInputFieldWithIcon(
                           controller: controller.minPriceController,
                           iconPrefix: Icons.attach_money_rounded,
-                          labelText: langKey.minPrice,
+                          labelText: langKey.minPrice.tr,
                           iconColor: kPrimaryColor,
                           enableBorder: UnderlineInputBorder(
                             borderSide:
@@ -306,7 +306,7 @@ class SearchUI extends GetView<SearchController> {
                         child: FormInputFieldWithIcon(
                           controller: controller.maxPriceController,
                           iconPrefix: Icons.attach_money_rounded,
-                          labelText: langKey.maxPrice,
+                          labelText: langKey.maxPrice.tr,
                           iconColor: kPrimaryColor,
                           autofocus: false,
                           enableBorder: UnderlineInputBorder(
@@ -352,7 +352,7 @@ class SearchUI extends GetView<SearchController> {
             controller.minPriceController.clear();
             controller.maxPriceController.clear();
           },
-          text: langKey.search,
+          text: langKey.search.tr,
           width: 120,
           height: 35,
         ),
@@ -374,7 +374,7 @@ class SearchUI extends GetView<SearchController> {
               activeColor: kPrimaryColor,
               toggleable: true,
               title: CustomText(
-                title: langKey.lowToHigh,
+                title: langKey.lowToHigh.tr,
                 size: 16,
               ),
               value: 'low-to-high',
@@ -389,7 +389,7 @@ class SearchUI extends GetView<SearchController> {
               //selected: controller.sortBy!.contains("high-to-low"),
               toggleable: true,
               title: CustomText(
-                title: langKey.highToLow,
+                title: langKey.highToLow.tr,
                 size: 16,
               ),
               value: 'high-to-low',

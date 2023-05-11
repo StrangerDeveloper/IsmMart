@@ -111,21 +111,23 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
         if (response.success!) {
           fetchMyProducts();
           Get.back();
-          AppConstant.displaySnackBar(langKey.success, "${response.message}");
+          AppConstant.displaySnackBar(
+              langKey.success.tr, "${response.message}");
           clearControllers();
         } else {
           AppConstant.displaySnackBar(
-              langKey.errorTitle, "${response.message}");
+              langKey.errorTitle.tr, "${response.message}");
         }
       } else
-        AppConstant.displaySnackBar(langKey.errorTitle, someThingWentWrong.tr);
+        AppConstant.displaySnackBar(
+            langKey.errorTitle.tr, someThingWentWrong.tr);
     }).catchError(onError);
   }
 
   onError(e) async {
     isLoading(false);
     print(">>>SellerController: $e");
-    showSnackBar(title: langKey.errorTitle, message: e.toString());
+    showSnackBar(title: langKey.errorTitle.tr, message: e.toString());
   }
 
   //TDO: END Product
@@ -138,10 +140,10 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
         .then((response) {
       if (response.success!) {
         if (response.success!) {
-          AppConstant.displaySnackBar(langKey.success, response.message);
+          AppConstant.displaySnackBar(langKey.success.tr, response.message);
           fetchMyProducts();
         } else
-          AppConstant.displaySnackBar(langKey.errorTitle, response.message);
+          AppConstant.displaySnackBar(langKey.errorTitle.tr, response.message);
       }
     }).catchError(onError);
     //fetchMyProducts();
@@ -271,12 +273,15 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
         if (response.success!) {
           Get.back();
           clearControllers();
-          AppConstant.displaySnackBar(langKey.success, "${response.message}");
+          AppConstant.displaySnackBar(
+              langKey.success.tr, "${response.message}");
           fetchMyProducts();
         } else {
           debugPrint('Error: ${response.toString()}');
-          AppConstant.displaySnackBar(langKey.errorTitle,
-              "${response.message != null ? response.message : someThingWentWrong.tr}");
+          AppConstant.displaySnackBar(
+            langKey.errorTitle.tr,
+            "${response.message != null ? response.message : someThingWentWrong.tr}",
+          );
         }
       }
     }).catchError((e) {
@@ -312,7 +317,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
                   print(">>>Length after: $lengthInMb");
                   imagesSizeInMb.value += lengthInMb;
                   if (lengthInMb > 2) {
-                    showSnackBar(message: langKey.fileMustBe + ' 2MB');
+                    showSnackBar(message: langKey.fileMustBe.tr + ' 2MB');
                   } else {
                     //: needs to add check if file exist
                     pickedImagesList.add(compressedFile);
@@ -326,7 +331,9 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
         } on PlatformException catch (e) {
           print(e);
           AppConstant.displaySnackBar(
-              langKey.errorTitle, langKey.invalidImageFormat);
+            langKey.errorTitle.tr,
+            langKey.invalidImageFormat.tr,
+          );
         }
       } else {
         print("called");
@@ -348,7 +355,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
                   .then((compressedFile) {
                 var lengthInMb = compressedFile.lengthSync() * 0.000001;
                 if (lengthInMb > 2) {
-                  showSnackBar(message: langKey.imageSizeDesc + ' 2MB');
+                  showSnackBar(message: langKey.imageSizeDesc.tr + ' 2MB');
                 } else {
                   imagePath(compressedFile.path);
                 }
@@ -432,8 +439,10 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
     ];
   }
 
-  void showSnackBar(
-      {title = langKey.errorTitle, message = langKey.someThingWentWrong}) {
+  void showSnackBar({
+    title = langKey.errorTitle,
+    message = langKey.someThingWentWrong,
+  }) {
     AppConstant.displaySnackBar(title, message);
   }
 
