@@ -493,37 +493,39 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
               BottomSheetItemRow(
                 title: langKey.addDisputes.tr,
                 icon: CupertinoIcons.add,
+                isDisabled:
+                (orderItem?.tickets?.isEmpty ?? false) ? false : true,
                 onTap: () {
                   Navigator.of(context).pop();
-                  if (orderItem?.tickets?.isEmpty ?? false) {
-                    AppConstant.showBottomSheet(
-                      isGetXBottomSheet: true,
-                      buildContext: Get.context,
-                      widget: addDisputeItems(orderItem: orderItem),
-                    );
-                  } else {
-                    AppConstant.displaySnackBar(
-                      langKey.errorTitle.tr,
-                      langKey.disputeAlreadyAdded.tr,
-                    );
-                  }
+                  AppConstant.showBottomSheet(
+                    isGetXBottomSheet: true,
+                    buildContext: Get.context,
+                    widget: addDisputeItems(orderItem: orderItem),
+                  );
                 },
               ),
               BottomSheetItemRow(
-                title: langKey.viewDispute.tr,
+                title:  langKey.viewDispute.tr,
                 icon: IconlyLight.document,
+                isDisabled:
+                (orderItem?.tickets?.isNotEmpty ?? false) ? false : true,
                 onTap: () {
                   Navigator.of(context).pop();
-                  if (orderItem?.tickets?.isNotEmpty ?? false) {
-                    Get.to(() => DisputeDetailView(), arguments: {
-                      'id': orderItem!.tickets![0].id.toString()
-                    });
-                  } else {
-                    AppConstant.displaySnackBar(
-                      langKey.errorTitle.tr,
-                      langKey.disputeNotAddedYet.tr,
-                    );
-                  }
+                  Get.to(() => DisputeDetailView(),
+                      arguments: {'id': orderItem!.tickets![0].id.toString()});
+                },
+              ),
+              BottomSheetItemRow(
+                title:  langKey.deleteDisputes.tr,
+                icon: IconlyLight.delete,
+                isDisabled:
+                (orderItem?.tickets?.isNotEmpty ?? false) ? false : true,
+                onTap: () {
+                  Navigator.of(context).pop();
+                  controller.deleteTicket(
+                    orderItem!.tickets![0].id.toString(),
+                    orderModel!.id.toString(),
+                  );
                 },
               ),
             ],
@@ -706,19 +708,21 @@ class BottomSheetItemRow extends StatelessWidget {
   final String title;
   final IconData icon;
   final GestureTapCallback? onTap;
+  final bool isDisabled;
 
   const BottomSheetItemRow({
     Key? key,
     required this.title,
     required this.icon,
     this.onTap,
+    required this.isDisabled,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(8),
-      onTap: onTap,
+      onTap: isDisabled ? null : onTap,
       child: Padding(
         padding: const EdgeInsets.only(left: 10, top: 10, bottom: 10),
         child: Row(
@@ -729,11 +733,13 @@ class BottomSheetItemRow extends StatelessWidget {
                 shape: BoxShape.circle,
                 border: Border.all(
                   width: 0.5,
+                  color: isDisabled ? Colors.grey : Colors.black,
                 ),
               ),
               child: Icon(
                 icon,
                 size: 20,
+                color: isDisabled ? Colors.grey : Colors.black,
               ),
             ),
             SizedBox(width: 13),
@@ -741,7 +747,7 @@ class BottomSheetItemRow extends StatelessWidget {
               title,
               style: GoogleFonts.lato(
                 fontSize: 15,
-                color: Colors.black,
+                color: isDisabled ? Colors.grey : Colors.black,
               ),
             ),
           ],

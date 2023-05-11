@@ -30,9 +30,10 @@ class CustomText extends StatelessWidget {
       textAlign: textAlign ?? TextAlign.start,
       style: style ??
           bodyText1.copyWith(
-              fontSize: size ?? 13,
-              color: color ?? Colors.black,
-              fontWeight: weight ?? FontWeight.normal),
+            fontSize: size ?? 13,
+            color: color ?? Colors.black,
+            fontWeight: weight ?? FontWeight.normal,
+          ),
     );
   }
 }

@@ -24,24 +24,31 @@ class FaqUI extends GetView<BaseController> {
               Obx(
                 () => Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: controller.faqsList.map((FAQModel? faq) {
-                    return ExpansionTile(
-                      childrenPadding: EdgeInsets.only(left: 16),
-                      expandedAlignment: Alignment.centerLeft,
-                      title: CustomText(
-                        title: faq!.questions,
-                        style: headline3,
-                      ),
-                      children: [
-                        CustomText(
-                          title: faq.answer!,
-                          size: 14.5,
-                          weight: FontWeight.w600,
-                          color: Colors.black,
+                  children: controller.faqsList.map(
+                    (FAQModel? faq) {
+                      return ExpansionTile(
+                        childrenPadding: EdgeInsets.only(left: 16, bottom: 10),
+                        expandedAlignment: Alignment.centerLeft,
+                        title: Text(
+                          faq!.questions!,
+                          textAlign: TextAlign.start,
+                          style: headline3.copyWith(height: 1.1),
                         ),
-                      ],
-                    );
-                  }).toList(),
+                        children: [
+                          Text(
+                            faq.answer!,
+                            textAlign: TextAlign.start,
+                            style: bodyText1.copyWith(
+                              height: 1.5,
+                              fontSize: 13,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w100,
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  ).toList(),
                 ),
               ),
             ],
