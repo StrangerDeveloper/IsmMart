@@ -96,9 +96,9 @@ class ApiProvider {
     return response.map((e) => QuestionModel.fromJson(e)).toList();
   }
 
-  Future<ResponseModel> postProductQuestion({token, model}) async{
-    var response =  await _apiRepository.postQuestion(token: token, data: model);
-    return ResponseModel.fromResponse(response);
+  Future<ApiResponse> postProductQuestion({token, model}) async {
+    var response = await _apiRepository.postQuestion(token: token, data: model);
+    return ApiResponse.fromJson(response);
   }
 
   //TDO: Cart Item APIs
@@ -108,9 +108,9 @@ class ApiProvider {
     return cartResponse.map((e) => CartModel.fromJson(e)).toList();
   }
 
-  Future<CartResponse> addCart({String? token, JSON? data}) async {
+  Future<ApiResponse> addCart({String? token, JSON? data}) async {
     var response = await _apiRepository.postCartItem(token: token, data: data);
-    return CartResponse.fromJson(response);
+    return ApiResponse.fromJson(response);
   }
 
   Future<CartResponse> deleteCartItem({String? token, int? cartId}) async {
@@ -134,6 +134,17 @@ class ApiProvider {
     var response = await _apiRepository.reqStripePayment(
         client_secret: AppConstant.SECRET_KEY, body: data);
     return response;
+  }
+
+  /**
+   *
+   * Api Layer
+   * */
+
+  Future<CurrencyModel> convertCurrency({to, from, amount}) async {
+    var response = await _apiRepository.reqCurrencyConverter(
+        to: to, from: from, amount: amount);
+    return CurrencyModel.fromJson(response);
   }
 
   /**

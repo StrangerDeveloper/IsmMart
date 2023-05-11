@@ -5,37 +5,42 @@ import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
-
-import 'package:ism_mart/utils/constants.dart';
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class SingleCartItems extends StatelessWidget {
-  const SingleCartItems({Key? key, this.cartModel, this.index})
+  const SingleCartItems(
+      {Key? key, this.cartModel, this.index, this.calledFromCheckout = false})
       : super(key: key);
   final CartModel? cartModel;
   final int? index;
+  final bool? calledFromCheckout;
 
   @override
   Widget build(BuildContext context) {
     var controller = Get.find<CartController>();
-    return _singleCartItem(
-        cartModel: cartModel, index: index, controller: controller);
+    return InkWell(
+      onTap: () {
+        Get.toNamed('/product/${cartModel!.productId!}',
+            arguments: {"calledFor": "seller"});
+      },
+      child: _singleCartItem(
+          cartModel: cartModel, index: index, controller: controller),
+    );
   }
 
   Widget _singleCartItem(
       {CartModel? cartModel, index, CartController? controller}) {
-    return Card(
-      elevation: 0,
-      margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
-      child: Padding(
-        padding: const EdgeInsets.all(6.0),
-        child: Stack(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Stack(
+        children: [
+          CustomGreyBorderContainer(
+            //elevation: 0,
+            borderColor: kWhiteColor,
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Column(
               children: [
                 Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  //mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Expanded(
                       child: CircleAvatar(
@@ -51,50 +56,52 @@ class SingleCartItems extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.end,
                           children: [
+                            Container(
+                              width: AppResponsiveness.width * 0.6,
+                              child: CustomText(
+                                title: cartModel.productModel!.name,
+                                style: headline3,
+                                maxLines: 3,
+                              ),
+                            ),
+                            AppConstant.spaceWidget(height: 2),
                             CustomText(
-                              title: cartModel.productModel!.name,
-                              style: headline3,
+                              title:
+                                  "${langKey.availableStock.tr}: ${cartModel.productModel!.stock}",
+                              size: 10,
+                            ),
+                            AppConstant.spaceWidget(height: 2),
+                            Row(
+                              children: [
+                                CustomText(
+                                  title: "${langKey.itemPrice.tr}: ",
+                                  style: bodyText2.copyWith(color: kLightColor),
+                                ),
+                                CustomPriceWidget(
+                                  title:
+                                      "${cartModel.productModel!.discountPrice}",
+                                  style: bodyText2.copyWith(color: kLightColor),
+                                ),
+                              ],
                             ),
                             AppConstant.spaceWidget(height: 4),
                             CustomPriceWidget(
-                                title:
-                                    "${cartModel.productModel!.discountPrice}"),
-                            (cartModel.productModel!.discount != null &&
-                                    cartModel.productModel!.discount! > 0)
-                                ? Row(
-                                    children: [
-                                      CustomPriceWidget(
-                                        title:
-                                            "${cartModel.productModel!.price}",
-                                        style: bodyText1.copyWith(
-                                            fontWeight: FontWeight.bold,
-                                            color: kLightColor,
-                                            decoration:
-                                                TextDecoration.lineThrough),
-                                      ),
-                                      AppConstant.spaceWidget(width: 5),
-                                      CustomText(
-                                          title:
-                                              "${cartModel.productModel!.discount!}% OFF",
-                                          style: bodyText2.copyWith(
-                                              fontWeight: FontWeight.w700,
-                                              color: Colors.red))
-                                    ],
-                                  )
-                                : Container(),
+                              title: "${cartModel.itemPrice}",
+                              style: bodyText1,
+                            ),
 
                             ///Product selected Features
                             if (cartModel.featuresName!.isNotEmpty)
                               Row(
                                 children: [
                                   CustomText(
-                                    title: "Features:",
+                                    title: "${langKey.features.tr}:",
                                     style: bodyText2,
                                   ),
                                   SizedBox(
-                                    width: 170,
+                                    width: AppResponsiveness.width * 0.5,
                                     height: 30,
                                     child: ListView.builder(
                                         scrollDirection: Axis.horizontal,
@@ -128,151 +135,88 @@ class SingleCartItems extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Align(
-                      alignment: Alignment.bottomRight,
-                      child: ProductQuantityCounterr(
-                        h: 30.0,
-                        w: 25.0,
-                        horiz: 0.0,
-                        verti: 3.0,
-                        margin: 0.0,
-                        spaceW: 0.0,
-                        bottomP: 15.0,
-                        onDecrementPress: () async {
-                          var a = int.parse(cartModel.quantity.toString());
-                          if (a <= -1) {
-                            a = 0;
-                          }
-                          a--;
-                          cartModel.quantity = "$a";
-                          cartModel.productModel!.totalPrice =
-                              controller!.totalCartAmount.value;
-                          await LocalStorageHelper.updateCartItems(
-                              cartModel: cartModel);
-                          controller.update();
-                        },
-                        onIncrementPress: () async {
-                          var a = int.parse(cartModel.quantity.toString());
-                          if (a == 10) {
-                            a = 0;
-                          }
-                          a++;
-                          cartModel.quantity = "$a";
-                          cartModel.productModel!.totalPrice =
-                              controller!.totalCartAmount.value;
-                          await LocalStorageHelper.updateCartItems(
-                              cartModel: cartModel);
-                          controller.update();
-                        },
-                        bgColor: kPrimaryColor,
-                        textColor: kWhiteColor,
-                        quantity: cartModel.quantity,
-                      ),
+                  ],
+                ),
 
-                      // InkWell(
-                      //   onTap: () {
-                      //     cartModel.onQuantityClicked =
-                      //         !cartModel.onQuantityClicked!;
-                      //     controller!.cartItemsList.refresh();
-                      //     controller.update();
-                      //   },
-                      //   child: Container(
-                      //       padding: const EdgeInsets.symmetric(
-                      //           horizontal: 12.0, vertical: 5),
-                      //       decoration: BoxDecoration(
-                      //         color: kWhiteColor,
-                      //         border: Border.all(
-                      //             color: cartModel.onQuantityClicked!
-                      //                 ? kDarkColor
-                      //                 : kLightColor),
-                      //         borderRadius: BorderRadius.circular(8.0),
-                      //       ),
-                      //       child: Row(
-                      //         children: [
-                      //           CustomText(
-                      //             title: cartModel.quantity!,
-                      //             size: 16,
-                      //             color: kDarkColor,
-                      //             weight: FontWeight.bold,
-                      //           ),
-                      //           AppConstant.spaceWidget(width: 5),
-                      //           Icon(
-                      //             cartModel.onQuantityClicked!
-                      //                 ? Icons.keyboard_arrow_up
-                      //                 : Icons.keyboard_arrow_down,
-                      //             size: 20,
-                      //             color: cartModel.onQuantityClicked!
-                      //                 ? kDarkColor
-                      //                 : kLightColor,
-                      //           ),
-                      //         ],
-                      //       )),
-                      // ),
-                    ),
+                ///Qty widget
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    calledFromCheckout!
+                        ? Align(
+                            alignment: Alignment.bottomRight,
+                            child: InkWell(
+                              onTap: () {
+                                cartModel.onQuantityClicked =
+                                    !cartModel.onQuantityClicked!;
+                                controller!.cartItemsList.refresh();
+                                controller.update();
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 12.0, vertical: 5),
+                                decoration: BoxDecoration(
+                                  color: kWhiteColor,
+                                  border: Border.all(
+                                      color: cartModel.onQuantityClicked!
+                                          ? kDarkColor
+                                          : kLightColor),
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                child: CustomText(
+                                  title: cartModel.quantity!,
+                                  size: 16,
+                                  color: kDarkColor,
+                                  weight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          )
+                        : ProductQuantityCounter(
+                            //width: 140,
+                            height: 30,
+                            margin: const EdgeInsets.symmetric(
+                                vertical: 2, horizontal: 2),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 2, horizontal: 2),
+                            quantity: cartModel.quantity,
+                            onIncrementPress: () async {
+                              int quantity = int.parse(cartModel.quantity!);
+                              if (quantity >= cartModel.productModel!.stock!)
+                                return;
+                              cartModel.quantity = "${quantity + 1}";
+                              cartModel.productModel!.totalPrice =
+                                  controller!.totalCartAmount.value;
+                              cartModel.itemPrice = (quantity + 1) *
+                                  cartModel.productModel!.discountPrice!;
+                              await LocalStorageHelper.updateCartItems(
+                                  cartModel: cartModel);
+                              controller.update();
+                            },
+                            onDecrementPress: () async {
+                              int quantity = int.parse(cartModel.quantity!);
+                              if (quantity <= 1) return;
+                              cartModel.quantity = "${quantity - 1}";
+                              cartModel.productModel!.totalPrice =
+                                  controller!.totalCartAmount.value;
+                              cartModel.itemPrice = ((quantity - 1) *
+                                  cartModel.productModel!.discountPrice!);
+
+                              await LocalStorageHelper.updateCartItems(
+                                  cartModel: cartModel);
+                              controller.update();
+                            },
+                          ),
                   ],
                 ),
                 AppConstant.spaceWidget(height: 5),
-                cartModel.onQuantityClicked!
-                    ? AnimatedContainer(
-                        duration: const Duration(milliseconds: 1500),
-                        curve: Curves.fastOutSlowIn,
-                        width: double.infinity,
-                        height: 40,
-                        child: ListView.builder(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            itemCount: controller!.moq,
-                            itemBuilder: (_, index) {
-                              return InkWell(
-                                onTap: () async {
-                                  // cartModel.quantity = "${(index + 1)}";
-                                  /* await controller.updateCart(
-                                      cartItemId: cartModel.id,
-                                      quantity: (index + 1));*/
-                                  cartModel.quantity = "${(index + 1)}";
-                                  cartModel.productModel!.totalPrice =
-                                      controller.totalCartAmount.value;
-                                  await LocalStorageHelper.updateCartItems(
-                                      cartModel: cartModel);
-                                  controller.update();
-                                },
-                                child: Container(
-                                  margin: const EdgeInsets.symmetric(
-                                      horizontal: 5, vertical: 3),
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 12.0, vertical: 5),
-                                  decoration: int.parse(cartModel.quantity!) ==
-                                          (index + 1)
-                                      ? BoxDecoration(
-                                          color: kPrimaryColor,
-                                          border: Border.all(color: kDarkColor),
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                        )
-                                      : BoxDecoration(
-                                          color: kWhiteColor,
-                                          border: Border.all(color: kDarkColor),
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                        ),
-                                  child: CustomText(
-                                    title: "${index + 1}",
-                                    textAlign: TextAlign.center,
-                                    color: int.parse(cartModel.quantity!) ==
-                                            (index + 1)
-                                        ? kWhiteColor
-                                        : kPrimaryColor,
-                                    weight: FontWeight.w600,
-                                  ),
-                                ),
-                              );
-                            }),
-                      )
-                    : Container(),
               ],
             ),
+          ),
+          if (!calledFromCheckout!)
             Positioned(
-              right: 0,
+              right: 5,
+              top: 5,
               child: CustomActionIcon(
                 onTap: () {
                   controller!.cartItemsList.removeAt(index);
@@ -281,102 +225,13 @@ class SingleCartItems extends StatelessWidget {
 
                   //controller!.deleteCartItem(cartItemId: cartModel.id);
                 },
+                height: 20,
                 hasShadow: false,
                 icon: Icons.close_rounded,
                 bgColor: kRedColor.withOpacity(0.2),
                 iconColor: kRedColor,
               ),
             ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-// ProductQuantityCounter(
-//                         h: 30.0,
-//                         w: 10.0,
-//                         horiz: 0.0,
-//                         verti: 3.0,
-//                         margin: 0.0,
-//                         spaceW: 0.0,
-//                         bottomP: 15.0,
-//                         onDecrementPress: () => productController.decrement(),
-//                         onIncrementPress: () => productController.increment(),
-//                         textEditingController:
-//                             productController.quantityController,
-//                         bgColor: kPrimaryColor,
-//                         textColor: kWhiteColor,
-//                       ),
-
-class ProductQuantityCounterr extends StatelessWidget {
-  ProductQuantityCounterr(
-      {Key? key,
-      this.onDecrementPress,
-      this.onIncrementPress,
-      this.quantity,
-      this.bgColor,
-      this.textColor,
-      this.w = 30.0,
-      this.h = 40.0,
-      this.horiz = 10.0,
-      this.verti = 5.0,
-      this.margin = 8.0,
-      this.spaceW = 4.0,
-      this.bottomP = 12.0})
-      : super(key: key);
-
-  final VoidCallback? onDecrementPress;
-  final VoidCallback? onIncrementPress;
-  String? quantity;
-  final Color? bgColor, textColor;
-  var w;
-  var h;
-  final horiz;
-  final verti;
-  final margin;
-  final spaceW;
-  final bottomP;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: margin),
-      padding: EdgeInsets.symmetric(horizontal: horiz, vertical: verti),
-      decoration: BoxDecoration(
-        color: bgColor ?? kPrimaryColor,
-        borderRadius: BorderRadius.circular(30),
-      ),
-      height: 40,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          IconButton(
-            iconSize: 18,
-            alignment: Alignment.topCenter,
-            onPressed: onDecrementPress,
-            icon: Icon(
-              Icons.remove,
-              color: textColor ?? kWhiteColor,
-            ),
-          ),
-          AppConstant.spaceWidget(width: spaceW),
-          SizedBox(
-              width: w,
-              height: h,
-              child: Text(
-                quantity.toString(),
-                style: bodyText1.copyWith(
-                    color: textColor ?? kWhiteColor, fontSize: 16),
-              )),
-          AppConstant.spaceWidget(width: spaceW),
-          IconButton(
-            iconSize: 18,
-            alignment: Alignment.topCenter,
-            onPressed: onIncrementPress,
-            icon: Icon(Icons.add, color: textColor ?? kWhiteColor),
-          ),
         ],
       ),
     );

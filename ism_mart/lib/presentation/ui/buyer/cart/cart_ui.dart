@@ -109,7 +109,8 @@ class CartUI extends GetView<CartController> {
             AppConstant.spaceWidget(width: 10),
             Obx(
               () => CustomText(
-                title: 'My Cart (${controller.totalQtyCart.value} items)',
+                title:
+                    '${langKey.myCart.tr} (${controller.totalQtyCart.value} ${langKey.items.tr})',
                 style: appBarTitleSize,
               ),
             ),
@@ -120,8 +121,10 @@ class CartUI extends GetView<CartController> {
   }
 
   Widget _buildCartItemSection({List<CartModel>? cartItemsList}) {
+    int selectedItem = 0;
     return ListView.builder(
       shrinkWrap: true,
+      reverse: true,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: cartItemsList!.length,
       itemBuilder: (context, index) {
@@ -145,7 +148,8 @@ class CartUI extends GetView<CartController> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomText(
-                    title: "${controller.totalQtyCart.value} items",
+                    title:
+                        "${controller.totalQtyCart.value} ${langKey.items.tr}",
                     style: headline3,
                   ),
                   CustomPriceWidget(
@@ -155,7 +159,10 @@ class CartUI extends GetView<CartController> {
             ),
             AppConstant.spaceWidget(height: 10),
             CustomButton(
-              onTap: () => Get.toNamed(Routes.checkOutRoute),
+              onTap: () async{
+                AuthController authController = Get.find();
+                await authController.emailVerificationChecks(false);
+              },
               text: langKey.proceedToCheckOut.tr,
               color: kPrimaryColor,
               height: 40,

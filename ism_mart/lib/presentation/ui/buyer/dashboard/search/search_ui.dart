@@ -7,18 +7,15 @@ import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class SearchUI extends GetView<SearchController> {
- const SearchUI({
+  const SearchUI({
     Key? key,
     this.isCalledForDeals = false,
   }) : super(key: key);
   final bool? isCalledForDeals;
 
-
-
- // final controller = Get.find<SearchController>();
+  // final controller = Get.find<SearchController>();
   @override
   Widget build(BuildContext context) {
-
     controller.search(
         Get.arguments != null ? Get.arguments["searchText"].toString() : " ");
 
@@ -101,10 +98,10 @@ class SearchUI extends GetView<SearchController> {
 
   _body() {
     //print("ProductList: ${controller.productList.length}");
-   /* return GetBuilder<SearchController>(
-        builder: (_) => *//*controller.isLoading.isTrue
+    /* return GetBuilder<SearchController>(
+        builder: (_) => */ /*controller.isLoading.isTrue
             ? CustomLoading(isItForWidget: true, color: kPrimaryColor)
-            : *//*controller.productList.isEmpty
+            : */ /*controller.productList.isEmpty
                 ? Center(
                     child: NoDataFoundWithIcon(
                       title: langKey.emptyProductSearch.tr,
@@ -141,7 +138,7 @@ class SearchUI extends GetView<SearchController> {
                 Expanded(
                   flex: 2,
                   child: CustomText(
-                    title: "${list.length} items found",
+                    title: "${list.length} ${langKey.itemsFound.tr}",
                     weight: FontWeight.w600,
                   ),
                 ),
@@ -229,7 +226,7 @@ class SearchUI extends GetView<SearchController> {
             SliverList(
               delegate: SliverChildListDelegate(
                 [
-                  StickyLabel(text: "Categories"),
+                  StickyLabel(text: langKey.categories.tr),
                   Obx(
                     () => Container(
                       height: 70,
@@ -279,7 +276,7 @@ class SearchUI extends GetView<SearchController> {
                       ),
                     ),
                   ),
-                  StickyLabel(text: "Price"),
+                  StickyLabel(text: langKey.price.tr),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -289,7 +286,7 @@ class SearchUI extends GetView<SearchController> {
                         child: FormInputFieldWithIcon(
                           controller: controller.minPriceController,
                           iconPrefix: Icons.attach_money_rounded,
-                          labelText: 'Min Price',
+                          labelText: langKey.minPrice.tr,
                           iconColor: kPrimaryColor,
                           enableBorder: UnderlineInputBorder(
                             borderSide:
@@ -309,7 +306,7 @@ class SearchUI extends GetView<SearchController> {
                         child: FormInputFieldWithIcon(
                           controller: controller.maxPriceController,
                           iconPrefix: Icons.attach_money_rounded,
-                          labelText: 'Max Price',
+                          labelText: langKey.maxPrice.tr,
                           iconColor: kPrimaryColor,
                           autofocus: false,
                           enableBorder: UnderlineInputBorder(
@@ -344,14 +341,18 @@ class SearchUI extends GetView<SearchController> {
       children: [
         CustomButton(
           onTap: () => controller.clearFilters(),
-          text: "Clear",
+          text: clear.tr,
           color: kOrangeColor,
           width: 120,
           height: 35,
         ),
         CustomButton(
-          onTap: () => controller.applyFilter(),
-          text: "Search",
+          onTap: () {
+            controller.applyFilter();
+            controller.minPriceController.clear();
+            controller.maxPriceController.clear();
+          },
+          text: langKey.search.tr,
           width: 120,
           height: 35,
         ),
@@ -373,7 +374,7 @@ class SearchUI extends GetView<SearchController> {
               activeColor: kPrimaryColor,
               toggleable: true,
               title: CustomText(
-                title: 'Low to High',
+                title: langKey.lowToHigh.tr,
                 size: 16,
               ),
               value: 'low-to-high',
@@ -388,7 +389,7 @@ class SearchUI extends GetView<SearchController> {
               //selected: controller.sortBy!.contains("high-to-low"),
               toggleable: true,
               title: CustomText(
-                title: 'High to Low',
+                title: langKey.highToLow.tr,
                 size: 16,
               ),
               value: 'high-to-low',

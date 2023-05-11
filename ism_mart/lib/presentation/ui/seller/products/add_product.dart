@@ -200,15 +200,17 @@ class AddProductsUI extends GetView<SellersController> {
                               },
                               onSaved: (value) {},
                             ),
-                            Obx(() => Visibility(
-                                  visible: controller
-                                      .prodPriceController.text.isNotEmpty,
-                                  child: CustomText(
-                                    title:
-                                        "Final price would be Rs ${controller.priceAfterCommission.value} after platform fee of 5%",
-                                    color: kRedColor,
-                                  ),
-                                ))
+                            Obx(
+                              () => Visibility(
+                                visible: controller
+                                    .prodPriceController.text.isNotEmpty,
+                                child: CustomText(
+                                  title:
+                                      "${langKey.finalPriceWould.tr} ${controller.priceAfterCommission.value} ${langKey.afterPlatformFee.tr} 5%",
+                                  color: kRedColor,
+                                ),
+                              ),
+                            )
                           ],
                         ),
                         AppConstant.spaceWidget(height: 15),
@@ -307,11 +309,14 @@ class AddProductsUI extends GetView<SellersController> {
                                             .discountMessage.isEmpty) {
                                           controller.addProduct();
                                         } else {
-                                          AppConstant.displaySnackBar('error',
-                                              "Your discount should be between 10 and 100 percent. Please try again!");
+                                          AppConstant.displaySnackBar(
+                                            langKey.errorTitle,
+                                            langKey.yourDiscountShould.tr,
+                                          );
                                         }
                                       } else {
-                                        AppConstant.displaySnackBar('error',
+                                        AppConstant.displaySnackBar(
+                                            langKey.errorTitle,
                                             langKey.plzSelectSubCategory.tr);
                                       }
                                     }
@@ -423,32 +428,33 @@ class AddProductsUI extends GetView<SellersController> {
                   ? kRedColor
                   : kPrimaryColor,
               child: Container(
-                  width: double.infinity,
-                  height: 150,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: controller.pickedImagesList.isNotEmpty
-                      ? _showImages()
-                      : Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Icon(
-                              Icons.cloud_upload_rounded,
-                              size: 30,
-                            ),
-                            const SizedBox(height: 5),
-                            CustomText(
-                              title: 'Click here to upload',
-                              color: kLightColor,
-                            ),
-                          ],
-                        )),
+                width: double.infinity,
+                height: 150,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: controller.pickedImagesList.isNotEmpty
+                    ? _showImages()
+                    : Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.cloud_upload_rounded,
+                            size: 30,
+                          ),
+                          const SizedBox(height: 5),
+                          CustomText(
+                            title: langKey.clickHereToUpload.tr,
+                            color: kLightColor,
+                          ),
+                        ],
+                      ),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5),
               child: CustomText(
-                title: "Upload images less than 2MB",
+                title: "${langKey.uploadImageLessThan.tr} 2MB",
                 color: controller.imagesSizeInMb.value > maxImageUploadSizeInMBs
                     ? kRedColor
                     : kLightColor,

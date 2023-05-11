@@ -167,7 +167,7 @@ class AppConstant {
           "We're sorry, but we couldn't recognize that user. Please double-check and try again, or contact support for assistance.";
     }
 
-    Get.snackbar(titleNew.capitalizeFirst!, messageNew,
+    Get.snackbar(titleNew.capitalizeFirst!, messageNew.toString(),
         snackPosition: position ?? SnackPosition.TOP,
         backgroundColor: bgColor,
         icon: Icon(
@@ -198,7 +198,6 @@ class AppConstant {
     } else {
       Scaffold.of(buildContext).showBottomSheet(
         (context) => widget!,
-
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(15), topRight: Radius.circular(15)),
@@ -243,14 +242,37 @@ class AppConstant {
     }
   }
 
-  static String getCurrencySymbol({String? languageCode}) {
-    switch (languageCode) {
-      case "us":
+  static String getCurrencySymbol({String? currencyCode}) {
+    switch (currencyCode?.toLowerCase()) {
+      case "usd":
         return "\$";
       case "pkr":
-        return "Rs.";
-      case "uae":
-        return "AED";
+        return "Rs ";
+      case "aed":
+        return "AED ";
+      case "gbp":
+        return "\£";
+      case "eur":
+        return "\€";
+      case "inr":
+        return "\₹";
+      case "cny":
+        return "\¥";
+      case "aud":
+        return "A\$";
+      case "cad":
+        return "CA\$";
+      case "jpy":
+        return "JP\¥";
+      case "sgd":
+        return "\$";
+      case "try":
+        return "\₺";
+      case "hkd":
+        return "HK\$";
+      case "chf":
+        return "CHF";
+
       default:
         return "Rs";
     }

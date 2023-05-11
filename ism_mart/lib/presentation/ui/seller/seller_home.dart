@@ -10,24 +10,25 @@ class SellerHome extends GetView<SellersController> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         title: Obx(
           () => CustomText(
-              title: controller.appBarTitle.value.tr,
-              style: appBarTitleSize),
+              title: controller.appBarTitle.value.tr, style: appBarTitleSize),
         ),
         iconTheme: IconThemeData(color: kPrimaryColor),
         centerTitle: true,
         backgroundColor: kAppBarColor,
         actions: [
           InkWell(
-            onTap: ()=>Get.back(),
+            onTap: () => Get.back(),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Icon(IconlyLight.logout, color: kRedColor,),
+              child: Icon(
+                IconlyLight.logout,
+                color: kRedColor,
+              ),
             ),
           ),
         ],

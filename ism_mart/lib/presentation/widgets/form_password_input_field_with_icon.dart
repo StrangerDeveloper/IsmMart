@@ -86,8 +86,8 @@ class _FormPasswordInputFieldWithIconState
                     onTap: _toggle,
                     child: Icon(
                       passVisibility.isTrue
-                          ? Icons.visibility
-                          : Icons.visibility_off,
+                          ? Icons.visibility_off
+                          : Icons.visibility,
                       color: Colors.black87,
                     ),
                   )

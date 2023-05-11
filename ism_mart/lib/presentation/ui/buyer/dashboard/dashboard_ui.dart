@@ -188,7 +188,7 @@ class DashboardUI extends GetView<BaseController> {
             right: 0,
             child: Container(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 30, vertical: 0),
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
                 //height: 60,
                 child: Column(
                   children: [
@@ -228,14 +228,14 @@ class DashboardUI extends GetView<BaseController> {
                                 children: [
                                   CustomPriceWidget(
                                     title: "${model.discountPrice!}",
-                                    style: headline2,
+                                    style: headline3,
                                   ),
                                   AppConstant.spaceWidget(width: 5),
                                   CustomPriceWidget(
                                     title: "${model.price!}",
                                     style: bodyText1.copyWith(
                                         decoration: TextDecoration.lineThrough,
-                                        fontSize: 15),
+                                        fontSize: 13),
                                   ),
                                   AppConstant.spaceWidget(width: 8),
                                   RichText(
@@ -399,7 +399,8 @@ class DashboardUI extends GetView<BaseController> {
                         itemBuilder: (context, index) {
                           CategoryModel model = list[index];
                           return SingleCategoryItem(categoryModel: model);
-                        }),
+                        },
+                      ),
               ),
             ),
     );

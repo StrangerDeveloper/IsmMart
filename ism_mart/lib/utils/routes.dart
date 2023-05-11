@@ -1,16 +1,21 @@
 import 'package:get/get.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
-import 'package:ism_mart/presentation/ui/buyer/account/forgot_password.dart';
 import 'package:ism_mart/presentation/ui/exports_ui.dart';
+
+import '../presentation/ui/buyer/account/email_verification/resend_email_verification_link.dart';
 
 class Routes {
   static const initRoute = "/";
   static const loginRoute = "/signIn";
-  static const forgotPasswordRoute = "/forgotPassword";
+  static const resetPasswordRoute = "/resetPassword";
+  static const passwordResetEmailInput = "/inputEmail";
   static const registerRoute = "/register";
+  static const emailVerificationLinkRoute = "/emailVerificationLink";
   static const categoriesRoute = "/categories";
   static const cartRoute = "/cart";
   static const checkOutRoute = "/checkout";
+  static const changeAddressRoute = "/changeAddress";
+
   static const profileRoute = "/profile";
 
   static const searchRoute = "/search";
@@ -19,6 +24,7 @@ class Routes {
   static const buyerOrdersRoute = "/buyerOrders";
 
   static const settingsRoute = "/settings";
+
   //static const aboutUsRoute = "/aboutUs";
 
   ///Pages with passing :ID
@@ -31,9 +37,14 @@ class Routes {
       name: aboutUsRoute,
       page: () => AboutUS(),
     ),*/
+
+    GetPage(
+        name: initRoute,
+        page: () => const BaseLayout(),
+        binding: BaseBindings()),
     GetPage(
       name: loginRoute,
-      page: () => const SignInUI(),
+      page: () => SignInUI(),
       binding: BaseBindings(),
     ),
     GetPage(
@@ -42,12 +53,16 @@ class Routes {
       binding: BaseBindings(),
     ),
     GetPage(
-        name: forgotPasswordRoute,
-        page: () => const ForgotPassword(),
-    ),
+        name: resetPasswordRoute,
+        page: () => const ResetForgotPassword(),
+        binding: BaseBindings()),
     GetPage(
-        name: initRoute,
-        page: () => const BaseLayout(),
+        name: passwordResetEmailInput,
+        page: () => const EmailInput(),
+        binding: BaseBindings()),
+    GetPage(
+        name: emailVerificationLinkRoute,
+        page: () => ResendEmailVerificationLink(),
         binding: BaseBindings()),
     GetPage(
         name: searchRoute,
@@ -67,6 +82,12 @@ class Routes {
       page: () => CheckoutUI(),
       binding: CheckoutBinding(),
       middlewares: [AuthMiddleWare(priority: 5)],
+    ),
+    GetPage(
+      name: changeAddressRoute,
+      page: () => ChangeAddressUI(),
+      binding: CheckoutBinding(),
+      middlewares: [AuthMiddleWare(priority: 1)],
     ),
     GetPage(
       name: buyerOrdersRoute,

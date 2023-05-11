@@ -5,16 +5,23 @@ import 'package:flutter/services.dart';
 import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:ism_mart/api_helper/api_base_helper.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
+import 'package:ism_mart/api_helper/urls.dart';
 import 'package:ism_mart/controllers/controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class OrderController extends GetxController
     with StateMixin, GetSingleTickerProviderStateMixin {
   final OrderProvider _orderProvider;
 
   OrderController(this._orderProvider);
+
+  GlobalKey<FormState> reviewFormKey = GlobalKey<FormState>();
+  RxDouble rating = 5.0.obs;
+  TextEditingController reviewTxtFieldController = TextEditingController();
 
   var titleController = TextEditingController();
   var descriptionController = TextEditingController();
@@ -138,23 +145,25 @@ class OrderController extends GetxController
     });
   }
 
-  disputeOnOrders({orderId}) async {
+  disputeOnOrders({OrderItem? orderItem, orderId}) async {
     isLoading(false);
     String title = titleController.text;
     String description = descriptionController.text;
 
     await _orderProvider
             .createDispute(authController.userToken, title, description,
-                orderId, pickedImagesList)
-            .then((DisputeResponse? response) {
+                orderItem!.id, pickedImagesList)
+            .then((ApiResponse? apiResponse) {
       isLoading(false);
-      if (response != null) {
-        if (response.success!) {
+      if (apiResponse != null) {
+        if (apiResponse.success!) {
+          fetchOrderById(orderId);
           Get.back();
           clearControllers();
-          showSnackBar(title: 'success', message: response.message);
+          showSnackBar(
+              title: langKey.successTitle.tr, message: apiResponse.message);
         } else
-          showSnackBar(message: response.message);
+          showSnackBar(message: apiResponse.message);
       } else {
         showSnackBar();
       }
@@ -163,6 +172,32 @@ class OrderController extends GetxController
       print(">>>Dispute $e");
     })*/
         ;
+  }
+
+  deleteTicket(String ticketId, String orderId) {
+    // GlobalVariable.showLoader.value = true;
+    isLoading(true);
+    ApiBaseHelper()
+        .deleteMethod(url: Urls.deleteTickets + ticketId, withBearer: false)
+        .then((parsedJson) {
+      isLoading(false);
+      if (parsedJson['success'] == true && parsedJson['data'] != null) {
+        fetchOrderById(orderId);
+        AppConstant.displaySnackBar(
+          langKey.success.tr,
+          langKey.disputeDeleted.tr,
+        );
+      } else {
+        AppConstant.displaySnackBar(
+          langKey.errorTitle.tr,
+          langKey.recordDoNotExist.tr,
+        );
+      }
+    }).catchError((e) {
+      isLoading(false);
+      print(e);
+      // GlobalVariable.showLoader.value = false;
+    });
   }
 
   var _picker = ImagePicker();
@@ -184,7 +219,7 @@ class OrderController extends GetxController
 
               imagesSizeInMb.value += lengthInMb;
               if (lengthInMb > 2) {
-                showSnackBar(message: 'Each file must be up to 2MB');
+                showSnackBar(message: langKey.fileMustBe.tr + ' 2MB');
               } else {
                 //: needs to add check if file exist
                 pickedImagesList.add(compressedFile);
@@ -195,7 +230,10 @@ class OrderController extends GetxController
           }
         } on PlatformException catch (e) {
           print(e);
-          AppConstant.displaySnackBar('error', 'Invalid Image format!');
+          AppConstant.displaySnackBar(
+            langKey.errorTitle.tr,
+            langKey.invalidImageFormat.tr,
+          );
         }
       } else {
         print("called");
@@ -215,6 +253,7 @@ class OrderController extends GetxController
   void onClose() {
     super.onClose();
     clearControllers();
+    reviewTxtFieldController.dispose();
   }
 
   @override
@@ -232,7 +271,40 @@ class OrderController extends GetxController
     authController.fetchUserCoins();
   }
 
-  void showSnackBar({title = 'error', message = 'Something went wrong'}) {
+  submitReviewBtn({OrderItem? orderItem}) async {
+    if (reviewFormKey.currentState?.validate() ?? false) {
+      isLoading(true);
+      JSON data = {
+        "text": reviewTxtFieldController.text,
+        "rating": rating.value,
+        "productId": orderItem!.product!.id,
+        "orderItemId": orderItem.id
+      };
+      await _orderProvider
+          .createReview(token: authController.userToken, data: data)
+          .then((ApiResponse? apiResponse) {
+        print(apiResponse?.message);
+        isLoading(false);
+        if (apiResponse != null) {
+          if (apiResponse.success!) {
+            Get.back();
+            rating.value = 0;
+            reviewTxtFieldController.clear();
+            showSnackBar(
+                title: langKey.successTitle.tr, message: apiResponse.message);
+          } else
+            showSnackBar(message: apiResponse.message);
+        } else {
+          showSnackBar();
+        }
+      }).catchError((e) {
+        isLoading(false);
+        print(">>>Dispute $e");
+      });
+    }
+  }
+
+  void showSnackBar({title = 'error', message = "Something went wrong!"}) {
     AppConstant.displaySnackBar(title, message);
   }
 }

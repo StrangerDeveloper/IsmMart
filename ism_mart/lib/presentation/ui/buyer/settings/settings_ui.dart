@@ -13,7 +13,6 @@ class SettingsUI extends GetView<AuthController> {
 
   @override
   Widget build(BuildContext context) {
-    //var authController = Get.find<AuthController>();
     return Obx(
       () => SafeArea(
         child: controller.isLoading.isTrue
@@ -45,7 +44,7 @@ class SettingsUI extends GetView<AuthController> {
                     children: [
                       _accountSetup(context),
                       AppConstant.spaceWidget(height: 10),
-                      const StickyLabel(text: langKey.general),
+                      StickyLabel(text: langKey.general.tr),
                       _generalSettings(),
                     ],
                   ),
@@ -63,13 +62,13 @@ class SettingsUI extends GetView<AuthController> {
           ? Column(
               children: [
                 _userCard(),
-                const StickyLabel(text: langKey.myAccount),
+                StickyLabel(text: langKey.myAccount.tr),
                 _accountSettings(buildContext: context)
               ],
             )
           : Column(
               children: [
-                const StickyLabel(text: langKey.account),
+                StickyLabel(text: langKey.account.tr),
                 _account(),
               ],
             ),
@@ -88,6 +87,13 @@ class SettingsUI extends GetView<AuthController> {
                       "${langKey.welcome.tr} ${controller.userModel!.firstName}",
                   style: headline2,
                 ),
+                trailing: controller.userModel!.emailVerified == false ? InkWell(onTap: ()async{
+                  await controller.emailVerificationChecks(true);
+                },
+                  child: Text('Verify Email',
+                  style: bodyText1.copyWith(decoration: TextDecoration.underline),
+                  ),
+                ): null,
                 subtitle: CustomText(
                   title: "${controller.userModel!.email}",
                   style: bodyText1,
@@ -143,7 +149,9 @@ class SettingsUI extends GetView<AuthController> {
                   }
                 } else {
                   AppConstant.displaySnackBar(
-                      'error', "Your store has been disabled");
+                    langKey.errorTitle.tr,
+                    langKey.youStoreHas.tr,
+                  );
                 }
               },
               icon: Icons.dashboard_rounded,
@@ -177,20 +185,21 @@ class SettingsUI extends GetView<AuthController> {
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
-          /* _singleSettingsItem(
-              onTap: () => _showThemeChangeBottomSheet(),
-              icon: IconlyLight.setting,
-              iconColor: Colors.deepPurple,
-              title: "appearance".tr,
-              value: themeController.theme.value),*/
-
+          _singleSettingsItem(
+              onTap: () => _showCurrencyChangeBS(),
+              icon: Icons.currency_exchange,
+              iconColor: Color.fromARGB(255, 160, 235, 94),
+              title: langKey.currencyKey.tr,
+              value: currencyController.currency.value,
+              countryCode: currencyController.countryCode.value),
           Obx(
             () => _singleSettingsItem(
                 onTap: () => _showLanguageChangeBottomSheet(),
                 icon: Icons.language,
                 iconColor: Colors.orange,
                 title: langKey.language.tr,
-                value: languageController.language.value),
+                value: languageController.language.value,
+                countryCode: languageController.countryKey.value),
           ),
           /*_singleSettingsItem(
               onTap: () => Get.to(() => NotificationUI()),
@@ -244,14 +253,16 @@ class SettingsUI extends GetView<AuthController> {
                   },
                   icon: IconlyLight.logout,
                   iconColor: Colors.red,
-                  title: langKey.logout.tr)
+                  title: langKey.logout.tr,
+                )
               : Container()),
         ],
       ),
     );
   }
 
-  _singleSettingsItem({required onTap, icon, iconColor, title, value}) {
+  _singleSettingsItem(
+      {required onTap, icon, iconColor, title, value, countryCode}) {
     return InkWell(
       onTap: onTap,
       child: Container(
@@ -280,10 +291,14 @@ class SettingsUI extends GetView<AuthController> {
             ),
             Row(
               children: [
+                if (countryCode != null && countryCode != "")
+                  _countryFlag(countryCode: countryCode, height: 15, width: 25),
+                AppConstant.spaceWidget(width: 8),
                 if (value != null && value != "")
                   CustomText(
-                      title: value,
-                      style: caption.copyWith(fontWeight: FontWeight.w600)),
+                      title: value.toString().capitalizeFirst,
+                      style: caption.copyWith(
+                          fontWeight: FontWeight.w600, fontSize: 13)),
                 AppConstant.spaceWidget(width: 5),
                 const Align(
                     alignment: Alignment.centerRight,
@@ -334,27 +349,78 @@ class SettingsUI extends GetView<AuthController> {
     );
   }
 
-  Widget _countryFlag({String? countryCode, Color? color}) {
+  _showCurrencyChangeBS() {
+    AppConstant.showBottomSheet(
+      widget: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            StickyLabel(
+              text: langKey.selectCurrency.tr,
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children:
+                      currencyController.currencyLocales.entries.map((item) {
+                    return ListTile(
+                      onTap: () {
+                        currencyController.setCurrency(key: item.key);
+                        Get.back();
+                      },
+                      leading: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          _countryFlag(
+                              countryCode: item.value['countryCode'],
+                              color: item.value['color']),
+                        ],
+                      ),
+                      title: Text(item.value["description"],
+                          style:
+                              bodyText1.copyWith(fontWeight: FontWeight.w600)),
+                      subtitle: CustomText(
+                        title: item.value["longDesc"],
+                        color: kLightColor,
+                        size: 11,
+                      ),
+                      trailing: item.value["description"] ==
+                              currencyController.currency.value
+                          ? const Icon(Icons.done)
+                          : null,
+                    );
+                  }).toList(),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _countryFlag(
+      {String? countryCode,
+      Color? color = Colors.amber,
+      double? height = 20,
+      double? width = 30}) {
     var imageUrl =
         "https://raw.githubusercontent.com/hampusborgos/country-flags/main/png1000px/${countryCode!.toLowerCase()}.png";
     return Container(
-      height: 45,
-      width: 45,
+      height: height,
+      width: width,
       padding: EdgeInsets.all(8),
       // Border width
       decoration: BoxDecoration(
         color: color!.withOpacity(0.3),
-        shape: BoxShape.circle,
+        //shape: BoxShape.circle,
+        border: Border.all(color: Colors.grey),
         image: DecorationImage(
-          fit: BoxFit.fill,
+          fit: BoxFit.cover,
           image: NetworkImage(imageUrl),
         ),
       ),
-      /* child: SvgPicture.network(
-        "https://flagicons.lipis.dev/flags/4x3/${countryCode.toLowerCase()}.svg",
-        width: 40,
-        height: 40,
-      ),*/
     );
   }
 /*_showThemeChangeBottomSheet() {

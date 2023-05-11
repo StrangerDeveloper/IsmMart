@@ -47,9 +47,8 @@ class OrderModel {
         billingDetail: json["BillingDetail"] == null
             ? null
             : UserModel.fromJson(json["BillingDetail"]),
-        vendorDetails: json["User"] == null
-            ? null
-            : UserModel.fromJson(json["User"]),
+        vendorDetails:
+            json["User"] == null ? null : UserModel.fromJson(json["User"]),
         orderItems: json["OrderItems"] == null
             ? null
             : List<OrderItem>.from(
@@ -73,35 +72,90 @@ class OrderModel {
 }
 
 class OrderItem {
-  OrderItem({
-    this.id,
-    this.quantity,
-    this.price,
-    this.reviewed,
-    this.product,
-  });
-
   int? id;
   String? quantity;
   double? price;
   bool? reviewed;
   ProductModel? product;
+  List<Tickets>? tickets;
 
-  factory OrderItem.fromJson(Map<String, dynamic> json) => OrderItem(
-        id: json["id"],
-        quantity: json["quantity"],
-        price: json["price"].toDouble(),
-        reviewed: json["reviewed"],
-        product: ProductModel.fromJson(json["Product"]),
-      );
+  OrderItem(
+      {this.id,
+      this.quantity,
+      this.price,
+      this.reviewed,
+      this.product,
+      this.tickets});
+
+  OrderItem.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    quantity = json['quantity'];
+    price = json['price'].toDouble();
+    reviewed = json['reviewed'];
+    product = json['Product'] != null
+        ? new ProductModel.fromJson(json['Product'])
+        : null;
+    if (json['Tickets'] != null) {
+      tickets = <Tickets>[];
+      json['Tickets'].forEach((v) {
+        tickets!.add(new Tickets.fromJson(v));
+      });
+    }
+  }
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "quantity": quantity,
         "price": price,
         "reviewed": reviewed,
-        "Product": product!.toJson(),
+        "product": product!.toJson(),
+        "Tickets": tickets!.map((v) => v.toJson()).toList()
       };
+}
+
+class Tickets {
+  int? id;
+  String? title;
+  String? description;
+  int? orderItemsId;
+  int? userId;
+  String? status;
+  String? createdAt;
+  String? updatedAt;
+
+  Tickets(
+      {this.id,
+      this.title,
+      this.description,
+      this.orderItemsId,
+      this.userId,
+      this.status,
+      this.createdAt,
+      this.updatedAt});
+
+  Tickets.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    title = json['title'];
+    description = json['description'];
+    orderItemsId = json['orderItemsId'];
+    userId = json['userId'];
+    status = json['status'];
+    createdAt = json['createdAt'];
+    updatedAt = json['updatedAt'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['title'] = this.title;
+    data['description'] = this.description;
+    data['orderItemsId'] = this.orderItemsId;
+    data['userId'] = this.userId;
+    data['status'] = this.status;
+    data['createdAt'] = this.createdAt;
+    data['updatedAt'] = this.updatedAt;
+    return data;
+  }
 }
 
 class OrderResponse {

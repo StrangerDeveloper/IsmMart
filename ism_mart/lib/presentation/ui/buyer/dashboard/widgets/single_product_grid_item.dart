@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class SingleProductItems extends StatelessWidget {
   const SingleProductItems(
@@ -75,7 +76,7 @@ class SingleProductItems extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: CustomText(
-                      title: "${model.discount}% OFF",
+                      title: "${model.discount}% ${langKey.OFF.tr}",
                       color: kWhiteColor,
                       size: 12,
                       weight: FontWeight.w600,
@@ -95,11 +96,9 @@ class SingleProductItems extends StatelessWidget {
       aspectRatio: 0.75,
       child: GestureDetector(
         onTap: onTap ??
-            //()=>Navigator.pushReplacementNamed(Get.context!, '/product/${model!.id}', arguments: {"calledFor": "customer"}),
             () {
-              // if (!Get.isOverlaysOpen) Get.toNamed('/product/${model!.id}', arguments: {"calledFor": "customer"},);
               showModalBottomSheet(
-                //isDismissible: false,
+                  //isDismissible: false,
                   isScrollControlled: true,
                   context: buildContext,
                   backgroundColor: kWhiteColor,
@@ -108,17 +107,14 @@ class SingleProductItems extends StatelessWidget {
                   builder: (_) {
                     return SafeArea(
                       child: Container(
-                        height: AppResponsiveness.height*0.91,
+                        height: AppResponsiveness.height * 0.91,
                         child: SingleProductView(
                           productId: "${model!.id}",
                         ),
                       ),
                     );
                   });
-
-              // AppConstant.showBottomSheet(widget: SingleProductView(productId: "${model!.id}",), isGetXBottomSheet: false, buildContext: buildContext);
             },
-        // () => Get.to(() => SingleProductView(), binding: ProductBinding(), arguments: {"calledFor": "customer", "id":"${model!.id}"},  opaque: true, fullscreenDialog: true),
         child: Container(
           clipBehavior: Clip.hardEdge,
           margin: const EdgeInsets.symmetric(horizontal: 5),
@@ -152,12 +148,18 @@ class SingleProductItems extends StatelessWidget {
                         AppConstant.spaceWidget(height: 5),
                         CustomPriceWidget(title: "${model.discountPrice!}"),
                         if (model.discount != 0)
-                          CustomText(
-                            title:
-                                "${AppConstant.getCurrencySymbol()} ${model.price!}",
+                          CustomPriceWidget(
+                            title: "${model.price!}",
                             style: bodyText1.copyWith(
                                 decoration: TextDecoration.lineThrough),
                           ),
+
+                        // CustomText(
+                        //   title:
+                        //       "${AppConstant.getCurrencySymbol()} ${model.price!}",
+                        //   style: bodyText1.copyWith(
+                        //       decoration: TextDecoration.lineThrough),
+                        // ),
                       ],
                     ),
                   ),
@@ -176,7 +178,7 @@ class SingleProductItems extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: CustomText(
-                      title: "${model.discount}% OFF",
+                      title: "${model.discount}% ${langKey.OFF.tr}",
                       color: kWhiteColor,
                       size: 12,
                       weight: FontWeight.w600,
@@ -189,15 +191,4 @@ class SingleProductItems extends StatelessWidget {
       ),
     );
   }
-}
-
-class CustomRoute<T> extends MaterialPageRoute<T> {
-  CustomRoute({
-    required WidgetBuilder builder,
-    required RouteSettings settings,
-  }) : super(
-            builder: builder,
-            settings: settings,
-            maintainState: true,
-            fullscreenDialog: false);
 }

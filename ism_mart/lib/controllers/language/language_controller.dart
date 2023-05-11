@@ -7,6 +7,7 @@ class LanguageController extends GetxController {
 
   var languageKey = "".obs;
   var language = "".obs;
+  var countryKey = "".obs;
 
   var locale = Get.locale.toString().obs;
 
@@ -67,7 +68,6 @@ class LanguageController extends GetxController {
     }
 
     setLanguage(key: 'en_US');
-
   }
 
   void setLanguage({key}) {
@@ -82,6 +82,7 @@ class LanguageController extends GetxController {
     //storage.write('languageCode', languageCode);
 
     language(optionsLocales[key]['description']);
+    countryKey(optionsLocales[key]['countryCode']);
 
     update();
   }

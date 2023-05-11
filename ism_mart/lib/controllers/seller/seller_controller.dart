@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -27,9 +27,9 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
 
   void setDiscount(int? discount) {
     if (discount! > 0 && discount < 10) {
-      discountMessage("Discount should be greater than 10");
-    } else if (discount >= 100) {
-      discountMessage("Discount should not be greater or equal to 100");
+      discountMessage(langKey.discountMinValue.tr);
+    } else if (discount >= 90) {
+      discountMessage(langKey.discountMaxValue.tr);
     } else {
       discountMessage("");
     }
@@ -64,8 +64,8 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
   int productsLimit = 20;
   int page = 1;
 
-  fetchMyProducts() async {
-    await _apiProvider
+  fetchMyProducts() {
+    _apiProvider
         .fetchMyProducts(
             token: authController.userToken, limit: productsLimit, page: page)
         .then((response) {
@@ -95,29 +95,45 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
   //TOO: Update Product using PATCH request type
 
   updateProduct({ProductModel? model}) async {
+    model!.price = int.parse("${prodPriceController.text}");
+    model.name = prodNameController.text;
+    model.discount = int.parse("${prodDiscountController.text}");
+    model.description = prodDescriptionController.text;
+    model.stock = int.parse("${prodStockController.text}");
+
     isLoading(true);
+    model!.price = int.parse("${prodPriceController.text}");
+    model.name = prodNameController.text;
+    model.discount = int.parse(
+        "${prodDiscountController.text.isEmpty ? 0 : prodDiscountController.text}");
+    model.description = prodDescriptionController.text;
+    model.stock = int.parse("${prodStockController.text}");
+
     await _apiProvider
         .updateProduct(token: authController.userToken, model: model)
-        .then((ProductResponse? response) {
+        .then((ApiResponse? response) {
       isLoading(false);
       if (response != null) {
-        if (response.success != null) {
+        if (response.success!) {
           fetchMyProducts();
           Get.back();
-          AppConstant.displaySnackBar('success', "${response.message}");
+          AppConstant.displaySnackBar(
+              langKey.success.tr, "${response.message}");
           clearControllers();
         } else {
-          AppConstant.displaySnackBar('error', "${response.message}");
+          AppConstant.displaySnackBar(
+              langKey.errorTitle.tr, "${response.message}");
         }
       } else
-        AppConstant.displaySnackBar('error', someThingWentWrong.tr);
+        AppConstant.displaySnackBar(
+            langKey.errorTitle.tr, someThingWentWrong.tr);
     }).catchError(onError);
   }
 
   onError(e) async {
     isLoading(false);
     print(">>>SellerController: $e");
-    showSnackBar(title: 'error', message: e);
+    showSnackBar(title: langKey.errorTitle.tr, message: e.toString());
   }
 
   //TDO: END Product
@@ -125,19 +141,18 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
   //TDO: Delete Product
 
   deleteProduct({int? id}) async {
-    await LocalStorageHelper.getStoredUser().then((user) async {
-      await _apiProvider
-          .deleteProductById(id: id, token: user.token)
-          .then((response) {
-        if (response.success != null) {
-          if (response.success!) {
-            AppConstant.displaySnackBar('success', response.message);
-          } else
-            AppConstant.displaySnackBar('error', response.message);
-        }
-      }).catchError(onError);
-    });
-    fetchMyProducts();
+    await _apiProvider
+        .deleteProductById(id: id, token: authController.userToken)
+        .then((response) {
+      if (response.success!) {
+        if (response.success!) {
+          AppConstant.displaySnackBar(langKey.success.tr, response.message);
+          fetchMyProducts();
+        } else
+          AppConstant.displaySnackBar(langKey.errorTitle.tr, response.message);
+      }
+    }).catchError(onError);
+    //fetchMyProducts();
     //myProductsList.refresh();
   }
 
@@ -241,7 +256,9 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
 
   addProduct() async {
     isLoading(true);
-
+    num discount = prodDiscountController.text.isEmpty
+        ? 0
+        : num.parse(prodDiscountController.text);
     ProductModel newProduct = ProductModel(
         name: prodNameController.text.trim(),
         price: priceAfterCommission.value,
@@ -249,31 +266,35 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
         categoryId: selectedCategoryID.value,
         subCategoryId: selectedSubCategoryID.value,
         description: prodDescriptionController.text,
-        discount: num.parse(prodDiscountController.text.isEmpty
-            ? "0"
-            : prodDiscountController.text));
+        discount: discount);
     await _apiProvider
         .addProductWithHttp(
             token: authController.userToken,
             model: newProduct,
             categoryFieldList: dynamicFieldsValuesList,
             images: pickedImagesList)
-        .then((ProductResponse? response) {
+        .then((ApiResponse? response) {
       isLoading(false);
       if (response != null) {
-        if (response.success != null) {
-          fetchMyProducts();
+        if (response.success!) {
           Get.back();
           clearControllers();
-          AppConstant.displaySnackBar('success', "${response.message}");
+          AppConstant.displaySnackBar(
+              langKey.success.tr, "${response.message}");
+          fetchMyProducts();
         } else {
           debugPrint('Error: ${response.toString()}');
-          AppConstant.displaySnackBar('error',
-              "${response.message != null ? response.message : someThingWentWrong.tr}");
+          AppConstant.displaySnackBar(
+            langKey.errorTitle.tr,
+            "${response.message != null ? response.message : someThingWentWrong.tr}",
+          );
         }
       }
-    }).catchError(onError);
-    //isLoading(false);
+    }).catchError((e) {
+      debugPrint('Error: ${e.toString()}');
+      isLoading(false);
+      AppConstant.displaySnackBar(langKey.errorTitle, "${e.message}");
+    });
   }
 
   /// Profile Image Capture/Pick Section
@@ -302,7 +323,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
                   print(">>>Length after: $lengthInMb");
                   imagesSizeInMb.value += lengthInMb;
                   if (lengthInMb > 2) {
-                    showSnackBar(message: 'Each file must be up to 2MB');
+                    showSnackBar(message: langKey.fileMustBe.tr + ' 2MB');
                   } else {
                     //: needs to add check if file exist
                     pickedImagesList.add(compressedFile);
@@ -315,7 +336,10 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
           }
         } on PlatformException catch (e) {
           print(e);
-          AppConstant.displaySnackBar('error', 'Invalid Image format!');
+          AppConstant.displaySnackBar(
+            langKey.errorTitle.tr,
+            langKey.invalidImageFormat.tr,
+          );
         }
       } else {
         print("called");
@@ -337,7 +361,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
                   .then((compressedFile) {
                 var lengthInMb = compressedFile.lengthSync() * 0.000001;
                 if (lengthInMb > 2) {
-                  showSnackBar(message: 'Image must be up to 2MB');
+                  showSnackBar(message: langKey.imageSizeDesc.tr + ' 2MB');
                 } else {
                   imagePath(compressedFile.path);
                 }
@@ -421,7 +445,10 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
     ];
   }
 
-  void showSnackBar({title = 'error', message = 'Something went wrong'}) {
+  void showSnackBar({
+    title = langKey.errorTitle,
+    message = langKey.someThingWentWrong,
+  }) {
     AppConstant.displaySnackBar(title, message);
   }
 

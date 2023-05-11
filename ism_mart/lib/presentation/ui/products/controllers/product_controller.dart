@@ -5,6 +5,8 @@ import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+
 class ProductController extends GetxController with StateMixin {
   final ApiProvider _apiProvider;
 
@@ -24,27 +26,35 @@ class ProductController extends GetxController with StateMixin {
   var color = "".obs;
 
   // minimum Order Qty Limit
-  int moq = 10;
+  var moq = 0.obs;
 
   ///end Lists
   @override
   void onInit() {
     super.onInit();
-    quantityController.text = count.value.toString();
   }
 
   fetchProduct(int id) async {
     change(null, status: RxStatus.loading());
+
     await _apiProvider.getProductById(id).then((product) {
       change(product, status: RxStatus.success());
 
       fetchProductBySubCategory(subCategoryId: product.subCategory!.id);
       fetchProductReviewsById(productId: id);
       getProductQuestions(productId: id);
+
+      setCountAndMOQ(productModel: product);
     }).catchError((error) {
       change(null, status: RxStatus.error(error));
       print(">>>FetchProduct $error");
     });
+  }
+
+  setCountAndMOQ({ProductModel? productModel}) {
+    count.value = 1;
+    moq.value = productModel!.stock!;
+    quantityController.text = count.value.toString();
   }
 
   var subCategoryProductList = <ProductModel>[].obs;
@@ -134,7 +144,8 @@ class ProductController extends GetxController with StateMixin {
   }
 
   void increment() {
-    if (count.value == moq) return;
+    print("Count: ${count.value} && MOQ: ${moq.value}");
+    if (count.value >= moq.value) return;
     count.value++;
 
     quantityController.text = count.value.toString();
@@ -159,6 +170,7 @@ class ProductController extends GetxController with StateMixin {
     CartModel cart = CartModel(
       productId: product.id!,
       productModel: product,
+      itemPrice: product.totalPrice,
       quantity: quantityController.text,
       featuresID: selectedFeatureIDsList,
       featuresName: selectedFeatureNamesList,
@@ -167,7 +179,7 @@ class ProductController extends GetxController with StateMixin {
 
     await LocalStorageHelper.addItemToCart(cartModel: cart).then((value) {
       Get.back();
-      AppConstant.displaySnackBar("success", "Added to Cart!");
+      AppConstant.displaySnackBar(langKey.successTitle.tr, langKey.addToCart.tr);
       clearControllers();
       count(1);
     });
@@ -187,7 +199,7 @@ class ProductController extends GetxController with StateMixin {
       await _apiProvider
           .postProductQuestion(
               token: authController.userToken, model: questionModel.toJson())
-          .then((ResponseModel? responseModel) {
+          .then((ApiResponse? responseModel) {
         if (responseModel != null) {
           if (responseModel.success!) {
             clearControllers();
@@ -212,7 +224,7 @@ class ProductController extends GetxController with StateMixin {
 
     if (authController.isSessionExpired! && authController.userToken == null) {
       await LocalStorageHelper.addItemToCart(cartModel: cart).then((value) {
-        AppConstant.displaySnackBar("Added", "Added to Cart!",
+        AppConstant.displaySnackBar(langKey.added.tr, langKey.addToCart.tr,
             position: SnackPosition.TOP);
         clearControllers();
         count(1);
@@ -222,16 +234,16 @@ class ProductController extends GetxController with StateMixin {
       print("");
       await _apiProvider
           .addCart(token: authController.userToken, data: cartData)
-          .then((CartResponse? response) {
+          .then((ApiResponse? response) {
         if (response != null) {
           if (response.success!) {
             clearControllers();
             count(1);
-            showSnackBar('success', response.message);
+            showSnackBar(langKey.success.tr, response.message);
           } else
-            showSnackBar('error', response.message);
+            showSnackBar(langKey.errorTitle.tr, response.message);
         } else
-          showSnackBar('error', 'Something went wrong!');
+          showSnackBar(langKey.errorTitle.tr, langKey.someThingWentWrong.tr);
       }).catchError((error) {
         debugPrint(">>>>addItemToCart $error");
       });

@@ -39,14 +39,14 @@ class OrderProvider {
     return OrderResponse.fromJson(response);
   }
 
-  Future<OrderResponse> createOrder({token, data}) async {
+  Future<ApiResponse> createOrder({token, data}) async {
     print(">>>CreateOrder: ${data.toString()}");
     var response = await _orderRepo.postOrder(token: token, data: data);
 
-    return OrderResponse.fromJson(response);
+    return ApiResponse.fromJson(response);
   }
 
-  Future<DisputeResponse> createDispute(
+  Future<ApiResponse> createDispute(
       token, title, description, orderItemId, imagesList) async {
     var response = await _orderRepo.postDispute(
         token: token,
@@ -54,11 +54,16 @@ class OrderProvider {
         description: description,
         orderItemId: orderItemId,
         imagesList: imagesList);
-    return DisputeResponse.fromJson(response);
+    return ApiResponse.fromJson(response);
   }
 
-  Future<PaymentIntentResponse> createPaymentIntent({token, data}) async {
+  Future<ApiResponse> createPaymentIntent({token, data}) async {
     var response = await _orderRepo.postPaymentIntent(token: token, data: data);
-    return PaymentIntentResponse.fromJson(response);
+    return ApiResponse.fromJson(response);
+  }
+
+  Future<ApiResponse> createReview({token, data}) async {
+    var response = await _orderRepo.postReview(token: token, data: data);
+    return ApiResponse.fromJson(response);
   }
 }

@@ -40,7 +40,9 @@ class RegisterVendorUI extends GetView<AuthController> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 CustomText(
-                  title: model!=null? "Update Vendor Details":langKey.vendorRegistration.tr,
+                  title: model != null
+                      ? langKey.updateVendorDetails.tr
+                      : langKey.vendorRegistration.tr,
                   style: headline2,
                 ),
                 CustomActionIcon(
@@ -76,7 +78,8 @@ class RegisterVendorUI extends GetView<AuthController> {
                               ? Container(
                                   alignment: Alignment.center,
                                   child: Image.file(
-                                      File(controller.coverImgPath.value)),
+                                    File(controller.coverImgPath.value),
+                                  ),
                                 )
                               : Center(
                                   child: Column(
@@ -90,7 +93,7 @@ class RegisterVendorUI extends GetView<AuthController> {
                                       ),
                                       const SizedBox(height: 5),
                                       Text(
-                                        'Click here to upload',
+                                        langKey.clickHereToUpload.tr,
                                         style: TextStyle(
                                           fontSize: 15,
                                           color: Colors.grey.shade400,
@@ -115,21 +118,22 @@ class RegisterVendorUI extends GetView<AuthController> {
                         child: Icon(Icons.add_a_photo, color: kPrimaryColor),
                       ),
                       decoration: BoxDecoration(
-                          border: Border.all(
-                            width: 3,
-                            color: Colors.white,
-                          ),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(50),
-                          ),
+                        border: Border.all(
+                          width: 3,
                           color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              offset: Offset(0, 0),
-                              color: kPrimaryColor.withOpacity(0.3),
-                              blurRadius: 10.78,
-                            ),
-                          ]),
+                        ),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(50),
+                        ),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            offset: Offset(0, 0),
+                            color: kPrimaryColor.withOpacity(0.3),
+                            blurRadius: 10.78,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -161,7 +165,8 @@ class RegisterVendorUI extends GetView<AuthController> {
                               backgroundImage:
                                   controller.profileImgPath.value.isNotEmpty
                                       ? FileImage(
-                                          File(controller.profileImgPath.value))
+                                          File(controller.profileImgPath.value),
+                                        )
                                       : null,
                             ),
                           ),
@@ -205,9 +210,7 @@ class RegisterVendorUI extends GetView<AuthController> {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5),
-            child: CustomText(
-                title:
-                    "Your cover and profile must be a PNG or JPG, up to 2 MB"),
+            child: CustomText(title: "${langKey.yourCoverAndProfile} 2 MB"),
           ),
           _formData()
         ],
@@ -217,8 +220,7 @@ class RegisterVendorUI extends GetView<AuthController> {
 
   void _pickImage({calledForProfile = true}) {
     Get.defaultDialog(
-      title: "Pick from",
-      //barrierDismissible: false,
+      title: langKey.pickFrom,
       contentPadding: const EdgeInsets.all(10),
       titleStyle: appBarTitleSize,
       content: Row(
@@ -227,14 +229,16 @@ class RegisterVendorUI extends GetView<AuthController> {
           _imageBtn(
             onTap: () => controller.pickOrCaptureImageGallery(0,
                 calledForProfile: calledForProfile),
-            title: "Camera",
+            title: langKey.camera.tr,
             icon: Icons.camera_alt_rounded,
             color: Colors.blue,
           ),
           _imageBtn(
-            onTap: () => controller.pickOrCaptureImageGallery(1,
-                calledForProfile: calledForProfile),
-            title: "Gallery",
+            onTap: () => controller.pickOrCaptureImageGallery(
+              1,
+              calledForProfile: calledForProfile,
+            ),
+            title: langKey.gallery.tr,
             icon: Icons.photo_library_rounded,
             color: Colors.redAccent,
           ),
@@ -389,7 +393,9 @@ class RegisterVendorUI extends GetView<AuthController> {
                           await controller.registerStore();
                         }
                       },
-                      text: model!=null?langKey.updateBtn.tr:langKey.register.tr,
+                      text: model != null
+                          ? langKey.updateBtn.tr
+                          : langKey.register.tr,
                       height: 40,
                       width: 150,
                     ),

@@ -8,7 +8,6 @@ import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class ProfileUI extends GetView<AuthController> {
   const ProfileUI({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -32,6 +31,7 @@ class ProfileUI extends GetView<AuthController> {
   }
 
   _body() {
+    //  var field = {'field': 'firstName', 'field': 'lastName'};
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: ListView(
@@ -113,12 +113,17 @@ class ProfileUI extends GetView<AuthController> {
                   ),*/
                   StickyLabel(text: langKey.personalInfo.tr),
                   //Profile data
-                  Column(
-                    children: controller
-                        .getProfileData()
-                        .map((profile) => profileCards(profile["title"],
-                            profile["subtitle"], profile["icon"]))
-                        .toList(),
+                  Obx(
+                    () => Column(
+                      children: controller.getProfileData().map((profile) {
+                        print("map is $profile");
+                        return profileCards(
+                            profile["title"],
+                            profile["subtitle"],
+                            profile["icon"],
+                            profile['field']);
+                      }).toList(),
+                    ),
                   ),
                 ],
               ),
@@ -169,44 +174,44 @@ class ProfileUI extends GetView<AuthController> {
     );
   }
 
-  Widget profileCards(String title, subtitle, icon) {
-    return Container(
-      width: 320,
-      height: 60,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: kPrimaryColor.withOpacity(0.7)),
-      ),
-      margin: EdgeInsets.only(left: 8, top: 12, right: 8, bottom: 3),
-      child: ListTile(
-        dense: true,
-        contentPadding: EdgeInsets.only(left: 10.0, right: 10.0),
-        title: CustomText(
-          title: title,
-          color: Colors.black54,
-          weight: FontWeight.w600,
-        ),
-        subtitle: CustomText(
-          title: subtitle,
-          style: bodyText1,
-        ),
-        leading: Icon(icon),
-        trailing: (title.toLowerCase().contains("country") ||
-                title.toLowerCase().contains("city"))
-            ? null
-            : InkWell(
-                onTap: () => showEditDialog(title, subtitle),
+  Widget profileCards(String title, subtitle, icon, field) {
+    return (title.toLowerCase().contains("country") ||
+            title.toLowerCase().contains("city"))
+        ? SizedBox()
+        : Container(
+            width: 320,
+            height: 60,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: kPrimaryColor.withOpacity(0.7)),
+            ),
+            margin: EdgeInsets.only(left: 8, top: 12, right: 8, bottom: 3),
+            child: ListTile(
+              dense: true,
+              contentPadding: EdgeInsets.only(left: 10.0, right: 10.0),
+              title: CustomText(
+                title: title,
+                color: Colors.black54,
+                weight: FontWeight.w600,
+              ),
+              subtitle: CustomText(
+                title: subtitle,
+                style: bodyText1,
+              ),
+              leading: Icon(icon),
+              trailing: InkWell(
+                onTap: () => showEditDialog(title, subtitle, field),
                 child: Icon(
                   Icons.edit,
                   size: 20,
                   color: kPrimaryColor.withOpacity(0.8),
                 ),
               ),
-      ),
-    );
+            ),
+          );
   }
 
-  void showEditDialog(title, subtitle) {
+  void showEditDialog(title, subtitle, field) {
     controller.editingTextController.text = subtitle;
     var _formKey = GlobalKey<FormState>();
     Get.defaultDialog(
@@ -247,7 +252,11 @@ class ProfileUI extends GetView<AuthController> {
                   if (_formKey.currentState!.validate()) {
                     await controller.updateUser(
                         title: title,
-                        value: controller.editingTextController.text);
+                        value: controller.editingTextController.text,
+                        field: field);
+                    controller.login();
+
+                    Get.back();
                   }
                 },
                 text: langKey.updateBtn.tr,

@@ -20,14 +20,13 @@ class SellersApiProvider {
         .toList();
   }
 
-  Future<ProductResponse> addProduct(
-      {String? token, formData, imagesList}) async {
+  Future<ApiResponse> addProduct({String? token, formData, imagesList}) async {
     var response =
         await _sellersApiRepo.postProduct(token: token, formData: formData);
-    return ProductResponse.fromResponse(response);
+    return ApiResponse.fromJson(response);
   }
 
-  Future<ProductResponse> addProductWithHttp(
+  Future<ApiResponse> addProductWithHttp(
       {String? token, ProductModel? model, categoryFieldList, images}) async {
     final url = "${ApiConstant.baseUrl}vendor/products/add";
     final request = http.MultipartRequest('POST', Uri.parse(url));
@@ -39,7 +38,9 @@ class SellersApiProvider {
     request.fields['stock'] = "${model.stock}";
     request.fields['categoryId'] = "${model.categoryId}";
     request.fields['subCategoryId'] = "${model.subCategoryId}";
-    request.fields['discount'] = "${model.discount}";
+    if (model.discount != null &&
+        model.discount! >= 10 &&
+        model.discount! <= 90) request.fields['discount'] = "${model.discount}";
     request.fields['description'] = "${model.description}";
 
     if (categoryFieldList.isNotEmpty)
@@ -64,11 +65,10 @@ class SellersApiProvider {
       final responseData = await response.stream.bytesToString();
       final data = json.decode(responseData);
       print(data);
-      return ProductResponse.fromResponse(data);
+      return ApiResponse.fromJson(data);
     } else {
-      //: Still needs to test this one properly
-      http.StreamedResponse res = handleStreamResponse(response);
-      return ProductResponse.fromResponse(
+      http.StreamedResponse res = await handleStreamResponse(response);
+      return ApiResponse.fromJson(
           json.decode(await res.stream.bytesToString()));
     }
   }
@@ -80,70 +80,47 @@ class SellersApiProvider {
     return SellerProductModel.fromJson(products);
   }
 
-  Future<ProductResponse> getProductById(int id) async {
+  Future<ApiResponse> getProductById(int id) async {
     var response = await _sellersApiRepo.getProductDetailsById(id: id);
-    return ProductResponse.fromResponse(response);
+    return ApiResponse.fromJson(response);
   }
 
-  Future<ProductResponse> deleteProductById({id, token}) async {
+  Future<ApiResponse> deleteProductById({id, token}) async {
     var response = await _sellersApiRepo.deleteProduct(id: id, token: token);
-    return ProductResponse.fromResponse(response);
+    return ApiResponse.fromJson(response);
   }
 
-  Future<ProductResponse> updateProduct(
+  Future<ApiResponse> updateProduct(
       {String? token, ProductModel? model}) async {
-    /* var response =
-        await _sellersApiRepo.updateProduct(token: token, productModel: model);
-   print("Update Prod provider Response: $response");
-    return ProductResponse.fromResponse(response);*/
-
-    /*final data = {
-      "id": "${model!.id}",
-      "name": "${model.name}",
-      "price": "${model.price}",
-      "stock": "${model.stock}",
-      "discount": "${model.discount ?? 0}",
-      "description": "${model.description}",
-    };
-    final body = data.keys.map((key) {
-      final value = data[key];
-      return '$key=${Uri.encodeComponent(value.toString())}';
-    }).join('&');
-    final response = await http.patch(
-      Uri.parse(url),
-      headers: {
-        'Content-Type': 'multipart/form-data',
-        'Authorization': '$token'
-      },
-      body: body,
-    );*/
-
     final url = "${ApiConstant.baseUrl}vendor/products/update";
+    var headers = {'authorization': '$token', 'Cookie': 'XSRF-token=$token'};
     final request = http.MultipartRequest('PATCH', Uri.parse(url));
-    //request.headers['Accept'] = 'multipart/form-data';
-    request.headers['content-type'] = 'multipart/form-data';
-    request.headers['authorization'] = '$token';
 
-    request.fields['id'] = model!.id!.toString();
-    request.fields['name'] = model.name!;
-    request.fields['thumbnail'] = model.thumbnail!;
-    request.fields['price'] = "${model.price}";
-    request.fields['discount'] = "${model.discount}";
-    request.fields['description'] = "${model.description}";
+    request.headers.addAll(headers);
 
-    requestInterceptorMultipart(request);
+    request.fields.addAll({
+      'name': '${model!.name}',
+      'id': '${model.id}',
+      'price': '${model.price}',
+      'stock': '${model.stock}',
+      'discription': '${model.description}',
+      // if (model.discount != null &&
+      //     model.discount! >= 10 &&
+      //     model.discount! <= 90)
+      'discount': '${model.discount}',
+    });
 
-    final response = await request.send();
-
+    http.StreamedResponse response = await request.send();
     if (response.statusCode == 200) {
       final responseData = await response.stream.bytesToString();
       final data = json.decode(responseData);
       print(data);
-      return ProductResponse.fromResponse(data);
+      return ApiResponse.fromJson(data);
     } else {
-      http.StreamedResponse res = handleStreamResponse(response);
-      return ProductResponse.fromResponse(
-          json.decode(await res.stream.bytesToString()));
+      http.StreamedResponse res = await handleStreamResponse(response);
+      final data = json.decode(await res.stream.bytesToString());
+      print(">>>UpdateREsponse: $data");
+      return ApiResponse.fromJson(data);
     }
   }
 }

@@ -1,27 +1,27 @@
-class CoinsResponse {
-  CoinsResponse({
-    this.success,
-    this.message,
-    this.coinsModel,
-  });
+// class CoinsResponse {
+//   CoinsResponse({
+//     this.success,
+//     this.message,
+//     this.coinsModel,
+//   });
 
-  bool? success;
-  String? message;
-  CoinsModel? coinsModel;
+//   bool? success;
+//   String? message;
+//   CoinsModel? coinsModel;
 
-  factory CoinsResponse.fromJson(Map<String, dynamic> json) => CoinsResponse(
-        success: json["success"],
-        message: json["message"],
-        coinsModel:
-            json["data"] == null ? null : CoinsModel.fromJson(json["data"]),
-      );
+//   factory CoinsResponse.fromJson(Map<String, dynamic> json) => CoinsResponse(
+//         success: json["success"],
+//         message: json["message"],
+//         coinsModel:
+//             json["data"] == null ? null : CoinsModel.fromJson(json["data"]),
+//       );
 
-  Map<String, dynamic> toJson() => {
-        "success": success,
-        "message": message,
-        "data": coinsModel?.toJson(),
-      };
-}
+//   Map<String, dynamic> toJson() => {
+//         "success": success,
+//         "message": message,
+//         "data": coinsModel?.toJson(),
+//       };
+// }
 
 class CoinsModel {
   CoinsModel({

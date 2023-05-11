@@ -4,6 +4,7 @@ import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 /*class MyStates<T1, T2> {
   T1? state1;
@@ -56,11 +57,13 @@ class CartController extends GetxController
   fetchCartItemsFromLocal() {
     change(null, status: RxStatus.loading());
     //isLoading(true);
-    cartItemsList.clear();
+
     LocalStorageHelper.fetchCartItems().then((value) {
+      cartItemsList.clear();
       cartItemsList.addAll(value);
       isLoading(false);
       change(value, status: RxStatus.success());
+
       //change(MyStates(state1: value,), status: RxStatus.success());
     });
   }
@@ -92,12 +95,12 @@ class CartController extends GetxController
           .then((CartResponse? response) {
         if (response != null) {
           if (response.success!) {
-            showSnackBar('success', response.message);
+            showSnackBar(langKey.success.tr, response.message);
             fetchCartItems();
           } else
-            showSnackBar('error', response.message);
+            showSnackBar(langKey.errorTitle.tr, response.message);
         } else
-          showSnackBar('error', 'Something went wrong!');
+          showSnackBar(langKey.errorTitle.tr, langKey.someThingWentWrong.tr);
       }).catchError((error) {
         debugPrint(">>>>updateCart $error");
       });
@@ -111,12 +114,12 @@ class CartController extends GetxController
           .then((CartResponse? response) {
         if (response != null) {
           if (response.success!) {
-            showSnackBar('success', response.message);
+            showSnackBar(langKey.success.tr, response.message);
             fetchCartItems();
           } else
-            showSnackBar('error', response.message);
+            showSnackBar(langKey.errorTitle.tr, response.message);
         } else
-          showSnackBar('error', 'Something went wrong!');
+          showSnackBar(langKey.errorTitle.tr, langKey.someThingWentWrong.tr);
       }).catchError((error) {
         debugPrint(">>>>DeleteItem $error");
       });
@@ -140,7 +143,7 @@ class CartController extends GetxController
             value.productModel!.discountPrice != null
                 ? value.productModel!.discountPrice.toString()
                 : "0");
-        var qty = 1;
+        var qty = int.parse(value.quantity.toString());
         totalAmount += (discountPrice * qty);
         totalQty += qty;
       }
@@ -172,15 +175,6 @@ class CartController extends GetxController
 
     quantityController.text = counter.value.toString();
   }
-
-  //    cartModel.quantity = "${(index + 1)}";
-  // cartModel.productModel!.totalPrice =
-  //     controller.totalCartAmount.value;
-  // await LocalStorageHelper.updateCartItems(
-  //     cartModel: cartModel);
-  // controller.update();
-
-  //ENd Cart Items
 
   @override
   void onClose() {

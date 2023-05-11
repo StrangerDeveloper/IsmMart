@@ -20,7 +20,11 @@ class UpdateProductUI extends GetView<SellersController> {
         return CustomLoading();
       }
       return _build(productModel: state);
-    }, onLoading: CustomLoading(), onEmpty: NoDataFound(text: "Product Not Found",));
+    },
+        onLoading: CustomLoading(),
+        onEmpty: NoDataFound(
+          text: langKey.productNotFound.tr,
+        ));
   }
 
   Widget _build({ProductModel? productModel}) {
@@ -108,7 +112,7 @@ class UpdateProductUI extends GetView<SellersController> {
                                       .prodPriceController.text.isNotEmpty,
                                   child: CustomText(
                                     title:
-                                        "Final price would be Rs ${controller.priceAfterCommission.value} after platform fee of 5%",
+                                        "${langKey.finalPriceWould.tr} ${controller.priceAfterCommission.value} ${langKey.afterPlatformFee.tr} 5%",
                                     color: kRedColor,
                                   ),
                                 ))
@@ -191,8 +195,10 @@ class UpdateProductUI extends GetView<SellersController> {
                                         controller.updateProduct(
                                             model: productModel);
                                       } else {
-                                        AppConstant.displaySnackBar('error',
-                                            "Your discount should be between 10 and 100 percent. Please try again!");
+                                        AppConstant.displaySnackBar(
+                                          langKey.errorTitle.tr,
+                                          langKey.yourDiscountShould.tr,
+                                        );
                                       }
                                     }
                                   },

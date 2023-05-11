@@ -4,6 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class AuthController extends GetxController {
   final AuthProvider authProvider;
@@ -42,6 +43,7 @@ class AuthController extends GetxController {
   @override
   void onReady() {
     super.onReady();
+
     getCountries();
 
     getToken();
@@ -61,10 +63,11 @@ class AuthController extends GetxController {
     if (userToken!.isNotEmpty) {
       await authProvider
           .getUserCoins(token: userToken)
-          .then((CoinsResponse? coinsResponse) {
-        if (coinsResponse != null) {
-          if (coinsResponse.success!) {
-            _coinsModel(coinsResponse.coinsModel!);
+          .then((ApiResponse? apiResponse) {
+        if (apiResponse != null) {
+          if (apiResponse.success!) {
+            var details = CoinsModel.fromJson(apiResponse.data);
+            _coinsModel(details);
           }
         }
       }).catchError((error) {
@@ -76,6 +79,7 @@ class AuthController extends GetxController {
   var isLoading = false.obs;
 
   login() async {
+    print("email ${emailController.text} pass  ${passwordController.text}");
     isLoading(true);
     await authProvider
         .postLogin(
@@ -86,17 +90,21 @@ class AuthController extends GetxController {
       if (userResponse != null) {
         if (userResponse.success!) {
           Get.back();
-          AppConstant.displaySnackBar("success", userResponse.message);
+          AppConstant.displaySnackBar(
+              langKey.successTitle.tr, userResponse.message);
           await LocalStorageHelper.storeUser(userModel: userResponse.userModel)
               .then((value) {
             clearLoginController();
           });
         } else {
-          AppConstant.displaySnackBar("error", userResponse.message);
+          AppConstant.displaySnackBar(
+              langKey.errorTitle.tr, userResponse.message);
         }
       } else {
         AppConstant.displaySnackBar(
-            "error", "Something went wrong with credentials");
+          langKey.errorTitle.tr,
+          langKey.wrongWithCredentials.tr,
+        );
       }
     }).catchError((error) {
       isLoading(false);
@@ -105,25 +113,32 @@ class AuthController extends GetxController {
     //isLoading(false);
   }
 
-  Future<void> forgotPasswordWithEmail() async {
-    isLoading(true);
+  Future<bool?> forgotPasswordWithEmail() async {
+    isLoading(false);
     String email = forgotPasswordEmailController.text.trim();
-    await authProvider.forgotPassword(data: {"email": email}).then((UserResponse? response) {
+
+    await authProvider
+        .forgotPassword(data: {"email": email}).then((ApiResponse? response) {
       isLoading(false);
       if (response != null) {
         if (response.success!) {
-          Get.back();
-          AppConstant.displaySnackBar("success", response.message);
+          //Get.back();
+          AppConstant.displaySnackBar(
+              langKey.successTitle.tr, response.message);
+          return true;
         } else {
-          AppConstant.displaySnackBar("error", response.message);
+          AppConstant.displaySnackBar(langKey.errorTitle.tr, response.message);
         }
       } else
         AppConstant.displaySnackBar(
-            "error", "Something went wrong with credentials");
+            langKey.errorTitle.tr, langKey.wrongWithCredentials.tr);
+      return false;
     }).catchError((onError) {
       isLoading(false);
       debugPrint("resetPassword: $onError");
+      return false;
     });
+    return false;
   }
 
   forgotPasswordOtp() async {
@@ -137,19 +152,21 @@ class AuthController extends GetxController {
       "token": otp,
       "password": password,
       "confirmPassword": confirmPass
-    }).then((UserResponse? response) async {
+    }).then((ApiResponse? response) async {
       isLoading(false);
       if (response != null) {
         if (response.success!) {
           Get.back();
           debugPrint("Email: ${response.toString()}");
-          AppConstant.displaySnackBar("success", response.message);
+          AppConstant.displaySnackBar(
+              langKey.successTitle.tr, response.message);
+          passwordController.clear();
         } else {
-          AppConstant.displaySnackBar("error", response.message);
+          AppConstant.displaySnackBar(langKey.errorTitle.tr, response.message);
         }
       } else
         AppConstant.displaySnackBar(
-            "error", "Something went wrong with credentials");
+            langKey.errorTitle.tr, langKey.wrongWithCredentials.tr);
     }).catchError((onError) {
       isLoading(false);
       debugPrint("resetPassword: $onError");
@@ -162,33 +179,73 @@ class AuthController extends GetxController {
 
     await authProvider
         .resendVerificationLink(email: email)
-        .then((UserResponse? response) {
+        .then((ApiResponse? response) {
       if (response != null) {
         if (response.success!) {
           Get.back();
+          clearLoginController();
           debugPrint("Email: ${response.toString()}");
-          AppConstant.displaySnackBar("success", response.message);
+          AppConstant.displaySnackBar(
+              langKey.successTitle.tr, response.message);
         } else {
-          AppConstant.displaySnackBar("error", response.message);
+          AppConstant.displaySnackBar(langKey.errorTitle.tr, response.message);
         }
       } else
         AppConstant.displaySnackBar(
-            "error", "Something went wrong with credentials");
+          langKey.errorTitle.tr,
+          langKey.wrongWithCredentials.tr,
+        );
     }).catchError((onError) {
       debugPrint("Verification Link Error: $onError");
     });
+  }
+
+  emailVerificationChecks(bool screenCheck)async {
+    var userDetailsInLocalStrg = await LocalStorageHelper.getStoredUser();
+    if (userDetailsInLocalStrg.emailVerified == false) {
+      await getToken();
+      if (userModel!.emailVerified == false) {
+        String? verificationDetails = await LocalStorageHelper
+            .getEmailVerificationLinkSentTime();
+        if (verificationDetails != null) {
+          DateTime linkTime = DateTime.parse(verificationDetails);
+          DateTime currentTime = DateTime.now();
+          DateTime fiveMinutesCheck = currentTime.subtract(
+              Duration(minutes: 5));
+          if (fiveMinutesCheck.isAfter(linkTime)) {
+            LocalStorageHelper.localStorage.remove('emailVerificationTime');
+            Get.toNamed(Routes.emailVerificationLinkRoute);
+          }
+          else {
+            showSnackBar(title: 'Verify Email',
+                message: screenCheck ? 'An Email Verification link has already been sent to your email'
+                    : 'Verify Email to proceed');
+          }
+        }
+        else {
+          Get.toNamed(Routes.emailVerificationLinkRoute);
+        }
+      }
+      else {
+        Get.toNamed(Routes.checkOutRoute);
+      }
+    }
+    else {
+      Get.toNamed(Routes.checkOutRoute);
+    }
   }
 
   register() async {
     isLoading(true);
 
     UserModel newUser = UserModel(
-        //firstName: firstNameController.text.trim(),
-        //lastName: lastNameController.text.trim(),
-        firstName: firstNameController.text.trim(),
-        email: emailController.text.trim(),
-        phone: phoneController.text.trim(),
-        password: passwordController.text.trim());
+      //firstName: firstNameController.text.trim(),
+      //lastName: lastNameController.text.trim(),
+      firstName: firstNameController.text.trim(),
+      email: emailController.text.trim(),
+      phone: phoneController.text.trim(),
+      password: passwordController.text.trim(),
+    );
 
     await authProvider
         .postRegister(userModel: newUser)
@@ -196,22 +253,27 @@ class AuthController extends GetxController {
       isLoading(false);
       if (response != null) {
         if (response.success!) {
-          Get.back();
-          AppConstant.displaySnackBar("success", response.message);
-          clearControllers();
+          //Get.back();
+          AppConstant.displaySnackBar(
+              langKey.successTitle.tr, response.message);
+          //clearControllers();
         } else
-          AppConstant.displaySnackBar('error', response.message);
+          AppConstant.displaySnackBar(langKey.errorTitle.tr, response.message);
       } else
-        AppConstant.displaySnackBar('error', 'Something went wrong!');
+        AppConstant.displaySnackBar(
+            langKey.errorTitle.tr, langKey.someThingWentWrong.tr);
     }).catchError((error) {
       isLoading(false);
-      AppConstant.displaySnackBar('error', "something went wrong!");
+      AppConstant.displaySnackBar(
+          langKey.errorTitle.tr, langKey.someThingWentWrong.tr);
     });
   }
 
-  registerStore({SellerModel? updatedModel}) async {
+  registerStore({UserModel? updatedModel}) async {
     isLoading(true);
 
+    print(
+        "controller profile ${profileImgPath.value}  \n covet= ${coverImgPath.value}");
     SellerModel model = SellerModel(
       storeName: storeNameController.text.trim(),
       storeDesc: storeDescController.text,
@@ -225,31 +287,39 @@ class AuthController extends GetxController {
       accountTitle: bankHolderTitleController.text.trim(),
       accountNumber: bankAccController.text.trim(),
     );
+
     if (userToken!.isNotEmpty) {
+      // UserModel user = UserModel(vendor: model);
       await authProvider
           .postStoreRegister(
               token: userToken!,
               calledForUpdate: updatedModel != null,
               sellerModel: model)
-          .then((UserResponse? userResponse) {
+          .then((UserResponse? apiResponse) {
         isLoading(false);
-        if (userResponse != null) {
-          if (userResponse.success!) {
+        if (apiResponse != null) {
+          if (apiResponse.success!) {
             Get.back();
-            AppConstant.displaySnackBar("success", userResponse.message);
+            AppConstant.displaySnackBar(
+                langKey.successTitle.tr, apiResponse.message);
             clearStoreController();
             getCurrentUser();
           } else
-            AppConstant.displaySnackBar('error', userResponse.message);
+            AppConstant.displaySnackBar(
+                langKey.errorTitle.tr, apiResponse.message);
         } else
-          AppConstant.displaySnackBar('error', "something went wrong!");
+          AppConstant.displaySnackBar(
+              langKey.errorTitle.tr, langKey.someThingWentWrong.tr);
       }).catchError((error) {
         isLoading(false);
         debugPrint("RegisterStore: Error $error");
       });
     } else {
       isLoading(false);
-      AppConstant.displaySnackBar('error', "Current User not found!");
+      AppConstant.displaySnackBar(
+        langKey.errorTitle.tr,
+        langKey.currentUserNotFound.tr,
+      );
     }
   }
 
@@ -270,7 +340,7 @@ class AuthController extends GetxController {
                   .then((compressedFile) {
                 var lengthInMb = compressedFile.lengthSync() * 0.000001;
                 if (lengthInMb > 2) {
-                  showSnackBar(message: 'Image must be up to 2MB');
+                  showSnackBar(message: langKey.imageSizeDesc.tr + ' 2MB');
                 } else {
                   if (calledForProfile) {
                     profileImgPath(compressedFile.path);
@@ -305,22 +375,25 @@ class AuthController extends GetxController {
   }
 
   getCurrentUser() async {
+    print("Auth Token: ${userToken}");
     if (userToken!.isNotEmpty) {
       isLoading(true);
-      await authProvider.getCurrentUser(token: userToken).then((userResponse) {
+      await authProvider
+          .getCurrentUser(token: userToken)
+          .then((apiResponse) async {
         isLoading(false);
-        if (userResponse.message != null &&
-            userResponse.message!
+        if (apiResponse.message != null &&
+            apiResponse.message!
                 .toLowerCase()
                 .contains(AppConstant.SESSION_EXPIRED)) {
           setSession(true);
         } else
           setSession(false);
 
-        if (userResponse.errors != null && userResponse.errors!.isNotEmpty) {
-          setUserModel(UserModel(error: userResponse.errors!.first));
+        if (apiResponse.errors != null && apiResponse.errors!.isNotEmpty) {
+          setUserModel(UserModel(error: apiResponse.errors!.first));
         } else
-          setUserModel(userResponse.userModel!);
+          setUserModel(apiResponse.userModel!);
       }).catchError((error) {
         isLoading(false);
         setSession(true);
@@ -329,27 +402,39 @@ class AuthController extends GetxController {
       setSession(true);
   }
 
+  updateUserEmailVerification({UserModel? fromApi, UserModel? stored}) async {
+    if (fromApi!.emailVerified != stored!.emailVerified) {
+      await LocalStorageHelper.deleteUserData();
+      await LocalStorageHelper.storeUser(userModel: fromApi);
+    }
+    setUserModel(fromApi);
+  }
+
   List getProfileData() {
     var profileData = [
       {
         "title": firstName.tr,
         "subtitle": userModel!.firstName ?? '',
         "icon": Icons.person_rounded,
+        "field": "firstName",
       },
       {
         "title": lastName.tr,
         "subtitle": userModel!.lastName ?? '',
         "icon": Icons.person_rounded,
+        "field": "lastName"
       },
       {
         "title": phone.tr,
         "subtitle": userModel!.phone ?? '',
         "icon": Icons.phone_iphone_rounded,
+        "field": "phone",
       },
       {
         "title": address.tr,
         "subtitle": userModel!.address ?? '',
-        "icon": Icons.location_on_rounded
+        "icon": Icons.location_on_rounded,
+        "field": "address",
       },
       {
         "title": country.tr,
@@ -417,10 +502,9 @@ class AuthController extends GetxController {
 
   getToken() async {
     await LocalStorageHelper.getStoredUser().then((user) async {
-      print("Auth Token: ${user.token}");
       _currUserToken.value = user.token ?? '';
 
-      await getCurrentUser();
+      getCurrentUser();
       await fetchUserCoins();
     }).onError((error, stackTrace) {
       print(">>>Token: $error, $stackTrace");
@@ -429,23 +513,41 @@ class AuthController extends GetxController {
     //update();
   }
 
-  updateUser({title, value}) async {
+  updateUser({title, value, field}) async {
+    title = editingTextController.text;
+    if (title == "firstName") {
+      userModel!.firstName = value;
+    } else if (title == "lastName") {
+      userModel!.lastName = value;
+    } else if (title == "phone") {
+      userModel!.phone = value;
+    } else if (title == "address") {
+      userModel!.address = value;
+    }
+    // userModel!.firstName = title;
+    // userModel!.lastName = title;
+
+    print("title is => $title");
     if (userToken != null) {
       isLoading(true);
       await authProvider
-          .updateUser(token: userToken, title: title, value: value)
+          .updateUser(
+              token: userToken, title: title, value: value, field: field)
           .then((UserResponse? userResponse) {
         isLoading(false);
         if (userResponse != null) {
           if (userResponse.success!) {
             Get.back();
-            AppConstant.displaySnackBar("success", userResponse.message);
+            AppConstant.displaySnackBar(
+                langKey.successTitle.tr, userResponse.message);
             editingTextController.clear();
             getCurrentUser();
           } else
-            AppConstant.displaySnackBar('error', userResponse.message);
+            AppConstant.displaySnackBar(
+                langKey.errorTitle.tr, userResponse.message);
         } else
-          AppConstant.displaySnackBar('error', "something went wrong!");
+          AppConstant.displaySnackBar(
+              langKey.errorTitle.tr, langKey.someThingWentWrong.tr);
       }).catchError((error) {
         isLoading(false);
         debugPrint("RegisterStore: Error $error");
@@ -458,17 +560,20 @@ class AuthController extends GetxController {
       isLoading(true);
       await authProvider
           .deActivateUser(token: userToken)
-          .then((UserResponse? response) {
+          .then((ApiResponse? response) {
         //isLoading(false);
         if (response != null) {
           if (response.success!) {
             Get.back();
             LocalStorageHelper.deleteUserData();
-            AppConstant.displaySnackBar("error", response.message);
+            AppConstant.displaySnackBar(
+                langKey.errorTitle.tr, response.message);
           } else
-            AppConstant.displaySnackBar("error", response.message);
+            AppConstant.displaySnackBar(
+                langKey.errorTitle.tr, response.message);
         } else
-          AppConstant.displaySnackBar('error', "something went wrong!");
+          AppConstant.displaySnackBar(
+              langKey.errorTitle.tr, langKey.someThingWentWrong.tr);
       }).catchError((error) {
         isLoading(false);
         debugPrint("deActivateAccount: Error $error");
@@ -512,25 +617,29 @@ class AuthController extends GetxController {
   var subjectController = TextEditingController();
 
   postContactUs() async {
+    isLoading(true);
     var data = {
       "name": "${firstNameController.text}",
       "email": "${emailController.text.trim()}",
       "subject": "${subjectController.text}",
       "message": "${storeDescController.text}"
     };
-
-    await authProvider.contactUs(data: data).then((UserResponse? userResponse) {
-      if (userResponse != null) {
-        if (userResponse.success!) {
+    await authProvider.contactUs(data: data).then((ApiResponse? apiResponse) {
+      if (apiResponse != null) {
+        if (apiResponse.success!) {
           // Get.back();
-          AppConstant.displaySnackBar("success", userResponse.message);
+          AppConstant.displaySnackBar(
+              langKey.successTitle.tr, apiResponse.message);
           clearContactUsControllers();
         } else
-          AppConstant.displaySnackBar('error', userResponse.message);
+          AppConstant.displaySnackBar(
+              langKey.errorTitle.tr, apiResponse.message);
       } else
-        AppConstant.displaySnackBar('error', "something went wrong!");
+        AppConstant.displaySnackBar(
+            langKey.errorTitle.tr, langKey.someThingWentWrong.tr);
     }).catchError((e) {
-      AppConstant.displaySnackBar('error', "$e");
+      isLoading(false);
+      AppConstant.displaySnackBar(langKey.errorTitle.tr, "$e");
     });
   }
 

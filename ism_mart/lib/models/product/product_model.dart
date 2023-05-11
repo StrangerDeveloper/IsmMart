@@ -10,40 +10,6 @@ List<ProductModel> productModelFromJson(String str) => List<ProductModel>.from(
 String productModelToJson(List<ProductModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class ProductResponse {
-  bool? success, key;
-  String? message, error;
-  dynamic data;
-  List<String>? errors;
-
-  ProductResponse(
-      {this.success,
-      this.key,
-      this.message,
-      this.error,
-      this.errors,
-      this.data});
-
-  factory ProductResponse.fromResponse(response) => ProductResponse(
-      success: response['success'] == null ? false : response['success'],
-      message: response['message'] ?? "",
-      error: response['error'],
-      errors: response['errors'] != null
-          ? List<String>.from(response["errors"].map((x) => x))
-          : null,
-      data: response['data']
-
-      /*productModel: response['data'] == null && response['data'].isBlank!
-          ? null
-          : ProductModel.fromJson(response['data'])*/
-      );
-
-  @override
-  String toString() {
-    return 'ProductResponse{success: $success, key: $key, message: $message, error: $error, errors: $errors}';
-  }
-}
-
 class ProductModel {
   ProductModel(
       {this.id,
@@ -151,7 +117,8 @@ class ProductModel {
         "thumbnail": thumbnail,
         "vendorId": vendorId,
         "discountPrice": discountPrice,
-        "totalPrice": totalPrice
+        "totalPrice": totalPrice,
+        "stock": stock,
       };
 
   JSON toUpdateProductJson() => {
@@ -165,9 +132,11 @@ class ProductModel {
 
   @override
   bool operator ==(Object other) {
-    if (other is! ProductModel) return false;
-    if (id != other.id) return false;
-    return true;
+    if (identical(this, other)) return true;
+    if (other.runtimeType != runtimeType) {
+      return false;
+    }
+    return other is ProductModel && other.id == id && other.name == name;
   }
 
   @override

@@ -10,6 +10,8 @@ class StoreProfileUI extends GetView<AuthController> {
 
   @override
   Widget build(BuildContext context) {
+    print(
+        "vendor profile UI cover  ${controller.userModel!.vendor?.coverImage}   profile  ${controller.userModel!.vendor?.storeImage}");
     return Obx(
       () => SafeArea(
         child: controller.isLoading.isTrue
@@ -27,16 +29,18 @@ class StoreProfileUI extends GetView<AuthController> {
                               padding: const EdgeInsets.all(8.0),
                               child: CustomButton(
                                 onTap: () => AppConstant.showBottomSheet(
-                                    widget: RegisterVendorUI(model: controller.userModel?.vendor),
+                                    widget: RegisterVendorUI(
+                                      model: controller.userModel?.vendor,
+                                    ),
                                     isGetXBottomSheet: false,
                                     buildContext: context),
-                                //controller.changePage(1),
                                 text: langKey.updateBtn.tr,
                                 width: 110,
                                 height: 35,
                               ),
                             ),
                           ),
+
                           ///Store data
                           CustomGreyBorderContainer(
                             child: Padding(
@@ -96,15 +100,15 @@ class StoreProfileUI extends GetView<AuthController> {
                                                 backgroundColor:
                                                     Colors.grey[200],
                                                 backgroundImage: NetworkImage(
-                                                    controller.userModel!.vendor
-                                                            ?.storeImage ??
-                                                        AppConstant
-                                                            .defaultImgUrl),
+                                                  controller.userModel!.vendor
+                                                          ?.storeImage ??
+                                                      AppConstant.defaultImgUrl,
+                                                ),
                                               ),
                                             ),
                                           ),
                                         ),
-                                       /* Positioned(
+                                        /* Positioned(
                                          top: 1,
                                          right: 1,
                                          child: InkWell(
@@ -120,7 +124,7 @@ class StoreProfileUI extends GetView<AuthController> {
                                            ),
                                          ),
                                        ),*/
-                                         /*Stack(
+                                        /*Stack(
                                          children: [
                                            Container(
                                              height: 90,
@@ -303,7 +307,7 @@ class StoreProfileUI extends GetView<AuthController> {
           style: bodyText1,
         ),
         leading: Icon(icon),
-       /* trailing: InkWell(
+        /* trailing: InkWell(
           onTap: () => showEditDialog(title, subtitle),
           child: Icon(
             Icons.edit,
