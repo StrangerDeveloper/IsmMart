@@ -233,7 +233,6 @@ const discountMinValue = 'discountMinValue',
  *  Settings
  * */
 const exitApp = "exitApp", exitDialogDesc = "exitDialogDesc";
-
 const settings = "settings",
     general = "general",
     account = "account",
@@ -379,6 +378,7 @@ const email = "email",
     invalidEmail = "invalidEmail",
     password = "password",
     passwordLengthReq = "passwordReq",
+    phoneValidate = "phonevalidate",
     otp = "otp",
     otpReq = "otpReq",
     fullName = "fullName",

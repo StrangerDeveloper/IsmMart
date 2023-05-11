@@ -95,6 +95,12 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
   //TOO: Update Product using PATCH request type
 
   updateProduct({ProductModel? model}) async {
+    model!.price = int.parse("${prodPriceController.text}");
+    model.name = prodNameController.text;
+    model.discount = int.parse("${prodDiscountController.text}");
+    model.description = prodDescriptionController.text;
+    model.stock = int.parse("${prodStockController.text}");
+
     isLoading(true);
     model!.price = int.parse("${prodPriceController.text}");
     model.name = prodNameController.text;

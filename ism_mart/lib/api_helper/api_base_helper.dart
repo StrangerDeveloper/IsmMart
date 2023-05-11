@@ -96,7 +96,8 @@ class ApiBaseHelper {
     } catch (e) {
       GlobalVariable.showLoader.value = false;
       print(e);
-      GetxHelper.showSnackBar(title: langKey.errorTitle.tr, message: e.toString());
+      GetxHelper.showSnackBar(
+          title: langKey.errorTitle.tr, message: e.toString());
       throw e.toString();
     }
   }
@@ -138,7 +139,8 @@ class ApiBaseHelper {
     } catch (e) {
       GlobalVariable.showLoader.value = false;
       print(e);
-      GetxHelper.showSnackBar(title: langKey.errorTitle.tr, message: e.toString());
+      GetxHelper.showSnackBar(
+          title: langKey.errorTitle.tr, message: e.toString());
       throw e.toString();
     }
   }

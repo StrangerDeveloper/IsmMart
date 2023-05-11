@@ -160,7 +160,8 @@ class OrderController extends GetxController
           fetchOrderById(orderId);
           Get.back();
           clearControllers();
-          showSnackBar(title: langKey.successTitle.tr, message: apiResponse.message);
+          showSnackBar(
+              title: langKey.successTitle.tr, message: apiResponse.message);
         } else
           showSnackBar(message: apiResponse.message);
       } else {
@@ -289,7 +290,8 @@ class OrderController extends GetxController
             Get.back();
             rating.value = 0;
             reviewTxtFieldController.clear();
-            showSnackBar(title: langKey.successTitle.tr, message: apiResponse.message);
+            showSnackBar(
+                title: langKey.successTitle.tr, message: apiResponse.message);
           } else
             showSnackBar(message: apiResponse.message);
         } else {
@@ -302,8 +304,7 @@ class OrderController extends GetxController
     }
   }
 
-  void showSnackBar(
-      {title = 'error', message = "Something went wrong!"}) {
+  void showSnackBar({title = 'error', message = "Something went wrong!"}) {
     AppConstant.displaySnackBar(title, message);
   }
 }

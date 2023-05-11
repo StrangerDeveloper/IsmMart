@@ -83,9 +83,14 @@ class SignUpUI extends GetView<AuthController> {
                             textStyle: bodyText1,
                             autoValidateMode:
                                 AutovalidateMode.onUserInteraction,
-                            validator: (value) => !GetUtils.isEmail(value!)
-                                ? langKey.emailReq.tr
-                                : null,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return "Email is required for this field";
+                              } else
+                                return !GetUtils.isEmail(value)
+                                    ? langKey.emailReq.tr
+                                    : null;
+                            },
                             keyboardType: TextInputType.emailAddress,
                             onChanged: (value) {},
                             onSaved: (value) {},
@@ -99,10 +104,14 @@ class SignUpUI extends GetView<AuthController> {
                             labelText: langKey.password.tr,
                             autoValidateMode:
                                 AutovalidateMode.onUserInteraction,
-                            validator: (value) => //!GetUtils.isPassport(value!)
-                                value!.length < 8
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return "Password is required for this field";
+                              } else
+                                return value.length < 8
                                     ? langKey.passwordLengthReq.tr
-                                    : null,
+                                    : null;
+                            },
                             obscureText: true,
                             onChanged: (value) => {},
                             maxLines: 1,
@@ -114,6 +123,16 @@ class SignUpUI extends GetView<AuthController> {
                             iconColor: kPrimaryColor,
                             textStyle: bodyText1,
                             autofocus: false,
+                            autoValidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return "Phone No: is required for this field";
+                              } else
+                                return value.length < 11
+                                    ? langKey.phoneValidate.tr
+                                    : null;
+                            },
                             labelText:
                                 '${langKey.phone.tr} (${langKey.optional.tr})',
                             /*autoValidateMode:

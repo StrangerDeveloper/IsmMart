@@ -25,9 +25,9 @@ class AuthProvider {
     return UserResponse.fromResponse(response);
   }
 
-  Future<ApiResponse> postRegister({UserModel? userModel}) async {
+  Future<UserResponse> postRegister({UserModel? userModel}) async {
     var response = await _authRepo.register(userModel: userModel);
-    return ApiResponse.fromJson(response);
+    return UserResponse.fromResponse(response);
   }
 
   Future<ApiResponse> resendVerificationLink({email}) async {
@@ -36,7 +36,7 @@ class AuthProvider {
     return ApiResponse.fromJson(response);
   }
 
-  Future<ApiResponse> postStoreRegister(
+  Future<UserResponse> postStoreRegister(
       {token, SellerModel? sellerModel, bool? calledForUpdate = false}) async {
     final url = "${ApiConstant.baseUrl}auth/vendor/register";
     final request = http.MultipartRequest('POST', Uri.parse(url));
@@ -75,11 +75,12 @@ class AuthProvider {
     if (response.statusCode == 200) {
       final responseData = await response.stream.bytesToString();
       final data = json.decode(responseData);
-      return ApiResponse.fromJson(data);
+
+      return UserResponse.fromResponse(data);
     } else {
       //ODO: Still needs to test this one properly
       http.StreamedResponse res = handleStreamResponse(response);
-      return ApiResponse.fromJson(
+      return UserResponse.fromResponse(
           json.decode(await res.stream.bytesToString()));
     }
 
@@ -95,25 +96,44 @@ class AuthProvider {
     return UserResponse.fromResponse(response);*/
   }
 
-  Future<ApiResponse> addBankAccount({token, SellerModel? sellerModel}) async {
+  Future<UserResponse> addBankAccount({token, SellerModel? sellerModel}) async {
     var jsonData = {
       "accountTitle": '${sellerModel!.accountTitle}',
       "accountNumber": '${sellerModel.accountNumber}',
       "bankName": '${sellerModel.bankName}',
     };
     var response = await _authRepo.registerStore(token: token, data: jsonData);
-    return ApiResponse.fromJson(response);
+    return UserResponse.fromResponse(response);
   }
 
-  Future<ApiResponse> getCurrentUser({String? token}) async {
+  Future<UserResponse> getCurrentUser({String? token}) async {
     var response = await _authRepo.fetchCurrentUser(token: token);
     debugPrint("UserResponse: ${response}");
-    return ApiResponse.fromJson(response);
+    return UserResponse.fromResponse(response);
   }
 
-  Future<UserResponse> updateUser({token, title, value}) async {
+  Future<UserResponse> updateUser({token, title, value, field}) async {
     var data = {'$title': '$value'};
-    var response = await _authRepo.updateUser(token: token, data: data);
+    print("title is api => field $field $title  $value");
+
+    // var response = await _authRepo.updateUser(token: token, data: data);
+
+    var headers = {
+      'authorization': 'Bearer $token',
+      'Cookie': 'XSRF-token=$token'
+    };
+    var request = http.MultipartRequest(
+        'PATCH', Uri.parse('https://ismmart-api.com/api/user/update'));
+    request.fields.addAll({'$field': title.toString()});
+    request.headers.addAll(headers);
+    http.StreamedResponse response = await request.send();
+    var res = http.Response.fromStream(response);
+
+    // if (response.statusCode == 200) {
+    //   print(await response.stream.bytesToString());
+    // } else {
+    //   print(response.reasonPhrase);
+    // }
     return UserResponse.fromResponse(response);
   }
 

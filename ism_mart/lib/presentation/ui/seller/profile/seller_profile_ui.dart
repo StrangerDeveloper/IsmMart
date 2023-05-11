@@ -10,6 +10,8 @@ class StoreProfileUI extends GetView<AuthController> {
 
   @override
   Widget build(BuildContext context) {
+    print(
+        "vendor profile UI cover  ${controller.userModel!.vendor?.coverImage}   profile  ${controller.userModel!.vendor?.storeImage}");
     return Obx(
       () => SafeArea(
         child: controller.isLoading.isTrue

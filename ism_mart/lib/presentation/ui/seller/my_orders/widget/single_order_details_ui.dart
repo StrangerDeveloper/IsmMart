@@ -150,6 +150,13 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
 
                       AppConstant.spaceWidget(height: 20),
                       _invoiceBody(model: model),
+                      // CustomTextBtn(
+                      //   width: 150,
+                      //   onPressed: () {
+                      //     Get.to(() => AllDisputeView());
+                      //   },
+                      //   child: Text('View All Disputes'),
+                      // ),
                       AppConstant.spaceWidget(height: 10),
                       _invoiceFooter(orderModel: model),
                     ],
@@ -319,7 +326,6 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
         ),
         CustomActionIcon(
           onTap: () {
-            disputeActionsBottomSheet(orderItem: orderItemModel);
             disputeActionsBottomSheet(orderItem: orderItemModel);
           },
           icon: Icons.cases_outlined,
@@ -599,8 +605,7 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
               ),
               AppConstant.spaceWidget(height: 5),
               CustomText(
-                title:
-                    langKey.claimCanBeMade.tr,
+                title: langKey.claimCanBeMade.tr,
                 style: headline3.copyWith(color: kLightColor),
               ),
               AppConstant.spaceWidget(height: 15),

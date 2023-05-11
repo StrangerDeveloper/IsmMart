@@ -204,16 +204,17 @@ class AuthController extends GetxController {
     isLoading(true);
 
     UserModel newUser = UserModel(
-        //firstName: firstNameController.text.trim(),
-        //lastName: lastNameController.text.trim(),
-        firstName: firstNameController.text.trim(),
-        email: emailController.text.trim(),
-        phone: phoneController.text.trim(),
-        password: passwordController.text.trim());
+      //firstName: firstNameController.text.trim(),
+      //lastName: lastNameController.text.trim(),
+      firstName: firstNameController.text.trim(),
+      email: emailController.text.trim(),
+      phone: phoneController.text.trim(),
+      password: passwordController.text.trim(),
+    );
 
     await authProvider
         .postRegister(userModel: newUser)
-        .then((ApiResponse? response) {
+        .then((UserResponse? response) {
       isLoading(false);
       if (response != null) {
         if (response.success!) {
@@ -233,9 +234,11 @@ class AuthController extends GetxController {
     });
   }
 
-  registerStore({SellerModel? updatedModel}) async {
+  registerStore({UserModel? updatedModel}) async {
     isLoading(true);
 
+    print(
+        "controller profile ${profileImgPath.value}  \n covet= ${coverImgPath.value}");
     SellerModel model = SellerModel(
       storeName: storeNameController.text.trim(),
       storeDesc: storeDescController.text,
@@ -249,13 +252,15 @@ class AuthController extends GetxController {
       accountTitle: bankHolderTitleController.text.trim(),
       accountNumber: bankAccController.text.trim(),
     );
+
     if (userToken!.isNotEmpty) {
+      // UserModel user = UserModel(vendor: model);
       await authProvider
           .postStoreRegister(
               token: userToken!,
               calledForUpdate: updatedModel != null,
               sellerModel: model)
-          .then((ApiResponse? apiResponse) {
+          .then((UserResponse? apiResponse) {
         isLoading(false);
         if (apiResponse != null) {
           if (apiResponse.success!) {
@@ -352,16 +357,8 @@ class AuthController extends GetxController {
 
         if (apiResponse.errors != null && apiResponse.errors!.isNotEmpty) {
           setUserModel(UserModel(error: apiResponse.errors!.first));
-        } else {
-          UserModel? userDetailsFromApi = UserModel.fromJson(apiResponse.data);
-          UserModel? storedDetails = await LocalStorageHelper.getStoredUser();
-          if (userDetailsFromApi.emailVerified != storedDetails.emailVerified) {
-            updateUserEmailVerification(
-                fromApi: userDetailsFromApi, stored: storedDetails);
-          } else {
-            setUserModel(userDetailsFromApi);
-          }
-        }
+        } else
+          setUserModel(apiResponse.userModel!);
       }).catchError((error) {
         isLoading(false);
         setSession(true);
@@ -384,21 +381,25 @@ class AuthController extends GetxController {
         "title": firstName.tr,
         "subtitle": userModel!.firstName ?? '',
         "icon": Icons.person_rounded,
+        "field": "firstName",
       },
       {
         "title": lastName.tr,
         "subtitle": userModel!.lastName ?? '',
         "icon": Icons.person_rounded,
+        "field": "lastName"
       },
       {
         "title": phone.tr,
         "subtitle": userModel!.phone ?? '',
         "icon": Icons.phone_iphone_rounded,
+        "field": "phone",
       },
       {
         "title": address.tr,
         "subtitle": userModel!.address ?? '',
-        "icon": Icons.location_on_rounded
+        "icon": Icons.location_on_rounded,
+        "field": "address",
       },
       {
         "title": country.tr,
@@ -477,7 +478,7 @@ class AuthController extends GetxController {
     //update();
   }
 
-  updateUser({title, value}) async {
+  updateUser({title, value, field}) async {
     title = editingTextController.text;
     if (title == "firstName") {
       userModel!.firstName = value;
@@ -488,10 +489,15 @@ class AuthController extends GetxController {
     } else if (title == "address") {
       userModel!.address = value;
     }
+    // userModel!.firstName = title;
+    // userModel!.lastName = title;
+
+    print("title is => $title");
     if (userToken != null) {
       isLoading(true);
       await authProvider
-          .updateUser(token: userToken, title: title, value: value)
+          .updateUser(
+              token: userToken, title: title, value: value, field: field)
           .then((UserResponse? userResponse) {
         isLoading(false);
         if (userResponse != null) {

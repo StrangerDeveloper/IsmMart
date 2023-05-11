@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ism_mart/utils/constants.dart';
 
 class ProductQuantityCounter extends StatelessWidget {
-  const ProductQuantityCounter(
+  ProductQuantityCounter(
       {Key? key,
       this.onDecrementPress,
       this.onIncrementPress,
