@@ -430,5 +430,15 @@ class Turkish {
             '* Uygun öğelerde sınırsız teslimatlar.'
             'Not: Tüm üyelerinden (satıcılar ve alıcılar) ödeme veya teslimatta herhangi bir rahatsızlıktan kaçınmak için Ismmart tarafından belirtilen tüm ticaret kurallarına ve prosedürlerine uymaları istenir. Komisyon Ücret Yapısı İşlem Değeri PKR100.000/- ~% 0,5 PKR100.000/-- PKR250,00,00/-- ~% 1.00 PKR250,00,00/- üzerindeki ancak PKR250\'nin altında komisyon işlem değeri, PKR250, 00,000/- ~% 1.75 PKR 2550,00.000/- düz% 2.25 komisyon herhangi bir toptan işlem için komisyon% 3,5\'lik düz bir komisyon tahsil edilecektir.'
             'Not: İşlem değeri nakliye ve sigorta maliyetini hariç tutar.',
+        key.exchangeHeader1: '',
+        key.exchangeHeader2: 'Nasıl Geri Döner?',
+        key.exchangeBody1: 'Müşteri memnuniyeti garanti edilir! Ismmart mağazaları aracılığıyla satılan ürünlerin kalitesini garanti ediyoruz ve satın alma işleminizden memnun değilseniz, doğru yapacağız. Aşağıda listelenen birkaç koşul hariç, ISMMART mağazalarından satın alınan herhangi bir ürün, sevkiyatın alınmasından itibaren 14 takvim günü içinde iade edilebilir.'
+            '* İndirimli mallar/ürünler geri ödeme için değiştirilemez veya iade edilemez. Sadece belirgin bir kusur bulunursa değiştirilebilir veya iade edilebilir.'
+            '* İade edilen ürünler, orijinal ambalajında, tüm güvenlik contaları ve etiketleri hala sağlam/eklenmiş olarak veya eklenmelidir. Bu koşullar yerine getirilmezse, iade geri ödeme veya değişim için kalifiye olmayacaktır.'
+            '* ISMMART mağazaları, bazı durumlarda istisna yapmak için özel hakkı/ yetkiyi ayırır.'
+            '* İade politikamıza gelen bariz hata nedeniyle bir öğe döndürülürse, müşteri kurye hizmetleri için ücret alınmaz.'
+            '* Cep telefonları, aksesuarlar ve diğer elektrik ve elektronik ürünler için dönüş süresi, paketin alındığı günden başlayarak sadece 5 takvim günüdür. Dönüş penceresi sırasında bir kusur bulunursa, bir yedek öğe şarjsız verilecektir. İade penceresinin süresi dolduktan sonra üretici veya tedarikçiden gelen standart garantiler yürürlükte olacaktır.',
+        key.exchangeBody2:
+            'Bir öğe yukarıda belirtilen tüm gereksinimleri karşılıyorsa lütfen müşteri destek merkezimizle iletişime geçin.',
       };
 }

@@ -432,5 +432,15 @@ class Italian {
             '* Consegne illimitate su articoli idonei.'
             'Nota: tutti i membri (venditori e acquirenti) sono invitati a seguire tutte le regole e le procedure di trading menzionate da ISMMART per evitare qualsiasi tipo di inconveniente nel pagamento o nella consegna. Valore delle transazioni della struttura delle commissioni di commissione al di sotto di PKR100.000/- ~ 0,5% Valore della transazione della Commissione al di sopra di PKR100.000/- e inferiore a PKR250,00,00,00/- ~ 1,00% Valore della transazione della Commissione superiore a PKR250,00,00/- ma al di sotto di PKR250, 00.000/- ~ 1,75% Valore delle transazioni della Commissione superiore a PKR250,00.000/- Flat 2,25% Commissione per qualsiasi transazione all\'ingrosso Verrà addebitata una commissione piatta del 3,5%.'
             'Nota: il valore della transazione esclude il costo di spedizione e assicurazione.',
+        key.exchangeHeader1: '',
+        key.exchangeHeader2: 'Come tornare?',
+        key.exchangeBody1: 'La soddisfazione del cliente è garantita! Garantiamo la qualità dei prodotti venduti attraverso i negozi ISMMART e se non sei soddisfatto del tuo acquisto, lo faremo bene. Ad eccezione di alcune condizioni elencate di seguito, qualsiasi articolo acquistato dai negozi ISMMART può essere restituito entro 14 giorni di calendario dalla data in cui la spedizione viene ricevuta.'
+            '* I beni/prodotti scontati non possono essere scambiati o restituiti per un rimborso. Può essere scambiato o restituito solo se si trova un difetto evidente.'
+            '* Gli oggetti restituiti devono non essere sbalorditivi, nella sua confezione originale, con tutte le guarnizioni e le etichette di sicurezza ancora intatte/attaccate. Il rendimento non sarà qualificato per un rimborso o uno scambio se queste condizioni non sono soddisfatte.'
+            '* I negozi ISMMMART si riservano il diritto/ autorità esclusivi per fare eccezioni in alcune circostanze.'
+            '* Se un articolo viene restituito a causa di un evidente errore che viene nella nostra politica di reso, il cliente non verrà addebitato per i servizi di corriere.'
+            '* Il periodo di ritorno per telefoni cellulari, accessori e altri prodotti elettrici ed elettronici è solo 5 giorni di calendario a partire dal giorno in cui viene ricevuto il pacchetto. Verrà dato un elemento di sostituzione senza carica se si trova un difetto durante la finestra di ritorno. Le garanzie standard del produttore o del fornitore saranno in vigore dopo la scadenza della finestra di ritorno.',
+        key.exchangeBody2:
+            'Si prega di contattarsi con il nostro centro di assistenza clienti se un articolo soddisfa tutti i requisiti sopra specificati.',
       };
 }

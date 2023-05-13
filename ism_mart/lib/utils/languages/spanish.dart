@@ -432,5 +432,15 @@ class Spanish {
             '* Entregas ilimitadas en artículos elegibles.'
             'Nota: Se solicita a todos los miembros (vendedores y compradores) que sigan todas las reglas y procedimientos comerciales mencionados por Ismmart para evitar cualquier tipo de inconveniente en el pago o entrega. Valor de transacción de la estructura de la comisión por debajo del valor de transacción de la comisión PKR100,000/- ~ 0.5% por encima del valor de la transacción de la comisión por encima de PKR250,00/- pero por debajo de PKR250, 00,000/- ~ 1.75% Valor de transacción de la Comisión por encima de PKR250,00,000/- Flat 2.25% Comisión para cualquier transacción mayorista Se cobrará una comisión fija de 3.5%.'
             'Nota: El valor de la transacción excluye el costo de envío y seguro.',
+        key.exchangeHeader1: '',
+        key.exchangeHeader2: '¿Cómo regresar?',
+        key.exchangeBody1: '¡La satisfacción del cliente está garantizada! Garantizamos la calidad de los productos vendidos a través de las tiendas ISMMART, y si no está satisfecho con su compra, lo haremos correcto. Con la excepción de algunas condiciones enumeradas a continuación, cualquier artículo comprado en las tiendas ISMMART puede devolverse dentro de los 14 días calendario a partir de la fecha en que se recibe el envío.'
+            '* Los productos/productos con descuento no se pueden intercambiar ni devolver por un reembolso. Se puede intercambiar o devolver solo si se encuentra un defecto obvio.'
+            '* Los elementos que se devuelven deben estar desagradables, en su embalaje original, con todos los sellos y etiquetas de seguridad aún intactos/adjuntos. La declaración no se calificará para un reembolso o intercambio si no se cumplen estas condiciones.'
+            '* Las tiendas ISMMART reservan el derecho/ autoridad exclusiva para hacer excepciones en algunas circunstancias.'
+            '* Si se devuelve un elemento debido a un error obvio que entra en nuestra política de devoluciones, el cliente no se cobrará por los servicios de mensajería.'
+            '* El período de devolución para teléfonos móviles, accesorios y otros productos eléctricos y electrónicos es de solo 5 días calendario que comienzan el día en que se recibe el paquete. Se administrará un artículo de reemplazo sin cargo si se encuentra un defecto durante la ventana de retorno. Las garantías estándar del fabricante o proveedor estarán vigentes después de que haya expirado la ventana de devolución.',
+        key.exchangeBody2:
+            'Póngase en contacto con nuestro centro de atención al cliente si un artículo cumple con todos los requisitos especificados anteriormente.',
       };
 }

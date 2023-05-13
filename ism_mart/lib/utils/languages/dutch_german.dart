@@ -433,5 +433,15 @@ class DutchGerman {
             '* Unbegrenzte Lieferungen für förderfähige Gegenstände.'
             'Hinweis: Alle Mitglieder (Verkäufer und Käufer) werden gebeten, alle von ISMmart genannten Handelsregeln und -verfahren zu befolgen, um jegliche Art von Unannehmlichkeiten bei der Zahlung oder Lieferung zu vermeiden. Der Transaktionswert der Provision Gebührenstruktur unter pkR100.000/- ~ 0,5% Provisionstransaktionswert über PKR 100.000/- und unter pkr250,00,00/- ~ 1,00% Provisionstransaktionswert über PKR250,00,00/- jedoch unter PKR250, Transaktionswert über PKR250,00/- 00.000/- ~ 1,75% Provisionstransaktionswert über PKR250,00.000/- Flat 2,25% Provision für jede Großhandelstransaktion wird eine flache Provision von 3,5% berechnet.'
             'Hinweis: Der Transaktionswert schließt die Versand- und Versicherungskosten aus.',
+        key.exchangeHeader1: '',
+        key.exchangeHeader2: 'Wie kehre ich zurück?',
+        key.exchangeBody1: 'Kundenzufriedenheit ist garantiert! Wir garantieren die Qualität der Produkte, die über ISMMART -Läden verkauft werden, und wenn Sie mit Ihrem Kauf nicht zufrieden sind, werden wir es richtig machen. Mit Ausnahme einiger unten aufgeführter Bedingungen kann jeder von ISMMART -Stores gekaufte Artikel innerhalb von 14 Kalendertagen nach dem Eingang des Datums zurückgegeben werden.'
+            '* Ermäßigte Waren/Produkte können nicht für eine Rückerstattung ausgetauscht oder zurückgegeben werden. Es kann nur ausgetauscht oder zurückgegeben werden, wenn ein offensichtlicher Fehler gefunden wird.'
+            '* Die zurückgegebenen Gegenstände müssen in seiner ursprünglichen Verpackung ungetragen sein, wobei alle Sicherheitsdichtungen und Etiketten noch intakt/angebracht sind. Die Rendite wird nicht für eine Rückerstattung oder einen Austausch qualifiziert, wenn diese Bedingungen nicht erfüllt sind.'
+            '* ISMMART -Store behalten sich das ausschließliche Recht/ die Autorität vor, unter bestimmten Umständen Ausnahmen zu machen.'
+            '* Wenn ein Artikel aufgrund eines offensichtlichen Fehlers zurückgegeben wird, der in unsere Rückgaberichtlinien eingeht, wird der Kunde nicht für Kurierdienste berechnet.'
+            '* Die Rückkehrzeit für Mobiltelefone, Zubehör und andere elektrische und elektronische Produkte beträgt nur 5 Kalendertage, die am Tag des Pakets beginnen. Ein Ersatzelement wird ohne Ladung gegeben, wenn während des Rückgabebergens ein Fehler gefunden wird. Standardgarantien des Herstellers oder Lieferanten werden nach Ablauf des Rückgabesters in Kraft sein.',
+        key.exchangeBody2:
+            'Bitte setzen Sie sich mit unserem Kunden Support Center in Verbindung, wenn ein Artikel alle oben angegebenen Anforderungen erfüllt.',
       };
 }

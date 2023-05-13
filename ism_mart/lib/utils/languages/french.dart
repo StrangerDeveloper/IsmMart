@@ -436,5 +436,15 @@ class French {
             '* Livraisons illimitées sur les articles éligibles.'
             'Remarque: Tous les membres (vendeurs et acheteurs) sont priés de suivre toutes les règles et procédures de négociation mentionnées par Ismmart pour éviter tout type de désagrément en paiement ou en livraison. Valeur de transaction de la structure des frais de commission inférieure à 100 000 PKR / - ~ 0,5% Valeur de transaction de commission supérieure à 100 000 PKR / - et en dessous de PKR250,00,00 / - ~ 1,00% Valeur de transaction de commission supérieure à PKR250,00,00 / - mais en dessous de PKR250, 00,000 / - ~ 1,75% Valeur de transaction de commission supérieure à 250,00 000 / - Commission plate de 2,25% pour toute transaction en gros, une commission plate de 3,5% sera facturée.'
             'Remarque: La valeur de la transaction exclut les frais d\'expédition et d\'assurance.',
+        key.exchangeHeader1: '',
+        key.exchangeHeader2: 'Comment revenir?',
+        key.exchangeBody1: 'La satisfaction du client est garantie! Nous garantissons la qualité des produits vendus dans les magasins Ismmart, et si vous n\'êtes pas satisfait de votre achat, nous ferons les choses correctement. À l\'exception de quelques conditions énumérées ci-dessous, tout article acheté dans les magasins Ismmart peut être retourné dans les 14 jours civils à compter de la date de l\'envoi.'
+            '* Les marchandises / produits à prix réduit ne peuvent pas être échangés ou retournés contre un remboursement. Il ne peut être échangé ou retourné que si une faille évidente est trouvée.'
+            '* Les articles retournés doivent être non portés, dans son emballage d\'origine, avec tous les joints de sécurité et étiquettes toujours intacts / attachés. Le rendement ne sera pas qualifié pour un remboursement ou un échange si ces conditions ne sont pas remplies.'
+            '* Les magasins Ismmart réservent le droit / l\'autorité exclusif de faire des exceptions dans certaines circonstances.'
+            '* Si un article est retourné en raison d\'une erreur évidente qui entre dans notre politique de retour, le client ne sera pas facturé pour les services de messagerie.'
+            '* La période de retour pour les téléphones mobiles, les accessoires et autres produits électriques et électroniques ne représente que 5 jours civils à partir du jour où le package est reçu. Un élément de remplacement sera donné sans frais si une faille est trouvée pendant la fenêtre de retour. Les garanties standard du fabricant ou du fournisseur seront en vigueur après l\'expiration de la fenêtre de retour.',
+        key.exchangeBody2:
+            'Veuillez contacter notre centre de support client si un article répond à toutes les exigences spécifiées ci-dessus.',
       };
 }
