@@ -41,7 +41,7 @@ class AuthProvider {
     final url = "${ApiConstant.baseUrl}auth/vendor/register";
     final request = http.MultipartRequest('POST', Uri.parse(url));
     request.headers['Authorization'] = '$token';
-    request.headers['Content-Type'] = 'multipart/form-data';
+    //request.headers['Content-Type'] = 'multipart/form-data';
 
     request.fields['storeName'] = sellerModel!.storeName!;
     request.fields['storeDesc'] = sellerModel.storeDesc!;
@@ -53,33 +53,38 @@ class AuthProvider {
     request.fields['accountNumber'] = sellerModel.accountNumber!;
     request.fields['bankName'] = sellerModel.bankName!;
 
-    if (sellerModel.storeImage!.isNotEmpty) {
+    if (sellerModel.storeImage != '') {
       request.files.add(await http.MultipartFile.fromPath(
         'storeImage',
         sellerModel.storeImage!,
         contentType: MediaType.parse('image/jpeg'),
       ));
-    } else {
-      request.fields['storeImage'] = sellerModel.storeName!;
     }
-    if (sellerModel.coverImage!.isNotEmpty) {
+    // else {
+    //   request.fields['storeImage'] = sellerModel.storeImage!;
+    // }
+
+    if (sellerModel.coverImage != '') {
       request.files.add(await http.MultipartFile.fromPath(
         'coverImage',
         sellerModel.coverImage!,
         contentType: MediaType.parse('image/jpeg'),
       ));
-    } else {
-      request.fields['coverImage'] = sellerModel.coverImage!;
     }
+    // else {
+    //   request.fields['coverImage'] = sellerModel.coverImage!;
+    // }
+
+    print(request.files.map((e) => e.filename).toString());
     final response = await request.send();
     if (response.statusCode == 200) {
-      final responseData = await response.stream.bytesToString();
-      final data = json.decode(responseData);
+      var data = await jsonDecode(await response.stream.bytesToString());
 
       return UserResponse.fromResponse(data);
     } else {
       //ODO: Still needs to test this one properly
-      http.StreamedResponse res = handleStreamResponse(response);
+      http.StreamedResponse res =
+          await request.send().timeout(const Duration(seconds: 15));
       return UserResponse.fromResponse(
           json.decode(await res.stream.bytesToString()));
     }

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,10 +11,13 @@ import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class RegisterVendorUI extends GetView<AuthController> {
-  const RegisterVendorUI({Key? key, this.isCalledForUpdate, this.model})
-      : super(key: key);
+  const RegisterVendorUI({
+    Key? key,
+    // this.isCalledForUpdate,
+    this.model,
+  }) : super(key: key);
 
-  final bool? isCalledForUpdate;
+  // final bool? isCalledForUpdate;
   final SellerModel? model;
 
   @override
@@ -74,34 +78,44 @@ class RegisterVendorUI extends GetView<AuthController> {
                         dashPattern: const [10, 4],
                         strokeCap: StrokeCap.round,
                         child: Obx(
-                          () => controller.coverImgPath.value.isNotEmpty
-                              ? Container(
-                                  alignment: Alignment.center,
-                                  child: Image.file(
-                                    File(controller.coverImgPath.value),
+                          () => (controller.coverImgPath.value.isEmpty &&
+                                  model?.coverImage != null)
+                              ? Center(
+                                  child: CustomNetworkImage(
+                                    imageUrl: model!.coverImage!,
+                                    fit: BoxFit.fill,
+                                    width: AppConstant.getSize().width,
                                   ),
                                 )
-                              : Center(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      const Icon(
-                                        Icons.cloud_upload_rounded,
-                                        size: 30,
+                              : (controller.coverImgPath.value.isNotEmpty
+                                  ? Container(
+                                      alignment: Alignment.center,
+                                      child: Image.file(
+                                        File(controller.coverImgPath.value),
                                       ),
-                                      const SizedBox(height: 5),
-                                      Text(
-                                        langKey.clickHereToUpload.tr,
-                                        style: TextStyle(
-                                          fontSize: 15,
-                                          color: Colors.grey.shade400,
-                                        ),
+                                    )
+                                  : Center(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          const Icon(
+                                            Icons.cloud_upload_rounded,
+                                            size: 30,
+                                          ),
+                                          const SizedBox(height: 5),
+                                          Text(
+                                            langKey.clickHereToUpload.tr,
+                                            style: TextStyle(
+                                              fontSize: 15,
+                                              color: Colors.grey.shade400,
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
-                                ),
+                                    )),
                         ),
                       ),
                     ),
@@ -159,16 +173,22 @@ class RegisterVendorUI extends GetView<AuthController> {
                             ],
                           ),
                           child: Obx(
-                            () => CircleAvatar(
-                              radius: 40,
-                              backgroundColor: Colors.grey[200],
-                              backgroundImage:
-                                  controller.profileImgPath.value.isNotEmpty
-                                      ? FileImage(
-                                          File(controller.profileImgPath.value),
-                                        )
-                                      : null,
-                            ),
+                            () => (controller.profileImgPath.value.isEmpty &&
+                                    model?.storeImage != null)
+                                ? profileImage(
+                                    model!.storeImage!,
+                                  )
+                                : CircleAvatar(
+                                    radius: 40,
+                                    backgroundColor: Colors.grey[200],
+                                    backgroundImage: controller
+                                            .profileImgPath.value.isNotEmpty
+                                        ? FileImage(
+                                            File(controller
+                                                .profileImgPath.value),
+                                          )
+                                        : null,
+                                  ),
                           ),
                         ),
                         Positioned(
@@ -215,6 +235,41 @@ class RegisterVendorUI extends GetView<AuthController> {
           _formData()
         ],
       )),
+    );
+  }
+
+  Widget profileImage(String url) {
+    return Container(
+      child: CachedNetworkImage(
+        imageUrl: url,
+        imageBuilder: (context, imageProvider) {
+          return Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              image: DecorationImage(
+                image: imageProvider,
+                fit: BoxFit.fill,
+              ),
+            ),
+          );
+        },
+        errorWidget: (context, url, error) {
+          return Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              image: DecorationImage(
+                image: AssetImage('assets/images/no_image_found.jpg'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          );
+        },
+        placeholder: (context, url) {
+          return const Center(
+            child: CircularProgressIndicator(strokeWidth: 0.5),
+          );
+        },
+      ),
     );
   }
 

@@ -134,7 +134,7 @@ class AuthRepository {
   }
 
   Future<dynamic> deleteShippingDetails({token, id}) async {
-    var response = await _apiService.delete(
+    var response = await _apiService.patch(
         endpoint: 'user/deleteShippingDetails/$id',
         token: token,
         requiresAuthToken: true);
