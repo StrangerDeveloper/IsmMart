@@ -59,6 +59,8 @@ class English {
             'Payment Successful!, You\'re Order has been Placed!',
         key.orderInformation: 'Order Information',
         key.orderNotCreated: 'Something went wrong! Order Not created',
+        key.phoneValidate:
+            'Phone numbers should be in a format of 11 to 14 digits.',
 
         ///sellerController
         key.imageSizeDesc: 'Image must be up to',
@@ -119,7 +121,7 @@ class English {
         key.finalPriceWould: 'Final price would be Rs',
         key.afterPlatformFee: 'After platform fee of',
         key.yourDiscountShould:
-            'Your discount should be between 10 and 100 percent. Please try again!',
+            'Your discount should be between 10 and 90 percent. Please try again!',
         key.uploadImageLessThan: 'Upload images less than',
         key.outOfStock: 'Out of stock',
         key.productNotFound: 'Product Not Found',
@@ -253,8 +255,8 @@ class English {
             'Please get in touch with our customer support centre if an item meets all the requirements specified above.',
 
         ///memberShip
-        key.discountMinValue: 'Discount should be greater than',
-        key.discountMaxValue: 'Discount should not be greater or equal to',
+        key.discountMinValue: 'Discount should be greater or equal to 10',
+        key.discountMaxValue: 'Discount should not be greater than 90',
 
         key.memPlan1Title: 'START',
         key.memPlan1Price: 'Free',

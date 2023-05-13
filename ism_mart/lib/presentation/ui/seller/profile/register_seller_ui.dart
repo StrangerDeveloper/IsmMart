@@ -230,7 +230,7 @@ class RegisterVendorUI extends GetView<AuthController> {
               ],
             ),
           ),
-        
+
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5),
             child: CustomText(title: "${langKey.yourCoverAndProfile.tr} 2 MB"),
@@ -344,8 +344,7 @@ class RegisterVendorUI extends GetView<AuthController> {
               autofocus: false,
               textStyle: bodyText1,
               autoValidateMode: AutovalidateMode.onUserInteraction,
-              validator: (value) =>
-                  GetUtils.isBlank(value!)! ? langKey.ownerNameReq.tr : null,
+              validator: Validator().name,
               keyboardType: TextInputType.name,
               onChanged: (value) {},
               onSaved: (value) {},

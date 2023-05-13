@@ -28,7 +28,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
   void setDiscount(int? discount) {
     if (discount! > 0 && discount < 10) {
       discountMessage(langKey.discountMinValue.tr);
-    } else if (discount >= 90) {
+    } else if (discount > 90) {
       discountMessage(langKey.discountMaxValue.tr);
     } else {
       discountMessage("");

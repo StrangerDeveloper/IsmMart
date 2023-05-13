@@ -29,7 +29,7 @@ class StoreProfileUI extends GetView<AuthController> {
                                 onTap: () => AppConstant.showBottomSheet(
                                     widget: RegisterVendorUI(
                                       model: controller.userModel?.vendor,
-                                      isCalledForUpdate: true,
+                                      //isCalledForUpdate: true,
                                     ),
                                     isGetXBottomSheet: false,
                                     buildContext: context),

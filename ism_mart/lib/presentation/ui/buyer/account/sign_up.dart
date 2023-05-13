@@ -66,9 +66,7 @@ class SignUpUI extends GetView<AuthController> {
                             textStyle: bodyText1,
                             autoValidateMode:
                                 AutovalidateMode.onUserInteraction,
-                            validator: (value) => GetUtils.isBlank(value!)!
-                                ? langKey.fullNameReq.tr
-                                : null,
+                            validator: Validator().name,
                             keyboardType: TextInputType.name,
                             onChanged: (value) {},
                             onSaved: (value) {},
@@ -122,16 +120,14 @@ class SignUpUI extends GetView<AuthController> {
                             iconPrefix: Icons.phone_iphone_outlined,
                             iconColor: kPrimaryColor,
                             textStyle: bodyText1,
+                            keyboardType: TextInputType.phone,
                             autofocus: false,
                             autoValidateMode:
                                 AutovalidateMode.onUserInteraction,
                             validator: (value) {
-                              if (value!.isEmpty) {
-                                return "Phone No: is required for this field";
-                              } else
-                                return value.length < 11
-                                    ? langKey.phoneValidate.tr
-                                    : null;
+                              return value!.length < 11 && value.length > 14
+                                  ? langKey.phoneValidate.tr
+                                  : null;
                             },
                             labelText:
                                 '${langKey.phone.tr} (${langKey.optional.tr})',
