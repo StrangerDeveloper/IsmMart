@@ -133,6 +133,7 @@ class English {
         key.reviews: 'Reviews',
         key.rating: 'Rating',
         key.addDisputes: 'Add Disputes',
+        key.deleteDisputes: 'Delete Disputes',
         key.disputeAlreadyAdded: 'Dispute Already Added',
         key.viewDispute: 'View Dispute',
         key.disputeNotAddedYet: 'Dispute Not Added Yet',

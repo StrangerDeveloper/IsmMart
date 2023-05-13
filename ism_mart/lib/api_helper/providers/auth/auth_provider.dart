@@ -45,7 +45,7 @@ class AuthProvider {
     final url = "${ApiConstant.baseUrl}auth/vendor/register";
     final request = http.MultipartRequest('POST', Uri.parse(url));
     request.headers['Authorization'] = '$token';
-    request.headers['Content-Type'] = 'multipart/form-data';
+    //request.headers['Content-Type'] = 'multipart/form-data';
 
     request.fields['storeName'] = sellerModel!.storeName!;
     request.fields['storeDesc'] = sellerModel.storeDesc!;
