@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
+import 'package:ism_mart/controllers/buyer/image_controller.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
@@ -34,7 +35,7 @@ class AuthController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    //getCurrentUser();
+    getCurrentUser();
     //getToken();
 
     //getCurrentUser();
@@ -282,26 +283,20 @@ class AuthController extends GetxController {
         if (apiResponse != null) {
           if (apiResponse.success!) {
             Get.back();
-            AppConstant.displaySnackBar(
-                langKey.successTitle.tr, apiResponse.message);
-            clearStoreController();
+            AppConstant.displaySnackBar("success", apiResponse.message);
+            //    clearStoreController();
             getCurrentUser();
           } else
-            AppConstant.displaySnackBar(
-                langKey.errorTitle.tr, apiResponse.message);
+            AppConstant.displaySnackBar('error', apiResponse.message);
         } else
-          AppConstant.displaySnackBar(
-              langKey.errorTitle.tr, langKey.someThingWentWrong.tr);
+          AppConstant.displaySnackBar('error', "something went wrong!");
       }).catchError((error) {
         isLoading(false);
         debugPrint("RegisterStore: Error $error");
       });
     } else {
       isLoading(false);
-      AppConstant.displaySnackBar(
-        langKey.errorTitle.tr,
-        langKey.currentUserNotFound.tr,
-      );
+      AppConstant.displaySnackBar('error', "Current User not found!");
     }
   }
 
@@ -326,8 +321,11 @@ class AuthController extends GetxController {
                 } else {
                   if (calledForProfile) {
                     profileImgPath(compressedFile.path);
+
+                    updateUser();
                   } else
                     coverImgPath(compressedFile.path);
+                  updateUser();
                 }
                 Get.back();
               });
@@ -368,6 +366,8 @@ class AuthController extends GetxController {
             apiResponse.message!
                 .toLowerCase()
                 .contains(AppConstant.SESSION_EXPIRED)) {
+          var a = apiResponse.userModel!.imageUrl;
+          print("image from current user $a");
           setSession(true);
         } else
           setSession(false);
@@ -482,6 +482,7 @@ class AuthController extends GetxController {
 
   //String? get userToken => "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQ4LCJpYW0iOiJ2ZW5kb3IiLCJ2aWQiOjQzLCJpYXQiOjE2NzgwNzY4MTE2MjcsImV4cCI6MTY3ODI0OTYxMTYyN30.eWj8W9zsP_mDBf81ho08HGmtwz8ufDpKUP2YBghyCN8";
 
+  var imgController = Get.put(ImageController());
   getToken() async {
     await LocalStorageHelper.getStoredUser().then((user) async {
       _currUserToken.value = user.token ?? '';
@@ -496,6 +497,21 @@ class AuthController extends GetxController {
   }
 
   updateUser({title, value, field}) async {
+    title = editingTextController.text;
+    if (field == "firstName") {
+      userModel!.firstName = title;
+    } else if (field == "lastName") {
+      userModel!.lastName = title;
+    } else if (field == "phone") {
+      userModel!.phone = title;
+    } else if (field == "address") {
+      userModel!.address = title;
+    }
+    // userModel!.firstName = title;
+    // userModel!.lastName = title;
+    userModel!.imageUrl = profileImgPath.value;
+    print("m0del image file ${profileImgPath.value}");
+
     if (userToken != null) {
       isLoading(true);
       await authProvider
@@ -506,17 +522,18 @@ class AuthController extends GetxController {
         if (userResponse != null) {
           if (userResponse.success!) {
             Get.back();
-            AppConstant.displaySnackBar(
-                langKey.successTitle.tr, userResponse.message);
+            AppConstant.displaySnackBar("success", userResponse.message);
             editingTextController.clear();
             getCurrentUser();
+            profileImgPath.value = '';
           } else
-            AppConstant.displaySnackBar(
-                langKey.errorTitle.tr, userResponse.message);
+            getCurrentUser();
+          AppConstant.displaySnackBar('error', userResponse.message);
         } else
-          AppConstant.displaySnackBar(
-              langKey.errorTitle.tr, langKey.someThingWentWrong.tr);
+          getCurrentUser();
+        AppConstant.displaySnackBar('error', "something went wrong!");
       }).catchError((error) {
+        getCurrentUser();
         isLoading(false);
         debugPrint("RegisterStore: Error $error");
       });

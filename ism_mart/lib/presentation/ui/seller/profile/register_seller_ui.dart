@@ -230,6 +230,7 @@ class RegisterVendorUI extends GetView<AuthController> {
               ],
             ),
           ),
+        
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5),
             child: CustomText(title: "${langKey.yourCoverAndProfile.tr} 2 MB"),

@@ -277,6 +277,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
       isLoading(false);
       if (response != null) {
         if (response.success!) {
+          fetchMyProducts();
           Get.back();
           clearControllers();
           AppConstant.displaySnackBar(
@@ -384,7 +385,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
     const MyProducts(),
     const MyOrdersUI(),
     //const PremiumMembershipUI(),
-    const ProfileUI(),
+    ProfileUI(),
     const StoreProfileUI(),
   ];
 

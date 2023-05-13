@@ -266,7 +266,7 @@ class BaseController extends GetxController {
     const DashboardUI(),
     const CategoriesUI(),
     const CartUI(),
-    const SettingsUI(),
+     SettingsUI(),
     SearchUI(
       isCalledForDeals: true,
     )

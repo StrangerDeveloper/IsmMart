@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/controllers/buyer/auth/auth_controller.dart';
@@ -6,10 +8,15 @@ import 'package:ism_mart/presentation/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
+import '../../../../controllers/buyer/image_controller.dart';
+
 class ProfileUI extends GetView<AuthController> {
   const ProfileUI({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    print(
+        "image is m0del => ${controller.userModel!.imageUrl} \n image controller ${controller.profileImgPath.value}");
     return Obx(
       () => SafeArea(
         child: controller.isLoading.isTrue
@@ -44,7 +51,7 @@ class ProfileUI extends GetView<AuthController> {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  /*Stack(
+                  Stack(
                     children: [
                       Container(
                         height: 90,
@@ -61,28 +68,24 @@ class ProfileUI extends GetView<AuthController> {
                             ),
                           ],
                         ),
-                        child: Obx(
-                          () => CircleAvatar(
-                            radius: 40,
-                            backgroundColor: Colors.grey[200],
-                            backgroundImage: NetworkImage(
-                                controller.userModel!.imageUrl ??
-                                    AppConstant.defaultImgUrl),
-                          ),
-                        ),
+                        child: Obx(() => controller.profileImgPath.value == ''
+                            ? CircleAvatar(
+                                radius: 40,
+                                backgroundColor: Colors.grey[200],
+                                backgroundImage: NetworkImage(
+                                    controller.userModel!.imageUrl.toString()))
+                            : CircleAvatar(
+                                radius: 40,
+                                backgroundColor: Colors.grey[200],
+                                backgroundImage: FileImage(
+                                    File(controller.profileImgPath.value)))),
                       ),
                       Positioned(
                         bottom: 1,
                         right: 1,
                         child: InkWell(
                           onTap: () {
-                              Get.defaultDialog(
-                              title: "Choose Profile Avatar",
-                              titleStyle: AppThemes.dialogTitleHeader
-                                  .copyWith(color: AppThemes.DEEP_ORANGE),
-                              content: _profileIconsContent(),
-                              //confirm: _btnSCameraAndGallery(),
-                            );
+                            _pickImage();
                           },
                           child: Container(
                             child: Padding(
@@ -110,7 +113,8 @@ class ProfileUI extends GetView<AuthController> {
                         ),
                       ),
                     ],
-                  ),*/
+                  ),
+
                   StickyLabel(text: langKey.personalInfo.tr),
                   //Profile data
                   Obx(
@@ -252,7 +256,13 @@ class ProfileUI extends GetView<AuthController> {
                         title: title,
                         value: controller.editingTextController.text,
                         field: field);
-                    // controller.login();
+                    controller.login();
+                    var imgController = Get.put(ImageController());
+
+                    // await imgController.updateUser(
+                    //   field: field,
+                    //   title: title,
+                    // );
 
                     //Get.back();
                   }
@@ -306,6 +316,60 @@ class ProfileUI extends GetView<AuthController> {
             )
           ],
         ),
+      ),
+    );
+  }
+
+//image picker
+
+  void _pickImage({calledForProfile = true}) {
+    Get.defaultDialog(
+      title: langKey.pickFrom,
+      contentPadding: const EdgeInsets.all(10),
+      titleStyle: appBarTitleSize,
+      content: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          _imageBtn(
+            onTap: () => controller.pickOrCaptureImageGallery(0,
+                calledForProfile: calledForProfile),
+            title: langKey.camera.tr,
+            icon: Icons.camera_alt_rounded,
+            color: Colors.blue,
+          ),
+          _imageBtn(
+            onTap: () => controller.pickOrCaptureImageGallery(
+              1,
+              calledForProfile: calledForProfile,
+            ),
+            title: langKey.gallery.tr,
+            icon: Icons.photo_library_rounded,
+            color: Colors.redAccent,
+          ),
+        ],
+      ),
+      //onCancel: ()=>Get.back()
+    );
+  }
+
+  Widget _imageBtn({onTap, icon, title, color}) {
+    return InkWell(
+      onTap: onTap,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Icon(
+            icon,
+            color: color,
+            size: 30,
+          ),
+          AppConstant.spaceWidget(height: 10),
+          CustomText(
+            title: title,
+            color: color,
+          )
+        ],
       ),
     );
   }

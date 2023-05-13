@@ -53,6 +53,7 @@ class SearchController extends GetxController {
 
   search(String? query) async {
     //change(null, status: RxStatus.loading());
+
     isLoading(true);
     page = 1;
     searchLimit = 32 * 2;
