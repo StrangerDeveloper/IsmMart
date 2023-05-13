@@ -54,6 +54,9 @@ class AuthProvider {
     request.fields['bankName'] = sellerModel.bankName!;
 
     if (sellerModel.storeImage!.isNotEmpty) {
+      print(
+          "API profile ${sellerModel.storeImage!}  \n covet= ${sellerModel.coverImage!}");
+
       request.files.add(await http.MultipartFile.fromPath(
         'storeImage',
         sellerModel.storeImage!,

@@ -102,7 +102,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
     model.stock = int.parse("${prodStockController.text}");
 
     isLoading(true);
-    model!.price = int.parse("${prodPriceController.text}");
+    model.price = int.parse("${prodPriceController.text}");
     model.name = prodNameController.text;
     model.discount = int.parse(
         "${prodDiscountController.text.isEmpty ? 0 : prodDiscountController.text}");
@@ -277,6 +277,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
       isLoading(false);
       if (response != null) {
         if (response.success!) {
+          fetchMyProducts();
           Get.back();
           clearControllers();
           AppConstant.displaySnackBar(
@@ -384,7 +385,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
     const MyProducts(),
     const MyOrdersUI(),
     //const PremiumMembershipUI(),
-    const ProfileUI(),
+    ProfileUI(),
     const StoreProfileUI(),
   ];
 

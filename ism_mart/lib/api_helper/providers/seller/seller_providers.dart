@@ -43,13 +43,17 @@ class SellersApiProvider {
         model.discount! <= 90) request.fields['discount'] = "${model.discount}";
     request.fields['description'] = "${model.description}";
 
-    if (categoryFieldList.isNotEmpty)
+    if (categoryFieldList.isNotEmpty) {
       for (var i = 0; i < categoryFieldList.entries.length; i++) {
         request.fields['features[$i][id]'] =
             "${categoryFieldList.entries.elementAt(i).key}";
         request.fields['features[$i][value]'] =
             "${categoryFieldList.entries.elementAt(i).value}";
       }
+    } else {
+      int i = 0;
+      request.fields['features[$i]'] = '';
+    }
 
     for (File image in images) {
       request.files.add(await http.MultipartFile.fromPath(
