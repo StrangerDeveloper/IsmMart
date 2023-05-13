@@ -234,32 +234,49 @@ class AuthController extends GetxController {
     });
   }
 
-  registerStore({UserModel? updatedModel}) async {
+  registerStore(
+      {SellerModel? updatedModel, bool? isCalledForUpdate = false}) async {
     isLoading(true);
 
     print(
-        "controller profile ${profileImgPath.value}  \n covet= ${coverImgPath.value}");
+        "!!!!controller profile ${updatedModel!.storeImage}  \n cover= ${coverImgPath.value}");
+
     SellerModel model = SellerModel(
-      storeName: storeNameController.text.trim(),
+      storeName: storeNameController.text,
       storeDesc: storeDescController.text,
-      ownerName: ownerNameController.text.trim(),
-      storeImage: profileImgPath.value,
-      coverImage: coverImgPath.value,
-      phone: phoneController.text.trim(),
+      ownerName: ownerNameController.text,
+      //storeImage: profileImgPath.value,
+      //coverImage: coverImgPath.value,
+      phone: phoneController.text,
       membership: "Free",
       premium: false,
-      bankName: bankNameController.text.trim(),
-      accountTitle: bankHolderTitleController.text.trim(),
-      accountNumber: bankAccController.text.trim(),
+      bankName: bankNameController.text,
+      accountTitle: bankHolderTitleController.text,
+      accountNumber: bankAccController.text,
     );
+
+    model.storeImage =
+        updatedModel.storeImage != null ? updatedModel.storeImage : "";
+
+    // profileImgPath.value.isNotEmpty
+    //     ? profileImgPath.value
+    //     : updatedModel.storeImage;
+    model.coverImage =
+        updatedModel.coverImage != null ? updatedModel.coverImage : "";
+
+    //  coverImgPath.value.isNotEmpty
+    //     ? coverImgPath.value
+    //     : updatedModel.coverImage;
 
     if (userToken!.isNotEmpty) {
       // UserModel user = UserModel(vendor: model);
       await authProvider
           .postStoreRegister(
               token: userToken!,
-              calledForUpdate: updatedModel != null,
-              sellerModel: model)
+              calledForUpdate: isCalledForUpdate!,
+              sellerModel: model,
+              coverImagePath: coverImgPath.value,
+              storeImagePath: profileImgPath.value)
           .then((UserResponse? apiResponse) {
         isLoading(false);
         if (apiResponse != null) {
@@ -479,20 +496,6 @@ class AuthController extends GetxController {
   }
 
   updateUser({title, value, field}) async {
-    title = editingTextController.text;
-    if (title == "firstName") {
-      userModel!.firstName = value;
-    } else if (title == "lastName") {
-      userModel!.lastName = value;
-    } else if (title == "phone") {
-      userModel!.phone = value;
-    } else if (title == "address") {
-      userModel!.address = value;
-    }
-    // userModel!.firstName = title;
-    // userModel!.lastName = title;
-
-    print("title is => $title");
     if (userToken != null) {
       isLoading(true);
       await authProvider

@@ -12,7 +12,6 @@ class AppResponsiveness {
         AppConstant.getSize().width < 1100;
   }
 
-
   ///text Size
   static double getTextSize13_16() {
     return _isTabletScreen() ? 16.0 : 13.0;
@@ -32,12 +31,15 @@ class AppResponsiveness {
   static double getHeight60_70() {
     return _isTabletScreen() ? 70 : 60;
   }
+
   static double getHeight70_80() {
     return _isTabletScreen() ? 80 : 70;
   }
+
   static double getHeight80_90() {
     return _isTabletScreen() ? 90 : 80;
   }
+
   static double getHeight90_100() {
     return _isTabletScreen() ? 100 : 90;
   }
@@ -82,6 +84,10 @@ class AppResponsiveness {
   }
 
   static double getBoxHeightPoint30() {
+    return height * (_isTabletScreen() ? 0.27 : 0.30);
+  }
+
+  static double getBoxHeightPoint35() {
     return height * (_isTabletScreen() ? 0.40 : 0.35);
   }
 

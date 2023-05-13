@@ -102,7 +102,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
     model.stock = int.parse("${prodStockController.text}");
 
     isLoading(true);
-    model!.price = int.parse("${prodPriceController.text}");
+    model.price = int.parse("${prodPriceController.text}");
     model.name = prodNameController.text;
     model.discount = int.parse(
         "${prodDiscountController.text.isEmpty ? 0 : prodDiscountController.text}");

@@ -48,7 +48,7 @@ class Validator {
     }
   }
 
-  String? number(String? value) {
+  String? phone(String? value) {
     //String pattern = r'^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$';
     String pattern = r'^(\+92|0|92)[0-9]{10}$'; //Pakistan
     //String pattern = r'(^(?:[+0]9)?[0-9]{11,12}$)';

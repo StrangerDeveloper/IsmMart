@@ -13,7 +13,6 @@ class MyProducts extends GetView<SellersController> {
 
   @override
   Widget build(BuildContext context) {
-
     return SafeArea(
       child: Scaffold(
         body: Column(
@@ -57,7 +56,7 @@ class MyProducts extends GetView<SellersController> {
                 Expanded(
                   child: RefreshIndicator(
                     onRefresh: () {
-                      return Future.delayed(Duration(milliseconds: 100), () {
+                      return Future.delayed(Duration(seconds: 2), () {
                         controller.fetchMyProducts();
                       });
                     },

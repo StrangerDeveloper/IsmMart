@@ -92,7 +92,7 @@ class CurrencyController extends GetxController with StateMixin {
       'selected': false,
       'color': Color.fromARGB(255, 89, 45, 208),
     },
-    'SGD': {
+    'sgd': {
       'currencyCode': 'sgd',
       'countryCode': 'SG',
       'description': 'SGD',
@@ -100,7 +100,7 @@ class CurrencyController extends GetxController with StateMixin {
       'selected': false,
       'color': Color.fromARGB(255, 253, 32, 168),
     },
-    'TRY': {
+    'try': {
       'currencyCode': 'try',
       'countryCode': 'TR',
       'description': 'TRY',
@@ -108,7 +108,7 @@ class CurrencyController extends GetxController with StateMixin {
       'selected': false,
       'color': Color.fromARGB(255, 251, 52, 2),
     },
-    'HKD': {
+    'hkd': {
       'currencyCode': 'hkd',
       'countryCode': 'HK',
       'description': 'HKD',
@@ -116,7 +116,7 @@ class CurrencyController extends GetxController with StateMixin {
       'selected': false,
       'color': Color.fromARGB(255, 87, 26, 141),
     },
-    'CHF': {
+    'chf': {
       'currencyCode': 'chf',
       'countryCode': 'CH',
       'description': 'CHF',

@@ -47,8 +47,56 @@ class LanguageController extends GetxController {
       'selected': false,
       'color': Colors.blue[900],
     },
+    'tr_TR': {
+      'languageCode': 'tr',
+      'countryCode': 'TR',
+      'description': 'Turkish',
+      'selected': false,
+      'color': Colors.red[600],
+    },
+    'fr_CH': {
+      'languageCode': 'fr',
+      'countryCode': 'CH',
+      'description': 'French',
+      'selected': false,
+      'color': Colors.red,
+    },
+    'es_ES': {
+      'languageCode': 'es',
+      'countryCode': 'ES',
+      'description': 'Spanish',
+      'selected': false,
+      'color': Colors.indigo,
+    },
+    'ja_JP': {
+      'languageCode': 'ja',
+      'countryCode': 'JP',
+      'description': '日本',
+      'selected': false,
+      'color': Colors.blue[300],
+    },
+    'de_DE': {
+      'languageCode': 'de',
+      'countryCode': 'DE',
+      'description': 'Deutsch',
+      'selected': false,
+      'color': Colors.amber[300],
+    },
+    'it_IT': {
+      'languageCode': 'it',
+      'countryCode': 'IT',
+      'description': 'italiano',
+      'selected': false,
+      'color': Colors.blue[900],
+    },
+    'ko_KR': {
+      'languageCode': 'ko',
+      'countryCode': 'KR',
+      'description': '한국인',
+      'selected': false,
+      'color': Color.fromARGB(255, 36, 51, 74),
+    },
   };
-
   /*final List locale =[
     {'name':'ENGLISH','locale': Locale('en','US')},
     {'name':'ಕನ್ನಡ','locale': Locale('kn','IN')},

@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:dropdown_search/dropdown_search.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/current_remaining_time.dart';
 import 'package:flutter_native_image/flutter_native_image.dart';
@@ -106,19 +105,6 @@ var appBarTitleSize = GoogleFonts.lato(
 
 class AppConstant {
   AppConstant._();
-
-  static const live_pk =
-      "pk_live_51LrbOmEmpuNuAXn2Gq2LMtj73x7dlz4uX8UYQn1coVIFDK69qc3d2td9ttdGp5Pnv1u2vrdxyYXNoeuXMk4gbTFu00sENXZzqS";
-  static const test_pk =
-      "pk_test_51LrbOmEmpuNuAXn2fUnpk1ER8KmDmnjMgWf4bE8Bd7TyQt9pr5IpGGi5y9rBf3cSTj6jNxMUo71bBKb009L7Ws2T000Tf2jBP4";
-  static const PUBLISHABLE_KEY = kDebugMode ? test_pk : live_pk;
-
-  static const live_sk =
-      "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";
-  static const test_sk =
-      "sk_test_51M7CqbAqAePi9vIiIaBO0wAHIUmAmrUTTM89z5dx6MfbYK10pFs8YOJgxo3qrz2jXdRsWqbEuVNhaoLS4wkTfU3p00EweFGR7b";
-
-  static const SECRET_KEY = kDebugMode ? test_sk : live_sk;
 
   static const defaultImgUrl =
       "https://i.ibb.co/dLxHqcR/vecteezy-icon-image-not-found-vector.jpg";

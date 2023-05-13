@@ -121,7 +121,6 @@ class CartUI extends GetView<CartController> {
   }
 
   Widget _buildCartItemSection({List<CartModel>? cartItemsList}) {
-    int selectedItem = 0;
     return ListView.builder(
       shrinkWrap: true,
       reverse: true,

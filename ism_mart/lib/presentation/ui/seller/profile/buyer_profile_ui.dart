@@ -230,9 +230,7 @@ class ProfileUI extends GetView<AuthController> {
           autoValidateMode: AutovalidateMode.onUserInteraction,
           validator: (value) {
             if (title.toString().toLowerCase() == "phone")
-              return !GetUtils.isPhoneNumber(value!)
-                  ? langKey.phoneReq.tr
-                  : null;
+              return Validator().phone(value);
             return GetUtils.isBlank(value!)!
                 ? langKey.titleReq.trParams({"title": "$title"})
                 : null;
@@ -254,9 +252,9 @@ class ProfileUI extends GetView<AuthController> {
                         title: title,
                         value: controller.editingTextController.text,
                         field: field);
-                    controller.login();
+                    // controller.login();
 
-                    Get.back();
+                    //Get.back();
                   }
                 },
                 text: langKey.updateBtn.tr,

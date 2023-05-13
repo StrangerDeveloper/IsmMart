@@ -37,7 +37,11 @@ class AuthProvider {
   }
 
   Future<UserResponse> postStoreRegister(
-      {token, SellerModel? sellerModel, bool? calledForUpdate = false}) async {
+      {token,
+      SellerModel? sellerModel,
+      bool? calledForUpdate = false,
+      String? coverImagePath,
+      String? storeImagePath}) async {
     final url = "${ApiConstant.baseUrl}auth/vendor/register";
     final request = http.MultipartRequest('POST', Uri.parse(url));
     request.headers['Authorization'] = '$token';
@@ -53,36 +57,54 @@ class AuthProvider {
     request.fields['accountNumber'] = sellerModel.accountNumber!;
     request.fields['bankName'] = sellerModel.bankName!;
 
-    if (sellerModel.storeImage!.isNotEmpty) {
+    if (storeImagePath!.isNotEmpty) {
       request.files.add(await http.MultipartFile.fromPath(
         'storeImage',
-        sellerModel.storeImage!,
+        storeImagePath,
         contentType: MediaType.parse('image/jpeg'),
       ));
-    } else {
-      request.fields['storeImage'] = sellerModel.storeName!;
     }
-    if (sellerModel.coverImage!.isNotEmpty) {
+    // else {
+    //   request.fields['storeImage'] = sellerModel.storeImage!;
+    // }
+
+    // if (sellerModel.storeImage!.isEmpty) {
+    //   request.files.add(await http.MultipartFile.fromPath(
+    //     'storeImage',
+    //     storeImage!,
+    //     contentType: MediaType.parse('image/jpeg'),
+    //   ));
+    // } else {
+    //   request.fields['storeImage'] = sellerModel.storeImage!;
+    // }
+    // &&sellerModel.coverImage!.contains(coverImage!)
+    print(">>>CoverImage: $coverImagePath");
+    if (coverImagePath!.isNotEmpty) {
       request.files.add(await http.MultipartFile.fromPath(
         'coverImage',
-        sellerModel.coverImage!,
+        coverImagePath,
         contentType: MediaType.parse('image/jpeg'),
       ));
-    } else {
-      request.fields['coverImage'] = sellerModel.coverImage!;
     }
-    final response = await request.send();
-    if (response.statusCode == 200) {
-      final responseData = await response.stream.bytesToString();
-      final data = json.decode(responseData);
+    // else {
+    //   request.fields['coverImage'] = sellerModel.coverImage!;
+    // }
 
-      return UserResponse.fromResponse(data);
-    } else {
-      //ODO: Still needs to test this one properly
-      http.StreamedResponse res = handleStreamResponse(response);
-      return UserResponse.fromResponse(
-          json.decode(await res.stream.bytesToString()));
-    }
+    var response = await handleStreamResponse(await request.send());
+    return UserResponse.fromResponse(
+        json.decode(await response.stream.bytesToString()));
+
+    // if (response.statusCode == 200) {
+    //   final responseData = await response.stream.bytesToString();
+    //   final data = json.decode(responseData);
+
+    //   return UserResponse.fromResponse(data);
+    // } else {
+    //   //ODO: Still needs to test this one properly
+    //   http.StreamedResponse res = handleStreamResponse(response);
+    //   return UserResponse.fromResponse(
+    //       json.decode(await res.stream.bytesToString()));
+    // }
 
     /* var jsonData = {
       "phone": phone,
@@ -113,28 +135,27 @@ class AuthProvider {
   }
 
   Future<UserResponse> updateUser({token, title, value, field}) async {
-    var data = {'$title': '$value'};
+    // var data = {'$title': '$value'};
     print("title is api => field $field $title  $value");
 
     // var response = await _authRepo.updateUser(token: token, data: data);
 
-    var headers = {
-      'authorization': 'Bearer $token',
-      'Cookie': 'XSRF-token=$token'
-    };
+    var headers = {'authorization': '$token', 'Cookie': 'XSRF-token=$token'};
     var request = http.MultipartRequest(
         'PATCH', Uri.parse('https://ismmart-api.com/api/user/update'));
-    request.fields.addAll({'$field': title.toString()});
+    request.fields.addAll({'$field': value.toString()});
     request.headers.addAll(headers);
-    http.StreamedResponse response = await request.send();
-    var res = http.Response.fromStream(response);
+    http.StreamedResponse response =
+        await handleStreamResponse(await request.send());
+    //var res = http.Response.fromStream(response);
 
     // if (response.statusCode == 200) {
     //   print(await response.stream.bytesToString());
     // } else {
     //   print(response.reasonPhrase);
     // }
-    return UserResponse.fromResponse(response);
+    return UserResponse.fromResponse(
+        json.decode(await response.stream.bytesToString()));
   }
 
   Future<ApiResponse> deActivateUser({token}) async {

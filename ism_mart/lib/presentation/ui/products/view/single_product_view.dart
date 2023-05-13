@@ -777,7 +777,7 @@ class SingleProductView extends GetView<ProductController> {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: SizedBox(
-                      height: AppResponsiveness.getBoxHeightPoint28(),
+                      height: AppResponsiveness.getBoxHeightPoint30(),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         //mainAxisAlignment: MainAxisAlignment.spaceEvenly,

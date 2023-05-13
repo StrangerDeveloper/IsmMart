@@ -18,6 +18,7 @@ class RegisterVendorUI extends GetView<AuthController> {
 
   @override
   Widget build(BuildContext context) {
+    /// model will be empty if called for registration
     if (model != null) {
       controller.storeNameController.text = model?.storeName ?? "";
       controller.storeDescController.text = model?.storeDesc ?? "";
@@ -29,6 +30,7 @@ class RegisterVendorUI extends GetView<AuthController> {
     }
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
           child: ListView(
         shrinkWrap: true,
@@ -210,7 +212,7 @@ class RegisterVendorUI extends GetView<AuthController> {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5),
-            child: CustomText(title: "${langKey.yourCoverAndProfile} 2 MB"),
+            child: CustomText(title: "${langKey.yourCoverAndProfile.tr} 2 MB"),
           ),
           _formData()
         ],
@@ -301,8 +303,10 @@ class RegisterVendorUI extends GetView<AuthController> {
               autofocus: false,
               textStyle: bodyText1,
               autoValidateMode: AutovalidateMode.onUserInteraction,
-              validator: (value) =>
-                  GetUtils.isBlank(value!)! ? langKey.storeNameReq.tr : null,
+              validator: Validator().name,
+
+              // (value) =>
+              //     GetUtils.isBlank(value!)! ? langKey.storeNameReq.tr : null,
               keyboardType: TextInputType.name,
               onChanged: (value) {},
               onSaved: (value) {},
@@ -316,8 +320,9 @@ class RegisterVendorUI extends GetView<AuthController> {
               autofocus: false,
               textStyle: bodyText1,
               autoValidateMode: AutovalidateMode.onUserInteraction,
-              validator: (value) =>
-                  !GetUtils.isPhoneNumber(value!) ? langKey.phoneReq.tr : null,
+              validator: Validator().phone,
+              // (value) =>
+              //     !GetUtils.isPhoneNumber(value!) ? langKey.phoneReq.tr : null,
               keyboardType: TextInputType.phone,
               onChanged: (value) {},
               onSaved: (value) {},
@@ -332,7 +337,8 @@ class RegisterVendorUI extends GetView<AuthController> {
               textStyle: bodyText1,
               autoValidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) =>
-                  GetUtils.isBlank(value!)! ? langKey.descriptionReq.tr : null,
+                  Validator().notEmpty(value, langKey.descriptionReq.tr),
+              //GetUtils.isBlank(value!)! ? langKey.descriptionReq.tr : null,
               keyboardType: TextInputType.name,
               onChanged: (value) {},
               onSaved: (value) {},
@@ -346,8 +352,9 @@ class RegisterVendorUI extends GetView<AuthController> {
               autofocus: false,
               textStyle: bodyText1,
               autoValidateMode: AutovalidateMode.onUserInteraction,
-              validator: (value) =>
-                  GetUtils.isBlank(value!)! ? langKey.bankNameReq.tr : null,
+              validator: Validator().name,
+              //  (value) =>
+              //     GetUtils.isBlank(value!)! ? langKey.bankNameReq.tr : null,
               keyboardType: TextInputType.name,
               onChanged: (value) {},
               onSaved: (value) {},
@@ -361,9 +368,11 @@ class RegisterVendorUI extends GetView<AuthController> {
               autofocus: false,
               textStyle: bodyText1,
               autoValidateMode: AutovalidateMode.onUserInteraction,
-              validator: (value) => GetUtils.isBlank(value!)!
-                  ? langKey.bankAccHolderReq.tr
-                  : null,
+              validator: (value) =>
+                  Validator().notEmpty(value, langKey.bankAccHolderReq.tr),
+              // (value) => GetUtils.isBlank(value!)!
+              //     ? langKey.bankAccHolderReq.tr
+              //     : null,
               keyboardType: TextInputType.name,
               onChanged: (value) {},
               onSaved: (value) {},
@@ -378,7 +387,8 @@ class RegisterVendorUI extends GetView<AuthController> {
               textStyle: bodyText1,
               autoValidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) =>
-                  GetUtils.isBlank(value!)! ? langKey.bankAccountReq.tr : null,
+                  Validator().notEmpty(value, langKey.bankAccountReq.tr),
+              //GetUtils.isBlank(value!)! ? langKey.bankAccountReq.tr : null,
               keyboardType: TextInputType.text,
               onChanged: (value) {},
               onSaved: (value) {},
@@ -390,7 +400,7 @@ class RegisterVendorUI extends GetView<AuthController> {
                   : CustomButton(
                       onTap: () async {
                         if (formKey.currentState!.validate()) {
-                          await controller.registerStore();
+                          await controller.registerStore(updatedModel: model!);
                         }
                       },
                       text: model != null

@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/models/exports_model.dart';
-import 'package:ism_mart/utils/constants.dart';
 
 class ApiProvider {
   final ApiRepository _apiRepository;
@@ -132,7 +131,7 @@ class ApiProvider {
 
   Future<JSON> postStripePaymentInfo({data}) async {
     var response = await _apiRepository.reqStripePayment(
-        client_secret: AppConstant.SECRET_KEY, body: data);
+        client_secret: ApiConstant.SECRET_KEY, body: data);
     return response;
   }
 
