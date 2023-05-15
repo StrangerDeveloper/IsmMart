@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/controllers/buyer/auth/auth_controller.dart';
@@ -51,69 +49,71 @@ class ProfileUI extends GetView<AuthController> {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  Stack(
-                    children: [
-                      Container(
-                        height: 90,
-                        width: 90,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: kPrimaryColor.withOpacity(0.22),
-                              offset: Offset(0, 0),
-                              blurRadius: 10.78,
-                            ),
-                          ],
-                        ),
-                        child: Obx(() => controller.profileImgPath.value == ''
-                            ? CircleAvatar(
-                                radius: 40,
-                                backgroundColor: Colors.grey[200],
-                                backgroundImage: NetworkImage(
-                                    controller.userModel!.imageUrl.toString()))
-                            : CircleAvatar(
-                                radius: 40,
-                                backgroundColor: Colors.grey[200],
-                                backgroundImage: FileImage(
-                                    File(controller.profileImgPath.value)))),
-                      ),
-                      Positioned(
-                        bottom: 1,
-                        right: 1,
-                        child: InkWell(
-                          onTap: () {
-                            _pickImage();
-                          },
-                          child: Container(
-                            child: Padding(
-                              padding: const EdgeInsets.all(2.0),
-                              child:
-                                  Icon(Icons.add_a_photo, color: kPrimaryColor),
-                            ),
-                            decoration: BoxDecoration(
-                                border: Border.all(
-                                  width: 3,
-                                  color: Colors.white,
-                                ),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(50),
-                                ),
-                                color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                    offset: Offset(0, 0),
-                                    color: kPrimaryColor.withOpacity(0.3),
-                                    blurRadius: 10.78,
-                                  ),
-                                ]),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                  // Stack(
+                  //   children: [
+                  //     Container(
+                  //       height: 90,
+                  //       width: 90,
+                  //       alignment: Alignment.center,
+                  //       decoration: BoxDecoration(
+                  //         borderRadius: BorderRadius.circular(50),
+                  //         color: Colors.white,
+                  //         boxShadow: [
+                  //           BoxShadow(
+                  //             color: kPrimaryColor.withOpacity(0.22),
+                  //             offset: Offset(0, 0),
+                  //             blurRadius: 10.78,
+                  //           ),
+                  //         ],
+                  //       ),
+                  //       child:
+                  //        Obx(() => controller.profileImgPath.value == ''
+                  //           ? CircleAvatar(
+                  //               radius: 40,
+                  //               backgroundColor: Colors.grey[200],
+                  //               backgroundImage: NetworkImage(
+                  //                   controller.userModel!.imageUrl.toString()))
+                  //           : CircleAvatar(
+                  //               radius: 40,
+                  //               backgroundColor: Colors.grey[200],
+                  //               backgroundImage: FileImage(
+                  //                   File(controller.profileImgPath.value)))),
+                  //     ),
+                  //     Positioned(
+                  //       bottom: 1,
+                  //       right: 1,
+                  //       child: InkWell(
+                  //         onTap: () {
+                  //           _pickImage();
+                  //         },
+                  //         child: Container(
+                  //           child: Padding(
+                  //             padding: const EdgeInsets.all(2.0),
+                  //             child:
+                  //                 Icon(Icons.add_a_photo, color: kPrimaryColor),
+                  //           ),
+                  //           decoration: BoxDecoration(
+                  //               border: Border.all(
+                  //                 width: 3,
+                  //                 color: Colors.white,
+                  //               ),
+                  //               borderRadius: BorderRadius.all(
+                  //                 Radius.circular(50),
+                  //               ),
+                  //               color: Colors.white,
+                  //               boxShadow: [
+                  //                 BoxShadow(
+                  //                   offset: Offset(0, 0),
+                  //                   color: kPrimaryColor.withOpacity(0.3),
+                  //                   blurRadius: 10.78,
+                  //                 ),
+                  //               ]),
+                  //         ),
+                  //       ),
+                  //     ),
+
+                  //   ],
+                  // ),
 
                   StickyLabel(text: langKey.personalInfo.tr),
                   //Profile data
