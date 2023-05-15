@@ -12,7 +12,6 @@ class AppResponsiveness {
         AppConstant.getSize().width < 1100;
   }
 
-
   ///text Size
   static double getTextSize13_16() {
     return _isTabletScreen() ? 16.0 : 13.0;
@@ -32,12 +31,15 @@ class AppResponsiveness {
   static double getHeight60_70() {
     return _isTabletScreen() ? 70 : 60;
   }
+
   static double getHeight70_80() {
     return _isTabletScreen() ? 80 : 70;
   }
+
   static double getHeight80_90() {
     return _isTabletScreen() ? 90 : 80;
   }
+
   static double getHeight90_100() {
     return _isTabletScreen() ? 100 : 90;
   }
@@ -46,8 +48,8 @@ class AppResponsiveness {
     return _isTabletScreen() ? 100 : 50;
   }
 
-  static double getHeight90_110() {
-    return _isTabletScreen() ? 110 : 90;
+  static double getHeight90_140() {
+    return _isTabletScreen() ? 140 : 90;
   }
 
   static double getHeight100_120() {
@@ -81,12 +83,16 @@ class AppResponsiveness {
     return height * (_isTabletScreen() ? 0.25 : 0.28);
   }
 
-  static double getBoxHeightPoint30() {
+  static double getBoxHeightPoint32() {
+    return height * (_isTabletScreen() ? 0.29 : 0.32);
+  }
+
+  static double getBoxHeightPoint35() {
     return height * (_isTabletScreen() ? 0.40 : 0.35);
   }
 
-  static double getBoxHeightPoint55() {
-    return height * (_isTabletScreen() ? 0.65 : 0.55);
+  static double getBoxHeightPoint60() {
+    return height * (_isTabletScreen() ? 0.65 : 0.6);
   }
 
   ///Gridview contents
@@ -100,7 +106,9 @@ class AppResponsiveness {
     return height * (_isTabletScreen() ? 0.30 : 0.25);
   }
 
-  static double getMainAxisExtentPoint28() {
-    return height * (_isTabletScreen() ? 0.32 : 0.28);
+  static double getChildAspectRatio() {
+    return height * (_isTabletScreen() ? 2.5/4 : 3/4);
   }
+
+
 }

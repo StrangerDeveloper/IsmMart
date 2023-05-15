@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,14 +11,18 @@ import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class RegisterVendorUI extends GetView<AuthController> {
-  const RegisterVendorUI({Key? key, this.isCalledForUpdate, this.model})
-      : super(key: key);
+  const RegisterVendorUI({
+    Key? key,
+    // this.isCalledForUpdate,
+    this.model,
+  }) : super(key: key);
 
-  final bool? isCalledForUpdate;
+  // final bool? isCalledForUpdate;
   final SellerModel? model;
 
   @override
   Widget build(BuildContext context) {
+    /// model will be empty if called for registration
     if (model != null) {
       controller.storeNameController.text = model?.storeName ?? "";
       controller.storeDescController.text = model?.storeDesc ?? "";
@@ -29,6 +34,7 @@ class RegisterVendorUI extends GetView<AuthController> {
     }
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
           child: ListView(
         shrinkWrap: true,
@@ -74,34 +80,44 @@ class RegisterVendorUI extends GetView<AuthController> {
                         dashPattern: const [10, 4],
                         strokeCap: StrokeCap.round,
                         child: Obx(
-                          () => controller.coverImgPath.value.isNotEmpty
-                              ? Container(
-                                  alignment: Alignment.center,
-                                  child: Image.file(
-                                    File(controller.coverImgPath.value),
+                          () => (controller.coverImgPath.value.isEmpty &&
+                                  model?.coverImage != null)
+                              ? Center(
+                                  child: CustomNetworkImage(
+                                    imageUrl: model!.coverImage!,
+                                    fit: BoxFit.fill,
+                                    width: AppConstant.getSize().width,
                                   ),
                                 )
-                              : Center(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      const Icon(
-                                        Icons.cloud_upload_rounded,
-                                        size: 30,
+                              : (controller.coverImgPath.value.isNotEmpty
+                                  ? Container(
+                                      alignment: Alignment.center,
+                                      child: Image.file(
+                                        File(controller.coverImgPath.value),
                                       ),
-                                      const SizedBox(height: 5),
-                                      Text(
-                                        langKey.clickHereToUpload.tr,
-                                        style: TextStyle(
-                                          fontSize: 15,
-                                          color: Colors.grey.shade400,
-                                        ),
+                                    )
+                                  : Center(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          const Icon(
+                                            Icons.cloud_upload_rounded,
+                                            size: 30,
+                                          ),
+                                          const SizedBox(height: 5),
+                                          Text(
+                                            langKey.clickHereToUpload.tr,
+                                            style: TextStyle(
+                                              fontSize: 15,
+                                              color: Colors.grey.shade400,
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
-                                ),
+                                    )),
                         ),
                       ),
                     ),
@@ -159,16 +175,22 @@ class RegisterVendorUI extends GetView<AuthController> {
                             ],
                           ),
                           child: Obx(
-                            () => CircleAvatar(
-                              radius: 40,
-                              backgroundColor: Colors.grey[200],
-                              backgroundImage:
-                                  controller.profileImgPath.value.isNotEmpty
-                                      ? FileImage(
-                                          File(controller.profileImgPath.value),
-                                        )
-                                      : null,
-                            ),
+                            () => (controller.profileImgPath.value.isEmpty &&
+                                    model?.storeImage != null)
+                                ? profileImage(
+                                    model!.storeImage!,
+                                  )
+                                : CircleAvatar(
+                                    radius: 40,
+                                    backgroundColor: Colors.grey[200],
+                                    backgroundImage: controller
+                                            .profileImgPath.value.isNotEmpty
+                                        ? FileImage(
+                                            File(controller
+                                                .profileImgPath.value),
+                                          )
+                                        : null,
+                                  ),
                           ),
                         ),
                         Positioned(
@@ -208,13 +230,49 @@ class RegisterVendorUI extends GetView<AuthController> {
               ],
             ),
           ),
+
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5),
-            child: CustomText(title: "${langKey.yourCoverAndProfile} 2 MB"),
+            child: CustomText(title: "${langKey.yourCoverAndProfile.tr} 2 MB"),
           ),
           _formData()
         ],
       )),
+    );
+  }
+
+  Widget profileImage(String url) {
+    return Container(
+      child: CachedNetworkImage(
+        imageUrl: url,
+        imageBuilder: (context, imageProvider) {
+          return Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              image: DecorationImage(
+                image: imageProvider,
+                fit: BoxFit.fill,
+              ),
+            ),
+          );
+        },
+        errorWidget: (context, url, error) {
+          return Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              image: DecorationImage(
+                image: AssetImage('assets/images/no_image_found.jpg'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          );
+        },
+        placeholder: (context, url) {
+          return const Center(
+            child: CircularProgressIndicator(strokeWidth: 0.5),
+          );
+        },
+      ),
     );
   }
 
@@ -286,8 +344,7 @@ class RegisterVendorUI extends GetView<AuthController> {
               autofocus: false,
               textStyle: bodyText1,
               autoValidateMode: AutovalidateMode.onUserInteraction,
-              validator: (value) =>
-                  GetUtils.isBlank(value!)! ? langKey.ownerNameReq.tr : null,
+              validator: Validator().name,
               keyboardType: TextInputType.name,
               onChanged: (value) {},
               onSaved: (value) {},
@@ -301,8 +358,10 @@ class RegisterVendorUI extends GetView<AuthController> {
               autofocus: false,
               textStyle: bodyText1,
               autoValidateMode: AutovalidateMode.onUserInteraction,
-              validator: (value) =>
-                  GetUtils.isBlank(value!)! ? langKey.storeNameReq.tr : null,
+              validator: Validator().name,
+
+              // (value) =>
+              //     GetUtils.isBlank(value!)! ? langKey.storeNameReq.tr : null,
               keyboardType: TextInputType.name,
               onChanged: (value) {},
               onSaved: (value) {},
@@ -316,8 +375,9 @@ class RegisterVendorUI extends GetView<AuthController> {
               autofocus: false,
               textStyle: bodyText1,
               autoValidateMode: AutovalidateMode.onUserInteraction,
-              validator: (value) =>
-                  !GetUtils.isPhoneNumber(value!) ? langKey.phoneReq.tr : null,
+              validator: Validator().phone,
+              // (value) =>
+              //     !GetUtils.isPhoneNumber(value!) ? langKey.phoneReq.tr : null,
               keyboardType: TextInputType.phone,
               onChanged: (value) {},
               onSaved: (value) {},
@@ -332,7 +392,8 @@ class RegisterVendorUI extends GetView<AuthController> {
               textStyle: bodyText1,
               autoValidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) =>
-                  GetUtils.isBlank(value!)! ? langKey.descriptionReq.tr : null,
+                  Validator().notEmpty(value, langKey.descriptionReq.tr),
+              //GetUtils.isBlank(value!)! ? langKey.descriptionReq.tr : null,
               keyboardType: TextInputType.name,
               onChanged: (value) {},
               onSaved: (value) {},
@@ -346,8 +407,9 @@ class RegisterVendorUI extends GetView<AuthController> {
               autofocus: false,
               textStyle: bodyText1,
               autoValidateMode: AutovalidateMode.onUserInteraction,
-              validator: (value) =>
-                  GetUtils.isBlank(value!)! ? langKey.bankNameReq.tr : null,
+              validator: Validator().name,
+              //  (value) =>
+              //     GetUtils.isBlank(value!)! ? langKey.bankNameReq.tr : null,
               keyboardType: TextInputType.name,
               onChanged: (value) {},
               onSaved: (value) {},
@@ -361,9 +423,11 @@ class RegisterVendorUI extends GetView<AuthController> {
               autofocus: false,
               textStyle: bodyText1,
               autoValidateMode: AutovalidateMode.onUserInteraction,
-              validator: (value) => GetUtils.isBlank(value!)!
-                  ? langKey.bankAccHolderReq.tr
-                  : null,
+              validator: (value) =>
+                  Validator().notEmpty(value, langKey.bankAccHolderReq.tr),
+              // (value) => GetUtils.isBlank(value!)!
+              //     ? langKey.bankAccHolderReq.tr
+              //     : null,
               keyboardType: TextInputType.name,
               onChanged: (value) {},
               onSaved: (value) {},
@@ -378,7 +442,8 @@ class RegisterVendorUI extends GetView<AuthController> {
               textStyle: bodyText1,
               autoValidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) =>
-                  GetUtils.isBlank(value!)! ? langKey.bankAccountReq.tr : null,
+                  Validator().notEmpty(value, langKey.bankAccountReq.tr),
+              //GetUtils.isBlank(value!)! ? langKey.bankAccountReq.tr : null,
               keyboardType: TextInputType.text,
               onChanged: (value) {},
               onSaved: (value) {},
@@ -390,7 +455,7 @@ class RegisterVendorUI extends GetView<AuthController> {
                   : CustomButton(
                       onTap: () async {
                         if (formKey.currentState!.validate()) {
-                          await controller.registerStore();
+                          await controller.registerStore(updatedModel: model!);
                         }
                       },
                       text: model != null

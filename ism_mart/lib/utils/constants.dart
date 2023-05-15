@@ -1,7 +1,6 @@
 import 'dart:io';
-
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import 'package:dropdown_search/dropdown_search.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/current_remaining_time.dart';
 import 'package:flutter_native_image/flutter_native_image.dart';
@@ -9,6 +8,9 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:ism_mart/models/exports_model.dart';
+
+import '../presentation/widgets/custom_button.dart';
+import '../presentation/widgets/custom_text.dart';
 
 const kLimeGreenColor = Color(0xFFACC254);
 const kPrimaryColor = kDarkColor;
@@ -107,19 +109,6 @@ var appBarTitleSize = GoogleFonts.lato(
 class AppConstant {
   AppConstant._();
 
-  static const live_pk =
-      "pk_live_51LrbOmEmpuNuAXn2Gq2LMtj73x7dlz4uX8UYQn1coVIFDK69qc3d2td9ttdGp5Pnv1u2vrdxyYXNoeuXMk4gbTFu00sENXZzqS";
-  static const test_pk =
-      "pk_test_51LrbOmEmpuNuAXn2fUnpk1ER8KmDmnjMgWf4bE8Bd7TyQt9pr5IpGGi5y9rBf3cSTj6jNxMUo71bBKb009L7Ws2T000Tf2jBP4";
-  static const PUBLISHABLE_KEY = kDebugMode ? test_pk : live_pk;
-
-  static const live_sk =
-      "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";
-  static const test_sk =
-      "sk_test_51M7CqbAqAePi9vIiIaBO0wAHIUmAmrUTTM89z5dx6MfbYK10pFs8YOJgxo3qrz2jXdRsWqbEuVNhaoLS4wkTfU3p00EweFGR7b";
-
-  static const SECRET_KEY = kDebugMode ? test_sk : live_sk;
-
   static const defaultImgUrl =
       "https://i.ibb.co/dLxHqcR/vecteezy-icon-image-not-found-vector.jpg";
 
@@ -167,7 +156,7 @@ class AppConstant {
           "We're sorry, but we couldn't recognize that user. Please double-check and try again, or contact support for assistance.";
     }
 
-    Get.snackbar(titleNew.capitalizeFirst!, messageNew.toString(),
+    Get.snackbar(titleNew.capitalizeFirst!, messageNew,
         snackPosition: position ?? SnackPosition.TOP,
         backgroundColor: bgColor,
         icon: Icon(
@@ -313,5 +302,70 @@ class AppConstant {
     } else {
       return 15;
     }
+  }
+
+  static void showConfirmDeleteDialog({VoidCallback? ontap, String? ontapText}) {
+    Get.defaultDialog(
+      content: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 8),
+        child: Column(
+          children: [
+            Align(
+              alignment: Alignment.topRight,
+              child: IconButton(
+                  onPressed: ()=>Get.back(),
+                  icon: Icon(
+                    Icons.close,
+                    size: 24,
+                    color: Colors.grey,
+                  )),
+            ),
+            AppConstant.spaceWidget(
+                height: 5
+            ),
+            Icon(
+              Icons.highlight_remove_outlined,
+              size: 45,
+              color: Colors.red,
+            ),
+            AppConstant.spaceWidget(
+                height: 12
+            ),
+            CustomText(
+              title: 'Are You Sure?',
+              style: headline1,
+            ),
+            AppConstant.spaceWidget(
+                height: 12
+            ),
+            CustomText(
+              title: 'Do you really want to delete this record? This process cannot be undone',
+              weight: FontWeight.w600,
+            ),
+            //buildConfirmDeleteIcon(),
+            AppConstant.spaceWidget(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                CustomButton(
+                  onTap:() => Get.back(),
+                  text: langKey.noBtn.tr,
+                  width: 100,
+                  height: 30,
+                  color: kPrimaryColor,
+                ),
+                CustomButton(
+                  onTap: ontap,
+                  text: langKey.yesBtn.tr,
+                  width: 100,
+                  height: 30,
+                  color: kRedColor,
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

@@ -9,8 +9,7 @@ import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class SettingsUI extends GetView<AuthController> {
-  const SettingsUI({Key? key}) : super(key: key);
-
+  SettingsUI({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -82,18 +81,38 @@ class SettingsUI extends GetView<AuthController> {
           : Padding(
               padding: const EdgeInsets.all(8.0),
               child: ListTile(
+                trailing: controller.userModel!.emailVerified == true ? null : InkWell(
+                  onTap: ()async {
+                    String? verificationDetails = await LocalStorageHelper
+                        .getEmailVerificationDetails();
+                    if (verificationDetails != null) {
+                      DateTime linkTime = DateTime.parse(verificationDetails);
+                      DateTime currentTime = DateTime.now();
+                      DateTime fiveMinutesCheck = currentTime.subtract(
+                          Duration(minutes: 5));
+                      if (fiveMinutesCheck.isAfter(linkTime)) {
+                        print('yes');
+                        LocalStorageHelper.localStorage.remove(
+                            'emailVerificationTime');
+                        Get.toNamed(Routes.emailVerificationLinkRoute);
+                      }
+                      else {
+                        controller.showSnackBar(title: 'Verify Email',
+                            message: 'An Email Verification link has already been sent to your email');
+                      }
+                    }
+                    else {
+                      Get.toNamed(Routes.emailVerificationLinkRoute);
+                    }
+                  }, child: Text('Verify Email', style: bodyText1.copyWith(
+                    decoration: TextDecoration.underline),
+                ),
+                ),
                 title: CustomText(
                   title:
                       "${langKey.welcome.tr} ${controller.userModel!.firstName}",
                   style: headline2,
                 ),
-                trailing: controller.userModel!.emailVerified == false ? InkWell(onTap: ()async{
-                  await controller.emailVerificationChecks(true);
-                },
-                  child: Text('Verify Email',
-                  style: bodyText1.copyWith(decoration: TextDecoration.underline),
-                  ),
-                ): null,
                 subtitle: CustomText(
                   title: "${controller.userModel!.email}",
                   style: bodyText1,
@@ -246,8 +265,8 @@ class SettingsUI extends GetView<AuthController> {
                   !controller.isSessionExpired! &&
                   controller.userToken != null
               ? _singleSettingsItem(
-                  onTap: () {
-                    LocalStorageHelper.deleteUserData();
+                  onTap: () async{
+                    await LocalStorageHelper.deleteUserData();
                     controller.update();
                     authController.update();
                   },

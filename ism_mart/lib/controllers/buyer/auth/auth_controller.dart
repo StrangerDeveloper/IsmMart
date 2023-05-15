@@ -34,7 +34,7 @@ class AuthController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    //getCurrentUser();
+    getCurrentUser();
     //getToken();
 
     //getCurrentUser();
@@ -200,41 +200,6 @@ class AuthController extends GetxController {
     });
   }
 
-  emailVerificationChecks(bool screenCheck)async {
-    var userDetailsInLocalStrg = await LocalStorageHelper.getStoredUser();
-    if (userDetailsInLocalStrg.emailVerified == false) {
-      await getToken();
-      if (userModel!.emailVerified == false) {
-        String? verificationDetails = await LocalStorageHelper
-            .getEmailVerificationLinkSentTime();
-        if (verificationDetails != null) {
-          DateTime linkTime = DateTime.parse(verificationDetails);
-          DateTime currentTime = DateTime.now();
-          DateTime fiveMinutesCheck = currentTime.subtract(
-              Duration(minutes: 5));
-          if (fiveMinutesCheck.isAfter(linkTime)) {
-            LocalStorageHelper.localStorage.remove('emailVerificationTime');
-            Get.toNamed(Routes.emailVerificationLinkRoute);
-          }
-          else {
-            showSnackBar(title: 'Verify Email',
-                message: screenCheck ? 'An Email Verification link has already been sent to your email'
-                    : 'Verify Email to proceed');
-          }
-        }
-        else {
-          Get.toNamed(Routes.emailVerificationLinkRoute);
-        }
-      }
-      else {
-        Get.toNamed(Routes.checkOutRoute);
-      }
-    }
-    else {
-      Get.toNamed(Routes.checkOutRoute);
-    }
-  }
-
   register() async {
     isLoading(true);
 
@@ -269,11 +234,12 @@ class AuthController extends GetxController {
     });
   }
 
-  registerStore({UserModel? updatedModel}) async {
+  registerStore({SellerModel? updatedModel}) async {
     isLoading(true);
 
     print(
-        "controller profile ${profileImgPath.value}  \n covet= ${coverImgPath.value}");
+        "!!!!controller profile ${updatedModel!.storeImage}  \n cover= ${coverImgPath.value}");
+
     SellerModel model = SellerModel(
       storeName: storeNameController.text.trim(),
       storeDesc: storeDescController.text,
@@ -344,8 +310,11 @@ class AuthController extends GetxController {
                 } else {
                   if (calledForProfile) {
                     profileImgPath(compressedFile.path);
+
+                    //updateUser();
                   } else
                     coverImgPath(compressedFile.path);
+                  //updateUser();
                 }
                 Get.back();
               });
@@ -386,6 +355,8 @@ class AuthController extends GetxController {
             apiResponse.message!
                 .toLowerCase()
                 .contains(AppConstant.SESSION_EXPIRED)) {
+          var a = apiResponse.userModel!.imageUrl;
+          print("image from current user $a");
           setSession(true);
         } else
           setSession(false);
@@ -504,7 +475,7 @@ class AuthController extends GetxController {
     await LocalStorageHelper.getStoredUser().then((user) async {
       _currUserToken.value = user.token ?? '';
 
-      getCurrentUser();
+      await getCurrentUser();
       await fetchUserCoins();
     }).onError((error, stackTrace) {
       print(">>>Token: $error, $stackTrace");
@@ -515,19 +486,20 @@ class AuthController extends GetxController {
 
   updateUser({title, value, field}) async {
     title = editingTextController.text;
-    if (title == "firstName") {
-      userModel!.firstName = value;
-    } else if (title == "lastName") {
-      userModel!.lastName = value;
-    } else if (title == "phone") {
-      userModel!.phone = value;
-    } else if (title == "address") {
-      userModel!.address = value;
+    if (field == "firstName") {
+      userModel!.firstName = title;
+    } else if (field == "lastName") {
+      userModel!.lastName = title;
+    } else if (field == "phone") {
+      userModel!.phone = title;
+    } else if (field == "address") {
+      userModel!.address = title;
     }
     // userModel!.firstName = title;
     // userModel!.lastName = title;
+    userModel!.imageUrl = profileImgPath.value;
+    print("m0del image file ${profileImgPath.value}");
 
-    print("title is => $title");
     if (userToken != null) {
       isLoading(true);
       await authProvider
@@ -538,20 +510,54 @@ class AuthController extends GetxController {
         if (userResponse != null) {
           if (userResponse.success!) {
             Get.back();
-            AppConstant.displaySnackBar(
-                langKey.successTitle.tr, userResponse.message);
+            AppConstant.displaySnackBar("success", userResponse.message);
             editingTextController.clear();
             getCurrentUser();
+            profileImgPath.value = '';
           } else
-            AppConstant.displaySnackBar(
-                langKey.errorTitle.tr, userResponse.message);
+            getCurrentUser();
+          //    AppConstant.displaySnackBar('error', userResponse.message);
         } else
-          AppConstant.displaySnackBar(
-              langKey.errorTitle.tr, langKey.someThingWentWrong.tr);
+          getCurrentUser();
+        // AppConstant.displaySnackBar('error', "something went wrong!");
       }).catchError((error) {
+        getCurrentUser();
         isLoading(false);
         debugPrint("RegisterStore: Error $error");
       });
+    }
+  }
+
+  emailVerificationCheck()async{
+    await getToken();
+    if(userToken == null || userToken == '') {
+      Get.toNamed(Routes.loginRoute);
+    } else{
+      if (userModel!.emailVerified == false) {
+        String? verificationDetails = await LocalStorageHelper
+            .getEmailVerificationDetails();
+        if (verificationDetails != null) {
+          DateTime linkTime = DateTime.parse(verificationDetails);
+          DateTime currentTime = DateTime.now();
+          DateTime fiveMinutesCheck = currentTime.subtract(
+              Duration(minutes: 5));
+          if (fiveMinutesCheck.isAfter(linkTime)) {
+            LocalStorageHelper.localStorage.remove(
+                'emailVerificationTime');
+            Get.toNamed(Routes.emailVerificationLinkRoute);
+          }
+          else {
+            showSnackBar(title: 'Verify Email',
+                message: 'An Email Verification link has already been sent to your email');
+          }
+        }
+        else {
+          Get.toNamed(Routes.emailVerificationLinkRoute);
+        }
+      }
+      else {
+        Get.toNamed(Routes.checkOutRoute);
+      }
     }
   }
 

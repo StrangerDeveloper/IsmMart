@@ -8,8 +8,11 @@ import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class ProfileUI extends GetView<AuthController> {
   const ProfileUI({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    print(
+        "image is m0del => ${controller.userModel!.imageUrl} \n image controller ${controller.profileImgPath.value}");
     return Obx(
       () => SafeArea(
         child: controller.isLoading.isTrue
@@ -44,73 +47,72 @@ class ProfileUI extends GetView<AuthController> {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  /*Stack(
-                    children: [
-                      Container(
-                        height: 90,
-                        width: 90,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: kPrimaryColor.withOpacity(0.22),
-                              offset: Offset(0, 0),
-                              blurRadius: 10.78,
-                            ),
-                          ],
-                        ),
-                        child: Obx(
-                          () => CircleAvatar(
-                            radius: 40,
-                            backgroundColor: Colors.grey[200],
-                            backgroundImage: NetworkImage(
-                                controller.userModel!.imageUrl ??
-                                    AppConstant.defaultImgUrl),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        bottom: 1,
-                        right: 1,
-                        child: InkWell(
-                          onTap: () {
-                              Get.defaultDialog(
-                              title: "Choose Profile Avatar",
-                              titleStyle: AppThemes.dialogTitleHeader
-                                  .copyWith(color: AppThemes.DEEP_ORANGE),
-                              content: _profileIconsContent(),
-                              //confirm: _btnSCameraAndGallery(),
-                            );
-                          },
-                          child: Container(
-                            child: Padding(
-                              padding: const EdgeInsets.all(2.0),
-                              child:
-                                  Icon(Icons.add_a_photo, color: kPrimaryColor),
-                            ),
-                            decoration: BoxDecoration(
-                                border: Border.all(
-                                  width: 3,
-                                  color: Colors.white,
-                                ),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(50),
-                                ),
-                                color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                    offset: Offset(0, 0),
-                                    color: kPrimaryColor.withOpacity(0.3),
-                                    blurRadius: 10.78,
-                                  ),
-                                ]),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),*/
+                  // Stack(
+                  //   children: [
+                  //     Container(
+                  //       height: 90,
+                  //       width: 90,
+                  //       alignment: Alignment.center,
+                  //       decoration: BoxDecoration(
+                  //         borderRadius: BorderRadius.circular(50),
+                  //         color: Colors.white,
+                  //         boxShadow: [
+                  //           BoxShadow(
+                  //             color: kPrimaryColor.withOpacity(0.22),
+                  //             offset: Offset(0, 0),
+                  //             blurRadius: 10.78,
+                  //           ),
+                  //         ],
+                  //       ),
+                  //       child:
+                  //        Obx(() => controller.profileImgPath.value == ''
+                  //           ? CircleAvatar(
+                  //               radius: 40,
+                  //               backgroundColor: Colors.grey[200],
+                  //               backgroundImage: NetworkImage(
+                  //                   controller.userModel!.imageUrl.toString()))
+                  //           : CircleAvatar(
+                  //               radius: 40,
+                  //               backgroundColor: Colors.grey[200],
+                  //               backgroundImage: FileImage(
+                  //                   File(controller.profileImgPath.value)))),
+                  //     ),
+                  //     Positioned(
+                  //       bottom: 1,
+                  //       right: 1,
+                  //       child: InkWell(
+                  //         onTap: () {
+                  //           _pickImage();
+                  //         },
+                  //         child: Container(
+                  //           child: Padding(
+                  //             padding: const EdgeInsets.all(2.0),
+                  //             child:
+                  //                 Icon(Icons.add_a_photo, color: kPrimaryColor),
+                  //           ),
+                  //           decoration: BoxDecoration(
+                  //               border: Border.all(
+                  //                 width: 3,
+                  //                 color: Colors.white,
+                  //               ),
+                  //               borderRadius: BorderRadius.all(
+                  //                 Radius.circular(50),
+                  //               ),
+                  //               color: Colors.white,
+                  //               boxShadow: [
+                  //                 BoxShadow(
+                  //                   offset: Offset(0, 0),
+                  //                   color: kPrimaryColor.withOpacity(0.3),
+                  //                   blurRadius: 10.78,
+                  //                 ),
+                  //               ]),
+                  //         ),
+                  //       ),
+                  //     ),
+
+                  //   ],
+                  // ),
+
                   StickyLabel(text: langKey.personalInfo.tr),
                   //Profile data
                   Obx(
@@ -230,9 +232,7 @@ class ProfileUI extends GetView<AuthController> {
           autoValidateMode: AutovalidateMode.onUserInteraction,
           validator: (value) {
             if (title.toString().toLowerCase() == "phone")
-              return !GetUtils.isPhoneNumber(value!)
-                  ? langKey.phoneReq.tr
-                  : null;
+              return Validator().phone(value);
             return GetUtils.isBlank(value!)!
                 ? langKey.titleReq.trParams({"title": "$title"})
                 : null;
@@ -256,7 +256,12 @@ class ProfileUI extends GetView<AuthController> {
                         field: field);
                     controller.login();
 
-                    Get.back();
+                    // await imgController.updateUser(
+                    //   field: field,
+                    //   title: title,
+                    // );
+
+                    //Get.back();
                   }
                 },
                 text: langKey.updateBtn.tr,
@@ -308,6 +313,60 @@ class ProfileUI extends GetView<AuthController> {
             )
           ],
         ),
+      ),
+    );
+  }
+
+//image picker
+
+  void _pickImage({calledForProfile = true}) {
+    Get.defaultDialog(
+      title: langKey.pickFrom,
+      contentPadding: const EdgeInsets.all(10),
+      titleStyle: appBarTitleSize,
+      content: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          _imageBtn(
+            onTap: () => controller.pickOrCaptureImageGallery(0,
+                calledForProfile: calledForProfile),
+            title: langKey.camera.tr,
+            icon: Icons.camera_alt_rounded,
+            color: Colors.blue,
+          ),
+          _imageBtn(
+            onTap: () => controller.pickOrCaptureImageGallery(
+              1,
+              calledForProfile: calledForProfile,
+            ),
+            title: langKey.gallery.tr,
+            icon: Icons.photo_library_rounded,
+            color: Colors.redAccent,
+          ),
+        ],
+      ),
+      //onCancel: ()=>Get.back()
+    );
+  }
+
+  Widget _imageBtn({onTap, icon, title, color}) {
+    return InkWell(
+      onTap: onTap,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Icon(
+            icon,
+            color: color,
+            size: 30,
+          ),
+          AppConstant.spaceWidget(height: 10),
+          CustomText(
+            title: title,
+            color: color,
+          )
+        ],
       ),
     );
   }

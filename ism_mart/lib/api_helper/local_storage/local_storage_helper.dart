@@ -116,12 +116,12 @@ class LocalStorageHelper {
     localStorage.remove(currentUserKey);
   }
 
-  static storeEmailVerificationLinkSentTime() {
+  static storeEmailVerificationDetails() {
     DateTime time = DateTime.now();
     localStorage.write('emailVerificationTime', time.toIso8601String());
   }
 
-  static getEmailVerificationLinkSentTime()async{
+  static getEmailVerificationDetails()async{
     var emailVerificationDetails = await localStorage.read('emailVerificationTime');
     return emailVerificationDetails;
   }

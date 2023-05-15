@@ -28,7 +28,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
   void setDiscount(int? discount) {
     if (discount! > 0 && discount < 10) {
       discountMessage(langKey.discountMinValue.tr);
-    } else if (discount >= 90) {
+    } else if (discount > 90) {
       discountMessage(langKey.discountMaxValue.tr);
     } else {
       discountMessage("");
@@ -102,7 +102,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
     model.stock = int.parse("${prodStockController.text}");
 
     isLoading(true);
-    model!.price = int.parse("${prodPriceController.text}");
+    model.price = int.parse("${priceAfterCommission.value}");
     model.name = prodNameController.text;
     model.discount = int.parse(
         "${prodDiscountController.text.isEmpty ? 0 : prodDiscountController.text}");
@@ -169,6 +169,13 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
 
   var prodPriceController = TextEditingController();
   var priceAfterCommission = 0.obs;
+  void totalTax() {
+    var price = int.parse(prodPriceController.text.toString());
+    var a = (5 / 100) * price;
+
+    priceAfterCommission.value = priceAfterCommission.value + a.toInt();
+    print(" percentage after tax $a   total ${priceAfterCommission.value}");
+  }
 
   static const chooseCategory = "Select Category";
 
@@ -277,6 +284,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
       isLoading(false);
       if (response != null) {
         if (response.success!) {
+          fetchMyProducts();
           Get.back();
           clearControllers();
           AppConstant.displaySnackBar(
@@ -384,7 +392,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
     const MyProducts(),
     const MyOrdersUI(),
     //const PremiumMembershipUI(),
-    const ProfileUI(),
+    ProfileUI(),
     const StoreProfileUI(),
   ];
 

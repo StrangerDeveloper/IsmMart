@@ -128,9 +128,9 @@ class DashboardUI extends GetView<BaseController> {
   Widget _displayDiscountProducts() {
     return Obx(
       () => Container(
-        //margin: const EdgeInsets.only(top: 10),
+        margin: const EdgeInsets.only(top: 10),
         color: kWhiteColor,
-        height: AppResponsiveness.getBoxHeightPoint30(),
+        height: AppResponsiveness.getBoxHeightPoint32(),
         child: Column(
           children: [
             StickyLabel(text: langKey.discountDeals.tr),
@@ -139,9 +139,9 @@ class DashboardUI extends GetView<BaseController> {
                 ? Center(child: NoDataFound())
                 : SizedBox(
                     width: AppConstant.getSize().width * 0.9,
-                    height: AppConstant.getSize().height * 0.28,
+                    height: AppResponsiveness.height * 0.24,
                     child: ListView.builder(
-                      //shrinkWrap: true,
+                      shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
                       //physics: const AlwaysScrollableScrollPhysics(),
                       itemCount: controller.discountSliderProductsList.length,
@@ -151,7 +151,7 @@ class DashboardUI extends GetView<BaseController> {
                         return _singleDiscountProductItem(model);
                       },
                     ),
-                  )
+                  ),
           ],
         ),
       ),
@@ -170,8 +170,8 @@ class DashboardUI extends GetView<BaseController> {
         fit: StackFit.loose,
         children: [
           Container(
-            width: AppConstant.getSize().width * 0.9,
-            height: AppConstant.getSize().height * 0.2,
+            width: AppResponsiveness.width * 0.9,
+            height: AppResponsiveness.height * 0.2,
             margin: const EdgeInsets.symmetric(horizontal: 4),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
@@ -210,7 +210,7 @@ class DashboardUI extends GetView<BaseController> {
                     Card(
                       shadowColor: kDarkColor,
                       child: SizedBox(
-                        height: AppResponsiveness.getHeight100_120(),
+                        height: AppResponsiveness.getHeight90_100(),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Column(
@@ -244,7 +244,9 @@ class DashboardUI extends GetView<BaseController> {
                                           text: "${model.discount}% ",
                                           style: bodyText1.copyWith(
                                               color: kRedColor)),
-                                      TextSpan(text: "OFF", style: bodyText1),
+                                      TextSpan(
+                                          text: langKey.OFF.tr,
+                                          style: bodyText1),
                                     ]),
                                   ),
                                 ],
@@ -358,7 +360,7 @@ class DashboardUI extends GetView<BaseController> {
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
         height:
-            AppConstant.getSize().height * (isCategoryProducts! ? 0.2 : 0.25),
+            AppResponsiveness.getBoxHeightPoint25(),
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: list.length,
@@ -406,7 +408,7 @@ class DashboardUI extends GetView<BaseController> {
     );
   }
 
-  /* _getChildAspectRatio(context) {
+/* _getChildAspectRatio(context) {
     double aspectRatio = MediaQuery.of(context).size.width /
         (MediaQuery.of(context).size.height / 2.5);
     print("aspectRatio: $aspectRatio");

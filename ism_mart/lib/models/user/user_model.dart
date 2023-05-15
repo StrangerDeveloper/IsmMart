@@ -132,6 +132,7 @@ class UserResponse {
       this.userModel});
 
   factory UserResponse.fromResponse(response) {
+    print(">>Body: ${response['success']}: ${response['message']}");
     return UserResponse(
         success: response['success'] == null ? false : response['success'],
         message: response['message'] ?? "Something went wrong",

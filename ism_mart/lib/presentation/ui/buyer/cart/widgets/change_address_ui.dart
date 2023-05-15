@@ -162,7 +162,7 @@ class ChangeAddressUI extends GetView<CheckoutController> {
                     bgColor: kPrimaryColor),
                 AppConstant.spaceWidget(width: 5),
                 CustomActionIcon(
-                    onTap: () => controller.deleteShippingAddress(userModel.id),
+                    onTap: () {}, //controller.deleteShippingAddress(userModel.id),
                     size: 15,
                     height: 25,
                     width: 25,
@@ -221,7 +221,7 @@ class ChangeAddressUI extends GetView<CheckoutController> {
                 autofocus: false,
                 textStyle: bodyText1,
                 autoValidateMode: AutovalidateMode.onUserInteraction,
-                validator: Validator().number,
+                validator: Validator().phone,
                 keyboardType: TextInputType.number,
                 onChanged: (value) {},
                 onSaved: (value) {},

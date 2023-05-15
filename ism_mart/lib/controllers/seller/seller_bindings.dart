@@ -7,7 +7,8 @@ class SellerBindings extends Bindings {
   void dependencies() {
     Get.lazyPut<AuthRepository>(() => AuthRepository(Get.find()));
     Get.lazyPut<AuthProvider>(() => AuthProvider(Get.find()));
-    Get.lazyPut<AuthController>(() => AuthController(Get.find()));
+     Get.lazyPut<AuthController>(() => AuthController(Get.find()));
+   
 
     Get.lazyPut<CategoryController>(() => CategoryController(Get.find()));
 

@@ -13,17 +13,20 @@ class SellerModelResponse {
   int? totalCustomers;
   SellerModel? vendorStore;
 
-  factory SellerModelResponse.fromJson(Map<String, dynamic> json) => SellerModelResponse(
-    totalProducts: json["totalProducts"],
-    totalCustomers: json["totalCustomers"],
-    vendorStore: json["vendorStore"] == null ? null : SellerModel.fromJson(json["vendorStore"]),
-  );
+  factory SellerModelResponse.fromJson(Map<String, dynamic> json) =>
+      SellerModelResponse(
+        totalProducts: json["totalProducts"],
+        totalCustomers: json["totalCustomers"],
+        vendorStore: json["vendorStore"] == null
+            ? null
+            : SellerModel.fromJson(json["vendorStore"]),
+      );
 
   Map<String, dynamic> toJson() => {
-    "totalProducts": totalProducts,
-    "totalCustomers": totalCustomers,
-    "vendorStore": vendorStore?.toJson(),
-  };
+        "totalProducts": totalProducts,
+        "totalCustomers": totalCustomers,
+        "vendorStore": vendorStore?.toJson(),
+      };
 }
 
 class SellerModel {
@@ -38,32 +41,30 @@ class SellerModel {
   String? bankName, accountTitle, accountNumber;
   String? storeImage, coverImage, totalSold;
 
-
-  SellerModel({
-    this.id,
-    this.storeName,
-    this.storeDesc,
-    this.storeUrl,
-    this.ownerName,
-    this.status,
-    this.visibility,
-    this.rating,
-    this.stripeCustomerId,
-    this.phone,
-    this.premium,
-    this.membership,
-    this.createdAt,
-    this.userId,
-    this.updatedAt,
-    this.accountNumber,
-    this.accountTitle,
-    this.bankName,
-    this.coverImage,
-    this.storeImage,
-    this.address,
-    this.user,
-    this.totalSold
-  });
+  SellerModel(
+      {this.id,
+      this.storeName,
+      this.storeDesc,
+      this.storeUrl,
+      this.ownerName,
+      this.status,
+      this.visibility,
+      this.rating,
+      this.stripeCustomerId,
+      this.phone,
+      this.premium,
+      this.membership,
+      this.createdAt,
+      this.userId,
+      this.updatedAt,
+      this.accountNumber,
+      this.accountTitle,
+      this.bankName,
+      this.coverImage,
+      this.storeImage,
+      this.address,
+      this.user,
+      this.totalSold});
 
   factory SellerModel.fromJson(JSON json) => SellerModel(
       id: json["id"],

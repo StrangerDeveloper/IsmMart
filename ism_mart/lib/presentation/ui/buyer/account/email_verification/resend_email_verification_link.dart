@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/controllers/buyer/auth/auth_controller.dart';
 import 'package:ism_mart/utils/svg_helper.dart';
 import 'package:ism_mart/presentation/widgets/form_input_field_with_icon.dart';
@@ -7,6 +6,8 @@ import 'package:get/get.dart';
 import 'package:ism_mart/utils/constants.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/presentation/widgets/custom_button.dart';
+
+import '../../../../../api_helper/local_storage/local_storage_helper.dart';
 
 class ResendEmailVerificationLink extends GetView<AuthController> {
   ResendEmailVerificationLink({Key? key}) : super(key: key);
@@ -98,8 +99,9 @@ class ResendEmailVerificationLink extends GetView<AuthController> {
                                 CustomButton(
                                   onTap: () async {
                                     if (formKey.currentState!.validate()) {
-                                      await controller.resendEmailVerificationLink();
-                                      await LocalStorageHelper.storeEmailVerificationLinkSentTime();
+                                      await controller
+                                          .resendEmailVerificationLink();
+                                      await LocalStorageHelper.storeEmailVerificationDetails();
                                     }
                                   },
                                   text: langKey.send.tr,

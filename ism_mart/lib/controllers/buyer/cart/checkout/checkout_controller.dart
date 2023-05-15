@@ -437,8 +437,9 @@ class CheckoutController extends GetxController {
       "cartItems": cartItems,
     };
 
-    await _orderProvider.createOrder(token: authController.userToken, data: data)
-        .then((ApiResponse? response) {
+    await _orderProvider
+        .createOrder(token: authController.userToken, data: data)
+        .then((OrderResponse? response) {
       isLoading(false);
       if (response != null) {
         if (response.success!) {
@@ -456,7 +457,7 @@ class CheckoutController extends GetxController {
     }).catchError(onError);
   }
 
-  void showSuccessDialog({ApiResponse? response}) {
+  void showSuccessDialog({OrderResponse? response}) {
     Get.defaultDialog(
       title: langKey.orderInformation.tr,
       titleStyle: appBarTitleSize,

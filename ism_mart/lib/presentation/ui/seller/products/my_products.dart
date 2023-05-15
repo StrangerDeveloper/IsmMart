@@ -13,7 +13,6 @@ class MyProducts extends GetView<SellersController> {
 
   @override
   Widget build(BuildContext context) {
-
     return SafeArea(
       child: Scaffold(
         body: Column(
@@ -57,7 +56,7 @@ class MyProducts extends GetView<SellersController> {
                 Expanded(
                   child: RefreshIndicator(
                     onRefresh: () {
-                      return Future.delayed(Duration(milliseconds: 100), () {
+                      return Future.delayed(Duration(seconds: 2), () {
                         controller.fetchMyProducts();
                       });
                     },
@@ -67,10 +66,10 @@ class MyProducts extends GetView<SellersController> {
                         controller: controller.scrollController,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: AppResponsiveness.getGridItemCount(),
-                          mainAxisExtent:
-                              AppResponsiveness.getMainAxisExtentPoint28(),
+                          //mainAxisExtent:
+                            //  AppResponsiveness.getMainAxisExtentPoint30(),
                           mainAxisSpacing: 5,
-                          //childAspectRatio: 0.8,
+                          childAspectRatio: AppResponsiveness.getChildAspectRatio(),
                         ),
                         itemCount: controller.myProductsList.length,
                         itemBuilder: (_, index) {
@@ -91,7 +90,7 @@ class MyProducts extends GetView<SellersController> {
 
   _buildProductItem({ProductModel? model}) {
     return AspectRatio(
-      aspectRatio: 0.5,
+      aspectRatio: 0.75,
       child: GestureDetector(
         onTap: () {
           Get.toNamed('/product/${model.id}',
@@ -192,11 +191,15 @@ class MyProducts extends GetView<SellersController> {
                         icon: Icons.edit_rounded,
                         bgColor: kPrimaryColor),
                     AppConstant.spaceWidget(width: 5),
-                    CustomActionIcon(
-                        onTap: () =>
-                            showConfirmDeleteDialog(productModel: model),
-                        icon: Icons.delete_rounded,
-                        bgColor: kRedColor)
+                    // CustomActionIcon(
+                    //     onTap: () => AppConstant.showConfirmDeleteDialog(
+                    //           ontap: (){
+                    //             controller.deleteProduct(id: model.id);
+                    //             Get.back();
+                    //           },
+                    //       ),
+                    //     icon: Icons.delete_rounded,
+                    //     bgColor: kRedColor)
                   ],
                 ),
               ),

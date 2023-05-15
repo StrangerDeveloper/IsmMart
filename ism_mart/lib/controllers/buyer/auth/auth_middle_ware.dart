@@ -11,6 +11,8 @@ class AuthMiddleWare extends GetMiddleware {
 
   @override
   RouteSettings? redirect(String? route) {
+    // return (findOrInit.userModel!.emailVerified == false ?
+    // RouteSettings(name: Routes.emailVerificationLinkRoute) :
     return (findOrInit.userModel!.email != null &&
                 !findOrInit.isSessionExpired! &&
                 findOrInit.userToken != null) ||

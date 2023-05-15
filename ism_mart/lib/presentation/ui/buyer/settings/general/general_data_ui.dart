@@ -349,11 +349,11 @@ Note: Transaction value excludes shipping and insurance cost.
     return [
       {
         'header': langKey.exchangeHeader1.tr,
-        'body': langKey.exchangeBody1,
+        'body': langKey.exchangeBody1.tr,
       },
       {
         'header': langKey.exchangeHeader2.tr,
-        'body': langKey.exchangeBody2,
+        'body': langKey.exchangeBody2.tr,
       },
     ];
   }

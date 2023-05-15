@@ -39,11 +39,11 @@ class OrderProvider {
     return OrderResponse.fromJson(response);
   }
 
-  Future<ApiResponse> createOrder({token, data}) async {
+  Future<OrderResponse> createOrder({token, data}) async {
     print(">>>CreateOrder: ${data.toString()}");
     var response = await _orderRepo.postOrder(token: token, data: data);
 
-    return ApiResponse.fromJson(response);
+    return OrderResponse.fromJson(response);
   }
 
   Future<ApiResponse> createDispute(

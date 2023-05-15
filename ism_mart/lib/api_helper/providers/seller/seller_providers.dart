@@ -43,13 +43,17 @@ class SellersApiProvider {
         model.discount! <= 90) request.fields['discount'] = "${model.discount}";
     request.fields['description'] = "${model.description}";
 
-    if (categoryFieldList.isNotEmpty)
+    if (categoryFieldList.isNotEmpty) {
       for (var i = 0; i < categoryFieldList.entries.length; i++) {
         request.fields['features[$i][id]'] =
             "${categoryFieldList.entries.elementAt(i).key}";
         request.fields['features[$i][value]'] =
             "${categoryFieldList.entries.elementAt(i).value}";
       }
+    } else {
+      int i = 0;
+      request.fields['features[$i]'] = '';
+    }
 
     for (File image in images) {
       request.files.add(await http.MultipartFile.fromPath(
@@ -59,18 +63,11 @@ class SellersApiProvider {
       ));
     }
 //TDO: Response handling remaining
-    final response = await request.send();
 
-    if (response.statusCode == 200) {
-      final responseData = await response.stream.bytesToString();
-      final data = json.decode(responseData);
-      print(data);
-      return ApiResponse.fromJson(data);
-    } else {
-      http.StreamedResponse res = await handleStreamResponse(response);
-      return ApiResponse.fromJson(
-          json.decode(await res.stream.bytesToString()));
-    }
+    http.StreamedResponse response =
+        await handleStreamResponse(await request.send());
+    return ApiResponse.fromJson(
+        json.decode(await response.stream.bytesToString()));
   }
 
   Future<SellerProductModel> fetchMyProducts(

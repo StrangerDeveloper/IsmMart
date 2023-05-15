@@ -10,8 +10,6 @@ class StoreProfileUI extends GetView<AuthController> {
 
   @override
   Widget build(BuildContext context) {
-    print(
-        "vendor profile UI cover  ${controller.userModel!.vendor?.coverImage}   profile  ${controller.userModel!.vendor?.storeImage}");
     return Obx(
       () => SafeArea(
         child: controller.isLoading.isTrue
@@ -31,6 +29,7 @@ class StoreProfileUI extends GetView<AuthController> {
                                 onTap: () => AppConstant.showBottomSheet(
                                     widget: RegisterVendorUI(
                                       model: controller.userModel?.vendor,
+                                      //isCalledForUpdate: true,
                                     ),
                                     isGetXBottomSheet: false,
                                     buildContext: context),
@@ -69,8 +68,9 @@ class StoreProfileUI extends GetView<AuthController> {
                                           child: CustomNetworkImage(
                                             width: AppConstant.getSize().width *
                                                 0.90,
-                                            imageUrl: controller
-                                                .userModel!.vendor?.coverImage,
+                                            imageUrl: controller.userModel!
+                                                    .vendor?.coverImage ??
+                                                AppConstant.defaultImgUrl,
                                             fit: BoxFit.cover,
                                           ),
                                         ),
