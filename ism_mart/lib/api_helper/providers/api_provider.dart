@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/models/exports_model.dart';
-import 'package:ism_mart/utils/constants.dart';
+import 'package:http/http.dart' as http;
 
 class ApiProvider {
   final ApiRepository _apiRepository;
