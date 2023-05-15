@@ -6,8 +6,6 @@ import 'package:ism_mart/presentation/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
-import '../../../../controllers/buyer/image_controller.dart';
-
 class ProfileUI extends GetView<AuthController> {
   const ProfileUI({Key? key}) : super(key: key);
 
@@ -257,7 +255,6 @@ class ProfileUI extends GetView<AuthController> {
                         value: controller.editingTextController.text,
                         field: field);
                     controller.login();
-                    var imgController = Get.put(ImageController());
 
                     // await imgController.updateUser(
                     //   field: field,

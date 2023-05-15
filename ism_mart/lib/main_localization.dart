@@ -13,19 +13,17 @@
 //   String documentId = "1KOwB8NH_O3UvoIuWweapOL_gbxEfEkGSqD9wPjJSBpA";
 //   //the sheetid of your google sheet
 
-// SheetID
-//      0-->General and All app widget Text
-//      15336104---> General Single Data (Sheet4)
-//      1423501492--> About US
-//      80287141-->TermsAndConditions
-//      1372575240 ---> Return And Exchange
-//      1207021985----> FAQS
-//      572245348----> MembershipAndPlans
-//      368543940 ---> PrivacyPolicy
+// // SheetID
+// //      0-->General and All app widget Text
+// //      15336104---> General Single Data (Sheet4)
+// //      1423501492--> About US
+// //      80287141-->TermsAndConditions
+// //      1372575240 ---> Return And Exchange
+// //      1207021985----> FAQS
+// //      572245348----> MembershipAndPlans
+// //      368543940 ---> PrivacyPolicy
 
-
-
-//   String sheetId = "1372575240";
+//   String sheetId = "1207021985";
 
 //   String _phraseKey = '';
 //   List<LocalizationModel> _localizations = [];
@@ -123,9 +121,9 @@
 //     stdout.writeln('---------------------------------------');
 //     //stdout.writeln('Saving app_translation_new.g.dart');
 //     //stdout.writeln('Saving app_translation_about_us.g.dart');
-//     stdout.writeln('Saving app_translation_sheetId_1372575240.g.dart');
+//     stdout.writeln('Saving app_translation_sheetId_1207021985.g.dart');
 //     stdout.writeln('---------------------------------------');
-//     final file = File('app_translation_sheet_1372575240.g.dart');
+//     final file = File('app_translation_sheet_1207021985.g.dart');
 //     await file.writeAsString(_localizationFile);
 //     stdout.writeln('Done...');
 //   } catch (e) {

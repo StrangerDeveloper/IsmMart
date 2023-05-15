@@ -37,11 +37,7 @@ class AuthProvider {
   }
 
   Future<UserResponse> postStoreRegister(
-      {token,
-      SellerModel? sellerModel,
-      bool? calledForUpdate = false,
-      String? coverImagePath,
-      String? storeImagePath}) async {
+      {token, SellerModel? sellerModel, bool? calledForUpdate = false}) async {
     final url = "${ApiConstant.baseUrl}auth/vendor/register";
     final request = http.MultipartRequest('POST', Uri.parse(url));
     request.headers['Authorization'] = '$token';
@@ -57,10 +53,10 @@ class AuthProvider {
     request.fields['accountNumber'] = sellerModel.accountNumber!;
     request.fields['bankName'] = sellerModel.bankName!;
 
-    if (storeImagePath!.isNotEmpty) {
+    if (sellerModel.storeImage != '') {
       request.files.add(await http.MultipartFile.fromPath(
         'storeImage',
-        storeImagePath,
+        sellerModel.storeImage!,
         contentType: MediaType.parse('image/jpeg'),
       ));
     }
@@ -78,11 +74,11 @@ class AuthProvider {
     //   request.fields['storeImage'] = sellerModel.storeImage!;
     // }
     // &&sellerModel.coverImage!.contains(coverImage!)
-    print(">>>CoverImage: $coverImagePath");
-    if (coverImagePath!.isNotEmpty) {
+
+    if (sellerModel.coverImage != '') {
       request.files.add(await http.MultipartFile.fromPath(
         'coverImage',
-        coverImagePath,
+        sellerModel.coverImage!,
         contentType: MediaType.parse('image/jpeg'),
       ));
     }
@@ -90,9 +86,22 @@ class AuthProvider {
     //   request.fields['coverImage'] = sellerModel.coverImage!;
     // }
 
-    var response = await handleStreamResponse(await request.send());
-    return UserResponse.fromResponse(
-        json.decode(await response.stream.bytesToString()));
+    print(request.files.map((e) => e.filename).toString());
+    final response = await request.send();
+    if (response.statusCode == 200) {
+      var data = await jsonDecode(await response.stream.bytesToString());
+
+      return UserResponse.fromResponse(data);
+    } else {
+      //ODO: Still needs to test this one properly
+      http.StreamedResponse res =
+          await request.send().timeout(const Duration(seconds: 15));
+      return UserResponse.fromResponse(
+          json.decode(await res.stream.bytesToString()));
+    }
+    // var response = await handleStreamResponse(await request.send());
+    // return UserResponse.fromResponse(
+    //     json.decode(await response.stream.bytesToString()));
 
     // if (response.statusCode == 200) {
     //   final responseData = await response.stream.bytesToString();

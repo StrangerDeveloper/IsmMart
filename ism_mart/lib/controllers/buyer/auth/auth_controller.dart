@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
-import 'package:ism_mart/controllers/buyer/image_controller.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
@@ -235,68 +234,58 @@ class AuthController extends GetxController {
     });
   }
 
-  registerStore(
-      {SellerModel? updatedModel, bool? isCalledForUpdate = false}) async {
+  registerStore({SellerModel? updatedModel}) async {
     isLoading(true);
 
     print(
         "!!!!controller profile ${updatedModel!.storeImage}  \n cover= ${coverImgPath.value}");
 
     SellerModel model = SellerModel(
-      storeName: storeNameController.text,
+      storeName: storeNameController.text.trim(),
       storeDesc: storeDescController.text,
-      ownerName: ownerNameController.text,
-      //storeImage: profileImgPath.value,
-      //coverImage: coverImgPath.value,
-      phone: phoneController.text,
+      ownerName: ownerNameController.text.trim(),
+      storeImage: profileImgPath.value,
+      coverImage: coverImgPath.value,
+      phone: phoneController.text.trim(),
       membership: "Free",
       premium: false,
-      bankName: bankNameController.text,
-      accountTitle: bankHolderTitleController.text,
-      accountNumber: bankAccController.text,
+      bankName: bankNameController.text.trim(),
+      accountTitle: bankHolderTitleController.text.trim(),
+      accountNumber: bankAccController.text.trim(),
     );
-
-    model.storeImage =
-        updatedModel.storeImage != null ? updatedModel.storeImage : "";
-
-    // profileImgPath.value.isNotEmpty
-    //     ? profileImgPath.value
-    //     : updatedModel.storeImage;
-    model.coverImage =
-        updatedModel.coverImage != null ? updatedModel.coverImage : "";
-
-    //  coverImgPath.value.isNotEmpty
-    //     ? coverImgPath.value
-    //     : updatedModel.coverImage;
 
     if (userToken!.isNotEmpty) {
       // UserModel user = UserModel(vendor: model);
       await authProvider
           .postStoreRegister(
               token: userToken!,
-              calledForUpdate: isCalledForUpdate!,
-              sellerModel: model,
-              coverImagePath: coverImgPath.value,
-              storeImagePath: profileImgPath.value)
+              calledForUpdate: updatedModel != null,
+              sellerModel: model)
           .then((UserResponse? apiResponse) {
         isLoading(false);
         if (apiResponse != null) {
           if (apiResponse.success!) {
             Get.back();
-            AppConstant.displaySnackBar("success", apiResponse.message);
-            //    clearStoreController();
+            AppConstant.displaySnackBar(
+                langKey.successTitle.tr, apiResponse.message);
+            clearStoreController();
             getCurrentUser();
           } else
-            AppConstant.displaySnackBar('error', apiResponse.message);
+            AppConstant.displaySnackBar(
+                langKey.errorTitle.tr, apiResponse.message);
         } else
-          AppConstant.displaySnackBar('error', "something went wrong!");
+          AppConstant.displaySnackBar(
+              langKey.errorTitle.tr, langKey.someThingWentWrong.tr);
       }).catchError((error) {
         isLoading(false);
         debugPrint("RegisterStore: Error $error");
       });
     } else {
       isLoading(false);
-      AppConstant.displaySnackBar('error', "Current User not found!");
+      AppConstant.displaySnackBar(
+        langKey.errorTitle.tr,
+        langKey.currentUserNotFound.tr,
+      );
     }
   }
 
@@ -322,10 +311,10 @@ class AuthController extends GetxController {
                   if (calledForProfile) {
                     profileImgPath(compressedFile.path);
 
-                    updateUser();
+                    //updateUser();
                   } else
                     coverImgPath(compressedFile.path);
-                  updateUser();
+                  //updateUser();
                 }
                 Get.back();
               });
@@ -482,7 +471,6 @@ class AuthController extends GetxController {
 
   //String? get userToken => "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQ4LCJpYW0iOiJ2ZW5kb3IiLCJ2aWQiOjQzLCJpYXQiOjE2NzgwNzY4MTE2MjcsImV4cCI6MTY3ODI0OTYxMTYyN30.eWj8W9zsP_mDBf81ho08HGmtwz8ufDpKUP2YBghyCN8";
 
-  var imgController = Get.put(ImageController());
   getToken() async {
     await LocalStorageHelper.getStoredUser().then((user) async {
       _currUserToken.value = user.token ?? '';
