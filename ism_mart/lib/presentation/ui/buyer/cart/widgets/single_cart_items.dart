@@ -188,7 +188,8 @@ class SingleCartItems extends StatelessWidget {
                               cartModel.productModel!.totalPrice =
                                   controller!.totalCartAmount.value;
                               cartModel.itemPrice = (quantity + 1) *
-                                  cartModel.productModel!.discountPrice!;
+                                  cartModel.productModel!.discountPrice!
+                                      .round();
                               await LocalStorageHelper.updateCartItems(
                                   cartModel: cartModel);
                               controller.update();
@@ -200,7 +201,8 @@ class SingleCartItems extends StatelessWidget {
                               cartModel.productModel!.totalPrice =
                                   controller!.totalCartAmount.value;
                               cartModel.itemPrice = ((quantity - 1) *
-                                  cartModel.productModel!.discountPrice!);
+                                  cartModel.productModel!.discountPrice!
+                                      .round());
 
                               await LocalStorageHelper.updateCartItems(
                                   cartModel: cartModel);

@@ -139,12 +139,12 @@ class CartController extends GetxController
     int totalQty = 0;
     if (list.isNotEmpty) {
       for (var value in list) {
-        double discountPrice = double.parse(
+        var discountPrice = double.parse(
             value.productModel!.discountPrice != null
                 ? value.productModel!.discountPrice.toString()
                 : "0");
         var qty = int.parse(value.quantity.toString());
-        totalAmount += (discountPrice * qty);
+        totalAmount += (discountPrice.round() * qty);
         totalQty += qty;
       }
     }
@@ -166,7 +166,7 @@ class CartController extends GetxController
     cartModel!.quantity = quantityController.text.toString();
     cartModel!.productModel!.totalPrice = totalCartAmount.value;
     await LocalStorageHelper.updateCartItems(cartModel: cartModel);
-    update();
+    //update();
   }
 
   void decrement() async {

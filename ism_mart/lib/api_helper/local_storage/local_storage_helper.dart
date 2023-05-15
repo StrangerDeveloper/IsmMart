@@ -78,7 +78,7 @@ class LocalStorageHelper {
           .indexWhere((element) => element.productId == cartModel.productId);
       if (index != -1) {
         list[index].quantity = cartModel.quantity;
-        list[index].itemPrice = cartModel.itemPrice;
+        list[index].itemPrice = cartModel.itemPrice!;
         String carts = cartModelToJson(list);
         await saveCart(carts);
       }
