@@ -140,7 +140,7 @@ class SingleProductView extends GetView<ProductController> {
                   children: [
                     Expanded(
                         flex: 5,
-                        child: SearchBar(
+                        child: CustomSearchBar(
                           searchText: productModel.name,
                           calledFromSPV: true,
                         )),

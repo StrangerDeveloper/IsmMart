@@ -5,10 +5,10 @@ import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/utils/constants.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
-class SearchController extends GetxController {
+class CustomSearchController extends GetxController {
   final ApiProvider _apiProvider;
 
-  SearchController(this._apiProvider);
+  CustomSearchController(this._apiProvider);
 
   var searchTextController = TextEditingController();
 
@@ -67,6 +67,7 @@ class SearchController extends GetxController {
       isLoading(false);
       productList.clear();
       productList.addAll(response.products.productRows!);
+      searchTextController.clear();
     }).catchError((error) {
       isLoading(false);
       //change(null, status: RxStatus.error(error));

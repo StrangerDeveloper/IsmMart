@@ -67,7 +67,7 @@ class CategoriesUI extends GetView<CategoryController> {
           Obx(
             () => Expanded(
               flex: 6,
-              child: SearchBar(searchText: controller.selectedCategory.value),
+              child: CustomSearchBar(searchText: controller.selectedCategory.value),
             ),
           ),
         ],

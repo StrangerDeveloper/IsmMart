@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:ism_mart/controllers/controllers.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
-class SearchBar extends StatelessWidget {
-  const SearchBar({Key? key, this.searchText, this.calledFromSPV = false}) : super(key: key);
+class CustomSearchBar extends StatelessWidget {
+  const CustomSearchBar({Key? key, this.searchText, this.calledFromSPV = false}) : super(key: key);
   final String? searchText;
   final bool? calledFromSPV;
 
