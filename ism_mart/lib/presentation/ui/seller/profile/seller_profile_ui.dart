@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
@@ -46,25 +47,26 @@ class StoreProfileUI extends GetView<AuthController> {
                               padding: const EdgeInsets.all(8.0),
                               child: Column(
                                 children: [
-                                  //StickyLabel(text: langKey.storeInfo.tr),
                                   SizedBox(
                                     width: AppConstant.getSize().width * 0.9,
                                     height: AppConstant.getSize().height * 0.15,
                                     child: Stack(
+                                      alignment: Alignment.bottomLeft,
                                       children: [
                                         Container(
                                           decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              color: Colors.black,
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: kPrimaryColor
-                                                      .withOpacity(0.05),
-                                                  offset: Offset(0, 0),
-                                                  blurRadius: 1,
-                                                )
-                                              ]),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            color: Colors.black,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: kPrimaryColor
+                                                    .withOpacity(0.05),
+                                                offset: Offset(0, 0),
+                                                blurRadius: 1,
+                                              )
+                                            ],
+                                          ),
                                           child: CustomNetworkImage(
                                             width: AppConstant.getSize().width *
                                                 0.90,
@@ -74,40 +76,7 @@ class StoreProfileUI extends GetView<AuthController> {
                                             fit: BoxFit.cover,
                                           ),
                                         ),
-                                        Positioned(
-                                          bottom: 1,
-                                          left: 1,
-                                          child: Container(
-                                            height: 70,
-                                            width: 70,
-                                            alignment: Alignment.center,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(40),
-                                              color: Colors.white,
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: kPrimaryColor
-                                                      .withOpacity(0.22),
-                                                  offset: Offset(0, 0),
-                                                  blurRadius: 10.78,
-                                                ),
-                                              ],
-                                            ),
-                                            child: Obx(
-                                              () => CircleAvatar(
-                                                radius: 30,
-                                                backgroundColor:
-                                                    Colors.grey[200],
-                                                backgroundImage: NetworkImage(
-                                                  controller.userModel!.vendor
-                                                          ?.storeImage ??
-                                                      AppConstant.defaultImgUrl,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
+                                        profileImage(),
                                         /* Positioned(
                                          top: 1,
                                          right: 1,
@@ -281,6 +250,51 @@ class StoreProfileUI extends GetView<AuthController> {
                   ],
                 ),
               ),
+      ),
+    );
+  }
+
+  Widget profileImage() {
+    return Obx(
+      () => Container(
+        margin: EdgeInsets.only(left: 6, bottom: 6),
+        padding: EdgeInsets.all(3),
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: Colors.white,
+        ),
+        child: CachedNetworkImage(
+          height: 60,
+          width: 60,
+          imageUrl: controller.userModel!.vendor?.storeImage ?? '',
+          imageBuilder: (context, imageProvider) {
+            return Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                  image: imageProvider,
+                  fit: BoxFit.fill,
+                ),
+              ),
+            );
+          },
+          errorWidget: (context, url, error) {
+            return Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                  image: AssetImage('assets/images/no_image_found.jpg'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            );
+          },
+          placeholder: (context, url) {
+            return const Center(
+              child: CircularProgressIndicator(strokeWidth: 0.5),
+            );
+          },
+        ),
       ),
     );
   }
