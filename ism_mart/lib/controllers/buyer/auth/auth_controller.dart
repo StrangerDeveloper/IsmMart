@@ -259,7 +259,7 @@ class AuthController extends GetxController {
       await authProvider
           .postStoreRegister(
               token: userToken!,
-              calledForUpdate: updatedModel != null,
+              //calledForUpdate: updatedModel != null,
               sellerModel: model)
           .then((UserResponse? apiResponse) {
         isLoading(false);
