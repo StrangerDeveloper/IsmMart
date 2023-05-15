@@ -67,7 +67,7 @@ class CustomSearchController extends GetxController {
       isLoading(false);
       productList.clear();
       productList.addAll(response.products.productRows!);
-      searchTextController.clear();
+      //searchTextController.clear();
     }).catchError((error) {
       isLoading(false);
       //change(null, status: RxStatus.error(error));
@@ -109,8 +109,6 @@ class CustomSearchController extends GetxController {
     categoriesList.addAll(list);
 
     categoriesList.refresh();
-
-    debugPrint(">>>SetCategories: ${categoriesList.length}");
   }
 
   makeSelectedCategory(CategoryModel? categoryModel) {

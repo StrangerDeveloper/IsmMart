@@ -103,7 +103,7 @@ class CheckoutUI extends GetView<CheckoutController> {
                                 return;
                               } else if (controller
                                   .getCartItemsList()
-                                  .isNotEmpty) {
+                                  .isEmpty) {
                                 controller.showSnackBar(
                                     title: langKey.errorTitle.tr,
                                     message: langKey.cartMustNotEmpty.tr);

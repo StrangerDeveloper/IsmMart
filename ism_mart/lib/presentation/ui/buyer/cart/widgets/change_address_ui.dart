@@ -43,23 +43,22 @@ class ChangeAddressUI extends GetView<CheckoutController> {
                 Obx(
                   () => controller.shippingAddressList.isEmpty
                       ? _buildNewAddress()
-                      : ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          padding: const EdgeInsets.all(8),
-                          itemCount: controller.shippingAddressList.length,
-                          itemBuilder: (_, index) {
-                            UserModel? userModel =
-                                controller.shippingAddressList[index];
+                      : SizedBox(
+                          height: 400,
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            padding: const EdgeInsets.all(8),
+                            itemCount: controller.shippingAddressList.length,
+                            itemBuilder: (_, index) {
+                              UserModel? userModel =
+                                  controller.shippingAddressList[index];
 
-                            return _singleAddressListItem(userModel);
-                          },
+                              return _singleAddressListItem(userModel);
+                            },
+                          ),
                         ),
                 ),
-
-                // Obx(() => controller.defaultAddressModel!.defaultAddress!
-                //   ? _shippingAddressDetails(controller.defaultAddressModel)
-                //   : _buildNewAddress()),
               ],
             ),
           ),
