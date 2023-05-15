@@ -74,7 +74,8 @@ class CheckoutUI extends GetView<CheckoutController> {
                             onTap: () {
                               if (controller
                                       .cartController.totalCartAmount.value <=
-                                  num.parse(convertStaticPrice(price: 1000))) {
+                                  num.parse(currencyController.convertCurrency(
+                                      currentPrice: "1000")!)) {
                                 controller.showSnackBar(
                                   title: langKey.errorTitle.tr,
                                   message: langKey.toProceedWithPurchase.tr,
@@ -101,7 +102,8 @@ class CheckoutUI extends GetView<CheckoutController> {
                                     message: langKey.noDefaultAddressFound.tr);
                                 return;
                               } else if (controller
-                                  .cartController.cartItemsList.isNotEmpty) {
+                                  .getCartItemsList()
+                                  .isNotEmpty) {
                                 controller.showSnackBar(
                                     title: langKey.errorTitle.tr,
                                     message: langKey.cartMustNotEmpty.tr);
