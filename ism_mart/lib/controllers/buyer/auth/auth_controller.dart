@@ -516,10 +516,10 @@ class AuthController extends GetxController {
             profileImgPath.value = '';
           } else
             getCurrentUser();
-          AppConstant.displaySnackBar('error', userResponse.message);
+          //    AppConstant.displaySnackBar('error', userResponse.message);
         } else
           getCurrentUser();
-        AppConstant.displaySnackBar('error', "something went wrong!");
+        // AppConstant.displaySnackBar('error', "something went wrong!");
       }).catchError((error) {
         getCurrentUser();
         isLoading(false);
