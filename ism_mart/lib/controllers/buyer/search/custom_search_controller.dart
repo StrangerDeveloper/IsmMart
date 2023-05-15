@@ -42,7 +42,12 @@ class CustomSearchController extends GetxController {
     searchTextController.addListener(() {
       search(searchTextController.text);
     });
-    scrollController..addListener(() => loadMore(searchTextController.text));
+    scrollController
+      ..addListener(() {
+        if (stopLoadMore.isFalse) {
+          loadMore(searchTextController.text);
+        }
+      });
   }
 
   var isLoading = false.obs;
@@ -127,7 +132,9 @@ class CustomSearchController extends GetxController {
     }
   }
 
+  var stopLoadMore = false.obs;
   applyFilter() async {
+    stopLoadMore.value = true;
     int? categoryId = selectedCategoryId.value;
     num? minPrice = num.parse(minPriceController.text.isNotEmpty
         ? minPriceController.text.toString().trim()
