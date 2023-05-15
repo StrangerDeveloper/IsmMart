@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
-import 'package:ism_mart/controllers/buyer/image_controller.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
@@ -482,7 +481,6 @@ class AuthController extends GetxController {
 
   //String? get userToken => "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQ4LCJpYW0iOiJ2ZW5kb3IiLCJ2aWQiOjQzLCJpYXQiOjE2NzgwNzY4MTE2MjcsImV4cCI6MTY3ODI0OTYxMTYyN30.eWj8W9zsP_mDBf81ho08HGmtwz8ufDpKUP2YBghyCN8";
 
-  var imgController = Get.put(ImageController());
   getToken() async {
     await LocalStorageHelper.getStoredUser().then((user) async {
       _currUserToken.value = user.token ?? '';
@@ -528,10 +526,10 @@ class AuthController extends GetxController {
             profileImgPath.value = '';
           } else
             getCurrentUser();
-          AppConstant.displaySnackBar('error', userResponse.message);
+          //    AppConstant.displaySnackBar('error', userResponse.message);
         } else
           getCurrentUser();
-        AppConstant.displaySnackBar('error', "something went wrong!");
+        // AppConstant.displaySnackBar('error', "something went wrong!");
       }).catchError((error) {
         getCurrentUser();
         isLoading(false);
