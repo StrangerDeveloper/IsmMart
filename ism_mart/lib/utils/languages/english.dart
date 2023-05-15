@@ -136,6 +136,7 @@ class English {
         key.rating: 'Rating',
         key.addDisputes: 'Add Disputes',
         key.deleteDisputes: 'Delete Disputes',
+        key.deleteDisputesMsg: 'Are you sure you want to delete dispute?',
         key.disputeAlreadyAdded: 'Dispute Already Added',
         key.viewDispute: 'View Dispute',
         key.disputeNotAddedYet: 'Dispute Not Added Yet',

@@ -522,14 +522,68 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                 (orderItem?.tickets?.isNotEmpty ?? false) ? false : true,
                 onTap: () {
                   Navigator.of(context).pop();
-                  controller.deleteTicket(
-                    orderItem!.tickets![0].id.toString(),
-                    orderModel!.id.toString(),
-                  );
+                  showDeleteDisputeDialog(context, orderItem);
                 },
               ),
             ],
           ),
+        );
+      },
+    );
+  }
+
+  Future showDeleteDisputeDialog(
+      BuildContext context, OrderItem? orderItem) async {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(langKey.deleteDisputes.tr),
+          content: Text(langKey.deleteDisputesMsg.tr),
+          actions: [
+            Row(
+              children: [
+                Expanded(
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      minimumSize: Size(double.infinity, 40),
+                      foregroundColor: Colors.grey,
+                    ),
+                    child: Text(
+                      langKey.noBtn.tr,
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.of(Get.context!).pop();
+                    },
+                  ),
+                ),
+                Expanded(
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      minimumSize: Size(double.infinity, 40),
+                      foregroundColor: Colors.grey,
+                    ),
+                    child: Text(
+                      langKey.yesBtn.tr,
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                    onPressed: () {
+                      controller.deleteTicket(
+                        orderItem!.tickets![0].id.toString(),
+                        orderModel!.id.toString(),
+                      );
+                      Navigator.of(Get.context!).pop();
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ],
         );
       },
     );

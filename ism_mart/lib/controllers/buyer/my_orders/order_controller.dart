@@ -146,14 +146,14 @@ class OrderController extends GetxController
   }
 
   disputeOnOrders({OrderItem? orderItem, orderId}) async {
-    isLoading(false);
+    isLoading(true);
     String title = titleController.text;
     String description = descriptionController.text;
 
     await _orderProvider
-            .createDispute(authController.userToken, title, description,
-                orderItem!.id, pickedImagesList)
-            .then((ApiResponse? apiResponse) {
+        .createDispute(authController.userToken, title, description,
+            orderItem!.id, pickedImagesList)
+        .then((ApiResponse? apiResponse) {
       isLoading(false);
       if (apiResponse != null) {
         if (apiResponse.success!) {
@@ -167,20 +167,16 @@ class OrderController extends GetxController
       } else {
         showSnackBar();
       }
-    }) /*.catchError((e) {
-      isLoading(false);
-      print(">>>Dispute $e");
-    })*/
-        ;
+    });
   }
 
   deleteTicket(String ticketId, String orderId) {
-    // GlobalVariable.showLoader.value = true;
-    isLoading(true);
+    print('bangash');
+    // isLoading(true);
     ApiBaseHelper()
         .deleteMethod(url: Urls.deleteTickets + ticketId, withBearer: false)
         .then((parsedJson) {
-      isLoading(false);
+      // isLoading(false);
       if (parsedJson['success'] == true && parsedJson['data'] != null) {
         fetchOrderById(orderId);
         AppConstant.displaySnackBar(
@@ -194,10 +190,10 @@ class OrderController extends GetxController
         );
       }
     }).catchError((e) {
-      isLoading(false);
+      // isLoading(false);
       print(e);
-      // GlobalVariable.showLoader.value = false;
     });
+    print('bangash');
   }
 
   var _picker = ImagePicker();
