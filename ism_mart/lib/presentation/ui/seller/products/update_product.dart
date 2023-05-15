@@ -97,12 +97,17 @@ class UpdateProductUI extends GetView<SellersController> {
                               keyboardType: TextInputType.number,
                               onChanged: (value) {
                                 if (value.isNotEmpty) {
-                                  int amount = int.parse(value);
-                                  int totalAfter =
-                                      amount + (amount * 0.05).round();
-                                  controller.priceAfterCommission(totalAfter);
+                                  // int amount = int.parse(value);
+                                  // int totalAfter =
+                                  //     amount + (amount * 0.05).round();
+                                  // controller.priceAfterCommission(amount);
+                                  controller.priceAfterCommission.value =
+                                      int.parse(value);
+                                  controller.totalTax();
+                                  productModel!.price =
+                                      controller.priceAfterCommission.value;
                                 } else {
-                                  controller.priceAfterCommission(0);
+                                  // controller.priceAfterCommission(0);
                                 }
                               },
                               onSaved: (value) {},
