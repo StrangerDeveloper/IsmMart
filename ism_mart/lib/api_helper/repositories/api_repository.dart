@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:ism_mart/api_helper/api_service.dart';
+import 'package:ism_mart/api_helper/export_api_helper.dart';
 
 class ApiRepository {
   final ApiService _apiService;
@@ -203,8 +204,7 @@ class ApiRepository {
           'https://api.apilayer.com/exchangerates_data/convert?to=$to&from=$from&amount=$amount'),
       headers: {
         //'Authorization': 'Bearer $client_secret',
-        'apikey': 'GfHmdIjzz5iYzBNC2GbVOpDOWt4cg7XJ'
-        // 'O8SwtgaidFLGnv15tOvXenR7f8Zeodfc' //'28ctJvWImBjcvSKiiGTJ3GH3frjz3Nj7'
+        'apikey': ApiConstant.CURRENCY_EXCHANGE_API_KEY,
       },
     );
     return json.decode(response.body);

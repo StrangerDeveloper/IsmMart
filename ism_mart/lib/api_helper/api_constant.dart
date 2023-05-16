@@ -31,6 +31,18 @@ class ApiConstant {
 
   static const SECRET_KEY = kDebugMode ? test_sk : live_sk;
 
+  static const live_currency_exchange_api_key =
+      "dYkOzqTeDZkENZyxkCiennS5kvUDbcoA";
+  static const test_currency_exchange_api_key =
+      "GfHmdIjzz5iYzBNC2GbVOpDOWt4cg7XJ";
+
+  // 'O8SwtgaidFLGnv15tOvXenR7f8Zeodfc'
+  // //'28ctJvWImBjcvSKiiGTJ3GH3frjz3Nj7'
+
+  static const CURRENCY_EXCHANGE_API_KEY = kDebugMode
+      ? test_currency_exchange_api_key
+      : live_currency_exchange_api_key;
+
   // static const SESSION_EXPIRED = "Session is expired";
 
   static String getBaseUrl({calledStripe = false}) {

@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -73,10 +72,9 @@ class OrderRepository {
   Future<dynamic> postDispute(
       {token, title, description, orderItemId, imagesList}) async {
     final url = "${ApiConstant.baseUrl}tickets/add";
+    var headers = {'authorization': '$token', 'Cookie': 'XSRF-token=$token'};
     final request = http.MultipartRequest('POST', Uri.parse(url));
-    request.headers['Authorization'] = '$token';
-    request.headers['Content-Type'] = 'multipart/form-data';
-
+    request.headers.addAll(headers);
     request.fields['title'] = "${title}";
     request.fields['description'] = "${description}";
     request.fields['orderItemsId'] = "${orderItemId}";
@@ -89,19 +87,10 @@ class OrderRepository {
           contentType: MediaType.parse('image/jpeg'),
         ));
       }
-
-      final response = await request.send();
-      if (response.statusCode == 200) {
-        final responseData = await response.stream.bytesToString();
-        final data = json.decode(responseData);
-        print(responseData);
-        print(data);
-        return data;
-      } else {
-        //TDO: Still needs to test this one properly
-        http.StreamedResponse res = handleStreamResponse(response);
-        return json.decode(await res.stream.bytesToString());
-      }
+      var response = await request.send();
+      print(
+          "Dispute: ${response.statusCode} ${response.stream.bytesToString()}");
+      return response;
     }
   }
 

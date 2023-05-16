@@ -12,6 +12,9 @@ import 'package:ism_mart/controllers/controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:http/http.dart' as http;
+
+import 'package:http_parser/http_parser.dart';
 
 class OrderController extends GetxController
     with StateMixin, GetSingleTickerProviderStateMixin {
@@ -149,7 +152,6 @@ class OrderController extends GetxController
     isLoading(true);
     String title = titleController.text;
     String description = descriptionController.text;
-
     await _orderProvider
         .createDispute(authController.userToken, title, description,
             orderItem!.id, pickedImagesList)
@@ -167,6 +169,10 @@ class OrderController extends GetxController
       } else {
         showSnackBar();
       }
+    }).catchError((error) {
+      isLoading(false);
+      print("Dispute: $error");
+      showSnackBar();
     });
   }
 

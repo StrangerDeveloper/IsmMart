@@ -145,42 +145,45 @@ class ApiBaseHelper {
     }
   }
 
-// Future<dynamic> postMethodForImage(
-//     {required String url,
-//     required List<http.MultipartFile> files,
-//     required Map<String, String> fields}) async {
-//   try {
-//     Uri urlValue = Uri.parse(Urls.baseURL + url);
-//     http.MultipartRequest request = http.MultipartRequest('POST', urlValue);
-//     request.headers['Authorization'] = 'Bearer $token';
-//     request.fields.addAll(fields);
-//     request.files.addAll(files);
-//     http.StreamedResponse response = await request.send();
-//     Map<String, dynamic> parsedJson =
-//         await jsonDecode(await response.stream.bytesToString());
-//
-//     print('********************** Response ********************************');
-//     print(urlValue.toString());
-//     print(parsedJson.toString());
-//     print('&&&&&&&&&&&&&&&&&&&&&&& End of Response &&&&&&&&&&&&&&&&&&&&&&\n');
-//     return parsedJson;
-//   } on SocketException catch (_) {
-//     GlobalVariable.showLoader.value = false;
-//     //GetxHelper.showSnackBar(title: 'Error', message: Errors.noInternetError);
-//     throw Errors.noInternetError;
-//   } on TimeoutException catch (_) {
-//     GlobalVariable.showLoader.value = false;
-//     GetxHelper.showSnackBar(title: 'Error', message: Errors.timeOutException);
-//     throw Errors.timeOutException;
-//   } on FormatException catch (_) {
-//     GlobalVariable.showLoader.value = false;
-//     GetxHelper.showSnackBar(title: 'Error', message: Errors.formatException);
-//     throw Errors.formatException;
-//   } catch (e) {
-//     GlobalVariable.showLoader.value = false;
-//     GetxHelper.showSnackBar(title: 'Error', message: Errors.generalApiError);
-//     throw e.toString();
-//   }
-// }
-//
+  Future<dynamic> postMethodForImage(
+      {required String url,
+      required List<http.MultipartFile> files,
+      required Map<String, String> fields}) async {
+    try {
+      Uri urlValue = Uri.parse(_baseUrl + url);
+      http.MultipartRequest request = http.MultipartRequest('POST', urlValue);
+      Map<String, String> header = {
+        'authorization': token,
+        'Content-Type': 'multipart/form-data'
+      };
+      request.headers.addAll(header);
+      request.fields.addAll(fields);
+      request.files.addAll(files);
+      http.StreamedResponse response = await request.send();
+      Map<String, dynamic> parsedJson =
+          await jsonDecode(await response.stream.bytesToString());
+
+      print('********************** Response ********************************');
+      print(urlValue.toString());
+      print(parsedJson.toString());
+      print('&&&&&&&&&&&&&&&&&&&&&&& End of Response &&&&&&&&&&&&&&&&&&&&&&\n');
+      return parsedJson;
+    } on SocketException catch (_) {
+      GlobalVariable.showLoader.value = false;
+      //GetxHelper.showSnackBar(title: 'Error', message: Errors.noInternetError);
+      throw Errors.noInternetError;
+    } on TimeoutException catch (_) {
+      GlobalVariable.showLoader.value = false;
+      GetxHelper.showSnackBar(title: 'Error', message: Errors.timeOutException);
+      throw Errors.timeOutException;
+    } on FormatException catch (_) {
+      GlobalVariable.showLoader.value = false;
+      GetxHelper.showSnackBar(title: 'Error', message: Errors.formatException);
+      throw Errors.formatException;
+    } catch (e) {
+      GlobalVariable.showLoader.value = false;
+      GetxHelper.showSnackBar(title: 'Error', message: Errors.generalApiError);
+      throw e.toString();
+    }
+  }
 }

@@ -24,15 +24,21 @@ class ApiResponse {
       };
 
   factory ApiResponse.fromJson(Map<String, dynamic> json) {
-    print(">>Body: ${json['success']} : ${json['message']}");
     return ApiResponse(
         success: json['success'] == null ? false : json['success'],
-        key: json['key'],
         message: json['message'] ?? "",
-        error: json['error'],
-        errors: json['errors'] != null
-            ? List<String>.from(json["errors"].map((x) => x))
-            : null,
         data: json['data'] == null ? null : json['data']);
   }
+
+  // factory ApiResponse.fromJson(Map<String, dynamic> json) {
+  //   return ApiResponse(
+  //       success: json['success'] == null ? false : json['success'],
+  //       key: json['key'] ?? '',
+  //       message: json['message'] ?? "",
+  //       error: json['error'] == null ? "" : json['error'],
+  //       errors: json['errors'] != null
+  //           ? List<String>.from(json["errors"].map((x) => x))
+  //           : null,
+  //       data: json['data'] == null ? null : json['data']);
+  // }
 }
