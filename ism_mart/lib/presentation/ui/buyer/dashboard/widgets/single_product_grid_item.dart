@@ -51,7 +51,7 @@ class SingleProductItems extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: AppResponsiveness.getHeight100_150(),
+                    height: AppResponsiveness.getHeight90_140(),
                     width: double.infinity,
                     child: CustomNetworkImage(imageUrl: model!.thumbnail),
                   ),

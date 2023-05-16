@@ -59,8 +59,7 @@ class English {
             'Payment Successful!, You\'re Order has been Placed!',
         key.orderInformation: 'Order Information',
         key.orderNotCreated: 'Something went wrong! Order Not created',
-        key.phoneValidate:
-            'Phone numbers should be in a format of 11 to 14 digits.',
+        key.phoneValidate: 'Phone numbers should be 11 to 14 digits long.',
 
         ///sellerController
         key.imageSizeDesc: 'Image must be up to',

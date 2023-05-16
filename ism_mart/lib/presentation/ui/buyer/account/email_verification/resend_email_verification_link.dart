@@ -7,6 +7,8 @@ import 'package:ism_mart/utils/constants.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/presentation/widgets/custom_button.dart';
 
+import '../../../../../api_helper/local_storage/local_storage_helper.dart';
+
 class ResendEmailVerificationLink extends GetView<AuthController> {
   ResendEmailVerificationLink({Key? key}) : super(key: key);
 
@@ -99,6 +101,8 @@ class ResendEmailVerificationLink extends GetView<AuthController> {
                                     if (formKey.currentState!.validate()) {
                                       await controller
                                           .resendEmailVerificationLink();
+                                      await LocalStorageHelper
+                                          .storeEmailVerificationDetails();
                                     }
                                   },
                                   text: langKey.send.tr,

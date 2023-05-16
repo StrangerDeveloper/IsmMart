@@ -8,6 +8,8 @@ import 'package:ism_mart/app_binding/app_init_binding.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
+import 'api_helper/export_api_helper.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();

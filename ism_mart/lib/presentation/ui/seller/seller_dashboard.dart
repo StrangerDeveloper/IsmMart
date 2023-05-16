@@ -45,7 +45,7 @@ class SellerDashboard extends GetView<SellersController> {
 
   Widget _orderStats() {
     return Obx(() => SizedBox(
-          height: AppResponsiveness.getBoxHeightPoint55(),
+          height: AppResponsiveness.getBoxHeightPoint60(),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(

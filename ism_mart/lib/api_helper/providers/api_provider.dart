@@ -8,6 +8,21 @@ class ApiProvider {
   ApiProvider(this._apiRepository);
 
   Future<SearchProductResponse> search({text, page, limit, sortBy}) async {
+// Search api call for search UI product
+    // var request = http.Request(
+    //     'GET',
+    //     Uri.parse(
+    //         'https://ismmart-api.com/api/filter?minPrice=1&maxPrice=100&type=Discounts&1000=100&page=$page&sort=low-to-high'));
+    // http.StreamedResponse response = await request.send();
+    // var raw = await http.Response.fromStream(response);
+    // var res = jsonDecode(raw.body);
+
+    // print("search api hit >>> $res");
+    // if (response.statusCode == 200) {
+    //   print(await response.stream.bytesToString());
+    // } else {
+    //   print(response.reasonPhrase);
+    // }
     var products = await _apiRepository.searchProduct(
         text: text, page: page, limit: limit, sortBy: sortBy);
 

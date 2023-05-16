@@ -528,6 +528,39 @@ class AuthController extends GetxController {
     }
   }
 
+  emailVerificationCheck()async{
+    await getToken();
+    if(userToken == null || userToken == '') {
+      Get.toNamed(Routes.loginRoute);
+    } else{
+      if (userModel!.emailVerified == false) {
+        String? verificationDetails = await LocalStorageHelper
+            .getEmailVerificationDetails();
+        if (verificationDetails != null) {
+          DateTime linkTime = DateTime.parse(verificationDetails);
+          DateTime currentTime = DateTime.now();
+          DateTime fiveMinutesCheck = currentTime.subtract(
+              Duration(minutes: 5));
+          if (fiveMinutesCheck.isAfter(linkTime)) {
+            LocalStorageHelper.localStorage.remove(
+                'emailVerificationTime');
+            Get.toNamed(Routes.emailVerificationLinkRoute);
+          }
+          else {
+            showSnackBar(title: 'Verify Email',
+                message: 'An Email Verification link has already been sent to your email');
+          }
+        }
+        else {
+          Get.toNamed(Routes.emailVerificationLinkRoute);
+        }
+      }
+      else {
+        Get.toNamed(Routes.checkOutRoute);
+      }
+    }
+  }
+
   deActivateAccount() async {
     if (userToken != null) {
       isLoading(true);

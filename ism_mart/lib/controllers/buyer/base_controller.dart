@@ -266,9 +266,6 @@ class BaseController extends GetxController {
     const CategoriesUI(),
     const CartUI(),
     SettingsUI(),
-    SearchUI(
-      isCalledForDeals: true,
-    )
   ];
 
   var currentPage = 0.obs;

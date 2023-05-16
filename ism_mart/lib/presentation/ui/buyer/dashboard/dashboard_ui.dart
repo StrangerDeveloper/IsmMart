@@ -130,7 +130,7 @@ class DashboardUI extends GetView<BaseController> {
       () => Container(
         margin: const EdgeInsets.only(top: 10),
         color: kWhiteColor,
-        height: AppResponsiveness.getBoxHeightPoint30(),
+        height: AppResponsiveness.getBoxHeightPoint32(),
         child: Column(
           children: [
             StickyLabel(text: langKey.discountDeals.tr),
@@ -360,7 +360,7 @@ class DashboardUI extends GetView<BaseController> {
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
         height:
-            AppConstant.getSize().height * (isCategoryProducts! ? 0.2 : 0.25),
+            AppResponsiveness.getBoxHeightPoint25(),
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: list.length,

@@ -7,6 +7,8 @@ import 'package:ism_mart/presentation/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
+import '../../../../api_helper/local_storage/local_storage_helper.dart';
+
 class CartUI extends GetView<CartController> {
   const CartUI({Key? key}) : super(key: key);
 
@@ -158,7 +160,10 @@ class CartUI extends GetView<CartController> {
             ),
             AppConstant.spaceWidget(height: 10),
             CustomButton(
-              onTap: () => Get.toNamed(Routes.checkOutRoute),
+              onTap: () async{
+                  AuthController authController = Get.find();
+                  await authController.emailVerificationCheck();
+                },
               text: langKey.proceedToCheckOut.tr,
               color: kPrimaryColor,
               height: 40,

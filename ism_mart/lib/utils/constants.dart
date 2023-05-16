@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/current_remaining_time.dart';
@@ -8,6 +8,9 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:ism_mart/models/exports_model.dart';
+
+import '../presentation/widgets/custom_button.dart';
+import '../presentation/widgets/custom_text.dart';
 
 const kLimeGreenColor = Color(0xFFACC254);
 const kPrimaryColor = kDarkColor;
@@ -299,5 +302,70 @@ class AppConstant {
     } else {
       return 15;
     }
+  }
+
+  static void showConfirmDeleteDialog({VoidCallback? ontap, String? ontapText}) {
+    Get.defaultDialog(
+      content: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 8),
+        child: Column(
+          children: [
+            Align(
+              alignment: Alignment.topRight,
+              child: IconButton(
+                  onPressed: ()=>Get.back(),
+                  icon: Icon(
+                    Icons.close,
+                    size: 24,
+                    color: Colors.grey,
+                  )),
+            ),
+            AppConstant.spaceWidget(
+                height: 5
+            ),
+            Icon(
+              Icons.highlight_remove_outlined,
+              size: 45,
+              color: Colors.red,
+            ),
+            AppConstant.spaceWidget(
+                height: 12
+            ),
+            CustomText(
+              title: 'Are You Sure?',
+              style: headline1,
+            ),
+            AppConstant.spaceWidget(
+                height: 12
+            ),
+            CustomText(
+              title: 'Do you really want to delete this record? This process cannot be undone',
+              weight: FontWeight.w600,
+            ),
+            //buildConfirmDeleteIcon(),
+            AppConstant.spaceWidget(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                CustomButton(
+                  onTap:() => Get.back(),
+                  text: langKey.noBtn.tr,
+                  width: 100,
+                  height: 30,
+                  color: kPrimaryColor,
+                ),
+                CustomButton(
+                  onTap: ontap,
+                  text: langKey.yesBtn.tr,
+                  width: 100,
+                  height: 30,
+                  color: kRedColor,
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

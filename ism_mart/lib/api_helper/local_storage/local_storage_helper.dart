@@ -115,4 +115,15 @@ class LocalStorageHelper {
   static deleteUserData() {
     localStorage.remove(currentUserKey);
   }
+
+  static storeEmailVerificationDetails() {
+    DateTime time = DateTime.now();
+    localStorage.write('emailVerificationTime', time.toIso8601String());
+  }
+
+  static getEmailVerificationDetails() async {
+    var emailVerificationDetails =
+        await localStorage.read('emailVerificationTime');
+    return emailVerificationDetails;
+  }
 }

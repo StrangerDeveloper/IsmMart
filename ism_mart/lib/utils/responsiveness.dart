@@ -48,8 +48,8 @@ class AppResponsiveness {
     return _isTabletScreen() ? 100 : 50;
   }
 
-  static double getHeight90_110() {
-    return _isTabletScreen() ? 110 : 90;
+  static double getHeight90_140() {
+    return _isTabletScreen() ? 140 : 90;
   }
 
   static double getHeight100_120() {
@@ -87,12 +87,16 @@ class AppResponsiveness {
     return height * (_isTabletScreen() ? 0.27 : 0.30);
   }
 
+  static double getBoxHeightPoint32() {
+    return height * (_isTabletScreen() ? 0.29 : 0.32);
+  }
+
   static double getBoxHeightPoint35() {
     return height * (_isTabletScreen() ? 0.40 : 0.35);
   }
 
-  static double getBoxHeightPoint55() {
-    return height * (_isTabletScreen() ? 0.65 : 0.55);
+  static double getBoxHeightPoint60() {
+    return height * (_isTabletScreen() ? 0.65 : 0.6);
   }
 
   ///Gridview contents
@@ -106,7 +110,7 @@ class AppResponsiveness {
     return height * (_isTabletScreen() ? 0.30 : 0.25);
   }
 
-  static double getMainAxisExtentPoint28() {
-    return height * (_isTabletScreen() ? 0.32 : 0.28);
+  static double getChildAspectRatio() {
+    return height * (_isTabletScreen() ? 2.5 / 4 : 3 / 4);
   }
 }
