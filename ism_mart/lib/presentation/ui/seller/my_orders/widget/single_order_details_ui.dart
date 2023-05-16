@@ -94,12 +94,12 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                             ),
                             CustomText(
                               title:
-                                  "${langKey.Date.tr}: ${AppConstant.formattedDataTime("MMMM dd, yyyy", model!.createdAt ?? DateTime.now())}",
+                                  "${langKey.Date.tr}: ${AppConstant.formattedDataTime("MMMM dd, yyyy", model?.createdAt ?? DateTime.now())}",
                             ),
                           ],
                         ),
                         trailing: CustomText(
-                          title: model.status?.capitalizeFirst,
+                          title: model?.status?.capitalizeFirst,
                           color: AppConstant.getStatusColor(model),
                           weight: FontWeight.w600,
                         ),
@@ -118,7 +118,7 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                               style: appBarTitleSize,
                             ),
                             subtitle: CustomText(
-                              title: getAddress(model: model.billingDetail),
+                              title: getAddress(model: model?.billingDetail),
                               style: bodyText2.copyWith(color: kLightColor),
                               maxLines: 5,
                             ),
@@ -127,26 +127,30 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                       ),
 
                       ///Invoice From:
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: CustomGreyBorderContainer(
-                          hasShadow: false,
-                          padding: const EdgeInsets.all(8.0),
-                          child: ListTile(
-                            contentPadding: const EdgeInsets.all(8.0),
-                            title: CustomText(
-                              title: "${langKey.vendorStoreDetails.tr}:",
-                              style: appBarTitleSize,
-                            ),
-                            subtitle: CustomText(
-                              title:
-                                  getVendorDetails(vendor: model.vendorDetails),
-                              style: bodyText2.copyWith(color: kLightColor),
-                              maxLines: 5,
-                            ),
-                          ),
-                        ),
-                      ),
+
+                      model?.vendorDetails?.email != null
+                          ? Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: CustomGreyBorderContainer(
+                                hasShadow: false,
+                                padding: const EdgeInsets.all(8.0),
+                                child: ListTile(
+                                  contentPadding: const EdgeInsets.all(8.0),
+                                  title: CustomText(
+                                    title: "${langKey.vendorStoreDetails.tr}:",
+                                    style: appBarTitleSize,
+                                  ),
+                                  subtitle: CustomText(
+                                    title: getVendorDetails(
+                                        vendor: model?.vendorDetails),
+                                    style:
+                                        bodyText2.copyWith(color: kLightColor),
+                                    maxLines: 5,
+                                  ),
+                                ),
+                              ),
+                            )
+                          : SizedBox(),
 
                       AppConstant.spaceWidget(height: 20),
                       _invoiceBody(model: model),
@@ -203,7 +207,7 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
   }
 
   String getVendorDetails({UserModel? vendor}) {
-    return "${vendor?.vendor!.storeName ?? vendor?.firstName ?? null}\n ${vendor!.vendor?.phone ?? null}";
+    return "${vendor?.vendor?.storeName ?? vendor?.firstName ?? null}\n ${vendor?.vendor?.phone ?? null}";
   }
 
   Widget _invoiceBody({OrderModel? model}) {
@@ -254,7 +258,7 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                           ),
                           Expanded(
                             child: CustomPriceWidget(
-                              title: "${orderItem.product?.discountPrice}",
+                              title: "${orderItem.product?.discountPrice ?? 0}",
                               style: bodyText2Poppins,
                             ),
                             /*_dataCell(
@@ -494,7 +498,7 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                 title: langKey.addDisputes.tr,
                 icon: CupertinoIcons.add,
                 isDisabled:
-                (orderItem?.tickets?.isEmpty ?? false) ? false : true,
+                    (orderItem?.tickets?.isEmpty ?? false) ? false : true,
                 onTap: () {
                   Navigator.of(context).pop();
                   AppConstant.showBottomSheet(
@@ -505,10 +509,10 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                 },
               ),
               BottomSheetItemRow(
-                title:  langKey.viewDispute.tr,
+                title: langKey.viewDispute.tr,
                 icon: IconlyLight.document,
                 isDisabled:
-                (orderItem?.tickets?.isNotEmpty ?? false) ? false : true,
+                    (orderItem?.tickets?.isNotEmpty ?? false) ? false : true,
                 onTap: () {
                   Navigator.of(context).pop();
                   Get.to(() => DisputeDetailView(),
@@ -516,10 +520,10 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                 },
               ),
               BottomSheetItemRow(
-                title:  langKey.deleteDisputes.tr,
+                title: langKey.deleteDisputes.tr,
                 icon: IconlyLight.delete,
                 isDisabled:
-                (orderItem?.tickets?.isNotEmpty ?? false) ? false : true,
+                    (orderItem?.tickets?.isNotEmpty ?? false) ? false : true,
                 onTap: () {
                   Navigator.of(context).pop();
                   showDeleteDisputeDialog(context, orderItem);

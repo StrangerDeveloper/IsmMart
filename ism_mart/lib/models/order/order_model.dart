@@ -32,43 +32,43 @@ class OrderModel {
   List<OrderItem>? orderItems;
 
   factory OrderModel.fromJson(Map<String, dynamic> json) => OrderModel(
-        id: json["id"],
-        paymentMethod: json["paymentMethod"],
-        status: json["status"],
-        expectedDeliveryDate: json["expectedDeliveryDate"] == null
-            ? null
-            : DateTime.parse(json["expectedDeliveryDate"]),
-        totalPrice: json["totalPrice"],
-        shippingPrice: json["shippingPrice"],
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: json["updatedAt"] == null
-            ? null
-            : DateTime.parse(json["updatedAt"]),
-        billingDetail: json["BillingDetail"] == null
-            ? null
-            : UserModel.fromJson(json["BillingDetail"]),
-        vendorDetails:
-            json["User"] == null ? null : UserModel.fromJson(json["User"]),
-        orderItems: json["OrderItems"] == null
-            ? null
-            : List<OrderItem>.from(
-                json["OrderItems"].map((x) => OrderItem.fromJson(x))),
-      );
+    id: json["id"],
+    paymentMethod: json["paymentMethod"],
+    status: json["status"],
+    expectedDeliveryDate: json["expectedDeliveryDate"] == null
+        ? null
+        : DateTime.parse(json["expectedDeliveryDate"]),
+    totalPrice: json["totalPrice"],
+    shippingPrice: json["shippingPrice"],
+    createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
+    updatedAt: json["updatedAt"] == null
+        ? null
+        : DateTime.parse(json["updatedAt"]),
+    billingDetail: json["BillingDetail"] == null
+        ? null
+        : UserModel.fromJson(json["BillingDetail"]),
+    vendorDetails:
+    json["User"] == null ? null : UserModel.fromJson(json["User"]),
+    orderItems: json["OrderItems"] == null
+        ? null
+        : List<OrderItem>.from(
+        json["OrderItems"].map((x) => OrderItem.fromJson(x))),
+  );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "paymentMethod": paymentMethod,
-        "status": status,
-        "expectedDeliveryDate": expectedDeliveryDate!.toIso8601String(),
-        "totalPrice": totalPrice,
-        "shippingPrice": shippingPrice,
-        "createdAt": createdAt!.toIso8601String(),
-        "updatedAt": updatedAt == null ? null : updatedAt!.toIso8601String(),
-        "BillingDetail": billingDetail == null ? null : billingDetail!.toJson(),
-        "OrderItems": orderItems == null
-            ? null
-            : List<dynamic>.from(orderItems!.map((x) => x.toJson())),
-      };
+    "id": id,
+    "paymentMethod": paymentMethod,
+    "status": status,
+    "expectedDeliveryDate": expectedDeliveryDate!.toIso8601String(),
+    "totalPrice": totalPrice,
+    "shippingPrice": shippingPrice,
+    "createdAt": createdAt!.toIso8601String(),
+    "updatedAt": updatedAt == null ? null : updatedAt!.toIso8601String(),
+    "BillingDetail": billingDetail == null ? null : billingDetail!.toJson(),
+    "OrderItems": orderItems == null
+        ? null
+        : List<dynamic>.from(orderItems!.map((x) => x.toJson())),
+  };
 }
 
 class OrderItem {
@@ -81,11 +81,11 @@ class OrderItem {
 
   OrderItem(
       {this.id,
-      this.quantity,
-      this.price,
-      this.reviewed,
-      this.product,
-      this.tickets});
+        this.quantity,
+        this.price,
+        this.reviewed,
+        this.product,
+        this.tickets});
 
   OrderItem.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -104,13 +104,13 @@ class OrderItem {
   }
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "quantity": quantity,
-        "price": price,
-        "reviewed": reviewed,
-        "product": product!.toJson(),
-        "Tickets": tickets!.map((v) => v.toJson()).toList()
-      };
+    "id": id,
+    "quantity": quantity,
+    "price": price,
+    "reviewed": reviewed,
+    "product": product!.toJson(),
+    "Tickets": tickets!.map((v) => v.toJson()).toList()
+  };
 }
 
 class Tickets {
@@ -125,13 +125,13 @@ class Tickets {
 
   Tickets(
       {this.id,
-      this.title,
-      this.description,
-      this.orderItemsId,
-      this.userId,
-      this.status,
-      this.createdAt,
-      this.updatedAt});
+        this.title,
+        this.description,
+        this.orderItemsId,
+        this.userId,
+        this.status,
+        this.createdAt,
+        this.updatedAt});
 
   Tickets.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -173,20 +173,20 @@ class OrderResponse {
       success: json["success"], message: json["message"], data: json["data"]);
 
   Map<String, dynamic> toJson() => {
-        "success": success,
-        "message": message,
-        "data": data!.toJson(),
-      };
+    "success": success,
+    "message": message,
+    "data": data!.toJson(),
+  };
 }
 
 class OrderStats {
   OrderStats(
       {this.orderId,
-      this.totalOrders,
-      this.pendingOrders,
-      this.activeOrders,
-      this.deliveredOrders,
-      this.silverCoin});
+        this.totalOrders,
+        this.pendingOrders,
+        this.activeOrders,
+        this.deliveredOrders,
+        this.silverCoin});
 
   num? orderId, totalOrders, pendingOrders;
   num? activeOrders, deliveredOrders, silverCoin;
@@ -200,13 +200,13 @@ class OrderStats {
       silverCoin: json['sliver']);
 
   JSON toJson() => {
-        "orderId": orderId,
-        "totalOrders": totalOrders,
-        "pendingOrders": pendingOrders,
-        "activeOrders": activeOrders,
-        "deliveredOrders": deliveredOrders,
-        "sliver": silverCoin,
-      };
+    "orderId": orderId,
+    "totalOrders": totalOrders,
+    "pendingOrders": pendingOrders,
+    "activeOrders": activeOrders,
+    "deliveredOrders": deliveredOrders,
+    "sliver": silverCoin,
+  };
 }
 
 class VendorStats {
@@ -225,26 +225,26 @@ class VendorStats {
   });
 
   factory VendorStats.fromJson(Map<String, dynamic> json) => VendorStats(
-        totalOrders: json["totalOrders"],
-        pendingOrders: json["pendingOrders"],
-        activeOrders: json["activeOrders"],
-        deliveredOrders: json["deliveredOrders"],
-        totalEarning: json["totalEarning"],
-        pendingAmount: json["pendingAmount"],
-        cMonthEarning: json["cmonthEarning"],
-        goldCoin: json['gold'],
-      );
+    totalOrders: json["totalOrders"],
+    pendingOrders: json["pendingOrders"],
+    activeOrders: json["activeOrders"],
+    deliveredOrders: json["deliveredOrders"],
+    totalEarning: json["totalEarning"],
+    pendingAmount: json["pendingAmount"],
+    cMonthEarning: json["cmonthEarning"],
+    goldCoin: json['gold'],
+  );
 
   Map<String, dynamic> toJson() => {
-        "totalOrders": totalOrders,
-        "pendingOrders": pendingOrders,
-        "activeOrders": activeOrders,
-        "deliveredOrders": deliveredOrders,
-        "totalEarning": totalEarning,
-        "pendingAmount": pendingAmount,
-        "cmonthEarning": cMonthEarning,
-        "gold": goldCoin
-      };
+    "totalOrders": totalOrders,
+    "pendingOrders": pendingOrders,
+    "activeOrders": activeOrders,
+    "deliveredOrders": deliveredOrders,
+    "totalEarning": totalEarning,
+    "pendingAmount": pendingAmount,
+    "cmonthEarning": cMonthEarning,
+    "gold": goldCoin
+  };
 }
 
 class VendorOrder {
@@ -263,21 +263,21 @@ class VendorOrder {
   });
 
   factory VendorOrder.fromJson(Map<String, dynamic> json) => VendorOrder(
-        id: json["id"],
-        title: json["title"],
-        text: json["text"],
-        createdAt: json["createdAt"] == null
-            ? null
-            : DateTime.parse(json["createdAt"]),
-        orderModel:
-            json["Order"] == null ? null : OrderModel.fromJson(json["Order"]),
-      );
+    id: json["id"],
+    title: json["title"],
+    text: json["text"],
+    createdAt: json["createdAt"] == null
+        ? null
+        : DateTime.parse(json["createdAt"]),
+    orderModel:
+    json["Order"] == null ? null : OrderModel.fromJson(json["Order"]),
+  );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "title": title,
-        "text": text,
-        "createdAt": createdAt?.toIso8601String(),
-        "Order": orderModel?.toJson(),
-      };
+    "id": id,
+    "title": title,
+    "text": text,
+    "createdAt": createdAt?.toIso8601String(),
+    "Order": orderModel?.toJson(),
+  };
 }
