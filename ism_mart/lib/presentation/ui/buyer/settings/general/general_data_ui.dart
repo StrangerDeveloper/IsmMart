@@ -150,8 +150,8 @@ class GeneralSettingsDataUI extends StatelessWidget {
                       autofocus: false,
                       textStyle: bodyText1,
                       autoValidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (value) =>
-                          GetUtils.isBlank(value!)! ? fullNameReq.tr : null,
+                      validator: (value) => Validator().name(value),
+                      // GetUtils.isBlank(value!)! ? fullNameReq.tr : null,
                       keyboardType: TextInputType.name,
                       onChanged: (value) {},
                       onSaved: (value) {},
@@ -165,8 +165,12 @@ class GeneralSettingsDataUI extends StatelessWidget {
                       autofocus: false,
                       textStyle: bodyText1,
                       autoValidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (value) =>
-                          !GetUtils.isEmail(value!) ? emailReq.tr : null,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return fullNameReq.tr;
+                        }
+                        return Validator().email(value);
+                      },
                       keyboardType: TextInputType.name,
                       onChanged: (value) {},
                       onSaved: (value) {},

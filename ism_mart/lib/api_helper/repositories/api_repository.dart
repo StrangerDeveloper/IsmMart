@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:ism_mart/api_helper/api_service.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 
 class ApiRepository {

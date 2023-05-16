@@ -231,12 +231,15 @@ class ProfileUI extends GetView<AuthController> {
           textStyle: bodyText1,
           autoValidateMode: AutovalidateMode.onUserInteraction,
           validator: (value) {
-            if (title.toString().toLowerCase() == "phone")
+            if (title == "First Name") {
+              return Validator().name(value);
+            } else if (title == "Last Name")
+              return Validator().name(value);
+            else if (title.toString().toLowerCase() == "phone")
               return Validator().phone(value);
-            if (value!.isEmpty) {
-              return "Required $title";
-            }
-            return null;
+            return GetUtils.isBlank(value!)!
+                ? langKey.titleReq.trParams({"title": "$title"})
+                : null;
           },
           keyboardType: title.toString().toLowerCase() == "phone"
               ? TextInputType.phone
@@ -255,7 +258,7 @@ class ProfileUI extends GetView<AuthController> {
                         title: title,
                         value: controller.editingTextController.text,
                         field: field);
-                    controller.login();
+                    // controller.login();
 
                     // await imgController.updateUser(
                     //   field: field,
@@ -320,55 +323,55 @@ class ProfileUI extends GetView<AuthController> {
 
 //image picker
 
-  // void _pickImage({calledForProfile = true}) {
-  //   Get.defaultDialog(
-  //     title: langKey.pickFrom,
-  //     contentPadding: const EdgeInsets.all(10),
-  //     titleStyle: appBarTitleSize,
-  //     content: Row(
-  //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  //       children: [
-  //         _imageBtn(
-  //           onTap: () => controller.pickOrCaptureImageGallery(0,
-  //               calledForProfile: calledForProfile),
-  //           title: langKey.camera.tr,
-  //           icon: Icons.camera_alt_rounded,
-  //           color: Colors.blue,
-  //         ),
-  //         _imageBtn(
-  //           onTap: () => controller.pickOrCaptureImageGallery(
-  //             1,
-  //             calledForProfile: calledForProfile,
-  //           ),
-  //           title: langKey.gallery.tr,
-  //           icon: Icons.photo_library_rounded,
-  //           color: Colors.redAccent,
-  //         ),
-  //       ],
-  //     ),
-  //     //onCancel: ()=>Get.back()
-  //   );
-  // }
+  void _pickImage({calledForProfile = true}) {
+    Get.defaultDialog(
+      title: langKey.pickFrom,
+      contentPadding: const EdgeInsets.all(10),
+      titleStyle: appBarTitleSize,
+      content: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          _imageBtn(
+            onTap: () => controller.pickOrCaptureImageGallery(0,
+                calledForProfile: calledForProfile),
+            title: langKey.camera.tr,
+            icon: Icons.camera_alt_rounded,
+            color: Colors.blue,
+          ),
+          _imageBtn(
+            onTap: () => controller.pickOrCaptureImageGallery(
+              1,
+              calledForProfile: calledForProfile,
+            ),
+            title: langKey.gallery.tr,
+            icon: Icons.photo_library_rounded,
+            color: Colors.redAccent,
+          ),
+        ],
+      ),
+      //onCancel: ()=>Get.back()
+    );
+  }
 
-  // Widget _imageBtn({onTap, icon, title, color}) {
-  //   return InkWell(
-  //     onTap: onTap,
-  //     child: Column(
-  //       mainAxisAlignment: MainAxisAlignment.center,
-  //       crossAxisAlignment: CrossAxisAlignment.center,
-  //       children: [
-  //         Icon(
-  //           icon,
-  //           color: color,
-  //           size: 30,
-  //         ),
-  //         AppConstant.spaceWidget(height: 10),
-  //         CustomText(
-  //           title: title,
-  //           color: color,
-  //         )
-  //       ],
-  //     ),
-  //   );
-  // }
+  Widget _imageBtn({onTap, icon, title, color}) {
+    return InkWell(
+      onTap: onTap,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Icon(
+            icon,
+            color: color,
+            size: 30,
+          ),
+          AppConstant.spaceWidget(height: 10),
+          CustomText(
+            title: title,
+            color: color,
+          )
+        ],
+      ),
+    );
+  }
 }
