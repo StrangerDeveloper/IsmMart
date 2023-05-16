@@ -99,16 +99,16 @@ class OrderController extends GetxController
   }
 
   fetchVendorOrderById(orderId) async {
-    change(null, status: RxStatus.loading());
+    //change(null, status: RxStatus.loading());
     await _orderProvider
         .getVendorOrdersDetails(
             token: authController.userToken, orderId: orderId)
         .then((value) {
       _orderDetailsModel(value);
-      change(value, status: RxStatus.success());
+      //change(value, status: RxStatus.success());
     }).catchError((error) {
       debugPrint(">>>>fetchVendorOrderById: $error");
-      change(null, status: RxStatus.error(error));
+      //change(null, status: RxStatus.error(error));
     });
   }
 
