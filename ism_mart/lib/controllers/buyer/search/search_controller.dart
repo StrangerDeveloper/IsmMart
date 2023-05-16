@@ -29,8 +29,15 @@ class SearchController extends GetxController {
     search(searchTextController.text);
   }
 
+  //focus function
+  FocusNode focus = FocusNode();
+  void _onFocusChange() {
+    debugPrint("Focus: ${focus.hasFocus.toString()}");
+  }
+
   @override
   void onInit() {
+    focus.addListener(_onFocusChange);
     super.onInit();
     //change(null, status: RxStatus.loading());
   }
@@ -67,6 +74,7 @@ class SearchController extends GetxController {
       isLoading(false);
       productList.clear();
       productList.addAll(response.products.productRows!);
+      searchTextController.clear();
     }).catchError((error) {
       isLoading(false);
       //change(null, status: RxStatus.error(error));

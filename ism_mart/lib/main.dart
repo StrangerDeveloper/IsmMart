@@ -3,11 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:ism_mart/api_helper/api_constant.dart';
 import 'package:ism_mart/app_binding/app_init_binding.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
-
-import 'api_helper/export_api_helper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,19 +29,22 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     //Get.put(AppInitBinding());
 
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: "ISMMART",
-      theme: Themes.lightTheme,
-      darkTheme: Themes.darkTheme,
-      themeMode: getThemeMode(themeController.theme.value),
-      initialRoute: Routes.initRoute,
-      getPages: Routes.pages,
-      defaultTransition: Transition.fadeIn,
-      initialBinding: AppInitBinding(),
-      translations: AppTranslations(),
-      locale: getLocale(languageController.languageKey.value),
-      fallbackLocale: Locale('en', 'US'),
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: "ISMMART",
+        theme: Themes.lightTheme,
+        darkTheme: Themes.darkTheme,
+        themeMode: getThemeMode(themeController.theme.value),
+        initialRoute: Routes.initRoute,
+        getPages: Routes.pages,
+        defaultTransition: Transition.fadeIn,
+        initialBinding: AppInitBinding(),
+        translations: AppTranslations(),
+        locale: getLocale(languageController.languageKey.value),
+        fallbackLocale: Locale('en', 'US'),
+      ),
     );
   }
 

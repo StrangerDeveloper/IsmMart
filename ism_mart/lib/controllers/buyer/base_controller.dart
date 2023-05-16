@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
@@ -35,7 +34,7 @@ class BaseController extends GetxController {
       setCartItemCount();
     });
 
-    ever(categories, getRandomTextForSearch);
+    // ever(categories, getRandomTextForSearch);
     LocalStorageHelper.localStorage
         .listenKey(LocalStorageHelper.currCurrencyKey, (value) {});
   }
@@ -172,15 +171,15 @@ class BaseController extends GetxController {
 
   var randomSearchText = "".obs;
 
-  void getRandomTextForSearch(List<CategoryModel> list) {
-    int min = 1;
-    int max = list.length;
+  // void getRandomTextForSearch(List<CategoryModel> list) {
+  //   int min = 1;
+  //   int max = list.length;
 
-    var rnd = new Random();
-    int r = min + rnd.nextInt(max - min);
-    //debugPrint(">>>rnd: $r >>>${categories.elementAt(r).name!}");
-    randomSearchText(list.elementAt(r).name!);
-  }
+  //   var rnd = new Random();
+  //   int r = min + rnd.nextInt(max - min);
+  //   //debugPrint(">>>rnd: $r >>>${categories.elementAt(r).name!}");
+  //   randomSearchText(list.elementAt(r).name!);
+  // }
 
   //End Fetch Top Categories
 
@@ -266,7 +265,7 @@ class BaseController extends GetxController {
     const DashboardUI(),
     const CategoriesUI(),
     const CartUI(),
-     SettingsUI(),
+    SettingsUI(),
     SearchUI(
       isCalledForDeals: true,
     )

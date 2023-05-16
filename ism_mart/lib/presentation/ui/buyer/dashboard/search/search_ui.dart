@@ -13,9 +13,9 @@ class SearchUI extends GetView<CustomSearchController> {
   }) : super(key: key);
   final bool? isCalledForDeals;
 
-  // final controller = Get.find<SearchController>();
   @override
   Widget build(BuildContext context) {
+    //  final controller = Get.find<SearchController>();
     controller.search(
         Get.arguments != null ? Get.arguments["searchText"].toString() : " ");
 
@@ -56,6 +56,11 @@ class SearchUI extends GetView<CustomSearchController> {
         height: 36,
         child: TextField(
           controller: controller.searchTextController,
+          focusNode: controller.focus,
+          onChanged: (value) {
+            print("on change call Focus ---${controller.focus}-");
+            // controller.searchTextController.text = '';
+          },
           cursorColor: kPrimaryColor,
           autofocus: false,
           maxLines: 1,

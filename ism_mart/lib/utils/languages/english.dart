@@ -479,7 +479,7 @@ class English {
         key.confirmPass: 'Confirm Password',
         key.confirmPassReq: 'Confirm Password is required',
         key.passwordNotMatched: 'Password not matched!',
-        key.titleKey: 'title',
+        key.titleKey: 'Title',
         key.titleReq: 'Title is required',
         key.updateProduct: 'Update Product',
         key.stock: 'Stock',
