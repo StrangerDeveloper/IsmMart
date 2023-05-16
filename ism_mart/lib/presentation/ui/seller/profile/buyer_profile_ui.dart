@@ -233,9 +233,10 @@ class ProfileUI extends GetView<AuthController> {
           validator: (value) {
             if (title.toString().toLowerCase() == "phone")
               return Validator().phone(value);
-            return GetUtils.isBlank(value!)!
-                ? langKey.titleReq.trParams({"title": "$title"})
-                : null;
+            if (value!.isEmpty) {
+              return "Required $title";
+            }
+            return null;
           },
           keyboardType: title.toString().toLowerCase() == "phone"
               ? TextInputType.phone

@@ -29,8 +29,18 @@ class CustomSearchController extends GetxController {
     search(searchTextController.text);
   }
 
+  //focus function
+  FocusNode focus = FocusNode();
+  void _onFocusChange() {
+    debugPrint("Focus: ${focus.hasFocus.toString()}");
+    if (focus.hasFocus == false) {
+      searchTextController.text = '';
+    }
+  }
+
   @override
   void onInit() {
+    focus.addListener(_onFocusChange);
     super.onInit();
     //change(null, status: RxStatus.loading());
   }
@@ -193,5 +203,7 @@ class CustomSearchController extends GetxController {
   void onClose() {
     super.onClose();
     searchTextController.clear();
+    focus.removeListener(_onFocusChange);
+    focus.dispose();
   }
 }
