@@ -1,9 +1,11 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
+import 'package:ism_mart/models/exports_model.dart';
 
 class OrderRepository {
   final ApiService _apiService;
@@ -87,10 +89,9 @@ class OrderRepository {
           contentType: MediaType.parse('image/jpeg'),
         ));
       }
-      var response = await request.send();
-      print(
-          "Dispute: ${response.statusCode} ${response.stream.bytesToString()}");
-      return response;
+      //var response = await request.send();
+      http.StreamedResponse response = await request.send();
+      return json.decode(await response.stream.bytesToString());
     }
   }
 

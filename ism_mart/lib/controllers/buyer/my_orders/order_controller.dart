@@ -12,6 +12,8 @@ import 'package:ism_mart/controllers/controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart';
 
 class OrderController extends GetxController
     with StateMixin, GetSingleTickerProviderStateMixin {
@@ -149,28 +151,62 @@ class OrderController extends GetxController
     isLoading(true);
     String title = titleController.text;
     String description = descriptionController.text;
-    await _orderProvider
-        .createDispute(authController.userToken, title, description,
-            orderItem!.id, pickedImagesList)
-        .then((ApiResponse? apiResponse) {
+    final url = "tickets/add";
+
+    var data = {
+      'title': '$title',
+      "description": "$description",
+      "orderItemsId": '${orderItem!.id}',
+    };
+    var imageList = <http.MultipartFile>[];
+    for (var image in pickedImagesList) {
+      imageList.add(await http.MultipartFile.fromPath('images', image.path,
+          contentType: MediaType.parse('image/jpeg')));
+    }
+
+    ApiBaseHelper()
+        .postMethodForImage(url: url, files: imageList, fields: data)
+        .then((parsedJson) {
       isLoading(false);
-      if (apiResponse != null) {
-        if (apiResponse.success!) {
-          fetchOrderById(orderId);
-          Get.back();
-          clearControllers();
-          showSnackBar(
-              title: langKey.successTitle.tr, message: apiResponse.message);
-        } else
-          showSnackBar(message: apiResponse.message);
-      } else {
-        showSnackBar();
-      }
+      ApiResponse? apiResponse = ApiResponse.fromJson(parsedJson);
+
+      if (apiResponse.success!) {
+        fetchOrderById(orderId);
+        Get.back();
+        clearControllers();
+        showSnackBar(
+            title: langKey.successTitle.tr, message: apiResponse.message);
+      } else
+        showSnackBar(message: apiResponse.message);
     }).catchError((error) {
       isLoading(false);
       print("Dispute: $error");
       showSnackBar();
     });
+
+    // await _orderProvider
+    //     .createDispute(authController.userToken, title, description,
+    //         orderItem!.id, pickedImagesList)
+    //     .then((ApiResponse? apiResponse) {
+    //   isLoading(false);
+    //   if (apiResponse != null) {
+    //     if (apiResponse.success!) {
+    //       fetchOrderById(orderId);
+    //       Get.back();
+    //       clearControllers();
+    //       showSnackBar(
+    //           title: langKey.successTitle.tr, message: apiResponse.message);
+    //     } else
+    //       showSnackBar(message: apiResponse.message);
+    //   } else {
+    //     showSnackBar();
+    //   }
+    // })
+    // .catchError((error) {
+    //   isLoading(false);
+    //   print("Dispute: $error");
+    //   showSnackBar();
+    // });
   }
 
   deleteTicket(String ticketId, String orderId) {
