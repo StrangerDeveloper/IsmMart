@@ -22,6 +22,7 @@ const kLightColor = Color(0xFF808080);
 const kLightGreyColor = Color(0xFFD1D1D1);
 const kLightBlueColor = Color(0xFFE2E8F0);
 const kRedColor = Color(0xFFF54141);
+const kLightRedColor = Color(0xBBEF5350);
 const kGoldColor = Color(0xFFFFD700);
 const kOrangeColor = Colors.deepOrange;
 
@@ -304,62 +305,60 @@ class AppConstant {
     }
   }
 
-  static void showConfirmDeleteDialog({VoidCallback? ontap, String? ontapText}) {
+  static void showConfirmDeleteDialog({VoidCallback? ontap}) {
     Get.defaultDialog(
+      title: '',
+      titleStyle: TextStyle(
+        fontSize: 0
+    ),
+      titlePadding: EdgeInsets.zero,
       content: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 8),
+        padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
             Align(
               alignment: Alignment.topRight,
-              child: IconButton(
-                  onPressed: ()=>Get.back(),
-                  icon: Icon(
-                    Icons.close,
-                    size: 24,
-                    color: Colors.grey,
-                  )),
-            ),
-            AppConstant.spaceWidget(
-                height: 5
+              child: IconButton(onPressed: ()=>Get.back(), icon: Icon(Icons.close, size: 24, color: Colors.grey,))
             ),
             Icon(
-              Icons.highlight_remove_outlined,
-              size: 45,
-              color: Colors.red,
-            ),
-            AppConstant.spaceWidget(
-                height: 12
+              Icons.highlight_remove_rounded,
+              size: 100,
+              color: kLightRedColor,
             ),
             CustomText(
               title: 'Are You Sure?',
-              style: headline1,
+              weight: FontWeight.bold,
+              style: headline1
             ),
-            AppConstant.spaceWidget(
-                height: 12
+            spaceWidget(
+              height: 12
             ),
             CustomText(
-              title: 'Do you really want to delete this record? This process cannot be undone',
-              weight: FontWeight.w600,
+                title: 'Do you really want to delete this record? This process cannot be undone.',
+              textAlign: TextAlign.center,
+              style: bodyText1,
             ),
-            //buildConfirmDeleteIcon(),
-            AppConstant.spaceWidget(height: 20),
+            spaceWidget(
+              height: 20
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 CustomButton(
-                  onTap:() => Get.back(),
+                  onTap: () {
+                    Get.back();
+                  },
                   text: langKey.noBtn.tr,
                   width: 100,
                   height: 30,
-                  color: kPrimaryColor,
+                  color: kLightColor,
                 ),
                 CustomButton(
                   onTap: ontap,
                   text: langKey.yesBtn.tr,
                   width: 100,
                   height: 30,
-                  color: kRedColor,
+                  color: kLightRedColor,
                 ),
               ],
             )

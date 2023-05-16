@@ -37,7 +37,7 @@ class AuthProvider {
   }
 
   Future<UserResponse> postStoreRegister(
-      {token, SellerModel? sellerModel, bool? calledForUpdate = false}) async {
+      {token, SellerModel? sellerModel}) async {
     final url = "${ApiConstant.baseUrl}auth/vendor/register";
     final request = http.MultipartRequest('POST', Uri.parse(url));
     request.headers['Authorization'] = '$token';

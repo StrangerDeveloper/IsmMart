@@ -58,7 +58,7 @@ class DashboardUI extends GetView<BaseController> {
           Expanded(
             flex: 5,
             child: Obx(
-              () => SearchBar(searchText: controller.randomSearchText.value),
+              () => CustomSearchBar(searchText: controller.randomSearchText.value),
             ),
           ),
           //const Expanded(flex:1,child:Center())
@@ -127,7 +127,7 @@ class DashboardUI extends GetView<BaseController> {
 
   Widget _displayDiscountProducts() {
     return Obx(
-      () => Container(
+          () => Container(
         margin: const EdgeInsets.only(top: 10),
         color: kWhiteColor,
         height: AppResponsiveness.getBoxHeightPoint32(),
@@ -138,20 +138,20 @@ class DashboardUI extends GetView<BaseController> {
             controller.discountSliderProductsList.isEmpty
                 ? Center(child: NoDataFound())
                 : SizedBox(
-                    width: AppConstant.getSize().width * 0.9,
-                    height: AppResponsiveness.height * 0.24,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      //physics: const AlwaysScrollableScrollPhysics(),
-                      itemCount: controller.discountSliderProductsList.length,
-                      itemBuilder: (_, index) {
-                        ProductModel model =
-                            controller.discountSliderProductsList[index];
-                        return _singleDiscountProductItem(model);
-                      },
-                    ),
-                  ),
+              width: AppConstant.getSize().width * 0.9,
+              height: AppResponsiveness.height * 0.24,
+              child: ListView.builder(
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                //physics: const AlwaysScrollableScrollPhysics(),
+                itemCount: controller.discountSliderProductsList.length,
+                itemBuilder: (_, index) {
+                  ProductModel model =
+                  controller.discountSliderProductsList[index];
+                  return _singleDiscountProductItem(model);
+                },
+              ),
+            ),
           ],
         ),
       ),
@@ -359,8 +359,7 @@ class DashboardUI extends GetView<BaseController> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
-        height:
-            AppResponsiveness.getBoxHeightPoint25(),
+        height: AppResponsiveness.getBoxHeightPoint25(),
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: list.length,

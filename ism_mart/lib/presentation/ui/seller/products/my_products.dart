@@ -66,8 +66,8 @@ class MyProducts extends GetView<SellersController> {
                         controller: controller.scrollController,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: AppResponsiveness.getGridItemCount(),
-                          //mainAxisExtent:
-                            //  AppResponsiveness.getMainAxisExtentPoint30(),
+                          // mainAxisExtent:
+                          //     AppResponsiveness.getMainAxisExtentPoint28(),
                           mainAxisSpacing: 5,
                           childAspectRatio: AppResponsiveness.getChildAspectRatio(),
                         ),
@@ -191,15 +191,14 @@ class MyProducts extends GetView<SellersController> {
                         icon: Icons.edit_rounded,
                         bgColor: kPrimaryColor),
                     AppConstant.spaceWidget(width: 5),
-                    // CustomActionIcon(
-                    //     onTap: () => AppConstant.showConfirmDeleteDialog(
-                    //           ontap: (){
-                    //             controller.deleteProduct(id: model.id);
-                    //             Get.back();
-                    //           },
-                    //       ),
-                    //     icon: Icons.delete_rounded,
-                    //     bgColor: kRedColor)
+                    CustomActionIcon(
+                        onTap: () => AppConstant.showConfirmDeleteDialog(
+                          ontap: ()async{
+                            controller.deleteProduct(id: model.id);
+                          }
+                        ),
+                        icon: Icons.delete_rounded,
+                        bgColor: kRedColor)
                   ],
                 ),
               ),
@@ -224,51 +223,6 @@ class MyProducts extends GetView<SellersController> {
                 ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-
-  void showConfirmDeleteDialog({ProductModel? productModel}) {
-    Get.defaultDialog(
-      title: langKey.deleteProd.tr,
-      titleStyle: appBarTitleSize,
-      content: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            CustomText(
-              title: langKey.delProdMsg.tr,
-              weight: FontWeight.w600,
-            ),
-            AppConstant.spaceWidget(height: 10),
-            buildConfirmDeleteIcon(),
-            AppConstant.spaceWidget(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                CustomButton(
-                  onTap: () {
-                    Get.back();
-                  },
-                  text: langKey.noBtn.tr,
-                  width: 100,
-                  height: 30,
-                  color: kPrimaryColor,
-                ),
-                CustomButton(
-                  onTap: () {
-                    controller.deleteProduct(id: productModel!.id);
-                    Get.back();
-                  },
-                  text: langKey.yesBtn.tr,
-                  width: 100,
-                  height: 30,
-                  color: kRedColor,
-                ),
-              ],
-            )
-          ],
         ),
       ),
     );

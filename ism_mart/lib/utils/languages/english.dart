@@ -2,8 +2,6 @@ import 'translations_key.dart' as key;
 
 class English {
   Map<String, String> get translations => {
-//////////////////////////////////////////////////////////
-
         ///authController
         key.currentUserNotFound: 'Current User not found',
         key.wrongWithCredentials: 'Something went wrong with credentials',
@@ -44,8 +42,8 @@ class English {
         key.invalidImageFormat: 'Invalid Image format!',
         key.minPriceShouldNotBe:
             'Min. Price should not be greater than Max. price!',
-        key.plzSelectCountry: 'Plz select Country and City',
-        key.shippingAddressDetail: 'Plz select Country and City',
+        key.plzSelectCountry: 'Please select country and city',
+        key.shippingAddressDetail: 'Shipping address details',
         key.cashOnDelivery: 'Cash On Delivery (Not Available)',
         key.creditCard: 'Credit Card',
         key.wantToRedeem: 'Want to redeem',
@@ -61,6 +59,8 @@ class English {
             'Payment Successful!, You\'re Order has been Placed!',
         key.orderInformation: 'Order Information',
         key.orderNotCreated: 'Something went wrong! Order Not created',
+        key.phoneValidate:
+            'Phone numbers should be in a format of 11 to 14 digits.',
 
         ///sellerController
         key.imageSizeDesc: 'Image must be up to',
@@ -121,7 +121,7 @@ class English {
         key.finalPriceWould: 'Final price would be Rs',
         key.afterPlatformFee: 'After platform fee of',
         key.yourDiscountShould:
-            'Your discount should be between 10 and 100 percent. Please try again!',
+            'Your discount should be between 10 and 90 percent. Please try again!',
         key.uploadImageLessThan: 'Upload images less than',
         key.outOfStock: 'Out of stock',
         key.productNotFound: 'Product Not Found',
@@ -135,6 +135,8 @@ class English {
         key.reviews: 'Reviews',
         key.rating: 'Rating',
         key.addDisputes: 'Add Disputes',
+        key.deleteDisputes: 'Delete Disputes',
+        key.deleteDisputesMsg: 'Are you sure you want to delete dispute?',
         key.disputeAlreadyAdded: 'Dispute Already Added',
         key.viewDispute: 'View Dispute',
         key.disputeNotAddedYet: 'Dispute Not Added Yet',
@@ -254,8 +256,8 @@ class English {
             'Please get in touch with our customer support centre if an item meets all the requirements specified above.',
 
         ///memberShip
-        key.discountMinValue: 'Discount should be greater than',
-        key.discountMaxValue: 'Discount should not be greater or equal to',
+        key.discountMinValue: 'Discount should be greater or equal to 10',
+        key.discountMaxValue: 'Discount should not be greater than 90',
 
         key.memPlan1Title: 'START',
         key.memPlan1Price: 'Free',
@@ -293,7 +295,6 @@ class English {
         key.memPlan3Desc9:
             'As all Premium Members are scrutinized and are verified through ISMMART verification process, so all such members can do worry less trade with each other, anywhere in the World.',
 
-//////////////////////////////////////////////////////////
         key.exitApp: 'Exit App',
         key.exitDialogDesc: 'Are you sure you want to exit?',
         key.resetPass: 'Reset Password',

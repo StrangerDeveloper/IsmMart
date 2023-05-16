@@ -52,7 +52,7 @@ class LocalStorageHelper {
 
       if (isItemExistsInCart(cartModel)) {
         list.removeWhere(
-            (element) => element.productId! == cartModel!.productId);
+                (element) => element.productId! == cartModel!.productId);
       }
     }
     list.add(cartModel!);

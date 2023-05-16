@@ -5,10 +5,10 @@ import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/utils/constants.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
-class SearchController extends GetxController {
+class CustomSearchController extends GetxController {
   final ApiProvider _apiProvider;
 
-  SearchController(this._apiProvider);
+  CustomSearchController(this._apiProvider);
 
   var searchTextController = TextEditingController();
 
@@ -42,13 +42,18 @@ class SearchController extends GetxController {
     searchTextController.addListener(() {
       search(searchTextController.text);
     });
-    scrollController..addListener(() => loadMore(searchTextController.text));
+    scrollController
+      ..addListener(() {
+        if (stopLoadMore.isFalse) {
+          loadMore(searchTextController.text);
+        }
+      });
   }
 
   var isLoading = false.obs;
   var productList = <ProductModel>[].obs;
 
-  int searchLimit = 33;
+  int searchLimit = 32;
   int page = 1;
 
   search(String? query) async {
@@ -67,6 +72,7 @@ class SearchController extends GetxController {
       isLoading(false);
       productList.clear();
       productList.addAll(response.products.productRows!);
+      //searchTextController.clear();
     }).catchError((error) {
       isLoading(false);
       //change(null, status: RxStatus.error(error));
@@ -108,8 +114,6 @@ class SearchController extends GetxController {
     categoriesList.addAll(list);
 
     categoriesList.refresh();
-
-    debugPrint(">>>SetCategories: ${categoriesList.length}");
   }
 
   makeSelectedCategory(CategoryModel? categoryModel) {
@@ -128,7 +132,9 @@ class SearchController extends GetxController {
     }
   }
 
+  var stopLoadMore = false.obs;
   applyFilter() async {
+    stopLoadMore.value = true;
     int? categoryId = selectedCategoryId.value;
     num? minPrice = num.parse(minPriceController.text.isNotEmpty
         ? minPriceController.text.toString().trim()

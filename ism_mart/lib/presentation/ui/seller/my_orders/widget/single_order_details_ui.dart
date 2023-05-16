@@ -208,7 +208,7 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
 
   Widget _invoiceBody({OrderModel? model}) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(5.0),
       child: Column(
         children: [
           Container(
@@ -222,10 +222,17 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
               children: [
                 Expanded(
                     flex: 2, child: _dataHeader(text: langKey.productName.tr)),
-                Expanded(child: _dataHeader(text: langKey.qty.tr)),
+                Expanded(
+                    child: Align(
+                  alignment: Alignment.center,
+                  child: _dataHeader(text: langKey.qty.tr),
+                )),
                 Expanded(child: _dataHeader(text: langKey.price.tr)),
                 Expanded(child: _dataHeader(text: langKey.amount.tr)),
-                Expanded(child: _dataHeader(text: langKey.action.tr)),
+                Expanded(
+                    child: Align(
+                        alignment: Alignment.center,
+                        child: _dataHeader(text: langKey.action.tr))),
               ],
             ),
           ),
@@ -244,13 +251,16 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                           Expanded(
                             flex: 2,
                             child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 _dataCell(text: '${orderItem.product?.name}'),
                               ],
                             ),
                           ),
                           Expanded(
-                            child: _dataCell(text: '${orderItem.quantity}'),
+                            child: Center(
+                              child: _dataCell(text: '${orderItem.quantity}'),
+                            ),
                           ),
                           Expanded(
                             child: CustomPriceWidget(
@@ -317,19 +327,23 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
   _dataAction({OrderItem? orderItemModel}) {
     return Row(
       children: [
-        CustomActionIcon(
-          onTap: () {
-            addReviewBottomSheet(orderItem: orderItemModel);
-          },
-          icon: Icons.feedback_outlined,
-          iconColor: kPrimaryColor,
+        Expanded(
+          child: CustomActionIcon(
+            onTap: () {
+              addReviewBottomSheet(orderItem: orderItemModel);
+            },
+            icon: Icons.feedback_outlined,
+            iconColor: kPrimaryColor,
+          ),
         ),
-        CustomActionIcon(
-          onTap: () {
-            disputeActionsBottomSheet(orderItem: orderItemModel);
-          },
-          icon: Icons.cases_outlined,
-          iconColor: kRedColor,
+        Expanded(
+          child: CustomActionIcon(
+            onTap: () {
+              disputeActionsBottomSheet(orderItem: orderItemModel);
+            },
+            icon: Icons.cases_outlined,
+            iconColor: kRedColor,
+          ),
         ),
       ],
     );
@@ -494,7 +508,7 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                 title: langKey.addDisputes.tr,
                 icon: CupertinoIcons.add,
                 isDisabled:
-                (orderItem?.tickets?.isEmpty ?? false) ? false : true,
+                    (orderItem?.tickets?.isEmpty ?? false) ? false : true,
                 onTap: () {
                   Navigator.of(context).pop();
                   AppConstant.showBottomSheet(
@@ -505,10 +519,10 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                 },
               ),
               BottomSheetItemRow(
-                title:  langKey.viewDispute.tr,
+                title: langKey.viewDispute.tr,
                 icon: IconlyLight.document,
                 isDisabled:
-                (orderItem?.tickets?.isNotEmpty ?? false) ? false : true,
+                    (orderItem?.tickets?.isNotEmpty ?? false) ? false : true,
                 onTap: () {
                   Navigator.of(context).pop();
                   Get.to(() => DisputeDetailView(),
@@ -516,20 +530,74 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                 },
               ),
               BottomSheetItemRow(
-                title:  langKey.deleteDisputes.tr,
+                title: langKey.deleteDisputes.tr,
                 icon: IconlyLight.delete,
                 isDisabled:
-                (orderItem?.tickets?.isNotEmpty ?? false) ? false : true,
+                    (orderItem?.tickets?.isNotEmpty ?? false) ? false : true,
                 onTap: () {
                   Navigator.of(context).pop();
-                  controller.deleteTicket(
-                    orderItem!.tickets![0].id.toString(),
-                    orderModel!.id.toString(),
-                  );
+                  showDeleteDisputeDialog(context, orderItem);
                 },
               ),
             ],
           ),
+        );
+      },
+    );
+  }
+
+  Future showDeleteDisputeDialog(
+      BuildContext context, OrderItem? orderItem) async {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(langKey.deleteDisputes.tr),
+          content: Text(langKey.deleteDisputesMsg.tr),
+          actions: [
+            Row(
+              children: [
+                Expanded(
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      minimumSize: Size(double.infinity, 40),
+                      foregroundColor: Colors.grey,
+                    ),
+                    child: Text(
+                      langKey.noBtn.tr,
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.of(Get.context!).pop();
+                    },
+                  ),
+                ),
+                Expanded(
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      minimumSize: Size(double.infinity, 40),
+                      foregroundColor: Colors.grey,
+                    ),
+                    child: Text(
+                      langKey.yesBtn.tr,
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                    onPressed: () {
+                      controller.deleteTicket(
+                        orderItem!.tickets![0].id.toString(),
+                        orderModel!.id.toString(),
+                      );
+                      Navigator.of(Get.context!).pop();
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ],
         );
       },
     );
@@ -558,10 +626,12 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
             _textWidget(
               title: langKey.shippingCost.tr,
               value: orderModel.shippingPrice ?? 0,
+              valueIsPrice: true,
             ),
             _textWidget(
                 title: langKey.totalPrice.tr,
                 value: orderModel.totalPrice ?? 0,
+                valueIsPrice: true,
                 valueColor: kRedColor),
           ],
         ),
@@ -569,7 +639,7 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
     );
   }
 
-  _textWidget({title, value, valueColor}) {
+  _textWidget({title, value, valueColor, bool? valueIsPrice = false}) {
     return Expanded(
       child: Card(
         child: ListTile(
@@ -577,10 +647,15 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
             title: title,
             color: kDarkColor,
           ),
-          subtitle: CustomText(
-            title: "${value}",
-            style: headline2.copyWith(color: valueColor ?? kPrimaryColor),
-          ),
+          subtitle: valueIsPrice!
+              ? CustomPriceWidget(
+                  title: "${value}",
+                  style: headline2.copyWith(color: valueColor ?? kPrimaryColor),
+                )
+              : CustomText(
+                  title: "${value}",
+                  style: headline2.copyWith(color: valueColor ?? kPrimaryColor),
+                ),
         ),
       ),
     );

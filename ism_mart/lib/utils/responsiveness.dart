@@ -103,12 +103,10 @@ class AppResponsiveness {
 
   /// Gridview mainAxisExtent
   static double getMainAxisExtentPoint25() {
-    return height * (_isTabletScreen() ? 0.30 : 0.25);
+    return height * (_isTabletScreen() ? 0.33 : 0.28);
   }
 
   static double getChildAspectRatio() {
     return height * (_isTabletScreen() ? 2.5/4 : 3/4);
   }
-
-
 }

@@ -13,112 +13,92 @@ class SettingsUI extends GetView<AuthController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => SafeArea(
+          () => SafeArea(
         child: controller.isLoading.isTrue
             ? CustomLoading(isItForWidget: true, color: kPrimaryColor)
             : NestedScrollView(
-                headerSliverBuilder: (context, innerBoxIsScrolled) {
-                  return [
-                    SliverAppBar(
-                      expandedHeight: 100.0,
-                      floating: false,
-                      pinned: true,
-                      backgroundColor: kAppBarColor,
-                      flexibleSpace: FlexibleSpaceBar(
-                        centerTitle: false,
-                        titlePadding:
-                            const EdgeInsets.symmetric(horizontal: 16),
-                        title: Text(
-                          langKey.settings.tr,
-                          style: appBarTitleSize,
-                        ),
-                      ),
-                    ),
-                  ];
-                },
-                body: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: ListView(
-                    physics: const NeverScrollableScrollPhysics(),
-                    children: [
-                      _accountSetup(context),
-                      AppConstant.spaceWidget(height: 10),
-                      StickyLabel(text: langKey.general.tr),
-                      _generalSettings(),
-                    ],
+          headerSliverBuilder: (context, innerBoxIsScrolled) {
+            return [
+              SliverAppBar(
+                expandedHeight: 100.0,
+                floating: false,
+                pinned: true,
+                backgroundColor: kAppBarColor,
+                flexibleSpace: FlexibleSpaceBar(
+                  centerTitle: false,
+                  titlePadding:
+                  const EdgeInsets.symmetric(horizontal: 16),
+                  title: Text(
+                    langKey.settings.tr,
+                    style: appBarTitleSize,
                   ),
                 ),
               ),
+            ];
+          },
+          body: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ListView(
+              physics: const NeverScrollableScrollPhysics(),
+              children: [
+                _accountSetup(context),
+                AppConstant.spaceWidget(height: 10),
+                StickyLabel(text: langKey.general.tr),
+                _generalSettings(),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
 
   _accountSetup(context) {
     return Obx(
-      () => controller.userModel!.email != null &&
-              !controller.isSessionExpired! &&
-              controller.userToken != null
+          () => controller.userModel!.email != null &&
+          !controller.isSessionExpired! &&
+          controller.userToken != null
           ? Column(
-              children: [
-                _userCard(),
-                StickyLabel(text: langKey.myAccount.tr),
-                _accountSettings(buildContext: context)
-              ],
-            )
+        children: [
+          _userCard(),
+          StickyLabel(text: langKey.myAccount.tr),
+          _accountSettings(buildContext: context)
+        ],
+      )
           : Column(
-              children: [
-                StickyLabel(text: langKey.account.tr),
-                _account(),
-              ],
-            ),
+        children: [
+          StickyLabel(text: langKey.account.tr),
+          _account(),
+        ],
+      ),
     );
   }
 
   _userCard() {
     return Obx(
-      () => controller.userModel!.email == null
+          () => controller.userModel!.email == null
           ? Container()
           : Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListTile(
-                trailing: controller.userModel!.emailVerified == true ? null : InkWell(
-                  onTap: ()async {
-                    String? verificationDetails = await LocalStorageHelper
-                        .getEmailVerificationDetails();
-                    if (verificationDetails != null) {
-                      DateTime linkTime = DateTime.parse(verificationDetails);
-                      DateTime currentTime = DateTime.now();
-                      DateTime fiveMinutesCheck = currentTime.subtract(
-                          Duration(minutes: 5));
-                      if (fiveMinutesCheck.isAfter(linkTime)) {
-                        print('yes');
-                        LocalStorageHelper.localStorage.remove(
-                            'emailVerificationTime');
-                        Get.toNamed(Routes.emailVerificationLinkRoute);
-                      }
-                      else {
-                        controller.showSnackBar(title: 'Verify Email',
-                            message: 'An Email Verification link has already been sent to your email');
-                      }
-                    }
-                    else {
-                      Get.toNamed(Routes.emailVerificationLinkRoute);
-                    }
-                  }, child: Text('Verify Email', style: bodyText1.copyWith(
-                    decoration: TextDecoration.underline),
-                ),
-                ),
-                title: CustomText(
-                  title:
-                      "${langKey.welcome.tr} ${controller.userModel!.firstName}",
-                  style: headline2,
-                ),
-                subtitle: CustomText(
-                  title: "${controller.userModel!.email}",
-                  style: bodyText1,
-                ),
-              ),
-            ),
+        padding: const EdgeInsets.all(8.0),
+        child: ListTile(
+          trailing: controller.userModel!.emailVerified == true ? null : InkWell(
+            onTap: ()async {
+              await controller.emailVerificationCheck();
+            }, child: Text('Verify Email', style: bodyText1.copyWith(
+              decoration: TextDecoration.underline),
+          ),
+          ),
+          title: CustomText(
+            title:
+            "${langKey.welcome.tr} ${controller.userModel!.firstName}",
+            style: headline2,
+          ),
+          subtitle: CustomText(
+            title: "${controller.userModel!.email}",
+            style: bodyText1,
+          ),
+        ),
+      ),
     );
   }
 
@@ -212,7 +192,7 @@ class SettingsUI extends GetView<AuthController> {
               value: currencyController.currency.value,
               countryCode: currencyController.countryCode.value),
           Obx(
-            () => _singleSettingsItem(
+                () => _singleSettingsItem(
                 onTap: () => _showLanguageChangeBottomSheet(),
                 icon: Icons.language,
                 iconColor: Colors.orange,
@@ -234,7 +214,7 @@ class SettingsUI extends GetView<AuthController> {
               title: langKey.termsAndConditions.tr),
           _singleSettingsItem(
               onTap: () => Get.to(
-                  () => GeneralSettingsDataUI(title: langKey.privacyPolicy.tr)),
+                      () => GeneralSettingsDataUI(title: langKey.privacyPolicy.tr)),
               icon: IconlyLight.paper,
               iconColor: Colors.purpleAccent,
               title: langKey.privacyPolicy.tr),
@@ -246,7 +226,7 @@ class SettingsUI extends GetView<AuthController> {
               title: langKey.returnAndExchange.tr),
           _singleSettingsItem(
               onTap: () => Get.to(
-                  () => GeneralSettingsDataUI(title: langKey.aboutUs.tr)),
+                      () => GeneralSettingsDataUI(title: langKey.aboutUs.tr)),
               icon: IconlyLight.info_circle,
               iconColor: Colors.pinkAccent,
               title: langKey.aboutUs.tr),
@@ -262,18 +242,18 @@ class SettingsUI extends GetView<AuthController> {
               iconColor: Colors.purple,
               title: langKey.faqs.tr),
           Obx(() => controller.userModel!.email != null &&
-                  !controller.isSessionExpired! &&
-                  controller.userToken != null
+              !controller.isSessionExpired! &&
+              controller.userToken != null
               ? _singleSettingsItem(
-                  onTap: () async{
-                    await LocalStorageHelper.deleteUserData();
-                    controller.update();
-                    authController.update();
-                  },
-                  icon: IconlyLight.logout,
-                  iconColor: Colors.red,
-                  title: langKey.logout.tr,
-                )
+            onTap: () async{
+              await LocalStorageHelper.deleteUserData();
+              controller.update();
+              authController.update();
+            },
+            icon: IconlyLight.logout,
+            iconColor: Colors.red,
+            title: langKey.logout.tr,
+          )
               : Container()),
         ],
       ),
@@ -355,7 +335,7 @@ class SettingsUI extends GetView<AuthController> {
                     title: Text(item.value["description"],
                         style: bodyText1.copyWith(fontWeight: FontWeight.w600)),
                     trailing: item.value["description"] ==
-                            languageController.language.value
+                        languageController.language.value
                         ? const Icon(Icons.done)
                         : null,
                   );
@@ -381,7 +361,7 @@ class SettingsUI extends GetView<AuthController> {
               child: SingleChildScrollView(
                 child: Column(
                   children:
-                      currencyController.currencyLocales.entries.map((item) {
+                  currencyController.currencyLocales.entries.map((item) {
                     return ListTile(
                       onTap: () {
                         currencyController.setCurrency(key: item.key);
@@ -398,14 +378,14 @@ class SettingsUI extends GetView<AuthController> {
                       ),
                       title: Text(item.value["description"],
                           style:
-                              bodyText1.copyWith(fontWeight: FontWeight.w600)),
+                          bodyText1.copyWith(fontWeight: FontWeight.w600)),
                       subtitle: CustomText(
                         title: item.value["longDesc"],
                         color: kLightColor,
                         size: 11,
                       ),
                       trailing: item.value["description"] ==
-                              currencyController.currency.value
+                          currencyController.currency.value
                           ? const Icon(Icons.done)
                           : null,
                     );
@@ -421,9 +401,9 @@ class SettingsUI extends GetView<AuthController> {
 
   Widget _countryFlag(
       {String? countryCode,
-      Color? color = Colors.amber,
-      double? height = 20,
-      double? width = 30}) {
+        Color? color = Colors.amber,
+        double? height = 20,
+        double? width = 30}) {
     var imageUrl =
         "https://raw.githubusercontent.com/hampusborgos/country-flags/main/png1000px/${countryCode!.toLowerCase()}.png";
     return Container(

@@ -7,8 +7,6 @@ import 'package:ism_mart/presentation/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
-import '../../../../api_helper/local_storage/local_storage_helper.dart';
-
 class CartUI extends GetView<CartController> {
   const CartUI({Key? key}) : super(key: key);
 
@@ -43,13 +41,13 @@ class CartUI extends GetView<CartController> {
           automaticallyImplyLeading: false,
           leading: (Get.arguments != null && Get.arguments["calledFromSPV"])
               ? InkWell(
-                  onTap: () => Get.back(),
-                  child: Icon(
-                    Icons.arrow_back_ios_new,
-                    size: 18,
-                    color: kPrimaryColor,
-                  ),
-                )
+            onTap: () => Get.back(),
+            child: Icon(
+              Icons.arrow_back_ios_new,
+              size: 18,
+              color: kPrimaryColor,
+            ),
+          )
               : null,
           title: Row(
             children: [
@@ -110,9 +108,9 @@ class CartUI extends GetView<CartController> {
             buildSvgLogo(),
             AppConstant.spaceWidget(width: 10),
             Obx(
-              () => CustomText(
+                  () => CustomText(
                 title:
-                    '${langKey.myCart.tr} (${controller.totalQtyCart.value} ${langKey.items.tr})',
+                '${langKey.myCart.tr} (${controller.totalQtyCart.value} ${langKey.items.tr})',
                 style: appBarTitleSize,
               ),
             ),
@@ -145,12 +143,12 @@ class CartUI extends GetView<CartController> {
           //mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Obx(
-              () => Row(
+                  () => Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomText(
                     title:
-                        "${controller.totalQtyCart.value} ${langKey.items.tr}",
+                    "${controller.totalQtyCart.value} ${langKey.items.tr}",
                     style: headline3,
                   ),
                   CustomPriceWidget(
@@ -161,9 +159,10 @@ class CartUI extends GetView<CartController> {
             AppConstant.spaceWidget(height: 10),
             CustomButton(
               onTap: () async{
-                  AuthController authController = Get.find();
-                  await authController.emailVerificationCheck();
-                },
+                AuthController authController = Get.find();
+                Get.toNamed(Routes.checkOutRoute);
+                // await authController.emailVerificationCheck();
+              },
               text: langKey.proceedToCheckOut.tr,
               color: kPrimaryColor,
               height: 40,

@@ -164,7 +164,6 @@ class CheckoutController extends GetxController {
       isLoading(false);
       if (apiResponse != null) {
         if (apiResponse.success!) {
-          Get.back();
           AppConstant.displaySnackBar(langKey.success.tr, apiResponse.message);
           clearControllers();
           getDefaultAddress();
@@ -216,6 +215,7 @@ class CheckoutController extends GetxController {
           //shippingAddressList.refresh();
           //update();
           getAllShippingAddresses();
+          getDefaultAddress();
           //Get.back();
           AppConstant.displaySnackBar("success", apiResponse.message);
           //getAllShippingAddresses();
@@ -247,7 +247,9 @@ class CheckoutController extends GetxController {
           //Get.back();
           AppConstant.displaySnackBar("success", apiResponse.message);
           clearControllers();
+
           getAllShippingAddresses();
+          getDefaultAddress();
         } else
           AppConstant.displaySnackBar(
               langKey.errorTitle.tr, apiResponse.message);
@@ -265,7 +267,7 @@ class CheckoutController extends GetxController {
         .then((ApiResponse? apiResponse) {
       if (apiResponse != null) {
         if (apiResponse.success!) {
-          //Get.back();
+          Get.back();
           AppConstant.displaySnackBar("success", apiResponse.message);
           getAllShippingAddresses();
         } else

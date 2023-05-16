@@ -17,7 +17,7 @@ class BaseBindings extends Bindings {
 
     Get.put<OrderRepository>(OrderRepository(Get.find()));
     Get.put<MembershipController>(MembershipController());
-    Get.put<SearchController>(SearchController(Get.find()));
+    Get.put<CustomSearchController>(CustomSearchController(Get.find()));
 
     Get.lazyPut<ProductController>(() => ProductController(Get.find()));
   }

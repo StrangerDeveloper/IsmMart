@@ -43,23 +43,22 @@ class ChangeAddressUI extends GetView<CheckoutController> {
                 Obx(
                   () => controller.shippingAddressList.isEmpty
                       ? _buildNewAddress()
-                      : ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          padding: const EdgeInsets.all(8),
-                          itemCount: controller.shippingAddressList.length,
-                          itemBuilder: (_, index) {
-                            UserModel? userModel =
-                                controller.shippingAddressList[index];
+                      : SizedBox(
+                          height: 400,
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            padding: const EdgeInsets.all(8),
+                            itemCount: controller.shippingAddressList.length,
+                            itemBuilder: (_, index) {
+                              UserModel? userModel =
+                                  controller.shippingAddressList[index];
 
-                            return _singleAddressListItem(userModel);
-                          },
+                              return _singleAddressListItem(userModel);
+                            },
+                          ),
                         ),
                 ),
-
-                // Obx(() => controller.defaultAddressModel!.defaultAddress!
-                //   ? _shippingAddressDetails(controller.defaultAddressModel)
-                //   : _buildNewAddress()),
               ],
             ),
           ),
@@ -162,7 +161,11 @@ class ChangeAddressUI extends GetView<CheckoutController> {
                     bgColor: kPrimaryColor),
                 AppConstant.spaceWidget(width: 5),
                 CustomActionIcon(
-                    onTap: () {}, //controller.deleteShippingAddress(userModel.id),
+                    onTap: () => AppConstant.showConfirmDeleteDialog(
+                      ontap: ()async{
+                        await controller.deleteShippingAddress(userModel.id);
+                      }
+                    ),
                     size: 15,
                     height: 25,
                     width: 25,

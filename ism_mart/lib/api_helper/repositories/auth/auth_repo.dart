@@ -60,8 +60,6 @@ class AuthRepository {
         token: token,
         requiresAuthToken: true);
 
-        
-
     return response.body;
   }
 
@@ -110,7 +108,7 @@ class AuthRepository {
 
   Future<List<dynamic>> getShippingDetails({token}) async {
     var response = await _apiService.get(
-        endpoint: "user/getShippingDetails",
+        endpoint: "user/getShippingDetails?limit=10",
         requiresAuthToken: true,
         token: token);
     return response.body['data'];

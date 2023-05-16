@@ -48,11 +48,11 @@ class AuthController extends GetxController {
 
     getToken();
     LocalStorageHelper.localStorage.listenKey(LocalStorageHelper.currentUserKey,
-        (value) {
-      print(">>>Listening... currentUserKey");
-      getToken();
-      //getCurrentUser();
-    });
+            (value) {
+          print(">>>Listening... currentUserKey");
+          getToken();
+          //getCurrentUser();
+        });
   }
 
   var _coinsModel = CoinsModel().obs;
@@ -83,8 +83,8 @@ class AuthController extends GetxController {
     isLoading(true);
     await authProvider
         .postLogin(
-            email: emailController.text.toString(),
-            password: passwordController.text.trim())
+        email: emailController.text.toString(),
+        password: passwordController.text.trim())
         .then((UserResponse? userResponse) async {
       isLoading(false);
       if (userResponse != null) {
@@ -258,9 +258,9 @@ class AuthController extends GetxController {
       // UserModel user = UserModel(vendor: model);
       await authProvider
           .postStoreRegister(
-              token: userToken!,
-              calledForUpdate: updatedModel != null,
-              sellerModel: model)
+          token: userToken!,
+          //calledForUpdate: updatedModel != null,
+          sellerModel: model)
           .then((UserResponse? apiResponse) {
         isLoading(false);
         if (apiResponse != null) {
@@ -299,7 +299,7 @@ class AuthController extends GetxController {
         try {
           XFile? imgFile = await _picker.pickImage(
               source:
-                  imageSource == 0 ? ImageSource.camera : ImageSource.gallery);
+              imageSource == 0 ? ImageSource.camera : ImageSource.gallery);
           if (imgFile != null) {
             await imgFile.length().then((length) async {
               await AppConstant.compressImage(imgFile.path, fileLength: length)
@@ -504,7 +504,7 @@ class AuthController extends GetxController {
       isLoading(true);
       await authProvider
           .updateUser(
-              token: userToken, title: title, value: value, field: field)
+          token: userToken, title: title, value: value, field: field)
           .then((UserResponse? userResponse) {
         isLoading(false);
         if (userResponse != null) {

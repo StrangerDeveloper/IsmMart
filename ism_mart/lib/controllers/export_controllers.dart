@@ -9,7 +9,7 @@ export 'buyer/categories/category_controller.dart';
 export 'buyer/my_orders/order_controller.dart';
 export 'buyer/my_orders/orders_bindings.dart';
 export 'buyer/search/search_binding.dart';
-export 'buyer/search/search_controller.dart';
+export 'buyer/search/custom_search_controller.dart';
 export 'controllers.dart';
 export 'language/language_controller.dart';
 export 'seller/membership/membership_controller.dart';
