@@ -107,7 +107,6 @@ class AuthRepository {
   }
 
   Future<List<dynamic>> getShippingDetails({token}) async {
-    var query = {"limit": 10};
     var response = await _apiService.get(
         endpoint: "user/getShippingDetails?limit=10",
         requiresAuthToken: true,
