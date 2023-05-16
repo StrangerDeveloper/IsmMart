@@ -89,7 +89,8 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             CustomText(
-                              title: "${langKey.invoiceNo}: ${model?.id ?? 0}",
+                              title:
+                                  "${langKey.invoiceNo.tr}: ${model?.id ?? 0}",
                               style: headline3,
                             ),
                             CustomText(
