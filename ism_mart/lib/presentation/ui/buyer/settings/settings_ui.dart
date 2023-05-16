@@ -315,25 +315,30 @@ class SettingsUI extends GetView<AuthController> {
               StickyLabel(
                 text: langKey.selectLanguage.tr,
               ),
-              Column(
-                children: languageController.optionsLocales.entries.map((item) {
-                  return ListTile(
-                    onTap: () {
-                      languageController.setLanguage(key: item.key);
-                      Get.back();
-                    },
-                    leading: _countryFlag(
-                        countryCode: item.value['countryCode'],
-                        color: item.value['color']),
-                    title: Text(item.value["description"],
-                        style: bodyText1.copyWith(fontWeight: FontWeight.w600)),
-                    trailing: item.value["description"] ==
-                            languageController.language.value
-                        ? const Icon(Icons.done)
-                        : null,
-                  );
-                }).toList(),
-              )
+              Flexible(
+                  child: SingleChildScrollView(
+                child: Column(
+                  children:
+                      languageController.optionsLocales.entries.map((item) {
+                    return ListTile(
+                      onTap: () {
+                        languageController.setLanguage(key: item.key);
+                        Get.back();
+                      },
+                      leading: _countryFlag(
+                          countryCode: item.value['countryCode'],
+                          color: item.value['color']),
+                      title: Text(item.value["description"],
+                          style:
+                              bodyText1.copyWith(fontWeight: FontWeight.w600)),
+                      trailing: item.value["description"] ==
+                              languageController.language.value
+                          ? const Icon(Icons.done)
+                          : null,
+                    );
+                  }).toList(),
+                ),
+              ))
             ],
           ),
         ),
