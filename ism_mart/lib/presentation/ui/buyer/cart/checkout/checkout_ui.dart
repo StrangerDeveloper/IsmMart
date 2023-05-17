@@ -535,25 +535,26 @@ class CheckoutUI extends GetView<CheckoutController> {
                       () => CustomPriceWidget(
                           title: "${controller.totalAmount.value}"),
                     ),
-                    InkWell(
-                      onTap: () {
-                        moreAboutCostDialog();
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 8, bottom: 5),
-                        child: Text(
-                          langKey.moreAboutCost.tr,
-                          style: textStylePoppins.copyWith(
-                            color: Color(0xffDC2626),
-                            fontSize: 13,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                    ),
+
                   ],
                 ),
-                AppConstant.spaceWidget(height: 10),
+
+                InkWell(
+                  onTap: () {
+                    moreAboutCostDialog();
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 8, bottom: 5),
+                    child: Text(
+                      langKey.moreAboutCost.tr,
+                      style: textStylePoppins.copyWith(
+                        color: Color(0xffDC2626),
+                        fontSize: 13,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
