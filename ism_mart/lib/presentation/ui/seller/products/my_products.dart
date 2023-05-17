@@ -61,13 +61,12 @@ class MyProducts extends GetView<SellersController> {
                       });
                     },
                     child: Padding(
-                      padding: const EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: GridView.builder(
+                        shrinkWrap: true,
                         controller: controller.scrollController,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: AppResponsiveness.getGridItemCount(),
-                          //mainAxisExtent:
-                          //  AppResponsiveness.getMainAxisExtentPoint30(),
                           mainAxisSpacing: 5,
                           childAspectRatio:
                               AppResponsiveness.getChildAspectRatio(),
@@ -192,15 +191,15 @@ class MyProducts extends GetView<SellersController> {
                         icon: Icons.edit_rounded,
                         bgColor: kPrimaryColor),
                     AppConstant.spaceWidget(width: 5),
-                    // CustomActionIcon(
-                    //     onTap: () => AppConstant.showConfirmDeleteDialog(
-                    //           ontap: (){
-                    //             controller.deleteProduct(id: model.id);
-                    //             Get.back();
-                    //           },
-                    //       ),
-                    //     icon: Icons.delete_rounded,
-                    //     bgColor: kRedColor)
+                    CustomActionIcon(
+                        onTap: () => AppConstant.showConfirmDeleteDialog(
+                              ontap: () {
+                                controller.deleteProduct(id: model.id);
+                                Get.back();
+                              },
+                            ),
+                        icon: Icons.delete_rounded,
+                        bgColor: kRedColor)
                   ],
                 ),
               ),

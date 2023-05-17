@@ -10,7 +10,7 @@ class Validator {
     String pattern = r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+';
     RegExp regex = RegExp(pattern);
     if (!regex.hasMatch(value!.trim())) {
-      return 'Invalid Email Format';
+      return langKey.invalidEmail.tr;
     } else {
       return null;
     }

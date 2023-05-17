@@ -83,11 +83,9 @@ class SignUpUI extends GetView<AuthController> {
                                 AutovalidateMode.onUserInteraction,
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return "Email is required for this field";
+                                return langKey.emailReq.tr;
                               } else
-                                return !GetUtils.isEmail(value)
-                                    ? langKey.emailReq.tr
-                                    : null;
+                                return Validator().email(value);
                             },
                             keyboardType: TextInputType.emailAddress,
                             onChanged: (value) {},

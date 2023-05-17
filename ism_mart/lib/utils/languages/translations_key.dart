@@ -285,6 +285,7 @@ const shipping = "shipping",
     shippingDetails = "shippingDetails",
     orderSummary = "orderSummary",
     expectedDelivery = "expectedDelivery",
+    paymentCardFailed = "paymentCardFailed",
     orderTime = "orderTime";
 
 /**

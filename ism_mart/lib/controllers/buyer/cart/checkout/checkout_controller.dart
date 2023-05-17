@@ -289,12 +289,18 @@ class CheckoutController extends GetxController {
 
   Future<void> makePayment({String? amount}) async {
     // try {
-    isLoading(true);
-    if (_paymentMethodId.isNotEmpty)
-      await sendPaymentIntent(paymentId: _paymentMethodId.value);
-    else
-      print("Payment intent is null");
 
+    isLoading(true);
+    Future.delayed(Duration(seconds: 2), () async {
+      if (_paymentMethodId.isNotEmpty)
+        await sendPaymentIntent(paymentId: _paymentMethodId.value);
+      else {
+        showSnackBar(
+            message: langKey.paymentCardFailed.tr, title: "error");
+        isLoading(false);
+        print("Payment intent is null");
+      }
+    });
     /*  //STEP 1: Create Payment Intent
      // paymentIntent = await createPaymentIntent(amount!, 'PKR');
 
