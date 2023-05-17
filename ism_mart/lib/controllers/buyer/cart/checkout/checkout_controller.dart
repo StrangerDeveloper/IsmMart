@@ -295,7 +295,7 @@ class CheckoutController extends GetxController {
         await sendPaymentIntent(paymentId: _paymentMethodId.value);
       else {
         showSnackBar(
-            message: "Payment Information is not Correct", title: "Error");
+            message: "Payment Information  is not Correct", title: "Error");
         isLoading(false);
         print("Payment intent is null");
       }
