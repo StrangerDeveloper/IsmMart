@@ -111,6 +111,6 @@ class AppResponsiveness {
   }
 
   static double getChildAspectRatio() {
-    return height * (_isTabletScreen() ? 2.5 / 4 : 3 / 4);
+    return _isTabletScreen() ? 0.7 : 0.86;
   }
 }

@@ -8,6 +8,7 @@ class ProductVariantsModel {
     this.placeholder,
     this.required,
     this.multiple,
+    this.isNewField = false,
     this.type,
     this.createdAt,
     this.updatedAt,
@@ -17,7 +18,7 @@ class ProductVariantsModel {
 
   int? id;
   String? name, label, placeholder, type;
-  bool? required, multiple;
+  bool? required, multiple, isNewField;
   DateTime? createdAt;
   DateTime? updatedAt;
   CategoryModel? category;
@@ -32,6 +33,7 @@ class ProductVariantsModel {
         required: json["required"] == null ? false : json["required"],
         multiple: json["multiple"] == null ? false : json["multiple"],
         type: json["type"] == null ? null : json["type"],
+        isNewField: false,
         category: json["Category"] == null
             ? null
             : CategoryModel.fromJson(json["Category"]),

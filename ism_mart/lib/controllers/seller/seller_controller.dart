@@ -252,6 +252,21 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
     });
   }
 
+  // late ProductVariantsModel newVariantModel;
+  // addMoreVariantsFields({ProductVariantsModel? variantsModel}) {
+  //   //newVariantModel = variantsModel!;
+  //   newVariantModel.isNewField = true;
+  //   productVariantsFieldsList.add(newVariantModel);
+  // }
+
+  // removeMoreVariantsFields({ProductVariantsModel? variantsModel}) {
+  //   //newVariantModel = variantsModel!;
+  //   //newVariantModel.isNewField = true;
+  //   //productVariantsFieldsList.remove(newVariantModel);
+  //   productVariantsFieldsList.removeWhere((element) =>
+  //       element.id == newVariantModel.id && element.isNewField == true);
+  // }
+
   var dynamicFieldsValuesList = Map<String, dynamic>().obs;
 
   onDynamicFieldsValueChanged(String? value, ProductVariantsModel? model) {
