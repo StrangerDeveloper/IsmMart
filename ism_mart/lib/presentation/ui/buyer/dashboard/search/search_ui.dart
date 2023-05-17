@@ -197,8 +197,11 @@ class SearchUI extends GetView<CustomSearchController> {
                       crossAxisCount: AppResponsiveness.getGridItemCount(),
                       mainAxisSpacing: 10,
                       crossAxisSpacing: 10,
-                      mainAxisExtent:
-                          AppResponsiveness.getMainAxisExtentPoint25()),
+                      childAspectRatio:
+                          AppResponsiveness.getChildAspectRatioPoint90()
+                      // mainAxisExtent:
+                      //     AppResponsiveness.getMainAxisExtentPoint25(),
+                      ),
                   itemCount: list.length,
                   itemBuilder: (_, index) {
                     ProductModel productModel = list[index];

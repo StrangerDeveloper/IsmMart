@@ -27,9 +27,9 @@ class ProductQuantityCounter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: margin ?? const EdgeInsets.symmetric(vertical: 8),
-      padding:
-          padding ?? const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      // margin: margin ?? const EdgeInsets.symmetric(vertical: 8),
+      // padding:
+      //     padding ?? const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       decoration: BoxDecoration(
         color: bgColor ?? kPrimaryColor,
         borderRadius: BorderRadius.circular(30),
@@ -41,8 +41,8 @@ class ProductQuantityCounter extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           IconButton(
-            iconSize: 18,
-            alignment: Alignment.topCenter,
+            iconSize: 20,
+            alignment: Alignment.center,
             onPressed: onDecrementPress,
             icon: Icon(
               Icons.remove,
@@ -57,22 +57,22 @@ class ProductQuantityCounter extends StatelessWidget {
               controller: textEditingController,
               enabled: false,
               style: bodyText1.copyWith(
-                  color: textColor ?? kWhiteColor, fontSize: 14),
+                  color: textColor ?? kWhiteColor, fontSize: 17),
               textAlignVertical: TextAlignVertical.center,
               decoration: InputDecoration(
-                  contentPadding: EdgeInsets.symmetric(vertical: 8),
+                  contentPadding: EdgeInsets.symmetric(vertical: 10),
                   border: InputBorder.none,
                   hintText: "$quantity",
                   hintStyle: bodyText1.copyWith(
-                      color: textColor ?? kWhiteColor, fontSize: 16)),
+                      color: textColor ?? kWhiteColor, fontSize: 17)),
               textAlign: TextAlign.center,
               keyboardType: TextInputType.number,
             ),
           ),
           AppConstant.spaceWidget(width: 4),
           IconButton(
-            iconSize: 18,
-            alignment: Alignment.topCenter,
+            iconSize: 20,
+            alignment: Alignment.center,
             onPressed: onIncrementPress,
             icon: Icon(Icons.add, color: textColor ?? kWhiteColor),
           ),

@@ -22,6 +22,7 @@ const kLightColor = Color(0xFF808080);
 const kLightGreyColor = Color(0xFFD1D1D1);
 const kLightBlueColor = Color(0xFFE2E8F0);
 const kRedColor = Color(0xFFF54141);
+const kLightRedColor = Color(0xBBEF5350);
 const kGoldColor = Color(0xFFFFD700);
 const kOrangeColor = Colors.deepOrange;
 
@@ -100,13 +101,14 @@ var bodyText2 = GoogleFonts.lato(
     fontSize: 12, fontWeight: FontWeight.w600, color: Colors.black);
 var bodyText2Poppins = GoogleFonts.poppins(
     fontSize: 12, fontWeight: FontWeight.w400, color: Colors.black);
-var textStylePoppins = GoogleFonts.lato(
-  color: Colors.black,
-);
+
 var caption = GoogleFonts.lato(fontSize: 11, fontWeight: FontWeight.w500);
 
 var appBarTitleSize = GoogleFonts.lato(
     color: kPrimaryColor, fontSize: 15, fontWeight: FontWeight.bold);
+var textStylePoppins = GoogleFonts.lato(
+  color: Colors.black,
+);
 
 class AppConstant {
   AppConstant._();
@@ -306,43 +308,40 @@ class AppConstant {
     }
   }
 
-  static void showConfirmDeleteDialog({VoidCallback? ontap, String? ontapText}) {
+  static void showConfirmDeleteDialog({VoidCallback? ontap}) {
     Get.defaultDialog(
+      titlePadding: EdgeInsets.zero,
+      titleStyle: TextStyle(fontSize: 0),
+      title: '',
       content: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 8),
+        padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 8),
         child: Column(
           children: [
             Align(
               alignment: Alignment.topRight,
               child: IconButton(
-                  onPressed: ()=>Get.back(),
+                  onPressed: () => Get.back(),
                   icon: Icon(
                     Icons.close,
                     size: 24,
                     color: Colors.grey,
                   )),
             ),
-            AppConstant.spaceWidget(
-                height: 5
-            ),
             Icon(
               Icons.highlight_remove_outlined,
-              size: 45,
-              color: Colors.red,
+              size: 100,
+              color: kLightRedColor,
             ),
-            AppConstant.spaceWidget(
-                height: 12
-            ),
+            AppConstant.spaceWidget(height: 12),
             CustomText(
-              title: 'Are You Sure?',
+              title: langKey.areYouSure.tr,
               style: headline1,
             ),
-            AppConstant.spaceWidget(
-                height: 12
-            ),
+            AppConstant.spaceWidget(height: 12),
             CustomText(
-              title: 'Do you really want to delete this record? This process cannot be undone',
+              title: langKey.deletionProcessDetail.tr,
               weight: FontWeight.w600,
+              textAlign: TextAlign.center,
             ),
             //buildConfirmDeleteIcon(),
             AppConstant.spaceWidget(height: 20),
@@ -350,18 +349,18 @@ class AppConstant {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 CustomButton(
-                  onTap:() => Get.back(),
+                  onTap: () => Get.back(),
                   text: langKey.noBtn.tr,
                   width: 100,
-                  height: 30,
-                  color: kPrimaryColor,
+                  height: 40,
+                  color: kLightColor,
                 ),
                 CustomButton(
                   onTap: ontap,
                   text: langKey.yesBtn.tr,
                   width: 100,
-                  height: 30,
-                  color: kRedColor,
+                  height: 40,
+                  color: kLightRedColor,
                 ),
               ],
             )

@@ -58,7 +58,8 @@ class DashboardUI extends GetView<BaseController> {
           Expanded(
             flex: 5,
             child: Obx(
-              () => CustomSearchBar(searchText: controller.randomSearchText.value),
+              () => CustomSearchBar(
+                  searchText: controller.randomSearchText.value),
             ),
           ),
           //const Expanded(flex:1,child:Center())
@@ -342,7 +343,9 @@ class DashboardUI extends GetView<BaseController> {
               physics: const NeverScrollableScrollPhysics(),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: AppResponsiveness.getGridItemCount(),
-                  mainAxisExtent: AppResponsiveness.getMainAxisExtentPoint25(),
+                  childAspectRatio:
+                      AppResponsiveness.getChildAspectRatioPoint100(),
+                  //mainAxisExtent: AppResponsiveness.getMainAxisExtentPoint25(),
                   mainAxisSpacing: 10,
                   crossAxisSpacing: 10),
               itemCount: list.length,
@@ -359,8 +362,7 @@ class DashboardUI extends GetView<BaseController> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
-        height:
-            AppResponsiveness.getBoxHeightPoint25(),
+        height: AppResponsiveness.getBoxHeightPoint21(),
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: list.length,

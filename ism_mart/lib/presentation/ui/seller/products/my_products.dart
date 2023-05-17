@@ -61,15 +61,16 @@ class MyProducts extends GetView<SellersController> {
                       });
                     },
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(10.0),
                       child: GridView.builder(
-                        shrinkWrap: true,
                         controller: controller.scrollController,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: AppResponsiveness.getGridItemCount(),
+                          //mainAxisExtent:
+                          //  AppResponsiveness.getMainAxisExtentPoint30(),
                           mainAxisSpacing: 5,
                           childAspectRatio:
-                              AppResponsiveness.getChildAspectRatio(),
+                              AppResponsiveness.getChildAspectRatioPoint75(),
                         ),
                         itemCount: controller.myProductsList.length,
                         itemBuilder: (_, index) {

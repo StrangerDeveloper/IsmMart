@@ -96,6 +96,10 @@ const frequentlyAsked = 'frequentlyAsked',
     forAnyQueryJust = 'forAnyQueryJust',
     youStoreHas = 'youStoreHas';
 
+///Delete Confirmation Dialog
+const areYouSure = 'areYouSure';
+const deletionProcessDetail = 'processDetail';
+
 ///products
 const addToCart = 'addToCart',
     added = 'added',
