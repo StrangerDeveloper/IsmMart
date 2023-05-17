@@ -383,6 +383,7 @@ class CheckoutUI extends GetView<CheckoutController> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 AppConstant.spaceWidget(height: 10),
 
@@ -534,6 +535,22 @@ class CheckoutUI extends GetView<CheckoutController> {
                       () => CustomPriceWidget(
                           title: "${controller.totalAmount.value}"),
                     ),
+                    InkWell(
+                      onTap: () {
+                        moreAboutCostDialog();
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 8, bottom: 5),
+                        child: Text(
+                          langKey.moreAboutCost.tr,
+                          style: textStylePoppins.copyWith(
+                            color: Color(0xffDC2626),
+                            fontSize: 13,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
                 AppConstant.spaceWidget(height: 10),
@@ -542,6 +559,163 @@ class CheckoutUI extends GetView<CheckoutController> {
           ),
         ),
       ),
+    );
+  }
+
+  Future moreAboutCostDialog() async {
+    return showDialog(
+      // barrierDismissible: true,
+      context: Get.context!,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            // side: BorderSide(color: Colors.grey, width: 1.5),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          insetPadding: EdgeInsets.symmetric(horizontal: 16),
+          child: Stack(
+            alignment: Alignment.topRight,
+            children: [
+              SingleChildScrollView(
+                padding: EdgeInsets.all(15),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      langKey.feeChargesExplained.tr,
+                      style: textStylePoppins.copyWith(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 18,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 5, bottom: 10),
+                      child: Text(
+                        langKey.costDesc1.tr,
+                        textAlign: TextAlign.center,
+                        style: textStylePoppins.copyWith(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w300,
+                        ),
+                      ),
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Icon(Icons.local_shipping_outlined),
+                        SizedBox(width: 10),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                langKey.serviceFee.tr,
+                                style: textStylePoppins.copyWith(
+                                  fontSize: 16,
+                                  color: Color(0xffDC2626),
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              SizedBox(height: 5),
+                              Text(
+                                langKey.costDesc2.tr,
+                                style: textStylePoppins.copyWith(
+                                  fontWeight: FontWeight.w500,
+                                  height: 1.3,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 12),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Icon(Icons.miscellaneous_services_outlined),
+                        SizedBox(width: 10),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                langKey.deliveryFee.tr,
+                                style: textStylePoppins.copyWith(
+                                  fontSize: 16,
+                                  color: Color(0xffDC2626),
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              SizedBox(height: 5),
+                              Text(
+                                langKey.costDesc3.tr,
+                                style: textStylePoppins.copyWith(
+                                  fontWeight: FontWeight.w500,
+                                  height: 1.3,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 12, bottom: 12),
+                      child: Text(
+                        langKey.costDesc4.tr,
+                        textAlign: TextAlign.center,
+                        style: textStylePoppins.copyWith(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w300,
+                        ),
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.support_agent_outlined,
+                          size: 30,
+                        ),
+                        SizedBox(width: 8),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '+92 3331832356',
+                              style: textStylePoppins.copyWith(
+                                fontSize: 17,
+                                color: Color(0xffDC2626),
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            SizedBox(height: 2),
+                            Text(
+                              langKey.supportCenter.tr,
+                              style: textStylePoppins.copyWith(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              IconButton(
+                visualDensity: VisualDensity.compact,
+                onPressed: () {
+                  Get.back();
+                },
+                icon: Icon(Icons.close),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

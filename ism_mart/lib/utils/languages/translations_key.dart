@@ -49,7 +49,16 @@ const standard = 'standard',
     orderId = 'orderId',
     paymentSuccessful = 'paymentSuccessful',
     orderNotCreated = 'orderNotCreated',
-    orderInformation = 'orderInformation';
+    orderInformation = 'orderInformation',
+    moreAboutCost = 'moreAboutCost',
+    feeChargesExplained = 'feeChargesExplained',
+    serviceFee = 'serviceFee',
+    deliveryFee = 'deliveryFee',
+    supportCenter = 'supportCenter',
+    costDesc1 = 'costDesc1',
+    costDesc2 = 'costDesc2',
+    costDesc3 = 'costDesc3',
+    costDesc4 = 'costDesc4';
 
 ///sellerController
 const imageSizeDesc = 'imageSizeDesc';

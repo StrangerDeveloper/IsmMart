@@ -100,7 +100,9 @@ var bodyText2 = GoogleFonts.lato(
     fontSize: 12, fontWeight: FontWeight.w600, color: Colors.black);
 var bodyText2Poppins = GoogleFonts.poppins(
     fontSize: 12, fontWeight: FontWeight.w400, color: Colors.black);
-
+var textStylePoppins = GoogleFonts.lato(
+  color: Colors.black,
+);
 var caption = GoogleFonts.lato(fontSize: 11, fontWeight: FontWeight.w500);
 
 var appBarTitleSize = GoogleFonts.lato(

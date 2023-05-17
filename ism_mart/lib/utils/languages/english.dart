@@ -59,8 +59,16 @@ class English {
             'Payment Successful!, You\'re Order has been Placed!',
         key.orderInformation: 'Order Information',
         key.orderNotCreated: 'Something went wrong! Order Not created',
-        key.phoneValidate: 'Phone numbers should be 11 to 14 digits long.',
-        key.paymentCardFailed : "Payment Information is not Correct",
+        key.phoneValidate: 'Phone numbers should be in a format of 11 to 14 digits.',
+        key.moreAboutCost: 'More about cost',
+        key.feeChargesExplained: 'Fee charges Explained!',
+        key.serviceFee: 'Service Fee',
+        key.deliveryFee: 'Delivery Fee',
+        key.supportCenter: '24/7 Support center',
+        key.costDesc1 : 'We strive to keep our service and delivery fees as low as possible while still providing you with the best possible service.',
+        key.costDesc2 : 'is a percentage-based fee that helps us cover the costs of maintaining our platform, ensuring quality control, and providing customer support. The service fee is only 5% on each product uploaded by our prestiogius vendor.',
+        key.costDesc3 : 'The delivery fee is a flat fee that covers the cost of delivering your order to your location. The Delivery Fee is 250 Rupees only on each order.',
+        key.costDesc4 : 'If you have any questions or concerns about our fees, please don\'t hesitate to reach out to our customer support team. Thank you for choosing our service!',
 
         ///sellerController
         key.imageSizeDesc: 'Image must be up to',
