@@ -37,7 +37,7 @@ class CategoriesUI extends GetView<CategoryController> {
         backgroundColor: Colors.grey[100]!,
         appBar: _appBar(),
         body: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.only(left: 8, right: 8, top: 8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -67,7 +67,8 @@ class CategoriesUI extends GetView<CategoryController> {
           Obx(
             () => Expanded(
               flex: 6,
-              child: CustomSearchBar(searchText: controller.selectedCategory.value),
+              child: CustomSearchBar(
+                  searchText: controller.selectedCategory.value),
             ),
           ),
         ],
@@ -93,19 +94,15 @@ class CategoriesUI extends GetView<CategoryController> {
                   controller.getSubcategory(categoryModel);
                 },
                 child: Container(
-                  //width: 50,
                   constraints: BoxConstraints(minHeight: 150),
                   alignment: Alignment.center,
-                  //padding: const EdgeInsets.all(8.0),
-                  //margin: const EdgeInsets.symmetric(vertical: 5.0),
-                  margin: const EdgeInsets.only(bottom: 20.0),
+                  margin: const EdgeInsets.only(bottom: 20),
                   decoration: BoxDecoration(
-                      color: categoryModel.isPressed!
-                          ? kTransparent
-                          : kPrimaryColor,
-                      border:
-                          categoryModel.isPressed! ? Border.all() : Border(),
-                      borderRadius: BorderRadius.circular(5.0)),
+                    color:
+                        categoryModel.isPressed! ? kTransparent : kPrimaryColor,
+                    border: categoryModel.isPressed! ? Border.all() : Border(),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
                   child: RotatedBox(
                     quarterTurns: -1,
                     child: CustomText(
@@ -121,9 +118,11 @@ class CategoriesUI extends GetView<CategoryController> {
             },
           ),
         ),
-        //),
         kDivider,
-        Expanded(flex: 4, child: _categoryBody())
+        Expanded(
+          flex: 4,
+          child: _categoryBody(),
+        )
       ],
     );
   }
@@ -140,11 +139,16 @@ class CategoriesUI extends GetView<CategoryController> {
                   icon: Icons.category_outlined,
                   title: langKey.noSubCategoryFound.tr,
                 )
-              : ListView.builder(
+              : ListView.separated(
+                  padding: EdgeInsets.only(bottom: 10),
+                  physics: BouncingScrollPhysics(),
                   itemCount: controller.subCategories.length,
                   itemBuilder: (_, index) {
                     SubCategory subCategory = controller.subCategories[index];
                     return _buildSubCategoryItem(subCategory);
+                  },
+                  separatorBuilder: (BuildContext context, int index) {
+                    return SizedBox(height: 12);
                   },
                 ),
     );
@@ -152,32 +156,31 @@ class CategoriesUI extends GetView<CategoryController> {
 
   Widget _buildSubCategoryItem(SubCategory? subCategory) {
     // var height = AppConstant.getSize().height;
-    return InkWell(
-      onTap: () {
-        Get.toNamed(Routes.searchRoute,
-            arguments: {"searchText": "${subCategory.name}"});
-      },
-      child: Container(
-        margin: EdgeInsets.only(bottom: 15),
-        padding: const EdgeInsets.all(10.0),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(15.0),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Expanded(
-              child: CustomText(
-                title: "${subCategory!.name}",
-                //color: kWhiteColor,
-                size: AppResponsiveness.getTextSize13_16(),
-                textAlign: TextAlign.center,
-                weight: FontWeight.bold,
+    return Material(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(13),
+      child: InkWell(
+        onTap: () {
+          Get.toNamed(Routes.searchRoute,
+              arguments: {"searchText": "${subCategory.name}"});
+        },
+        borderRadius: BorderRadius.circular(13),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 11, horizontal: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: CustomText(
+                  title: "${subCategory!.name}",
+                  size: AppResponsiveness.getTextSize13_16(),
+                  textAlign: TextAlign.center,
+                  weight: FontWeight.bold,
+                ),
               ),
-            ),
-            Icon(Icons.chevron_right),
-          ],
+              Icon(Icons.chevron_right),
+            ],
+          ),
         ),
       ),
     );

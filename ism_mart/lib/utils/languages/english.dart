@@ -433,6 +433,7 @@ class English {
         key.total: 'Total',
         key.details: 'Details',
         key.sortBy: 'Sort',
+        key.sortByPrice: 'Sort By Price',
         key.filter: 'Filter',
         key.search: 'Search',
         key.status: 'Status',

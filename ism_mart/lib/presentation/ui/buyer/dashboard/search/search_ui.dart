@@ -187,33 +187,31 @@ class SearchUI extends GetView<CustomSearchController> {
           ),
         ),
         Expanded(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                Expanded(
-                  child: GridView.builder(
-                    controller: controller.scrollController,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: AppResponsiveness.getGridItemCount(),
-                        mainAxisSpacing: 10,
-                        crossAxisSpacing: 10,
-                        mainAxisExtent:
-                            AppResponsiveness.getMainAxisExtentPoint25()),
-                    itemCount: list.length,
-                    itemBuilder: (_, index) {
-                      ProductModel productModel = list[index];
-                      return SingleProductItems(productModel: productModel);
-                    },
-                  ),
+          child: Column(
+            children: [
+              Expanded(
+                child: GridView.builder(
+                  padding: EdgeInsets.all(8),
+                  controller: controller.scrollController,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: AppResponsiveness.getGridItemCount(),
+                      mainAxisSpacing: 10,
+                      crossAxisSpacing: 10,
+                      mainAxisExtent:
+                          AppResponsiveness.getMainAxisExtentPoint25()),
+                  itemCount: list.length,
+                  itemBuilder: (_, index) {
+                    ProductModel productModel = list[index];
+                    return SingleProductItems(productModel: productModel);
+                  },
                 ),
-                if (controller.isLoadingMore.isTrue)
-                  CustomLoading(
-                    isItForWidget: true,
-                    color: kPrimaryColor,
-                  )
-              ],
-            ),
+              ),
+              if (controller.isLoadingMore.isTrue)
+                CustomLoading(
+                  isItForWidget: true,
+                  color: kPrimaryColor,
+                )
+            ],
           ),
         ),
       ],
@@ -221,191 +219,253 @@ class SearchUI extends GetView<CustomSearchController> {
   }
 
   void showFilterBottomSheet() {
-    //var categoryController = Get.find<CategoryController>();
-    debugPrint(">>> ${controller.categoriesList.length}");
     AppConstant.showBottomSheet(
-      widget: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: CustomScrollView(
-          slivers: [
-            SliverList(
-              delegate: SliverChildListDelegate(
-                [
-                  StickyLabel(text: langKey.categories.tr),
-                  Obx(
-                    () => Container(
-                      height: 70,
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: ListView.builder(
-                        //shrinkWrap: true,
-                        scrollDirection: Axis.horizontal,
-                        itemCount: controller.categoriesList.length,
-                        itemBuilder: (_, index) {
-                          CategoryModel categoryModel =
-                              controller.categoriesList[index];
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: InkWell(
-                              onTap: () {
-                                controller
-                                    .selectedCategoryId(categoryModel.id!);
-                                controller.makeSelectedCategory(categoryModel);
-                              },
-                              child: Container(
-                                //height: 50,
-                                constraints: BoxConstraints(minWidth: 50),
-                                alignment: Alignment.center,
-                                padding: const EdgeInsets.all(8.0),
-                                margin:
-                                    const EdgeInsets.symmetric(vertical: 5.0),
-                                // margin: const EdgeInsets.only(bottom: 20.0),
-                                decoration: BoxDecoration(
-                                    color: categoryModel.isPressed!
-                                        ? kPrimaryColor
-                                        : kTransparent,
-                                    border: categoryModel.isPressed!
-                                        ? Border()
-                                        : Border.all(),
-                                    borderRadius: BorderRadius.circular(5.0)),
-                                child: CustomText(
-                                  title: categoryModel.name,
-                                  color: categoryModel.isPressed!
-                                      ? kWhiteColor
-                                      : kDarkColor,
-                                  weight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                          );
-                        },
+      widget: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 8, right: 8, top: 10),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 5),
+                      child: CustomText(
+                        title: langKey.filter.tr,
+                        weight: FontWeight.bold,
+                        size: 16,
                       ),
                     ),
-                  ),
-                  StickyLabel(text: langKey.price.tr),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      SizedBox(
-                        width: 130,
-                        height: 50,
-                        child: FormInputFieldWithIcon(
-                          controller: controller.minPriceController,
-                          iconPrefix: Icons.attach_money_rounded,
-                          labelText: langKey.minPrice.tr,
-                          iconColor: kPrimaryColor,
-                          enableBorder: UnderlineInputBorder(
-                            borderSide:
-                                BorderSide(color: kPrimaryColor, width: 1.5),
-                            //borderRadius: BorderRadius.circular(25.0),
-                          ),
-                          autofocus: false,
-                          textStyle: bodyText1,
-                          keyboardType: TextInputType.number,
-                          onChanged: (value) {},
-                          onSaved: (value) {},
+                    IconButton(
+                      visualDensity: VisualDensity.compact,
+                      onPressed: () {
+                        Get.back();
+                      },
+                      icon: Icon(Icons.close),
+                    ),
+                  ],
+                ),
+                Divider(),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 13),
+            child: CustomText(
+              title: langKey.categories.tr,
+              weight: FontWeight.bold,
+              size: 14,
+            ),
+          ),
+          Obx(
+            () => Container(
+              height: 70,
+              child: ListView.builder(
+                physics: BouncingScrollPhysics(),
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                scrollDirection: Axis.horizontal,
+                itemCount: controller.categoriesList.length,
+                itemBuilder: (_, index) {
+                  CategoryModel categoryModel =
+                      controller.categoriesList[index];
+                  return Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 5, vertical: 13),
+                    child: InkWell(
+                      onTap: () {
+                        controller.selectedCategoryId(categoryModel.id!);
+                        controller.makeSelectedCategory(categoryModel);
+                      },
+                      borderRadius: BorderRadius.circular(5),
+                      child: Container(
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: categoryModel.isPressed!
+                              ? kPrimaryColor
+                              : kTransparent,
+                          border: categoryModel.isPressed!
+                              ? Border()
+                              : Border.all(),
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: CustomText(
+                          title: categoryModel.name,
+                          color: categoryModel.isPressed!
+                              ? kWhiteColor
+                              : kDarkColor,
+                          weight: FontWeight.w600,
                         ),
                       ),
-                      SizedBox(
-                        width: 130,
-                        height: 50,
-                        child: FormInputFieldWithIcon(
-                          controller: controller.maxPriceController,
-                          iconPrefix: Icons.attach_money_rounded,
-                          labelText: langKey.maxPrice.tr,
-                          iconColor: kPrimaryColor,
-                          autofocus: false,
-                          enableBorder: UnderlineInputBorder(
-                            borderSide:
-                                BorderSide(color: kPrimaryColor, width: 1.5),
-                            //borderRadius: BorderRadius.circular(25.0),
-                          ),
-                          textStyle: bodyText1,
-                          keyboardType: TextInputType.number,
-                          onChanged: (value) {},
-                          onSaved: (value) {},
-                        ),
-                      ),
-                    ],
-                  ),
-                  AppConstant.spaceWidget(height: 20),
-                  _filtersBtn(),
-                  AppConstant.spaceWidget(height: 10),
-                ],
+                    ),
+                  );
+                },
               ),
             ),
-          ],
-        ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 13, top: 10),
+            child: CustomText(
+              title: langKey.price.tr,
+              weight: FontWeight.bold,
+              size: 14,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              children: [
+                Expanded(
+                  child: FormInputFieldWithIcon(
+                    controller: controller.minPriceController,
+                    iconPrefix: Icons.attach_money_rounded,
+                    labelText: langKey.minPrice.tr,
+                    iconColor: kPrimaryColor,
+                    enableBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: kPrimaryColor,
+                        width: 1.5,
+                      ),
+                    ),
+                    autofocus: false,
+                    textStyle: bodyText1,
+                    keyboardType: TextInputType.number,
+                    onChanged: (value) {},
+                    onSaved: (value) {},
+                  ),
+                ),
+                SizedBox(width: 20),
+                Expanded(
+                  child: FormInputFieldWithIcon(
+                    controller: controller.maxPriceController,
+                    iconPrefix: Icons.attach_money_rounded,
+                    labelText: langKey.maxPrice.tr,
+                    iconColor: kPrimaryColor,
+                    autofocus: false,
+                    enableBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: kPrimaryColor,
+                        width: 1.5,
+                      ),
+                    ),
+                    textStyle: bodyText1,
+                    keyboardType: TextInputType.number,
+                    onChanged: (value) {},
+                    onSaved: (value) {},
+                  ),
+                ),
+              ],
+            ),
+          ),
+          _filtersBtn(),
+        ],
       ),
     );
   }
 
   Widget _filtersBtn() {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        CustomButton(
-          onTap: () => controller.clearFilters(),
-          text: clear.tr,
-          color: kOrangeColor,
-          width: 120,
-          height: 35,
-        ),
-        CustomButton(
-          onTap: () {
-            controller.applyFilter();
-            controller.minPriceController.clear();
-            controller.maxPriceController.clear();
-          },
-          text: langKey.search.tr,
-          width: 120,
-          height: 35,
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 20, 20, 15),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Expanded(
+            child: CustomButton(
+              onTap: () => controller.clearFilters(),
+              text: clear.tr,
+              color: kOrangeColor,
+              height: 36,
+            ),
+          ),
+          SizedBox(width: 20),
+          Expanded(
+            child: CustomButton(
+              onTap: () {
+                controller.applyFilter();
+                controller.minPriceController.clear();
+                controller.maxPriceController.clear();
+              },
+              text: langKey.search.tr,
+              height: 36,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
   void showSortBottomSheet() {
     AppConstant.showBottomSheet(
-      widget: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            CustomText(
-                title: langKey.sortBy.tr, size: 20, weight: FontWeight.bold),
-            AppConstant.spaceWidget(height: 10),
-            RadioListTile(
-              //selected: controller.sortBy!.contains("low-to-high"),
-              activeColor: kPrimaryColor,
-              toggleable: true,
-              title: CustomText(
-                title: langKey.lowToHigh.tr,
-                size: 16,
-              ),
-              value: 'low-to-high',
-              onChanged: (String? value) {
-                controller.setSortBy(value!);
-                Get.back();
-              },
-              groupValue: controller.sortBy,
+      widget: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 8, right: 8, top: 10),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 5),
+                      child: CustomText(
+                        title: langKey.sortByPrice.tr,
+                        weight: FontWeight.bold,
+                        size: 16,
+                      ),
+                    ),
+                    IconButton(
+                      visualDensity: VisualDensity.compact,
+                      onPressed: () {
+                        Get.back();
+                      },
+                      icon: Icon(Icons.close),
+                    ),
+                  ],
+                ),
+                Divider(),
+              ],
             ),
-            RadioListTile(
-              activeColor: kPrimaryColor,
-              //selected: controller.sortBy!.contains("high-to-low"),
-              toggleable: true,
-              title: CustomText(
-                title: langKey.highToLow.tr,
-                size: 16,
-              ),
-              value: 'high-to-low',
-              onChanged: (String? value) {
-                controller.setSortBy(value!);
-                Get.back();
-              },
-              groupValue: controller.sortBy,
+          ),
+          RadioListTile(
+            visualDensity: const VisualDensity(
+              horizontal: VisualDensity.minimumDensity,
             ),
-          ],
-        ),
+            activeColor: kPrimaryColor,
+            toggleable: true,
+            title: CustomText(
+              title: langKey.lowToHigh.tr,
+              size: 14,
+            ),
+            value: 'low-to-high',
+            onChanged: (String? value) {
+              controller.setSortBy(value!);
+              Get.back();
+            },
+            groupValue: controller.sortBy,
+          ),
+          RadioListTile(
+            visualDensity: const VisualDensity(
+              horizontal: VisualDensity.minimumDensity,
+            ),
+            activeColor: kPrimaryColor,
+            toggleable: true,
+            title: CustomText(
+              title: langKey.highToLow.tr,
+              size: 14,
+            ),
+            value: 'high-to-low',
+            onChanged: (String? value) {
+              controller.setSortBy(value!);
+              Get.back();
+            },
+            groupValue: controller.sortBy,
+          ),
+        ],
       ),
     );
   }
