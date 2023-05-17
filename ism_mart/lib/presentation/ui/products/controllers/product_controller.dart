@@ -185,6 +185,11 @@ class ProductController extends GetxController with StateMixin {
     });
   }
 
+  ///Product Full Image View Variables
+  var imageChange = false.obs;
+  var imageIndex = 0.obs;
+  ///Product Full Image View End
+
   postQuestion({productId}) async {
     String question = questionController.text;
     if (question.isNotEmpty) {

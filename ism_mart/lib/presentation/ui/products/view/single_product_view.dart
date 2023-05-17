@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/ui/exports_ui.dart';
+import 'package:ism_mart/presentation/ui/products/view/single_product_full_image_view.dart';
 import 'package:ism_mart/presentation/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
@@ -62,16 +63,16 @@ class SingleProductView extends GetView<ProductController> {
               [
                 productModel.images!.isEmpty
                     ? InteractiveViewer(
-                        boundaryMargin: const EdgeInsets.all(20.0),
-                        minScale: 0.1,
-                        maxScale: 2.0,
-                        child: CustomNetworkImage(
-                          imageUrl: productModel.thumbnail,
-                          fit: BoxFit.cover,
-                          width: MediaQuery.of(Get.context!).size.width,
-                          height: MediaQuery.of(Get.context!).size.height * 0.4,
-                        ),
-                      )
+                  boundaryMargin: const EdgeInsets.all(20.0),
+                  minScale: 0.1,
+                  maxScale: 2.0,
+                  child: CustomNetworkImage(
+                    imageUrl: productModel.thumbnail,
+                    fit: BoxFit.cover,
+                    width: MediaQuery.of(Get.context!).size.width,
+                    height: MediaQuery.of(Get.context!).size.height * 0.4,
+                  ),
+                )
                     : _productImages(imagesList: productModel.images!),
 
                 /// product name, price etc.
@@ -103,8 +104,8 @@ class SingleProductView extends GetView<ProductController> {
         ],
       ),
       bottomNavigationBar: Get.arguments != null &&
-              Get.arguments["calledFor"] != null &&
-              Get.arguments["calledFor"]!.contains("seller")
+          Get.arguments["calledFor"] != null &&
+          Get.arguments["calledFor"]!.contains("seller")
           ? null
           : _footerBottomBar(),
     );
@@ -127,41 +128,41 @@ class SingleProductView extends GetView<ProductController> {
         ),
       ),
       title: Get.arguments != null &&
-              Get.arguments["calledFor"] != null &&
-              Get.arguments["calledFor"]!.contains("seller")
+          Get.arguments["calledFor"] != null &&
+          Get.arguments["calledFor"]!.contains("seller")
           ? CustomText(
-              title: "Product Details",
-              style: appBarTitleSize,
-            )
+        title: "Product Details",
+        style: appBarTitleSize,
+      )
           : Column(
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                        flex: 5,
-                        child: CustomSearchBar(
-                          searchText: productModel.name,
-                          calledFromSPV: true,
-                        )),
-                    AppConstant.spaceWidget(width: 10),
-                    CartIcon(
-                      onTap: () {
-                        //called from SingleProductView (SPV)
-                        Get.offNamed(Routes.cartRoute,
-                            arguments: {"calledFromSPV": true},
-                            preventDuplicates: false);
-                      },
-                      iconWidget: Icon(
-                        IconlyLight.buy,
-                        size: 25,
-                        color: kPrimaryColor,
-                      ),
-                    ),
-                  ],
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                  flex: 5,
+                  child: CustomSearchBar(
+                    searchText: productModel.name,
+                    calledFromSPV: true,
+                  )),
+              AppConstant.spaceWidget(width: 10),
+              CartIcon(
+                onTap: () {
+                  //called from SingleProductView (SPV)
+                  Get.offNamed(Routes.cartRoute,
+                      arguments: {"calledFromSPV": true},
+                      preventDuplicates: false);
+                },
+                iconWidget: Icon(
+                  IconlyLight.buy,
+                  size: 25,
+                  color: kPrimaryColor,
                 ),
-              ],
-            ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 
@@ -175,19 +176,23 @@ class SingleProductView extends GetView<ProductController> {
             onPageChanged: controller.changePage,
             itemCount: imagesList!.length,
             itemBuilder: (context, index) {
-              return InteractiveViewer(
-                boundaryMargin: const EdgeInsets.all(20.0),
-                minScale: 0.1,
-                maxScale: 2.0,
+              return GestureDetector(
+                onTap: () {
+                  controller.imageIndex(index);
+                  Get.to(() => SingleProductFullImage(productImages: imagesList, initialImage: index,));
+                },
                 child: CustomNetworkImage(
-                    imageUrl: imagesList[index].url,
-                    width: MediaQuery.of(context).size.width),
+                  imageUrl: imagesList[index].url,
+                  fit: BoxFit.cover,
+                  width: MediaQuery.of(Get.context!).size.width,
+                  height: MediaQuery.of(Get.context!).size.height * 0.6,
+                ),
               );
             },
           ),
         ),
         Obx(
-          () => Positioned(
+              () => Positioned(
             bottom: 16.0,
             left: 0.0,
             right: 0.0,
@@ -195,7 +200,7 @@ class SingleProductView extends GetView<ProductController> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
                 imagesList.length,
-                (index) => AnimatedContainer(
+                    (index) => AnimatedContainer(
                   duration: const Duration(milliseconds: 400),
                   height: 6.0,
                   width: /*controller.sliderIndex.value == index ? 14.0 :*/ 6.0,
@@ -214,6 +219,7 @@ class SingleProductView extends GetView<ProductController> {
       ],
     );
   }
+
 
   _productBasicDetails({ProductModel? productModel}) {
     return Card(
@@ -303,9 +309,9 @@ class SingleProductView extends GetView<ProductController> {
                   child: Row(
                     children: [
                       Obx(
-                        () => CustomText(
+                            () => CustomText(
                           title:
-                              "${getRating(controller.reviewResponse)} (${controller.reviewResponse!.count})",
+                          "${getRating(controller.reviewResponse)} (${controller.reviewResponse!.count})",
                           style: bodyText1,
                         ),
                       ),
@@ -354,7 +360,7 @@ class SingleProductView extends GetView<ProductController> {
                         style: bodyText1.copyWith(color: kLightGreyColor)),
                     TextSpan(
                         text:
-                            "${productModel.sellerModel!.storeName ?? productModel.sellerModel!.user!.firstName ?? productModel.sellerModel!.user!.name ?? ""}",
+                        "${productModel.sellerModel!.storeName ?? productModel.sellerModel!.user!.firstName ?? productModel.sellerModel!.user!.name ?? ""}",
                         style: headline3),
                   ],
                 ),
@@ -365,7 +371,7 @@ class SingleProductView extends GetView<ProductController> {
                   const Icon(Icons.star_rounded, color: Colors.amber),
                   CustomText(
                     title:
-                        "${productModel.sellerModel!.rating!.toStringAsFixed(1)}",
+                    "${productModel.sellerModel!.rating!.toStringAsFixed(1)}",
                     style: bodyText1,
                   ),
                   AppConstant.spaceWidget(width: 10),
@@ -412,9 +418,9 @@ class SingleProductView extends GetView<ProductController> {
 
   _productVariantWidget(
       {title,
-      List<Feature>? featureList,
-      bool? isNextBtnClicked = false,
-      isCalledForColors = false}) {
+        List<Feature>? featureList,
+        bool? isNextBtnClicked = false,
+        isCalledForColors = false}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -425,9 +431,9 @@ class SingleProductView extends GetView<ProductController> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: featureList!
                 .map((e) => isNextBtnClicked!
-                    ? _buildChip(
-                        featureModel: e, calledForColors: isCalledForColors)
-                    : _singleVariantsListItems(feature: e))
+                ? _buildChip(
+                featureModel: e, calledForColors: isCalledForColors)
+                : _singleVariantsListItems(feature: e))
                 .toList(),
           ),
         ),
@@ -544,7 +550,7 @@ class SingleProductView extends GetView<ProductController> {
                   ),
                   CustomText(
                     title:
-                        "Based on ${controller.reviewResponse!.count ?? 0} ratings",
+                    "Based on ${controller.reviewResponse!.count ?? 0} ratings",
                     style: caption,
                   ),
                 ],
@@ -552,15 +558,15 @@ class SingleProductView extends GetView<ProductController> {
             ),
             kSmallDivider,
             Obx(
-              () => controller.reviewResponse!.reviewsList == null ||
-                      controller.reviewResponse!.reviewsList!.isEmpty
+                  () => controller.reviewResponse!.reviewsList == null ||
+                  controller.reviewResponse!.reviewsList!.isEmpty
                   ? NoDataFound(text: "No reviews found")
                   : Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: controller.reviewResponse!.reviewsList!
-                          .map((e) => _singleReviewListItem(review: e))
-                          .toList(),
-                    ),
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: controller.reviewResponse!.reviewsList!
+                    .map((e) => _singleReviewListItem(review: e))
+                    .toList(),
+              ),
             ),
 
             /* ListView.builder(
@@ -596,7 +602,7 @@ class SingleProductView extends GetView<ProductController> {
           children: [
             CustomText(
                 title:
-                    "${review!.user!.firstName} ${review.user!.lastName!.isNotEmpty ? review.user!.lastName!.substring(0, 1).capitalizeFirst : ''}."),
+                "${review!.user!.firstName} ${review.user!.lastName!.isNotEmpty ? review.user!.lastName!.substring(0, 1).capitalizeFirst : ''}."),
             RatingBar.builder(
               itemSize: 13,
               ignoreGestures: true,
@@ -634,7 +640,7 @@ class SingleProductView extends GetView<ProductController> {
 
   _productQuestions({ProductModel? productModel}) {
     return Obx(
-      () => CustomCard(
+          () => CustomCard(
         margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5),
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -645,55 +651,55 @@ class SingleProductView extends GetView<ProductController> {
               CustomText(title: langKey.productQuestions.tr, style: headline2),
               controller.productQuestionsList.isEmpty
                   ? Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: NoDataFound(text: langKey.noQuestionFound.tr),
-                    )
+                padding: const EdgeInsets.all(8.0),
+                child: NoDataFound(text: langKey.noQuestionFound.tr),
+              )
                   : ListView.builder(
-                      shrinkWrap: true,
-                      padding: EdgeInsets.zero,
-                      //physics: const NeverScrollableScrollPhysics(),
-                      itemCount: controller.productQuestionsList.length,
-                      itemBuilder: (_, index) {
-                        QuestionModel? model =
-                            controller.productQuestionsList[index];
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 8.0, vertical: 15),
-                          child: Column(
-                            //mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              _singleQuestionListItem(
-                                  icon: "Q",
-                                  //Icons.question_mark,
-                                  iconColor: kRedColor,
-                                  title: model.question,
-                                  firstName: model.user!.firstName!,
-                                  date: model.createdAt),
-                              AppConstant.spaceWidget(height: 10),
-                              if (model.answer != null)
-                                _singleQuestionListItem(
-                                    icon: "A",
-                                    //Icons.question_answer,
-                                    title: model.answer!.answer,
-                                    iconColor: kLightColor,
-                                    firstName:
-                                        productModel!.sellerModel!.storeName ??
-                                            productModel
-                                                .sellerModel!.user!.firstName,
-                                    date: model.answer!.createdAt),
-                              kSmallDivider,
-                            ],
-                          ),
-                        );
-                      },
+                shrinkWrap: true,
+                padding: EdgeInsets.zero,
+                //physics: const NeverScrollableScrollPhysics(),
+                itemCount: controller.productQuestionsList.length,
+                itemBuilder: (_, index) {
+                  QuestionModel? model =
+                  controller.productQuestionsList[index];
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 8.0, vertical: 15),
+                    child: Column(
+                      //mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _singleQuestionListItem(
+                            icon: "Q",
+                            //Icons.question_mark,
+                            iconColor: kRedColor,
+                            title: model.question,
+                            firstName: model.user!.firstName!,
+                            date: model.createdAt),
+                        AppConstant.spaceWidget(height: 10),
+                        if (model.answer != null)
+                          _singleQuestionListItem(
+                              icon: "A",
+                              //Icons.question_answer,
+                              title: model.answer!.answer,
+                              iconColor: kLightColor,
+                              firstName:
+                              productModel!.sellerModel!.storeName ??
+                                  productModel
+                                      .sellerModel!.user!.firstName,
+                              date: model.answer!.createdAt),
+                        kSmallDivider,
+                      ],
                     ),
+                  );
+                },
+              ),
               //kSmallDivider,
               InkWell(
                 onTap: () {
                   Get.to(() => ProductQuestionAnswerUI(
-                        productModel: productModel,
-                      ));
+                    productModel: productModel,
+                  ));
                 },
                 child: CustomGreyBorderContainer(
                   width: double.infinity,
@@ -701,9 +707,9 @@ class SingleProductView extends GetView<ProductController> {
                   borderColor: kWhiteColor,
                   child: Center(
                       child: CustomText(
-                    title: langKey.askQuestion.tr,
-                    color: kRedColor,
-                  )),
+                        title: langKey.askQuestion.tr,
+                        color: kRedColor,
+                      )),
                 ),
               ),
             ],
@@ -727,9 +733,9 @@ class SingleProductView extends GetView<ProductController> {
               color: iconColor!.withOpacity(0.75), shape: BoxShape.circle),
           child: Center(
               child: CustomText(
-            title: icon,
-            color: kWhiteColor,
-          )),
+                title: icon,
+                color: kWhiteColor,
+              )),
 
           /*Icon(
             icon,
@@ -754,7 +760,7 @@ class SingleProductView extends GetView<ProductController> {
                       style: caption.copyWith(color: kLightColor)),
                   TextSpan(
                       text:
-                          " - ${AppConstant.formattedDataTime("dd-MMM-yy", date)}",
+                      " - ${AppConstant.formattedDataTime("dd-MMM-yy", date)}",
                       style: caption.copyWith(color: kLightColor)),
                 ],
               ),
@@ -767,49 +773,49 @@ class SingleProductView extends GetView<ProductController> {
 
   Widget _buildCustomerAlsoViewed(List<ProductModel> list) {
     return Obx(
-      () => list.isEmpty
+          () => list.isEmpty
           ? Container()
           : controller.isLoading.isTrue
-              ? CustomLoading(isItForWidget: true)
-              : Card(
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: SizedBox(
-                      height: AppResponsiveness.getBoxHeightPoint32(),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          CustomText(
-                            title: langKey.peopleAlsoViewed.tr,
-                            size: 18,
-                            weight: FontWeight.w600,
-                          ),
-                          AppConstant.spaceWidget(height: 10),
-                          Expanded(
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: list.length,
-                              itemBuilder: (context, index) {
-                                ProductModel productModel = list[index];
-                                return SingleProductItems(
-                                  productModel: productModel,
-                                  onTap: () {
-                                    Get.offNamed('/product/${productModel.id}',
-                                        preventDuplicates: false,
-                                        arguments: {"calledFor": "customer"});
-                                  },
-                                );
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+          ? CustomLoading(isItForWidget: true)
+          : Card(
+        margin:
+        const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SizedBox(
+            height: AppResponsiveness.getBoxHeightPoint32(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                CustomText(
+                  title: langKey.peopleAlsoViewed.tr,
+                  size: 18,
+                  weight: FontWeight.w600,
+                ),
+                AppConstant.spaceWidget(height: 10),
+                Expanded(
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: list.length,
+                    itemBuilder: (context, index) {
+                      ProductModel productModel = list[index];
+                      return SingleProductItems(
+                        productModel: productModel,
+                        onTap: () {
+                          Get.offNamed('/product/${productModel.id}',
+                              preventDuplicates: false,
+                              arguments: {"calledFor": "customer"});
+                        },
+                      );
+                    },
                   ),
                 ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 
@@ -906,7 +912,7 @@ class SingleProductView extends GetView<ProductController> {
 
   Widget _buildChip({Feature? featureModel, calledForColors = true}) {
     return Obx(
-      () => Padding(
+          () => Padding(
         padding: const EdgeInsets.all(8.0),
         child: ChoiceChip(
           label: CustomText(
