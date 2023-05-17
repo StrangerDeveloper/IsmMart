@@ -6,6 +6,8 @@ import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
+import '../../../presentation/ui/buyer/settings/general/general_data_ui.dart';
+
 class AuthController extends GetxController {
   final AuthProvider authProvider;
 
@@ -528,34 +530,32 @@ class AuthController extends GetxController {
     }
   }
 
-  emailVerificationCheck()async{
+  emailVerificationCheck() async {
     await getToken();
-    if(userToken == null || userToken == '') {
+    if (userToken == null || userToken == '') {
       Get.toNamed(Routes.loginRoute);
-    } else{
+    } else {
       if (userModel!.emailVerified == false) {
-        String? verificationDetails = await LocalStorageHelper
-            .getEmailVerificationDetails();
+        String? verificationDetails =
+            await LocalStorageHelper.getEmailVerificationDetails();
         if (verificationDetails != null) {
           DateTime linkTime = DateTime.parse(verificationDetails);
           DateTime currentTime = DateTime.now();
-          DateTime fiveMinutesCheck = currentTime.subtract(
-              Duration(minutes: 5));
+          DateTime fiveMinutesCheck =
+              currentTime.subtract(Duration(minutes: 5));
           if (fiveMinutesCheck.isAfter(linkTime)) {
-            LocalStorageHelper.localStorage.remove(
-                'emailVerificationTime');
+            LocalStorageHelper.localStorage.remove('emailVerificationTime');
             Get.toNamed(Routes.emailVerificationLinkRoute);
+          } else {
+            showSnackBar(
+                title: 'Verify Email',
+                message:
+                    'An Email Verification link has already been sent to your email');
           }
-          else {
-            showSnackBar(title: 'Verify Email',
-                message: 'An Email Verification link has already been sent to your email');
-          }
-        }
-        else {
+        } else {
           Get.toNamed(Routes.emailVerificationLinkRoute);
         }
-      }
-      else {
+      } else {
         Get.toNamed(Routes.checkOutRoute);
       }
     }
@@ -636,7 +636,11 @@ class AuthController extends GetxController {
           // Get.back();
           AppConstant.displaySnackBar(
               langKey.successTitle.tr, apiResponse.message);
+          isLoading(false);
+          // firstNameController.text = '';
+
           clearContactUsControllers();
+          Get.to(GeneralSettingsDataUI());
         } else
           AppConstant.displaySnackBar(
               langKey.errorTitle.tr, apiResponse.message);
@@ -692,6 +696,8 @@ class AuthController extends GetxController {
   @override
   void onClose() {
     super.onClose();
+    print("dispose call ----------");
+    clearContactUsControllers();
     clearControllers();
     clearLoginController();
     clearStoreController();

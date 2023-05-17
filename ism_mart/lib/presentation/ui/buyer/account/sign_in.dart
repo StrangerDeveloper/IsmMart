@@ -67,12 +67,9 @@ class SignInUI extends GetView<AuthController> {
                                 AutovalidateMode.onUserInteraction,
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return langKey.emailReq.tr;
-                              } else {
-                                return !GetUtils.isEmail(value)
-                                    ? langKey.invalidEmail.tr
-                                    : null;
+                                return fullNameReq.tr;
                               }
+                              return Validator().email(value);
                             },
                             keyboardType: TextInputType.emailAddress,
                             onChanged: (value) {},

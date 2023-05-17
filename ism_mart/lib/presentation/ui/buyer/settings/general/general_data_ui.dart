@@ -132,6 +132,7 @@ class GeneralSettingsDataUI extends StatelessWidget {
           CustomGreyBorderContainer(
             child: Form(
               key: formKey,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               child: Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5),
@@ -213,6 +214,7 @@ class GeneralSettingsDataUI extends StatelessWidget {
                               onTap: () async {
                                 if (formKey.currentState!.validate()) {
                                   await authController.postContactUs();
+                                  formKey.currentState!.reset();
                                 }
                               },
                               text: send.tr,

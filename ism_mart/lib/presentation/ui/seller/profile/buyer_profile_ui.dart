@@ -258,6 +258,7 @@ class ProfileUI extends GetView<AuthController> {
                         title: title,
                         value: controller.editingTextController.text,
                         field: field);
+                    _formKey.currentState!.reset();
                     // controller.login();
 
                     // await imgController.updateUser(
