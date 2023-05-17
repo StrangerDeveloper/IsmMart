@@ -89,7 +89,7 @@ class SignInUI extends GetView<AuthController> {
                             validator: (value) =>
                                 //!GetUtils.isPassport(value!)<<<<<<< HEAD
                                 value!.isEmpty
-                                    ? langKey.passwordRequired
+                                    ? langKey.passwordRequired.tr
                                     : null,
                             obscureText: true,
                             onChanged: (value) => {},

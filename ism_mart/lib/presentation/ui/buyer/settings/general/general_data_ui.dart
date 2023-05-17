@@ -49,8 +49,8 @@ class GeneralSettingsDataUI extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child:
-                                  //_bodyText(text:e['body']),
-                                  Text(
+                              //_bodyText(text:e['body']),
+                              Text(
                                 "${e['body'].toString()}",
                                 softWrap: true,
                                 textAlign: TextAlign.start,
@@ -102,29 +102,29 @@ class GeneralSettingsDataUI extends StatelessWidget {
               children: getContactUsData()
                   .map(
                     (e) => Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: ListTile(
-                        leading: Icon(
-                          e["icon"],
-                          size: 30,
-                          color: kPrimaryColor,
-                        ),
-                        title: CustomText(
-                          title: e['title'].toString(),
-                          style: headline3,
-                        ),
-                        subtitle: CustomText(
-                          title: e['description'].toString(),
-                          maxLines: e['description'].length,
-
-                          style: bodyText1.copyWith(
-                            color: kDarkColor,
-                          ),
-                          //textAlign: TextAlign.center,
-                        ),
-                      ),
+                  padding: const EdgeInsets.all(5.0),
+                  child: ListTile(
+                    leading: Icon(
+                      e["icon"],
+                      size: 30,
+                      color: kPrimaryColor,
                     ),
-                  )
+                    title: CustomText(
+                      title: e['title'].toString(),
+                      style: headline3,
+                    ),
+                    subtitle: CustomText(
+                      title: e['description'].toString(),
+                      maxLines: e['description'].length,
+
+                      style: bodyText1.copyWith(
+                        color: kDarkColor,
+                      ),
+                      //textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+              )
                   .toList(),
             ),
           ),
@@ -132,9 +132,10 @@ class GeneralSettingsDataUI extends StatelessWidget {
           CustomGreyBorderContainer(
             child: Form(
               key: formKey,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5),
+                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5),
                 child: Column(
                   children: [
                     StickyLabel(
@@ -185,7 +186,7 @@ class GeneralSettingsDataUI extends StatelessWidget {
                       textStyle: bodyText1,
                       autoValidateMode: AutovalidateMode.onUserInteraction,
                       validator: (value) =>
-                          GetUtils.isBlank(value!)! ? subjectReq.tr : null,
+                      GetUtils.isBlank(value!)! ? subjectReq.tr : null,
                       keyboardType: TextInputType.name,
                       onChanged: (value) {},
                       onSaved: (value) {},
@@ -200,25 +201,26 @@ class GeneralSettingsDataUI extends StatelessWidget {
                       textStyle: bodyText1,
                       autoValidateMode: AutovalidateMode.onUserInteraction,
                       validator: (value) =>
-                          GetUtils.isBlank(value!)! ? messageReq.tr : null,
+                      GetUtils.isBlank(value!)! ? messageReq.tr : null,
                       keyboardType: TextInputType.text,
                       onChanged: (value) {},
                       onSaved: (value) {},
                     ),
                     AppConstant.spaceWidget(height: 20),
                     Obx(
-                      () => authController.isLoading.isTrue
+                          () => authController.isLoading.isTrue
                           ? CustomLoading(isItBtn: true)
                           : CustomButton(
-                              onTap: () async {
-                                if (formKey.currentState!.validate()) {
-                                  await authController.postContactUs();
-                                }
-                              },
-                              text: send.tr,
-                              height: 40,
-                              width: 150,
-                            ),
+                        onTap: () async {
+                          if (formKey.currentState!.validate()) {
+                            await authController.postContactUs();
+                            formKey.currentState!.reset();
+                          }
+                        },
+                        text: send.tr,
+                        height: 40,
+                        width: 150,
+                      ),
                     ),
                   ],
                 ),
@@ -328,26 +330,6 @@ class GeneralSettingsDataUI extends StatelessWidget {
       {'header': '', 'body': ''},
     ];
   }
-
-  /*
-These terms and conditions and any dispute or claim arising out of or in connection with them or their subject matter or formation (including non-contractual disputes or claims) will be governed by Pakistan law. You should understand that by ordering any of our product, you agree to be bound by these terms and conditions.
-Categories for Registration:
-  1- Basic Membership- Free of Cost: Can be registered as free members.
-    • Cannot sell anything on ISMMART platform.
-    • Will have only access to the products and stores to visit that are opened by default or kept opened by the Vendors & Businesses to visit.
-    • They can buy anything at their own as a direct customers with mutual understanding with the seller; ISMMART will not be responsible or back up in case of any issues in such deal.
-  2- Premium Membership – Paid Membership:
-    • 5 USD per month with a free one month trial. Yearly subscription charges are 99.5 USD.
-    • Can sell anything on ISMMART platform.
-    • Will have access to all products and stores to visit.
-    • All deals by Premium Members on ISMMART will be backed up by ISMMART. We will be responsible for smooth transactions and delivery of products. ISMMART will guarantee to honor the mutual understanding that both Seller and Buyer have agreed upon.
-    • Premium Members will have worry less access to all businesses worldwide, both as a Seller & Buyer as ISMMART will be directly guaranteeing and verifying such members and any deals they do.
-    • As all Premium Members are scrutinized and are verified through ISMMART verification process, so all such members can do worry less trade with each other, anywhere in the World.
-    • Unlimited deliveries on eligible items.\n'
-Note: All members (Sellers & Buyers) are requested to follow all trading rules and procedures mentioned by ISMMART to avoid any kind of inconvenience in payment or delivery. Commission Fee Structure Transaction value below PKR100,000/- ~ 0.5% Commission Transaction value above PKR100,000/- and below PKR250,00,00/- ~ 1.00% Commission Transaction value above PKR250,00,00/- but below PKR250,00,000/- ~ 1.75% Commission Transaction value above PKR250,00,000/- flat 2.25% Commission For any wholesale transaction a flat 3.5% Commission will be charged.
-Note: Transaction value excludes shipping and insurance cost.
-   */
-
   List getReturnExchangeData() {
     //String dot = "\u2022";
     return [

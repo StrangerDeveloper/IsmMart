@@ -631,6 +631,7 @@ class AuthController extends GetxController {
       "message": "${storeDescController.text}"
     };
     await authProvider.contactUs(data: data).then((ApiResponse? apiResponse) {
+      isLoading(false);
       if (apiResponse != null) {
         if (apiResponse.success!) {
           // Get.back();
@@ -645,6 +646,7 @@ class AuthController extends GetxController {
             langKey.errorTitle.tr, langKey.someThingWentWrong.tr);
     }).catchError((e) {
       isLoading(false);
+
       AppConstant.displaySnackBar(langKey.errorTitle.tr, "$e");
     });
   }

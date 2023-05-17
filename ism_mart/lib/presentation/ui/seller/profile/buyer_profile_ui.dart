@@ -14,21 +14,21 @@ class ProfileUI extends GetView<AuthController> {
     print(
         "image is m0del => ${controller.userModel!.imageUrl} \n image controller ${controller.profileImgPath.value}");
     return Obx(
-      () => SafeArea(
+          () => SafeArea(
         child: controller.isLoading.isTrue
             ? CustomLoading(isItForWidget: true, color: kPrimaryColor)
             : CustomScrollView(
-                slivers: [
-                  SliverList(
-                    delegate: SliverChildListDelegate(
-                      [
-                        CustomHeader(title: langKey.profile.tr),
-                        _body(),
-                      ],
-                    ),
-                  ),
+          slivers: [
+            SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  CustomHeader(title: langKey.profile.tr),
+                  _body(),
                 ],
               ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -116,7 +116,7 @@ class ProfileUI extends GetView<AuthController> {
                   StickyLabel(text: langKey.personalInfo.tr),
                   //Profile data
                   Obx(
-                    () => Column(
+                        () => Column(
                       children: controller.getProfileData().map((profile) {
                         print("map is $profile");
                         return profileCards(
@@ -139,35 +139,35 @@ class ProfileUI extends GetView<AuthController> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Obx(
-                () => controller.isLoading.isTrue
+                    () => controller.isLoading.isTrue
                     ? CustomLoading(
-                        isItBtn: true,
-                      )
+                  isItBtn: true,
+                )
                     : InkWell(
-                        onTap: () => showConfirmDeleteDialog(
-                            userModel: controller.userModel!),
-                        child: Container(
-                          width: 150,
-                          padding: const EdgeInsets.symmetric(vertical: 15.0),
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            //color: kRedColor,
-                            borderRadius: BorderRadius.circular(8),
-                            //border: Border.all(color: kRedColor),
-                            boxShadow: [
-                              BoxShadow(
-                                color: kRedColor,
-                                offset: Offset(0, 1),
-                                blurRadius: 2,
-                              )
-                            ],
-                          ),
-                          child: CustomText(
-                            title: langKey.deactivateBtn.tr,
-                            color: kWhiteColor,
-                          ),
-                        ),
-                      ),
+                  onTap: () => showConfirmDeleteDialog(
+                      userModel: controller.userModel!),
+                  child: Container(
+                    width: 150,
+                    padding: const EdgeInsets.symmetric(vertical: 15.0),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      //color: kRedColor,
+                      borderRadius: BorderRadius.circular(8),
+                      //border: Border.all(color: kRedColor),
+                      boxShadow: [
+                        BoxShadow(
+                          color: kRedColor,
+                          offset: Offset(0, 1),
+                          blurRadius: 2,
+                        )
+                      ],
+                    ),
+                    child: CustomText(
+                      title: langKey.deactivateBtn.tr,
+                      color: kWhiteColor,
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
@@ -178,39 +178,39 @@ class ProfileUI extends GetView<AuthController> {
 
   Widget profileCards(String title, subtitle, icon, field) {
     return (title.toLowerCase().contains("country") ||
-            title.toLowerCase().contains("city"))
+        title.toLowerCase().contains("city"))
         ? SizedBox()
         : Container(
-            width: 320,
-            height: 60,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: kPrimaryColor.withOpacity(0.7)),
-            ),
-            margin: EdgeInsets.only(left: 8, top: 12, right: 8, bottom: 3),
-            child: ListTile(
-              dense: true,
-              contentPadding: EdgeInsets.only(left: 10.0, right: 10.0),
-              title: CustomText(
-                title: title,
-                color: Colors.black54,
-                weight: FontWeight.w600,
-              ),
-              subtitle: CustomText(
-                title: subtitle,
-                style: bodyText1,
-              ),
-              leading: Icon(icon),
-              trailing: InkWell(
-                onTap: () => showEditDialog(title, subtitle, field),
-                child: Icon(
-                  Icons.edit,
-                  size: 20,
-                  color: kPrimaryColor.withOpacity(0.8),
-                ),
-              ),
-            ),
-          );
+      width: 320,
+      height: 60,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: kPrimaryColor.withOpacity(0.7)),
+      ),
+      margin: EdgeInsets.only(left: 8, top: 12, right: 8, bottom: 3),
+      child: ListTile(
+        dense: true,
+        contentPadding: EdgeInsets.only(left: 10.0, right: 10.0),
+        title: CustomText(
+          title: title,
+          color: Colors.black54,
+          weight: FontWeight.w600,
+        ),
+        subtitle: CustomText(
+          title: subtitle,
+          style: bodyText1,
+        ),
+        leading: Icon(icon),
+        trailing: InkWell(
+          onTap: () => showEditDialog(title, subtitle, field),
+          child: Icon(
+            Icons.edit,
+            size: 20,
+            color: kPrimaryColor.withOpacity(0.8),
+          ),
+        ),
+      ),
+    );
   }
 
   void showEditDialog(title, subtitle, field) {
@@ -249,29 +249,30 @@ class ProfileUI extends GetView<AuthController> {
         ),
       ),
       confirm: Obx(
-        () => controller.isLoading.isTrue
+            () => controller.isLoading.isTrue
             ? CustomLoading(isItBtn: true)
             : CustomButton(
-                onTap: () async {
-                  if (_formKey.currentState!.validate()) {
-                    await controller.updateUser(
-                        title: title,
-                        value: controller.editingTextController.text,
-                        field: field);
-                    // controller.login();
+          onTap: () async {
+            if (_formKey.currentState!.validate()) {
+              await controller.updateUser(
+                  title: title,
+                  value: controller.editingTextController.text,
+                  field: field);
+              _formKey.currentState!.reset();
+              // controller.login();
 
-                    // await imgController.updateUser(
-                    //   field: field,
-                    //   title: title,
-                    // );
+              // await imgController.updateUser(
+              //   field: field,
+              //   title: title,
+              // );
 
-                    //Get.back();
-                  }
-                },
-                text: langKey.updateBtn.tr,
-                height: 40,
-                width: 200,
-              ),
+              //Get.back();
+            }
+          },
+          text: langKey.updateBtn.tr,
+          height: 40,
+          width: 200,
+        ),
       ),
     );
   }

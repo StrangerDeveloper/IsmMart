@@ -60,6 +60,7 @@ class English {
         key.orderInformation: 'Order Information',
         key.orderNotCreated: 'Something went wrong! Order Not created',
         key.phoneValidate: 'Phone numbers should be 11 to 14 digits long.',
+        key.paymentCardFailed : "Payment Information is not Correct",
 
         ///sellerController
         key.imageSizeDesc: 'Image must be up to',
