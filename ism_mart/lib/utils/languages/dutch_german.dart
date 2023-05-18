@@ -514,30 +514,56 @@ class DutchGerman {
             'Sie können auf Ihre Informationen zugreifen, einschließlich Ihres Namens, Ihrer Adresse, Ihrer Zahlungsoptionen, der Profilinformationen und Ihres Kaufhistoriums im Kontoabschnitt.',
         key.privacyBody15:
             'Diese Datenschutzrichtlinie ist ab dem 10. Oktober 2022 wirksam und bleibt in Bezug auf Änderungen seiner Bestimmungen in der Zukunft in Kraft, die unmittelbar nach der Veröffentlichung auf dieser Seite in Kraft sein werden. Wir behalten uns das Recht vor, unsere Datenschutzrichtlinien jederzeit zu aktualisieren oder zu ändern, und Sie sollten diese Datenschutzrichtlinie regelmäßig überprüfen. Beachten Sie: Wenn Sie Fragen zu dieser Datenschutzrichtlinie haben, kontaktieren Sie uns bitte.',
-    key.memPlan1Title: 'START',
-key.memPlan1Price: 'Frei',
-key.memPlan1Desc1: 'Jeder kann als kostenlose Mitglieder registriert werden.',
-key.memPlan1Desc2: 'Kann bis zu 3 Produkte auf der Ismmart -Plattform verkaufen.',
-key.memPlan1Desc3: 'Sie haben nur Zugang zu den Produkten und Geschäften, die standardmäßig eröffnet oder von den Anbietern und Unternehmen geöffnet werden können, um sie zu besuchen.',
-key.memPlan1Desc4: 'Sie können alles selbst als direkte Kunden mit gegenseitigem Verständnis mit dem Verkäufer kaufen. IsMmart ist bei Problemen in einem solchen Deal nicht verantwortlich oder sichern.',
-key.memPlan2Title: 'PROFI',
-key.memPlan2Desc1: 'Eine kostenlose Testversion in einem Monat',
-key.memPlan2Desc2: 'Kann alles auf der ismmart -Plattform verkaufen',
-key.memPlan2Desc3: 'Hat Zugang zu allen Produkten und Geschäften, die Sie besuchen können.',
-key.memPlan2Desc4: 'Alle Angebote von Premium -Mitgliedern bei IsMmart werden von IsMmart unterstützt. Wir werden für reibungslose Transaktionen und die Lieferung von Produkten verantwortlich sein. IsMmart wird garantieren, das gegenseitige Verständnis zu ehren, das sowohl Verkäufer als auch Käufer zugestimmt haben.',
-key.memPlan2Desc5: 'Unbegrenzte Lieferungen für förderfähige Artikel.',
-key.memPlan2Desc6: 'Premium -Mitglieder haben weniger Zugang zu allen Unternehmen weltweit, sowohl als Verkäufer als auch als Käufer, da IsMmart diese Mitglieder direkt garantieren und überprüft, und alle Angebote, die sie abgeben.',
-key.memPlan2Desc7: 'Da alle Premium -Mitglieder überprüft werden und durch den ISMMART -Überprüfungsprozess verifiziert werden, können sich alle dieser Mitglieder weniger Sorgen machen, überall auf der Welt.',
-key.memPlan3Title: 'GESCHÄFT',
-key.memPlan3Desc1: '2 Monate kostenlose Testversion',
-key.memPlan3Desc2: 'B2B -Möglichkeiten',
-key.memPlan3Desc3: 'Unbegrenzte kostenlose Lieferungen',
-key.memPlan3Desc4: 'Unbegrenzte Werbewerkzeuge',
-key.memPlan3Desc5: 'Großhandelsversand',
-key.memPlan3Desc6: 'Holen Sie sich die Chance, Produkte in unsere physischen Geschäfte zu platzieren.',
-key.memPlan3Desc7: 'Unbegrenzte Lieferungen für förderfähige Artikel.',
-key.memPlan3Desc8: 'Premium -Mitglieder haben weniger Zugang zu allen Unternehmen weltweit, sowohl als Verkäufer als auch als Käufer, da IsMmart diese Mitglieder direkt garantieren und überprüft, und alle Angebote, die sie abgeben.',
-key.memPlan3Desc9: 'Da alle Premium -Mitglieder überprüft werden und durch den ISMMART -Überprüfungsprozess verifiziert werden, können sich alle dieser Mitglieder weniger Sorgen machen, überall auf der Welt.',
-
+        key.memPlan1Title: 'START',
+        key.memPlan1Price: 'Frei',
+        key.memPlan1Desc1:
+            'Jeder kann als kostenlose Mitglieder registriert werden.',
+        key.memPlan1Desc2:
+            'Kann bis zu 3 Produkte auf der Ismmart -Plattform verkaufen.',
+        key.memPlan1Desc3:
+            'Sie haben nur Zugang zu den Produkten und Geschäften, die standardmäßig eröffnet oder von den Anbietern und Unternehmen geöffnet werden können, um sie zu besuchen.',
+        key.memPlan1Desc4:
+            'Sie können alles selbst als direkte Kunden mit gegenseitigem Verständnis mit dem Verkäufer kaufen. IsMmart ist bei Problemen in einem solchen Deal nicht verantwortlich oder sichern.',
+        key.memPlan2Title: 'PROFI',
+        key.memPlan2Desc1: 'Eine kostenlose Testversion in einem Monat',
+        key.memPlan2Desc2: 'Kann alles auf der ismmart -Plattform verkaufen',
+        key.memPlan2Desc3:
+            'Hat Zugang zu allen Produkten und Geschäften, die Sie besuchen können.',
+        key.memPlan2Desc4:
+            'Alle Angebote von Premium -Mitgliedern bei IsMmart werden von IsMmart unterstützt. Wir werden für reibungslose Transaktionen und die Lieferung von Produkten verantwortlich sein. IsMmart wird garantieren, das gegenseitige Verständnis zu ehren, das sowohl Verkäufer als auch Käufer zugestimmt haben.',
+        key.memPlan2Desc5: 'Unbegrenzte Lieferungen für förderfähige Artikel.',
+        key.memPlan2Desc6:
+            'Premium -Mitglieder haben weniger Zugang zu allen Unternehmen weltweit, sowohl als Verkäufer als auch als Käufer, da IsMmart diese Mitglieder direkt garantieren und überprüft, und alle Angebote, die sie abgeben.',
+        key.memPlan2Desc7:
+            'Da alle Premium -Mitglieder überprüft werden und durch den ISMMART -Überprüfungsprozess verifiziert werden, können sich alle dieser Mitglieder weniger Sorgen machen, überall auf der Welt.',
+        key.memPlan3Title: 'GESCHÄFT',
+        key.memPlan3Desc1: '2 Monate kostenlose Testversion',
+        key.memPlan3Desc2: 'B2B -Möglichkeiten',
+        key.memPlan3Desc3: 'Unbegrenzte kostenlose Lieferungen',
+        key.memPlan3Desc4: 'Unbegrenzte Werbewerkzeuge',
+        key.memPlan3Desc5: 'Großhandelsversand',
+        key.memPlan3Desc6:
+            'Holen Sie sich die Chance, Produkte in unsere physischen Geschäfte zu platzieren.',
+        key.memPlan3Desc7: 'Unbegrenzte Lieferungen für förderfähige Artikel.',
+        key.memPlan3Desc8:
+            'Premium -Mitglieder haben weniger Zugang zu allen Unternehmen weltweit, sowohl als Verkäufer als auch als Käufer, da IsMmart diese Mitglieder direkt garantieren und überprüft, und alle Angebote, die sie abgeben.',
+        key.memPlan3Desc9:
+            'Da alle Premium -Mitglieder überprüft werden und durch den ISMMART -Überprüfungsprozess verifiziert werden, können sich alle dieser Mitglieder weniger Sorgen machen, überall auf der Welt.',
+        key.q1: 'Wie funktioniert der IsMmart?',
+        key.q2: 'Kann ich mein Abonnement jederzeit kündigen?',
+        key.q3: 'Welche Zahlungsmethode sollten Sie akzeptieren?',
+        key.q4: 'Was sind die Vorteile der Verwendung von ISMMart -Affiliate?',
+        key.q5:
+            'Was ist Flottenmanagement und wie unterscheidet es sich von der dynamischen Skalierung?',
+        key.ans1:
+            'Das System bietet den Verkäufern, die etwas auf den Markt verkaufen möchten, einen virtuellen Platz/ein virtuelles Geschäft. Sie können einzelne Anbieter oder einige etablierte Marken sein, die ihre Präsenz in der digitalen Welt verbessern möchten. Unsere Anbieter registrieren sich bei uns in einigen monatlichen Abonnementgebühren/ Plattformgebühren. Wir werden die Echtheit der Anbieter überprüfen, indem wir ihre grundlegenden Informationen einnehmen und eine Vereinbarung mit ihnen vorbereiten. Ebenso müssen unsere Kunden/Käufer auch in unserem E -Commerce -Geschäft bei uns registriert sein. Die Kunden können das Anbieterprofil sehen, sie bewerten (nach Erhalten von Dienstleistungen), ihre Einkäufe tätigen und sich mit den Produkten auf dem Markt auf dem Laufenden halten. Zum Beispiel haben wir einen Anbieter/Geschäft als Ali -Elektronik, der sich mit allen Arten von Haushaltsgeräten befasst. Sagen Sie, Ayesha möchte einen elektrischen Wasserkocher kaufen und sie findet beim Suchen ihr gewünschtes Produkt auf Ali -Elektronik. Sie wird ihre Bestellung aufgeben und ihre Zahlung im Voraus leisten, die auf dem Konto des Unternehmens stehen, bis die Bestellung abgeschlossen ist. Ali Electronics erhält eine Benachrichtigung über die Bestellung. Er wird das entsprechende Produkt packen und es über unseren Service (unsere definierten Kurierdienste über unser Konto) entsenden. Sobald Miss Ayesha das Produkt erhält und überprüft, ob sie das gewünschte Produkt erhalten hat, wird die Zahlung freigegeben und erreicht das Verkäuferkonto in definierter Zeitraum (15 Tage).',
+        key.ans2:
+            'Ja. Sie können Ihr Abonnement jederzeit stornieren. Ihr Abonnement wird bis zum Ende Ihrer aktuellen Laufzeit (Monat oder Jahr) weiter aktiv sein, aber es wird sich nicht automatisch erneuern. Wenn Sie Ihr Konto nicht manuell löschen, werden Ihr Konto und alle Daten 60 Tage ab dem Tag gelöscht, an dem Ihr Abonnement inaktiv wird.',
+        key.ans3:
+            'Ganzheitliche engagierte Nischenmärkte vor der Zusammenarbeit und der Teile von Ideen. Phosphoreszenz ermöglichen parallele Anwendungen mit einzigartigen Imperativen. Proaktiv Funktionen von Funktionen durch kostengünstige Lösungen plagiarisieren. Nehmen Sie gemeinsam webfähige Vermittler anstatt verschiedene Testverfahren an.',
+        key.ans4:
+            'Einflüssig wirken sich ständig auf nahtlose Imperative für Best-of-Breed-Best Practices. Phosphoreszenz ermöglichen parallele Anwendungen mit einzigartigen Imperativen. Proaktiv Funktionen von Funktionen durch kostengünstige Lösungen plagiarisieren. Nehmen Sie gemeinsam webfähige Vermittler anstatt verschiedene Testverfahren an.',
+        key.ans5:
+            'Initiieren Sie fehlerfreie Kanäle mit hocheffizientem ROI. Intrinsic Envision-Weltklasse-Daten über Best-of-Breed-Best Practices. Effizient ermöglichen, ermächtigte E-Stellern nach Cross-Unit-Diensten zu ermöglichen. Eindeutig beschleunigen nahtlose Einzelhändler über kooperative Schnittstellen. Der monotonisch myokardiale Kunde leitete Meta-Services, während fehlerfreie Szenarien.',
       };
 }

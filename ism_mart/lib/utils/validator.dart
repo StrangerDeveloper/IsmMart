@@ -19,8 +19,7 @@ class Validator {
     RegExp regex = RegExp(pattern);
     if (GetUtils.isBlank(value)!) {
       return langKey.fieldIsRequired.tr;
-    }
-    else if (!regex.hasMatch(value!)) {
+    } else if (!regex.hasMatch(value!)) {
       return langKey.phoneValidate.tr;
     } else {
       return null;

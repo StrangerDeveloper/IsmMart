@@ -512,31 +512,57 @@ class Italian {
             'Puoi accedere alle tue informazioni, inclusi il tuo nome, indirizzo, opzioni di pagamento, informazioni sul profilo e cronologia degli acquisti nella sezione Account.',
         key.privacyBody15:
             'La presente Informativa sulla privacy è efficace al 10 ottobre 2022 e rimarrà in vigore se non per quanto riguarda le modifiche nelle sue disposizioni in futuro, che saranno in vigore immediatamente dopo essere stata pubblicata in questa pagina. Ci riserviamo il diritto di aggiornare o modificare la nostra politica sulla privacy in qualsiasi momento e dovresti verificare periodicamente questa politica sulla privacy. Nota: se hai domande sulla presente Informativa sulla privacy, contattaci.',
-     
-     key.memPlan1Title: 'INIZIO',
-key.memPlan1Price: 'Gratuito',
-key.memPlan1Desc1: 'Chiunque può essere registrato come membri gratuiti.',
-key.memPlan1Desc2: 'Può vendere fino a 3 prodotti sulla piattaforma ISMMART.',
-key.memPlan1Desc3: 'Avrà accesso solo ai prodotti e ai negozi da visitare che sono aperti per impostazione predefinita o mantenuti aperti dai venditori e dalle aziende da visitare.',
-key.memPlan1Desc4: 'Possono acquistare qualsiasi cosa a sé stante come clienti diretti con comprensione reciproca con il venditore; Ismmart non sarà responsabile o eseguito il backup in caso di problemi in tale accordo.',
-key.memPlan2Title: 'Pro',
-key.memPlan2Desc1: 'Una prova gratuita di un mese',
-key.memPlan2Desc2: 'Può vendere qualsiasi cosa sulla piattaforma ISMMART',
-key.memPlan2Desc3: 'Avrà accesso a tutti i prodotti e nei negozi da visitare.',
-key.memPlan2Desc4: 'Tutte le offerte da parte dei membri premium su Ismmart saranno supportate da Ismmart. Saremo responsabili delle transazioni fluide e della consegna dei prodotti. Ismmart garantirà di onorare la comprensione reciproca che sia il venditore che l\'acquirente hanno concordato.',
-key.memPlan2Desc5: 'Consegne illimitate su articoli idonei.',
-key.memPlan2Desc6: 'I membri premium avranno meno accesso a tutte le aziende in tutto il mondo, sia come venditore e acquirente, come IsmMART garantirà direttamente e verificherà tali membri e qualsiasi accordo che fanno.',
-key.memPlan2Desc7: 'Poiché tutti i membri premium vengono esaminati e vengono verificati attraverso il processo di verifica ISMMART, in modo che tutti questi membri possano preoccuparsi meno commercio tra loro, in qualsiasi parte del mondo.',
-key.memPlan3Title: 'ATTIVITÀ COMMERCIALE',
-key.memPlan3Desc1: 'Prova gratuita di 2 mesi',
-key.memPlan3Desc2: 'Opportunità B2B',
-key.memPlan3Desc3: 'Consegne gratuite illimitate',
-key.memPlan3Desc4: 'Strumenti promozionali illimitati',
-key.memPlan3Desc5: 'Spedizione all\'ingrosso',
-key.memPlan3Desc6: 'Ottieni la possibilità di posizionare i prodotti nei nostri negozi fisici.',
-key.memPlan3Desc7: 'Consegne illimitate su articoli idonei.',
-key.memPlan3Desc8: 'I membri premium avranno meno accesso a tutte le aziende in tutto il mondo, sia come venditore e acquirente, come IsmMART garantirà direttamente e verificherà tali membri e qualsiasi accordo che fanno.',
-key.memPlan3Desc9: 'Poiché tutti i membri premium vengono esaminati e vengono verificati attraverso il processo di verifica ISMMART, in modo che tutti questi membri possano preoccuparsi meno commercio tra loro, in qualsiasi parte del mondo.',
-
+        key.memPlan1Title: 'INIZIO',
+        key.memPlan1Price: 'Gratuito',
+        key.memPlan1Desc1:
+            'Chiunque può essere registrato come membri gratuiti.',
+        key.memPlan1Desc2:
+            'Può vendere fino a 3 prodotti sulla piattaforma ISMMART.',
+        key.memPlan1Desc3:
+            'Avrà accesso solo ai prodotti e ai negozi da visitare che sono aperti per impostazione predefinita o mantenuti aperti dai venditori e dalle aziende da visitare.',
+        key.memPlan1Desc4:
+            'Possono acquistare qualsiasi cosa a sé stante come clienti diretti con comprensione reciproca con il venditore; Ismmart non sarà responsabile o eseguito il backup in caso di problemi in tale accordo.',
+        key.memPlan2Title: 'Pro',
+        key.memPlan2Desc1: 'Una prova gratuita di un mese',
+        key.memPlan2Desc2:
+            'Può vendere qualsiasi cosa sulla piattaforma ISMMART',
+        key.memPlan2Desc3:
+            'Avrà accesso a tutti i prodotti e nei negozi da visitare.',
+        key.memPlan2Desc4:
+            'Tutte le offerte da parte dei membri premium su Ismmart saranno supportate da Ismmart. Saremo responsabili delle transazioni fluide e della consegna dei prodotti. Ismmart garantirà di onorare la comprensione reciproca che sia il venditore che l\'acquirente hanno concordato.',
+        key.memPlan2Desc5: 'Consegne illimitate su articoli idonei.',
+        key.memPlan2Desc6:
+            'I membri premium avranno meno accesso a tutte le aziende in tutto il mondo, sia come venditore e acquirente, come IsmMART garantirà direttamente e verificherà tali membri e qualsiasi accordo che fanno.',
+        key.memPlan2Desc7:
+            'Poiché tutti i membri premium vengono esaminati e vengono verificati attraverso il processo di verifica ISMMART, in modo che tutti questi membri possano preoccuparsi meno commercio tra loro, in qualsiasi parte del mondo.',
+        key.memPlan3Title: 'ATTIVITÀ COMMERCIALE',
+        key.memPlan3Desc1: 'Prova gratuita di 2 mesi',
+        key.memPlan3Desc2: 'Opportunità B2B',
+        key.memPlan3Desc3: 'Consegne gratuite illimitate',
+        key.memPlan3Desc4: 'Strumenti promozionali illimitati',
+        key.memPlan3Desc5: 'Spedizione all\'ingrosso',
+        key.memPlan3Desc6:
+            'Ottieni la possibilità di posizionare i prodotti nei nostri negozi fisici.',
+        key.memPlan3Desc7: 'Consegne illimitate su articoli idonei.',
+        key.memPlan3Desc8:
+            'I membri premium avranno meno accesso a tutte le aziende in tutto il mondo, sia come venditore e acquirente, come IsmMART garantirà direttamente e verificherà tali membri e qualsiasi accordo che fanno.',
+        key.memPlan3Desc9:
+            'Poiché tutti i membri premium vengono esaminati e vengono verificati attraverso il processo di verifica ISMMART, in modo che tutti questi membri possano preoccuparsi meno commercio tra loro, in qualsiasi parte del mondo.',
+        key.q1: 'Come funziona IsmMart?',
+        key.q2: 'Posso annullare il mio abbonamento in qualsiasi momento?',
+        key.q3: 'Quale metodo di pagamento dovresti accettare?',
+        key.q4: 'Quali sono i vantaggi dell\'utilizzo dell\'affiliata ISMMART?',
+        key.q5:
+            'Cos\'è la gestione della flotta e in che modo è diverso dal ridimensionamento dinamico?',
+        key.ans1:
+            'Il sistema fornirà uno spazio/negozio virtuale ai venditori che desiderano vendere qualcosa al mercato. Possono essere singoli fornitori o alcuni marchi affermati che vogliono migliorare la loro presenza nel mondo digitale. I nostri fornitori si registreranno con noi con alcune spese mensili di abbonamento/ piattaforma. Verificheremo l\'autenticità dei venditori prendendo le loro informazioni di base e prepareremo un accordo con loro. Allo stesso modo i nostri clienti/acquirenti devono anche essere registrati con noi nel nostro negozio di e -commerce. I clienti saranno in grado di vedere il profilo del fornitore, valutarli (dopo aver ottenuto servizi), effettuare i loro acquisti e tenersi aggiornati con i prodotti sul mercato. Ad esempio, abbiamo un fornitore/negozio registrato come ALI Electronics che si occupa di tutti i tipi di elettrodomestici. Lascia che Ayesha vuole acquistare un bollitore elettrico e lei dopo aver cercato trova il suo prodotto desiderato su Ali Electronics. Esse effettuerà il suo ordine e effettuerà il suo pagamento in anticipo, che sarà sul conto dell\'azienda fino al completamento dell\'ordine. Ali Electronics riceverà una notifica sull\'ordine. Imbellerà il prodotto pertinente e lo spedirà attraverso il nostro servizio (i nostri servizi di corriere definiti attraverso il nostro account). Una volta che la signorina Ayesha riceve il prodotto e verifica che ha ottenuto il prodotto desiderato, il pagamento verrà rilasciato e raggiungerà il conto del fornitore nel periodo di tempo definito (15 giorni).',
+        key.ans2:
+            'SÌ. Puoi annullare l\'abbonamento in qualsiasi momento. L\'abbonamento continuerà ad essere attivo fino alla fine del termine attuale (mese o anno) ma non sarà automatico. A meno che non elimini manualmente il tuo account, il tuo account e tutti i dati verranno eliminati 60 giorni dal giorno in cui l\'abbonamento diventa inattivo.',
+        key.ans3:
+            'Holistic coinvolge mercati di nicchia appiccicosi prima della collaborazione collaborativa e della condivisione delle idee. Facilitare fosforescamente applicazioni parallele con imperativi unici. Plagio in modo proattivo i risultati delle funzionalità tramite soluzioni economiche. Abbracciare collaborativamente gli intermediari abilitati al Web anziché procedure di test diverse.',
+        key.ans4:
+            'Imparsi senza soluzione di continuità per le migliori pratiche migliori. Facilitare fosforescamente applicazioni parallele con imperativi unici. Plagio in modo proattivo i risultati delle funzionalità tramite soluzioni economiche. Abbracciare collaborativamente gli intermediari abilitati al Web anziché procedure di test diverse.',
+        key.ans5:
+            'Avviare distintamente canali privi di errori con ROI altamente efficiente. Intrinsic Envision Dati di livello mondiale tramite le migliori pratiche migliori. Abilita in modo efficiente i tiler E potenziati dopo servizi incrociati. Accelerare in modo univoco i rivenditori senza soluzione di continuità tramite interfacce cooperative. Il cliente monotonicamente miocardico ha diretto i meta-servici mentre scenari senza errori.',
       };
 }

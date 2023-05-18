@@ -463,7 +463,8 @@ class French {
         key.currencyKey: 'Monnaie',
         key.privacyHeader1: '',
         key.privacyHeader2: 'Utilisation de vos informations personnelles',
-        key.privacyHeader3: 'Quelles données collectons-nous et comment les collectons-nous?',
+        key.privacyHeader3:
+            'Quelles données collectons-nous et comment les collectons-nous?',
         key.privacyHeader4: 'Informations que vous fournissez:',
         key.privacyHeader5: 'Informations automatiques:',
         key.privacyHeader6: 'Informations provenant d\'autres sources:',
@@ -473,10 +474,13 @@ class French {
         key.privacyHeader10: 'Analytique:',
         key.privacyHeader11: 'Information de Lieu:',
         key.privacyHeader12: 'Biscuits:',
-        key.privacyHeader13: 'Dans quelle mesure mes informations sont-elles sécurisées?',
+        key.privacyHeader13:
+            'Dans quelle mesure mes informations sont-elles sécurisées?',
         key.privacyHeader14: 'À quelles informations puis-je accéder?',
-        key.privacyHeader15: 'Modifications de cette politique de confidentialité',
-        key.privacyBody1: 'Les magasins Ismmart respectent votre vie privée et souhaitent protéger vos informations personnelles. Cette déclaration de confidentialité vise à vous expliquer comment nous gérons les données personnelles que nous obtenons des utilisateurs de notre plate-forme ou de notre site et des services mis à disposition sur le site. Cette politique décrit également vos options sur la façon dont vos informations personnelles seront collectées, utilisées et divulguées. Vous acceptez les procédures décrites dans la présente politique de confidentialité si vous accédez directement à cette plate-forme ou site via un autre site Web. Veuillez lire cette politique de confidentialité pour plus d\'informations. Les magasins Ismmart collectent vos données personnelles afin que nous puissions offrir et améliorer constamment nos produits et services.',
+        key.privacyHeader15:
+            'Modifications de cette politique de confidentialité',
+        key.privacyBody1:
+            'Les magasins Ismmart respectent votre vie privée et souhaitent protéger vos informations personnelles. Cette déclaration de confidentialité vise à vous expliquer comment nous gérons les données personnelles que nous obtenons des utilisateurs de notre plate-forme ou de notre site et des services mis à disposition sur le site. Cette politique décrit également vos options sur la façon dont vos informations personnelles seront collectées, utilisées et divulguées. Vous acceptez les procédures décrites dans la présente politique de confidentialité si vous accédez directement à cette plate-forme ou site via un autre site Web. Veuillez lire cette politique de confidentialité pour plus d\'informations. Les magasins Ismmart collectent vos données personnelles afin que nous puissions offrir et améliorer constamment nos produits et services.',
         key.privacyBody2: 'En général, les informations personnelles que vous soumettez à nous sont utilisées soit pour répondre aux demandes que vous faites, nous aider à mieux vous servir ou à commercialiser nos services. Nous utilisons vos informations personnelles de la manière suivante: '
             '  Prenez les commandes, livrez des produits, traitez les paiements et communiquez avec vous sur les commandes, les produits et services et les offres promotionnelles. Vous mettre à jour sur la livraison des produits;'
             '* Collectez et utilisez vos informations personnelles pour se conformer à certaines lois.'
@@ -487,46 +491,86 @@ class French {
             '* Vous identifiez comme utilisateur dans notre système via votre compte / profil personnel ou d\'autres moyens.'
             '* Effectuer des processus de prise de décision automatisés conformément à l\'une de ces objectifs.'
             '* Vérifiez et effectuez des transactions financières par rapport aux paiements que vous effectuez et auditez le téléchargement des données de notre site.'
-        '* Nous pouvons stocker et traiter vos informations personnelles sur les serveurs situés à divers endroits. Nous pouvons également créer des enregistrements de données anonymes à partir de vos informations personnelles en excluant complètement des informations qui autrement rendraient les données personnellement identifiables pour vous. Nous utilisons ces données anonymes pour analyser les modèles de demande et d\'utilisation afin que nous puissions améliorer le «contenu de nos services et optimiser les fonctionnalités du site.'
+            '* Nous pouvons stocker et traiter vos informations personnelles sur les serveurs situés à divers endroits. Nous pouvons également créer des enregistrements de données anonymes à partir de vos informations personnelles en excluant complètement des informations qui autrement rendraient les données personnellement identifiables pour vous. Nous utilisons ces données anonymes pour analyser les modèles de demande et d\'utilisation afin que nous puissions améliorer le «contenu de nos services et optimiser les fonctionnalités du site.'
             'En plus de cela, nous nous réservons le droit de partager des données anonymes avec des tiers et pouvons l\'utiliser à quelque fin que ce soit. Les utilisateurs qui ont eu de bonnes expériences avec nos produits et services peuvent nous fournir des témoignages et des remarques. Nous pourrions publier un tel matériel. Nous pouvons utiliser les prénoms et les noms de famille de nos utilisateurs pour les identifier lorsque nous publions un tel contenu. Avant de publier ces données avec le témoignage, nous obtiendrons le consentement de l’utilisateur.'
             'Nous utiliserons ces informations à d\'autres fins à laquelle votre consentement a été obtenu; et mener des processus de prise de décision automatisés conformément à l\'une de ces objectifs.',
         key.privacyBody3: '',
-        key.privacyBody4: 'Les magasins Ismmart reçoivent et stockent des données que vous nous fournissez via le profil de votre compte lors de l\'utilisation de nos services.',
-        key.privacyBody5: 'Lorsque vous utilisez nos services, nous collectons et conservons automatiquement certains types d\'informations, y compris des données sur la façon dont vous interagissez avec les produits, les informations et les services offerts dans les magasins Ismart. Lorsque votre navigateur Web ou votre appareil accède à notre site Web, nous, comme de nombreux autres sites Web, utilisons des «cookies» et d\'autres identifiants uniques pour collecter des types d\'informations spécifiques.',
-        key.privacyBody6: 'Les magasins Ismmart peuvent obtenir des informations vous concernant à partir d\'autres sources. Par exemple, nos opérateurs peuvent nous fournir des données de livraison et d\'adressage mises à jour, que nous utilisons pour mettre à jour nos enregistrements et simplifier les achats ultérieurs.',
-        key.privacyBody7: 'Les informations seront automatiquement créées lors de l\'utilisation de nos services. Lorsque vous utilisez nos services, par exemple, nous pouvons collecter des informations sur votre emplacement général, le type d\'appareil que vous utilisez, le numéro d\'identification de l\'appareil ouvert, la date et l\'heure de votre visite, l\'identifiant de l\'appareil unique, le type de navigateur que vous êtes En utilisant, le système d\'exploitation, l\'adresse du protocole Internet (IP) et le nom de domaine. De manière générale, nous utilisons ces informations pour fonctionner et améliorer le site, ainsi que pour vous assurer que vous recevez les informations les plus pertinentes possibles.',
-        key.privacyBody8: 'Votre nom d\'utilisateur et votre mot de passe, les commandes liées à vous, vos intérêts, vos préférences, vos commentaires et vos réponses d\'enquête.',
-        key.privacyBody9: 'Comme pour la plupart des sites Web, nous collectons automatiquement certaines informations et les stockons dans les fichiers journaux. Ces informations incluent les adresses IP, le type de navigateur, le fournisseur de services Internet (ISP), les pages de référence / de sortie, le système d\'exploitation, la date / horodatage, et cliquez sur les données de diffusion. Nous utilisons ces informations pour maintenir et améliorer les services de performance.',
-        key.privacyBody10: 'Pour mieux comprendre comment les gens interagissent avec le site Web, nous utilisons des services d\'analyse, tels que mais non limités à Google Analytics. Les cookies sont utilisés par les services d\'analyse pour collecter des données telles que la fréquence à laquelle les utilisateurs visitent le site, et nous utilisons ces données pour améliorer nos services et notre site Web. Les conditions d\'utilisation et les politiques de confidentialité des services d\'analyse, que vous devriez consulter pour plus d\'informations sur la façon dont ces entreprises utilisent ces informations, limitent la façon dont elles peuvent utiliser et distribuer les informations qu\'ils recueillent.',
-        key.privacyBody11: 'Si vous avez activé les services de localisation sur vos appareils, nous pouvons collecter vos informations de localisation pour améliorer les services que nous offrons. Si vous ne souhaitez pas collecter ces informations, vous pouvez désactiver les services de localisation sur votre appareil.',
-        key.privacyBody12: 'Les cookies sont de petites informations qu\'un site Web envoie au disque dur de votre ordinateur pendant que vous consultez le site Web. Ces fichiers texte peuvent être utilisés par des sites Web pour rendre les utilisateurs plus efficaces. Nous pouvons stocker ces cookies sur votre appareil s\'ils sont strictement nécessaires au fonctionnement de ce site. Pour tous les autres types de cookies, nous avons besoin de votre autorisation. À cette fin, ce site utilise différents types de cookies. Certains cookies sont placés par des services tiers qui apparaissent sur nos pages. Nous et quelques tiers pouvons utiliser les cookies de session (qui expirent une fois que vous fermez votre navigateur Web) et les cookies persistants (qui restent sur votre ordinateur jusqu\'à ce que vous les supprimez) pour vous offrir une expérience plus personnelle et interactive sur nos services et pour commercialiser nos produits. Les cookies marketing sont utilisés pour suivre les visiteurs sur tous les sites Web. L\'intention est d\'afficher des annonces pertinentes et engageantes pour l\'utilisateur individuel et ainsi plus précieuses pour les éditeurs et les annonceurs tiers. Ce suivi se fait sur une base anonyme.',
-        key.privacyBody13: 'Nous considérons votre sécurité et votre confidentialité lors de la conception de nos solutions. En utilisant des protocoles de chiffrement et des logiciels, nous essayons de maintenir la sécurité de vos informations personnelles tout au long de la transmission. Lors de la gestion des cartes de crédit / débit / coordonnées bancaires, nous adhérons aux meilleures pratiques de l\'industrie et maintenons les informations personnelles des clients en sécurité en utilisant des mesures physiques, électroniques et procédurales. En raison de nos mesures de sécurité, nous pouvons vous obliger à prouver votre identité avant de vous donner accès à des données personnelles. Il est important pour vous de vous protéger contre l\'accès non autorisé à votre mot de passe et à vos ordinateurs, appareils et applications. Nous vous recommandons d\'utiliser un mot de passe unique pour votre compte qui n\'est pas utilisé pour d\'autres comptes en ligne. Assurez-vous de vous déconnecter lorsque vous avez terminé à l\'aide d\'un ordinateur partagé.',
-        key.privacyBody14: 'Vous pouvez accéder à vos informations, y compris votre nom, votre adresse, vos options de paiement, vos informations de profil et votre historique d\'achat dans la section Compte.',
-        key.privacyBody15: 'Cette politique de confidentialité est en vigueur du 10 octobre 2022 et restera en vigueur, sauf en ce qui concerne tout changement dans ses dispositions à l\'avenir, qui sera en vigueur immédiatement après avoir été publié sur cette page. Nous nous réservons le droit de mettre à jour ou de modifier notre politique de confidentialité à tout moment et vous devez vérifier périodiquement cette politique de confidentialité. \ t Remarque: si vous avez des questions sur cette politique de confidentialité, veuillez nous contacter.',
-key.memPlan1Title: 'COMMENCER',
-key.memPlan1Price: 'Gratuit',
-key.memPlan1Desc1: 'Tout le monde peut être enregistré en tant que membres gratuits.',
-key.memPlan1Desc2: 'Peut vendre jusqu\'à 3 produits sur la plate-forme Ismmart.',
-key.memPlan1Desc3: 'N\'aura accès qu\'aux produits et magasins à visiter qui sont ouverts par défaut ou conservés par les vendeurs et les entreprises à visiter.',
-key.memPlan1Desc4: 'Ils peuvent acheter n\'importe quoi à eux-mêmes en tant que clients directs avec une compréhension mutuelle avec le vendeur; Ismmart ne sera pas responsable ou sauvegardé en cas de problèmes dans un tel accord.',
-key.memPlan2Title: 'PRO',
-key.memPlan2Desc1: 'Un essai gratuit d\'un mois',
-key.memPlan2Desc2: 'Peut vendre n\'importe quoi sur la plate-forme ismmart',
-key.memPlan2Desc3: 'Aura accès à tous les produits et magasins à visiter.',
-key.memPlan2Desc4: 'Toutes les transactions de membres Premium sur Ismmart seront soutenues par Ismmart. Nous serons responsables des transactions en douceur et de la livraison des produits. Ismmart garantira d\'honorer la compréhension mutuelle que le vendeur et l\'acheteur ont convenu.',
-key.memPlan2Desc5: 'Livraisons illimitées sur les articles éligibles.',
-key.memPlan2Desc6: 'Les membres Premium auront moins d\'accès à toutes les entreprises du monde entier, à la fois en tant que vendeur et acheteur, car Ismmart garantira et vérifiera directement ces membres et toutes les offres qu\'ils concluent.',
-key.memPlan2Desc7: 'Comme tous les membres premium sont examinés et vérifiés par le processus de vérification ISMMart, de sorte que tous ces membres peuvent faire moins de commerce les uns avec les autres, partout dans le monde.',
-key.memPlan3Title: 'ENTREPRISE',
-key.memPlan3Desc1: 'Essai gratuit de 2 mois',
-key.memPlan3Desc2: 'Opportunités B2B',
-key.memPlan3Desc3: 'Livraison gratuite illimitée',
-key.memPlan3Desc4: 'Outils promotionnels illimités',
-key.memPlan3Desc5: 'Expédition en gros',
-key.memPlan3Desc6: 'Ayez la chance de placer des produits dans nos magasins physiques.',
-key.memPlan3Desc7: 'Livraisons illimitées sur les articles éligibles.',
-key.memPlan3Desc8: 'Les membres Premium auront moins d\'accès à toutes les entreprises du monde entier, à la fois en tant que vendeur et acheteur, car Ismmart garantira et vérifiera directement ces membres et toutes les offres qu\'ils concluent.',
-key.memPlan3Desc9: 'Comme tous les membres premium sont examinés et vérifiés par le processus de vérification ISMMart, de sorte que tous ces membres peuvent faire moins de commerce les uns avec les autres, partout dans le monde.',
-
-  };
+        key.privacyBody4:
+            'Les magasins Ismmart reçoivent et stockent des données que vous nous fournissez via le profil de votre compte lors de l\'utilisation de nos services.',
+        key.privacyBody5:
+            'Lorsque vous utilisez nos services, nous collectons et conservons automatiquement certains types d\'informations, y compris des données sur la façon dont vous interagissez avec les produits, les informations et les services offerts dans les magasins Ismart. Lorsque votre navigateur Web ou votre appareil accède à notre site Web, nous, comme de nombreux autres sites Web, utilisons des «cookies» et d\'autres identifiants uniques pour collecter des types d\'informations spécifiques.',
+        key.privacyBody6:
+            'Les magasins Ismmart peuvent obtenir des informations vous concernant à partir d\'autres sources. Par exemple, nos opérateurs peuvent nous fournir des données de livraison et d\'adressage mises à jour, que nous utilisons pour mettre à jour nos enregistrements et simplifier les achats ultérieurs.',
+        key.privacyBody7:
+            'Les informations seront automatiquement créées lors de l\'utilisation de nos services. Lorsque vous utilisez nos services, par exemple, nous pouvons collecter des informations sur votre emplacement général, le type d\'appareil que vous utilisez, le numéro d\'identification de l\'appareil ouvert, la date et l\'heure de votre visite, l\'identifiant de l\'appareil unique, le type de navigateur que vous êtes En utilisant, le système d\'exploitation, l\'adresse du protocole Internet (IP) et le nom de domaine. De manière générale, nous utilisons ces informations pour fonctionner et améliorer le site, ainsi que pour vous assurer que vous recevez les informations les plus pertinentes possibles.',
+        key.privacyBody8:
+            'Votre nom d\'utilisateur et votre mot de passe, les commandes liées à vous, vos intérêts, vos préférences, vos commentaires et vos réponses d\'enquête.',
+        key.privacyBody9:
+            'Comme pour la plupart des sites Web, nous collectons automatiquement certaines informations et les stockons dans les fichiers journaux. Ces informations incluent les adresses IP, le type de navigateur, le fournisseur de services Internet (ISP), les pages de référence / de sortie, le système d\'exploitation, la date / horodatage, et cliquez sur les données de diffusion. Nous utilisons ces informations pour maintenir et améliorer les services de performance.',
+        key.privacyBody10:
+            'Pour mieux comprendre comment les gens interagissent avec le site Web, nous utilisons des services d\'analyse, tels que mais non limités à Google Analytics. Les cookies sont utilisés par les services d\'analyse pour collecter des données telles que la fréquence à laquelle les utilisateurs visitent le site, et nous utilisons ces données pour améliorer nos services et notre site Web. Les conditions d\'utilisation et les politiques de confidentialité des services d\'analyse, que vous devriez consulter pour plus d\'informations sur la façon dont ces entreprises utilisent ces informations, limitent la façon dont elles peuvent utiliser et distribuer les informations qu\'ils recueillent.',
+        key.privacyBody11:
+            'Si vous avez activé les services de localisation sur vos appareils, nous pouvons collecter vos informations de localisation pour améliorer les services que nous offrons. Si vous ne souhaitez pas collecter ces informations, vous pouvez désactiver les services de localisation sur votre appareil.',
+        key.privacyBody12:
+            'Les cookies sont de petites informations qu\'un site Web envoie au disque dur de votre ordinateur pendant que vous consultez le site Web. Ces fichiers texte peuvent être utilisés par des sites Web pour rendre les utilisateurs plus efficaces. Nous pouvons stocker ces cookies sur votre appareil s\'ils sont strictement nécessaires au fonctionnement de ce site. Pour tous les autres types de cookies, nous avons besoin de votre autorisation. À cette fin, ce site utilise différents types de cookies. Certains cookies sont placés par des services tiers qui apparaissent sur nos pages. Nous et quelques tiers pouvons utiliser les cookies de session (qui expirent une fois que vous fermez votre navigateur Web) et les cookies persistants (qui restent sur votre ordinateur jusqu\'à ce que vous les supprimez) pour vous offrir une expérience plus personnelle et interactive sur nos services et pour commercialiser nos produits. Les cookies marketing sont utilisés pour suivre les visiteurs sur tous les sites Web. L\'intention est d\'afficher des annonces pertinentes et engageantes pour l\'utilisateur individuel et ainsi plus précieuses pour les éditeurs et les annonceurs tiers. Ce suivi se fait sur une base anonyme.',
+        key.privacyBody13:
+            'Nous considérons votre sécurité et votre confidentialité lors de la conception de nos solutions. En utilisant des protocoles de chiffrement et des logiciels, nous essayons de maintenir la sécurité de vos informations personnelles tout au long de la transmission. Lors de la gestion des cartes de crédit / débit / coordonnées bancaires, nous adhérons aux meilleures pratiques de l\'industrie et maintenons les informations personnelles des clients en sécurité en utilisant des mesures physiques, électroniques et procédurales. En raison de nos mesures de sécurité, nous pouvons vous obliger à prouver votre identité avant de vous donner accès à des données personnelles. Il est important pour vous de vous protéger contre l\'accès non autorisé à votre mot de passe et à vos ordinateurs, appareils et applications. Nous vous recommandons d\'utiliser un mot de passe unique pour votre compte qui n\'est pas utilisé pour d\'autres comptes en ligne. Assurez-vous de vous déconnecter lorsque vous avez terminé à l\'aide d\'un ordinateur partagé.',
+        key.privacyBody14:
+            'Vous pouvez accéder à vos informations, y compris votre nom, votre adresse, vos options de paiement, vos informations de profil et votre historique d\'achat dans la section Compte.',
+        key.privacyBody15:
+            'Cette politique de confidentialité est en vigueur du 10 octobre 2022 et restera en vigueur, sauf en ce qui concerne tout changement dans ses dispositions à l\'avenir, qui sera en vigueur immédiatement après avoir été publié sur cette page. Nous nous réservons le droit de mettre à jour ou de modifier notre politique de confidentialité à tout moment et vous devez vérifier périodiquement cette politique de confidentialité. \ t Remarque: si vous avez des questions sur cette politique de confidentialité, veuillez nous contacter.',
+        key.memPlan1Title: 'COMMENCER',
+        key.memPlan1Price: 'Gratuit',
+        key.memPlan1Desc1:
+            'Tout le monde peut être enregistré en tant que membres gratuits.',
+        key.memPlan1Desc2:
+            'Peut vendre jusqu\'à 3 produits sur la plate-forme Ismmart.',
+        key.memPlan1Desc3:
+            'N\'aura accès qu\'aux produits et magasins à visiter qui sont ouverts par défaut ou conservés par les vendeurs et les entreprises à visiter.',
+        key.memPlan1Desc4:
+            'Ils peuvent acheter n\'importe quoi à eux-mêmes en tant que clients directs avec une compréhension mutuelle avec le vendeur; Ismmart ne sera pas responsable ou sauvegardé en cas de problèmes dans un tel accord.',
+        key.memPlan2Title: 'PRO',
+        key.memPlan2Desc1: 'Un essai gratuit d\'un mois',
+        key.memPlan2Desc2:
+            'Peut vendre n\'importe quoi sur la plate-forme ismmart',
+        key.memPlan2Desc3:
+            'Aura accès à tous les produits et magasins à visiter.',
+        key.memPlan2Desc4:
+            'Toutes les transactions de membres Premium sur Ismmart seront soutenues par Ismmart. Nous serons responsables des transactions en douceur et de la livraison des produits. Ismmart garantira d\'honorer la compréhension mutuelle que le vendeur et l\'acheteur ont convenu.',
+        key.memPlan2Desc5: 'Livraisons illimitées sur les articles éligibles.',
+        key.memPlan2Desc6:
+            'Les membres Premium auront moins d\'accès à toutes les entreprises du monde entier, à la fois en tant que vendeur et acheteur, car Ismmart garantira et vérifiera directement ces membres et toutes les offres qu\'ils concluent.',
+        key.memPlan2Desc7:
+            'Comme tous les membres premium sont examinés et vérifiés par le processus de vérification ISMMart, de sorte que tous ces membres peuvent faire moins de commerce les uns avec les autres, partout dans le monde.',
+        key.memPlan3Title: 'ENTREPRISE',
+        key.memPlan3Desc1: 'Essai gratuit de 2 mois',
+        key.memPlan3Desc2: 'Opportunités B2B',
+        key.memPlan3Desc3: 'Livraison gratuite illimitée',
+        key.memPlan3Desc4: 'Outils promotionnels illimités',
+        key.memPlan3Desc5: 'Expédition en gros',
+        key.memPlan3Desc6:
+            'Ayez la chance de placer des produits dans nos magasins physiques.',
+        key.memPlan3Desc7: 'Livraisons illimitées sur les articles éligibles.',
+        key.memPlan3Desc8:
+            'Les membres Premium auront moins d\'accès à toutes les entreprises du monde entier, à la fois en tant que vendeur et acheteur, car Ismmart garantira et vérifiera directement ces membres et toutes les offres qu\'ils concluent.',
+        key.memPlan3Desc9:
+            'Comme tous les membres premium sont examinés et vérifiés par le processus de vérification ISMMart, de sorte que tous ces membres peuvent faire moins de commerce les uns avec les autres, partout dans le monde.',
+        key.q1: 'Comment fonctionne l\'ISMMart?',
+        key.q2: 'Puis-je annuler mon abonnement à tout moment?',
+        key.q3: 'Quelle méthode de paiement devriez-vous accepter?',
+        key.q4:
+            'Quels sont les avantages de l\'utilisation de l\'affilié Ismmart?',
+        key.q5:
+            'Qu\'est-ce que la gestion de la flotte et en quoi est-elle différente de la mise à l\'échelle dynamique?',
+        key.ans1:
+            'Le système fournira un espace / magasin virtuel aux vendeurs qui souhaitent vendre quelque chose au marché. Il peut s\'agir de fournisseurs individuels ou de marques établies qui souhaitent améliorer leur présence dans le monde numérique. Nos fournisseurs s\'inscrire auprès de nous sur certains frais d\'abonnement mensuels / frais de plate-forme. Nous vérifierons l\'authenticité des vendeurs en prenant leurs informations de base et en préparant un accord avec eux. De même, nos clients / acheteurs seront également enregistrés chez nous dans notre magasin de commerce électronique. Les clients pourront voir le profil du fournisseur, les évaluer (après avoir obtenu des services), effectuer leurs achats et se tenir au courant des produits sur le marché. Par exemple, nous avons un fournisseur / magasin enregistré comme Ali Electronics qui traite de toutes sortes d\'appareils électroménagers. Disons, Ayesha veut acheter une bouilloire électrique et elle en cherchant trouve son produit souhaité sur Ali Electronics. Elle passera sa commande et effectuera son paiement à l\'avance qui sera sur le compte de la société jusqu\'à la fin de la commande. Ali Electronics recevra une notification sur la commande. Il emballera le produit pertinent et le rendra via notre service (nos services de messagerie définis via notre compte). Une fois que Miss Ayesha reçoit le produit et vérifie qu\'elle a obtenu le produit souhaité, le paiement sera publié et atteindra le compte du fournisseur dans une période définie (15 jours).',
+        key.ans2:
+            'Oui. Vous pouvez annuler votre abonnement à tout moment. Votre abonnement continuera d\'être actif jusqu\'à la fin de votre mandat actuel (mois ou année), mais il ne se rendra pas automatiquement. À moins que vous ne supprimez votre compte manuellement, votre compte et toutes les données seront supprimés à 60 jours du jour où votre abonnement devient inactif.',
+        key.ans3:
+            'Holistique engage les marchés de niche collants avant la collaboration collaborative et le partage des idées. Faciliter phosphorescent les applications parallèles avec des impératifs uniques. Plagier de manière proactive les livrables de fonctionnalité via des solutions peu coûteuses. Embrassez en collaboration des intermédiaires compatibles Web plutôt que diverses procédures de test.',
+        key.ans4:
+            'Impact en permanence les impératifs transparents pour les meilleures pratiques des meilleures race. Faciliter phosphorescent les applications parallèles avec des impératifs uniques. Plagier de manière proactive les livrables de fonctionnalité via des solutions peu coûteuses. Embrassez en collaboration des intermédiaires compatibles Web plutôt que diverses procédures de test.',
+        key.ans5:
+            'Lancer distinctement les canaux sans erreur avec un retour sur investissement très efficace. Intrinsèque envisage des données de classe mondiale via les meilleures pratiques de race. Activer efficacement les e-tilers habilités après des services à unité croisée. Accélérer uniquement les détaillants transparents via des interfaces coopératives. Le client myocardique monotonique a dirigé des méta-services tandis que des scénarios sans erreur.',
+      };
 }

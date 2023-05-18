@@ -512,30 +512,53 @@ class Turkish {
             'Hesap bölümünde adınız, adresiniz, ödeme seçenekleri, profil bilgileriniz ve satın alma geçmişiniz de dahil olmak üzere bilgilerinize erişebilirsiniz.',
         key.privacyBody15:
             'Bu Gizlilik Politikası, 10 Ekim 2022\'den itibaren geçerlidir ve gelecekteki hükümlerindeki herhangi bir değişiklik dışında, bu sayfada yayınlandıktan hemen sonra yürürlükte olacaktır. Gizlilik politikamızı herhangi bir zamanda güncelleme veya değiştirme hakkını saklı tutarız ve bu Gizlilik Politikasını periyodik olarak kontrol etmelisiniz. Not: Bu Gizlilik Politikası hakkında herhangi bir sorunuz varsa, lütfen bizimle iletişime geçin.',
-      key.memPlan1Title: 'BAŞLANGIÇ',
-key.memPlan1Price: 'Özgür',
-key.memPlan1Desc1: 'Herkes ücretsiz üye olarak kaydedilebilir.',
-key.memPlan1Desc2: 'Ismmart platformunda en fazla 3 ürün satabilir.',
-key.memPlan1Desc3: 'Yalnızca Varsayılan olarak açılan veya satıcılar ve işletmeler tarafından ziyaret edilecek olan ürünlere ve mağazalara erişime sahip olacak.',
-key.memPlan1Desc4: 'Satıcı ile karşılıklı anlayışla doğrudan müşteriler olarak kendi başlarına her şeyi satın alabilirler; Ismmart, bu tür konularda herhangi bir sorun olması durumunda sorumlu veya yedeklemeyecektir.',
-key.memPlan2Title: 'Profesyonel',
-key.memPlan2Desc1: 'Ücretsiz bir aylık deneme',
-key.memPlan2Desc2: 'Ismmart platformunda her şeyi satabilir',
-key.memPlan2Desc3: 'Ziyaret etmek için tüm ürünlere ve mağazalara erişecektir.',
-key.memPlan2Desc4: 'Premium üyelerin Ismmart\'taki tüm anlaşmaları Ismmart tarafından desteklenecek. Yumuşak işlemlerden ve ürünlerin teslimatından sorumlu olacağız. Ismmart, hem satıcının hem de alıcının üzerinde anlaştığı karşılıklı anlayışı onurlandırmayı garanti edecek.',
-key.memPlan2Desc5: 'Uygun ürünlerde sınırsız teslimat.',
-key.memPlan2Desc6: 'Premium üyeler, hem satıcı hem de alıcı olarak, bu tür üyeleri ve yaptıkları anlaşmaları doğrudan garanti edip doğrulayacak şekilde dünya çapındaki tüm işletmelere daha az erişimden endişe duyacaktır.',
-key.memPlan2Desc7: 'Tüm premium üyeler incelendiğinden ve ISMMART doğrulama süreci ile doğrulandığından, bu tür tüm üyeler dünyanın herhangi bir yerinde birbirleriyle daha az ticaret endişelenebilirler.',
-key.memPlan3Title: 'İŞLETME',
-key.memPlan3Desc1: '2 aylık ücretsiz deneme',
-key.memPlan3Desc2: 'B2B Fırsatları',
-key.memPlan3Desc3: 'Sınırsız ücretsiz teslimatlar',
-key.memPlan3Desc4: 'Sınırsız Promosyon Araçları',
-key.memPlan3Desc5: 'Toptan nakliye',
-key.memPlan3Desc6: 'Ürünleri fiziksel mağazalarımıza yerleştirme şansı edin.',
-key.memPlan3Desc7: 'Uygun ürünlerde sınırsız teslimat.',
-key.memPlan3Desc8: 'Premium üyeler, hem satıcı hem de alıcı olarak, bu tür üyeleri ve yaptıkları anlaşmaları doğrudan garanti edip doğrulayacak şekilde dünya çapındaki tüm işletmelere daha az erişimden endişe duyacaktır.',
-key.memPlan3Desc9: 'Tüm premium üyeler incelendiğinden ve ISMMART doğrulama süreci ile doğrulandığından, bu tür tüm üyeler dünyanın herhangi bir yerinde birbirleriyle daha az ticaret endişelenebilirler.',
-
+        key.memPlan1Title: 'BAŞLANGIÇ',
+        key.memPlan1Price: 'Özgür',
+        key.memPlan1Desc1: 'Herkes ücretsiz üye olarak kaydedilebilir.',
+        key.memPlan1Desc2: 'Ismmart platformunda en fazla 3 ürün satabilir.',
+        key.memPlan1Desc3:
+            'Yalnızca Varsayılan olarak açılan veya satıcılar ve işletmeler tarafından ziyaret edilecek olan ürünlere ve mağazalara erişime sahip olacak.',
+        key.memPlan1Desc4:
+            'Satıcı ile karşılıklı anlayışla doğrudan müşteriler olarak kendi başlarına her şeyi satın alabilirler; Ismmart, bu tür konularda herhangi bir sorun olması durumunda sorumlu veya yedeklemeyecektir.',
+        key.memPlan2Title: 'Profesyonel',
+        key.memPlan2Desc1: 'Ücretsiz bir aylık deneme',
+        key.memPlan2Desc2: 'Ismmart platformunda her şeyi satabilir',
+        key.memPlan2Desc3:
+            'Ziyaret etmek için tüm ürünlere ve mağazalara erişecektir.',
+        key.memPlan2Desc4:
+            'Premium üyelerin Ismmart\'taki tüm anlaşmaları Ismmart tarafından desteklenecek. Yumuşak işlemlerden ve ürünlerin teslimatından sorumlu olacağız. Ismmart, hem satıcının hem de alıcının üzerinde anlaştığı karşılıklı anlayışı onurlandırmayı garanti edecek.',
+        key.memPlan2Desc5: 'Uygun ürünlerde sınırsız teslimat.',
+        key.memPlan2Desc6:
+            'Premium üyeler, hem satıcı hem de alıcı olarak, bu tür üyeleri ve yaptıkları anlaşmaları doğrudan garanti edip doğrulayacak şekilde dünya çapındaki tüm işletmelere daha az erişimden endişe duyacaktır.',
+        key.memPlan2Desc7:
+            'Tüm premium üyeler incelendiğinden ve ISMMART doğrulama süreci ile doğrulandığından, bu tür tüm üyeler dünyanın herhangi bir yerinde birbirleriyle daha az ticaret endişelenebilirler.',
+        key.memPlan3Title: 'İŞLETME',
+        key.memPlan3Desc1: '2 aylık ücretsiz deneme',
+        key.memPlan3Desc2: 'B2B Fırsatları',
+        key.memPlan3Desc3: 'Sınırsız ücretsiz teslimatlar',
+        key.memPlan3Desc4: 'Sınırsız Promosyon Araçları',
+        key.memPlan3Desc5: 'Toptan nakliye',
+        key.memPlan3Desc6:
+            'Ürünleri fiziksel mağazalarımıza yerleştirme şansı edin.',
+        key.memPlan3Desc7: 'Uygun ürünlerde sınırsız teslimat.',
+        key.memPlan3Desc8:
+            'Premium üyeler, hem satıcı hem de alıcı olarak, bu tür üyeleri ve yaptıkları anlaşmaları doğrudan garanti edip doğrulayacak şekilde dünya çapındaki tüm işletmelere daha az erişimden endişe duyacaktır.',
+        key.memPlan3Desc9:
+            'Tüm premium üyeler incelendiğinden ve ISMMART doğrulama süreci ile doğrulandığından, bu tür tüm üyeler dünyanın herhangi bir yerinde birbirleriyle daha az ticaret endişelenebilirler.',
+        key.q1: 'Ismmart nasıl çalışıyor?',
+        key.q2: 'Aboneliğimi istediğiniz zaman iptal edebilir miyim?',
+        key.q3: 'Hangi ödeme yöntemini kabul etmelisiniz?',
+        key.q4: 'Ismmart bağlı kuruluşunu kullanmanın faydaları nelerdir?',
+        key.q5: 'Filo yönetimi nedir ve dinamik ölçeklemeden nasıl farklıdır?',
+        key.ans1:
+            'Sistem, piyasaya bir şeyler satmak isteyen satıcılara sanal bir alan/mağaza sağlayacaktır. Bireysel satıcılar veya dijital dünyadaki varlıklarını geliştirmek isteyen bazı yerleşik markalar olabilirler. Satıcılarımız aylık bazı abonelik ücretleri/ platform ücretleri için kendimize kaydolacaklar. Temel bilgilerini alarak satıcıların gerçekliğini doğrulayacağız ve onlarla bir anlaşma hazırlayacağız. Benzer şekilde müşterilerimiz/alıcılarımız da e -ticaret mağazamızda bize kayıtlı olacaktır. Müşteriler satıcı profilini görebilecek, (hizmet aldıktan sonra) değerlendirebilecek, satın alımlarını yapabilecek ve piyasadaki ürünlerle güncel tutabilecekler. Örneğin, her türlü ev aletiyle ilgilenen Ali Electronics olarak kayıtlı bir satıcı/mağazamız var. Diyelim ki Ayesha elektrikli bir su ısıtıcısı satın almak istiyor ve Arama yaptıktan sonra istenen ürünü Ali Electronics\'te buluyor. Siparişini verecek ve sipariş tamamlanana kadar şirketin hesabına olacak ödemesini önceden yapacak. Ali Electronics, sipariş hakkında bir bildirim alacaktır. İlgili ürünü paketleyecek ve hizmetimiz aracılığıyla (tanımlanmış kurye hizmetlerimiz hesabımız aracılığıyla) gönderecektir. Bayan Ayesha ürünü aldıktan ve istenen ürünü aldığını doğruladıktan sonra, ödeme yayınlanacak ve satıcı hesabına tanımlanmış sürede (15 gün) ulaşacaktır.',
+        key.ans2:
+            'Evet. Aboneliğinizi istediğiniz zaman iptal edebilirsiniz. Aboneliğiniz mevcut döneminizin (ay veya yıl) sonuna kadar aktif olmaya devam edecektir, ancak otomatik olarak yenilenmeyecektir. Hesabınızı manuel olarak silmezseniz, hesabınız ve tüm veriler aboneliğinizin aktif olmadığı günden itibaren 60 gün silinecektir.',
+        key.ans3:
+            'Holistic, işbirlikçi işbirliği ve fikir paylaşımından önce yapışkan niş pazarları. Eşsiz zorunluluklarla paralel uygulamaları fosfor olarak kolaylaştırır. Ucuz çözümler yoluyla işlevsellik çıktılarını proaktif olarak intihal eder. Çeşitli test prosedürleri yerine web özellikli aracıları işbirliği içinde kucaklayın.',
+        key.ans4:
+            'En iyi en iyi uygulamalar için kesintisiz zorunlulukları sürekli etkiler. Eşsiz zorunluluklarla paralel uygulamaları fosfor olarak kolaylaştırır. Ucuz çözümler yoluyla işlevsellik çıktılarını proaktif olarak intihal eder. Çeşitli test prosedürleri yerine web özellikli aracıları işbirliği içinde kucaklayın.',
+        key.ans5:
+            'Yüksek verimli ROI ile hatasız kanalları belirgin bir şekilde başlatın. En iyi en iyi uygulamalar aracılığıyla dünya standartlarında verileri içsel öngörmek. Çapraz birim hizmetlerinden sonra güçlendirilmiş e-tilatörleri verimli bir şekilde etkinleştirin. Kooperatif arayüzleri aracılığıyla kesintisiz perakendecileri benzersiz bir şekilde hızlandırır. Monotonik miyokardiyal müşteri meta hizmetleri yönlendirirken, hatasız senaryolar.',
       };
 }
