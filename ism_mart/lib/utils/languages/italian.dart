@@ -457,5 +457,60 @@ class Italian {
             'In caso di domande o dubbi sulle nostre commissioni, non esitare a contattare il nostro team di assistenza clienti. Grazie per aver scelto il nostro servizio!',
         key.sortByPrice: 'Ordina per prezzo',
         key.currencyKey: 'Valuta',
+        key.privacyHeader1: '',
+        key.privacyHeader2: 'Uso delle tue informazioni personali',
+        key.privacyHeader3: 'Quali dati raccogliamo e come li raccogliamo?',
+        key.privacyHeader4: 'Informazioni che fornisci:',
+        key.privacyHeader5: 'Informazioni automatiche:',
+        key.privacyHeader6: 'Informazioni da altre fonti:',
+        key.privacyHeader7: 'Dati generali:',
+        key.privacyHeader8: 'Dati del profilo:',
+        key.privacyHeader9: 'Log files:',
+        key.privacyHeader10: 'Analisi:',
+        key.privacyHeader11: 'Informazioni sulla posizione:',
+        key.privacyHeader12: 'Biscotti:',
+        key.privacyHeader13: 'Quanto sono sicure le mie informazioni?',
+        key.privacyHeader14: 'Quali informazioni posso accedere?',
+        key.privacyHeader15: 'Modifiche a questa politica sulla privacy',
+        key.privacyBody1:
+            'I negozi ISMMART rispettano la tua privacy e desiderano proteggere le tue informazioni personali. Questa informativa sulla privacy mira a spiegarti come gestiamo i dati personali che otteniamo dagli utenti della nostra piattaforma o sito e i servizi resi disponibili sul sito. Questa politica delinea anche le tue opzioni su come le tue informazioni personali verranno raccolte, utilizzate e divulgate. Accetta le procedure delineate nella presente Informativa sulla privacy se si accede a questa piattaforma o sito direttamente o tramite un altro sito Web. Si prega di leggere questa politica sulla privacy per ulteriori informazioni. I negozi ISMMART raccolgono i tuoi dati personali in modo da poter offrire e migliorare costantemente i nostri prodotti e servizi.',
+        key.privacyBody2: 'In generale, le informazioni personali che ti invii vengono utilizzate per rispondere alle richieste che fai, aiutaci a servirti meglio o commercializzare i nostri servizi. Usiamo le tue informazioni personali nei seguenti modi: '
+            'Prendi ordini, consegna prodotti, pagamenti di processo e comunica con te su ordini, prodotti e servizi e offerte promozionali. Aggiornati alla consegna dei prodotti; '
+            "* Raccogli e usa le tue informazioni personali per conformarsi a determinate leggi."
+            "* Oprare, mantenere e migliorare il nostro sito, prodotti e servizi."
+            "* Rispondi a commenti e richieste e fornisci il servizio clienti."
+            "* Link o combina le informazioni dell\'utente con altre informazioni personali che riceviamo da terze parti per comprendere meglio le tue esigenze e offrirti un servizio migliore."
+            "* Sviluppare, migliorare e migliorare il marketing per i prodotti."
+            "* Identificati come utente nel nostro sistema tramite il tuo account/profilo personale o altri mezzi."
+            "* Condurre processi decisionali automatizzati in conformità con uno di questi scopi."
+            "* Verificare e effettuare transazioni finanziarie in relazione ai pagamenti effettuati e verificare il download di dati dal nostro sito."
+            '* Possiamo archiviare ed elaborare le tue informazioni personali su server situati in varie posizioni. Possiamo anche creare record di dati anonimi dalle tue informazioni personali completamente "escluse informazioni che altrimenti renderebbero i dati identificabili personalmente per te. Utilizziamo questi dati anonimi per analizzare i modelli di richiesta e utilizzo in modo da poter migliorare il contenuto "" dei nostri servizi e ottimizzare la funzionalità del sito.'
+            'Inoltre, ci riserviamo il diritto di condividere dati anonimi con terze parti e possiamo usarli per qualsiasi scopo. Gli utenti che hanno avuto buone esperienze con i nostri prodotti e servizi possono fornirci testimonianze e osservazioni. Potremmo pubblicare tale materiale. Possiamo utilizzare il nome e il cognome dei nostri utenti per identificarli quando pubblichiamo tali contenuti. Prima di pubblicare questi dati insieme alla testimonianza, otterremo il consenso dell\'utente.'
+            'Useremo queste informazioni per qualsiasi altro scopo a cui è stato ottenuto il tuo consenso; e condurre processi decisionali automatizzati in conformità con uno di questi scopi.',
+        key.privacyBody3: '',
+        key.privacyBody4:
+            'I negozi ISMMART ricevono e archiviano i dati che ci dai tramite il profilo del tuo account quando utilizzano i nostri servizi.',
+        key.privacyBody5:
+            'Quando si utilizzano i nostri servizi, raccogliamo e manteniamo automaticamente alcuni tipi di informazioni, inclusi i dati su come interagisci con i prodotti, le informazioni e i servizi offerti nei negozi ISMMART. Quando il tuo browser Web o dispositivo accede al nostro sito Web, noi, come molti altri siti Web, utilizziamo "cookie" e altri identificatori univoci per raccogliere specifici tipi di informazioni.',
+        key.privacyBody6:
+            'I negozi ISMMART possono ottenere informazioni su di te da altre fonti. Ad esempio, i nostri vettori possono fornirci dati di consegna e indirizzi aggiornati, che utilizziamo per aggiornare i nostri record e rendere più semplice fornire i tuoi acquisti successivi.',
+        key.privacyBody7:
+            'Le informazioni verranno create automaticamente quando si utilizzano i nostri servizi. Quando usi i nostri servizi, ad esempio, potremmo raccogliere informazioni sulla tua posizione generale, sul tipo di dispositivo che usi, il numero di identificazione del dispositivo aperto, la data e l\'ora della tua visita, l\'identificatore univoco del dispositivo, il tipo di browser Utilizzando, il sistema operativo, l\'indirizzo IP (Internet Protocol) e il nome di dominio. In generale, utilizziamo queste informazioni per operare e migliorare il sito, nonché per assicurarti di ricevere le informazioni più pertinenti possibili.',
+        key.privacyBody8:
+            'Il tuo nome utente e password, ordini relativi a te, i tuoi interessi, le preferenze, il feedback e le risposte al sondaggio.',
+        key.privacyBody9:
+            'Come è vero per la maggior parte dei siti Web, raccogliamo automaticamente alcune informazioni e le memorizziamo nei file di registro. Queste informazioni includono indirizzi IP, tipo di browser, provider di servizi Internet (ISP), pagine di riferimento/uscita, sistema operativo, data/timestamp e fare clic su dati di streaming. Utilizziamo queste informazioni per mantenere e migliorare i servizi di prestazione.',
+        key.privacyBody10:
+            'Per capire meglio come le persone interagiscono con il sito Web, impieghiamo servizi di analisi, come ma non limitati a Google Analytics. I cookie vengono utilizzati dai servizi di analisi per raccogliere dati come la frequenza con cui gli utenti visitano il sito e utilizziamo questi dati per migliorare i nostri servizi e il nostro sito Web. I termini di utilizzo e le politiche sulla privacy dei servizi di analisi, che dovresti consultare per ulteriori informazioni su come queste aziende utilizzano queste informazioni, pongono limitazioni su come possono utilizzare e distribuire le informazioni che raccolgono.',
+        key.privacyBody11:
+            'Se hai abilitato i servizi di posizione sui tuoi dispositivi, potremmo raccogliere le informazioni sulla tua posizione per migliorare i servizi che offriamo. Se non si desidera raccolta queste informazioni, è possibile disabilitare i servizi di posizione sul dispositivo.',
+        key.privacyBody12:
+            'I cookie sono piccole informazioni che un sito Web invia al disco rigido del tuo computer mentre si visualizza il sito Web. Questi file di testo possono essere utilizzati dai siti Web per rendere gli utenti più efficienti. Potremmo archiviare questi cookie sul tuo dispositivo se sono rigorosamente necessari per il funzionamento di questo sito. Per tutti gli altri tipi di cookie abbiamo bisogno del tuo permesso. A tal fine, questo sito utilizza diversi tipi di cookie. Alcuni cookie sono collocati da servizi di terze parti che appaiono sulle nostre pagine. Noi e alcune terze parti possiamo utilizzare entrambi i cookie di sessione (che scadono una volta chiuso il browser web) e cookie persistenti (che rimangono sul tuo computer fino a quando non li elimini) per fornirti un\'esperienza più personale e interattiva sui nostri servizi e per il mercato i nostri prodotti. I cookie di marketing vengono utilizzati per tenere traccia dei visitatori sui siti Web. L\'intenzione è quella di visualizzare annunci pertinenti e coinvolgenti per il singolo utente e quindi più preziosi per gli editori e gli inserzionisti di terze parti. Questo monitoraggio viene eseguito su base anonima.',
+        key.privacyBody13:
+            'Consideriamo la tua sicurezza e la tua privacy durante la progettazione delle nostre soluzioni. Utilizzando protocolli e software di crittografia, cerchiamo di mantenere la sicurezza delle tue informazioni personali durante la trasmissione. Quando si gestiscono carte di credito / debito / dettagli bancari, aderiamo alle migliori pratiche del settore e proteggiamo le informazioni personali dei clienti utilizzando misure fisiche, elettroniche e procedurali. A causa delle nostre misure di sicurezza, possiamo richiedere di dimostrare la tua identità prima di darti accesso ai dati personali. È importante per te proteggere dall\'accesso non autorizzato alla tua password e ai tuoi computer, dispositivi e applicazioni. Si consiglia di utilizzare una password univoca per il tuo account che non viene utilizzata per altri account online. Assicurati di firmare al termine dell\'utilizzo di un computer condiviso.',
+        key.privacyBody14:
+            'Puoi accedere alle tue informazioni, inclusi il tuo nome, indirizzo, opzioni di pagamento, informazioni sul profilo e cronologia degli acquisti nella sezione Account.',
+        key.privacyBody15:
+            'La presente Informativa sulla privacy è efficace al 10 ottobre 2022 e rimarrà in vigore se non per quanto riguarda le modifiche nelle sue disposizioni in futuro, che saranno in vigore immediatamente dopo essere stata pubblicata in questa pagina. Ci riserviamo il diritto di aggiornare o modificare la nostra politica sulla privacy in qualsiasi momento e dovresti verificare periodicamente questa politica sulla privacy. Nota: se hai domande sulla presente Informativa sulla privacy, contattaci.',
       };
 }

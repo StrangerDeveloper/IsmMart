@@ -440,21 +440,77 @@ class Turkish {
             '* Cep telefonları, aksesuarlar ve diğer elektrik ve elektronik ürünler için dönüş süresi, paketin alındığı günden başlayarak sadece 5 takvim günüdür. Dönüş penceresi sırasında bir kusur bulunursa, bir yedek öğe şarjsız verilecektir. İade penceresinin süresi dolduktan sonra üretici veya tedarikçiden gelen standart garantiler yürürlükte olacaktır.',
         key.exchangeBody2:
             'Bir öğe yukarıda belirtilen tüm gereksinimleri karşılıyorsa lütfen müşteri destek merkezimizle iletişime geçin.',
-      key.deleteDisputesMsg:
-              'Anlaşmazlığı silmek istediğinden emin misiniz?',
-          key.feeChargesExplained: 'Ücret ücretleri açıklandı!',
-          key.serviceFee: 'Servis ücreti',
-          key.deliveryFee: 'Teslimat ücreti',
-          key.supportCenter: '24/7 Destek Merkezi',
-          key.costDesc1:
-              'Hizmet ve teslimat ücretlerimizi mümkün olduğunca düşük tutmaya çalışırken, yine de mümkün olan en iyi hizmeti sunuyoruz.',
-          key.costDesc2:
-              'platformumuzu koruma, kalite kontrolü sağlama ve müşteri desteği sağlama maliyetlerini karşılamamıza yardımcı olan yüzde tabanlı bir ücrettir. Prestiogius satıcımız tarafından yüklenen her ürün için hizmet ücreti sadece% 5\'tir.',
-          key.costDesc3:
-              'Teslimat ücreti, siparişinizi bulunduğunuz yere teslim etme maliyetini kapsayan sabit bir ücrettir. Teslimat ücreti sadece her siparişte 250 rupidir.',
-          key.costDesc4:
-              'Ücretlerimizle ilgili herhangi bir sorunuz veya endişeniz varsa, lütfen müşteri destek ekibimize ulaşmaktan çekinmeyin. Hizmetimizi seçtiğiniz için teşekkür ederiz!',
-          key.sortByPrice: 'Fiyata göre sıralayın',
-          key.currencyKey: 'Para birimi',
+        key.deleteDisputesMsg: 'Anlaşmazlığı silmek istediğinden emin misiniz?',
+        key.feeChargesExplained: 'Ücret ücretleri açıklandı!',
+        key.serviceFee: 'Servis ücreti',
+        key.deliveryFee: 'Teslimat ücreti',
+        key.supportCenter: '24/7 Destek Merkezi',
+        key.costDesc1:
+            'Hizmet ve teslimat ücretlerimizi mümkün olduğunca düşük tutmaya çalışırken, yine de mümkün olan en iyi hizmeti sunuyoruz.',
+        key.costDesc2:
+            'platformumuzu koruma, kalite kontrolü sağlama ve müşteri desteği sağlama maliyetlerini karşılamamıza yardımcı olan yüzde tabanlı bir ücrettir. Prestiogius satıcımız tarafından yüklenen her ürün için hizmet ücreti sadece% 5\'tir.',
+        key.costDesc3:
+            'Teslimat ücreti, siparişinizi bulunduğunuz yere teslim etme maliyetini kapsayan sabit bir ücrettir. Teslimat ücreti sadece her siparişte 250 rupidir.',
+        key.costDesc4:
+            'Ücretlerimizle ilgili herhangi bir sorunuz veya endişeniz varsa, lütfen müşteri destek ekibimize ulaşmaktan çekinmeyin. Hizmetimizi seçtiğiniz için teşekkür ederiz!',
+        key.sortByPrice: 'Fiyata göre sıralayın',
+        key.currencyKey: 'Para birimi',
+        key.privacyHeader1: '',
+        key.privacyHeader2: 'Kişisel Bilgilerinizin Kullanımı',
+        key.privacyHeader3:
+            'Hangi verileri topluyoruz ve onu nasıl topluyoruz?',
+        key.privacyHeader4: 'Verdiğiniz bilgiler:',
+        key.privacyHeader5: 'Otomatik Bilgiler:',
+        key.privacyHeader6: 'Diğer kaynaklardan gelen bilgiler:',
+        key.privacyHeader7: 'Genel veri:',
+        key.privacyHeader8: 'Profil Verileri:',
+        key.privacyHeader9: 'Log dosyaları:',
+        key.privacyHeader10: 'Analytics:',
+        key.privacyHeader11: 'Konum bilgisi:',
+        key.privacyHeader12: 'Kurabiye:',
+        key.privacyHeader13: 'Benim bilgilerim ne kadar güvende?',
+        key.privacyHeader14: 'Hangi bilgilere erişebilirim?',
+        key.privacyHeader15: 'Bu Gizlilik Politikasında Değişiklikler',
+        key.privacyBody1:
+            'ISMMART mağazaları gizliliğinize saygı duyar ve kişisel bilgilerinizi korumak ister. Bu gizlilik bildirimi, platformumuzun veya sitemizin kullanıcılarından aldığımız kişisel verileri ve sitede sunulan hizmetleri nasıl ele aldığımızı açıklamayı amaçlamaktadır. Bu politika ayrıca kişisel bilgilerinizin nasıl toplanacağına, kullanılacağına ve açıklanacağına ilişkin seçeneklerinizi de özetlemektedir. Bu platforma veya siteye doğrudan veya başka bir web sitesi aracılığıyla erişiyorsanız, bu Gizlilik Politikasında belirtilen prosedürleri kabul edersiniz. Daha fazla bilgi için lütfen bu gizlilik politikasını okuyun. ISMMART mağazaları, ürün ve hizmetlerimizi sunabilmemiz ve sürekli olarak geliştirebilmemiz için kişisel verilerinizi toplar.',
+        key.privacyBody2: 'Genel olarak, bize gönderdiğiniz kişisel bilgiler ya yaptığınız taleplere yanıt vermek, size daha iyi hizmet vermemize yardımcı olmak veya hizmetlerimizi pazarlamak için kullanılır. Kişisel bilgilerinizi şu şekillerde kullanıyoruz: '
+            'Siparişler alın, ürünler teslim edin, ödemeler işleyin ve siparişler, ürünler ve hizmetler ve promosyon teklifleri hakkında sizinle iletişim kurun. Ürünlerin teslimatı hakkında sizi güncelleyin; '
+            '* Kişisel bilgilerinizi belirli yasalara uymak için toplayın ve kullanın.'
+            '* Sitemizi, ürünlerimizi ve hizmetlerimizi çalıştırın, koruyun ve geliştirin.'
+            '* Yorumlara ve sorulara yanıt verin ve müşteri hizmetleri sağlayın.'
+            '* İhtiyaçlarınızı daha iyi anlamak ve size daha iyi hizmet sunmak için kullanıcı bilgilerini üçüncü taraflardan aldığımız diğer kişisel bilgilere bağlayın veya birleştirin.'
+            '* Ürünler için pazarlamayı geliştirmek, geliştirmek ve geliştirmek.'
+            '* Sizi Sistemimizde Hesabınız/Kişisel Profiliniz veya Diğer Araçlar aracılığıyla kullanıcı olarak tanımlayın.'
+            '* Bu amaçlardan herhangi birine göre otomatik karar verme süreçleri yapın.'
+            '* Sitemizden verilerin indirilmesini yaptığınız ödemelerle ilgili finansal işlemleri doğrulayın ve gerçekleştirin.'
+            '* Kişisel bilgilerinizi çeşitli yerlerde bulunan sunucularda saklayabilir ve işleyebiliriz. Ayrıca, verileri sizin için kişisel olarak tanımlanabilir hale getirecek bilgiler hariç tutarak kişisel bilgilerinizden anonim veri kayıtları da oluşturabiliriz. Bu anonim verileri, istek ve kullanım kalıplarını analiz etmek için kullanıyoruz, böylece '
+            'hizmetlerimizin içeriğini geliştirebilir ve site işlevselliğini optimize edebiliriz.'
+            'Buna ek olarak, anonim verileri üçüncü taraflarla paylaşma hakkını saklı tutarız ve bunu herhangi bir amaç için kullanabiliriz. Ürünlerimiz ve hizmetlerimizle iyi deneyimler yaşayan kullanıcılar bize referans ve açıklamalar sağlayabilir. Bu tür materyalleri yayınlayabiliriz. Bu tür içerik yayınlarken bunları tanımlamak için kullanıcılarımızın adlarını ve soyadlarını kullanabiliriz. Bu verileri referansla birlikte yayınlamadan önce, kullanıcının onayını alacağız.'
+            'Bu bilgileri, rızanızın alındığı diğer herhangi bir amaç için kullanacağız; ve bu amaçlardan herhangi birine göre otomatik karar verme süreçleri yapmak.',
+        key.privacyBody3: '',
+        key.privacyBody4:
+            'ISMMART mağazaları, hizmetlerimizi kullanırken bize hesap profiliniz aracılığıyla bize verdiğiniz verileri alır ve depolar.',
+        key.privacyBody5:
+            'Hizmetlerimizi kullandığınızda, ISMMART mağazalarında sunulan ürünler, bilgiler ve hizmetlerle nasıl etkileşime girdiğinize dair veriler de dahil olmak üzere bazı bilgileri otomatik olarak toplar ve saklarız. Web tarayıcınız veya cihazınız web sitemize eriştiğinde, diğer birçok web sitesi gibi, belirli türden bilgi toplamak için “çerezleri” ve diğer benzersiz tanımlayıcıları kullanıyoruz.',
+        key.privacyBody6:
+            'Ismmart mağazaları sizinle ilgili diğer kaynaklardan bilgi alabilir. Örneğin, operatörlerimiz bize kayıtlarımızı güncellemek ve sonraki satın alımlarınızı sunmayı kolaylaştırmak için kullandığımız güncellenmiş teslimat ve adres verileri sağlayabilir.',
+        key.privacyBody7:
+            'Hizmetlerimizi kullanırken bilgiler otomatik olarak oluşturulacaktır. Örneğin, hizmetlerimizi kullandığınızda, genel konumunuz, kullandığınız cihaz türü, açık cihaz kimlik numarası, ziyaretinizin tarihi ve saati, benzersiz cihaz tanımlayıcısı, olduğunuz tarayıcı türü hakkında bilgi toplayabiliriz. Kullanım sistemi, İnternet Protokolü (IP) adresi ve alan adı kullanma. Genel olarak konuşursak, bu bilgileri siteyi çalıştırmak ve geliştirmek ve mümkün olan en uygun bilgileri almanızı sağlamak için kullanıyoruz.',
+        key.privacyBody8:
+            'Kullanıcı adınız ve şifreniz, sizinle ilgili siparişler, ilgi alanlarınız, tercihleriniz, geri bildirim ve anket yanıtları.',
+        key.privacyBody9:
+            'Çoğu web sitesi için olduğu gibi, belirli bilgileri otomatik olarak toplar ve günlük dosyalarında saklarız. Bu bilgiler IP adresleri, tarayıcı türü, İnternet Servis Sağlayıcısı (ISS), yönlendirme/çıkış sayfaları, işletim sistemi, tarih/zaman damgası ve akış verilerini tıklatır. Bu bilgileri performans hizmetlerini sürdürmek ve geliştirmek için kullanırız.',
+        key.privacyBody10:
+            'İnsanların web sitesi ile nasıl etkileşime girdiğini daha iyi anlamak için, Google Analytics ile sınırlı olmamak üzere analitik hizmetleri kullanıyoruz. Çerezler, Analytics hizmetleri tarafından kullanıcıların siteyi ne sıklıkta ziyaret ettiği gibi verileri toplamak için kullanılır ve bu verileri hizmetlerimizi ve web sitemizi geliştirmek için kullanırız. Bu şirketlerin bu bilgileri nasıl kullandıkları hakkında daha fazla bilgi için danışmanız gereken Analytics Hizmetlerinin Kullanım Koşulları ve Gizlilik Politikaları, topladıkları bilgileri nasıl kullanabilecekleri ve dağıtabilecekleri konusundaki sınırlamalar yerleştirin.',
+        key.privacyBody11:
+            'Cihazlarınızda konum hizmetlerini etkinleştirdiyseniz, sunduğumuz hizmetleri geliştirmek için konum bilgilerinizi toplayabiliriz. Bu bilgilerin toplanmasını istemiyorsanız, cihazınızdaki konum hizmetlerini devre dışı bırakabilirsiniz.',
+        key.privacyBody12:
+            'Çerezler, bir web sitesinin web sitesini görüntülerken bilgisayarınızın sabit diskine gönderdiği küçük bilgilerdir. Bu metin dosyaları, kullanıcıların deneyimini daha verimli hale getirmek için web siteleri tarafından kullanılabilir. Bu sitenin çalışması için kesinlikle gerekliyse bu çerezleri cihazınıza saklayabiliriz. Diğer tüm çerez türleri için izninize ihtiyacımız var. Bu amaçla, bu site farklı çerez türleri kullanır. Bazı çerezler sayfalarımızda görünen üçüncü taraf hizmetleri tarafından yerleştirilir. Biz ve bazı üçüncü taraflar, hizmetlerimizde daha kişisel ve etkileşimli bir deneyim sağlamak için hem oturum çerezlerini (web tarayıcınızı kapattıktan sonra sona erdiğinde) hem de kalıcı çerezleri (bunları silinceye kadar bilgisayarınızda kalan) kullanabilirler. bizim ürünlerimiz. Pazarlama çerezleri, web sitelerinde ziyaretçileri izlemek için kullanılır. Amaç, bireysel kullanıcı için alakalı ve ilgi çekici ve dolayısıyla yayıncılar ve üçüncü taraf reklamverenler için daha değerli reklamlar görüntülemektir. Bu izleme anonim olarak yapılır.',
+        key.privacyBody13:
+            'Çözümlerimizi tasarlarken güvenliğinizi ve gizliliğinizi düşünüyoruz. Şifreleme protokolleri ve yazılımlarını kullanarak kişisel bilgilerinizin güvenliğini iletim boyunca tutmaya çalışıyoruz. Kredi / banka kartlarını / banka ayrıntılarını ele alırken, en iyi endüstri uygulamalarına uyuyoruz ve fiziksel, elektronik ve prosedürel önlemleri kullanarak müşteri kişisel bilgilerini güvende tutuyoruz. Güvenlik önlemlerimiz nedeniyle, kişisel verilere erişim vermeden önce kimliğinizi kanıtlamanızı isteyebiliriz. Şifrenize ve bilgisayarlarınıza, cihazlarınıza ve uygulamalarınıza yetkisiz erişime karşı korunmanız önemlidir. Hesabınız için diğer çevrimiçi hesaplar için kullanılmayan benzersiz bir şifre kullanmanızı öneririz. Paylaşılan bir bilgisayar kullanarak bittiğinde oturum açtığınızdan emin olun.',
+        key.privacyBody14:
+            'Hesap bölümünde adınız, adresiniz, ödeme seçenekleri, profil bilgileriniz ve satın alma geçmişiniz de dahil olmak üzere bilgilerinize erişebilirsiniz.',
+        key.privacyBody15:
+            'Bu Gizlilik Politikası, 10 Ekim 2022\'den itibaren geçerlidir ve gelecekteki hükümlerindeki herhangi bir değişiklik dışında, bu sayfada yayınlandıktan hemen sonra yürürlükte olacaktır. Gizlilik politikamızı herhangi bir zamanda güncelleme veya değiştirme hakkını saklı tutarız ve bu Gizlilik Politikasını periyodik olarak kontrol etmelisiniz. Not: Bu Gizlilik Politikası hakkında herhangi bir sorunuz varsa, lütfen bizimle iletişime geçin.',
       };
 }

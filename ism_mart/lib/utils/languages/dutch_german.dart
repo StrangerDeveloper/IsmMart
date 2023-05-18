@@ -459,5 +459,60 @@ class DutchGerman {
             'Wenn Sie Fragen oder Bedenken zu unseren Gebühren haben, zögern Sie bitte nicht, sich an unser Kundendienstteam zu wenden. Vielen Dank, dass Sie sich für unseren Service entschieden haben!',
         key.sortByPrice: 'Sortieren nach Preis',
         key.currencyKey: 'Währung',
+        key.privacyHeader1: '',
+        key.privacyHeader2: 'Verwendung Ihrer persönlichen Daten',
+        key.privacyHeader3: 'Welche Daten sammeln wir und wie wir sie sammeln?',
+        key.privacyHeader4: 'Informationen, die Sie angeben:',
+        key.privacyHeader5: 'Automatische Informationen:',
+        key.privacyHeader6: 'Informationen aus anderen Quellen:',
+        key.privacyHeader7: 'Allgemeine Daten:',
+        key.privacyHeader8: 'Profildaten:',
+        key.privacyHeader9: 'Protokolldateien:',
+        key.privacyHeader10: 'Analyse:',
+        key.privacyHeader11: 'Standortinformationen:',
+        key.privacyHeader12: 'Kekse:',
+        key.privacyHeader13: 'Wie sicher sind meine Informationen?',
+        key.privacyHeader14: 'Auf welche Informationen kann ich zugreifen?',
+        key.privacyHeader15: 'Änderungen an dieser Datenschutzrichtlinie',
+        key.privacyBody1:
+            'IsMmart speichert respektieren Ihre Privatsphäre und möchte Ihre persönlichen Daten schützen. Diese Datenschutzerklärung zielt darauf ab, Ihnen zu erklären, wie wir mit den persönlichen Daten umgehen, die wir von Benutzern unserer Plattform oder Website und den auf der Website verfügbaren Diensten erhalten. Diese Richtlinie beschreibt auch Ihre Optionen, wie Ihre persönlichen Daten erfasst, verwendet und offengelegt werden. Sie stimmen den in dieser Datenschutzrichtlinie beschriebenen Verfahren zu, wenn Sie direkt oder über eine andere Website auf diese Plattform oder diese Website zugreifen. Bitte lesen Sie diese Datenschutzrichtlinie für weitere Informationen. IsMmart -Stores sammelt Ihre persönlichen Daten, damit wir unsere Produkte und Dienstleistungen anbieten und ständig verbessern können.',
+        key.privacyBody2: 'Im Allgemeinen werden persönliche Informationen, die Sie uns einreichen, entweder verwendet, um auf Anfragen zu antworten, die Sie stellen, uns bei der Dienste besser bedienen oder unsere Dienstleistungen vermarkten. Wir verwenden Ihre persönlichen Daten auf folgende Weise: '
+            'Bestellungen, liefern Sie Produkte, verarbeiten Sie Zahlungen und kommunizieren Sie mit Ihnen über Bestellungen, Produkte und Dienstleistungen und Werbeangebote. Aktualisieren Sie die Lieferung der Produkte; '
+            "* Sammeln und verwenden Sie Ihre persönlichen Daten, um bestimmte Gesetze einzuhalten."
+            "* Betreiben, pflegen und verbessern unsere Website, Produkte und Dienstleistungen."
+            "* Auf Kommentare und Anfragen antworten und Kundenservice anbieten."
+            "* Link oder kombinieren Sie Benutzerinformationen mit anderen persönlichen Informationen, die wir von Dritten erhalten, um Ihre Bedürfnisse besser zu verstehen und Ihnen einen besseren Service zu bieten."
+            "* Entwicklung, Verbesserung und Verbesserung des Marketings für Produkte."
+            "* Identifizieren Sie Sie als Benutzer in unserem System über Ihr Konto/persönliches Profil oder andere Mittel."
+            "* Durchführen automatisierter Entscheidungsprozesse gemäß diesen Zwecken."
+            "* Überprüfen und führen Sie Finanztransaktionen in Bezug auf die von Ihnen erbrachten Zahlungen durch und prüfen Sie das Herunterladen von Daten von unserer Website."
+            '* Wir können Ihre persönlichen Daten auf Servern an verschiedenen Orten speichern und verarbeiten. Wir können auch anonyme Datensätze aus Ihren persönlichen Daten erstellen, indem wir vollständig Informationen ausschließen, die die Daten ansonsten für Sie persönlich identifizierbar machen. Wir verwenden diese anonymen Daten, um Anforderungs- und Nutzungsmuster zu analysieren, damit wir den Inhalt unserer Dienste verbessern und die Standortfunktionalität optimieren können.'
+            'Darüber hinaus behalten wir uns das Recht vor, anonyme Daten an Dritte zu teilen, und können sie für jeden Zweck verwenden. Benutzer, die gute Erfahrungen mit unseren Produkten und Dienstleistungen gemacht haben, bieten uns möglicherweise Testimonials und Bemerkungen. Wir könnten ein solches Material veröffentlichen. Wir können die ersten und Nachnamen unserer Benutzer verwenden, um sie zu identifizieren, wenn wir solche Inhalte veröffentlichen. Bevor wir diese Daten zusammen mit dem Testimonial veröffentlichen, erhalten wir die Zustimmung des Benutzers.'
+            'Wir werden diese Informationen für jeden anderen Zweck verwenden, zu dem Ihre Zustimmung eingeholt wurde. und automatisierte Entscheidungsprozesse gemäß diesen Zwecken durchzuführen.',
+        key.privacyBody3: '',
+        key.privacyBody4:
+            'ISMMART -Stores empfangen und speichern Daten, die Sie uns über Ihr Kontoprofil geben, wenn Sie unsere Dienste verwenden.',
+        key.privacyBody5:
+            'Wenn Sie unsere Dienste nutzen, sammeln und behalten wir automatisch einige Arten von Informationen, einschließlich Daten darüber, wie Sie mit den Produkten, Informationen und Dienstleistungen in ISMMART -Stores interagieren. Wenn Ihr Webbrowser oder Gerät auf unsere Website zugreift, verwenden wir wie viele andere Websites „Cookies“ und andere eindeutige Kennungen, um bestimmte Arten von Informationen zu sammeln.',
+        key.privacyBody6:
+            'ISMMART -Stores erhalten möglicherweise Informationen über Sie aus anderen Quellen. Zum Beispiel können unsere Fluggesellschaften uns aktualisierte Zustellungs- und Adressdaten zur Verfügung stellen, die wir verwenden, um unsere Datensätze zu aktualisieren und es einfacher zu machen, Ihre nachfolgenden Einkäufe zu liefern.',
+        key.privacyBody7:
+            'Informationen werden automatisch erstellt, wenn unsere Dienste verwendet werden. Wenn Sie beispielsweise unsere Dienste nutzen, können wir Informationen über Ihren allgemeinen Standort, die Art des von Ihnen verwendeten Geräts, die Identifikationsnummer der offenen Geräte, das Datum und die Uhrzeit Ihres Besuchs, die eindeutige Gerätekennung, die Art des Browsers, die Sie sind Verwenden Sie das Betriebssystem, die IP -Adresse (Internet Protocol) und den Domänennamen. Im Allgemeinen verwenden wir diese Informationen, um die Website zu bedienen und zu verbessern sowie sicherzustellen, dass Sie die wichtigsten Informationen erhalten.',
+        key.privacyBody8:
+            'Ihr Benutzername und Ihr Passwort, Ihre Bestellungen, Ihre Interessen, Vorlieben, Feedback und Umfrageantworten.',
+        key.privacyBody9:
+            'Wie bei den meisten Websites sammeln wir bestimmte Informationen automatisch und speichern sie in Protokolldateien. Diese Informationen umfassen IP -Adressen, Browsertyp, Internetdienstanbieter (ISP), Überweisungen/Beenden von Seiten, Betriebssystem, Datums-/Zeitstempel und klicken Sie auf Stream -Daten. Wir verwenden diese Informationen, um die Leistungsdienste aufrechtzuerhalten und zu verbessern.',
+        key.privacyBody10:
+            'Um besser zu verstehen, wie Menschen mit der Website interagieren, verwenden wir Analytics -Dienste, wie sie jedoch nicht auf Google Analytics beschränkt sind. Cookies werden von Analytics -Diensten verwendet, um Daten zu sammeln, z. B. wie häufig Benutzer die Website besuchen, und wir verwenden diese Daten, um unsere Dienste und unsere Website zu verbessern. Die Nutzungsbedingungen und Datenschutzrichtlinien der Analysedienste, die Sie an weitere Informationen darüber konsultieren sollten, wie diese Unternehmen diese Informationen verwenden, stellen Sie Einschränkungen dafür vor, wie sie die von ihnen gesammelten Informationen verwenden und verteilen können.',
+        key.privacyBody11:
+            'Wenn Sie Standortdienste auf Ihren Geräten aktiviert haben, können wir Ihre Standortinformationen sammeln, um die von uns angebotenen Dienste zu verbessern. Wenn Sie diese Informationen nicht erfassen möchten, können Sie Standortdienste auf Ihrem Gerät deaktivieren.',
+        key.privacyBody12:
+            'Cookies sind kleine Informationen, die eine Website an die Festplatte Ihres Computers sendet, während Sie die Website anzeigen. Diese Textdateien können von Websites verwendet werden, um die Benutzer effizienter zu gestalten. Wir können diese Cookies auf Ihrem Gerät speichern, wenn sie für den Betrieb dieser Website ausschließlich erforderlich sind. Für alle anderen Kekse benötigen wir Ihre Erlaubnis. Zu diesem Zweck verwendet diese Site verschiedene Arten von Cookies. Einige Cookies werden von Diensten von Drittanbietern platziert, die auf unseren Seiten erscheinen. Wir und einige Dritte verwenden möglicherweise beide Sitzungs -Cookies (die ablaufen, sobald Sie Ihren Webbrowser schließen) als auch anhaltende Cookies (die auf Ihrem Computer bleiben, bis Sie sie löschen), um Ihnen ein persönlicheres und interaktiveres Erlebnis auf unseren Diensten zu bieten und zu vermarkten unsere Produkte. Marketing -Cookies werden verwendet, um Besucher auf Websites zu verfolgen. Es ist beabsichtigt, Anzeigen anzuzeigen, die für den einzelnen Benutzer relevant und engagiert sind und damit für Verlage und Werbetreibende von Drittanbietern wertvoller sind. Diese Tracking erfolgt anonym.',
+        key.privacyBody13:
+            'Wir betrachten Ihre Sicherheit und Privatsphäre bei der Gestaltung unserer Lösungen. Durch die Verwendung von Verschlüsselungsprotokollen und Software versuchen wir, die Sicherheit Ihrer persönlichen Daten während der gesamten Übertragung beizubehalten. Bei der Behandlung von Kredit- / Debitkarten / Bankdetails halten wir uns an die besten Branchenpraktiken ein und halten persönliche Daten der Kunden mithilfe physischer, elektronischer und prozeduraler Maßnahmen sicher. Aufgrund unserer Sicherheitsmaßnahmen können Sie verlangen, dass Sie Ihre Identität nachweisen, bevor Sie Zugriff auf personenbezogene Daten gewähren. Es ist wichtig, dass Sie vor unbefugtem Zugriff auf Ihr Passwort und Ihren Computern, Geräten und Anwendungen schützen. Wir empfehlen, ein eindeutiges Passwort für Ihr Konto zu verwenden, das nicht für andere Online -Konten verwendet wird. Stellen Sie sicher, dass Sie sich abmelden, wenn Sie mit einem gemeinsam genutzten Computer fertig sind.',
+        key.privacyBody14:
+            'Sie können auf Ihre Informationen zugreifen, einschließlich Ihres Namens, Ihrer Adresse, Ihrer Zahlungsoptionen, der Profilinformationen und Ihres Kaufhistoriums im Kontoabschnitt.',
+        key.privacyBody15:
+            'Diese Datenschutzrichtlinie ist ab dem 10. Oktober 2022 wirksam und bleibt in Bezug auf Änderungen seiner Bestimmungen in der Zukunft in Kraft, die unmittelbar nach der Veröffentlichung auf dieser Seite in Kraft sein werden. Wir behalten uns das Recht vor, unsere Datenschutzrichtlinien jederzeit zu aktualisieren oder zu ändern, und Sie sollten diese Datenschutzrichtlinie regelmäßig überprüfen. Beachten Sie: Wenn Sie Fragen zu dieser Datenschutzrichtlinie haben, kontaktieren Sie uns bitte.',
       };
 }
