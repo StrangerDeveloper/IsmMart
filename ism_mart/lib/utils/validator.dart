@@ -21,7 +21,7 @@ class Validator {
       return langKey.fieldIsRequired.tr;
     }
     else if (!regex.hasMatch(value!)) {
-      return 'Invalid Format';
+      return langKey.phoneValidate.tr;
     } else {
       return null;
     }
