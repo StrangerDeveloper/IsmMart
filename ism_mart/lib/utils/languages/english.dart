@@ -550,51 +550,51 @@ class English {
             'ISMMART is a unique platform which offers 100 percent security to both the buyer and the vendor. \nIt provides a virtual space to display, market and sell your products or services under one platform unlike stores that offer only products selling.\nFor buyers, it is an exclusive forum where they can shop with confident that their money will not be wasted. Our unique return policy ensures that no fraudulent activity happens with the buyer or seller. We have devised different subscription/membership offers for vendors of different categories.',
 
         ///Terms And Conditions
-        key.tCHeader1: 'Introduction',
+        key.tCHeader1: '1. Introduction',
         key.tCBody1:
             'Welcome to ISMMART Stores, also hereby known as “we” and “us”. These terms and conditions govern your access to and use of our online platform/site, as well as any associated websites, apps, services, or resources. You acknowledge that you have read, understand, and agree to the terms and conditions listed below before using the ISMMART Stores. These terms and conditions may be changed, modified, added, or removed at any moment without previous notice by ISMMART Stores. If no further notification is given, changes become effective when they are posted on the website.',
         key.tCHeader2:
-            'How the contract is formed between you and ISMMART Stores?',
+            '2. How the contract is formed between you and ISMMART Stores?',
         key.tCBody2:
             '• After placing an order, you will receive online notification from us acknowledging that we have received your order. Please note that this does not mean that your order has been accepted. Your order constitutes an offer to us to buy a product. All orders are subject to acceptance by us. The contract will only be formed when you receive the products ordered via this platform. \n • The contract will relate only to those Products which you receive. A contract for any other products which may have been part of your order will be formed when you receive those other.',
-        key.tCHeader3: 'Your account',
+        key.tCHeader3: '3. Your account',
         key.tCBody3:
             '• To access certain services offered by the platform, we may require that you create an account with us or provide personal information to complete the creation of an account.'
                 '\n• You are responsible for maintaining the confidentiality of your user identification, password, account details and related private information. You acknowledge that you have this obligation to maintain the security of your account at all times and to take all reasonable precautions to prevent unauthorized use of your account. You should inform us immediately if you have any reason to believe that your password has become known to anyone else, or if the password is being, or is likely to be, used in an unauthorized manner. You understand and agree that any use of the website, any related services provided, and/or any access to confidential data, information, or communications made possible through the use of your account and password shall be deemed to have been made by you, or as the case may be, to have been made by someone authorized by you.'
                 '\n• In case of breach or any serious violation of these terms and conditions, we reserve the right to invalidate the username and/or password after serving notice and providing reasonable time to rectify the same or make amends as per terms of this contract.',
-        key.tCHeader4: 'Your status',
+        key.tCHeader4: '4. Your status',
         key.tCBody4:
             'By placing an order through our site/platform, you warrant that:'
-                '\n• you are legally capable of entering into binding contracts.'
-                '\n• you are at least 18 years old.'
-                '\n• you are not resident in a country where making a payment to our site, in line with these terms and conditions would breach any law.',
-        key.tCHeader5: 'Delivery of Products',
+                '\n• You are legally capable of entering into binding contracts.'
+                '\n• You are at least 18 years old.'
+                '\n• You are not resident in a country where making a payment to our site, in line with these terms and conditions would breach any law.',
+        key.tCHeader5: '5. Delivery of Products',
         key.tCBody5:
             'In the case of products, your order will be fulfilled/made ready for receipt (as applicable) within a reasonable time of the date indicated at the time of ordering, unless there are exceptional circumstances.',
-        key.tCHeader6: 'Warranty',
+        key.tCHeader6: '6. Warranty',
         key.tCBody6:
             'We warrant to you that any product purchased from us through our site will, on delivery, conform to its description, be of satisfactory quality, and be reasonably fit for all the purposes for which products of that kind are commonly supplied. All other warranties, conditions or terms relating to fitness for purpose, merchantability, satisfactory quality or condition whether implied by stature or common law are excluded in so far as permitted by law.',
-        key.tCHeader7: 'Cancellation rights',
+        key.tCHeader7: '7. Cancellation rights',
         key.tCBody7:
             '• In the case of products, if you are contracting as a consumer, you have a right to cancel your product order for any reason and receive a full refund. You will receive a full refund of the price paid for the products (excluding shipping costs). Your right to cancel a contract relating to the purchase of a product starts from the date when you receive the Product (when the contract is formed). If the products have been delivered to you, you may cancel at any time as per the Return Policy. In the event that you received a product that is damaged on delivery then please inform us in writing as soon as possible. If a product is returned to us damaged and you have not informed us that the product was damaged when you received it then we may refuse your right to cancel or receive.'
                 '\n• You will not have any right to cancel a contract for the supply of any made-to-order or personalized products, periodicals or magazines, perishable goods, or software, DVDs or CDs which have had their security seal opened.'
                 '\n• In the case of products, to cancel a contract, you must inform us in writing. If the products have been delivered to you, you must also return the products to us as soon as reasonably practicable, and at your own cost. You have a legal obligation to take reasonable care of the products while they are in your hands.',
-        key.tCHeader8: 'Transfer of rights and obligations',
+        key.tCHeader8: '8. Transfer of rights and obligations',
         key.tCBody8:
             '• We may transfer our rights and obligations under these terms and conditions to another organization, but that will not affect your rights or our obligations under the contract.'
                 '\n• You may only transfer your rights and obligations under your contract with us if we agree to this in writing.',
-        key.tCHeader9: 'Price',
+        key.tCHeader9: '9. Price',
         key.tCBody9:
             '• Price of the products and our delivery charges will be as quoted on our platform/site from time to time, except in cases of obvious.'
                 '\n• Product prices include GST/FED/VAT, where applicable. However, if the rate of GST/FED/VAT changes between the date of your order and the date of delivery, we will adjust the price accordingly.'
                 '\n• Product prices and delivery charges are liable to change at any time, but changes will not affect orders for products which you then take steps to fulfil/receive within a reasonable time.',
-        key.tCHeader10: 'Refunds',
+        key.tCHeader10: '10. Refunds',
         key.tCBody10:
             'If an order is cancelled in accordance with paragraph 6 above, then we will refund the amounts owed in accordance with our Refund Policy.',
-        key.tCHeader11: 'How we use your information?',
+        key.tCHeader11: '11. How we use your information?',
         key.tCBody11:
             'Please read the Privacy Policy for details on how we will use your information. By agreeing and accepting these terms and conditions you hereby agree and accept the terms of our Privacy Policy.',
-        key.tCHeader12: 'Our liability to a Business',
+        key.tCHeader12: '12. Our liability to a Business',
         key.tCBody12:
             '• If we fail to comply with these terms and conditions, we shall only be liable to you for the purchase price of the products and not any losses that you will suffer as a result of our failure to comply (whether arising in contract, delict (including negligence), breach of statutory duty or otherwise).'
                 '\n• We will not be liable for losses that result from our failure to comply with these terms and conditions that fall into the following categories even if such losses were in our contemplation as at the date that the contract constituted by these terms and conditions was formed between us of being a foreseeable consequence of our breach.'
@@ -605,41 +605,41 @@ class English {
                 '\n• Loss of data'
                 '\n• Waste of management or office'
                 '\nNote: This paragraph does not apply if you are contracting as a consumer.',
-        key.tCHeader13: 'Our liability to a Consumer',
+        key.tCHeader13: '13. Our liability to a Consumer',
         key.tCBody13:
             '• If we fail to comply with these terms and conditions, we are responsible for loss or damage you suffer that is a foreseeable result of our breach of the terms and conditions or our negligence. Loss or damage is foreseeable if it was an obvious consequence of our breach or it was otherwise contemplated by you and us at the time we entered into the relevant.'
                 '\n• We only supply the products to you for domestic and private use. You agree not to use the product for any commercial, business or re-sale purposes, and we have no liability to you for any loss of profit, loss of business, business interruption, or loss of business.'
                 '\nNote: This paragraph does not apply if you are contracting as a business.',
-        key.tCHeader14: 'Our contract with you if you are a Business',
+        key.tCHeader14: '14. Our contract with you if you are a Business',
         key.tCBody14: '• These terms and conditions and any document expressly referred to in them constitute the whole agreement between us and supersede all previous discussions, correspondence, negotiations, previous arrangement, understanding or agreement between us relating to the subject matter hereof.'
             '\n• We each acknowledge that, in entering into a contract, neither of us relies on, or will have any remedies in respect of, any representation or warranty (whether made innocently or negligently) that is not set out in these terms and conditions.'
             '\n• Each of us agrees that our only liability in respect of those representations and warranties that are set out in this agreement (whether made innocently or negligently) will be for breach of contract.'
             '\n• Nothing in this paragraph limits or excludes any liability.'
             '\nIf you are contracting as a consumer, this paragraph does not apply',
-        key.tCHeader15: 'Our contract with you if you are a consumer',
+        key.tCHeader15: '15. Our contract with you if you are a consumer',
         key.tCBody15:
             'If you are contracting as a consumer, we intend to rely upon these terms and conditions and any document expressly referred to in them in relation to the subject matter of any contract. While we accept responsibility for statements and representations made by our duly authorized agents, please make sure you ask for any variations from these terms and conditions to be confirmed in writing.'
                 '\nNote: If you are contracting in the course of business, this paragraph does not apply.',
-        key.tCHeader16: 'Notices',
+        key.tCHeader16: '16. Notices',
         key.tCBody16:
             '• Any notice to be sent by you or by us in connection with these terms and condition can be sent by letter or by email. Notices to us should be sent to one of the following addresses:'
                 '\n > 2nd Floor, Emirates Tower, F7 Markaz, Islamabad.'
                 '\n > Email: businesses@shaukatmarwatgroup.com'
                 '\n• We will send notices to you by email to the email address that you supplied at the time of signing up to our platform'
                 '\n• Either of us can change the address for notices by telling the other in writing the new address, but the previous address will continue to remain valid for 7 days after the change is made.',
-        key.tCHeader17: 'Third party rights',
+        key.tCHeader17: '17. Third party rights',
         key.tCBody17:
             'A person who is not party to these terms and conditions or a contract shall not have any rights under or in connection with them.',
-        key.tCHeader18: 'Waiver',
+        key.tCHeader18: '18. Waiver',
         key.tCBody18:
             'The failure of either party to exercise or enforce any right conferred on that party by these terms and conditions shall not be deemed to be a waiver of any such right or operate to bar the exercise or enforcement thereof at any time or times thereafter. No waiver by us of any of these terms and conditions will be effective unless it is expressly stated to be a waiver and is communicated to you in writing in accordance with paragraph 16 above.',
-        key.tCHeader19: 'Severability',
+        key.tCHeader19: '19. Severability',
         key.tCBody19:
             'If any court or competent authority decides that any of the provisions of these terms and conditions or any provisions of a contract are invalid, unlawful or unenforceable to any extent, the term will, to that extent only, be severed from the remaining terms, which will continue to be valid to the fullest extent permitted by law.',
-        key.tCHeader20: 'Force majeure',
+        key.tCHeader20: '20. Force majeure',
         key.tCBody20:
             'We reserve the right to defer the date of delivery or to cancel a contract for all circumstances beyond its reasonable control, including but not limited to any strike, lockout, disorder, fire, explosion, accident or stoppage of or affecting our business or work and which prevents or hinders the delivery of the goods or the performance of service.',
-        key.tCHeader21: 'Law and jurisdiction',
+        key.tCHeader21: '21. Law and jurisdiction',
         key.tCBody21: 'These terms and conditions and any dispute or claim arising out of or in connection with them or their subject matter or formation (including non-contractual disputes or claims) will be governed by Pakistan law. You should understand that by ordering any of our product, you agree to be bound by these terms and conditions.'
             '\nCategories for Registration:'
             '\n 1- Basic Membership- Free of Cost: Can be registered as free members.'

@@ -19,54 +19,55 @@ class GeneralSettingsDataUI extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.white,
         appBar: _appBar(),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: ListView(
-            shrinkWrap: true,
-            physics: const AlwaysScrollableScrollPhysics(),
-            children: [
-              CustomHeader(title: title!),
-              if (isContactUsCalled!)
-                _buildContactUs()
-              else
-                Column(
+        body: ListView(
+          shrinkWrap: true,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 16, right: 16, top: 15),
+              child: Text(
+                title!,
+                style: headline1.copyWith(
+                  fontSize: 25,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+            ),
+            if (isContactUsCalled!)
+              _buildContactUs()
+            else
+              Padding(
+                padding: const EdgeInsets.fromLTRB(22, 5, 22, 16),
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: getData().map((e) {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        AppConstant.spaceWidget(height: 8),
-                        CustomText(
-                          title: "${e['header']}",
-                          style: headline2,
-                        ),
-                        AppConstant.spaceWidget(height: 5),
+                        AppConstant.spaceWidget(height: 15),
+                        if (e['header'] != '')
+                          CustomText(
+                            title: "${e['header']}",
+                            style: headline2,
+                          ),
+                        if (e['header'] != '') Divider(),
                         if (e['body'].toString().isNotEmpty)
-                          CustomGreyBorderContainer(
-                            borderColor: Colors.grey[300]!,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child:
-                                  //_bodyText(text:e['body']),
-                                  Text(
-                                "${e['body'].toString()}",
-                                softWrap: true,
-                                textAlign: TextAlign.start,
-                                style: GoogleFonts.poppins(
-                                  fontSize: 13,
-                                  color: kDarkColor,
-                                ),
-                              ),
+                          Text(
+                            "${e['body'].toString()}",
+                            style: GoogleFonts.poppins(
+                              fontSize: 13.5,
+                              color: kDarkColor,
+                              height: 1.7,
                             ),
                           ),
                       ],
                     );
                   }).toList(),
                 ),
-            ],
-          ),
+              ),
+          ],
         ),
       ),
     );
@@ -234,7 +235,6 @@ class GeneralSettingsDataUI extends StatelessWidget {
 
   List getData() {
     if (title!.contains(termsAndConditions.tr)) {
-      print("$title");
       return getTermConditionData();
     } else if (title!.contains(privacyPolicy.tr))
       return getPrivacyData();
@@ -327,7 +327,6 @@ class GeneralSettingsDataUI extends StatelessWidget {
       {'header': langKey.tCHeader19.tr, 'body': langKey.tCBody19.tr},
       {'header': langKey.tCHeader20.tr, 'body': langKey.tCBody20.tr},
       {'header': langKey.tCHeader21.tr, 'body': langKey.tCBody21.tr},
-      {'header': '', 'body': ''},
     ];
   }
 

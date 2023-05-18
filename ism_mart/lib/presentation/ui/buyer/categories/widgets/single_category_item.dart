@@ -25,11 +25,13 @@ class SingleCategoryItem extends StatelessWidget {
             Get.toNamed(Routes.searchRoute,
                 arguments: {"searchText": "${category.name}"});
           },
+      borderRadius: BorderRadius.circular(8),
       child: Column(
         children: [
           Container(
             width: 60,
             height: 60,
+            margin: EdgeInsets.only(bottom: 2),
             padding: EdgeInsets.all(5),
             decoration: BoxDecoration(shape: BoxShape.circle),
             child: ClipOval(
