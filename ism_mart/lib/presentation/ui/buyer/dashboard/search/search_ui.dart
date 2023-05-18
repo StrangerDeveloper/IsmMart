@@ -56,11 +56,8 @@ class SearchUI extends GetView<CustomSearchController> {
         height: 36,
         child: TextField(
           controller: controller.searchTextController,
-          focusNode: controller.focus,
-          onChanged: (value) {
-            print("on change call Focus ---${controller.focus}-");
-            // controller.searchTextController.text = '';
-          },
+          //focusNode: controller.focus,
+          onChanged: controller.search,
           cursorColor: kPrimaryColor,
           autofocus: false,
           maxLines: 1,

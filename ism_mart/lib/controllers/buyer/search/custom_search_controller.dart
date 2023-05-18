@@ -30,17 +30,17 @@ class CustomSearchController extends GetxController {
   }
 
   //focus function
-  FocusNode focus = FocusNode();
-  void _onFocusChange() {
-    debugPrint("Focus: ${focus.hasFocus.toString()}");
-    if (focus.hasFocus == false) {
-      searchTextController.text = '';
-    }
-  }
+  // FocusNode focus = FocusNode();
+  // void _onFocusChange() {
+  //   debugPrint("Focus: ${focus.hasFocus.toString()}");
+  //   if (focus.hasFocus == false) {
+  //     searchTextController.text = '';
+  //   }
+  // }
 
   @override
   void onInit() {
-    focus.addListener(_onFocusChange);
+    // focus.addListener(_onFocusChange);
     super.onInit();
     //change(null, status: RxStatus.loading());
   }
@@ -49,9 +49,11 @@ class CustomSearchController extends GetxController {
   void onReady() {
     // TOO: implement onReady
     super.onReady();
-    searchTextController.addListener(() {
-      search(searchTextController.text);
-    });
+
+    //searchTextController.addListener(() {
+    //  search(searchTextController.text);
+    // });
+
     scrollController
       ..addListener(() {
         if (stopLoadMore.isFalse) {
@@ -202,8 +204,10 @@ class CustomSearchController extends GetxController {
   @override
   void onClose() {
     super.onClose();
-    searchTextController.clear();
-    focus.removeListener(_onFocusChange);
-    focus.dispose();
+    searchTextController.text = "";
+    //searchTextController.removeListener(() {});
+    //scrollController.removeListener(() {});
+    //focus.removeListener(_onFocusChange);
+    //focus.dispose();
   }
 }
