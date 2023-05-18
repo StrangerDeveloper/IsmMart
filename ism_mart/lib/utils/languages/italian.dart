@@ -512,5 +512,31 @@ class Italian {
             'Puoi accedere alle tue informazioni, inclusi il tuo nome, indirizzo, opzioni di pagamento, informazioni sul profilo e cronologia degli acquisti nella sezione Account.',
         key.privacyBody15:
             'La presente Informativa sulla privacy è efficace al 10 ottobre 2022 e rimarrà in vigore se non per quanto riguarda le modifiche nelle sue disposizioni in futuro, che saranno in vigore immediatamente dopo essere stata pubblicata in questa pagina. Ci riserviamo il diritto di aggiornare o modificare la nostra politica sulla privacy in qualsiasi momento e dovresti verificare periodicamente questa politica sulla privacy. Nota: se hai domande sulla presente Informativa sulla privacy, contattaci.',
+     
+     key.memPlan1Title: 'INIZIO',
+key.memPlan1Price: 'Gratuito',
+key.memPlan1Desc1: 'Chiunque può essere registrato come membri gratuiti.',
+key.memPlan1Desc2: 'Può vendere fino a 3 prodotti sulla piattaforma ISMMART.',
+key.memPlan1Desc3: 'Avrà accesso solo ai prodotti e ai negozi da visitare che sono aperti per impostazione predefinita o mantenuti aperti dai venditori e dalle aziende da visitare.',
+key.memPlan1Desc4: 'Possono acquistare qualsiasi cosa a sé stante come clienti diretti con comprensione reciproca con il venditore; Ismmart non sarà responsabile o eseguito il backup in caso di problemi in tale accordo.',
+key.memPlan2Title: 'Pro',
+key.memPlan2Desc1: 'Una prova gratuita di un mese',
+key.memPlan2Desc2: 'Può vendere qualsiasi cosa sulla piattaforma ISMMART',
+key.memPlan2Desc3: 'Avrà accesso a tutti i prodotti e nei negozi da visitare.',
+key.memPlan2Desc4: 'Tutte le offerte da parte dei membri premium su Ismmart saranno supportate da Ismmart. Saremo responsabili delle transazioni fluide e della consegna dei prodotti. Ismmart garantirà di onorare la comprensione reciproca che sia il venditore che l\'acquirente hanno concordato.',
+key.memPlan2Desc5: 'Consegne illimitate su articoli idonei.',
+key.memPlan2Desc6: 'I membri premium avranno meno accesso a tutte le aziende in tutto il mondo, sia come venditore e acquirente, come IsmMART garantirà direttamente e verificherà tali membri e qualsiasi accordo che fanno.',
+key.memPlan2Desc7: 'Poiché tutti i membri premium vengono esaminati e vengono verificati attraverso il processo di verifica ISMMART, in modo che tutti questi membri possano preoccuparsi meno commercio tra loro, in qualsiasi parte del mondo.',
+key.memPlan3Title: 'ATTIVITÀ COMMERCIALE',
+key.memPlan3Desc1: 'Prova gratuita di 2 mesi',
+key.memPlan3Desc2: 'Opportunità B2B',
+key.memPlan3Desc3: 'Consegne gratuite illimitate',
+key.memPlan3Desc4: 'Strumenti promozionali illimitati',
+key.memPlan3Desc5: 'Spedizione all\'ingrosso',
+key.memPlan3Desc6: 'Ottieni la possibilità di posizionare i prodotti nei nostri negozi fisici.',
+key.memPlan3Desc7: 'Consegne illimitate su articoli idonei.',
+key.memPlan3Desc8: 'I membri premium avranno meno accesso a tutte le aziende in tutto il mondo, sia come venditore e acquirente, come IsmMART garantirà direttamente e verificherà tali membri e qualsiasi accordo che fanno.',
+key.memPlan3Desc9: 'Poiché tutti i membri premium vengono esaminati e vengono verificati attraverso il processo di verifica ISMMART, in modo che tutti questi membri possano preoccuparsi meno commercio tra loro, in qualsiasi parte del mondo.',
+
       };
 }

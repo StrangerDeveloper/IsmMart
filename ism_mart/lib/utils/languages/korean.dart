@@ -495,5 +495,31 @@ class Korean {
             '계정 섹션에서 이름, 주소, 지불 옵션, 프로필 정보 및 구매 기록을 포함하여 귀하의 정보에 액세스 할 수 있습니다.',
         key.privacyBody15:
             '이 개인 정보 보호 정책은 2022 년 10 월 10 일부터 유효하며 향후 조항의 변경 사항과 관련하여 유효합니다.이 페이지에 게시 된 직후에 적용됩니다. 당사는 언제든지 개인 정보 보호 정책을 업데이트하거나 변경할 권리를 보유 하며이 개인 정보 보호 정책을 정기적으로 확인해야합니다. \ t 참고 :이 개인 정보 보호 정책에 대해 궁금한 점이 있으면 문의하십시오.',
+      
+      key.memPlan1Title: '시작',
+key.memPlan1Price: '무료',
+key.memPlan1Desc1: '누구나 무료 회원으로 등록 할 수 있습니다.',
+key.memPlan1Desc2: 'ISMMART 플랫폼에서 최대 3 개의 제품을 판매 할 수 있습니다.',
+key.memPlan1Desc3: '기본적으로 개설하거나 방문 할 공급 업체 및 비즈니스가 계속 개설 할 제품 및 상점에만 액세스 할 수 있습니다.',
+key.memPlan1Desc4: '그들은 판매자와의 상호 이해를 가진 직접 고객으로 자신의 모든 것을 살 수 있습니다. ISMMART는 그러한 거래에서 문제가 발생할 경우 책임을지지 않거나 백업하지 않습니다.',
+key.memPlan2Title: '찬성',
+key.memPlan2Desc1: '무료 1 개월 재판',
+key.memPlan2Desc2: 'ISMMART 플랫폼에서 무엇이든 판매 할 수 있습니다',
+key.memPlan2Desc3: '방문 할 모든 제품 및 상점에 액세스 할 수 있습니다.',
+key.memPlan2Desc4: 'ISMMART의 프리미엄 회원의 모든 거래는 ISMMART에 의해 백업됩니다. 우리는 원활한 거래 및 제품 제공을 담당 할 것입니다. ISMMART는 판매자와 구매자 모두가 동의 한 상호 이해를 존중할 것입니다.',
+key.memPlan2Desc5: '적격 항목에 대한 무제한 배송.',
+key.memPlan2Desc6: 'Premium 회원은 전 세계 모든 비즈니스에 대한 걱정이 적습니다. ISMMART는 판매자 및 구매자로서 그러한 회원 및 거래를 직접 보장하고 확인할 것입니다.',
+key.memPlan2Desc7: '모든 프리미엄 회원이 면밀히 조사되고 ISMMART 확인 프로세스를 통해 검증되므로 이러한 모든 회원은 전 세계 어디에서나 서로 거래를 덜 걱정할 수 있습니다.',
+key.memPlan3Title: '사업',
+key.memPlan3Desc1: '2 개월 무료 평가판',
+key.memPlan3Desc2: 'B2B 기회',
+key.memPlan3Desc3: '무제한 무료 배송',
+key.memPlan3Desc4: '무제한 홍보 도구',
+key.memPlan3Desc5: '도매 배송',
+key.memPlan3Desc6: '물리적 상점에 제품을 배치 할 수있는 기회를 얻으십시오.',
+key.memPlan3Desc7: '적격 항목에 대한 무제한 배송.',
+key.memPlan3Desc8: 'Premium 회원은 전 세계 모든 비즈니스에 대한 걱정이 적습니다. ISMMART는 판매자 및 구매자로서 그러한 회원 및 거래를 직접 보장하고 확인할 것입니다.',
+key.memPlan3Desc9: '모든 프리미엄 회원이 면밀히 조사되고 ISMMART 확인 프로세스를 통해 검증되므로 이러한 모든 회원은 전 세계 어디에서나 서로 거래를 덜 걱정할 수 있습니다.',
+
       };
 }
