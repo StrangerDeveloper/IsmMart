@@ -6,6 +6,26 @@ import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 class Validator {
   Validator();
 
+  String? validateDefaultTxtField(String? value) {
+    if (GetUtils.isBlank(value)!) {
+      return langKey.fieldIsRequired.tr;
+    } else {
+      return null;
+    }
+  }
+
+  String? validatePhoneNumber(String? value) {
+    String pattern = r'^\d{12}$';
+    RegExp regex = RegExp(pattern);
+    if (GetUtils.isBlank(value)!) {
+      return langKey.fieldIsRequired.tr;
+    } else if (!regex.hasMatch(value!)) {
+      return langKey.phoneValidate.tr;
+    } else {
+      return null;
+    }
+  }
+
   String? email(String? value) {
     String pattern = r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+';
     RegExp regex = RegExp(pattern);

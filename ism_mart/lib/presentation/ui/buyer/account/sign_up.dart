@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/presentation/widgets/export_widgets.dart';
@@ -112,32 +113,50 @@ class SignUpUI extends GetView<AuthController> {
                             onChanged: (value) => {},
                             maxLines: 1,
                           ),
+                          // AppConstant.spaceWidget(height: 15),
+                          // FormInputFieldWithIcon(
+                          //   controller: controller.phoneController,
+                          //   iconPrefix: Icons.phone_iphone_outlined,
+                          //   iconColor: kPrimaryColor,
+                          //   textStyle: bodyText1,
+                          //   keyboardType: TextInputType.phone,
+                          //   autofocus: false,
+                          //   autoValidateMode:
+                          //       AutovalidateMode.onUserInteraction,
+                          //   validator: (value) {
+                          //     return value!.length < 11 && value.length > 14
+                          //         ? langKey.phoneValidate.tr
+                          //         : null;
+                          //   },
+                          //   labelText:
+                          //       '${langKey.phone.tr} (${langKey.optional.tr})',
+                          //   /*autoValidateMode:
+                          //       AutovalidateMode.onUserInteraction,
+                          //   validator: (value) =>
+                          //       !GetUtils.isPhoneNumber(value!)
+                          //           ? "Invalid phone number format"
+                          //           : null,*/
+                          //   onChanged: (value) => {},
+                          //   onSaved: (value) {},
+                          //   maxLines: 1,
+                          // ),
                           AppConstant.spaceWidget(height: 15),
-                          FormInputFieldWithIcon(
+                          CountryCodePickerTextField(
+                            keyboardType: TextInputType.number,
                             controller: controller.phoneController,
-                            iconPrefix: Icons.phone_iphone_outlined,
-                            iconColor: kPrimaryColor,
-                            textStyle: bodyText1,
-                            keyboardType: TextInputType.phone,
-                            autofocus: false,
+                            initialValue: controller.countryCode.value,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(RegExp(r'^\d+?\d*')),
+                            ],
                             autoValidateMode:
                                 AutovalidateMode.onUserInteraction,
                             validator: (value) {
-                              return value!.length < 11 && value.length > 14
-                                  ? langKey.phoneValidate.tr
-                                  : null;
+                              return Validator().validatePhoneNumber(value!);
                             },
-                            labelText:
-                                '${langKey.phone.tr} (${langKey.optional.tr})',
-                            /*autoValidateMode:
-                                AutovalidateMode.onUserInteraction,
-                            validator: (value) =>
-                                !GetUtils.isPhoneNumber(value!)
-                                    ? "Invalid phone number format"
-                                    : null,*/
-                            onChanged: (value) => {},
-                            onSaved: (value) {},
-                            maxLines: 1,
+                            onChanged: (value) {
+                              controller.countryCode.value =
+                                  value.dialCode ?? '+92';
+                            },
                           ),
                           AppConstant.spaceWidget(height: 40),
                           Obx(() => controller.isLoading.isTrue
