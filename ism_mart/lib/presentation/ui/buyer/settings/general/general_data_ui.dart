@@ -49,8 +49,8 @@ class GeneralSettingsDataUI extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child:
-                              //_bodyText(text:e['body']),
-                              Text(
+                                  //_bodyText(text:e['body']),
+                                  Text(
                                 "${e['body'].toString()}",
                                 softWrap: true,
                                 textAlign: TextAlign.start,
@@ -102,29 +102,29 @@ class GeneralSettingsDataUI extends StatelessWidget {
               children: getContactUsData()
                   .map(
                     (e) => Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: ListTile(
-                    leading: Icon(
-                      e["icon"],
-                      size: 30,
-                      color: kPrimaryColor,
-                    ),
-                    title: CustomText(
-                      title: e['title'].toString(),
-                      style: headline3,
-                    ),
-                    subtitle: CustomText(
-                      title: e['description'].toString(),
-                      maxLines: e['description'].length,
+                      padding: const EdgeInsets.all(5.0),
+                      child: ListTile(
+                        leading: Icon(
+                          e["icon"],
+                          size: 30,
+                          color: kPrimaryColor,
+                        ),
+                        title: CustomText(
+                          title: e['title'].toString(),
+                          style: headline3,
+                        ),
+                        subtitle: CustomText(
+                          title: e['description'].toString(),
+                          maxLines: e['description'].length,
 
-                      style: bodyText1.copyWith(
-                        color: kDarkColor,
+                          style: bodyText1.copyWith(
+                            color: kDarkColor,
+                          ),
+                          //textAlign: TextAlign.center,
+                        ),
                       ),
-                      //textAlign: TextAlign.center,
                     ),
-                  ),
-                ),
-              )
+                  )
                   .toList(),
             ),
           ),
@@ -132,10 +132,10 @@ class GeneralSettingsDataUI extends StatelessWidget {
           CustomGreyBorderContainer(
             child: Form(
               key: formKey,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
+              //autovalidateMode: AutovalidateMode.onUserInteraction,
               child: Padding(
                 padding:
-                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5),
+                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5),
                 child: Column(
                   children: [
                     StickyLabel(
@@ -168,7 +168,7 @@ class GeneralSettingsDataUI extends StatelessWidget {
                       autoValidateMode: AutovalidateMode.onUserInteraction,
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return fullNameReq.tr;
+                          return emailReq.tr;
                         }
                         return Validator().email(value);
                       },
@@ -186,7 +186,7 @@ class GeneralSettingsDataUI extends StatelessWidget {
                       textStyle: bodyText1,
                       autoValidateMode: AutovalidateMode.onUserInteraction,
                       validator: (value) =>
-                      GetUtils.isBlank(value!)! ? subjectReq.tr : null,
+                          GetUtils.isBlank(value!)! ? subjectReq.tr : null,
                       keyboardType: TextInputType.name,
                       onChanged: (value) {},
                       onSaved: (value) {},
@@ -201,26 +201,26 @@ class GeneralSettingsDataUI extends StatelessWidget {
                       textStyle: bodyText1,
                       autoValidateMode: AutovalidateMode.onUserInteraction,
                       validator: (value) =>
-                      GetUtils.isBlank(value!)! ? messageReq.tr : null,
+                          GetUtils.isBlank(value!)! ? messageReq.tr : null,
                       keyboardType: TextInputType.text,
                       onChanged: (value) {},
                       onSaved: (value) {},
                     ),
                     AppConstant.spaceWidget(height: 20),
                     Obx(
-                          () => authController.isLoading.isTrue
+                      () => authController.isLoading.isTrue
                           ? CustomLoading(isItBtn: true)
                           : CustomButton(
-                        onTap: () async {
-                          if (formKey.currentState!.validate()) {
-                            await authController.postContactUs();
-                            formKey.currentState!.reset();
-                          }
-                        },
-                        text: send.tr,
-                        height: 40,
-                        width: 150,
-                      ),
+                              onTap: () async {
+                                if (formKey.currentState!.validate()) {
+                                  await authController.postContactUs();
+                                  formKey.currentState!.reset();
+                                }
+                              },
+                              text: send.tr,
+                              height: 40,
+                              width: 150,
+                            ),
                     ),
                   ],
                 ),
@@ -330,6 +330,7 @@ class GeneralSettingsDataUI extends StatelessWidget {
       {'header': '', 'body': ''},
     ];
   }
+
   List getReturnExchangeData() {
     //String dot = "\u2022";
     return [

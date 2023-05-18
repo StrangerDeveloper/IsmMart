@@ -110,7 +110,6 @@ class SettingsUI extends GetView<AuthController> {
                             DateTime fiveMinutesCheck =
                                 currentTime.subtract(Duration(minutes: 5));
                             if (fiveMinutesCheck.isAfter(linkTime)) {
-                              print('yes');
                               LocalStorageHelper.localStorage
                                   .remove('emailVerificationTime');
                               Get.toNamed(Routes.emailVerificationLinkRoute);
