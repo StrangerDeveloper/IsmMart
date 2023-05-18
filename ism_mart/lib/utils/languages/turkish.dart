@@ -440,5 +440,21 @@ class Turkish {
             '* Cep telefonları, aksesuarlar ve diğer elektrik ve elektronik ürünler için dönüş süresi, paketin alındığı günden başlayarak sadece 5 takvim günüdür. Dönüş penceresi sırasında bir kusur bulunursa, bir yedek öğe şarjsız verilecektir. İade penceresinin süresi dolduktan sonra üretici veya tedarikçiden gelen standart garantiler yürürlükte olacaktır.',
         key.exchangeBody2:
             'Bir öğe yukarıda belirtilen tüm gereksinimleri karşılıyorsa lütfen müşteri destek merkezimizle iletişime geçin.',
+      key.deleteDisputesMsg:
+              'Anlaşmazlığı silmek istediğinden emin misiniz?',
+          key.feeChargesExplained: 'Ücret ücretleri açıklandı!',
+          key.serviceFee: 'Servis ücreti',
+          key.deliveryFee: 'Teslimat ücreti',
+          key.supportCenter: '24/7 Destek Merkezi',
+          key.costDesc1:
+              'Hizmet ve teslimat ücretlerimizi mümkün olduğunca düşük tutmaya çalışırken, yine de mümkün olan en iyi hizmeti sunuyoruz.',
+          key.costDesc2:
+              'platformumuzu koruma, kalite kontrolü sağlama ve müşteri desteği sağlama maliyetlerini karşılamamıza yardımcı olan yüzde tabanlı bir ücrettir. Prestiogius satıcımız tarafından yüklenen her ürün için hizmet ücreti sadece% 5\'tir.',
+          key.costDesc3:
+              'Teslimat ücreti, siparişinizi bulunduğunuz yere teslim etme maliyetini kapsayan sabit bir ücrettir. Teslimat ücreti sadece her siparişte 250 rupidir.',
+          key.costDesc4:
+              'Ücretlerimizle ilgili herhangi bir sorunuz veya endişeniz varsa, lütfen müşteri destek ekibimize ulaşmaktan çekinmeyin. Hizmetimizi seçtiğiniz için teşekkür ederiz!',
+          key.sortByPrice: 'Fiyata göre sıralayın',
+          key.currencyKey: 'Para birimi',
       };
 }

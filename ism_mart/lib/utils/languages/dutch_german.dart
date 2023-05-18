@@ -443,5 +443,21 @@ class DutchGerman {
             '* Die Rückkehrzeit für Mobiltelefone, Zubehör und andere elektrische und elektronische Produkte beträgt nur 5 Kalendertage, die am Tag des Pakets beginnen. Ein Ersatzelement wird ohne Ladung gegeben, wenn während des Rückgabebergens ein Fehler gefunden wird. Standardgarantien des Herstellers oder Lieferanten werden nach Ablauf des Rückgabesters in Kraft sein.',
         key.exchangeBody2:
             'Bitte setzen Sie sich mit unserem Kunden Support Center in Verbindung, wenn ein Artikel alle oben angegebenen Anforderungen erfüllt.',
+        key.deleteDisputesMsg:
+            'Sind Sie sicher, dass Sie Streitigkeiten löschen möchten?',
+        key.feeChargesExplained: 'Gebühren für Gebühren!',
+        key.serviceFee: 'Servicegebühr',
+        key.deliveryFee: 'Liefergebühr',
+        key.supportCenter: '24/7 Hilfszentrum',
+        key.costDesc1:
+            'Wir bemühen uns, unsere Service- und Liefergebühren so niedrig wie möglich zu halten und Ihnen dennoch den bestmöglichen Service zu bieten.',
+        key.costDesc2:
+            'ist eine prozentuale Gebühr, die uns hilft, die Kosten für die Aufrechterhaltung unserer Plattform, die Gewährleistung der Qualitätskontrolle und die Bereitstellung von Kundenunterstützung zu decken. Die Servicegebühr beträgt nur 5% für jedes von unserem Prestiogius -Anbieter hochgeladene Produkt.',
+        key.costDesc3:
+            'Die Liefergebühr ist eine Pauschalgebühr, die die Kosten für die Lieferung Ihrer Bestellung an Ihren Standort abdeckt. Die Liefergebühr beträgt 250 Rupien nur auf jeder Bestellung.',
+        key.costDesc4:
+            'Wenn Sie Fragen oder Bedenken zu unseren Gebühren haben, zögern Sie bitte nicht, sich an unser Kundendienstteam zu wenden. Vielen Dank, dass Sie sich für unseren Service entschieden haben!',
+        key.sortByPrice: 'Sortieren nach Preis',
+        key.currencyKey: 'Währung',
       };
 }

@@ -442,5 +442,20 @@ class Italian {
             '* Il periodo di ritorno per telefoni cellulari, accessori e altri prodotti elettrici ed elettronici è solo 5 giorni di calendario a partire dal giorno in cui viene ricevuto il pacchetto. Verrà dato un elemento di sostituzione senza carica se si trova un difetto durante la finestra di ritorno. Le garanzie standard del produttore o del fornitore saranno in vigore dopo la scadenza della finestra di ritorno.',
         key.exchangeBody2:
             'Si prega di contattarsi con il nostro centro di assistenza clienti se un articolo soddisfa tutti i requisiti sopra specificati.',
+        key.deleteDisputesMsg: 'Sei sicuro di voler eliminare la controversia?',
+        key.feeChargesExplained: 'I costi delle commissioni spiegati!',
+        key.serviceFee: 'Costo del servizio',
+        key.deliveryFee: 'Tassa di consegna',
+        key.supportCenter: 'Centro di supporto 24/7',
+        key.costDesc1:
+            'Ci impegniamo a mantenere le commissioni di servizio e di consegna il più basse possibile, pur fornendo il miglior servizio possibile.',
+        key.costDesc2:
+            'è una commissione basata su percentuale che ci aiuta a coprire i costi di mantenimento della nostra piattaforma, garantendo il controllo di qualità e fornendo assistenza clienti. La quota di servizio è solo del 5% su ciascun prodotto caricato dal nostro fornitore di Prestiogius.',
+        key.costDesc3:
+            'La commissione di consegna è una tariffa fissa che copre il costo di consegna del tuo ordine alla tua posizione. La quota di consegna è di 250 rupie solo su ogni ordine.',
+        key.costDesc4:
+            'In caso di domande o dubbi sulle nostre commissioni, non esitare a contattare il nostro team di assistenza clienti. Grazie per aver scelto il nostro servizio!',
+        key.sortByPrice: 'Ordina per prezzo',
+        key.currencyKey: 'Valuta',
       };
 }

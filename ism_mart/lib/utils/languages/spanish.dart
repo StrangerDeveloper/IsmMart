@@ -442,5 +442,21 @@ class Spanish {
             '* El período de devolución para teléfonos móviles, accesorios y otros productos eléctricos y electrónicos es de solo 5 días calendario que comienzan el día en que se recibe el paquete. Se administrará un artículo de reemplazo sin cargo si se encuentra un defecto durante la ventana de retorno. Las garantías estándar del fabricante o proveedor estarán vigentes después de que haya expirado la ventana de devolución.',
         key.exchangeBody2:
             'Póngase en contacto con nuestro centro de atención al cliente si un artículo cumple con todos los requisitos especificados anteriormente.',
+        key.deleteDisputesMsg:
+            '¿Estás seguro de que quieres eliminar la disputa?',
+        key.feeChargesExplained: '¡Se explican los cargos de tarifas!',
+        key.serviceFee: 'Tarifa de servicio',
+        key.deliveryFee: 'Gastos de envío',
+        key.supportCenter: 'Centro de soporte 24/7',
+        key.costDesc1:
+            'Nos esforzamos por mantener nuestras tarifas de servicio y entrega lo más bajas posible al tiempo que le brindamos el mejor servicio posible.',
+        key.costDesc2:
+            'Es una tarifa basada en porcentaje que nos ayuda a cubrir los costos de mantener nuestra plataforma, garantizar el control de calidad y proporcionar atención al cliente. La tarifa de servicio es solo del 5% en cada producto cargado por nuestro proveedor de Prestiogius.',
+        key.costDesc3:
+            'La tarifa de entrega es una tarifa fija que cubre el costo de entregar su pedido a su ubicación. La tarifa de entrega es de 250 rupias solo en cada pedido.',
+        key.costDesc4:
+            'Si tiene alguna pregunta o inquietud sobre nuestras tarifas, no dude en comunicarse con nuestro equipo de atención al cliente. ¡Gracias por escoger nuestro servicio!',
+        key.sortByPrice: 'Ordenar por precio',
+        key.currencyKey: 'Divisa',
       };
 }

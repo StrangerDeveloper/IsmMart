@@ -446,5 +446,20 @@ class French {
             '* La période de retour pour les téléphones mobiles, les accessoires et autres produits électriques et électroniques ne représente que 5 jours civils à partir du jour où le package est reçu. Un élément de remplacement sera donné sans frais si une faille est trouvée pendant la fenêtre de retour. Les garanties standard du fabricant ou du fournisseur seront en vigueur après l\'expiration de la fenêtre de retour.',
         key.exchangeBody2:
             'Veuillez contacter notre centre de support client si un article répond à toutes les exigences spécifiées ci-dessus.',
+        key.deleteDisputesMsg: 'Êtes-vous sûr de vouloir supprimer le litige?',
+        key.feeChargesExplained: 'Frais de frais expliqués!',
+        key.serviceFee: 'Frais de service',
+        key.deliveryFee: 'Frais de livraison',
+        key.supportCenter: 'Centre de soutien 24/7',
+        key.costDesc1:
+            'Nous nous efforçons de garder nos frais de service et de livraison aussi bas que possible tout en vous offrant le meilleur service possible.',
+        key.costDesc2:
+            'est des frais basés sur le pourcentage qui nous aident à couvrir les coûts de maintien de notre plate-forme, d\'assurer le contrôle de la qualité et de fournir un support client. Les frais de service ne sont que de 5% sur chaque produit téléchargé par notre fournisseur de prestiogius.',
+        key.costDesc3:
+            'Les frais de livraison sont des frais forfaitaires qui couvrent le coût de la livraison de votre commande à votre emplacement. Les frais de livraison sont de 250 roupies uniquement sur chaque commande.',
+        key.costDesc4:
+            'Si vous avez des questions ou des préoccupations concernant nos frais, veuillez ne pas hésiter à contacter notre équipe de support client. Merci d\'avoir choisi notre service!',
+        key.sortByPrice: 'Trier par prix',
+        key.currencyKey: 'Monnaie',
       };
 }
