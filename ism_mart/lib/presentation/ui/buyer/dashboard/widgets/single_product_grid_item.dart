@@ -19,11 +19,11 @@ class SingleProductItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return isCategoryProducts!
-        ? _buildCategoryProductItem(model: productModel)
+        ? _buildCategoryProductItem(model: productModel, buildContext: context)
         : _buildProductItemNew(model: productModel, buildContext: context);
   }
 
-  _buildCategoryProductItem({ProductModel? model}) {
+  _buildCategoryProductItem({ProductModel? model, BuildContext? buildContext}) {
     return AspectRatio(
       aspectRatio: 0.8,
       child: GestureDetector(
@@ -64,7 +64,8 @@ class SingleProductItems extends StatelessWidget {
                   ),
                 ],
               ),
-              if (model.discount != 0)
+              if(model.stock! > 0)
+                if (model.discount != 0)
                 Positioned(
                   top: 0,
                   right: 0,
@@ -83,6 +84,8 @@ class SingleProductItems extends StatelessWidget {
                     ),
                   ),
                 ),
+              if(model.stock! == 0)
+                _buildOutOfStockStack(buildContext)
             ],
           ),
         ),
@@ -90,7 +93,7 @@ class SingleProductItems extends StatelessWidget {
     );
   }
 
-  _buildProductItemNew({ProductModel? model, buildContext}) {
+  _buildProductItemNew({ProductModel? model, BuildContext? buildContext}) {
     //print("This one is called>>>>>>>>>>>>>>>>>>");
     return AspectRatio(
       aspectRatio: 0.75,
@@ -100,7 +103,7 @@ class SingleProductItems extends StatelessWidget {
               showModalBottomSheet(
                   //isDismissible: false,
                   isScrollControlled: true,
-                  context: buildContext,
+                  context: buildContext!,
                   backgroundColor: kWhiteColor,
                   enableDrag: true,
                   elevation: 0,
@@ -166,7 +169,8 @@ class SingleProductItems extends StatelessWidget {
                   //AppConstant.spaceWidget(height: 10)
                 ],
               ),
-              if (model.discount != 0)
+              if(model.stock! > 0)
+                if (model.discount != 0)
                 Positioned(
                   top: 1,
                   right: 1,
@@ -185,10 +189,42 @@ class SingleProductItems extends StatelessWidget {
                     ),
                   ),
                 ),
+              if(model.stock! == 0)
+                _buildOutOfStockStack(buildContext)
             ],
           ),
         ),
       ),
     );
   }
+}
+
+_buildOutOfStockStack(BuildContext? context){
+  return Stack(
+    children: [
+      Container(
+        color: Colors.grey.shade200.withOpacity(0.5),
+        width: double.infinity,
+        height: MediaQuery.of(context!).size.height,
+      ),
+      Positioned(
+        top: 1,
+        right: 1,
+        child: Container(
+          padding:
+          const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+          decoration: BoxDecoration(
+            color: kOrangeColor,
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: CustomText(
+            title: "${langKey.outOfStock.tr}",
+            color: kWhiteColor,
+            size: 12,
+            weight: FontWeight.w600,
+          ),
+        ),
+      ),
+    ],
+  );
 }

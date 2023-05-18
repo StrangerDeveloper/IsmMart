@@ -22,7 +22,12 @@ class SellerHome extends GetView<SellersController> {
         backgroundColor: kAppBarColor,
         actions: [
           InkWell(
-            onTap: () => Get.back(),
+            onTap: () async{
+              BaseController baseController = Get.find();
+              await baseController.fetchProducts();
+              await baseController.fetchProductsByTypes();
+              Get.back();
+            },
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Icon(
