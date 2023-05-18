@@ -11,6 +11,7 @@ class AuthController extends GetxController {
 
   AuthController(this.authProvider);
 
+  RxString countryCode = '+92'.obs;
   var forgotPasswordEmailController = TextEditingController();
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
@@ -208,7 +209,7 @@ class AuthController extends GetxController {
       //lastName: lastNameController.text.trim(),
       firstName: firstNameController.text.trim(),
       email: emailController.text.trim(),
-      phone: phoneController.text.trim(),
+      phone: countryCode.value + phoneController.text.trim(),
       password: passwordController.text.trim(),
     );
 
@@ -246,7 +247,7 @@ class AuthController extends GetxController {
       ownerName: ownerNameController.text.trim(),
       storeImage: profileImgPath.value,
       coverImage: coverImgPath.value,
-      phone: phoneController.text.trim(),
+      phone: countryCode.value +  phoneController.text.trim(),
       membership: "Free",
       premium: false,
       bankName: bankNameController.text.trim(),
