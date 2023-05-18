@@ -247,7 +247,7 @@ class AuthController extends GetxController {
       ownerName: ownerNameController.text.trim(),
       storeImage: profileImgPath.value,
       coverImage: coverImgPath.value,
-      phone: countryCode.value +  phoneController.text.trim(),
+      phone: countryCode.value + phoneController.text.trim(),
       membership: "Free",
       premium: false,
       bankName: bankNameController.text.trim(),
@@ -529,34 +529,32 @@ class AuthController extends GetxController {
     }
   }
 
-  emailVerificationCheck()async{
+  emailVerificationCheck() async {
     await getToken();
-    if(userToken == null || userToken == '') {
+    if (userToken == null || userToken == '') {
       Get.toNamed(Routes.loginRoute);
-    } else{
+    } else {
       if (userModel!.emailVerified == false) {
-        String? verificationDetails = await LocalStorageHelper
-            .getEmailVerificationDetails();
+        String? verificationDetails =
+            await LocalStorageHelper.getEmailVerificationDetails();
         if (verificationDetails != null) {
           DateTime linkTime = DateTime.parse(verificationDetails);
           DateTime currentTime = DateTime.now();
-          DateTime fiveMinutesCheck = currentTime.subtract(
-              Duration(minutes: 5));
+          DateTime fiveMinutesCheck =
+              currentTime.subtract(Duration(minutes: 5));
           if (fiveMinutesCheck.isAfter(linkTime)) {
-            LocalStorageHelper.localStorage.remove(
-                'emailVerificationTime');
+            LocalStorageHelper.localStorage.remove('emailVerificationTime');
             Get.toNamed(Routes.emailVerificationLinkRoute);
+          } else {
+            showSnackBar(
+                title: 'Verify Email',
+                message:
+                    'An Email Verification link has already been sent to your email');
           }
-          else {
-            showSnackBar(title: 'Verify Email',
-                message: 'An Email Verification link has already been sent to your email');
-          }
-        }
-        else {
+        } else {
           Get.toNamed(Routes.emailVerificationLinkRoute);
         }
-      }
-      else {
+      } else {
         Get.toNamed(Routes.checkOutRoute);
       }
     }

@@ -483,10 +483,17 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
     prodPriceController.clear();
     prodDescriptionController.clear();
     prodDiscountController.clear();
+
     pickedImagesList.clear();
+
     dynamicFieldsValuesList.clear();
+
     imagesSizeInMb(0.0);
     priceAfterCommission(0);
+    imagePath.value = "";
+
+    selectedCategory(CategoryModel(name: chooseCategory, id: 0));
+    selectedSubCategory(SubCategory(name: chooseSubCategory, id: 0));
   }
 
   @override

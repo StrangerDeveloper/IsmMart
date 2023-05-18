@@ -33,6 +33,12 @@ class ChangeAddressUI extends GetView<CheckoutController> {
                           height: 30,
                           onTap: () {
                             // Get.back();
+                            if (controller.shippingAddressList.length > 3) {
+                              AppConstant.displaySnackBar(
+                                  'error', langKey.maxAddressLimitMsg.tr);
+                              return;
+                            }
+                            controller.clearControllers();
                             AppConstant.showBottomSheet(
                                 widget: addNewORUpdateAddressContents());
                           },
@@ -43,20 +49,17 @@ class ChangeAddressUI extends GetView<CheckoutController> {
                 Obx(
                   () => controller.shippingAddressList.isEmpty
                       ? _buildNewAddress()
-                      : SizedBox(
-                          height: 400,
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            padding: const EdgeInsets.all(8),
-                            itemCount: controller.shippingAddressList.length,
-                            itemBuilder: (_, index) {
-                              UserModel? userModel =
-                                  controller.shippingAddressList[index];
+                      : ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          padding: const EdgeInsets.all(8),
+                          itemCount: controller.shippingAddressList.length,
+                          itemBuilder: (_, index) {
+                            UserModel? userModel =
+                                controller.shippingAddressList[index];
 
-                              return _singleAddressListItem(userModel);
-                            },
-                          ),
+                            return _singleAddressListItem(userModel);
+                          },
                         ),
                 ),
               ],
@@ -88,8 +91,9 @@ class ChangeAddressUI extends GetView<CheckoutController> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
+        height: AppResponsiveness.height * 0.7,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             NoDataFoundWithIcon(
               title: langKey.noDefaultAddressFound.tr,
@@ -178,6 +182,7 @@ class ChangeAddressUI extends GetView<CheckoutController> {
   Widget addNewORUpdateAddressContents(
       {UserModel? userModel, calledForUpdate = false}) {
     var formKey = GlobalKey<FormState>();
+
     if (calledForUpdate) {
       controller.nameController.text = userModel!.name ?? "";
       controller.addressController.text = userModel.address ?? "";
