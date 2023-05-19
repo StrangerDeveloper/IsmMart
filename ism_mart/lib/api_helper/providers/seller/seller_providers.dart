@@ -51,7 +51,6 @@ class SellersApiProvider {
             "${categoryFieldList.entries.elementAt(i).value}";
       }
     } else {
-      int i = 0;
       request.fields['features'] = "[]";
       //request.fields['features[$i][value]'] = "[]";
     }

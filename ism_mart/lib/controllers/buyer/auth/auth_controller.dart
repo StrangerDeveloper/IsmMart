@@ -44,7 +44,6 @@ class AuthController extends GetxController {
 
   final phoneErrorText = Rxn<String>();
   validatorPhoneNumber(String? value) {
-    print(">>>Phone: ${value!.length}");
     if (GetUtils.isBlank(value)!) {
       //return langKey.fieldIsRequired.tr;
       phoneErrorText.value = langKey.fieldIsRequired.tr;
