@@ -360,7 +360,10 @@ class DashboardUI extends GetView<BaseController> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
-        height: AppResponsiveness.getBoxHeightPoint21(),
+        height: AppResponsiveness.height *
+            (!isCategoryProducts!
+                ? 0.25
+                : 0.22), //AppResponsiveness.getBoxHeightPoint25(),
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: list.length,

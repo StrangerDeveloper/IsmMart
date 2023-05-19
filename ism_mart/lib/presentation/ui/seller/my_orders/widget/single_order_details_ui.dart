@@ -332,15 +332,15 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
   _dataAction({OrderItem? orderItemModel}) {
     return Row(
       children: [
-        Expanded(
-          child: CustomActionIcon(
-            onTap: () {
-              addReviewBottomSheet(orderItem: orderItemModel);
-            },
-            icon: Icons.feedback_outlined,
-            iconColor: kPrimaryColor,
-          ),
-        ),
+        // Expanded(
+        //   child: CustomActionIcon(
+        //     onTap: () {
+        //       addReviewBottomSheet(orderItem: orderItemModel);
+        //     },
+        //     icon: Icons.feedback_outlined,
+        //     iconColor: kPrimaryColor,
+        //   ),
+        // ),
         Expanded(
           child: CustomActionIcon(
             onTap: () {

@@ -135,9 +135,11 @@ class CountryCodePickerTextField extends StatelessWidget {
   final FormFieldValidator<String>? validator;
   final AutovalidateMode? autoValidateMode;
   final ValueChanged<CountryCode>? onChanged;
+  final ValueChanged<String>? onPhoneFieldChange;
   final bool? showCursor;
   final bool readOnly;
   final bool enabled;
+  final String? errorText;
   final List<TextInputFormatter>? inputFormatters;
 
   CountryCodePickerTextField({
@@ -151,6 +153,8 @@ class CountryCodePickerTextField extends StatelessWidget {
     this.readOnly = false,
     this.enabled = true,
     this.inputFormatters,
+    this.errorText,
+    this.onPhoneFieldChange,
   });
 
   @override
@@ -161,7 +165,9 @@ class CountryCodePickerTextField extends StatelessWidget {
       readOnly: readOnly,
       autovalidateMode: autoValidateMode,
       validator: validator,
+      onChanged: onPhoneFieldChange,
       decoration: InputDecoration(
+        errorText: errorText,
         fillColor: Colors.white,
         prefixIcon: Container(
           margin: EdgeInsets.fromLTRB(1, 1, 10, 1),

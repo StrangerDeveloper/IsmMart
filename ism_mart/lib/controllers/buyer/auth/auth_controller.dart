@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
+import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
@@ -39,6 +40,19 @@ class AuthController extends GetxController {
     //getToken();
 
     //getCurrentUser();
+  }
+
+  final phoneErrorText = Rxn<String>();
+  validatorPhoneNumber(String? value) {
+    print(">>>Phone: ${value!.length}");
+    if (GetUtils.isBlank(value)!) {
+      //return langKey.fieldIsRequired.tr;
+      phoneErrorText.value = langKey.fieldIsRequired.tr;
+    } else if (value!.length > 16 || value.length < 7) {
+      phoneErrorText.value = langKey.phoneValidate.tr;
+    } else {
+      phoneErrorText.value = null;
+    }
   }
 
   @override
@@ -80,7 +94,6 @@ class AuthController extends GetxController {
   var isLoading = false.obs;
 
   login() async {
-    print("email ${emailController.text} pass  ${passwordController.text}");
     isLoading(true);
     await authProvider
         .postLogin(
@@ -91,6 +104,9 @@ class AuthController extends GetxController {
       if (userResponse != null) {
         if (userResponse.success!) {
           Get.back();
+          //Navigating back to home after login
+          baseController.changePage(0);
+
           AppConstant.displaySnackBar(
               langKey.successTitle.tr, userResponse.message);
           await LocalStorageHelper.storeUser(userModel: userResponse.userModel)
@@ -222,7 +238,8 @@ class AuthController extends GetxController {
           //Get.back();
           AppConstant.displaySnackBar(
               langKey.successTitle.tr, response.message);
-          //clearControllers();
+          clearControllers();
+          Get.offNamed(Routes.loginRoute);
         } else
           AppConstant.displaySnackBar(langKey.errorTitle.tr, response.message);
       } else

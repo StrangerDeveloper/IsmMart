@@ -67,7 +67,7 @@ class English {
         key.orderInformation: 'Order Information',
         key.orderNotCreated: 'Something went wrong! Order Not created',
         key.phoneValidate:
-            'Phone numbers should be in a format of 11 to 14 digits.',
+            'Phone numbers should be in a format of 7 to 16 digits.',
         key.moreAboutCost: 'More about cost',
         key.feeChargesExplained: 'Fee charges Explained!',
         key.serviceFee: 'Service Fee',
@@ -487,9 +487,9 @@ class English {
 
         key.email: "Email",
         key.emailReq: 'Email is required!.',
-        key.invalidEmail: 'Invalid Email Format?',
+        key.invalidEmail: 'Invalid Email Format',
         key.password: 'Password',
-        key.passwordLengthReq: 'Password must be at least 8 characters long?',
+        key.passwordLengthReq: 'Password must be at least 8 characters long!',
         key.fullName: 'Full Name',
         key.fullNameReq: 'Name is required',
         key.registerGreetings: 'Create an ISMMART Account!',

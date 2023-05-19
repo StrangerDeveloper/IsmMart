@@ -174,11 +174,11 @@ class SingleCartItems extends StatelessWidget {
                           )
                         : ProductQuantityCounter(
                             //width: 140,
-                            height: 30,
-                            margin: const EdgeInsets.symmetric(
-                                vertical: 2, horizontal: 2),
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 2, horizontal: 2),
+                            // height: 30,
+                            // margin: const EdgeInsets.symmetric(
+                            //     vertical: 2, horizontal: 2),
+                            // padding: const EdgeInsets.symmetric(
+                            //     vertical: 2, horizontal: 2),
                             quantity: cartModel.quantity,
                             onIncrementPress: () async {
                               int quantity = int.parse(cartModel.quantity!);

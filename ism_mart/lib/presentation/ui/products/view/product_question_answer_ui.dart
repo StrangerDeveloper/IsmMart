@@ -184,7 +184,7 @@ class ProductQuestionAnswerUI extends GetView<ProductController> {
                   height: 40,
                   child: TextField(
                     controller: controller.questionController,
-                    focusNode: controller.focusNode,
+                    //focusNode: controller.focusNode,
                     cursorColor: kPrimaryColor,
                     autofocus: false,
                     maxLines: 1,

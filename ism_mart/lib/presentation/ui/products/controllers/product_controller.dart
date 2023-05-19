@@ -13,7 +13,7 @@ class ProductController extends GetxController with StateMixin {
   ProductController(this._apiProvider);
 
   var questionController = TextEditingController();
-  FocusNode focusNode = FocusNode();
+  //FocusNode focusNode = FocusNode();
 
   var pageController = PageController(initialPage: 0);
   var pageIndex = 0.obs;
@@ -179,7 +179,8 @@ class ProductController extends GetxController with StateMixin {
 
     await LocalStorageHelper.addItemToCart(cartModel: cart).then((value) {
       Get.back();
-      AppConstant.displaySnackBar(langKey.successTitle.tr, langKey.addToCart.tr);
+      AppConstant.displaySnackBar(
+          langKey.successTitle.tr, langKey.addToCart.tr);
       clearControllers();
       count(1);
     });
@@ -188,6 +189,7 @@ class ProductController extends GetxController with StateMixin {
   ///Product Full Image View Variables
   var imageChange = false.obs;
   var imageIndex = 0.obs;
+
   ///Product Full Image View End
 
   postQuestion({productId}) async {
@@ -264,7 +266,6 @@ class ProductController extends GetxController with StateMixin {
   clearControllers() {
     quantityController.clear();
     questionController.clear();
-    focusNode.unfocus();
   }
 
   @override

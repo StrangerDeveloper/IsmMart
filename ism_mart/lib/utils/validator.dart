@@ -15,11 +15,10 @@ class Validator {
   }
 
   String? validatePhoneNumber(String? value) {
-    String pattern = r'^\d{12}$';
-    RegExp regex = RegExp(pattern);
+    print(">>phoneNumber: ${value!.length}");
     if (GetUtils.isBlank(value)!) {
       return langKey.fieldIsRequired.tr;
-    } else if (!regex.hasMatch(value!)) {
+    } else if (value!.length > 6 || value.length < 4) {
       return langKey.phoneValidate.tr;
     } else {
       return null;

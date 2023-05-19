@@ -52,7 +52,8 @@ class SellersApiProvider {
       }
     } else {
       int i = 0;
-      request.fields['features[$i]'] = '';
+      request.fields['features'] = "[]";
+      //request.fields['features[$i][value]'] = "[]";
     }
 
     for (File image in images) {

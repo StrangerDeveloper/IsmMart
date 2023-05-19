@@ -70,7 +70,7 @@ class MyProducts extends GetView<SellersController> {
                           //  AppResponsiveness.getMainAxisExtentPoint30(),
                           mainAxisSpacing: 5,
                           childAspectRatio:
-                              AppResponsiveness.getChildAspectRatioPoint75(),
+                              AppResponsiveness.getChildAspectRatioPoint90(),
                         ),
                         itemCount: controller.myProductsList.length,
                         itemBuilder: (_, index) {
@@ -111,7 +111,7 @@ class MyProducts extends GetView<SellersController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: AppResponsiveness.getHeight100_120(),
+                    height: AppResponsiveness.getHeight90_100(),
                     width: double.infinity,
                     child: CustomNetworkImage(
                         imageUrl:

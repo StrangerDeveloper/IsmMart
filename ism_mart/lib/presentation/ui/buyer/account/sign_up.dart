@@ -141,22 +141,41 @@ class SignUpUI extends GetView<AuthController> {
                           //   maxLines: 1,
                           // ),
                           AppConstant.spaceWidget(height: 15),
-                          CountryCodePickerTextField(
-                            keyboardType: TextInputType.number,
-                            controller: controller.phoneController,
-                            initialValue: controller.countryCode.value,
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(RegExp(r'^\d+?\d*')),
-                            ],
-                            autoValidateMode:
-                                AutovalidateMode.onUserInteraction,
-                            validator: (value) {
-                              return Validator().validatePhoneNumber(value!);
-                            },
-                            onChanged: (value) {
-                              controller.countryCode.value =
-                                  value.dialCode ?? '+92';
-                            },
+                          Obx(
+                            () => CountryCodePickerTextField(
+                              keyboardType: TextInputType.number,
+                              controller: controller.phoneController,
+                              initialValue: controller.countryCode.value,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(
+                                    RegExp(r'^\d+?\d*')),
+                              ],
+                              // autoValidateMode:
+                              //     AutovalidateMode.onUserInteraction,
+                              // validator: (value) {
+                              //   //print(
+                              //     //  ">>Phone: ${controller.countryCode.value + value!}");
+                              //   // return Validator().validatePhoneNumber(
+                              //   //     "${controller.countryCode.value + value!}");
+                              // },
+                              errorText: controller.phoneErrorText.value,
+                              onPhoneFieldChange: (value) {
+                                String newPhoneValue =
+                                    controller.countryCode.value + value;
+                                print(">>>Phone: $newPhoneValue");
+                                controller.validatorPhoneNumber(newPhoneValue);
+                              },
+                              onChanged: (value) {
+                                controller.countryCode.value =
+                                    value.dialCode ?? '+92';
+
+                                String newPhoneValue =
+                                    controller.countryCode.value +
+                                        controller.phoneController.text;
+                                print(">>>Phone: $newPhoneValue");
+                                controller.validatorPhoneNumber(newPhoneValue);
+                              },
+                            ),
                           ),
                           AppConstant.spaceWidget(height: 40),
                           Obx(() => controller.isLoading.isTrue
