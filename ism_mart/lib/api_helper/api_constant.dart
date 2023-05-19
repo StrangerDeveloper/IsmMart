@@ -1,11 +1,9 @@
-import 'package:flutter/foundation.dart';
-
 class ApiConstant {
   ApiConstant._();
 
   //static const baseUrl = "https://ism-mart-ecommerce-5.herokuapp.com/api/";
   //static const baseUrl = "http://3.83.164.216:5000/api/";
-  ///Development
+  ///API-BASE-URL
   //static const baseUrl = "http://18.212.34.27:5000/api/";
   static const testBaseUrl = "https://ismmart-api.com/api/";
   static const liveBaseUrl = "https://ismmart-backend.com/api/";
