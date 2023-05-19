@@ -15,7 +15,6 @@ class Validator {
   }
 
   String? validatePhoneNumber(String? value) {
-    print(">>phoneNumber: ${value!.length}");
     if (GetUtils.isBlank(value)!) {
       return langKey.fieldIsRequired.tr;
     } else if (value!.length > 6 || value.length < 4) {
