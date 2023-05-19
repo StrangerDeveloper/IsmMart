@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/presentation/widgets/export_widgets.dart';
@@ -37,55 +38,50 @@ class BaseLayout extends GetView<BaseController> {
     );
   }
 
-
-
   _buildBottomNavBar(BaseController navController) {
     return BottomAppBar(
       elevation: kLess,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        child: Obx(
-          () => Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _getNavBarItems(
-                icon: IconlyLight.home,
-                title: langKey.home.tr,
-                page: 0,
-              ),
-              _getNavBarItems(
-                icon: IconlyLight.category,
-                title: langKey.categories.tr,
-                page: 1,
-              ),
-              _getNavBarItems(
-                icon: IconlyLight.bag_2,
-                title: langKey.deals.tr,
-                page: 4,
-              ),
-              controller.cartCount.value <= 0
-                  ? _getNavBarItems(
-                      icon: IconlyLight.buy,
-                      title: langKey.myCart.tr,
-                      page: 2,
-                    )
-                  : CartIcon(
-                      onTap: () {
-                        //Get.to(Routes.cartRoute);
-                        controller.changePage(2);
-                      },
-                      iconWidget: _getNavBarItems(
-                          icon: IconlyLight.buy,
-                          title: langKey.myCart.tr,
-                          page: 2),
-                    ),
-              _getNavBarItems(
-                icon: Icons.menu,
-                title: langKey.menu.tr,
-                page: 3,
-              ),
-            ],
-          ),
+      child: Obx(
+            () => Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            _getNavBarItems(
+              icon: IconlyLight.home,
+              title: langKey.home.tr,
+              page: 0,
+            ),
+            _getNavBarItems(
+              icon: IconlyLight.category,
+              title: langKey.categories.tr,
+              page: 1,
+            ),
+            _getNavBarItems(
+              icon: IconlyLight.bag_2,
+              title: langKey.deals.tr,
+              page: 4,
+            ),
+            controller.cartCount.value <= 0
+                ? _getNavBarItems(
+              icon: IconlyLight.buy,
+              title: langKey.myCart.tr,
+              page: 2,
+            )
+                : CartIcon(
+              onTap: () {
+                //Get.to(Routes.cartRoute);
+                controller.changePage(2);
+              },
+              iconWidget: _getNavBarItems(
+                  icon: IconlyLight.buy,
+                  title: langKey.myCart.tr,
+                  page: 2),
+            ),
+            _getNavBarItems(
+              icon: Icons.menu,
+              title: langKey.menu.tr,
+              page: 3,
+            ),
+          ],
         ),
       ),
     );
@@ -98,37 +94,44 @@ class BaseLayout extends GetView<BaseController> {
   }) {
     //return BottomNavigationBarItem(icon: Icon(icon), label: "$page");
 
-    return GestureDetector(
-      onTap: () {
-        /*if(page == 4){
-          controller.currentPage(page);
-          Get.toNamed(Routes.searchRoute, arguments: {"searchText": " "});
-        }else*/
-        controller.changePage(page);
-      },
-      child: SizedBox(
-        height: 50,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Icon(
-              icon,
-              color: controller.currentPage.value == page
-                  ? kPrimaryColor
-                  : kLightColor,
-              size: 20,
-            ),
-            Flexible(
-              child: CustomText(
-                title: title,
-                size: 12,
+    return Expanded(
+      child: InkWell(
+        onTap: () {
+          /*if(page == 4){
+            controller.currentPage(page);
+            Get.toNamed(Routes.searchRoute, arguments: {"searchText": " "});
+          }else*/
+          controller.changePage(page);
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                icon,
                 color: controller.currentPage.value == page
                     ? kPrimaryColor
                     : kLightColor,
+                size: 20,
               ),
-            )
-          ],
+              SizedBox(height: 3.5),
+              Flexible(
+                child: Text(
+                  title,
+                  style: GoogleFonts.lato(
+                    fontWeight: controller.currentPage.value == page
+                        ? FontWeight.w600
+                        : FontWeight.w500,
+                    fontSize: 11.2,
+                    color: controller.currentPage.value == page
+                        ? kPrimaryColor
+                        : kLightColor,
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
