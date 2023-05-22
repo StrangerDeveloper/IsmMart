@@ -70,7 +70,7 @@ class MyProducts extends GetView<SellersController> {
                           //  AppResponsiveness.getMainAxisExtentPoint30(),
                           mainAxisSpacing: 5,
                           childAspectRatio:
-                              AppResponsiveness.getChildAspectRatioPoint90(),
+                              AppResponsiveness.getChildAspectRatioPoint80(),
                         ),
                         itemCount: controller.myProductsList.length,
                         itemBuilder: (_, index) {
