@@ -461,8 +461,7 @@ class SingleProductView extends GetView<ProductController> {
   Widget _productVariantWidget(
       {title,
       List<ProductFeature>? featureList,
-      bool? isNextBtnClicked = false,
-      isCalledForColors = false}) {
+      bool? isNextBtnClicked = false}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceAround,

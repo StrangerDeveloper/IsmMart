@@ -67,7 +67,10 @@ class SignUpUI extends GetView<AuthController> {
                             textStyle: bodyText1,
                             autoValidateMode:
                                 AutovalidateMode.onUserInteraction,
-                            validator: Validator().name,
+                            validator: (value) {
+                              return Validator()
+                                  .name(value, title: langKey.fullName.tr);
+                            },
                             keyboardType: TextInputType.name,
                             onChanged: (value) {},
                             onSaved: (value) {},
@@ -146,6 +149,8 @@ class SignUpUI extends GetView<AuthController> {
                               keyboardType: TextInputType.number,
                               controller: controller.phoneController,
                               initialValue: controller.countryCode.value,
+                              textStyle: bodyText1,
+                              labelText: langKey.phone.tr,
                               inputFormatters: [
                                 FilteringTextInputFormatter.allow(
                                     RegExp(r'^\d+?\d*')),
@@ -162,7 +167,7 @@ class SignUpUI extends GetView<AuthController> {
                               onPhoneFieldChange: (value) {
                                 String newPhoneValue =
                                     controller.countryCode.value + value;
-                                print(">>>Phone: $newPhoneValue");
+                                //print(">>>Phone: $newPhoneValue");
                                 controller.validatorPhoneNumber(newPhoneValue);
                               },
                               onChanged: (value) {
@@ -172,7 +177,7 @@ class SignUpUI extends GetView<AuthController> {
                                 String newPhoneValue =
                                     controller.countryCode.value +
                                         controller.phoneController.text;
-                                print(">>>Phone: $newPhoneValue");
+                                //print(">>>Phone: $newPhoneValue");
                                 controller.validatorPhoneNumber(newPhoneValue);
                               },
                             ),

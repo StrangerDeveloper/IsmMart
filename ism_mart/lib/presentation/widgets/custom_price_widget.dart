@@ -33,7 +33,7 @@ class CustomPriceWidget extends GetView<CurrencyController> {
     var decimalDigits = 0;
     if (controller.currency.value.contains("pkr")) {
       amount = amount.round();
-      print(">>>PKR Price: ${amount.toInt()}");
+      //print(">>>PKR Price: ${amount.toInt()}");
       decimalDigits = 0;
     } else {
       amount = num.parse(amount.toStringAsFixed(2));
@@ -41,8 +41,8 @@ class CustomPriceWidget extends GetView<CurrencyController> {
     }
     //amount = num.parse(amount.toStringAsFixed(2));
     //decimalDigits = 2;
-    print(
-        ">>>Value: ${AppConstant.getCurrencySymbol(currencyCode: controller.currency.value)}$amount");
+    // print(
+    //     ">>>Value: ${AppConstant.getCurrencySymbol(currencyCode: controller.currency.value)}$amount");
     return NumberFormat.currency(
             locale: languageController.languageKey.value,
             symbol: AppConstant.getCurrencySymbol(

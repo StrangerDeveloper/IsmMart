@@ -212,7 +212,9 @@ class ChangeAddressUI extends GetView<CheckoutController> {
                 autofocus: false,
                 textStyle: bodyText1,
                 autoValidateMode: AutovalidateMode.onUserInteraction,
-                validator: Validator().name,
+                validator: (value) {
+                  return Validator().name(value, title: langKey.fullName.tr);
+                },
                 keyboardType: TextInputType.name,
                 onChanged: (value) {},
                 onSaved: (value) {},

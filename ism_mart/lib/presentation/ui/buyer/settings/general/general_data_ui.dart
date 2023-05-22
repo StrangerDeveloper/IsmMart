@@ -152,7 +152,10 @@ class GeneralSettingsDataUI extends StatelessWidget {
                       autofocus: false,
                       textStyle: bodyText1,
                       autoValidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (value) => Validator().name(value),
+                      validator: (value) {
+                        return Validator()
+                            .name(value, title: langKey.fullName.tr);
+                      },
                       // GetUtils.isBlank(value!)! ? fullNameReq.tr : null,
                       keyboardType: TextInputType.name,
                       onChanged: (value) {},

@@ -222,10 +222,10 @@ class AuthController extends GetxController {
     UserModel newUser = UserModel(
       //firstName: firstNameController.text.trim(),
       //lastName: lastNameController.text.trim(),
-      firstName: firstNameController.text.trim(),
-      email: emailController.text.trim(),
-      phone: countryCode.value + phoneController.text.trim(),
-      password: passwordController.text.trim(),
+      firstName: firstNameController.text,
+      email: emailController.text,
+      phone: countryCode.value + phoneController.text,
+      password: passwordController.text,
     );
 
     await authProvider
@@ -246,6 +246,7 @@ class AuthController extends GetxController {
             langKey.errorTitle.tr, langKey.someThingWentWrong.tr);
     }).catchError((error) {
       isLoading(false);
+
       AppConstant.displaySnackBar(
           langKey.errorTitle.tr, langKey.someThingWentWrong.tr);
     });

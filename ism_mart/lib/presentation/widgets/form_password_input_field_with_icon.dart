@@ -67,19 +67,17 @@ class _FormPasswordInputFieldWithIconState
             enabledBorder: OutlineInputBorder(
               //borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(
-                color: kPrimaryColor,
-                width: 1.0,
-              ),
-              //borderRadius: BorderRadius.circular(20)
+                  color: Colors.black, width: 1, style: BorderStyle.solid), //B
+              borderRadius: BorderRadius.circular(8),
             ),
             fillColor: widget.iconColor ?? kPrimaryColor,
             labelText: widget.labelText,
             labelStyle: widget.textStyle,
             focusColor: widget.iconColor,
-            focusedBorder: UnderlineInputBorder(
+            focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(
-                  color: widget.iconColor ?? kPrimaryColor, width: 2.0),
-              //borderRadius: BorderRadius.circular(25.0),
+                  color: Colors.black, width: 1, style: BorderStyle.solid), //B
+              borderRadius: BorderRadius.circular(8),
             ),
             suffixIcon: widget.obscureText!
                 ? GestureDetector(
