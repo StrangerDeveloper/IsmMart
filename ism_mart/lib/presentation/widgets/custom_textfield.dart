@@ -5,7 +5,7 @@ import 'package:ism_mart/utils/constants.dart';
 
 class CustomTextField1 extends StatelessWidget {
   final String? title;
-  final String? hint;
+  final String? hint, labelText;
   final TextEditingController? controller;
   final TextInputType? keyboardType;
   final int maxLines;
@@ -25,6 +25,7 @@ class CustomTextField1 extends StatelessWidget {
   final double prefixIconSize;
   final double suffixIconSize;
   final EdgeInsetsGeometry contentPadding;
+  final TextStyle? textStyle;
 
   const CustomTextField1({
     super.key,
@@ -52,6 +53,8 @@ class CustomTextField1 extends StatelessWidget {
     this.prefixIcon,
     this.errorText,
     this.readOnly = false,
+    this.labelText,
+    this.textStyle,
   });
 
   @override
@@ -94,10 +97,13 @@ class CustomTextField1 extends StatelessWidget {
           validator: validator,
           onTap: onTap,
           style: bodyText1,
+          cursorColor: kPrimaryColor,
           decoration: InputDecoration(
             contentPadding: contentPadding,
             //fillColor: fillColor,
             //filled: true,
+            labelText: labelText,
+            labelStyle: textStyle,
             hintText: hint,
             isDense: true,
             errorBorder: OutlineInputBorder(
@@ -135,9 +141,12 @@ class CountryCodePickerTextField extends StatelessWidget {
   final FormFieldValidator<String>? validator;
   final AutovalidateMode? autoValidateMode;
   final ValueChanged<CountryCode>? onChanged;
+  final ValueChanged<String>? onPhoneFieldChange;
   final bool? showCursor;
   final bool readOnly;
   final bool enabled;
+  final String? labelText, errorText;
+  final TextStyle? textStyle;
   final List<TextInputFormatter>? inputFormatters;
 
   CountryCodePickerTextField({
@@ -151,6 +160,10 @@ class CountryCodePickerTextField extends StatelessWidget {
     this.readOnly = false,
     this.enabled = true,
     this.inputFormatters,
+    this.errorText,
+    this.onPhoneFieldChange,
+    this.labelText,
+    this.textStyle,
   });
 
   @override
@@ -161,8 +174,12 @@ class CountryCodePickerTextField extends StatelessWidget {
       readOnly: readOnly,
       autovalidateMode: autoValidateMode,
       validator: validator,
+      onChanged: onPhoneFieldChange,
       decoration: InputDecoration(
+        errorText: errorText,
         fillColor: Colors.white,
+        labelText: labelText,
+        labelStyle: textStyle,
         prefixIcon: Container(
           margin: EdgeInsets.fromLTRB(1, 1, 10, 1),
           decoration: BoxDecoration(
@@ -183,6 +200,8 @@ class CountryCodePickerTextField extends StatelessWidget {
               searchDecoration: InputDecoration(
                 prefixIconColor: Colors.black,
                 contentPadding: EdgeInsets.zero,
+                labelText: labelText,
+                labelStyle: textStyle,
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
                     color: Colors.black,

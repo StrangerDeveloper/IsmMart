@@ -27,12 +27,16 @@ class SellersApiProvider {
   }
 
   Future<ApiResponse> addProductWithHttp(
-      {String? token, ProductModel? model, categoryFieldList, images}) async {
+      {String? token,
+      ProductModel? model,
+      Map<String, dynamic>? categoryFieldList,
+      images}) async {
     final url = "${ApiConstant.baseUrl}vendor/products/add";
     final request = http.MultipartRequest('POST', Uri.parse(url));
     request.headers['Authorization'] = '$token';
-    //request.headers['Content-Type'] = 'application/json';
+    //request.headers['Content-Type'] = 'application/x-www-form-urlencoded';
     request.headers['Content-Type'] = 'multipart/form-data';
+
     request.fields['name'] = model!.name!;
     request.fields['price'] = "${model.price}";
     request.fields['stock'] = "${model.stock}";
@@ -43,7 +47,7 @@ class SellersApiProvider {
         model.discount! <= 90) request.fields['discount'] = "${model.discount}";
     request.fields['description'] = "${model.description}";
 
-    if (categoryFieldList.isNotEmpty) {
+    if (categoryFieldList!.isNotEmpty) {
       for (var i = 0; i < categoryFieldList.entries.length; i++) {
         request.fields['features[$i][id]'] =
             "${categoryFieldList.entries.elementAt(i).key}";
@@ -51,8 +55,11 @@ class SellersApiProvider {
             "${categoryFieldList.entries.elementAt(i).value}";
       }
     } else {
-      int i = 0;
-      request.fields['features[$i]'] = '';
+      request.fields['features'] = "[]";
+      //request.fields['features'] = "${categoryFieldList.entries.toList()}";
+      //request.fields['features[0][id]'] = "";
+      //request.fields['features[0][value]'] = "[]";
+      //request.fields['features[$i][value]'] = "[]";
     }
 
     for (File image in images) {

@@ -23,18 +23,21 @@ class DashboardUI extends GetView<BaseController> {
             delegate: SliverChildListDelegate(
               [
                 _slider(controller.sliderImages),
-
                 StickyLabel(text: langKey.topCategories.tr),
                 _topCategoriesGrid(controller.categories),
-                //kDivider,
                 _displayDiscountProducts(),
-                // kDivider,
-                Obx(() => _displayProducts(
-                    productMap: controller.productsWithTypesMap)),
+                Obx(
+                  () => _displayProducts(
+                    productMap: controller.productsWithTypesMap,
+                  ),
+                ),
                 kDivider,
-                Obx(() => _displayProducts(
+                Obx(
+                  () => _displayProducts(
                     productMap: controller.productsMap,
-                    calledForCategoryProducts: true)),
+                    calledForCategoryProducts: true,
+                  ),
+                ),
                 // _productByCategories(),
               ],
             ),
@@ -47,10 +50,8 @@ class DashboardUI extends GetView<BaseController> {
   SliverAppBar _sliverAppBar() {
     return SliverAppBar(
       backgroundColor: kAppBarColor,
-      // elevation: 5,
       floating: true,
       pinned: true,
-
       title: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -59,7 +60,8 @@ class DashboardUI extends GetView<BaseController> {
             flex: 5,
             child: Obx(
               () => CustomSearchBar(
-                  searchText: controller.randomSearchText.value),
+                searchText: controller.randomSearchText.value,
+              ),
             ),
           ),
           //const Expanded(flex:1,child:Center())
@@ -69,11 +71,11 @@ class DashboardUI extends GetView<BaseController> {
   }
 
   Widget _slider(List<SliderModel> list) {
-    //var height = AppConstant.getSize().height;
     return Obx(
       () => controller.isSliderLoading.isTrue
           ? CustomLoading(isItForWidget: true)
           : Stack(
+              alignment: Alignment.bottomCenter,
               children: [
                 SizedBox(
                   height: AppResponsiveness.getBoxHeightPoint15(),
@@ -91,16 +93,13 @@ class DashboardUI extends GetView<BaseController> {
                           imageUrl: model.image!,
                           fit: BoxFit.fill,
                           width: AppConstant.getSize().width,
-                          //height: 190,
                         ),
                       );
                     },
                   ),
                 ),
-                Positioned(
-                  bottom: 0.0,
-                  left: 0.0,
-                  right: 0.0,
+                Padding(
+                  padding: EdgeInsets.only(bottom: 6),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: List.generate(
@@ -108,14 +107,13 @@ class DashboardUI extends GetView<BaseController> {
                       (index) => AnimatedContainer(
                         duration: const Duration(milliseconds: 400),
                         height: 6.0,
-                        width:
-                            controller.sliderIndex.value == index ? 14.0 : 6.0,
-                        margin: const EdgeInsets.only(right: 3.0),
+                        width: controller.sliderIndex.value == index ? 14 : 6,
+                        margin: const EdgeInsets.only(right: 3),
                         decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
                           color: controller.sliderIndex.value == index
-                              ? kPrimaryColor
-                              : kLightColor,
-                          borderRadius: BorderRadius.circular(5.0),
+                              ? Colors.black
+                              : Colors.grey,
                         ),
                       ),
                     ),
@@ -362,7 +360,10 @@ class DashboardUI extends GetView<BaseController> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
-        height: AppResponsiveness.getBoxHeightPoint21(),
+        height: AppResponsiveness.height *
+            (!isCategoryProducts!
+                ? 0.25
+                : 0.22), //AppResponsiveness.getBoxHeightPoint25(),
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: list.length,
@@ -379,25 +380,24 @@ class DashboardUI extends GetView<BaseController> {
   }
 
   Widget _topCategoriesGrid(List<CategoryModel> list) {
-    //var theme = Theme.of(Get.context!);
-    //double height = AppConstant.getSize().height;
     return Obx(
       () => controller.isCategoriesLoading.isTrue
           ? CustomLoading(isItForWidget: true)
           : Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              padding: const EdgeInsets.fromLTRB(10, 8, 10, 5),
               child: SizedBox(
                 height: AppResponsiveness.getBoxHeightPoint25(),
                 child: list.isEmpty
                     ? NoDataFound(text: langKey.noCategoryFound.tr)
                     : GridView.builder(
+                        physics: BouncingScrollPhysics(),
                         scrollDirection: Axis.horizontal,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           //maxCrossAxisExtent: 150,
                           crossAxisCount: 2,
                           //childAspectRatio: 1.8,
                           //mainAxisSpacing: 3.0,
-                          //crossAxisSpacing: 3.0,
+                          crossAxisSpacing: 5,
                         ),
                         itemCount: list.length,
                         itemBuilder: (context, index) {

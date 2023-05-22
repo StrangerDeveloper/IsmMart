@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
@@ -47,6 +45,10 @@ class SingleProductView extends GetView<ProductController> {
       return _build(productModel: state);
     },
         onLoading: CustomLoading(isDarkMode: isDarkMode),
+        onError: (error) => NoDataFoundWithIcon(
+              title: "No Product Found",
+              subTitle: error,
+            ),
         onEmpty: NoDataFoundWithIcon(
           title: "No Product Found",
         ));
@@ -54,61 +56,90 @@ class SingleProductView extends GetView<ProductController> {
 
   Widget _build({ProductModel? productModel}) {
     return Scaffold(
-      backgroundColor: Colors.grey[300]!,
-      body: CustomScrollView(
-        slivers: [
-          _sliverAppBar(productModel!),
-          SliverList(
-            delegate: SliverChildListDelegate(
-              [
-                productModel.images!.isEmpty
-                    ? InteractiveViewer(
-                        boundaryMargin: const EdgeInsets.all(20.0),
-                        minScale: 0.1,
-                        maxScale: 2.0,
-                        child: CustomNetworkImage(
-                          imageUrl: productModel.thumbnail,
-                          fit: BoxFit.cover,
-                          width: MediaQuery.of(Get.context!).size.width,
-                          height: MediaQuery.of(Get.context!).size.height * 0.4,
-                        ),
-                      )
-                    : _productImages(imagesList: productModel.images!),
+        backgroundColor: Colors.grey[300]!,
+        resizeToAvoidBottomInset: true,
+        body: CustomScrollView(
+          slivers: [
+            _sliverAppBar(productModel!),
+            SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  productModel.images!.isEmpty
+                      ? GestureDetector(
+                          onTap: () {
+                            var imagesList = <ProductImages>[];
+                            imagesList.add(ProductImages(
+                                id: 0, url: productModel.thumbnail));
+                            Get.to(() => SingleProductFullImage(
+                                  productImages: imagesList,
+                                  initialImage: 0,
+                                ));
+                          },
+                          child: CustomNetworkImage(
+                            imageUrl: productModel.thumbnail,
+                            fit: BoxFit.cover,
+                            width: MediaQuery.of(Get.context!).size.width,
+                            height:
+                                MediaQuery.of(Get.context!).size.height * 0.4,
+                          ),
+                        )
+                      : _productImages(imagesList: productModel.images!),
 
-                /// product name, price etc.
-                _productBasicDetails(productModel: productModel),
+                  /// product name, price etc.
+                  _productBasicDetails(productModel: productModel),
 
-                /// Product features
-                if (productModel.productFeatures!.colors!.isNotEmpty ||
-                    productModel.productFeatures!.sizes!.isNotEmpty)
-                  _productVariantsDetails(productModel: productModel),
+                  /// Product features
+                  if (productModel.productFeatures!.isNotEmpty)
+                    _productVariantsDetails(productModel: productModel),
 
-                //_vendorStoreDetails(productModel: productModel),
+                  //_vendorStoreDetails(productModel: productModel),
 
-                ///product description
-                _productAdvanceDetails(productModel: productModel),
+                  ///product description
+                  _productAdvanceDetails(productModel: productModel),
 
-                ///product reviews
-                _productReviews(productModel: productModel),
+                  ///product reviews
+                  // _productReviews(productModel: productModel),
 
-                ///Product Questions
-                _productQuestions(productModel: productModel),
+                  ///Product Questions
+                  _productQuestions(productModel: productModel),
 
-                if (Get.arguments != null &&
-                    Get.arguments["calledFor"] != null &&
-                    Get.arguments["calledFor"]!.contains("customer"))
-                  _buildCustomerAlsoViewed(controller.subCategoryProductList)
-              ],
+                  if (Get.arguments != null &&
+                      Get.arguments["calledFor"] != null &&
+                      Get.arguments["calledFor"]!.contains("customer"))
+                    _buildCustomerAlsoViewed(controller.subCategoryProductList),
+
+                  // AppConstant.spaceWidget(height: 70),
+                  //Spacer(),
+                ],
+              ),
             ),
-          ),
-        ],
-      ),
-      bottomNavigationBar: Get.arguments != null &&
-              Get.arguments["calledFor"] != null &&
-              Get.arguments["calledFor"]!.contains("seller")
-          ? null
-          : _footerBottomBar(productModel.stock),
-    );
+          ],
+        ),
+        // if (Get.arguments != null &&
+        //     Get.arguments["calledFor"] != null &&
+        //     Get.arguments["calledFor"]!.contains("customer"))
+        //   Positioned(
+        //       bottom: 0,
+        //       right: 1,
+        //       left: 1,
+        //       child: _footerBottomBar(
+        //         productModel.stock,
+        //       ))
+
+        bottomNavigationBar: Get.arguments != null &&
+                Get.arguments["calledFor"] != null &&
+                Get.arguments["calledFor"]!.contains("seller")
+            ? null
+            : GestureDetector(
+                onTap: null,
+                child: _footerBottomBar(productModel.stock),
+              ));
+    //   bottomNavigationBar: Get.arguments != null &&
+    //           Get.arguments["calledFor"] != null &&
+    //           Get.arguments["calledFor"]!.contains("seller")
+    //       ? null
+    //       :
+    // )
   }
 
   SliverAppBar _sliverAppBar(ProductModel productModel) {
@@ -306,38 +337,38 @@ class SingleProductView extends GetView<ProductController> {
             ),
             AppConstant.spaceWidget(height: 8),
             // reviews
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Icon(Icons.star_rounded, color: Colors.amber),
-                AppConstant.spaceWidget(width: 5),
-                Expanded(
-                  flex: 2,
-                  child: Row(
-                    children: [
-                      Obx(
-                        () => CustomText(
-                          title:
-                              "${getRating(controller.reviewResponse)} (${controller.reviewResponse!.count})",
-                          style: bodyText1,
-                        ),
-                      ),
-                      //5(44)
-                      const Icon(
-                        Icons.arrow_forward_ios_sharp,
-                        color: kPrimaryColor,
-                        size: 12,
-                      ),
-                      AppConstant.spaceWidget(width: 5),
-                      CustomText(
-                        title: "${productModel.sold} Sold",
-                        style: bodyText1,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     const Icon(Icons.star_rounded, color: Colors.amber),
+            //     AppConstant.spaceWidget(width: 5),
+            //     Expanded(
+            //       flex: 2,
+            //       child: Row(
+            //         children: [
+            //           Obx(
+            //             () => CustomText(
+            //               title:
+            //                   "${getRating(controller.reviewResponse)} (${controller.reviewResponse!.count})",
+            //               style: bodyText1,
+            //             ),
+            //           ),
+            //           //5(44)
+            //           const Icon(
+            //             Icons.arrow_forward_ios_sharp,
+            //             color: kPrimaryColor,
+            //             size: 12,
+            //           ),
+            //           AppConstant.spaceWidget(width: 5),
+            //           CustomText(
+            //             title: "${productModel.sold} Sold",
+            //             style: bodyText1,
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //   ],
+            // ),
 
             AppConstant.spaceWidget(height: 8),
 
@@ -372,22 +403,22 @@ class SingleProductView extends GetView<ProductController> {
                   ],
                 ),
               ),
-              subtitle: Row(
-                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  const Icon(Icons.star_rounded, color: Colors.amber),
-                  CustomText(
-                    title:
-                        "${productModel.sellerModel!.rating!.toStringAsFixed(1)}",
-                    style: bodyText1,
-                  ),
-                  AppConstant.spaceWidget(width: 10),
-                  CustomText(
-                    title: "${_getPositiveResponse()}",
-                    style: bodyText2,
-                  )
-                ],
-              ),
+              // subtitle: Row(
+              //   // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //   children: [
+              //     const Icon(Icons.star_rounded, color: Colors.amber),
+              //     CustomText(
+              //       title:
+              //           "${productModel.sellerModel!.rating!.toStringAsFixed(1)}",
+              //       style: bodyText1,
+              //     ),
+              //     AppConstant.spaceWidget(width: 10),
+              //     CustomText(
+              //       title: "${_getPositiveResponse()}",
+              //       style: bodyText2,
+              //     )
+              //   ],
+              // ),
               trailing: const Icon(
                 Icons.arrow_forward_ios_sharp,
                 color: kPrimaryColor,
@@ -406,40 +437,46 @@ class SingleProductView extends GetView<ProductController> {
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (productModel!.productFeatures!.colors!.isNotEmpty)
-              _productVariantWidget(
-                  title: "Color",
-                  featureList: productModel.productFeatures!.colors!),
-            if (productModel.productFeatures!.sizes!.isNotEmpty)
-              _productVariantWidget(
-                  title: "Size",
-                  featureList: productModel.productFeatures!.sizes!)
+            CustomText(title: "Product Variants", style: headline2),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: productModel?.productFeatures?.length,
+              itemBuilder: (_, index) {
+                String? key =
+                    productModel!.productFeatures?.keys.elementAt(index);
+                return _productVariantWidget(
+                    title: key,
+                    featureList: productModel.productFeatures?[key]);
+              },
+            ),
           ],
         ),
       ),
     );
   }
 
-  _productVariantWidget(
+  Widget _productVariantWidget(
       {title,
-      List<Feature>? featureList,
-      bool? isNextBtnClicked = false,
-      isCalledForColors = false}) {
+      List<ProductFeature>? featureList,
+      bool? isNextBtnClicked = false}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        CustomText(title: title, style: headline2),
+        CustomText(
+          title: title,
+          size: 15,
+        ),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: featureList!
                 .map((e) => isNextBtnClicked!
-                    ? _buildChip(
-                        featureModel: e, calledForColors: isCalledForColors)
+                    ? _buildChip(featureModel: e)
                     : _singleVariantsListItems(feature: e))
                 .toList(),
           ),
@@ -448,19 +485,19 @@ class SingleProductView extends GetView<ProductController> {
     );
   }
 
-  Widget _singleVariantsListItems({Feature? feature}) {
+  Widget _singleVariantsListItems({ProductFeature? feature}) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: CustomGreyBorderContainer(
         //width: feature!.value!.length.toDouble(),
-        height: 30,
+        height: 20,
         bgColor: kPrimaryColor,
         borderColor: kWhiteColor,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: Center(
             child: CustomText(
-              title: feature!.value,
+              title: feature?.value,
               maxLines: 1,
               size: 11,
               color: kWhiteColor,
@@ -482,7 +519,7 @@ class SingleProductView extends GetView<ProductController> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CustomText(title: "Description", style: headline2),
+                CustomText(title: langKey.description.tr, style: headline2),
                 RichText(
                   text: TextSpan(
                     children: [
@@ -790,7 +827,7 @@ class SingleProductView extends GetView<ProductController> {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: SizedBox(
-                      height: AppResponsiveness.getBoxHeightPoint32(),
+                      height: AppResponsiveness.getBoxHeightPoint30(),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -826,15 +863,15 @@ class SingleProductView extends GetView<ProductController> {
     );
   }
 
-  String _getPositiveResponse() {
-    int min = 70;
-    int max = 100;
-
-    var rnd = new Random();
-    int r = min + rnd.nextInt(max - min);
-
-    return " $r% Positive Response  ";
-  }
+  // String _getPositiveResponse() {
+  //   int min = 70;
+  //   int max = 100;
+  //
+  //   var rnd = new Random();
+  //   int r = min + rnd.nextInt(max - min);
+  //
+  //   return " $r% Positive Response  ";
+  // }
 
   /*List<String> _getServices() {
     return <String>[
@@ -879,19 +916,40 @@ class SingleProductView extends GetView<ProductController> {
             ),
           ),
           AppConstant.spaceWidget(height: 10),
-          if (productModel.productFeatures!.colors!.isNotEmpty)
-            _productVariantWidget(
-                title: langKey.color.tr,
-                featureList: productModel.productFeatures!.colors!,
-                isNextBtnClicked: true,
-                isCalledForColors: true),
-          if (productModel.productFeatures!.sizes!.isNotEmpty)
-            _productVariantWidget(
-              title: langKey.size.tr,
-              featureList: productModel.productFeatures!.sizes!,
-              isNextBtnClicked: true,
-              isCalledForColors: false,
+
+          if (productModel.productFeatures!.isNotEmpty)
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CustomText(title: "Product Variants", style: headline2),
+                AppConstant.spaceWidget(height: 5),
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: productModel.productFeatures?.length,
+                  itemBuilder: (_, index) {
+                    String? key =
+                        productModel.productFeatures?.keys.elementAt(index);
+                    return _productVariantWidget(
+                        title: key,
+                        isNextBtnClicked: true,
+                        featureList: productModel.productFeatures?[key]);
+                  },
+                ),
+              ],
             ),
+          //   _productVariantWidget(
+          //       title: langKey.color.tr,
+          //       featureList: productModel.productFeatures!.colors!,
+          //       isNextBtnClicked: true,
+          //       isCalledForColors: true),
+          // if (productModel.productFeatures!.sizes!.isNotEmpty)
+          //   _productVariantWidget(
+          //     title: langKey.size.tr,
+          //     featureList: productModel.productFeatures!.sizes!,
+          //     isNextBtnClicked: true,
+          //     isCalledForColors: false,
+          //   ),
 
           /* productModel.productFeatures!.sizes!.isEmpty
               ? Container()
@@ -917,7 +975,7 @@ class SingleProductView extends GetView<ProductController> {
     );
   }
 
-  Widget _buildChip({Feature? featureModel, calledForColors = true}) {
+  Widget _buildChip({ProductFeature? featureModel}) {
     return Obx(
       () => Padding(
         padding: const EdgeInsets.all(8.0),
@@ -988,51 +1046,57 @@ class SingleProductView extends GetView<ProductController> {
   }
 
   _footerBottomBar(int? stockCheck) {
-    return BottomAppBar(
-      elevation: 20,
-      child: Container(
-          padding: EdgeInsets.symmetric(
-              horizontal: 10, vertical: stockCheck! > 0 ? 5 : 15),
-          child: stockCheck > 0
-              ? Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    //_getNavBarItems(icon: Icons.store,),
-                    ProductQuantityCounter(
-                      onDecrementPress: () => controller.decrement(),
-                      onIncrementPress: () => controller.increment(),
-                      textEditingController: controller.quantityController,
-                      bgColor: kPrimaryColor,
-                      textColor: kWhiteColor,
-                    ),
-                    CustomButton(
-                      onTap: () => showVariationBottomSheet(
-                          productModel: controller.state),
-                      text: langKey.next.tr,
-                      width: 100,
-                      height: 40,
-                    ),
-                    //_buildBuyNowAndCartBtn(),
-                  ],
-                )
-              : Container(
-                  height: 48,
-                  decoration: BoxDecoration(
-                      color: Colors.grey.shade300,
-                      borderRadius: BorderRadius.all(Radius.circular(12)),
-                      border:
-                          Border.all(width: 0, color: Colors.grey.shade300)),
-                  child: Center(
-                    child: Text(
-                      'Out Of Stock',
-                      textAlign: TextAlign.center,
-                      style: bodyText1.copyWith(
-                          color: kRedColor,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                )),
-    );
+    if (stockCheck! > 0) {
+      return CustomCard(
+        elevation: 0,
+        //height: 48,
+        child: Container(
+
+            //width: double.infinity,
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                //_getNavBarItems(icon: Icons.store,),
+                ProductQuantityCounter(
+                  onDecrementPress: () => controller.decrement(),
+                  onIncrementPress: () => controller.increment(),
+                  textEditingController: controller.quantityController,
+                  bgColor: kPrimaryColor,
+                  textColor: kWhiteColor,
+                ),
+                CustomButton(
+                  onTap: () =>
+                      showVariationBottomSheet(productModel: controller.state),
+                  text: langKey.next.tr,
+                  width: 100,
+                  height: 40,
+                ),
+                //_buildBuyNowAndCartBtn(),
+              ],
+            )),
+      );
+    } else {
+      return BottomAppBar(
+        height: 50,
+        elevation: 0,
+        child: Container(
+          alignment: Alignment.center,
+          height: 48,
+          // width: ,
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          decoration: BoxDecoration(
+              color: Colors.grey.shade300,
+              //borderRadius: BorderRadius.all(Radius.circular(12)),
+              border: Border.all(width: 0, color: Colors.grey.shade300)),
+          child: CustomText(
+            title: 'Out Of Stock',
+            textAlign: TextAlign.center,
+            size: 18,
+            color: kRedColor,
+          ),
+        ),
+      );
+    }
   }
 }

@@ -52,7 +52,7 @@ class ProductModel {
   MultipartFile? productImageFile;
   bool? isPopular, hasSalesOn;
 
-  ProductFeature? productFeatures;
+  Map<String, List<ProductFeature>>? productFeatures;
 
   factory ProductModel.fromJson(JSON? json) {
     List<ProductImages> productImages = [];
@@ -63,6 +63,17 @@ class ProductModel {
         productImages.addAll(List<ProductImages>.from(
             list.map((e) => ProductImages.fromJson(e))));
       }
+    }
+    Map<String, dynamic>? productFeaturesJson =
+        json?['ProductFeatures'] == null ? null : json?['ProductFeatures'];
+    Map<String, List<ProductFeature>> productFeatures = {};
+    if (productFeaturesJson != null) {
+      productFeaturesJson.forEach((key, value) {
+        List<ProductFeature> features = (value as List)
+            .map((feature) => ProductFeature.fromJson(feature))
+            .toList();
+        if (!key.contains("undefined")) productFeatures[key] = features;
+      });
     }
 
     return ProductModel(
@@ -91,9 +102,7 @@ class ProductModel {
         subCategory: json?["SubCategory"] == null
             ? null
             : SubCategory.fromJson(json?["SubCategory"]),
-        productFeatures: json!["ProductFeatures"] == null
-            ? null
-            : ProductFeature.fromJson(json["ProductFeatures"]));
+        productFeatures: productFeatures);
   }
 
   JSON toJson() => {
@@ -154,47 +163,18 @@ String productImagesToJson(List<ProductImages> data) =>
 
 class ProductImages {
   String? url;
+  int? id;
 
-  ProductImages({this.url});
+  ProductImages({this.url, this.id});
 
   factory ProductImages.fromJson(JSON? json) =>
-      ProductImages(url: json?['url']);
+      ProductImages(url: json?['url'], id: json?["id"]);
 
-  JSON? toJson() => {'url': url};
+  JSON? toJson() => {'url': url, "id": id};
 }
 
 class ProductFeature {
   ProductFeature({
-    this.colors,
-    this.sizes,
-  });
-
-  List<Feature>? colors;
-  List<Feature>? sizes;
-
-  factory ProductFeature.fromJson(Map<String, dynamic> json) => ProductFeature(
-        colors: json["Colors"] == null
-            ? []
-            : List<Feature>.from(
-                json["Colors"]!.map((x) => Feature.fromJson(x))),
-        sizes: json["Sizes"] == null
-            ? []
-            : List<Feature>.from(
-                json["Sizes"]!.map((x) => Feature.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "Colors": colors == null
-            ? []
-            : List<dynamic>.from(colors!.map((x) => x.toJson())),
-        "Sizes": sizes == null
-            ? []
-            : List<dynamic>.from(sizes!.map((x) => x.toJson())),
-      };
-}
-
-class Feature {
-  Feature({
     this.id,
     this.value,
     this.categoryField,
@@ -204,7 +184,7 @@ class Feature {
   String? value;
   ProductVariantsModel? categoryField;
 
-  factory Feature.fromJson(Map<String, dynamic> json) => Feature(
+  factory ProductFeature.fromJson(Map<String, dynamic> json) => ProductFeature(
         id: json["id"],
         value: json["value"],
         categoryField: json["CategoryField"] == null
@@ -217,4 +197,62 @@ class Feature {
         "value": value,
         "CategoryField": categoryField?.toJson(),
       };
+
+//   ProductFeature({
+//     this.colors,
+//     this.sizes,
+//   });
+
+//   //List<Feature>? colors;
+//  // List<Feature>? sizes;
+
+//   factory ProductFeature.fromJson(Map<String, dynamic> json) {
+//     return ProductFeature();
+//   }
+
+//   factory ProductFeature.fromJson(Map<String, dynamic> json) => ProductFeature(
+//         colors: json["Colors"] == null
+//             ? []
+//             : List<Feature>.from(
+//                 json["Colors"]!.map((x) => Feature.fromJson(x))),
+//         sizes: json["Sizes"] == null
+//             ? []
+//             : List<Feature>.from(
+//                 json["Sizes"]!.map((x) => Feature.fromJson(x))),
+//       );
+
+//   Map<String, dynamic> toJson() => {
+//         "Colors": colors == null
+//             ? []
+//             : List<dynamic>.from(colors!.map((x) => x.toJson())),
+//         "Sizes": sizes == null
+//             ? []
+//             : List<dynamic>.from(sizes!.map((x) => x.toJson())),
+//       };
 }
+
+// class Feature {
+//   Feature({
+//     this.id,
+//     this.value,
+//     this.categoryField,
+//   });
+
+//   int? id;
+//   String? value;
+//   ProductVariantsModel? categoryField;
+
+//   factory Feature.fromJson(Map<String, dynamic> json) => Feature(
+//         id: json["id"],
+//         value: json["value"],
+//         categoryField: json["CategoryField"] == null
+//             ? null
+//             : ProductVariantsModel.fromJson(json["CategoryField"]),
+//       );
+
+//   Map<String, dynamic> toJson() => {
+//         "id": id,
+//         "value": value,
+//         "CategoryField": categoryField?.toJson(),
+//       };
+// }

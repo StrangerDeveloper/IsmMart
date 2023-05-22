@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
-import 'package:ism_mart/controllers/controllers.dart';
+import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/presentation/ui/exports_ui.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
@@ -274,6 +274,11 @@ class BaseController extends GetxController {
   var currentPage = 0.obs;
 
   void changePage(int index) {
+    if (index == 4) {
+      Get.find<CustomSearchController>().search("");
+      Get.find<CustomSearchController>().searchTextController.clear();
+    }
+
     currentPage.value = index;
     bottomNavPageController.jumpToPage(index);
     /*bottomNavPageController.animateToPage(index,

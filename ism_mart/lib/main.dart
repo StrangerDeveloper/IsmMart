@@ -31,22 +31,19 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     //Get.put(AppInitBinding());
 
-    return GestureDetector(
-      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child: GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: "ISMMART",
-        theme: Themes.lightTheme,
-        darkTheme: Themes.darkTheme,
-        themeMode: getThemeMode(themeController.theme.value),
-        initialRoute: Routes.initRoute,
-        getPages: Routes.pages,
-        defaultTransition: Transition.fadeIn,
-        initialBinding: AppInitBinding(),
-        translations: AppTranslations(),
-        locale: getLocale(languageController.languageKey.value),
-        fallbackLocale: Locale('en', 'US'),
-      ),
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: "ISMMART",
+      theme: Themes.lightTheme,
+      darkTheme: Themes.darkTheme,
+      themeMode: getThemeMode(themeController.theme.value),
+      initialRoute: Routes.initRoute,
+      getPages: Routes.pages,
+      defaultTransition: Transition.fadeIn,
+      initialBinding: AppInitBinding(),
+      translations: AppTranslations(),
+      locale: getLocale(languageController.languageKey.value),
+      fallbackLocale: Locale('en', 'US'),
     );
   }
 

@@ -22,7 +22,7 @@ class SellerHome extends GetView<SellersController> {
         backgroundColor: kAppBarColor,
         actions: [
           InkWell(
-            onTap: () async{
+            onTap: () async {
               BaseController baseController = Get.find();
               await baseController.fetchProducts();
               await baseController.fetchProductsByTypes();

@@ -25,6 +25,7 @@ class FormInputFieldWithIcon extends StatelessWidget {
     required this.onChanged,
     required this.onSaved,
     this.autoValidateMode,
+    this.inputFormatters,
   }) : super(key: key);
   final AutovalidateMode? autoValidateMode;
   final TextEditingController controller;
@@ -45,6 +46,7 @@ class FormInputFieldWithIcon extends StatelessWidget {
   final TextCapitalization? textCapitalization;
   final void Function(String) onChanged;
   final void Function(String?)? onSaved;
+  final List<TextInputFormatter>? inputFormatters;
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +55,7 @@ class FormInputFieldWithIcon extends StatelessWidget {
       textCapitalization: textCapitalization!,
       textAlignVertical: TextAlignVertical.top,
       autovalidateMode: autoValidateMode,
+      inputFormatters: inputFormatters,
       scrollPhysics: const AlwaysScrollableScrollPhysics(),
       //textAlign: TextAlign.center,
       decoration: InputDecoration(
@@ -65,6 +68,7 @@ class FormInputFieldWithIcon extends StatelessWidget {
         labelText: labelText,
         labelStyle: textStyle,
         hintText: hintText,
+        errorMaxLines: 2,
         enabledBorder: enableBorder ??
             OutlineInputBorder(
               borderSide: BorderSide(

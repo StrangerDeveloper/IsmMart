@@ -126,7 +126,7 @@ class SignInUI extends GetView<AuthController> {
                           AppConstant.spaceWidget(height: 20),
                           Center(
                             child: InkWell(
-                              onTap: () => Get.toNamed(Routes.registerRoute),
+                              onTap: () => Get.offNamed(Routes.registerRoute),
                               child: Column(
                                 children: [
                                   Text(langKey.donTHaveAccount.tr,

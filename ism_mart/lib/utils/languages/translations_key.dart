@@ -299,6 +299,7 @@ const shipping = "shipping",
     orderSummary = "orderSummary",
     expectedDelivery = "expectedDelivery",
     paymentCardFailed = "paymentCardFailed",
+    maxAddressLimitMsg = "maxAddressLimitMesg",
     orderTime = "orderTime";
 
 /**

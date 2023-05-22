@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/api_service.dart';
 import 'package:ism_mart/models/exports_model.dart';
+import 'package:ism_mart/utils/exports_utils.dart';
 
 List<UserModel> userModelFromJson(String str) =>
     List<UserModel>.from(json.decode(str).map((x) => UserModel.fromJson(x)));
@@ -132,10 +134,18 @@ class UserResponse {
       this.userModel});
 
   factory UserResponse.fromResponse(response) {
-    print(">>Body: ${response['success']}: ${response['message']}");
+    print(">>Body: ${response.toString()}");
+    String? message = "";
+    if (response['message'] == null) {
+      message = someThingWentWrong.tr;
+    } else if (response[message] is List) {
+      message = (response['message'] as List).first;
+    } else {
+      message = response['message'];
+    }
     return UserResponse(
         success: response['success'] == null ? false : response['success'],
-        message: response['message'] ?? "Something went wrong",
+        message: message,
         error: response['error'],
         errors: response['errors'] != null
             ? List<String>.from(response["errors"].map((x) => x))

@@ -64,14 +64,16 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
   int productsLimit = 20;
   int page = 1;
 
-  fetchMyProducts() {
-    _apiProvider
+  fetchMyProducts() async {
+    await _apiProvider
         .fetchMyProducts(
             token: authController.userToken, limit: productsLimit, page: page)
         .then((response) {
-      myProductsList.clear();
       myProductsList.addAll(response.products!);
+      //myProductsList.refresh();
     });
+
+    update();
   }
 
   var isLoadingMore = false.obs;
@@ -111,11 +113,12 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
 
     await _apiProvider
         .updateProduct(token: authController.userToken, model: model)
-        .then((ApiResponse? response) {
+        .then((ApiResponse? response) async {
       isLoading(false);
       if (response != null) {
         if (response.success!) {
-          fetchMyProducts();
+          myProductsList.clear();
+          await fetchMyProducts();
           Get.back();
           AppConstant.displaySnackBar(
               langKey.success.tr, "${response.message}");
@@ -143,14 +146,15 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
   deleteProduct({int? id}) async {
     await _apiProvider
         .deleteProductById(id: id, token: authController.userToken)
-        .then((response) {
+        .then((response) async {
       if (response.success!) {
-        if (response.success!) {
-          AppConstant.displaySnackBar(langKey.success.tr, response.message);
-          fetchMyProducts();
-        } else
-          AppConstant.displaySnackBar(langKey.errorTitle.tr, response.message);
-      }
+        Get.back();
+        myProductsList.removeWhere((element) => element.id == id);
+        myProductsList.refresh();
+
+        AppConstant.displaySnackBar(langKey.success.tr, response.message);
+      } else
+        AppConstant.displaySnackBar(langKey.errorTitle.tr, response.message);
     }).catchError(onError);
     //fetchMyProducts();
     //myProductsList.refresh();
@@ -295,16 +299,17 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
             model: newProduct,
             categoryFieldList: dynamicFieldsValuesList,
             images: pickedImagesList)
-        .then((ApiResponse? response) {
+        .then((ApiResponse? response) async {
       isLoading(false);
       if (response != null) {
         if (response.success!) {
-          fetchMyProducts();
+          myProductsList.clear();
+          await fetchMyProducts();
+
           Get.back();
           clearControllers();
           AppConstant.displaySnackBar(
               langKey.success.tr, "${response.message}");
-          fetchMyProducts();
         } else {
           debugPrint('Error: ${response.toString()}');
           AppConstant.displaySnackBar(
@@ -483,10 +488,17 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
     prodPriceController.clear();
     prodDescriptionController.clear();
     prodDiscountController.clear();
+
     pickedImagesList.clear();
+
     dynamicFieldsValuesList.clear();
+
     imagesSizeInMb(0.0);
     priceAfterCommission(0);
+    imagePath.value = "";
+
+    selectedCategory(CategoryModel(name: chooseCategory, id: 0));
+    selectedSubCategory(SubCategory(name: chooseSubCategory, id: 0));
   }
 
   @override

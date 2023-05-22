@@ -113,7 +113,7 @@ class CheckoutController extends GetxController {
     //getCityByCountryName(name);
     countryId(model!.id);
     authController.cities.clear();
-    authController.update();
+    // authController.update();
     await authController.getCitiesByCountry(countryId: model.id!);
   }
 
@@ -295,8 +295,7 @@ class CheckoutController extends GetxController {
       if (_paymentMethodId.isNotEmpty)
         await sendPaymentIntent(paymentId: _paymentMethodId.value);
       else {
-        showSnackBar(
-            message: langKey.paymentCardFailed.tr, title: "error");
+        showSnackBar(message: langKey.paymentCardFailed.tr, title: "error");
         isLoading(false);
         print("Payment intent is null");
       }
@@ -442,6 +441,7 @@ class CheckoutController extends GetxController {
       "shippingPrice": shippingCost.value,
       "shippingDetailsId": defaultAddressModel!.id,
       "redeemCoins": _isRedeemApplied.value,
+      "exchangeRate": currencyController.currencyModel!.exchangeRate ?? 1,
       "cartItems": cartItems,
     };
 
@@ -524,6 +524,9 @@ class CheckoutController extends GetxController {
     phoneController.clear();
     addressController.clear();
     zipCodeController.clear();
+
+    authController.selectedCountry(CountryModel(name: "Select Country", id: 0));
+    authController.selectedCity(CountryModel(name: "Select City", id: 0));
   }
 
   @override

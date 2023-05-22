@@ -64,28 +64,27 @@ class SingleProductItems extends StatelessWidget {
                   ),
                 ],
               ),
-              if(model.stock! > 0)
+              if (model.stock! > 0)
                 if (model.discount != 0)
-                Positioned(
-                  top: 0,
-                  right: 0,
-                  child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                    decoration: BoxDecoration(
-                      color: kOrangeColor,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: CustomText(
-                      title: "${model.discount}% ${langKey.OFF.tr}",
-                      color: kWhiteColor,
-                      size: 12,
-                      weight: FontWeight.w600,
+                  Positioned(
+                    top: 0,
+                    right: 0,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 5, horizontal: 10),
+                      decoration: BoxDecoration(
+                        color: kOrangeColor,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: CustomText(
+                        title: "${model.discount}% ${langKey.OFF.tr}",
+                        color: kWhiteColor,
+                        size: 12,
+                        weight: FontWeight.w600,
+                      ),
                     ),
                   ),
-                ),
-              if(model.stock! == 0)
-                _buildOutOfStockStack(buildContext)
+              if (model.stock! == 0) _buildOutOfStockStack(buildContext)
             ],
           ),
         ),
@@ -169,28 +168,27 @@ class SingleProductItems extends StatelessWidget {
                   //AppConstant.spaceWidget(height: 10)
                 ],
               ),
-              if(model.stock! > 0)
+              if (model.stock! > 0)
                 if (model.discount != 0)
-                Positioned(
-                  top: 1,
-                  right: 1,
-                  child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                    decoration: BoxDecoration(
-                      color: kOrangeColor,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: CustomText(
-                      title: "${model.discount}% ${langKey.OFF.tr}",
-                      color: kWhiteColor,
-                      size: 12,
-                      weight: FontWeight.w600,
+                  Positioned(
+                    top: 1,
+                    right: 1,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 5, horizontal: 10),
+                      decoration: BoxDecoration(
+                        color: kOrangeColor,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: CustomText(
+                        title: "${model.discount}% ${langKey.OFF.tr}",
+                        color: kWhiteColor,
+                        size: 12,
+                        weight: FontWeight.w600,
+                      ),
                     ),
                   ),
-                ),
-              if(model.stock! == 0)
-                _buildOutOfStockStack(buildContext)
+              if (model.stock! == 0) _buildOutOfStockStack(buildContext)
             ],
           ),
         ),
@@ -199,7 +197,7 @@ class SingleProductItems extends StatelessWidget {
   }
 }
 
-_buildOutOfStockStack(BuildContext? context){
+_buildOutOfStockStack(BuildContext? context) {
   return Stack(
     children: [
       Container(
@@ -211,8 +209,7 @@ _buildOutOfStockStack(BuildContext? context){
         top: 1,
         right: 1,
         child: Container(
-          padding:
-          const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
           decoration: BoxDecoration(
             color: kOrangeColor,
             borderRadius: BorderRadius.circular(5),

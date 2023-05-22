@@ -1,5 +1,6 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
@@ -33,6 +34,12 @@ class ChangeAddressUI extends GetView<CheckoutController> {
                           height: 30,
                           onTap: () {
                             // Get.back();
+                            if (controller.shippingAddressList.length > 3) {
+                              AppConstant.displaySnackBar(
+                                  'error', langKey.maxAddressLimitMsg.tr);
+                              return;
+                            }
+                            controller.clearControllers();
                             AppConstant.showBottomSheet(
                                 widget: addNewORUpdateAddressContents());
                           },
@@ -43,20 +50,17 @@ class ChangeAddressUI extends GetView<CheckoutController> {
                 Obx(
                   () => controller.shippingAddressList.isEmpty
                       ? _buildNewAddress()
-                      : SizedBox(
-                          height: 400,
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            padding: const EdgeInsets.all(8),
-                            itemCount: controller.shippingAddressList.length,
-                            itemBuilder: (_, index) {
-                              UserModel? userModel =
-                                  controller.shippingAddressList[index];
+                      : ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          padding: const EdgeInsets.all(8),
+                          itemCount: controller.shippingAddressList.length,
+                          itemBuilder: (_, index) {
+                            UserModel? userModel =
+                                controller.shippingAddressList[index];
 
-                              return _singleAddressListItem(userModel);
-                            },
-                          ),
+                            return _singleAddressListItem(userModel);
+                          },
                         ),
                 ),
               ],
@@ -88,8 +92,9 @@ class ChangeAddressUI extends GetView<CheckoutController> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
+        height: AppResponsiveness.height * 0.7,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             NoDataFoundWithIcon(
               title: langKey.noDefaultAddressFound.tr,
@@ -178,6 +183,7 @@ class ChangeAddressUI extends GetView<CheckoutController> {
   Widget addNewORUpdateAddressContents(
       {UserModel? userModel, calledForUpdate = false}) {
     var formKey = GlobalKey<FormState>();
+
     if (calledForUpdate) {
       controller.nameController.text = userModel!.name ?? "";
       controller.addressController.text = userModel.address ?? "";
@@ -206,7 +212,9 @@ class ChangeAddressUI extends GetView<CheckoutController> {
                 autofocus: false,
                 textStyle: bodyText1,
                 autoValidateMode: AutovalidateMode.onUserInteraction,
-                validator: Validator().name,
+                validator: (value) {
+                  return Validator().name(value, title: langKey.fullName.tr);
+                },
                 keyboardType: TextInputType.name,
                 onChanged: (value) {},
                 onSaved: (value) {},
@@ -220,7 +228,10 @@ class ChangeAddressUI extends GetView<CheckoutController> {
                 autofocus: false,
                 textStyle: bodyText1,
                 autoValidateMode: AutovalidateMode.onUserInteraction,
-                validator: Validator().phone,
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp(r'^(?:[+])?\d*'))
+                ],
+                validator: Validator().validatePhoneNumber,
                 keyboardType: TextInputType.number,
                 onChanged: (value) {},
                 onSaved: (value) {},
