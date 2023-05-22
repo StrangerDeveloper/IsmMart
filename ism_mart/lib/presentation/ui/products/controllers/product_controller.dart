@@ -13,8 +13,6 @@ class ProductController extends GetxController with StateMixin {
   ProductController(this._apiProvider);
 
   var questionController = TextEditingController();
-  //FocusNode focusNode = FocusNode();
-
   var pageController = PageController(initialPage: 0);
   var pageIndex = 0.obs;
 
@@ -41,14 +39,16 @@ class ProductController extends GetxController with StateMixin {
       change(product, status: RxStatus.success());
 
       fetchProductBySubCategory(subCategoryId: product.subCategory!.id);
-      fetchProductReviewsById(productId: id);
+      //fetchProductReviewsById(productId: id);
       getProductQuestions(productId: id);
 
       setCountAndMOQ(productModel: product);
-    }).catchError((error) {
-      change(null, status: RxStatus.error(error));
-      print(">>>FetchProduct $error");
     });
+
+    // .catchError((error) {
+    //   change(null, status: RxStatus.error(error));
+    //   print(">>>FetchProduct $error");
+    // });
   }
 
   setCountAndMOQ({ProductModel? productModel}) {

@@ -17,7 +17,7 @@ class Validator {
   String? validatePhoneNumber(String? value) {
     if (GetUtils.isBlank(value)!) {
       return langKey.fieldIsRequired.tr;
-    } else if (value!.length > 6 || value.length < 4) {
+    } else if (value!.length > 16 || value.length < 7) {
       return langKey.phoneValidate.tr;
     } else {
       return null;
@@ -46,14 +46,16 @@ class Validator {
     }
   }
 
-  String? name(String? value) {
-    String pattern = r"^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$";
+  String? name(String? value, {String? title}) {
+    //String pattern = r"^[a-zA-Z]+(([',.-][a-zA-Z])?[a-zA-Z])$";
+    String pattern = r"^[a-zA-Z\s]+$";
     RegExp regex = RegExp(pattern);
     if (value!.isEmpty) {
-      return langKey.fullNameReq.tr;
+      return "$title is required";
     } else if (!regex.hasMatch(value.trim())) {
       return langKey.nameAlphabaticReq.tr;
     } else {
+      //GetUtils.isAlphabetOnly(s)
       return null;
     }
   }
@@ -68,22 +70,22 @@ class Validator {
     }
   }
 
-  String? phone(String? value) {
-    //String pattern = r'^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$';
-    String pattern = r'^(\+92|0|92)[0-9]{10}$'; //Pakistan
-    //String pattern = r'(^(?:[+0]9)?[0-9]{11,12}$)';
-    // String pattern =
-    //     r'(^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$)';
+  // String? phone(String? value) {
+  //   //String pattern = r'^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$';
+  //   String pattern = r'^(\+92|0|92)[0-9]{10}$'; //Pakistan
+  //   //String pattern = r'(^(?:[+0]9)?[0-9]{11,12}$)';
+  //   // String pattern =
+  //   //     r'(^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$)';
 
-    RegExp regex = RegExp(pattern);
-    if (value!.isEmpty) {
-      return langKey.phoneReq.tr;
-    } else if (!regex.hasMatch(value.trim())) {
-      return 'Invalid phone number format';
-    } else {
-      return null;
-    }
-  }
+  //   RegExp regex = RegExp(pattern);
+  //   if (value!.isEmpty) {
+  //     return langKey.phoneReq.tr;
+  //   } else if (!regex.hasMatch(value.trim())) {
+  //     return 'Invalid phone number format';
+  //   } else {
+  //     return null;
+  //   }
+  // }
 
   // String? amount(String? value) {
   //   String pattern = r'^\d+$';

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/controllers/buyer/auth/auth_controller.dart';
 import 'package:ism_mart/models/exports_model.dart';
@@ -344,7 +345,9 @@ class RegisterVendorUI extends GetView<AuthController> {
               autofocus: false,
               textStyle: bodyText1,
               autoValidateMode: AutovalidateMode.onUserInteraction,
-              validator: Validator().name,
+              validator: (value) {
+                return Validator().name(value, title: langKey.ownerName.tr);
+              },
               keyboardType: TextInputType.name,
               onChanged: (value) {},
               onSaved: (value) {},
@@ -358,7 +361,9 @@ class RegisterVendorUI extends GetView<AuthController> {
               autofocus: false,
               textStyle: bodyText1,
               autoValidateMode: AutovalidateMode.onUserInteraction,
-              validator: Validator().name,
+              validator: (value) {
+                return Validator().name(value, title: langKey.storeName.tr);
+              },
 
               // (value) =>
               //     GetUtils.isBlank(value!)! ? langKey.storeNameReq.tr : null,
@@ -374,8 +379,11 @@ class RegisterVendorUI extends GetView<AuthController> {
               iconColor: kPrimaryColor,
               autofocus: false,
               textStyle: bodyText1,
+              inputFormatters: [
+                FilteringTextInputFormatter.allow(RegExp(r'^(?:[+])?\d*'))
+              ],
               autoValidateMode: AutovalidateMode.onUserInteraction,
-              validator: Validator().phone,
+              validator: Validator().validatePhoneNumber,
               // (value) =>
               //     !GetUtils.isPhoneNumber(value!) ? langKey.phoneReq.tr : null,
               keyboardType: TextInputType.phone,
@@ -407,9 +415,9 @@ class RegisterVendorUI extends GetView<AuthController> {
               autofocus: false,
               textStyle: bodyText1,
               autoValidateMode: AutovalidateMode.onUserInteraction,
-              validator: Validator().name,
-              //  (value) =>
-              //     GetUtils.isBlank(value!)! ? langKey.bankNameReq.tr : null,
+              validator: (value) {
+                return Validator().name(value, title: langKey.bankName.tr);
+              },
               keyboardType: TextInputType.name,
               onChanged: (value) {},
               onSaved: (value) {},

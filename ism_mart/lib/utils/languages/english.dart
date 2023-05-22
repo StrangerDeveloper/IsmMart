@@ -66,8 +66,7 @@ class English {
             'Payment Successful!, You\'re Order has been Placed!',
         key.orderInformation: 'Order Information',
         key.orderNotCreated: 'Something went wrong! Order Not created',
-        key.phoneValidate:
-            'Phone numbers should be in a format of 7 to 16 digits.',
+        key.phoneValidate: 'Phone numbers should be 7 to 16 digits long.',
         key.moreAboutCost: 'More about cost',
         key.feeChargesExplained: 'Fee charges Explained!',
         key.serviceFee: 'Service Fee',

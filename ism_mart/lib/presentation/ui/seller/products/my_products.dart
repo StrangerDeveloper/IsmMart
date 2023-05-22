@@ -196,7 +196,7 @@ class MyProducts extends GetView<SellersController> {
                         onTap: () => AppConstant.showConfirmDeleteDialog(
                               ontap: () {
                                 controller.deleteProduct(id: model.id);
-                                Get.back();
+                                //
                               },
                             ),
                         icon: Icons.delete_rounded,
@@ -225,51 +225,6 @@ class MyProducts extends GetView<SellersController> {
                 ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-
-  void showConfirmDeleteDialog({ProductModel? productModel}) {
-    Get.defaultDialog(
-      title: langKey.deleteProd.tr,
-      titleStyle: appBarTitleSize,
-      content: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            CustomText(
-              title: langKey.delProdMsg.tr,
-              weight: FontWeight.w600,
-            ),
-            AppConstant.spaceWidget(height: 10),
-            buildConfirmDeleteIcon(),
-            AppConstant.spaceWidget(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                CustomButton(
-                  onTap: () {
-                    Get.back();
-                  },
-                  text: langKey.noBtn.tr,
-                  width: 100,
-                  height: 30,
-                  color: kPrimaryColor,
-                ),
-                CustomButton(
-                  onTap: () {
-                    controller.deleteProduct(id: productModel!.id);
-                    Get.back();
-                  },
-                  text: langKey.yesBtn.tr,
-                  width: 100,
-                  height: 30,
-                  color: kRedColor,
-                ),
-              ],
-            )
-          ],
         ),
       ),
     );
