@@ -13,6 +13,10 @@ class SignUpUI extends GetView<AuthController> {
   @override
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
+
+    ///default clearing all controllers without email
+    //controller.clearControllers();
+
     return SafeArea(
       child: Scaffold(
         body: CustomScrollView(
@@ -77,7 +81,7 @@ class SignUpUI extends GetView<AuthController> {
                           ),
                           AppConstant.spaceWidget(height: 15),
                           FormInputFieldWithIcon(
-                            controller: controller.emailController,
+                            controller: controller.signUpEmailController,
                             iconPrefix: Icons.email_outlined,
                             labelText: langKey.email.tr,
                             iconColor: kPrimaryColor,
@@ -97,7 +101,7 @@ class SignUpUI extends GetView<AuthController> {
                           ),
                           AppConstant.spaceWidget(height: 15),
                           FormPasswordInputFieldWithIcon(
-                            controller: controller.passwordController,
+                            controller: controller.signUpPasswordController,
                             iconPrefix: Icons.lock_outline_rounded,
                             iconColor: kPrimaryColor,
                             textStyle: bodyText1,
@@ -188,7 +192,13 @@ class SignUpUI extends GetView<AuthController> {
                               : CustomButton(
                                   onTap: () async {
                                     if (formKey.currentState!.validate()) {
-                                      await controller.register();
+                                      if (controller
+                                          .phoneController.text.isNotEmpty)
+                                        await controller.register();
+                                      else {
+                                        controller.phoneErrorText.value =
+                                            langKey.phoneReq.tr;
+                                      }
                                     }
                                   },
                                   text: langKey.signUp.tr,

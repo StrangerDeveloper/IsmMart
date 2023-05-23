@@ -61,9 +61,6 @@ class ApiBaseHelper {
 
   Future<dynamic> getMethod(
       {required String url, bool withBearer = true}) async {
-    print('hayat');
-    print(token);
-
     Map<String, String> header = {
       'Authorization': withBearer ? 'Bearer $token' : token,
       'Content-Type': 'application/json'

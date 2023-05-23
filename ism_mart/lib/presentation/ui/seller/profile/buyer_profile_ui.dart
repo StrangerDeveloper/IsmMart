@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -12,8 +13,6 @@ class ProfileUI extends GetView<AuthController> {
 
   @override
   Widget build(BuildContext context) {
-    print(
-        "image is m0del => ${controller.userModel!.imageUrl} \n image controller ${controller.profileImgPath.value}");
     return Obx(
       () => SafeArea(
         child: controller.isLoading.isTrue
@@ -38,142 +37,151 @@ class ProfileUI extends GetView<AuthController> {
     //  var field = {'field': 'firstName', 'field': 'lastName'};
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: ListView(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
+      child: Stack(
         children: [
-          ///Personal Information
-          CustomGreyBorderContainer(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
+          ListView(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            children: [
+              AppConstant.spaceWidget(height: 50),
+
+              ///Personal Information
+              CustomGreyBorderContainer(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      AppConstant.spaceWidget(height: 30),
+                      StickyLabel(text: langKey.personalInfo.tr),
+                      //Profile data
+                      Obx(
+                        () => Column(
+                          children: controller.getProfileData().map((profile) {
+                            print("map is $profile");
+                            return profileCards(
+                                profile["title"],
+                                profile["subtitle"],
+                                profile["icon"],
+                                profile['field']);
+                          }).toList(),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              AppConstant.spaceWidget(height: 40),
+
+              ///delete account button
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Stack(
-                  //   children: [
-                  //     Container(
-                  //       height: 90,
-                  //       width: 90,
-                  //       alignment: Alignment.center,
-                  //       decoration: BoxDecoration(
-                  //         borderRadius: BorderRadius.circular(50),
-                  //         color: Colors.white,
-                  //         boxShadow: [
-                  //           BoxShadow(
-                  //             color: kPrimaryColor.withOpacity(0.22),
-                  //             offset: Offset(0, 0),
-                  //             blurRadius: 10.78,
-                  //           ),
-                  //         ],
-                  //       ),
-                  //       child:
-                  //        Obx(() => controller.profileImgPath.value == ''
-                  //           ? CircleAvatar(
-                  //               radius: 40,
-                  //               backgroundColor: Colors.grey[200],
-                  //               backgroundImage: NetworkImage(
-                  //                   controller.userModel!.imageUrl.toString()))
-                  //           : CircleAvatar(
-                  //               radius: 40,
-                  //               backgroundColor: Colors.grey[200],
-                  //               backgroundImage: FileImage(
-                  //                   File(controller.profileImgPath.value)))),
-                  //     ),
-                  //     Positioned(
-                  //       bottom: 1,
-                  //       right: 1,
-                  //       child: InkWell(
-                  //         onTap: () {
-                  //           _pickImage();
-                  //         },
-                  //         child: Container(
-                  //           child: Padding(
-                  //             padding: const EdgeInsets.all(2.0),
-                  //             child:
-                  //                 Icon(Icons.add_a_photo, color: kPrimaryColor),
-                  //           ),
-                  //           decoration: BoxDecoration(
-                  //               border: Border.all(
-                  //                 width: 3,
-                  //                 color: Colors.white,
-                  //               ),
-                  //               borderRadius: BorderRadius.all(
-                  //                 Radius.circular(50),
-                  //               ),
-                  //               color: Colors.white,
-                  //               boxShadow: [
-                  //                 BoxShadow(
-                  //                   offset: Offset(0, 0),
-                  //                   color: kPrimaryColor.withOpacity(0.3),
-                  //                   blurRadius: 10.78,
-                  //                 ),
-                  //               ]),
-                  //         ),
-                  //       ),
-                  //     ),
-
-                  //   ],
-                  // ),
-
-                  StickyLabel(text: langKey.personalInfo.tr),
-                  //Profile data
                   Obx(
-                    () => Column(
-                      children: controller.getProfileData().map((profile) {
-                        print("map is $profile");
-                        return profileCards(
-                            profile["title"],
-                            profile["subtitle"],
-                            profile["icon"],
-                            profile['field']);
-                      }).toList(),
-                    ),
+                    () => controller.isLoading.isTrue
+                        ? CustomLoading(
+                            isItBtn: true,
+                          )
+                        : InkWell(
+                            onTap: () => showConfirmDeleteDialog(
+                                userModel: controller.userModel!),
+                            child: Container(
+                              width: 150,
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 15.0),
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                //color: kRedColor,
+                                borderRadius: BorderRadius.circular(8),
+                                //border: Border.all(color: kRedColor),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: kRedColor,
+                                    offset: Offset(0, 1),
+                                    blurRadius: 2,
+                                  )
+                                ],
+                              ),
+                              child: CustomText(
+                                title: langKey.deactivateBtn.tr,
+                                color: kWhiteColor,
+                              ),
+                            ),
+                          ),
                   ),
                 ],
               ),
-            ),
+            ],
           ),
-          AppConstant.spaceWidget(height: 40),
+          Align(alignment: Alignment.center, child: _profileCircularImage()),
+        ],
+      ),
+    );
+  }
 
-          ///delete account button
-
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Obx(
-                () => controller.isLoading.isTrue
-                    ? CustomLoading(
-                        isItBtn: true,
-                      )
-                    : InkWell(
-                        onTap: () => showConfirmDeleteDialog(
-                            userModel: controller.userModel!),
-                        child: Container(
-                          width: 150,
-                          padding: const EdgeInsets.symmetric(vertical: 15.0),
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            //color: kRedColor,
-                            borderRadius: BorderRadius.circular(8),
-                            //border: Border.all(color: kRedColor),
-                            boxShadow: [
-                              BoxShadow(
-                                color: kRedColor,
-                                offset: Offset(0, 1),
-                                blurRadius: 2,
-                              )
-                            ],
-                          ),
-                          child: CustomText(
-                            title: langKey.deactivateBtn.tr,
-                            color: kWhiteColor,
-                          ),
-                        ),
-                      ),
+  Widget _profileCircularImage() {
+    return Stack(
+      children: [
+        Container(
+          height: 90,
+          width: 90,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(50),
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: kPrimaryColor.withOpacity(0.22),
+                offset: Offset(0, 0),
+                blurRadius: 10.78,
               ),
             ],
           ),
-        ],
-      ),
+          child: Obx(() => controller.profileImgPath.value.isNotEmpty
+              ? CircleAvatar(
+                  radius: 40,
+                  backgroundColor: Colors.grey[200],
+                  backgroundImage:
+                      NetworkImage(controller.userModel!.imageUrl.toString()))
+              : CircleAvatar(
+                  radius: 40,
+                  backgroundColor: Colors.grey[200],
+                  backgroundImage:
+                      FileImage(File(controller.profileImgPath.value)))),
+        ),
+        Positioned(
+          bottom: 1,
+          right: 1,
+          child: InkWell(
+            onTap: () {
+              AppConstant.pickImage(
+                  calledForProfile: true, calledBuyerProfile: true);
+            },
+            child: Container(
+              child: Padding(
+                padding: const EdgeInsets.all(2.0),
+                child: Icon(Icons.add_a_photo, color: kPrimaryColor),
+              ),
+              decoration: BoxDecoration(
+                  border: Border.all(
+                    width: 3,
+                    color: Colors.white,
+                  ),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(50),
+                  ),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      offset: Offset(0, 0),
+                      color: kPrimaryColor.withOpacity(0.3),
+                      blurRadius: 10.78,
+                    ),
+                  ]),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -255,19 +263,12 @@ class ProfileUI extends GetView<AuthController> {
             : CustomButton(
                 onTap: () async {
                   if (_formKey.currentState!.validate()) {
+                    Get.back();
                     await controller.updateUser(
                         title: title,
                         value: controller.editingTextController.text,
                         field: field);
                     _formKey.currentState!.reset();
-                    // controller.login();
-
-                    // await imgController.updateUser(
-                    //   field: field,
-                    //   title: title,
-                    // );
-
-                    //Get.back();
                   }
                 },
                 text: langKey.updateBtn.tr,

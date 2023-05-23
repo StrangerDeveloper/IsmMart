@@ -58,11 +58,7 @@ class DashboardUI extends GetView<BaseController> {
           buildSvgLogo(),
           Expanded(
             flex: 5,
-            child: Obx(
-              () => CustomSearchBar(
-                searchText: controller.randomSearchText.value,
-              ),
-            ),
+            child: CustomSearchBar(searchText: ""),
           ),
           //const Expanded(flex:1,child:Center())
         ],
@@ -162,8 +158,7 @@ class DashboardUI extends GetView<BaseController> {
         DateTime.now().add(const Duration(hours: 17)).millisecondsSinceEpoch;
     return InkWell(
       onTap: () {
-        Get.toNamed('/product/${model.id}',
-            arguments: {"calledFor": "customer"});
+        Get.to(SingleProductView(productId: model.id,));
       },
       child: Stack(
         fit: StackFit.loose,

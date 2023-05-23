@@ -67,9 +67,9 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
   fetchMyProducts() async {
     await _apiProvider
         .fetchMyProducts(
-        token: authController.userToken, limit: productsLimit, page: page)
+            token: authController.userToken, limit: productsLimit, page: page)
         .then((response) {
-          myProductsList.clear();
+      myProductsList.clear();
       myProductsList.addAll(response.products!);
       //myProductsList.refresh();
     });
@@ -85,12 +85,12 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
         scrollController.position.maxScrollExtent == scrollController.offset) {
       isLoadingMore(true);
       //page++;
-      productsLimit += 5;
+      productsLimit += 10;
       await _apiProvider
           .fetchMyProducts(
-          token: authController.userToken, limit: productsLimit, page: page)
+              token: authController.userToken, limit: productsLimit, page: page)
           .then((response) {
-            myProductsList.clear();
+        myProductsList.clear();
         myProductsList.addAll(response.products!);
         isLoadingMore(false);
       }).catchError(onError);
@@ -102,7 +102,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
   updateProduct({ProductModel? model}) async {
     model!.price = int.parse("${prodPriceController.text}");
     model.name = prodNameController.text;
-    model.discount = int.parse("${prodDiscountController.text}");
+    model.discount = int.parse("${prodDiscountController.text.isEmpty || prodDiscountController.text == '' ? 0 : prodDiscountController.text}");
     model.description = prodDescriptionController.text;
     model.stock = int.parse("${prodStockController.text}");
 
@@ -110,7 +110,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
     model.price = int.parse("${priceAfterCommission.value}");
     model.name = prodNameController.text;
     model.discount = int.parse(
-        "${prodDiscountController.text.isEmpty ? 0 : prodDiscountController.text}");
+        "${prodDiscountController.text.isEmpty || prodDiscountController.text == '' ? 0 : prodDiscountController.text}");
     model.description = prodDescriptionController.text;
     model.stock = int.parse("${prodStockController.text}");
 
@@ -120,13 +120,16 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
       isLoading(false);
       if (response != null) {
         if (response.success!) {
-          int productIndex = myProductsList.indexWhere((element) => element.id == model.id);
-          myProductsList[productIndex].stock = model.stock;
-          myProductsList[productIndex].name = model.name;
-          myProductsList[productIndex].description = model.description;
-          myProductsList[productIndex].price = model.price;
-          myProductsList[productIndex].discount = model.discount;
-          myProductsList.refresh();
+          myProductsList.clear();
+          await fetchMyProducts();
+
+          // int productIndex = myProductsList.indexWhere((element) => element.id == model.id);
+          // myProductsList[productIndex].stock = model.stock;
+          // myProductsList[productIndex].name = model.name;
+          // myProductsList[productIndex].description = model.description;
+          // myProductsList[productIndex].price = model.price;
+          // myProductsList[productIndex].discount = model.discount;
+          // myProductsList.refresh();
           Get.back();
           AppConstant.displaySnackBar(
               langKey.success.tr, "${response.message}");
@@ -255,8 +258,8 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
     isLoading(true);
     await _apiProvider
         .getProductVariantsFieldsByCategories(
-        catId: selectedCategoryID.value,
-        subCatId: selectedSubCategoryID.value)
+            catId: selectedCategoryID.value,
+            subCatId: selectedSubCategoryID.value)
         .then((fieldsList) {
       isLoading(false);
       productVariantsFieldsList.clear();
@@ -301,17 +304,18 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
         subCategoryId: selectedSubCategoryID.value,
         description: prodDescriptionController.text,
         discount: discount);
+
     await _apiProvider
         .addProductWithHttp(
-        token: authController.userToken,
-        model: newProduct,
-        categoryFieldList: dynamicFieldsValuesList,
-        images: pickedImagesList)
+            token: authController.userToken,
+            model: newProduct,
+            categoryFieldList: dynamicFieldsValuesList,
+            images: pickedImagesList)
         .then((ApiResponse? response) async {
       isLoading(false);
       if (response != null) {
         if (response.success!) {
-          myProductsList.clear();
+          //myProductsList.clear();
           await fetchMyProducts();
 
           Get.back();
@@ -390,7 +394,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
         try {
           XFile? imgFile = await _picker.pickImage(
               source:
-              callingType == 0 ? ImageSource.camera : ImageSource.gallery);
+                  callingType == 0 ? ImageSource.camera : ImageSource.gallery);
           if (imgFile != null) {
             await imgFile.length().then((length) async {
               await AppConstant.compressImage(imgFile.path, fileLength: length)

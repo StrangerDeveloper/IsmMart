@@ -68,9 +68,10 @@ class MyProducts extends GetView<SellersController> {
                           crossAxisCount: AppResponsiveness.getGridItemCount(),
                           //mainAxisExtent:
                           //  AppResponsiveness.getMainAxisExtentPoint30(),
-                          mainAxisSpacing: 5,
+                          mainAxisSpacing: 8,
+                          crossAxisSpacing: 8,
                           childAspectRatio:
-                              AppResponsiveness.getChildAspectRatioPoint80(),
+                              AppResponsiveness.getChildAspectRatioPoint85(),
                         ),
                         itemCount: controller.myProductsList.length,
                         itemBuilder: (_, index) {
@@ -94,8 +95,7 @@ class MyProducts extends GetView<SellersController> {
       aspectRatio: 0.75,
       child: GestureDetector(
         onTap: () {
-          Get.toNamed('/product/${model.id}',
-              arguments: {"calledFor": "seller"});
+          Get.to(SingleProductView(productId: "${model.id}", calledFor: 'seller',));
         },
         child: Container(
           clipBehavior: Clip.hardEdge,

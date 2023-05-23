@@ -23,10 +23,12 @@ class SellerHome extends GetView<SellersController> {
         actions: [
           InkWell(
             onTap: () async {
-              BaseController baseController = Get.find();
+              BaseController baseController = Get.find<BaseController>();
               await baseController.fetchProducts();
               await baseController.fetchProductsByTypes();
+
               Get.back();
+              //baseController.changePage(0);
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),

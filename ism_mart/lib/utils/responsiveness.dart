@@ -122,8 +122,16 @@ class AppResponsiveness {
     return _isTabletScreen() ? 0.65 : 0.8;
   }
 
+  static double getChildAspectRatioPoint85() {
+    return _isTabletScreen() ? 0.67 : 0.85;
+  }
+
   static double getChildAspectRatioPoint90() {
     return _isTabletScreen() ? 0.75 : 0.9;
+  }
+
+  static double getChildAspectRatioPoint95() {
+    return _isTabletScreen() ? 0.8 : 0.95;
   }
 
   static double getChildAspectRatioPoint100() {

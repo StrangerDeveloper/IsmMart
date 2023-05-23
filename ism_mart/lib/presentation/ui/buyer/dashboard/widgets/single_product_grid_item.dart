@@ -8,9 +8,9 @@ import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 class SingleProductItems extends StatelessWidget {
   const SingleProductItems(
       {Key? key,
-        this.productModel,
-        this.isCategoryProducts = false,
-        this.onTap})
+      this.productModel,
+      this.isCategoryProducts = false,
+      this.onTap})
       : super(key: key);
   final ProductModel? productModel;
   final bool? isCategoryProducts;
@@ -67,8 +67,8 @@ class SingleProductItems extends StatelessWidget {
                           ],
                         ),
                       )
-                    //child: CustomNetworkImage(imageUrl: model!.thumbnail),
-                  ),
+                      //child: CustomNetworkImage(imageUrl: model!.thumbnail),
+                      ),
                   Padding(
                     padding: const EdgeInsets.all(8),
                     child: CustomText(
@@ -112,9 +112,9 @@ class SingleProductItems extends StatelessWidget {
       aspectRatio: 0.75,
       child: GestureDetector(
         onTap: onTap ??
-                () {
+            () {
               showModalBottomSheet(
-                //isDismissible: false,
+                  //isDismissible: false,
                   isScrollControlled: true,
                   context: buildContext!,
                   backgroundColor: kWhiteColor,
@@ -162,8 +162,8 @@ class SingleProductItems extends StatelessWidget {
                           ],
                         ),
                       )
-                    //child: CustomNetworkImage(imageUrl: model!.thumbnail),
-                  ),
+                      //child: CustomNetworkImage(imageUrl: model!.thumbnail),
+                      ),
                   Padding(
                     padding: const EdgeInsets.all(6),
                     child: Column(

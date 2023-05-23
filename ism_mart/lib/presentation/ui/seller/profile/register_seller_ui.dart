@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
@@ -37,207 +36,207 @@ class RegisterVendorUI extends GetView<AuthController> {
       resizeToAvoidBottomInset: false,
       body: SafeArea(
           child: ListView(
-            shrinkWrap: true,
-            children: [
-              AppConstant.spaceWidget(height: AppConstant.getSize().height * 0.045),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CustomText(
-                      title: model != null
-                          ? langKey.updateVendorDetails.tr
-                          : langKey.vendorRegistration.tr,
-                      style: headline2,
-                    ),
-                    CustomActionIcon(
-                      onTap: () => Get.back(),
-                      hasShadow: false,
-                      icon: Icons.close_rounded,
-                      bgColor: kPrimaryColor.withOpacity(0.2),
-                      iconColor: kPrimaryColor,
-                    ),
-                  ],
+        shrinkWrap: true,
+        children: [
+          AppConstant.spaceWidget(height: AppConstant.getSize().height * 0.045),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CustomText(
+                  title: model != null
+                      ? langKey.updateVendorDetails.tr
+                      : langKey.vendorRegistration.tr,
+                  style: headline2,
                 ),
-              ),
+                CustomActionIcon(
+                  onTap: () => Get.back(),
+                  hasShadow: false,
+                  icon: Icons.close_rounded,
+                  bgColor: kPrimaryColor.withOpacity(0.2),
+                  iconColor: kPrimaryColor,
+                ),
+              ],
+            ),
+          ),
 
-              ///background and profile
-              SizedBox(
-                height: AppConstant.getSize().height * 0.2,
-                child: Stack(
-                  children: [
-                    GestureDetector(
-                      onTap: () => _pickImage(calledForProfile: false),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          width: AppConstant.getSize().width * 0.95,
-                          // alignment: Alignment.center,
-                          child: DottedBorder(
-                            borderType: BorderType.RRect,
-                            radius: const Radius.circular(10),
-                            dashPattern: const [10, 4],
-                            strokeCap: StrokeCap.round,
-                            child: Obx(
-                                  () => (controller.coverImgPath.value.isEmpty &&
+          ///background and profile
+          SizedBox(
+            height: AppConstant.getSize().height * 0.2,
+            child: Stack(
+              children: [
+                GestureDetector(
+                  onTap: () => AppConstant.pickImage(calledForProfile: false),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      width: AppConstant.getSize().width * 0.95,
+                      // alignment: Alignment.center,
+                      child: DottedBorder(
+                        borderType: BorderType.RRect,
+                        radius: const Radius.circular(10),
+                        dashPattern: const [10, 4],
+                        strokeCap: StrokeCap.round,
+                        child: Obx(
+                          () => (controller.coverImgPath.value.isEmpty &&
                                   model?.coverImage != null)
-                                  ? Center(
-                                child: CustomNetworkImage(
-                                  imageUrl: model!.coverImage!,
-                                  fit: BoxFit.fill,
-                                  width: AppConstant.getSize().width,
-                                ),
-                              )
-                                  : (controller.coverImgPath.value.isNotEmpty
+                              ? Center(
+                                  child: CustomNetworkImage(
+                                    imageUrl: model!.coverImage!,
+                                    fit: BoxFit.fill,
+                                    width: AppConstant.getSize().width,
+                                  ),
+                                )
+                              : (controller.coverImgPath.value.isNotEmpty
                                   ? Container(
-                                alignment: Alignment.center,
-                                child: Image.file(
-                                  File(controller.coverImgPath.value),
-                                ),
-                              )
-                                  : Center(
-                                child: Column(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.center,
-                                  crossAxisAlignment:
-                                  CrossAxisAlignment.center,
-                                  children: [
-                                    const Icon(
-                                      Icons.cloud_upload_rounded,
-                                      size: 30,
-                                    ),
-                                    const SizedBox(height: 5),
-                                    Text(
-                                      langKey.clickHereToUpload.tr,
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        color: Colors.grey.shade400,
+                                      alignment: Alignment.center,
+                                      child: Image.file(
+                                        File(controller.coverImgPath.value),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              )),
-                            ),
-                          ),
+                                    )
+                                  : Center(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          const Icon(
+                                            Icons.cloud_upload_rounded,
+                                            size: 30,
+                                          ),
+                                          const SizedBox(height: 5),
+                                          Text(
+                                            langKey.clickHereToUpload.tr,
+                                            style: TextStyle(
+                                              fontSize: 15,
+                                              color: Colors.grey.shade400,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    )),
                         ),
                       ),
                     ),
-                    Positioned(
-                      top: 10,
-                      left: 10,
-                      child: InkWell(
-                        onTap: () => _pickImage(calledForProfile: false),
-                        child: Container(
-                          child: Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: Icon(Icons.add_a_photo, color: kPrimaryColor),
+                  ),
+                ),
+                Positioned(
+                  top: 10,
+                  left: 10,
+                  child: InkWell(
+                    onTap: () => AppConstant.pickImage(calledForProfile: false),
+                    child: Container(
+                      child: Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: Icon(Icons.add_a_photo, color: kPrimaryColor),
+                      ),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 3,
+                          color: Colors.white,
+                        ),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(50),
+                        ),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            offset: Offset(0, 0),
+                            color: kPrimaryColor.withOpacity(0.3),
+                            blurRadius: 10.78,
                           ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.bottomLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: Stack(
+                      children: [
+                        Container(
+                          height: 90,
+                          width: 90,
+                          alignment: Alignment.center,
                           decoration: BoxDecoration(
-                            border: Border.all(
-                              width: 3,
-                              color: Colors.white,
-                            ),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(50),
-                            ),
+                            borderRadius: BorderRadius.circular(50),
                             color: Colors.white,
                             boxShadow: [
                               BoxShadow(
+                                color: kPrimaryColor.withOpacity(0.22),
                                 offset: Offset(0, 0),
-                                color: kPrimaryColor.withOpacity(0.3),
                                 blurRadius: 10.78,
                               ),
                             ],
                           ),
-                        ),
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.bottomLeft,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                        child: Stack(
-                          children: [
-                            Container(
-                              height: 90,
-                              width: 90,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50),
-                                color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: kPrimaryColor.withOpacity(0.22),
-                                    offset: Offset(0, 0),
-                                    blurRadius: 10.78,
-                                  ),
-                                ],
-                              ),
-                              child: Obx(
-                                    () => (controller.profileImgPath.value.isEmpty &&
+                          child: Obx(
+                            () => (controller.profileImgPath.value.isEmpty &&
                                     model?.storeImage != null)
-                                    ? profileImage(
-                                  model!.storeImage!,
-                                )
-                                    : CircleAvatar(
-                                  radius: 40,
-                                  backgroundColor: Colors.grey[200],
-                                  backgroundImage: controller
-                                      .profileImgPath.value.isNotEmpty
-                                      ? FileImage(
-                                    File(controller
-                                        .profileImgPath.value),
+                                ? profileImage(
+                                    model!.storeImage!,
                                   )
-                                      : null,
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              bottom: 1,
-                              right: 1,
-                              child: InkWell(
-                                onTap: () => _pickImage(),
-                                child: Container(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(2.0),
-                                    child: Icon(Icons.add_a_photo,
-                                        color: kPrimaryColor),
+                                : CircleAvatar(
+                                    radius: 40,
+                                    backgroundColor: Colors.grey[200],
+                                    backgroundImage: controller
+                                            .profileImgPath.value.isNotEmpty
+                                        ? FileImage(
+                                            File(controller
+                                                .profileImgPath.value),
+                                          )
+                                        : null,
                                   ),
-                                  decoration: BoxDecoration(
-                                      border: Border.all(
-                                        width: 3,
-                                        color: Colors.white,
-                                      ),
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(50),
-                                      ),
-                                      color: Colors.white,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          offset: Offset(0, 0),
-                                          color: kPrimaryColor.withOpacity(0.3),
-                                          blurRadius: 10.78,
-                                        ),
-                                      ]),
-                                ),
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
-                      ),
+                        Positioned(
+                          bottom: 1,
+                          right: 1,
+                          child: InkWell(
+                            onTap: () => AppConstant.pickImage(),
+                            child: Container(
+                              child: Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: Icon(Icons.add_a_photo,
+                                    color: kPrimaryColor),
+                              ),
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                    width: 3,
+                                    color: Colors.white,
+                                  ),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(50),
+                                  ),
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      offset: Offset(0, 0),
+                                      color: kPrimaryColor.withOpacity(0.3),
+                                      blurRadius: 10.78,
+                                    ),
+                                  ]),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
-              ),
+              ],
+            ),
+          ),
 
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5),
-                child: CustomText(title: "${langKey.yourCoverAndProfile.tr} 2 MB"),
-              ),
-              _formData()
-            ],
-          )),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5),
+            child: CustomText(title: "${langKey.yourCoverAndProfile.tr} 2 MB"),
+          ),
+          _formData()
+        ],
+      )),
     );
   }
 
@@ -272,58 +271,6 @@ class RegisterVendorUI extends GetView<AuthController> {
             child: CircularProgressIndicator(strokeWidth: 0.5),
           );
         },
-      ),
-    );
-  }
-
-  void _pickImage({calledForProfile = true}) {
-    Get.defaultDialog(
-      title: langKey.pickFrom,
-      contentPadding: const EdgeInsets.all(10),
-      titleStyle: appBarTitleSize,
-      content: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          _imageBtn(
-            onTap: () => controller.pickOrCaptureImageGallery(0,
-                calledForProfile: calledForProfile),
-            title: langKey.camera.tr,
-            icon: Icons.camera_alt_rounded,
-            color: Colors.blue,
-          ),
-          _imageBtn(
-            onTap: () => controller.pickOrCaptureImageGallery(
-              1,
-              calledForProfile: calledForProfile,
-            ),
-            title: langKey.gallery.tr,
-            icon: Icons.photo_library_rounded,
-            color: Colors.redAccent,
-          ),
-        ],
-      ),
-      //onCancel: ()=>Get.back()
-    );
-  }
-
-  Widget _imageBtn({onTap, icon, title, color}) {
-    return InkWell(
-      onTap: onTap,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Icon(
-            icon,
-            color: color,
-            size: 30,
-          ),
-          AppConstant.spaceWidget(height: 10),
-          CustomText(
-            title: title,
-            color: color,
-          )
-        ],
       ),
     );
   }
@@ -461,20 +408,20 @@ class RegisterVendorUI extends GetView<AuthController> {
             ),
             AppConstant.spaceWidget(height: 40),
             Obx(
-                  () => controller.isLoading.isTrue
+              () => controller.isLoading.isTrue
                   ? CustomLoading(isItBtn: true)
                   : CustomButton(
-                onTap: () async {
-                  if (formKey.currentState!.validate()) {
-                    await controller.registerStore(updatedModel: model!);
-                  }
-                },
-                text: model != null
-                    ? langKey.updateBtn.tr
-                    : langKey.register.tr,
-                height: 40,
-                width: 150,
-              ),
+                      onTap: () async {
+                        if (formKey.currentState!.validate()) {
+                          await controller.registerStore(updatedModel: model!);
+                        }
+                      },
+                      text: model != null
+                          ? langKey.updateBtn.tr
+                          : langKey.register.tr,
+                      height: 40,
+                      width: 150,
+                    ),
             ),
             AppConstant.spaceWidget(height: 10),
           ],
