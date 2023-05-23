@@ -46,6 +46,7 @@ class SingleProductItems extends StatelessWidget {
             ],
           ),
           child: Stack(
+            fit: StackFit.expand,
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,7 +54,20 @@ class SingleProductItems extends StatelessWidget {
                   SizedBox(
                     height: AppResponsiveness.getHeight90_140(),
                     width: double.infinity,
-                    child: CustomNetworkImage(imageUrl: model!.thumbnail),
+                    child: Center(
+                      child: Stack(
+                        fit: StackFit.expand,
+                        children: [
+                          CustomNetworkImage(
+                            imageUrl: model!.thumbnail,
+                            //fit: BoxFit.cover,
+                          ),
+                          if (model.stock! == 0)
+                            _buildOutOfStockStack(buildContext),
+                        ],
+                      ),
+                    ),
+                    //child: CustomNetworkImage(imageUrl: model!.thumbnail),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8),

@@ -69,6 +69,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
         .fetchMyProducts(
             token: authController.userToken, limit: productsLimit, page: page)
         .then((response) {
+      myProductsList.clear();
       myProductsList.addAll(response.products!);
       //myProductsList.refresh();
     });
@@ -83,11 +84,13 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
         isLoadingMore.isFalse &&
         scrollController.position.maxScrollExtent == scrollController.offset) {
       isLoadingMore(true);
-      page++;
+      //page++;
+      productsLimit += 10;
       await _apiProvider
           .fetchMyProducts(
               token: authController.userToken, limit: productsLimit, page: page)
           .then((response) {
+        myProductsList.clear();
         myProductsList.addAll(response.products!);
         isLoadingMore(false);
       }).catchError(onError);
@@ -117,8 +120,18 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
       isLoading(false);
       if (response != null) {
         if (response.success!) {
-          myProductsList.clear();
-          await fetchMyProducts();
+          //myProductsList.clear();
+          //await fetchMyProducts();
+
+          int productIndex =
+              myProductsList.indexWhere((element) => element.id == model.id);
+          myProductsList[productIndex].stock = model.stock;
+          myProductsList[productIndex].name = model.name;
+          myProductsList[productIndex].description = model.description;
+          myProductsList[productIndex].price = model.price;
+          myProductsList[productIndex].discount = model.discount;
+          myProductsList.refresh();
+
           Get.back();
           AppConstant.displaySnackBar(
               langKey.success.tr, "${response.message}");
@@ -293,6 +306,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
         subCategoryId: selectedSubCategoryID.value,
         description: prodDescriptionController.text,
         discount: discount);
+
     await _apiProvider
         .addProductWithHttp(
             token: authController.userToken,
@@ -303,7 +317,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
       isLoading(false);
       if (response != null) {
         if (response.success!) {
-          myProductsList.clear();
+          //myProductsList.clear();
           await fetchMyProducts();
 
           Get.back();

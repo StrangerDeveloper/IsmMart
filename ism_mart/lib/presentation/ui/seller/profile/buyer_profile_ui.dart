@@ -12,8 +12,6 @@ class ProfileUI extends GetView<AuthController> {
 
   @override
   Widget build(BuildContext context) {
-    print(
-        "image is m0del => ${controller.userModel!.imageUrl} \n image controller ${controller.profileImgPath.value}");
     return Obx(
       () => SafeArea(
         child: controller.isLoading.isTrue

@@ -169,7 +169,7 @@ class BaseController extends GetxController {
     await fetchProductsByTypes();
   }
 
-  var randomSearchText = "".obs;
+  //var randomSearchText = "".obs;
 
   // void getRandomTextForSearch(List<CategoryModel> list) {
   //   int min = 1;

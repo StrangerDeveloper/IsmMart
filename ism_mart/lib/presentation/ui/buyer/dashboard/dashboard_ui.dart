@@ -58,11 +58,7 @@ class DashboardUI extends GetView<BaseController> {
           buildSvgLogo(),
           Expanded(
             flex: 5,
-            child: Obx(
-              () => CustomSearchBar(
-                searchText: controller.randomSearchText.value,
-              ),
-            ),
+            child: CustomSearchBar(searchText: ""),
           ),
           //const Expanded(flex:1,child:Center())
         ],

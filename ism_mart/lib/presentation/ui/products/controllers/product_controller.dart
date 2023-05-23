@@ -43,12 +43,10 @@ class ProductController extends GetxController with StateMixin {
       getProductQuestions(productId: id);
 
       setCountAndMOQ(productModel: product);
+    }).catchError((error) {
+      change(null, status: RxStatus.error(error));
+      print(">>>FetchProduct $error");
     });
-
-    // .catchError((error) {
-    //   change(null, status: RxStatus.error(error));
-    //   print(">>>FetchProduct $error");
-    // });
   }
 
   setCountAndMOQ({ProductModel? productModel}) {
@@ -195,9 +193,6 @@ class ProductController extends GetxController with StateMixin {
   postQuestion({productId}) async {
     String question = questionController.text;
     if (question.isNotEmpty) {
-      var data = {"productId": productId, "question": question};
-      print(">>>QuestionData: ${data.toString()}");
-
       QuestionModel questionModel = QuestionModel(
         productId: productId,
         question: question,
