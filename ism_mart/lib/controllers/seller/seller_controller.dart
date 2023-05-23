@@ -61,7 +61,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
 
   //TOO: fetch MY Products
   var myProductsList = <ProductModel>[].obs;
-  int productsLimit = 20;
+  int productsLimit = 7;
   int page = 1;
 
   fetchMyProducts() async {
@@ -131,7 +131,6 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
           myProductsList[productIndex].price = model.price;
           myProductsList[productIndex].discount = model.discount;
           myProductsList.refresh();
-
           Get.back();
           AppConstant.displaySnackBar(
               langKey.success.tr, "${response.message}");

@@ -46,29 +46,29 @@ class SingleProductItems extends StatelessWidget {
             ],
           ),
           child: Stack(
-            fit: StackFit.expand,
+            //fit: StackFit.expand,
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: AppResponsiveness.getHeight90_140(),
-                    width: double.infinity,
-                    child: Center(
-                      child: Stack(
-                        fit: StackFit.expand,
-                        children: [
-                          CustomNetworkImage(
-                            imageUrl: model!.thumbnail,
-                            //fit: BoxFit.cover,
-                          ),
-                          if (model.stock! == 0)
-                            _buildOutOfStockStack(buildContext),
-                        ],
+                      height: AppResponsiveness.getHeight90_140(),
+                      width: double.infinity,
+                      child: Center(
+                        child: Stack(
+                          fit: StackFit.expand,
+                          children: [
+                            CustomNetworkImage(
+                              imageUrl: model!.thumbnail,
+                              //fit: BoxFit.cover,
+                            ),
+                            if (model.stock! == 0)
+                              _buildOutOfStockStack(buildContext),
+                          ],
+                        ),
+                      )
+                      //child: CustomNetworkImage(imageUrl: model!.thumbnail),
                       ),
-                    ),
-                    //child: CustomNetworkImage(imageUrl: model!.thumbnail),
-                  ),
                   Padding(
                     padding: const EdgeInsets.all(8),
                     child: CustomText(
@@ -98,7 +98,7 @@ class SingleProductItems extends StatelessWidget {
                       ),
                     ),
                   ),
-              if (model.stock! == 0) _buildOutOfStockStack(buildContext)
+              //if (model.stock! == 0) _buildOutOfStockStack(buildContext)
             ],
           ),
         ),
@@ -141,15 +141,29 @@ class SingleProductItems extends StatelessWidget {
             border: Border.all(color: kLightGreyColor, width: 1),
           ),
           child: Stack(
+            fit: StackFit.expand,
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: AppResponsiveness.getHeight90_100(),
-                    width: double.infinity,
-                    child: CustomNetworkImage(imageUrl: model!.thumbnail),
-                  ),
+                      height: AppResponsiveness.getHeight90_140(),
+                      //width: double.infinity,
+                      child: Center(
+                        child: Stack(
+                          fit: StackFit.expand,
+                          children: [
+                            CustomNetworkImage(
+                              imageUrl: model!.thumbnail,
+                              //fit: BoxFit.cover,
+                            ),
+                            if (model.stock! == 0)
+                              _buildOutOfStockStack(buildContext),
+                          ],
+                        ),
+                      )
+                      //child: CustomNetworkImage(imageUrl: model!.thumbnail),
+                      ),
                   Padding(
                     padding: const EdgeInsets.all(6),
                     child: Column(
@@ -202,7 +216,7 @@ class SingleProductItems extends StatelessWidget {
                       ),
                     ),
                   ),
-              if (model.stock! == 0) _buildOutOfStockStack(buildContext)
+              //if (model.stock! == 0) _buildOutOfStockStack(buildContext)
             ],
           ),
         ),
