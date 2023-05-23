@@ -68,9 +68,10 @@ class MyProducts extends GetView<SellersController> {
                           crossAxisCount: AppResponsiveness.getGridItemCount(),
                           //mainAxisExtent:
                           //  AppResponsiveness.getMainAxisExtentPoint30(),
-                          mainAxisSpacing: 5,
+                          mainAxisSpacing: 8,
+                          crossAxisSpacing: 8,
                           childAspectRatio:
-                              AppResponsiveness.getChildAspectRatioPoint80(),
+                              AppResponsiveness.getChildAspectRatioPoint85(),
                         ),
                         itemCount: controller.myProductsList.length,
                         itemBuilder: (_, index) {

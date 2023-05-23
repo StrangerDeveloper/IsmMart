@@ -471,7 +471,7 @@ class English {
         key.descriptionReq: 'Description is required',
         key.ownerName: 'Owner Name',
         key.ownerNameReq: 'Owner name required',
-        key.phoneReq: 'Phone is required',
+        key.phoneReq: 'Phone number is required',
 
         key.productName: 'Product Name',
         key.productNameReq: 'Product name required',

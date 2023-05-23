@@ -144,25 +144,22 @@ class AuthProvider {
   }
 
   Future<UserResponse> updateUser({token, title, value, field}) async {
-    // var data = {'$title': '$value'};
-    print("title is api => field $field $title  $value");
-
-    // var response = await _authRepo.updateUser(token: token, data: data);
-
     var headers = {'authorization': '$token', 'Cookie': 'XSRF-token=$token'};
     var request = http.MultipartRequest(
-        'PATCH', Uri.parse('https://ismmart-api.com/api/user/update'));
-    request.fields.addAll({'$field': value.toString()});
+        'PATCH', Uri.parse('${ApiConstant.baseUrl}user/update'));
+    if (field.contains("image")) {
+      print(">>>Caled...");
+      request.files.add(await http.MultipartFile.fromPath(
+        '$field',
+        value,
+        contentType: MediaType.parse('image/jpeg'),
+      ));
+    } else
+      request.fields.addAll({'$field': value.toString()});
     request.headers.addAll(headers);
     http.StreamedResponse response =
         await handleStreamResponse(await request.send());
-    //var res = http.Response.fromStream(response);
 
-    // if (response.statusCode == 200) {
-    //   print(await response.stream.bytesToString());
-    // } else {
-    //   print(response.reasonPhrase);
-    // }
     return UserResponse.fromResponse(
         json.decode(await response.stream.bytesToString()));
   }

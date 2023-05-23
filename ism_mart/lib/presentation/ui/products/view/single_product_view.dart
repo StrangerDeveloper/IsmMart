@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 import 'package:ism_mart/models/exports_model.dart';
@@ -554,80 +553,80 @@ class SingleProductView extends GetView<ProductController> {
     );
   }
 
-  _productReviews({ProductModel? productModel}) {
-    double prodRating = controller.reviewResponse!.rating != null
-        ? controller.reviewResponse!.rating!.toDouble()
-        : 0.0;
-    return CustomCard(
-      margin: const EdgeInsets.symmetric(
-        horizontal: 8.0,
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CustomText(title: "Product Reviews", style: headline2),
-            ListTile(
-              dense: false,
-              leading: CustomText(
-                  title: getRating(controller.reviewResponse!), size: 22),
-              title: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  RatingBar.builder(
-                    itemSize: 20,
-                    ignoreGestures: true,
-                    initialRating: prodRating,
-                    //minRating: 1,
-                    direction: Axis.horizontal,
-                    allowHalfRating: true,
-                    itemCount: 5,
-                    itemPadding: EdgeInsets.symmetric(horizontal: 1.0),
-                    itemBuilder: (context, _) => Icon(
-                      Icons.star_rounded,
-                      color: Colors.amber,
-                    ),
-                    onRatingUpdate: (rating) {
-                      print(rating);
-                    },
-                  ),
-                  CustomText(
-                    title:
-                        "Based on ${controller.reviewResponse!.count ?? 0} ratings",
-                    style: caption,
-                  ),
-                ],
-              ),
-            ),
-            kSmallDivider,
-            Obx(
-              () => controller.reviewResponse!.reviewsList == null ||
-                      controller.reviewResponse!.reviewsList!.isEmpty
-                  ? NoDataFound(text: "No reviews found")
-                  : Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: controller.reviewResponse!.reviewsList!
-                          .map((e) => _singleReviewListItem(review: e))
-                          .toList(),
-                    ),
-            ),
+  // _productReviews({ProductModel? productModel}) {
+  //   double prodRating = controller.reviewResponse!.rating != null
+  //       ? controller.reviewResponse!.rating!.toDouble()
+  //       : 0.0;
+  //   return CustomCard(
+  //     margin: const EdgeInsets.symmetric(
+  //       horizontal: 8.0,
+  //     ),
+  //     child: Padding(
+  //       padding: const EdgeInsets.all(8.0),
+  //       child: Column(
+  //         crossAxisAlignment: CrossAxisAlignment.start,
+  //         children: [
+  //           CustomText(title: "Product Reviews", style: headline2),
+  //           ListTile(
+  //             dense: false,
+  //             leading: CustomText(
+  //                 title: getRating(controller.reviewResponse!), size: 22),
+  //             title: Column(
+  //               crossAxisAlignment: CrossAxisAlignment.start,
+  //               children: [
+  //                 RatingBar.builder(
+  //                   itemSize: 20,
+  //                   ignoreGestures: true,
+  //                   initialRating: prodRating,
+  //                   //minRating: 1,
+  //                   direction: Axis.horizontal,
+  //                   allowHalfRating: true,
+  //                   itemCount: 5,
+  //                   itemPadding: EdgeInsets.symmetric(horizontal: 1.0),
+  //                   itemBuilder: (context, _) => Icon(
+  //                     Icons.star_rounded,
+  //                     color: Colors.amber,
+  //                   ),
+  //                   onRatingUpdate: (rating) {
+  //                     print(rating);
+  //                   },
+  //                 ),
+  //                 CustomText(
+  //                   title:
+  //                       "Based on ${controller.reviewResponse!.count ?? 0} ratings",
+  //                   style: caption,
+  //                 ),
+  //               ],
+  //             ),
+  //           ),
+  //           kSmallDivider,
+  //           Obx(
+  //             () => controller.reviewResponse!.reviewsList == null ||
+  //                     controller.reviewResponse!.reviewsList!.isEmpty
+  //                 ? NoDataFound(text: "No reviews found")
+  //                 : Column(
+  //                     crossAxisAlignment: CrossAxisAlignment.start,
+  //                     children: controller.reviewResponse!.reviewsList!
+  //                         .map((e) => _singleReviewListItem(review: e))
+  //                         .toList(),
+  //                   ),
+  //           ),
 
-            /* ListView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: controller.reviewResponse!.reviewsList!.length,
-              itemBuilder: (_, index) {
-                ReviewModel? reviewModel =
-                    controller.reviewResponse!.reviewsList![index];
-                return _singleReviewListItem(review: reviewModel);
-              },
-            ),*/
-          ],
-        ),
-      ),
-    );
-  }
+  //           /* ListView.builder(
+  //             shrinkWrap: true,
+  //             physics: const NeverScrollableScrollPhysics(),
+  //             itemCount: controller.reviewResponse!.reviewsList!.length,
+  //             itemBuilder: (_, index) {
+  //               ReviewModel? reviewModel =
+  //                   controller.reviewResponse!.reviewsList![index];
+  //               return _singleReviewListItem(review: reviewModel);
+  //             },
+  //           ),*/
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 
   String getRating(ReviewModelResponse? reviewModel) {
     return reviewModel!.rating != null
@@ -635,52 +634,52 @@ class SingleProductView extends GetView<ProductController> {
         : "0.0";
   }
 
-  Widget _singleReviewListItem({ReviewModel? review}) {
-    return Padding(
-      padding: const EdgeInsets.all(5.0),
-      child: Container(
-        //height: AppResponsiveness.getHeight70_80(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            CustomText(
-                title:
-                    "${review!.user!.firstName} ${review.user!.lastName!.isNotEmpty ? review.user!.lastName!.substring(0, 1).capitalizeFirst : ''}."),
-            RatingBar.builder(
-              itemSize: 13,
-              ignoreGestures: true,
-              initialRating: review.rating!.toDouble(),
-              //minRating: 1,
-              direction: Axis.horizontal,
-              allowHalfRating: true,
-              itemCount: 5,
-              itemBuilder: (context, _) => Icon(
-                Icons.star_rounded,
-                color: Colors.amber,
-              ),
-              onRatingUpdate: (rating) {
-                print(rating);
-              },
-            ),
-            CustomText(
-              title: "${review.text}",
-              size: 12,
-              maxLines: review.text!.length,
-              color: kLightColor,
-            ),
-            kSmallDivider,
-            /*AppConstant.spaceWidget(height: 5),
-            Container(
-              height: 1,
-              decoration: BoxDecoration(color: kLightGreyColor),
-            ),
-            AppConstant.spaceWidget(height: 5),*/
-          ],
-        ),
-      ),
-    );
-  }
+  // Widget _singleReviewListItem({ReviewModel? review}) {
+  //   return Padding(
+  //     padding: const EdgeInsets.all(5.0),
+  //     child: Container(
+  //       //height: AppResponsiveness.getHeight70_80(),
+  //       child: Column(
+  //         crossAxisAlignment: CrossAxisAlignment.start,
+  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //         children: [
+  //           CustomText(
+  //               title:
+  //                   "${review!.user!.firstName} ${review.user!.lastName!.isNotEmpty ? review.user!.lastName!.substring(0, 1).capitalizeFirst : ''}."),
+  //           RatingBar.builder(
+  //             itemSize: 13,
+  //             ignoreGestures: true,
+  //             initialRating: review.rating!.toDouble(),
+  //             //minRating: 1,
+  //             direction: Axis.horizontal,
+  //             allowHalfRating: true,
+  //             itemCount: 5,
+  //             itemBuilder: (context, _) => Icon(
+  //               Icons.star_rounded,
+  //               color: Colors.amber,
+  //             ),
+  //             onRatingUpdate: (rating) {
+  //               print(rating);
+  //             },
+  //           ),
+  //           CustomText(
+  //             title: "${review.text}",
+  //             size: 12,
+  //             maxLines: review.text!.length,
+  //             color: kLightColor,
+  //           ),
+  //           kSmallDivider,
+  //           /*AppConstant.spaceWidget(height: 5),
+  //           Container(
+  //             height: 1,
+  //             decoration: BoxDecoration(color: kLightGreyColor),
+  //           ),
+  //           AppConstant.spaceWidget(height: 5),*/
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 
   _productQuestions({ProductModel? productModel}) {
     return Obx(

@@ -28,7 +28,7 @@ class SellerHome extends GetView<SellersController> {
               await baseController.fetchProductsByTypes();
 
               Get.back();
-              baseController.changePage(0);
+              //baseController.changePage(0);
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),

@@ -18,6 +18,9 @@ class AuthController extends GetxController {
   var passwordController = TextEditingController();
   var confirmPassController = TextEditingController();
 
+  var signUpEmailController = TextEditingController();
+  var signUpPasswordController = TextEditingController();
+
   var firstNameController = TextEditingController();
   var otpController = TextEditingController();
   var phoneController = TextEditingController();
@@ -223,9 +226,9 @@ class AuthController extends GetxController {
       //firstName: firstNameController.text.trim(),
       //lastName: lastNameController.text.trim(),
       firstName: firstNameController.text,
-      email: emailController.text,
+      email: signUpEmailController.text,
       phone: countryCode.value + phoneController.text,
-      password: passwordController.text,
+      password: signUpPasswordController.text,
     );
 
     await authProvider
@@ -237,7 +240,7 @@ class AuthController extends GetxController {
           //Get.back();
           AppConstant.displaySnackBar(
               langKey.successTitle.tr, response.message);
-          clearControllers();
+          clearSignUpControllers();
           Get.offNamed(Routes.loginRoute);
         } else
           AppConstant.displaySnackBar(langKey.errorTitle.tr, response.message);
@@ -311,7 +314,8 @@ class AuthController extends GetxController {
   var profileImgPath = "".obs;
   var _picker = ImagePicker();
 
-  pickOrCaptureImageGallery(int? imageSource, {calledForProfile = true}) async {
+  pickOrCaptureImageGallery(int? imageSource,
+      {calledForProfile = true, calledForBuyerProfile = false}) async {
     await PermissionsHandler().checkPermissions().then((isGranted) async {
       if (isGranted) {
         try {
@@ -333,6 +337,13 @@ class AuthController extends GetxController {
                   } else
                     coverImgPath(compressedFile.path);
                   //updateUser();
+
+                  if (calledForBuyerProfile) {
+                    updateUser(
+                        title: 'image',
+                        value: profileImgPath.value,
+                        field: 'image');
+                  }
                 }
                 Get.back();
               });
@@ -512,11 +523,7 @@ class AuthController extends GetxController {
       userModel!.phone = title;
     } else if (field == "address") {
       userModel!.address = title;
-    }
-    // userModel!.firstName = title;
-    // userModel!.lastName = title;
-    userModel!.imageUrl = profileImgPath.value;
-    print("m0del image file ${profileImgPath.value}");
+    } else if (field == "image") userModel!.imageUrl = profileImgPath.value;
 
     if (userToken != null) {
       isLoading(true);
@@ -527,7 +534,7 @@ class AuthController extends GetxController {
         isLoading(false);
         if (userResponse != null) {
           if (userResponse.success!) {
-            Get.back();
+            //Get.back();
             AppConstant.displaySnackBar("success", userResponse.message);
             editingTextController.clear();
             getCurrentUser();
@@ -678,11 +685,12 @@ class AuthController extends GetxController {
     storeDescController.clear();
   }
 
-  clearControllers() {
+  clearSignUpControllers() {
     firstNameController.clear();
     otpController.clear();
     phoneController.clear();
-    passwordController.clear();
+    signUpPasswordController.clear();
+    signUpEmailController.clear();
   }
 
   clearLoginController() {
@@ -710,7 +718,7 @@ class AuthController extends GetxController {
   @override
   void onClose() {
     super.onClose();
-    clearControllers();
+    clearSignUpControllers();
     clearLoginController();
     clearStoreController();
   }

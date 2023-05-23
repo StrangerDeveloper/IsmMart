@@ -11,6 +11,9 @@ class SignInUI extends GetView<AuthController> {
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
+
+    ///default clearing all controllers without email
+
     return SafeArea(
       child: Scaffold(
         body: CustomScrollView(
