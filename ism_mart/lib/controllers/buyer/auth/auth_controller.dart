@@ -267,7 +267,7 @@ class AuthController extends GetxController {
       ownerName: ownerNameController.text.trim(),
       storeImage: profileImgPath.value,
       coverImage: coverImgPath.value,
-      phone: countryCode.value + phoneController.text.trim(),
+      phone: phoneController.text.trim(),
       membership: "Free",
       premium: false,
       bankName: bankNameController.text.trim(),

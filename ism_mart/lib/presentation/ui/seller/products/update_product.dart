@@ -156,7 +156,7 @@ class UpdateProductUI extends GetView<SellersController> {
                               keyboardType: TextInputType.number,
                               onChanged: (String? value) {
                                 int discount =
-                                    value!.isNotEmpty ? int.parse(value) : 0;
+                                    value!.isNotEmpty || value != '' ? int.parse(value) : 0;
                                 controller.setDiscount(discount);
                               },
                               onSaved: (value) {},

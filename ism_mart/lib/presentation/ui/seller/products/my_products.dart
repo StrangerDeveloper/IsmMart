@@ -95,8 +95,7 @@ class MyProducts extends GetView<SellersController> {
       aspectRatio: 0.75,
       child: GestureDetector(
         onTap: () {
-          Get.toNamed('/product/${model.id}',
-              arguments: {"calledFor": "seller"});
+          Get.to(SingleProductView(productId: "${model.id}", calledFor: 'seller',));
         },
         child: Container(
           clipBehavior: Clip.hardEdge,
