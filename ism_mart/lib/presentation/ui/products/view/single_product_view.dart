@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 import 'package:ism_mart/models/exports_model.dart';
@@ -10,10 +9,7 @@ import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class SingleProductView extends GetView<ProductController> {
-  const SingleProductView({
-    this.productId,
-    this.calledFor = 'customer'
-  });
+  const SingleProductView({this.productId, this.calledFor = 'customer'});
   final productId;
   final String calledFor;
 
@@ -47,9 +43,9 @@ class SingleProductView extends GetView<ProductController> {
     },
         onLoading: CustomLoading(isDarkMode: isDarkMode),
         onError: (error) => NoDataFoundWithIcon(
-          title: "No Product Found",
-          subTitle: error,
-        ),
+              title: "No Product Found",
+              subTitle: error,
+            ),
         onEmpty: NoDataFoundWithIcon(
           title: "No Product Found",
         ));
@@ -70,23 +66,24 @@ class SingleProductView extends GetView<ProductController> {
                     [
                       productModel.images!.isEmpty
                           ? GestureDetector(
-                        onTap: () {
-                          var imagesList = <ProductImages>[];
-                          imagesList.add(ProductImages(
-                              id: 0, url: productModel.thumbnail));
-                          Get.to(() => SingleProductFullImage(
-                            productImages: imagesList,
-                            initialImage: 0,
-                          ));
-                        },
-                        child: CustomNetworkImage(
-                          imageUrl: productModel.thumbnail,
-                          fit: BoxFit.cover,
-                          width: MediaQuery.of(Get.context!).size.width,
-                          height:
-                          MediaQuery.of(Get.context!).size.height * 0.4,
-                        ),
-                      )
+                              onTap: () {
+                                var imagesList = <ProductImages>[];
+                                imagesList.add(ProductImages(
+                                    id: 0, url: productModel.thumbnail));
+                                Get.to(() => SingleProductFullImage(
+                                      productImages: imagesList,
+                                      initialImage: 0,
+                                    ));
+                              },
+                              child: CustomNetworkImage(
+                                imageUrl: productModel.thumbnail,
+                                fit: BoxFit.cover,
+                                width: MediaQuery.of(Get.context!).size.width,
+                                height:
+                                    MediaQuery.of(Get.context!).size.height *
+                                        0.4,
+                              ),
+                            )
                           : _productImages(imagesList: productModel.images!),
 
                       /// product name, price etc.
@@ -110,7 +107,8 @@ class SingleProductView extends GetView<ProductController> {
                       if (Get.arguments != null &&
                           Get.arguments["calledFor"] != null &&
                           Get.arguments["calledFor"]!.contains("customer"))
-                        _buildCustomerAlsoViewed(controller.subCategoryProductList),
+                        _buildCustomerAlsoViewed(
+                            controller.subCategoryProductList),
 
                       // AppConstant.spaceWidget(height: 70),
                       //Spacer(),
@@ -122,10 +120,11 @@ class SingleProductView extends GetView<ProductController> {
             // if(Get.arguments != null &&
             //     Get.arguments["calledFor"] != null &&
             //     Get.arguments["calledFor"]!.contains("customer"))
-            calledFor == 'seller' ? Container() : _outOfStockBottom(productModel)
+            calledFor == 'seller'
+                ? Container()
+                : _outOfStockBottom(productModel)
           ],
-        )
-    );
+        ));
 
     // bottomNavigationBar: Get.arguments != null &&
     //         Get.arguments["calledFor"] != null &&
@@ -157,41 +156,41 @@ class SingleProductView extends GetView<ProductController> {
         ),
       ),
       title: Get.arguments != null &&
-          Get.arguments["calledFor"] != null &&
-          Get.arguments["calledFor"]!.contains("seller")
+              Get.arguments["calledFor"] != null &&
+              Get.arguments["calledFor"]!.contains("seller")
           ? CustomText(
-        title: "Product Details",
-        style: appBarTitleSize,
-      )
+              title: "Product Details",
+              style: appBarTitleSize,
+            )
           : Column(
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                  flex: 5,
-                  child: CustomSearchBar(
-                    searchText: productModel.name,
-                    calledFromSPV: true,
-                  )),
-              AppConstant.spaceWidget(width: 10),
-              CartIcon(
-                onTap: () {
-                  //called from SingleProductView (SPV)
-                  Get.offNamed(Routes.cartRoute,
-                      arguments: {"calledFromSPV": true},
-                      preventDuplicates: false);
-                },
-                iconWidget: Icon(
-                  IconlyLight.buy,
-                  size: 25,
-                  color: kPrimaryColor,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                        flex: 5,
+                        child: CustomSearchBar(
+                          searchText: productModel.name,
+                          calledFromSPV: true,
+                        )),
+                    AppConstant.spaceWidget(width: 10),
+                    CartIcon(
+                      onTap: () {
+                        //called from SingleProductView (SPV)
+                        Get.offNamed(Routes.cartRoute,
+                            arguments: {"calledFromSPV": true},
+                            preventDuplicates: false);
+                      },
+                      iconWidget: Icon(
+                        IconlyLight.buy,
+                        size: 25,
+                        color: kPrimaryColor,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
-          ),
-        ],
-      ),
+              ],
+            ),
     );
   }
 
@@ -209,9 +208,9 @@ class SingleProductView extends GetView<ProductController> {
                 onTap: () {
                   controller.imageIndex(index);
                   Get.to(() => SingleProductFullImage(
-                    productImages: imagesList,
-                    initialImage: index,
-                  ));
+                        productImages: imagesList,
+                        initialImage: index,
+                      ));
                 },
                 child: CustomNetworkImage(
                   imageUrl: imagesList[index].url,
@@ -224,7 +223,7 @@ class SingleProductView extends GetView<ProductController> {
           ),
         ),
         Obx(
-              () => Positioned(
+          () => Positioned(
             bottom: 16.0,
             left: 0.0,
             right: 0.0,
@@ -232,7 +231,7 @@ class SingleProductView extends GetView<ProductController> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
                 imagesList.length,
-                    (index) => AnimatedContainer(
+                (index) => AnimatedContainer(
                   duration: const Duration(milliseconds: 400),
                   height: 6.0,
                   width: /*controller.sliderIndex.value == index ? 14.0 :*/ 6.0,
@@ -281,7 +280,7 @@ class SingleProductView extends GetView<ProductController> {
                           ? 'Out Of Stock'
                           : "Stock: ${productModel.stock}",
                       color:
-                      productModel.stock == 0 ? kRedColor : kPrimaryColor,
+                          productModel.stock == 0 ? kRedColor : kPrimaryColor,
                       weight: productModel.stock == 0
                           ? FontWeight.bold
                           : FontWeight.w600),
@@ -396,7 +395,7 @@ class SingleProductView extends GetView<ProductController> {
                         style: bodyText1.copyWith(color: kLightGreyColor)),
                     TextSpan(
                         text:
-                        "${productModel.sellerModel!.storeName ?? productModel.sellerModel!.user!.firstName ?? productModel.sellerModel!.user!.name ?? ""}",
+                            "${productModel.sellerModel!.storeName ?? productModel.sellerModel!.user!.firstName ?? productModel.sellerModel!.user!.name ?? ""}",
                         style: headline3),
                   ],
                 ),
@@ -444,7 +443,7 @@ class SingleProductView extends GetView<ProductController> {
               itemCount: productModel?.productFeatures?.length,
               itemBuilder: (_, index) {
                 String? key =
-                productModel!.productFeatures?.keys.elementAt(index);
+                    productModel!.productFeatures?.keys.elementAt(index);
                 return _productVariantWidget(
                     title: key,
                     featureList: productModel.productFeatures?[key]);
@@ -458,8 +457,8 @@ class SingleProductView extends GetView<ProductController> {
 
   Widget _productVariantWidget(
       {title,
-        List<ProductFeature>? featureList,
-        bool? isNextBtnClicked = false}) {
+      List<ProductFeature>? featureList,
+      bool? isNextBtnClicked = false}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -474,8 +473,8 @@ class SingleProductView extends GetView<ProductController> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: featureList!
                 .map((e) => isNextBtnClicked!
-                ? _buildChip(featureModel: e)
-                : _singleVariantsListItems(feature: e))
+                    ? _buildChip(featureModel: e)
+                    : _singleVariantsListItems(feature: e))
                 .toList(),
           ),
         ),
@@ -552,80 +551,80 @@ class SingleProductView extends GetView<ProductController> {
     );
   }
 
-  _productReviews({ProductModel? productModel}) {
-    double prodRating = controller.reviewResponse!.rating != null
-        ? controller.reviewResponse!.rating!.toDouble()
-        : 0.0;
-    return CustomCard(
-      margin: const EdgeInsets.symmetric(
-        horizontal: 8.0,
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CustomText(title: "Product Reviews", style: headline2),
-            ListTile(
-              dense: false,
-              leading: CustomText(
-                  title: getRating(controller.reviewResponse!), size: 22),
-              title: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  RatingBar.builder(
-                    itemSize: 20,
-                    ignoreGestures: true,
-                    initialRating: prodRating,
-                    //minRating: 1,
-                    direction: Axis.horizontal,
-                    allowHalfRating: true,
-                    itemCount: 5,
-                    itemPadding: EdgeInsets.symmetric(horizontal: 1.0),
-                    itemBuilder: (context, _) => Icon(
-                      Icons.star_rounded,
-                      color: Colors.amber,
-                    ),
-                    onRatingUpdate: (rating) {
-                      print(rating);
-                    },
-                  ),
-                  CustomText(
-                    title:
-                    "Based on ${controller.reviewResponse!.count ?? 0} ratings",
-                    style: caption,
-                  ),
-                ],
-              ),
-            ),
-            kSmallDivider,
-            Obx(
-                  () => controller.reviewResponse!.reviewsList == null ||
-                  controller.reviewResponse!.reviewsList!.isEmpty
-                  ? NoDataFound(text: "No reviews found")
-                  : Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: controller.reviewResponse!.reviewsList!
-                    .map((e) => _singleReviewListItem(review: e))
-                    .toList(),
-              ),
-            ),
+  // _productReviews({ProductModel? productModel}) {
+  //   double prodRating = controller.reviewResponse!.rating != null
+  //       ? controller.reviewResponse!.rating!.toDouble()
+  //       : 0.0;
+  //   return CustomCard(
+  //     margin: const EdgeInsets.symmetric(
+  //       horizontal: 8.0,
+  //     ),
+  //     child: Padding(
+  //       padding: const EdgeInsets.all(8.0),
+  //       child: Column(
+  //         crossAxisAlignment: CrossAxisAlignment.start,
+  //         children: [
+  //           CustomText(title: "Product Reviews", style: headline2),
+  //           ListTile(
+  //             dense: false,
+  //             leading: CustomText(
+  //                 title: getRating(controller.reviewResponse!), size: 22),
+  //             title: Column(
+  //               crossAxisAlignment: CrossAxisAlignment.start,
+  //               children: [
+  //                 RatingBar.builder(
+  //                   itemSize: 20,
+  //                   ignoreGestures: true,
+  //                   initialRating: prodRating,
+  //                   //minRating: 1,
+  //                   direction: Axis.horizontal,
+  //                   allowHalfRating: true,
+  //                   itemCount: 5,
+  //                   itemPadding: EdgeInsets.symmetric(horizontal: 1.0),
+  //                   itemBuilder: (context, _) => Icon(
+  //                     Icons.star_rounded,
+  //                     color: Colors.amber,
+  //                   ),
+  //                   onRatingUpdate: (rating) {
+  //                     print(rating);
+  //                   },
+  //                 ),
+  //                 CustomText(
+  //                   title:
+  //                       "Based on ${controller.reviewResponse!.count ?? 0} ratings",
+  //                   style: caption,
+  //                 ),
+  //               ],
+  //             ),
+  //           ),
+  //           kSmallDivider,
+  //           Obx(
+  //             () => controller.reviewResponse!.reviewsList == null ||
+  //                     controller.reviewResponse!.reviewsList!.isEmpty
+  //                 ? NoDataFound(text: "No reviews found")
+  //                 : Column(
+  //                     crossAxisAlignment: CrossAxisAlignment.start,
+  //                     children: controller.reviewResponse!.reviewsList!
+  //                         .map((e) => _singleReviewListItem(review: e))
+  //                         .toList(),
+  //                   ),
+  //           ),
 
-            /* ListView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: controller.reviewResponse!.reviewsList!.length,
-              itemBuilder: (_, index) {
-                ReviewModel? reviewModel =
-                    controller.reviewResponse!.reviewsList![index];
-                return _singleReviewListItem(review: reviewModel);
-              },
-            ),*/
-          ],
-        ),
-      ),
-    );
-  }
+  //           /* ListView.builder(
+  //             shrinkWrap: true,
+  //             physics: const NeverScrollableScrollPhysics(),
+  //             itemCount: controller.reviewResponse!.reviewsList!.length,
+  //             itemBuilder: (_, index) {
+  //               ReviewModel? reviewModel =
+  //                   controller.reviewResponse!.reviewsList![index];
+  //               return _singleReviewListItem(review: reviewModel);
+  //             },
+  //           ),*/
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 
   String getRating(ReviewModelResponse? reviewModel) {
     return reviewModel!.rating != null
@@ -633,56 +632,56 @@ class SingleProductView extends GetView<ProductController> {
         : "0.0";
   }
 
-  Widget _singleReviewListItem({ReviewModel? review}) {
-    return Padding(
-      padding: const EdgeInsets.all(5.0),
-      child: Container(
-        //height: AppResponsiveness.getHeight70_80(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            CustomText(
-                title:
-                "${review!.user!.firstName} ${review.user!.lastName!.isNotEmpty ? review.user!.lastName!.substring(0, 1).capitalizeFirst : ''}."),
-            RatingBar.builder(
-              itemSize: 13,
-              ignoreGestures: true,
-              initialRating: review.rating!.toDouble(),
-              //minRating: 1,
-              direction: Axis.horizontal,
-              allowHalfRating: true,
-              itemCount: 5,
-              itemBuilder: (context, _) => Icon(
-                Icons.star_rounded,
-                color: Colors.amber,
-              ),
-              onRatingUpdate: (rating) {
-                print(rating);
-              },
-            ),
-            CustomText(
-              title: "${review.text}",
-              size: 12,
-              maxLines: review.text!.length,
-              color: kLightColor,
-            ),
-            kSmallDivider,
-            /*AppConstant.spaceWidget(height: 5),
-            Container(
-              height: 1,
-              decoration: BoxDecoration(color: kLightGreyColor),
-            ),
-            AppConstant.spaceWidget(height: 5),*/
-          ],
-        ),
-      ),
-    );
-  }
+  // Widget _singleReviewListItem({ReviewModel? review}) {
+  //   return Padding(
+  //     padding: const EdgeInsets.all(5.0),
+  //     child: Container(
+  //       //height: AppResponsiveness.getHeight70_80(),
+  //       child: Column(
+  //         crossAxisAlignment: CrossAxisAlignment.start,
+  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //         children: [
+  //           CustomText(
+  //               title:
+  //                   "${review!.user!.firstName} ${review.user!.lastName!.isNotEmpty ? review.user!.lastName!.substring(0, 1).capitalizeFirst : ''}."),
+  //           RatingBar.builder(
+  //             itemSize: 13,
+  //             ignoreGestures: true,
+  //             initialRating: review.rating!.toDouble(),
+  //             //minRating: 1,
+  //             direction: Axis.horizontal,
+  //             allowHalfRating: true,
+  //             itemCount: 5,
+  //             itemBuilder: (context, _) => Icon(
+  //               Icons.star_rounded,
+  //               color: Colors.amber,
+  //             ),
+  //             onRatingUpdate: (rating) {
+  //               print(rating);
+  //             },
+  //           ),
+  //           CustomText(
+  //             title: "${review.text}",
+  //             size: 12,
+  //             maxLines: review.text!.length,
+  //             color: kLightColor,
+  //           ),
+  //           kSmallDivider,
+  //           /*AppConstant.spaceWidget(height: 5),
+  //           Container(
+  //             height: 1,
+  //             decoration: BoxDecoration(color: kLightGreyColor),
+  //           ),
+  //           AppConstant.spaceWidget(height: 5),*/
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 
   _productQuestions({ProductModel? productModel}) {
     return Obx(
-          () => CustomCard(
+      () => CustomCard(
         margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5),
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -693,55 +692,55 @@ class SingleProductView extends GetView<ProductController> {
               CustomText(title: langKey.productQuestions.tr, style: headline2),
               controller.productQuestionsList.isEmpty
                   ? Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: NoDataFound(text: langKey.noQuestionFound.tr),
-              )
+                      padding: const EdgeInsets.all(8.0),
+                      child: NoDataFound(text: langKey.noQuestionFound.tr),
+                    )
                   : ListView.builder(
-                shrinkWrap: true,
-                padding: EdgeInsets.zero,
-                //physics: const NeverScrollableScrollPhysics(),
-                itemCount: controller.productQuestionsList.length,
-                itemBuilder: (_, index) {
-                  QuestionModel? model =
-                  controller.productQuestionsList[index];
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 8.0, vertical: 15),
-                    child: Column(
-                      //mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _singleQuestionListItem(
-                            icon: "Q",
-                            //Icons.question_mark,
-                            iconColor: kRedColor,
-                            title: model.question,
-                            firstName: model.user!.firstName!,
-                            date: model.createdAt),
-                        AppConstant.spaceWidget(height: 10),
-                        if (model.answer != null)
-                          _singleQuestionListItem(
-                              icon: "A",
-                              //Icons.question_answer,
-                              title: model.answer!.answer,
-                              iconColor: kLightColor,
-                              firstName:
-                              productModel!.sellerModel!.storeName ??
-                                  productModel
-                                      .sellerModel!.user!.firstName,
-                              date: model.answer!.createdAt),
-                        kSmallDivider,
-                      ],
+                      shrinkWrap: true,
+                      padding: EdgeInsets.zero,
+                      //physics: const NeverScrollableScrollPhysics(),
+                      itemCount: controller.productQuestionsList.length,
+                      itemBuilder: (_, index) {
+                        QuestionModel? model =
+                            controller.productQuestionsList[index];
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8.0, vertical: 15),
+                          child: Column(
+                            //mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              _singleQuestionListItem(
+                                  icon: "Q",
+                                  //Icons.question_mark,
+                                  iconColor: kRedColor,
+                                  title: model.question,
+                                  firstName: model.user!.firstName!,
+                                  date: model.createdAt),
+                              AppConstant.spaceWidget(height: 10),
+                              if (model.answer != null)
+                                _singleQuestionListItem(
+                                    icon: "A",
+                                    //Icons.question_answer,
+                                    title: model.answer!.answer,
+                                    iconColor: kLightColor,
+                                    firstName:
+                                        productModel!.sellerModel!.storeName ??
+                                            productModel
+                                                .sellerModel!.user!.firstName,
+                                    date: model.answer!.createdAt),
+                              kSmallDivider,
+                            ],
+                          ),
+                        );
+                      },
                     ),
-                  );
-                },
-              ),
               //kSmallDivider,
               InkWell(
                 onTap: () {
                   Get.to(() => ProductQuestionAnswerUI(
-                    productModel: productModel,
-                  ));
+                        productModel: productModel,
+                      ));
                 },
                 child: CustomGreyBorderContainer(
                   width: double.infinity,
@@ -749,9 +748,9 @@ class SingleProductView extends GetView<ProductController> {
                   borderColor: kWhiteColor,
                   child: Center(
                       child: CustomText(
-                        title: langKey.askQuestion.tr,
-                        color: kRedColor,
-                      )),
+                    title: langKey.askQuestion.tr,
+                    color: kRedColor,
+                  )),
                 ),
               ),
             ],
@@ -775,9 +774,9 @@ class SingleProductView extends GetView<ProductController> {
               color: iconColor!.withOpacity(0.75), shape: BoxShape.circle),
           child: Center(
               child: CustomText(
-                title: icon,
-                color: kWhiteColor,
-              )),
+            title: icon,
+            color: kWhiteColor,
+          )),
 
           /*Icon(
             icon,
@@ -802,7 +801,7 @@ class SingleProductView extends GetView<ProductController> {
                       style: caption.copyWith(color: kLightColor)),
                   TextSpan(
                       text:
-                      " - ${AppConstant.formattedDataTime("dd-MMM-yy", date)}",
+                          " - ${AppConstant.formattedDataTime("dd-MMM-yy", date)}",
                       style: caption.copyWith(color: kLightColor)),
                 ],
               ),
@@ -815,49 +814,49 @@ class SingleProductView extends GetView<ProductController> {
 
   Widget _buildCustomerAlsoViewed(List<ProductModel> list) {
     return Obx(
-          () => list.isEmpty
+      () => list.isEmpty
           ? Container()
           : controller.isLoading.isTrue
-          ? CustomLoading(isItForWidget: true)
-          : Card(
-        margin:
-        const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SizedBox(
-            height: AppResponsiveness.getBoxHeightPoint30(),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                CustomText(
-                  title: langKey.peopleAlsoViewed.tr,
-                  size: 18,
-                  weight: FontWeight.w600,
-                ),
-                AppConstant.spaceWidget(height: 10),
-                Expanded(
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: list.length,
-                    itemBuilder: (context, index) {
-                      ProductModel productModel = list[index];
-                      return SingleProductItems(
-                        productModel: productModel,
-                        onTap: () {
-                          Get.offNamed('/product/${productModel.id}',
-                              preventDuplicates: false,
-                              arguments: {"calledFor": "customer"});
-                        },
-                      );
-                    },
+              ? CustomLoading(isItForWidget: true)
+              : Card(
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SizedBox(
+                      height: AppResponsiveness.getBoxHeightPoint30(),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          CustomText(
+                            title: langKey.peopleAlsoViewed.tr,
+                            size: 18,
+                            weight: FontWeight.w600,
+                          ),
+                          AppConstant.spaceWidget(height: 10),
+                          Expanded(
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: list.length,
+                              itemBuilder: (context, index) {
+                                ProductModel productModel = list[index];
+                                return SingleProductItems(
+                                  productModel: productModel,
+                                  onTap: () {
+                                    Get.offNamed('/product/${productModel.id}',
+                                        preventDuplicates: false,
+                                        arguments: {"calledFor": "customer"});
+                                  },
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
-              ],
-            ),
-          ),
-        ),
-      ),
     );
   }
 
@@ -927,7 +926,7 @@ class SingleProductView extends GetView<ProductController> {
                   itemCount: productModel.productFeatures?.length,
                   itemBuilder: (_, index) {
                     String? key =
-                    productModel.productFeatures?.keys.elementAt(index);
+                        productModel.productFeatures?.keys.elementAt(index);
                     return _productVariantWidget(
                         title: key,
                         isNextBtnClicked: true,
@@ -975,7 +974,7 @@ class SingleProductView extends GetView<ProductController> {
 
   Widget _buildChip({ProductFeature? featureModel}) {
     return Obx(
-          () => Padding(
+      () => Padding(
         padding: const EdgeInsets.all(8.0),
         child: ChoiceChip(
           label: CustomText(
@@ -1044,12 +1043,11 @@ class SingleProductView extends GetView<ProductController> {
   }
 
   _footerBottomBar() {
-    return BottomAppBar(
-      elevation: 0,
-      height: 52,
-      child: Container(
+    return Container(
+        height: 55,
+          color: Colors.white,
           width: AppResponsiveness.width,
-          padding: EdgeInsets.symmetric(horizontal: 10 , vertical: 5),
+          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -1071,34 +1069,35 @@ class SingleProductView extends GetView<ProductController> {
               //_buildBuyNowAndCartBtn(),
             ],
           )
-      ),
     );
   }
 
-  _outOfStockBottom(ProductModel? productModel){
+  _outOfStockBottom(ProductModel? productModel) {
     return Positioned(
         bottom: 0,
-        child: productModel!.stock == 0 ? IgnorePointer(
-          child: BottomAppBar(
-            elevation: 0,
-            height: 48,
-            child: Container(
-              width: AppResponsiveness.width,
-              decoration: BoxDecoration(
-                  color: Colors.grey.shade300,
-                  //borderRadius: BorderRadius.all(Radius.circular(12)),
-                  border: Border.all(width: 0, color: Colors.grey.shade300)),
-              child: Center(
-                child: CustomText(
-                  title: 'Out Of Stock',
-                  textAlign: TextAlign.center,
-                  size: 18,
-                  color: kRedColor,
+        child: productModel!.stock == 0
+            ? IgnorePointer(
+                child: BottomAppBar(
+                  elevation: 0,
+                  height: 48,
+                  child: Container(
+                    width: AppResponsiveness.width,
+                    decoration: BoxDecoration(
+                        color: Colors.grey.shade300,
+                        //borderRadius: BorderRadius.all(Radius.circular(12)),
+                        border:
+                            Border.all(width: 0, color: Colors.grey.shade300)),
+                    child: Center(
+                      child: CustomText(
+                        title: 'Out Of Stock',
+                        textAlign: TextAlign.center,
+                        size: 18,
+                        color: kRedColor,
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          ),
-        ) : _footerBottomBar()
-    );
+              )
+            : _footerBottomBar());
   }
 }

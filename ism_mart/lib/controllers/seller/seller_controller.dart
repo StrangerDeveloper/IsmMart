@@ -73,8 +73,6 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
       myProductsList.addAll(response.products!);
       //myProductsList.refresh();
     });
-
-    update();
   }
 
   var isLoadingMore = false.obs;
@@ -100,17 +98,10 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
   //TOO: Update Product using PATCH request type
 
   updateProduct({ProductModel? model}) async {
-    model!.price = int.parse("${prodPriceController.text}");
-    model.name = prodNameController.text;
-    model.discount = int.parse("${prodDiscountController.text.isEmpty || prodDiscountController.text == '' ? 0 : prodDiscountController.text}");
-    model.description = prodDescriptionController.text;
-    model.stock = int.parse("${prodStockController.text}");
-
     isLoading(true);
+    model!.name = prodNameController.text;
     model.price = int.parse("${priceAfterCommission.value}");
-    model.name = prodNameController.text;
-    model.discount = int.parse(
-        "${prodDiscountController.text.isEmpty || prodDiscountController.text == '' ? 0 : prodDiscountController.text}");
+    model.discount = int.parse(prodDiscountController.text);
     model.description = prodDescriptionController.text;
     model.stock = int.parse("${prodStockController.text}");
 
@@ -120,16 +111,17 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
       isLoading(false);
       if (response != null) {
         if (response.success!) {
-          myProductsList.clear();
-          await fetchMyProducts();
+          //myProductsList.clear();
+          //await fetchMyProducts();
 
-          // int productIndex = myProductsList.indexWhere((element) => element.id == model.id);
-          // myProductsList[productIndex].stock = model.stock;
-          // myProductsList[productIndex].name = model.name;
-          // myProductsList[productIndex].description = model.description;
-          // myProductsList[productIndex].price = model.price;
-          // myProductsList[productIndex].discount = model.discount;
-          // myProductsList.refresh();
+          int productIndex =
+              myProductsList.indexWhere((element) => element.id == model.id);
+          myProductsList[productIndex].stock = model.stock;
+          myProductsList[productIndex].name = model.name;
+          myProductsList[productIndex].description = model.description;
+          myProductsList[productIndex].price = model.price;
+          myProductsList[productIndex].discount = model.discount;
+          myProductsList.refresh();
           Get.back();
           AppConstant.displaySnackBar(
               langKey.success.tr, "${response.message}");

@@ -108,10 +108,10 @@ class SellersApiProvider {
       'price': '${model.price}',
       'stock': '${model.stock}',
       'discription': '${model.description}',
-      // if (model.discount != null &&
-      //     model.discount! >= 10 &&
-      //     model.discount! <= 90)
-      'discount': '${model.discount}',
+      if (model.discount != null &&
+          model.discount! >= 10 &&
+          model.discount! <= 90)
+        'discount': '${model.discount}',
     });
 
     http.StreamedResponse response = await request.send();

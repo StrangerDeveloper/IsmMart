@@ -309,7 +309,7 @@ class AppConstant {
     }
   }
 
-  static void showConfirmDeleteDialog({VoidCallback? ontap}) {
+  static void showConfirmDeleteDialog({VoidCallback? ontap, String? passedHeadingLangKey, String? passedBodyLangKey, double? givenFontSize}) {
     Get.defaultDialog(
       titlePadding: EdgeInsets.zero,
       titleStyle: TextStyle(fontSize: 0),
@@ -334,15 +334,16 @@ class AppConstant {
               color: kLightRedColor,
             ),
             AppConstant.spaceWidget(height: 12),
-            CustomText(
-              title: langKey.areYouSure.tr,
-              style: headline1,
-            ),
+            passedHeadingLangKey == null ? Container() : CustomText(
+                title: passedHeadingLangKey,
+                style: headline1,
+              ),
             AppConstant.spaceWidget(height: 12),
             CustomText(
-              title: langKey.deletionProcessDetail.tr,
+              title: passedBodyLangKey,
               weight: FontWeight.w600,
               textAlign: TextAlign.center,
+              size: givenFontSize,
             ),
             //buildConfirmDeleteIcon(),
             AppConstant.spaceWidget(height: 20),

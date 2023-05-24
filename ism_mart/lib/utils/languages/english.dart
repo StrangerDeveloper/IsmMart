@@ -9,7 +9,7 @@ class English {
         ///Delete Confirmation Dialog
         key.areYouSure: 'Are You Sure?',
         key.deletionProcessDetail:
-            'Do you really want to delete this record?. This process cannot be undone.',
+            'Do you really want to delete this record? This process cannot be undone.',
 
         ///email_input
         key.enterEmail: 'Enter Email To Receive OTP',
@@ -407,7 +407,7 @@ class English {
         key.address: 'Address',
         key.country: 'Country',
         key.city: 'City',
-        key.deActivateMsg: 'Are you sure to de-activate your account?',
+        key.deActivateMsg: 'Are you sure you want to de-activate your account?',
 
         key.bankDetails: 'Bank Details',
         key.bankName: 'Bank Name',
@@ -415,7 +415,7 @@ class English {
         key.bankAccount: 'Account Number',
         key.bankAccountReq: 'Bank Account Number Required',
         key.bankAccountHolder: 'Account Title',
-        key.bankAccHolderReq: 'Account title required',
+        key.bankAccHolderReq: 'Account title',
 
         ///contact us
         key.subject: 'Subject',

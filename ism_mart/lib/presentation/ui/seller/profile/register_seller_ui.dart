@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/controllers/buyer/auth/auth_controller.dart';
 import 'package:ism_mart/models/exports_model.dart';
@@ -291,7 +292,9 @@ class RegisterVendorUI extends GetView<AuthController> {
               autofocus: false,
               textStyle: bodyText1,
               autoValidateMode: AutovalidateMode.onUserInteraction,
-              validator: Validator().name,
+              validator: (value) {
+                return Validator().name(value, title: langKey.ownerName.tr);
+              },
               keyboardType: TextInputType.name,
               onChanged: (value) {},
               onSaved: (value) {},
@@ -305,7 +308,9 @@ class RegisterVendorUI extends GetView<AuthController> {
               autofocus: false,
               textStyle: bodyText1,
               autoValidateMode: AutovalidateMode.onUserInteraction,
-              validator: Validator().name,
+              validator: (value) {
+                return Validator().name(value, title: langKey.storeName.tr);
+              },
 
               // (value) =>
               //     GetUtils.isBlank(value!)! ? langKey.storeNameReq.tr : null,
@@ -321,19 +326,11 @@ class RegisterVendorUI extends GetView<AuthController> {
               iconColor: kPrimaryColor,
               autofocus: false,
               textStyle: bodyText1,
+              inputFormatters: [
+                FilteringTextInputFormatter.allow(RegExp(r'^(?:[+])?\d*'))
+              ],
               autoValidateMode: AutovalidateMode.onUserInteraction,
-              validator: (value) {
-                //  print("value length --- ${value!.length}");
-                if (value!.isNotEmpty) {
-                  if (value.length < 9 || value.length > 16) {
-                    //    print("value length --- ${value.length}");
-                    return langKey.phoneValidate.tr;
-                  }
-                  return Validator().phone(value);
-                }
-
-                return value.isEmpty ? "Phone No is Required" : null;
-              },
+              validator: Validator().validatePhoneNumber,
               // (value) =>
               //     !GetUtils.isPhoneNumber(value!) ? langKey.phoneReq.tr : null,
               keyboardType: TextInputType.phone,
@@ -365,9 +362,9 @@ class RegisterVendorUI extends GetView<AuthController> {
               autofocus: false,
               textStyle: bodyText1,
               autoValidateMode: AutovalidateMode.onUserInteraction,
-              validator: Validator().name,
-              //  (value) =>
-              //     GetUtils.isBlank(value!)! ? langKey.bankNameReq.tr : null,
+              validator: (value) {
+                return Validator().name(value, title: langKey.bankName.tr);
+              },
               keyboardType: TextInputType.name,
               onChanged: (value) {},
               onSaved: (value) {},
@@ -382,7 +379,7 @@ class RegisterVendorUI extends GetView<AuthController> {
               textStyle: bodyText1,
               autoValidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) =>
-                  Validator().notEmpty(value, langKey.bankAccHolderReq.tr),
+                  Validator().name(value, title:langKey.bankAccHolderReq.tr),
               // (value) => GetUtils.isBlank(value!)!
               //     ? langKey.bankAccHolderReq.tr
               //     : null,
@@ -413,7 +410,9 @@ class RegisterVendorUI extends GetView<AuthController> {
                   : CustomButton(
                       onTap: () async {
                         if (formKey.currentState!.validate()) {
-                          await controller.registerStore(updatedModel: model!);
+                          //closing keyboard
+                          //FocusManager.instance.primaryFocus?.unfocus();
+                          await controller.registerStore(updatedModel: model);
                         }
                       },
                       text: model != null

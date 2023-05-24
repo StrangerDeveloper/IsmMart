@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -83,8 +82,11 @@ class ProfileUI extends GetView<AuthController> {
                             isItBtn: true,
                           )
                         : InkWell(
-                            onTap: () => showConfirmDeleteDialog(
-                                userModel: controller.userModel!),
+                            onTap: () => AppConstant.showConfirmDeleteDialog(
+                              ontap: () => controller.deActivateAccount(),
+                              passedBodyLangKey: langKey.deActivateMsg.tr,
+                              givenFontSize: 18
+                            ),
                             child: Container(
                               width: 150,
                               padding:
@@ -137,17 +139,14 @@ class ProfileUI extends GetView<AuthController> {
               ),
             ],
           ),
-          child: Obx(() => controller.profileImgPath.value.isNotEmpty
-              ? CircleAvatar(
-                  radius: 40,
-                  backgroundColor: Colors.grey[200],
-                  backgroundImage:
-                      NetworkImage(controller.userModel!.imageUrl.toString()))
-              : CircleAvatar(
-                  radius: 40,
-                  backgroundColor: Colors.grey[200],
-                  backgroundImage:
-                      FileImage(File(controller.profileImgPath.value)))),
+          child: Obx(
+            () => CircleAvatar(
+              radius: 40,
+              backgroundColor: Colors.grey[200],
+              backgroundImage:
+                  NetworkImage(controller.userModel!.imageUrl.toString()),
+            ),
+          ),
         ),
         Positioned(
           bottom: 1,
@@ -304,7 +303,7 @@ class ProfileUI extends GetView<AuthController> {
                   text: langKey.noBtn.tr,
                   width: 100,
                   height: 35,
-                  color: kRedColor,
+                  color: kPrimaryColor,
                 ),
                 CustomButton(
                   onTap: () {
