@@ -379,7 +379,7 @@ class RegisterVendorUI extends GetView<AuthController> {
               textStyle: bodyText1,
               autoValidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) =>
-                  Validator().name(value, title:langKey.bankAccHolderReq.tr),
+                  Validator().notEmpty(value, langKey.bankAccHolderReq.tr),
               // (value) => GetUtils.isBlank(value!)!
               //     ? langKey.bankAccHolderReq.tr
               //     : null,
@@ -412,7 +412,7 @@ class RegisterVendorUI extends GetView<AuthController> {
                         if (formKey.currentState!.validate()) {
                           //closing keyboard
                           //FocusManager.instance.primaryFocus?.unfocus();
-                          await controller.registerStore(updatedModel: model);
+                          await controller.registerStore(updatedModel: model!);
                         }
                       },
                       text: model != null

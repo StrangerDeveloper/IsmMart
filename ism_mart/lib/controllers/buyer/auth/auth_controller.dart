@@ -13,6 +13,7 @@ class AuthController extends GetxController {
   AuthController(this.authProvider);
 
   RxString countryCode = '+92'.obs;
+
   var forgotPasswordEmailController = TextEditingController();
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
