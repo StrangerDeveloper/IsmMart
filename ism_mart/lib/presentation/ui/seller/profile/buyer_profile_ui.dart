@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -137,17 +136,14 @@ class ProfileUI extends GetView<AuthController> {
               ),
             ],
           ),
-          child: Obx(() => controller.profileImgPath.value.isNotEmpty
-              ? CircleAvatar(
-                  radius: 40,
-                  backgroundColor: Colors.grey[200],
-                  backgroundImage:
-                      NetworkImage(controller.userModel!.imageUrl.toString()))
-              : CircleAvatar(
-                  radius: 40,
-                  backgroundColor: Colors.grey[200],
-                  backgroundImage:
-                      FileImage(File(controller.profileImgPath.value)))),
+          child: Obx(
+            () => CircleAvatar(
+              radius: 40,
+              backgroundColor: Colors.grey[200],
+              backgroundImage:
+                  NetworkImage(controller.userModel!.imageUrl.toString()),
+            ),
+          ),
         ),
         Positioned(
           bottom: 1,

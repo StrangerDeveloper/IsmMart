@@ -410,6 +410,8 @@ class RegisterVendorUI extends GetView<AuthController> {
                   : CustomButton(
                       onTap: () async {
                         if (formKey.currentState!.validate()) {
+                          //closing keyboard
+                          //FocusManager.instance.primaryFocus?.unfocus();
                           await controller.registerStore(updatedModel: model!);
                         }
                       },

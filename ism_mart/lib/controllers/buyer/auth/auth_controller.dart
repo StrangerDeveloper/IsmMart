@@ -698,8 +698,8 @@ class AuthController extends GetxController {
     storeNameController.clear();
     storeDescController.clear();
     phoneController.clear();
-    coverImgPath(null);
-    profileImgPath(null);
+    coverImgPath("");
+    profileImgPath("");
 
     clearBankControllers();
   }
