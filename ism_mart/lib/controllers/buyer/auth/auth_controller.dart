@@ -13,6 +13,7 @@ class AuthController extends GetxController {
   AuthController(this.authProvider);
 
   RxString countryCode = '+92'.obs;
+
   var forgotPasswordEmailController = TextEditingController();
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
@@ -221,13 +222,13 @@ class AuthController extends GetxController {
 
   register() async {
     isLoading(true);
-
+    String? phoneNumber = countryCode.value + phoneController.text;
     UserModel newUser = UserModel(
       //firstName: firstNameController.text.trim(),
-      //lastName: lastNameController.text.trim(),
+      //lastName: lastNameController.text.trim(),\\
       firstName: firstNameController.text,
       email: signUpEmailController.text,
-      phone: countryCode.value + phoneController.text,
+      phone: phoneNumber,
       password: signUpPasswordController.text,
     );
 
@@ -258,16 +259,13 @@ class AuthController extends GetxController {
   registerStore({SellerModel? updatedModel}) async {
     isLoading(true);
 
-    print(
-        "!!!!controller profile ${updatedModel!.storeImage}  \n cover= ${coverImgPath.value}");
-
     SellerModel model = SellerModel(
-      storeName: storeNameController.text.trim(),
+      storeName: storeNameController.text,
       storeDesc: storeDescController.text,
-      ownerName: ownerNameController.text.trim(),
+      ownerName: ownerNameController.text,
       storeImage: profileImgPath.value,
       coverImage: coverImgPath.value,
-      phone: phoneController.text.trim(),
+      phone: phoneController.text,
       membership: "Free",
       premium: false,
       bankName: bankNameController.text.trim(),
@@ -278,10 +276,7 @@ class AuthController extends GetxController {
     if (userToken!.isNotEmpty) {
       // UserModel user = UserModel(vendor: model);
       await authProvider
-          .postStoreRegister(
-              token: userToken!,
-              //calledForUpdate: updatedModel != null,
-              sellerModel: model)
+          .postStoreRegister(token: userToken!, sellerModel: model)
           .then((UserResponse? apiResponse) {
         isLoading(false);
         if (apiResponse != null) {

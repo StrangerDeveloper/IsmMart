@@ -33,7 +33,7 @@ class Validator {
 
   String? validatePhoneNumber(String? value) {
     if (GetUtils.isBlank(value)!) {
-      return langKey.fieldIsRequired.tr;
+      return langKey.phoneReq.tr;
     } else if (value!.length > 16 || value.length < 7) {
       return langKey.phoneValidate.tr;
     } else {
