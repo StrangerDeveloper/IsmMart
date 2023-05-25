@@ -39,16 +39,16 @@ class Routes {
 
     GetPage(
         name: initRoute,
-        page: () => const BaseLayout(),
+        page: () => const BottomNavigationView(),
         binding: BaseBindings()),
     GetPage(
       name: loginRoute,
-      page: () => SignInUI(),
+      page: () => SignInView(),
       binding: BaseBindings(),
     ),
     GetPage(
       name: registerRoute,
-      page: () => const SignUpUI(),
+      page: () => const SignUpView(),
       binding: BaseBindings(),
     ),
     GetPage(
@@ -65,7 +65,7 @@ class Routes {
         binding: BaseBindings()),
     GetPage(
         name: searchRoute,
-        page: () => SearchUI(),
+        page: () => SearchView(),
         //binding: SearchBindings(),
         bindings: [
           SearchBindings(),
@@ -73,12 +73,12 @@ class Routes {
         ]),
     GetPage(
       name: cartRoute,
-      page: () => CartUI(),
+      page: () => CartView(),
       binding: BaseBindings(),
     ),
     GetPage(
       name: checkOutRoute,
-      page: () => CheckoutUI(),
+      page: () => CheckoutView(),
       binding: CheckoutBinding(),
       middlewares: [AuthMiddleWare(priority: 5)],
     ),
@@ -90,12 +90,12 @@ class Routes {
     ),
     GetPage(
       name: buyerOrdersRoute,
-      page: () => BuyerOrdersUI(),
+      page: () => BuyerOrderView(),
       binding: OrdersBindings(),
     ),
     GetPage(
         name: sellerHomeRoute,
-        page: () => const SellerHome(),
+        page: () => const SellerHomeView(),
         binding: SellerBindings()),
     GetPage(
       name: '/product/:id',
@@ -111,7 +111,7 @@ class Routes {
     ),
     GetPage(
       name: '/storeDetails/:storeId',
-      page: () => const SellerStoreDetailsUI(),
+      page: () => const SellerStoreDetailsView(),
       binding: ProductBinding(),
     )
   ];

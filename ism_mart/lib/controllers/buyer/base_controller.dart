@@ -264,10 +264,10 @@ class BaseController extends GetxController {
   var bottomNavPageController = PageController(initialPage: 0);
   List<Widget> bottomNavScreens = [
     const DashboardUI(),
-    const CategoriesUI(),
-    const CartUI(),
-    SettingsUI(),
-    SearchUI(
+    const CategoriesView(),
+    const CartView(),
+    SettingsView(),
+    SearchView(
       isCalledForDeals: true,
     )
   ];

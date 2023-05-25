@@ -6,8 +6,8 @@ import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
-class SellerDashboard extends GetView<SellersController> {
-  const SellerDashboard({Key? key}) : super(key: key);
+class SellerDashboardView extends GetView<SellersController> {
+  const SellerDashboardView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

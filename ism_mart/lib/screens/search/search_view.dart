@@ -6,8 +6,8 @@ import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
-class SearchUI extends GetView<CustomSearchController> {
-  const SearchUI({
+class SearchView extends GetView<CustomSearchController> {
+  const SearchView({
     Key? key,
     this.isCalledForDeals = false,
   }) : super(key: key);

@@ -6,8 +6,8 @@ import 'package:ism_mart/exports/export_presentation.dart';
 import '../../utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
-class StoreProfileUI extends GetView<AuthController> {
-  const StoreProfileUI({Key? key}) : super(key: key);
+class StoreProfileView extends GetView<AuthController> {
+  const StoreProfileView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

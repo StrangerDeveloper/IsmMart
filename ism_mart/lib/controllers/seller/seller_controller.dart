@@ -412,12 +412,12 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
 
 //TDO: Seller Home Section
   List<Widget> NavScreens = [
-    const SellerDashboard(),
+    const SellerDashboardView(),
     const MyProducts(),
     const MyOrdersUI(),
     //const PremiumMembershipUI(),
-    ProfileUI(),
-    const StoreProfileUI(),
+    BuyerProfileView(),
+    const StoreProfileView(),
   ];
 
   var currentPage = 0.obs;

@@ -7,8 +7,8 @@ import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
-class CheckoutUI extends GetView<CheckoutController> {
-  const CheckoutUI({Key? key}) : super(key: key);
+class CheckoutView extends GetView<CheckoutController> {
+  const CheckoutView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

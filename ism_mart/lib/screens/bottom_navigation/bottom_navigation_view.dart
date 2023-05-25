@@ -7,8 +7,8 @@ import 'package:ism_mart/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
-class BaseLayout extends GetView<BaseController> {
-  const BaseLayout({Key? key}) : super(key: key);
+class BottomNavigationView extends GetView<BaseController> {
+  const BottomNavigationView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

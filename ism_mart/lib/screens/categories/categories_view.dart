@@ -7,8 +7,8 @@ import 'package:ism_mart/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
-class CategoriesUI extends GetView<CategoryController> {
-  const CategoriesUI({Key? key}) : super(key: key);
+class CategoriesView extends GetView<CategoryController> {
+  const CategoriesView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

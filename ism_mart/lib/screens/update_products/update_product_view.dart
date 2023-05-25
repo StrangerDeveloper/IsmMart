@@ -7,8 +7,8 @@ import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
-class UpdateProductUI extends GetView<SellersController> {
-  const UpdateProductUI({Key? key, this.productId}) : super(key: key);
+class UpdateProductView extends GetView<SellersController> {
+  const UpdateProductView({Key? key, this.productId}) : super(key: key);
   final int? productId;
 
   @override

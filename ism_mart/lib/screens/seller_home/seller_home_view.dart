@@ -5,8 +5,8 @@ import 'package:ism_mart/widgets/custom_text.dart';
 import 'package:ism_mart/utils/constants.dart';
 import 'package:iconly/iconly.dart';
 
-class SellerHome extends GetView<SellersController> {
-  const SellerHome({Key? key}) : super(key: key);
+class SellerHomeView extends GetView<SellersController> {
+  const SellerHomeView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

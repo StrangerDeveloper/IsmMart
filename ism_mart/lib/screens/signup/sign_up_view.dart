@@ -7,8 +7,8 @@ import 'package:ism_mart/utils/exports_utils.dart';
 
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
-class SignUpUI extends GetView<AuthController> {
-  const SignUpUI({Key? key}) : super(key: key);
+class SignUpView extends GetView<AuthController> {
+  const SignUpView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

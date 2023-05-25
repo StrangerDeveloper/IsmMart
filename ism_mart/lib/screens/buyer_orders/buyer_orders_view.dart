@@ -10,8 +10,8 @@ import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 enum AppBarMenuNames { disputes }
 
-class BuyerOrdersUI extends GetView<OrderController> {
-  const BuyerOrdersUI({Key? key}) : super(key: key);
+class BuyerOrderView extends GetView<OrderController> {
+  const BuyerOrderView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
