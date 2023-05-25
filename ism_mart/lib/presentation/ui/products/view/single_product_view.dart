@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 import 'package:ism_mart/models/exports_model.dart';
@@ -10,10 +9,7 @@ import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class SingleProductView extends GetView<ProductController> {
-  const SingleProductView({
-    this.productId,
-    this.calledFor = 'customer'
-  });
+  const SingleProductView({this.productId, this.calledFor = 'customer'});
   final productId;
   final String calledFor;
 
@@ -47,9 +43,9 @@ class SingleProductView extends GetView<ProductController> {
     },
         onLoading: CustomLoading(isDarkMode: isDarkMode),
         onError: (error) => NoDataFoundWithIcon(
-          title: "No Product Found",
-          subTitle: error,
-        ),
+              title: "No Product Found",
+              subTitle: error,
+            ),
         onEmpty: NoDataFoundWithIcon(
           title: "No Product Found",
         ));
@@ -1049,31 +1045,30 @@ class SingleProductView extends GetView<ProductController> {
   _footerBottomBar() {
     return Container(
         height: 55,
-          color: Colors.white,
-          width: AppResponsiveness.width,
-          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              //_getNavBarItems(icon: Icons.store,),
-              ProductQuantityCounter(
-                onDecrementPress: () => controller.decrement(),
-                onIncrementPress: () => controller.increment(),
-                textEditingController: controller.quantityController,
-                bgColor: kPrimaryColor,
-                textColor: kWhiteColor,
-              ),
-              CustomButton(
-                onTap: () =>
-                    showVariationBottomSheet(productModel: controller.state),
-                text: langKey.next.tr,
-                width: 100,
-                height: 40,
-              ),
-              //_buildBuyNowAndCartBtn(),
-            ],
-          )
-    );
+        color: Colors.white,
+        width: AppResponsiveness.width,
+        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            //_getNavBarItems(icon: Icons.store,),
+            ProductQuantityCounter(
+              onDecrementPress: () => controller.decrement(),
+              onIncrementPress: () => controller.increment(),
+              textEditingController: controller.quantityController,
+              bgColor: kPrimaryColor,
+              textColor: kWhiteColor,
+            ),
+            CustomButton(
+              onTap: () =>
+                  showVariationBottomSheet(productModel: controller.state),
+              text: langKey.next.tr,
+              width: 100,
+              height: 40,
+            ),
+            //_buildBuyNowAndCartBtn(),
+          ],
+        ));
   }
 
   _outOfStockBottom(ProductModel? productModel) {
