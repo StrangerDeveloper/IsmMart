@@ -158,7 +158,9 @@ class DashboardUI extends GetView<BaseController> {
         DateTime.now().add(const Duration(hours: 17)).millisecondsSinceEpoch;
     return InkWell(
       onTap: () {
-        Get.to(SingleProductView(productId: model.id,));
+        Get.to(SingleProductView(
+          productId: model.id,
+        ));
       },
       child: Stack(
         fit: StackFit.loose,

@@ -412,7 +412,7 @@ class RegisterVendorUI extends GetView<AuthController> {
                         if (formKey.currentState!.validate()) {
                           //closing keyboard
                           //FocusManager.instance.primaryFocus?.unfocus();
-                          await controller.registerStore(updatedModel: model!);
+                          await controller.registerStore();
                         }
                       },
                       text: model != null

@@ -256,7 +256,7 @@ class AuthController extends GetxController {
     });
   }
 
-  registerStore({SellerModel? updatedModel}) async {
+  registerStore() async {
     isLoading(true);
 
     SellerModel model = SellerModel(
@@ -532,14 +532,14 @@ class AuthController extends GetxController {
             //Get.back();
             AppConstant.displaySnackBar("success", userResponse.message);
             editingTextController.clear();
-            getCurrentUser();
+            //getCurrentUser();
             profileImgPath.value = '';
           } else
-            getCurrentUser();
-          //    AppConstant.displaySnackBar('error', userResponse.message);
+            //getCurrentUser();
+            AppConstant.displaySnackBar('error', userResponse.message);
         } else
-          getCurrentUser();
-        // AppConstant.displaySnackBar('error', "something went wrong!");
+          AppConstant.displaySnackBar('error', langKey.someThingWentWrong.tr);
+        getCurrentUser();
       }).catchError((error) {
         getCurrentUser();
         isLoading(false);
