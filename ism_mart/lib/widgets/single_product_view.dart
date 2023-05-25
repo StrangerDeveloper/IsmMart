@@ -929,7 +929,7 @@ class SingleProductView extends GetView<ProductController> {
                         productModel.productFeatures?.keys.elementAt(index);
                     return _productVariantWidget(
                         title: key,
-                        isNextBtnClicked: true,
+                        isNextBtnClicked: false,
                         featureList: productModel.productFeatures?[key]);
                   },
                 ),

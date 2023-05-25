@@ -34,7 +34,7 @@ class UpdateProductUI extends GetView<SellersController> {
       controller.prodPriceController.text = productModel.price!.toString();
       controller.prodStockController.text = productModel.stock!.toString();
       controller.prodDiscountController.text =
-          productModel.discount!.toString();
+          productModel.discount == 0 ? '' : productModel.discount!.toString();
       controller.prodDescriptionController.text = productModel.description!;
       controller.priceAfterCommission(productModel.price!.toInt());
     }
@@ -155,9 +155,13 @@ class UpdateProductUI extends GetView<SellersController> {
                                   : null,*/
                               keyboardType: TextInputType.number,
                               onChanged: (String? value) {
-                                int discount =
-                                    value!.isNotEmpty || value != '' ? int.parse(value) : 0;
-                                controller.setDiscount(discount);
+                                if (value!.isNotEmpty || value != '') {
+                                  int discount = int.parse(value);
+                                  controller.setDiscount(discount);
+                                } else {
+                                  int discount = 0;
+                                  controller.setDiscount(discount);
+                                }
                               },
                               onSaved: (value) {},
                             ),

@@ -110,7 +110,7 @@ class SellersApiProvider {
       'discription': '${model.description}',
       if (model.discount != null &&
           model.discount! >= 10 &&
-          model.discount! <= 90)
+          model.discount! <= 90 || model.discount == 0)
         'discount': '${model.discount}',
     });
 
