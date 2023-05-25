@@ -1,9 +1,10 @@
-class Errors{
-  static String generalApiError = 'Something went wrong';
-  static String noInternetError = 'No internet connection';
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
+class Errors {
+  static String generalApiError = langKey.someThingWentWrong;
+  static String noInternetError = langKey.noInternetConnection;
 
   /////////////
-  static String formatException = 'server is unable to handle request';
-  static String timeOutException = 'server is taking too long to respond ';
+  static String formatException = langKey.serverUnableToHandle;
+  static String timeOutException = langKey.serverTakingTooLong;
 }

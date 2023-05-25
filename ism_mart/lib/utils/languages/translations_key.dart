@@ -1,5 +1,10 @@
 //////////////////////////////////////////////////////////////////////
 
+///errors
+const noInternetConnection = 'noInternetConnection',
+    serverUnableToHandle = 'serverUnableToHandle',
+    serverTakingTooLong = 'serverTakingTooLong';
+
 ///authController
 const currentUserNotFound = "currentUserNotFound",
     wrongWithCredentials = 'wrongWithCredentials';

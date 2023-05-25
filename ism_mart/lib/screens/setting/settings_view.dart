@@ -6,6 +6,7 @@ import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
+import 'package:ism_mart/screens/contact_us/contact_us_view.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
@@ -281,8 +282,11 @@ class SettingsView extends GetView<AuthController> {
           title: langKey.aboutUs.tr,
         ),
         _singleSettingsItem(
-          onTap: () => Get.to(() => GeneralSettingsView(
-              isContactUsCalled: true, title: langKey.contactUs.tr)),
+          // onTap: () => Get.to(() => GeneralSettingsView(
+          //     isContactUsCalled: true, title: langKey.contactUs.tr)),
+          onTap: (){
+            Get.to(()=>ContactUsView());
+          },
           icon: Icons.contactless_outlined,
           iconColor: Colors.green,
           title: langKey.contactUs.tr,

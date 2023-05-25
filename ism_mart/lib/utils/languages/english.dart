@@ -2,6 +2,12 @@ import 'translations_key.dart' as key;
 
 class English {
   Map<String, String> get translations => {
+
+        ///errors
+        key.serverUnableToHandle: 'server is unable to handle request',
+        key.serverTakingTooLong: 'server is taking too long to respond',
+        key.noInternetConnection: 'No internet connection',
+
         ///authController
         key.currentUserNotFound: 'Current User not found',
         key.wrongWithCredentials: 'Something went wrong with credentials',
