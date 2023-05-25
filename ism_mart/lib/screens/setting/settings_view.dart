@@ -254,41 +254,41 @@ class SettingsView extends GetView<AuthController> {
             title: langKey.notifications.tr),*/
         _singleSettingsItem(
           onTap: () => Get.to(() =>
-              GeneralSettingsDataUI(title: langKey.termsAndConditions.tr)),
+              GeneralSettingsView(title: langKey.termsAndConditions.tr)),
           icon: Icons.rule_outlined,
           iconColor: Colors.indigo,
           title: langKey.termsAndConditions.tr,
         ),
         _singleSettingsItem(
           onTap: () => Get.to(
-              () => GeneralSettingsDataUI(title: langKey.privacyPolicy.tr)),
+              () => GeneralSettingsView(title: langKey.privacyPolicy.tr)),
           icon: IconlyLight.paper,
           iconColor: Colors.purpleAccent,
           title: langKey.privacyPolicy.tr,
         ),
         _singleSettingsItem(
           onTap: () => Get.to(
-              () => GeneralSettingsDataUI(title: langKey.returnAndExchange.tr)),
+              () => GeneralSettingsView(title: langKey.returnAndExchange.tr)),
           icon: Icons.assignment_return_rounded,
           iconColor: Colors.lime,
           title: langKey.returnAndExchange.tr,
         ),
         _singleSettingsItem(
           onTap: () =>
-              Get.to(() => GeneralSettingsDataUI(title: langKey.aboutUs.tr)),
+              Get.to(() => GeneralSettingsView(title: langKey.aboutUs.tr)),
           icon: IconlyLight.info_circle,
           iconColor: Colors.pinkAccent,
           title: langKey.aboutUs.tr,
         ),
         _singleSettingsItem(
-          onTap: () => Get.to(() => GeneralSettingsDataUI(
+          onTap: () => Get.to(() => GeneralSettingsView(
               isContactUsCalled: true, title: langKey.contactUs.tr)),
           icon: Icons.contactless_outlined,
           iconColor: Colors.green,
           title: langKey.contactUs.tr,
         ),
         _singleSettingsItem(
-          onTap: () => Get.to(() => FaqUI()),
+          onTap: () => Get.to(() => FaqView()),
           icon: Icons.question_answer,
           iconColor: Colors.purple,
           title: langKey.faqs.tr,

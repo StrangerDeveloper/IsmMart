@@ -1,48 +1,66 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ism_mart/controllers/export_controllers.dart';
+import 'package:ism_mart/controllers/buyer/base_controller.dart';
 import 'package:ism_mart/models/exports_model.dart';
-import 'package:ism_mart/exports/export_presentation.dart';
-import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/utils/constants.dart';
+import 'package:ism_mart/widgets/custom_text.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
-class FaqUI extends GetView<BaseController> {
-  const FaqUI({Key? key}) : super(key: key);
+class FaqView extends GetView<BaseController> {
+  const FaqView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: _appBar(),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: ListView(
-            shrinkWrap: true,
-            //physics: const NeverScrollableScrollPhysics(),
+        backgroundColor: Colors.white,
+        appBar: appBar(),
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CustomHeader(title: langKey.frequentlyAsked.tr),
+              Padding(
+                padding: const EdgeInsets.only(left: 15, right: 16, top: 6),
+                child: FittedBox(
+                  child: Text(
+                    langKey.frequentlyAsked.tr,
+                    style: headline1.copyWith(
+                      fontSize: 25,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                ),
+              ),
               Obx(
-                () => Column(
+                    () => Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: controller.faqsList.map(
-                    (FAQModel? faq) {
+                        (FAQModel? faq) {
                       return ExpansionTile(
-                        childrenPadding: EdgeInsets.only(left: 16, bottom: 10),
+                        backgroundColor: Colors.black.withOpacity(0.03),
+                        childrenPadding:
+                        EdgeInsets.only(left: 16, bottom: 10, right: 24),
                         expandedAlignment: Alignment.centerLeft,
                         title: Text(
                           faq!.questions!,
                           textAlign: TextAlign.start,
-                          style: headline3.copyWith(height: 1.1),
+                          style: headline3.copyWith(
+                            height: 1.3,
+                            fontSize: 15.5,
+                          ),
                         ),
                         children: [
-                          Text(
-                            faq.answer!,
-                            textAlign: TextAlign.start,
-                            style: bodyText1.copyWith(
-                              height: 1.5,
-                              fontSize: 13,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w100,
+                          Container(
+                            //color: Colors.red,
+                            child: Text(
+                              faq.answer!,
+                              textAlign: TextAlign.start,
+                              style: bodyText2Poppins.copyWith(
+                                height: 1.45,
+                                fontSize: 12.5,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w100,
+                              ),
                             ),
                           ),
                         ],
@@ -58,9 +76,8 @@ class FaqUI extends GetView<BaseController> {
     );
   }
 
-  _appBar() {
+  PreferredSizeWidget appBar() {
     return AppBar(
-      elevation: 0,
       backgroundColor: kAppBarColor,
       leading: InkWell(
         onTap: () => Get.back(),
@@ -70,7 +87,10 @@ class FaqUI extends GetView<BaseController> {
           color: kPrimaryColor,
         ),
       ),
-      title: CustomText(title: langKey.faqs.tr, style: appBarTitleSize),
+      title: CustomText(
+        title: langKey.faqs.tr,
+        style: appBarTitleSize,
+      ),
     );
   }
 

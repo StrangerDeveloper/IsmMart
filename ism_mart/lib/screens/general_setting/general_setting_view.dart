@@ -3,12 +3,18 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:ism_mart/controllers/controllers.dart';
-import 'package:ism_mart/exports/export_presentation.dart';
-import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/utils/constants.dart';
+import 'package:ism_mart/utils/languages/translations_key.dart';
+import 'package:ism_mart/utils/validator.dart';
+
+import 'package:ism_mart/widgets/custom_button.dart';
+import 'package:ism_mart/widgets/custom_loading.dart';
+import 'package:ism_mart/widgets/custom_text.dart';
+import 'package:ism_mart/widgets/form_input_field_with_icon.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
-class GeneralSettingsDataUI extends StatelessWidget {
-  const GeneralSettingsDataUI(
+class GeneralSettingsView extends StatelessWidget {
+  const GeneralSettingsView(
       {Key? key, this.title, this.isContactUsCalled = false})
       : super(key: key);
 
@@ -25,7 +31,7 @@ class GeneralSettingsDataUI extends StatelessWidget {
           shrinkWrap: true,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16, top: 15),
+              padding: const EdgeInsets.only(left: 16, right: 16, top: 6),
               child: Text(
                 title!,
                 style: headline1.copyWith(
@@ -38,7 +44,7 @@ class GeneralSettingsDataUI extends StatelessWidget {
               _buildContactUs()
             else
               Padding(
-                padding: const EdgeInsets.fromLTRB(22, 5, 22, 16),
+                padding: const EdgeInsets.fromLTRB(18, 0, 22, 16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: getData().map((e) {
@@ -92,142 +98,167 @@ class GeneralSettingsDataUI extends StatelessWidget {
   Widget _buildContactUs() {
     var formKey = GlobalKey<FormState>();
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.fromLTRB(16, 10, 16, 16),
       child: ListView(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        //padding: const EdgeInsets.symmetric(vertical: 10),
         children: [
-          CustomGreyBorderContainer(
-            child: Column(
-              children: getContactUsData()
-                  .map(
-                    (e) => Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: ListTile(
-                        leading: Icon(
-                          e["icon"],
-                          size: 30,
-                          color: kPrimaryColor,
-                        ),
-                        title: CustomText(
-                          title: e['title'].toString(),
-                          style: headline3,
-                        ),
-                        subtitle: CustomText(
-                          title: e['description'].toString(),
-                          maxLines: e['description'].length,
-
-                          style: bodyText1.copyWith(
-                            color: kDarkColor,
-                          ),
-                          //textAlign: TextAlign.center,
+          Column(
+            children: getContactUsData()
+                .map(
+                  (e) => Padding(
+                padding: const EdgeInsets.only(top: 15),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(13),
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.05),
+                        borderRadius: BorderRadius.circular(4),
+                        border: Border.all(
+                          color: Colors.black.withOpacity(0.06),
                         ),
                       ),
+                      child: Icon(
+                        e["icon"],
+                        size: 22,
+                        color: kPrimaryColor,
+                      ),
                     ),
-                  )
-                  .toList(),
-            ),
-          ),
-          AppConstant.spaceWidget(height: 15),
-          CustomGreyBorderContainer(
-            child: Form(
-              key: formKey,
-              //autovalidateMode: AutovalidateMode.onUserInteraction,
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5),
-                child: Column(
-                  children: [
-                    StickyLabel(
-                      text: langKey.forAnyQueryJust.tr,
-                      style: headline1,
-                    ),
-                    AppConstant.spaceWidget(height: 15),
-                    FormInputFieldWithIcon(
-                      controller: authController.firstNameController,
-                      iconPrefix: Icons.person_rounded,
-                      labelText: fullName.tr,
-                      iconColor: kPrimaryColor,
-                      autofocus: false,
-                      textStyle: bodyText1,
-                      autoValidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (value) {
-                        return Validator()
-                            .name(value, title: langKey.fullName.tr);
-                      },
-                      // GetUtils.isBlank(value!)! ? fullNameReq.tr : null,
-                      keyboardType: TextInputType.name,
-                      onChanged: (value) {},
-                      onSaved: (value) {},
-                    ),
-                    AppConstant.spaceWidget(height: 10),
-                    FormInputFieldWithIcon(
-                      controller: authController.emailController,
-                      iconPrefix: Icons.email_rounded,
-                      labelText: email.tr,
-                      iconColor: kPrimaryColor,
-                      autofocus: false,
-                      textStyle: bodyText1,
-                      autoValidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return emailReq.tr;
-                        }
-                        return Validator().email(value);
-                      },
-                      keyboardType: TextInputType.name,
-                      onChanged: (value) {},
-                      onSaved: (value) {},
-                    ),
-                    AppConstant.spaceWidget(height: 10),
-                    FormInputFieldWithIcon(
-                      controller: authController.subjectController,
-                      iconPrefix: Icons.subject_rounded,
-                      labelText: subject.tr,
-                      iconColor: kPrimaryColor,
-                      autofocus: false,
-                      textStyle: bodyText1,
-                      autoValidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (value) =>
-                          GetUtils.isBlank(value!)! ? subjectReq.tr : null,
-                      keyboardType: TextInputType.name,
-                      onChanged: (value) {},
-                      onSaved: (value) {},
-                    ),
-                    AppConstant.spaceWidget(height: 10),
-                    FormInputFieldWithIcon(
-                      controller: authController.messageController,
-                      iconPrefix: Icons.description,
-                      labelText: message.tr,
-                      iconColor: kPrimaryColor,
-                      autofocus: false,
-                      textStyle: bodyText1,
-                      autoValidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (value) =>
-                          GetUtils.isBlank(value!)! ? messageReq.tr : null,
-                      keyboardType: TextInputType.text,
-                      onChanged: (value) {},
-                      onSaved: (value) {},
-                    ),
-                    AppConstant.spaceWidget(height: 20),
-                    Obx(
-                      () => authController.isLoading.isTrue
-                          ? CustomLoading(isItBtn: true)
-                          : CustomButton(
-                              onTap: () async {
-                                if (formKey.currentState!.validate()) {
-                                  await authController.postContactUs();
-                                  formKey.currentState!.reset();
-                                }
-                              },
-                              text: send.tr,
-                              height: 40,
-                              width: 150,
+                    SizedBox(width: 15),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CustomText(
+                            title: e['title'].toString().capitalize,
+                            style: headline3.copyWith(
+                              fontSize: 14.5,
                             ),
-                    ),
+                          ),
+                          SizedBox(height: 5),
+                          CustomText(
+                            title: e['description'].toString(),
+                            style: bodyText2Poppins.copyWith(
+                              color: Colors.grey.shade700,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
                   ],
                 ),
+              ),
+            )
+                .toList(),
+          ),
+          AppConstant.spaceWidget(height: 15),
+          Container(
+            margin: EdgeInsets.only(bottom: 15, top: 15),
+            padding: EdgeInsets.all(15),
+            decoration: BoxDecoration(
+              color: Colors.black.withOpacity(0.03),
+              borderRadius: BorderRadius.circular(4),
+              border: Border.all(
+                color: Colors.black.withOpacity(0.08),
+              ),
+            ),
+            child: Form(
+              key: formKey,
+              child: Column(
+                children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: CustomText(
+                      title: langKey.forAnyQueryJust.tr,
+                      style: headline2,
+                    ),
+                  ),
+                  SizedBox(height: 15),
+                  FormInputFieldWithIcon(
+                    controller: authController.firstNameController,
+                    iconPrefix: Icons.person_rounded,
+                    labelText: fullName.tr,
+                    iconColor: kPrimaryColor,
+                    autofocus: false,
+                    textStyle: bodyText1,
+                    autoValidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) {
+                      return Validator()
+                          .name(value, title: langKey.fullName.tr);
+                    },
+                    // GetUtils.isBlank(value!)! ? fullNameReq.tr : null,
+                    keyboardType: TextInputType.name,
+                    onChanged: (value) {},
+                    onSaved: (value) {},
+                  ),
+                  AppConstant.spaceWidget(height: 10),
+                  FormInputFieldWithIcon(
+                    controller: authController.emailController,
+                    iconPrefix: Icons.email_rounded,
+                    labelText: email.tr,
+                    iconColor: kPrimaryColor,
+                    autofocus: false,
+                    textStyle: bodyText1,
+                    autoValidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return emailReq.tr;
+                      }
+                      return Validator().email(value);
+                    },
+                    keyboardType: TextInputType.name,
+                    onChanged: (value) {},
+                    onSaved: (value) {},
+                  ),
+                  AppConstant.spaceWidget(height: 10),
+                  FormInputFieldWithIcon(
+                    controller: authController.subjectController,
+                    iconPrefix: Icons.subject_rounded,
+                    labelText: subject.tr,
+                    iconColor: kPrimaryColor,
+                    autofocus: false,
+                    textStyle: bodyText1,
+                    autoValidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) =>
+                    GetUtils.isBlank(value!)! ? subjectReq.tr : null,
+                    keyboardType: TextInputType.name,
+                    onChanged: (value) {},
+                    onSaved: (value) {},
+                  ),
+                  AppConstant.spaceWidget(height: 10),
+                  FormInputFieldWithIcon(
+                    controller: authController.storeDescController,
+                    iconPrefix: Icons.description,
+                    labelText: message.tr,
+                    iconColor: kPrimaryColor,
+                    autofocus: false,
+                    textStyle: bodyText1,
+                    autoValidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) =>
+                    GetUtils.isBlank(value!)! ? messageReq.tr : null,
+                    keyboardType: TextInputType.text,
+                    onChanged: (value) {},
+                    onSaved: (value) {},
+                  ),
+                  AppConstant.spaceWidget(height: 20),
+                  Obx(
+                        () => authController.isLoading.isTrue
+                        ? CustomLoading(isItBtn: true)
+                        : CustomButton(
+                      onTap: () async {
+                        if (formKey.currentState!.validate()) {
+                          await authController.postContactUs();
+                          formKey.currentState!.reset();
+                        }
+                      },
+                      text: send.tr,
+                      height: 40,
+                      width: 150,
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -263,7 +294,7 @@ class GeneralSettingsDataUI extends StatelessWidget {
         'icon': Icons.email_outlined,
         'title': langKey.email.tr,
         'subTitle': null,
-        'description': 'businesses@ismmart.com'
+        'description': 'businesses@ismmart.com\n'
       },
       {
         'icon': IconlyBold.calling,

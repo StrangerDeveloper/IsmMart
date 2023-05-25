@@ -120,7 +120,7 @@ class SignInView extends GetView<AuthController> {
                               onTap: () =>
                                   Get.toNamed(Routes.passwordResetEmailInput),
                               child: Text(
-                                langKey.forgotPassword.tr,
+                                langKey.forgotPassword.tr+'?',
                                 style: headline3.copyWith(
                                     decoration: TextDecoration.underline),
                               ),
