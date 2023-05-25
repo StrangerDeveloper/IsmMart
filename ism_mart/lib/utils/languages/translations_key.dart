@@ -407,6 +407,7 @@ const email = "email",
     confirmPassReq = "confirmPassReq",
     resetPass = 'resetPass',
     passwordNotMatched = "passNotMatched",
+    forgotPasswordDesc = 'forgotPasswordDesc',
     forgotPassword = "forgotPassword";
 
 const storeName = "storeName",

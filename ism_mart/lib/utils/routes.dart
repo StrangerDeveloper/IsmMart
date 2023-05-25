@@ -57,7 +57,7 @@ class Routes {
         binding: BaseBindings()),
     GetPage(
         name: passwordResetEmailInput,
-        page: () => const EmailInput(),
+        page: () => const ForgotPasswordView(),
         binding: BaseBindings()),
     GetPage(
         name: emailVerificationLinkRoute,

@@ -345,6 +345,8 @@ class English {
         key.signUp: 'Sign Up',
         key.loginGreetings: 'Greetings! Welcome back!\nSign in to your Account',
         key.forgotPassword: 'Forgot Password?',
+        key.forgotPasswordDesc:
+        'Enter your email to receive an email\nwith the OTP Code.',
         key.donTHaveAccount: "Don't have an Account?",
         key.send: 'Send',
         key.optional: 'Optional',

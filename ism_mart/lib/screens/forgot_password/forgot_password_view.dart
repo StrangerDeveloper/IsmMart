@@ -1,136 +1,132 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/controllers/buyer/auth/auth_controller.dart';
-import 'package:ism_mart/utils/svg_helper.dart';
+import 'package:ism_mart/utils/routes.dart';
 import 'package:ism_mart/utils/constants.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
-import '../../utils/routes.dart';
-import '../../widgets/custom_button.dart';
-import '../../widgets/form_input_field_with_icon.dart';
+import 'package:ism_mart/widgets/custom_button.dart';
+import 'package:ism_mart/widgets/form_input_field_with_icon.dart';
 
-class EmailInput extends GetView<AuthController> {
-  const EmailInput({Key? key}) : super(key: key);
+class ForgotPasswordView extends GetView<AuthController> {
+  const ForgotPasswordView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final formKey = GlobalKey<FormState>();
     return SafeArea(
       child: Scaffold(
-        body: CustomScrollView(
-          slivers: [
-            SliverAppBar(
-              expandedHeight: 100.0,
-              floating: false,
-              pinned: true,
-              automaticallyImplyLeading: false,
-              flexibleSpace: FlexibleSpaceBar(
-                centerTitle: false,
-                titlePadding: const EdgeInsets.symmetric(horizontal: 16),
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    buildSvgLogo(),
-                    InkWell(
-                      onTap: () {
-                        controller.forgotPasswordEmailController.clear();
-                        Get.back();
-                      },
-                      child: const Icon(Icons.close),
-                    ),
-                  ],
+        appBar: appBar(),
+        body: SingleChildScrollView(
+          padding: EdgeInsets.fromLTRB(16, 0, 16, 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                langKey.forgotPassword.tr,
+                style: headline1.copyWith(
+                  fontSize: 25,
+                  fontWeight: FontWeight.w800,
                 ),
               ),
-            ),
-            SliverList(
-              delegate: SliverChildListDelegate(
-                [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Text(
-                      langKey.enterEmail.tr,
-                      style: headline2,
-                    ),
-                  ),
-                  AppConstant.spaceWidget(height: 90),
-                  Center(
-                    child: Form(
-                      key: formKey,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            AppConstant.spaceWidget(height: 20),
-                            FormInputFieldWithIcon(
-                              controller:
-                                  controller.forgotPasswordEmailController,
-                              iconPrefix: Icons.email,
-                              labelText: langKey.email.tr,
-                              iconColor: kPrimaryColor,
-                              autofocus: false,
-                              textStyle: bodyText1,
-                              autoValidateMode:
-                                  AutovalidateMode.onUserInteraction,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return langKey.emptyField.tr;
-                                } else
-                                  return !GetUtils.isEmail(value)
-                                      ? langKey.emailReq.tr
-                                      : null;
-                              },
-                              keyboardType: TextInputType.emailAddress,
-                              onChanged: (value) {},
-                              onSaved: (value) {},
-                            ),
-                            AppConstant.spaceWidget(height: 20),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                CustomButton(
-                                  onTap: () {
-                                    Get.back();
-                                  },
-                                  text: langKey.cancelBtn.tr,
-                                  width: 100,
-                                  height: 35,
-                                  color: kPrimaryColor,
-                                ),
-                                CustomButton(
-                                  onTap: () async {
-                                    if (formKey.currentState!.validate()) {
-                                      await controller
-                                          .forgotPasswordWithEmail()
-                                          .then((value) {
-                                        if (value == true) {
-                                          Navigator.pop(Get.context!);
-                                          Get.toNamed(
-                                              Routes.resetPasswordRoute);
-                                          controller
-                                              .forgotPasswordEmailController
-                                              .clear();
-                                        }
-                                      });
-                                    }
-                                  },
-                                  text: langKey.send.tr,
-                                  width: 100,
-                                  height: 35,
-                                  color: kPrimaryColor,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+              SizedBox(height: 10),
+              Text(
+                langKey.forgotPasswordDesc.tr,
+                style: bodyText2Poppins.copyWith(
+                  fontSize: 13,
+                ),
               ),
-            )
-          ],
+              //header(),
+              SizedBox(height: 40),
+              Text(
+                langKey.enterEmail.tr,
+                style: headline2,
+              ),
+              emailTextField(),
+              buttons(),
+            ],
+          ),
         ),
       ),
+    );
+  }
+
+  PreferredSizeWidget appBar() {
+    return AppBar(
+      elevation: 0,
+      leading: IconButton(
+        onPressed: () {
+          controller.forgotPasswordEmailController.clear();
+          Get.back();
+        },
+        icon: Icon(
+          Icons.arrow_back_ios_new,
+          size: 18,
+          color: kPrimaryColor,
+        ),
+      ),
+    );
+  }
+
+  Widget emailTextField() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 15, bottom: 20),
+      child: Form(
+        key: controller.forgotPasswordFormKey,
+        child: FormInputFieldWithIcon(
+          controller: controller.forgotPasswordEmailController,
+          iconPrefix: Icons.email,
+          labelText: langKey.email.tr,
+          iconColor: kPrimaryColor,
+          autofocus: false,
+          textStyle: bodyText1,
+          autoValidateMode: AutovalidateMode.onUserInteraction,
+          validator: (value) {
+            if (value!.isEmpty) {
+              return langKey.emptyField.tr;
+            } else
+              return !GetUtils.isEmail(value) ? langKey.emailReq.tr : null;
+          },
+          keyboardType: TextInputType.emailAddress,
+          onChanged: (value) {},
+          onSaved: (value) {},
+        ),
+      ),
+    );
+  }
+
+  Widget buttons() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
+          child: CustomButton(
+            onTap: () {
+              Get.back();
+            },
+            text: langKey.cancelBtn.tr,
+            height: 40,
+            color: kPrimaryColor,
+          ),
+        ),
+        SizedBox(width: 15),
+        Expanded(
+          child: CustomButton(
+            onTap: () async {
+              if (controller.forgotPasswordFormKey.currentState!.validate()) {
+                await controller.forgotPasswordWithEmail().then((value) {
+                  if (value == true) {
+                    Navigator.pop(Get.context!);
+                    Get.toNamed(Routes.resetPasswordRoute);
+                    controller.forgotPasswordEmailController.clear();
+                  }
+                });
+              }
+            },
+            text: langKey.send.tr,
+            height: 40,
+            color: kPrimaryColor,
+          ),
+        ),
+      ],
     );
   }
 }
