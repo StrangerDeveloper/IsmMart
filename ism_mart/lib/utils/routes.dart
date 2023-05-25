@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
-import 'package:ism_mart/presentation/ui/exports_ui.dart';
+import 'package:ism_mart/presentation/exports_ui.dart';
 
 import '../presentation/ui/buyer/account/email_verification/resend_email_verification_link.dart';
 
