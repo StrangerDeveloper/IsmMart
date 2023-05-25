@@ -553,7 +553,8 @@ class AuthController extends GetxController {
     if (userToken == null || userToken == '') {
       Get.toNamed(Routes.loginRoute);
     } else {
-      if (userModel!.emailVerified == false) {
+      if (userModel!.emailVerified == null ||
+          userModel!.emailVerified == false) {
         String? verificationDetails =
             await LocalStorageHelper.getEmailVerificationDetails();
         if (verificationDetails != null) {
