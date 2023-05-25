@@ -337,7 +337,7 @@ class DashboardUI extends GetView<BaseController> {
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: AppResponsiveness.getGridItemCount(),
                   childAspectRatio:
-                      AppResponsiveness.getChildAspectRatioPoint100(),
+                      AppResponsiveness.getChildAspectRatioPoint90(),
                   //mainAxisExtent: AppResponsiveness.getMainAxisExtentPoint25(),
                   mainAxisSpacing: 10,
                   crossAxisSpacing: 10),
@@ -355,10 +355,7 @@ class DashboardUI extends GetView<BaseController> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
-        height: AppResponsiveness.height *
-            (!isCategoryProducts!
-                ? 0.25
-                : 0.22), //AppResponsiveness.getBoxHeightPoint25(),
+        height: AppResponsiveness.getBoxHeightPoint28(),
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: list.length,
