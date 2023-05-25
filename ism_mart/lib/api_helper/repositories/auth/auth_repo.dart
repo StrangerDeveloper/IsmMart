@@ -29,6 +29,7 @@ class AuthRepository {
   Future<dynamic> register({UserModel? userModel}) async {
     var response = await _apiService.post(
         endpoint: "auth/register", body: userModel?.toJson());
+
     return response.body;
   }
 
