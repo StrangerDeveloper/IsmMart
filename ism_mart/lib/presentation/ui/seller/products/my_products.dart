@@ -194,10 +194,9 @@ class MyProducts extends GetView<SellersController> {
                     AppConstant.spaceWidget(width: 5),
                     CustomActionIcon(
                         onTap: () => AppConstant.showConfirmDeleteDialog(
-                              ontap: () {
-                                controller.deleteProduct(id: model.id);
-                                //
-                              },
+                              ontap: () => controller.deleteProduct(id: model.id),
+                          passedHeadingLangKey: langKey.areYouSure.tr,
+                          passedBodyLangKey: langKey.deletionProcessDetail.tr,
                             ),
                         icon: Icons.delete_rounded,
                         bgColor: kRedColor)

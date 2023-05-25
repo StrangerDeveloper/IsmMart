@@ -82,8 +82,11 @@ class ProfileUI extends GetView<AuthController> {
                             isItBtn: true,
                           )
                         : InkWell(
-                            onTap: () => showConfirmDeleteDialog(
-                                userModel: controller.userModel!),
+                            onTap: () => AppConstant.showConfirmDeleteDialog(
+                              ontap: () => controller.deActivateAccount(),
+                              passedBodyLangKey: langKey.deActivateMsg.tr,
+                              givenFontSize: 18
+                            ),
                             child: Container(
                               width: 150,
                               padding:
@@ -300,7 +303,7 @@ class ProfileUI extends GetView<AuthController> {
                   text: langKey.noBtn.tr,
                   width: 100,
                   height: 35,
-                  color: kRedColor,
+                  color: kPrimaryColor,
                 ),
                 CustomButton(
                   onTap: () {

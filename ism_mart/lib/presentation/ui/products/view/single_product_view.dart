@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 import 'package:ism_mart/models/exports_model.dart';
@@ -9,7 +10,10 @@ import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class SingleProductView extends GetView<ProductController> {
-  const SingleProductView({this.productId, this.calledFor = 'customer'});
+  const SingleProductView({
+    this.productId,
+    this.calledFor = 'customer'
+  });
   final productId;
   final String calledFor;
 
@@ -43,9 +47,9 @@ class SingleProductView extends GetView<ProductController> {
     },
         onLoading: CustomLoading(isDarkMode: isDarkMode),
         onError: (error) => NoDataFoundWithIcon(
-              title: "No Product Found",
-              subTitle: error,
-            ),
+          title: "No Product Found",
+          subTitle: error,
+        ),
         onEmpty: NoDataFoundWithIcon(
           title: "No Product Found",
         ));
@@ -1043,12 +1047,11 @@ class SingleProductView extends GetView<ProductController> {
   }
 
   _footerBottomBar() {
-    return BottomAppBar(
-      elevation: 0,
-      height: 52,
-      child: Container(
+    return Container(
+        height: 55,
+          color: Colors.white,
           width: AppResponsiveness.width,
-          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -1069,7 +1072,7 @@ class SingleProductView extends GetView<ProductController> {
               ),
               //_buildBuyNowAndCartBtn(),
             ],
-          )),
+          )
     );
   }
 

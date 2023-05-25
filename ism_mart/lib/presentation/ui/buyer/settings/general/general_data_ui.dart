@@ -197,7 +197,7 @@ class GeneralSettingsDataUI extends StatelessWidget {
                     ),
                     AppConstant.spaceWidget(height: 10),
                     FormInputFieldWithIcon(
-                      controller: authController.storeDescController,
+                      controller: authController.messageController,
                       iconPrefix: Icons.description,
                       labelText: message.tr,
                       iconColor: kPrimaryColor,

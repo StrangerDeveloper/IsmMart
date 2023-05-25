@@ -28,8 +28,7 @@ class SingleProductItems extends StatelessWidget {
       aspectRatio: 0.8,
       child: GestureDetector(
         onTap: () {
-          Get.toNamed('/product/${model.id}',
-              arguments: {"calledFor": "customer"}, preventDuplicates: false);
+          Get.to(SingleProductView(productId: "${model.id}", calledFor: 'customer',));
         },
         child: Container(
           clipBehavior: Clip.hardEdge,

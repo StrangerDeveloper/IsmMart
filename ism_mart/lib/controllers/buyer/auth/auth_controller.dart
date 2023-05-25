@@ -585,7 +585,7 @@ class AuthController extends GetxController {
       await authProvider
           .deActivateUser(token: userToken)
           .then((ApiResponse? response) {
-        //isLoading(false);
+        isLoading(false);
         if (response != null) {
           if (response.success!) {
             Get.back();
@@ -639,7 +639,7 @@ class AuthController extends GetxController {
 
   ///Contact us
   var subjectController = TextEditingController();
-
+  var messageController = TextEditingController();
   postContactUs() async {
     isLoading(true);
     var data = {
@@ -677,7 +677,7 @@ class AuthController extends GetxController {
     firstNameController.clear();
     emailController.clear();
     subjectController.clear();
-    storeDescController.clear();
+    messageController.clear();
   }
 
   clearSignUpControllers() {

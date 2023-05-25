@@ -138,7 +138,7 @@ class UserResponse {
     String? message = "";
     if (response['message'] == null) {
       message = someThingWentWrong.tr;
-    } else if (response[message] is List) {
+    } else if (response['message'] is List<dynamic>) {
       message = (response['message'] as List).first;
     } else {
       message = response['message'];

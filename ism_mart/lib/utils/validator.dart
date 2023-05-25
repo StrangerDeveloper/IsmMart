@@ -65,8 +65,8 @@ class Validator {
 
   String? name(String? value, {String? title}) {
     //String pattern = r"^[a-zA-Z]+(([',.-][a-zA-Z])?[a-zA-Z])$";
-    String pattern = r"^[a-zA-Z\s]+$";
-    RegExp regex = RegExp(pattern);
+    // String pattern = r"[a-zA-Z-]+$|\s";
+    RegExp regex = RegExp(r'[a-zA-Z-]+|\s');
     if (value!.isEmpty) {
       return "$title is required";
     } else if (!regex.hasMatch(value.trim())) {
