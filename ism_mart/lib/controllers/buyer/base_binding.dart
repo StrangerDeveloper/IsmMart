@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
-import 'package:ism_mart/presentation/ui/products/controllers/product_controller.dart';
+import 'package:ism_mart/controllers/product_controller.dart';
 
 class BaseBindings extends Bindings {
   @override
