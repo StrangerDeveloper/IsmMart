@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
-import 'package:ism_mart/presentation/exports_ui.dart';
+import 'package:ism_mart/exports/exports_ui.dart';
 import 'package:ism_mart/screens/email_verification/email_verification.dart';
 
 class Routes {

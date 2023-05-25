@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
-import 'package:ism_mart/presentation/export_presentation.dart';
+import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 import 'package:ism_mart/models/exports_model.dart';
-import 'package:ism_mart/presentation/exports_ui.dart';
+import 'package:ism_mart/exports/exports_ui.dart';
 import 'package:ism_mart/widgets/single_product_full_image_view.dart';
 import 'package:ism_mart/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';

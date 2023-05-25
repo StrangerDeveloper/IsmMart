@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:ism_mart/presentation/export_presentation.dart';
+import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
 class ShowPickedImagesList extends StatelessWidget {

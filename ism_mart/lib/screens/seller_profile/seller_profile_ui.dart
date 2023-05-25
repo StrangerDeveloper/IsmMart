@@ -2,8 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
+import 'package:ism_mart/exports/export_presentation.dart';
 import '../../utils/exports_utils.dart';
-import '../../presentation/export_presentation.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class StoreProfileUI extends GetView<AuthController> {

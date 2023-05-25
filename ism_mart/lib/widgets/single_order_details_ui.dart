@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
-import 'package:ism_mart/presentation/export_presentation.dart';
+import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/screens/dispute_detail/dispute_detail_view.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:iconly/iconly.dart';

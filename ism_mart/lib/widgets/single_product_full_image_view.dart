@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ism_mart/presentation/export_presentation.dart';
+import 'package:ism_mart/exports/export_presentation.dart';
 import '../models/product/product_model.dart';
 import '../utils/constants.dart';
 
