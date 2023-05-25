@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ism_mart/presentation/ui/buyer/dispute_detail/dispute_detail_viewmodel.dart';
-import 'package:ism_mart/presentation/widgets/loader_view.dart';
+import 'package:ism_mart/widgets/loader_view.dart';
 import 'package:ism_mart/utils/constants.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;

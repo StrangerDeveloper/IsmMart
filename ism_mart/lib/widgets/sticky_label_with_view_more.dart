@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ism_mart/presentation/widgets/export_widgets.dart';
+import 'package:ism_mart/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
 class StickyLabelWithViewMoreOption extends StatelessWidget {

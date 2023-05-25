@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ism_mart/presentation/widgets/custom_text.dart';
+import 'package:ism_mart/widgets/custom_text.dart';
 import 'package:ism_mart/utils/constants.dart';
 
-import '../../utils/languages/translations_key.dart' as langKey;
+import '../utils/languages/translations_key.dart' as langKey;
 
 class NoDataFound extends StatelessWidget {
   const NoDataFound(

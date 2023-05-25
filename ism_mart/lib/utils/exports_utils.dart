@@ -11,5 +11,4 @@ export 'languages/russian.dart';
 export 'languages/chinese.dart';
 export 'responsiveness.dart';
 export 'helpers/permission_handler.dart';
-export 'helpers/common_function.dart';
 export 'validator.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
-import 'package:ism_mart/presentation/widgets/custom_text.dart';
+import 'package:ism_mart/widgets/custom_text.dart';
 import 'package:ism_mart/utils/constants.dart';
 import 'package:iconly/iconly.dart';
 

@@ -435,7 +435,7 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                           maxLines: 6,
                           autoValidateMode: AutovalidateMode.onUserInteraction,
                           validator: (value) {
-                            return CommonFunctions.validateDefaultTxtField(
+                            return Validator().validateDefaultTxtField(
                                 value);
                           },
                         ),

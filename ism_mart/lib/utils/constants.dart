@@ -10,8 +10,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:ism_mart/models/exports_model.dart';
 
-import '../presentation/widgets/custom_button.dart';
-import '../presentation/widgets/custom_text.dart';
+import '../widgets/custom_button.dart';
+import '../widgets/custom_text.dart';
 
 const kLimeGreenColor = Color(0xFFACC254);
 const kPrimaryColor = kDarkColor;

@@ -5,8 +5,8 @@ import 'package:ism_mart/utils/svg_helper.dart';
 import 'package:ism_mart/utils/constants.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import '../../../../../utils/routes.dart';
-import '../../../../widgets/custom_button.dart';
-import '../../../../widgets/form_input_field_with_icon.dart';
+import '../../../../../widgets/custom_button.dart';
+import '../../../../../widgets/form_input_field_with_icon.dart';
 
 class EmailInput extends GetView<AuthController> {
   const EmailInput({Key? key}) : super(key: key);
