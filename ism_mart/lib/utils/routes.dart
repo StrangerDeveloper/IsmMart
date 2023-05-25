@@ -61,7 +61,7 @@ class Routes {
         binding: BaseBindings()),
     GetPage(
         name: emailVerificationLinkRoute,
-        page: () => ResendEmailVerificationLink(),
+        page: () => EmailVerificationView(),
         binding: BaseBindings()),
     GetPage(
         name: searchRoute,

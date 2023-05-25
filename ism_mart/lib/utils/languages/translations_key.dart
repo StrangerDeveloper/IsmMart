@@ -82,7 +82,9 @@ const itemsFound = 'itemsFound',
 const orderDetail = 'orderDetail';
 
 ///email_verification
-const cancel = 'cancel', emailVerificationLink = 'emailVerificationLink';
+const cancel = 'cancel',
+    emailVerificationLink = 'emailVerificationLink',
+    emailVerification = 'emailVerification';
 
 ///DisputeDetailView
 const id = 'id';

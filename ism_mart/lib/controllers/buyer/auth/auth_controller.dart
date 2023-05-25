@@ -14,6 +14,7 @@ class AuthController extends GetxController {
 
   RxString countryCode = '+92'.obs;
   final forgotPasswordFormKey = GlobalKey<FormState>();
+  final emailVerificationFormKey = GlobalKey<FormState>();
   var forgotPasswordEmailController = TextEditingController();
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
