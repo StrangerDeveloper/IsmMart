@@ -258,7 +258,7 @@ class StoreProfileView extends GetView<AuthController> {
     return Obx(
       () => Container(
         margin: EdgeInsets.only(left: 6, bottom: 6),
-        padding: EdgeInsets.all(3),
+        // padding: EdgeInsets.all(3),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: Colors.white,
@@ -275,6 +275,12 @@ class StoreProfileView extends GetView<AuthController> {
                   image: imageProvider,
                   fit: BoxFit.fill,
                 ),
+                  boxShadow: [ BoxShadow(
+              color: kPrimaryColor.withOpacity(0.22),
+              offset: Offset(0, 0),
+              blurRadius: 10.78,
+            ),
+              ]
               ),
             );
           },

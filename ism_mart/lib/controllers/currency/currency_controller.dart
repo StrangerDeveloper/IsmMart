@@ -175,15 +175,18 @@ class CurrencyController extends GetxController with StateMixin {
     await _apiProvider
         .convertCurrency(to: toCurrency, from: fromCurrency, amount: amount)
         .then((CurrencyModel? model) {
-      if (model != null) {
+      if (model!.success!) {
         //_currencyModel(model);
         print(">>Model: ${model.exchangeRate}");
         LocalStorageHelper.storeCurrency(
             currencyModel: CurrencyModel(
                 to: toCurrency, from: "pkr", exchangeRate: model.exchangeRate));
-      } else {
-        print(">>Model is null");
       }
+      else{
+        getCurrencyState();
+      }
+    }).catchError((e) {
+      getCurrencyState();
     });
 
     //return currency.value;
