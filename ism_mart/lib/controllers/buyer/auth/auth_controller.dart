@@ -39,7 +39,7 @@ class AuthController extends GetxController {
 
   var editingTextController = TextEditingController();
 
-  var isPasswordMatched = false.obs;
+  var showPasswordNotMatched = false.obs;
 
   @override
   void onInit() {
@@ -152,7 +152,7 @@ class AuthController extends GetxController {
         if (response.success!) {
           Navigator.pop(Get.context!);
           Get.to(() => ResetForgotPassword());
-          forgotPasswordEmailController.clear();
+          //forgotPasswordEmailController.clear();
           AppConstant.displaySnackBar(
               langKey.successTitle.tr, response.message);
         } else {
@@ -169,7 +169,7 @@ class AuthController extends GetxController {
 
   forgotPasswordOtp() async {
     isLoading(true);
-    String email = emailController.text;
+    String email = forgotPasswordEmailController.text;
     String password = passwordController.text;
     String confirmPass = confirmPassController.text;
     String otp = otpController.text;
@@ -184,9 +184,9 @@ class AuthController extends GetxController {
         if (response.success!) {
           Get.back();
           debugPrint("Email: ${response.toString()}");
+          clearForgotPasswordControllers();
           AppConstant.displaySnackBar(
               langKey.successTitle.tr, response.message);
-          passwordController.clear();
         } else {
           AppConstant.displaySnackBar(langKey.errorTitle.tr, response.message);
         }
@@ -681,6 +681,13 @@ class AuthController extends GetxController {
 
   void showSnackBar({title = 'error', message = 'Something went wrong'}) {
     AppConstant.displaySnackBar(title, message);
+  }
+
+  clearForgotPasswordControllers(){
+    passwordController.clear();
+    forgotPasswordEmailController.clear();
+    otpController.clear();
+    confirmPassController.clear();
   }
 
   clearContactUsControllers() {
