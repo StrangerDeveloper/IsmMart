@@ -72,8 +72,8 @@ class ApiProvider {
     return products.map((product) => ProductModel.fromJson(product)).toList();
   }
 
-  Future<List<ProductModel>> getProductsByType({String? type}) async {
-    var products = await _apiRepository.getProductsByType(type: type);
+  Future<List<ProductModel>> getProductsByType({String? type, int? limit}) async {
+    var products = await _apiRepository.getProductsByType(type: type, limit: limit);
 
     return products.map((product) => ProductModel.fromJson(product)).toList();
   }

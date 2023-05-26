@@ -158,9 +158,7 @@ class DashboardUI extends GetView<BaseController> {
         DateTime.now().add(const Duration(hours: 17)).millisecondsSinceEpoch;
     return InkWell(
       onTap: () {
-        Get.to(SingleProductView(
-          productId: model.id,
-        ));
+        Get.to(SingleProductView(productId: "${model.id}", calledFor: 'customer',));
       },
       child: Stack(
         fit: StackFit.loose,
@@ -311,8 +309,7 @@ class DashboardUI extends GetView<BaseController> {
                 title: e.key,
                 textSize: 20,
                 onTap: () {
-                  Get.toNamed(Routes.searchRoute,
-                      arguments: {"searchText": "${e.key}"});
+                  Get.to(() => SearchView(passedSearchQuery: '${e.key}',));
                 }),
             AppConstant.spaceWidget(height: 10),
             _trendingProducts(list as List<ProductModel>, isPopular,

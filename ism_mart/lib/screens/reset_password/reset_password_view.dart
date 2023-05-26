@@ -46,7 +46,7 @@ class ResetForgotPassword extends GetView<AuthController> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: Text(
-                      langKey.enterEmail.tr,
+                      langKey.enterDetails.tr,
                       style: headline2,
                     ),
                   ),
@@ -138,7 +138,7 @@ class ResetForgotPassword extends GetView<AuthController> {
                               onTap: () async {
                                 await controller.forgotPasswordOtp();
                               },
-                              text: langKey.send.tr,
+                              text: langKey.proceed.tr,
                               width: 120,
                               height: 40,
                               color: kPrimaryColor,

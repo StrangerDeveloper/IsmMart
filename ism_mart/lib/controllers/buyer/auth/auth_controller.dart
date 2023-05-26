@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
+import 'package:ism_mart/exports/export_account.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
@@ -134,7 +135,7 @@ class AuthController extends GetxController {
     //isLoading(false);
   }
 
-  Future<bool?> forgotPasswordWithEmail() async {
+  forgotPasswordWithEmail() async {
     isLoading(false);
     String email = forgotPasswordEmailController.text.trim();
 
@@ -143,23 +144,21 @@ class AuthController extends GetxController {
       isLoading(false);
       if (response != null) {
         if (response.success!) {
-          //Get.back();
+          Navigator.pop(Get.context!);
+          Get.to(() => ResetForgotPassword());
+          forgotPasswordEmailController.clear();
           AppConstant.displaySnackBar(
               langKey.successTitle.tr, response.message);
-          return true;
         } else {
           AppConstant.displaySnackBar(langKey.errorTitle.tr, response.message);
         }
       } else
         AppConstant.displaySnackBar(
             langKey.errorTitle.tr, langKey.wrongWithCredentials.tr);
-      return false;
     }).catchError((onError) {
       isLoading(false);
       debugPrint("resetPassword: $onError");
-      return false;
     });
-    return false;
   }
 
   forgotPasswordOtp() async {
@@ -196,7 +195,7 @@ class AuthController extends GetxController {
 
   resendEmailVerificationLink() async {
     isLoading(false);
-    String email = emailController.text.trim();
+    String email = emailController.text;
 
     await authProvider
         .resendVerificationLink(email: email)

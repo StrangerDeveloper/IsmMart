@@ -24,6 +24,7 @@ class English {
 
         ///reset_password
         key.enterDetails: 'Enter Details To Create New Password',
+        key.proceed: 'Proceed',
 
         ///sign_in
         key.passwordRequired: 'Password is required!.',

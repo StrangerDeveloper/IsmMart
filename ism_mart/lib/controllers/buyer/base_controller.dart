@@ -214,7 +214,7 @@ class BaseController extends GetxController {
     productsWithTypesMap.clear();
 
     _getProductsType().forEach((element) async {
-      await _apiProvider.getProductsByType(type: element['key']).then((value) {
+      await _apiProvider.getProductsByType(limit: 15, type: element['key']).then((value) {
         isProductsLoading(false);
         productsWithTypesMap.putIfAbsent(element['value'], () => value);
       }).catchError((error) {

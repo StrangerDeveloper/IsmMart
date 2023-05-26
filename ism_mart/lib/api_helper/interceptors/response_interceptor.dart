@@ -11,10 +11,10 @@ FutureOr<dynamic> responseInterceptor(
 }
 
 dynamic handleResponse(Response response) {
-  debugPrint('RESPONSE START /////////////////');
-  debugPrint('  Status Code: ${response.statusCode}');
-  debugPrint('  Body: ${response.body}');
-  debugPrint('RESPONSE END /////////////////');
+  // debugPrint('RESPONSE START /////////////////');
+  // debugPrint('  Status Code: ${response.statusCode}');
+  // debugPrint('  Body: ${response.body}');
+  // debugPrint('RESPONSE END /////////////////');
 
   switch (response.statusCode) {
     case 200:

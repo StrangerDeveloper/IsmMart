@@ -9,25 +9,48 @@ import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 class SearchView extends GetView<CustomSearchController> {
   const SearchView({
     Key? key,
+    this.passedSearchQuery,
     this.isCalledForDeals = false,
   }) : super(key: key);
   final bool? isCalledForDeals;
-
+  final String? passedSearchQuery;
   @override
   Widget build(BuildContext context) {
     //  final controller = Get.find<SearchController>();
-    controller.search(
-        Get.arguments != null ? Get.arguments["searchText"].toString() : " ");
+    String? searchQuery;
+    if(passedSearchQuery == 'ISMMART Originals'){
+      searchQuery = 'IsmmartOriginal';
+      controller.setSelectedCategory(searchQuery);
+    }
+    else if(passedSearchQuery == 'Popular Products'){
+      searchQuery = 'Latest';
+      controller.setSelectedCategory(searchQuery);
+    }
+    else if(passedSearchQuery == 'Featured Products'){
+      searchQuery = 'Featured';
+      controller.setSelectedCategory(searchQuery);
+    }
+    else{
+      searchQuery = passedSearchQuery;
+      controller.setSelectedCategory(passedSearchQuery);
+    }
+    controller.getProductsByType(searchQuery);
+
 
     return Hero(
       tag: "productSearchBar",
       child: SafeArea(
-        child: Scaffold(
-          backgroundColor: Colors.grey[100]!,
-          appBar: _searchAppBar(),
-          body: _body(),
-          //floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-          //floatingActionButton: _filterBar(),
+        child: WillPopScope(
+          onWillPop: (){
+            return controller.goBack();
+          },
+          child: Scaffold(
+            backgroundColor: Colors.grey[100]!,
+            appBar: _searchAppBar(),
+            body: _body(),
+            //floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+            //floatingActionButton: _filterBar(),
+          ),
         ),
       ),
     );
@@ -45,7 +68,9 @@ class SearchView extends GetView<CustomSearchController> {
       leading: isCalledForDeals!
           ? null
           : InkWell(
-              onTap: () => Get.back(),
+              onTap: () {
+                controller.goBack();
+              },
               child: Icon(
                 Icons.arrow_back_ios_new,
                 size: 18,
@@ -57,7 +82,12 @@ class SearchView extends GetView<CustomSearchController> {
         child: TextField(
           controller: controller.searchTextController,
           //focusNode: controller.focus,
-          onChanged: controller.search,
+          onChanged: (value){
+            if(value != '') {
+              controller.setSelectedCategory(null);
+              controller.search(controller.searchTextController.text);
+            }
+          },
           cursorColor: kPrimaryColor,
           autofocus: false,
           maxLines: 1,

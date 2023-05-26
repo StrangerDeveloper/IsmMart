@@ -17,11 +17,17 @@ class CustomSearchController extends GetxController {
 
   var selectedCategoryId = 0.obs;
 
+  var _selectedCategory = ''.obs;
   var isLoadingMore = false.obs;
   ScrollController scrollController = ScrollController();
 
   var _sortBy = ''.obs;
 
+  String? get selectedCategory => _selectedCategory.value;
+
+  setSelectedCategory(String? value){
+    _selectedCategory.value = value.toString();
+  }
   String? get sortBy => _sortBy.value;
 
   setSortBy(String value) {
@@ -57,7 +63,12 @@ class CustomSearchController extends GetxController {
     scrollController
       ..addListener(() {
         if (stopLoadMore.isFalse) {
-          loadMore(searchTextController.text);
+          if (selectedCategory!.isNotEmpty) {
+            loadMoreCategoryProducts(selectedCategory);
+          }
+          else {
+            loadMore(searchTextController.text);
+          }
         }
       });
   }
@@ -65,18 +76,38 @@ class CustomSearchController extends GetxController {
   var isLoading = false.obs;
   var productList = <ProductModel>[].obs;
 
-  int searchLimit = 32;
+  int searchLimit = 15;
   int page = 1;
+
+  getProductsByType(String? query)async{
+    isLoading(true);
+    await _apiProvider
+        .getProductsByType(
+      type: query,
+      // page: page,
+      limit: searchLimit,
+      // sortBy: sortBy
+    )
+        .then((response) {
+      isLoading(false);
+      productList.clear();
+      productList.addAll(response);
+      //searchTextController.clear();
+    }).catchError((error) {
+      isLoading(false);
+      //change(null, status: RxStatus.error(error));
+    });
+  }
 
   search(String? query) async {
     //change(null, status: RxStatus.loading());
 
     isLoading(true);
-    page = 1;
-    searchLimit = 32 * 2;
+    // page = 1;
+    // searchLimit = 32 * 2;
     await _apiProvider
         .search(
-            text: query!.toLowerCase(),
+            text: query,
             page: page,
             limit: searchLimit,
             sortBy: sortBy)
@@ -110,6 +141,34 @@ class CustomSearchController extends GetxController {
         //change(products, status: RxStatus.success());
         // productList.clear();
         productList.addAll(response.products.productRows!);
+        isLoadingMore(false);
+      }).catchError((error) {
+        isLoadingMore(false);
+        //change(null, status: RxStatus.error(error));
+      });
+    }
+  }
+
+  void loadMoreCategoryProducts(String? searchQuery) async {
+    //scrollController.position.maxScrollExtent == scrollController.offset
+    //scrollController.position.extentAfter<300
+    if (scrollController.hasClients &&
+        isLoadingMore.isFalse &&
+        scrollController.position.maxScrollExtent == scrollController.offset) {
+      isLoadingMore(true);
+      searchLimit += 10;
+      //page++;
+      print(searchLimit);
+      await _apiProvider
+          .getProductsByType(
+        type: searchQuery,
+        limit: searchLimit,
+      )
+          .then((response) {
+        //change(products, status: RxStatus.success());
+        productList.clear();
+        productList.addAll(response);
+        print('Received Products: ${productList.length}');
         isLoadingMore(false);
       }).catchError((error) {
         isLoadingMore(false);
@@ -186,6 +245,12 @@ class CustomSearchController extends GetxController {
       isLoading(false);
       debugPrint("searchFilter: $onError");
     });
+  }
+
+  goBack(){
+    searchLimit = 15;
+    searchTextController.clear();
+    Get.back();
   }
 
   clearFilters() async {

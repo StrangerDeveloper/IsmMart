@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:ism_mart/controllers/product_controller.dart';
-import 'package:ism_mart/controllers/product_controller.dart';
 
 class ProductBinding extends Bindings {
   @override

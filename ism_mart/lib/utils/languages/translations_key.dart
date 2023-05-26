@@ -415,7 +415,8 @@ const email = "email",
     resetPass = 'resetPass',
     passwordNotMatched = "passNotMatched",
     forgotPasswordDesc = 'forgotPasswordDesc',
-    forgotPassword = "forgotPassword";
+    forgotPassword = "forgotPassword",
+    proceed = 'proceed';
 
 const storeName = "storeName",
     storeNameReq = "storeNameRequired",

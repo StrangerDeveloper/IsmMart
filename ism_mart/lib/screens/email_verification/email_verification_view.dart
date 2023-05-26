@@ -69,9 +69,9 @@ class EmailVerificationView extends GetView<AuthController> {
     return Padding(
       padding: const EdgeInsets.only(top: 15, bottom: 20),
       child: Form(
-        key: controller.forgotPasswordFormKey,
+        key: controller.emailVerificationFormKey,
         child: FormInputFieldWithIcon(
-          controller: controller.forgotPasswordEmailController,
+          controller: controller.emailController,
           iconPrefix: Icons.email,
           labelText: langKey.email.tr,
           iconColor: kPrimaryColor,
@@ -110,8 +110,7 @@ class EmailVerificationView extends GetView<AuthController> {
         Expanded(
           child: CustomButton(
             onTap: () async {
-              if (controller.emailVerificationFormKey.currentState!
-                  .validate()) {
+              if (controller.emailVerificationFormKey.currentState!.validate()) {
                 await controller.resendEmailVerificationLink();
                 await LocalStorageHelper.storeEmailVerificationDetails();
               }

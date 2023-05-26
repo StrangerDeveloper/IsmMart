@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/controllers/buyer/auth/auth_controller.dart';
-import 'package:ism_mart/utils/routes.dart';
 import 'package:ism_mart/utils/constants.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/custom_button.dart';
@@ -112,13 +111,7 @@ class ForgotPasswordView extends GetView<AuthController> {
           child: CustomButton(
             onTap: () async {
               if (controller.forgotPasswordFormKey.currentState!.validate()) {
-                await controller.forgotPasswordWithEmail().then((value) {
-                  if (value == true) {
-                    Navigator.pop(Get.context!);
-                    Get.toNamed(Routes.resetPasswordRoute);
-                    controller.forgotPasswordEmailController.clear();
-                  }
-                });
+                await controller.forgotPasswordWithEmail();
               }
             },
             text: langKey.send.tr,
