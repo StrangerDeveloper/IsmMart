@@ -1,4 +1,10 @@
 //////////////////////////////////////////////////////////////////////
+///
+const questions = 'questions',
+    updateQuestion = 'updateQuestion',
+    deleteQuestion = 'deleteQuestion',
+    deleteQuestionDialogDesc = 'deleteQuestionDialogDesc',
+    question = 'question';
 
 ///errors
 const noInternetConnection = 'noInternetConnection',

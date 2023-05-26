@@ -2,6 +2,12 @@ import 'translations_key.dart' as key;
 
 class English {
   Map<String, String> get translations => {
+        ///single_product_view
+        key.questions : 'Questions',
+        key.updateQuestion : 'Update Question',
+        key.deleteQuestion : 'Delete Question',
+        key.deleteQuestionDialogDesc : 'Are you sure you want to delete question?',
+        key.question : 'Question',
 
         ///errors
         key.serverUnableToHandle: 'server is unable to handle request',

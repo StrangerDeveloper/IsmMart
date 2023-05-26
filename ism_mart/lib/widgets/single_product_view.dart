@@ -865,7 +865,7 @@ class SingleProductView extends GetView<ProductController> {
                   Padding(
                     padding: const EdgeInsets.only(left: 5),
                     child: Text(
-                      'Questions',
+                      langKey.questions.tr,
                       style: GoogleFonts.lato(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -884,7 +884,7 @@ class SingleProductView extends GetView<ProductController> {
               ),
               Divider(),
               BottomSheetItemRow(
-                title: 'Update Question',
+                title: langKey.updateQuestion.tr,
                 icon: IconlyLight.edit,
                 isDisabled: false,
                 onTap: () {
@@ -893,7 +893,7 @@ class SingleProductView extends GetView<ProductController> {
                 },
               ),
               BottomSheetItemRow(
-                title: 'Delete Question',
+                title: langKey.deleteQuestion.tr,
                 icon: IconlyLight.delete,
                 isDisabled: false,
                 onTap: () {
@@ -913,8 +913,8 @@ class SingleProductView extends GetView<ProductController> {
       context: Get.context!,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Delete Question'),
-          content: Text('Are you sure you want to delete question?'),
+          title: Text(langKey.deleteQuestion.tr),
+          content: Text(langKey.deleteQuestionDialogDesc.tr),
           actions: [
             Row(
               children: [
@@ -962,6 +962,8 @@ class SingleProductView extends GetView<ProductController> {
   }
 
   updateQuestionBottomSheet(int index) {
+    controller.updateQuestionController.text =
+        controller.productQuestionsList[index].question ?? '';
     showModalBottomSheet(
       useSafeArea: true,
       isScrollControlled: true,
@@ -989,7 +991,7 @@ class SingleProductView extends GetView<ProductController> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           StickyLabel(
-                            text: 'Update Question',
+                            text: langKey.updateQuestion.tr,
                             style: headline1,
                           ),
                         ],
@@ -998,7 +1000,7 @@ class SingleProductView extends GetView<ProductController> {
                         padding: const EdgeInsets.only(top: 10, bottom: 20),
                         child: CustomTextField1(
                           controller: controller.updateQuestionController,
-                          title: 'Question',
+                          title: langKey.question.tr,
                           asterisk: true,
                           minLines: 4,
                           maxLines: 6,
@@ -1009,10 +1011,9 @@ class SingleProductView extends GetView<ProductController> {
                         ),
                       ),
                       CustomTextBtn(
-                        child: Text('Update'),
-                        onPressed: (){
+                        child: Text(langKey.updateBtn.tr),
+                        onPressed: () {
                           controller.updateQuestion(index);
-
                         },
                       )
                     ],
@@ -1308,7 +1309,7 @@ class SingleProductView extends GetView<ProductController> {
                             Border.all(width: 0, color: Colors.grey.shade300)),
                     child: Center(
                       child: CustomText(
-                        title: 'Out Of Stock',
+                        title: langKey.outOfStock.tr,
                         textAlign: TextAlign.center,
                         size: 18,
                         color: kRedColor,
