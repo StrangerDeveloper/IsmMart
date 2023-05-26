@@ -143,9 +143,8 @@ class CurrencyController extends GetxController with StateMixin {
         currency(currencyLocales[model.to]['currencyCode']);
         countryCode(currencyLocales[model.to]['countryCode']);
         //setCurrency(key: model.to);
-      } else {
+      } else
         setCurrency(key: "pkr");
-      }
     });
   }
 
@@ -176,7 +175,7 @@ class CurrencyController extends GetxController with StateMixin {
     await _apiProvider
         .convertCurrency(to: toCurrency, from: fromCurrency, amount: amount)
         .then((CurrencyModel? model) {
-      if (model!.success! && model.exchangeRate != null) {
+      if (model!.success!) {
         //_currencyModel(model);
         print(">>Model: ${model.exchangeRate}");
         LocalStorageHelper.storeCurrency(

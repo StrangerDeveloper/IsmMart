@@ -33,10 +33,7 @@ class ResetForgotPassword extends GetView<AuthController> {
                   children: [
                     buildSvgLogo(),
                     InkWell(
-                      onTap: () {
-                        controller.clearForgotPasswordControllers();
-                        Get.back();
-                      },
+                      onTap: () => Get.back(),
                       child: const Icon(Icons.close),
                     ),
                   ],
@@ -117,36 +114,29 @@ class ResetForgotPassword extends GetView<AuthController> {
                                               : null,
                               obscureText: true,
                               onChanged: (value) {
-                                print('Confirm: $value + Previous: ${controller.passwordController.text}');
                                 if (value.toLowerCase().trim() ==
                                     controller.passwordController.text
                                         .toLowerCase()
                                         .trim()) {
-                                  controller.showPasswordNotMatched(false);
-                                } else {
-                                  controller.showPasswordNotMatched(true);
-                                }
-                                },
+                                  controller.isPasswordMatched(true);
+                                } else
+                                  controller.isPasswordMatched(false);
+                              },
                               maxLines: 1,
                             ),
                             AppConstant.spaceWidget(height: 30),
                             Obx(
                               () => Visibility(
-                                  visible: controller.showPasswordNotMatched.value,
+                                  visible: controller.isPasswordMatched.value,
                                   child: CustomText(
                                     title: langKey.passwordNotMatched.tr,
                                     color: kRedColor,
-                                  )
-                              ),
+                                  )),
                             ),
                             AppConstant.spaceWidget(height: 20),
                             CustomButton(
                               onTap: () async {
-                                if(formKey.currentState!.validate()){
-                                  if(controller.showPasswordNotMatched == false){
-                                    await controller.forgotPasswordOtp();
-                                  }
-                                }
+                                await controller.forgotPasswordOtp();
                               },
                               text: langKey.proceed.tr,
                               width: 120,

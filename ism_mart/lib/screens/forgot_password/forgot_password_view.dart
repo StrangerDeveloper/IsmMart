@@ -53,7 +53,7 @@ class ForgotPasswordView extends GetView<AuthController> {
       elevation: 0,
       leading: IconButton(
         onPressed: () {
-          controller.clearForgotPasswordControllers();
+          controller.forgotPasswordEmailController.clear();
           Get.back();
         },
         icon: Icon(
