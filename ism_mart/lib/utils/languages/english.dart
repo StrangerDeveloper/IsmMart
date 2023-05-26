@@ -3,11 +3,13 @@ import 'translations_key.dart' as key;
 class English {
   Map<String, String> get translations => {
         ///single_product_view
-        key.questions : 'Questions',
-        key.updateQuestion : 'Update Question',
-        key.deleteQuestion : 'Delete Question',
-        key.deleteQuestionDialogDesc : 'Are you sure you want to delete question?',
-        key.question : 'Question',
+        key.questions: 'Questions',
+        key.updateQuestion: 'Update Question',
+        key.deleteQuestion: 'Delete Question',
+        key.deleteQuestionDialogDesc:
+            'Are you sure you want to delete question?',
+        key.question: 'Question',
+        key.topVendors: 'Top Vendors',
 
         ///errors
         key.serverUnableToHandle: 'server is unable to handle request',
@@ -360,7 +362,7 @@ class English {
         key.loginGreetings: 'Greetings! Welcome back!\nSign in to your Account',
         key.forgotPassword: 'Forgot Password',
         key.forgotPasswordDesc:
-        'Enter your email to receive an email\nwith the OTP Code.',
+            'Enter your email to receive an email\nwith the OTP Code.',
         key.donTHaveAccount: "Don't have an Account?",
         key.send: 'Send',
         key.optional: 'Optional',

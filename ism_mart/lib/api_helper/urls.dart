@@ -10,4 +10,6 @@ class Urls {
   //productController
   static String deleteQuestion = "product/questions/delete/";
   static String updateQuestion = "product/questions/update/";
+
+  static String getTopVendors = "getTopVendors?limit=";
 }

@@ -66,6 +66,10 @@ class AppResponsiveness {
   }
 
   /// box/section size based on small screen
+  ///
+  static double getBoxHeightPoint5() {
+    return height * (_isTabletScreen() ? 0.08 : 0.12);
+  }
 
   static double getBoxHeightPoint15() {
     return height * (_isTabletScreen() ? 0.2 : 0.15);

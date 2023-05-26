@@ -4,7 +4,8 @@ const questions = 'questions',
     updateQuestion = 'updateQuestion',
     deleteQuestion = 'deleteQuestion',
     deleteQuestionDialogDesc = 'deleteQuestionDialogDesc',
-    question = 'question';
+    question = 'question',
+    topVendors = "topVendors";
 
 ///errors
 const noInternetConnection = 'noInternetConnection',

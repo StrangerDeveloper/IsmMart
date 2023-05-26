@@ -25,6 +25,9 @@ class DashboardUI extends GetView<BaseController> {
                 _slider(controller.sliderImages),
                 StickyLabel(text: langKey.topCategories.tr),
                 _topCategoriesGrid(controller.categories),
+                //Top Vendors List
+                StickyLabel(text: langKey.topVendors.tr),
+                _topVendorCategoriesList(),
                 _displayDiscountProducts(),
                 Obx(
                   () => _displayProducts(
@@ -158,7 +161,10 @@ class DashboardUI extends GetView<BaseController> {
         DateTime.now().add(const Duration(hours: 17)).millisecondsSinceEpoch;
     return InkWell(
       onTap: () {
-        Get.to(SingleProductView(productId: "${model.id}", calledFor: 'customer',));
+        Get.to(SingleProductView(
+          productId: "${model.id}",
+          calledFor: 'customer',
+        ));
       },
       child: Stack(
         fit: StackFit.loose,
@@ -309,7 +315,9 @@ class DashboardUI extends GetView<BaseController> {
                 title: e.key,
                 textSize: 20,
                 onTap: () {
-                  Get.to(() => SearchView(passedSearchQuery: '${e.key}',));
+                  Get.to(() => SearchView(
+                        passedSearchQuery: '${e.key}',
+                      ));
                 }),
             AppConstant.spaceWidget(height: 10),
             _trendingProducts(list as List<ProductModel>, isPopular,
@@ -381,21 +389,24 @@ class DashboardUI extends GetView<BaseController> {
           : Padding(
               padding: const EdgeInsets.fromLTRB(10, 8, 10, 5),
               child: SizedBox(
-                height: AppResponsiveness.getBoxHeightPoint25(),
+                height: AppResponsiveness.getBoxHeightPoint5(),
                 child: list.isEmpty
                     ? NoDataFound(text: langKey.noCategoryFound.tr)
-                    : GridView.builder(
-                        physics: BouncingScrollPhysics(),
+                    : ListView.builder(
                         scrollDirection: Axis.horizontal,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          //maxCrossAxisExtent: 150,
-                          crossAxisCount: 2,
-                          //childAspectRatio: 1.8,
-                          //mainAxisSpacing: 3.0,
-                          crossAxisSpacing: 5,
-                        ),
                         itemCount: list.length,
                         itemBuilder: (context, index) {
+                          //  GridView.builder(
+                          //     physics: BouncingScrollPhysics(),
+                          //     scrollDirection: Axis.horizontal,
+                          //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          //       //maxCrossAxisExtent: 150,
+                          //       crossAxisCount: 2,
+                          //       //childAspectRatio: 1.8,
+                          //       //mainAxisSpacing: 3.0,
+                          //       crossAxisSpacing: 5,
+                          //     ),
+
                           CategoryModel model = list[index];
                           return SingleCategoryItem(categoryModel: model);
                         },
@@ -411,4 +422,76 @@ class DashboardUI extends GetView<BaseController> {
     print("aspectRatio: $aspectRatio");
     return aspectRatio;
   }*/
+
+  Widget _topVendorCategoriesList() {
+    return Obx(
+      () => Padding(
+        padding: const EdgeInsets.fromLTRB(10, 8, 10, 5),
+        child: SizedBox(
+          height: 100,
+          child: topVendorsViewModel.topvendorList.isEmpty
+              ? NoDataFound(text: langKey.noCategoryFound.tr)
+              : ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: topVendorsViewModel.topvendorList.length,
+                  itemBuilder: (context, index) {
+                    //  GridView.builder(
+                    //     physics: BouncingScrollPhysics(),
+                    //     scrollDirection: Axis.horizontal,
+                    //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    //       //maxCrossAxisExtent: 150,
+                    //       crossAxisCount: 2,
+                    //       //childAspectRatio: 1.8,
+                    //       //mainAxisSpacing: 3.0,
+                    //       crossAxisSpacing: 5,
+                    //     )
+
+                    return Expanded(child: topVendorsListViewItem(index));
+                  },
+                ),
+        ),
+      ),
+    );
+  }
+
+  Widget topVendorsListViewItem(int index) {
+    return InkWell(
+      onTap: () {
+        Get.toNamed(
+            '/storeDetails/${topVendorsViewModel.topvendorList[index].id}');
+        // Get.toNamed(Routes.searchRoute,
+        //     arguments: {"searchText": "${category.name}"});
+      },
+      borderRadius: BorderRadius.circular(8),
+      child: Column(
+        children: [
+          Container(
+            width: 60,
+            height: 60,
+            margin: EdgeInsets.only(bottom: 2),
+            padding: EdgeInsets.all(5),
+            decoration: BoxDecoration(shape: BoxShape.circle),
+            child: ClipOval(
+              child: SizedBox.fromSize(
+                child: SizedBox.fromSize(
+                  size: Size.fromRadius(25), // Image radius
+                  child: CustomNetworkImage(
+                      imageUrl:
+                          topVendorsViewModel.topvendorList[index].storeImage),
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            child: CustomText(
+              title: topVendorsViewModel.topvendorList[index].storeName,
+              maxLines: 2,
+              textAlign: TextAlign.center,
+              weight: FontWeight.w600,
+            ),
+          )
+        ],
+      ),
+    );
+  }
 }
