@@ -23,10 +23,10 @@ class SellerHomeView extends GetView<SellersController> {
         actions: [
           InkWell(
             onTap: () async {
+              controller.clearControllers();
               BaseController baseController = Get.find<BaseController>();
               await baseController.fetchProducts();
               await baseController.fetchProductsByTypes();
-
               Get.back();
               //baseController.changePage(0);
             },

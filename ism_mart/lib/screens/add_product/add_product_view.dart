@@ -33,7 +33,10 @@ class AddProductsView extends GetView<SellersController> {
                         style: headline2,
                       ),
                       CustomActionIcon(
-                        onTap: () => Get.back(),
+                        onTap: () {
+                          controller.clearControllers();
+                          Get.back();
+                        },
                         hasShadow: false,
                         icon: Icons.close_rounded,
                         bgColor: kPrimaryColor.withOpacity(0.2),
