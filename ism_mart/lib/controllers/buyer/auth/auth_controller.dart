@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
+import 'package:ism_mart/api_helper/global_variables.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/exports/export_account.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/exports/export_account.dart';
 
 class AuthController extends GetxController {
   final AuthProvider authProvider;
@@ -111,13 +113,17 @@ class AuthController extends GetxController {
           Get.back();
           //Navigating back to home after login
           baseController.changePage(0);
-
+          print('hayat');
+          print(userResponse.userModel?.toJson());
+          GlobalVariable.userModel = userResponse.userModel;
           AppConstant.displaySnackBar(
               langKey.successTitle.tr, userResponse.message);
           await LocalStorageHelper.storeUser(userModel: userResponse.userModel)
               .then((value) {
+
             clearLoginController();
           });
+
         } else {
           AppConstant.displaySnackBar(
               langKey.errorTitle.tr, userResponse.message);
@@ -389,6 +395,8 @@ class AuthController extends GetxController {
           setUserModel(UserModel(error: apiResponse.errors!.first));
         } else
           setUserModel(apiResponse.userModel!);
+
+        GlobalVariable.userModel = apiResponse.userModel;
       }).catchError((error) {
         isLoading(false);
         setSession(true);
@@ -401,6 +409,7 @@ class AuthController extends GetxController {
     if (fromApi!.emailVerified != stored!.emailVerified) {
       await LocalStorageHelper.deleteUserData();
       await LocalStorageHelper.storeUser(userModel: fromApi);
+      GlobalVariable.userModel = fromApi;
     }
     setUserModel(fromApi);
   }

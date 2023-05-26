@@ -6,4 +6,8 @@ class Urls {
 
   //ContactUsViewModel
   static String contactUs = "user/contact";
+
+  //productController
+  static String deleteQuestion = "product/questions/delete/";
+  static String updateQuestion = "product/questions/update/";
 }

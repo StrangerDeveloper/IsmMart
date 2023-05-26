@@ -65,6 +65,58 @@ class ApiBaseHelper {
     }
   }
 
+  Future<dynamic> patchMethod({
+    required String url,
+    dynamic body,
+    bool withBearer = false,
+    bool withAuthorization = false,
+  }) async {
+    Map<String, String> header = {'Content-Type': 'application/json'};
+
+    if (withAuthorization) {
+      header['Authorization'] = withBearer ? 'Bearer $token' : token;
+    }
+
+    try {
+      body = jsonEncode(body);
+      print('*********************** Request ********************************');
+      print(body);
+      print(_baseUrl + url);
+      Uri urlValue = Uri.parse(_baseUrl + url);
+      http.Response response = await http
+          .patch(urlValue, headers: header, body: body)
+          .timeout(Duration(seconds: 30));
+
+      print(response.body);
+
+      Map<String, dynamic> parsedJSON = jsonDecode(response.body);
+      print(
+          '*********************** Response **********************************');
+      print(urlValue.toString());
+      print('body => ' + body);
+      print(parsedJSON);
+      print('&&&&&&&&&&&&&&&&&&&&&&& End of Response &&&&&&&&&&&&&&&&&&&&&&\n');
+      return parsedJSON;
+    } on SocketException catch (_) {
+      GlobalVariable.showLoader.value = false;
+      GetxHelper.showSnackBar(title: 'Error', message: Errors.noInternetError);
+      throw Errors.noInternetError;
+    } on TimeoutException catch (_) {
+      GlobalVariable.showLoader.value = false;
+      GetxHelper.showSnackBar(title: 'Error', message: Errors.timeOutException);
+      throw Errors.timeOutException;
+    } on FormatException catch (_) {
+      GlobalVariable.showLoader.value = false;
+      GetxHelper.showSnackBar(title: 'Error', message: Errors.formatException);
+      throw Errors.formatException;
+    } catch (e) {
+      GlobalVariable.showLoader.value = false;
+      GetxHelper.showSnackBar(title: 'Error', message: Errors.generalApiError);
+      throw e.toString();
+    }
+  }
+
+
   Future<dynamic> getMethod(
       {required String url, bool withBearer = true}) async {
     Map<String, String> header = {
@@ -107,8 +159,6 @@ class ApiBaseHelper {
 
   Future<dynamic> deleteMethod(
       {required String url, bool withBearer = true}) async {
-    print('hayat');
-    print(token);
 
     Map<String, String> header = {
       'Authorization': withBearer ? 'Bearer $token' : token,

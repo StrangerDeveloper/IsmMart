@@ -210,12 +210,9 @@ class OrderController extends GetxController
   }
 
   deleteTicket(String ticketId, String orderId) {
-    print('bangash');
-    // isLoading(true);
     ApiBaseHelper()
         .deleteMethod(url: Urls.deleteTickets + ticketId, withBearer: false)
         .then((parsedJson) {
-      // isLoading(false);
       if (parsedJson['success'] == true && parsedJson['data'] != null) {
         fetchOrderById(orderId);
         AppConstant.displaySnackBar(
@@ -229,10 +226,8 @@ class OrderController extends GetxController
         );
       }
     }).catchError((e) {
-      // isLoading(false);
       print(e);
     });
-    print('bangash');
   }
 
   var _picker = ImagePicker();

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ism_mart/api_helper/api_base_helper.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
+import 'package:ism_mart/api_helper/global_variables.dart';
+import 'package:ism_mart/api_helper/urls.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
@@ -12,11 +15,12 @@ class ProductController extends GetxController with StateMixin {
 
   ProductController(this._apiProvider);
 
-  var questionController = TextEditingController();
+  final updateQuestionFormKey = GlobalKey<FormState>();
+  TextEditingController updateQuestionController = TextEditingController();
+  TextEditingController questionController = TextEditingController();
+  TextEditingController quantityController = TextEditingController();
   var pageController = PageController(initialPage: 0);
   var pageIndex = 0.obs;
-
-  var quantityController = TextEditingController();
 
   var count = 1.obs;
 
@@ -268,5 +272,53 @@ class ProductController extends GetxController with StateMixin {
     super.onClose();
 
     clearControllers();
+  }
+
+  deleteQuestion(int index) {
+    GlobalVariable.showLoader.value = true;
+    String questionId = productQuestionsList[index].id.toString();
+
+    ApiBaseHelper()
+        .deleteMethod(url: Urls.deleteQuestion + questionId, withBearer: false)
+        .then((parsedJson) {
+      GlobalVariable.showLoader.value = false;
+      if (parsedJson['message'] == "Question deleted successfully") {
+        showSnackBar(langKey.success.tr, parsedJson['message']);
+        getProductQuestions(productId: productQuestionsList[index].productId);
+      } else {
+        showSnackBar(langKey.errorTitle.tr, parsedJson['message']);
+      }
+    }).catchError((e) {
+      GlobalVariable.showLoader.value = false;
+      print(e);
+    });
+  }
+
+  updateQuestion(int index) {
+    if (updateQuestionFormKey.currentState?.validate() ?? false) {
+      GlobalVariable.showLoader.value = true;
+      String questionId = productQuestionsList[index].id.toString();
+
+      Map<String, dynamic> param = {"question": updateQuestionController.text};
+
+      ApiBaseHelper()
+          .patchMethod(
+              url: Urls.updateQuestion + questionId,
+              body: param,
+              withBearer: false, withAuthorization: true)
+          .then((parsedJson) {
+        GlobalVariable.showLoader.value = false;
+        if (parsedJson['message'] == "Product question updated successfully") {
+          Get.back();
+          getProductQuestions(productId: productQuestionsList[index].productId);
+          showSnackBar(langKey.success.tr, parsedJson['message']);
+        } else {
+          showSnackBar(langKey.errorTitle.tr, parsedJson['message']);
+        }
+      }).catchError((e) {
+        GlobalVariable.showLoader.value = false;
+        print(e);
+      });
+    }
   }
 }
