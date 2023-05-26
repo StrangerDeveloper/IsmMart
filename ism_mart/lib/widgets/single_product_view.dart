@@ -776,7 +776,8 @@ class SingleProductView extends GetView<ProductController> {
       required int index}) {
     return InkWell(
       borderRadius: BorderRadius.circular(8),
-      onTap: isQuestion
+      onTap: (GlobalVariable.userModel?.email ==
+              controller.productQuestionsList[index].user?.email)
           ? () {
               questionAnswerActionsBottomSheet(index);
             }
