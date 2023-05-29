@@ -2,6 +2,19 @@ import 'translations_key.dart' as key;
 
 class English {
   Map<String, String> get translations => {
+        ///change password
+        key.currentPassword: 'Current Password is required',
+
+        ///answer_question_view
+        key.addAnswer : 'Add Answer',
+        key.viewProduct : 'View Product',
+        key.answer : 'Answer',
+        key.updateAnswer : 'Update Answer',
+        key.deleteAnswer : 'Delete Answer',
+
+        ///product_questions_view
+        key.addQuestion : 'Add Question',
+
         ///single_product_view
         key.questions: 'Questions',
         key.updateQuestion: 'Update Question',

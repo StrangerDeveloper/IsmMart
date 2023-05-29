@@ -1,4 +1,7 @@
 import 'dart:io';
+import 'package:iconly/iconly.dart';
+import 'package:ism_mart/screens/answer_question/answer_question_view.dart';
+import 'package:ism_mart/screens/change_password/change_password_view.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -418,6 +421,8 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
     //const PremiumMembershipUI(),
     BuyerProfileView(),
     const StoreProfileView(),
+    AnswerQuestionView(),
+    ChangePasswordView()
   ];
 
   var currentPage = 0.obs;
@@ -440,6 +445,8 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
       {'title': myOrders.tr, "icon": Icons.shopping_bag_outlined, "page": 2},
       {'title': profile.tr, "icon": Icons.manage_accounts_outlined, "page": 3},
       {'title': vendorStoreDetails.tr, "icon": Icons.storefront, "page": 4},
+      {'title': 'Answer User Questions', "icon": Icons.question_mark_sharp, "page": 5},
+      {'title': 'Change Password', "icon": Icons.description_outlined, "page": 6},
       /*{
         'title': "Premium Membership",
         "icon": Icons.workspace_premium_outlined,

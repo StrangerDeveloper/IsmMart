@@ -116,13 +116,16 @@ class ApiBaseHelper {
     }
   }
 
+  Future<dynamic> getMethod({
+    required String url,
+    bool withBearer = false,
+    bool withAuthorization = false,
+  }) async {
+    Map<String, String> header = {'Content-Type': 'application/json'};
 
-  Future<dynamic> getMethod(
-      {required String url, bool withBearer = true}) async {
-    Map<String, String> header = {
-      'Authorization': withBearer ? 'Bearer $token' : token,
-      'Content-Type': 'application/json'
-    };
+    if (withAuthorization) {
+      header['Authorization'] = withBearer ? 'Bearer $token' : token;
+    }
 
     try {
       Uri urlValue = Uri.parse(_baseUrl + url);
@@ -157,13 +160,18 @@ class ApiBaseHelper {
     }
   }
 
-  Future<dynamic> deleteMethod(
-      {required String url, bool withBearer = true}) async {
-
+  Future<dynamic> deleteMethod({
+    required String url,
+    bool withBearer = false,
+    bool withAuthorization = false,
+  }) async {
     Map<String, String> header = {
-      'Authorization': withBearer ? 'Bearer $token' : token,
       'Content-Type': 'application/json'
     };
+
+    if (withAuthorization) {
+      header['Authorization'] = withBearer ? 'Bearer $token' : token;
+    }
 
     try {
       Uri urlValue = Uri.parse(_baseUrl + url);
@@ -200,8 +208,8 @@ class ApiBaseHelper {
 
   Future<dynamic> postMethodForImage(
       {required String url,
-        required List<http.MultipartFile> files,
-        required Map<String, String> fields}) async {
+      required List<http.MultipartFile> files,
+      required Map<String, String> fields}) async {
     try {
       Uri urlValue = Uri.parse(_baseUrl + url);
       http.MultipartRequest request = http.MultipartRequest('POST', urlValue);
@@ -214,7 +222,7 @@ class ApiBaseHelper {
       request.files.addAll(files);
       http.StreamedResponse response = await request.send();
       Map<String, dynamic> parsedJson =
-      await jsonDecode(await response.stream.bytesToString());
+          await jsonDecode(await response.stream.bytesToString());
 
       print('********************** Response ********************************');
       print(urlValue.toString());

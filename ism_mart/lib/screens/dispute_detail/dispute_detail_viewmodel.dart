@@ -32,7 +32,7 @@ class DisputeDetailViewModel extends GetxController {
   getData() {
     GlobalVariable.showLoader.value = true;
 
-    ApiBaseHelper().getMethod(url: Urls.ticketDetail + id).then((parsedJson) {
+    ApiBaseHelper().getMethod(url: Urls.ticketDetail + id, withBearer: true).then((parsedJson) {
       GlobalVariable.showLoader.value = false;
       if (parsedJson['success'] == true && parsedJson['data'] != null) {
         disputeDetailModel.value =

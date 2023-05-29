@@ -57,7 +57,7 @@ class TopVendorsViewModel extends GetxController {
         var data = parsedJson['data'] as List;
 
         topvendorList.addAll(data.map((e) => TopVendorsModel.fromJson(e)));
-        print('hayat');
+
         print(topvendorList.length);
       }
     }).catchError((e) {

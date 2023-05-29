@@ -13,7 +13,6 @@ class ProductQuestionAnswerUI extends GetView<ProductController> {
 
   @override
   Widget build(BuildContext context) {
-    print(">>> ${productModel!.id}");
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.grey[100]!,

@@ -1,4 +1,14 @@
 //////////////////////////////////////////////////////////////////////
+///answer_question_view
+const addAnswer = 'addAnswer',
+    viewProduct = 'viewProduct',
+    answer = 'answer',
+    updateAnswer = 'updateAnswer',
+    deleteAnswer = 'deleteAnswer';
+
+///product_questions_view
+const addQuestion = 'addQuestion';
+
 ///
 const questions = 'questions',
     updateQuestion = 'updateQuestion',
@@ -423,7 +433,8 @@ const email = "email",
     passwordNotMatched = "passNotMatched",
     forgotPasswordDesc = 'forgotPasswordDesc',
     forgotPassword = "forgotPassword",
-    proceed = 'proceed';
+    proceed = 'proceed',
+    currentPassword = 'currentPassword';
 
 const storeName = "storeName",
     storeNameReq = "storeNameRequired",

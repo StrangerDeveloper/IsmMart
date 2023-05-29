@@ -6,6 +6,7 @@ import 'package:iconly/iconly.dart';
 import 'package:ism_mart/api_helper/global_variables.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/exports/exports_ui.dart';
+import 'package:ism_mart/screens/product_questions/product_questions_view.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
 import 'package:ism_mart/widgets/single_product_full_image_view.dart';
 import 'package:ism_mart/widgets/export_widgets.dart';
@@ -702,9 +703,13 @@ class SingleProductView extends GetView<ProductController> {
               questionListView(productModel: productModel),
               InkWell(
                 onTap: () {
-                  Get.to(() => ProductQuestionAnswerUI(
-                        productModel: productModel,
-                      ));
+                  Get.to(() => ProductQuestionsView(), arguments: {
+                    'productModel': productModel,
+                    'productId': productId
+                  });
+                  // Get.to(() => ProductQuestionAnswerUI(
+                  //       productModel: productModel,
+                  //     ));
                 },
                 child: CustomGreyBorderContainer(
                   width: double.infinity,
@@ -774,265 +779,63 @@ class SingleProductView extends GetView<ProductController> {
       name,
       date,
       required int index}) {
-    return InkWell(
-      borderRadius: BorderRadius.circular(8),
-      onTap: (GlobalVariable.userModel?.email ==
-              controller.productQuestionsList[index].user?.email)
-          ? () {
-              questionAnswerActionsBottomSheet(index);
-            }
-          : null,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-              width: 24,
-              height: 24,
-              decoration: BoxDecoration(
-                color: isQuestion
-                    ? kRedColor.withOpacity(0.7)
-                    : kLightColor.withOpacity(0.7),
-                shape: BoxShape.circle,
-              ),
-              child: Center(
-                child: CustomText(
-                  title: isQuestion ? 'Q' : 'A',
-                  color: kWhiteColor,
-                ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Container(
+            width: 24,
+            height: 24,
+            decoration: BoxDecoration(
+              color: isQuestion
+                  ? kRedColor.withOpacity(0.7)
+                  : kLightColor.withOpacity(0.7),
+              shape: BoxShape.circle,
+            ),
+            child: Center(
+              child: CustomText(
+                title: isQuestion ? 'Q' : 'A',
+                color: kWhiteColor,
               ),
             ),
-            AppConstant.spaceWidget(width: 10),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CustomText(
-                    title: title,
-                    maxLines: title!.length,
-                  ),
-                  RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: name,
-                          style: caption.copyWith(
-                            color: kLightColor,
-                          ),
-                        ),
-                        TextSpan(
-                          text:
-                              " - ${AppConstant.formattedDataTime("dd-MMM-yy", date)}",
-                          style: caption.copyWith(
-                            color: kLightColor,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            (GlobalVariable.userModel?.email ==
-                    controller.productQuestionsList[index].user?.email)
-                ? Icon(
-                    IconlyLight.more_square,
-                    color: kLightColor,
-                    size: 18,
-                  )
-                : SizedBox(height: 0),
-          ],
-        ),
-      ),
-    );
-  }
-
-  questionAnswerActionsBottomSheet(int index) {
-    showModalBottomSheet(
-      context: Get.context!,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
-      ),
-      builder: (BuildContext context) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 5),
-                    child: Text(
-                      langKey.questions.tr,
-                      style: GoogleFonts.lato(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
-                  IconButton(
-                    visualDensity: VisualDensity.compact,
-                    onPressed: () {
-                      Get.back();
-                    },
-                    icon: Icon(Icons.close),
-                  ),
-                ],
-              ),
-              Divider(),
-              BottomSheetItemRow(
-                title: langKey.updateQuestion.tr,
-                icon: IconlyLight.edit,
-                isDisabled: false,
-                onTap: () {
-                  Navigator.of(context).pop();
-                  updateQuestionBottomSheet(index);
-                },
-              ),
-              BottomSheetItemRow(
-                title: langKey.deleteQuestion.tr,
-                icon: IconlyLight.delete,
-                isDisabled: false,
-                onTap: () {
-                  Navigator.of(context).pop();
-                  showDeleteQuestionDialog(index);
-                },
-              ),
-            ],
           ),
-        );
-      },
-    );
-  }
-
-  Future showDeleteQuestionDialog(int index) async {
-    return showDialog(
-      context: Get.context!,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(langKey.deleteQuestion.tr),
-          content: Text(langKey.deleteQuestionDialogDesc.tr),
-          actions: [
-            Row(
+          AppConstant.spaceWidget(width: 10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      minimumSize: Size(double.infinity, 40),
-                      foregroundColor: Colors.grey,
-                    ),
-                    child: Text(
-                      langKey.noBtn.tr,
-                      style: TextStyle(
-                        color: Colors.black,
-                      ),
-                    ),
-                    onPressed: () {
-                      Navigator.of(Get.context!).pop();
-                    },
-                  ),
+                CustomText(
+                  title: title,
+                  maxLines: title!.length,
                 ),
-                Expanded(
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      minimumSize: Size(double.infinity, 40),
-                      foregroundColor: Colors.grey,
-                    ),
-                    child: Text(
-                      langKey.yesBtn.tr,
-                      style: TextStyle(
-                        color: Colors.black,
+                RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: name,
+                        style: caption.copyWith(
+                          color: kLightColor,
+                        ),
                       ),
-                    ),
-                    onPressed: () {
-                      controller.deleteQuestion(index);
-                      Navigator.of(Get.context!).pop();
-                    },
+                      TextSpan(
+                        text:
+                            " - ${AppConstant.formattedDataTime("dd-MMM-yy", date)}",
+                        style: caption.copyWith(
+                          color: kLightColor,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
             ),
-          ],
-        );
-      },
+          ),
+        ],
+      ),
     );
   }
 
-  updateQuestionBottomSheet(int index) {
-    controller.updateQuestionController.text =
-        controller.productQuestionsList[index].question ?? '';
-    showModalBottomSheet(
-      useSafeArea: true,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
-      ),
-      context: Get.context!,
-      builder: (BuildContext context) {
-        return Padding(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).viewInsets.bottom + 10,
-          ),
-          child: Stack(
-            alignment: Alignment.topRight,
-            children: [
-              Form(
-                key: controller.updateQuestionFormKey,
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(horizontal: 13),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          StickyLabel(
-                            text: langKey.updateQuestion.tr,
-                            style: headline1,
-                          ),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10, bottom: 20),
-                        child: CustomTextField1(
-                          controller: controller.updateQuestionController,
-                          title: langKey.question.tr,
-                          asterisk: true,
-                          minLines: 4,
-                          maxLines: 6,
-                          autoValidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (value) {
-                            return Validator().validateDefaultTxtField(value);
-                          },
-                        ),
-                      ),
-                      CustomTextBtn(
-                        child: Text(langKey.updateBtn.tr),
-                        onPressed: () {
-                          controller.updateQuestion(index);
-                        },
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              IconButton(
-                onPressed: () {
-                  Get.back();
-                },
-                icon: Icon(Icons.close),
-              )
-            ],
-          ),
-        );
-      },
-    );
-  }
 
   Widget _buildCustomerAlsoViewed(List<ProductModel> list) {
     return Obx(
