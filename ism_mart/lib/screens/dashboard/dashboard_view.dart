@@ -4,11 +4,12 @@ import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/api_service.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
-import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/exports/exports_ui.dart';
-import 'package:ism_mart/widgets/export_widgets.dart';
+import 'package:ism_mart/models/exports_model.dart';
+import 'package:ism_mart/screens/top_vendors/top_vendors_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/widgets/export_widgets.dart';
 
 class DashboardUI extends GetView<BaseController> {
   const DashboardUI({Key? key}) : super(key: key);
@@ -341,13 +342,16 @@ class DashboardUI extends GetView<BaseController> {
           child: GridView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: AppResponsiveness.getGridItemCount(),
-                  childAspectRatio:
-                      AppResponsiveness.getChildAspectRatioPoint90(),
-                  //mainAxisExtent: AppResponsiveness.getMainAxisExtentPoint25(),
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10),
+              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                //crossAxisCount: AppResponsiveness.getGridItemCount(),
+                maxCrossAxisExtent: 200,
+                // Maximum width of each item
+                childAspectRatio: 1,
+                // Aspect ratio of each item (width / height)
+                mainAxisSpacing: 10,
+                // Spacing between rows
+                crossAxisSpacing: 10, // Spacing between columns
+              ),
               itemCount: list.length,
               itemBuilder: (_, index) {
                 ProductModel productModel = list[index];
@@ -389,24 +393,21 @@ class DashboardUI extends GetView<BaseController> {
           : Padding(
               padding: const EdgeInsets.fromLTRB(10, 8, 10, 5),
               child: SizedBox(
-                height: AppResponsiveness.getBoxHeightPoint5(),
+                height: AppResponsiveness.getBoxHeightPoint25(),
                 child: list.isEmpty
                     ? NoDataFound(text: langKey.noCategoryFound.tr)
-                    : ListView.builder(
+                    : GridView.builder(
+                        physics: BouncingScrollPhysics(),
                         scrollDirection: Axis.horizontal,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          //maxCrossAxisExtent: 150,
+                          crossAxisCount: 2,
+                          //childAspectRatio: 1,
+                          mainAxisSpacing: 5,
+                          crossAxisSpacing: 5,
+                        ),
                         itemCount: list.length,
                         itemBuilder: (context, index) {
-                          //  GridView.builder(
-                          //     physics: BouncingScrollPhysics(),
-                          //     scrollDirection: Axis.horizontal,
-                          //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          //       //maxCrossAxisExtent: 150,
-                          //       crossAxisCount: 2,
-                          //       //childAspectRatio: 1.8,
-                          //       //mainAxisSpacing: 3.0,
-                          //       crossAxisSpacing: 5,
-                          //     ),
-
                           CategoryModel model = list[index];
                           return SingleCategoryItem(categoryModel: model);
                         },
@@ -428,25 +429,17 @@ class DashboardUI extends GetView<BaseController> {
       () => Padding(
         padding: const EdgeInsets.fromLTRB(10, 8, 10, 5),
         child: SizedBox(
-          height: 100,
+          height: 130,
           child: topVendorsViewModel.topvendorList.isEmpty
               ? NoDataFound(text: langKey.noCategoryFound.tr)
               : ListView.builder(
                   scrollDirection: Axis.horizontal,
+                  physics: const BouncingScrollPhysics(),
                   itemCount: topVendorsViewModel.topvendorList.length,
                   itemBuilder: (context, index) {
-                    //  GridView.builder(
-                    //     physics: BouncingScrollPhysics(),
-                    //     scrollDirection: Axis.horizontal,
-                    //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    //       //maxCrossAxisExtent: 150,
-                    //       crossAxisCount: 2,
-                    //       //childAspectRatio: 1.8,
-                    //       //mainAxisSpacing: 3.0,
-                    //       crossAxisSpacing: 5,
-                    //     )
-
-                    return Expanded(child: topVendorsListViewItem(index));
+                    TopVendorsModel vendorsModel =
+                        topVendorsViewModel.topvendorList[index];
+                    return topVendorsListViewItem(vendorsModel: vendorsModel);
                   },
                 ),
         ),
@@ -454,43 +447,83 @@ class DashboardUI extends GetView<BaseController> {
     );
   }
 
-  Widget topVendorsListViewItem(int index) {
+  Widget topVendorsListViewItem({TopVendorsModel? vendorsModel}) {
     return InkWell(
       onTap: () {
-        Get.toNamed(
-            '/storeDetails/${topVendorsViewModel.topvendorList[index].id}');
-        // Get.toNamed(Routes.searchRoute,
-        //     arguments: {"searchText": "${category.name}"});
+        Get.toNamed('/storeDetails/${vendorsModel.id}');
       },
       borderRadius: BorderRadius.circular(8),
-      child: Column(
-        children: [
-          Container(
-            width: 60,
-            height: 60,
-            margin: EdgeInsets.only(bottom: 2),
-            padding: EdgeInsets.all(5),
-            decoration: BoxDecoration(shape: BoxShape.circle),
-            child: ClipOval(
-              child: SizedBox.fromSize(
-                child: SizedBox.fromSize(
-                  size: Size.fromRadius(25), // Image radius
-                  child: CustomNetworkImage(
-                      imageUrl:
-                          topVendorsViewModel.topvendorList[index].storeImage),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: CustomGreyBorderContainer(
+          width: 100,
+          padding: const EdgeInsets.all(8),
+          //hasShadow: false,
+          borderColor: kTransparent,
+          //bgColor: Colors.white60,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Container(
+                //margin: EdgeInsets.only(left: 6, bottom: 6),
+                padding: EdgeInsets.all(1),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: kPrimaryColor.withOpacity(0.2),
+                ),
+                child:  ClipOval(
+                  child: SizedBox.fromSize(
+                    size: Size.fromRadius(25), // Image radius
+                    child: CustomNetworkImage(imageUrl: vendorsModel!.storeImage, fit: BoxFit.cover,),
+                  ),
                 ),
               ),
-            ),
+
+              // ClipOval(
+
+              CustomText(
+                title: vendorsModel.storeName,
+                maxLines: 2,
+                //size: 12,
+                textAlign: TextAlign.center,
+                weight: FontWeight.w600,
+              )
+            ],
           ),
-          Expanded(
-            child: CustomText(
-              title: topVendorsViewModel.topvendorList[index].storeName,
-              maxLines: 2,
-              textAlign: TextAlign.center,
-              weight: FontWeight.w600,
-            ),
-          )
-        ],
+
+          // Column(
+          //   children: [
+          //
+          //
+          //
+          //     Container(
+          //       width: 60,
+          //       height: 60,
+          //       margin: EdgeInsets.only(bottom: 2),
+          //       padding: EdgeInsets.all(5),
+          //       decoration: BoxDecoration(shape: BoxShape.circle),
+          //       child: ClipOval(
+          //         child: SizedBox.fromSize(
+          //           child: SizedBox.fromSize(
+          //             size: Size.fromRadius(25), // Image radius
+          //             child: CustomNetworkImage(
+          //                 imageUrl: vendorsModel!.storeImage),
+          //           ),
+          //         ),
+          //       ),
+          //     ),
+          //     Expanded(
+          //       child: CustomText(
+          //         title: vendorsModel.storeName,
+          //         maxLines: 2,
+          //         size: 11,
+          //         textAlign: TextAlign.center,
+          //         weight: FontWeight.w600,
+          //       ),
+          //     )
+          //   ],
+          // ),
+        ),
       ),
     );
   }

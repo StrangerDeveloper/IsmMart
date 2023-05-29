@@ -141,4 +141,8 @@ class AppResponsiveness {
   static double getChildAspectRatioPoint100() {
     return _isTabletScreen() ? 0.85 : 1;
   }
+
+  static double getMainAxisExtentPoint25() {
+    return height * (_isTabletScreen() ? 0.30 : 0.22);
+  }
 }

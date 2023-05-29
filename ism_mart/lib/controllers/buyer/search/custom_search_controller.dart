@@ -177,6 +177,17 @@ class CustomSearchController extends GetxController {
     }
   }
 
+  getProductByType(String type) async {
+    isLoading(true);
+    await _apiProvider
+        .getProductsByType(type: type, limit: searchLimit)
+        .then((value) {
+      isLoading(false);
+      productList.clear();
+      productList.addAll(value);
+    });
+  }
+
   var categoriesList = <CategoryModel>[].obs;
 
   setCategories(List<CategoryModel> list) {

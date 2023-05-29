@@ -64,7 +64,7 @@ class CustomGreyBorderContainer extends StatelessWidget {
             BoxShadow(
               color: kPrimaryColor.withOpacity(0.2),
               offset: Offset(0, 1),
-              blurRadius: 8,
+              blurRadius: 5,
             )
         ],
       ),
