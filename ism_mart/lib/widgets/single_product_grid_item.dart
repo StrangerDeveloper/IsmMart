@@ -25,25 +25,31 @@ class SingleProductItems extends StatelessWidget {
 
   _buildCategoryProductItem({ProductModel? model, BuildContext? buildContext}) {
     return AspectRatio(
-      aspectRatio: 0.8,
+      aspectRatio: 0.85,
       child: GestureDetector(
         onTap: () {
           Get.to(SingleProductView(productId: "${model.id}", calledFor: 'customer',));
         },
-        child: Container(
-          clipBehavior: Clip.hardEdge,
+        child: CustomGreyBorderContainer(
+          //height: 90,
+          //width: 120,
+          borderColor: kTransparent,
+          bgColor: Colors.grey.shade100,
           margin: const EdgeInsets.only(right: 4, left: 4),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            color: Colors.grey.shade200,
-            border: Border.all(color: Colors.grey.shade200, width: 1),
-            boxShadow: [
-              BoxShadow(
-                  color: kPrimaryColor.withOpacity(0.22),
-                  offset: const Offset(0, 1),
-                  blurRadius: 10)
-            ],
-          ),
+        // Container(
+        //   clipBehavior: Clip.hardEdge,
+        //   margin: const EdgeInsets.only(right: 4, left: 4),
+        //   decoration: BoxDecoration(
+        //     borderRadius: BorderRadius.circular(8),
+        //     color: Colors.grey.shade200,
+        //     border: Border.all(color: Colors.grey.shade200, width: 1),
+        //     boxShadow: [
+        //       BoxShadow(
+        //           color: kPrimaryColor.withOpacity(0.22),
+        //           offset: const Offset(0, 1),
+        //           blurRadius: 10)
+        //     ],
+        //   ),
           child: Stack(
             //fit: StackFit.expand,
             children: [

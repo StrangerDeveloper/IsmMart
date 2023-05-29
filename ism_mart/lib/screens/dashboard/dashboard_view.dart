@@ -366,7 +366,7 @@ class DashboardUI extends GetView<BaseController> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
-        height: AppResponsiveness.getBoxHeightPoint28(),
+        height: 180,
         // height: AppResponsiveness.height *
         //     (!isCategoryProducts!
         //         ? 0.28
@@ -429,7 +429,7 @@ class DashboardUI extends GetView<BaseController> {
       () => Padding(
         padding: const EdgeInsets.fromLTRB(10, 8, 10, 5),
         child: SizedBox(
-          height: 130,
+          height: 120,
           child: topVendorsViewModel.topvendorList.isEmpty
               ? NoDataFound(text: langKey.noCategoryFound.tr)
               : ListView.builder(
@@ -481,12 +481,14 @@ class DashboardUI extends GetView<BaseController> {
 
               // ClipOval(
 
-              CustomText(
-                title: vendorsModel.storeName,
-                maxLines: 2,
-                //size: 12,
-                textAlign: TextAlign.center,
-                weight: FontWeight.w600,
+              Flexible(
+                child: CustomText(
+                  title: vendorsModel.storeName,
+                  maxLines: 2,
+                  //size: 12,
+                  textAlign: TextAlign.center,
+                  weight: FontWeight.w600,
+                ),
               )
             ],
           ),

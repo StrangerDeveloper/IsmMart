@@ -12,13 +12,13 @@ class CustomGreyBorderContainer extends StatelessWidget {
       this.hasShadow = true,
       this.isSelected = false,
       this.activeColor,
-      this.padding,
+      this.padding,this.margin,
       this.height})
       : super(key: key);
   final Color? borderColor, bgColor, activeColor;
   final Widget? child;
   final double? width, height;
-  final EdgeInsetsGeometry? padding;
+  final EdgeInsetsGeometry? padding, margin;
   final bool? hasShadow, isSelected;
 
   @override
@@ -55,6 +55,7 @@ class CustomGreyBorderContainer extends StatelessWidget {
       width: width,
       height: height,
       padding: padding,
+      margin: margin,
       decoration: BoxDecoration(
         color: bgColor ?? kWhiteColor,
         borderRadius: BorderRadius.circular(8),
