@@ -26,85 +26,83 @@ class SingleProductItems extends StatelessWidget {
   _buildCategoryProductItem({ProductModel? model, BuildContext? buildContext}) {
     return AspectRatio(
       aspectRatio: 0.85,
-      child: GestureDetector(
-        onTap: () {
-          Get.to(SingleProductView(productId: "${model.id}", calledFor: 'customer',));
-        },
-        child: CustomGreyBorderContainer(
-          //height: 90,
-          //width: 120,
-          borderColor: kTransparent,
-          bgColor: Colors.grey.shade100,
-          margin: const EdgeInsets.only(right: 4, left: 4),
-        // Container(
-        //   clipBehavior: Clip.hardEdge,
-        //   margin: const EdgeInsets.only(right: 4, left: 4),
-        //   decoration: BoxDecoration(
-        //     borderRadius: BorderRadius.circular(8),
-        //     color: Colors.grey.shade200,
-        //     border: Border.all(color: Colors.grey.shade200, width: 1),
-        //     boxShadow: [
-        //       BoxShadow(
-        //           color: kPrimaryColor.withOpacity(0.22),
-        //           offset: const Offset(0, 1),
-        //           blurRadius: 10)
-        //     ],
-        //   ),
-          child: Stack(
-            //fit: StackFit.expand,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                      height: AppResponsiveness.getHeight90_140(),
-                      width: double.infinity,
-                      child: Center(
-                        child: Stack(
-                          fit: StackFit.expand,
-                          children: [
-                            CustomNetworkImage(
-                              imageUrl: model!.thumbnail,
-                              //fit: BoxFit.cover,
-                            ),
-                            if (model.stock! == 0)
-                              _buildOutOfStockStack(buildContext),
-                          ],
+      child: Padding(
+        padding: const EdgeInsets.all(5.0),
+        child: GestureDetector(
+          onTap: () {
+            Get.to(SingleProductView(productId: "${model.id}", calledFor: 'customer',));
+          },
+          child:
+          Container(
+            clipBehavior: Clip.hardEdge,
+            margin: const EdgeInsets.only(right: 4, left: 4),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              color: Colors.grey.shade100,
+              //border: Border.all(color: Colors.grey.shade200, width: 1),
+              boxShadow: [
+                BoxShadow(
+                    color: kPrimaryColor.withOpacity(0.2),
+                    offset: const Offset(0, 0),
+                    blurRadius: 8)
+              ],
+            ),
+            child: Stack(
+              //fit: StackFit.expand,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                        height: AppResponsiveness.getHeight90_140(),
+                        width: double.infinity,
+                        child: Center(
+                          child: Stack(
+                            fit: StackFit.expand,
+                            children: [
+                              CustomNetworkImage(
+                                imageUrl: model!.thumbnail,
+                                //fit: BoxFit.cover,
+                              ),
+                              if (model.stock! == 0)
+                                _buildOutOfStockStack(buildContext),
+                            ],
+                          ),
+                        )
+                        //child: CustomNetworkImage(imageUrl: model!.thumbnail),
                         ),
-                      )
-                      //child: CustomNetworkImage(imageUrl: model!.thumbnail),
-                      ),
-                  Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: CustomText(
-                      title: model.name!,
-                      maxLines: 2,
-                    ),
-                  ),
-                ],
-              ),
-              if (model.stock! > 0)
-                if (model.discount != 0)
-                  Positioned(
-                    top: 0,
-                    right: 0,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 5, horizontal: 10),
-                      decoration: BoxDecoration(
-                        color: kOrangeColor,
-                        borderRadius: BorderRadius.circular(5),
-                      ),
+                    Padding(
+                      padding: const EdgeInsets.all(8),
                       child: CustomText(
-                        title: "${model.discount}% ${langKey.OFF.tr}",
-                        color: kWhiteColor,
-                        size: 12,
-                        weight: FontWeight.w600,
+                        title: model.name!,
+                        maxLines: 2,
                       ),
                     ),
-                  ),
-              //if (model.stock! == 0) _buildOutOfStockStack(buildContext)
-            ],
+                  ],
+                ),
+                if (model.stock! > 0)
+                  if (model.discount != 0)
+                    Positioned(
+                      top: 0,
+                      right: 0,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 5, horizontal: 10),
+                        decoration: BoxDecoration(
+                          color: kOrangeColor,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: CustomText(
+                          title: "${model.discount}% ${langKey.OFF.tr}",
+                          color: kWhiteColor,
+                          size: 12,
+                          weight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                //if (model.stock! == 0) _buildOutOfStockStack(buildContext)
+              ],
+            ),
           ),
         ),
       ),
@@ -114,7 +112,7 @@ class SingleProductItems extends StatelessWidget {
   _buildProductItemNew({ProductModel? model, BuildContext? buildContext}) {
     //print("This one is called>>>>>>>>>>>>>>>>>>");
     return AspectRatio(
-      aspectRatio: 0.75,
+      aspectRatio: 0.8,
       child: GestureDetector(
         onTap: onTap ??
             () {
@@ -136,7 +134,9 @@ class SingleProductItems extends StatelessWidget {
                     );
                   });
             },
-        child: Container(
+        child:
+
+        Container(
           clipBehavior: Clip.hardEdge,
           margin: const EdgeInsets.symmetric(horizontal: 5),
           //padding: const EdgeInsets.all(1),

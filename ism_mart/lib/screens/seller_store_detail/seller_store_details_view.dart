@@ -26,8 +26,10 @@ class SellerStoreDetailsView extends GetView<ProductController> {
       child: Scaffold(
         backgroundColor: Colors.grey[300]!,
         body: Obx(
-          () => controller.sellerStoreResponse.value.vendorStore == null
-              ? Center(child: NoDataFoundWithIcon())
+          () => controller.isLoading.isTrue? CustomLoading(isItForWidget: true, color: kPrimaryColor,):
+
+          controller.sellerStoreResponse.value.vendorStore == null
+              ? Center(child: NoDataFoundWithIcon(icon:Icons.dataset_linked_rounded,title: langKey.noDataFound.tr,))
               : CustomScrollView(
                   slivers: [
                     _sliverAppBar(),

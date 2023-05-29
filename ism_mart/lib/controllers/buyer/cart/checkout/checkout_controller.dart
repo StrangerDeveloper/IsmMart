@@ -117,17 +117,6 @@ class CheckoutController extends GetxController {
     await authController.getCitiesByCountry(countryId: model.id!);
   }
 
-  void getCityByCountryName(String name) {
-    if (authController.countries.isNotEmpty) {
-      int? cId = authController.countries
-          .firstWhere(
-              (element) => element.name!.toLowerCase() == name.toLowerCase(),
-              orElse: () => CountryModel())
-          .id;
-      countryId(cId!);
-      authController.getCitiesByCountry(countryId: cId);
-    }
-  }
 
   void setSelectedCity(CountryModel model) {
     authController.selectedCity(model);
@@ -135,14 +124,6 @@ class CheckoutController extends GetxController {
     //getCityIdByName(value);
   }
 
-  getCityIdByName(String? city) {
-    cityId(authController.cities.isNotEmpty
-        ? authController.cities
-            .firstWhere(
-                (element) => element.name!.toLowerCase() == city!.toLowerCase())
-            .id
-        : 0);
-  }
 
   getCartItemsList() {
     return cartController.cartItemsList;
