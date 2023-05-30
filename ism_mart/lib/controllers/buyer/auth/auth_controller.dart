@@ -112,8 +112,6 @@ class AuthController extends GetxController {
           Get.back();
           //Navigating back to home after login
           baseController.changePage(0);
-          print('hayat');
-          print(userResponse.userModel?.toJson());
           GlobalVariable.userModel = userResponse.userModel;
           AppConstant.displaySnackBar(
               langKey.successTitle.tr, userResponse.message);

@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
-import 'package:ism_mart/api_helper/global_variables.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/exports/exports_ui.dart';
 import 'package:ism_mart/screens/product_questions/product_questions_view.dart';

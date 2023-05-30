@@ -100,6 +100,7 @@ class CustomTextField1 extends StatelessWidget {
           cursorColor: kPrimaryColor,
           decoration: InputDecoration(
             contentPadding: contentPadding,
+            suffixIcon: suffixIcon,
             //fillColor: fillColor,
             //filled: true,
             labelText: labelText,

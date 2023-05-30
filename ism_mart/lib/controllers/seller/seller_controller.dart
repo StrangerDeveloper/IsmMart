@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:iconly/iconly.dart';
 import 'package:ism_mart/screens/answer_question/answer_question_view.dart';
 import 'package:ism_mart/screens/change_password/change_password_view.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;

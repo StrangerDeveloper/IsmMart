@@ -336,34 +336,37 @@ class DashboardUI extends GetView<BaseController> {
     //var height = AppConstant.getSize().height;
     if (isPopular!)
       return Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: GridView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-              //crossAxisCount: AppResponsiveness.getGridItemCount(),
-              maxCrossAxisExtent: 200,
-              // Maximum width of each item
-              childAspectRatio: 1,
-              // Aspect ratio of each item (width / height)
-              mainAxisSpacing: 10,
-              // Spacing between rows
-              crossAxisSpacing: 10, // Spacing between columns
-            ),
-            itemCount: list.length,
-            itemBuilder: (_, index) {
-              ProductModel productModel = list[index];
-              return SingleProductItems(
-                productModel: productModel,
-                isCategoryProducts: isCategoryProducts,
-              );
-            }),
+        padding: const EdgeInsets.all(6.0),
+        child: SizedBox(
+          //height: AppConstant.getSize().height * 0.5,
+          child: GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                //crossAxisCount: AppResponsiveness.getGridItemCount(),
+                maxCrossAxisExtent: 200,
+                // Maximum width of each item
+                childAspectRatio: 1,
+                // Aspect ratio of each item (width / height)
+                mainAxisSpacing: 10,
+                // Spacing between rows
+                crossAxisSpacing: 10, // Spacing between columns
+              ),
+              itemCount: list.length,
+              itemBuilder: (_, index) {
+                ProductModel productModel = list[index];
+                return SingleProductItems(
+                  productModel: productModel,
+                  isCategoryProducts: isCategoryProducts,
+                );
+              }),
+        ),
       );
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
-        height: isCategoryProducts! ?170 : 190,
+        height: isCategoryProducts! ? 170 : 190,
         // height: AppResponsiveness.height *
         //     (!isCategoryProducts!
         //         ? 0.28

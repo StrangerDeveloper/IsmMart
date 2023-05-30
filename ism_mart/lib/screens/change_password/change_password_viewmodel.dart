@@ -1,12 +1,8 @@
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/api_constant.dart';
-import 'package:ism_mart/api_helper/api_service.dart';
-import 'package:ism_mart/api_helper/base_provider.dart';
 import 'package:ism_mart/models/api_response/api_response_model.dart';
-
 import '../../api_helper/local_storage/local_storage_helper.dart';
 import '../../models/user/user_model.dart';
 import 'package:http/http.dart' as http;
