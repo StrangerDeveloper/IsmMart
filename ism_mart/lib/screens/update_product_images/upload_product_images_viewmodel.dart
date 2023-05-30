@@ -1,42 +1,41 @@
-import 'dart:io';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart';
-import 'package:ism_mart/controllers/product_controller.dart';
+import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ism_mart/utils/constants.dart';
 import 'package:flutter/material.dart';
+import '../../models/api_response/api_response_model.dart';
 import '../../models/product/product_model.dart';
 import '../../utils/helpers/permission_handler.dart';
 import '../../widgets/custom_text.dart';
 
 class UpdateProductImagesViewModel extends GetxController {
 
-  UpdateProductImagesViewModel();
-
+  UpdateProductImagesViewModel({this.id});
+  final int? id;
   // final List<ProductImages>? imagesList;
 
-  @override
-  void onInit() {
-    ProductController productController = Get.find();
-    // productController.fetchProduct()
-    super.onInit();
-  }
+  // @override
+  // void onInit() {
+  //   ProductController productController = Get.find();
+  //   // productController.fetchProduct()
+  //   super.onInit();
+  // }
 
   var thumbnailImageSizeInMb = 0.0.obs;
-  var thumbnailURl = ''.obs;
-  var thumbnailID = 0.obs;
-  var thumbnailPath = <File>[].obs;
-  var imagesListForUI = [].obs;
+  var imagesListForUI = <ProductImages>[].obs;
+  var imagesToDelete = [].obs;
+  var imagesToUpdate = [].obs;
 
   createLists(List<ProductImages>? imagesList){
-    thumbnailURl.value = imagesList![0].url.toString();
-    thumbnailID.value = imagesList[0].id!;
-
-    for(int i = 1; i<=imagesList.length; i++){
+    imagesListForUI.clear();
+    for(int i = 0; i<=imagesList!.length-1; i++){
       imagesListForUI.add(imagesList[i]);
-      imagesListForUI.refresh();
     }
+    imagesListForUI.refresh();
   }
 
   static var _picker = ImagePicker();
@@ -55,12 +54,12 @@ class UpdateProductImagesViewModel extends GetxController {
                   }
                   else{
                     thumbnailImageSizeInMb.value += lengthInMb;
-                    thumbnailPath.add(compressedFile);
+                    imagesToUpdate.add(compressedFile);
                   }
               });
             });
           }
-        } on PlatformException catch (e){
+        } on PlatformException{
           AppConstant.displaySnackBar(langKey.errorTitle.tr, langKey.invalidImageFormat.tr);
         }
       } else{
@@ -115,6 +114,20 @@ class UpdateProductImagesViewModel extends GetxController {
         ],
       ),
     );
+  }
+
+  fetchProduct(int? productID)async{
+    var request = http.Request('GET', Uri.parse('https://ismmart-backend.com/api/products/$productID'));
+
+    http.StreamedResponse response = await request.send();
+
+    var data = await http.Response.fromStream(response);
+    var res = jsonDecode(data.body);
+
+    if (response.statusCode == 200) {
+      return ApiResponse.fromJson(res);
+    }
+
   }
 
 }

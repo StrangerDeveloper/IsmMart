@@ -52,6 +52,7 @@ class AuthProvider {
     request.fields['accountTitle'] = sellerModel.accountTitle!;
     request.fields['accountNumber'] = sellerModel.accountNumber!;
     request.fields['bankName'] = sellerModel.bankName!;
+    request.fields['cityId'] = sellerModel.cityId.toString();
 
     if (sellerModel.storeImage != '') {
       request.files.add(await http.MultipartFile.fromPath(

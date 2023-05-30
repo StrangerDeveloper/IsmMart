@@ -194,6 +194,8 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
   var selectedCategoryID = 1.obs;
   var categoriesList = <CategoryModel>[].obs;
 
+  var productImages = <ProductImages>[].obs;
+
   fetchCategories() async {
     categoriesList.clear();
     categoriesList.insert(0, CategoryModel(name: chooseCategory, id: 0));
