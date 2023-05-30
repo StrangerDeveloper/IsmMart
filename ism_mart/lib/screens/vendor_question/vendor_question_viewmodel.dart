@@ -3,22 +3,15 @@ import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/api_base_helper.dart';
 import 'package:ism_mart/api_helper/global_variables.dart';
 import 'package:ism_mart/api_helper/urls.dart';
-import 'package:ism_mart/models/exports_model.dart';
+import 'package:ism_mart/screens/vendor_question/vendor_question_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
-class AnswerQuestionViewModel extends GetxController {
-  List<QuestionModel> productQuestionsList = <QuestionModel>[].obs;
+class VendorQuestionViewModel extends GetxController {
+  List<VendorQuestionModel> productQuestionsList = <VendorQuestionModel>[].obs;
   final answerFormKey = GlobalKey<FormState>();
   final updateAnswerFormKey = GlobalKey<FormState>();
   TextEditingController answerController = TextEditingController();
   TextEditingController updateAnswerController = TextEditingController();
-
-  // @override
-  // void onInit() {
-  //   productId = Get.arguments['productId'];
-  //   productModel = Get.arguments['productModel'];
-  //   super.onInit();
-  // }
 
   @override
   void onReady() {
@@ -42,7 +35,7 @@ class AnswerQuestionViewModel extends GetxController {
       if (parsedJson['success'] == true) {
         var data = parsedJson['data'] as List;
         productQuestionsList.clear();
-        productQuestionsList.addAll(data.map((e) => QuestionModel.fromJson(e)));
+        productQuestionsList.addAll(data.map((e) => VendorQuestionModel.fromJson(e)));
       }
     }).catchError((e) {
       print(e);
@@ -52,6 +45,7 @@ class AnswerQuestionViewModel extends GetxController {
 
   addAnswer(int index) {
     if (answerFormKey.currentState?.validate() ?? false) {
+      Get.back();
       GlobalVariable.showLoader.value = true;
 
       Map<String, dynamic> param = {
@@ -65,7 +59,7 @@ class AnswerQuestionViewModel extends GetxController {
           .then((parsedJson) {
         GlobalVariable.showLoader.value = false;
         if (parsedJson['message'] == "Answer added successfully") {
-          Get.back();
+
           answerController.text = "";
           AppConstant.displaySnackBar(success.tr, parsedJson['message']);
           getData();
@@ -79,10 +73,11 @@ class AnswerQuestionViewModel extends GetxController {
     }
   }
 
-  updateQuestion(int index) {
+  updateAnswer(int index) {
     if (updateAnswerFormKey.currentState?.validate() ?? false) {
+      Get.back();
       GlobalVariable.showLoader.value = true;
-      String questionId = productQuestionsList[index].id.toString();
+      String questionId = productQuestionsList[index].answer!.id.toString();
 
       Map<String, dynamic> param = {"answer": updateAnswerController.text};
 
@@ -94,7 +89,7 @@ class AnswerQuestionViewModel extends GetxController {
           .then((parsedJson) {
         GlobalVariable.showLoader.value = false;
         if (parsedJson['message'] == "Answer updated successfully") {
-          Get.back();
+
           updateAnswerController.text = "";
           AppConstant.displaySnackBar(success.tr, parsedJson['message']);
           getData();
@@ -110,10 +105,10 @@ class AnswerQuestionViewModel extends GetxController {
 
   deleteAnswer(int index) {
     GlobalVariable.showLoader.value = true;
-    String questionId = productQuestionsList[index].id.toString();
+    String questionId = productQuestionsList[index].answer!.id.toString();
 
     ApiBaseHelper()
-        .deleteMethod(url: Urls.deleteAnswer + questionId, withBearer: false)
+        .deleteMethod(url: Urls.deleteAnswer + questionId, withAuthorization: true)
         .then((parsedJson) {
       GlobalVariable.showLoader.value = false;
       if (parsedJson['message'] == "Answer deleted successfully") {

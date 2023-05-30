@@ -3,12 +3,14 @@ import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/exports/exports_ui.dart';
 import 'package:ism_mart/screens/top_vendors/top_vendors_viewmodel.dart';
 
+import '../screens/register_seller/city_viewmodel.dart';
 import 'export_controllers.dart';
 
 AuthController authController = Get.find<AuthController>();
 BaseController baseController = Get.find<BaseController>();
 TopVendorsViewModel topVendorsViewModel = Get.put(TopVendorsViewModel());
 ThemesController themeController = Get.put(ThemesController());
+CityViewModel cityViewModel = Get.put(CityViewModel(Get.find()));
 
 LanguageController languageController = Get.put(LanguageController());
 

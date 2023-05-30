@@ -39,6 +39,7 @@ class UpdateProductView extends GetView<SellersController> {
           productModel.discount == 0 ? '' : productModel.discount!.toString();
       controller.prodDescriptionController.text = productModel.description!;
       controller.priceAfterCommission(productModel.price!.toInt());
+      controller.productImages.addAll(productModel.images!);
     }
 
     return SafeArea(
@@ -65,7 +66,7 @@ class UpdateProductView extends GetView<SellersController> {
                       height: 50,
                       width: 300,
                         onTap: (){
-                          Get.to(() => UpdateProductImagesView(productId: productId, imagesList: images,));
+                          Get.to(() => UpdateProductImagesView(productId: productId, imagesList: controller.productImages,));
                         },
                         text: 'Update Product Images',
                     ),

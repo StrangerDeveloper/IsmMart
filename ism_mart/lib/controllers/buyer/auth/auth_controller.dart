@@ -260,22 +260,22 @@ class AuthController extends GetxController {
     });
   }
 
-  registerStore() async {
+  registerStore({cityid, String? cityName}) async {
     isLoading(true);
-
     SellerModel model = SellerModel(
-      storeName: storeNameController.text,
-      storeDesc: storeDescController.text,
-      ownerName: ownerNameController.text,
-      storeImage: profileImgPath.value,
-      coverImage: coverImgPath.value,
-      phone: phoneController.text,
-      membership: "Free",
-      premium: false,
-      bankName: bankNameController.text.trim(),
-      accountTitle: bankHolderTitleController.text.trim(),
-      accountNumber: bankAccController.text.trim(),
-    );
+        storeName: storeNameController.text,
+        storeDesc: storeDescController.text,
+        ownerName: ownerNameController.text,
+        storeImage: profileImgPath.value,
+        coverImage: coverImgPath.value,
+        phone: phoneController.text,
+        membership: "Free",
+        premium: false,
+        bankName: bankNameController.text.trim(),
+        accountTitle: bankHolderTitleController.text.trim(),
+        accountNumber: bankAccController.text.trim(),
+        cityId: cityid,
+        cityName: cityName.toString());
 
     if (userToken!.isNotEmpty) {
       // UserModel user = UserModel(vendor: model);
@@ -468,6 +468,11 @@ class AuthController extends GetxController {
         "title": description.tr,
         "subtitle": userModel!.vendor?.storeDesc ?? '',
         "icon": Icons.info_outlined,
+      },
+      {
+        "title": city.tr,
+        "subtitle": userModel!.city?.name ?? '',
+        "icon": Icons.villa_rounded,
       },
     ];
   }

@@ -3,6 +3,8 @@ import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/screens/top_vendors/top_vendors_viewmodel.dart';
 
+import '../screens/register_seller/city_viewmodel.dart';
+
 class AppInitBinding extends Bindings {
   @override
   void dependencies() {
@@ -27,5 +29,6 @@ class AppInitBinding extends Bindings {
     //Get.lazyPut<AuthController>(() => null)
     Get.put<CurrencyController>(CurrencyController(Get.find()));
     Get.put(TopVendorsViewModel());
+    Get.put(CityViewModel(Get.find()));
   }
 }

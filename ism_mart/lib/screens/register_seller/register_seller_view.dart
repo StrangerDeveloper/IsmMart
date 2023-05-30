@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -9,6 +10,8 @@ import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+
+import '../../controllers/controllers.dart';
 
 class RegisterVendorUI extends GetView<AuthController> {
   const RegisterVendorUI({
@@ -338,6 +341,91 @@ class RegisterVendorUI extends GetView<AuthController> {
               onSaved: (value) {},
             ),
             AppConstant.spaceWidget(height: 15),
+            AppConstant.spaceWidget(height: 15),
+            //Countries
+            Obx(
+                  () => DropdownSearch<CountryModel>(
+                popupProps: PopupProps.dialog(
+                    showSearchBox: true,
+                    dialogProps: DialogProps(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10))),
+                    searchFieldProps: AppConstant.searchFieldProp()),
+                items: cityViewModel.authController.countries,
+                itemAsString: (model) => model.name ?? "",
+                dropdownDecoratorProps: DropDownDecoratorProps(
+                  baseStyle: bodyText1,
+                  dropdownSearchDecoration: InputDecoration(
+                    labelText: langKey.selectCountry.tr,
+                    labelStyle: bodyText1,
+                    hintText: langKey.chooseCountry.tr,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: Colors.black,
+                          width: 1,
+                          style: BorderStyle.solid), //B
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                ),
+                onChanged: (CountryModel? newValue) {
+                  cityViewModel.setSelectedCountry(newValue!);
+                  //debugPrint(">>> $newValue");
+                },
+                selectedItem:
+                cityViewModel.authController.selectedCountry.value,
+              ),
+            ),
+            AppConstant.spaceWidget(height: 15),
+
+            ///TOO: Sub Cities
+            Obx(
+                  () => authController.cities.isEmpty
+                  ? Container()
+                  : authController.isLoading.isTrue
+                  ? CustomLoading(
+                isItForWidget: true,
+                color: kPrimaryColor,
+              )
+                  : DropdownSearch<CountryModel>(
+                popupProps: PopupProps.dialog(
+                    showSearchBox: true,
+                    dialogProps: DialogProps(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10))),
+                    searchFieldProps: AppConstant.searchFieldProp()),
+                //showSelectedItems: true),
+
+                items: cityViewModel.authController.cities,
+                itemAsString: (model) => model.name ?? "",
+                dropdownDecoratorProps: DropDownDecoratorProps(
+                  baseStyle: bodyText1,
+                  dropdownSearchDecoration: InputDecoration(
+                    labelText: langKey.selectCity.tr,
+                    labelStyle: bodyText1,
+                    hintText: langKey.chooseCity.tr,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: Colors.black,
+                          width: 1,
+                          style: BorderStyle.solid), //B
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                ),
+
+                onChanged: (CountryModel? newValue) {
+                  cityViewModel.selectedcity.value =
+                      newValue!.name ?? "";
+                  cityViewModel.setSelectedCity(newValue);
+                  // cityViewModel.selectedcity.value =
+                  //     newValue.toString();
+                },
+                selectedItem:
+                cityViewModel.authController.selectedCity.value,
+              ),
+            ),
+            AppConstant.spaceWidget(height: 15),
             FormInputFieldWithIcon(
               controller: controller.storeDescController,
               iconPrefix: Icons.description,
@@ -412,7 +500,9 @@ class RegisterVendorUI extends GetView<AuthController> {
                         if (formKey.currentState!.validate()) {
                           //closing keyboard
                           //FocusManager.instance.primaryFocus?.unfocus();
-                          await controller.registerStore();
+                          await controller.registerStore(
+                              cityid: cityViewModel.cityId.value,
+                              cityName: cityViewModel.selectedcity.value);
                         }
                       },
                       text: model != null
