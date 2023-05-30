@@ -341,6 +341,10 @@ class DashboardUI extends GetView<BaseController> {
           //height: AppConstant.getSize().height * 0.5,
           child: GridView.builder(
               shrinkWrap: true,
+
+              ///Reducing memory consumption
+              addAutomaticKeepAlives: false,
+              addRepaintBoundaries: false,
               physics: const NeverScrollableScrollPhysics(),
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                 //crossAxisCount: AppResponsiveness.getGridItemCount(),
@@ -372,6 +376,9 @@ class DashboardUI extends GetView<BaseController> {
         //         ? 0.28
         //         : 0.22), //AppResponsiveness.getBoxHeightPoint25(),
         child: ListView.builder(
+          ///Reducing memory consumption
+          addAutomaticKeepAlives: false,
+          addRepaintBoundaries: false,
           scrollDirection: Axis.horizontal,
           itemCount: list.length,
           itemBuilder: (context, index) {
@@ -471,10 +478,13 @@ class DashboardUI extends GetView<BaseController> {
                   shape: BoxShape.circle,
                   color: kPrimaryColor.withOpacity(0.2),
                 ),
-                child:  ClipOval(
+                child: ClipOval(
                   child: SizedBox.fromSize(
                     size: Size.fromRadius(25), // Image radius
-                    child: CustomNetworkImage(imageUrl: vendorsModel!.storeImage, fit: BoxFit.cover,),
+                    child: CustomNetworkImage(
+                      imageUrl: vendorsModel!.storeImage,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),

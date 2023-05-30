@@ -73,7 +73,8 @@ class ApiProvider {
   }
 
   Future<List<ProductModel>> getProductsByType({String? type, limit}) async {
-    var products = await _apiRepository.getProductsByType(type: type, limit: limit);
+    var products =
+        await _apiRepository.getProductsByType(type: type, limit: limit);
 
     return products.map((product) => ProductModel.fromJson(product)).toList();
   }
@@ -97,9 +98,10 @@ class ApiProvider {
     return SellerModelResponse.fromJson(response);
   }
 
-  Future<List<ProductModel>> geVendorProductById({token, storeID}) async {
+  Future<List<ProductModel>> geVendorProductById(
+      {token, storeID, limit, page}) async {
     var response = await _apiRepository.fetchStoreProductsById(
-        token: token, storeID: storeID);
+        token: token, storeID: storeID, limit: limit, page: page);
     return response.map((e) => ProductModel.fromJson(e)).toList();
   }
 

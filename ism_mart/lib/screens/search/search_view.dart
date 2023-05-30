@@ -18,30 +18,26 @@ class SearchView extends GetView<CustomSearchController> {
   Widget build(BuildContext context) {
     //  final controller = Get.find<SearchController>();
     String? searchQuery;
-    if(passedSearchQuery == 'ISMMART Originals'){
+    if (passedSearchQuery == 'ISMMART Originals') {
       searchQuery = 'IsmmartOriginal';
       controller.setSelectedCategory(searchQuery);
-    }
-    else if(passedSearchQuery == 'Popular Products'){
+    } else if (passedSearchQuery == 'Popular Products') {
       searchQuery = 'Latest';
       controller.setSelectedCategory(searchQuery);
-    }
-    else if(passedSearchQuery == 'Featured Products'){
+    } else if (passedSearchQuery == 'Featured Products') {
       searchQuery = 'Featured';
       controller.setSelectedCategory(searchQuery);
-    }
-    else{
+    } else {
       searchQuery = passedSearchQuery;
       controller.setSelectedCategory(passedSearchQuery);
     }
     controller.getProductsByType(searchQuery);
 
-
     return Hero(
       tag: "productSearchBar",
       child: SafeArea(
         child: WillPopScope(
-          onWillPop: (){
+          onWillPop: () {
             return controller.goBack();
           },
           child: Scaffold(
@@ -82,8 +78,8 @@ class SearchView extends GetView<CustomSearchController> {
         child: TextField(
           controller: controller.searchTextController,
           //focusNode: controller.focus,
-          onChanged: (value){
-            if(value != '') {
+          onChanged: (value) {
+            if (value != '') {
               controller.setSelectedCategory(null);
               controller.search(controller.searchTextController.text);
             }

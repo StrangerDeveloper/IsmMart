@@ -31,12 +31,15 @@ class ChangePasswordView extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              Text(
-                'Fill the following details to change password',
-                style: bodyText2Poppins.copyWith(
-                  fontSize: 14
+
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: CustomText(
+                  title: "Fill the following details to change password",
+                  style: headline2,
                 ),
               ),
+
               SizedBox(
                 height: 45,
               ),
@@ -45,83 +48,36 @@ class ChangePasswordView extends StatelessWidget {
                 child: Column(
                   // mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // Padding(
-                    //   padding: const EdgeInsets.only(left: 8.0, bottom: 5),
-                    //   child: Text(
-                    //     'Current Password',
-                    //     style: bodyText2.copyWith(
-                    //       color: Colors.grey
-                    //     ),
-                    //   ),
-                    // ),
-                    // Obx(() => CustomTextField1(
-                    //    controller: viewModel.currentPasswordController,
-                    //     onChanged: (value) => {},
-                    //     autoValidateMode: AutovalidateMode.onUserInteraction,
-                    //       validator:
-                    //           (value) => //!GetUtils.isPassport(value!)
-                    //       value!.isEmpty
-                    //           ? langKey.currentPassword.tr
-                    //           : null,
-                    //     // minLines: 1,
-                    //   obscureText: viewModel.currentPasswordIconVisibility.isTrue,
-                    //     suffixIcon: GestureDetector(
-                    //       onTap: ()=> viewModel.changeIcon(viewModel.currentPasswordIconVisibility),
-                    //       child: Icon(viewModel.currentPasswordIconVisibility.isTrue
-                    //           ? Icons.visibility_off : Icons.visibility,
-                    //         color: Colors.black, size: 22,),
-                    //     ),
-                    //   ),
-                    // ),
                     // AppConstant.spaceWidget(height: 20),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0, bottom: 5),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          'New Password',
-                          style: bodyText2.copyWith(
-                              color: Colors.grey
-                          ),
-                        ),
-                      ),
-                    ),
-                    Obx(() => CustomTextField1(
+
+                    FormPasswordInputFieldWithIcon(
                       controller: viewModel.newPasswordController,
-                      onChanged: (value) => {},
+                      iconColor: kPrimaryColor,
+                      textStyle: bodyText1,
+                      labelText: langKey.newPassword.tr,
                       autoValidateMode: AutovalidateMode.onUserInteraction,
-                      validator:
-                          (value) => //!GetUtils.isPassport(value!)
-                      value!.isEmpty
+                      validator: (value) => value!.isEmpty
                           ? langKey.newPassReq.tr
                           : value.length < 8
-                          ? langKey.passwordLengthReq.tr
-                          : null,
-                      minLines: 1,
-                      obscureText: viewModel.newPasswordIconVisibility.isTrue,
-                      suffixIcon: GestureDetector(
-                        onTap: ()=> viewModel.changeIcon(viewModel.newPasswordIconVisibility),
-                        child: Icon(viewModel.newPasswordIconVisibility.isTrue
-                            ? Icons.visibility_off : Icons.visibility,
-                          color: Colors.black, size: 22,),
-                      ),
-                    ),
+                              ? langKey.passwordLengthReq.tr
+                              : null,
+                      obscureText: true,
+                      onChanged: (value) => {},
+                      maxLines: 1,
                     ),
                     AppConstant.spaceWidget(height: 20),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0, bottom: 5),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          'Confirm Password',
-                          style: bodyText2.copyWith(
-                              color: Colors.grey
-                          ),
-                        ),
-                      ),
-                    ),
-                    Obx(() => CustomTextField1(
+                    FormPasswordInputFieldWithIcon(
                       controller: viewModel.confirmPasswordController,
+                      iconColor: kPrimaryColor,
+                      textStyle: bodyText1,
+                      labelText: langKey.confirmPass.tr,
+                      autoValidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (value) => value!.isEmpty
+                          ? langKey.confirmPassReq.tr
+                          : value.length < 8
+                              ? langKey.passwordLengthReq.tr
+                              : null,
+                      obscureText: true,
                       onChanged: (value) {
                         if (value.toLowerCase().trim() ==
                             viewModel.newPasswordController.text
@@ -132,26 +88,12 @@ class ChangePasswordView extends StatelessWidget {
                           viewModel.passwordNotMatched(true);
                         }
                       },
-                      autoValidateMode: AutovalidateMode.onUserInteraction,
-                      validator:
-                          (value) => //!GetUtils.isPassport(value!)
-                          value!.isEmpty
-                              ? langKey.confirmPassReq.tr
-                              : value.length < 8
-                              ? langKey.passwordLengthReq.tr : null,
-                      minLines: 1,
-                      obscureText: viewModel.confirmPasswordIconVisibility.isTrue,
-                      suffixIcon: GestureDetector(
-                        onTap: ()=> viewModel.changeIcon(viewModel.confirmPasswordIconVisibility),
-                        child: Icon(viewModel.confirmPasswordIconVisibility.isTrue
-                            ? Icons.visibility_off : Icons.visibility,
-                          color: Colors.black, size: 22,),
-                      ),
+                      maxLines: 1,
                     ),
-                    ),
+
                     AppConstant.spaceWidget(height: 20),
                     Obx(
-                          () => Visibility(
+                      () => Visibility(
                           visible: viewModel.passwordNotMatched.value,
                           child: CustomText(
                             title: langKey.passwordNotMatched.tr,
@@ -161,22 +103,19 @@ class ChangePasswordView extends StatelessWidget {
                     AppConstant.spaceWidget(height: 8),
                     CustomButton(
                       onTap: () async {
-                        if(viewModel.changePasswordFormKey.currentState!.validate()){
-                          if(viewModel.passwordNotMatched == false){
-                            final ApiResponse apiCall = await viewModel.updatePassword();
-                            if(apiCall.success!){
+                        if (viewModel.changePasswordFormKey.currentState!
+                            .validate()) {
+                          if (viewModel.passwordNotMatched == false) {
+                            final ApiResponse apiCall =
+                                await viewModel.updatePassword();
+                            if (apiCall.success!) {
                               viewModel.clearControllers();
                               Get.back();
                               AppConstant.displaySnackBar(
-                                langKey.successTitle.tr,
-                                apiCall.message
-                              );
-                            }
-                            else{
+                                  langKey.successTitle.tr, apiCall.message);
+                            } else {
                               AppConstant.displaySnackBar(
-                                langKey.errorTitle.tr,
-                                apiCall.message
-                              );
+                                  langKey.errorTitle.tr, apiCall.message);
                             }
                           }
                         }

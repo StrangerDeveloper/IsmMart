@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:flutter/services.dart';
-import 'package:ism_mart/controllers/product_controller.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -11,14 +10,13 @@ import '../../utils/helpers/permission_handler.dart';
 import '../../widgets/custom_text.dart';
 
 class UpdateProductImagesViewModel extends GetxController {
-
   UpdateProductImagesViewModel();
 
   // final List<ProductImages>? imagesList;
 
   @override
   void onInit() {
-    ProductController productController = Get.find();
+    //ProductController productController = Get.find();
     // productController.fetchProduct()
     super.onInit();
   }
@@ -29,41 +27,44 @@ class UpdateProductImagesViewModel extends GetxController {
   var thumbnailPath = <File>[].obs;
   var imagesListForUI = [].obs;
 
-  createLists(List<ProductImages>? imagesList){
+  createLists(List<ProductImages>? imagesList) {
     thumbnailURl.value = imagesList![0].url.toString();
     thumbnailID.value = imagesList[0].id!;
 
-    for(int i = 1; i<=imagesList.length; i++){
+    for (int i = 1; i <= imagesList.length; i++) {
       imagesListForUI.add(imagesList[i]);
       imagesListForUI.refresh();
     }
   }
 
   static var _picker = ImagePicker();
-  pickThumbnail(ImageSource src)async{
+  pickThumbnail(ImageSource src) async {
     await PermissionsHandler().checkPermissions().then((isGranted) async {
-      if(isGranted){
-        try{
+      if (isGranted) {
+        try {
           XFile? thumbnailImage = await _picker.pickImage(source: src);
-          if(thumbnailImage!.path != ''){
-            await thumbnailImage.length().then((length) async{
-              await AppConstant.compressImage(thumbnailImage.path, fileLength: length)
+          if (thumbnailImage!.path != '') {
+            await thumbnailImage.length().then((length) async {
+              await AppConstant.compressImage(thumbnailImage.path,
+                      fileLength: length)
                   .then((compressedFile) {
-                  var lengthInMb = compressedFile.lengthSync() * 0.000001;
-                  if(lengthInMb > 2){
-                    AppConstant.displaySnackBar(langKey.errorTitle.tr, '${langKey.fileMustBe.tr} + 2MB');
-                  }
-                  else{
-                    thumbnailImageSizeInMb.value += lengthInMb;
-                    thumbnailPath.add(compressedFile);
-                  }
+                var lengthInMb = compressedFile.lengthSync() * 0.000001;
+                if (lengthInMb > 2) {
+                  AppConstant.displaySnackBar(
+                      langKey.errorTitle.tr, '${langKey.fileMustBe.tr} + 2MB');
+                } else {
+                  thumbnailImageSizeInMb.value += lengthInMb;
+                  thumbnailPath.add(compressedFile);
+                }
               });
             });
           }
-        } on PlatformException catch (e){
-          AppConstant.displaySnackBar(langKey.errorTitle.tr, langKey.invalidImageFormat.tr);
+        } on PlatformException catch (e) {
+          print("PlatformExcetion: $e");
+          AppConstant.displaySnackBar(
+              langKey.errorTitle.tr, langKey.invalidImageFormat.tr);
         }
-      } else{
+      } else {
         await PermissionsHandler().requestPermissions();
       }
     });
@@ -116,5 +117,4 @@ class UpdateProductImagesViewModel extends GetxController {
       ),
     );
   }
-
 }

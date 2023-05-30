@@ -103,7 +103,10 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
     isLoading(true);
     model!.name = prodNameController.text;
     model.price = int.parse("${priceAfterCommission.value}");
-    model.discount = prodDiscountController.text == '' || prodDiscountController.text.isEmpty ? 0 : int.parse(prodDiscountController.text);
+    model.discount =
+        prodDiscountController.text == '' || prodDiscountController.text.isEmpty
+            ? 0
+            : int.parse(prodDiscountController.text);
     model.description = prodDescriptionController.text;
     model.stock = int.parse("${prodStockController.text}");
 
@@ -444,8 +447,16 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
       {'title': myOrders.tr, "icon": Icons.shopping_bag_outlined, "page": 2},
       {'title': profile.tr, "icon": Icons.manage_accounts_outlined, "page": 3},
       {'title': vendorStoreDetails.tr, "icon": Icons.storefront, "page": 4},
-      {'title': 'Answer User Questions', "icon": Icons.question_mark_sharp, "page": 5},
-      {'title': 'Change Password', "icon": Icons.description_outlined, "page": 6},
+      {
+        'title': 'Answer User Questions',
+        "icon": Icons.question_mark_sharp,
+        "page": 5
+      },
+      {
+        'title': 'Change Password',
+        "icon": Icons.description_outlined,
+        "page": 6
+      },
       /*{
         'title': "Premium Membership",
         "icon": Icons.workspace_premium_outlined,

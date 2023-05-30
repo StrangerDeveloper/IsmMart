@@ -6,7 +6,7 @@ class FormInputFieldWithIcon extends StatelessWidget {
   const FormInputFieldWithIcon({
     Key? key,
     required this.controller,
-    required this.iconPrefix,
+    this.iconPrefix,
     this.labelText,
     this.hintText,
     this.suffix,
@@ -29,7 +29,7 @@ class FormInputFieldWithIcon extends StatelessWidget {
   }) : super(key: key);
   final AutovalidateMode? autoValidateMode;
   final TextEditingController controller;
-  final IconData iconPrefix;
+  final IconData? iconPrefix;
   final String? labelText, hintText;
   final bool? autofocus;
   final Widget? suffix;
@@ -61,21 +61,23 @@ class FormInputFieldWithIcon extends StatelessWidget {
       decoration: InputDecoration(
         filled: false,
         suffix: suffix,
-        prefixIcon: Icon(
-          iconPrefix,
-          color: kPrimaryColor,
-        ),
+        prefixIcon: iconPrefix == null
+            ? null
+            : Icon(
+                iconPrefix,
+                color: kPrimaryColor,
+              ),
         labelText: labelText,
         labelStyle: textStyle,
         hintText: hintText,
         errorMaxLines: 2,
-        enabledBorder: enableBorder ??
+        focusedBorder: enableBorder ??
             OutlineInputBorder(
               borderSide: BorderSide(
                   color: Colors.black, width: 1, style: BorderStyle.solid), //B
               borderRadius: BorderRadius.circular(8),
             ),
-        focusedBorder: enableBorder ??
+        border: enableBorder ??
             OutlineInputBorder(
               borderSide: BorderSide(
                   color: Colors.black, width: 1, style: BorderStyle.solid), //B

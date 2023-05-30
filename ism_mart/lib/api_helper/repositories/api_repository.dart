@@ -91,7 +91,7 @@ class ApiRepository {
   }
 
   Future<List<dynamic>> fetchStoreProductsById(
-      {token, storeID, limit = 100, page = 1}) async {
+      {token, storeID, limit = 30, page = 1}) async {
     final queryParameters = {"limit": "$limit", "page": "$page"};
     var response = await _apiService.get(
         endpoint: 'vendor/products/$storeID',
