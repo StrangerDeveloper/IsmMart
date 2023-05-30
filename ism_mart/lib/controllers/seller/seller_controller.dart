@@ -1,6 +1,6 @@
 import 'dart:io';
-import 'package:ism_mart/screens/answer_question/answer_question_view.dart';
 import 'package:ism_mart/screens/change_password/change_password_view.dart';
+import 'package:ism_mart/screens/vendor_question/vendor_question_view.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -420,7 +420,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
     //const PremiumMembershipUI(),
     BuyerProfileView(),
     const StoreProfileView(),
-    AnswerQuestionView(),
+    VendorQuestionView(),
     ChangePasswordView()
   ];
 

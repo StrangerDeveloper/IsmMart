@@ -425,4 +425,11 @@ class AppConstant {
       ),
     );
   }
+
+  static String convertDateFormat1(String stringDate) {
+    DateTime inputDate = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").parse(stringDate);
+    String outputDate = DateFormat('dd-MMM-yy').format(inputDate);
+    return outputDate;
+  }
+
 }
