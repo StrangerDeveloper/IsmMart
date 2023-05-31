@@ -5,10 +5,10 @@ import 'package:ism_mart/api_helper/global_variables.dart';
 import 'package:ism_mart/api_helper/urls.dart';
 import 'package:ism_mart/controllers/product_controller.dart';
 import 'package:ism_mart/models/exports_model.dart';
+import 'package:ism_mart/screens/product_questions/product_questions_view.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
 class ProductQuestionsViewModel extends GetxController {
-
   String productId = "";
   List<QuestionModel> productQuestionsList = <QuestionModel>[].obs;
   ProductModel? productModel;
@@ -44,9 +44,9 @@ class ProductQuestionsViewModel extends GetxController {
             url: Urls.getQuestionByProductId + productId, withBearer: false)
         .then((parsedJson) {
       GlobalVariable.showLoader.value = false;
-      if (parsedJson['success'] == true) {
-        var data = parsedJson['data'] as List;
+      if (parsedJson['message'] == 'Product questions fetched successfully' || parsedJson['message'] == 'No questions found') {
         productQuestionsList.clear();
+        var data = parsedJson['data'] as List;
         productQuestionsList.addAll(data.map((e) => QuestionModel.fromJson(e)));
       }
     }).catchError((e) {
@@ -98,13 +98,13 @@ class ProductQuestionsViewModel extends GetxController {
 
       ApiBaseHelper()
           .patchMethod(
-          url: Urls.updateQuestion + questionId,
-          body: param,
-          withBearer: false, withAuthorization: true)
+              url: Urls.updateQuestion + questionId,
+              body: param,
+              withBearer: false,
+              withAuthorization: true)
           .then((parsedJson) {
         GlobalVariable.showLoader.value = false;
         if (parsedJson['message'] == "Product question updated successfully") {
-
           updateQuestionController.text = "";
           AppConstant.displaySnackBar(success.tr, parsedJson['message']);
           /////////////
@@ -127,7 +127,8 @@ class ProductQuestionsViewModel extends GetxController {
     String questionId = productQuestionsList[index].id.toString();
 
     ApiBaseHelper()
-        .deleteMethod(url: Urls.deleteQuestion + questionId, withAuthorization: true)
+        .deleteMethod(
+            url: Urls.deleteQuestion + questionId, withAuthorization: true)
         .then((parsedJson) {
       GlobalVariable.showLoader.value = false;
       if (parsedJson['message'] == "Question deleted successfully") {
@@ -135,6 +136,7 @@ class ProductQuestionsViewModel extends GetxController {
         getQuestionAnswers();
         ProductController controller = Get.find();
         controller.getProductQuestions(productId: productId);
+        // Get.to(ProductQuestionsView());
       } else {
         AppConstant.displaySnackBar(errorTitle.tr, parsedJson['message']);
       }
@@ -143,6 +145,4 @@ class ProductQuestionsViewModel extends GetxController {
       print(e);
     });
   }
-
-
 }
