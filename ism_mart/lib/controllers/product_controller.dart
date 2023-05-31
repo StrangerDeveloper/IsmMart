@@ -50,6 +50,16 @@ class ProductController extends GetxController with StateMixin {
     });
   }
 
+  popSingleProductView(){
+    pageIndex(0);
+    Get.back();
+  }
+
+  popProductImageView(){
+    imageIndex(0);
+    Get.back();
+  }
+
   setCountAndMOQ({ProductModel? productModel}) {
     count.value = 1;
     moq.value = productModel!.stock!;

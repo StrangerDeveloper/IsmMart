@@ -19,6 +19,7 @@ class SingleProductView extends GetView<ProductController> {
 
   @override
   Widget build(BuildContext context) {
+    print(controller.imageIndex);
     if (productId == null) {
       return Scaffold(body: Center(child: CustomLoading()));
     } else if (productId != null) {
@@ -56,80 +57,83 @@ class SingleProductView extends GetView<ProductController> {
   }
 
   Widget _build({ProductModel? productModel}) {
-    return Scaffold(
-        backgroundColor: Colors.grey[300]!,
-        resizeToAvoidBottomInset: true,
-        body: Stack(
-          fit: StackFit.expand,
-          children: [
-            CustomScrollView(
-              slivers: [
-                _sliverAppBar(productModel!),
-                SliverList(
-                  delegate: SliverChildListDelegate(
-                    [
-                      productModel.images!.isEmpty
-                          ? GestureDetector(
-                              onTap: () {
-                                var imagesList = <ProductImages>[];
-                                imagesList.add(ProductImages(
-                                    id: 0, url: productModel.thumbnail));
-                                Get.to(() => SingleProductFullImage(
-                                      productImages: imagesList,
-                                      initialImage: 0,
-                                    ));
-                              },
-                              child: CustomNetworkImage(
-                                imageUrl: productModel.thumbnail,
-                                fit: BoxFit.cover,
-                                width: MediaQuery.of(Get.context!).size.width,
-                                height:
-                                    MediaQuery.of(Get.context!).size.height *
-                                        0.4,
-                              ),
-                            )
-                          : _productImages(imagesList: productModel.images!),
+    return WillPopScope(
+      onWillPop: () => controller.popSingleProductView(),
+      child: Scaffold(
+          backgroundColor: Colors.grey[300]!,
+          resizeToAvoidBottomInset: true,
+          body: Stack(
+            fit: StackFit.expand,
+            children: [
+              CustomScrollView(
+                slivers: [
+                  _sliverAppBar(productModel!),
+                  SliverList(
+                    delegate: SliverChildListDelegate(
+                      [
+                        productModel.images!.isEmpty
+                            ? GestureDetector(
+                                onTap: () {
+                                  var imagesList = <ProductImages>[];
+                                  imagesList.add(ProductImages(
+                                      id: 0, url: productModel.thumbnail));
+                                  Get.to(() => SingleProductFullImage(
+                                        productImages: imagesList,
+                                        initialImage: 0,
+                                      ));
+                                },
+                                child: CustomNetworkImage(
+                                  imageUrl: productModel.thumbnail,
+                                  fit: BoxFit.cover,
+                                  width: MediaQuery.of(Get.context!).size.width,
+                                  height:
+                                      MediaQuery.of(Get.context!).size.height *
+                                          0.4,
+                                ),
+                              )
+                            : _productImages(imagesList: productModel.images!),
 
-                      /// product name, price etc.
-                      _productBasicDetails(productModel: productModel),
+                        /// product name, price etc.
+                        _productBasicDetails(productModel: productModel),
 
-                      /// Product features
-                      if (productModel.productFeatures!.isNotEmpty)
-                        _productVariantsDetails(productModel: productModel),
+                        /// Product features
+                        if (productModel.productFeatures!.isNotEmpty)
+                          _productVariantsDetails(productModel: productModel),
 
-                      //_vendorStoreDetails(productModel: productModel),
+                        //_vendorStoreDetails(productModel: productModel),
 
-                      ///product description
-                      _productAdvanceDetails(productModel: productModel),
+                        ///product description
+                        _productAdvanceDetails(productModel: productModel),
 
-                      ///product reviews
-                      // _productReviews(productModel: productModel),
+                        ///product reviews
+                        // _productReviews(productModel: productModel),
 
-                      ///Product Questions
-                      productQuestions(productModel: productModel),
+                        ///Product Questions
+                        productQuestions(productModel: productModel),
 
-                      if (Get.arguments != null &&
-                          Get.arguments["calledFor"] != null &&
-                          Get.arguments["calledFor"]!.contains("customer"))
-                        _buildCustomerAlsoViewed(
-                            controller.subCategoryProductList),
+                        if (Get.arguments != null &&
+                            Get.arguments["calledFor"] != null &&
+                            Get.arguments["calledFor"]!.contains("customer"))
+                          _buildCustomerAlsoViewed(
+                              controller.subCategoryProductList),
 
-                      // AppConstant.spaceWidget(height: 70),
-                      //Spacer(),
-                    ],
+                        // AppConstant.spaceWidget(height: 70),
+                        //Spacer(),
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-            // if(Get.arguments != null &&
-            //     Get.arguments["calledFor"] != null &&
-            //     Get.arguments["calledFor"]!.contains("customer"))
-            calledFor == 'seller'
-                ? Container()
-                : _outOfStockBottom(productModel),
-            LoaderView(),
-          ],
-        ));
+                ],
+              ),
+              // if(Get.arguments != null &&
+              //     Get.arguments["calledFor"] != null &&
+              //     Get.arguments["calledFor"]!.contains("customer"))
+              calledFor == 'seller'
+                  ? Container()
+                  : _outOfStockBottom(productModel),
+              LoaderView(),
+            ],
+          )),
+    );
 
     // bottomNavigationBar: Get.arguments != null &&
     //         Get.arguments["calledFor"] != null &&
