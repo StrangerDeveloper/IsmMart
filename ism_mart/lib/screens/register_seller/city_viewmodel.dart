@@ -16,7 +16,7 @@ class CityViewModel extends GetxController {
   @override
   void onReady() {
     // getCountryApi();
-    // TODO: implement onReady
+
     super.onReady();
   }
 
