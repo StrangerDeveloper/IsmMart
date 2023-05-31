@@ -5,7 +5,6 @@ import 'package:ism_mart/api_helper/global_variables.dart';
 import 'package:ism_mart/api_helper/urls.dart';
 import 'package:ism_mart/controllers/product_controller.dart';
 import 'package:ism_mart/models/exports_model.dart';
-import 'package:ism_mart/screens/product_questions/product_questions_view.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
 class ProductQuestionsViewModel extends GetxController {
@@ -44,7 +43,8 @@ class ProductQuestionsViewModel extends GetxController {
             url: Urls.getQuestionByProductId + productId, withBearer: false)
         .then((parsedJson) {
       GlobalVariable.showLoader.value = false;
-      if (parsedJson['message'] == 'Product questions fetched successfully' || parsedJson['message'] == 'No questions found') {
+      if (parsedJson['message'] == 'Product questions fetched successfully' ||
+          parsedJson['message'] == 'No questions found') {
         productQuestionsList.clear();
         var data = parsedJson['data'] as List;
         productQuestionsList.addAll(data.map((e) => QuestionModel.fromJson(e)));
