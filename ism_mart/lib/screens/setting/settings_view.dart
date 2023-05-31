@@ -234,7 +234,7 @@ class SettingsView extends GetView<AuthController> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 32, bottom: 8),
+          padding: const EdgeInsets.only(left: 32, bottom: 8, right: 32),
           child: CustomText(
             title: langKey.general.tr,
             size: 16,
