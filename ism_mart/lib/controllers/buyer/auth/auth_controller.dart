@@ -623,6 +623,7 @@ class AuthController extends GetxController {
   var cities = <CountryModel>[].obs;
   var selectedCountry = CountryModel().obs;
   var selectedCity = CountryModel().obs;
+  RxBool newAcc = false.obs;
 
   getCountries() async {
     countries.clear();

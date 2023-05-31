@@ -55,6 +55,8 @@ class CityViewModel extends GetxController {
 
   var countryId = 0.obs;
   var cityId = 0.obs;
+  var selectedCountry = CountryModel().obs;
+  var selectedCity = CountryModel().obs;
   void setSelectedCountry(CountryModel? model) async {
     authController.selectedCountry(model);
     //getCityByCountryName(name);

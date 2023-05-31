@@ -83,10 +83,9 @@ class BuyerProfileView extends GetView<AuthController> {
                           )
                         : InkWell(
                             onTap: () => AppConstant.showConfirmDeleteDialog(
-                              ontap: () => controller.deActivateAccount(),
-                              passedBodyLangKey: langKey.deActivateMsg.tr,
-                              givenFontSize: 18
-                            ),
+                                ontap: () => controller.deActivateAccount(),
+                                passedBodyLangKey: langKey.deActivateMsg.tr,
+                                givenFontSize: 18),
                             child: Container(
                               width: 150,
                               padding:

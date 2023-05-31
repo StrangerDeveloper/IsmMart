@@ -270,18 +270,18 @@ class StoreProfileView extends GetView<AuthController> {
           imageBuilder: (context, imageProvider) {
             return Container(
               decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  image: imageProvider,
-                  fit: BoxFit.fill,
-                ),
-                  boxShadow: [ BoxShadow(
-              color: kPrimaryColor.withOpacity(0.22),
-              offset: Offset(0, 0),
-              blurRadius: 10.78,
-            ),
-              ]
-              ),
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                    image: imageProvider,
+                    fit: BoxFit.fill,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: kPrimaryColor.withOpacity(0.22),
+                      offset: Offset(0, 0),
+                      blurRadius: 10.78,
+                    ),
+                  ]),
             );
           },
           errorWidget: (context, url, error) {

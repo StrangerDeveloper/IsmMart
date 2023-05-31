@@ -1,6 +1,7 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:ism_mart/utils/constants.dart';
 
 class CustomTextField1 extends StatelessWidget {
@@ -31,7 +32,7 @@ class CustomTextField1 extends StatelessWidget {
     super.key,
     this.contentPadding = const EdgeInsets.symmetric(
       horizontal: 10,
-      vertical: 13,
+      vertical: 13.5,
     ),
     this.asterisk = false,
     this.validator,
@@ -129,6 +130,113 @@ class CustomTextField1 extends StatelessWidget {
           keyboardType: keyboardType,
           minLines: minLines,
           maxLines: maxLines,
+        ),
+      ],
+    );
+  }
+}
+
+class CustomTextField2 extends StatelessWidget {
+  final String? title;
+  final String? hintText;
+  final Widget? prefixIcon;
+  final Widget? suffixIcon;
+  final String? label;
+  final EdgeInsetsGeometry? contentPadding;
+  final bool obscureText;
+  final TextEditingController? controller;
+  final Color? fillColor;
+  final bool readOnly;
+  final bool? showCursor;
+  final AutovalidateMode? autoValidateMode;
+  final FormFieldValidator<String>? validator;
+  final List<TextInputFormatter>? inputFormatters;
+  final TextInputType? keyboardType;
+
+  CustomTextField2({
+    Key? key,
+    this.showCursor,
+    this.readOnly = false,
+    this.fillColor,
+    this.contentPadding = const EdgeInsets.fromLTRB(10, 13.5, 10, 13.5),
+    this.controller,
+    this.suffixIcon,
+    this.obscureText = false,
+    this.hintText,
+    this.prefixIcon,
+    this.label,
+    this.title,
+    this.autoValidateMode,
+    this.validator,
+    this.inputFormatters,
+    this.keyboardType,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (title != null)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 5),
+            child: Text(
+              title!,
+              style: TextStyle(fontSize: 15),
+            ),
+          ),
+        TextFormField(
+          keyboardType: keyboardType,
+          inputFormatters: inputFormatters,
+          validator: validator,
+          autovalidateMode: autoValidateMode,
+          showCursor: showCursor,
+          readOnly: readOnly,
+          controller: controller,
+          obscureText: obscureText,
+          style: GoogleFonts.lato(
+            color: Colors.black,
+            fontSize: 15,
+          ),
+          decoration: InputDecoration(
+            labelText: label,
+            labelStyle: GoogleFonts.lato(
+              fontSize: 14,
+              color: Colors.black54,
+            ),
+            floatingLabelStyle: GoogleFonts.lato(
+              color: Colors.black,
+              fontSize: 17,
+              fontWeight: FontWeight.w600,
+            ),
+            // hintStyle: TextStyle(fontWeight: FontWeight.w400, fontSize: 14, color: Colors.green),
+            // prefixIcon: prefixIcon,
+            contentPadding: contentPadding,
+            suffixIcon: suffixIcon,
+            // suffixIconConstraints: BoxConstraints.expand(width: 40),
+            filled: true,
+            fillColor: Colors.white,
+            // hintText: hintText,
+            errorStyle: GoogleFonts.lato(
+              color: Colors.red,
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.black, width: 0.8),
+              borderRadius: BorderRadius.circular(9),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.black, width: 1.1),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.red.shade700, width: 0.8),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.red.shade700),
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
         ),
       ],
     );

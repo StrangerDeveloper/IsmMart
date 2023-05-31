@@ -2,6 +2,8 @@ import 'translations_key.dart' as key;
 
 class English {
   Map<String, String> get translations => {
+
+
         ///change password
         key.currentPassword: 'Current Password is required',
 
@@ -202,11 +204,12 @@ class English {
         key.cancelled: 'Cancelled',
 
         ///profile
+        key.updateProfile : 'Update Account',
+        key.pickImage : 'Pick Image',
         key.gallery: 'Gallery',
         key.camera: 'Camera',
         key.pickFrom: 'Pick from',
-        key.yourCoverAndProfile:
-            'Your cover and profile must be a PNG or JPG, up to',
+        key.yourCoverAndProfile: 'Your cover and profile must be a PNG or JPG, up to',
         key.updateVendorDetails: 'Update Vendor Details',
         key.fieldIsRequired: 'Field is required',
 

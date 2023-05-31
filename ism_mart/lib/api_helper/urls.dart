@@ -17,6 +17,12 @@ class Urls {
 
   static String getTopVendors = "getTopVendors?limit=";
 
+
   static String getQuestionByProductId = "product/questions/";
   static String getVendorQuestions = "product/questions/vendorQuestions";
+
+  //BuyerProfileViewModel
+  static String deleteAccount = "user/deactivate";
+  static String getVendorAccountData = "user/profile";
+  static String updateVendorData = "user/update";
 }

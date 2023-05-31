@@ -178,7 +178,7 @@ const invoiceNo = 'invoiceNo',
     disputeNotAddedYet = 'disputeNotAddedYet';
 
 ///profile
-const gallery = 'gallery',
+const updateProfile = 'updateProfile', pickImage = 'pickImage', gallery = 'gallery',
     camera = 'camera',
     pickFrom = 'pickFrom',
     yourCoverAndProfile = 'yourCoverAndProfile',

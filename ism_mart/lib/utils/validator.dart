@@ -1,14 +1,42 @@
 import 'dart:core';
 
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class Validator {
   Validator();
 
+  //Formatters
+  final List<TextInputFormatter>? phoneNumberFormatter = [
+    FilteringTextInputFormatter.allow(RegExp(r'^(?:[+])?\d*'))
+  ];
+
+  //Validations
   String? validateDefaultTxtField(String? value) {
     if (GetUtils.isBlank(value)!) {
       return langKey.fieldIsRequired.tr;
+    } else {
+      return null;
+    }
+  }
+
+  String? validateName(String? value) {
+    RegExp regex = RegExp(r'^[a-zA-Z -]+$');
+    if (GetUtils.isBlank(value)!) {
+      return langKey.fieldIsRequired.tr;
+    } else if (!regex.hasMatch(value!)) {
+      return langKey.nameAlphabaticReq.tr;
+    } else {
+      return null;
+    }
+  }
+
+  String? validatePhoneNumber(String? value) {
+    if (GetUtils.isBlank(value)!) {
+      return langKey.phoneReq.tr;
+    } else if (value!.length > 16 || value.length < 7) {
+      return langKey.phoneValidate.tr;
     } else {
       return null;
     }
@@ -26,16 +54,6 @@ class Validator {
       return langKey.phoneReq.tr;
     } else if (!regex.hasMatch(value.trim())) {
       return 'Invalid phone number format';
-    } else {
-      return null;
-    }
-  }
-
-  String? validatePhoneNumber(String? value) {
-    if (GetUtils.isBlank(value)!) {
-      return langKey.phoneReq.tr;
-    } else if (value!.length > 16 || value.length < 7) {
-      return langKey.phoneValidate.tr;
     } else {
       return null;
     }
@@ -63,6 +81,7 @@ class Validator {
     }
   }
 
+  //replace this with upper
   String? name(String? value, {String? title}) {
     //String pattern = r"^[a-zA-Z]+(([',.-][a-zA-Z])?[a-zA-Z])$";
     // String pattern = r"[a-zA-Z-]+$|\s";

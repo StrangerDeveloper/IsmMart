@@ -372,8 +372,9 @@ class RegisterVendorUI extends GetView<AuthController> {
                   cityViewModel.setSelectedCountry(newValue!);
                   //debugPrint(">>> $newValue");
                 },
-                selectedItem:
-                cityViewModel.authController.selectedCountry.value,
+                    selectedItem: authController.newAcc.value == true
+                        ? cityViewModel.selectedCountry.value
+                        : cityViewModel.authController.selectedCountry.value,
               ),
             ),
             AppConstant.spaceWidget(height: 15),
@@ -421,8 +422,9 @@ class RegisterVendorUI extends GetView<AuthController> {
                   // cityViewModel.selectedcity.value =
                   //     newValue.toString();
                 },
-                selectedItem:
-                cityViewModel.authController.selectedCity.value,
+                    selectedItem: authController.newAcc.value == true
+                        ? cityViewModel.selectedCountry.value
+                        : cityViewModel.authController.selectedCity.value,
               ),
             ),
             AppConstant.spaceWidget(height: 15),

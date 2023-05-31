@@ -293,8 +293,7 @@ class AppConstant {
   }
 
   static Future<File> compressImage(imagePath, {fileLength}) async {
-    return await FlutterNativeImage.compressImage(imagePath,
-        quality: 100, percentage: getCompressionPercentage(length: fileLength));
+    return await FlutterNativeImage.compressImage(imagePath, quality: 100, percentage: getCompressionPercentage(length: fileLength));
   }
 
   static int getCompressionPercentage({length}) {

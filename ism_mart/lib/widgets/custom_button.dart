@@ -48,7 +48,7 @@ class CustomTextBtn extends StatelessWidget {
   final double height;
   final double width;
   final Widget child;
-  final double? radius;
+  final double radius;
   final EdgeInsetsGeometry? padding;
   final MaterialTapTargetSize? tapTargetSize;
   final BorderSide? side;
@@ -56,13 +56,13 @@ class CustomTextBtn extends StatelessWidget {
 
   const CustomTextBtn({
     Key? key,
-    this.height = 40,
+    this.height = 44,
     this.width = double.infinity,
-    this.onPressed,
+    required this.onPressed,
     this.backgroundColor = kPrimaryColor,
     this.foregroundColor = Colors.white,
     required this.child,
-    this.radius,
+    this.radius = 6,
     this.padding,
     this.tapTargetSize,
     this.side,
@@ -80,11 +80,11 @@ class CustomTextBtn extends StatelessWidget {
         foregroundColor: foregroundColor,
         minimumSize: Size(width, height),
         side: side,
-        shape: (radius == null)
+        shape: (shape != null)
             ? shape
             : RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(radius!),
-        ),
+                borderRadius: BorderRadius.circular(radius),
+              ),
       ),
       child: child,
     );

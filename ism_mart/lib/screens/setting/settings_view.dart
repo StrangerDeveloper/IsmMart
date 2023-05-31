@@ -6,6 +6,7 @@ import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
+import 'package:ism_mart/screens/buyer_profile_new/buyer_profile_new.dart';
 import 'package:ism_mart/screens/contact_us/contact_us_view.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
@@ -178,7 +179,9 @@ class SettingsView extends GetView<AuthController> {
                   .toLowerCase()
                   .contains("vendor")) {
                 Get.toNamed(Routes.sellerHomeRoute);
+                authController.newAcc.value = true;
               } else {
+                authController.newAcc.value = false;
                 //Get.toNamed(Routes.sellerHomeRoute);
                 AppConstant.showBottomSheet(
                     widget: RegisterVendorUI(),
@@ -202,7 +205,14 @@ class SettingsView extends GetView<AuthController> {
           iconColor: Colors.teal,
           title: langKey.userOrders.tr,
         ),
-        /* _singleSettingsItem(
+        _singleSettingsItem(
+          onTap: () {
+            Get.to(() => BuyerProfileNew());
+          },
+          icon: IconlyBold.user_2,
+          iconColor: Colors.pink,
+          title: 'Buyer Profile',
+        ), /* _singleSettingsItem(
             onTap: () => Get.to(() => PremiumMembershipUI()),
             icon: Icons.workspace_premium_outlined,
             iconColor: kOrangeColor,
@@ -254,8 +264,8 @@ class SettingsView extends GetView<AuthController> {
             iconColor: Colors.lightBlue,
             title: langKey.notifications.tr),*/
         _singleSettingsItem(
-          onTap: () => Get.to(() =>
-              GeneralSettingsView(title: langKey.termsAndConditions.tr)),
+          onTap: () => Get.to(
+              () => GeneralSettingsView(title: langKey.termsAndConditions.tr)),
           icon: Icons.rule_outlined,
           iconColor: Colors.indigo,
           title: langKey.termsAndConditions.tr,
@@ -284,8 +294,8 @@ class SettingsView extends GetView<AuthController> {
         _singleSettingsItem(
           // onTap: () => Get.to(() => GeneralSettingsView(
           //     isContactUsCalled: true, title: langKey.contactUs.tr)),
-          onTap: (){
-            Get.to(()=>ContactUsView());
+          onTap: () {
+            Get.to(() => ContactUsView());
           },
           icon: Icons.contactless_outlined,
           iconColor: Colors.green,

@@ -165,9 +165,7 @@ class ApiBaseHelper {
     bool withBearer = false,
     bool withAuthorization = false,
   }) async {
-    Map<String, String> header = {
-      'Content-Type': 'application/json'
-    };
+    Map<String, String> header = {'Content-Type': 'application/json'};
 
     if (withAuthorization) {
       header['Authorization'] = withBearer ? 'Bearer $token' : token;
@@ -217,6 +215,57 @@ class ApiBaseHelper {
         'authorization': token,
         'Content-Type': 'multipart/form-data'
       };
+      request.headers.addAll(header);
+      request.fields.addAll(fields);
+      request.files.addAll(files);
+      http.StreamedResponse response = await request.send();
+      Map<String, dynamic> parsedJson =
+          await jsonDecode(await response.stream.bytesToString());
+
+      print('********************** Response ********************************');
+      print(urlValue.toString());
+      print(parsedJson.toString());
+      print('&&&&&&&&&&&&&&&&&&&&&&& End of Response &&&&&&&&&&&&&&&&&&&&&&\n');
+      return parsedJson;
+    } on SocketException catch (_) {
+      GlobalVariable.showLoader.value = false;
+      //GetxHelper.showSnackBar(title: 'Error', message: Errors.noInternetError);
+      throw Errors.noInternetError;
+    } on TimeoutException catch (_) {
+      GlobalVariable.showLoader.value = false;
+      GetxHelper.showSnackBar(title: 'Error', message: Errors.timeOutException);
+      throw Errors.timeOutException;
+    } on FormatException catch (_) {
+      GlobalVariable.showLoader.value = false;
+      GetxHelper.showSnackBar(title: 'Error', message: Errors.formatException);
+      throw Errors.formatException;
+    } catch (e) {
+      GlobalVariable.showLoader.value = false;
+      GetxHelper.showSnackBar(title: 'Error', message: Errors.generalApiError);
+      throw e.toString();
+    }
+  }
+
+  Future<dynamic> patchMethodForImage({
+    required String url,
+    required List<http.MultipartFile> files,
+    required Map<String, String> fields,
+    bool withBearer = false,
+    bool withAuthorization = false,
+  }) async {
+    try {
+
+      Uri urlValue = Uri.parse(_baseUrl + url);
+      http.MultipartRequest request = http.MultipartRequest('PATCH', urlValue);
+      Map<String, String> header = {
+        'Content-Type': 'multipart/form-data'
+      };
+
+      if (withAuthorization) {
+        header['Authorization'] = withBearer ? 'Bearer $token' : token;
+      }
+
+
       request.headers.addAll(header);
       request.fields.addAll(fields);
       request.files.addAll(files);
