@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:get/get.dart';
+import 'package:ism_mart/api_helper/errors.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
+import 'package:ism_mart/utils/constants.dart';
 
 typedef JSON = Map<String, dynamic>;
 
@@ -15,21 +19,27 @@ class ApiService {
     String? token,
     bool requiresAuthToken = false,
   }) async {
-    var customHeaders = {
-      'Accept': 'application/json',
-      //requiresAuthToken?'authorization' : '':'',
-    };
-    customHeaders.addIf(requiresAuthToken, "Authorization", "$token");
+    try {
+      var customHeaders = {
+        'Accept': 'application/json',
+        //requiresAuthToken?'authorization' : '':'',
+      };
+      customHeaders.addIf(requiresAuthToken, "Authorization", "$token");
 
-    if (headers != null) {
-      customHeaders.addAll(headers);
+      if (headers != null) {
+        customHeaders.addAll(headers);
+      }
+
+      // _baseProvider.httpClient.baseUrl = ApiConstant.baseUrl;
+      final response = await _baseProvider.get(endpoint,
+          headers: customHeaders, query: query);
+
+      return response;
+    } on SocketException catch (error) {
+      print("ApiService: $error");
+      AppConstant.displaySnackBar("error", Errors.noInternetError);
+      throw Errors.noInternetError;
     }
-
-    // _baseProvider.httpClient.baseUrl = ApiConstant.baseUrl;
-    final response =
-        await _baseProvider.get(endpoint, headers: customHeaders, query: query);
-
-    return response;
   }
 
   Future<Response> post<T>({
@@ -40,30 +50,36 @@ class ApiService {
     Map<String, String>? headers,
     bool requiresAuthToken = false,
   }) async {
-    var customHeaders = {
-      'Accept': 'application/json',
-      //requiresAuthToken ? 'Authorization' : '': '',
-    };
-    customHeaders.addIf(requiresAuthToken, "Authorization", "$token");
+    try {
+      var customHeaders = {
+        'Accept': 'application/json',
+        //requiresAuthToken ? 'Authorization' : '': '',
+      };
+      customHeaders.addIf(requiresAuthToken, "Authorization", "$token");
 
-    if (headers != null) {
-      customHeaders.addAll(headers);
-    }
-    // _baseProvider.httpClient.baseUrl = ApiConstant.baseUrl;
+      if (headers != null) {
+        customHeaders.addAll(headers);
+      }
+      // _baseProvider.httpClient.baseUrl = ApiConstant.baseUrl;
 
-    final response = await _baseProvider.post(
-      endpoint,
-      body,
-      headers: customHeaders,
-      query: query,
-    );
+      final response = await _baseProvider.post(
+        endpoint,
+        body,
+        headers: customHeaders,
+        query: query,
+      );
 
-    /*debugPrint("ApiService: ${response.body}"
+      /*debugPrint("ApiService: ${response.body}"
         "StCode: ${response.statusCode}"
         "UnAuth ${response.unauthorized}"
         " Error ${response.hasError}"
         "ApiService: ${response.status.isForbidden}");*/
-    return response;
+      return response;
+    } on SocketException catch (error) {
+      print("ApiService: $error");
+      AppConstant.displaySnackBar("error", Errors.noInternetError);
+      throw Errors.noInternetError;
+    }
   }
 
   Future<Response> postImage<T>({
