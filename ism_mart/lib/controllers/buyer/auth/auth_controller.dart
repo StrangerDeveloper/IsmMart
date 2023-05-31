@@ -116,10 +116,8 @@ class AuthController extends GetxController {
               langKey.successTitle.tr, userResponse.message);
           await LocalStorageHelper.storeUser(userModel: userResponse.userModel)
               .then((value) {
-
             clearLoginController();
           });
-
         } else {
           AppConstant.displaySnackBar(
               langKey.errorTitle.tr, userResponse.message);
@@ -138,7 +136,7 @@ class AuthController extends GetxController {
   }
 
   forgotPasswordWithEmail() async {
-    isLoading(false);
+    isLoading(true);
     String email = forgotPasswordEmailController.text.trim();
 
     await authProvider
@@ -146,7 +144,7 @@ class AuthController extends GetxController {
       isLoading(false);
       if (response != null) {
         if (response.success!) {
-          Navigator.pop(Get.context!);
+          Get.back();
           Get.to(() => ResetForgotPassword());
           //forgotPasswordEmailController.clear();
           AppConstant.displaySnackBar(
@@ -159,7 +157,7 @@ class AuthController extends GetxController {
             langKey.errorTitle.tr, langKey.wrongWithCredentials.tr);
     }).catchError((onError) {
       isLoading(false);
-      debugPrint("resetPassword: $onError");
+      print("resetPassword: $onError");
     });
   }
 
@@ -582,8 +580,6 @@ class AuthController extends GetxController {
     });
   }
 
-
-
   //END Current User
 
   ///Contact us
@@ -653,13 +649,12 @@ class AuthController extends GetxController {
     clearBankControllers();
   }
 
-  clearForgotPasswordControllers(){
+  clearForgotPasswordControllers() {
     passwordController.clear();
     forgotPasswordEmailController.clear();
     otpController.clear();
     confirmPassController.clear();
   }
-
 
   clearBankControllers() {
     bankNameController.clear();

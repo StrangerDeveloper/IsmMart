@@ -17,6 +17,7 @@ class ForgotPasswordView extends GetView<AuthController> {
           padding: EdgeInsets.fromLTRB(16, 0, 16, 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 langKey.forgotPassword.tr,
@@ -92,51 +93,38 @@ class ForgotPasswordView extends GetView<AuthController> {
   }
 
   Widget buttons() {
-    return Obx(
-      () => controller.isLoading.isTrue
-          ? CustomLoading(isItBtn: true)
-          : CustomButton(
-              onTap: () async {
-                if (controller.forgotPasswordFormKey.currentState!.validate()) {
-                  await controller.forgotPasswordWithEmail();
-                }
-              },
-              text: langKey.send.tr,
-              width: 200,
-              height: 40,
-              color: kPrimaryColor,
-            ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        // Expanded(
+        //   child: CustomButton(
+        //     onTap: () {
+        //       Get.back();
+        //     },
+        //     text: langKey.cancelBtn.tr,
+        //     height: 40,
+        //     color: kPrimaryColor,
+        //   ),
+        // ),
+        // SizedBox(width: 15),
+
+        Obx(
+          () => controller.isLoading.isTrue
+              ? CustomLoading(isItBtn: true)
+              : CustomButton(
+                  onTap: () async {
+                    if (controller.forgotPasswordFormKey.currentState!
+                        .validate()) {
+                      await controller.forgotPasswordWithEmail();
+                    }
+                  },
+                  text: langKey.send.tr,
+                  width: 200,
+                  height: 40,
+                  color: kPrimaryColor,
+                ),
+        )
+      ],
     );
-    // return Row(
-    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //   children: [
-    //     // Expanded(
-    //     //   child: CustomButton(
-    //     //     onTap: () {
-    //     //       Get.back();
-    //     //     },
-    //     //     text: langKey.cancelBtn.tr,
-    //     //     height: 40,
-    //     //     color: kPrimaryColor,
-    //     //   ),
-    //     // ),
-    //     // SizedBox(width: 15),
-    //     Expanded(
-    //       child:
-    //
-    //       CustomButton(
-    //         onTap: () async {
-    //           if (controller.forgotPasswordFormKey.currentState!.validate()) {
-    //             await controller.forgotPasswordWithEmail();
-    //           }
-    //         },
-    //         text: langKey.send.tr,
-    //         width: 250,
-    //         height: 40,
-    //         color: kPrimaryColor,
-    //       ),
-    //     ),
-    //   ],
-    // );
   }
 }
