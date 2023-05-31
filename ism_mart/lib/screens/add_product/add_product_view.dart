@@ -59,43 +59,7 @@ class AddProductsView extends GetView<SellersController> {
 
                         ///TOO: Category
                         Obx(
-                          () => DropdownSearch<CategoryModel>(
-                            popupProps: PopupProps.dialog(
-                                showSearchBox: true,
-                                dialogProps: DialogProps(
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(10))),
-                                searchDelay: const Duration(milliseconds: 0),
-                                searchFieldProps:
-                                    AppConstant.searchFieldProp()),
-                            //showSelectedItems: true),
-                            items: controller.categoriesList,
-                            itemAsString: (model) => model.name ?? "",
-                            dropdownDecoratorProps: DropDownDecoratorProps(
-                              baseStyle: bodyText1,
-                              dropdownSearchDecoration: InputDecoration(
-                                labelText: langKey.selectCategory.tr,
-                                labelStyle: headline3,
-
-                                // hintText: "Choose Sub Category",
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Colors.black,
-                                      width: 1,
-                                      style: BorderStyle.solid), //B
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                              ),
-                            ),
-
-                            onChanged: (CategoryModel? newValue) {
-                              controller.setSelectedCategory(
-                                  category: newValue!);
-                              //debugPrint(">>> $newValue");
-                            },
-                            selectedItem: controller.selectedCategory.value,
-                          ),
+                          () => selectCountryField()
                         ),
                         AppConstant.spaceWidget(height: 15),
 
@@ -103,46 +67,7 @@ class AddProductsView extends GetView<SellersController> {
                         Obx(
                           () => controller.subCategoriesList.isEmpty
                               ? Container()
-                              : DropdownSearch<SubCategory>(
-                                  popupProps: PopupProps.dialog(
-                                    showSearchBox: true,
-                                    dialogProps: DialogProps(
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10))),
-                                    searchFieldProps:
-                                        AppConstant.searchFieldProp(),
-                                  ),
-                                  //showSelectedItems: true),
-
-                                  items: controller.subCategoriesList,
-                                  itemAsString: (model) => model.name ?? "",
-                                  dropdownDecoratorProps:
-                                      DropDownDecoratorProps(
-                                    baseStyle: bodyText1,
-                                    dropdownSearchDecoration: InputDecoration(
-                                      labelText: langKey.selectSubCategory.tr,
-                                      labelStyle: headline3,
-                                      // hintText: "Choose Sub Category",
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: Colors.black,
-                                            width: 1,
-                                            style: BorderStyle.solid), //B
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                    ),
-                                  ),
-
-                                  onChanged: (SubCategory? newValue) {
-                                    controller.setSelectedSubCategory(
-                                        subCategory: newValue!);
-                                    //debugPrint(">>> $newValue");
-                                  },
-
-                                  selectedItem:
-                                      controller.selectedSubCategory.value,
-                                ),
+                              : selectCityField()
                         ),
                         AppConstant.spaceWidget(height: 15),
 
@@ -467,6 +392,89 @@ class AddProductsView extends GetView<SellersController> {
           ],
         ),
       ),
+    );
+  }
+
+  selectCountryField(){
+    return DropdownSearch<CategoryModel>(
+      popupProps: PopupProps.dialog(
+          showSearchBox: true,
+          dialogProps: DialogProps(
+              shape: RoundedRectangleBorder(
+                  borderRadius:
+                  BorderRadius.circular(10))),
+          searchDelay: const Duration(milliseconds: 0),
+          searchFieldProps:
+          AppConstant.searchFieldProp()),
+      //showSelectedItems: true),
+      items: controller.categoriesList,
+      itemAsString: (model) => model.name ?? "",
+      dropdownDecoratorProps: DropDownDecoratorProps(
+        baseStyle: bodyText1,
+        dropdownSearchDecoration: InputDecoration(
+          labelText: langKey.selectCategory.tr,
+          labelStyle: headline3,
+
+          // hintText: "Choose Sub Category",
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+                color: Colors.black,
+                width: 1,
+                style: BorderStyle.solid), //B
+            borderRadius: BorderRadius.circular(8),
+          ),
+        ),
+      ),
+
+      onChanged: (CategoryModel? newValue) {
+        controller.setSelectedCategory(
+            category: newValue!);
+        //debugPrint(">>> $newValue");
+      },
+      selectedItem: controller.selectedCategory.value,
+    );
+  }
+
+  selectCityField(){
+    return DropdownSearch<SubCategory>(
+      popupProps: PopupProps.dialog(
+        showSearchBox: true,
+        dialogProps: DialogProps(
+            shape: RoundedRectangleBorder(
+                borderRadius:
+                BorderRadius.circular(10))),
+        searchFieldProps:
+        AppConstant.searchFieldProp(),
+      ),
+      //showSelectedItems: true),
+
+      items: controller.subCategoriesList,
+      itemAsString: (model) => model.name ?? "",
+      dropdownDecoratorProps:
+      DropDownDecoratorProps(
+        baseStyle: bodyText1,
+        dropdownSearchDecoration: InputDecoration(
+          labelText: langKey.selectSubCategory.tr,
+          labelStyle: headline3,
+          // hintText: "Choose Sub Category",
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+                color: Colors.black,
+                width: 1,
+                style: BorderStyle.solid), //B
+            borderRadius: BorderRadius.circular(8),
+          ),
+        ),
+      ),
+
+      onChanged: (SubCategory? newValue) {
+        controller.setSelectedSubCategory(
+            subCategory: newValue!);
+        //debugPrint(">>> $newValue");
+      },
+
+      selectedItem:
+      controller.selectedSubCategory.value,
     );
   }
 }

@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
@@ -95,11 +94,12 @@ class SellersApiProvider {
   }
 
   Future<ApiResponse> updateProduct(
-      {String? token, ProductModel? model, List<int>? imagesToDelete, List<File>? imagesToUpdate, String? thumbnailImage}) async {
+      {String? token, ProductModel? model, List<int>? imagesToDelete, List<File>? imagesToUpdate, String thumbnailImage = ''}) async {
     final url = "${ApiConstant.baseUrl}vendor/products/update";
     var headers = {'authorization': '$token', 'Cookie': 'XSRF-token=$token'};
     final request = http.MultipartRequest('PATCH', Uri.parse(url));
 
+    // print(">>Delete Images: $imagesToDelete");
     request.headers.addAll(headers);
 
     request.fields.addAll({
@@ -112,18 +112,28 @@ class SellersApiProvider {
           model.discount! >= 10 &&
           model.discount! <= 90 || model.discount == 0)
         'discount': '${model.discount}',
+      // 'deleteImages': imagesToDelete == [] ? "[]" : "$imagesToDelete",
+      if(imagesToDelete != [])
+        for(int i = 0; i<imagesToDelete!.length; i++)
+          'deleteImages[$i]': "${imagesToDelete[i]}"
     });
 
-    if(thumbnailImage != null || thumbnailImage != '')
+    if(thumbnailImage == '') {
+      null;
+    }
+    else{
       request.files.add(await http.MultipartFile.fromPath(
-          'thumbnail', thumbnailImage.toString()
+        'thumbnail',
+        thumbnailImage.toString(),
+        contentType: MediaType.parse('image/jpeg'),
       ));
+    }
 
-    if(imagesToDelete!.isNotEmpty)
-      request.fields['deleteImages'] = "$imagesToDelete";
+    // if(imagesToDelete!.isNotEmpty)
+    //   request.fields['deleteImages'] = "$imagesToDelete";
 
-    if(imagesToUpdate!.isNotEmpty){
-      for(File image in imagesToUpdate){
+    if(imagesToUpdate != []){
+      for(File image in imagesToUpdate!){
         request.files.add(await http.MultipartFile.fromPath(
           'addImages',
           image.path,
@@ -135,7 +145,7 @@ class SellersApiProvider {
     if (response.statusCode == 200) {
       final responseData = await response.stream.bytesToString();
       final data = json.decode(responseData);
-      print(data);
+      // print(data);
       return ApiResponse.fromJson(data);
     } else {
       http.StreamedResponse res = await handleStreamResponse(response);

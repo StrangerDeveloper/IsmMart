@@ -27,3 +27,14 @@ ProductController get productControllerFindOrInit {
     return Get.find();
   }
 }
+
+CategoryController get categoryControllerFindOrInit{
+  try{
+    return Get.find();
+  } catch (e){
+    Get.put<ApiRepository>(ApiRepository(Get.find()));
+    Get.put<ApiProvider>(ApiProvider(Get.find()));
+    Get.put<CategoryController>(CategoryController(Get.find()));
+    return Get.find();
+  }
+}
