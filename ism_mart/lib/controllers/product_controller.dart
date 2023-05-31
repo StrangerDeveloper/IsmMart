@@ -27,10 +27,23 @@ class ProductController extends GetxController with StateMixin {
   // minimum Order Qty Limit
   var moq = 0.obs;
 
+  ScrollController scrollController = ScrollController();
+  var loadMoreVisibilty = false.obs;
+
   ///end Lists
   @override
   void onInit() {
     super.onInit();
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
+    scrollController
+      ..addListener(() {
+        print("CAlled");
+        loadMoreVendorProducts();
+      });
   }
 
   fetchProduct(int id) async {
@@ -101,36 +114,59 @@ class ProductController extends GetxController with StateMixin {
   }
 
   var sellerStoreResponse = SellerModelResponse().obs;
-
+  var vendorID = 0.obs;
   fetchStoreDetailsByID({storeID}) async {
     isLoading(true);
     //change(null, status: RxStatus.loading());
     await _apiProvider
-            .getVendorStoreById(
-                storeID: storeID, token: authController.userToken)
-            .then((sellerModelResponse) {
-              isLoading(false);
+        .getVendorStoreById(storeID: storeID, token: authController.userToken)
+        .then((sellerModelResponse) {
+      isLoading(false);
       sellerStoreResponse(sellerModelResponse);
       //change(sellerModelResponse, status: RxStatus.success());
-      getVendorProducts(vendorId: sellerModelResponse.vendorStore!.id);
-    }) .catchError((error) {
+      vendorID.value = sellerModelResponse.vendorStore!.id!;
+      page = 1;
+      getVendorProducts(vendorId: vendorID.value.toInt());
+    }).catchError((error) {
       //change(null, status: RxStatus.empty());
       isLoading(false);
       print(">>>StoreDetails $error");
-    })
-        ;
+    });
   }
 
   var vendorProductList = <ProductModel>[].obs;
-
-  getVendorProducts({vendorId}) async {
+  int productLimit = 15;
+  int page = 1;
+  getVendorProducts({int? vendorId}) async {
+    print(">>GetVendorPRoducts: $page, $productLimit");
     await _apiProvider
-        .geVendorProductById(token: authController.userToken, storeID: vendorId)
+        .geVendorProductById(
+            token: authController.userToken,
+            storeID: vendorId,
+            limit: productLimit,
+            page: page)
         .then((value) {
+      isLoading(false);
+      loadMoreVisibilty(false);
       vendorProductList.addAll(value);
     }).catchError((e) {
+      isLoading(false);
+      loadMoreVisibilty(false);
       print(">>>>GetVendorProduct: $e");
     });
+  }
+
+  loadMoreVendorProducts() async {
+    if (scrollController.hasClients &&
+        loadMoreVisibilty.isFalse &&
+        scrollController.position.maxScrollExtent == scrollController.offset) {
+      loadMoreVisibilty(true);
+      isLoading(true);
+      productLimit = 20;
+      page++;
+
+      getVendorProducts(vendorId: vendorID.value.toInt());
+    }
   }
 
   var productQuestionsList = <QuestionModel>[].obs;

@@ -341,10 +341,9 @@ class RegisterVendorUI extends GetView<AuthController> {
               onSaved: (value) {},
             ),
             AppConstant.spaceWidget(height: 15),
-            AppConstant.spaceWidget(height: 15),
             //Countries
             Obx(
-                  () => DropdownSearch<CountryModel>(
+              () => DropdownSearch<CountryModel>(
                 popupProps: PopupProps.dialog(
                     showSearchBox: true,
                     dialogProps: DialogProps(
@@ -373,57 +372,57 @@ class RegisterVendorUI extends GetView<AuthController> {
                   //debugPrint(">>> $newValue");
                 },
                 selectedItem:
-                cityViewModel.authController.selectedCountry.value,
+                    cityViewModel.authController.selectedCountry.value,
               ),
             ),
             AppConstant.spaceWidget(height: 15),
 
             ///TOO: Sub Cities
             Obx(
-                  () => authController.cities.isEmpty
+              () => authController.cities.isEmpty
                   ? Container()
                   : authController.isLoading.isTrue
-                  ? CustomLoading(
-                isItForWidget: true,
-                color: kPrimaryColor,
-              )
-                  : DropdownSearch<CountryModel>(
-                popupProps: PopupProps.dialog(
-                    showSearchBox: true,
-                    dialogProps: DialogProps(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10))),
-                    searchFieldProps: AppConstant.searchFieldProp()),
-                //showSelectedItems: true),
+                      ? CustomLoading(
+                          isItForWidget: true,
+                          color: kPrimaryColor,
+                        )
+                      : DropdownSearch<CountryModel>(
+                          popupProps: PopupProps.dialog(
+                              showSearchBox: true,
+                              dialogProps: DialogProps(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10))),
+                              searchFieldProps: AppConstant.searchFieldProp()),
+                          //showSelectedItems: true),
 
-                items: cityViewModel.authController.cities,
-                itemAsString: (model) => model.name ?? "",
-                dropdownDecoratorProps: DropDownDecoratorProps(
-                  baseStyle: bodyText1,
-                  dropdownSearchDecoration: InputDecoration(
-                    labelText: langKey.selectCity.tr,
-                    labelStyle: bodyText1,
-                    hintText: langKey.chooseCity.tr,
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: Colors.black,
-                          width: 1,
-                          style: BorderStyle.solid), //B
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                ),
+                          items: cityViewModel.authController.cities,
+                          itemAsString: (model) => model.name ?? "",
+                          dropdownDecoratorProps: DropDownDecoratorProps(
+                            baseStyle: bodyText1,
+                            dropdownSearchDecoration: InputDecoration(
+                              labelText: langKey.selectCity.tr,
+                              labelStyle: bodyText1,
+                              hintText: langKey.chooseCity.tr,
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.black,
+                                    width: 1,
+                                    style: BorderStyle.solid), //B
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                            ),
+                          ),
 
-                onChanged: (CountryModel? newValue) {
-                  cityViewModel.selectedcity.value =
-                      newValue!.name ?? "";
-                  cityViewModel.setSelectedCity(newValue);
-                  // cityViewModel.selectedcity.value =
-                  //     newValue.toString();
-                },
-                selectedItem:
-                cityViewModel.authController.selectedCity.value,
-              ),
+                          onChanged: (CountryModel? newValue) {
+                            cityViewModel.selectedcity.value =
+                                newValue!.name ?? "";
+                            cityViewModel.setSelectedCity(newValue);
+                            // cityViewModel.selectedcity.value =
+                            //     newValue.toString();
+                          },
+                          selectedItem:
+                              cityViewModel.authController.selectedCity.value,
+                        ),
             ),
             AppConstant.spaceWidget(height: 15),
             FormInputFieldWithIcon(

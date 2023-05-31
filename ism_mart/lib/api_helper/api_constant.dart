@@ -38,15 +38,15 @@ class ApiConstant {
   /// FOR MAKING BUILD 0R APK... Production (Live) APIS
   ///////////////////////////////////////////////////////////////////////////
 
-  // static const baseUrl = liveBaseUrl;
-  // static const PUBLISHABLE_KEY = live_pk;
-  // static const SECRET_KEY = live_sk;
-  // static const CURRENCY_EXCHANGE_API_KEY = live_currency_exchange_api_key;
+  static const baseUrl = liveBaseUrl;
+  static const PUBLISHABLE_KEY = live_pk;
+  static const SECRET_KEY = live_sk;
+  static const CURRENCY_EXCHANGE_API_KEY = live_currency_exchange_api_key;
 
-  static const baseUrl = testBaseUrl;
-  static const PUBLISHABLE_KEY = test_pk;
-  static const SECRET_KEY = test_sk;
-  static const CURRENCY_EXCHANGE_API_KEY = test_currency_exchange_api_key;
+  // static const baseUrl = testBaseUrl;
+  // static const PUBLISHABLE_KEY = test_pk;
+  // static const SECRET_KEY = test_sk;
+  // static const CURRENCY_EXCHANGE_API_KEY = test_currency_exchange_api_key;
   ///////////////////////////////////////////////////////////////////////////
 
   static String getBaseUrl({calledStripe = false}) {

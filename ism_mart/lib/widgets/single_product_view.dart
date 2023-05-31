@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
@@ -25,7 +24,7 @@ class SingleProductView extends GetView<ProductController> {
     } else if (productId != null) {
       controller.fetchProduct(int.parse(productId));
     } else
-      controller.fetchProduct(int.parse(Get.parameters['id']!));
+      controller.fetchProduct(int.parse(Get.parameters['id'] ?? productId));
 
     /*if (Get.parameters['id'] == null) {
       return const Center(child: CircularProgressIndicator());
@@ -837,7 +836,6 @@ class SingleProductView extends GetView<ProductController> {
       ),
     );
   }
-
 
   Widget _buildCustomerAlsoViewed(List<ProductModel> list) {
     return Obx(

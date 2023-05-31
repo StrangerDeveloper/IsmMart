@@ -7,7 +7,7 @@ class FormPasswordInputFieldWithIcon extends StatefulWidget {
   const FormPasswordInputFieldWithIcon(
       {Key? key,
       required this.controller,
-      required this.iconPrefix,
+      this.iconPrefix,
       required this.labelText,
       required this.validator,
       this.iconColor,
@@ -25,7 +25,7 @@ class FormPasswordInputFieldWithIcon extends StatefulWidget {
       : super(key: key);
   final AutovalidateMode? autoValidateMode;
   final TextEditingController controller;
-  final IconData iconPrefix;
+  final IconData? iconPrefix;
   final String labelText;
   final String? Function(String?)? validator;
   final TextInputType keyboardType;
@@ -60,21 +60,28 @@ class _FormPasswordInputFieldWithIconState
         autovalidateMode: widget.autoValidateMode,
         decoration: InputDecoration(
             filled: false,
-            prefixIcon: Icon(
-              widget.iconPrefix,
-              color: kPrimaryColor,
-            ),
-            enabledBorder: OutlineInputBorder(
-              //borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(
-                  color: Colors.black, width: 1, style: BorderStyle.solid), //B
-              borderRadius: BorderRadius.circular(8),
-            ),
+            prefixIcon: widget.iconPrefix == null
+                ? null
+                : Icon(
+                    widget.iconPrefix,
+                    color: kPrimaryColor,
+                  ),
+            // enabledBorder: OutlineInputBorder(
+            //   //borderRadius: BorderRadius.circular(10),
+            //   borderSide: BorderSide(
+            //       color: Colors.black, width: 1, style: BorderStyle.solid), //B
+            //   borderRadius: BorderRadius.circular(8),
+            // ),
             fillColor: widget.iconColor ?? kPrimaryColor,
             labelText: widget.labelText,
             labelStyle: widget.textStyle,
             focusColor: widget.iconColor,
             focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                  color: Colors.black, width: 1, style: BorderStyle.solid), //B
+              borderRadius: BorderRadius.circular(8),
+            ),
+            border: OutlineInputBorder(
               borderSide: BorderSide(
                   color: Colors.black, width: 1, style: BorderStyle.solid), //B
               borderRadius: BorderRadius.circular(8),

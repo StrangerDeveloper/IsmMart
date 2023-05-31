@@ -13,7 +13,6 @@ import '../../utils/helpers/permission_handler.dart';
 import '../../widgets/custom_text.dart';
 
 class UpdateProductImagesViewModel extends GetxController {
-
   UpdateProductImagesViewModel({this.id});
   final int? id;
   // final List<ProductImages>? imagesList;
@@ -30,39 +29,41 @@ class UpdateProductImagesViewModel extends GetxController {
   var imagesToDelete = [].obs;
   var imagesToUpdate = [].obs;
 
-  createLists(List<ProductImages>? imagesList){
+  createLists(List<ProductImages>? imagesList) {
     imagesListForUI.clear();
-    for(int i = 0; i<=imagesList!.length-1; i++){
+    for (int i = 0; i <= imagesList!.length - 1; i++) {
       imagesListForUI.add(imagesList[i]);
     }
     imagesListForUI.refresh();
   }
 
   static var _picker = ImagePicker();
-  pickThumbnail(ImageSource src)async{
+  pickThumbnail(ImageSource src) async {
     await PermissionsHandler().checkPermissions().then((isGranted) async {
-      if(isGranted){
-        try{
+      if (isGranted) {
+        try {
           XFile? thumbnailImage = await _picker.pickImage(source: src);
-          if(thumbnailImage!.path != ''){
-            await thumbnailImage.length().then((length) async{
-              await AppConstant.compressImage(thumbnailImage.path, fileLength: length)
+          if (thumbnailImage!.path != '') {
+            await thumbnailImage.length().then((length) async {
+              await AppConstant.compressImage(thumbnailImage.path,
+                      fileLength: length)
                   .then((compressedFile) {
-                  var lengthInMb = compressedFile.lengthSync() * 0.000001;
-                  if(lengthInMb > 2){
-                    AppConstant.displaySnackBar(langKey.errorTitle.tr, '${langKey.fileMustBe.tr} + 2MB');
-                  }
-                  else{
-                    thumbnailImageSizeInMb.value += lengthInMb;
-                    imagesToUpdate.add(compressedFile);
-                  }
+                var lengthInMb = compressedFile.lengthSync() * 0.000001;
+                if (lengthInMb > 2) {
+                  AppConstant.displaySnackBar(
+                      langKey.errorTitle.tr, '${langKey.fileMustBe.tr} + 2MB');
+                } else {
+                  thumbnailImageSizeInMb.value += lengthInMb;
+                  imagesToUpdate.add(compressedFile);
+                }
               });
             });
           }
-        } on PlatformException{
-          AppConstant.displaySnackBar(langKey.errorTitle.tr, langKey.invalidImageFormat.tr);
+        } on PlatformException {
+          AppConstant.displaySnackBar(
+              langKey.errorTitle.tr, langKey.invalidImageFormat.tr);
         }
-      } else{
+      } else {
         await PermissionsHandler().requestPermissions();
       }
     });
@@ -116,8 +117,9 @@ class UpdateProductImagesViewModel extends GetxController {
     );
   }
 
-  fetchProduct(int? productID)async{
-    var request = http.Request('GET', Uri.parse('https://ismmart-backend.com/api/products/$productID'));
+  fetchProduct(int? productID) async {
+    var request = http.Request('GET',
+        Uri.parse('https://ismmart-backend.com/api/products/$productID'));
 
     http.StreamedResponse response = await request.send();
 
@@ -127,7 +129,5 @@ class UpdateProductImagesViewModel extends GetxController {
     if (response.statusCode == 200) {
       return ApiResponse.fromJson(res);
     }
-
   }
-
 }
