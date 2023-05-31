@@ -184,7 +184,7 @@ class MyProducts extends GetView<SellersController> {
                   children: [
                     CustomActionIcon(
                         onTap: () {
-                          Get.to(() => UpdateProductView(productId: model.id, images: model.images,));
+                          Get.to(() => UpdateProductView(productId: model.id,));
                           // AppConstant.showBottomSheet(
                           //     widget: UpdateProductView(productId: model.id),
                           //     isGetXBottomSheet: true,

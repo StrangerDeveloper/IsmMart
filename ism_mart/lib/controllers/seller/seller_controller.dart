@@ -13,12 +13,12 @@ import 'package:ism_mart/exports/exports_ui.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
 class SellersController extends GetxController with StateMixin<ProductModel> {
-  final SellersApiProvider _apiProvider;
+  final SellersApiProvider apiProvider;
   final CategoryController categoryController;
   final OrderController orderController;
 
   SellersController(
-      this._apiProvider, this.categoryController, this.orderController);
+      this.apiProvider, this.categoryController, this.orderController);
 
   var pageViewController = PageController(initialPage: 0);
   ScrollController scrollController = ScrollController();
@@ -26,6 +26,9 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
   var isLoading = false.obs;
 
   var discountMessage = "".obs;
+
+  var thumbnailImagePath = ''.obs;
+  var thumbnailImageUrl = ''.obs;
 
   void setDiscount(int? discount) {
     if (discount! > 0 && discount < 10) {
@@ -49,10 +52,12 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
 
   getProductById(id) async {
     change(null, status: RxStatus.loading());
-    await _apiProvider.getProductById(id).then((response) {
-      if (response.success!)
+    await apiProvider.getProductById(id).then((response) {
+      if (response.success!) {
         change(ProductModel.fromJson(response.data),
             status: RxStatus.success());
+        productImages.clear();
+      }
       else {
         change(null, status: RxStatus.empty());
       }
@@ -67,7 +72,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
   int page = 1;
 
   fetchMyProducts() async {
-    await _apiProvider
+    await apiProvider
         .fetchMyProducts(
             token: authController.userToken, limit: productsLimit, page: page)
         .then((response) {
@@ -86,7 +91,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
       isLoadingMore(true);
       //page++;
       productsLimit += 10;
-      await _apiProvider
+      await apiProvider
           .fetchMyProducts(
               token: authController.userToken, limit: productsLimit, page: page)
           .then((response) {
@@ -103,11 +108,14 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
     isLoading(true);
     model!.name = prodNameController.text;
     model.price = int.parse("${priceAfterCommission.value}");
-    model.discount = prodDiscountController.text == '' || prodDiscountController.text.isEmpty ? 0 : int.parse(prodDiscountController.text);
+    model.discount =
+        prodDiscountController.text == '' || prodDiscountController.text.isEmpty
+            ? 0
+            : int.parse(prodDiscountController.text);
     model.description = prodDescriptionController.text;
     model.stock = int.parse("${prodStockController.text}");
 
-    await _apiProvider
+    await apiProvider
         .updateProduct(token: authController.userToken, model: model)
         .then((ApiResponse? response) async {
       isLoading(false);
@@ -115,15 +123,6 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
         if (response.success!) {
           myProductsList.clear();
           await fetchMyProducts();
-
-          // int productIndex =
-          //     myProductsList.indexWhere((element) => element.id == model.id);
-          // myProductsList[productIndex].stock = model.stock;
-          // myProductsList[productIndex].name = model.name;
-          // myProductsList[productIndex].description = model.description;
-          // myProductsList[productIndex].price = model.price;
-          // myProductsList[productIndex].discount = model.discount;
-          // myProductsList.refresh();
           Get.back();
           AppConstant.displaySnackBar(
               langKey.success.tr, "${response.message}");
@@ -149,7 +148,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
   //TDO: Delete Product
 
   deleteProduct({int? id}) async {
-    await _apiProvider
+    await apiProvider
         .deleteProductById(id: id, token: authController.userToken)
         .then((response) async {
       if (response.success!) {
@@ -252,7 +251,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
 
   getVariantsFields() async {
     isLoading(true);
-    await _apiProvider
+    await apiProvider
         .getProductVariantsFieldsByCategories(
             catId: selectedCategoryID.value,
             subCatId: selectedSubCategoryID.value)
@@ -301,7 +300,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
         description: prodDescriptionController.text,
         discount: discount);
 
-    await _apiProvider
+    await apiProvider
         .addProductWithHttp(
             token: authController.userToken,
             model: newProduct,
@@ -412,6 +411,21 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
     });
   }
 
+  ///Updaet Product Images
+
+  var thumbnailImageSizeInMb = 0.0.obs;
+  var imagesListForUI = <ProductImages>[].obs;
+  var imagesToDelete = [].obs;
+  var imagesToUpdate = [].obs;
+
+  createLists(List<ProductImages>? imagesList){
+    imagesListForUI.clear();
+    for(int i = 0; i<=imagesList!.length-1; i++){
+      imagesListForUI.add(imagesList[i]);
+    }
+    imagesListForUI.refresh();
+  }
+
   ///END Add Product
 
 //TDO: Seller Home Section
@@ -446,8 +460,16 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
       {'title': myOrders.tr, "icon": Icons.shopping_bag_outlined, "page": 2},
       {'title': profile.tr, "icon": Icons.manage_accounts_outlined, "page": 3},
       {'title': vendorStoreDetails.tr, "icon": Icons.storefront, "page": 4},
-      {'title': 'Answer User Questions', "icon": Icons.question_mark_sharp, "page": 5},
-      {'title': 'Change Password', "icon": Icons.description_outlined, "page": 6},
+      {
+        'title': 'Answer User Questions',
+        "icon": Icons.question_mark_sharp,
+        "page": 5
+      },
+      {
+        'title': 'Change Password',
+        "icon": Icons.description_outlined,
+        "page": 6
+      },
       /*{
         'title': "Premium Membership",
         "icon": Icons.workspace_premium_outlined,

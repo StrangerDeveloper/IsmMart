@@ -10,7 +10,6 @@ class TopVendorsViewModel extends GetxController {
   @override
   void onReady() {
     getData();
-    // TODO: implement onReady
     super.onReady();
   }
 

@@ -95,7 +95,7 @@ class SellersApiProvider {
   }
 
   Future<ApiResponse> updateProduct(
-      {String? token, ProductModel? model}) async {
+      {String? token, ProductModel? model, List<int>? imagesToDelete, List<File>? imagesToUpdate, String? thumbnailImage}) async {
     final url = "${ApiConstant.baseUrl}vendor/products/update";
     var headers = {'authorization': '$token', 'Cookie': 'XSRF-token=$token'};
     final request = http.MultipartRequest('PATCH', Uri.parse(url));
@@ -114,6 +114,23 @@ class SellersApiProvider {
         'discount': '${model.discount}',
     });
 
+    if(thumbnailImage != null || thumbnailImage != '')
+      request.files.add(await http.MultipartFile.fromPath(
+          'thumbnail', thumbnailImage.toString()
+      ));
+
+    if(imagesToDelete!.isNotEmpty)
+      request.fields['deleteImages'] = "$imagesToDelete";
+
+    if(imagesToUpdate!.isNotEmpty){
+      for(File image in imagesToUpdate){
+        request.files.add(await http.MultipartFile.fromPath(
+          'addImages',
+          image.path,
+          contentType: MediaType.parse('image/jpeg'),
+        ));
+      }
+    }
     http.StreamedResponse response = await request.send();
     if (response.statusCode == 200) {
       final responseData = await response.stream.bytesToString();

@@ -8,6 +8,7 @@ import 'export_controllers.dart';
 
 AuthController authController = Get.find<AuthController>();
 BaseController baseController = Get.find<BaseController>();
+SellersController sellersController = Get.find<SellersController>();
 TopVendorsViewModel topVendorsViewModel = Get.put(TopVendorsViewModel());
 ThemesController themeController = Get.put(ThemesController());
 CityViewModel cityViewModel = Get.put(CityViewModel(Get.find()));

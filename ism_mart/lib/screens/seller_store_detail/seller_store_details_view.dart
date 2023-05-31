@@ -24,30 +24,37 @@ class SellerStoreDetailsView extends GetView<ProductController> {
   Widget _build() {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.grey[300]!,
+        backgroundColor: Colors.grey[100]!,
         body: Obx(
-          () => controller.isLoading.isTrue? CustomLoading(isItForWidget: true, color: kPrimaryColor,):
-
-          controller.sellerStoreResponse.value.vendorStore == null
-              ? Center(child: NoDataFoundWithIcon(icon:Icons.dataset_linked_rounded,title: langKey.noDataFound.tr,))
-              : CustomScrollView(
-                  slivers: [
-                    _sliverAppBar(),
-                    SliverList(
-                      delegate: SliverChildListDelegate(
-                        [
-                          _storeBasicDetails(
-                              model: controller
-                                  .sellerStoreResponse.value.vendorStore),
-                          _storeRatingAndCustomerCard(
-                              modelResponse:
-                                  controller.sellerStoreResponse.value),
-                          _buildTopProducts(controller.vendorProductList),
-                        ],
-                      ),
+          () => controller.isLoading.isTrue
+              ? CustomLoading(
+                  isItForWidget: true,
+                  color: kPrimaryColor,
+                )
+              : controller.sellerStoreResponse.value.vendorStore == null
+                  ? Center(
+                      child: NoDataFoundWithIcon(
+                      icon: Icons.dataset_linked_rounded,
+                      title: langKey.noDataFound.tr,
+                    ))
+                  : CustomScrollView(
+                      slivers: [
+                        _sliverAppBar(),
+                        SliverList(
+                          delegate: SliverChildListDelegate(
+                            [
+                              _storeBasicDetails(
+                                  model: controller
+                                      .sellerStoreResponse.value.vendorStore),
+                              _storeRatingAndCustomerCard(
+                                  modelResponse:
+                                      controller.sellerStoreResponse.value),
+                              _buildTopProducts(controller.vendorProductList),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
         ),
       ),
     );
@@ -81,20 +88,6 @@ class SellerStoreDetailsView extends GetView<ProductController> {
           )
         ],
       ),
-      /*flexibleSpace: FlexibleSpaceBar(
-        centerTitle: true,
-       //titlePadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-        title: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-
-            */ /*AppConstant.spaceWidget(width: 10),
-            buildSvgLogo(),
-            AppConstant.spaceWidget(width: 10),*/ /*
-            CustomText(title: "Store Details", style: appBarTitleSize,)
-          ],
-        ),
-      ),*/
     );
   }
 
@@ -280,7 +273,7 @@ class SellerStoreDetailsView extends GetView<ProductController> {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: SizedBox(
-                      height: AppResponsiveness.getBoxHeightPoint28(),
+                      height: AppResponsiveness.getBoxHeightPoint30(),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -310,6 +303,45 @@ class SellerStoreDetailsView extends GetView<ProductController> {
                               },
                             ),
                           ),
+
+                          // Expanded(
+                          //   child: GridView.builder(
+                          //     controller: controller.scrollController,
+                          //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          //         crossAxisCount:
+                          //             AppResponsiveness.getGridItemCount(),
+                          //         mainAxisSpacing: 5,
+                          //         crossAxisSpacing: 5,
+                          //         childAspectRatio: AppResponsiveness
+                          //             .getChildAspectRatioPoint90()
+                          //         // mainAxisExtent:
+                          //         //     AppResponsiveness.getMainAxisExtentPoint25(),
+                          //         ),
+                          //     shrinkWrap: true,
+                          //     physics: const BouncingScrollPhysics(),
+                          //     //scrollDirection: Axis.horizontal,
+                          //     itemCount: list.length,
+                          //     itemBuilder: (context, index) {
+                          //       ProductModel productModel = list[index];
+                          //       return SingleProductItems(
+                          //         productModel: productModel,
+                          //         onTap: () {
+                          //           Get.offNamed(
+                          //             '/product/${productModel.id}',
+                          //             preventDuplicates: false,
+                          //             arguments: {"calledFor": "customer"},
+                          //           );
+                          //         },
+                          //       );
+                          //     },
+                          //   ),
+                          // ),
+                          // AppConstant.spaceWidget(height: 10),
+                          // if (controller.loadMoreVisibilty.isTrue)
+                          //   CustomLoading(
+                          //     isItForWidget: true,
+                          //     color: kPrimaryColor,
+                          //   )
                         ],
                       ),
                     ),
