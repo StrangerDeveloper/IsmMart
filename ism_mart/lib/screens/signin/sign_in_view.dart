@@ -129,7 +129,11 @@ class SignInView extends GetView<AuthController> {
                           AppConstant.spaceWidget(height: 20),
                           Center(
                             child: InkWell(
-                              onTap: () => Get.offNamed(Routes.registerRoute),
+                              onTap: (){
+                                controller.clearLoginController();
+                                controller.clearSignUpControllers();
+                                Get.offNamed(Routes.registerRoute);
+                                },
                               child: Column(
                                 children: [
                                   Text(langKey.donTHaveAccount.tr,

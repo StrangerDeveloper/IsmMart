@@ -423,7 +423,7 @@ class RegisterVendorUI extends GetView<AuthController> {
                   //     newValue.toString();
                 },
                     selectedItem: authController.newAcc.value == true
-                        ? cityViewModel.selectedCountry.value
+                        ? cityViewModel.selectedCity.value
                         : cityViewModel.authController.selectedCity.value,
               ),
             ),

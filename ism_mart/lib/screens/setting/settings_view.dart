@@ -179,9 +179,9 @@ class SettingsView extends GetView<AuthController> {
                   .toLowerCase()
                   .contains("vendor")) {
                 Get.toNamed(Routes.sellerHomeRoute);
-                authController.newAcc.value = true;
-              } else {
                 authController.newAcc.value = false;
+              } else {
+                authController.newAcc.value = true;
                 //Get.toNamed(Routes.sellerHomeRoute);
                 AppConstant.showBottomSheet(
                     widget: RegisterVendorUI(),
