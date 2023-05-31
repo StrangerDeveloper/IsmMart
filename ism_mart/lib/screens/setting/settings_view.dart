@@ -6,7 +6,7 @@ import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
-import 'package:ism_mart/screens/buyer_profile_new/buyer_profile_new.dart';
+import 'package:ism_mart/screens/buyer_profile/buyer_profile_view.dart';
 import 'package:ism_mart/screens/contact_us/contact_us_view.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
@@ -207,7 +207,7 @@ class SettingsView extends GetView<AuthController> {
         ),
         _singleSettingsItem(
           onTap: () {
-            Get.to(() => BuyerProfileNew());
+            Get.to(() => BuyerProfileView());
           },
           icon: IconlyBold.user_2,
           iconColor: Colors.pink,

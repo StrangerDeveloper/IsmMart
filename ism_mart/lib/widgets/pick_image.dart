@@ -30,7 +30,7 @@ class PickImage {
                   Padding(
                     padding: const EdgeInsets.only(left: 5),
                     child: Text(
-                      langKey.pickImage,
+                      langKey.pickImage.tr,
                       style: GoogleFonts.lato(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -49,7 +49,7 @@ class PickImage {
               ),
               Divider(),
               BottomSheetItemRow(
-                title: langKey.gallery,
+                title: langKey.gallery.tr,
                 icon: IconlyLight.image,
                 isDisabled: false,
                 onTap: () async {
@@ -58,7 +58,7 @@ class PickImage {
                 },
               ),
               BottomSheetItemRow(
-                title: langKey.camera,
+                title: langKey.camera.tr,
                 icon: IconlyLight.camera,
                 isDisabled: false,
                 onTap: () async {

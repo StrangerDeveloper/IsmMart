@@ -6,13 +6,13 @@ import 'package:ism_mart/api_helper/api_base_helper.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/api_helper/global_variables.dart';
 import 'package:ism_mart/api_helper/urls.dart';
-import 'package:ism_mart/screens/buyer_profile_new/buyer_profile_new_model.dart';
+import 'package:ism_mart/screens/buyer_profile/buyer_profile_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:http/http.dart' as http;
 
 class BuyerProfileViewModel extends GetxController {
   GlobalKey<FormState> buyerProfileFormKey = GlobalKey<FormState>();
-  Rx<BuyerProfileNewModel> buyerProfileNewModel = BuyerProfileNewModel().obs;
+  Rx<BuyerProfileModel> buyerProfileNewModel = BuyerProfileModel().obs;
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
@@ -44,7 +44,7 @@ class BuyerProfileViewModel extends GetxController {
       GlobalVariable.showLoader.value = false;
       if (parsedJson['success'] == true && parsedJson['data'] != null) {
         buyerProfileNewModel.value =
-            BuyerProfileNewModel.fromJson(parsedJson['data']);
+            BuyerProfileModel.fromJson(parsedJson['data']);
         firstNameController.text = buyerProfileNewModel.value.firstName ?? '';
         lastNameController.text = buyerProfileNewModel.value.lastName ?? '';
         phoneController.text = buyerProfileNewModel.value.phone ?? '';

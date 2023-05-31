@@ -2,14 +2,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
-import 'package:ism_mart/screens/buyer_profile_new/buyer_profile_viewmodel.dart';
+import 'package:ism_mart/screens/buyer_profile/buyer_profile_viewmodel.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
 import 'package:ism_mart/widgets/pick_image.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
-class BuyerProfileNew extends StatelessWidget {
-  BuyerProfileNew({Key? key}) : super(key: key);
+class BuyerProfileView extends StatelessWidget {
+  BuyerProfileView({Key? key}) : super(key: key);
   final BuyerProfileViewModel viewModel = Get.put(BuyerProfileViewModel());
 
   @override
@@ -138,7 +138,7 @@ class BuyerProfileNew extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 30, bottom: 20),
       child: CustomTextField2(
-        label: langKey.firstName,
+        label: langKey.firstName.tr,
         controller: viewModel.firstNameController,
         autoValidateMode: AutovalidateMode.onUserInteraction,
         validator: (value) {
@@ -150,7 +150,7 @@ class BuyerProfileNew extends StatelessWidget {
 
   Widget lastNameTextField() {
     return CustomTextField2(
-      label: langKey.lastName,
+      label: langKey.lastName.tr,
       controller: viewModel.lastNameController,
       autoValidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
@@ -163,7 +163,7 @@ class BuyerProfileNew extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: CustomTextField2(
-        label: langKey.phone,
+        label: langKey.phone.tr,
         controller: viewModel.phoneController,
         keyboardType: TextInputType.phone,
         inputFormatters: Validator().phoneNumberFormatter,
@@ -177,7 +177,7 @@ class BuyerProfileNew extends StatelessWidget {
 
   Widget addressTextField() {
     return CustomTextField2(
-      label: langKey.address,
+      label: langKey.address.tr,
       controller: viewModel.addressController,
       autoValidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
@@ -195,7 +195,7 @@ class BuyerProfileNew extends StatelessWidget {
             onPressed: () {
               showDeleteQuestionDialog();
             },
-            child: Text(langKey.deactivateBtn),
+            child: Text(langKey.deactivateBtn.tr),
           ),
         ),
         SizedBox(width: 10),
@@ -204,7 +204,7 @@ class BuyerProfileNew extends StatelessWidget {
             onPressed: () {
               viewModel.updateData();
             },
-            child: Text(langKey.updateProfile),
+            child: Text(langKey.updateProfile.tr),
           ),
         ),
       ],

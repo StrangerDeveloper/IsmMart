@@ -1,4 +1,4 @@
-class BuyerProfileNewModel {
+class BuyerProfileModel {
   // int? id;
   // String? email;
   String? firstName;
@@ -12,7 +12,7 @@ class BuyerProfileNewModel {
   // Country? country;
   // Country? city;
 
-  BuyerProfileNewModel(
+  BuyerProfileModel(
       {
         // this.id,
         // this.email,
@@ -28,7 +28,7 @@ class BuyerProfileNewModel {
         // this.city
       });
 
-  BuyerProfileNewModel.fromJson(Map<String, dynamic> json) {
+  BuyerProfileModel.fromJson(Map<String, dynamic> json) {
     // id = json['id'];
     // email = json['email'];
     firstName = json['firstName'];
