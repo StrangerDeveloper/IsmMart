@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:ism_mart/controllers/buyer/auth/auth_controller.dart';
 import 'package:get/get.dart';
-import 'package:ism_mart/widgets/form_input_field_with_icon.dart';
-import 'package:ism_mart/widgets/custom_button.dart';
-import 'package:ism_mart/utils/svg_helper.dart';
+import 'package:ism_mart/controllers/buyer/auth/auth_controller.dart';
+import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/utils/constants.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
-import '../../widgets/custom_text.dart';
-import '../../widgets/form_password_input_field_with_icon.dart';
-import '../../widgets/sticky_labels.dart';
+import 'package:ism_mart/utils/svg_helper.dart';
 
 class ResetForgotPassword extends GetView<AuthController> {
   const ResetForgotPassword({Key? key}) : super(key: key);
@@ -131,25 +127,33 @@ class ResetForgotPassword extends GetView<AuthController> {
                             AppConstant.spaceWidget(height: 30),
                             Obx(
                               () => Visibility(
-                                  visible: controller.showPasswordNotMatched.value,
+                                  visible:
+                                      controller.showPasswordNotMatched.value,
                                   child: CustomText(
                                     title: langKey.passwordNotMatched.tr,
                                     color: kRedColor,
                                   )),
                             ),
                             AppConstant.spaceWidget(height: 20),
-                            CustomButton(
-                              onTap: () async {
-                                if(formKey.currentState!.validate()){
-                                  if(controller.showPasswordNotMatched == false){
-                                    await controller.forgotPasswordOtp();
-                                  }
-                                }
-                              },
-                              text: langKey.proceed.tr,
-                              width: 120,
-                              height: 40,
-                              color: kPrimaryColor,
+                            Obx(
+                              () => controller.isLoading.isTrue
+                                  ? CustomLoading(isItBtn: true)
+                                  : CustomButton(
+                                      onTap: () async {
+                                        if (formKey.currentState!.validate()) {
+                                          if (controller
+                                                  .showPasswordNotMatched ==
+                                              false) {
+                                            await controller
+                                                .forgotPasswordOtp();
+                                          }
+                                        }
+                                      },
+                                      text: langKey.proceed.tr,
+                                      width: 200,
+                                      height: 40,
+                                      color: kPrimaryColor,
+                                    ),
                             ),
                           ],
                         ),

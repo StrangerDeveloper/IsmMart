@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/controllers/buyer/auth/auth_controller.dart';
+import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/utils/constants.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
-import 'package:ism_mart/widgets/custom_button.dart';
-import 'package:ism_mart/widgets/form_input_field_with_icon.dart';
 
 class ForgotPasswordView extends GetView<AuthController> {
   const ForgotPasswordView({Key? key}) : super(key: key);
@@ -80,9 +79,9 @@ class ForgotPasswordView extends GetView<AuthController> {
           autoValidateMode: AutovalidateMode.onUserInteraction,
           validator: (value) {
             if (value!.isEmpty) {
-              return langKey.emptyField.tr;
+              return langKey.emailReq.tr;
             } else
-              return !GetUtils.isEmail(value) ? langKey.emailReq.tr : null;
+              return !GetUtils.isEmail(value) ? langKey.invalidEmail.tr : null;
           },
           keyboardType: TextInputType.emailAddress,
           onChanged: (value) {},
@@ -93,33 +92,51 @@ class ForgotPasswordView extends GetView<AuthController> {
   }
 
   Widget buttons() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Expanded(
-          child: CustomButton(
-            onTap: () {
-              Get.back();
-            },
-            text: langKey.cancelBtn.tr,
-            height: 40,
-            color: kPrimaryColor,
-          ),
-        ),
-        SizedBox(width: 15),
-        Expanded(
-          child: CustomButton(
-            onTap: () async {
-              if (controller.forgotPasswordFormKey.currentState!.validate()) {
-                await controller.forgotPasswordWithEmail();
-              }
-            },
-            text: langKey.send.tr,
-            height: 40,
-            color: kPrimaryColor,
-          ),
-        ),
-      ],
+    return Obx(
+      () => controller.isLoading.isTrue
+          ? CustomLoading(isItBtn: true)
+          : CustomButton(
+              onTap: () async {
+                if (controller.forgotPasswordFormKey.currentState!.validate()) {
+                  await controller.forgotPasswordWithEmail();
+                }
+              },
+              text: langKey.send.tr,
+              width: 200,
+              height: 40,
+              color: kPrimaryColor,
+            ),
     );
+    // return Row(
+    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //   children: [
+    //     // Expanded(
+    //     //   child: CustomButton(
+    //     //     onTap: () {
+    //     //       Get.back();
+    //     //     },
+    //     //     text: langKey.cancelBtn.tr,
+    //     //     height: 40,
+    //     //     color: kPrimaryColor,
+    //     //   ),
+    //     // ),
+    //     // SizedBox(width: 15),
+    //     Expanded(
+    //       child:
+    //
+    //       CustomButton(
+    //         onTap: () async {
+    //           if (controller.forgotPasswordFormKey.currentState!.validate()) {
+    //             await controller.forgotPasswordWithEmail();
+    //           }
+    //         },
+    //         text: langKey.send.tr,
+    //         width: 250,
+    //         height: 40,
+    //         color: kPrimaryColor,
+    //       ),
+    //     ),
+    //   ],
+    // );
   }
 }
