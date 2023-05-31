@@ -45,7 +45,6 @@ class AuthController extends GetxController {
     super.onInit();
     getCurrentUser();
     //getToken();
-
     //getCurrentUser();
   }
 
@@ -412,46 +411,6 @@ class AuthController extends GetxController {
     setUserModel(fromApi);
   }
 
-  List getProfileData() {
-    var profileData = [
-      {
-        "title": firstName.tr,
-        "subtitle": userModel!.firstName ?? '',
-        "icon": Icons.person_rounded,
-        "field": "firstName",
-      },
-      {
-        "title": lastName.tr,
-        "subtitle": userModel!.lastName ?? '',
-        "icon": Icons.person_rounded,
-        "field": "lastName"
-      },
-      {
-        "title": phone.tr,
-        "subtitle": userModel!.phone ?? '',
-        "icon": Icons.phone_iphone_rounded,
-        "field": "phone",
-      },
-      {
-        "title": address.tr,
-        "subtitle": userModel!.address ?? '',
-        "icon": Icons.location_on_rounded,
-        "field": "address",
-      },
-      {
-        "title": country.tr,
-        "subtitle": userModel!.country?.name ?? '',
-        "icon": Icons.language_rounded,
-      },
-      {
-        "title": city.tr,
-        "subtitle": userModel!.city?.name ?? '',
-        "icon": Icons.villa_rounded,
-      },
-    ];
-    return profileData;
-  }
-
   List getStoreInfo() {
     return [
       {
@@ -589,32 +548,6 @@ class AuthController extends GetxController {
       } else {
         Get.toNamed(Routes.checkOutRoute);
       }
-    }
-  }
-
-  deActivateAccount() async {
-    if (userToken != null) {
-      isLoading(true);
-      await authProvider
-          .deActivateUser(token: userToken)
-          .then((ApiResponse? response) {
-        isLoading(false);
-        if (response != null) {
-          if (response.success!) {
-            Get.back();
-            LocalStorageHelper.deleteUserData();
-            AppConstant.displaySnackBar(
-                langKey.errorTitle.tr, response.message);
-          } else
-            AppConstant.displaySnackBar(
-                langKey.errorTitle.tr, response.message);
-        } else
-          AppConstant.displaySnackBar(
-              langKey.errorTitle.tr, langKey.someThingWentWrong.tr);
-      }).catchError((error) {
-        isLoading(false);
-        debugPrint("deActivateAccount: Error $error");
-      });
     }
   }
 

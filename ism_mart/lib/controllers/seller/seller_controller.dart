@@ -434,7 +434,6 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
     const MyProducts(),
     const MyOrdersUI(),
     //const PremiumMembershipUI(),
-    BuyerProfileView(),
     const StoreProfileView(),
     VendorQuestionView(),
     ChangePasswordView()
@@ -458,17 +457,16 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
       //{'title': "Add Product", "icon": Icons.add_card_outlined, "page": 1},
       {'title': myProducts.tr, "icon": Icons.list_outlined, "page": 1},
       {'title': myOrders.tr, "icon": Icons.shopping_bag_outlined, "page": 2},
-      {'title': profile.tr, "icon": Icons.manage_accounts_outlined, "page": 3},
-      {'title': vendorStoreDetails.tr, "icon": Icons.storefront, "page": 4},
+      {'title': vendorStoreDetails.tr, "icon": Icons.storefront, "page": 3},
       {
         'title': 'Answer User Questions',
         "icon": Icons.question_mark_sharp,
-        "page": 5
+        "page": 4
       },
       {
         'title': 'Change Password',
         "icon": Icons.description_outlined,
-        "page": 6
+        "page": 5
       },
       /*{
         'title': "Premium Membership",
