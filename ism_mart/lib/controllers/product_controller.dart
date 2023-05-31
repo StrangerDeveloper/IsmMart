@@ -28,7 +28,7 @@ class ProductController extends GetxController with StateMixin {
   var moq = 0.obs;
 
   ScrollController scrollController = ScrollController();
-  var loadMoreVisibilty = false.obs;
+  var loadMoreVisibility = false.obs;
 
   ///end Lists
   @override
@@ -39,11 +39,11 @@ class ProductController extends GetxController with StateMixin {
   @override
   void onReady() {
     super.onReady();
-    scrollController
-      ..addListener(() {
-        print("CAlled");
-        loadMoreVendorProducts();
-      });
+    // scrollController
+    //   ..addListener(() {
+    //     print("CAlled");
+    //     loadMoreVendorProducts();
+    //   });
   }
 
   fetchProduct(int id) async {
@@ -114,7 +114,7 @@ class ProductController extends GetxController with StateMixin {
   }
 
   var sellerStoreResponse = SellerModelResponse().obs;
-  var vendorID = 0.obs;
+  //var vendorID = 0.obs;
   fetchStoreDetailsByID({storeID}) async {
     isLoading(true);
     //change(null, status: RxStatus.loading());
@@ -124,9 +124,9 @@ class ProductController extends GetxController with StateMixin {
       isLoading(false);
       sellerStoreResponse(sellerModelResponse);
       //change(sellerModelResponse, status: RxStatus.success());
-      vendorID.value = sellerModelResponse.vendorStore!.id!;
+      //vendorID.value = sellerModelResponse.vendorStore!.id!;
       page = 1;
-      getVendorProducts(vendorId: vendorID.value.toInt());
+      getVendorProducts(vendorId: sellerModelResponse.vendorStore!.id!);
     }).catchError((error) {
       //change(null, status: RxStatus.empty());
       isLoading(false);
@@ -147,25 +147,26 @@ class ProductController extends GetxController with StateMixin {
             page: page)
         .then((value) {
       isLoading(false);
-      loadMoreVisibilty(false);
+      loadMoreVisibility(false);
+      vendorProductList.clear();
       vendorProductList.addAll(value);
     }).catchError((e) {
       isLoading(false);
-      loadMoreVisibilty(false);
+      loadMoreVisibility(false);
       print(">>>>GetVendorProduct: $e");
     });
   }
 
   loadMoreVendorProducts() async {
     if (scrollController.hasClients &&
-        loadMoreVisibilty.isFalse &&
+        loadMoreVisibility.isFalse &&
         scrollController.position.maxScrollExtent == scrollController.offset) {
-      loadMoreVisibilty(true);
+      loadMoreVisibility(true);
       isLoading(true);
       productLimit = 20;
       page++;
 
-      getVendorProducts(vendorId: vendorID.value.toInt());
+      //getVendorProducts(vendorId: vendorID.value.toInt());
     }
   }
 

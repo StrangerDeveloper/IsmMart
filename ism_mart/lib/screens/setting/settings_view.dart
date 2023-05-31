@@ -241,7 +241,7 @@ class SettingsView extends GetView<AuthController> {
           ),
         ),
         _singleSettingsItem(
-          onTap: () {}, // => _showCurrencyChangeBS(),
+          onTap: () => _showCurrencyChangeBS(),
           icon: Icons.currency_exchange,
           iconColor: Color.fromARGB(255, 160, 235, 94),
           title: langKey.currencyKey.tr,

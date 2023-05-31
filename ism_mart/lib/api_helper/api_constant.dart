@@ -25,7 +25,8 @@ class ApiConstant {
       "sk_test_51M7CqbAqAePi9vIiIaBO0wAHIUmAmrUTTM89z5dx6MfbYK10pFs8YOJgxo3qrz2jXdRsWqbEuVNhaoLS4wkTfU3p00EweFGR7b";
 
   static const live_currency_exchange_api_key =
-      "dYkOzqTeDZkENZyxkCiennS5kvUDbcoA";
+      "eJAxu0n1qnOeT9Jl6YuYbnuSvgAYq8Cm"; //temporary key
+  //"dYkOzqTeDZkENZyxkCiennS5kvUDbcoA";
   static const test_currency_exchange_api_key =
       "GfHmdIjzz5iYzBNC2GbVOpDOWt4cg7XJ";
 

@@ -54,11 +54,11 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
     change(null, status: RxStatus.loading());
     await apiProvider.getProductById(id).then((response) {
       if (response.success!) {
+        print("GetPRoductID: ${response.data.toString()}");
         change(ProductModel.fromJson(response.data),
             status: RxStatus.success());
         productImages.clear();
-      }
-      else {
+      } else {
         change(null, status: RxStatus.empty());
       }
     }).catchError((error) {
@@ -418,9 +418,9 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
   var imagesToDelete = [].obs;
   var imagesToUpdate = [].obs;
 
-  createLists(List<ProductImages>? imagesList){
+  createLists(List<ProductImages>? imagesList) {
     imagesListForUI.clear();
-    for(int i = 0; i<=imagesList!.length-1; i++){
+    for (int i = 0; i <= imagesList!.length - 1; i++) {
       imagesListForUI.add(imagesList[i]);
     }
     imagesListForUI.refresh();
