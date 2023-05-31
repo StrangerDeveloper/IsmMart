@@ -8,6 +8,8 @@ class Validator {
   Validator();
 
   //Formatters
+
+  ///Number should start from + sign...
   final List<TextInputFormatter>? phoneNumberFormatter = [
     FilteringTextInputFormatter.allow(RegExp(r'^(?:[+])?\d*'))
   ];
@@ -32,6 +34,7 @@ class Validator {
     }
   }
 
+  ///Phone Number : that should NOT start from + sign...
   String? validatePhoneNumber(String? value) {
     if (GetUtils.isBlank(value)!) {
       return langKey.phoneReq.tr;
@@ -42,22 +45,6 @@ class Validator {
     }
   }
 
-  String? phone(String? value) {
-    //String pattern = r'^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$';
-    String pattern = r'^(\+92|0|92)[0-9]{10}$'; //Pakistan
-    //String pattern = r'(^(?:[+0]9)?[0-9]{11,12}$)';
-    // String pattern =
-    //     r'(^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$)';
-
-    RegExp regex = RegExp(pattern);
-    if (value!.isEmpty) {
-      return langKey.phoneReq.tr;
-    } else if (!regex.hasMatch(value.trim())) {
-      return 'Invalid phone number format';
-    } else {
-      return null;
-    }
-  }
 
   String? email(String? value) {
     String pattern = r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+';
