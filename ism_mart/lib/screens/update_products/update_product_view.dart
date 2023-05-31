@@ -46,10 +46,14 @@ class UpdateProductView extends GetView<SellersController> {
           productModel.discount == 0 ? '' : productModel.discount!.toString();
       viewModel.prodDescriptionController.text = productModel.description!;
       viewModel.priceAfterCommission(productModel.price!.toInt());
-      controller.productImages.addAll(productModel.images!);
-      controller.thumbnailImageUrl.value =
-          controller.productImages[0].url.toString();
-      controller.productImages.removeAt(0);
+
+      if (productModel.images!.isNotEmpty) {
+        controller.productImages.addAll(productModel.images!);
+        controller.thumbnailImageUrl.value =
+            controller.productImages[0].url.toString();
+        controller.productImages.removeAt(0);
+      }
+
       viewModel.imagesToDelete.clear();
       viewModel.imagesToUpdate.clear();
     }

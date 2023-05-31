@@ -95,7 +95,10 @@ class MyProducts extends GetView<SellersController> {
       aspectRatio: 0.75,
       child: GestureDetector(
         onTap: () {
-          Get.to(SingleProductView(productId: "${model.id}", calledFor: 'seller',));
+          Get.to(SingleProductView(
+            productId: "${model.id}",
+            calledFor: 'seller',
+          ));
         },
         child: Container(
           clipBehavior: Clip.hardEdge,
@@ -184,7 +187,8 @@ class MyProducts extends GetView<SellersController> {
                   children: [
                     CustomActionIcon(
                         onTap: () {
-                          Get.to(() => UpdateProductView(productId: model.id,));
+                          print("ProductId: ${model.id}");
+                          Get.to(() => UpdateProductView(productId: model.id));
                           // AppConstant.showBottomSheet(
                           //     widget: UpdateProductView(productId: model.id),
                           //     isGetXBottomSheet: true,
@@ -195,9 +199,11 @@ class MyProducts extends GetView<SellersController> {
                     AppConstant.spaceWidget(width: 5),
                     CustomActionIcon(
                         onTap: () => AppConstant.showConfirmDeleteDialog(
-                              ontap: () => controller.deleteProduct(id: model.id),
-                          passedHeadingLangKey: langKey.areYouSure.tr,
-                          passedBodyLangKey: langKey.deletionProcessDetail.tr,
+                              ontap: () =>
+                                  controller.deleteProduct(id: model.id),
+                              passedHeadingLangKey: langKey.areYouSure.tr,
+                              passedBodyLangKey:
+                                  langKey.deletionProcessDetail.tr,
                             ),
                         icon: Icons.delete_rounded,
                         bgColor: kRedColor)
