@@ -25,7 +25,7 @@ dependencies:
   flutter_svg: ^2.0.1
   get: ^4.6.5
   get_storage: ^2.0.3
-  google_fonts: ^4.0.3
+  google_fonts: ^4.0.4
   http: ^0.13.5
   iconly: ^1.0.1
   image_picker: ^0.8.6
