@@ -350,7 +350,7 @@ class DashboardUI extends GetView<BaseController> {
                 //crossAxisCount: AppResponsiveness.getGridItemCount(),
                 maxCrossAxisExtent: 200,
                 // Maximum width of each item
-                childAspectRatio: 1,
+                childAspectRatio: 0.92,
                 // Aspect ratio of each item (width / height)
                 mainAxisSpacing: 10,
                 // Spacing between rows

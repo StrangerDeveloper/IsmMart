@@ -6,10 +6,12 @@ import 'package:ism_mart/utils/constants.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class ForgotPasswordView extends GetView<AuthController> {
-  const ForgotPasswordView({Key? key}) : super(key: key);
+  const ForgotPasswordView({Key? key, this.email}) : super(key: key);
+  final String? email;
 
   @override
   Widget build(BuildContext context) {
+    controller.forgotPasswordEmailController.text = email.toString();
     return SafeArea(
       child: Scaffold(
         appBar: appBar(),

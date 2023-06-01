@@ -46,14 +46,11 @@ class UpdateProductView extends GetView<SellersController> {
           productModel.discount == 0 ? '' : productModel.discount!.toString();
       viewModel.prodDescriptionController.text = productModel.description!;
       viewModel.priceAfterCommission(productModel.price!.toInt());
-
+      controller.thumbnailImageUrl.value = productModel.thumbnail.toString();
       if (productModel.images!.isNotEmpty) {
         controller.productImages.addAll(productModel.images!);
-        controller.thumbnailImageUrl.value =
-            controller.productImages[0].url.toString();
-        controller.productImages.removeAt(0);
+        // controller.productImages.removeAt(0);
       }
-
       viewModel.imagesToDelete.clear();
       viewModel.imagesToUpdate.clear();
     }
@@ -340,7 +337,7 @@ class UpdateProductView extends GetView<SellersController> {
                                                       ));
                                                 },
                                                 child: Container(
-                                                  width: 80,
+                                                  width: 90,
                                                   child: Stack(
                                                     fit: StackFit.expand,
                                                     children: [
@@ -549,7 +546,6 @@ class UpdateProductView extends GetView<SellersController> {
                 controller.thumbnailImagePath.value = '';
               }
               viewModel.thumbnailNotAvailable(true);
-              //viewModel.imagesToDelete.add(controller.productImages[0].id);
             },
           ),
         )

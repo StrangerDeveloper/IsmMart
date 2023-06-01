@@ -21,13 +21,6 @@ class ChangePasswordView extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Text(
-              //     'Change Password',
-              //   style: headline1.copyWith(
-              //     fontSize: 25,
-              //     fontWeight: FontWeight.w800
-              //   ),
-              // ),
               SizedBox(
                 height: 10,
               ),
@@ -62,7 +55,16 @@ class ChangePasswordView extends StatelessWidget {
                               ? langKey.passwordLengthReq.tr
                               : null,
                       obscureText: true,
-                      onChanged: (value) => {},
+                      onChanged: (value) {
+                        if (value.toLowerCase().trim() ==
+                            viewModel.confirmPasswordController.text
+                                .toLowerCase()
+                                .trim()) {
+                          viewModel.passwordNotMatched(false);
+                        } else {
+                          viewModel.passwordNotMatched(true);
+                        }
+                      },
                       maxLines: 1,
                     ),
                     AppConstant.spaceWidget(height: 20),

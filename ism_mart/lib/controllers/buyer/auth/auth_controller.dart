@@ -18,6 +18,7 @@ class AuthController extends GetxController {
   final forgotPasswordFormKey = GlobalKey<FormState>();
   final emailVerificationFormKey = GlobalKey<FormState>();
   var forgotPasswordEmailController = TextEditingController();
+  var newPasswordController = TextEditingController();
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
   var confirmPassController = TextEditingController();
@@ -164,7 +165,7 @@ class AuthController extends GetxController {
   forgotPasswordOtp() async {
     isLoading(true);
     String email = forgotPasswordEmailController.text;
-    String password = passwordController.text;
+    String password = newPasswordController.text;
     String confirmPass = confirmPassController.text;
     String otp = otpController.text;
     await authProvider.forgotPasswordOtp(data: {
@@ -650,6 +651,7 @@ class AuthController extends GetxController {
   }
 
   clearForgotPasswordControllers() {
+    newPasswordController.clear();
     passwordController.clear();
     forgotPasswordEmailController.clear();
     otpController.clear();

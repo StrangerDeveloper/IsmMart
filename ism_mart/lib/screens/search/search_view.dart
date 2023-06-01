@@ -20,16 +20,16 @@ class SearchView extends GetView<CustomSearchController> {
     String? searchQuery;
     if (passedSearchQuery == 'ISMMART Originals') {
       searchQuery = 'IsmmartOriginal';
-      controller.setSelectedCategory(searchQuery);
+      controller.selectedCategory.value = searchQuery;
     } else if (passedSearchQuery == 'Popular Products') {
       searchQuery = 'Latest';
-      controller.setSelectedCategory(searchQuery);
+      controller.selectedCategory.value = searchQuery;
     } else if (passedSearchQuery == 'Featured Products') {
       searchQuery = 'Featured';
-      controller.setSelectedCategory(searchQuery);
+      controller.selectedCategory.value = searchQuery;
     } else {
       searchQuery = passedSearchQuery;
-      controller.setSelectedCategory(passedSearchQuery);
+      controller.selectedCategory.value = passedSearchQuery.toString();
     }
     controller.getProductsByType(searchQuery);
 
@@ -80,8 +80,8 @@ class SearchView extends GetView<CustomSearchController> {
           //focusNode: controller.focus,
           onChanged: (value) {
             if (value != '') {
-              controller.setSelectedCategory(null);
-              controller.search(controller.searchTextController.text);
+              controller.selectedCategory.value = '';
+              controller.search(value);
             }
           },
           cursorColor: kPrimaryColor,

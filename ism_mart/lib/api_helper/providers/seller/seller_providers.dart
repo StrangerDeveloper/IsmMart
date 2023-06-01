@@ -99,7 +99,8 @@ class SellersApiProvider {
     var headers = {'authorization': '$token', 'Cookie': 'XSRF-token=$token'};
     final request = http.MultipartRequest('PATCH', Uri.parse(url));
 
-    // print(">>Delete Images: $imagesToDelete");
+    // print(imagesToDelete);
+    print(">>Delete Images: $imagesToDelete");
     request.headers.addAll(headers);
 
     request.fields.addAll({

@@ -17,17 +17,12 @@ class CustomSearchController extends GetxController {
 
   var selectedCategoryId = 0.obs;
 
-  var _selectedCategory = ''.obs;
+  var selectedCategory = ''.obs;
   var isLoadingMore = false.obs;
   ScrollController scrollController = ScrollController();
 
   var _sortBy = ''.obs;
 
-  String? get selectedCategory => _selectedCategory.value;
-
-  setSelectedCategory(String? value){
-    _selectedCategory.value = value.toString();
-  }
   String? get sortBy => _sortBy.value;
 
   setSortBy(String value) {
@@ -60,14 +55,15 @@ class CustomSearchController extends GetxController {
     //  search(searchTextController.text);
     // });
 
-    scrollController
-      ..addListener(() {
+    scrollController.addListener(() {
         if (stopLoadMore.isFalse) {
-          if (selectedCategory!.isNotEmpty) {
-            loadMoreCategoryProducts(selectedCategory);
-          }
-          else {
+          print(">>Selected Category: $selectedCategory");
+          print(searchTextController.text);
+          if(selectedCategory.value == ''){
             loadMore(searchTextController.text);
+          }
+          else{
+            loadMoreCategoryProducts(selectedCategory.value);
           }
         }
       });
@@ -101,7 +97,7 @@ class CustomSearchController extends GetxController {
 
   search(String? query) async {
     //change(null, status: RxStatus.loading());
-
+    print('Search called');
     isLoading(true);
     // page = 1;
     // searchLimit = 32 * 2;
@@ -125,12 +121,13 @@ class CustomSearchController extends GetxController {
   void loadMore(String? searchQuery) async {
     //scrollController.position.maxScrollExtent == scrollController.offset
     //scrollController.position.extentAfter<300
+    print('Load More Search');
     if (scrollController.hasClients &&
         isLoadingMore.isFalse &&
         scrollController.position.maxScrollExtent == scrollController.offset) {
       isLoadingMore(true);
-      searchLimit = 15;
-      page++;
+      searchLimit += 15;
+      //page++;
       await _apiProvider
           .search(
               text: searchQuery!.toLowerCase(),
@@ -139,7 +136,7 @@ class CustomSearchController extends GetxController {
               sortBy: sortBy)
           .then((response) {
         //change(products, status: RxStatus.success());
-        // productList.clear();
+        productList.clear();
         productList.addAll(response.products.productRows!);
         isLoadingMore(false);
       }).catchError((error) {
@@ -152,13 +149,13 @@ class CustomSearchController extends GetxController {
   void loadMoreCategoryProducts(String? searchQuery) async {
     //scrollController.position.maxScrollExtent == scrollController.offset
     //scrollController.position.extentAfter<300
+    print('Category Search More');
     if (scrollController.hasClients &&
         isLoadingMore.isFalse &&
         scrollController.position.maxScrollExtent == scrollController.offset) {
       isLoadingMore(true);
       searchLimit += 10;
       //page++;
-      print(searchLimit);
       await _apiProvider
           .getProductsByType(
         type: searchQuery,

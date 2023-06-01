@@ -77,7 +77,7 @@ class ResetForgotPassword extends GetView<AuthController> {
                             ),
                             AppConstant.spaceWidget(height: 30),
                             FormPasswordInputFieldWithIcon(
-                              controller: controller.passwordController,
+                              controller: controller.newPasswordController,
                               iconPrefix: Icons.lock_rounded,
                               iconColor: kPrimaryColor,
                               textStyle: bodyText1,
@@ -92,7 +92,16 @@ class ResetForgotPassword extends GetView<AuthController> {
                                               ? langKey.passwordLengthReq.tr
                                               : null,
                               obscureText: true,
-                              onChanged: (value) => {},
+                              onChanged: (value) {
+                                if (value.toLowerCase().trim() ==
+                                    controller.confirmPassController.text
+                                        .toLowerCase()
+                                        .trim()) {
+                                  controller.showPasswordNotMatched(false);
+                                } else {
+                                  controller.showPasswordNotMatched(true);
+                                }
+                              },
                               maxLines: 1,
                             ),
                             AppConstant.spaceWidget(height: 30),
@@ -114,7 +123,7 @@ class ResetForgotPassword extends GetView<AuthController> {
                               obscureText: true,
                               onChanged: (value) {
                                 if (value.toLowerCase().trim() ==
-                                    controller.passwordController.text
+                                    controller.newPasswordController.text
                                         .toLowerCase()
                                         .trim()) {
                                   controller.showPasswordNotMatched(false);

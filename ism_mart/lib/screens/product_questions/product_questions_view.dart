@@ -9,12 +9,15 @@ import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
 
 class ProductQuestionsView extends StatelessWidget {
-  ProductQuestionsView({Key? key}) : super(key: key);
-  final ProductQuestionsViewModel viewModel =
-      Get.put(ProductQuestionsViewModel());
+  ProductQuestionsView({Key? key, this.id}) : super(key: key);
+  final String? id;
+
+  final ProductQuestionsViewModel viewModel = Get.put(ProductQuestionsViewModel());
 
   @override
   Widget build(BuildContext context) {
+    print('Product Questions View');
+    viewModel.productId.value=id.toString();
     return Scaffold(
       appBar: appBar(),
       body: Stack(
@@ -55,7 +58,7 @@ class ProductQuestionsView extends StatelessWidget {
       padding: const EdgeInsets.all(15),
       child: CustomTextBtn(
         onPressed: () {
-          askQuestionBottomSheet();
+          viewModel.loginCheck();
         },
         child: Text(
           askQuestion.tr,

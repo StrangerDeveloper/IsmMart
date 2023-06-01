@@ -6,9 +6,12 @@ import 'package:ism_mart/api_helper/urls.dart';
 import 'package:ism_mart/controllers/product_controller.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
+import '../signin/sign_in_view.dart';
+import 'product_questions_view.dart';
 
 class ProductQuestionsViewModel extends GetxController {
-  String productId = "";
+
+  RxString productId = ''.obs;
   List<QuestionModel> productQuestionsList = <QuestionModel>[].obs;
   ProductModel? productModel;
   final addQuestionFormKey = GlobalKey<FormState>();
@@ -16,16 +19,18 @@ class ProductQuestionsViewModel extends GetxController {
   TextEditingController addQuestionController = TextEditingController();
   TextEditingController updateQuestionController = TextEditingController();
 
-  @override
-  void onInit() {
-    productId = Get.arguments['productId'];
-    productModel = Get.arguments['productModel'];
-    super.onInit();
-  }
+  // @override
+  // void onInit() {
+  //   print('>>Product ID: ${Get.arguments['productId']}');
+  //   print('>>Product Model: ${Get.arguments['productModel']}');
+  //   productId = Get.arguments['productId'];
+  //   productModel = Get.arguments['productModel'];
+  //   super.onInit();
+  // }
 
   @override
   void onReady() {
-    getQuestionAnswers();
+    getQuestionAnswers(productId.value);
     super.onReady();
   }
 
@@ -35,12 +40,12 @@ class ProductQuestionsViewModel extends GetxController {
     super.onClose();
   }
 
-  getQuestionAnswers() {
+  getQuestionAnswers(String? id) {
     GlobalVariable.showLoader.value = true;
 
     ApiBaseHelper()
         .getMethod(
-            url: Urls.getQuestionByProductId + productId, withBearer: false)
+            url: Urls.getQuestionByProductId + id.toString(), withBearer: false)
         .then((parsedJson) {
       GlobalVariable.showLoader.value = false;
       if (parsedJson['message'] == 'Product questions fetched successfully' ||
@@ -55,13 +60,21 @@ class ProductQuestionsViewModel extends GetxController {
     });
   }
 
+  loginCheck(){
+    if(GlobalVariable.userModel == null) {
+      return Get.to(() => SignInView());
+    }
+    else{
+      return ProductQuestionsView().askQuestionBottomSheet();
+    }
+  }
+
   addQuestion() {
     if (addQuestionFormKey.currentState?.validate() ?? false) {
-      Get.back();
       GlobalVariable.showLoader.value = true;
 
       Map<String, dynamic> param = {
-        "productId": productId,
+        "productId": productId.value,
         "question": addQuestionController.text,
       };
 
@@ -72,9 +85,10 @@ class ProductQuestionsViewModel extends GetxController {
         GlobalVariable.showLoader.value = false;
         if (parsedJson['message'] == "Product question created successfully") {
           addQuestionController.text = "";
+          Get.back();
           AppConstant.displaySnackBar(success.tr, parsedJson['message']);
           /////////////
-          getQuestionAnswers();
+          getQuestionAnswers(productId.value);
           ProductController controller = Get.find();
           controller.getProductQuestions(productId: productId);
           ////////////
@@ -108,7 +122,7 @@ class ProductQuestionsViewModel extends GetxController {
           updateQuestionController.text = "";
           AppConstant.displaySnackBar(success.tr, parsedJson['message']);
           /////////////
-          getQuestionAnswers();
+          getQuestionAnswers(productId.value);
           ProductController controller = Get.find();
           controller.getProductQuestions(productId: productId);
           ////////////
@@ -133,7 +147,7 @@ class ProductQuestionsViewModel extends GetxController {
       GlobalVariable.showLoader.value = false;
       if (parsedJson['message'] == "Question deleted successfully") {
         AppConstant.displaySnackBar(success.tr, parsedJson['message']);
-        getQuestionAnswers();
+        getQuestionAnswers(productId.value);
         ProductController controller = Get.find();
         controller.getProductQuestions(productId: productId);
         // Get.to(ProductQuestionsView());

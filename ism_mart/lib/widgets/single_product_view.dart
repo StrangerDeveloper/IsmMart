@@ -322,12 +322,12 @@ class SingleProductView extends GetView<ProductController> {
             AppConstant.spaceWidget(height: 8),
 
             //Categories
-            Row(
+            Wrap(
               children: [
                 CustomText(title: "Category: ", style: bodyText2),
                 CustomText(
                     title: "\t${productModel.category!.name}",
-                    style: bodyText1),
+                    style: bodyText1, maxLines: 2,),
                 AppConstant.spaceWidget(width: 3),
                 const Icon(
                   Icons.arrow_forward_ios_sharp,
@@ -704,10 +704,8 @@ class SingleProductView extends GetView<ProductController> {
               questionListView(productModel: productModel),
               InkWell(
                 onTap: () {
-                  Get.to(() => ProductQuestionsView(), arguments: {
-                    'productModel': productModel,
-                    'productId': productId
-                  });
+                  print('Called');
+                  Navigator.push(Get.context!, MaterialPageRoute(builder: (context)=>ProductQuestionsView(id: "$productId",)));
                   // Get.to(() => ProductQuestionAnswerUI(
                   //       productModel: productModel,
                   //     ));

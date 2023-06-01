@@ -109,12 +109,12 @@ class UpdateProductViewModel extends GetxController{
       GlobalVariable.showLoader.value=false;
       if (response != null) {
         if (response.success!) {
+          sellersController.myProductsList.clear();
+          await sellersController.fetchMyProducts();
           sellersController.thumbnailImagePath('');
           sellersController.thumbnailImageUrl('');
           imagesToUpdate.clear();
           imagesToDelete.clear();
-          sellersController.myProductsList.clear();
-          await sellersController.fetchMyProducts();
           Get.back();
           AppConstant.displaySnackBar(
               langKey.success.tr, "${response.message}");

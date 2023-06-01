@@ -5,6 +5,8 @@ import 'package:ism_mart/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
+import '../forgot_password/forgot_password_view.dart';
+
 class SignInView extends GetView<AuthController> {
   SignInView({Key? key}) : super(key: key);
 
@@ -117,8 +119,12 @@ class SignInView extends GetView<AuthController> {
                           Container(
                             alignment: Alignment.centerRight,
                             child: InkWell(
-                              onTap: () =>
-                                  Get.toNamed(Routes.passwordResetEmailInput),
+                              onTap: () {
+                                  Get.to(() => ForgotPasswordView(
+                                      email: GetUtils.isEmail(controller
+                                          .emailController.text) ?
+                                      controller.emailController.text : '' ));
+                                },
                               child: Text(
                                 langKey.forgotPassword.tr+'?',
                                 style: headline3.copyWith(
