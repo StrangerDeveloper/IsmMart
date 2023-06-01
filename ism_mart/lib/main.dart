@@ -1,3 +1,5 @@
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
@@ -7,7 +9,8 @@ import 'package:ism_mart/api_helper/api_constant.dart';
 import 'package:ism_mart/app_binding/app_init_binding.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
-
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'api_helper/export_api_helper.dart';
 
 void main() async {
@@ -19,6 +22,22 @@ void main() async {
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(statusBarColor: Colors.grey[300]!));
+
+  ///Use firebase integration for crashlytics
+  ///
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  FlutterError.onError = (errorDetails) {
+    // If you wish to record a "non-fatal" exception, please use `FirebaseCrashlytics.instance.recordFlutterError` instead
+    FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+  };
+  PlatformDispatcher.instance.onError = (error, stack) {
+    // If you wish to record a "non-fatal" exception, please remove the "fatal" parameter
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    return true;
+  };
 
   runApp(const MyApp());
 }
