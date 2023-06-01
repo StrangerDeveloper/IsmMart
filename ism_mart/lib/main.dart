@@ -23,7 +23,7 @@ void main() async {
   SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(statusBarColor: Colors.grey[300]!));
 
-  ///Use firebase integration for crashlytics
+  ///firebase integration for crashlytics
   ///
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

@@ -394,6 +394,8 @@ class AuthController extends GetxController {
         GlobalVariable.userModel = apiResponse.userModel;
       }).catchError((error) {
         isLoading(false);
+        //if invalid users received
+        LocalStorageHelper.storeUser(userModel: userModel);
         setSession(true);
       });
     } else
@@ -468,7 +470,7 @@ class AuthController extends GetxController {
     await LocalStorageHelper.getStoredUser().then((user) async {
       _currUserToken.value = user.token ?? '';
 
-      getCurrentUser();
+      await getCurrentUser();
       await fetchUserCoins();
     }).onError((error, stackTrace) {
       print(">>>Token: $error, $stackTrace");
