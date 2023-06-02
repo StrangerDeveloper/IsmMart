@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
+import 'package:ism_mart/api_helper/global_variables.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/utils/constants.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import '../../../api_helper/api_base_helper.dart';
 
 class CustomSearchController extends GetxController {
   final ApiProvider _apiProvider;
@@ -17,27 +19,19 @@ class CustomSearchController extends GetxController {
 
   var selectedCategoryId = 0.obs;
 
-  var selectedCategory = ''.obs;
+  RxString selectedCategory = ''.obs;
   var isLoadingMore = false.obs;
   ScrollController scrollController = ScrollController();
 
+  RxInt subCategoryID = 0.obs;
   var _sortBy = ''.obs;
 
   String? get sortBy => _sortBy.value;
 
   setSortBy(String value) {
     _sortBy.value = value;
-    search(searchTextController.text);
+    searchProducts(searchTextController.text);
   }
-
-  //focus function
-  // FocusNode focus = FocusNode();
-  // void _onFocusChange() {
-  //   debugPrint("Focus: ${focus.hasFocus.toString()}");
-  //   if (focus.hasFocus == false) {
-  //     searchTextController.text = '';
-  //   }
-  // }
 
   @override
   void onInit() {
@@ -57,13 +51,14 @@ class CustomSearchController extends GetxController {
 
     scrollController.addListener(() {
         if (stopLoadMore.isFalse) {
-          print(">>Selected Category: $selectedCategory");
-          print(searchTextController.text);
-          if(selectedCategory.value == ''){
-            loadMore(searchTextController.text);
+          if(selectedCategory.value == '' && searchTextController.text == ''){
+            loadMoreWithSubCategory(subCategoryID.value);
+          }
+          else if(searchTextController.text == '' && subCategoryID.value == 0){
+            loadMoreCategoryProducts(selectedCategory.value);
           }
           else{
-            loadMoreCategoryProducts(selectedCategory.value);
+            loadMoreSearchedProducts(searchTextController.text);
           }
         }
       });
@@ -75,58 +70,62 @@ class CustomSearchController extends GetxController {
   int searchLimit = 15;
   int page = 1;
 
-  getProductsByType(String? query)async{
+  searchProductsByCategory(String? query)async{
     isLoading(true);
     await _apiProvider
         .getProductsByType(
       type: query,
-      // page: page,
       limit: searchLimit,
-      // sortBy: sortBy
     )
         .then((response) {
       isLoading(false);
       productList.clear();
       productList.addAll(response);
-      //searchTextController.clear();
     }).catchError((error) {
       isLoading(false);
-      //change(null, status: RxStatus.error(error));
+    });
+  }
+  
+  searchWithSubCategory(int? subCategoryId)async{
+    subCategoryID.value = subCategoryId!;
+    isLoading(true);
+    ApiBaseHelper().getMethod(
+        url: "products/getBySubCategory?limit=$searchLimit&page=1&id=$subCategoryId").
+    then((response) {
+      GlobalVariable.showLoader.value = true;
+      if(response['success'] == true && response['data'] != null){
+        isLoading(false);
+        productList.clear();
+        List list = response['data'].map((product) => ProductModel.fromJson(product)).toList();
+        list.forEach((element) {
+          productList.add(element);
+        });
+      }
+    }).catchError((e){
+      isLoading(false);
+      print(e);
     });
   }
 
-  search(String? query) async {
-    //change(null, status: RxStatus.loading());
-    print('Search called');
+  searchProducts(String? query) async {
     isLoading(true);
-    // page = 1;
-    // searchLimit = 32 * 2;
     await _apiProvider
-        .search(
-            text: query,
-            page: page,
-            limit: searchLimit,
-            sortBy: sortBy)
+        .search(text: query, page: page, limit: searchLimit, sortBy: sortBy)
         .then((response) {
       isLoading(false);
       productList.clear();
       productList.addAll(response.products.productRows!);
-      //searchTextController.clear();
     }).catchError((error) {
       isLoading(false);
-      //change(null, status: RxStatus.error(error));
     });
   }
 
-  void loadMore(String? searchQuery) async {
-    //scrollController.position.maxScrollExtent == scrollController.offset
-    //scrollController.position.extentAfter<300
-    print('Load More Search');
+  void loadMoreSearchedProducts(String? searchQuery) async {
     if (scrollController.hasClients &&
         isLoadingMore.isFalse &&
         scrollController.position.maxScrollExtent == scrollController.offset) {
       isLoadingMore(true);
-      searchLimit += 15;
+      searchLimit += 10;
       //page++;
       await _apiProvider
           .search(
@@ -135,54 +134,57 @@ class CustomSearchController extends GetxController {
               limit: searchLimit,
               sortBy: sortBy)
           .then((response) {
-        //change(products, status: RxStatus.success());
         productList.clear();
         productList.addAll(response.products.productRows!);
         isLoadingMore(false);
       }).catchError((error) {
         isLoadingMore(false);
-        //change(null, status: RxStatus.error(error));
       });
     }
   }
 
-  void loadMoreCategoryProducts(String? searchQuery) async {
-    //scrollController.position.maxScrollExtent == scrollController.offset
-    //scrollController.position.extentAfter<300
-    print('Category Search More');
+  loadMoreWithSubCategory(int? subCategoryId)async {
     if (scrollController.hasClients &&
         isLoadingMore.isFalse &&
         scrollController.position.maxScrollExtent == scrollController.offset) {
       isLoadingMore(true);
       searchLimit += 10;
-      //page++;
-      await _apiProvider
-          .getProductsByType(
-        type: searchQuery,
-        limit: searchLimit,
-      )
+      ApiBaseHelper().getMethod(
+          url: "products/getBySubCategory?limit=$searchLimit&page=1&id=$subCategoryId").
+      then((response) {
+        isLoadingMore(true);
+        if(response['success'] == true && response['data'] != null){
+          isLoading(false);
+          productList.clear();
+          List list = response['data'].map((product) => ProductModel.fromJson(product)).toList();
+          list.forEach((element) {
+            productList.add(element);
+          });
+          isLoadingMore(false);
+        }
+      }).catchError((e){
+        isLoadingMore(false);
+        print(e);
+      });
+    }
+  }
+  
+  void loadMoreCategoryProducts(String? searchQuery) async {
+    if (scrollController.hasClients &&
+        isLoadingMore.isFalse &&
+        scrollController.position.maxScrollExtent == scrollController.offset) {
+      isLoadingMore(true);
+      searchLimit += 10;
+      await _apiProvider.getProductsByType(type: searchQuery, limit: searchLimit,)
           .then((response) {
-        //change(products, status: RxStatus.success());
         productList.clear();
         productList.addAll(response);
-        print('Received Products: ${productList.length}');
         isLoadingMore(false);
       }).catchError((error) {
         isLoadingMore(false);
         //change(null, status: RxStatus.error(error));
       });
     }
-  }
-
-  getProductByType(String type) async {
-    isLoading(true);
-    await _apiProvider
-        .getProductsByType(type: type, limit: searchLimit)
-        .then((value) {
-      isLoading(false);
-      productList.clear();
-      productList.addAll(value);
-    });
   }
 
   var categoriesList = <CategoryModel>[].obs;
@@ -256,7 +258,10 @@ class CustomSearchController extends GetxController {
   }
 
   goBack(){
+    productList.clear();
     searchLimit = 15;
+    selectedCategory('');
+    subCategoryID.value = 0;
     searchTextController.clear();
     Get.back();
   }

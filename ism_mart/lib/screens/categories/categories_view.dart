@@ -161,8 +161,7 @@ class CategoriesView extends GetView<CategoryController> {
       borderRadius: BorderRadius.circular(13),
       child: InkWell(
         onTap: () {
-          Get.toNamed(Routes.searchRoute,
-              arguments: {"searchText": "${subCategory.name}"});
+          Get.to(() => SearchView(subCategoryID: subCategory.id,));
         },
         borderRadius: BorderRadius.circular(13),
         child: Padding(
