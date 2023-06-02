@@ -28,7 +28,7 @@ class StoreProfileView extends GetView<AuthController> {
                               padding: const EdgeInsets.all(8.0),
                               child: CustomButton(
                                 onTap: () => AppConstant.showBottomSheet(
-                                    widget: RegisterVendorUI(
+                                    widget: UpdateVendorView(
                                       model: controller.userModel?.vendor,
                                       //isCalledForUpdate: true,
                                     ),

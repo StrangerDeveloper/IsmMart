@@ -24,7 +24,7 @@ class ChangePasswordView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomText(
-                    title: "Fill the following details to change password",
+                    title: langKey.changePasswordDesc.tr,
                     textAlign: TextAlign.center,
                     style: headline2,
                   ),

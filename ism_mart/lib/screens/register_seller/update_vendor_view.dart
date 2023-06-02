@@ -13,8 +13,8 @@ import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 import '../../controllers/controllers.dart';
 
-class RegisterVendorUI extends GetView<AuthController> {
-  const RegisterVendorUI({
+class UpdateVendorView extends GetView<AuthController> {
+  const UpdateVendorView({
     Key? key,
     // this.isCalledForUpdate,
     this.model,
