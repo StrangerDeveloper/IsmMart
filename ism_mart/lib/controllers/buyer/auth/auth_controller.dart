@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -6,6 +8,7 @@ import 'package:ism_mart/api_helper/global_variables.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/exports/export_account.dart';
 import 'package:ism_mart/models/exports_model.dart';
+import 'package:ism_mart/screens/vendor_detail/vendor_detail_viewmodel.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
@@ -50,6 +53,7 @@ class AuthController extends GetxController {
   }
 
   final phoneErrorText = Rxn<String>();
+
   validatorPhoneNumber(String? value) {
     if (GetUtils.isBlank(value)!) {
       //return langKey.fieldIsRequired.tr;
@@ -288,6 +292,11 @@ class AuthController extends GetxController {
                 langKey.successTitle.tr, apiResponse.message);
             clearStoreController();
             getCurrentUser();
+            // print('hayat');
+            // log(GlobalVariable.userModel!.toJson().toString());
+            // print('hayat');
+            // VendorDetailViewModel vendorDetailViewModel = Get.find();
+            // vendorDetailViewModel.getData();
           } else
             AppConstant.displaySnackBar(
                 langKey.errorTitle.tr, apiResponse.message);
@@ -389,10 +398,10 @@ class AuthController extends GetxController {
 
         if (apiResponse.errors != null && apiResponse.errors!.isNotEmpty) {
           setUserModel(UserModel(error: apiResponse.errors!.first));
-        } else
+        } else {
           setUserModel(apiResponse.userModel!);
-
-        GlobalVariable.userModel = apiResponse.userModel;
+          GlobalVariable.userModel = apiResponse.userModel;
+        }
       }).catchError((error) {
         isLoading(false);
         //if invalid users received
@@ -588,6 +597,7 @@ class AuthController extends GetxController {
   ///Contact us
   var subjectController = TextEditingController();
   var messageController = TextEditingController();
+
   postContactUs() async {
     isLoading(true);
     var data = {

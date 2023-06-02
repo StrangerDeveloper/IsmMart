@@ -6,7 +6,7 @@ export '../screens/my_products/my_products_view.dart';
 export '../screens/seller_dashboard/seller_dashboard_view.dart';
 export '../screens/seller_home/seller_home_view.dart';
 export '../screens/register_seller/update_vendor_view.dart';
-export '../screens/vendor_detail/vendor_detail_view.dart';
+export '../screens/vendor_detail/store_profile_view.dart';
 export '../screens/buyer_orders/buyer_orders_view.dart';
 export '../widgets/single_order_details_ui.dart';
 export '../screens/update_products/update_product_view.dart';
