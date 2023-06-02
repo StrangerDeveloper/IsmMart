@@ -178,7 +178,9 @@ const invoiceNo = 'invoiceNo',
     disputeNotAddedYet = 'disputeNotAddedYet';
 
 ///profile
-const updateProfile = 'updateProfile', pickImage = 'pickImage', gallery = 'gallery',
+const updateProfile = 'updateProfile',
+    pickImage = 'pickImage',
+    gallery = 'gallery',
     camera = 'camera',
     pickFrom = 'pickFrom',
     yourCoverAndProfile = 'yourCoverAndProfile',
@@ -434,7 +436,8 @@ const email = "email",
     forgotPasswordDesc = 'forgotPasswordDesc',
     forgotPassword = "forgotPassword",
     proceed = 'proceed',
-    currentPassword = 'currentPassword';
+    currentPassword = 'currentPassword',
+    changePasswordDesc = 'changePasswordDesc';
 
 const storeName = "storeName",
     storeNameReq = "storeNameRequired",

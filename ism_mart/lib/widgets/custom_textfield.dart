@@ -199,6 +199,7 @@ class CustomTextField2 extends StatelessWidget {
             fontSize: 15,
           ),
           decoration: InputDecoration(
+
             labelText: label,
             labelStyle: GoogleFonts.lato(
               fontSize: 14,

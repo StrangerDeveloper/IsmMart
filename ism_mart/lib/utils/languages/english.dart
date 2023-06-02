@@ -3,9 +3,9 @@ import 'translations_key.dart' as key;
 class English {
   Map<String, String> get translations => {
 
-
         ///change password
         key.currentPassword: 'Current Password is required',
+        key.changePasswordDesc: 'Fill the following details to change password',
 
         ///answer_question_view
         key.addAnswer : 'Add Answer',

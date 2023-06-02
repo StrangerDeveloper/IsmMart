@@ -25,4 +25,8 @@ class Urls {
   static String deleteAccount = "user/deactivate";
   static String getVendorAccountData = "user/profile";
   static String updateVendorData = "user/update";
+
+  //ChangePasswordViewModel
+  static String updatePassword = "user/updatePassword";
+
 }

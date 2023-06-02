@@ -1,65 +1,73 @@
-import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:ism_mart/api_helper/api_constant.dart';
-import 'package:ism_mart/models/api_response/api_response_model.dart';
+import 'package:ism_mart/api_helper/api_base_helper.dart';
+import 'package:ism_mart/api_helper/global_variables.dart';
+import 'package:ism_mart/api_helper/urls.dart';
+import 'package:ism_mart/utils/exports_utils.dart';
 import '../../api_helper/local_storage/local_storage_helper.dart';
 import '../../models/user/user_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class ChangePasswordViewModel extends GetxController {
+  TextEditingController newPasswordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
+  GlobalKey<FormState> changePasswordFormKey = GlobalKey<FormState>();
 
+  RxBool obscureNewPassword = false.obs;
+  RxBool obscureConfirmPassword = false.obs;
 
-  var currentPasswordController = TextEditingController();
-  var newPasswordController = TextEditingController();
-  var confirmPasswordController = TextEditingController();
-
-  final changePasswordFormKey = GlobalKey<FormState>();
-
-  var passwordNotMatched = false.obs;
-
-  var currentPasswordIconVisibility = true.obs;
-  var newPasswordIconVisibility = true.obs;
-  var confirmPasswordIconVisibility = true.obs;
-
-  @override
-  void onClose(){
-    clearControllers();
-    super.onClose();
-  }
-
-  changeIcon(RxBool Icon) {
-    Icon.value = !Icon.value;
-  }
-
-  Future<dynamic> updatePassword({String? email}) async {
-    final UserModel userDetails = await LocalStorageHelper.getStoredUser();
-
-    var url=ApiConstant.baseUrl;
-    var headers = {
-      'Content-Type': 'application/json',
-      'Cookie': 'XSRF-token=${userDetails.token}'
-    };
-    var request = http.Request('PATCH', Uri.parse('$url/user/updatePassword'));
-    request.body = json.encode({
-      "email": "${userDetails.email}",
-      "password": newPasswordController.text.trim().toString(),
-      "confirmPassword": confirmPasswordController.text.trim().toString(),
-    });
-    request.headers.addAll(headers);
-
-    http.StreamedResponse response = await request.send();
-    var data = await http.Response.fromStream(response);
-    var res = jsonDecode(data.body);
-
-    if (response.statusCode == 200) {
-      return ApiResponse.fromJson(res);
+  String? validateNewPassTxtField(String? value) {
+    if (GetUtils.isBlank(value)!) {
+      return langKey.fieldIsRequired.tr;
+    } else if (GetUtils.isLengthLessThan(value, 8)) {
+      return langKey.passwordLengthReq.tr;
+    } else {
+      return null;
     }
   }
 
-  clearControllers(){
-    currentPasswordController.clear();
-    newPasswordController.clear();
-    confirmPasswordController.clear();
+  String? validateConfirmPassTxtField(String? value) {
+    if (GetUtils.isBlank(value)!) {
+      return langKey.fieldIsRequired.tr;
+    } else if (GetUtils.isLengthLessThan(value, 8)) {
+      return langKey.passwordLengthReq.tr;
+    } else if (newPasswordController.text != confirmPasswordController.text) {
+      return langKey.passwordNotMatched.tr;
+    } else {
+      return null;
+    }
+  }
+
+  updatePassword() async {
+    if (changePasswordFormKey.currentState?.validate() ?? false) {
+      final UserModel userDetails = await LocalStorageHelper.getStoredUser();
+
+      GlobalVariable.showLoader.value = true;
+
+      Map<String, dynamic> param = {
+        "email": "${userDetails.email}",
+        "password": newPasswordController.text,
+        "confirmPassword": confirmPasswordController.text,
+      };
+
+      ApiBaseHelper()
+          .patchMethod(
+              url: Urls.updatePassword, body: param, withAuthorization: true)
+          .then((parsedJson) {
+        GlobalVariable.showLoader.value = false;
+        if (parsedJson['message'] == "Password updated successfully") {
+          newPasswordController.text = "";
+          confirmPasswordController.text = "";
+          Get.back();
+          AppConstant.displaySnackBar(success.tr, parsedJson['message']);
+        } else {
+          AppConstant.displaySnackBar(errorTitle.tr, parsedJson['message']);
+        }
+      }).catchError((e) {
+        GlobalVariable.showLoader.value = false;
+        print(e);
+      });
+    }
   }
 }
