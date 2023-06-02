@@ -11,13 +11,22 @@ class SearchView extends GetView<CustomSearchController> {
     Key? key,
     this.passedSearchQuery,
     this.isCalledForDeals = false,
+    this.calledForCategory,
+    this.subCategoryID
   }) : super(key: key);
+
   final bool? isCalledForDeals;
   final String? passedSearchQuery;
+  final bool? calledForCategory;
+  final int? subCategoryID;
+
   @override
   Widget build(BuildContext context) {
     //  final controller = Get.find<SearchController>();
-    String? searchQuery;
+    controller.searchTextController.clear();
+    controller.subCategoryID.value = 0;
+    controller.selectedCategory('');
+    String searchQuery = '';
     if (passedSearchQuery == 'ISMMART Originals') {
       searchQuery = 'IsmmartOriginal';
       controller.selectedCategory.value = searchQuery;
@@ -28,11 +37,17 @@ class SearchView extends GetView<CustomSearchController> {
       searchQuery = 'Featured';
       controller.selectedCategory.value = searchQuery;
     } else {
-      searchQuery = passedSearchQuery;
-      controller.selectedCategory.value = passedSearchQuery.toString();
+      controller.selectedCategory(passedSearchQuery);
     }
-    controller.getProductsByType(searchQuery);
 
+
+    if(calledForCategory == null) {
+      null;
+    }else{
+      calledForCategory!
+          ? controller.searchProductsByCategory(searchQuery)
+          : controller.searchWithSubCategory(subCategoryID);
+    }
     return Hero(
       tag: "productSearchBar",
       child: SafeArea(
@@ -65,6 +80,9 @@ class SearchView extends GetView<CustomSearchController> {
           ? null
           : InkWell(
               onTap: () {
+                controller.productList.clear();
+                controller.searchLimit = 15;
+                controller.searchTextController.clear();
                 controller.goBack();
               },
               child: Icon(
@@ -80,8 +98,9 @@ class SearchView extends GetView<CustomSearchController> {
           //focusNode: controller.focus,
           onChanged: (value) {
             if (value != '') {
-              controller.selectedCategory.value = '';
-              controller.search(value);
+              controller.selectedCategory('');
+              controller.searchProducts(value);
+              controller.searchLimit = 15;
             }
           },
           cursorColor: kPrimaryColor,
