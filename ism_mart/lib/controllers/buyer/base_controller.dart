@@ -276,7 +276,7 @@ class BaseController extends GetxController {
 
   void changePage(int index) {
     if (index == 4) {
-      Get.find<CustomSearchController>().search("");
+      Get.find<CustomSearchController>().searchProducts("");
       Get.find<CustomSearchController>().searchTextController.clear();
     }
 
