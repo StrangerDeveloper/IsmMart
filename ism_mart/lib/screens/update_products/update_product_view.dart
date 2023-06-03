@@ -55,8 +55,52 @@ class UpdateProductView extends GetView<SellersController> {
       viewModel.imagesToUpdate.clear();
     }
 
+    // Container(
+    //   color: Colors.red,
+    //   width: AppResponsiveness.width,
+    //   child: Row(
+    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //     children: [
+    //       Align(
+    //         alignment: Alignment.topLeft,
+    //         child: CustomActionIcon(
+    //           icon: Icons.arrow_back_ios,
+    //           iconColor: kPrimaryColor,
+    //           onTap: ()async{
+    //             Get.back();
+    //           },
+    //         ),
+    //       ),
+    //       Center(
+    //         child: Padding(
+    //           padding: const EdgeInsets.all(8.0),
+    //           child: CustomText(
+    //             title: langKey.updateProduct.tr,
+    //             style: headline2,
+    //           ),
+    //         ),
+    //       ),
+    //     ],
+    //   ),
+    // ),
+
     return SafeArea(
         child: Scaffold(
+          appBar: AppBar(
+            centerTitle: true,
+            leading: CustomActionIcon(
+              icon: Icons.arrow_back_ios,
+              size: 23,
+              iconColor: kPrimaryColor,
+              onTap: ()async{
+                Get.back();
+                },
+            ),
+            title: CustomText(
+              title: langKey.updateProduct.tr,
+              style: headline2,
+            ),
+          ),
             body: Stack(
       children: [
         CustomScrollView(
@@ -64,16 +108,6 @@ class UpdateProductView extends GetView<SellersController> {
             SliverList(
               delegate: SliverChildListDelegate(
                 [
-                  Align(
-                    alignment: Alignment.topCenter,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: CustomText(
-                        title: langKey.updateProduct.tr,
-                        style: headline2,
-                      ),
-                    ),
-                  ),
                   AppConstant.spaceWidget(height: 20),
                   Form(
                     key: formKey,
@@ -117,27 +151,35 @@ class UpdateProductView extends GetView<SellersController> {
                                           : null,
                                   keyboardType: TextInputType.number,
                                   onChanged: (value) {
-                                    viewModel.totalTax();
-                                    if (value.isNotEmpty) {
-                                      // int amount = int.parse(value);
-                                      // int totalAfter =
-                                      //     amount + (amount * 0.05).round();
-                                      // controller.priceAfterCommission(amount);
-
-                                      viewModel.priceAfterCommission.value =
-                                          int.parse(value);
+                                    // print('>>ProdPrice: ${viewModel.prodPriceController.text.isEmpty}');
+                                    if (value == '') {
+                                      viewModel.showPriceAfterCommission.value = false;
+                                    }
+                                    else {
+                                      viewModel.showPriceAfterCommission.value = true;
                                       viewModel.totalTax();
-                                      productModel!.price =
-                                          viewModel.priceAfterCommission.value;
-                                    } else {
-                                      // controller.priceAfterCommission(0);
+                                      if (value.isNotEmpty) {
+                                        // int amount = int.parse(value);
+                                        // int totalAfter =
+                                        //     amount + (amount * 0.05).round();
+                                        // controller.priceAfterCommission(amount);
+
+                                        viewModel.priceAfterCommission.value =
+                                            int.parse(value);
+                                        viewModel.totalTax();
+                                        productModel!.price =
+                                            viewModel.priceAfterCommission
+                                                .value;
+                                      } else {
+                                        // controller.priceAfterCommission(0);
+                                      }
                                     }
                                   },
                                   onSaved: (value) {},
                                 ),
                                 Obx(() => Visibility(
                                       visible: viewModel
-                                          .prodPriceController.text.isNotEmpty,
+                                          .showPriceAfterCommission.value,
                                       child: CustomText(
                                         title:
                                             "${langKey.finalPriceWould.tr} ${viewModel.priceAfterCommission.value} ${langKey.afterPlatformFee.tr} 5%",
