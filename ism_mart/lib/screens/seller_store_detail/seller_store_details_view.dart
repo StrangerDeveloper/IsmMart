@@ -79,8 +79,8 @@ class SellerStoreDetailsView extends GetView<ProductController> {
               color: kPrimaryColor,
             ),
           ),
-          AppConstant.spaceWidget(width: 10),
-          buildSvgLogo(),
+          //AppConstant.spaceWidget(width: 10),
+          //buildSvgLogo(),
           AppConstant.spaceWidget(width: 10),
           CustomText(
             title: langKey.storeDetail.tr,

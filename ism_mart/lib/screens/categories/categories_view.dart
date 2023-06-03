@@ -64,9 +64,10 @@ class CategoriesView extends GetView<CategoryController> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           buildSvgLogo(),
+          AppConstant.spaceWidget(width: 5),
           Obx(
             () => Expanded(
-              flex: 6,
+              flex: 5,
               child: CustomSearchBar(
                   searchText: controller.selectedCategory.value),
             ),
@@ -161,7 +162,10 @@ class CategoriesView extends GetView<CategoryController> {
       borderRadius: BorderRadius.circular(13),
       child: InkWell(
         onTap: () {
-          Get.to(() => SearchView(subCategoryID: subCategory.id, calledForCategory: false,));
+          Get.to(() => SearchView(
+                subCategoryID: subCategory.id,
+                calledForCategory: false,
+              ));
         },
         borderRadius: BorderRadius.circular(13),
         child: Padding(

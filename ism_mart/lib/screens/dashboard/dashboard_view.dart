@@ -60,6 +60,7 @@ class DashboardUI extends GetView<BaseController> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           buildSvgLogo(),
+          AppConstant.spaceWidget(width: 5),
           Expanded(
             flex: 5,
             child: CustomSearchBar(searchText: ""),

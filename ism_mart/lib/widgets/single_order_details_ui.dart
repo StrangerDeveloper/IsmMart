@@ -56,7 +56,7 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CustomText(title: langKey.orderDetail.tr, style: appBarTitleSize),
-              buildSvgLogo(),
+              // buildSvgLogo(),
             ],
           ),
         ),
@@ -435,8 +435,7 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                           maxLines: 6,
                           autoValidateMode: AutovalidateMode.onUserInteraction,
                           validator: (value) {
-                            return Validator().validateDefaultTxtField(
-                                value);
+                            return Validator().validateDefaultTxtField(value);
                           },
                         ),
                       ),
