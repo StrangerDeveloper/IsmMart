@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import 'package:ism_mart/screens/top_vendors/top_vendors_model.dart';
 
-import '../../../controllers/buyer/auth/auth_controller.dart';
-import '../../../models/user/country_city_model.dart';
+import '../../controllers/buyer/auth/auth_controller.dart';
+import '../../models/user/country_city_model.dart';
 
 class CityViewModel extends GetxController {
   final AuthController authController;

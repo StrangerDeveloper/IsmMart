@@ -3,7 +3,7 @@ import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/screens/top_vendors/top_vendors_viewmodel.dart';
 
-import '../screens/register_seller/city_viewmodel.dart';
+import '../controllers/city_viewmodel.dart';
 
 class AppInitBinding extends Bindings {
   @override
