@@ -129,17 +129,17 @@ class ApiBaseHelper {
 
     try {
       Uri urlValue = Uri.parse(_baseUrl + url);
-      // print(urlValue);
+      print(urlValue);
       http.Response response = await http
           .get(urlValue, headers: header)
           .timeout(Duration(seconds: 50));
 
       Map<String, dynamic> parsedJSON = jsonDecode(response.body);
-      // print(
-      //     '*********************** Response **********************************');
-      // print(urlValue.toString());
-      // print(parsedJSON);
-      // print('&&&&&&&&&&&&&&&&&&&&&&& End of Response &&&&&&&&&&&&&&&&&&&&&&\n');
+      print(
+          '*********************** Response **********************************');
+      print(urlValue.toString());
+      print(parsedJSON);
+      print('&&&&&&&&&&&&&&&&&&&&&&& End of Response &&&&&&&&&&&&&&&&&&&&&&\n');
       return parsedJSON;
     } on SocketException {
       GlobalVariable.showLoader.value = false;
@@ -204,23 +204,30 @@ class ApiBaseHelper {
     }
   }
 
-  Future<dynamic> postMethodForImage(
-      {required String url,
-      required List<http.MultipartFile> files,
-      required Map<String, String> fields}) async {
+  Future<dynamic> postMethodForImage({
+    required String url,
+    required List<http.MultipartFile> files,
+    required Map<String, String> fields,
+    bool withBearer = false,
+    bool withAuthorization = false,
+  }) async {
     try {
       Uri urlValue = Uri.parse(_baseUrl + url);
       http.MultipartRequest request = http.MultipartRequest('POST', urlValue);
       Map<String, String> header = {
-        'authorization': token,
         'Content-Type': 'multipart/form-data'
       };
+
+      if (withAuthorization) {
+        header['Authorization'] = withBearer ? 'Bearer $token' : token;
+      }
+
       request.headers.addAll(header);
       request.fields.addAll(fields);
       request.files.addAll(files);
       http.StreamedResponse response = await request.send();
       Map<String, dynamic> parsedJson =
-          await jsonDecode(await response.stream.bytesToString());
+      await jsonDecode(await response.stream.bytesToString());
 
       print('********************** Response ********************************');
       print(urlValue.toString());
@@ -254,24 +261,20 @@ class ApiBaseHelper {
     bool withAuthorization = false,
   }) async {
     try {
-
       Uri urlValue = Uri.parse(_baseUrl + url);
       http.MultipartRequest request = http.MultipartRequest('PATCH', urlValue);
-      Map<String, String> header = {
-        'Content-Type': 'multipart/form-data'
-      };
+      Map<String, String> header = {'Content-Type': 'multipart/form-data'};
 
       if (withAuthorization) {
         header['Authorization'] = withBearer ? 'Bearer $token' : token;
       }
-
 
       request.headers.addAll(header);
       request.fields.addAll(fields);
       request.files.addAll(files);
       http.StreamedResponse response = await request.send();
       Map<String, dynamic> parsedJson =
-          await jsonDecode(await response.stream.bytesToString());
+      await jsonDecode(await response.stream.bytesToString());
 
       print('********************** Response ********************************');
       print(urlValue.toString());

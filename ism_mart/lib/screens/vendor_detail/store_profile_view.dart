@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
+import 'package:ism_mart/screens/update_vendor/update_vendor_view.dart';
 import '../../utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
@@ -28,6 +29,7 @@ class StoreProfileView extends GetView<AuthController> {
                               padding: const EdgeInsets.all(8.0),
                               child: CustomButton(
                                 onTap: () {
+                                  //Get.to(()=>UpdateVendorView());
                                   AppConstant.showBottomSheet(
                                       widget: register_seller_view(
                                         model: controller.userModel?.vendor,
