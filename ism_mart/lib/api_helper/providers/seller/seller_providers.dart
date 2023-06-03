@@ -108,7 +108,7 @@ class SellersApiProvider {
       'id': '${model.id}',
       'price': '${model.price}',
       'stock': '${model.stock}',
-      'discription': '${model.description}',
+      'description': '${model.description}',
       if (model.discount != null &&
           model.discount! >= 10 &&
           model.discount! <= 90 || model.discount == 0)
