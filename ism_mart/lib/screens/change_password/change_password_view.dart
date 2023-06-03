@@ -77,28 +77,30 @@ class ChangePasswordView extends StatelessWidget {
   }
 
   Widget confirmPasswordTxtField() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20),
-      child: CustomTextField2(
-        label: langKey.confirmPass.tr,
-        controller: viewModel.confirmPasswordController,
-        autoValidateMode: AutovalidateMode.onUserInteraction,
-        validator: (value) {
-          return viewModel.validateConfirmPassTxtField(value);
-        },
-        obscureText: viewModel.obscureConfirmPassword.value ? true : false,
-        suffixIcon: IconButton(
-          icon: Icon(
-            viewModel.obscureConfirmPassword.value
-                ? CupertinoIcons.eye_slash
-                : CupertinoIcons.eye,
-            size: 20,
-            color: Colors.black,
-          ),
-          onPressed: () {
-            viewModel.obscureConfirmPassword.value =
-                !viewModel.obscureConfirmPassword.value;
+    return Obx(
+      () => Padding(
+        padding: const EdgeInsets.symmetric(vertical: 20),
+        child: CustomTextField2(
+          label: langKey.confirmPass.tr,
+          controller: viewModel.confirmPasswordController,
+          autoValidateMode: AutovalidateMode.onUserInteraction,
+          validator: (value) {
+            return viewModel.validateConfirmPassTxtField(value);
           },
+          obscureText: viewModel.obscureConfirmPassword.value ? true : false,
+          suffixIcon: IconButton(
+            icon: Icon(
+              viewModel.obscureConfirmPassword.value
+                  ? CupertinoIcons.eye_slash
+                  : CupertinoIcons.eye,
+              size: 20,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              viewModel.obscureConfirmPassword.value =
+                  !viewModel.obscureConfirmPassword.value;
+            },
+          ),
         ),
       ),
     );

@@ -1,341 +1,258 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ism_mart/controllers/export_controllers.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
-import '../../utils/exports_utils.dart';
+import 'package:ism_mart/screens/vendor_detail/vendor_detail_viewmodel.dart';
+import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
-class StoreProfileView extends GetView<AuthController> {
-  const StoreProfileView({Key? key}) : super(key: key);
+class VendorDetailView extends StatelessWidget {
+  VendorDetailView({Key? key}) : super(key: key);
+  final VendorDetailViewModel viewModel = Get.put(VendorDetailViewModel());
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => SafeArea(
-        child: controller.isLoading.isTrue
-            ? CustomLoading(isItForWidget: true, color: kPrimaryColor)
-            : Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: CustomScrollView(
-                  slivers: [
-                    SliverList(
-                      delegate: SliverChildListDelegate(
-                        [
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: CustomButton(
-                                onTap: () => AppConstant.showBottomSheet(
-                                    widget: UpdateVendorView(
-                                      model: controller.userModel?.vendor,
-                                      //isCalledForUpdate: true,
-                                    ),
-                                    isGetXBottomSheet: false,
-                                    buildContext: context),
-                                text: langKey.updateBtn.tr,
-                                width: 110,
-                                height: 35,
-                              ),
-                            ),
-                          ),
-
-                          ///Store data
-                          CustomGreyBorderContainer(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                children: [
-                                  SizedBox(
-                                    width: AppConstant.getSize().width * 0.9,
-                                    height: AppConstant.getSize().height * 0.15,
-                                    child: Stack(
-                                      alignment: Alignment.bottomLeft,
-                                      children: [
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            color: Colors.black,
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: kPrimaryColor
-                                                    .withOpacity(0.05),
-                                                offset: Offset(0, 0),
-                                                blurRadius: 1,
-                                              )
-                                            ],
-                                          ),
-                                          child: CustomNetworkImage(
-                                            width: AppConstant.getSize().width *
-                                                0.90,
-                                            imageUrl: controller.userModel!
-                                                    .vendor?.coverImage ??
-                                                AppConstant.defaultImgUrl,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        profileImage(),
-                                        /* Positioned(
-                                         top: 1,
-                                         right: 1,
-                                         child: InkWell(
-                                           onTap: () {
-                                           },
-                                           child: Container(
-                                             child: Padding(
-                                               padding:
-                                               const EdgeInsets.all(2.0),
-                                               child: Icon(Icons.photo,
-                                                   color: kLightBlueColor),
-                                             ),
-                                           ),
-                                         ),
-                                       ),*/
-                                        /*Stack(
-                                         children: [
-                                           Container(
-                                             height: 90,
-                                             width: 90,
-                                             alignment: Alignment.center,
-                                             decoration: BoxDecoration(
-                                               borderRadius:
-                                               BorderRadius.circular(50),
-                                               color: Colors.white,
-                                               boxShadow: [
-                                                 BoxShadow(
-                                                   color: kPrimaryColor
-                                                       .withOpacity(0.22),
-                                                   offset: Offset(0, 0),
-                                                   blurRadius: 10.78,
-                                                 ),
-                                               ],
-                                             ),
-                                             child: Obx(
-                                                   () => CircleAvatar(
-                                                 radius: 40,
-                                                 backgroundColor: Colors.grey[200],
-                                                 backgroundImage: NetworkImage(
-                                                     controller.userModel!.vendor?.storeImage ??
-                                                         AppConstant.defaultImgUrl),
-                                               ),
-                                             ),
-                                           ),
-                                           Positioned(
-                                             bottom: 1,
-                                             right: 1,
-                                             child: InkWell(
-                                               onTap: () {
-                                               },
-                                               child: Container(
-                                                 child: Padding(
-                                                   padding:
-                                                   const EdgeInsets.all(2.0),
-                                                   child: Icon(Icons.add_a_photo,
-                                                       color: kPrimaryColor),
-                                                 ),
-                                                 decoration: BoxDecoration(
-                                                     border: Border.all(
-                                                       width: 3,
-                                                       color: Colors.white,
-                                                     ),
-                                                     borderRadius: BorderRadius.all(
-                                                       Radius.circular(50),
-                                                     ),
-                                                     color: Colors.white,
-                                                     boxShadow: [
-                                                       BoxShadow(
-                                                         offset: Offset(0, 0),
-                                                         color: kPrimaryColor
-                                                             .withOpacity(0.3),
-                                                         blurRadius: 10.78,
-                                                       ),
-                                                     ]),
-                                               ),
-                                             ),
-                                           ),
-                                         ],
-                                       ),*/
-                                        /*Positioned(
-                                           bottom: 10,
-                                           left: 10,
-                                           child: child),*/
-                                      ],
-                                    ),
-                                  ),
-                                  Column(
-                                    children: controller
-                                        .getStoreInfo()
-                                        .map(
-                                          (profile) => profileCards(
-                                              profile["title"],
-                                              profile["subtitle"],
-                                              profile["icon"]),
-                                        )
-                                        .toList(),
-                                  ),
-
-                                  //Store Information
-
-                                  AppConstant.spaceWidget(height: 10),
-                                ],
-                              ),
-                            ),
-                          ),
-                          AppConstant.spaceWidget(height: 10),
-
-                          ///Bank Details
-                          CustomGreyBorderContainer(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                children: [
-                                  StickyLabel(text: langKey.bankDetails.tr),
-                                  AppConstant.spaceWidget(height: 10),
-                                  Obx(
-                                    () => Column(
-                                      children: controller
-                                          .getBankDetails()
-                                          .map(
-                                            (profile) => profileCards(
-                                                profile["title"],
-                                                profile["subtitle"],
-                                                profile["icon"]),
-                                          )
-                                          .toList(),
-                                    ),
-                                  ),
-                                  //Store Information
-                                  AppConstant.spaceWidget(height: 10),
-                                ],
-                              ),
-                            ),
-                          ),
-                          /*AppConstant.spaceWidget(height: 20),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Obx(
-                                    ()=> controller.isLoading.isTrue?
-                                CustomLoading(isItBtn: true,)
-                                    :InkWell(
-                                  onTap: ()=>{},
-                                  child: Container(
-                                    width: 150,
-                                    padding: const EdgeInsets.symmetric(vertical: 15.0),
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                      //color: kRedColor,
-                                      borderRadius: BorderRadius.circular(8),
-                                      //border: Border.all(color: kRedColor),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: kRedColor,
-                                          offset: Offset(0, 1),
-                                          blurRadius: 2,
-                                        )
-                                      ],
-                                    ),
-                                    child: CustomText(title: langKey.deactivateBtn.tr, color: kWhiteColor,),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),*/
-                          AppConstant.spaceWidget(height: 20),
-                        ],
-                      ),
-                    ),
+    return SafeArea(
+      child: Scaffold(
+        body: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+          child: Column(
+            children: [
+              SizedBox(
+                height: 190,
+                child: Stack(
+                  children: [
+                    coverImage(),
+                    profileImage(),
                   ],
                 ),
               ),
+              SizedBox(height: 20),
+              CustomTextBtn(
+                width: Get.width * 0.5,
+                onPressed: () {
+                  AppConstant.showBottomSheet(
+                    widget: register_seller_view(
+                      model: viewModel.userModel.value?.vendor,
+                    ),
+                    isGetXBottomSheet: false,
+                    buildContext: context,
+                  );
+                },
+                title: langKey.updateBtn.tr,
+              ),
+              storeInfo(),
+              bankDetail(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget coverImage() {
+    return Obx(
+      () => CachedNetworkImage(
+        height: 140,
+        width: double.infinity,
+        imageUrl: viewModel.userModel.value?.vendor?.coverImage ?? '',
+        imageBuilder: (context, imageProvider) {
+          return Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(18),
+              image: DecorationImage(
+                image: imageProvider,
+                fit: BoxFit.cover,
+              ),
+            ),
+          );
+        },
+        errorWidget: (context, url, error) {
+          return Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(18),
+              image: DecorationImage(
+                image: AssetImage('assets/images/no_image_found.jpg'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          );
+        },
+        placeholder: (context, url) {
+          return const Center(
+            child: CircularProgressIndicator(strokeWidth: 0.5),
+          );
+        },
       ),
     );
   }
 
   Widget profileImage() {
-    return Obx(
-      () => Container(
-        margin: EdgeInsets.only(left: 6, bottom: 6),
-        // padding: EdgeInsets.all(3),
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Container(
         decoration: BoxDecoration(
-          shape: BoxShape.circle,
           color: Colors.white,
+          shape: BoxShape.circle,
         ),
-        child: CachedNetworkImage(
-          height: 60,
-          width: 60,
-          imageUrl: controller.userModel!.vendor?.storeImage ?? '',
-          imageBuilder: (context, imageProvider) {
-            return Container(
-              decoration: BoxDecoration(
+        padding: EdgeInsets.all(3.5),
+        child: Obx(
+          () => CachedNetworkImage(
+            height: 95,
+            width: 95,
+            imageUrl: viewModel.userModel.value?.vendor?.storeImage ?? '',
+            imageBuilder: (context, imageProvider) {
+              return Container(
+                decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
                     image: imageProvider,
                     fit: BoxFit.fill,
                   ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: kPrimaryColor.withOpacity(0.22),
-                      offset: Offset(0, 0),
-                      blurRadius: 10.78,
-                    ),
-                  ]),
-            );
-          },
-          errorWidget: (context, url, error) {
-            return Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  image: AssetImage('assets/images/no_image_found.jpg'),
-                  fit: BoxFit.cover,
                 ),
-              ),
-            );
-          },
-          placeholder: (context, url) {
-            return const Center(
-              child: CircularProgressIndicator(strokeWidth: 0.5),
-            );
-          },
+              );
+            },
+            errorWidget: (context, url, error) {
+              return Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/no_image_found.jpg'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              );
+            },
+            placeholder: (context, url) {
+              return const Center(
+                child: CircularProgressIndicator(strokeWidth: 0.5),
+              );
+            },
+          ),
         ),
       ),
     );
   }
 
-  Widget profileCards(String title, subtitle, icon) {
-    return Container(
-      // width: 350,
-      height: 60,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: kPrimaryColor.withOpacity(0.7)),
-      ),
-      margin: EdgeInsets.only(left: 8, top: 12, right: 8, bottom: 3),
-      child: ListTile(
-        dense: true,
-        contentPadding: EdgeInsets.only(left: 10.0, right: 10.0),
-        title: CustomText(
-          title: title,
-          color: Colors.black54,
-          weight: FontWeight.w600,
-        ),
-        subtitle: CustomText(
-          title: subtitle,
-          style: bodyText1,
-        ),
-        leading: Icon(icon),
-        /* trailing: InkWell(
-          onTap: () => showEditDialog(title, subtitle),
-          child: Icon(
-            Icons.edit,
-            size: 20,
-            color: kPrimaryColor.withOpacity(0.8),
+
+  Widget storeInfo() {
+    return containerDecoration(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          containerTitleItem(langKey.storeInfo.tr),
+          Divider(height: 30),
+          titleItem(langKey.storeName.tr),
+          Obx(
+            () => valueItem(
+              viewModel.userModel.value?.vendor?.storeName ?? 'N/A',
+            ),
           ),
-        ),*/
+          titleItem(langKey.phone.tr),
+          Obx(
+            () => valueItem(
+              viewModel.userModel.value?.vendor?.phone ?? 'N/A',
+            ),
+          ),
+          titleItem(langKey.description.tr),
+          Obx(
+            () => valueItem(
+              viewModel.userModel.value?.vendor?.storeDesc ?? 'N/A',
+            ),
+          ),
+          titleItem(langKey.city.tr),
+          Obx(
+            () => valueItem(
+              viewModel.userModel.value?.city?.name ?? 'N/A',
+            ),
+          ),
+        ],
       ),
+    );
+  }
+
+  Widget bankDetail() {
+    return containerDecoration(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          containerTitleItem(langKey.bankDetails.tr),
+          Divider(height: 30),
+          titleItem(langKey.bankName.tr),
+          Obx(
+            () => valueItem(
+              viewModel.userModel.value?.vendor?.bankName ?? 'N/A',
+            ),
+          ),
+          titleItem(langKey.bankAccountHolder.tr),
+          Obx(
+            () => valueItem(
+              viewModel.userModel.value?.vendor?.accountTitle ?? 'N/A',
+            ),
+          ),
+          titleItem(langKey.bankAccount.tr),
+          Obx(
+            () => valueItem(
+              viewModel.userModel.value?.vendor?.accountNumber ?? 'N/A',
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget containerTitleItem(String value) {
+    return Align(
+      alignment: Alignment.center,
+      child: Text(
+        value,
+        style: GoogleFonts.lato(
+          fontSize: 18,
+        ),
+      ),
+    );
+  }
+
+  Widget titleItem(String value) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 3),
+      child: Text(
+        value,
+        style: GoogleFonts.lato(
+          fontSize: 13,
+        ),
+      ),
+    );
+  }
+
+  Widget valueItem(String value) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 15),
+      child: Text(
+        value,
+        style: GoogleFonts.lato(
+          fontSize: 15.5,
+          fontWeight: FontWeight.bold,
+          color: Colors.black,
+        ),
+      ),
+    );
+  }
+
+  Widget containerDecoration({required Widget child}) {
+    return Container(
+      width: double.infinity,
+      margin: EdgeInsets.only(top: 20),
+      padding: EdgeInsets.fromLTRB(16, 10, 16, 0),
+      decoration: BoxDecoration(
+        color: Colors.black.withOpacity(0.03),
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(
+          color: Colors.black.withOpacity(0.08),
+        ),
+      ),
+      child: child,
     );
   }
 }

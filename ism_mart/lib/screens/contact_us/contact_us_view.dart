@@ -113,7 +113,7 @@ class ContactUsView extends StatelessWidget {
       padding: EdgeInsets.all(15),
       decoration: BoxDecoration(
         color: Colors.black.withOpacity(0.03),
-        borderRadius: BorderRadius.circular(4),
+        borderRadius: BorderRadius.circular(18),
         border: Border.all(
           color: Colors.black.withOpacity(0.08),
         ),
