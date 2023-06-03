@@ -33,7 +33,7 @@ class VendorDetailView extends StatelessWidget {
                 width: Get.width * 0.5,
                 onPressed: () {
                   AppConstant.showBottomSheet(
-                    widget: UpdateVendorView(
+                    widget: register_seller_view(
                       model: viewModel.userModel.value?.vendor,
                     ),
                     isGetXBottomSheet: false,

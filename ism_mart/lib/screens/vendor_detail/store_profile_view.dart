@@ -29,7 +29,7 @@ class StoreProfileView extends GetView<AuthController> {
                               child: CustomButton(
                                 onTap: () {
                                   AppConstant.showBottomSheet(
-                                      widget: UpdateVendorView(
+                                      widget: register_seller_view(
                                         model: controller.userModel?.vendor,
                                         //isCalledForUpdate: true,
                                       ),
