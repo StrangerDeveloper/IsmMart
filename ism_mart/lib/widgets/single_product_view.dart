@@ -18,7 +18,7 @@ class SingleProductView extends GetView<ProductController> {
 
   @override
   Widget build(BuildContext context) {
-
+    print(controller.imageIndex);
     if (productId == null) {
       return Scaffold(body: Center(child: CustomLoading()));
     } else if (productId != null) {
@@ -326,8 +326,10 @@ class SingleProductView extends GetView<ProductController> {
               children: [
                 CustomText(title: "Category: ", style: bodyText2),
                 CustomText(
-                    title: "\t${productModel.category!.name}",
-                    style: bodyText1, maxLines: 2,),
+                  title: "\t${productModel.category!.name}",
+                  style: bodyText1,
+                  maxLines: 2,
+                ),
                 AppConstant.spaceWidget(width: 3),
                 const Icon(
                   Icons.arrow_forward_ios_sharp,
@@ -702,25 +704,54 @@ class SingleProductView extends GetView<ProductController> {
                 style: headline2,
               ),
               questionListView(productModel: productModel),
-              InkWell(
-                onTap: () {
-                  print('Called');
-                  Navigator.push(Get.context!, MaterialPageRoute(builder: (context)=>ProductQuestionsView(id: "$productId",)));
-                  // Get.to(() => ProductQuestionAnswerUI(
-                  //       productModel: productModel,
-                  //     ));
-                },
-                child: CustomGreyBorderContainer(
-                  width: double.infinity,
-                  height: 30,
-                  borderColor: kWhiteColor,
-                  child: Center(
-                      child: CustomText(
-                    title: langKey.askQuestion.tr,
-                    color: kRedColor,
-                  )),
+              //if vender, then don't show the ask question button
+
+              if (calledFor != 'customer')
+                SizedBox()
+              else
+                InkWell(
+                  onTap: () {
+                    print('Called');
+                    Navigator.push(
+                        Get.context!,
+                        MaterialPageRoute(
+                            builder: (context) => ProductQuestionsView(
+                                  id: "$productId",
+                                )));
+                    // Get.to(() => ProductQuestionAnswerUI(
+                    //       productModel: productModel,
+                    //     ));
+                  },
+                  child: CustomGreyBorderContainer(
+                    width: double.infinity,
+                    height: 30,
+                    borderColor: kWhiteColor,
+                    child: Center(
+                        child: CustomText(
+                      title: langKey.askQuestion.tr,
+                      color: kRedColor,
+                    )),
+                  ),
                 ),
-              ),
+              // InkWell(
+              //   onTap: () {
+              //     print('Called');
+              //     Navigator.push(Get.context!, MaterialPageRoute(builder: (context)=>ProductQuestionsView(id: "$productId",)));
+              //     // Get.to(() => ProductQuestionAnswerUI(
+              //     //       productModel: productModel,
+              //     //     ));
+              //   },
+              //   child: CustomGreyBorderContainer(
+              //     width: double.infinity,
+              //     height: 30,
+              //     borderColor: kWhiteColor,
+              //     child: Center(
+              //         child: CustomText(
+              //       title: langKey.askQuestion.tr,
+              //       color: kRedColor,
+              //     )),
+              //   ),
+              // ),
             ],
           ),
         ),
