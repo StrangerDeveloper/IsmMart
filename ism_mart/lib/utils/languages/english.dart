@@ -2,20 +2,19 @@ import 'translations_key.dart' as key;
 
 class English {
   Map<String, String> get translations => {
-
         ///change password
         key.currentPassword: 'Current Password is required',
         key.changePasswordDesc: 'Fill the following details to change password',
 
         ///answer_question_view
-        key.addAnswer : 'Add Answer',
-        key.viewProduct : 'View Product',
-        key.answer : 'Answer',
-        key.updateAnswer : 'Update Answer',
-        key.deleteAnswer : 'Delete Answer',
+        key.addAnswer: 'Add Answer',
+        key.viewProduct: 'View Product',
+        key.answer: 'Answer',
+        key.updateAnswer: 'Update Answer',
+        key.deleteAnswer: 'Delete Answer',
 
         ///product_questions_view
-        key.addQuestion : 'Add Question',
+        key.addQuestion: 'Add Question',
 
         ///single_product_view
         key.questions: 'Questions',
@@ -204,12 +203,13 @@ class English {
         key.cancelled: 'Cancelled',
 
         ///profile
-        key.updateProfile : 'Update Account',
-        key.pickImage : 'Pick Image',
+        key.updateProfile: 'Update Account',
+        key.pickImage: 'Pick Image',
         key.gallery: 'Gallery',
         key.camera: 'Camera',
         key.pickFrom: 'Pick from',
-        key.yourCoverAndProfile: 'Your cover and profile must be a PNG or JPG, up to',
+        key.yourCoverAndProfile:
+            'Your cover and profile must be a PNG or JPG, up to',
         key.updateVendorDetails: 'Update Vendor Details',
         key.fieldIsRequired: 'Field is required',
 
@@ -449,7 +449,7 @@ class English {
         key.bankAccount: 'Account Number',
         key.bankAccountReq: 'Bank Account Number Required',
         key.bankAccountHolder: 'Account Title',
-        key.bankAccHolderReq: 'Account title',
+        key.bankAccHolderReq: 'Account title is Required',
 
         ///contact us
         key.subject: 'Subject',
