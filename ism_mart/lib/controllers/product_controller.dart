@@ -31,6 +31,8 @@ class ProductController extends GetxController with StateMixin {
   ScrollController scrollController = ScrollController();
   var loadMoreVisibility = false.obs;
 
+  get userModel => authController.userModel!;
+
   ///end Lists
   @override
   void onInit() {
@@ -64,12 +66,12 @@ class ProductController extends GetxController with StateMixin {
     });
   }
 
-  popSingleProductView(){
+  popSingleProductView() {
     pageIndex(0);
     Get.back();
   }
 
-  popProductImageView(){
+  popProductImageView() {
     imageIndex(0);
     Get.back();
   }
