@@ -6,7 +6,6 @@ import 'package:ism_mart/api_helper/urls.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import '../../api_helper/local_storage/local_storage_helper.dart';
 import '../../models/user/user_model.dart';
-import 'package:http/http.dart' as http;
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class ChangePasswordViewModel extends GetxController {

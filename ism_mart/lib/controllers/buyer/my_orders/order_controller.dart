@@ -165,7 +165,7 @@ class OrderController extends GetxController
     }
 
     ApiBaseHelper()
-        .postMethodForImage(url: url, files: imageList, fields: data)
+        .postMethodForImage(url: url, files: imageList, fields: data, withAuthorization: true)
         .then((parsedJson) {
       isLoading(false);
       ApiResponse? apiResponse = ApiResponse.fromJson(parsedJson);

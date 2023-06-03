@@ -8,6 +8,7 @@ import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/screens/buyer_profile/buyer_profile_view.dart';
 import 'package:ism_mart/screens/contact_us/contact_us_view.dart';
+import 'package:ism_mart/screens/update_vendor/update_vendor_view.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
@@ -183,10 +184,11 @@ class SettingsView extends GetView<AuthController> {
               } else {
                 authController.newAcc.value = true;
                 //Get.toNamed(Routes.sellerHomeRoute);
-                AppConstant.showBottomSheet(
-                    widget: UpdateVendorView(),
-                    isGetXBottomSheet: false,
-                    buildContext: buildContext);
+                // AppConstant.showBottomSheet(
+                //     widget: register_seller_view(),
+                //     isGetXBottomSheet: false,
+                //     buildContext: buildContext);
+                Get.to(() => UpdateVendorView(), arguments: {'isRegisterScreen' : true});
               }
             } else {
               AppConstant.displaySnackBar(

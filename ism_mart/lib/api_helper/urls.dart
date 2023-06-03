@@ -29,4 +29,7 @@ class Urls {
   //ChangePasswordViewModel
   static String updatePassword = "user/updatePassword";
 
+  //UpdateVendorViewModel
+  static String updateVendor = "auth/vendor/register";
+
 }

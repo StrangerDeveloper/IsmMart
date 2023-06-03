@@ -44,7 +44,7 @@ class UpdateProductViewModel extends GetxController{
   var prodDiscountController = TextEditingController();
   var prodDescriptionController = TextEditingController();
   var prodSKUController = TextEditingController();
-
+  RxBool showPriceAfterCommission = false.obs;
   var prodPriceController = TextEditingController();
   var priceAfterCommission = 0.obs;
   void totalTax() {
