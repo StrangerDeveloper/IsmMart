@@ -18,7 +18,7 @@ class SingleProductView extends GetView<ProductController> {
 
   @override
   Widget build(BuildContext context) {
-    print(controller.imageIndex);
+
     if (productId == null) {
       return Scaffold(body: Center(child: CustomLoading()));
     } else if (productId != null) {

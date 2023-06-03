@@ -129,17 +129,17 @@ class ApiBaseHelper {
 
     try {
       Uri urlValue = Uri.parse(_baseUrl + url);
-      print(urlValue);
+      // print(urlValue);
       http.Response response = await http
           .get(urlValue, headers: header)
           .timeout(Duration(seconds: 50));
 
       Map<String, dynamic> parsedJSON = jsonDecode(response.body);
-      print(
-          '*********************** Response **********************************');
-      print(urlValue.toString());
-      print(parsedJSON);
-      print('&&&&&&&&&&&&&&&&&&&&&&& End of Response &&&&&&&&&&&&&&&&&&&&&&\n');
+      // print(
+      //     '*********************** Response **********************************');
+      // print(urlValue.toString());
+      // print(parsedJSON);
+      // print('&&&&&&&&&&&&&&&&&&&&&&& End of Response &&&&&&&&&&&&&&&&&&&&&&\n');
       return parsedJSON;
     } on SocketException {
       GlobalVariable.showLoader.value = false;
