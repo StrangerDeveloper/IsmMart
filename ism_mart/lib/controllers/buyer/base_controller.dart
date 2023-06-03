@@ -214,7 +214,9 @@ class BaseController extends GetxController {
     productsWithTypesMap.clear();
 
     _getProductsType().forEach((element) async {
-      await _apiProvider.getProductsByType(limit: 15, type: element['key']).then((value) {
+      await _apiProvider
+          .getProductsByType(limit: 15, type: element['key'])
+          .then((value) {
         isProductsLoading(false);
         productsWithTypesMap.putIfAbsent(element['value'], () => value);
       }).catchError((error) {
@@ -276,7 +278,7 @@ class BaseController extends GetxController {
 
   void changePage(int index) {
     if (index == 4) {
-      Get.find<CustomSearchController>().search("");
+      Get.find<CustomSearchController>().searchProducts("");
       Get.find<CustomSearchController>().searchTextController.clear();
     }
 
