@@ -38,7 +38,8 @@ class UpdateVendorView extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 8.0, vertical: 5),
                     child: CustomText(
                       title: "${langKey.yourCoverAndProfile.tr} 2 MB",
                       color: Colors.grey,
@@ -79,7 +80,12 @@ class UpdateVendorView extends StatelessWidget {
           color: kPrimaryColor,
         ),
       ),
-      title: CustomText(title: 'Update Vendor', style: appBarTitleSize),
+      title: CustomText(
+        title: viewModel.isRegisterScreen
+            ? langKey.vendorRegistration.tr
+            : langKey.updateVendorDetails.tr,
+        style: appBarTitleSize,
+      ),
     );
   }
 
@@ -136,8 +142,7 @@ class UpdateVendorView extends StatelessWidget {
             bottom: 6,
             child: InkWell(
               onTap: () async {
-                viewModel.coverImageFile.value =
-                    await PickImage().actionsBottomSheet();
+                viewModel.coverImageFile.value =  await PickImage().actionsBottomSheet();
               },
               child: Container(
                 padding: EdgeInsets.all(5),
@@ -426,7 +431,9 @@ class UpdateVendorView extends StatelessWidget {
       onPressed: () {
         viewModel.updateData();
       },
-      child: Text(langKey.updateBtn.tr),
+      child: Text(
+        viewModel.isRegisterScreen ? langKey.register.tr : langKey.updateBtn.tr,
+      ),
     );
   }
 }

@@ -8,12 +8,15 @@ import 'package:ism_mart/api_helper/global_variables.dart';
 import 'package:ism_mart/api_helper/urls.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
+import 'package:ism_mart/screens/vendor_detail/vendor_detail_viewmodel.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class UpdateVendorViewModel extends GetxController {
+
+  bool isRegisterScreen = false;
   Rx<File?> profileImageFile = File('').obs;
   Rx<File?> coverImageFile = File('').obs;
   Rx<UserModel?> userModel = UserModel().obs;
@@ -25,6 +28,12 @@ class UpdateVendorViewModel extends GetxController {
   TextEditingController bankNameController = TextEditingController();
   TextEditingController accountTitleController = TextEditingController();
   TextEditingController accountNumberController = TextEditingController();
+
+  @override
+  void onInit() {
+    isRegisterScreen = Get.arguments['isRegisterScreen'];
+    super.onInit();
+  }
 
   @override
   void onReady() {
@@ -119,12 +128,16 @@ class UpdateVendorViewModel extends GetxController {
               withAuthorization: true,
               files: fileList,
               fields: param)
-          .then((parsedJson) {
+          .then((parsedJson) async {
         GlobalVariable.showLoader.value = false;
         if (parsedJson['message'] == "Vendor profile created successfully") {
-          Get.back();
           AuthController controller = Get.find();
-          controller.getCurrentUser();
+          await controller.getCurrentUser();
+          if(!isRegisterScreen){
+            VendorDetailViewModel vendorDetailViewModel = Get.find();
+            vendorDetailViewModel.getData();
+          }
+          Get.back();
           AppConstant.displaySnackBar(success.tr, parsedJson['message']);
         } else {
           AppConstant.displaySnackBar(errorTitle.tr, parsedJson['message']);
