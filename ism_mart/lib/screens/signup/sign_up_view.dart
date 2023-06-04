@@ -14,8 +14,6 @@ class SignUpView extends GetView<AuthController> {
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
 
-    ///default clearing all controllers without email
-    //controller.clearControllers();
 
     return SafeArea(
       child: Scaffold(

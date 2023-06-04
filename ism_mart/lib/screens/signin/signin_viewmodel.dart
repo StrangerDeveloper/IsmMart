@@ -13,6 +13,7 @@ class SignInViewModel extends GetxController {
   GlobalKey<FormState> signInFormKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  RxBool obscurePassword = false.obs;
 
   @override
   void onClose() {
