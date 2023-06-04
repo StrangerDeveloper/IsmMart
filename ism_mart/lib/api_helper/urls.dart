@@ -1,4 +1,9 @@
 class Urls {
+
+  //SignInViewModel
+  static String login = "auth/login";
+
+
   //DisputeDetailViewModel
   static String ticketDetail = "tickets/";
   static String allTickets = "tickets/myTickets";

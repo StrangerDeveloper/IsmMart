@@ -12,6 +12,8 @@ import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 class AuthController extends GetxController {
   final AuthProvider authProvider;
 
+  final signInFormKey = GlobalKey<FormState>();
+
   AuthController(this.authProvider);
 
   RxString countryCode = '+92'.obs;
@@ -100,42 +102,42 @@ class AuthController extends GetxController {
 
   var isLoading = false.obs;
 
-  login() async {
-    isLoading(true);
-    await authProvider
-        .postLogin(
-            email: emailController.text.toString(),
-            password: passwordController.text.trim())
-        .then((UserResponse? userResponse) async {
-      isLoading(false);
-      if (userResponse != null) {
-        if (userResponse.success!) {
-          Get.back();
-          //Navigating back to home after login
-          baseController.changePage(0);
-          GlobalVariable.userModel = userResponse.userModel;
-          AppConstant.displaySnackBar(
-              langKey.successTitle.tr, userResponse.message);
-          await LocalStorageHelper.storeUser(userModel: userResponse.userModel)
-              .then((value) {
-            clearLoginController();
-          });
-        } else {
-          AppConstant.displaySnackBar(
-              langKey.errorTitle.tr, userResponse.message);
-        }
-      } else {
-        AppConstant.displaySnackBar(
-          langKey.errorTitle.tr,
-          langKey.wrongWithCredentials.tr,
-        );
-      }
-    }).catchError((error) {
-      isLoading(false);
-      debugPrint("Error: $error");
-    });
-    //isLoading(false);
-  }
+  // login() async {
+  //   isLoading(true);
+  //   await authProvider
+  //       .postLogin(
+  //           email: emailController.text.toString(),
+  //           password: passwordController.text.trim())
+  //       .then((UserResponse? userResponse) async {
+  //     isLoading(false);
+  //     if (userResponse != null) {
+  //       if (userResponse.success!) {
+  //         Get.back();
+  //         //Navigating back to home after login
+  //         baseController.changePage(0);
+  //         GlobalVariable.userModel = userResponse.userModel;
+  //         AppConstant.displaySnackBar(
+  //             langKey.successTitle.tr, userResponse.message);
+  //         await LocalStorageHelper.storeUser(userModel: userResponse.userModel)
+  //             .then((value) {
+  //           clearLoginController();
+  //         });
+  //       } else {
+  //         AppConstant.displaySnackBar(
+  //             langKey.errorTitle.tr, userResponse.message);
+  //       }
+  //     } else {
+  //       AppConstant.displaySnackBar(
+  //         langKey.errorTitle.tr,
+  //         langKey.wrongWithCredentials.tr,
+  //       );
+  //     }
+  //   }).catchError((error) {
+  //     isLoading(false);
+  //     debugPrint("Error: $error");
+  //   });
+  //   //isLoading(false);
+  // }
 
   forgotPasswordWithEmail() async {
     isLoading(true);

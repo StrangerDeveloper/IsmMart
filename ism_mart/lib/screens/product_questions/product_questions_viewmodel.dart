@@ -6,7 +6,7 @@ import 'package:ism_mart/api_helper/urls.dart';
 import 'package:ism_mart/controllers/product_controller.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
-import '../signin/sign_in_view.dart';
+import '../signin/signin_view.dart';
 import 'product_questions_view.dart';
 
 class ProductQuestionsViewModel extends GetxController {
