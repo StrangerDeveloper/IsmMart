@@ -1,235 +1,196 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:ism_mart/controllers/export_controllers.dart';
+import 'package:ism_mart/api_helper/global_variables.dart';
+import 'package:ism_mart/exports/export_account.dart';
+import 'package:ism_mart/screens/signup/signup_viewmodel.dart';
 import 'package:ism_mart/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
-
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/widgets/obscure_suffix_icon.dart';
 
-class SignUpView extends GetView<AuthController> {
-  const SignUpView({Key? key}) : super(key: key);
+class SignUpView extends StatelessWidget {
+  SignUpView({Key? key}) : super(key: key);
+  final SignUpViewModel viewModel = Get.put(SignUpViewModel());
 
   @override
   Widget build(BuildContext context) {
-    final formKey = GlobalKey<FormState>();
-
-
     return SafeArea(
       child: Scaffold(
-        body: CustomScrollView(
-          slivers: [
-            SliverAppBar(
-              expandedHeight: 100.0,
-              floating: false,
-              pinned: true,
-              automaticallyImplyLeading: false,
-              flexibleSpace: FlexibleSpaceBar(
-                centerTitle: false,
-                titlePadding: const EdgeInsets.symmetric(horizontal: 16),
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    buildSvgLogo(),
-                    InkWell(
-                      onTap: () => Get.back(),
-                      child: const Icon(Icons.close),
-                    ),
-                  ],
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          child: Form(
+            key: viewModel.signUpFormKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                logoCloseIcon(),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10, bottom: 40),
+                  child: CustomText(
+                    title: langKey.registerGreetings.tr,
+                    style: headline2,
+                  ),
+                ),
+                fullNameField(),
+                emailTextField(),
+                passwordTextField(),
+                phoneNumberTextField(),
+                signUpBtn(),
+                SizedBox(height: 20),
+                alreadyHaveAnAccount(),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget logoCloseIcon() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        SizedBox(
+          height: 70,
+          child: FittedBox(
+            child: buildSvgLogo(),
+          ),
+        ),
+        IconButton(
+          visualDensity: VisualDensity.compact,
+          onPressed: () {
+            Get.back();
+          },
+          icon: const Icon(Icons.close),
+        ),
+      ],
+    );
+  }
+
+  Widget fullNameField() {
+    return CustomTextField2(
+      contentPadding: EdgeInsets.symmetric(vertical: 16),
+      label: langKey.fullName.tr,
+      controller: viewModel.fullNameController,
+      prefixIcon: Icons.title,
+      autoValidateMode: AutovalidateMode.onUserInteraction,
+      validator: (value) {
+        return Validator().name(value, title: langKey.fullName.tr);
+      },
+      keyboardType: TextInputType.emailAddress,
+    );
+  }
+
+  Widget emailTextField() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20),
+      child: CustomTextField2(
+        contentPadding: EdgeInsets.symmetric(vertical: 16),
+        label: langKey.email.tr,
+        controller: viewModel.emailController,
+        prefixIcon: Icons.email_outlined,
+        autoValidateMode: AutovalidateMode.onUserInteraction,
+        validator: (value) {
+          return Validator().validateEmail(value);
+        },
+        keyboardType: TextInputType.emailAddress,
+      ),
+    );
+  }
+
+  Widget passwordTextField() {
+    return Obx(
+      () => CustomTextField2(
+        contentPadding: EdgeInsets.symmetric(vertical: 16),
+        controller: viewModel.passwordController,
+        prefixIcon: Icons.lock_rounded,
+        label: langKey.password.tr,
+        autoValidateMode: AutovalidateMode.onUserInteraction,
+        validator: (value) {
+          return Validator().validatePassword(value);
+        },
+        obscureText: viewModel.obscurePassword.value ? true : false,
+        suffixIcon: ObscureSuffixIcon(
+          isObscured: viewModel.obscurePassword.value ? true : false,
+          onPressed: () {
+            viewModel.obscurePassword.value = !viewModel.obscurePassword.value;
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget phoneNumberTextField() {
+    return Obx(
+      () => Padding(
+        padding: const EdgeInsets.only(top: 20, bottom: 30),
+        child: CountryCodePickerTextField(
+          keyboardType: TextInputType.number,
+          controller: viewModel.phoneNumberController,
+          initialValue: viewModel.countryCode.value,
+          textStyle: bodyText1,
+          labelText: langKey.phone.tr,
+          inputFormatters: [
+            FilteringTextInputFormatter.allow(RegExp(r'^\d+?\d*')),
+          ],
+          errorText: viewModel.phoneErrorText.value,
+          onPhoneFieldChange: (value) {
+            String newPhoneValue = viewModel.countryCode.value + value;
+            viewModel.validatorPhoneNumber(newPhoneValue);
+          },
+          onChanged: (value) {
+            viewModel.countryCode.value = value.dialCode ?? '+92';
+            String newPhoneValue = viewModel.countryCode.value + viewModel.phoneNumberController.text;
+            viewModel.validatorPhoneNumber(newPhoneValue);
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget signUpBtn() {
+    return Obx(
+      () => GlobalVariable.showLoader.value
+          ? CustomLoading(isItBtn: true)
+          : CustomTextBtn(
+              title: langKey.signUp.tr,
+              height: 48,
+              onPressed: () {
+                viewModel.signUp();
+              },
+            ),
+    );
+  }
+
+  Widget alreadyHaveAnAccount() {
+    return Center(
+      child: InkWell(
+        borderRadius: BorderRadius.circular(12),
+        onTap: () {
+          Get.off(()=>SignInView());
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+          child: Column(
+            children: [
+              Text(
+                langKey.alreadyHaveAccount.tr,
+                style: bodyText1.copyWith(
+                  fontSize: 14,
                 ),
               ),
-            ),
-            SliverList(
-              delegate: SliverChildListDelegate(
-                [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20.0,
-                    ),
-                    child: CustomText(
-                      title: langKey.registerGreetings.tr,
-                      style: headline2,
-                    ),
-                  ),
-                  AppConstant.spaceWidget(height: 40),
-                  Form(
-                    key: formKey,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20.0, vertical: 12),
-                      child: Column(
-                        children: [
-                          AppConstant.spaceWidget(height: 15),
-                          FormInputFieldWithIcon(
-                            controller: controller.firstNameController,
-                            iconPrefix: Icons.title,
-                            labelText: langKey.fullName.tr,
-                            iconColor: kPrimaryColor,
-                            autofocus: false,
-                            textStyle: bodyText1,
-                            autoValidateMode:
-                                AutovalidateMode.onUserInteraction,
-                            validator: (value) {
-                              return Validator()
-                                  .name(value, title: langKey.fullName.tr);
-                            },
-                            keyboardType: TextInputType.name,
-                            onChanged: (value) {},
-                            onSaved: (value) {},
-                          ),
-                          AppConstant.spaceWidget(height: 15),
-                          FormInputFieldWithIcon(
-                            controller: controller.signUpEmailController,
-                            iconPrefix: Icons.email_outlined,
-                            labelText: langKey.email.tr,
-                            iconColor: kPrimaryColor,
-                            autofocus: false,
-                            textStyle: bodyText1,
-                            autoValidateMode:
-                                AutovalidateMode.onUserInteraction,
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return langKey.emailReq.tr;
-                              } else
-                                return Validator().email(value);
-                            },
-                            keyboardType: TextInputType.emailAddress,
-                            onChanged: (value) {},
-                            onSaved: (value) {},
-                          ),
-                          AppConstant.spaceWidget(height: 15),
-                          FormPasswordInputFieldWithIcon(
-                            controller: controller.signUpPasswordController,
-                            iconPrefix: Icons.lock_outline_rounded,
-                            iconColor: kPrimaryColor,
-                            textStyle: bodyText1,
-                            labelText: langKey.password.tr,
-                            autoValidateMode:
-                                AutovalidateMode.onUserInteraction,
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return "Password is required for this field";
-                              } else
-                                return value.length < 8
-                                    ? langKey.passwordLengthReq.tr
-                                    : null;
-                            },
-                            obscureText: true,
-                            onChanged: (value) => {},
-                            maxLines: 1,
-                          ),
-                          // AppConstant.spaceWidget(height: 15),
-                          // FormInputFieldWithIcon(
-                          //   controller: controller.phoneController,
-                          //   iconPrefix: Icons.phone_iphone_outlined,
-                          //   iconColor: kPrimaryColor,
-                          //   textStyle: bodyText1,
-                          //   keyboardType: TextInputType.phone,
-                          //   autofocus: false,
-                          //   autoValidateMode:
-                          //       AutovalidateMode.onUserInteraction,
-                          //   validator: (value) {
-                          //     return value!.length < 11 && value.length > 14
-                          //         ? langKey.phoneValidate.tr
-                          //         : null;
-                          //   },
-                          //   labelText:
-                          //       '${langKey.phone.tr} (${langKey.optional.tr})',
-                          //   /*autoValidateMode:
-                          //       AutovalidateMode.onUserInteraction,
-                          //   validator: (value) =>
-                          //       !GetUtils.isPhoneNumber(value!)
-                          //           ? "Invalid phone number format"
-                          //           : null,*/
-                          //   onChanged: (value) => {},
-                          //   onSaved: (value) {},
-                          //   maxLines: 1,
-                          // ),
-                          AppConstant.spaceWidget(height: 15),
-                          Obx(
-                            () => CountryCodePickerTextField(
-                              keyboardType: TextInputType.number,
-                              controller: controller.phoneController,
-                              initialValue: controller.countryCode.value,
-                              textStyle: bodyText1,
-                              labelText: langKey.phone.tr,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.allow(
-                                    RegExp(r'^\d+?\d*')),
-                              ],
-                              // autoValidateMode:
-                              //     AutovalidateMode.onUserInteraction,
-                              // validator: (value) {
-                              //   //print(
-                              //     //  ">>Phone: ${controller.countryCode.value + value!}");
-                              //   // return Validator().validatePhoneNumber(
-                              //   //     "${controller.countryCode.value + value!}");
-                              // },
-                              errorText: controller.phoneErrorText.value,
-                              onPhoneFieldChange: (value) {
-                                String newPhoneValue =
-                                    controller.countryCode.value + value;
-                                //print(">>>Phone: $newPhoneValue");
-                                controller.validatorPhoneNumber(newPhoneValue);
-                              },
-                              onChanged: (value) {
-                                controller.countryCode.value =
-                                    value.dialCode ?? '+92';
-
-                                String newPhoneValue =
-                                    controller.countryCode.value +
-                                        controller.phoneController.text;
-                                //print(">>>Phone: $newPhoneValue");
-                                controller.validatorPhoneNumber(newPhoneValue);
-                              },
-                            ),
-                          ),
-                          AppConstant.spaceWidget(height: 40),
-                          Obx(() => controller.isLoading.isTrue
-                              ? CustomLoading(isItBtn: true)
-                              : CustomButton(
-                                  onTap: () async {
-                                    if (formKey.currentState!.validate()) {
-                                      if (controller
-                                          .phoneController.text.isNotEmpty)
-                                        await controller.register();
-                                      else {
-                                        controller.phoneErrorText.value =
-                                            langKey.phoneReq.tr;
-                                      }
-                                    }
-                                  },
-                                  text: langKey.signUp.tr,
-                                  height: 50,
-                                  width: 300,
-                                )),
-                          AppConstant.spaceWidget(height: 20),
-                          Center(
-                            child: InkWell(
-                              onTap: () => Get.offNamed(Routes.loginRoute),
-                              child: Column(
-                                children: [
-                                  CustomText(
-                                      title: langKey.alreadyHaveAccount.tr,
-                                      style: bodyText1),
-                                  CustomText(
-                                    title: langKey.signIn.tr,
-                                    style: bodyText1.copyWith(
-                                        decoration: TextDecoration.underline,
-                                        color: kPrimaryColor),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
+              SizedBox(height: 3),
+              Text(
+                langKey.signIn.tr,
+                style: bodyText1.copyWith(
+                  decoration: TextDecoration.underline,
+                  color: kPrimaryColor,
+                  fontSize: 14,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

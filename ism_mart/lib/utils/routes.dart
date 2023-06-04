@@ -48,7 +48,7 @@ class Routes {
     ),
     GetPage(
       name: registerRoute,
-      page: () => const SignUpView(),
+      page: () => SignUpView(),
       binding: BaseBindings(),
     ),
     GetPage(

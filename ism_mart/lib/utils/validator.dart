@@ -1,5 +1,4 @@
 import 'dart:core';
-
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
@@ -14,7 +13,6 @@ class Validator {
   ];
 
   /////////////////////  Validators  /////////////////////////
-
   ///EmptyField
   String? validateDefaultTxtField(String? value) {
     if (GetUtils.isBlank(value)!) {
@@ -58,6 +56,17 @@ class Validator {
     }
   }
 
+  ///Password
+  String? validatePassword(String? value) {
+    if (GetUtils.isBlank(value)!) {
+      return langKey.fieldIsRequired.tr;
+    } else if (GetUtils.isLengthLessThan(value, 8)) {
+      return langKey.passwordLengthReq.tr;
+    } else {
+      return null;
+    }
+  }
+
   //replace with upper one
   String? email(String? value) {
     String pattern = r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+';
@@ -69,17 +78,6 @@ class Validator {
     }
   }
 
-  String? password(String? value) {
-    String pattern = r'^.{8,}$';
-    RegExp regex = RegExp(pattern);
-    if (value!.isEmpty) {
-      return langKey.passwordRequired.tr;
-    } else if (!regex.hasMatch(value)) {
-      return langKey.passwordLengthReq.tr;
-    } else {
-      return null;
-    }
-  }
 
   //replace this with upper one
   String? name(String? value, {String? title}) {

@@ -3,6 +3,9 @@ class Urls {
   //SignInViewModel
   static String login = "auth/login";
 
+  //SignUpViewModel
+  static String signUp = "auth/register";
+
 
   //DisputeDetailViewModel
   static String ticketDetail = "tickets/";

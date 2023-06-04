@@ -19,6 +19,7 @@ class SignInViewModel extends GetxController {
   void onClose() {
     emailController.dispose();
     passwordController.dispose();
+    GlobalVariable.showLoader.value = false;
     super.onClose();
   }
 

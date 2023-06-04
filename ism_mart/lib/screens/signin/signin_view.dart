@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/global_variables.dart';
@@ -89,6 +88,7 @@ class SignInView extends StatelessWidget {
           controller: viewModel.passwordController,
           prefixIcon: Icons.lock_rounded,
           label: langKey.password.tr,
+          autoValidateMode: AutovalidateMode.onUserInteraction,
           validator: (value) {
             return Validator().validateDefaultTxtField(value);
           },

@@ -16,15 +16,6 @@ class ChangePasswordViewModel extends GetxController {
   RxBool obscureNewPassword = false.obs;
   RxBool obscureConfirmPassword = false.obs;
 
-  String? validateNewPassTxtField(String? value) {
-    if (GetUtils.isBlank(value)!) {
-      return langKey.fieldIsRequired.tr;
-    } else if (GetUtils.isLengthLessThan(value, 8)) {
-      return langKey.passwordLengthReq.tr;
-    } else {
-      return null;
-    }
-  }
 
   String? validateConfirmPassTxtField(String? value) {
     if (GetUtils.isBlank(value)!) {
