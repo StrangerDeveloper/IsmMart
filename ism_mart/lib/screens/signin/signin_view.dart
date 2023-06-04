@@ -65,38 +65,31 @@ class SignInView extends StatelessWidget {
   }
 
   Widget emailTextField() {
-    return FormInputFieldWithIcon(
+    return CustomTextField2(
+      contentPadding: EdgeInsets.symmetric(vertical: 16),
+      label: langKey.email.tr,
       controller: viewModel.emailController,
-      iconPrefix: Icons.email,
-      labelText: langKey.email.tr,
-      iconColor: kPrimaryColor,
-      autofocus: false,
-      textStyle: bodyText1,
+      prefixIcon: Icons.email,
       autoValidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
         return Validator().validateEmail(value);
       },
       keyboardType: TextInputType.emailAddress,
-      onChanged: (value) {},
-      onSaved: (value) {},
     );
   }
 
   Widget passwordTextField() {
     return Padding(
       padding: const EdgeInsets.only(top: 20, bottom: 40),
-      child: FormPasswordInputFieldWithIcon(
+      child: CustomTextField2(
+        contentPadding: EdgeInsets.symmetric(vertical: 16),
         controller: viewModel.passwordController,
-        iconPrefix: Icons.lock_rounded,
-        iconColor: kPrimaryColor,
-        textStyle: bodyText1,
-        labelText: langKey.password.tr,
+        prefixIcon: Icons.lock_rounded,
+        label: langKey.password.tr,
         validator: (value) {
           return Validator().validateDefaultTxtField(value);
         },
         obscureText: true,
-        onChanged: (value) => {},
-        maxLines: 1,
       ),
     );
   }
@@ -117,7 +110,7 @@ class SignInView extends StatelessWidget {
 
   Widget forgotPassword() {
     return Container(
-      margin: EdgeInsets.only(top: 10, bottom: 20),
+      margin: EdgeInsets.only(top: 20, bottom: 20),
       alignment: Alignment.centerRight,
       child: InkWell(
         onTap: () {
@@ -128,7 +121,10 @@ class SignInView extends StatelessWidget {
         },
         child: Text(
           langKey.forgotPassword.tr + '?',
-          style: headline3.copyWith(decoration: TextDecoration.underline),
+          style: headline3.copyWith(
+            decoration: TextDecoration.underline,
+            fontSize: 14,
+          ),
         ),
       ),
     );
@@ -137,18 +133,31 @@ class SignInView extends StatelessWidget {
   Widget doNotHaveAnAccount() {
     return Center(
       child: InkWell(
+        borderRadius: BorderRadius.circular(12),
         onTap: () {
           Get.offNamed(Routes.registerRoute);
         },
-        child: Column(
-          children: [
-            Text(langKey.donTHaveAccount.tr, style: bodyText1),
-            Text(
-              langKey.signUp.tr,
-              style: bodyText1.copyWith(
-                  decoration: TextDecoration.underline, color: kPrimaryColor),
-            ),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+          child: Column(
+            children: [
+              Text(
+                langKey.donTHaveAccount.tr,
+                style: bodyText1.copyWith(
+                  fontSize: 14,
+                ),
+              ),
+              SizedBox(height: 3),
+              Text(
+                langKey.signUp.tr,
+                style: bodyText1.copyWith(
+                  decoration: TextDecoration.underline,
+                  color: kPrimaryColor,
+                  fontSize: 14,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
