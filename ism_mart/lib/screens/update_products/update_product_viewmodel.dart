@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'dart:io';
 import 'package:http_parser/src/media_type.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/controllers/controllers.dart';
 import '../../api_helper/api_base_helper.dart';
@@ -12,7 +10,6 @@ import '../../models/product/product_model.dart';
 import '../../utils/constants.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import 'package:http/http.dart' as http;
-import '../../utils/helpers/permission_handler.dart';
 
 class UpdateProductViewModel extends GetxController {
 

@@ -286,6 +286,7 @@ class UpdateProductView extends GetView<SellersController> {
             imageUrlOrPath: viewModel.thumbnailUrl.value == ''
                 ? viewModel.thumbnailSelectedImage.value!.path
                 : viewModel.thumbnailUrl.value,
+            url: false,
           )),
           child: viewModel.thumbnailUrl.value != ''
               ? CustomNetworkImage(

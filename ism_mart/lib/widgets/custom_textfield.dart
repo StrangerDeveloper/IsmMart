@@ -214,11 +214,11 @@ class CustomTextField2 extends StatelessWidget {
             ),
             // hintStyle: TextStyle(fontWeight: FontWeight.w400, fontSize: 14, color: Colors.green),
             // prefixIcon: prefixIcon,
-            prefixIcon: Icon(
+            prefixIcon: prefixIcon != null ? Icon(
               prefixIcon,
               color: kPrimaryColor,
               size: 22,
-            ),
+            ) : null,
             contentPadding: contentPadding,
             suffixIcon: suffixIcon,
 

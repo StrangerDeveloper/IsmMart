@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'custom_network_image.dart';
+import 'dart:io';
 
 class SingleImageView extends StatelessWidget {
-  const SingleImageView({Key? key, this.imageUrlOrPath}) : super(key: key);
-  
+  const SingleImageView({Key? key, this.imageUrlOrPath, this.url = true}) : super(key: key);
   final String? imageUrlOrPath;
+  final bool url;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,8 +17,10 @@ class SingleImageView extends StatelessWidget {
       child: InteractiveViewer(
         minScale: 0.1,
         maxScale: 2.0,
-        child: CustomNetworkImage(imageUrl: imageUrlOrPath,
-          fit: BoxFit.contain,),
+        child: url ? CustomNetworkImage(imageUrl: imageUrlOrPath,
+          fit: BoxFit.contain,) : Image.file(
+          File(imageUrlOrPath.toString())
+        ),
       ),
     ),
     ),
