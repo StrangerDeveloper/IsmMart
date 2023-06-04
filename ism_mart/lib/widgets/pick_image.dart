@@ -11,9 +11,12 @@ import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class PickImage {
   File? selectedImage;
-  List<File>? imageList;
 
-  Future<File?> actionsBottomSheet() async {
+  //////////////////////////////////////////////////////////////////
+  ////////////////////////// Single Image //////////////////////////
+  //////////////////////////////////////////////////////////////////
+
+  Future<File?> pickSingleImage() async {
     await showModalBottomSheet(
       context: Get.context!,
       shape: const RoundedRectangleBorder(
@@ -75,7 +78,43 @@ class PickImage {
     return selectedImage;
   }
 
-  Future<File?> pickMultipleImage() async {
+  Future<File?> imgFromCamera() async {
+    XFile? pickedFile =
+    await ImagePicker().pickImage(source: ImageSource.camera);
+    if (pickedFile != null) {
+      File file = File(pickedFile.path);
+      return await compressImage(file);
+    }
+  }
+
+  Future<File?> imgFromGallery() async {
+    XFile? pickedFile =
+    await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      File file = File(pickedFile.path);
+      return await compressImage(file);
+    }
+  }
+
+  Future<File?> compressImage(File image) async {
+    File? file = await AppConstant.compressImage(image.path,
+        fileLength: await image.length());
+    var lengthInMb = await file.lengthSync() * 0.000001;
+    if (lengthInMb > 2) {
+      AppConstant.displaySnackBar(
+          langKey.errorTitle.tr, langKey.imageSizeDesc.tr + ' 2MB');
+      return null;
+    }
+    return file;
+  }
+
+  //////////////////////////////////////////////////////////////////
+  ////////////////////// / Multiple Image //////////////////////////
+  //////////////////////////////////////////////////////////////////
+
+  List<File> imageList = <File>[];
+
+  Future<List<File>> pickMultipleImage() async {
     await showModalBottomSheet(
       context: Get.context!,
       shape: const RoundedRectangleBorder(
@@ -116,7 +155,7 @@ class PickImage {
                 icon: IconlyLight.image,
                 isDisabled: false,
                 onTap: () async {
-                  imageList = await multipleImgFromGallery();
+                  imageList.addAll(await multipleImgFromGallery());
                   Navigator.of(context).pop();
                 },
               ),
@@ -127,7 +166,7 @@ class PickImage {
                 onTap: () async {
                   selectedImage = await imgFromCamera();
                   if (selectedImage != null) {
-                    imageList?.add(selectedImage!);
+                    imageList.add(selectedImage!);
                   }
                   Navigator.of(context).pop();
                 },
@@ -137,54 +176,25 @@ class PickImage {
         );
       },
     );
-    return selectedImage;
+    return imageList;
   }
 
-  Future<File?> imgFromCamera() async {
-    XFile? pickedFile =
-        await ImagePicker().pickImage(source: ImageSource.camera);
-    if (pickedFile != null) {
-      File file = File(pickedFile.path);
-      return await compressImage(file);
-    }
-    return null;
-  }
-
-  Future<File?> imgFromGallery() async {
-    XFile? pickedFile =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      File file = File(pickedFile.path);
-      return await compressImage(file);
-    }
-    return null;
-  }
-
-  Future<List<File>?> multipleImgFromGallery() async {
+  Future<List<File>> multipleImgFromGallery() async {
     List<XFile> pickedFile = await ImagePicker().pickMultiImage();
+
     if (pickedFile.isNotEmpty) {
-      imageList!.addAll(pickedFile.map((e) => File(e.path)));
-      return await compressMultipleImage(imageList);
+      List<File> tempImage = pickedFile.map((e) => File(e.path)).toList();
+      return await compressMultipleImage(tempImage);
+    } else {
+      return [];
     }
-    return null;
   }
 
-  Future<File?> compressImage(File image) async {
-    File? file = await AppConstant.compressImage(image.path,
-        fileLength: await image.length());
-    var lengthInMb = await file.lengthSync() * 0.000001;
-    if (lengthInMb > 2) {
-      AppConstant.displaySnackBar(
-          langKey.errorTitle.tr, langKey.imageSizeDesc.tr + ' 2MB');
-      return null;
-    }
-    return file;
-  }
-
-  Future<List<File>?> compressMultipleImage(List<File>? images) async {
+  Future<List<File>> compressMultipleImage(List<File> images) async {
+    print('compressMultipleImage');
     List<File> tempList = <File>[];
-    if (images?.isNotEmpty ?? false) {
-      for (int i = 0; i < images!.length; i++) {
+    if (images.isNotEmpty) {
+      for (int i = 0; i < images.length; i++) {
         File? file = await AppConstant.compressImage(images[i].path,
             fileLength: await images[i].length());
         var lengthInMb = await file.lengthSync() * 0.000001;
@@ -195,9 +205,10 @@ class PickImage {
           tempList.add(file);
         }
       }
+
       return tempList;
     } else {
-      return null;
+      return [];
     }
   }
 }

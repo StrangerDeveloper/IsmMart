@@ -114,7 +114,7 @@ class BuyerProfileView extends StatelessWidget {
           child: InkWell(
             onTap: () async {
               viewModel.imageFile.value =
-                  await PickImage().actionsBottomSheet();
+                  await PickImage().pickSingleImage();
             },
             child: Container(
               padding: EdgeInsets.all(5),

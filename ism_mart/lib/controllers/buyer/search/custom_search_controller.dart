@@ -213,6 +213,26 @@ class CustomSearchController extends GetxController {
     }
   }
 
+
+  RxList<String> suggestionList = <String>[].obs;
+  Rx<int> selectedIndex = 0.obs;
+  Rx<String> changeValue = ''.obs;
+  RxBool finalSerach = false.obs;
+  // var myFocusNode = FocusNode();
+
+  void suggestionSearch() {
+    suggestionList.clear();
+    //  productList.map((element) => l.add(element.name));
+    for (var element in productList) {
+      suggestionList.add(element.name.toString());
+    }
+
+    print("suggestin hasnain ----------- ${suggestionList.length}");
+  }
+
+
+
+
   var stopLoadMore = false.obs;
   applyFilter() async {
     stopLoadMore.value = true;

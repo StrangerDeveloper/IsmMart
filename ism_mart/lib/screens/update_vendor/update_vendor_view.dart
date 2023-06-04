@@ -142,7 +142,7 @@ class UpdateVendorView extends StatelessWidget {
             bottom: 6,
             child: InkWell(
               onTap: () async {
-                viewModel.coverImageFile.value =  await PickImage().actionsBottomSheet();
+                viewModel.coverImageFile.value =  await PickImage().pickSingleImage();
               },
               child: Container(
                 padding: EdgeInsets.all(5),
@@ -229,7 +229,7 @@ class UpdateVendorView extends StatelessWidget {
             child: InkWell(
               onTap: () async {
                 viewModel.profileImageFile.value =
-                    await PickImage().actionsBottomSheet();
+                    await PickImage().pickSingleImage();
               },
               child: Container(
                 padding: EdgeInsets.all(5),
