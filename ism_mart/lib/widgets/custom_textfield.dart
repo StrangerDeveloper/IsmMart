@@ -139,7 +139,7 @@ class CustomTextField1 extends StatelessWidget {
 class CustomTextField2 extends StatelessWidget {
   final String? title;
   final String? hintText;
-  final Widget? prefixIcon;
+  final IconData? prefixIcon;
   final Widget? suffixIcon;
   final String? label;
   final EdgeInsetsGeometry? contentPadding;
@@ -202,7 +202,6 @@ class CustomTextField2 extends StatelessWidget {
             fontSize: 15,
           ),
           decoration: InputDecoration(
-
             labelText: label,
             labelStyle: GoogleFonts.lato(
               fontSize: 14,
@@ -215,8 +214,14 @@ class CustomTextField2 extends StatelessWidget {
             ),
             // hintStyle: TextStyle(fontWeight: FontWeight.w400, fontSize: 14, color: Colors.green),
             // prefixIcon: prefixIcon,
+            prefixIcon: Icon(
+              prefixIcon,
+              color: kPrimaryColor,
+              size: 22,
+            ),
             contentPadding: contentPadding,
             suffixIcon: suffixIcon,
+
             // suffixIconConstraints: BoxConstraints.expand(width: 40),
             filled: true,
             fillColor: Colors.white,

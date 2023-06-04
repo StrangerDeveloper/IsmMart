@@ -7,13 +7,13 @@ import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class SearchView extends GetView<CustomSearchController> {
-  const SearchView({
-    Key? key,
-    this.passedSearchQuery,
-    this.isCalledForDeals = false,
-    this.calledForCategory,
-    this.subCategoryID
-  }) : super(key: key);
+  const SearchView(
+      {Key? key,
+      this.passedSearchQuery,
+      this.isCalledForDeals = false,
+      this.calledForCategory,
+      this.subCategoryID})
+      : super(key: key);
 
   final bool? isCalledForDeals;
   final String? passedSearchQuery;
@@ -40,10 +40,9 @@ class SearchView extends GetView<CustomSearchController> {
       controller.selectedCategory(passedSearchQuery);
     }
 
-
-    if(calledForCategory == null) {
+    if (calledForCategory == null) {
       null;
-    }else{
+    } else {
       calledForCategory!
           ? controller.searchProductsByCategory(searchQuery)
           : controller.searchWithSubCategory(subCategoryID);
@@ -101,8 +100,8 @@ class SearchView extends GetView<CustomSearchController> {
               controller.selectedCategory('');
               controller.searchProducts(value);
               controller.searchLimit = 15;
-            }
-            else if (controller.searchTextController.text.isEmpty ||
+              controller.suggestionSearch();
+            } else if (controller.searchTextController.text.isEmpty ||
                 controller.suggestionList.length == 0 ||
                 value == "") {
               controller.suggestionList.clear();
@@ -164,77 +163,75 @@ class SearchView extends GetView<CustomSearchController> {
                   )
                 : _buildProductView(controller.productList));*/
 
-    return  Obx(() => controller.isLoading.isTrue
+    return Obx(() => controller.isLoading.isTrue
         ? CustomLoading(isItForWidget: true, color: kPrimaryColor)
         : controller.productList.isEmpty
-        ? Stack(
-      children: [
-        Center(
-          child: NoDataFoundWithIcon(
-            title: langKey.emptyProductSearch.tr,
-            subTitle: langKey.emptyProductSearchMsg.tr,
-          ),
-        ),
-      ],
-    )
-        : Stack(
-      children: [
-        controller.suggestionList.isNotEmpty
-            ? Opacity(
-            opacity: .5,
-            child: _buildProductView(controller.productList))
-            : _buildProductView(controller.productList),
-        Positioned(
-            top: 1,
-            child: Obx(
-                  () => controller.suggestionList.isNotEmpty
-                  ? Container(
-                padding: EdgeInsets.only(left: 40),
-                color: Colors.white,
-                height: 400,
-                width: 375,
-                child: ListView.builder(
-                  itemCount: controller.suggestionList.length,
-                  itemBuilder: (context, index) {
-                    return Obx(
-                          () => ListTile(
-                        onTap: () {
-                          controller.selectedIndex.value =
-                              index;
-
-                          controller.searchTextController.text =
-                              controller.suggestionList[index]
-                                  .toString();
-
-                          controller.selectedCategory('');
-                          controller.searchProducts(controller
-                              .searchTextController.text);
-                          controller.searchLimit = 15;
-
-                          controller.suggestionList.clear();
-                          controller.finalSerach(true);
-                        },
-                        tileColor:
-                        controller.selectedIndex.value ==
-                            index
-                            ? Colors.black12
-                            : kAccentColor,
-                        title: CustomText(
-                          title: controller
-                              .suggestionList[index]
-                              .toString(),
-                        ),
-                      ),
-                    );
-                  },
-                ),
+            ? Stack(
+                children: [
+                  Center(
+                    child: NoDataFoundWithIcon(
+                      title: langKey.emptyProductSearch.tr,
+                      subTitle: langKey.emptyProductSearchMsg.tr,
+                    ),
+                  ),
+                ],
               )
-                  : SizedBox(),
-            )),
-      ],
-    ));
+            : Stack(
+                children: [
+                  controller.suggestionList.isNotEmpty
+                      ? Opacity(
+                          opacity: .5,
+                          child: _buildProductView(controller.productList))
+                      : _buildProductView(controller.productList),
+                  Positioned(
+                      top: 1,
+                      child: Obx(
+                        () => controller.suggestionList.isNotEmpty
+                            ? Container(
+                                padding: EdgeInsets.only(left: 40),
+                                color: Colors.white,
+                                height: 400,
+                                width: 375,
+                                child: ListView.builder(
+                                  itemCount: controller.suggestionList.length,
+                                  itemBuilder: (context, index) {
+                                    return Obx(
+                                      () => ListTile(
+                                        onTap: () {
+                                          controller.selectedIndex.value =
+                                              index;
 
+                                          controller.searchTextController.text =
+                                              controller.suggestionList[index]
+                                                  .toString();
 
+                                          controller.selectedCategory('');
+                                          controller.searchProducts(controller
+                                              .searchTextController.text);
+                                          controller.searchLimit = 15;
+
+                                          controller.suggestionList.clear();
+                                          controller.finalSerach(true);
+                                        },
+                                        tileColor:
+                                            controller.selectedIndex.value ==
+                                                    index
+                                                ? Colors.black12
+                                                : kAccentColor,
+                                        title: CustomText(
+                                          title: controller
+                                              .suggestionList[index]
+                                              .toString(),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              )
+                            : SizedBox(),
+                      )),
+                ],
+              ));
   }
 
   Widget _buildProductView(List<ProductModel> list) {
