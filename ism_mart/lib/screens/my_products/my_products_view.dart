@@ -187,12 +187,10 @@ class MyProducts extends GetView<SellersController> {
                   children: [
                     CustomActionIcon(
                         onTap: () {
-                          print("ProductId: ${model.id}");
-                          Get.to(() => UpdateProductView(productId: model.id));
-                          // AppConstant.showBottomSheet(
-                          //     widget: UpdateProductView(productId: model.id),
-                          //     isGetXBottomSheet: true,
-                          //     buildContext: Get.context!);
+                          // print("ProductId: ${model.id}");
+                          Get.to(() => UpdateProductView(), arguments: [{
+                            'productId': '${model.id}',
+                          }]);
                         },
                         icon: Icons.edit_rounded,
                         bgColor: kPrimaryColor),

@@ -15,7 +15,7 @@ class UpdateProductViewModel extends GetxController {
 
   @override
   void onInit() {
-    getUserToken();
+    getProductById(Get.arguments[0]['productId']);
     super.onInit();
   }
 
@@ -58,7 +58,6 @@ class UpdateProductViewModel extends GetxController {
   RxInt imageIndex = 0.obs;
   RxDouble imagesSize = 0.0.obs;
   RxList<ProductImages> productImages = <ProductImages>[].obs;
-
   var formKey = GlobalKey<FormState>();
 
   getUserToken() async {
@@ -79,9 +78,9 @@ class UpdateProductViewModel extends GetxController {
     GlobalVariable.showLoader.value = true;
     await ApiBaseHelper().getMethod(url: 'products/$id').then((response) {
       if (response['success'] == true && response['data'] != null) {
-        GlobalVariable.showLoader.value = false;
         productModel = ProductModel.fromJson(response['data']);
         productImages.clear();
+        GlobalVariable.showLoader.value = false;
         initializeValues();
       } else {
         GlobalVariable.showLoader.value = false;
@@ -125,6 +124,15 @@ class UpdateProductViewModel extends GetxController {
       int discount = 0;
       setDiscount(discount);
     }
+  }
+
+  void thumbnailCheck(){
+    if (thumbnailUrl.value != '') {
+      thumbnailUrl.value = '';
+    } else {
+      thumbnailSelectedImage.value = File('');
+    }
+    thumbnailNotAvailable(true);
   }
 
   void productPriceOnChange(String value) {

@@ -3,8 +3,6 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/screens/single_product_full_image/single_product_full_image_view.dart';
-import 'package:ism_mart/controllers/export_controllers.dart';
-import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/screens/update_products/update_product_viewmodel.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
@@ -13,16 +11,13 @@ import 'package:ism_mart/widgets/pick_image.dart';
 import '../../widgets/loader_view.dart';
 import '../../widgets/single_image_view.dart';
 
-class UpdateProductView extends GetView<SellersController> {
-  UpdateProductView({Key? key, this.productId, this.images}) : super(key: key);
-  final int? productId;
-  final List<ProductImages>? images;
+class UpdateProductView extends StatelessWidget {
+  UpdateProductView({Key? key}) : super(key: key);
+
   final UpdateProductViewModel viewModel = Get.put(UpdateProductViewModel());
 
   @override
   Widget build(BuildContext context) {
-    viewModel.getProductById(productId!);
-
     return SafeArea(
         child: Scaffold(
           appBar: _appBar(),
@@ -48,35 +43,11 @@ class UpdateProductView extends GetView<SellersController> {
                               langKey.productNameReq.tr : null;
                             },
                           ),
-                          AppConstant.spaceWidget(height: 15),
                           productPriceField(),
-                          AppConstant.spaceWidget(height: 15),
-                          CustomTextField2(
-                            controller: viewModel.prodStockController,
-                            label: langKey.prodStock.tr,
-                            autoValidateMode: AutovalidateMode.onUserInteraction,
-                            validator: (value) =>
-                            !GetUtils.isNumericOnly(value!)
-                                ? langKey.prodStockReq.tr
-                                : null,
-                            keyboardType: TextInputType.number,
-                          ),
-                          AppConstant.spaceWidget(height: 15),
+                          productStockField(),
                           productDiscountField(),
-                          AppConstant.spaceWidget(height: 15),
-                          CustomTextField2(
-                            controller: viewModel.prodDescriptionController,
-                            label: langKey.description.tr,
-                            autoValidateMode: AutovalidateMode.onUserInteraction,
-                            validator: (value) =>
-                            GetUtils.isBlank(value!)!
-                                ? langKey.descriptionReq.tr
-                                : null,
-                            keyboardType: TextInputType.text,
-                          ),
-                          AppConstant.spaceWidget(height: 20),
+                          productDescriptionField(),
                           imagesUpdateSection(),
-                          AppConstant.spaceWidget(height: 40),
                           CustomButton(
                               onTap: () {
                                 viewModel.updateButtonPress();
@@ -113,109 +84,142 @@ class UpdateProductView extends GetView<SellersController> {
     );
   }
 
-  Column productPriceField(){
-    return Column(
-      children: <Widget>[
-        CustomTextField2(
-          controller: viewModel.prodPriceController,
-          label: langKey.prodPrice.tr,
-          autoValidateMode: AutovalidateMode.onUserInteraction,
-          validator: (value) =>
-          !GetUtils.isNumericOnly(value!)
-              ? langKey.prodPriceReq.tr
-              : null,
-          keyboardType: TextInputType.number,
-          onChanged: (value) {
-            viewModel.productPriceOnChange(value);
-          },
-        ),
-        Obx(() => Visibility(
-          visible: viewModel.showPriceAfterCommission.value,
-          child: CustomText(
-            title:
-            "${langKey.finalPriceWould.tr} ${viewModel.priceAfterCommission.value} ${langKey.afterPlatformFee.tr} 5%",
-            color: kRedColor,
+  Padding productPriceField(){
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 15.0),
+      child: Column(
+        children: <Widget>[
+          CustomTextField2(
+            controller: viewModel.prodPriceController,
+            label: langKey.prodPrice.tr,
+            autoValidateMode: AutovalidateMode.onUserInteraction,
+            validator: (value) =>
+            !GetUtils.isNumericOnly(value!)
+                ? langKey.prodPriceReq.tr
+                : null,
+            keyboardType: TextInputType.number,
+            onChanged: (value) {
+              viewModel.productPriceOnChange(value);
+            },
           ),
-        ))
-      ],
+          Obx(() => Visibility(
+            visible: viewModel.showPriceAfterCommission.value,
+            child: CustomText(
+              title:
+              "${langKey.finalPriceWould.tr} ${viewModel.priceAfterCommission.value} ${langKey.afterPlatformFee.tr} 5%",
+              color: kRedColor,
+            ),
+          ))
+        ],
+      ),
     );
   }
 
-  Column productDiscountField(){
-    return Column(
-      children: <Widget>[
-        CustomTextField2(
-          controller: viewModel.prodDiscountController,
-          label: langKey.prodDiscount.tr,
-          autoValidateMode: AutovalidateMode.onUserInteraction,
-          keyboardType: TextInputType.number,
-          onChanged: (value){
-            viewModel.productDiscountOnChange(value);
-          },
-        ),
-        Obx(
-              () => Visibility(
-            visible: viewModel.prodDiscountController.text.isNotEmpty,
-            child: CustomText(
-              title: viewModel.discountMessage.value,
-              color: kRedColor,
-            ),
+  productStockField(){
+    return CustomTextField2(
+      controller: viewModel.prodStockController,
+      label: langKey.prodStock.tr,
+      autoValidateMode: AutovalidateMode.onUserInteraction,
+      validator: (value) =>
+      !GetUtils.isNumericOnly(value!)
+          ? langKey.prodStockReq.tr
+          : null,
+      keyboardType: TextInputType.number,
+    );
+  }
+
+  productDescriptionField(){
+    return CustomTextField2(
+      controller: viewModel.prodDescriptionController,
+      label: langKey.description.tr,
+      autoValidateMode: AutovalidateMode.onUserInteraction,
+      validator: (value) =>
+      GetUtils.isBlank(value!)! ? langKey.descriptionReq.tr : null,
+      keyboardType: TextInputType.text,
+    );
+  }
+
+  Padding productDiscountField(){
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 15.0),
+      child: Column(
+        children: <Widget>[
+          CustomTextField2(
+            controller: viewModel.prodDiscountController,
+            label: langKey.prodDiscount.tr,
+            autoValidateMode: AutovalidateMode.onUserInteraction,
+            keyboardType: TextInputType.number,
+            onChanged: (value){
+              viewModel.productDiscountOnChange(value);
+            },
           ),
-        )
-      ],
+          Obx(
+                () => Visibility(
+              visible: viewModel.prodDiscountController.text.isNotEmpty,
+              child: CustomText(
+                title: viewModel.discountMessage.value,
+                color: kRedColor,
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
   
-  Column imagesUpdateSection(){
-    return Column(
-      children: <Widget>[
-        Align(
-          alignment: Alignment.topCenter,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
+  Padding imagesUpdateSection(){
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 15.0),
+      child: Column(
+        children: <Widget>[
+          Align(
+            alignment: Alignment.topCenter,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CustomText(
+                title: langKey.productImageSection.tr,
+                style: headline1,
+              ),
+            ),
+          ),
+          AppConstant.spaceWidget(height: 20),
+          Align(
+            alignment: Alignment.topCenter,
             child: CustomText(
-              title: langKey.productImageSection.tr,
-              style: headline1,
+              title: langKey.productThumbnail.tr,
+              style: headline2,
             ),
           ),
-        ),
-        AppConstant.spaceWidget(height: 20),
-        Align(
-          alignment: Alignment.topCenter,
-          child: CustomText(
-            title: langKey.productThumbnail.tr,
-            style: headline2,
-          ),
-        ),
-        AppConstant.spaceWidget(height: 7),
-        thumbnailSection(),   
-        AppConstant.spaceWidget(height: 20),
-        productImagesSection(),
-        addedImagesSection(),
-        AppConstant.spaceWidget(height: 30),
-        DottedBorder(
-          strokeWidth: 3,
-          borderType: BorderType.Circle,
-          dashPattern: const [10, 4],
-          strokeCap: StrokeCap.round,
-          color: kPrimaryColor,
-          child: Container(
-            width: 55,
-            height: 55,
-            child: CustomActionIcon(
-              onTap: ()async {
-                // await viewModel.pickMultipleImages();
-                viewModel.imagesToUpdate.addAll(
-                    await PickImage().pickMultipleImage()
-                );
-              },
-              icon: Icons.cloud_upload_outlined,
-              size: 35,
-              iconColor: kPrimaryColor,
+          AppConstant.spaceWidget(height: 7),
+          thumbnailSection(),
+          AppConstant.spaceWidget(height: 20),
+          productImagesSection(),
+          addedImagesSection(),
+          AppConstant.spaceWidget(height: 30),
+          DottedBorder(
+            strokeWidth: 3,
+            borderType: BorderType.Circle,
+            dashPattern: const [10, 4],
+            strokeCap: StrokeCap.round,
+            color: kPrimaryColor,
+            child: Container(
+              width: 55,
+              height: 55,
+              child: CustomActionIcon(
+                onTap: ()async {
+                  // await viewModel.pickMultipleImages();
+                  viewModel.imagesToUpdate.addAll(
+                      await PickImage().pickMultipleImage()
+                  );
+                },
+                icon: Icons.cloud_upload_outlined,
+                size: 35,
+                iconColor: kPrimaryColor,
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -303,12 +307,7 @@ class UpdateProductView extends GetView<SellersController> {
             icon: Icons.close_rounded,
             height: 25,
             onTap: () {
-              if (viewModel.thumbnailUrl.value != '') {
-                viewModel.thumbnailUrl.value = '';
-              } else {
-                viewModel.thumbnailSelectedImage.value = File('');
-              }
-              viewModel.thumbnailNotAvailable(true);
+              viewModel.thumbnailCheck();
             },
           ),
         )
@@ -363,8 +362,7 @@ class UpdateProductView extends GetView<SellersController> {
                   return imageInList(index, true);
                 })),
       ],
-    )
-        : Container());
+    ) : Container());
   }
   
   Padding imageInList(int index, bool calledForAddedImages) {

@@ -60,6 +60,45 @@ class SingleProductView extends GetView<ProductController> {
     return WillPopScope(
       onWillPop: () => controller.popSingleProductView(),
       child: Scaffold(
+        appBar: AppBar(
+          actions: [
+            Align(
+              alignment: Alignment.center,
+              child: Padding(
+                padding: const EdgeInsets.only(right: 12.0),
+                child: CartIcon(
+                  onTap: () {
+                    //called from SingleProductView (SPV)
+                    Get.offNamed(Routes.cartRoute,
+                        arguments: {"calledFromSPV": true},
+                        preventDuplicates: false);
+                  },
+                  iconWidget: Icon(
+                    IconlyLight.buy,
+                    size: 25,
+                    color: kPrimaryColor,
+                  ),
+                ),
+              ),
+            ),
+          ],
+            backgroundColor: kAppBarColor,
+            centerTitle: true,
+            leading: InkWell(
+              onTap: () => Get.back(),
+              child: Icon(
+                Icons.arrow_back_ios_new,
+                size: 21,
+                color: kPrimaryColor,
+              ),
+            ),
+            title: CustomText(
+              title: "Product Details",
+              style: appBarTitleSize.copyWith(
+                fontSize: 18
+              ),
+            )
+        ),
           backgroundColor: Colors.grey[300]!,
           resizeToAvoidBottomInset: true,
           body: Stack(
@@ -67,11 +106,11 @@ class SingleProductView extends GetView<ProductController> {
             children: [
               CustomScrollView(
                 slivers: [
-                  _sliverAppBar(productModel!),
+                  // _sliverAppBar(productModel!),
                   SliverList(
                     delegate: SliverChildListDelegate(
                       [
-                        productModel.images!.isEmpty
+                        productModel!.images!.isEmpty
                             ? GestureDetector(
                                 onTap: () {
                                   var imagesList = <ProductImages>[];
