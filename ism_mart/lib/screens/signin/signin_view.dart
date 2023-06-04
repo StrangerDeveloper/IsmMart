@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/global_variables.dart';
@@ -5,6 +6,7 @@ import 'package:ism_mart/screens/signin/signin_viewmodel.dart';
 import 'package:ism_mart/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/widgets/obscure_suffix_icon.dart';
 import '../forgot_password/forgot_password_view.dart';
 
 class SignInView extends StatelessWidget {
@@ -79,17 +81,26 @@ class SignInView extends StatelessWidget {
   }
 
   Widget passwordTextField() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 20, bottom: 40),
-      child: CustomTextField2(
-        contentPadding: EdgeInsets.symmetric(vertical: 16),
-        controller: viewModel.passwordController,
-        prefixIcon: Icons.lock_rounded,
-        label: langKey.password.tr,
-        validator: (value) {
-          return Validator().validateDefaultTxtField(value);
-        },
-        obscureText: true,
+    return Obx(
+      () => Padding(
+        padding: const EdgeInsets.only(top: 20, bottom: 40),
+        child: CustomTextField2(
+          contentPadding: EdgeInsets.symmetric(vertical: 16),
+          controller: viewModel.passwordController,
+          prefixIcon: Icons.lock_rounded,
+          label: langKey.password.tr,
+          validator: (value) {
+            return Validator().validateDefaultTxtField(value);
+          },
+          obscureText: viewModel.obscurePassword.value ? true : false,
+          suffixIcon: ObscureSuffixIcon(
+            isObscured: viewModel.obscurePassword.value ? true : false,
+            onPressed: () {
+              viewModel.obscurePassword.value =
+                  !viewModel.obscurePassword.value;
+            },
+          ),
+        ),
       ),
     );
   }

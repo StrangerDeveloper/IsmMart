@@ -5,6 +5,7 @@ import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/screens/change_password/change_password_viewmodel.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/loader_view.dart';
+import 'package:ism_mart/widgets/obscure_suffix_icon.dart';
 import '../../utils/constants.dart';
 
 class ChangePasswordView extends StatelessWidget {
@@ -59,17 +60,11 @@ class ChangePasswordView extends StatelessWidget {
           return viewModel.validateNewPassTxtField(value);
         },
         obscureText: viewModel.obscureNewPassword.value ? true : false,
-        suffixIcon: IconButton(
-          icon: Icon(
-            viewModel.obscureNewPassword.value
-                ? CupertinoIcons.eye_slash
-                : CupertinoIcons.eye,
-            size: 20,
-            color: Colors.black,
-          ),
+        suffixIcon: ObscureSuffixIcon(
+          isObscured: viewModel.obscureConfirmPassword.value ? true : false,
           onPressed: () {
-            viewModel.obscureNewPassword.value =
-                !viewModel.obscureNewPassword.value;
+            viewModel.obscureConfirmPassword.value =
+                !viewModel.obscureConfirmPassword.value;
           },
         ),
       ),
@@ -88,14 +83,8 @@ class ChangePasswordView extends StatelessWidget {
             return viewModel.validateConfirmPassTxtField(value);
           },
           obscureText: viewModel.obscureConfirmPassword.value ? true : false,
-          suffixIcon: IconButton(
-            icon: Icon(
-              viewModel.obscureConfirmPassword.value
-                  ? CupertinoIcons.eye_slash
-                  : CupertinoIcons.eye,
-              size: 20,
-              color: Colors.black,
-            ),
+          suffixIcon: ObscureSuffixIcon(
+            isObscured: viewModel.obscureConfirmPassword.value ? true : false,
             onPressed: () {
               viewModel.obscureConfirmPassword.value =
                   !viewModel.obscureConfirmPassword.value;
