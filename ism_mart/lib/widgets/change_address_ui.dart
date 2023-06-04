@@ -34,7 +34,7 @@ class ChangeAddressUI extends GetView<CheckoutController> {
                           height: 30,
                           onTap: () {
                             // Get.back();
-                            if (controller.shippingAddressList.length > 3) {
+                            if (controller.shippingAddressList.length >= 3) {
                               AppConstant.displaySnackBar(
                                   'error', langKey.maxAddressLimitMsg.tr);
                               return;
