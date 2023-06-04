@@ -17,9 +17,9 @@ class SingleProductFullImageView extends GetView<ProductController> {
 
   @override
   Widget build(BuildContext context) {
-    viewModel.initalizedImageController(initialImage);
+    viewModel.initalizeImageController(initialImage);
     return WillPopScope(
-      onWillPop: () => controller.popProductImageView(),
+      onWillPop: () => viewModel.popProductImageView(),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Stack(
@@ -58,7 +58,7 @@ class SingleProductFullImageView extends GetView<ProductController> {
                       6.0,
                       margin: const EdgeInsets.only(right: 4.0),
                       decoration: BoxDecoration(
-                        color: controller.imageIndex.value == index
+                        color: viewModel.imageIndex.value == index
                             ? kPrimaryColor
                             : kLightColor,
                         borderRadius: BorderRadius.circular(8.0),

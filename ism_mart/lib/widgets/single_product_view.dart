@@ -5,10 +5,11 @@ import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/exports/exports_ui.dart';
 import 'package:ism_mart/screens/product_questions/product_questions_view.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
-import 'package:ism_mart/widgets/single_product_full_image_view.dart';
 import 'package:ism_mart/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+
+import '../screens/single_product_full_image/single_product_full_image_view.dart';
 
 class SingleProductView extends GetView<ProductController> {
   const SingleProductView({this.productId, this.calledFor = 'customer'});
@@ -76,7 +77,7 @@ class SingleProductView extends GetView<ProductController> {
                                   var imagesList = <ProductImages>[];
                                   imagesList.add(ProductImages(
                                       id: 0, url: productModel.thumbnail));
-                                  Get.to(() => SingleProductFullImage(
+                                  Get.to(() => SingleProductFullImageView(
                                         productImages: imagesList,
                                         initialImage: 0,
                                       ));
@@ -215,7 +216,7 @@ class SingleProductView extends GetView<ProductController> {
               return GestureDetector(
                 onTap: () {
                   controller.imageIndex(index);
-                  Get.to(() => SingleProductFullImage(
+                  Get.to(() => SingleProductFullImageView(
                         productImages: imagesList,
                         initialImage: index,
                       ));

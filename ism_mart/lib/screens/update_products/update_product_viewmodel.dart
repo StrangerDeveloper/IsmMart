@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -12,8 +11,8 @@ import '../../api_helper/global_variables.dart';
 import '../../models/product/product_model.dart';
 import '../../utils/constants.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
-import '../../utils/helpers/permission_handler.dart';
 import 'package:http/http.dart' as http;
+import '../../utils/helpers/permission_handler.dart';
 
 class UpdateProductViewModel extends GetxController {
 
@@ -29,32 +28,18 @@ class UpdateProductViewModel extends GetxController {
     thumbnailImageSizeInMb.value = 0.0;
     imagesToDelete.clear();
     imagesToUpdate.clear();
-    prodNameController.clear();
-    prodStockController.clear();
-    prodBrandController.clear();
-    prodDiscountController.clear();
-    prodSKUController.clear();
-    prodPriceController.clear();
+    prodNameController.dispose();
+    prodStockController.dispose();
+    prodBrandController.dispose();
+    prodDiscountController.dispose();
+    prodSKUController.dispose();
+    prodPriceController.dispose();
     priceAfterCommission(0);
     imagesSize(0.0);
-    sellersController.thumbnailImagePath('');
-    sellersController.thumbnailImageUrl('');
     super.onClose();
   }
 
-  getUserToken()async{
-    GlobalVariable.userModel = await LocalStorageHelper.getStoredUser();
-  }
-
   ProductModel? productModel;
-  RxString userToken = ''.obs;
-  RxBool thumbnailNotAvailable = false.obs;
-  RxDouble thumbnailImageSizeInMb = 0.0.obs;
-  List imagesToDelete = [].obs;
-  List<File> imagesToUpdate = <File>[].obs;
-
-  var formKey = GlobalKey<FormState>();
-
   TextEditingController prodNameController = TextEditingController();
   TextEditingController prodStockController = TextEditingController();
   TextEditingController prodBrandController = TextEditingController();
@@ -62,18 +47,26 @@ class UpdateProductViewModel extends GetxController {
   TextEditingController prodDescriptionController = TextEditingController();
   TextEditingController prodSKUController = TextEditingController();
   TextEditingController prodPriceController = TextEditingController();
+  RxString userToken = ''.obs;
+  RxBool thumbnailNotAvailable = false.obs;
+  RxDouble thumbnailImageSizeInMb = 0.0.obs;
+  List imagesToDelete = [].obs;
+  List<File> imagesToUpdate = <File>[].obs;
   RxBool showPriceAfterCommission = false.obs;
   RxInt priceAfterCommission = 0.obs;
   RxString thumbnailUrl = ''.obs;
-  var thumbnailPath = ''.obs;
+  Rx<File?> thumbnailSelectedImage = File('').obs;
   RxString discountMessage = "".obs;
   RxBool isLoading = false.obs;
   RxInt imageIndex = 0.obs;
   RxDouble imagesSize = 0.0.obs;
-
   RxList<ProductImages> productImages = <ProductImages>[].obs;
 
-  static var _picker = ImagePicker();
+  var formKey = GlobalKey<FormState>();
+
+  getUserToken() async {
+    GlobalVariable.userModel = await LocalStorageHelper.getStoredUser();
+  }
 
   void setDiscount(int? discount) {
     if (discount! > 0 && discount < 10) {
@@ -85,7 +78,7 @@ class UpdateProductViewModel extends GetxController {
     }
   }
 
-  getProductById(id) async {
+  void getProductById(id) async {
     GlobalVariable.showLoader.value = true;
     await ApiBaseHelper().getMethod(url: 'products/$id').then((response) {
       if (response['success'] == true && response['data'] != null) {
@@ -127,7 +120,49 @@ class UpdateProductViewModel extends GetxController {
     priceAfterCommission.value = priceAfterCommission.value + a.toInt();
   }
 
-  updateProduct({ProductModel? model}) async {
+  void productDiscountOnChange(String value) {
+    if (value.isNotEmpty || value != '') {
+      int discount = int.parse(value);
+      setDiscount(discount);
+    } else {
+      int discount = 0;
+      setDiscount(discount);
+    }
+  }
+
+  void productPriceOnChange(String value) {
+    if (value == '') {
+      showPriceAfterCommission.value = false;
+    }
+    else {
+      showPriceAfterCommission.value = true;
+      totalTax();
+      if (value.isNotEmpty) {
+        priceAfterCommission.value = int.parse(value);
+        totalTax();
+        productModel!.price = priceAfterCommission.value;
+      }
+    }
+  }
+
+  updateButtonPress() {
+    if (formKey.currentState!.validate()) {
+      if (thumbnailNotAvailable.value) {
+        return;
+      } else {
+        if (discountMessage.isEmpty) {
+          updateProduct(model: productModel);
+        } else {
+          AppConstant.displaySnackBar(
+            langKey.errorTitle.tr,
+            langKey.yourDiscountShould.tr,
+          );
+        }
+      }
+    }
+  }
+
+  void updateProduct({ProductModel? model}) async {
     GlobalVariable.showLoader.value = true;
     model!.name = prodNameController.text;
     model.price = int.parse("${priceAfterCommission.value}");
@@ -138,39 +173,7 @@ class UpdateProductViewModel extends GetxController {
     model.description = prodDescriptionController.text;
     model.stock = int.parse("${prodStockController.text}");
 
-    List<int> passedImagesToDelete = [];
-    List<File> passedImagesToUpdate = [];
-
-    if (imagesToDelete.isEmpty) {
-      passedImagesToDelete = [];
-    }
-    else {
-      imagesToDelete.forEach((element) {
-        passedImagesToDelete.add(element);
-      });
-    }
-
-    if (imagesToUpdate.isEmpty) {
-      passedImagesToUpdate = [];
-    }
-    else {
-      imagesToUpdate.forEach((element) {
-        passedImagesToUpdate.add(element);
-      });
-    }
-
-    String baseURL = ApiConstant.baseUrl;
-    String endPoint = '$baseURL/vendor/products/update';
-    String token = GlobalVariable.userModel!.token.toString();
-    print(GlobalVariable.userModel!.token);
-    Map<String, String> headers = {
-      'authorization': token,
-      'Cookie': 'XSRF-token=$token'
-    };
-    final request = http.MultipartRequest('PATCH', Uri.parse(endPoint));
-    request.headers.addAll(headers);
-
-    request.fields.addAll({
+    Map<String, String> body = {
       'name': '${model.name}',
       'id': '${model.id}',
       'price': '${model.price}',
@@ -182,113 +185,51 @@ class UpdateProductViewModel extends GetxController {
         'discount': '${model.discount}',
 
       if(imagesToDelete != [])
-        for(int i = 0; i<imagesToDelete.length; i++)
+        for(int i = 0; i < imagesToDelete.length; i++)
           'deleteImages[$i]': "${imagesToDelete[i]}"
-    });
+    };
 
-    if(thumbnailPath.value == '') {
+    List<http.MultipartFile> fileList = [];
+    if (thumbnailSelectedImage.value!.path == '') {
       null;
     }
-    else{
-      request.files.add(await http.MultipartFile.fromPath(
+    else {
+      fileList.add(await http.MultipartFile.fromPath(
         'thumbnail',
-        thumbnailPath.toString(),
+        thumbnailSelectedImage.value!.path.toString(),
         contentType: MediaType.parse('image/jpeg'),
       ));
     }
 
-    if(imagesToUpdate != []){
-      for(File image in imagesToUpdate){
-        request.files.add(await http.MultipartFile.fromPath(
+    if (imagesToUpdate != []) {
+      for (File image in imagesToUpdate) {
+        fileList.add(await http.MultipartFile.fromPath(
           'addImages',
           image.path,
           contentType: MediaType.parse('image/jpeg'),
         ));
       }
     }
-
-    http.StreamedResponse response = await request.send();
-    if (response.statusCode == 200) {
-      final responseData = await response.stream.bytesToString();
-      final data = json.decode(responseData);
+    ApiBaseHelper().patchMethodForImage(
+        url: 'vendor/products/update',
+        withAuthorization: true,
+        files: fileList,
+        fields: body)
+        .then((parsedJson) async {
       GlobalVariable.showLoader.value = false;
-      await sellersController.fetchMyProducts();
-      Get.back();
-      AppConstant.displaySnackBar(langKey.success.tr, data['message']);
-    } else {
+      if (parsedJson['message'] == "Product updated successfully") {
+        GlobalVariable.showLoader.value = false;
+        await sellersController.fetchMyProducts();
+        Get.back();
+        AppConstant.displaySnackBar(langKey.success.tr, parsedJson['message']);
+      } else {
+        GlobalVariable.showLoader.value = false;
+        AppConstant.displaySnackBar(
+            langKey.errorTitle.tr, parsedJson['message']);
+      }
+    }).catchError((e) {
       GlobalVariable.showLoader.value = false;
-      http.StreamedResponse res = await handleStreamResponse(response);
-      final data = json.decode(await res.stream.bytesToString());
-      AppConstant.displaySnackBar(langKey.errorTitle.tr, data['message']);
-    }
-  }
-
-  pickThumbnail(ImageSource src) async {
-    await PermissionsHandler().checkPermissions().then((isGranted) async {
-      if (isGranted) {
-        try {
-          XFile? thumbnailImage = await _picker.pickImage(source: src);
-          if (thumbnailImage!.path != '') {
-            await thumbnailImage.length().then((length) async {
-              await AppConstant.compressImage(
-                  thumbnailImage.path, fileLength: length)
-                  .then((compressedFile) {
-                var lengthInMb = compressedFile.lengthSync() * 0.000001;
-                if (lengthInMb > 2) {
-                  AppConstant.displaySnackBar(
-                      langKey.errorTitle.tr, '${langKey.fileMustBe.tr} + 2MB');
-                }
-                else {
-                  thumbnailImageSizeInMb.value += lengthInMb;
-                  thumbnailPath.value = compressedFile.path;
-                  thumbnailNotAvailable(false);
-                }
-              });
-            });
-          }
-        } on PlatformException {
-          AppConstant.displaySnackBar(
-              langKey.errorTitle.tr, langKey.invalidImageFormat.tr);
-        }
-      } else {
-        await PermissionsHandler().requestPermissions();
-      }
-    });
-    Get.back();
-  }
-
-  pickMultipleImages() async {
-    await PermissionsHandler().checkPermissions().then((isGranted) async {
-      if (isGranted) {
-        try {
-          List<XFile> images = await _picker.pickMultiImage(imageQuality: 100);
-          if (images.isNotEmpty) {
-            images.forEach((XFile? file) async {
-              await file!.length().then((length) async {
-                await AppConstant.compressImage(file.path, fileLength: length)
-                    .then((compressedFile) {
-                  var lengthInMb = compressedFile.lengthSync() * 0.000001;
-                  if (lengthInMb > 2) {
-                    AppConstant.displaySnackBar(langKey.errorTitle.tr,
-                        '${langKey.fileMustBe.tr} + 2MB');
-                  } else {
-                    imagesSize.value += lengthInMb;
-                    imagesToUpdate.add(compressedFile);
-                  }
-                });
-              });
-            });
-          }
-        } on PlatformException catch (e) {
-          print(e);
-          AppConstant.displaySnackBar(
-            langKey.errorTitle.tr,
-            langKey.invalidImageFormat.tr,
-          );
-        }
-      } else {
-        await PermissionsHandler().requestPermissions();
-      }
+      print(e);
     });
   }
 }

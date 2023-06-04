@@ -460,6 +460,13 @@ final productName = "productName",
     selectCategory = "selectCategory",
     selectSubCategory = "selectSubCategory";
 
+///Update Product
+final productImageSection = 'productImageSection',
+      productThumbnail = 'productThumbnail',
+      uploadThumbnail = 'uploadThumbnail',
+      productImages = 'productImages',
+      addedImages = 'addedImages';
+
 /**
  * Membership Plans
  *

@@ -152,12 +152,14 @@ class CustomTextField2 extends StatelessWidget {
   final FormFieldValidator<String>? validator;
   final List<TextInputFormatter>? inputFormatters;
   final TextInputType? keyboardType;
+  final void Function(String)? onChanged;
 
   CustomTextField2({
     Key? key,
     this.showCursor,
     this.readOnly = false,
     this.fillColor,
+    this.onChanged,
     this.contentPadding = const EdgeInsets.fromLTRB(10, 13.5, 10, 13.5),
     this.controller,
     this.suffixIcon,
@@ -194,6 +196,7 @@ class CustomTextField2 extends StatelessWidget {
           readOnly: readOnly,
           controller: controller,
           obscureText: obscureText,
+          onChanged: onChanged,
           style: GoogleFonts.lato(
             color: Colors.black,
             fontSize: 15,

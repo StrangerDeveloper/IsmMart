@@ -175,6 +175,13 @@ class English {
         key.outOfStock: 'Out of stock',
         key.productNotFound: 'Product Not Found',
 
+        ///update_product
+        key.productImageSection: 'Update Product Images',
+        key.productThumbnail: 'Product Thumbnail',
+        key.uploadThumbnail: 'Upload Thumbnail Image',
+        key.productImages: 'Product Images',
+        key.addedImages: 'Added Images',
+
         ///my_orders
         key.invoiceNo: 'INVOICE NO',
         key.billingDetails: 'Billing Details',
