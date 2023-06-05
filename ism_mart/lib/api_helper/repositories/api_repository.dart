@@ -61,6 +61,13 @@ class ApiRepository {
     return response.body['data'];
   }
 
+  Future<List<dynamic>> fetchAllProducts({int? limit = 30}) async {
+    final queryParameters = {"limit": "$limit"};
+    var response =
+        await _apiService.get(endpoint: "products/", query: queryParameters);
+    return response.body['data'];
+  }
+
   // same for categoryById and SubCategoryById
   Future<List<dynamic>> getProductsByCategory(
       {required String? endPoint,

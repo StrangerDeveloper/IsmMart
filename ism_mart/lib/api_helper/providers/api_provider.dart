@@ -79,6 +79,12 @@ class ApiProvider {
     return products.map((product) => ProductModel.fromJson(product)).toList();
   }
 
+  Future<List<ProductModel>> getAllProducts({int? limit}) async {
+    var products = await _apiRepository.fetchAllProducts(limit: limit);
+
+    return products.map((product) => ProductModel.fromJson(product)).toList();
+  }
+
   Future<ProductModel> getProductById(int id) async {
     var productResponse = await _apiRepository.getProductDetailsById(id: id);
     debugPrint("getProductById: ${productResponse.toString()}");

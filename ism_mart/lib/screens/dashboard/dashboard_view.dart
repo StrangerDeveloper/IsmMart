@@ -35,6 +35,7 @@ class DashboardUI extends GetView<BaseController> {
                     productMap: controller.productsWithTypesMap,
                   ),
                 ),
+
                 kDivider,
                 Obx(
                   () => _displayProducts(
@@ -366,6 +367,30 @@ class DashboardUI extends GetView<BaseController> {
                 );
               }),
         ),
+      );
+
+    if (isCategoryProducts!)
+      return GridView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+          //crossAxisCount: AppResponsiveness.getGridItemCount(),
+          maxCrossAxisExtent: 170,
+          // Maximum width of each item
+          childAspectRatio: 0.8,
+          // Aspect ratio of each item (width / height)
+          mainAxisSpacing: 5,
+          // Spacing between rows
+          crossAxisSpacing: 5, // Spacing between columns
+        ),
+        itemCount: list.length,
+        itemBuilder: (context, index) {
+          ProductModel productModel = list[index];
+          return SingleProductItems(
+            productModel: productModel,
+            isCategoryProducts: isCategoryProducts,
+          );
+        },
       );
 
     return Padding(
