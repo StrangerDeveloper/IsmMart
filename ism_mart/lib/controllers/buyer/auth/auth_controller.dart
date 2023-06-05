@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/api_helper/global_variables.dart';
-import 'package:ism_mart/exports/export_account.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
@@ -138,31 +137,31 @@ class AuthController extends GetxController {
   //   //isLoading(false);
   // }
 
-  forgotPasswordWithEmail() async {
-    isLoading(true);
-    String email = forgotPasswordEmailController.text.trim();
-
-    await authProvider
-        .forgotPassword(data: {"email": email}).then((ApiResponse? response) {
-      isLoading(false);
-      if (response != null) {
-        if (response.success!) {
-          Get.back();
-          Get.to(() => ResetForgotPassword());
-          //forgotPasswordEmailController.clear();
-          AppConstant.displaySnackBar(
-              langKey.successTitle.tr, response.message);
-        } else {
-          AppConstant.displaySnackBar(langKey.errorTitle.tr, response.message);
-        }
-      } else
-        AppConstant.displaySnackBar(
-            langKey.errorTitle.tr, langKey.wrongWithCredentials.tr);
-    }).catchError((onError) {
-      isLoading(false);
-      print("resetPassword: $onError");
-    });
-  }
+  // forgotPasswordWithEmail() async {
+  //   isLoading(true);
+  //   String email = forgotPasswordEmailController.text.trim();
+  //
+  //   await authProvider
+  //       .forgotPassword(data: {"email": email}).then((ApiResponse? response) {
+  //     isLoading(false);
+  //     if (response != null) {
+  //       if (response.success!) {
+  //         Get.back();
+  //         Get.to(() => ResetForgotPassword());
+  //         //forgotPasswordEmailController.clear();
+  //         AppConstant.displaySnackBar(
+  //             langKey.successTitle.tr, response.message);
+  //       } else {
+  //         AppConstant.displaySnackBar(langKey.errorTitle.tr, response.message);
+  //       }
+  //     } else
+  //       AppConstant.displaySnackBar(
+  //           langKey.errorTitle.tr, langKey.wrongWithCredentials.tr);
+  //   }).catchError((onError) {
+  //     isLoading(false);
+  //     print("resetPassword: $onError");
+  //   });
+  // }
 
   forgotPasswordOtp() async {
     isLoading(true);

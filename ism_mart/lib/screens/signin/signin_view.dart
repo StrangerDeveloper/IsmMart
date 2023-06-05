@@ -125,10 +125,11 @@ class SignInView extends StatelessWidget {
       alignment: Alignment.centerRight,
       child: InkWell(
         onTap: () {
-          Get.to(() => ForgotPasswordView(
-              email: GetUtils.isEmail(viewModel.emailController.text)
-                  ? viewModel.emailController.text
-                  : ''));
+          Get.to(() => ForgotPasswordView(), arguments: {
+            'email': GetUtils.isEmail(viewModel.emailController.text)
+                ? viewModel.emailController.text
+                : ''
+          });
         },
         child: Text(
           langKey.forgotPassword.tr + '?',

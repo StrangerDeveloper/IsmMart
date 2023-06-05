@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ism_mart/controllers/buyer/auth/auth_controller.dart';
+import 'package:ism_mart/api_helper/global_variables.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
-import 'package:ism_mart/utils/constants.dart';
+import 'package:ism_mart/screens/forgot_password/forgot_password_viewmodel.dart';
+import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
-class ForgotPasswordView extends GetView<AuthController> {
-  const ForgotPasswordView({Key? key, this.email}) : super(key: key);
-  final String? email;
+class ForgotPasswordView extends StatelessWidget {
+  ForgotPasswordView({Key? key}) : super(key: key);
+  final ForgotPasswordViewModel viewModel = Get.put(ForgotPasswordViewModel());
 
   @override
   Widget build(BuildContext context) {
-    controller.forgotPasswordEmailController.text = email.toString();
     return SafeArea(
       child: Scaffold(
         appBar: appBar(),
         body: SingleChildScrollView(
-          padding: EdgeInsets.fromLTRB(16, 0, 16, 16),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 langKey.forgotPassword.tr,
@@ -28,18 +27,18 @@ class ForgotPasswordView extends GetView<AuthController> {
                   fontWeight: FontWeight.w800,
                 ),
               ),
-              SizedBox(height: 10),
-              Text(
-                langKey.forgotPasswordDesc.tr,
-                style: bodyText2Poppins.copyWith(
-                  fontSize: 13,
+              Padding(
+                padding: const EdgeInsets.only(top: 10, bottom: 30),
+                child: Text(
+                  langKey.forgotPasswordDesc.tr,
+                  style: bodyText2Poppins.copyWith(
+                    fontSize: 13,
+                  ),
                 ),
               ),
-              //header(),
-              SizedBox(height: 40),
               Text(
                 langKey.enterEmail.tr,
-                style: headline2,
+                style: headline2.copyWith(fontSize: 16),
               ),
               emailTextField(),
               buttons(),
@@ -55,7 +54,6 @@ class ForgotPasswordView extends GetView<AuthController> {
       elevation: 0,
       leading: IconButton(
         onPressed: () {
-          controller.clearForgotPasswordControllers();
           Get.back();
         },
         icon: Icon(
@@ -71,62 +69,33 @@ class ForgotPasswordView extends GetView<AuthController> {
     return Padding(
       padding: const EdgeInsets.only(top: 15, bottom: 20),
       child: Form(
-        key: controller.forgotPasswordFormKey,
-        child: FormInputFieldWithIcon(
-          controller: controller.forgotPasswordEmailController,
-          iconPrefix: Icons.email,
-          labelText: langKey.email.tr,
-          iconColor: kPrimaryColor,
-          autofocus: false,
-          textStyle: bodyText1,
+        key: viewModel.forgotPasswordFormKey,
+        child: CustomTextField2(
+          contentPadding: EdgeInsets.symmetric(vertical: 16),
+          controller: viewModel.emailController,
+          prefixIcon: Icons.email,
+          label: langKey.email.tr,
           autoValidateMode: AutovalidateMode.onUserInteraction,
           validator: (value) {
-            if (value!.isEmpty) {
-              return langKey.emailReq.tr;
-            } else
-              return !GetUtils.isEmail(value) ? langKey.invalidEmail.tr : null;
+            return Validator().validateEmail(value);
           },
           keyboardType: TextInputType.emailAddress,
-          onChanged: (value) {},
-          onSaved: (value) {},
         ),
       ),
     );
   }
 
   Widget buttons() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        // Expanded(
-        //   child: CustomButton(
-        //     onTap: () {
-        //       Get.back();
-        //     },
-        //     text: langKey.cancelBtn.tr,
-        //     height: 40,
-        //     color: kPrimaryColor,
-        //   ),
-        // ),
-        // SizedBox(width: 15),
-
-        Obx(
-          () => controller.isLoading.isTrue
-              ? CustomLoading(isItBtn: true)
-              : CustomButton(
-                  onTap: () async {
-                    if (controller.forgotPasswordFormKey.currentState!
-                        .validate()) {
-                      await controller.forgotPasswordWithEmail();
-                    }
-                  },
-                  text: langKey.send.tr,
-                  width: 200,
-                  height: 40,
-                  color: kPrimaryColor,
-                ),
-        )
-      ],
+    return Obx(
+      () => GlobalVariable.showLoader.value
+          ? CustomLoading(isItBtn: true)
+          : CustomTextBtn(
+              title: langKey.send.tr,
+              height: 48,
+              onPressed: () {
+                viewModel.sendBtn();
+              },
+            ),
     );
   }
 }

@@ -58,10 +58,10 @@ class Routes {
         name: resetPasswordRoute,
         page: () => const ResetForgotPassword(),
         binding: BaseBindings()),
-    GetPage(
-        name: passwordResetEmailInput,
-        page: () => const ForgotPasswordView(),
-        binding: BaseBindings()),
+    // GetPage(
+    //     name: passwordResetEmailInput,
+    //     page: () => const ForgotPasswordView(),
+    //     binding: BaseBindings()),
     GetPage(
         name: emailVerificationLinkRoute,
         page: () => EmailVerificationView(),
