@@ -75,7 +75,8 @@ class _EmailVerifyViewState extends State<EmailVerifyView> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: CustomTextBtn(
-                    onPressed: () => Get.offAllNamed(Routes.initRoute),
+                    //rednring to login when user verify
+                    onPressed: () => Get.offAllNamed(Routes.loginRoute),
                     title: "Go to Dashboard",
                     height: 60,
                   ),
