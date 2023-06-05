@@ -53,7 +53,6 @@ class EmailVerificationView extends GetView<AuthController> {
       elevation: 0,
       leading: IconButton(
         onPressed: () {
-          controller.clearLoginController();
           Get.back();
         },
         icon: Icon(

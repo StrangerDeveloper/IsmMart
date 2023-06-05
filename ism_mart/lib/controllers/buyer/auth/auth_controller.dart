@@ -10,12 +10,8 @@ import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 class AuthController extends GetxController {
   final AuthProvider authProvider;
 
-  // final signInFormKey = GlobalKey<FormState>();
-
   AuthController(this.authProvider);
 
-  // RxString countryCode = '+92'.obs;
-  final forgotPasswordFormKey = GlobalKey<FormState>();
   final emailVerificationFormKey = GlobalKey<FormState>();
   var forgotPasswordEmailController = TextEditingController();
   var newPasswordController = TextEditingController();
@@ -45,22 +41,8 @@ class AuthController extends GetxController {
   void onInit() {
     super.onInit();
     getCurrentUser();
-    //getToken();
-    //getCurrentUser();
   }
 
-  // final phoneErrorText = Rxn<String>();
-  //
-  // validatorPhoneNumber(String? value) {
-  //   if (GetUtils.isBlank(value)!) {
-  //     //return langKey.fieldIsRequired.tr;
-  //     phoneErrorText.value = langKey.fieldIsRequired.tr;
-  //   } else if (value!.length > 16 || value.length < 7) {
-  //     phoneErrorText.value = langKey.phoneValidate.tr;
-  //   } else {
-  //     phoneErrorText.value = null;
-  //   }
-  // }
 
   @override
   void onReady() {
@@ -100,68 +82,6 @@ class AuthController extends GetxController {
 
   var isLoading = false.obs;
 
-  // login() async {
-  //   isLoading(true);
-  //   await authProvider
-  //       .postLogin(
-  //           email: emailController.text.toString(),
-  //           password: passwordController.text.trim())
-  //       .then((UserResponse? userResponse) async {
-  //     isLoading(false);
-  //     if (userResponse != null) {
-  //       if (userResponse.success!) {
-  //         Get.back();
-  //         //Navigating back to home after login
-  //         baseController.changePage(0);
-  //         GlobalVariable.userModel = userResponse.userModel;
-  //         AppConstant.displaySnackBar(
-  //             langKey.successTitle.tr, userResponse.message);
-  //         await LocalStorageHelper.storeUser(userModel: userResponse.userModel)
-  //             .then((value) {
-  //           clearLoginController();
-  //         });
-  //       } else {
-  //         AppConstant.displaySnackBar(
-  //             langKey.errorTitle.tr, userResponse.message);
-  //       }
-  //     } else {
-  //       AppConstant.displaySnackBar(
-  //         langKey.errorTitle.tr,
-  //         langKey.wrongWithCredentials.tr,
-  //       );
-  //     }
-  //   }).catchError((error) {
-  //     isLoading(false);
-  //     debugPrint("Error: $error");
-  //   });
-  //   //isLoading(false);
-  // }
-
-  // forgotPasswordWithEmail() async {
-  //   isLoading(true);
-  //   String email = forgotPasswordEmailController.text.trim();
-  //
-  //   await authProvider
-  //       .forgotPassword(data: {"email": email}).then((ApiResponse? response) {
-  //     isLoading(false);
-  //     if (response != null) {
-  //       if (response.success!) {
-  //         Get.back();
-  //         Get.to(() => ResetForgotPassword());
-  //         //forgotPasswordEmailController.clear();
-  //         AppConstant.displaySnackBar(
-  //             langKey.successTitle.tr, response.message);
-  //       } else {
-  //         AppConstant.displaySnackBar(langKey.errorTitle.tr, response.message);
-  //       }
-  //     } else
-  //       AppConstant.displaySnackBar(
-  //           langKey.errorTitle.tr, langKey.wrongWithCredentials.tr);
-  //   }).catchError((onError) {
-  //     isLoading(false);
-  //     print("resetPassword: $onError");
-  //   });
-  // }
 
   forgotPasswordOtp() async {
     isLoading(true);
@@ -206,7 +126,6 @@ class AuthController extends GetxController {
       if (response != null) {
         if (response.success!) {
           Get.back();
-          clearLoginController();
           debugPrint("Email: ${response.toString()}");
           AppConstant.displaySnackBar(
               langKey.successTitle.tr, response.message);
@@ -223,88 +142,6 @@ class AuthController extends GetxController {
     });
   }
 
-  // register() async {
-  //   isLoading(true);
-  //   String? phoneNumber = countryCode.value + phoneController.text;
-  //   UserModel newUser = UserModel(
-  //     //firstName: firstNameController.text.trim(),
-  //     //lastName: lastNameController.text.trim(),\\
-  //     firstName: firstNameController.text,
-  //     email: signUpEmailController.text,
-  //     phone: phoneNumber,
-  //     password: signUpPasswordController.text,
-  //   );
-  //
-  //   await authProvider
-  //       .postRegister(userModel: newUser)
-  //       .then((UserResponse? response) {
-  //     isLoading(false);
-  //     if (response != null) {
-  //       if (response.success!) {
-  //         //Get.back();
-  //         AppConstant.displaySnackBar(langKey.successTitle.tr, response.message);
-  //         clearSignUpControllers();
-  //         Get.offNamed(Routes.loginRoute);
-  //       } else
-  //         AppConstant.displaySnackBar(langKey.errorTitle.tr, response.message);
-  //     } else
-  //       AppConstant.displaySnackBar(langKey.errorTitle.tr, langKey.someThingWentWrong.tr);
-  //   }).catchError((error) {
-  //     isLoading(false);
-  //
-  //     AppConstant.displaySnackBar(
-  //         langKey.errorTitle.tr, langKey.someThingWentWrong.tr);
-  //   });
-  // }
-
-  // registerStore({cityid, String? cityName}) async {
-  //   isLoading(true);
-  //   SellerModel model = SellerModel(
-  //       storeName: storeNameController.text,
-  //       storeDesc: storeDescController.text,
-  //       ownerName: ownerNameController.text,
-  //       storeImage: profileImgPath.value,
-  //       coverImage: coverImgPath.value,
-  //       phone: phoneController.text,
-  //       membership: "Free",
-  //       premium: false,
-  //       bankName: bankNameController.text.trim(),
-  //       accountTitle: bankHolderTitleController.text.trim(),
-  //       accountNumber: bankAccController.text.trim(),
-  //       cityId: cityid,
-  //       cityName: cityName.toString());
-  //
-  //   if (userToken!.isNotEmpty) {
-  //     // UserModel user = UserModel(vendor: model);
-  //     await authProvider
-  //         .postStoreRegister(token: userToken!, sellerModel: model)
-  //         .then((UserResponse? apiResponse) {
-  //       isLoading(false);
-  //       if (apiResponse != null) {
-  //         if (apiResponse.success!) {
-  //           Get.back();
-  //           AppConstant.displaySnackBar(
-  //               langKey.successTitle.tr, apiResponse.message);
-  //           clearStoreController();
-  //           getCurrentUser();
-  //         } else
-  //           AppConstant.displaySnackBar(
-  //               langKey.errorTitle.tr, apiResponse.message);
-  //       } else
-  //         AppConstant.displaySnackBar(
-  //             langKey.errorTitle.tr, langKey.someThingWentWrong.tr);
-  //     }).catchError((error) {
-  //       isLoading(false);
-  //       debugPrint("RegisterStore: Error $error");
-  //     });
-  //   } else {
-  //     isLoading(false);
-  //     AppConstant.displaySnackBar(
-  //       langKey.errorTitle.tr,
-  //       langKey.currentUserNotFound.tr,
-  //     );
-  //   }
-  // }
 
   var coverImgPath = "".obs;
   var profileImgPath = "".obs;
@@ -411,50 +248,6 @@ class AuthController extends GetxController {
     setUserModel(fromApi);
   }
 
-  // List getStoreInfo() {
-  //   return [
-  //     {
-  //       "title": storeName.tr,
-  //       "subtitle": userModel!.vendor?.storeName ?? '',
-  //       "icon": Icons.storefront,
-  //     },
-  //     {
-  //       "title": phone.tr,
-  //       "subtitle": userModel!.vendor?.phone ?? '',
-  //       "icon": Icons.phone_iphone_rounded,
-  //     },
-  //     {
-  //       "title": description.tr,
-  //       "subtitle": userModel!.vendor?.storeDesc ?? '',
-  //       "icon": Icons.info_outlined,
-  //     },
-  //     {
-  //       "title": city.tr,
-  //       "subtitle": userModel!.city?.name ?? '',
-  //       "icon": Icons.villa_rounded,
-  //     },
-  //   ];
-  // }
-
-  // List getBankDetails() {
-  //   return [
-  //     {
-  //       "title": bankName.tr,
-  //       "subtitle": userModel!.vendor?.bankName ?? '',
-  //       "icon": Icons.account_balance_rounded,
-  //     },
-  //     {
-  //       "title": bankAccountHolder.tr,
-  //       "subtitle": userModel!.vendor?.accountTitle ?? '',
-  //       "icon": Icons.person_rounded,
-  //     },
-  //     {
-  //       "title": bankAccount.tr,
-  //       "subtitle": userModel!.vendor?.accountNumber ?? '',
-  //       "icon": Icons.account_balance_wallet_rounded,
-  //     },
-  //   ];
-  // }
 
   var _currUserToken = "".obs;
 
@@ -628,29 +421,6 @@ class AuthController extends GetxController {
     messageController.clear();
   }
 
-  clearSignUpControllers() {
-    firstNameController.clear();
-    otpController.clear();
-    phoneController.clear();
-    signUpPasswordController.clear();
-    signUpEmailController.clear();
-  }
-
-  clearLoginController() {
-    passwordController.clear();
-    emailController.clear();
-  }
-
-  clearStoreController() {
-    ownerNameController.clear();
-    storeNameController.clear();
-    storeDescController.clear();
-    phoneController.clear();
-    coverImgPath("");
-    profileImgPath("");
-
-    clearBankControllers();
-  }
 
   clearForgotPasswordControllers() {
     newPasswordController.clear();
@@ -669,9 +439,6 @@ class AuthController extends GetxController {
   @override
   void onClose() {
     super.onClose();
-    clearSignUpControllers();
-    clearLoginController();
-    clearStoreController();
     clearForgotPasswordControllers();
   }
 }

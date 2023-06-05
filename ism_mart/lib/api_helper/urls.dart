@@ -1,5 +1,4 @@
 class Urls {
-
   //SignInViewModel
   static String login = "auth/login";
 
@@ -25,9 +24,10 @@ class Urls {
   static String updateAnswer = "product/answers/update/";
   static String deleteAnswer = "product/answers/delete/";
 
+  //TopVendorsViewModel
   static String getTopVendors = "getTopVendors?limit=";
 
-
+  //ProductQuestionsViewModel
   static String getQuestionByProductId = "product/questions/";
   static String getVendorQuestions = "product/questions/vendorQuestions";
 
@@ -41,5 +41,4 @@ class Urls {
 
   //UpdateVendorViewModel
   static String updateVendor = "auth/vendor/register";
-
 }

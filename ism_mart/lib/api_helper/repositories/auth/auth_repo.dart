@@ -26,13 +26,6 @@ class AuthRepository {
     return response.body;
   }
 
-  Future<dynamic> register({UserModel? userModel}) async {
-    var response = await _apiService.post(
-        endpoint: "auth/register", body: userModel?.toJson());
-
-    return response.body;
-  }
-
   Future<dynamic> resendVerificationLink({String? email}) async {
     var queryParam = {"email": email};
     var response = await _apiService.get(
@@ -64,23 +57,9 @@ class AuthRepository {
     return response.body;
   }
 
-  Future<dynamic> deActivateUserAccount({token}) async {
-    var response = await _apiService.get(
-        endpoint: "user/deactivate", requiresAuthToken: true, token: token);
-    return response.body;
-  }
-
   Future<dynamic> fetchCurrentUser({String? token}) async {
     var response = await _apiService.get(
         endpoint: "user/profile", requiresAuthToken: true, token: token);
-    return response.body;
-  }
-
-  Future<dynamic> forgotPassword({data}) async {
-    var response = await _apiService.post(
-      endpoint: "auth/forgetPassword",
-      body: data,
-    );
     return response.body;
   }
 
