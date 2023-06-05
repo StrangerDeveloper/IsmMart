@@ -6,6 +6,8 @@ class Urls {
   //SignUpViewModel
   static String signUp = "auth/register";
 
+  //ForgotPasswordViewModel
+  static String forgetPassword = "auth/forgetPassword";
 
   //DisputeDetailViewModel
   static String ticketDetail = "tickets/";
