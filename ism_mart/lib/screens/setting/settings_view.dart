@@ -46,7 +46,7 @@ class SettingsView extends GetView<AuthController> {
                   children: [
                     _accountSetup(context),
                     SizedBox(height: 15),
-                    _generalSettings(),
+                    generalSettings(),
                   ],
                 ),
               ),
@@ -156,7 +156,6 @@ class SettingsView extends GetView<AuthController> {
       child: ListTile(
         onTap: () {
           Get.toNamed(Routes.loginRoute);
-          //Get.to(()=> const SignInUI());
         },
         leading: const Icon(
           IconlyBold.profile,
@@ -173,7 +172,7 @@ class SettingsView extends GetView<AuthController> {
   _accountSettings({buildContext}) {
     return Column(
       children: [
-        _singleSettingsItem(
+        singleSettingsItem(
           onTap: () {
             if (checkVendorAccountStatus(controller.userModel?.vendor)!) {
               if (controller.userModel!.role!
@@ -188,7 +187,8 @@ class SettingsView extends GetView<AuthController> {
                 //     widget: register_seller_view(),
                 //     isGetXBottomSheet: false,
                 //     buildContext: buildContext);
-                Get.to(() => UpdateVendorView(), arguments: {'isRegisterScreen' : true});
+                Get.to(() => UpdateVendorView(),
+                    arguments: {'isRegisterScreen': true});
               }
             } else {
               AppConstant.displaySnackBar(
@@ -198,21 +198,23 @@ class SettingsView extends GetView<AuthController> {
             }
           },
           icon: Icons.dashboard_rounded,
-          iconColor: kPrimaryColor,
+          color: kPrimaryColor,
           title: langKey.vendorDashboard.tr,
         ),
-        _singleSettingsItem(
-          onTap: () => Get.toNamed(Routes.buyerOrdersRoute),
+        singleSettingsItem(
+          onTap: () {
+            Get.toNamed(Routes.buyerOrdersRoute);
+          },
           icon: IconlyBold.bag,
-          iconColor: Colors.teal,
+          color: Colors.teal,
           title: langKey.userOrders.tr,
         ),
-        _singleSettingsItem(
+        singleSettingsItem(
           onTap: () {
             Get.to(() => BuyerProfileView());
           },
           icon: IconlyBold.user_2,
-          iconColor: Colors.pink,
+          color: Colors.pink,
           title: 'Buyer Profile',
         ), /* _singleSettingsItem(
             onTap: () => Get.to(() => PremiumMembershipUI()),
@@ -231,7 +233,7 @@ class SettingsView extends GetView<AuthController> {
     return true;
   }
 
-  _generalSettings() {
+  Widget generalSettings() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -242,19 +244,23 @@ class SettingsView extends GetView<AuthController> {
             size: 16,
           ),
         ),
-        _singleSettingsItem(
-          onTap: () {},//_showCurrencyChangeBS(),
+        singleSettingsItem(
+          onTap: () {
+            //_showCurrencyChangeBS();
+          },
           icon: Icons.currency_exchange,
-          iconColor: Color.fromARGB(255, 160, 235, 94),
+          color: Color.fromARGB(255, 160, 235, 94),
           title: langKey.currencyKey.tr,
           value: currencyController.currency.value,
           countryCode: currencyController.countryCode.value,
         ),
         Obx(
-          () => _singleSettingsItem(
-            onTap: () => _showLanguageChangeBottomSheet(),
+          () => singleSettingsItem(
+            onTap: () {
+              showLanguageBottomSheet();
+            },
             icon: Icons.language,
-            iconColor: Colors.orange,
+            color: Colors.orange,
             title: langKey.language.tr,
             value: languageController.language.value,
             countryCode: languageController.countryKey.value,
@@ -264,71 +270,85 @@ class SettingsView extends GetView<AuthController> {
             onTap: () => Get.to(() => NotificationUI()),
             icon: IconlyLight.notification,
             iconColor: Colors.lightBlue,
-            title: langKey.notifications.tr),*/
-        _singleSettingsItem(
-          onTap: () => Get.to(
-              () => GeneralSettingsView(title: langKey.termsAndConditions.tr)),
+            title: langKey.notifications.tr,),*/
+        singleSettingsItem(
+          onTap: () {
+            Get.to(() =>
+                GeneralSettingsView(title: langKey.termsAndConditions.tr));
+          },
           icon: Icons.rule_outlined,
-          iconColor: Colors.indigo,
+          color: Colors.indigo,
           title: langKey.termsAndConditions.tr,
         ),
-        _singleSettingsItem(
-          onTap: () => Get.to(
-              () => GeneralSettingsView(title: langKey.privacyPolicy.tr)),
+        singleSettingsItem(
+          onTap: () {
+            Get.to(() => GeneralSettingsView(title: langKey.privacyPolicy.tr));
+          },
           icon: IconlyLight.paper,
-          iconColor: Colors.purpleAccent,
+          color: Colors.purpleAccent,
           title: langKey.privacyPolicy.tr,
         ),
-        _singleSettingsItem(
-          onTap: () => Get.to(
-              () => GeneralSettingsView(title: langKey.returnAndExchange.tr)),
+        singleSettingsItem(
+          onTap: () {
+            Get.to(
+                () => GeneralSettingsView(title: langKey.returnAndExchange.tr));
+          },
           icon: Icons.assignment_return_rounded,
-          iconColor: Colors.lime,
+          color: Colors.lime,
           title: langKey.returnAndExchange.tr,
         ),
-        _singleSettingsItem(
-          onTap: () =>
-              Get.to(() => GeneralSettingsView(title: langKey.aboutUs.tr)),
+        singleSettingsItem(
+          onTap: () {
+            Get.to(() => GeneralSettingsView(title: langKey.aboutUs.tr));
+          },
           icon: IconlyLight.info_circle,
-          iconColor: Colors.pinkAccent,
+          color: Colors.pinkAccent,
           title: langKey.aboutUs.tr,
         ),
-        _singleSettingsItem(
-          // onTap: () => Get.to(() => GeneralSettingsView(
-          //     isContactUsCalled: true, title: langKey.contactUs.tr)),
+        singleSettingsItem(
           onTap: () {
             Get.to(() => ContactUsView());
           },
           icon: Icons.contactless_outlined,
-          iconColor: Colors.green,
+          color: Colors.green,
           title: langKey.contactUs.tr,
         ),
-        _singleSettingsItem(
-          onTap: () => Get.to(() => FaqView()),
+        singleSettingsItem(
+          onTap: () {
+            Get.to(() => FaqView());
+          },
           icon: Icons.question_answer,
-          iconColor: Colors.purple,
+          color: Colors.purple,
           title: langKey.faqs.tr,
         ),
-        Obx(() => controller.userModel!.email != null &&
-                !controller.isSessionExpired! &&
-                controller.userToken != null
-            ? _singleSettingsItem(
-                onTap: () async {
-                  await LocalStorageHelper.deleteUserData();
-                  controller.update();
-                  authController.update();
-                },
-                icon: IconlyLight.logout,
-                iconColor: Colors.red,
-                title: langKey.logout.tr,
-              )
-            : Container()),
+        Obx(
+          () => controller.userModel!.email != null &&
+                  !controller.isSessionExpired! &&
+                  controller.userToken != null
+              ? singleSettingsItem(
+                  onTap: () async {
+                    await LocalStorageHelper.deleteUserData();
+                    controller.update();
+                    authController.update();
+                  },
+                  icon: IconlyLight.logout,
+                  color: Colors.red,
+                  title: langKey.logout.tr,
+                )
+              : Container(),
+        ),
       ],
     );
   }
 
-  Widget _singleSettingsItem(
-      {required onTap, icon, iconColor, title, value, countryCode}) {
+  Widget singleSettingsItem({
+    required onTap,
+    required IconData icon,
+    required Color color,
+    required String title,
+    value,
+    countryCode,
+  }) {
     return InkWell(
       onTap: onTap,
       child: Container(
@@ -339,14 +359,16 @@ class SettingsView extends GetView<AuthController> {
               width: 45,
               height: 45,
               decoration: BoxDecoration(
-                  color: iconColor.withOpacity(0.15), shape: BoxShape.circle),
+                color: color.withOpacity(0.15),
+                shape: BoxShape.circle,
+              ),
               child: Icon(
                 icon,
                 size: 25,
-                color: iconColor,
+                color: color,
               ),
             ),
-            AppConstant.spaceWidget(width: 10),
+            SizedBox(width: 10),
             Expanded(
               flex: 4,
               child: CustomText(
@@ -358,18 +380,30 @@ class SettingsView extends GetView<AuthController> {
             Row(
               children: [
                 if (countryCode != null && countryCode != "")
-                  _countryFlag(countryCode: countryCode, height: 15, width: 25),
-                AppConstant.spaceWidget(width: 8),
+                  countryFlag(
+                    countryCode: countryCode,
+                    height: 15,
+                    width: 25,
+                  ),
                 if (value != null && value != "")
-                  CustomText(
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: CustomText(
                       title: value.toString().capitalizeFirst,
                       style: caption.copyWith(
-                          fontWeight: FontWeight.w600, fontSize: 13)),
-                AppConstant.spaceWidget(width: 5),
+                        fontWeight: FontWeight.w600,
+                        fontSize: 13,
+                      ),
+                    ),
+                  ),
                 const Align(
-                    alignment: Alignment.centerRight,
-                    child: Icon(Icons.arrow_forward_ios,
-                        size: 14, color: Colors.black)),
+                  alignment: Alignment.centerRight,
+                  child: Icon(
+                    Icons.arrow_forward_ios,
+                    size: 14,
+                    color: Colors.black,
+                  ),
+                ),
               ],
             )
           ],
@@ -378,7 +412,7 @@ class SettingsView extends GetView<AuthController> {
     );
   }
 
-  _showLanguageChangeBottomSheet() {
+  showLanguageBottomSheet() {
     AppConstant.showBottomSheet(
       widget: Column(
         children: [
@@ -413,27 +447,31 @@ class SettingsView extends GetView<AuthController> {
             child: Divider(),
           ),
           Flexible(
-              child: SingleChildScrollView(
-            child: Column(
-              children: languageController.optionsLocales.entries.map((item) {
-                return ListTile(
-                  onTap: () {
-                    languageController.setLanguage(key: item.key);
-                    Get.back();
-                  },
-                  leading: _countryFlag(
+            child: SingleChildScrollView(
+              child: Column(
+                children: languageController.optionsLocales.entries.map((item) {
+                  return ListTile(
+                    onTap: () {
+                      languageController.setLanguage(key: item.key);
+                      Get.back();
+                    },
+                    leading: countryFlag(
                       countryCode: item.value['countryCode'],
-                      color: item.value['color']),
-                  title: Text(item.value["description"],
-                      style: bodyText1.copyWith(fontWeight: FontWeight.w600)),
-                  trailing: item.value["description"] ==
-                          languageController.language.value
-                      ? const Icon(Icons.done)
-                      : null,
-                );
-              }).toList(),
+                      color: item.value['color'],
+                    ),
+                    title: Text(
+                      item.value["description"],
+                      style: bodyText1.copyWith(fontWeight: FontWeight.w600),
+                    ),
+                    trailing: item.value["description"] ==
+                            languageController.language.value
+                        ? const Icon(Icons.done)
+                        : null,
+                  );
+                }).toList(),
+              ),
             ),
-          ))
+          )
         ],
       ),
     );
@@ -488,7 +526,7 @@ class SettingsView extends GetView<AuthController> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        _countryFlag(
+                        countryFlag(
                             countryCode: item.value['countryCode'],
                             color: item.value['color']),
                       ],
@@ -514,21 +552,20 @@ class SettingsView extends GetView<AuthController> {
     );
   }
 
-  Widget _countryFlag(
-      {String? countryCode,
-      Color? color = Colors.amber,
-      double? height = 20,
-      double? width = 30}) {
+  Widget countryFlag({
+    String? countryCode,
+    Color? color = Colors.amber,
+    double? height = 20,
+    double? width = 30,
+  }) {
     var imageUrl =
         "https://raw.githubusercontent.com/hampusborgos/country-flags/main/png1000px/${countryCode!.toLowerCase()}.png";
     return Container(
       height: height,
       width: width,
       padding: EdgeInsets.all(8),
-      // Border width
       decoration: BoxDecoration(
         color: color!.withOpacity(0.3),
-        //shape: BoxShape.circle,
         border: Border.all(color: Colors.grey),
         image: DecorationImage(
           fit: BoxFit.cover,
