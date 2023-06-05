@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/global_variables.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
-import 'package:ism_mart/screens/forgot_password/forgot_password_viewmodel.dart';
+import 'package:ism_mart/screens/forgot_password1/forgot_password1_viewmodel.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
-class ForgotPasswordView extends StatelessWidget {
-  ForgotPasswordView({Key? key}) : super(key: key);
-  final ForgotPasswordViewModel viewModel = Get.put(ForgotPasswordViewModel());
+class ForgotPassword1View extends StatelessWidget {
+  ForgotPassword1View({Key? key}) : super(key: key);
+  final ForgotPassword1ViewModel viewModel =
+      Get.put(ForgotPassword1ViewModel());
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class ForgotPasswordView extends StatelessWidget {
       child: Scaffold(
         appBar: appBar(),
         body: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -41,7 +42,7 @@ class ForgotPasswordView extends StatelessWidget {
                 style: headline2.copyWith(fontSize: 16),
               ),
               emailTextField(),
-              buttons(),
+              sendBtn(),
             ],
           ),
         ),
@@ -67,7 +68,7 @@ class ForgotPasswordView extends StatelessWidget {
 
   Widget emailTextField() {
     return Padding(
-      padding: const EdgeInsets.only(top: 15, bottom: 20),
+      padding: const EdgeInsets.only(top: 15, bottom: 25),
       child: Form(
         key: viewModel.forgotPasswordFormKey,
         child: CustomTextField2(
@@ -85,7 +86,7 @@ class ForgotPasswordView extends StatelessWidget {
     );
   }
 
-  Widget buttons() {
+  Widget sendBtn() {
     return Obx(
       () => GlobalVariable.showLoader.value
           ? CustomLoading(isItBtn: true)

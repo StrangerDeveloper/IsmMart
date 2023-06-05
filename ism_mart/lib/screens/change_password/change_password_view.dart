@@ -56,8 +56,7 @@ class ChangePasswordView extends StatelessWidget {
         controller: viewModel.newPasswordController,
         autoValidateMode: AutovalidateMode.onUserInteraction,
         validator: (value) {
-          Validator().validatePassword(value);
-          return null;
+          return Validator().validatePassword(value);
         },
         obscureText: viewModel.obscureNewPassword.value ? true : false,
         suffixIcon: ObscureSuffixIcon(

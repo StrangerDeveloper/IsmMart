@@ -83,38 +83,38 @@ class AuthController extends GetxController {
   var isLoading = false.obs;
 
 
-  forgotPasswordOtp() async {
-    isLoading(true);
-    String email = forgotPasswordEmailController.text;
-    String password = newPasswordController.text;
-    String confirmPass = confirmPassController.text;
-    String otp = otpController.text;
-    await authProvider.forgotPasswordOtp(data: {
-      "email": email,
-      "token": otp,
-      "password": password,
-      "confirmPassword": confirmPass
-    }).then((ApiResponse? response) async {
-      isLoading(false);
-      if (response != null) {
-        if (response.success!) {
-          Get.back();
-          debugPrint("Email: ${response.toString()}");
-          clearForgotPasswordControllers();
-          AppConstant.displaySnackBar(
-              langKey.successTitle.tr, response.message);
-          passwordController.clear();
-        } else {
-          AppConstant.displaySnackBar(langKey.errorTitle.tr, response.message);
-        }
-      } else
-        AppConstant.displaySnackBar(
-            langKey.errorTitle.tr, langKey.wrongWithCredentials.tr);
-    }).catchError((onError) {
-      isLoading(false);
-      debugPrint("resetPassword: $onError");
-    });
-  }
+  // forgotPasswordOtp() async {
+  //   isLoading(true);
+  //   String email = forgotPasswordEmailController.text;
+  //   String password = newPasswordController.text;
+  //   String confirmPass = confirmPassController.text;
+  //   String otp = otpController.text;
+  //   await authProvider.forgotPasswordOtp(data: {
+  //     "email": email,
+  //     "token": otp,
+  //     "password": password,
+  //     "confirmPassword": confirmPass
+  //   }).then((ApiResponse? response) async {
+  //     isLoading(false);
+  //     if (response != null) {
+  //       if (response.success!) {
+  //         Get.back();
+  //         debugPrint("Email: ${response.toString()}");
+  //         clearForgotPasswordControllers();
+  //         AppConstant.displaySnackBar(
+  //             langKey.successTitle.tr, response.message);
+  //         passwordController.clear();
+  //       } else {
+  //         AppConstant.displaySnackBar(langKey.errorTitle.tr, response.message);
+  //       }
+  //     } else
+  //       AppConstant.displaySnackBar(
+  //           langKey.errorTitle.tr, langKey.wrongWithCredentials.tr);
+  //   }).catchError((onError) {
+  //     isLoading(false);
+  //     debugPrint("resetPassword: $onError");
+  //   });
+  // }
 
   resendEmailVerificationLink() async {
     isLoading(false);

@@ -41,4 +41,7 @@ class Urls {
 
   //UpdateVendorViewModel
   static String updateVendor = "auth/vendor/register";
+
+  //ForgotPassword2ViewModel
+  static String forgetPasswordOtp = "auth/forgetPasswordOtp";
 }

@@ -143,10 +143,10 @@ class AuthProvider {
         json.decode(await response.stream.bytesToString()));
   }
 
-  Future<ApiResponse> forgotPasswordOtp({data}) async {
-    var response = await _authRepo.recoverPasswordWithOtp(data: data);
-    return ApiResponse.fromJson(response);
-  }
+  // Future<ApiResponse> forgotPasswordOtp({data}) async {
+  //   var response = await _authRepo.recoverPasswordWithOtp(data: data);
+  //   return ApiResponse.fromJson(response);
+  // }
 
   /*
   *

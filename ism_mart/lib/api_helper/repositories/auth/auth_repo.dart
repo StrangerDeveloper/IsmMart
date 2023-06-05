@@ -63,13 +63,13 @@ class AuthRepository {
     return response.body;
   }
 
-  Future<dynamic> recoverPasswordWithOtp({data}) async {
-    var response = await _apiService.post(
-      endpoint: "auth/forgetPasswordOtp",
-      body: data,
-    );
-    return response.body;
-  }
+  // Future<dynamic> recoverPasswordWithOtp({data}) async {
+  //   var response = await _apiService.post(
+  //     endpoint: "auth/forgetPasswordOtp",
+  //     body: data,
+  //   );
+  //   return response.body;
+  // }
 
   /**
    *

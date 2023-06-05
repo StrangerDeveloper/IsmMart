@@ -3,11 +3,12 @@ import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/api_base_helper.dart';
 import 'package:ism_mart/api_helper/global_variables.dart';
 import 'package:ism_mart/api_helper/urls.dart';
-import 'package:ism_mart/screens/reset_password/reset_password_view.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
-class ForgotPasswordViewModel extends GetxController {
+import '../forgot_password2/forgot_password2_view.dart';
+
+class ForgotPassword1ViewModel extends GetxController {
   GlobalKey<FormState> forgotPasswordFormKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
 
@@ -36,7 +37,7 @@ class ForgotPasswordViewModel extends GetxController {
         GlobalVariable.showLoader.value = false;
 
         if (parsedJson['success'] == true) {
-          Get.off(() => ResetForgotPassword());
+          Get.off(() => ForgotPassword2View(), arguments: {'email' : emailController.text});
           AppConstant.displaySnackBar(
             langKey.successTitle.tr,
             parsedJson['message'],

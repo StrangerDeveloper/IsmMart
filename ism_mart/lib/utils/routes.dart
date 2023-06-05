@@ -4,11 +4,12 @@ import 'package:ism_mart/exports/exports_ui.dart';
 import 'package:ism_mart/screens/email_verification/email_verification_view.dart';
 
 import '../screens/email_verify/email_verify_view.dart';
+import '../screens/forgot_password2/forgot_password2_view.dart';
 
 class Routes {
   static const initRoute = "/";
   static const loginRoute = "/signIn";
-  static const resetPasswordRoute = "/resetPassword";
+  //static const resetPasswordRoute = "/resetPassword";
   static const passwordResetEmailInput = "/inputEmail";
   static const registerRoute = "/register";
   static const emailVerificationLinkRoute = "/emailVerificationLink";
@@ -54,10 +55,10 @@ class Routes {
       page: () => SignUpView(),
       binding: BaseBindings(),
     ),
-    GetPage(
-        name: resetPasswordRoute,
-        page: () => const ResetForgotPassword(),
-        binding: BaseBindings()),
+    // GetPage(
+    //     name: resetPasswordRoute,
+    //     page: () => ForgotPassword2View(),
+    //     binding: BaseBindings()),
     // GetPage(
     //     name: passwordResetEmailInput,
     //     page: () => const ForgotPasswordView(),
