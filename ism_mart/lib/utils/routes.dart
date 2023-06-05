@@ -3,6 +3,8 @@ import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/exports/exports_ui.dart';
 import 'package:ism_mart/screens/email_verification/email_verification_view.dart';
 
+import '../screens/email_verify/email_verify_view.dart';
+
 class Routes {
   static const initRoute = "/";
   static const loginRoute = "/signIn";
@@ -23,6 +25,7 @@ class Routes {
   static const buyerOrdersRoute = "/buyerOrders";
 
   static const settingsRoute = "/settings";
+  static const emailVerify = "/api/auth/verifyEmail";
 
   //static const aboutUsRoute = "/aboutUs";
 
@@ -62,6 +65,10 @@ class Routes {
     GetPage(
         name: emailVerificationLinkRoute,
         page: () => EmailVerificationView(),
+        binding: BaseBindings()),
+    GetPage(
+        name: emailVerify,
+        page: () => const EmailVerifyView(),
         binding: BaseBindings()),
     GetPage(
         name: searchRoute,
