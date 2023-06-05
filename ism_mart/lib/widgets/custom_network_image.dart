@@ -13,18 +13,20 @@ class CustomNetworkImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
-      imageUrl: imageUrl ?? AppConstant.defaultImgUrl,
-      width: width,
-      height: height,
-      fit: fit ?? BoxFit.cover,
-      placeholder: (context, url) => const Center(
-          child: CircularProgressIndicator(
-        strokeWidth: 0.5,
-      )),
-      errorWidget: (context, url, error) =>
-          Image.network(AppConstant.defaultImgUrl),
+        imageUrl: imageUrl ?? AppConstant.defaultImgUrl,
+        width: width,
+        height: height,
+        fit: fit ?? BoxFit.cover,
+        placeholder: (context, url) => const Center(
+                child: CircularProgressIndicator(
+              strokeWidth: 0.5,
+            )),
+        errorWidget: (context, url, error) {
+          print("CustomNetworkImage: $error");
+          return Image.network(AppConstant.defaultImgUrl);
+        }
 
-      //const Icon(Icons.error, color: kRedColor,),
-    );
+        //const Icon(Icons.error, color: kRedColor,),
+        );
   }
 }

@@ -161,7 +161,7 @@ class AppConstant {
           "We're sorry, but we couldn't recognize that user. Please double-check and try again, or contact support for assistance.";
     }
 
-    Get.snackbar(titleNew.capitalizeFirst!, messageNew,
+    Get.snackbar(titleNew.capitalizeFirst!.toString(), messageNew.toString(),
         snackPosition: position ?? SnackPosition.TOP,
         backgroundColor: bgColor,
         icon: Icon(
@@ -293,7 +293,8 @@ class AppConstant {
   }
 
   static Future<File> compressImage(imagePath, {fileLength}) async {
-    return await FlutterNativeImage.compressImage(imagePath, quality: 100, percentage: getCompressionPercentage(length: fileLength));
+    return await FlutterNativeImage.compressImage(imagePath,
+        quality: 100, percentage: getCompressionPercentage(length: fileLength));
   }
 
   static int getCompressionPercentage({length}) {
@@ -308,7 +309,11 @@ class AppConstant {
     }
   }
 
-  static void showConfirmDeleteDialog({VoidCallback? ontap, String? passedHeadingLangKey, String? passedBodyLangKey, double? givenFontSize}) {
+  static void showConfirmDeleteDialog(
+      {VoidCallback? ontap,
+      String? passedHeadingLangKey,
+      String? passedBodyLangKey,
+      double? givenFontSize}) {
     Get.defaultDialog(
       titlePadding: EdgeInsets.zero,
       titleStyle: TextStyle(fontSize: 0),
@@ -333,10 +338,12 @@ class AppConstant {
               color: kLightRedColor,
             ),
             AppConstant.spaceWidget(height: 12),
-            passedHeadingLangKey == null ? Container() : CustomText(
-                title: passedHeadingLangKey,
-                style: headline1,
-              ),
+            passedHeadingLangKey == null
+                ? Container()
+                : CustomText(
+                    title: passedHeadingLangKey,
+                    style: headline1,
+                  ),
             AppConstant.spaceWidget(height: 12),
             CustomText(
               title: passedBodyLangKey,
@@ -426,9 +433,9 @@ class AppConstant {
   }
 
   static String convertDateFormat1(String stringDate) {
-    DateTime inputDate = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").parse(stringDate);
+    DateTime inputDate =
+        DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").parse(stringDate);
     String outputDate = DateFormat('dd-MMM-yy').format(inputDate);
     return outputDate;
   }
-
 }
