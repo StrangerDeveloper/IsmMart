@@ -29,21 +29,21 @@ class ChangeAddressUI extends GetView<CheckoutController> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       StickyLabel(text: langKey.shippingDetails.tr),
-                      CustomButton(
-                          width: 90,
-                          height: 30,
-                          onTap: () {
-                            // Get.back();
-                            if (controller.shippingAddressList.length >= 3) {
-                              AppConstant.displaySnackBar(
-                                  'error', langKey.maxAddressLimitMsg.tr);
-                              return;
-                            }
-                            controller.clearControllers();
-                            AppConstant.showBottomSheet(
-                                widget: addNewORUpdateAddressContents());
-                          },
-                          text: langKey.addNew.tr),
+                      CustomTextBtn(
+                        width: 90,
+                        height: 30,
+                        onPressed: () {
+                          if (controller.shippingAddressList.length >= 3) {
+                            AppConstant.displaySnackBar(
+                                'error', langKey.maxAddressLimitMsg.tr);
+                            return;
+                          }
+                          controller.clearControllers();
+                          AppConstant.showBottomSheet(
+                              widget: addNewORUpdateAddressContents());
+                        },
+                        title: langKey.addNew.tr,
+                      ),
                     ],
                   ),
                 ),
@@ -101,15 +101,16 @@ class ChangeAddressUI extends GetView<CheckoutController> {
               icon: Icons.location_city_rounded,
             ),
             AppConstant.spaceWidget(height: 10),
-            CustomButton(
-                width: 150,
-                height: 40,
-                onTap: () {
-                  // Get.back();
-                  AppConstant.showBottomSheet(
-                      widget: addNewORUpdateAddressContents());
-                },
-                text: langKey.addNewAddress.tr),
+            CustomTextBtn(
+              width: 150,
+              height: 40,
+              onPressed: () {
+                // Get.back();
+                AppConstant.showBottomSheet(
+                    widget: addNewORUpdateAddressContents());
+              },
+              title: langKey.addNewAddress.tr,
+            ),
           ],
         ),
       ),
@@ -363,8 +364,8 @@ class ChangeAddressUI extends GetView<CheckoutController> {
               Obx(
                 () => controller.isLoading.isTrue
                     ? CustomLoading(isItForWidget: true, color: kPrimaryColor)
-                    : CustomButton(
-                        onTap: () {
+                    : CustomTextBtn(
+                        onPressed: () {
                           if (formKey.currentState!.validate()) {
                             if (calledForUpdate) {
                               controller.updateShippingAddress(userModel);
@@ -382,7 +383,7 @@ class ChangeAddressUI extends GetView<CheckoutController> {
                             Get.back();
                           }
                         },
-                        text: calledForUpdate
+                        title: calledForUpdate
                             ? langKey.updateBtn.tr
                             : langKey.add.tr,
                         height: 50,

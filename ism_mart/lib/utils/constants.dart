@@ -356,19 +356,17 @@ class AppConstant {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                CustomButton(
-                  onTap: () => Get.back(),
-                  text: langKey.noBtn.tr,
+                CustomTextBtn(
+                  onPressed: () => Get.back(),
+                  title: langKey.noBtn.tr,
                   width: 100,
                   height: 40,
-                  color: kLightColor,
                 ),
-                CustomButton(
-                  onTap: ontap,
-                  text: langKey.yesBtn.tr,
+                CustomTextBtn(
+                  onPressed: ontap,
+                  title: langKey.yesBtn.tr,
                   width: 100,
                   height: 40,
-                  color: kLightRedColor,
                 ),
               ],
             )

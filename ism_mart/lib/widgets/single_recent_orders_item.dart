@@ -73,16 +73,15 @@ class SingleRecentOrderItems extends StatelessWidget {
               Positioned(
                 bottom: 5,
                 right: 5,
-                child: CustomButton(
-                  onTap: () {
+                child: CustomTextBtn(
+                  onPressed: () {
                     Get.to(() => SingleOrderDetailsUI(
                           orderModel: model,
                           calledForBuyerOrderDetails:
                               calledForBuyerOrderDetails,
                         ));
                   },
-                  text: langKey.details.tr,
-                  //color: Colors.orangeAccent,
+                  title: langKey.details.tr,
                   width: 70,
                   height: 30,
                 ),

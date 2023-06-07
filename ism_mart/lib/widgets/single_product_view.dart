@@ -60,45 +60,42 @@ class SingleProductView extends GetView<ProductController> {
     return WillPopScope(
       onWillPop: () => controller.popSingleProductView(),
       child: Scaffold(
-        appBar: AppBar(
-          actions: [
-            Align(
-              alignment: Alignment.center,
-              child: Padding(
-                padding: const EdgeInsets.only(right: 12.0),
-                child: CartIcon(
-                  onTap: () {
-                    //called from SingleProductView (SPV)
-                    Get.offNamed(Routes.cartRoute,
-                        arguments: {"calledFromSPV": true},
-                        preventDuplicates: false);
-                  },
-                  iconWidget: Icon(
-                    IconlyLight.buy,
-                    size: 25,
-                    color: kPrimaryColor,
+          appBar: AppBar(
+              actions: [
+                Align(
+                  alignment: Alignment.center,
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 12.0),
+                    child: CartIcon(
+                      onTap: () {
+                        //called from SingleProductView (SPV)
+                        Get.offNamed(Routes.cartRoute,
+                            arguments: {"calledFromSPV": true},
+                            preventDuplicates: false);
+                      },
+                      iconWidget: Icon(
+                        IconlyLight.buy,
+                        size: 25,
+                        color: kPrimaryColor,
+                      ),
+                    ),
                   ),
                 ),
+              ],
+              backgroundColor: kAppBarColor,
+              centerTitle: true,
+              leading: InkWell(
+                onTap: () => Get.back(),
+                child: Icon(
+                  Icons.arrow_back_ios_new,
+                  size: 21,
+                  color: kPrimaryColor,
+                ),
               ),
-            ),
-          ],
-            backgroundColor: kAppBarColor,
-            centerTitle: true,
-            leading: InkWell(
-              onTap: () => Get.back(),
-              child: Icon(
-                Icons.arrow_back_ios_new,
-                size: 21,
-                color: kPrimaryColor,
-              ),
-            ),
-            title: CustomText(
-              title: "Product Details",
-              style: appBarTitleSize.copyWith(
-                fontSize: 18
-              ),
-            )
-        ),
+              title: CustomText(
+                title: "Product Details",
+                style: appBarTitleSize.copyWith(fontSize: 18),
+              )),
           backgroundColor: Colors.grey[300]!,
           resizeToAvoidBottomInset: true,
           body: Stack(
@@ -1112,13 +1109,13 @@ class SingleProductView extends GetView<ProductController> {
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        CustomButton(
-          onTap: () async {
+        CustomTextBtn(
+          onPressed: () async {
             await controller.addItemLocalCart(product: productModel);
             //controller.addItemToCart(product: productModel);
             //Get.back();
           },
-          text: langKey.addToCart.tr,
+          title: langKey.addToCart.tr,
           width: 320,
           height: 40,
         ),
@@ -1138,31 +1135,32 @@ class SingleProductView extends GetView<ProductController> {
 
   _footerBottomBar() {
     return Container(
-        height: 55,
-        color: Colors.white,
-        width: AppResponsiveness.width,
-        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            //_getNavBarItems(icon: Icons.store,),
-            ProductQuantityCounter(
-              onDecrementPress: () => controller.decrement(),
-              onIncrementPress: () => controller.increment(),
-              textEditingController: controller.quantityController,
-              bgColor: kPrimaryColor,
-              textColor: kWhiteColor,
-            ),
-            CustomButton(
-              onTap: () =>
-                  showVariationBottomSheet(productModel: controller.state),
-              text: langKey.next.tr,
-              width: 100,
-              height: 40,
-            ),
-            //_buildBuyNowAndCartBtn(),
-          ],
-        ));
+      height: 55,
+      color: Colors.white,
+      width: AppResponsiveness.width,
+      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          //_getNavBarItems(icon: Icons.store,),
+          ProductQuantityCounter(
+            onDecrementPress: () => controller.decrement(),
+            onIncrementPress: () => controller.increment(),
+            textEditingController: controller.quantityController,
+            bgColor: kPrimaryColor,
+            textColor: kWhiteColor,
+          ),
+          CustomTextBtn(
+            onPressed: () =>
+                showVariationBottomSheet(productModel: controller.state),
+            title: langKey.next.tr,
+            width: 100,
+            height: 40,
+          ),
+          //_buildBuyNowAndCartBtn(),
+        ],
+      ),
+    );
   }
 
   _outOfStockBottom(ProductModel? productModel) {

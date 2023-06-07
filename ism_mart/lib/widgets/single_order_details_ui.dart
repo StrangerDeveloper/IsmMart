@@ -444,12 +444,12 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                         child: Obx(
                           () => controller.isLoading.isTrue
                               ? CustomLoading(isItBtn: true)
-                              : CustomButton(
-                                  onTap: () async {
+                              : CustomTextBtn(
+                                  onPressed: () async {
                                     await controller.submitReviewBtn(
                                         orderItem: orderItem);
                                   },
-                                  text: submit.tr,
+                                  title: submit.tr,
                                   height: 40,
                                   width: 200,
                                 ),
@@ -763,14 +763,14 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
               Obx(
                 () => controller.isLoading.isTrue
                     ? CustomLoading(isItBtn: true)
-                    : CustomButton(
-                        onTap: () async {
+                    : CustomTextBtn(
+                        onPressed: () async {
                           if (formKey.currentState!.validate()) {
                             await controller.disputeOnOrders(
                                 orderItem: orderItem, orderId: orderModel!.id!);
                           }
                         },
-                        text: submit.tr,
+                        title: submit.tr,
                         height: 40,
                         width: 200,
                       ),

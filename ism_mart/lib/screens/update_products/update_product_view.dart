@@ -48,11 +48,11 @@ class UpdateProductView extends StatelessWidget {
                           productDiscountField(),
                           productDescriptionField(),
                           imagesUpdateSection(),
-                          CustomButton(
-                              onTap: () {
+                          CustomTextBtn(
+                              onPressed: () {
                                 viewModel.updateButtonPress();
                               },
-                              text: langKey.updateBtn.tr,
+                              title: langKey.updateBtn.tr,
                               height: 50,
                               width: 300,
                             ),
