@@ -44,4 +44,7 @@ class Urls {
 
   //ForgotPassword2ViewModel
   static String forgetPasswordOtp = "auth/forgetPasswordOtp";
+
+  //MyProductsViewModel
+  static String getMyProducts = "vendor/products/myProducts?";
 }

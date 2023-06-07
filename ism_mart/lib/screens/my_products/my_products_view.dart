@@ -17,25 +17,30 @@ class MyProducts extends GetView<SellersController> {
       child: Scaffold(
         body: Column(
           children: [
-            Align(
-              alignment: Alignment.centerRight,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: CustomTextBtn(
-                  onPressed: () => AppConstant.showBottomSheet(
-                      widget: AddProductsView(),
-                      isGetXBottomSheet: false,
-                      buildContext: context),
-                  //controller.changePage(1),
-                  title: langKey.addProduct.tr,
-                  width: 110,
-                  height: 35,
-                ),
-              ),
+            addProduct(context),
+            Expanded(
+              child: _buildProductBody(),
             ),
-            //AppConstant.spaceWidget(height: 10),
-            Expanded(child: _buildProductBody()),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget addProduct(BuildContext context) {
+    return Align(
+      alignment: Alignment.centerRight,
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: CustomTextBtn(
+          onPressed: () {
+            AppConstant.showBottomSheet(
+              widget: AddProductsView(),
+              isGetXBottomSheet: false,
+              buildContext: context,
+            );
+          },
+          title: langKey.addProduct.tr,
         ),
       ),
     );
@@ -66,8 +71,6 @@ class MyProducts extends GetView<SellersController> {
                         controller: controller.scrollController,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: AppResponsiveness.getGridItemCount(),
-                          //mainAxisExtent:
-                          //  AppResponsiveness.getMainAxisExtentPoint30(),
                           mainAxisSpacing: 8,
                           crossAxisSpacing: 8,
                           childAspectRatio:
@@ -95,10 +98,12 @@ class MyProducts extends GetView<SellersController> {
       aspectRatio: 0.75,
       child: GestureDetector(
         onTap: () {
-          Get.to(SingleProductView(
-            productId: "${model.id}",
-            calledFor: 'seller',
-          ));
+          Get.to(
+            SingleProductView(
+              productId: "${model.id}",
+              calledFor: 'seller',
+            ),
+          );
         },
         child: Container(
           clipBehavior: Clip.hardEdge,
@@ -117,8 +122,8 @@ class MyProducts extends GetView<SellersController> {
                     height: AppResponsiveness.getHeight90_100(),
                     width: double.infinity,
                     child: CustomNetworkImage(
-                        imageUrl:
-                            model!.thumbnail ?? AppConstant.defaultImgUrl),
+                      imageUrl: model!.thumbnail ?? AppConstant.defaultImgUrl,
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8),
@@ -147,11 +152,13 @@ class MyProducts extends GetView<SellersController> {
                             //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               CustomPriceWidget(
-                                  title: "${model.price!}",
-                                  style: bodyText1.copyWith(
-                                      decoration: TextDecoration.lineThrough,
-                                      fontSize: 13,
-                                      color: kLightColor)),
+                                title: "${model.price!}",
+                                style: bodyText1.copyWith(
+                                  decoration: TextDecoration.lineThrough,
+                                  fontSize: 13,
+                                  color: kLightColor,
+                                ),
+                              ),
                               AppConstant.spaceWidget(width: 10),
                               CustomText(
                                 title: "${model.discount}% ${langKey.OFF.tr}",
@@ -183,22 +190,21 @@ class MyProducts extends GetView<SellersController> {
                 top: 2,
                 right: 2,
                 child: Row(
-                  //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     CustomActionIcon(
                         onTap: () {
-                          // print("ProductId: ${model.id}");
-                          Get.to(() => UpdateProductView(), arguments: [{
-                            'productId': '${model.id}',
-                          }]);
+                          Get.to(() => UpdateProductView(), arguments: [
+                            {'productId': '${model.id}'}
+                          ]);
                         },
                         icon: Icons.edit_rounded,
                         bgColor: kPrimaryColor),
                     AppConstant.spaceWidget(width: 5),
                     CustomActionIcon(
                         onTap: () => AppConstant.showConfirmDeleteDialog(
-                              ontap: () =>
-                                  controller.deleteProduct(id: model.id),
+                              ontap: () {
+                                controller.deleteProduct(id: model.id);
+                              },
                               passedHeadingLangKey: langKey.areYouSure.tr,
                               passedBodyLangKey:
                                   langKey.deletionProcessDetail.tr,

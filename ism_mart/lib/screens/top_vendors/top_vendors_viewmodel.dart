@@ -9,7 +9,7 @@ class TopVendorsViewModel extends GetxController {
   Rx<TopVendorsModel> topVendorsModel = TopVendorsModel().obs;
   @override
   void onReady() {
-    getData();
+    //getData();
     super.onReady();
   }
 
@@ -49,7 +49,7 @@ class TopVendorsViewModel extends GetxController {
     GlobalVariable.showLoader.value = true;
     var limit = '10';
     ApiBaseHelper()
-        .getMethod(url: Urls.getTopVendors + limit, withBearer: false)
+        .getMethod(url: Urls.getTopVendors + limit)
         .then((parsedJson) {
       GlobalVariable.showLoader.value = false;
       if (parsedJson['success'] == true) {
