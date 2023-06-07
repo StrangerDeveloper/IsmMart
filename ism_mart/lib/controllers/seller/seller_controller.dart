@@ -74,12 +74,10 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
 
   fetchMyProducts() async {
     await apiProvider
-        .fetchMyProducts(
-            token: authController.userToken, limit: productsLimit, page: page)
+        .fetchMyProducts(token: authController.userToken, limit: productsLimit, page: page)
         .then((response) {
       myProductsList.clear();
       myProductsList.addAll(response.products!);
-      //myProductsList.refresh();
     });
   }
 
@@ -161,7 +159,6 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
       } else
         AppConstant.displaySnackBar(langKey.errorTitle.tr, response.message);
     }).catchError(onError);
-    //fetchMyProducts();
     //myProductsList.refresh();
   }
 
@@ -311,7 +308,6 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
       isLoading(false);
       if (response != null) {
         if (response.success!) {
-          //myProductsList.clear();
           await fetchMyProducts();
 
           Get.back();

@@ -484,22 +484,21 @@ class SearchView extends GetView<CustomSearchController> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Expanded(
-            child: CustomButton(
-              onTap: () => controller.clearFilters(),
-              text: clear.tr,
-              color: kOrangeColor,
+            child: CustomTextBtn(
+              onPressed: () => controller.clearFilters(),
+              title: clear.tr,
               height: 36,
             ),
           ),
           SizedBox(width: 20),
           Expanded(
-            child: CustomButton(
-              onTap: () {
+            child: CustomTextBtn(
+              onPressed: () {
                 controller.applyFilter();
                 controller.minPriceController.clear();
                 controller.maxPriceController.clear();
               },
-              text: langKey.search.tr,
+              title: langKey.search.tr,
               height: 36,
             ),
           ),

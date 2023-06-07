@@ -80,20 +80,22 @@ class PickImage {
 
   Future<File?> imgFromCamera() async {
     XFile? pickedFile =
-    await ImagePicker().pickImage(source: ImageSource.camera);
+        await ImagePicker().pickImage(source: ImageSource.camera);
     if (pickedFile != null) {
       File file = File(pickedFile.path);
       return await compressImage(file);
     }
+    return null;
   }
 
   Future<File?> imgFromGallery() async {
     XFile? pickedFile =
-    await ImagePicker().pickImage(source: ImageSource.gallery);
+        await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       File file = File(pickedFile.path);
       return await compressImage(file);
     }
+    return null;
   }
 
   Future<File?> compressImage(File image) async {

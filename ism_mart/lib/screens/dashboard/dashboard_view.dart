@@ -29,12 +29,14 @@ class DashboardUI extends GetView<BaseController> {
                 //Top Vendors List
                 StickyLabel(text: langKey.topVendors.tr),
                 _topVendorCategoriesList(),
+                StickyLabel(text: langKey.discountDeals.tr),
                 _displayDiscountProducts(),
                 Obx(
                   () => _displayProducts(
                     productMap: controller.productsWithTypesMap,
                   ),
                 ),
+
                 kDivider,
                 Obx(
                   () => _displayProducts(
@@ -132,11 +134,12 @@ class DashboardUI extends GetView<BaseController> {
         color: kWhiteColor,
         height: AppResponsiveness.getBoxHeightPoint32(),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            StickyLabel(text: langKey.discountDeals.tr),
-            AppConstant.spaceWidget(height: 10),
+            //StickyLabel(text: langKey.discountDeals.tr),
+            //AppConstant.spaceWidget(height: 10),
             controller.discountSliderProductsList.isEmpty
-                ? Center(child: NoDataFound())
+                ? NoDataFound()
                 : SizedBox(
                     width: AppConstant.getSize().width * 0.9,
                     height: AppResponsiveness.height * 0.24,
@@ -368,10 +371,34 @@ class DashboardUI extends GetView<BaseController> {
         ),
       );
 
+    if (isCategoryProducts!)
+      return GridView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+          //crossAxisCount: AppResponsiveness.getGridItemCount(),
+          maxCrossAxisExtent: 170,
+          // Maximum width of each item
+          childAspectRatio: 0.8,
+          // Aspect ratio of each item (width / height)
+          mainAxisSpacing: 5,
+          // Spacing between rows
+          crossAxisSpacing: 5, // Spacing between columns
+        ),
+        itemCount: list.length,
+        itemBuilder: (context, index) {
+          ProductModel productModel = list[index];
+          return SingleProductItems(
+            productModel: productModel,
+            isCategoryProducts: isCategoryProducts,
+          );
+        },
+      );
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
-        height: isCategoryProducts! ? 170 : 190,
+        height: isCategoryProducts ? 170 : 190,
         // height: AppResponsiveness.height *
         //     (!isCategoryProducts!
         //         ? 0.28
@@ -439,7 +466,7 @@ class DashboardUI extends GetView<BaseController> {
         child: SizedBox(
           height: 120,
           child: topVendorsViewModel.topvendorList.isEmpty
-              ? NoDataFound(text: langKey.noCategoryFound.tr)
+              ? NoDataFound()
               : ListView.builder(
                   scrollDirection: Axis.horizontal,
                   physics: const BouncingScrollPhysics(),

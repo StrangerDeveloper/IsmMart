@@ -16,7 +16,7 @@ class SellersApiRepo {
     };
     var response =
         await _apiService.get(endpoint: "categoryFields", query: params);
-    return response.body['data'];
+    return response.body != null ? response.body['data'] : [];
   }
 
   Future<dynamic> postProduct({String? token, formData}) async {
@@ -54,7 +54,7 @@ class SellersApiRepo {
     final queryParameters = {"limit": "$limit", "page": "$page"};
     var response = await _apiService.get(
         endpoint: "vendor/products/$vendorID", query: queryParameters);
-    return response.body['data'];
+    return response.body != null ? response.body['data'] : null;
   }
 
   Future<dynamic> getProductDetailsById({int? id}) async {

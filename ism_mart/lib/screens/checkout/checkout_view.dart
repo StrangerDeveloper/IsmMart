@@ -67,11 +67,11 @@ class CheckoutView extends GetView<CheckoutController> {
                   Obx(
                     () => controller.isLoading.isTrue
                         ? CustomLoading(isItBtn: true)
-                        : CustomButton(
+                        : CustomTextBtn(
                             width: 280,
                             height: 50,
-                            text: langKey.confirmOrder.tr,
-                            onTap: () {
+                            title: langKey.confirmOrder.tr,
+                            onPressed: () {
                               if (controller
                                       .cartController.totalCartAmount.value <=
                                   num.parse(currencyController.convertCurrency(
@@ -239,11 +239,12 @@ class CheckoutView extends GetView<CheckoutController> {
               fontSize: 13,
             ),
             AppConstant.spaceWidget(height: 10),
-            CustomButton(
-                width: 150,
-                height: 40,
-                onTap: () => Get.toNamed(Routes.changeAddressRoute),
-                text: langKey.addNewAddress.tr),
+            CustomTextBtn(
+              width: 150,
+              height: 40,
+              onPressed: () => Get.toNamed(Routes.changeAddressRoute),
+              title: langKey.addNewAddress.tr,
+            ),
           ],
         ),
       ),
@@ -535,7 +536,6 @@ class CheckoutView extends GetView<CheckoutController> {
                       () => CustomPriceWidget(
                           title: "${controller.totalAmount.value}"),
                     ),
-
                   ],
                 ),
 

@@ -23,34 +23,34 @@ class ApiRepository {
 
   Future<List<dynamic>> searchFilterProducts({filters}) async {
     var response = await _apiService.get(endpoint: "filter", query: filters);
-    return response.body['data'];
+    return response.body != null ? response.body['data'] : [];
   }
 
   Future<List<dynamic>> getSliderImages() async {
     var response = await _apiService.get(endpoint: "slider");
-    return response.body['data'];
+    return response.body != null ? response.body['data'] : [];
   }
 
   Future<List<dynamic>> fetchSliderDiscountProducts() async {
     var queryParam = {"limit": "3"};
     var response = await _apiService.get(
         endpoint: "slider/getDiscountProducts", query: queryParam);
-    return response.body['data'];
+    return response.body != null ? response.body['data'] : [];
   }
 
   Future<List<dynamic>> getAllCategories() async {
     var response = await _apiService.get(endpoint: "category");
-    return response.body['data'];
+    return response.body != null ? response.body['data'] : [];
   }
 
   Future<List<dynamic>> getCategoriesWithSubCategories() async {
     var response = await _apiService.get(endpoint: "category/");
-    return response.body['data'];
+    return response.body != null ? response.body['data'] : [];
   }
 
   Future<List<dynamic>> getSubCategoriesByCategoryID(int? categoryId) async {
     var response = await _apiService.get(endpoint: "subcategory/$categoryId");
-    return response.body['data'];
+    return response.body != null ? response.body['data'] : [];
   }
 
   Future<List<dynamic>> getProductsByType(
@@ -58,7 +58,14 @@ class ApiRepository {
     final queryParameters = {"limit": "$limit", "page": "$page", "type": type};
     var response =
         await _apiService.get(endpoint: "products/", query: queryParameters);
-    return response.body['data'];
+    return response.body != null ? response.body['data'] : [];
+  }
+
+  Future<List<dynamic>> fetchAllProducts({int? limit = 30}) async {
+    final queryParameters = {"limit": "$limit"};
+    var response =
+        await _apiService.get(endpoint: "products/", query: queryParameters);
+    return response.body != null ? response.body['data'] : [];
   }
 
   // same for categoryById and SubCategoryById
@@ -70,7 +77,7 @@ class ApiRepository {
     final queryParameters = {"limit": "$limit", "page": "$page", "id": "$id"};
     var response = await _apiService.get(
         endpoint: "products/$endPoint/", query: queryParameters);
-    return response.body['data'];
+    return response.body != null ? response.body['data'] : [];
   }
 
   Future<dynamic> getProductDetailsById({int? id}) async {
@@ -81,13 +88,13 @@ class ApiRepository {
   Future<dynamic> fetchProductsReviews({productId, token}) async {
     var response =
         await _apiService.get(endpoint: 'productReviews/allReviews/$productId');
-    return response.body['data'];
+    return response.body != null ? response.body['data'] : null;
   }
 
   ///Fetch store details by id customerSide
   Future<dynamic> fetchStoreDetailsByID({token, storeId}) async {
     var response = await _apiService.get(endpoint: 'vendor/store/$storeId');
-    return response.body['data'];
+    return response.body != null ? response.body['data'] : null;
   }
 
   Future<List<dynamic>> fetchStoreProductsById(
@@ -98,7 +105,7 @@ class ApiRepository {
         requiresAuthToken: true,
         token: token,
         query: queryParameters);
-    return response.body['data'];
+    return response.body != null ? response.body['data'] : [];
   }
 
   /// Product Answer and Questions
@@ -106,7 +113,7 @@ class ApiRepository {
   Future<List<dynamic>> fetchProductQuestions({productId}) async {
     var response =
         await _apiService.get(endpoint: 'product/questions/$productId');
-    return response.body['data'];
+    return response.body != null ? response.body['data'] : [];
   }
 
   Future<dynamic> postQuestion({token, data}) async {
@@ -132,7 +139,7 @@ class ApiRepository {
   Future<List<dynamic>> getCartItem({token}) async {
     var response = await _apiService.get(
         endpoint: 'cart', token: token, requiresAuthToken: true);
-    return response.body['data'];
+    return response.body != null ? response.body['data'] : [];
   }
 
   Future<dynamic> deleteCartItem({token, id}) async {
@@ -172,7 +179,7 @@ class ApiRepository {
   Future<List<dynamic>> fetchAllFAQ({token}) async {
     var response = await _apiService.get(
         endpoint: 'faq/allFaq', token: token, requiresAuthToken: true);
-    return response.body['data'];
+    return response.body != null ? response.body['data'] : [];
   }
 
   /**

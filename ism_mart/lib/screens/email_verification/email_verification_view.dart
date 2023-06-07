@@ -53,7 +53,6 @@ class EmailVerificationView extends GetView<AuthController> {
       elevation: 0,
       leading: IconButton(
         onPressed: () {
-          controller.clearLoginController();
           Get.back();
         },
         icon: Icon(
@@ -97,27 +96,25 @@ class EmailVerificationView extends GetView<AuthController> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Expanded(
-          child: CustomButton(
-            onTap: () {
+          child: CustomTextBtn(
+            onPressed: () {
               Get.back();
             },
-            text: langKey.cancelBtn.tr,
+            title: langKey.cancelBtn.tr,
             height: 40,
-            color: kPrimaryColor,
           ),
         ),
         SizedBox(width: 15),
         Expanded(
-          child: CustomButton(
-            onTap: () async {
+          child: CustomTextBtn(
+            onPressed: () async {
               if (controller.emailVerificationFormKey.currentState!.validate()) {
                 await controller.resendEmailVerificationLink();
                 await LocalStorageHelper.storeEmailVerificationDetails();
               }
             },
-            text: langKey.send.tr,
+            title: langKey.send.tr,
             height: 40,
-            color: kPrimaryColor,
           ),
         ),
       ],

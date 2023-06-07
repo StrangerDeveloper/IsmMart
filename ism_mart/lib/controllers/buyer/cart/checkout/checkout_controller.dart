@@ -483,15 +483,14 @@ class CheckoutController extends GetxController {
                 height: 35,
                 color: kPrimaryColor,
               ),*/
-              CustomButton(
-                onTap: () {
+              CustomTextBtn(
+                onPressed: () {
                   Get.offAllNamed(Routes.initRoute);
                   //Get.back();
                 },
-                text: langKey.continueShopping.tr,
+                title: langKey.continueShopping.tr,
                 width: 200,
                 height: 40,
-                color: kPrimaryColor,
               ),
             ],
           )

@@ -25,11 +25,6 @@ class AuthProvider {
     return UserResponse.fromResponse(response);
   }
 
-  Future<UserResponse> postRegister({UserModel? userModel}) async {
-    var response = await _authRepo.register(userModel: userModel);
-    return UserResponse.fromResponse(response);
-  }
-
   Future<ApiResponse> resendVerificationLink({email}) async {
     var response = await _authRepo.resendVerificationLink(email: email);
 
@@ -61,20 +56,6 @@ class AuthProvider {
         contentType: MediaType.parse('image/jpeg'),
       ));
     }
-    // else {
-    //   request.fields['storeImage'] = sellerModel.storeImage!;
-    // }
-
-    // if (sellerModel.storeImage!.isEmpty) {
-    //   request.files.add(await http.MultipartFile.fromPath(
-    //     'storeImage',
-    //     storeImage!,
-    //     contentType: MediaType.parse('image/jpeg'),
-    //   ));
-    // } else {
-    //   request.fields['storeImage'] = sellerModel.storeImage!;
-    // }
-    // &&sellerModel.coverImage!.contains(coverImage!)
 
     if (sellerModel.coverImage != '') {
       request.files.add(await http.MultipartFile.fromPath(
@@ -83,9 +64,6 @@ class AuthProvider {
         contentType: MediaType.parse('image/jpeg'),
       ));
     }
-    // else {
-    //   request.fields['coverImage'] = sellerModel.coverImage!;
-    // }
 
     print(request.files.map((e) => e.filename).toString());
     final response = await request.send();
@@ -165,20 +143,10 @@ class AuthProvider {
         json.decode(await response.stream.bytesToString()));
   }
 
-  Future<ApiResponse> deActivateUser({token}) async {
-    var response = await _authRepo.deActivateUserAccount(token: token);
-    return ApiResponse.fromJson(response);
-  }
-
-  Future<ApiResponse> forgotPassword({data}) async {
-    var response = await _authRepo.forgotPassword(data: data);
-    return ApiResponse.fromJson(response);
-  }
-
-  Future<ApiResponse> forgotPasswordOtp({data}) async {
-    var response = await _authRepo.recoverPasswordWithOtp(data: data);
-    return ApiResponse.fromJson(response);
-  }
+  // Future<ApiResponse> forgotPasswordOtp({data}) async {
+  //   var response = await _authRepo.recoverPasswordWithOtp(data: data);
+  //   return ApiResponse.fromJson(response);
+  // }
 
   /*
   *

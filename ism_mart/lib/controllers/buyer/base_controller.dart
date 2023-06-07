@@ -189,18 +189,22 @@ class BaseController extends GetxController {
   var isProductsLoading = false.obs;
 
   fetchProducts() async {
-    if (categories.isNotEmpty) {
-      productsMap.clear();
-      categories.forEach((element) async {
-        await _apiProvider.getProductsByCategory(element.id!).then((data) {
-          //debugPrint("FetchProducts: inside $data");
-          productsMap.putIfAbsent(element.name!, () => data);
-          //debugPrint("FetchProducts: inside Ln ${productList.first}");
-        }).catchError((error) {
-          print(">>>FetchProductByCategory: $error");
-        });
-      });
-    }
+    await _apiProvider.getAllProducts(limit: 30).then((data) {
+      productsMap.putIfAbsent("All Products", () => data);
+    });
+
+    // if (categories.isNotEmpty) {
+    //   productsMap.clear();
+    //   categories.forEach((element) async {
+    //     await _apiProvider.getProductsByCategory(element.id!).then((data) {
+    //       //debugPrint("FetchProducts: inside $data");
+    //       productsMap.putIfAbsent(element.name!, () => data);
+    //       //debugPrint("FetchProducts: inside Ln ${productList.first}");
+    //     }).catchError((error) {
+    //       print(">>>FetchProductByCategory: $error");
+    //     });
+    //   });
+    // }
   }
 
   /// Fetch Products by Type
@@ -230,7 +234,8 @@ class BaseController extends GetxController {
       {"key": "Latest", "value": "Popular Products"},
       {"key": "Featured", "value": "Featured Products"},
       {"key": "IsmmartOriginal", "value": "ISMMART Originals"},
-      //{"key": "Best Seller", "value": "Best Seller"},
+      {"key": "Best Seller", "value": "Best Seller"},
+      //{"key": "Valentines", "value": "Valentines"},
     ];
   }
 

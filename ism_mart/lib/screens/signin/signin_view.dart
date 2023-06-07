@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/global_variables.dart';
+import 'package:ism_mart/screens/forgot_password1/forgot_password1_view.dart';
 import 'package:ism_mart/screens/signin/signin_viewmodel.dart';
 import 'package:ism_mart/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/obscure_suffix_icon.dart';
-import '../forgot_password/forgot_password_view.dart';
 
 class SignInView extends StatelessWidget {
   SignInView({Key? key}) : super(key: key);
@@ -125,10 +125,11 @@ class SignInView extends StatelessWidget {
       alignment: Alignment.centerRight,
       child: InkWell(
         onTap: () {
-          Get.to(() => ForgotPasswordView(
-              email: GetUtils.isEmail(viewModel.emailController.text)
-                  ? viewModel.emailController.text
-                  : ''));
+          Get.to(() => ForgotPassword1View(), arguments: {
+            'email': GetUtils.isEmail(viewModel.emailController.text)
+                ? viewModel.emailController.text
+                : ''
+          });
         },
         child: Text(
           langKey.forgotPassword.tr + '?',

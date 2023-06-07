@@ -193,11 +193,11 @@ class ContactUsView extends StatelessWidget {
               onSaved: (value) {},
             ),
             AppConstant.spaceWidget(height: 20),
-            CustomButton(
-              onTap: () {
+            CustomTextBtn(
+              onPressed: () {
                 viewModel.contactUsBtn();
               },
-              text: send.tr,
+              title: send.tr,
               height: 40,
               width: 150,
             ),
