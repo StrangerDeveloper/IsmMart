@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 import 'package:ism_mart/models/exports_model.dart';
@@ -50,137 +51,32 @@ class AddProductsView extends StatelessWidget {
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            //Upload Images Section
+                            ///Upload Images Section
                             _buildImageSection(),
 
-                            //Product Category Field
-                            Obx(() => selectCategoryField()
-                            ),
+                            ///Product Category Field
+                            Obx(() => selectCategoryField()),
 
-                            //ProductSub Category Dropdown Field
+                            ///Product Sub Category Dropdown Field
                             Obx(() => viewModel.subCategoriesList.isEmpty
                                     ? Container()
                                     : selectSubCategoryField()
                             ),
-
                             ///Product Category fields or variants or features
                             productVariantsAndFeaturesField(),
 
-                            AppConstant.spaceWidget(height: 15),
-                            Column(
-                              children: [
-                                nameField(),
-                                Obx(
-                                      () =>
-                                      Visibility(
-                                        visible: viewModel
-                                            .prodPriceController.text
-                                            .isNotEmpty,
-                                        child: CustomText(
-                                          title:
-                                          "${langKey.finalPriceWould
-                                              .tr} ${viewModel
-                                              .priceAfterCommission
-                                              .value} ${langKey.afterPlatformFee
-                                              .tr} 5%",
-                                          color: kRedColor,
-                                        ),
-                                      ),
-                                )
-                              ],
-                            ),
-                            AppConstant.spaceWidget(height: 15),
-                            FormInputFieldWithIcon(
-                              controller: viewModel.prodStockController,
-                              iconPrefix: Icons.inventory_outlined,
-                              labelText: langKey.prodStock.tr,
-                              iconColor: kPrimaryColor,
-                              autofocus: false,
-                              textStyle: bodyText1,
-                              autoValidateMode: AutovalidateMode
-                                  .onUserInteraction,
-                              validator: (value) =>
-                              !GetUtils.isNumericOnly(value!)
-                                  ? langKey.prodStockReq.tr
-                                  : null,
-                              keyboardType: TextInputType.number,
-                              onChanged: (value) {},
-                              onSaved: (value) {},
-                            ),
-                            AppConstant.spaceWidget(height: 15),
-                            Column(
-                              children: [
-                                FormInputFieldWithIcon(
-                                  controller: viewModel.prodDiscountController,
-                                  iconPrefix: IconlyLight.discount,
-                                  labelText: langKey.prodDiscount.tr,
-                                  iconColor: kPrimaryColor,
-                                  autofocus: false,
-                                  textStyle: bodyText1,
-                                  keyboardType: TextInputType.number,
-                                  onChanged: (String? value) {
-                                    int discount =
-                                    value!.isNotEmpty ? int.parse(value) : 0;
-                                    viewModel.setDiscount(discount);
-                                  },
-                                  onSaved: (value) {},
-                                ),
-                                Obx(
-                                      () =>
-                                      Visibility(
-                                        visible: viewModel
-                                            .prodDiscountController.text
-                                            .isNotEmpty,
-                                        child: CustomText(
-                                          title: viewModel.discountMessage
-                                              .value,
-                                          color: kRedColor,
-                                        ),
-                                      ),
-                                )
-                              ],
-                            ),
-                            AppConstant.spaceWidget(height: 15),
-                            FormInputFieldWithIcon(
-                              controller: viewModel.prodDescriptionController,
-                              iconPrefix: IconlyLight.document,
-                              labelText: langKey.description.tr,
-                              iconColor: kPrimaryColor,
-                              autofocus: false,
-                              textStyle: bodyText1,
-                              autoValidateMode: AutovalidateMode.onUserInteraction,
-                              validator: (value) =>
-                              GetUtils.isBlank(value!)!
-                                  ? langKey.descriptionReq.tr
-                                  : null,
-                              keyboardType: TextInputType.text,
-                              onChanged: (value) {},
-                              onSaved: (value) {},
-                            ),
-
+                            ///Product Basic Details
+                            nameField(),
+                            priceField(),
+                            stockField(),
+                            discountField(),
+                            descriptionField(),
                             AppConstant.spaceWidget(height: 40),
-                            CustomButton(
-                              onTap: () {
-                                if (viewModel.formKey.currentState!
-                                    .validate()) {
-                                  if (viewModel.subCategoriesList.isNotEmpty) {
-                                    if (viewModel.discountMessage.isEmpty) {
-                                      if(!viewModel.uploadImagesError.value)
-                                      viewModel.addProduct();
-                                    } else {
-                                      AppConstant.displaySnackBar(
-                                        langKey.errorTitle,
-                                        langKey.yourDiscountShould.tr,
-                                      );
-                                    }
-                                  } else {
-                                    AppConstant.displaySnackBar(
-                                        langKey.errorTitle,
-                                        langKey.plzSelectSubCategory.tr);
-                                  }
-                                }
+                            CustomTextBtn(
+                              onPressed: () {
+                                viewModel.addProdBtnPress();
                               },
-                              text: langKey.addProduct.tr,
+                              title: langKey.addProduct.tr,
                               height: 50,
                               width: 300,
                             ),
@@ -427,34 +323,63 @@ class AddProductsView extends StatelessWidget {
     );
   }
 
-  CustomTextField2 nameField(){
-    return CustomTextField2(
-      controller: viewModel.prodNameController,
-      label: langKey.productName.tr,
-      autoValidateMode: AutovalidateMode.onUserInteraction,
-      validator: (value){
-        return GetUtils.isBlank(value!)! ? langKey.productNameReq.tr : null;
-      },
-      keyboardType: TextInputType.name,
+  Padding nameField(){
+    return Padding(
+      padding: const EdgeInsets.only(top: 12.0),
+      child: CustomTextField2(
+        prefixIcon: IconlyLight.paper_plus,
+        controller: viewModel.prodNameController,
+        label: langKey.productName.tr,
+        autoValidateMode: AutovalidateMode.onUserInteraction,
+        validator: (value){
+          return GetUtils.isBlank(value!)! ? langKey.productNameReq.tr : null;
+        },
+        keyboardType: TextInputType.name,
+      ),
     );
   }
 
-  CustomTextField2 priceField(){
-    return CustomTextField2(
-      controller: viewModel.prodPriceController,
-      label: langKey.prodPrice.tr,
-      autoValidateMode: AutovalidateMode.onUserInteraction,
-      validator: (value){
-        return GetUtils.isBlank(value!)! ? langKey.prodPriceReq.tr : null;
-      },
-      onChanged: (value){
-        viewModel.onPriceFieldChange(value);
-      },
-      keyboardType: TextInputType.number,
+  Padding priceField(){
+    return Padding(
+      padding: EdgeInsets.only(top: viewModel.fieldsPaddingSpace),
+      child: Column(
+        children: [
+          CustomTextField2(
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+              FilteringTextInputFormatter.digitsOnly
+            ],
+            prefixIcon: IconlyLight.wallet,
+            controller: viewModel.prodPriceController,
+            label: langKey.prodPrice.tr,
+            autoValidateMode: AutovalidateMode.onUserInteraction,
+            validator: (value){
+              return GetUtils.isBlank(value!)! ? langKey.prodPriceReq.tr : null;
+            },
+            onChanged: (value){
+              viewModel.onPriceFieldChange(value);
+            },
+            keyboardType: TextInputType.number,
+          ),
+          Obx(() => Visibility(
+            visible: viewModel.prodPriceController.text.isNotEmpty,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 4.0),
+              child: CustomText(title: "${langKey.finalPriceWould.tr} ${viewModel
+                  .priceAfterCommission
+                  .value} ${langKey.afterPlatformFee
+                  .tr} 5%",
+                color: kRedColor,
+              ),
+            ),
+          ),
+          )
+        ],
+      ),
     );
   }
 
-  productVariantsAndFeaturesField() {
+  Obx productVariantsAndFeaturesField() {
     return Obx(() => viewModel.productVariantsFieldsList.isEmpty ?
     Container() : Padding(
       padding: const EdgeInsets.symmetric(vertical: 15.0),
@@ -466,6 +391,72 @@ class AddProductsView extends StatelessWidget {
             .toList(),
       ),
     ),
+    );
+  }
+
+  Padding stockField(){
+    return Padding(
+      padding: const EdgeInsets.only(top: 12.0),
+      child: CustomTextField2(
+        inputFormatters: [
+          FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+          FilteringTextInputFormatter.digitsOnly
+        ],
+        controller: viewModel.prodStockController,
+        prefixIcon: Icons.inventory_outlined,
+        label: langKey.prodStock.tr,
+        autoValidateMode: AutovalidateMode.onUserInteraction,
+        validator: (value) => !GetUtils.isNumericOnly(value!) ? langKey.prodStockReq.tr
+              : null,
+          keyboardType: TextInputType.number,
+      ),
+    );
+  }
+
+  Padding discountField(){
+    return Padding(
+      padding: const EdgeInsets.only(top: 12.0),
+      child: Column(
+        children: [
+          CustomTextField2(
+            controller: viewModel.prodDiscountController,
+            prefixIcon: IconlyLight.discount,
+            label: langKey.prodDiscount.tr,
+            onChanged: (value){
+              int discount = value.isNotEmpty ? int.parse(value) : 0;
+                  viewModel.setDiscount(discount);
+            },
+            keyboardType: TextInputType.number,
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+              FilteringTextInputFormatter.digitsOnly
+            ],
+          ),
+          Obx(() => Visibility(
+            visible: viewModel.prodDiscountController.text.isNotEmpty,
+                  child: CustomText(
+                    title: viewModel.discountMessage.value,
+                    color: kRedColor,
+                  ),
+                ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Padding descriptionField(){
+    return Padding(
+      padding: const EdgeInsets.only(top: 12.0),
+      child: CustomTextField2(
+        controller: viewModel.prodDescriptionController,
+        label: langKey.description.tr,
+        prefixIcon: IconlyLight.document,
+        autoValidateMode: AutovalidateMode.onUserInteraction,
+        validator: (value) => GetUtils.isBlank(value!)! ? langKey.descriptionReq.tr
+              : null,
+          keyboardType: TextInputType.text,
+      ),
     );
   }
 }

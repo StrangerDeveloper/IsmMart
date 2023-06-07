@@ -39,6 +39,7 @@ class AddProductViewModel extends GetxController {
   RxString discountMessage = "".obs;
   RxDouble imagesSizeInMb = 0.0.obs;
   RxBool uploadImagesError = false.obs;
+  double fieldsPaddingSpace = 12.0;
 
   @override
   void onReady() {
@@ -46,7 +47,7 @@ class AddProductViewModel extends GetxController {
     super.onReady();
   }
 
-  onPriceFieldChange(String value){
+  void onPriceFieldChange(String value){
     if (value.isNotEmpty) {
       int amount = int.parse(value);
       int totalAfter = amount + (amount * 0.05).round();
@@ -83,8 +84,7 @@ class AddProductViewModel extends GetxController {
         var parsesJsonData = parsedJson['data'] as List;
         selectedSubCategory(SubCategory(name: chooseSubCategory.value, id: 0));
         subCategoriesList.insert(0, SubCategory(name: chooseSubCategory.value, id: 0));
-        subCategoriesList.addAll(
-            parsesJsonData.map((e) => SubCategory.fromJson(e)));
+        subCategoriesList.addAll(parsesJsonData.map((e) => SubCategory.fromJson(e)));
       }
     }).catchError((e) {
       print(e);
@@ -121,16 +121,14 @@ class AddProductViewModel extends GetxController {
   }
 
   void getVariantsFields() async {
-    ApiBaseHelper()
-        .getMethod(
+    ApiBaseHelper().getMethod(
         url: 'categoryFields?categoryId=$selectedCategoryID&subcategoryId=$selectedSubCategoryID')
         .then((parsedJson) {
       if (parsedJson['success'] == true) {
         var parsedJsonData = parsedJson['data'] as List;
         productVariantsFieldsList.clear();
         productVariantsFieldsList.addAll(
-            parsedJsonData.map((e) => ProductVariantsModel.fromJson(e))
-                .toList());
+            parsedJsonData.map((e) => ProductVariantsModel.fromJson(e)).toList());
       }
     }).catchError((e) {
       print(e);
@@ -142,6 +140,29 @@ class AddProductViewModel extends GetxController {
       dynamicFieldsValuesList.removeWhere((key, v) => v == value);
     dynamicFieldsValuesList.addIf(
         !dynamicFieldsValuesList.containsValue(value), "${model!.id}", value);
+  }
+
+  void addProdBtnPress(){
+    if (formKey.currentState!.validate()) {
+      if (subCategoriesList.isNotEmpty) {
+        if (discountMessage.isEmpty) {
+          if(!uploadImagesError.value){
+            addProduct();
+          } else {
+            uploadImagesError.value = true;
+          }
+        } else {
+          AppConstant.displaySnackBar(
+            langKey.errorTitle,
+            langKey.yourDiscountShould.tr,
+          );
+        }
+      } else {
+        AppConstant.displaySnackBar(
+            langKey.errorTitle,
+            langKey.plzSelectSubCategory.tr);
+      }
+    }
   }
 
   void addProduct() async {
