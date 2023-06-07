@@ -322,6 +322,9 @@ class DashboardUI extends GetView<BaseController> {
                 onTap: () {
                   Get.to(() => SearchView(
                         passedSearchQuery: '${e.key}',
+                        calledForCategory: true,
+
+                        ///used flag to call method of getProductByTypes
                       ));
                 }),
             AppConstant.spaceWidget(height: 10),
