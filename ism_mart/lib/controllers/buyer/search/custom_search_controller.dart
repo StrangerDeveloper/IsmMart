@@ -50,18 +50,17 @@ class CustomSearchController extends GetxController {
     // });
 
     scrollController.addListener(() {
-        if (stopLoadMore.isFalse) {
-          if(selectedCategory.value == '' && searchTextController.text == ''){
-            loadMoreWithSubCategory(subCategoryID.value);
-          }
-          else if(searchTextController.text == '' && subCategoryID.value == 0){
-            loadMoreCategoryProducts(selectedCategory.value);
-          }
-          else{
-            loadMoreSearchedProducts(searchTextController.text);
-          }
+      if (stopLoadMore.isFalse) {
+        if (selectedCategory.value == '' && searchTextController.text == '') {
+          loadMoreWithSubCategory(subCategoryID.value);
+        } else if (searchTextController.text == '' &&
+            subCategoryID.value == 0) {
+          loadMoreCategoryProducts(selectedCategory.value);
+        } else {
+          loadMoreSearchedProducts(searchTextController.text);
         }
-      });
+      }
+    });
   }
 
   var isLoading = false.obs;
@@ -70,7 +69,7 @@ class CustomSearchController extends GetxController {
   int searchLimit = 15;
   int page = 1;
 
-  searchProductsByCategory(String? query)async{
+  searchProductsByCategory(String? query) async {
     isLoading(true);
     await _apiProvider
         .getProductsByType(
@@ -85,23 +84,27 @@ class CustomSearchController extends GetxController {
       isLoading(false);
     });
   }
-  
-  searchWithSubCategory(int? subCategoryId)async{
+
+  searchWithSubCategory(int? subCategoryId) async {
     subCategoryID.value = subCategoryId!;
     isLoading(true);
-    ApiBaseHelper().getMethod(
-        url: "products/getBySubCategory?limit=$searchLimit&page=1&id=$subCategoryId").
-    then((response) {
+    ApiBaseHelper()
+        .getMethod(
+            url:
+                "products/getBySubCategory?limit=$searchLimit&page=1&id=$subCategoryId")
+        .then((response) {
       GlobalVariable.showLoader.value = true;
-      if(response['success'] == true && response['data'] != null){
+      if (response['success'] == true && response['data'] != null) {
         isLoading(false);
         productList.clear();
-        List list = response['data'].map((product) => ProductModel.fromJson(product)).toList();
+        List list = response['data']
+            .map((product) => ProductModel.fromJson(product))
+            .toList();
         list.forEach((element) {
           productList.add(element);
         });
       }
-    }).catchError((e){
+    }).catchError((e) {
       isLoading(false);
       print(e);
     });
@@ -143,39 +146,47 @@ class CustomSearchController extends GetxController {
     }
   }
 
-  loadMoreWithSubCategory(int? subCategoryId)async {
+  loadMoreWithSubCategory(int? subCategoryId) async {
     if (scrollController.hasClients &&
         isLoadingMore.isFalse &&
         scrollController.position.maxScrollExtent == scrollController.offset) {
       isLoadingMore(true);
       searchLimit += 10;
-      ApiBaseHelper().getMethod(
-          url: "products/getBySubCategory?limit=$searchLimit&page=1&id=$subCategoryId").
-      then((response) {
+      ApiBaseHelper()
+          .getMethod(
+              url:
+                  "products/getBySubCategory?limit=$searchLimit&page=1&id=$subCategoryId")
+          .then((response) {
         isLoadingMore(true);
-        if(response['success'] == true && response['data'] != null){
+        if (response['success'] == true && response['data'] != null) {
           isLoading(false);
           productList.clear();
-          List list = response['data'].map((product) => ProductModel.fromJson(product)).toList();
+          List list = response['data']
+              .map((product) => ProductModel.fromJson(product))
+              .toList();
           list.forEach((element) {
             productList.add(element);
           });
           isLoadingMore(false);
         }
-      }).catchError((e){
+      }).catchError((e) {
         isLoadingMore(false);
         print(e);
       });
     }
   }
-  
+
   void loadMoreCategoryProducts(String? searchQuery) async {
     if (scrollController.hasClients &&
         isLoadingMore.isFalse &&
         scrollController.position.maxScrollExtent == scrollController.offset) {
       isLoadingMore(true);
       searchLimit += 10;
-      await _apiProvider.getProductsByType(type: searchQuery, limit: searchLimit,)
+      await _apiProvider
+          .getProductsByType(
+        type: searchQuery,
+        limit: searchLimit,
+      )
           .then((response) {
         productList.clear();
         productList.addAll(response);
@@ -213,7 +224,6 @@ class CustomSearchController extends GetxController {
     }
   }
 
-
   RxList<String> suggestionList = <String>[].obs;
   Rx<int> selectedIndex = 0.obs;
   Rx<String> changeValue = ''.obs;
@@ -229,9 +239,6 @@ class CustomSearchController extends GetxController {
 
     print("suggestin hasnain ----------- ${suggestionList.length}");
   }
-
-
-
 
   var stopLoadMore = false.obs;
   applyFilter() async {
@@ -277,7 +284,7 @@ class CustomSearchController extends GetxController {
     });
   }
 
-  goBack(){
+  goBack() {
     productList.clear();
     searchLimit = 15;
     selectedCategory('');

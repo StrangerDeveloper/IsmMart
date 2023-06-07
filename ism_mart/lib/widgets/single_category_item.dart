@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/models/category/category_model.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
-import 'package:ism_mart/utils/exports_utils.dart';
 
 class SingleCategoryItem extends StatelessWidget {
   const SingleCategoryItem({
@@ -21,9 +20,13 @@ class SingleCategoryItem extends StatelessWidget {
   Widget _buildCategoryNew(CategoryModel category) {
     return InkWell(
       onTap: () {
-            Get.toNamed(Routes.searchRoute,
-                arguments: {"searchText": "${category.name}"});
-          },
+        Get.to(() => SearchView(
+              passedSearchQuery: category.name,
+              calledForCategory: true,
+            ));
+        // Get.toNamed(Routes.searchRoute,
+        //     arguments: {"searchText": "${category.name}"});
+      },
       borderRadius: BorderRadius.circular(8),
       child: Column(
         children: [

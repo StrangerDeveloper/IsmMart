@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'dart:io';
 import 'package:http_parser/src/media_type.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
-import 'package:ism_mart/controllers/controllers.dart';
 import 'package:ism_mart/screens/my_products/my_products_viewmodel.dart';
 import '../../api_helper/api_base_helper.dart';
 import '../../api_helper/global_variables.dart';
@@ -13,7 +12,6 @@ import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import 'package:http/http.dart' as http;
 
 class UpdateProductViewModel extends GetxController {
-
   @override
   void onInit() {
     getProductById(Get.arguments[0]['productId']);
@@ -99,7 +97,7 @@ class UpdateProductViewModel extends GetxController {
       prodPriceController.text = productModel!.price!.toString();
       prodStockController.text = productModel!.stock!.toString();
       prodDiscountController.text =
-      productModel!.discount == 0 ? '' : productModel!.discount!.toString();
+          productModel!.discount == 0 ? '' : productModel!.discount!.toString();
       prodDescriptionController.text = productModel!.description!;
       priceAfterCommission(productModel!.price!.toInt());
       thumbnailUrl.value = productModel!.thumbnail.toString();
@@ -127,7 +125,7 @@ class UpdateProductViewModel extends GetxController {
     }
   }
 
-  void thumbnailCheck(){
+  void thumbnailCheck() {
     if (thumbnailUrl.value != '') {
       thumbnailUrl.value = '';
     } else {
@@ -139,8 +137,7 @@ class UpdateProductViewModel extends GetxController {
   void productPriceOnChange(String value) {
     if (value == '') {
       showPriceAfterCommission.value = false;
-    }
-    else {
+    } else {
       showPriceAfterCommission.value = true;
       totalTax();
       if (value.isNotEmpty) {
@@ -173,9 +170,9 @@ class UpdateProductViewModel extends GetxController {
     model!.name = prodNameController.text;
     model.price = int.parse("${priceAfterCommission.value}");
     model.discount =
-    prodDiscountController.text == '' || prodDiscountController.text.isEmpty
-        ? 0
-        : int.parse(prodDiscountController.text);
+        prodDiscountController.text == '' || prodDiscountController.text.isEmpty
+            ? 0
+            : int.parse(prodDiscountController.text);
     model.description = prodDescriptionController.text;
     model.stock = int.parse("${prodStockController.text}");
 
@@ -186,20 +183,19 @@ class UpdateProductViewModel extends GetxController {
       'stock': '${model.stock}',
       'description': '${model.description}',
       if (model.discount != null &&
-          model.discount! >= 10 &&
-          model.discount! <= 90 || model.discount == 0)
+              model.discount! >= 10 &&
+              model.discount! <= 90 ||
+          model.discount == 0)
         'discount': '${model.discount}',
-
-      if(imagesToDelete != [])
-        for(int i = 0; i < imagesToDelete.length; i++)
+      if (imagesToDelete != [])
+        for (int i = 0; i < imagesToDelete.length; i++)
           'deleteImages[$i]': "${imagesToDelete[i]}"
     };
 
     List<http.MultipartFile> fileList = [];
     if (thumbnailSelectedImage.value!.path == '') {
       null;
-    }
-    else {
+    } else {
       fileList.add(await http.MultipartFile.fromPath(
         'thumbnail',
         thumbnailSelectedImage.value!.path.toString(),
@@ -216,11 +212,12 @@ class UpdateProductViewModel extends GetxController {
         ));
       }
     }
-    ApiBaseHelper().patchMethodForImage(
-        url: 'vendor/products/update',
-        withAuthorization: true,
-        files: fileList,
-        fields: body)
+    ApiBaseHelper()
+        .patchMethodForImage(
+            url: 'vendor/products/update',
+            withAuthorization: true,
+            files: fileList,
+            fields: body)
         .then((parsedJson) async {
       GlobalVariable.showLoader.value = false;
       if (parsedJson['message'] == "Product updated successfully") {

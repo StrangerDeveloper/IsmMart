@@ -8,8 +8,8 @@ import 'package:ism_mart/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
-class MyProductNewView extends StatelessWidget {
-  MyProductNewView({super.key});
+class MyProductView extends StatelessWidget {
+  MyProductView({super.key});
 
   final MyProductsViewModel viewModel = Get.put(MyProductsViewModel());
 

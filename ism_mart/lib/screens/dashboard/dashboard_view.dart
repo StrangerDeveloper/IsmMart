@@ -91,7 +91,7 @@ class DashboardUI extends GetView<BaseController> {
                     itemBuilder: (context, index) {
                       SliderModel model = list[index];
                       return InkWell(
-                        onTap: () => Get.toNamed(Routes.registerRoute),
+                        onTap: () {}, //Get.toNamed(Routes.registerRoute),
                         child: CustomNetworkImage(
                           imageUrl: model.image!,
                           fit: BoxFit.fill,
@@ -322,6 +322,9 @@ class DashboardUI extends GetView<BaseController> {
                 onTap: () {
                   Get.to(() => SearchView(
                         passedSearchQuery: '${e.key}',
+                        calledForCategory: true,
+
+                        ///used flag to call method of getProductByTypes
                       ));
                 }),
             AppConstant.spaceWidget(height: 10),

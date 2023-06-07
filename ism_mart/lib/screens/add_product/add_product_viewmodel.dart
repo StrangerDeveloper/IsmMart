@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/api_base_helper.dart';
 import 'package:ism_mart/api_helper/global_variables.dart';
-import 'package:ism_mart/controllers/controllers.dart';
 import 'package:ism_mart/screens/my_products/my_products_viewmodel.dart';
 import '../../models/category/category_model.dart';
 import '../../models/category/product_variants_model.dart';
@@ -15,7 +14,6 @@ import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import '../../utils/constants.dart';
 
 class AddProductViewModel extends GetxController {
-
   TextEditingController prodNameController = TextEditingController();
   TextEditingController prodStockController = TextEditingController();
   TextEditingController prodBrandController = TextEditingController();
@@ -23,6 +21,7 @@ class AddProductViewModel extends GetxController {
   TextEditingController prodDescriptionController = TextEditingController();
   TextEditingController prodSKUController = TextEditingController();
   TextEditingController prodPriceController = TextEditingController();
+
   RxInt priceAfterCommission = 1.obs;
   RxString chooseCategory = "Select Category".obs;
   RxString chooseSubCategory = "Select sub categories".obs;
@@ -34,9 +33,11 @@ class AddProductViewModel extends GetxController {
   RxInt selectedCategoryID = 0.obs;
   List<CategoryModel> categoriesList = <CategoryModel>[].obs;
   RxMap<String, dynamic> dynamicFieldsValuesList = Map<String, dynamic>().obs;
-  List<ProductVariantsModel> productVariantsFieldsList = <ProductVariantsModel>[].obs;
+  List<ProductVariantsModel> productVariantsFieldsList =
+      <ProductVariantsModel>[].obs;
   Map<String, String>? categoryFieldList;
   var formKey = GlobalKey<FormState>();
+
   RxString discountMessage = "".obs;
   RxDouble imagesSizeInMb = 0.0.obs;
   RxBool uploadImagesError = false.obs;
@@ -48,7 +49,7 @@ class AddProductViewModel extends GetxController {
     super.onReady();
   }
 
-  void onPriceFieldChange(String value){
+  void onPriceFieldChange(String value) {
     if (value.isNotEmpty) {
       int amount = int.parse(value);
       int totalAfter = amount + (amount * 0.05).round();
@@ -70,8 +71,8 @@ class AddProductViewModel extends GetxController {
     await ApiBaseHelper().getMethod(url: 'category/all').then((parsedJson) {
       if (parsedJson['success'] == true) {
         var parsedJsonData = parsedJson['data'] as List;
-        categoriesList.addAll(
-            parsedJsonData.map((e) => CategoryModel.fromJson(e)));
+        categoriesList
+            .addAll(parsedJsonData.map((e) => CategoryModel.fromJson(e)));
       }
     }).catchError((e) {
       print(e);
@@ -79,13 +80,16 @@ class AddProductViewModel extends GetxController {
   }
 
   fetchSubCategories(int categoryID) async {
-    await ApiBaseHelper().getMethod(url: 'subcategory/$categoryID').then((
-        parsedJson) {
+    await ApiBaseHelper()
+        .getMethod(url: 'subcategory/$categoryID')
+        .then((parsedJson) {
       if (parsedJson['success'] == true) {
         var parsesJsonData = parsedJson['data'] as List;
         selectedSubCategory(SubCategory(name: chooseSubCategory.value, id: 0));
-        subCategoriesList.insert(0, SubCategory(name: chooseSubCategory.value, id: 0));
-        subCategoriesList.addAll(parsesJsonData.map((e) => SubCategory.fromJson(e)));
+        subCategoriesList.insert(
+            0, SubCategory(name: chooseSubCategory.value, id: 0));
+        subCategoriesList
+            .addAll(parsesJsonData.map((e) => SubCategory.fromJson(e)));
       }
     }).catchError((e) {
       print(e);
@@ -122,14 +126,17 @@ class AddProductViewModel extends GetxController {
   }
 
   void getVariantsFields() async {
-    ApiBaseHelper().getMethod(
-        url: 'categoryFields?categoryId=$selectedCategoryID&subcategoryId=$selectedSubCategoryID')
+    ApiBaseHelper()
+        .getMethod(
+            url:
+                'categoryFields?categoryId=$selectedCategoryID&subcategoryId=$selectedSubCategoryID')
         .then((parsedJson) {
       if (parsedJson['success'] == true) {
         var parsedJsonData = parsedJson['data'] as List;
         productVariantsFieldsList.clear();
-        productVariantsFieldsList.addAll(
-            parsedJsonData.map((e) => ProductVariantsModel.fromJson(e)).toList());
+        productVariantsFieldsList.addAll(parsedJsonData
+            .map((e) => ProductVariantsModel.fromJson(e))
+            .toList());
       }
     }).catchError((e) {
       print(e);
@@ -143,11 +150,11 @@ class AddProductViewModel extends GetxController {
         !dynamicFieldsValuesList.containsValue(value), "${model!.id}", value);
   }
 
-  void addProdBtnPress(){
+  void addProdBtnPress() {
     if (formKey.currentState!.validate()) {
       if (subCategoriesList.isNotEmpty) {
         if (discountMessage.isEmpty) {
-          if(!uploadImagesError.value){
+          if (!uploadImagesError.value) {
             addProduct();
           } else {
             uploadImagesError.value = true;
@@ -160,16 +167,16 @@ class AddProductViewModel extends GetxController {
         }
       } else {
         AppConstant.displaySnackBar(
-            langKey.errorTitle,
-            langKey.plzSelectSubCategory.tr);
+            langKey.errorTitle, langKey.plzSelectSubCategory.tr);
       }
     }
   }
 
   void addProduct() async {
     GlobalVariable.showLoader.value = true;
-    num discount = prodDiscountController.text.isEmpty ? 0 : num.parse(
-        prodDiscountController.text);
+    num discount = prodDiscountController.text.isEmpty
+        ? 0
+        : num.parse(prodDiscountController.text);
     ProductModel newProduct = ProductModel(
         name: prodNameController.text.trim(),
         price: priceAfterCommission.value,
@@ -177,8 +184,7 @@ class AddProductViewModel extends GetxController {
         categoryId: selectedCategoryID.value,
         subCategoryId: selectedSubCategoryID.value,
         description: prodDescriptionController.text,
-        discount: discount
-    );
+        discount: discount);
 
     Map<String, String> body = {
       'name': newProduct.name.toString(),
@@ -197,7 +203,8 @@ class AddProductViewModel extends GetxController {
       for (int i = 0; i < categoryFieldList!.entries.length; i++) {
         body.addAll({
           'features[$i][id]': "${categoryFieldList!.entries.elementAt(i).key}",
-          'features[$i][value]': "${categoryFieldList!.entries.elementAt(i).value}"
+          'features[$i][value]':
+              "${categoryFieldList!.entries.elementAt(i).value}"
         });
       }
     } else {
@@ -213,12 +220,14 @@ class AddProductViewModel extends GetxController {
       ));
     }
 
-    await ApiBaseHelper().postMethodForImage(
+    await ApiBaseHelper()
+        .postMethodForImage(
       url: 'vendor/products/add',
       files: filesList,
       fields: body,
       withAuthorization: true,
-    ).then((value) async {
+    )
+        .then((value) async {
       GlobalVariable.showLoader.value = false;
       if (value['success'] == true) {
         MyProductsViewModel myProductsViewModel = Get.find();
@@ -226,10 +235,10 @@ class AddProductViewModel extends GetxController {
         // await sellersController.fetchMyProducts();
         Get.back();
         AppConstant.displaySnackBar(langKey.success.tr, value['message']);
-      }
-      else {
+      } else {
         debugPrint('Error: ${value.toString()}');
-        AppConstant.displaySnackBar(langKey.errorTitle.tr,
+        AppConstant.displaySnackBar(
+          langKey.errorTitle.tr,
           "${value['message'] != null ? value['message'] : langKey.someThingWentWrong.tr}",
         );
       }
