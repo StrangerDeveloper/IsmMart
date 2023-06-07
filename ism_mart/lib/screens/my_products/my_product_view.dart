@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
-import 'package:ism_mart/controllers/export_controllers.dart';
-import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/exports/exports_ui.dart';
+import 'package:ism_mart/screens/my_products/my_products_viewmodel.dart';
+import 'package:ism_mart/screens/my_products/vendor_product_model.dart';
 import 'package:ism_mart/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
-class MyProducts extends GetView<SellersController> {
-  const MyProducts({Key? key}) : super(key: key);
+class MyProductView extends StatelessWidget {
+  MyProductView({super.key});
+
+  final MyProductsViewModel viewModel = Get.put(MyProductsViewModel());
 
   @override
   Widget build(BuildContext context) {
@@ -17,23 +19,26 @@ class MyProducts extends GetView<SellersController> {
       child: Scaffold(
         body: Column(
           children: [
-            Align(
-              alignment: Alignment.centerRight,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: CustomTextBtn(
-                  onPressed: () {
-                    Get.to(() => AddProductsView());
-                  },
-                  title: langKey.addProduct.tr,
-                  width: 110,
-                  height: 35,
-                ),
-              ),
+            addProduct(context),
+            Expanded(
+              child: _buildProductBody(),
             ),
-            //AppConstant.spaceWidget(height: 10),
-            Expanded(child: _buildProductBody()),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget addProduct(BuildContext context) {
+    return Align(
+      alignment: Alignment.centerRight,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 10, right: 20, left: 20, bottom: 5),
+        child: CustomTextBtn(
+          onPressed: () {
+            Get.to(() => AddProductsView());
+          },
+          title: langKey.addProduct.tr,
         ),
       ),
     );
@@ -41,7 +46,7 @@ class MyProducts extends GetView<SellersController> {
 
   Widget _buildProductBody() {
     return Obx(
-      () => controller.myProductsList.isEmpty
+      () => viewModel.myProductsList.isEmpty
           ? Center(
               child: NoDataFoundWithIcon(
                 icon: IconlyLight.bag_2,
@@ -55,48 +60,51 @@ class MyProducts extends GetView<SellersController> {
                   child: RefreshIndicator(
                     onRefresh: () {
                       return Future.delayed(Duration(seconds: 2), () {
-                        controller.fetchMyProducts();
+                        viewModel.loadInitialProducts();
                       });
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: GridView.builder(
-                        controller: controller.scrollController,
+                        controller: viewModel.scrollController,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: AppResponsiveness.getGridItemCount(),
-                          //mainAxisExtent:
-                          //  AppResponsiveness.getMainAxisExtentPoint30(),
                           mainAxisSpacing: 8,
                           crossAxisSpacing: 8,
                           childAspectRatio:
                               AppResponsiveness.getChildAspectRatioPoint85(),
                         ),
-                        itemCount: controller.myProductsList.length,
+                        itemCount: viewModel.myProductsList.length,
                         itemBuilder: (_, index) {
-                          ProductModel productModel =
-                              controller.myProductsList[index];
-                          return _buildProductItem(model: productModel);
+                          VendorProduct productModel =
+                              viewModel.myProductsList[index];
+                          return _buildProductItem(
+                            model: productModel,
+                            index: index,
+                          );
                         },
                       ),
                     ),
                   ),
                 ),
-                if (controller.isLoadingMore.isTrue)
+                if (viewModel.isLoadingMore.isTrue)
                   CustomLoading(isItForWidget: true)
               ],
             ),
     );
   }
 
-  _buildProductItem({ProductModel? model}) {
+  _buildProductItem({VendorProduct? model, required int index}) {
     return AspectRatio(
       aspectRatio: 0.75,
       child: GestureDetector(
         onTap: () {
-          Get.to(SingleProductView(
-            productId: "${model.id}",
-            calledFor: 'seller',
-          ));
+          Get.to(
+            SingleProductView(
+              productId: "${model.id}",
+              calledFor: 'seller',
+            ),
+          );
         },
         child: Container(
           clipBehavior: Clip.hardEdge,
@@ -115,8 +123,8 @@ class MyProducts extends GetView<SellersController> {
                     height: AppResponsiveness.getHeight90_100(),
                     width: double.infinity,
                     child: CustomNetworkImage(
-                        imageUrl:
-                            model!.thumbnail ?? AppConstant.defaultImgUrl),
+                      imageUrl: model!.thumbnail ?? AppConstant.defaultImgUrl,
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8),
@@ -127,7 +135,8 @@ class MyProducts extends GetView<SellersController> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             CustomText(
-                                title: "${langKey.sold.tr}: ${model.sold!}"),
+                              title: "${langKey.id.tr}: ${model.id!}",
+                            ),
                             CustomText(
                               title: "${langKey.stock.tr}: ${model.stock!}",
                               color: kLimeGreenColor,
@@ -142,14 +151,15 @@ class MyProducts extends GetView<SellersController> {
                         CustomPriceWidget(title: "${model.discountPrice!}"),
                         if (model.discount != 0)
                           Row(
-                            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               CustomPriceWidget(
-                                  title: "${model.price!}",
-                                  style: bodyText1.copyWith(
-                                      decoration: TextDecoration.lineThrough,
-                                      fontSize: 13,
-                                      color: kLightColor)),
+                                title: "${model.price!}",
+                                style: bodyText1.copyWith(
+                                  decoration: TextDecoration.lineThrough,
+                                  fontSize: 13,
+                                  color: kLightColor,
+                                ),
+                              ),
                               AppConstant.spaceWidget(width: 10),
                               CustomText(
                                 title: "${model.discount}% ${langKey.OFF.tr}",
@@ -181,30 +191,28 @@ class MyProducts extends GetView<SellersController> {
                 top: 2,
                 right: 2,
                 child: Row(
-                  //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     CustomActionIcon(
                         onTap: () {
-                          // print("ProductId: ${model.id}");
                           Get.to(() => UpdateProductView(), arguments: [
-                            {
-                              'productId': '${model.id}',
-                            }
+                            {'productId': '${model.id}'}
                           ]);
                         },
                         icon: Icons.edit_rounded,
                         bgColor: kPrimaryColor),
                     AppConstant.spaceWidget(width: 5),
                     CustomActionIcon(
-                        onTap: () => AppConstant.showConfirmDeleteDialog(
-                              ontap: () =>
-                                  controller.deleteProduct(id: model.id),
-                              passedHeadingLangKey: langKey.areYouSure.tr,
-                              passedBodyLangKey:
-                                  langKey.deletionProcessDetail.tr,
-                            ),
-                        icon: Icons.delete_rounded,
-                        bgColor: kRedColor)
+                      onTap: () => AppConstant.showConfirmDeleteDialog(
+                        ontap: () {
+                          viewModel.deleteProduct(model.id.toString(),
+                              index: index);
+                        },
+                        passedHeadingLangKey: langKey.areYouSure.tr,
+                        passedBodyLangKey: langKey.deletionProcessDetail.tr,
+                      ),
+                      icon: Icons.delete_rounded,
+                      bgColor: kRedColor,
+                    )
                   ],
                 ),
               ),
@@ -234,7 +242,7 @@ class MyProducts extends GetView<SellersController> {
     );
   }
 
-  Color getStatusColor(ProductModel? model) {
+  Color getStatusColor(VendorProduct? model) {
     switch (model!.status!.toLowerCase()) {
       case "pending":
         return Colors.deepOrange;
