@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/api_base_helper.dart';
-import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/api_helper/global_variables.dart';
 import 'package:ism_mart/api_helper/urls.dart';
-import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
@@ -53,8 +51,7 @@ class ForgotPassword2ViewModel extends GetxController {
       };
 
       ApiBaseHelper()
-          .postMethod(
-              url: Urls.forgetPasswordOtp, body: param)
+          .postMethod(url: Urls.forgetPasswordOtp, body: param)
           .then((parsedJson) {
         GlobalVariable.showLoader.value = false;
         if (parsedJson['message'] == "Password updated successfully") {

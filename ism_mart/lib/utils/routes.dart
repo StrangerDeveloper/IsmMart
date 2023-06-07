@@ -4,7 +4,6 @@ import 'package:ism_mart/exports/exports_ui.dart';
 import 'package:ism_mart/screens/email_verification/email_verification_view.dart';
 
 import '../screens/email_verify/email_verify_view.dart';
-import '../screens/forgot_password2/forgot_password2_view.dart';
 
 class Routes {
   static const initRoute = "/";
