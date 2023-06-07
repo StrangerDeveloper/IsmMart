@@ -123,12 +123,12 @@ class PremiumMembershipUI extends GetView<MembershipController> {
                   }).toList(),
                 ),
                 kSmallDivider,
-                CustomButton(
-                  onTap: () {},
-                  text: model.title!.toLowerCase().contains("start")
+                CustomTextBtn(
+                  onPressed: () {},
+                  title: model.title!.toLowerCase().contains("start")
                       ? langKey.subscribedBtn.tr
                       : langKey.subscribeBtn.tr,
-                  color: model.title!.toLowerCase().contains("start")
+                  foregroundColor: model.title!.toLowerCase().contains("start")
                       ? kPrimaryColor
                       : Colors.grey,
                   width: 200,

@@ -21,13 +21,13 @@ class MyProducts extends GetView<SellersController> {
               alignment: Alignment.centerRight,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: CustomButton(
-                  onTap: () => AppConstant.showBottomSheet(
+                child: CustomTextBtn(
+                  onPressed: () => AppConstant.showBottomSheet(
                       widget: AddProductsView(),
                       isGetXBottomSheet: false,
                       buildContext: context),
                   //controller.changePage(1),
-                  text: langKey.addProduct.tr,
+                  title: langKey.addProduct.tr,
                   width: 110,
                   height: 35,
                 ),

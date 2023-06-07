@@ -157,13 +157,12 @@ class CartView extends GetView<CartController> {
               ),
             ),
             AppConstant.spaceWidget(height: 10),
-            CustomButton(
-              onTap: () async {
+            CustomTextBtn(
+              onPressed: () async {
                 AuthController authController = Get.find();
                 await authController.emailVerificationCheck();
               },
-              text: langKey.proceedToCheckOut.tr,
-              color: kPrimaryColor,
+              title: langKey.proceedToCheckOut.tr,
               height: 40,
             ),
             //_buildBuyNowAndCartBtn(),

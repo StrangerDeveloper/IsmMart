@@ -246,14 +246,14 @@ class GeneralSettingsView extends StatelessWidget {
                   Obx(
                         () => authController.isLoading.isTrue
                         ? CustomLoading(isItBtn: true)
-                        : CustomButton(
-                      onTap: () async {
+                        : CustomTextBtn(
+                      onPressed: () async {
                         if (formKey.currentState!.validate()) {
                           await authController.postContactUs();
                           formKey.currentState!.reset();
                         }
                       },
-                      text: send.tr,
+                      title: send.tr,
                       height: 40,
                       width: 150,
                     ),

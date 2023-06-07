@@ -228,8 +228,8 @@ class AddProductsView extends GetView<SellersController> {
                         Obx(
                           () => controller.isLoading.isTrue
                               ? CustomLoading(isItBtn: true)
-                              : CustomButton(
-                                  onTap: () {
+                              : CustomTextBtn(
+                                  onPressed: () {
                                     if (formKey.currentState!.validate()) {
                                       if (controller.categoryController
                                           .subCategories.isNotEmpty) {
@@ -249,7 +249,7 @@ class AddProductsView extends GetView<SellersController> {
                                       }
                                     }
                                   },
-                                  text: langKey.addProduct.tr,
+                                  title: langKey.addProduct.tr,
                                   height: 50,
                                   width: 300,
                                 ),
