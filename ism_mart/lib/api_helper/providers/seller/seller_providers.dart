@@ -94,7 +94,11 @@ class SellersApiProvider {
   }
 
   Future<ApiResponse> updateProduct(
-      {String? token, ProductModel? model, List<int>? imagesToDelete, List<File>? imagesToUpdate, String thumbnailImage = ''}) async {
+      {String? token,
+      ProductModel? model,
+      List<int>? imagesToDelete,
+      List<File>? imagesToUpdate,
+      String thumbnailImage = ''}) async {
     final url = "${ApiConstant.baseUrl}vendor/products/update";
     var headers = {'authorization': '$token', 'Cookie': 'XSRF-token=$token'};
     final request = http.MultipartRequest('PATCH', Uri.parse(url));
@@ -110,19 +114,19 @@ class SellersApiProvider {
       'stock': '${model.stock}',
       'description': '${model.description}',
       if (model.discount != null &&
-          model.discount! >= 10 &&
-          model.discount! <= 90 || model.discount == 0)
+              model.discount! >= 10 &&
+              model.discount! <= 90 ||
+          model.discount == 0)
         'discount': '${model.discount}',
       // 'deleteImages': imagesToDelete == [] ? "[]" : "$imagesToDelete",
-      if(imagesToDelete != [])
-        for(int i = 0; i<imagesToDelete!.length; i++)
+      if (imagesToDelete != [])
+        for (int i = 0; i < imagesToDelete!.length; i++)
           'deleteImages[$i]': "${imagesToDelete[i]}"
     });
 
-    if(thumbnailImage == '') {
+    if (thumbnailImage == '') {
       null;
-    }
-    else{
+    } else {
       request.files.add(await http.MultipartFile.fromPath(
         'thumbnail',
         thumbnailImage.toString(),
@@ -133,8 +137,8 @@ class SellersApiProvider {
     // if(imagesToDelete!.isNotEmpty)
     //   request.fields['deleteImages'] = "$imagesToDelete";
 
-    if(imagesToUpdate != []){
-      for(File image in imagesToUpdate!){
+    if (imagesToUpdate != []) {
+      for (File image in imagesToUpdate!) {
         request.files.add(await http.MultipartFile.fromPath(
           'addImages',
           image.path,

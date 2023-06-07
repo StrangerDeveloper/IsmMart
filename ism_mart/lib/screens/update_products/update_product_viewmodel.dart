@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:http_parser/src/media_type.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/controllers/controllers.dart';
+import 'package:ism_mart/screens/my_products/my_products_viewmodel.dart';
 import '../../api_helper/api_base_helper.dart';
 import '../../api_helper/global_variables.dart';
 import '../../models/product/product_model.dart';
@@ -224,7 +225,9 @@ class UpdateProductViewModel extends GetxController {
       GlobalVariable.showLoader.value = false;
       if (parsedJson['message'] == "Product updated successfully") {
         GlobalVariable.showLoader.value = false;
-        await sellersController.fetchMyProducts();
+        MyProductsViewModel myProductsViewModel = Get.find();
+        myProductsViewModel.loadInitialProducts();
+        // await sellersController.fetchMyProducts();
         Get.back();
         AppConstant.displaySnackBar(langKey.success.tr, parsedJson['message']);
       } else {
