@@ -21,16 +21,11 @@ class MyProducts extends GetView<SellersController> {
               alignment: Alignment.centerRight,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: CustomButton(
-                  onTap: () {
+                child: CustomTextBtn(
+                  onPressed: () {
                     Get.to(() => AddProductsView());
                   },
-                  // onTap: () => AppConstant.showBottomSheet(
-                  //     widget: AddProductsView(),
-                  //     isGetXBottomSheet: false,
-                  //     buildContext: context),
-                  //controller.changePage(1),
-                  text: langKey.addProduct.tr,
+                  title: langKey.addProduct.tr,
                   width: 110,
                   height: 35,
                 ),
@@ -191,9 +186,11 @@ class MyProducts extends GetView<SellersController> {
                     CustomActionIcon(
                         onTap: () {
                           // print("ProductId: ${model.id}");
-                          Get.to(() => UpdateProductView(), arguments: [{
-                            'productId': '${model.id}',
-                          }]);
+                          Get.to(() => UpdateProductView(), arguments: [
+                            {
+                              'productId': '${model.id}',
+                            }
+                          ]);
                         },
                         icon: Icons.edit_rounded,
                         bgColor: kPrimaryColor),
