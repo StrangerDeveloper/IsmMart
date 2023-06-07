@@ -91,7 +91,7 @@ class DashboardUI extends GetView<BaseController> {
                     itemBuilder: (context, index) {
                       SliderModel model = list[index];
                       return InkWell(
-                        onTap: () => Get.toNamed(Routes.registerRoute),
+                        onTap: () {}, //Get.toNamed(Routes.registerRoute),
                         child: CustomNetworkImage(
                           imageUrl: model.image!,
                           fit: BoxFit.fill,
