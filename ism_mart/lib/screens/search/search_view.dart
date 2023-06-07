@@ -195,34 +195,30 @@ class SearchView extends GetView<CustomSearchController> {
                                 child: ListView.builder(
                                   itemCount: controller.suggestionList.length,
                                   itemBuilder: (context, index) {
-                                    return Obx(
-                                      () => ListTile(
-                                        onTap: () {
-                                          controller.selectedIndex.value =
-                                              index;
+                                    return ListTile(
+                                      onTap: () {
+                                        controller.selectedIndex.value = index;
 
-                                          controller.searchTextController.text =
-                                              controller.suggestionList[index]
-                                                  .toString();
+                                        controller.searchTextController.text =
+                                            controller.suggestionList[index]
+                                                .toString();
 
-                                          controller.selectedCategory('');
-                                          controller.searchProducts(controller
-                                              .searchTextController.text);
-                                          controller.searchLimit = 15;
+                                        controller.selectedCategory('');
+                                        controller.searchProducts(controller
+                                            .searchTextController.text);
+                                        controller.searchLimit = 15;
 
-                                          controller.suggestionList.clear();
-                                          controller.finalSerach(true);
-                                        },
-                                        tileColor:
-                                            controller.selectedIndex.value ==
-                                                    index
-                                                ? Colors.black12
-                                                : kAccentColor,
-                                        title: CustomText(
-                                          title: controller
-                                              .suggestionList[index]
-                                              .toString(),
-                                        ),
+                                        controller.suggestionList.clear();
+                                        controller.finalSerach(true);
+                                      },
+                                      tileColor:
+                                          controller.selectedIndex.value ==
+                                                  index
+                                              ? Colors.black12
+                                              : kAccentColor,
+                                      title: CustomText(
+                                        title: controller.suggestionList[index]
+                                            .toString(),
                                       ),
                                     );
                                   },
