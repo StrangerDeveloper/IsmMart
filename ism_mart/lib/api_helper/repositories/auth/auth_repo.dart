@@ -1,5 +1,4 @@
 import 'package:ism_mart/api_helper/api_service.dart';
-import 'package:ism_mart/models/exports_model.dart';
 
 class AuthRepository {
   final ApiService _apiService;
@@ -8,12 +7,12 @@ class AuthRepository {
 
   Future<List<dynamic>> getCountries() async {
     var response = await _apiService.get(endpoint: 'country');
-    return response.body['data'];
+    return response.body != null ? response.body['data'] : [];
   }
 
   Future<List<dynamic>> getCities({int? countryId}) async {
     var response = await _apiService.get(endpoint: 'city/$countryId');
-    return response.body['data'];
+    return response.body != null ? response.body['data'] : [];
   }
 
   Future<dynamic> login({email, password}) async {
@@ -44,7 +43,7 @@ class AuthRepository {
 
   Future<List<dynamic>> getUsers() async {
     var response = await _apiService.get(endpoint: "auth/users");
-    return response.body['data'];
+    return response.body != null ? response.body['data'] : [];
   }
 
   Future<dynamic> updateUser({token, data}) async {
@@ -63,13 +62,13 @@ class AuthRepository {
     return response.body;
   }
 
-  // Future<dynamic> recoverPasswordWithOtp({data}) async {
-  //   var response = await _apiService.post(
-  //     endpoint: "auth/forgetPasswordOtp",
-  //     body: data,
-  //   );
-  //   return response.body;
-  // }
+  Future<dynamic> recoverPasswordWithOtp({data}) async {
+    var response = await _apiService.post(
+      endpoint: "auth/forgetPasswordOtp",
+      body: data,
+    );
+    return response.body;
+  }
 
   /**
    *
@@ -91,7 +90,7 @@ class AuthRepository {
         endpoint: "user/getShippingDetails?limit=3",
         requiresAuthToken: true,
         token: token);
-    return response.body['data'];
+    return response.body != null ? response.body['data'] : [];
   }
 
   Future<dynamic> getDefaultShippingDetails({token}) async {
@@ -99,7 +98,7 @@ class AuthRepository {
         endpoint: "user/getDefaultShippingDetails",
         requiresAuthToken: true,
         token: token);
-    return response.body['data'];
+    return response.body != null ? response.body['data'] : null;
   }
 
   Future<dynamic> changeDefaultShippingAddress({int? addressId, token}) async {

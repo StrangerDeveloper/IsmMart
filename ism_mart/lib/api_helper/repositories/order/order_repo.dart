@@ -18,7 +18,7 @@ class OrderRepository {
         query: queryParams,
         requiresAuthToken: true,
         token: token);
-    return response.body['data'];
+    return response.body != null ? response.body['data'] : [];
   }
 
   Future<List<dynamic>> fetchVendorOrders({token, status}) async {
@@ -28,7 +28,7 @@ class OrderRepository {
         query: queryParams,
         requiresAuthToken: true,
         token: token);
-    return response.body['data'];
+    return response.body != null ? response.body['data'] : [];
   }
 
   Future<dynamic> fetchBuyerOrdersDetails({token, orderId}) async {
@@ -36,7 +36,7 @@ class OrderRepository {
         endpoint: 'order/orderDetails/$orderId',
         requiresAuthToken: true,
         token: token);
-    return response.body['data'];
+    return response.body != null ? response.body['data'] : null;
   }
 
   Future<dynamic> fetchVendorOrdersDetails({token, orderId}) async {
@@ -44,7 +44,7 @@ class OrderRepository {
         endpoint: 'order/vendorOrders/$orderId',
         requiresAuthToken: true,
         token: token);
-    return response.body['data'];
+    return response.body != null ? response.body['data'] : null;
   }
 
   Future<dynamic> fetchBuyerOrderStats({token}) async {
