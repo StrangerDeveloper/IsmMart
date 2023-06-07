@@ -46,5 +46,6 @@ class Urls {
   static String forgetPasswordOtp = "auth/forgetPasswordOtp";
 
   //MyProductsViewModel
-  static String getMyProducts = "vendor/products/myProducts?";
+  static String getMyProducts = "vendor/products/myProducts?limit=10&page=";
+  static String deleteProduct = "vendor/products/delete/";
 }

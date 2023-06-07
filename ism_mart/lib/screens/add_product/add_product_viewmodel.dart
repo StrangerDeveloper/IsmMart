@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/api_base_helper.dart';
 import 'package:ism_mart/api_helper/global_variables.dart';
 import 'package:ism_mart/controllers/controllers.dart';
+import 'package:ism_mart/screens/my_products/my_products_viewmodel.dart';
 import '../../models/category/category_model.dart';
 import '../../models/category/product_variants_model.dart';
 import '../../models/category/sub_category_model.dart';
@@ -220,7 +221,9 @@ class AddProductViewModel extends GetxController {
     ).then((value) async {
       GlobalVariable.showLoader.value = false;
       if (value['success'] == true) {
-        await sellersController.fetchMyProducts();
+        MyProductsViewModel myProductsViewModel = Get.find();
+        myProductsViewModel.loadInitialProducts();
+        // await sellersController.fetchMyProducts();
         Get.back();
         AppConstant.displaySnackBar(langKey.success.tr, value['message']);
       }
