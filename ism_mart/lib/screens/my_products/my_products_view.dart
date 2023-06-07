@@ -22,10 +22,13 @@ class MyProducts extends GetView<SellersController> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: CustomButton(
-                  onTap: () => AppConstant.showBottomSheet(
-                      widget: AddProductsView(),
-                      isGetXBottomSheet: false,
-                      buildContext: context),
+                  onTap: () {
+                    Get.to(() => AddProductsView());
+                  },
+                  // onTap: () => AppConstant.showBottomSheet(
+                  //     widget: AddProductsView(),
+                  //     isGetXBottomSheet: false,
+                  //     buildContext: context),
                   //controller.changePage(1),
                   text: langKey.addProduct.tr,
                   width: 110,

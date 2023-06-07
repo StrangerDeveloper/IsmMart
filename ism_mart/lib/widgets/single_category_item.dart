@@ -20,8 +20,7 @@ class SingleCategoryItem extends StatelessWidget {
 
   Widget _buildCategoryNew(CategoryModel category) {
     return InkWell(
-      onTap: onTap ??
-          () {
+      onTap: () {
             Get.toNamed(Routes.searchRoute,
                 arguments: {"searchText": "${category.name}"});
           },
