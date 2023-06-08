@@ -63,43 +63,6 @@ class VendorOrdersViewModel extends GetxController {
     super.onReady();
   }
 
-  // getGenericData({
-  //   required String status,
-  //   required int pageNo,
-  //   required ScrollController scrollController,
-  //   required RxBool showLoader,
-  //   required List<VendorOrder> list,
-  // }) {
-  //   if (pageNo == 0
-  //       ? true
-  //       : (scrollController.hasClients &&
-  //           scrollController.position.maxScrollExtent ==
-  //               scrollController.offset)) {
-  //     pageNo++;
-  //     showLoader.value = true;
-  //
-  //     ApiBaseHelper()
-  //         .getMethod(
-  //             url: '${Urls.getVendorOrders}page=${pageNo}&status=pending',
-  //             withAuthorization: true)
-  //         .then((parsedJson) {
-  //       if (parsedJson['success'] == true && parsedJson['data'] != null) {
-  //         var data = parsedJson['data'] as List;
-  //         if (data.isEmpty) {
-  //           scrollController.dispose();
-  //         }
-  //         list.addAll(data.map((e) => VendorOrder.fromJson(e)));
-  //         showLoader.value = false;
-  //       } else {
-  //         AppConstant.displaySnackBar(errorTitle.tr, parsedJson['message']);
-  //       }
-  //     }).catchError((e) {
-  //       print(e);
-  //       // GlobalVariable.showLoader.value = false;
-  //     });
-  //   }
-  // }
-
   getPendingData() {
     if (pendingPageNo == 0
         ? true
