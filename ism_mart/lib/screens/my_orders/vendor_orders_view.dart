@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/screens/my_orders/vendor_orders_viewmodel.dart';
@@ -51,178 +50,77 @@ class VendorOrdersView extends StatelessWidget {
     return Expanded(
       child: TabBarView(
         children: [
-          pendingOrders(),
-          acceptedOrders(),
-          shippedOrders(),
-          deliveredOrders(),
-          cancelledOrders(),
+          Obx(
+            () => listView(
+              list: viewModel.pendingOrdersList,
+              scrollController: viewModel.pendingScrollController,
+              showLoader: viewModel.pendingLoader.value,
+            ),
+          ),
+          Obx(
+            () => listView(
+              list: viewModel.acceptedOrdersList,
+              scrollController: viewModel.acceptedScrollController,
+              showLoader: viewModel.acceptedLoader.value,
+            ),
+          ),
+          Obx(
+            () => listView(
+              list: viewModel.shippedOrdersList,
+              scrollController: viewModel.shippedScrollController,
+              showLoader: viewModel.shippedLoader.value,
+            ),
+          ),
+          Obx(
+            () => listView(
+              list: viewModel.deliveredOrdersList,
+              scrollController: viewModel.deliveredScrollController,
+              showLoader: viewModel.deliveredLoader.value,
+            ),
+          ),
+          Obx(
+            () => listView(
+              list: viewModel.cancelledOrdersList,
+              scrollController: viewModel.cancelledScrollController,
+              showLoader: viewModel.cancelledLoader.value,
+            ),
+          ),
         ],
       ),
     );
   }
 
-  Widget pendingOrders() {
-    return Obx(
-      () => viewModel.pendingOrdersList.isNotEmpty
-          ? Column(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                    physics: BouncingScrollPhysics(),
-                    controller: viewModel.pendingScrollController,
-                    itemCount: viewModel.pendingOrdersList.length,
-                    itemBuilder: (BuildContext, index) {
-                      return SingleRecentOrderItems(
-                        orderModel:
-                            viewModel.pendingOrdersList[index].orderModel,
-                        calledForBuyerOrderDetails: false,
-                      );
-                    },
-                  ),
+  Widget listView({
+    required List<VendorOrder> list,
+    required ScrollController? scrollController,
+    required bool showLoader,
+  }) {
+    return list.isNotEmpty
+        ? Column(
+            children: [
+              Expanded(
+                child: ListView.builder(
+                  physics: BouncingScrollPhysics(),
+                  controller: scrollController,
+                  itemCount: list.length,
+                  itemBuilder: (BuildContext, index) {
+                    return SingleRecentOrderItems(
+                      orderModel: list[index].orderModel,
+                      calledForBuyerOrderDetails: false,
+                    );
+                  },
                 ),
-                viewModel.pendingLoader.value
-                    ? Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                          child: CircularProgressIndicator(strokeWidth: 2),
-                        ),
-                      )
-                    : SizedBox()
-              ],
-            )
-          : NoDataFound(text: langKey.noOrderFound.tr),
-    );
-  }
-
-  Widget acceptedOrders() {
-    return Obx(
-      () => viewModel.acceptedOrdersList.isNotEmpty
-          ? Column(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                    physics: BouncingScrollPhysics(),
-                    controller: viewModel.acceptedScrollController,
-                    itemCount: viewModel.acceptedOrdersList.length,
-                    itemBuilder: (BuildContext, index) {
-                      return SingleRecentOrderItems(
-                        orderModel:
-                            viewModel.acceptedOrdersList[index].orderModel,
-                        calledForBuyerOrderDetails: false,
-                      );
-                    },
-                  ),
-                ),
-                viewModel.acceptedLoader.value
-                    ? Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                          child: CircularProgressIndicator(strokeWidth: 2),
-                        ),
-                      )
-                    : SizedBox()
-              ],
-            )
-          : NoDataFound(text: langKey.noOrderFound.tr),
-    );
-  }
-
-  Widget shippedOrders() {
-    return Obx(
-      () => viewModel.shippedOrdersList.isNotEmpty
-          ? Column(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                    physics: BouncingScrollPhysics(),
-                    controller: viewModel.shippedScrollController,
-                    itemCount: viewModel.shippedOrdersList.length,
-                    itemBuilder: (BuildContext, index) {
-                      return SingleRecentOrderItems(
-                        orderModel:
-                            viewModel.shippedOrdersList[index].orderModel,
-                        calledForBuyerOrderDetails: false,
-                      );
-                    },
-                  ),
-                ),
-                viewModel.shippedLoader.value
-                    ? Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                          child: CircularProgressIndicator(strokeWidth: 2),
-                        ),
-                      )
-                    : SizedBox()
-              ],
-            )
-          : NoDataFound(text: langKey.noOrderFound.tr),
-    );
-  }
-
-  Widget deliveredOrders() {
-    return Obx(
-      () => viewModel.deliveredOrdersList.isNotEmpty
-          ? Column(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                    physics: BouncingScrollPhysics(),
-                    controller: viewModel.deliveredScrollController,
-                    itemCount: viewModel.deliveredOrdersList.length,
-                    itemBuilder: (BuildContext, index) {
-                      return SingleRecentOrderItems(
-                        orderModel:
-                            viewModel.deliveredOrdersList[index].orderModel,
-                        calledForBuyerOrderDetails: false,
-                      );
-                    },
-                  ),
-                ),
-                viewModel.deliveredLoader.value
-                    ? Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                          child: CircularProgressIndicator(strokeWidth: 2),
-                        ),
-                      )
-                    : SizedBox()
-              ],
-            )
-          : NoDataFound(text: langKey.noOrderFound.tr),
-    );
-  }
-
-  Widget cancelledOrders() {
-    return Obx(
-      () => viewModel.cancelledOrdersList.isNotEmpty
-          ? Column(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                    physics: BouncingScrollPhysics(),
-                    controller: viewModel.cancelledScrollController,
-                    itemCount: viewModel.cancelledOrdersList.length,
-                    itemBuilder: (BuildContext, index) {
-                      return SingleRecentOrderItems(
-                        orderModel:
-                            viewModel.cancelledOrdersList[index].orderModel,
-                        calledForBuyerOrderDetails: false,
-                      );
-                    },
-                  ),
-                ),
-                viewModel.cancelledLoader.value
-                    ? Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                          child: CircularProgressIndicator(strokeWidth: 2),
-                        ),
-                      )
-                    : SizedBox()
-              ],
-            )
-          : NoDataFound(text: langKey.noOrderFound.tr),
-    );
+              ),
+              showLoader
+                  ? Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      ),
+                    )
+                  : SizedBox()
+            ],
+          )
+        : NoDataFound(text: langKey.noOrderFound.tr);
   }
 }
