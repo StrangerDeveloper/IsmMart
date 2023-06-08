@@ -1,4 +1,5 @@
 import 'package:ism_mart/screens/change_password/change_password_view.dart';
+import 'package:ism_mart/screens/my_orders/vendor_orders_view.dart';
 import 'package:ism_mart/screens/my_products/my_product_view.dart';
 import 'package:ism_mart/screens/vendor_detail/vendor_detail_view.dart';
 import 'package:ism_mart/screens/vendor_question/vendor_question_view.dart';
@@ -117,7 +118,8 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
     const SellerDashboardView(),
     // const MyProducts(),
     MyProductView(),
-    const MyOrdersUI(),
+    VendorOrdersView(),
+    // const MyOrdersUI(),
     //const PremiumMembershipUI(),
     // const StoreProfileView(),
     VendorDetailView(),
