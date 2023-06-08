@@ -23,18 +23,18 @@ class MyOrdersUI extends GetView<OrderController> {
     }, onLoading: CustomLoading(isDarkMode: Get.isDarkMode));
   }
 
-  Widget noDataFound() {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.grey[100]!,
-        body: Center(
-          child: NoDataFoundWithIcon(
-            title: langKey.noOrderFound.tr,
-          ),
-        ),
-      ),
-    );
-  }
+  // Widget noDataFound() {
+  //   return SafeArea(
+  //     child: Scaffold(
+  //       backgroundColor: Colors.grey[100]!,
+  //       body: Center(
+  //         child: NoDataFoundWithIcon(
+  //           title: langKey.noOrderFound.tr,
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Widget _build({listData}) {
     return SafeArea(
