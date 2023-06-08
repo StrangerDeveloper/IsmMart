@@ -63,9 +63,6 @@ class VendorOrdersViewModel extends GetxController {
     super.onReady();
   }
 
-
-
-
   // getGenericData({
   //   required String status,
   //   required int pageNo,

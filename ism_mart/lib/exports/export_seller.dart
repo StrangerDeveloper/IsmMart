@@ -1,5 +1,4 @@
 export '../screens/membership/member_ship_view.dart';
-export '../screens/my_orders/my_orders_view.dart';
 export '../widgets/single_recent_orders_item.dart';
 export '../screens/add_product/add_product_view.dart';
 export '../screens/seller_dashboard/seller_dashboard_view.dart';

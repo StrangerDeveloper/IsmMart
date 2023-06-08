@@ -1,7 +1,7 @@
 import 'package:ism_mart/screens/change_password/change_password_view.dart';
-import 'package:ism_mart/screens/my_orders/vendor_orders_view.dart';
 import 'package:ism_mart/screens/my_products/my_product_view.dart';
 import 'package:ism_mart/screens/vendor_detail/vendor_detail_view.dart';
+import 'package:ism_mart/screens/vendor_orders/vendor_orders_view.dart';
 import 'package:ism_mart/screens/vendor_question/vendor_question_view.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import 'package:flutter/material.dart';
@@ -28,7 +28,6 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
   @override
   void onReady() {
     super.onReady();
-    orderController.fetchVendorOrders(status: "pending");
     fetchCategories();
   }
 
@@ -116,12 +115,9 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
 //TDO: Seller Home Section
   List<Widget> NavScreens = [
     const SellerDashboardView(),
-    // const MyProducts(),
     MyProductView(),
     VendorOrdersView(),
-    // const MyOrdersUI(),
     //const PremiumMembershipUI(),
-    // const StoreProfileView(),
     VendorDetailView(),
     VendorQuestionView(),
     ChangePasswordView()
