@@ -48,4 +48,8 @@ class Urls {
   //MyProductsViewModel
   static String getMyProducts = "vendor/products/myProducts?limit=10&page=";
   static String deleteProduct = "vendor/products/delete/";
+
+  //MyOrdersViewModel
+  static String getVendorOrders = "order/vendorOrders?limit=10&";
+  //static String getVendorOrders = "order/vendorOrders?limit=1&page=1&status=pending";
 }
