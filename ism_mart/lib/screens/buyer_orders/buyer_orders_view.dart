@@ -10,8 +10,8 @@ import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 enum AppBarMenuNames { disputes }
 
-class BuyerOrderView extends GetView<OrderController> {
-  const BuyerOrderView({Key? key}) : super(key: key);
+class BuyerOrderViewOld extends GetView<OrderController> {
+  const BuyerOrderViewOld({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class BuyerOrderView extends GetView<OrderController> {
   Widget noDataFound() {
     return SafeArea(
       child: Scaffold(
-        appBar: _appBar(),
+        appBar: appBar(),
         backgroundColor: Colors.grey[100]!,
         body: Column(
           children: [
@@ -82,13 +82,14 @@ class BuyerOrderView extends GetView<OrderController> {
     );
   }
 
-  _appBar() {
+  AppBar appBar() {
     return AppBar(
-      backgroundColor: kAppBarColor,
       elevation: 0,
-      leading: InkWell(
-        onTap: () => Get.back(),
-        child: Icon(
+      leading: IconButton(
+        onPressed: () {
+          Get.back();
+        },
+        icon: Icon(
           Icons.arrow_back_ios_new,
           size: 18,
           color: kPrimaryColor,
@@ -104,7 +105,7 @@ class BuyerOrderView extends GetView<OrderController> {
   Widget _build({listData}) {
     return SafeArea(
       child: Scaffold(
-        appBar: _appBar(),
+        appBar: appBar(),
         backgroundColor: Colors.grey[100]!,
         body: Column(
           children: [

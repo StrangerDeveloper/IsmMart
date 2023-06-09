@@ -92,7 +92,7 @@ class Routes {
     ),
     GetPage(
       name: buyerOrdersRoute,
-      page: () => BuyerOrderView(),
+      page: () => BuyerOrderViewOld(),
       binding: OrdersBindings(),
     ),
     GetPage(
