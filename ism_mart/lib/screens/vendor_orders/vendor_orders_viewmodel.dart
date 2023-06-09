@@ -195,16 +195,16 @@ class VendorOrdersViewModel extends GetxController {
     if (cancelledPageNo == 0
         ? true
         : (cancelledScrollController.hasClients &&
-        cancelledScrollController.position.maxScrollExtent ==
-            cancelledScrollController.offset)) {
+            cancelledScrollController.position.maxScrollExtent ==
+                cancelledScrollController.offset)) {
       cancelledPageNo++;
       cancelledLoader.value = true;
 
       ApiBaseHelper()
           .getMethod(
-          url:
-          '${Urls.getVendorOrders}page=${deliveredPageNo}&status=cancelled',
-          withAuthorization: true)
+              url:
+                  '${Urls.getVendorOrders}page=${deliveredPageNo}&status=cancelled',
+              withAuthorization: true)
           .then((parsedJson) {
         if (parsedJson['success'] == true && parsedJson['data'] != null) {
           var data = parsedJson['data'] as List;

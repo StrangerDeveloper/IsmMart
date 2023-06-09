@@ -111,22 +111,22 @@ class OrderController extends GetxController
     });
   }
 
-  fetchVendorOrders({String? status}) async {
-    change(null, status: RxStatus.loading());
-    recentVendorOrdersList.clear();
-    isLoading(true);
-    await _orderProvider
-        .getVendorOrders(token: authController.userToken, status: status!)
-        .then((data) {
-      isLoading(false);
-      change(data, status: RxStatus.success());
-      recentVendorOrdersList.addAll(data);
-    }).catchError((error) {
-      isLoading(false);
-      debugPrint(">>>>fetchVendorOrders: $error");
-      change(null, status: RxStatus.error(error));
-    });
-  }
+  // fetchVendorOrders({String? status}) async {
+  //   change(null, status: RxStatus.loading());
+  //   recentVendorOrdersList.clear();
+  //   isLoading(true);
+  //   await _orderProvider
+  //       .getVendorOrders(token: authController.userToken, status: status!)
+  //       .then((data) {
+  //     isLoading(false);
+  //     change(data, status: RxStatus.success());
+  //     recentVendorOrdersList.addAll(data);
+  //   }).catchError((error) {
+  //     isLoading(false);
+  //     debugPrint(">>>>fetchVendorOrders: $error");
+  //     change(null, status: RxStatus.error(error));
+  //   });
+  // }
 
   fetchVendorOrderStats() async {
     isLoading(true);
