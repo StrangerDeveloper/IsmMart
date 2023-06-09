@@ -67,30 +67,4 @@ class Validator {
     }
   }
 
-
-  //replace this with upper one
-  String? name(String? value, {String? title}) {
-    //String pattern = r"^[a-zA-Z]+(([',.-][a-zA-Z])?[a-zA-Z])$";
-    // String pattern = r"[a-zA-Z-]+$|\s";
-    RegExp regex = RegExp(r'[a-zA-Z-]+|\s');
-    if (value!.isEmpty) {
-      return "$title is required";
-    } else if (!regex.hasMatch(value.trim())) {
-      return langKey.nameAlphabaticReq.tr;
-    } else {
-      //GetUtils.isAlphabetOnly(s)
-      return null;
-    }
-  }
-
-  String? question(String? value) {
-    String pattern = r"^\d+(?:\.\d+)?$";
-    RegExp regex = RegExp(pattern);
-    if (!regex.hasMatch(value!.trim())) {
-      return "Invalid question format";
-    } else {
-      return null;
-    }
-  }
-
 }
