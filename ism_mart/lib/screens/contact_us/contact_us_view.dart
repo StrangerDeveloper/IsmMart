@@ -5,9 +5,6 @@ import 'package:ism_mart/screens/contact_us/contact_us_viewmodel.dart';
 import 'package:ism_mart/utils/constants.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart';
 import 'package:ism_mart/utils/validator.dart';
-import 'package:ism_mart/widgets/custom_button.dart';
-import 'package:ism_mart/widgets/custom_text.dart';
-import 'package:ism_mart/widgets/form_input_field_with_icon.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
 
 class ContactUsView extends StatelessWidget {
