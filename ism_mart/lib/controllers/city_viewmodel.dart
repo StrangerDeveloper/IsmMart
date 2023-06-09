@@ -13,45 +13,7 @@ class CityViewModel extends GetxController {
 
   Rx<TopVendorsModel> topVendorsModel = TopVendorsModel().obs;
 
-  @override
-  void onReady() {
-    // getCountryApi();
 
-    super.onReady();
-  }
-
-  // // RxList<CountryModel> getCountryList = <CountryModel>[].obs;
-  // var countryModel = CountryModel().obs;
-  // RxList<CountryModel> getCountryList = <CountryModel>[].obs;
-  // RxString selectedCountry = "abc".obs;
-  // RxList<String> getCountryname = <String>[].obs;
-  // getCountryApi() {
-  //   // GlobalVariable.showLoader.value = true;
-  //   ApiBaseHelper()
-  //       .getMethod(url: Urls.getcountry, withBearer: false)
-  //       .then((parsedJson) {
-  //     GlobalVariable.showLoader.value = false;
-  //     if (parsedJson['success'] == true) {
-  //       var data = parsedJson['data'] as List;
-
-  //       getCountryList.addAll(data.map((e) {
-  //         //store only country names
-  //         getCountryname.add(e["name"].toString());
-  //         selectedCountry.value = getCountryname[0];
-
-  //         return CountryModel.fromJson(e);
-  //       }));
-  //       // print("hasnain get  countryname $getCountryname");
-  //       getCountryname
-  //           .map((element) => print("hasnain get  map ${element}"))
-  //           .toList();
-  //       // print('hasnain get country >> ${getCountryList[0].name}  ');
-  //     }
-  //   }).catchError((e) {
-  //     print(e);
-  //     GlobalVariable.showLoader.value = false;
-  //   });
-  // }
 
   var countryId = 0.obs;
   var cityId = 0.obs;

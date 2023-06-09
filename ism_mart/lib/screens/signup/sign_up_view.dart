@@ -76,7 +76,7 @@ class SignUpView extends StatelessWidget {
       prefixIcon: Icons.title,
       autoValidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
-        return Validator().name(value, title: langKey.fullName.tr);
+        return Validator().validateName(value);
       },
       keyboardType: TextInputType.emailAddress,
     );

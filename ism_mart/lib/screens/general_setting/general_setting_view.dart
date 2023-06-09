@@ -185,10 +185,8 @@ class GeneralSettingsView extends StatelessWidget {
                     textStyle: bodyText1,
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                     validator: (value) {
-                      return Validator()
-                          .name(value, title: langKey.fullName.tr);
+                      return Validator().validateName(value);
                     },
-                    // GetUtils.isBlank(value!)! ? fullNameReq.tr : null,
                     keyboardType: TextInputType.name,
                     onChanged: (value) {},
                     onSaved: (value) {},
@@ -203,10 +201,7 @@ class GeneralSettingsView extends StatelessWidget {
                     textStyle: bodyText1,
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                     validator: (value) {
-                      if (value!.isEmpty) {
-                        return emailReq.tr;
-                      }
-                      return Validator().email(value);
+                      return Validator().validateEmail(value);
                     },
                     keyboardType: TextInputType.name,
                     onChanged: (value) {},
