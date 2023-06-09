@@ -6,7 +6,6 @@ import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
-import 'package:ism_mart/screens/buyer_orders/buyer_order_view.dart';
 import 'package:ism_mart/screens/buyer_profile/buyer_profile_view.dart';
 import 'package:ism_mart/screens/contact_us/contact_us_view.dart';
 import 'package:ism_mart/screens/update_vendor/update_vendor_view.dart';
@@ -479,80 +478,80 @@ class SettingsView extends GetView<AuthController> {
     );
   }
 
-  _showCurrencyChangeBS() {
-    AppConstant.showBottomSheet(
-      widget: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 8, right: 8, top: 8),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 5),
-                  child: Text(
-                    langKey.selectCurrency.tr,
-                    style: GoogleFonts.lato(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-                IconButton(
-                  visualDensity: VisualDensity.compact,
-                  onPressed: () {
-                    Get.back();
-                  },
-                  icon: Icon(Icons.close),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Divider(),
-          ),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children:
-                    currencyController.currencyLocales.entries.map((item) {
-                  return ListTile(
-                    visualDensity: VisualDensity.compact,
-                    onTap: () {
-                      currencyController.setCurrency(key: item.key);
-                      Get.back();
-                    },
-                    leading: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        countryFlag(
-                            countryCode: item.value['countryCode'],
-                            color: item.value['color']),
-                      ],
-                    ),
-                    title: Text(item.value["description"],
-                        style: bodyText1.copyWith(fontWeight: FontWeight.w600)),
-                    subtitle: CustomText(
-                      title: item.value["longDesc"],
-                      color: kLightColor,
-                      size: 11,
-                    ),
-                    trailing: item.value["description"] ==
-                            currencyController.currency.value
-                        ? const Icon(Icons.done)
-                        : null,
-                  );
-                }).toList(),
-              ),
-            ),
-          )
-        ],
-      ),
-    );
-  }
+  // _showCurrencyChangeBS() {
+  //   AppConstant.showBottomSheet(
+  //     widget: Column(
+  //       children: [
+  //         Padding(
+  //           padding: const EdgeInsets.only(left: 8, right: 8, top: 8),
+  //           child: Row(
+  //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //             children: [
+  //               Padding(
+  //                 padding: const EdgeInsets.only(left: 5),
+  //                 child: Text(
+  //                   langKey.selectCurrency.tr,
+  //                   style: GoogleFonts.lato(
+  //                     color: Colors.black,
+  //                     fontWeight: FontWeight.bold,
+  //                     fontSize: 16,
+  //                   ),
+  //                 ),
+  //               ),
+  //               IconButton(
+  //                 visualDensity: VisualDensity.compact,
+  //                 onPressed: () {
+  //                   Get.back();
+  //                 },
+  //                 icon: Icon(Icons.close),
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //         Padding(
+  //           padding: const EdgeInsets.symmetric(horizontal: 8),
+  //           child: Divider(),
+  //         ),
+  //         Expanded(
+  //           child: SingleChildScrollView(
+  //             child: Column(
+  //               children:
+  //                   currencyController.currencyLocales.entries.map((item) {
+  //                 return ListTile(
+  //                   visualDensity: VisualDensity.compact,
+  //                   onTap: () {
+  //                     currencyController.setCurrency(key: item.key);
+  //                     Get.back();
+  //                   },
+  //                   leading: Column(
+  //                     crossAxisAlignment: CrossAxisAlignment.center,
+  //                     mainAxisAlignment: MainAxisAlignment.center,
+  //                     children: [
+  //                       countryFlag(
+  //                           countryCode: item.value['countryCode'],
+  //                           color: item.value['color']),
+  //                     ],
+  //                   ),
+  //                   title: Text(item.value["description"],
+  //                       style: bodyText1.copyWith(fontWeight: FontWeight.w600)),
+  //                   subtitle: CustomText(
+  //                     title: item.value["longDesc"],
+  //                     color: kLightColor,
+  //                     size: 11,
+  //                   ),
+  //                   trailing: item.value["description"] ==
+  //                           currencyController.currency.value
+  //                       ? const Icon(Icons.done)
+  //                       : null,
+  //                 );
+  //               }).toList(),
+  //             ),
+  //           ),
+  //         )
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Widget countryFlag({
     String? countryCode,
