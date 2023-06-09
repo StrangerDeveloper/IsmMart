@@ -135,6 +135,8 @@ class English {
         key.cancel: 'Cancel',
         key.emailVerificationLink: 'Enter Email To Receive Verification Link',
         key.emailVerification: 'Email Verification',
+        key.emailVerificationLinkSent: 'An Email Verification link has already been sent to your email',
+        key.verifyEmail: 'Verify Email',
 
         ///DisputeDetailView
         key.id: 'Id',

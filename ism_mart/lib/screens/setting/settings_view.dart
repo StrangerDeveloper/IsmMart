@@ -4,149 +4,123 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
-import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
+import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/screens/buyer_profile/buyer_profile_view.dart';
 import 'package:ism_mart/screens/contact_us/contact_us_view.dart';
-import 'package:ism_mart/screens/update_vendor/update_vendor_view.dart';
+import 'package:ism_mart/screens/setting/settings_viewmodel.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import '../update_vendor/update_vendor_view.dart';
 
-class SettingsView extends GetView<AuthController> {
+class SettingsView extends StatelessWidget {
   SettingsView({Key? key}) : super(key: key);
+  final SettingViewModel viewModel = Get.put(SettingViewModel());
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => SafeArea(
-        child: controller.isLoading.isTrue
-            ? CustomLoading(isItForWidget: true, color: kPrimaryColor)
-            : NestedScrollView(
-                headerSliverBuilder: (context, innerBoxIsScrolled) {
-                  return [
-                    SliverAppBar(
-                      expandedHeight: 100.0,
-                      floating: false,
-                      pinned: true,
-                      backgroundColor: kAppBarColor,
-                      flexibleSpace: FlexibleSpaceBar(
-                        centerTitle: false,
-                        titlePadding:
-                            const EdgeInsets.symmetric(horizontal: 16),
-                        title: Text(
-                          langKey.settings.tr,
-                          style: appBarTitleSize,
-                        ),
-                      ),
+    return SafeArea(
+      child: NestedScrollView(
+            headerSliverBuilder: (context, innerBoxIsScrolled) {
+              return [
+                SliverAppBar(
+                  expandedHeight: 100.0,
+                  floating: false,
+                  pinned: true,
+                  backgroundColor: kAppBarColor,
+                  flexibleSpace: FlexibleSpaceBar(
+                    centerTitle: false,
+                    titlePadding:
+                    const EdgeInsets.symmetric(horizontal: 16),
+                    title: Text(
+                      langKey.settings.tr,
+                      style: appBarTitleSize,
                     ),
-                  ];
-                },
-                body: ListView(
-                  physics: const NeverScrollableScrollPhysics(),
-                  children: [
-                    _accountSetup(context),
-                    SizedBox(height: 15),
-                    generalSettings(),
-                  ],
+                  ),
                 ),
-              ),
-      ),
+              ];
+            },
+            body: ListView(
+              physics: const NeverScrollableScrollPhysics(),
+              children: [
+                _accountSetup(),
+                SizedBox(height: 15),
+                generalSettings(),
+              ],
+            ),
+          ),
     );
   }
 
-  _accountSetup(context) {
-    return Obx(
-      () => controller.userModel!.email != null &&
-              !controller.isSessionExpired! &&
-              controller.userToken != null
-          ? Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _userCard(),
-                Padding(
-                  padding: const EdgeInsets.only(left: 30, bottom: 5),
-                  child: CustomText(
-                    title: langKey.myAccount.tr,
-                    size: 16,
-                  ),
-                ),
-                SizedBox(height: 10),
-                _accountSettings(buildContext: context)
-              ],
-            )
-          : Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 5, bottom: 5, top: 20),
-                    child: CustomText(
-                      title: langKey.account.tr,
-                      size: 16,
-                    ),
-                  ),
-                  _account(),
-                ],
+  _accountSetup() {
+    return Obx(() => viewModel.userDetails.value?.email == null &&
+        viewModel.userDetails.value?.token == null
+        ?  Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 30),
+      child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 5, bottom: 5, top: 20),
+              child: CustomText(
+                title: langKey.account.tr,
+                size: 16,
               ),
             ),
+            _account(),
+          ],
+        ),
+      ) : Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _userCard(),
+        Padding(
+          padding: const EdgeInsets.only(left: 30, bottom: 5),
+          child: CustomText(
+            title: langKey.myAccount.tr,
+            size: 16,
+          ),
+        ),
+        SizedBox(height: 10),
+        Obx(() => viewModel.userDetails.value?.token == null ? Container(): _accountSettings())
+      ],
+    )
     );
   }
 
   _userCard() {
-    return Obx(
-      () => controller.userModel!.email == null
+    return Obx(() => viewModel.userDetails.value?.email == null
           ? Container()
           : Padding(
-              padding: const EdgeInsets.only(left: 15, top: 8, bottom: 8),
-              child: ListTile(
-                trailing: controller.userModel!.emailVerified == true
-                    ? null
-                    : InkWell(
-                        onTap: () async {
-                          String? verificationDetails = await LocalStorageHelper
-                              .getEmailVerificationDetails();
-                          if (verificationDetails != null) {
-                            DateTime linkTime =
-                                DateTime.parse(verificationDetails);
-                            DateTime currentTime = DateTime.now();
-                            DateTime fiveMinutesCheck =
-                                currentTime.subtract(Duration(minutes: 5));
-                            if (fiveMinutesCheck.isAfter(linkTime)) {
-                              LocalStorageHelper.localStorage
-                                  .remove('emailVerificationTime');
-                              Get.toNamed(Routes.emailVerificationLinkRoute);
-                            } else {
-                              controller.showSnackBar(
-                                  title: 'Verify Email',
-                                  message:
-                                      'An Email Verification link has already been sent to your email');
-                            }
-                          } else {
-                            Get.toNamed(Routes.emailVerificationLinkRoute);
-                          }
-                        },
-                        child: Text(
-                          'Verify Email',
-                          style: bodyText1.copyWith(
-                              decoration: TextDecoration.underline),
-                        ),
-                      ),
-                title: CustomText(
-                  title:
-                      "${langKey.welcome.tr} ${controller.userModel!.firstName}",
-                  style: headline2,
-                ),
-                subtitle: CustomText(
-                  title: "${controller.userModel!.email}",
-                  style: bodyText1,
-                ),
-              ),
+        padding: const EdgeInsets.only(left: 15, top: 8, bottom: 8),
+        child: ListTile(
+          trailing: viewModel.userDetails.value?.emailVerified == true
+              ? null
+              : InkWell(
+            onTap: () async {
+              await viewModel.emailVerificationCheck();
+            },
+            child: Text(
+              langKey.verifyEmail.tr,
+              style: bodyText1.copyWith(
+                  decoration: TextDecoration.underline),
             ),
+          ),
+          title: CustomText(
+            title:
+            "${langKey.welcome.tr} ${viewModel.userDetails.value?.firstName}",
+            style: headline2,
+          ),
+          subtitle: CustomText(
+            title: "${viewModel.userDetails.value?.email}",
+            style: bodyText1,
+          ),
+        ),
+      ),
     );
   }
 
-  Widget _account() {
+  Container _account() {
     return Container(
       margin: EdgeInsets.only(top: 5),
       decoration: BoxDecoration(
@@ -169,24 +143,16 @@ class SettingsView extends GetView<AuthController> {
     );
   }
 
-  _accountSettings({buildContext}) {
+  Column _accountSettings() {
     return Column(
       children: [
         singleSettingsItem(
-          onTap: () {
-            if (checkVendorAccountStatus(controller.userModel?.vendor)!) {
-              if (controller.userModel!.role!
-                  .toLowerCase()
-                  .contains("vendor")) {
+          onTap: ()async {
+            if (viewModel.checkVendorAccountStatus()!) {
+              if (viewModel.userDetails.value!.role!.toLowerCase().contains("vendor")) {
                 Get.toNamed(Routes.sellerHomeRoute);
-                authController.newAcc.value = false;
+                // authController.newAcc.value = false;
               } else {
-                authController.newAcc.value = true;
-                //Get.toNamed(Routes.sellerHomeRoute);
-                // AppConstant.showBottomSheet(
-                //     widget: register_seller_view(),
-                //     isGetXBottomSheet: false,
-                //     buildContext: buildContext);
                 Get.to(() => UpdateVendorView(),
                     arguments: {'isRegisterScreen': true});
               }
@@ -226,15 +192,7 @@ class SettingsView extends GetView<AuthController> {
     );
   }
 
-  bool? checkVendorAccountStatus(SellerModel? model) {
-    String? status = model!.status!.toLowerCase();
-    if (status.contains("disabled") ||
-        status.contains("terminated") ||
-        status.contains("suspended")) return false;
-    return true;
-  }
-
-  Widget generalSettings() {
+  Column generalSettings() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -255,8 +213,7 @@ class SettingsView extends GetView<AuthController> {
           value: currencyController.currency.value,
           countryCode: currencyController.countryCode.value,
         ),
-        Obx(
-          () => singleSettingsItem(
+        Obx(() => singleSettingsItem(
             onTap: () {
               showLanguageBottomSheet();
             },
@@ -291,8 +248,7 @@ class SettingsView extends GetView<AuthController> {
         ),
         singleSettingsItem(
           onTap: () {
-            Get.to(
-                () => GeneralSettingsView(title: langKey.returnAndExchange.tr));
+            Get.to(() => GeneralSettingsView(title: langKey.returnAndExchange.tr));
           },
           icon: Icons.assignment_return_rounded,
           color: Colors.lime,
@@ -322,27 +278,163 @@ class SettingsView extends GetView<AuthController> {
           color: Colors.purple,
           title: langKey.faqs.tr,
         ),
-        Obx(
-          () => controller.userModel!.email != null &&
-                  !controller.isSessionExpired! &&
-                  controller.userToken != null
+        Obx(() => viewModel.userDetails.value?.email != null &&
+            viewModel.userDetails.value?.token != null
               ? singleSettingsItem(
-                  onTap: () async {
-                    await LocalStorageHelper.deleteUserData();
-                    controller.update();
-                    authController.update();
-                  },
-                  icon: IconlyLight.logout,
-                  color: Colors.red,
-                  title: langKey.logout.tr,
-                )
-              : Container(),
+            onTap: () async {
+              await LocalStorageHelper.deleteUserData();
+              viewModel.userDetails.value = UserModel();
+            },
+            icon: IconlyLight.logout,
+            color: Colors.red,
+            title: langKey.logout.tr,
+          ) : Container(),
         ),
       ],
     );
   }
 
-  Widget singleSettingsItem({
+  showLanguageBottomSheet() {
+    AppConstant.showBottomSheet(
+      widget: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 8, right: 8, top: 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 5),
+                  child: Text(
+                    langKey.selectLanguage.tr,
+                    style: GoogleFonts.lato(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+                IconButton(
+                  visualDensity: VisualDensity.compact,
+                  onPressed: () {
+                    Get.back();
+                  },
+                  icon: Icon(Icons.close),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Divider(),
+          ),
+          Flexible(
+            child: SingleChildScrollView(
+              child: Column(
+                children: languageController.optionsLocales.entries.map((item) {
+                  return ListTile(
+                    onTap: () {
+                      languageController.setLanguage(key: item.key);
+                      Get.back();
+                    },
+                    leading: countryFlag(
+                      countryCode: item.value['countryCode'],
+                      color: item.value['color'],
+                    ),
+                    title: Text(
+                      item.value["description"],
+                      style: bodyText1.copyWith(fontWeight: FontWeight.w600),
+                    ),
+                    trailing: item.value["description"] ==
+                        languageController.language.value
+                        ? const Icon(Icons.done)
+                        : null,
+                  );
+                }).toList(),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  _showCurrencyChangeBS() {
+    AppConstant.showBottomSheet(
+      widget: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 8, right: 8, top: 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 5),
+                  child: Text(
+                    langKey.selectCurrency.tr,
+                    style: GoogleFonts.lato(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+                IconButton(
+                  visualDensity: VisualDensity.compact,
+                  onPressed: () {
+                    Get.back();
+                  },
+                  icon: Icon(Icons.close),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Divider(),
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children:
+                currencyController.currencyLocales.entries.map((item) {
+                  return ListTile(
+                    visualDensity: VisualDensity.compact,
+                    onTap: () {
+                      currencyController.setCurrency(key: item.key);
+                      Get.back();
+                    },
+                    leading: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        countryFlag(
+                            countryCode: item.value['countryCode'],
+                            color: item.value['color']),
+                      ],
+                    ),
+                    title: Text(item.value["description"],
+                        style: bodyText1.copyWith(fontWeight: FontWeight.w600)),
+                    subtitle: CustomText(
+                      title: item.value["longDesc"],
+                      color: kLightColor,
+                      size: 11,
+                    ),
+                    trailing: item.value["description"] ==
+                        currencyController.currency.value
+                        ? const Icon(Icons.done)
+                        : null,
+                  );
+                }).toList(),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  InkWell singleSettingsItem({
     required onTap,
     required IconData icon,
     required Color color,
@@ -413,147 +505,7 @@ class SettingsView extends GetView<AuthController> {
     );
   }
 
-  showLanguageBottomSheet() {
-    AppConstant.showBottomSheet(
-      widget: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 8, right: 8, top: 8),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 5),
-                  child: Text(
-                    langKey.selectLanguage.tr,
-                    style: GoogleFonts.lato(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-                IconButton(
-                  visualDensity: VisualDensity.compact,
-                  onPressed: () {
-                    Get.back();
-                  },
-                  icon: Icon(Icons.close),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Divider(),
-          ),
-          Flexible(
-            child: SingleChildScrollView(
-              child: Column(
-                children: languageController.optionsLocales.entries.map((item) {
-                  return ListTile(
-                    onTap: () {
-                      languageController.setLanguage(key: item.key);
-                      Get.back();
-                    },
-                    leading: countryFlag(
-                      countryCode: item.value['countryCode'],
-                      color: item.value['color'],
-                    ),
-                    title: Text(
-                      item.value["description"],
-                      style: bodyText1.copyWith(fontWeight: FontWeight.w600),
-                    ),
-                    trailing: item.value["description"] ==
-                            languageController.language.value
-                        ? const Icon(Icons.done)
-                        : null,
-                  );
-                }).toList(),
-              ),
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
-  // _showCurrencyChangeBS() {
-  //   AppConstant.showBottomSheet(
-  //     widget: Column(
-  //       children: [
-  //         Padding(
-  //           padding: const EdgeInsets.only(left: 8, right: 8, top: 8),
-  //           child: Row(
-  //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //             children: [
-  //               Padding(
-  //                 padding: const EdgeInsets.only(left: 5),
-  //                 child: Text(
-  //                   langKey.selectCurrency.tr,
-  //                   style: GoogleFonts.lato(
-  //                     color: Colors.black,
-  //                     fontWeight: FontWeight.bold,
-  //                     fontSize: 16,
-  //                   ),
-  //                 ),
-  //               ),
-  //               IconButton(
-  //                 visualDensity: VisualDensity.compact,
-  //                 onPressed: () {
-  //                   Get.back();
-  //                 },
-  //                 icon: Icon(Icons.close),
-  //               ),
-  //             ],
-  //           ),
-  //         ),
-  //         Padding(
-  //           padding: const EdgeInsets.symmetric(horizontal: 8),
-  //           child: Divider(),
-  //         ),
-  //         Expanded(
-  //           child: SingleChildScrollView(
-  //             child: Column(
-  //               children:
-  //                   currencyController.currencyLocales.entries.map((item) {
-  //                 return ListTile(
-  //                   visualDensity: VisualDensity.compact,
-  //                   onTap: () {
-  //                     currencyController.setCurrency(key: item.key);
-  //                     Get.back();
-  //                   },
-  //                   leading: Column(
-  //                     crossAxisAlignment: CrossAxisAlignment.center,
-  //                     mainAxisAlignment: MainAxisAlignment.center,
-  //                     children: [
-  //                       countryFlag(
-  //                           countryCode: item.value['countryCode'],
-  //                           color: item.value['color']),
-  //                     ],
-  //                   ),
-  //                   title: Text(item.value["description"],
-  //                       style: bodyText1.copyWith(fontWeight: FontWeight.w600)),
-  //                   subtitle: CustomText(
-  //                     title: item.value["longDesc"],
-  //                     color: kLightColor,
-  //                     size: 11,
-  //                   ),
-  //                   trailing: item.value["description"] ==
-  //                           currencyController.currency.value
-  //                       ? const Icon(Icons.done)
-  //                       : null,
-  //                 );
-  //               }).toList(),
-  //             ),
-  //           ),
-  //         )
-  //       ],
-  //     ),
-  //   );
-  // }
-
-  Widget countryFlag({
+  Container countryFlag({
     String? countryCode,
     Color? color = Colors.amber,
     double? height = 20,
@@ -575,6 +527,7 @@ class SettingsView extends GetView<AuthController> {
       ),
     );
   }
+
 /*_showThemeChangeBottomSheet() {
     var listThemeItems = [
       {

@@ -413,7 +413,7 @@ class CheckoutController extends GetxController {
   onError(error) {
     isLoading(false);
     debugPrint(">>>>ConfirmPayment: $error");
-    showSnackBar(title: langKey.errorTitle, message: error);
+    // showSnackBar(title: langKey.errorTitle, message: error);
   }
 
   createOrder({paymentMethod = "COD", cartItems}) async {
