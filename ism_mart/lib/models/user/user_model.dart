@@ -70,9 +70,9 @@ class UserModel {
         country: json["Country"] == null
             ? null
             : CountryModel.fromJson(json["Country"]),
-        vendor: json["Vendor"] == null
-            ? null
-            : SellerModel.fromJson(json["Vendor"]),
+        vendor: json['Vendor'] != null
+            ? SellerModel.fromJson(json['Vendor'])
+            : null,
         zipCode: json['zipCode'] == null ? null : json['zipCode'],
         defaultAddress: json['default'] == null ? false : json['default'],
         createdAt: json["createdAt"] == null
@@ -98,6 +98,7 @@ class UserModel {
         "email_verified": emailVerified,
         "createdAt": createdAt?.toIso8601String(),
         "updatedAt": updatedAt?.toIso8601String(),
+        'Vendor': vendor?.toJson()
       };
 
   JSON toTokenJson() => {
@@ -107,7 +108,7 @@ class UserModel {
         "token": token,
       };
 
-  Map<String, dynamic> toAddressJson() => {
+  JSON toAddressJson() => {
         "id": id,
         "name": name,
         "phoneNumber": phone,
@@ -134,7 +135,7 @@ class UserResponse {
       this.userModel});
 
   factory UserResponse.fromResponse(response) {
-    print(">>Body: ${response.toString()}");
+    // print(">>Body: ${response.toString()}");
     String? message = "";
     if (response['message'] == null) {
       message = someThingWentWrong.tr;

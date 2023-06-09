@@ -249,19 +249,19 @@ class AuthController extends GetxController {
   }
 
 
-  var _currUserToken = "".obs;
+  var currUserToken = "".obs;
 
   setCurrUserToken(token) {
-    _currUserToken.value = token;
+    currUserToken.value = token;
   }
 
-  String? get userToken => _currUserToken.value;
+  String? get userToken => currUserToken.value;
 
   //String? get userToken => "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQ4LCJpYW0iOiJ2ZW5kb3IiLCJ2aWQiOjQzLCJpYXQiOjE2NzgwNzY4MTE2MjcsImV4cCI6MTY3ODI0OTYxMTYyN30.eWj8W9zsP_mDBf81ho08HGmtwz8ufDpKUP2YBghyCN8";
 
   getToken() async {
     await LocalStorageHelper.getStoredUser().then((user) async {
-      _currUserToken.value = user.token ?? '';
+      currUserToken.value = user.token ?? '';
 
       await getCurrentUser();
       await fetchUserCoins();
