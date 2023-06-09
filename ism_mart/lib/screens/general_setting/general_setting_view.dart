@@ -203,10 +203,7 @@ class GeneralSettingsView extends StatelessWidget {
                     textStyle: bodyText1,
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                     validator: (value) {
-                      if (value!.isEmpty) {
-                        return emailReq.tr;
-                      }
-                      return Validator().email(value);
+                      return Validator().validateEmail(value);
                     },
                     keyboardType: TextInputType.name,
                     onChanged: (value) {},

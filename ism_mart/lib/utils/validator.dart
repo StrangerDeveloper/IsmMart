@@ -67,17 +67,6 @@ class Validator {
     }
   }
 
-  //replace with upper one
-  String? email(String? value) {
-    String pattern = r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+';
-    RegExp regex = RegExp(pattern);
-    if (!regex.hasMatch(value!.trim())) {
-      return langKey.invalidEmail.tr;
-    } else {
-      return null;
-    }
-  }
-
 
   //replace this with upper one
   String? name(String? value, {String? title}) {
@@ -104,17 +93,4 @@ class Validator {
     }
   }
 
-  //replace with upper one
-  String? notEmpty(String? value, String? message) {
-    //String pattern = r"^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$";
-    //String pattern = r'/^(?!\s*$).+/';
-    // String pattern = "/(.|\s)*\S(.|\s)*/gm";
-    //RegExp regex = RegExp(pattern);
-    // if (!regex.hasMatch(value!.trim())) {
-    if (value == null || value.isEmpty) {
-      return message;
-    } else {
-      return null;
-    }
-  }
 }

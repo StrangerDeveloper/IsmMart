@@ -13,8 +13,6 @@ class ProductController extends GetxController with StateMixin {
 
   ProductController(this._apiProvider);
 
-  final updateQuestionFormKey = GlobalKey<FormState>();
-  TextEditingController updateQuestionController = TextEditingController();
   TextEditingController questionController = TextEditingController();
   TextEditingController quantityController = TextEditingController();
   var pageController = PageController(initialPage: 0);
@@ -33,21 +31,6 @@ class ProductController extends GetxController with StateMixin {
 
   get userModel => authController.userModel!;
 
-  ///end Lists
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-    // scrollController
-    //   ..addListener(() {
-    //     print("CAlled");
-    //     loadMoreVendorProducts();
-    //   });
-  }
 
   fetchProduct(int id) async {
     change(null, status: RxStatus.loading());

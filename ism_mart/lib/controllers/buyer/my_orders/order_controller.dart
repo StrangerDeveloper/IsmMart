@@ -83,19 +83,6 @@ class OrderController extends GetxController
     });
   }
 
-  fetchOrders() async {
-    change(null, status: RxStatus.loading());
-    recentBuyerOrdersList.clear();
-    await _orderProvider
-        .getBuyerOrders(token: authController.userToken)
-        .then((data) {
-      change(data, status: RxStatus.success());
-      recentBuyerOrdersList.addAll(data);
-    }).catchError((error) {
-      debugPrint(">>>>FetchOrderStats: $error");
-      change(null, status: RxStatus.error(error));
-    });
-  }
 
   fetchVendorOrderById(orderId) async {
     //change(null, status: RxStatus.loading());
@@ -110,23 +97,6 @@ class OrderController extends GetxController
       //change(null, status: RxStatus.error(error));
     });
   }
-
-  // fetchVendorOrders({String? status}) async {
-  //   change(null, status: RxStatus.loading());
-  //   recentVendorOrdersList.clear();
-  //   isLoading(true);
-  //   await _orderProvider
-  //       .getVendorOrders(token: authController.userToken, status: status!)
-  //       .then((data) {
-  //     isLoading(false);
-  //     change(data, status: RxStatus.success());
-  //     recentVendorOrdersList.addAll(data);
-  //   }).catchError((error) {
-  //     isLoading(false);
-  //     debugPrint(">>>>fetchVendorOrders: $error");
-  //     change(null, status: RxStatus.error(error));
-  //   });
-  // }
 
   fetchVendorOrderStats() async {
     isLoading(true);
@@ -184,29 +154,6 @@ class OrderController extends GetxController
       showSnackBar();
     });
 
-    // await _orderProvider
-    //     .createDispute(authController.userToken, title, description,
-    //         orderItem!.id, pickedImagesList)
-    //     .then((ApiResponse? apiResponse) {
-    //   isLoading(false);
-    //   if (apiResponse != null) {
-    //     if (apiResponse.success!) {
-    //       fetchOrderById(orderId);
-    //       Get.back();
-    //       clearControllers();
-    //       showSnackBar(
-    //           title: langKey.successTitle.tr, message: apiResponse.message);
-    //     } else
-    //       showSnackBar(message: apiResponse.message);
-    //   } else {
-    //     showSnackBar();
-    //   }
-    // })
-    // .catchError((error) {
-    //   isLoading(false);
-    //   print("Dispute: $error");
-    //   showSnackBar();
-    // });
   }
 
   deleteTicket(String ticketId, String orderId) {

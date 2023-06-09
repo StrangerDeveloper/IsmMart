@@ -246,8 +246,9 @@ class ChangeAddressUI extends GetView<CheckoutController> {
                 autofocus: false,
                 textStyle: bodyText1,
                 autoValidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value) =>
-                    Validator().notEmpty(value!, langKey.zipCodeRequired.tr),
+                validator: (value){
+                 return Validator().validateDefaultTxtField(value);
+                },
                 keyboardType: TextInputType.number,
                 onChanged: (value) {},
                 onSaved: (value) {},
@@ -262,8 +263,9 @@ class ChangeAddressUI extends GetView<CheckoutController> {
                 autofocus: false,
                 textStyle: bodyText1,
                 autoValidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value) =>
-                    Validator().notEmpty(value!, langKey.addressRequired.tr),
+                validator: (value){
+                  return Validator().validateDefaultTxtField(value);
+                },
                 keyboardType: TextInputType.name,
                 onChanged: (value) {},
                 onSaved: (value) {},
