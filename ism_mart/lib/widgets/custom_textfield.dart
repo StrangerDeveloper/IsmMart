@@ -1,6 +1,7 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ism_mart/utils/constants.dart';
 
@@ -376,6 +377,215 @@ class CountryCodePickerTextField extends StatelessWidget {
       ),
       controller: controller,
       keyboardType: keyboardType,
+    );
+  }
+}
+
+class FormInputFieldWithIcon extends StatelessWidget {
+  const FormInputFieldWithIcon({
+    Key? key,
+    required this.controller,
+    this.iconPrefix,
+    this.labelText,
+    this.hintText,
+    this.suffix,
+    this.iconColor,
+    this.textStyle,
+    this.validator,
+    this.keyboardType = TextInputType.text,
+    this.minLines = 1,
+    this.maxLines = 1,
+    this.isExpanded = false,
+    this.maxLength,
+    this.autofocus,
+    this.enableBorder,
+    this.textCapitalization = TextCapitalization.none,
+    this.maxLengthEnforcement,
+    required this.onChanged,
+    required this.onSaved,
+    this.autoValidateMode,
+    this.inputFormatters,
+  }) : super(key: key);
+  final AutovalidateMode? autoValidateMode;
+  final TextEditingController controller;
+  final IconData? iconPrefix;
+  final String? labelText, hintText;
+  final bool? autofocus;
+  final Widget? suffix;
+  final String? Function(String?)? validator;
+  final TextInputType keyboardType;
+  final int minLines;
+  final int? maxLines;
+  final bool? isExpanded;
+  final Color? iconColor;
+  final TextStyle? textStyle;
+  final int? maxLength;
+  final MaxLengthEnforcement? maxLengthEnforcement;
+  final InputBorder? enableBorder;
+  final TextCapitalization? textCapitalization;
+  final void Function(String) onChanged;
+  final void Function(String?)? onSaved;
+  final List<TextInputFormatter>? inputFormatters;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      autofocus: autofocus!,
+      textCapitalization: textCapitalization!,
+      textAlignVertical: TextAlignVertical.top,
+      autovalidateMode: autoValidateMode,
+      inputFormatters: inputFormatters,
+      scrollPhysics: const AlwaysScrollableScrollPhysics(),
+      //textAlign: TextAlign.center,
+      decoration: InputDecoration(
+        filled: false,
+        suffix: suffix,
+        prefixIcon: iconPrefix == null
+            ? null
+            : Icon(
+          iconPrefix,
+          color: kPrimaryColor,
+        ),
+        labelText: labelText,
+        labelStyle: textStyle,
+        hintText: hintText,
+        errorMaxLines: 2,
+        focusedBorder: enableBorder ??
+            OutlineInputBorder(
+              borderSide: BorderSide(
+                  color: Colors.black, width: 1, style: BorderStyle.solid), //B
+              borderRadius: BorderRadius.circular(8),
+            ),
+        border: enableBorder ??
+            OutlineInputBorder(
+              borderSide: BorderSide(
+                  color: Colors.black, width: 1, style: BorderStyle.solid), //B
+              borderRadius: BorderRadius.circular(8),
+            ),
+      ),
+      controller: controller,
+      cursorColor: iconColor,
+      style: textStyle,
+      onSaved: onSaved,
+      onChanged: onChanged,
+      keyboardType: keyboardType,
+      expands: isExpanded!,
+      maxLines: isExpanded! ? null : maxLines,
+      minLines: isExpanded! ? null : minLines,
+      maxLengthEnforcement: maxLengthEnforcement,
+      maxLength: maxLength,
+      validator: validator,
+    );
+  }
+}
+
+class FormPasswordInputFieldWithIcon extends StatefulWidget {
+  const FormPasswordInputFieldWithIcon(
+      {Key? key,
+        required this.controller,
+        this.iconPrefix,
+        required this.labelText,
+        required this.validator,
+        this.iconColor,
+        this.textStyle,
+        this.keyboardType = TextInputType.text,
+        this.obscureText = false,
+        this.minLines = 1,
+        this.maxLines,
+        this.maxLength,
+        this.maxLengthEnforcement,
+        this.onPasswordVisible,
+        required this.onChanged,
+        this.onSaved,
+        this.autoValidateMode})
+      : super(key: key);
+  final AutovalidateMode? autoValidateMode;
+  final TextEditingController controller;
+  final IconData? iconPrefix;
+  final String labelText;
+  final String? Function(String?)? validator;
+  final TextInputType keyboardType;
+  final bool? obscureText;
+  final int minLines;
+  final int? maxLines;
+  final Color? iconColor;
+  final TextStyle? textStyle;
+  final int? maxLength;
+  final MaxLengthEnforcement? maxLengthEnforcement;
+  final void Function(String) onChanged;
+  final void Function(String?)? onSaved;
+  final void Function(bool?)? onPasswordVisible;
+
+  @override
+  State<FormPasswordInputFieldWithIcon> createState() =>
+      _FormPasswordInputFieldWithIconState();
+}
+
+class _FormPasswordInputFieldWithIconState
+    extends State<FormPasswordInputFieldWithIcon> {
+  RxBool passVisibility = true.obs;
+
+  _toggle() {
+    passVisibility.value = !passVisibility.value;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(
+          () => TextFormField(
+        autovalidateMode: widget.autoValidateMode,
+        decoration: InputDecoration(
+            filled: false,
+            prefixIcon: widget.iconPrefix == null
+                ? null
+                : Icon(
+              widget.iconPrefix,
+              color: kPrimaryColor,
+            ),
+            // enabledBorder: OutlineInputBorder(
+            //   //borderRadius: BorderRadius.circular(10),
+            //   borderSide: BorderSide(
+            //       color: Colors.black, width: 1, style: BorderStyle.solid), //B
+            //   borderRadius: BorderRadius.circular(8),
+            // ),
+            fillColor: widget.iconColor ?? kPrimaryColor,
+            labelText: widget.labelText,
+            labelStyle: widget.textStyle,
+            focusColor: widget.iconColor,
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                  color: Colors.black, width: 1, style: BorderStyle.solid), //B
+              borderRadius: BorderRadius.circular(8),
+            ),
+            border: OutlineInputBorder(
+              borderSide: BorderSide(
+                  color: Colors.black, width: 1, style: BorderStyle.solid), //B
+              borderRadius: BorderRadius.circular(8),
+            ),
+            suffixIcon: widget.obscureText!
+                ? GestureDetector(
+              onTap: _toggle,
+              child: Icon(
+                passVisibility.isTrue
+                    ? Icons.visibility_off
+                    : Icons.visibility,
+                color: Colors.black87,
+              ),
+            )
+                : null),
+        controller: widget.controller,
+        cursorColor: widget.iconColor,
+        onSaved: widget.onSaved,
+        onChanged: widget.onChanged,
+        keyboardType: widget.keyboardType,
+        obscureText: passVisibility.value,
+        style: widget.textStyle,
+        maxLines: widget.maxLines,
+        minLines: widget.minLines,
+        maxLengthEnforcement: widget.maxLengthEnforcement,
+        maxLength: widget.maxLength,
+        validator: widget.validator,
+      ),
     );
   }
 }
