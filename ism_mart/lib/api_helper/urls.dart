@@ -51,5 +51,8 @@ class Urls {
 
   //MyOrdersViewModel
   static String getVendorOrders = "order/vendorOrders?limit=10&";
-  //static String getVendorOrders = "order/vendorOrders?limit=1&page=1&status=pending";
+
+  //BuyerOrderViewModel
+  static String getBuyerOrders = "order/myOrders?limit=10&page=";
+  static String getBuyerOrdersStats = "order/userStats";
 }

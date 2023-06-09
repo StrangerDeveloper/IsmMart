@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ism_mart/controllers/buyer/my_orders/orders_bindings.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/utils/constants.dart';
@@ -75,11 +76,13 @@ class SingleRecentOrderItems extends StatelessWidget {
                 right: 5,
                 child: CustomTextBtn(
                   onPressed: () {
-                    Get.to(() => SingleOrderDetailsUI(
-                          orderModel: model,
-                          calledForBuyerOrderDetails:
-                              calledForBuyerOrderDetails,
-                        ));
+                    Get.to(
+                        () => SingleOrderDetailsUI(
+                              orderModel: model,
+                              calledForBuyerOrderDetails:
+                                  calledForBuyerOrderDetails,
+                            ),
+                        binding: OrdersBindings());
                   },
                   title: langKey.details.tr,
                   width: 70,

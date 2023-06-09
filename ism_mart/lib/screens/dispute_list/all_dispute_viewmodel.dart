@@ -22,7 +22,7 @@ class DisputeListViewModel extends GetxController {
   getData() {
     GlobalVariable.showLoader.value = true;
 
-    ApiBaseHelper().getMethod(url: Urls.allTickets, withBearer: false).then((parsedJson) {
+    ApiBaseHelper().getMethod(url: Urls.allTickets, withAuthorization: true).then((parsedJson) {
       GlobalVariable.showLoader.value = false;
       if (parsedJson['success'] == true) {
         var data = parsedJson['data'] as List;

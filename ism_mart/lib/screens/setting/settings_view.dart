@@ -6,6 +6,7 @@ import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
+import 'package:ism_mart/screens/buyer_orders/buyer_order_view.dart';
 import 'package:ism_mart/screens/buyer_profile/buyer_profile_view.dart';
 import 'package:ism_mart/screens/contact_us/contact_us_view.dart';
 import 'package:ism_mart/screens/update_vendor/update_vendor_view.dart';
@@ -203,6 +204,7 @@ class SettingsView extends GetView<AuthController> {
         ),
         singleSettingsItem(
           onTap: () {
+            //Get.to(() => BuyerOrderView());
             Get.toNamed(Routes.buyerOrdersRoute);
           },
           icon: IconlyBold.bag,

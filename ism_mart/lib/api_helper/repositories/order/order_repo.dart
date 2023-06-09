@@ -21,16 +21,6 @@ class OrderRepository {
     return response.body != null ? response.body['data'] : [];
   }
 
-  Future<List<dynamic>> fetchVendorOrders({token, status}) async {
-    var queryParams = {"status": "$status"};
-    var response = await _apiService.get(
-        endpoint: 'order/vendorOrders',
-        query: queryParams,
-        requiresAuthToken: true,
-        token: token);
-    return response.body != null ? response.body['data'] : [];
-  }
-
   Future<dynamic> fetchBuyerOrdersDetails({token, orderId}) async {
     var response = await _apiService.get(
         endpoint: 'order/orderDetails/$orderId',

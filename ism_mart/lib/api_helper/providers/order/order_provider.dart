@@ -11,12 +11,6 @@ class OrderProvider {
     return response.map((e) => OrderModel.fromJson(e)).toList();
   }
 
-  Future<List<VendorOrder>> getVendorOrders({token, status}) async {
-    var response =
-        await _orderRepo.fetchVendorOrders(token: token, status: status);
-    return response.map((e) => VendorOrder.fromJson(e)).toList();
-  }
-
   Future<OrderModel> getBuyerOrdersDetails({token, orderId}) async {
     var response = await _orderRepo.fetchBuyerOrdersDetails(
         token: token, orderId: orderId);
@@ -46,16 +40,6 @@ class OrderProvider {
     return OrderResponse.fromJson(response);
   }
 
-  Future<ApiResponse> createDispute(
-      token, title, description, orderItemId, imagesList) async {
-    var response = await _orderRepo.postDispute(
-        token: token,
-        title: title,
-        description: description,
-        orderItemId: orderItemId,
-        imagesList: imagesList);
-    return ApiResponse.fromJson(response);
-  }
 
   Future<ApiResponse> createPaymentIntent({token, data}) async {
     var response = await _orderRepo.postPaymentIntent(token: token, data: data);

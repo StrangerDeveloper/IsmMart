@@ -27,18 +27,38 @@ class BuyerOrderViewOld extends GetView<OrderController> {
     }, onLoading: CustomLoading(isDarkMode: Get.isDarkMode));
   }
 
-  Widget noDataFound() {
-    return SafeArea(
-      child: Scaffold(
-        appBar: appBar(),
-        backgroundColor: Colors.grey[100]!,
-        body: Column(
-          children: [
-            _orderStats(),
-            Center(child: NoDataFoundWithIcon(title: langKey.noOrderFound.tr)),
-          ],
+  // Widget noDataFound() {
+  //   return SafeArea(
+  //     child: Scaffold(
+  //       appBar: appBar(),
+  //       backgroundColor: Colors.grey[100]!,
+  //       body: Column(
+  //         children: [
+  //           _orderStats(),
+  //           Center(child: NoDataFoundWithIcon(title: langKey.noOrderFound.tr)),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
+
+  AppBar appBar() {
+    return AppBar(
+      elevation: 0,
+      leading: IconButton(
+        onPressed: () {
+          Get.back();
+        },
+        icon: Icon(
+          Icons.arrow_back_ios_new,
+          size: 18,
+          color: kPrimaryColor,
         ),
       ),
+      title: CustomText(title: langKey.userOrders.tr, style: appBarTitleSize),
+      actions: [
+        appBarPopupMenu(),
+      ],
     );
   }
 
@@ -79,26 +99,6 @@ class BuyerOrderViewOld extends GetView<OrderController> {
           fontSize: 14,
         ),
       ),
-    );
-  }
-
-  AppBar appBar() {
-    return AppBar(
-      elevation: 0,
-      leading: IconButton(
-        onPressed: () {
-          Get.back();
-        },
-        icon: Icon(
-          Icons.arrow_back_ios_new,
-          size: 18,
-          color: kPrimaryColor,
-        ),
-      ),
-      title: CustomText(title: langKey.userOrders.tr, style: appBarTitleSize),
-      actions: [
-        appBarPopupMenu(),
-      ],
     );
   }
 
