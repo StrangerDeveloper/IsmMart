@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:ism_mart/helper/api_base_helper.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/api_helper/global_variables.dart';
-import 'package:ism_mart/api_helper/urls.dart';
+import 'package:ism_mart/helper/urls.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/screens/setting/settings_viewmodel.dart';

@@ -5,7 +5,7 @@ import 'package:http_parser/http_parser.dart';
 import 'package:ism_mart/helper/api_base_helper.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/api_helper/global_variables.dart';
-import 'package:ism_mart/api_helper/urls.dart';
+import 'package:ism_mart/helper/urls.dart';
 import 'package:ism_mart/screens/buyer_profile/buyer_profile_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:http/http.dart' as http;
