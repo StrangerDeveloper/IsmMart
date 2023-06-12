@@ -65,7 +65,6 @@ class SellerDashBoardViewModel extends GetxController {
         }
       }).catchError((e) {
         print(e);
-        // GlobalVariable.showLoader.value = false;
       });
     }
   }

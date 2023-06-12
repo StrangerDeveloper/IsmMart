@@ -6,8 +6,8 @@ import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/loader_view.dart';
 
-class SellerDashView extends StatelessWidget {
-  SellerDashView({super.key});
+class SellerDashboardView extends StatelessWidget {
+  SellerDashboardView({super.key});
 
   final SellerDashBoardViewModel viewModel =
       Get.put(SellerDashBoardViewModel());
@@ -102,11 +102,10 @@ class SellerDashView extends StatelessWidget {
                 ),
                 SizedBox(width: 5),
                 CustomOrderStatsItem2(
-                  title: langKey.cMonthEarning.tr,
-                  icon: Icons.monetization_on_rounded,
-                  iconColor: Colors.pinkAccent,
-                  isPriceWidget: true,
-                  value: viewModel.vendorStats.value.cMonthEarning ?? 0,
+                  title: langKey.goldCoins.tr,
+                  icon: Icons.price_change_outlined,
+                  iconColor: Colors.amber,
+                  value: viewModel.vendorStats.value.goldCoin ?? 0,
                 ),
               ],
             ),
@@ -135,10 +134,11 @@ class SellerDashView extends StatelessWidget {
             Row(
               children: [
                 CustomOrderStatsItem2(
-                  title: langKey.goldCoins.tr,
-                  icon: Icons.price_change_outlined,
-                  iconColor: Colors.amber,
-                  value: viewModel.vendorStats.value.goldCoin ?? 0,
+                  title: langKey.cMonthEarning.tr,
+                  icon: Icons.monetization_on_rounded,
+                  iconColor: Colors.pinkAccent,
+                  isPriceWidget: true,
+                  value: viewModel.vendorStats.value.cMonthEarning ?? 0,
                 ),
                 Expanded(
                   flex: 0,
