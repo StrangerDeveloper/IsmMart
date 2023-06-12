@@ -35,39 +35,14 @@ class OrderController extends GetxController
 
   var disputeAttachImgPath = "".obs;
 
-  var recentBuyerOrdersList = <OrderModel>[].obs;
-  var recentVendorOrdersList = <VendorOrder>[].obs;
-
   var _orderDetailsModel = OrderModel().obs;
-  var _orderStats = OrderStats().obs;
   var _vendorStats = VendorStats().obs;
 
   OrderModel? get orderDetailsModel => _orderDetailsModel.value;
 
-  OrderStats? get orderStats => _orderStats.value;
-
   VendorStats? get vendorStats => _vendorStats.value;
 
   CoinsModel? get coinsModel => authController.coinsModel;
-
-  fetchBuyerOrderStats() async {
-    isLoading(true);
-
-    await _orderProvider
-        .getBuyerOrderStats(token: authController.userToken!)
-        .then((OrderResponse? response) {
-      isLoading(false);
-      if (response != null) {
-        if (response.success!) {
-          _orderStats(OrderStats.fromJson(response.data));
-        } else
-          showSnackBar(message: response.message);
-      }
-    }).catchError((error) {
-      isLoading(false);
-      debugPrint(">>>>FetchBuyerOrderStats: $error");
-    });
-  }
 
   fetchOrderById(orderId) async {
     // change(null, status: RxStatus.loading());
@@ -83,7 +58,6 @@ class OrderController extends GetxController
     });
   }
 
-
   fetchVendorOrderById(orderId) async {
     //change(null, status: RxStatus.loading());
     await _orderProvider
@@ -95,25 +69,6 @@ class OrderController extends GetxController
     }).catchError((error) {
       debugPrint(">>>>fetchVendorOrderById: $error");
       //change(null, status: RxStatus.error(error));
-    });
-  }
-
-  fetchVendorOrderStats() async {
-    isLoading(true);
-
-    await _orderProvider
-        .getVendorOrderStats(token: authController.userToken!)
-        .then((OrderResponse? response) {
-      isLoading(false);
-      if (response != null) {
-        if (response.success!) {
-          _vendorStats(VendorStats.fromJson(response.data));
-        } else
-          showSnackBar(message: response.message);
-      }
-    }).catchError((error) {
-      isLoading(false);
-      debugPrint(">>>>FetchVendorOrderStats: $error");
     });
   }
 
@@ -135,7 +90,8 @@ class OrderController extends GetxController
     }
 
     ApiBaseHelper()
-        .postMethodForImage(url: url, files: imageList, fields: data, withAuthorization: true)
+        .postMethodForImage(
+            url: url, files: imageList, fields: data, withAuthorization: true)
         .then((parsedJson) {
       isLoading(false);
       ApiResponse? apiResponse = ApiResponse.fromJson(parsedJson);
@@ -153,7 +109,6 @@ class OrderController extends GetxController
       print("Dispute: $error");
       showSnackBar();
     });
-
   }
 
   deleteTicket(String ticketId, String orderId) {
@@ -242,9 +197,6 @@ class OrderController extends GetxController
   @override
   void onReady() {
     super.onReady();
-    fetchBuyerOrderStats();
-    fetchVendorOrderStats();
-
     authController.fetchUserCoins();
   }
 
