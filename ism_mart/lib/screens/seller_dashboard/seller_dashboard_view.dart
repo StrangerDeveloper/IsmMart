@@ -28,16 +28,24 @@ class SellerDashboardView extends StatelessWidget {
                       StickyLabel(text: langKey.recentOrders.tr),
                       kSmallDivider,
                       listView(),
-                      if (viewModel.showLoader.value)
-                        SliverToBoxAdapter(
-                          child: Container(
-                            padding: EdgeInsets.all(16.0),
-                            alignment: Alignment.center,
-                            child: CircularProgressIndicator(),
-                          ),
-                        ),
                     ],
                   ),
+                ),
+                Obx(
+                  () => (viewModel.showLoader.value)
+                      ? SliverFillRemaining(
+                          hasScrollBody: false,
+                          child: Container(
+                            padding: EdgeInsets.all(14),
+                            alignment: Alignment.center,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          ),
+                        )
+                      : SliverToBoxAdapter(
+                          child: Container(
+                            height: 50,
+                          ), // Empty container
+                        ),
                 ),
               ],
             ),
