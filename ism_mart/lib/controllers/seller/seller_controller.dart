@@ -13,6 +13,7 @@ import 'package:ism_mart/exports/exports_ui.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
 class SellersController extends GetxController with StateMixin<ProductModel> {
+
   final SellersApiProvider apiProvider;
   final CategoryController categoryController;
   final OrderController orderController;
