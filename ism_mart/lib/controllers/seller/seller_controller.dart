@@ -1,5 +1,6 @@
 import 'package:ism_mart/screens/change_password/change_password_view.dart';
 import 'package:ism_mart/screens/my_products/my_product_view.dart';
+import 'package:ism_mart/screens/seller_dashboard/seller_dash_view.dart';
 import 'package:ism_mart/screens/vendor_detail/vendor_detail_view.dart';
 import 'package:ism_mart/screens/vendor_orders/vendor_orders_view.dart';
 import 'package:ism_mart/screens/vendor_question/vendor_question_view.dart';
@@ -115,7 +116,8 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
 
 //TDO: Seller Home Section
   List<Widget> NavScreens = [
-    const SellerDashboardView(),
+    // const SellerDashboardView(),
+    SellerDashView(),
     MyProductView(),
     VendorOrdersView(),
     //const PremiumMembershipUI(),

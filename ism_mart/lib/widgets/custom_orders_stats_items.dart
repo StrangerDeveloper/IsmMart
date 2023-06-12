@@ -39,7 +39,6 @@ class CustomOrderStatsItem extends StatelessWidget {
         ),
         child: Row(
           children: [
-            /// icon with colorful bg
             Container(
               width: 45,
               height: 45,
@@ -51,7 +50,6 @@ class CustomOrderStatsItem extends StatelessWidget {
                 color: iconColor,
               ),
             ),
-
             AppConstant.spaceWidget(width: 10),
             Flexible(
                 //flex: 4,
@@ -78,6 +76,89 @@ class CustomOrderStatsItem extends StatelessWidget {
               ),
             )),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class CustomOrderStatsItem2 extends StatelessWidget {
+  final GestureTapCallback? onTap;
+  final Color? iconColor;
+  final IconData? icon;
+  final String? title;
+  final num? value;
+  final bool? isPriceWidget;
+
+  const CustomOrderStatsItem2(
+      {Key? key,
+      this.onTap,
+      this.iconColor,
+      this.icon,
+      this.title,
+      this.value,
+      this.isPriceWidget = false})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: InkWell(
+        onTap: onTap,
+        child: Container(
+          height: 70,
+          padding: const EdgeInsets.fromLTRB(8, 4, 4, 4),
+          decoration: BoxDecoration(
+            color: kWhiteColor,
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: kLightGreyColor),
+            boxShadow: [
+              BoxShadow(
+                color: kPrimaryColor.withOpacity(0.2),
+                offset: Offset(0, 1),
+                blurRadius: 8,
+              )
+            ],
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                    color: iconColor!.withOpacity(0.15),
+                    shape: BoxShape.circle),
+                child: Icon(
+                  icon,
+                  size: 22,
+                  color: iconColor,
+                ),
+              ),
+              SizedBox(width: 10),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CustomText(
+                      title: title,
+                      weight: FontWeight.w600,
+                      textAlign: TextAlign.center,
+                      size: 15,
+                    ),
+                    isPriceWidget!
+                        ? CustomPriceWidget(title: "$value")
+                        : CustomText(
+                            title: "$value",
+                            weight: FontWeight.bold,
+                            textAlign: TextAlign.center,
+                            size: 20,
+                          ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
