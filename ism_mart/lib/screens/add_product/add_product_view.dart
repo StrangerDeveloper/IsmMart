@@ -373,7 +373,7 @@ class AddProductsView extends StatelessWidget {
     );
   }
 
-  Obx productVariantsAndFeaturesField() {
+  productVariantsAndFeaturesField() {
     return Obx(
       () => viewModel.productVariantsFieldsList.isEmpty
           ? Container()

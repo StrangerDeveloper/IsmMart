@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/exports/exports_ui.dart';
+import 'package:ism_mart/screens/cart/cart_viewmodel.dart';
 import 'package:ism_mart/screens/product_questions/product_questions_view.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
 import 'package:ism_mart/widgets/export_widgets.dart';
@@ -61,7 +62,7 @@ class SingleProductView extends GetView<ProductController> {
       onWillPop: () => controller.popSingleProductView(),
       child: Scaffold(
           appBar: AppBar(
-              actions: [
+              actions: calledFor == 'customer' ? [
                 Align(
                   alignment: Alignment.center,
                   child: Padding(
@@ -81,7 +82,7 @@ class SingleProductView extends GetView<ProductController> {
                     ),
                   ),
                 ),
-              ],
+              ] : null,
               backgroundColor: kAppBarColor,
               centerTitle: true,
               leading: InkWell(
@@ -1112,6 +1113,8 @@ class SingleProductView extends GetView<ProductController> {
         CustomTextBtn(
           onPressed: () async {
             await controller.addItemLocalCart(product: productModel);
+            CartViewModel cartModel = Get.find();
+            cartModel.fetchCartItemsFromLocal();
             //controller.addItemToCart(product: productModel);
             //Get.back();
           },

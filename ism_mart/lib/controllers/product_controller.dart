@@ -214,8 +214,8 @@ class ProductController extends GetxController with StateMixin {
 
     await LocalStorageHelper.addItemToCart(cartModel: cart).then((value) {
       Get.back();
-      AppConstant.displaySnackBar(
-          langKey.successTitle.tr, langKey.addToCart.tr);
+      // AppConstant.displaySnackBar(
+      //     langKey.successTitle.tr, langKey.addToCart.tr);
       clearControllers();
       count(1);
     });

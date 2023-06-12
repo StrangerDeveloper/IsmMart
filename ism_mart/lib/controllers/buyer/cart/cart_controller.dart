@@ -4,7 +4,6 @@ import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
-import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 /*class MyStates<T1, T2> {
   T1? state1;
@@ -86,45 +85,45 @@ class CartController extends GetxController
     });
     // ever(cartItemsList, getTotalCartAmount);
   }
-
-  updateCart({cartItemId, quantity}) async {
-    var cartData = {"cartItemId": "$cartItemId", "quantity": quantity};
-    await LocalStorageHelper.getStoredUser().then((user) async {
-      await _apiProvider
-          .updateCartItem(token: user.token, data: cartData)
-          .then((CartResponse? response) {
-        if (response != null) {
-          if (response.success!) {
-            showSnackBar(langKey.success.tr, response.message);
-            fetchCartItems();
-          } else
-            showSnackBar(langKey.errorTitle.tr, response.message);
-        } else
-          showSnackBar(langKey.errorTitle.tr, langKey.someThingWentWrong.tr);
-      }).catchError((error) {
-        debugPrint(">>>>updateCart $error");
-      });
-    });
-  }
-
-  deleteCartItem({cartItemId}) async {
-    await LocalStorageHelper.getStoredUser().then((user) async {
-      await _apiProvider
-          .deleteCartItem(token: user.token, cartId: cartItemId)
-          .then((CartResponse? response) {
-        if (response != null) {
-          if (response.success!) {
-            showSnackBar(langKey.success.tr, response.message);
-            fetchCartItems();
-          } else
-            showSnackBar(langKey.errorTitle.tr, response.message);
-        } else
-          showSnackBar(langKey.errorTitle.tr, langKey.someThingWentWrong.tr);
-      }).catchError((error) {
-        debugPrint(">>>>DeleteItem $error");
-      });
-    });
-  }
+  //
+  // updateCart({cartItemId, quantity}) async {
+  //   var cartData = {"cartItemId": "$cartItemId", "quantity": quantity};
+  //   await LocalStorageHelper.getStoredUser().then((user) async {
+  //     await _apiProvider
+  //         .updateCartItem(token: user.token, data: cartData)
+  //         .then((CartResponse? response) {
+  //       if (response != null) {
+  //         if (response.success!) {
+  //           showSnackBar(langKey.success.tr, response.message);
+  //           fetchCartItems();
+  //         } else
+  //           showSnackBar(langKey.errorTitle.tr, response.message);
+  //       } else
+  //         showSnackBar(langKey.errorTitle.tr, langKey.someThingWentWrong.tr);
+  //     }).catchError((error) {
+  //       debugPrint(">>>>updateCart $error");
+  //     });
+  //   });
+  // }
+  //
+  // deleteCartItem({cartItemId}) async {
+  //   await LocalStorageHelper.getStoredUser().then((user) async {
+  //     await _apiProvider
+  //         .deleteCartItem(token: user.token, cartId: cartItemId)
+  //         .then((CartResponse? response) {
+  //       if (response != null) {
+  //         if (response.success!) {
+  //           showSnackBar(langKey.success.tr, response.message);
+  //           fetchCartItems();
+  //         } else
+  //           showSnackBar(langKey.errorTitle.tr, response.message);
+  //       } else
+  //         showSnackBar(langKey.errorTitle.tr, langKey.someThingWentWrong.tr);
+  //     }).catchError((error) {
+  //       debugPrint(">>>>DeleteItem $error");
+  //     });
+  //   });
+  // }
 
   showSnackBar(title, message) {
     AppConstant.displaySnackBar(title, message);
