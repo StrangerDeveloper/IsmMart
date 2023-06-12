@@ -5,16 +5,20 @@ import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
+import '../controllers/buyer/search/allproducts_model.dart';
+
 class SingleProductItems extends StatelessWidget {
-  const SingleProductItems(
-      {Key? key,
-      this.productModel,
-      this.isCategoryProducts = false,
-      this.onTap})
-      : super(key: key);
+  const SingleProductItems({
+    Key? key,
+    this.allProductsModel,
+    this.productModel,
+    this.isCategoryProducts = false,
+    this.onTap,
+  }) : super(key: key);
   final ProductModel? productModel;
   final bool? isCategoryProducts;
   final GestureTapCallback? onTap;
+  final AllProductsModel? allProductsModel;
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +34,12 @@ class SingleProductItems extends StatelessWidget {
         padding: const EdgeInsets.all(5.0),
         child: GestureDetector(
           onTap: () {
-            Get.to(SingleProductView(productId: "${model.id}", calledFor: 'customer',));
+            Get.to(SingleProductView(
+              productId: "${model.id}",
+              calledFor: 'customer',
+            ));
           },
-          child:
-          Container(
+          child: Container(
             clipBehavior: Clip.hardEdge,
             margin: const EdgeInsets.only(right: 4, left: 4),
             decoration: BoxDecoration(
@@ -134,9 +140,7 @@ class SingleProductItems extends StatelessWidget {
                     );
                   });
             },
-        child:
-
-        Container(
+        child: Container(
           clipBehavior: Clip.hardEdge,
           margin: const EdgeInsets.symmetric(horizontal: 5),
           //padding: const EdgeInsets.all(1),

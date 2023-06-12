@@ -16,6 +16,12 @@ class BaseController extends GetxController {
   var cartCount = 0.obs;
 
   @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+  }
+
+  @override
   void onReady() {
     super.onReady();
 

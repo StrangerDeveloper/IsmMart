@@ -6,6 +6,8 @@ import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
+import 'allproducts_view.dart';
+
 class SearchView extends GetView<CustomSearchController> {
   const SearchView(
       {Key? key,
@@ -23,7 +25,7 @@ class SearchView extends GetView<CustomSearchController> {
   @override
   Widget build(BuildContext context) {
     //  final controller = Get.find<SearchController>();
-    controller.searchTextController.clear();
+    // controller.searchTextController.clear();
     controller.subCategoryID.value = 0;
     controller.selectedCategory('');
     String searchQuery = '';
@@ -81,7 +83,7 @@ class SearchView extends GetView<CustomSearchController> {
               onTap: () {
                 controller.productList.clear();
                 controller.searchLimit = 15;
-                controller.searchTextController.clear();
+                //   controller.searchTextController.clear();
                 controller.goBack();
               },
               child: Icon(
@@ -93,6 +95,7 @@ class SearchView extends GetView<CustomSearchController> {
       title: Container(
         height: 36,
         child: TextField(
+          onTap: () => Get.to(AllProductsView()),
           controller: controller.searchTextController,
           //focusNode: controller.focus,
           onChanged: (value) {
@@ -100,13 +103,13 @@ class SearchView extends GetView<CustomSearchController> {
               controller.selectedCategory('');
               controller.searchProducts(value);
               controller.searchLimit = 15;
-              controller.suggestionSearch();
+              //   controller.suggestionSearch();
             } else if (controller.searchTextController.text.isEmpty ||
-                controller.suggestionList.length == 0 ||
+                controller.filteredlist.length == 0 ||
                 value == "") {
-              controller.suggestionList.clear();
+              controller.filteredlist.clear();
             } else {
-              controller.suggestionList.clear();
+              controller.filteredlist.clear();
             }
           },
           cursorColor: kPrimaryColor,
@@ -178,54 +181,50 @@ class SearchView extends GetView<CustomSearchController> {
               )
             : Stack(
                 children: [
-                  controller.suggestionList.isNotEmpty
-                      ? Opacity(
-                          opacity: .5,
-                          child: _buildProductView(controller.productList))
-                      : _buildProductView(controller.productList),
-                  Positioned(
-                      top: 1,
-                      child: Obx(
-                        () => controller.suggestionList.isNotEmpty
-                            ? Container(
-                                padding: EdgeInsets.only(left: 40),
-                                color: Colors.white,
-                                height: 400,
-                                width: 375,
-                                child: ListView.builder(
-                                  itemCount: controller.suggestionList.length,
-                                  itemBuilder: (context, index) {
-                                    return ListTile(
-                                      onTap: () {
-                                        controller.selectedIndex.value = index;
+                  _buildProductView(controller.productList),
+                  // Positioned(
+                  //     top: 1,
+                  //     child: Obx(
+                  //       () => controller.suggestionList.isNotEmpty
+                  //           ? Container(
+                  //               padding: EdgeInsets.only(left: 40),
+                  //               color: Colors.white,
+                  //               height: 400,
+                  //               width: 375,
+                  //               child: ListView.builder(
+                  //                 itemCount: controller.suggestionList.length,
+                  //                 itemBuilder: (context, index) {
+                  //                   return ListTile(
+                  //                     onTap: () {
+                  //                       controller.selectedIndex.value = index;
 
-                                        controller.searchTextController.text =
-                                            controller.suggestionList[index]
-                                                .toString();
+                  //                       controller.searchTextController.text =
+                  //                           controller.suggestionList[index]
+                  //                               .toString();
 
-                                        controller.selectedCategory('');
-                                        controller.searchProducts(controller
-                                            .searchTextController.text);
-                                        controller.searchLimit = 15;
+                  //                       controller.selectedCategory('');
+                  //                       controller.searchProducts(controller
+                  //                           .searchTextController.text);
+                  //                       controller.searchLimit = 15;
 
-                                        controller.suggestionList.clear();
-                                        controller.finalSerach(true);
-                                      },
-                                      tileColor:
-                                          controller.selectedIndex.value ==
-                                                  index
-                                              ? Colors.black12
-                                              : kAccentColor,
-                                      title: CustomText(
-                                        title: controller.suggestionList[index]
-                                            .toString(),
-                                      ),
-                                    );
-                                  },
-                                ),
-                              )
-                            : SizedBox(),
-                      )),
+                  //                       controller.suggestionList.clear();
+                  //                       controller.finalSerach(true);
+                  //                     },
+                  //                     tileColor:
+                  //                         controller.selectedIndex.value ==
+                  //                                 index
+                  //                             ? Colors.black12
+                  //                             : kAccentColor,
+                  //                     title: CustomText(
+                  //                       title: controller.suggestionList[index]
+                  //                           .toString(),
+                  //                     ),
+                  //                   );
+                  //                 },
+                  //               ),
+                  //             )
+                  //           : SizedBox(),
+                  //     )),
                 ],
               ));
   }

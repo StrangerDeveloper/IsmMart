@@ -9,7 +9,7 @@ class ApiRepository {
 
   ApiRepository(this._apiService);
 
-  Future<dynamic> searchProduct({text, page = 1, limit = 10, sortBy}) async {
+  Future<dynamic> searchProduct({text, page, limit = 10, sortBy}) async {
     final queryParameters = {
       "text": "$text",
       "limit": "$limit",

@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/api_helper/global_variables.dart';
+import 'package:ism_mart/helper/urls.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/utils/constants.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import '../../../helper/api_base_helper.dart';
+import 'allproducts_model.dart';
 
 class CustomSearchController extends GetxController {
   final ApiProvider _apiProvider;
@@ -35,6 +37,9 @@ class CustomSearchController extends GetxController {
 
   @override
   void onInit() {
+    getAllProducts();
+    loadMoreCategoryProducts("");
+
     // focus.addListener(_onFocusChange);
     super.onInit();
     //change(null, status: RxStatus.loading());
@@ -129,7 +134,7 @@ class CustomSearchController extends GetxController {
         scrollController.position.maxScrollExtent == scrollController.offset) {
       isLoadingMore(true);
       searchLimit += 10;
-      //page++;
+      page++;
       await _apiProvider
           .search(
               text: searchQuery!.toLowerCase(),
@@ -177,6 +182,19 @@ class CustomSearchController extends GetxController {
   }
 
   void loadMoreCategoryProducts(String? searchQuery) async {
+    await _apiProvider
+        .getProductsByType(
+      type: searchQuery,
+      limit: searchLimit,
+    )
+        .then((response) {
+      productList.clear();
+      productList.addAll(response);
+      isLoadingMore(false);
+    }).catchError((error) {
+      isLoadingMore(false);
+      //change(null, status: RxStatus.error(error));
+    });
     if (scrollController.hasClients &&
         isLoadingMore.isFalse &&
         scrollController.position.maxScrollExtent == scrollController.offset) {
@@ -224,20 +242,34 @@ class CustomSearchController extends GetxController {
     }
   }
 
-  RxList<String> suggestionList = <String>[].obs;
-  Rx<int> selectedIndex = 0.obs;
-  Rx<String> changeValue = ''.obs;
-  RxBool finalSerach = false.obs;
-  // var myFocusNode = FocusNode();
+  // RxList<String> suggestionList = <String>[].obs;
+  // Rx<int> selectedIndex = 0.obs;
+  // Rx<String> changeValue = ''.obs;
+  // RxBool finalSerach = false.obs;
+  // // var myFocusNode = FocusNode();
 
-  void suggestionSearch() {
-    suggestionList.clear();
-    //  productList.map((element) => l.add(element.name));
-    for (var element in productList) {
-      suggestionList.add(element.name.toString());
-    }
+  // void suggestionSearch() {
+  //   suggestionList.clear();
+  //   //  productList.map((element) => l.add(element.name));
+  //   for (var element in allProductsList) {
+  //     suggestionList.add(element.name.toString());
+  //   }
 
-    print("suggestin hasnain ----------- ${suggestionList.length}");
+  //   print("suggestin hasnian  ----------- ${suggestionList.length}");
+  // }
+
+//filtered list after passing onchange value
+  RxList<String> filteredlist = <String>[].obs;
+  filteredListfunc(String searchVal) {
+    filteredlist.clear();
+    print("suggestin hasnian  ----------- ${searchVal}");
+    print("suggestin list hasnian  ----------- ${suggestionList.length}");
+
+    filteredlist.value = suggestionList
+        .where((item) => item.toLowerCase().contains(searchVal.toLowerCase()))
+        .toList();
+    print(
+        "suggestin hasnian  filtered list length ----------- ${filteredlist.length}");
   }
 
   var stopLoadMore = false.obs;
@@ -289,7 +321,7 @@ class CustomSearchController extends GetxController {
     searchLimit = 15;
     selectedCategory('');
     subCategoryID.value = 0;
-    searchTextController.clear();
+    // searchTextController.clear();
     Get.back();
   }
 
@@ -306,10 +338,36 @@ class CustomSearchController extends GetxController {
     await searchWithFilters(filters: filters);
   }
 
+  RxList<AllProductsModel> allProductsList = <AllProductsModel>[].obs;
+  RxList<String> suggestionList = <String>[].obs;
+  Rx<int> selectedIndex = 0.obs;
+  Rx<String> changeValue = ''.obs;
+  RxBool finalSerach = false.obs;
+  getAllProducts() {
+    GlobalVariable.showLoader.value = true;
+
+    ApiBaseHelper().getMethod(url: Urls.allProducts).then((parsedJson) {
+      GlobalVariable.showLoader.value = false;
+      if (parsedJson['success'] == true) {
+        var data = parsedJson['data'] as List;
+
+        allProductsList.addAll(data.map((e) => AllProductsModel.fromJson(e)));
+        print(" all product hasnian ${allProductsList.length}");
+        for (var element in allProductsList) {
+          suggestionList.add(element.name.toString());
+        }
+        print(" suggestion list product hasnian ${suggestionList.length}");
+      }
+    }).catchError((e) {
+      print(e);
+      GlobalVariable.showLoader.value = false;
+    });
+  }
+
   @override
   void onClose() {
     super.onClose();
-    searchTextController.text = "";
+    // searchTextController.text = "";
     //searchTextController.removeListener(() {});
     //scrollController.removeListener(() {});
     //focus.removeListener(_onFocusChange);
