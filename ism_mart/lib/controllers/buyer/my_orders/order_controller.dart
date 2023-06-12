@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:ism_mart/api_helper/api_base_helper.dart';
+import 'package:ism_mart/helper/api_base_helper.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/api_helper/urls.dart';
 import 'package:ism_mart/controllers/controllers.dart';

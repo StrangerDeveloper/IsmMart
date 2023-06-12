@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:http_parser/http_parser.dart';
-import 'package:ism_mart/api_helper/api_base_helper.dart';
+import 'package:ism_mart/helper/api_base_helper.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/api_helper/global_variables.dart';
 import 'package:ism_mart/api_helper/urls.dart';

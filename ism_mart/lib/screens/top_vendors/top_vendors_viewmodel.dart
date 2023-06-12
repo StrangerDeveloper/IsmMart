@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:ism_mart/screens/top_vendors/top_vendors_model.dart';
 
-import '../../api_helper/api_base_helper.dart';
+import '../../helper/api_base_helper.dart';
 import '../../api_helper/global_variables.dart';
 import '../../api_helper/urls.dart';
 

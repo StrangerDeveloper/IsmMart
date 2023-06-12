@@ -2,7 +2,7 @@ import 'package:http_parser/http_parser.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ism_mart/api_helper/api_base_helper.dart';
+import 'package:ism_mart/helper/api_base_helper.dart';
 import 'package:ism_mart/api_helper/global_variables.dart';
 import 'package:ism_mart/screens/my_products/my_products_viewmodel.dart';
 import '../../models/category/category_model.dart';
