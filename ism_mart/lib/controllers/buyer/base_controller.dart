@@ -271,7 +271,7 @@ class BaseController extends GetxController {
   List<Widget> bottomNavScreens = [
     const DashboardUI(),
     const CategoriesView(),
-    const CartView(),
+    CartView(),
     SettingsView(),
     SearchView(
       isCalledForDeals: true,

@@ -134,9 +134,7 @@ class SingleProductItems extends StatelessWidget {
                     );
                   });
             },
-        child:
-
-        Container(
+        child: Container(
           clipBehavior: Clip.hardEdge,
           margin: const EdgeInsets.symmetric(horizontal: 5),
           //padding: const EdgeInsets.all(1),
