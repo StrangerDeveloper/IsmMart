@@ -6,7 +6,7 @@ import 'package:ism_mart/controllers/controllers.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/utils/constants.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart';
-import 'package:ism_mart/utils/validator.dart';
+import 'package:ism_mart/helper/validator.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class GeneralSettingsView extends StatelessWidget {

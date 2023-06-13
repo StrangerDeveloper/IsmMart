@@ -11,15 +11,6 @@ class OrderRepository {
 
   OrderRepository(this._apiService);
 
-  Future<List<dynamic>> fetchBuyerOrders({token, limit = 20, page = 1}) async {
-    var queryParams = {"limit": "$limit", "page": "$page"};
-    var response = await _apiService.get(
-        endpoint: 'order/myOrders',
-        query: queryParams,
-        requiresAuthToken: true,
-        token: token);
-    return response.body != null ? response.body['data'] : [];
-  }
 
   Future<dynamic> fetchBuyerOrdersDetails({token, orderId}) async {
     var response = await _apiService.get(
@@ -35,18 +26,6 @@ class OrderRepository {
         requiresAuthToken: true,
         token: token);
     return response.body != null ? response.body['data'] : null;
-  }
-
-  Future<dynamic> fetchBuyerOrderStats({token}) async {
-    var response = await _apiService.get(
-        endpoint: 'order/userStats', requiresAuthToken: true, token: token);
-    return response.body;
-  }
-
-  Future<dynamic> fetchVendorOrderStats({token}) async {
-    var response = await _apiService.get(
-        endpoint: 'order/vendorStats', requiresAuthToken: true, token: token);
-    return response.body;
   }
 
   Future<dynamic> postOrder({token, data}) async {

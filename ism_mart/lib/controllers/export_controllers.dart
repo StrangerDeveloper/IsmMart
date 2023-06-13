@@ -12,7 +12,6 @@ export 'buyer/search/search_binding.dart';
 export 'buyer/search/custom_search_controller.dart';
 export 'controllers.dart';
 export 'language/language_controller.dart';
-export 'seller/membership/membership_controller.dart';
 export 'seller/seller_bindings.dart';
 export 'seller/seller_controller.dart';
 export 'theme/theme_controller.dart';

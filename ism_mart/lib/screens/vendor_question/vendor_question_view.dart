@@ -6,7 +6,6 @@ import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/screens/vendor_question/vendor_question_viewmodel.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
-
 import '../single_product_details/single_product_details_view.dart';
 
 class VendorQuestionView extends StatelessWidget {
@@ -354,7 +353,8 @@ class VendorQuestionView extends StatelessWidget {
   }
 
   updateAnswerBottomSheet(int index) {
-    viewModel.updateAnswerController.text = viewModel.productQuestionsList[index].answer?.answer ?? '';
+    viewModel.updateAnswerController.text =
+        viewModel.productQuestionsList[index].answer?.answer ?? '';
     showModalBottomSheet(
       useSafeArea: true,
       isScrollControlled: true,

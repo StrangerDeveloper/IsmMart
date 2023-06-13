@@ -58,14 +58,14 @@ class BottomNavigationView extends GetView<BaseController> {
             _getNavBarItems(
               icon: IconlyLight.bag_2,
               title: langKey.deals.tr,
-              page: 4,
+              page: 2,
             ),
             // controller.cartCount.value <= 0
             //     ?
             _getNavBarItems(
                 icon: IconlyLight.buy,
                 title: langKey.myCart.tr,
-                page: 2,
+                page: 3,
                 showBadge: true),
 
             // : Expanded(
@@ -82,7 +82,7 @@ class BottomNavigationView extends GetView<BaseController> {
             _getNavBarItems(
               icon: Icons.menu,
               title: langKey.menu.tr,
-              page: 3,
+              page: 4,
             ),
           ],
         ),

@@ -4,7 +4,7 @@ import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/screens/contact_us/contact_us_viewmodel.dart';
 import 'package:ism_mart/utils/constants.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart';
-import 'package:ism_mart/utils/validator.dart';
+import 'package:ism_mart/helper/validator.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
 
 class ContactUsView extends StatelessWidget {

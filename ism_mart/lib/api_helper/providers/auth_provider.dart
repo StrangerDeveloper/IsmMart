@@ -19,90 +19,10 @@ class AuthProvider {
     return response.map((e) => CountryModel.fromJson(e)).toList();
   }
 
-  Future<UserResponse> postLogin({email, password}) async {
-    var response = await _authRepo.login(email: email, password: password);
-    return UserResponse.fromResponse(response);
-  }
-
   Future<ApiResponse> resendVerificationLink({email}) async {
     var response = await _authRepo.resendVerificationLink(email: email);
 
     return ApiResponse.fromJson(response);
-  }
-
-  Future<UserResponse> postStoreRegister(
-      {token, SellerModel? sellerModel}) async {
-    final url = "${ApiConstant.baseUrl}auth/vendor/register";
-    final request = http.MultipartRequest('POST', Uri.parse(url));
-    request.headers['Authorization'] = '$token';
-    //request.headers['Content-Type'] = 'multipart/form-data';
-
-    request.fields['storeName'] = sellerModel!.storeName!;
-    request.fields['storeDesc'] = sellerModel.storeDesc!;
-    request.fields['phone'] = sellerModel.phone!;
-    request.fields['ownerName'] = sellerModel.ownerName!;
-    request.fields['premium'] = sellerModel.premium!.toString();
-    request.fields['membership'] = sellerModel.membership!;
-    request.fields['accountTitle'] = sellerModel.accountTitle!;
-    request.fields['accountNumber'] = sellerModel.accountNumber!;
-    request.fields['bankName'] = sellerModel.bankName!;
-    request.fields['cityId'] = sellerModel.cityId.toString();
-
-    if (sellerModel.storeImage != '') {
-      request.files.add(await http.MultipartFile.fromPath(
-        'storeImage',
-        sellerModel.storeImage!,
-        contentType: MediaType.parse('image/jpeg'),
-      ));
-    }
-
-    if (sellerModel.coverImage != '') {
-      request.files.add(await http.MultipartFile.fromPath(
-        'coverImage',
-        sellerModel.coverImage!,
-        contentType: MediaType.parse('image/jpeg'),
-      ));
-    }
-
-    print(request.files.map((e) => e.filename).toString());
-    final response = await request.send();
-    if (response.statusCode == 200) {
-      var data = await jsonDecode(await response.stream.bytesToString());
-
-      return UserResponse.fromResponse(data);
-    } else {
-      //ODO: Still needs to test this one properly
-      http.StreamedResponse res =
-          await request.send().timeout(const Duration(seconds: 15));
-      return UserResponse.fromResponse(
-          json.decode(await res.stream.bytesToString()));
-    }
-    // var response = await handleStreamResponse(await request.send());
-    // return UserResponse.fromResponse(
-    //     json.decode(await response.stream.bytesToString()));
-
-    // if (response.statusCode == 200) {
-    //   final responseData = await response.stream.bytesToString();
-    //   final data = json.decode(responseData);
-
-    //   return UserResponse.fromResponse(data);
-    // } else {
-    //   //ODO: Still needs to test this one properly
-    //   http.StreamedResponse res = handleStreamResponse(response);
-    //   return UserResponse.fromResponse(
-    //       json.decode(await res.stream.bytesToString()));
-    // }
-
-    /* var jsonData = {
-      "phone": phone,
-      "storeName": storeName,
-      "storeDesc": storeDesc,
-      'ownerName': ownerName,
-      'storeURL': websiteUrl
-    };
-
-    var response = await _authRepo.registerStore(token: token, data: jsonData);
-    return UserResponse.fromResponse(response);*/
   }
 
   Future<UserResponse> addBankAccount({token, SellerModel? sellerModel}) async {
@@ -141,11 +61,6 @@ class AuthProvider {
     return UserResponse.fromResponse(
         json.decode(await response.stream.bytesToString()));
   }
-
-  // Future<ApiResponse> forgotPasswordOtp({data}) async {
-  //   var response = await _authRepo.recoverPasswordWithOtp(data: data);
-  //   return ApiResponse.fromJson(response);
-  // }
 
   /*
   *

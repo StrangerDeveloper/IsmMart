@@ -23,7 +23,6 @@ class SellerBindings extends Bindings {
     Get.lazyPut<OrderProvider>(()=>OrderProvider(Get.find()));
 
     Get.lazyPut<OrderController>(() => OrderController(Get.find()));
-    Get.lazyPut<MembershipController>(() => MembershipController());
 
   }
 }

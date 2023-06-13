@@ -21,8 +21,7 @@ class SingleCategoryItem extends StatelessWidget {
     return InkWell(
       onTap: () {
         Get.to(() => SearchView(
-              passedSearchQuery: category.name,
-              calledForCategory: true,
+              categoryID: categoryModel!.id,
             ));
         // Get.toNamed(Routes.searchRoute,
         //     arguments: {"searchText": "${category.name}"});
