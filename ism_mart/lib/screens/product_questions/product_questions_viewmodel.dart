@@ -13,20 +13,18 @@ class ProductQuestionsViewModel extends GetxController {
 
   RxString productId = ''.obs;
   List<QuestionModel> productQuestionsList = <QuestionModel>[].obs;
-  ProductModel? productModel;
+  final productModel = ProductModel().obs;
   final addQuestionFormKey = GlobalKey<FormState>();
   final updateQuestionFormKey = GlobalKey<FormState>();
   TextEditingController addQuestionController = TextEditingController();
   TextEditingController updateQuestionController = TextEditingController();
 
-  // @override
-  // void onInit() {
-  //   print('>>Product ID: ${Get.arguments['productId']}');
-  //   print('>>Product Model: ${Get.arguments['productModel']}');
-  //   productId = Get.arguments['productId'];
-  //   productModel = Get.arguments['productModel'];
-  //   super.onInit();
-  // }
+  @override
+  void onInit() {
+    productId.value = Get.arguments[0]['productId'];
+    productModel.value = Get.arguments[0]['productModel'];
+    super.onInit();
+  }
 
   @override
   void onReady() {

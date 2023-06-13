@@ -364,7 +364,6 @@ class CheckoutView extends GetView<CheckoutController> {
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: controller.getCartItemsList().length,
                 itemBuilder: (context, index) {
-                  CartModel cartModel = controller.getCartItemsList()[index];
                   return SingleCartItems(
                     index: index,
                     calledFromCheckout: true,

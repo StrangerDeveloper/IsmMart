@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ism_mart/exports/exports_ui.dart';
 import 'package:ism_mart/screens/cart/cart_viewmodel.dart';
 import 'package:ism_mart/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import '../screens/single_product_details/single_product_details_view.dart';
 
 class SingleCartItems extends StatelessWidget {
   SingleCartItems({
@@ -21,10 +21,10 @@ class SingleCartItems extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(() => SingleProductView(
-          productId: "${viewModel.cartItemsList[index!].productId}",
-          calledFor: 'seller',
-        ));
+        Get.to(() => SingleProductDetailsView(), arguments: [{
+          "calledFor": "customer",
+          "productID": "${viewModel.cartItemsList[index!].productId}"
+        }]);
       },
       child: _singleCartItem(),
     );
@@ -46,7 +46,8 @@ class SingleCartItems extends StatelessWidget {
                         child: CircleAvatar(
                             radius: 40,
                             backgroundImage: NetworkImage(
-                                viewModel.cartItemsList[index!].productModel!.thumbnail ?? AppConstant.defaultImgUrl)),
+                                viewModel.cartItemsList[index!].productModel!.thumbnail
+                                    ?? AppConstant.defaultImgUrl)),
                       ),
                       AppConstant.spaceWidget(width: 5),
                       productDetailsAndPrice(),

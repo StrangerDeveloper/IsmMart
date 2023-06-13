@@ -100,12 +100,12 @@ class Routes {
         name: sellerHomeRoute,
         page: () => const SellerHomeView(),
         binding: SellerBindings()),
-    GetPage(
-      name: '/product/:id',
-      //arguments: ['calledFor'],
-      page: () => const SingleProductView(),
-      binding: ProductBinding(),
-    ),
+    // GetPage(
+    //   name: '/product/:id',
+    //   //arguments: ['calledFor'],
+    //   page: () => SingleProductView(),
+    //   binding: ProductBinding(),
+    // ),
     GetPage(
       name: '/orderDetails/:id',
       //arguments: ['calledForBuyerOrderDetails'],

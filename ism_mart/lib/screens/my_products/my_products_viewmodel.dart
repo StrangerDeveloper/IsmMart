@@ -33,7 +33,7 @@ class MyProductsViewModel extends GetxController {
         var data = parsedJson['data']['products'] as List;
         myProductsList.addAll(data.map((e) => VendorProduct.fromJson(e)));
       } else {
-        AppConstant.displaySnackBar(errorTitle.tr, parsedJson['message']);
+        AppConstant.displaySnackBar(langKey.errorTitle.tr, parsedJson['message']);
       }
     }).catchError((e) {
       print(e);

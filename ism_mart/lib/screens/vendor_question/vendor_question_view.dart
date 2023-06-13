@@ -7,6 +7,8 @@ import 'package:ism_mart/screens/vendor_question/vendor_question_viewmodel.dart'
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
 
+import '../single_product_details/single_product_details_view.dart';
+
 class VendorQuestionView extends StatelessWidget {
   VendorQuestionView({Key? key}) : super(key: key);
   final VendorQuestionViewModel viewModel = Get.put(VendorQuestionViewModel());
@@ -259,11 +261,18 @@ class VendorQuestionView extends StatelessWidget {
                   Navigator.of(context).pop();
                   if (viewModel.productQuestionsList[index].product?.id !=
                       null) {
-                    Get.to(() => SingleProductView(
-                          productId:
-                              "${viewModel.productQuestionsList[index].product?.id}",
-                          calledFor: 'seller',
-                        ));
+                    print('Product ID: ${viewModel.productQuestionsList[index].product?.id}');
+
+                    Get.to(() => SingleProductDetailsView(), arguments: [{
+                      "calledFor": "seller",
+                      "productID": "${viewModel.productQuestionsList[index].product?.id}"
+                    }]);
+
+                    // Get.to(() => SingleProductView(
+                    //       productId:
+                    //           "${viewModel.productQuestionsList[index].product?.id}",
+                    //       calledFor: 'seller',
+                    //     ));
                   }
                 },
               ),

@@ -4,6 +4,7 @@ import 'package:iconly/iconly.dart';
 import 'package:ism_mart/exports/exports_ui.dart';
 import 'package:ism_mart/screens/my_products/my_products_viewmodel.dart';
 import 'package:ism_mart/screens/my_products/vendor_product_model.dart';
+import 'package:ism_mart/screens/single_product_details/single_product_details_view.dart';
 import 'package:ism_mart/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
@@ -99,12 +100,10 @@ class MyProductView extends StatelessWidget {
       aspectRatio: 0.75,
       child: GestureDetector(
         onTap: () {
-          Get.to(
-            SingleProductView(
-              productId: "${model.id}",
-              calledFor: 'seller',
-            ),
-          );
+          Get.to(() => SingleProductDetailsView(), arguments: [{
+            "calledFor": "seller",
+            "productID": "${model.id}"
+          }]);
         },
         child: Container(
           clipBehavior: Clip.hardEdge,

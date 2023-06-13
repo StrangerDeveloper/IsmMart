@@ -67,7 +67,6 @@ class LocalStorageHelper {
   }
 
   static saveCart(cartItems) {
-    print(">>>Cart: Save: ${cartItems}");
     localStorage.write(cartItemKey, cartItems).then((value) {});
   }
 

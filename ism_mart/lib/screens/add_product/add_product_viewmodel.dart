@@ -199,17 +199,19 @@ class AddProductViewModel extends GetxController {
       'description': newProduct.description.toString(),
     };
 
-    if (categoryFieldList != null) {
-      for (int i = 0; i < categoryFieldList!.entries.length; i++) {
+    if (dynamicFieldsValuesList.isNotEmpty) {
+      for (int i = 0; i < dynamicFieldsValuesList.entries.length; i++) {
         body.addAll({
-          'features[$i][id]': "${categoryFieldList!.entries.elementAt(i).key}",
+          'features[$i][id]': "${dynamicFieldsValuesList.entries.elementAt(i).key}",
           'features[$i][value]':
-              "${categoryFieldList!.entries.elementAt(i).value}"
+              "${dynamicFieldsValuesList.entries.elementAt(i).value}"
         });
       }
     } else {
       body.addAll({'features': '[]'});
     }
+
+    print(body);
 
     List<http.MultipartFile> filesList = [];
     for (File image in productImages) {

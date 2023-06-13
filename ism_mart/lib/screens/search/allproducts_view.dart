@@ -4,6 +4,7 @@ import 'package:ism_mart/controllers/buyer/search/allproducts_model.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
+import 'package:ism_mart/screens/single_product_details/single_product_details_view.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
@@ -622,10 +623,10 @@ class AllSingleProductItems extends StatelessWidget {
         padding: const EdgeInsets.all(5.0),
         child: GestureDetector(
           onTap: () {
-            Get.to(SingleProductView(
-              productId: "${model.id}",
-              calledFor: 'customer',
-            ));
+            Get.to(() => SingleProductDetailsView(), arguments: [{
+              "calledFor": "customer",
+              "productID": "${model.id}"
+            }]);
           },
           child: Container(
             clipBehavior: Clip.hardEdge,
@@ -710,23 +711,27 @@ class AllSingleProductItems extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap ??
             () {
-              showModalBottomSheet(
-                  //isDismissible: false,
-                  isScrollControlled: true,
-                  context: buildContext!,
-                  backgroundColor: kWhiteColor,
-                  enableDrag: true,
-                  elevation: 0,
-                  builder: (_) {
-                    return SafeArea(
-                      child: Container(
-                        height: AppResponsiveness.height * 0.91,
-                        child: SingleProductView(
-                          productId: "${model!.id}",
-                        ),
-                      ),
-                    );
-                  });
+          Get.to(() => SingleProductDetailsView(), arguments: [{
+            "calledFor": "customer",
+            "productID": "${model!.id}"
+          }]);
+              // showModalBottomSheet(
+              //     //isDismissible: false,
+              //     isScrollControlled: true,
+              //     context: buildContext!,
+              //     backgroundColor: kWhiteColor,
+              //     enableDrag: true,
+              //     elevation: 0,
+              //     builder: (_) {
+              //       return SafeArea(
+              //         child: Container(
+              //           height: AppResponsiveness.height * 0.91,
+              //           child: SingleProductDetailsView(
+              //             productId: "${model!.id}",
+              //           ),
+              //         ),
+              //       );
+              //     });
             },
         child: Container(
           clipBehavior: Clip.hardEdge,

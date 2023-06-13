@@ -9,15 +9,12 @@ import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
 
 class ProductQuestionsView extends StatelessWidget {
-  ProductQuestionsView({Key? key, this.id}) : super(key: key);
-  final String? id;
+  ProductQuestionsView({Key? key}) : super(key: key);
 
   final ProductQuestionsViewModel viewModel = Get.put(ProductQuestionsViewModel());
 
   @override
   Widget build(BuildContext context) {
-    print('Product Questions View');
-    viewModel.productId.value=id.toString();
     return Scaffold(
       appBar: appBar(),
       body: Stack(
@@ -216,15 +213,13 @@ class ProductQuestionsView extends StatelessWidget {
                 children: [
                   CustomText(
                     title: viewModel.productQuestionsList[index].answer!.answer,
-                    maxLines: viewModel
-                        .productQuestionsList[index].answer!.answer!.length,
+                    maxLines: viewModel.productQuestionsList[index].answer!.answer!.length,
                   ),
                   RichText(
                     text: TextSpan(
                       children: [
                         TextSpan(
-                          text: viewModel
-                                  .productModel?.sellerModel?.user?.firstName ??
+                          text: viewModel.productModel.value.sellerModel?.user?.firstName ??
                               'N/A',
                           style: caption.copyWith(
                             color: kLightColor,
