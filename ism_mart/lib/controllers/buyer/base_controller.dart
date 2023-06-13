@@ -265,7 +265,7 @@ class BaseController extends GetxController {
       passedSearchQuery: "",
       isCalledForDeals: true,
     ),
-    const CartView(),
+    CartView(),
     SettingsView(),
   ];
 

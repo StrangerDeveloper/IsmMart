@@ -186,60 +186,60 @@ class ProductView extends GetView<ProductController> {
     // )
   }
 
-  SliverAppBar _sliverAppBar(ProductModel productModel) {
-    return SliverAppBar(
-      backgroundColor: kAppBarColor,
-      automaticallyImplyLeading: true,
-      leadingWidth: 30,
-      floating: true,
-      pinned: true,
-      centerTitle: true,
-      leading: InkWell(
-        onTap: () => Get.back(),
-        child: Icon(
-          Icons.arrow_back_ios_new,
-          size: 18,
-          color: kPrimaryColor,
-        ),
-      ),
-      title: Get.arguments != null &&
-              Get.arguments["calledFor"] != null &&
-              Get.arguments["calledFor"]!.contains("seller")
-          ? CustomText(
-              title: "Product Details",
-              style: appBarTitleSize,
-            )
-          : Column(
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                        flex: 5,
-                        child: CustomSearchBar(
-                          searchText: productModel.name,
-                          calledFromSPV: true,
-                        )),
-                    AppConstant.spaceWidget(width: 10),
-                    CartIcon(
-                      onTap: () {
-                        //called from SingleProductView (SPV)
-                        Get.offNamed(Routes.cartRoute,
-                            arguments: {"calledFromSPV": true},
-                            preventDuplicates: false);
-                      },
-                      iconWidget: Icon(
-                        IconlyLight.buy,
-                        size: 25,
-                        color: kPrimaryColor,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-    );
-  }
+  // SliverAppBar _sliverAppBar(ProductModel productModel) {
+  //   return SliverAppBar(
+  //     backgroundColor: kAppBarColor,
+  //     automaticallyImplyLeading: true,
+  //     leadingWidth: 30,
+  //     floating: true,
+  //     pinned: true,
+  //     centerTitle: true,
+  //     leading: InkWell(
+  //       onTap: () => Get.back(),
+  //       child: Icon(
+  //         Icons.arrow_back_ios_new,
+  //         size: 18,
+  //         color: kPrimaryColor,
+  //       ),
+  //     ),
+  //     title: Get.arguments != null &&
+  //             Get.arguments["calledFor"] != null &&
+  //             Get.arguments["calledFor"]!.contains("seller")
+  //         ? CustomText(
+  //             title: "Product Details",
+  //             style: appBarTitleSize,
+  //           )
+  //         : Column(
+  //             children: [
+  //               Row(
+  //                 crossAxisAlignment: CrossAxisAlignment.center,
+  //                 children: [
+  //                   Expanded(
+  //                       flex: 5,
+  //                       child: CustomSearchBar(
+  //                         searchText: productModel.name,
+  //                         calledFromSPV: true,
+  //                       )),
+  //                   AppConstant.spaceWidget(width: 10),
+  //                   CartIcon(
+  //                     onTap: () {
+  //                       //called from SingleProductView (SPV)
+  //                       Get.offNamed(Routes.cartRoute,
+  //                           arguments: {"calledFromSPV": true},
+  //                           preventDuplicates: false);
+  //                     },
+  //                     iconWidget: Icon(
+  //                       IconlyLight.buy,
+  //                       size: 25,
+  //                       color: kPrimaryColor,
+  //                     ),
+  //                   ),
+  //                 ],
+  //               ),
+  //             ],
+  //           ),
+  //   );
+  // }
 
   _productImages({List<ProductImages>? imagesList}) {
     return Stack(
