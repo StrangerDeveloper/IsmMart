@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:http/http.dart' as http;
@@ -118,7 +117,7 @@ class AuthProvider {
 
   Future<UserResponse> getCurrentUser({String? token}) async {
     var response = await _authRepo.fetchCurrentUser(token: token);
-    debugPrint("UserResponse: ${response}");
+    // debugPrint("UserResponse: ${response}");
     return UserResponse.fromResponse(response);
   }
 

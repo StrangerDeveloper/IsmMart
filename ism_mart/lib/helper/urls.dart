@@ -27,6 +27,9 @@ class Urls {
   //TopVendorsViewModel
   static String getTopVendors = "getTopVendors?limit=";
 
+  //allProducts for searc screen
+  static String allProducts = "products/all";
+
   //ProductQuestionsViewModel
   static String getQuestionByProductId = "product/questions/";
   static String getVendorQuestions = "product/questions/vendorQuestions";
@@ -55,4 +58,9 @@ class Urls {
   //BuyerOrderViewModel
   static String getBuyerOrders = "order/myOrders?limit=10&page=";
   static String getBuyerOrdersStats = "order/userStats";
+
+  //SellerDashBoardViewModel
+  static String getSellerOrdersStats = "order/vendorStats";
+  static String getVendorOrdersForDashboard = "order/vendorOrders?limit=10&page=";
+
 }

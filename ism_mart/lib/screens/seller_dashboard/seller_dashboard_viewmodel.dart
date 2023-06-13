@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ism_mart/helper/api_base_helper.dart';
 import 'package:ism_mart/api_helper/global_variables.dart';
+import 'package:ism_mart/helper/api_base_helper.dart';
 import 'package:ism_mart/helper/urls.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
-
-class BuyerOrderViewModel extends GetxController {
+class SellerDashBoardViewModel extends GetxController {
   ScrollController scrollController = ScrollController();
   int pageNo = 0;
   RxBool showLoader = false.obs;
-  List<OrderModel> ordersList = <OrderModel>[].obs;
-  Rx<OrderStats> statsModel = OrderStats().obs;
+  Rx<VendorStats> vendorStats = VendorStats().obs;
+  List<VendorOrder> ordersList = <VendorOrder>[].obs;
 
   @override
   void onReady() {
@@ -28,11 +27,11 @@ class BuyerOrderViewModel extends GetxController {
     GlobalVariable.showLoader.value = true;
 
     ApiBaseHelper()
-        .getMethod(url: Urls.getBuyerOrdersStats, withAuthorization: true)
+        .getMethod(url: Urls.getSellerOrdersStats, withAuthorization: true)
         .then((parsedJson) {
       GlobalVariable.showLoader.value = false;
       if (parsedJson['success'] == true) {
-        statsModel.value = OrderStats.fromJson(parsedJson['data']);
+        vendorStats.value = VendorStats.fromJson(parsedJson['data']);
       }
     }).catchError((e) {
       print(e);
@@ -51,7 +50,7 @@ class BuyerOrderViewModel extends GetxController {
 
       ApiBaseHelper()
           .getMethod(
-              url: Urls.getBuyerOrders + pageNo.toString(),
+              url: Urls.getVendorOrdersForDashboard + pageNo.toString(),
               withAuthorization: true)
           .then((parsedJson) {
         if (parsedJson['success'] == true && parsedJson['data'] != null) {
@@ -59,14 +58,13 @@ class BuyerOrderViewModel extends GetxController {
           if (data.isEmpty) {
             scrollController.dispose();
           }
-          ordersList.addAll(data.map((e) => OrderModel.fromJson(e)));
+          ordersList.addAll(data.map((e) => VendorOrder.fromJson(e)));
           showLoader.value = false;
         } else {
           AppConstant.displaySnackBar(errorTitle.tr, parsedJson['message']);
         }
       }).catchError((e) {
         print(e);
-        // GlobalVariable.showLoader.value = false;
       });
     }
   }

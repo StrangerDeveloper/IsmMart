@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:http_parser/src/media_type.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/screens/my_products/my_products_viewmodel.dart';
-import '../../api_helper/api_base_helper.dart';
+import '../../helper/api_base_helper.dart';
 import '../../api_helper/global_variables.dart';
 import '../../models/product/product_model.dart';
 import '../../utils/constants.dart';

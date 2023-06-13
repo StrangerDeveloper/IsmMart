@@ -3,14 +3,10 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:ism_mart/controllers/controllers.dart';
+import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/utils/constants.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart';
 import 'package:ism_mart/utils/validator.dart';
-
-import 'package:ism_mart/widgets/custom_button.dart';
-import 'package:ism_mart/widgets/custom_loading.dart';
-import 'package:ism_mart/widgets/custom_text.dart';
-import 'package:ism_mart/widgets/form_input_field_with_icon.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class GeneralSettingsView extends StatelessWidget {

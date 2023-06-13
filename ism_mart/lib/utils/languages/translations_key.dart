@@ -106,7 +106,9 @@ const orderDetail = 'orderDetail';
 ///email_verification
 const cancel = 'cancel',
     emailVerificationLink = 'emailVerificationLink',
-    emailVerification = 'emailVerification';
+    emailVerification = 'emailVerification',
+    verifyEmail = 'verifyEmail',
+    emailVerificationLinkSent = 'emailVerificationLinkSent';
 
 ///DisputeDetailView
 const id = 'id';

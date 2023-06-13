@@ -23,13 +23,6 @@ class StickyLabel extends StatelessWidget {
       child: Text(
         text!.tr,
         style: style??headline3,
-
-
-        /*TextStyle(
-          color: textColor ?? kDarkColor,
-          fontWeight: FontWeight.bold,
-          fontSize: textSize,
-        ),*/
       ),
     );
   }
