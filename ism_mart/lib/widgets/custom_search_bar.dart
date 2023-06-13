@@ -4,7 +4,8 @@ import 'package:ism_mart/controllers/controllers.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
 class CustomSearchBar extends StatelessWidget {
-  const CustomSearchBar({Key? key, this.searchText, this.calledFromSPV = false}) : super(key: key);
+  const CustomSearchBar({Key? key, this.searchText, this.calledFromSPV = false})
+      : super(key: key);
   final String? searchText;
   final bool? calledFromSPV;
 
@@ -12,13 +13,13 @@ class CustomSearchBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if(calledFromSPV!){
+        if (calledFromSPV!) {
           Get.back();
           /*Get.offNamed(Routes.searchRoute,
               arguments: {"searchText": searchText ?? " "},
               preventDuplicates: true);*/
-        }else {
-          baseController.changePage(4);
+        } else {
+          baseController.changePage(2);
 
           /*Get.toNamed(Routes.searchRoute,
             arguments: {"searchText": searchText ?? " "});*/

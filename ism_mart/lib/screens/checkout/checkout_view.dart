@@ -367,6 +367,7 @@ class CheckoutView extends GetView<CheckoutController> {
                   CartModel cartModel = controller.getCartItemsList()[index];
                   return SingleCartItems(
                     index: index,
+                    cartModel: cartModel,
                     calledFromCheckout: true,
                   );
                 },

@@ -6,49 +6,77 @@ import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
-import 'allproducts_view.dart';
-
 class SearchView extends GetView<CustomSearchController> {
-  const SearchView(
-      {Key? key,
-      this.passedSearchQuery,
-      this.isCalledForDeals = false,
-      this.calledForCategory,
-      this.subCategoryID})
-      : super(key: key);
+  const SearchView({
+    Key? key,
+    this.passedSearchQuery = "",
+    this.subCategoryID = 0,
+    this.categoryID = 0,
+    this.isCalledForTypesProd = false,
+    this.isCalledForDeals = false,
+    // this.calledForCategory,
+  }) : super(key: key);
 
   final bool? isCalledForDeals;
   final String? passedSearchQuery;
-  final bool? calledForCategory;
-  final int? subCategoryID;
+  //final bool? calledForCategory;
+  final bool? isCalledForTypesProd;
+  final int? categoryID, subCategoryID;
 
   @override
   Widget build(BuildContext context) {
-    //  final controller = Get.find<SearchController>();
-    // controller.searchTextController.clear();
-    controller.subCategoryID.value = 0;
-    controller.selectedCategory('');
-    String searchQuery = '';
-    if (passedSearchQuery == 'ISMMART Originals') {
-      searchQuery = 'IsmmartOriginal';
-      controller.selectedCategory.value = searchQuery;
-    } else if (passedSearchQuery == 'Popular Products') {
-      searchQuery = 'Latest';
-      controller.selectedCategory.value = searchQuery;
-    } else if (passedSearchQuery == 'Featured Products') {
-      searchQuery = 'Featured';
-      controller.selectedCategory.value = searchQuery;
+    //----- used for calling from----------//
+    // 1. all products (dashboard)
+    // 2. Deals
+    //3. on SearchBar (dashboard)
+    print(
+        "SearchView: $isCalledForDeals--$passedSearchQuery---$isCalledForTypesProd");
+
+    if (isCalledForDeals!) {
+      controller.searchProducts(passedSearchQuery);
     } else {
-      controller.selectedCategory(passedSearchQuery);
+      var filters = {
+        "limit": "25",
+        "page": "1",
+      };
+
+      filters.addIf(isCalledForTypesProd! && passedSearchQuery!.isNotEmpty,
+          "type", baseController.getProductTypeKeys(passedSearchQuery));
+      filters.addIf(categoryID! > 0, "category", "$categoryID");
+      filters.addIf(subCategoryID! > 0, "subCategory", "$subCategoryID");
+
+      print("Filters: ${filters.toString()}");
+
+      controller.searchWithFilters(filters: filters);
     }
 
-    if (calledForCategory == null) {
-      null;
-    } else {
-      calledForCategory!
-          ? controller.searchProductsByCategory(searchQuery)
-          : controller.searchWithSubCategory(subCategoryID);
-    }
+    //  final controller = Get.find<SearchController>();
+    //controller.searchTextController.clear();
+    //controller.subCategoryID.value = 0;
+    //controller.selectedCategory('');
+    // String searchQuery = '';
+
+    // if (passedSearchQuery == 'ISMMART Originals') {
+    //   searchQuery = 'IsmmartOriginal';
+    //   controller.selectedCategory.value = searchQuery;
+    // } else if (passedSearchQuery == 'Popular Products') {
+    //   searchQuery = 'Latest';
+    //   controller.selectedCategory.value = searchQuery;
+    // } else if (passedSearchQuery == 'Featured Products') {
+    //   searchQuery = 'Featured';
+    //   controller.selectedCategory.value = searchQuery;
+    // } else {
+    //   controller.selectedCategory(passedSearchQuery);
+    // }
+
+    // if (calledForCategory == null) {
+    //   null;
+    // } else {
+    //   calledForCategory!
+    //       ? controller.searchProductsByCategory(searchQuery)
+    //       : controller.searchWithSubCategory(subCategoryID);
+    // }
+
     return Hero(
       tag: "productSearchBar",
       child: SafeArea(
@@ -81,10 +109,11 @@ class SearchView extends GetView<CustomSearchController> {
           ? null
           : InkWell(
               onTap: () {
-                controller.productList.clear();
-                controller.searchLimit = 15;
-                //   controller.searchTextController.clear();
-                controller.goBack();
+                Get.back();
+                //controller.productList.clear();
+                // controller.searchLimit = 15;
+                controller.searchTextController.clear();
+                //controller.goBack();
               },
               child: Icon(
                 Icons.arrow_back_ios_new,
@@ -95,21 +124,24 @@ class SearchView extends GetView<CustomSearchController> {
       title: Container(
         height: 36,
         child: TextField(
-          onTap: () => Get.to(AllProductsView()),
           controller: controller.searchTextController,
           //focusNode: controller.focus,
+
           onChanged: (value) {
             if (value != '') {
-              controller.selectedCategory('');
+              //controller.selectedCategory('');
               controller.searchProducts(value);
-              controller.searchLimit = 15;
-              //   controller.suggestionSearch();
-            } else if (controller.searchTextController.text.isEmpty ||
-                controller.filteredlist.length == 0 ||
-                value == "") {
-              controller.filteredlist.clear();
-            } else {
-              controller.filteredlist.clear();
+
+              //controller.searchLimit = 15;
+              //controller.suggestionSearch();
+            }
+            // else if (controller.searchTextController.text.isEmpty ||
+            //     controller.suggestionList.length == 0 ||
+            //     value == "") {
+            //   controller.suggestionList.clear();
+            // }
+            else {
+              controller.suggestionList.clear();
             }
           },
           cursorColor: kPrimaryColor,
@@ -153,19 +185,6 @@ class SearchView extends GetView<CustomSearchController> {
   }
 
   _body() {
-    //print("ProductList: ${controller.productList.length}");
-    /* return GetBuilder<SearchController>(
-        builder: (_) => */ /*controller.isLoading.isTrue
-            ? CustomLoading(isItForWidget: true, color: kPrimaryColor)
-            : */ /*controller.productList.isEmpty
-                ? Center(
-                    child: NoDataFoundWithIcon(
-                      title: langKey.emptyProductSearch.tr,
-                      subTitle: langKey.emptyProductSearchMsg.tr,
-                    ),
-                  )
-                : _buildProductView(controller.productList));*/
-
     return Obx(() => controller.isLoading.isTrue
         ? CustomLoading(isItForWidget: true, color: kPrimaryColor)
         : controller.productList.isEmpty
@@ -181,50 +200,55 @@ class SearchView extends GetView<CustomSearchController> {
               )
             : Stack(
                 children: [
-                  _buildProductView(controller.productList),
-                  // Positioned(
-                  //     top: 1,
-                  //     child: Obx(
-                  //       () => controller.suggestionList.isNotEmpty
-                  //           ? Container(
-                  //               padding: EdgeInsets.only(left: 40),
-                  //               color: Colors.white,
-                  //               height: 400,
-                  //               width: 375,
-                  //               child: ListView.builder(
-                  //                 itemCount: controller.suggestionList.length,
-                  //                 itemBuilder: (context, index) {
-                  //                   return ListTile(
-                  //                     onTap: () {
-                  //                       controller.selectedIndex.value = index;
+                  controller.suggestionList.isNotEmpty
+                      ? Opacity(
+                          opacity: .5,
+                          child: _buildProductView(controller.productList))
+                      : _buildProductView(controller.productList),
+                  Positioned(
+                      top: 1,
+                      child: Obx(
+                        () => controller.suggestionList.isNotEmpty
+                            ? Container(
+                                padding: EdgeInsets.symmetric(horizontal: 40),
+                                color: Colors.white,
+                                height: 400,
+                                width: AppResponsiveness.getWidthPoint90(),
+                                child: ListView.builder(
+                                  itemCount: controller.suggestionList.length,
+                                  itemBuilder: (context, index) {
+                                    return ListTile(
+                                      onTap: () {
+                                        //controller.selectedIndex.value = index;
 
-                  //                       controller.searchTextController.text =
-                  //                           controller.suggestionList[index]
-                  //                               .toString();
+                                        controller.searchTextController.text =
+                                            controller
+                                                .suggestionList[index].name!;
 
-                  //                       controller.selectedCategory('');
-                  //                       controller.searchProducts(controller
-                  //                           .searchTextController.text);
-                  //                       controller.searchLimit = 15;
+                                        // controller.selectedCategory('');
+                                        // controller.searchProducts(controller
+                                        //     .searchTextController.text);
+                                        // controller.searchLimit = 15;
 
-                  //                       controller.suggestionList.clear();
-                  //                       controller.finalSerach(true);
-                  //                     },
-                  //                     tileColor:
-                  //                         controller.selectedIndex.value ==
-                  //                                 index
-                  //                             ? Colors.black12
-                  //                             : kAccentColor,
-                  //                     title: CustomText(
-                  //                       title: controller.suggestionList[index]
-                  //                           .toString(),
-                  //                     ),
-                  //                   );
-                  //                 },
-                  //               ),
-                  //             )
-                  //           : SizedBox(),
-                  //     )),
+                                        // controller.suggestionList.clear();
+                                        // controller.finalSerach(true);
+                                      },
+                                      tileColor:
+                                          controller.selectedIndex.value ==
+                                                  index
+                                              ? Colors.black12
+                                              : kAccentColor,
+                                      title: CustomText(
+                                        title: controller
+                                                .suggestionList[index].name ??
+                                            "",
+                                      ),
+                                    );
+                                  },
+                                ),
+                              )
+                            : SizedBox(),
+                      )),
                 ],
               ));
   }
@@ -382,7 +406,7 @@ class SearchView extends GetView<CustomSearchController> {
                     child: InkWell(
                       onTap: () {
                         controller.selectedCategoryId(categoryModel.id!);
-                        controller.makeSelectedCategory(categoryModel);
+                        controller.setSelectedCategory(categoryModel);
                       },
                       borderRadius: BorderRadius.circular(5),
                       child: Container(
@@ -490,6 +514,7 @@ class SearchView extends GetView<CustomSearchController> {
             child: CustomTextBtn(
               onPressed: () {
                 controller.applyFilter();
+                Get.back();
                 controller.minPriceController.clear();
                 controller.maxPriceController.clear();
               },

@@ -21,102 +21,104 @@ class SettingsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: NestedScrollView(
-            headerSliverBuilder: (context, innerBoxIsScrolled) {
-              return [
-                SliverAppBar(
-                  expandedHeight: 100.0,
-                  floating: false,
-                  pinned: true,
-                  backgroundColor: kAppBarColor,
-                  flexibleSpace: FlexibleSpaceBar(
-                    centerTitle: false,
-                    titlePadding:
-                    const EdgeInsets.symmetric(horizontal: 16),
-                    title: Text(
-                      langKey.settings.tr,
-                      style: appBarTitleSize,
-                    ),
-                  ),
+        headerSliverBuilder: (context, innerBoxIsScrolled) {
+          return [
+            SliverAppBar(
+              expandedHeight: 100.0,
+              floating: false,
+              pinned: true,
+              backgroundColor: kAppBarColor,
+              flexibleSpace: FlexibleSpaceBar(
+                centerTitle: false,
+                titlePadding: const EdgeInsets.symmetric(horizontal: 16),
+                title: Text(
+                  langKey.settings.tr,
+                  style: appBarTitleSize,
                 ),
-              ];
-            },
-            body: ListView(
-              physics: const NeverScrollableScrollPhysics(),
-              children: [
-                _accountSetup(),
-                SizedBox(height: 15),
-                generalSettings(),
-              ],
+              ),
             ),
-          ),
+          ];
+        },
+        body: ListView(
+          physics: const NeverScrollableScrollPhysics(),
+          children: [
+            _accountSetup(),
+            SizedBox(height: 15),
+            generalSettings(),
+          ],
+        ),
+      ),
     );
   }
 
   _accountSetup() {
     return Obx(() => viewModel.userDetails.value?.email == null &&
-        viewModel.userDetails.value?.token == null
-        ?  Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30),
-      child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 5, bottom: 5, top: 20),
-              child: CustomText(
-                title: langKey.account.tr,
-                size: 16,
-              ),
+            viewModel.userDetails.value?.token == null
+        ? Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 5, bottom: 5, top: 20),
+                  child: CustomText(
+                    title: langKey.account.tr,
+                    size: 16,
+                  ),
+                ),
+                _account(),
+              ],
             ),
-            _account(),
-          ],
-        ),
-      ) : Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _userCard(),
-        Padding(
-          padding: const EdgeInsets.only(left: 30, bottom: 5),
-          child: CustomText(
-            title: langKey.myAccount.tr,
-            size: 16,
-          ),
-        ),
-        SizedBox(height: 10),
-        Obx(() => viewModel.userDetails.value?.token == null ? Container(): _accountSettings())
-      ],
-    )
-    );
+          )
+        : Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _userCard(),
+              Padding(
+                padding: const EdgeInsets.only(left: 30, bottom: 5),
+                child: CustomText(
+                  title: langKey.myAccount.tr,
+                  size: 16,
+                ),
+              ),
+              SizedBox(height: 10),
+              Obx(() => viewModel.userDetails.value?.token == null
+                  ? Container()
+                  : _accountSettings())
+            ],
+          ));
   }
 
   _userCard() {
-    return Obx(() => viewModel.userDetails.value?.email == null
+    return Obx(
+      () => viewModel.userDetails.value?.email == null
           ? Container()
           : Padding(
-        padding: const EdgeInsets.only(left: 15, top: 8, bottom: 8),
-        child: ListTile(
-          trailing: viewModel.userDetails.value?.emailVerified == true
-              ? null
-              : InkWell(
-            onTap: () async {
-              await viewModel.emailVerificationCheck();
-            },
-            child: Text(
-              langKey.verifyEmail.tr,
-              style: bodyText1.copyWith(
-                  decoration: TextDecoration.underline),
+              padding: const EdgeInsets.only(left: 15, top: 8, bottom: 8),
+              child: ListTile(
+                trailing: viewModel.userDetails.value?.emailVerified == true
+                    ? null
+                    : InkWell(
+                        onTap: () async {
+                          await viewModel.emailVerificationCheck();
+                        },
+                        child: Text(
+                          langKey.verifyEmail.tr,
+                          style: bodyText1.copyWith(
+                              decoration: TextDecoration.underline),
+                        ),
+                      ),
+                title: CustomText(
+                  title:
+                      "${langKey.welcome.tr} ${viewModel.userDetails.value?.firstName}",
+                  style: headline2,
+                ),
+                subtitle: CustomText(
+                  title: "${viewModel.userDetails.value?.email}",
+                  style: bodyText1,
+                ),
+              ),
             ),
-          ),
-          title: CustomText(
-            title:
-            "${langKey.welcome.tr} ${viewModel.userDetails.value?.firstName}",
-            style: headline2,
-          ),
-          subtitle: CustomText(
-            title: "${viewModel.userDetails.value?.email}",
-            style: bodyText1,
-          ),
-        ),
-      ),
     );
   }
 
@@ -147,9 +149,11 @@ class SettingsView extends StatelessWidget {
     return Column(
       children: [
         singleSettingsItem(
-          onTap: ()async {
+          onTap: () async {
             if (viewModel.checkVendorAccountStatus()!) {
-              if (viewModel.userDetails.value!.role!.toLowerCase().contains("vendor")) {
+              if (viewModel.userDetails.value!.role!
+                  .toLowerCase()
+                  .contains("vendor")) {
                 Get.toNamed(Routes.sellerHomeRoute);
                 // authController.newAcc.value = false;
               } else {
@@ -213,7 +217,8 @@ class SettingsView extends StatelessWidget {
           value: currencyController.currency.value,
           countryCode: currencyController.countryCode.value,
         ),
-        Obx(() => singleSettingsItem(
+        Obx(
+          () => singleSettingsItem(
             onTap: () {
               showLanguageBottomSheet();
             },
@@ -248,7 +253,8 @@ class SettingsView extends StatelessWidget {
         ),
         singleSettingsItem(
           onTap: () {
-            Get.to(() => GeneralSettingsView(title: langKey.returnAndExchange.tr));
+            Get.to(
+                () => GeneralSettingsView(title: langKey.returnAndExchange.tr));
           },
           icon: Icons.assignment_return_rounded,
           color: Colors.lime,
@@ -278,17 +284,19 @@ class SettingsView extends StatelessWidget {
           color: Colors.purple,
           title: langKey.faqs.tr,
         ),
-        Obx(() => viewModel.userDetails.value?.email != null &&
-            viewModel.userDetails.value?.token != null
+        Obx(
+          () => viewModel.userDetails.value?.email != null &&
+                  viewModel.userDetails.value?.token != null
               ? singleSettingsItem(
-            onTap: () async {
-              await LocalStorageHelper.deleteUserData();
-              viewModel.userDetails.value = UserModel();
-            },
-            icon: IconlyLight.logout,
-            color: Colors.red,
-            title: langKey.logout.tr,
-          ) : Container(),
+                  onTap: () async {
+                    await LocalStorageHelper.deleteUserData();
+                    viewModel.userDetails.value = UserModel();
+                  },
+                  icon: IconlyLight.logout,
+                  color: Colors.red,
+                  title: langKey.logout.tr,
+                )
+              : Container(),
         ),
       ],
     );
@@ -346,7 +354,7 @@ class SettingsView extends StatelessWidget {
                       style: bodyText1.copyWith(fontWeight: FontWeight.w600),
                     ),
                     trailing: item.value["description"] ==
-                        languageController.language.value
+                            languageController.language.value
                         ? const Icon(Icons.done)
                         : null,
                   );
@@ -359,80 +367,80 @@ class SettingsView extends StatelessWidget {
     );
   }
 
-  _showCurrencyChangeBS() {
-    AppConstant.showBottomSheet(
-      widget: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 8, right: 8, top: 8),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 5),
-                  child: Text(
-                    langKey.selectCurrency.tr,
-                    style: GoogleFonts.lato(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-                IconButton(
-                  visualDensity: VisualDensity.compact,
-                  onPressed: () {
-                    Get.back();
-                  },
-                  icon: Icon(Icons.close),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Divider(),
-          ),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children:
-                currencyController.currencyLocales.entries.map((item) {
-                  return ListTile(
-                    visualDensity: VisualDensity.compact,
-                    onTap: () {
-                      currencyController.setCurrency(key: item.key);
-                      Get.back();
-                    },
-                    leading: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        countryFlag(
-                            countryCode: item.value['countryCode'],
-                            color: item.value['color']),
-                      ],
-                    ),
-                    title: Text(item.value["description"],
-                        style: bodyText1.copyWith(fontWeight: FontWeight.w600)),
-                    subtitle: CustomText(
-                      title: item.value["longDesc"],
-                      color: kLightColor,
-                      size: 11,
-                    ),
-                    trailing: item.value["description"] ==
-                        currencyController.currency.value
-                        ? const Icon(Icons.done)
-                        : null,
-                  );
-                }).toList(),
-              ),
-            ),
-          )
-        ],
-      ),
-    );
-  }
+  // _showCurrencyChangeBS() {
+  //   AppConstant.showBottomSheet(
+  //     widget: Column(
+  //       children: [
+  //         Padding(
+  //           padding: const EdgeInsets.only(left: 8, right: 8, top: 8),
+  //           child: Row(
+  //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //             children: [
+  //               Padding(
+  //                 padding: const EdgeInsets.only(left: 5),
+  //                 child: Text(
+  //                   langKey.selectCurrency.tr,
+  //                   style: GoogleFonts.lato(
+  //                     color: Colors.black,
+  //                     fontWeight: FontWeight.bold,
+  //                     fontSize: 16,
+  //                   ),
+  //                 ),
+  //               ),
+  //               IconButton(
+  //                 visualDensity: VisualDensity.compact,
+  //                 onPressed: () {
+  //                   Get.back();
+  //                 },
+  //                 icon: Icon(Icons.close),
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //         Padding(
+  //           padding: const EdgeInsets.symmetric(horizontal: 8),
+  //           child: Divider(),
+  //         ),
+  //         Expanded(
+  //           child: SingleChildScrollView(
+  //             child: Column(
+  //               children:
+  //               currencyController.currencyLocales.entries.map((item) {
+  //                 return ListTile(
+  //                   visualDensity: VisualDensity.compact,
+  //                   onTap: () {
+  //                     currencyController.setCurrency(key: item.key);
+  //                     Get.back();
+  //                   },
+  //                   leading: Column(
+  //                     crossAxisAlignment: CrossAxisAlignment.center,
+  //                     mainAxisAlignment: MainAxisAlignment.center,
+  //                     children: [
+  //                       countryFlag(
+  //                           countryCode: item.value['countryCode'],
+  //                           color: item.value['color']),
+  //                     ],
+  //                   ),
+  //                   title: Text(item.value["description"],
+  //                       style: bodyText1.copyWith(fontWeight: FontWeight.w600)),
+  //                   subtitle: CustomText(
+  //                     title: item.value["longDesc"],
+  //                     color: kLightColor,
+  //                     size: 11,
+  //                   ),
+  //                   trailing: item.value["description"] ==
+  //                       currencyController.currency.value
+  //                       ? const Icon(Icons.done)
+  //                       : null,
+  //                 );
+  //               }).toList(),
+  //             ),
+  //           ),
+  //         )
+  //       ],
+  //     ),
+  //   );
+  // }
 
   InkWell singleSettingsItem({
     required onTap,

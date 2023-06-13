@@ -100,7 +100,7 @@ class MyProductView extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           Get.to(
-            SingleProductView(
+            ProductView(
               productId: "${model.id}",
               calledFor: 'seller',
             ),
