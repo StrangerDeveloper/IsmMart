@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
-class Themes {
+class ThemeHelper {
   static ThemeData lightTheme = ThemeData(
       primarySwatch: Colors.green,
       brightness: Brightness.light,

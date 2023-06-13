@@ -53,8 +53,8 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: "ISMMART",
-      theme: Themes.lightTheme,
-      darkTheme: Themes.darkTheme,
+      theme: ThemeHelper.lightTheme,
+      darkTheme: ThemeHelper.darkTheme,
       themeMode: getThemeMode(themeController.theme.value),
       initialRoute: Routes.initRoute,
       getPages: Routes.pages,
