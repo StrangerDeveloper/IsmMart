@@ -103,7 +103,7 @@ class Routes {
     GetPage(
       name: '/product/:id',
       //arguments: ['calledFor'],
-      page: () => const SingleProductView(),
+      page: () => const ProductView(),
       binding: ProductBinding(),
     ),
     GetPage(

@@ -259,7 +259,7 @@ class VendorQuestionView extends StatelessWidget {
                   Navigator.of(context).pop();
                   if (viewModel.productQuestionsList[index].product?.id !=
                       null) {
-                    Get.to(() => SingleProductView(
+                    Get.to(() => ProductView(
                           productId:
                               "${viewModel.productQuestionsList[index].product?.id}",
                           calledFor: 'seller',
@@ -345,7 +345,8 @@ class VendorQuestionView extends StatelessWidget {
   }
 
   updateAnswerBottomSheet(int index) {
-    viewModel.updateAnswerController.text = viewModel.productQuestionsList[index].answer?.answer ?? '';
+    viewModel.updateAnswerController.text =
+        viewModel.productQuestionsList[index].answer?.answer ?? '';
     showModalBottomSheet(
       useSafeArea: true,
       isScrollControlled: true,

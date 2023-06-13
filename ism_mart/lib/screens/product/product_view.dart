@@ -9,10 +9,10 @@ import 'package:ism_mart/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
-import '../screens/single_product_full_image/single_product_full_image_view.dart';
+import '../single_product_full_image/single_product_full_image_view.dart';
 
-class SingleProductView extends GetView<ProductController> {
-  const SingleProductView({this.productId, this.calledFor = 'customer'});
+class ProductView extends GetView<ProductController> {
+  const ProductView({this.productId, this.calledFor = 'customer'});
 
   final productId;
   final String calledFor;
@@ -62,24 +62,26 @@ class SingleProductView extends GetView<ProductController> {
       child: Scaffold(
           appBar: AppBar(
               actions: [
-                Align(
-                  alignment: Alignment.center,
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 12.0),
-                    child: CartIcon(
-                      onTap: () {
-                        //called from SingleProductView (SPV)
-                        Get.offNamed(Routes.cartRoute,
-                            arguments: {"calledFromSPV": true},
-                            preventDuplicates: false);
-                      },
-                      iconWidget: Icon(
-                        IconlyLight.buy,
-                        size: 25,
-                        color: kPrimaryColor,
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 12.0),
+                      child: CartIcon(
+                        onTap: () {
+                          //called from SingleProductView (SPV)
+                          Get.offNamed(Routes.cartRoute,
+                              arguments: {"calledFromSPV": true},
+                              preventDuplicates: false);
+                        },
+                        iconWidget: Icon(
+                          IconlyLight.buy,
+                          size: 25,
+                          color: kPrimaryColor,
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
               ],
               backgroundColor: kAppBarColor,

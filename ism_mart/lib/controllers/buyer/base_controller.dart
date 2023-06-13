@@ -169,22 +169,6 @@ class BaseController extends GetxController {
     await fetchProductsByTypes();
   }
 
-  //var randomSearchText = "".obs;
-
-  // void getRandomTextForSearch(List<CategoryModel> list) {
-  //   int min = 1;
-  //   int max = list.length;
-
-  //   var rnd = new Random();
-  //   int r = min + rnd.nextInt(max - min);
-  //   //debugPrint(">>>rnd: $r >>>${categories.elementAt(r).name!}");
-  //   randomSearchText(list.elementAt(r).name!);
-  // }
-
-  //End Fetch Top Categories
-
-  //TDO: START Fetch Product
-
   Map<String, dynamic> productsMap = Map<String, dynamic>().obs;
   var isProductsLoading = false.obs;
 
@@ -229,7 +213,7 @@ class BaseController extends GetxController {
     });
   }
 
-  _getProductsType() {
+  List _getProductsType() {
     return [
       {"key": "Latest", "value": "Popular Products"},
       {"key": "Featured", "value": "Featured Products"},
@@ -237,6 +221,12 @@ class BaseController extends GetxController {
       {"key": "Best Seller", "value": "Best Seller"},
       //{"key": "Valentines", "value": "Valentines"},
     ];
+  }
+
+  String getProductTypeKeys(value) {
+    return _getProductsType().firstWhere(
+        (element) => element["value"]!.contains(value),
+        orElse: null)['key'];
   }
 
   var categoryProducts = <ProductModel>[].obs;
@@ -271,20 +261,21 @@ class BaseController extends GetxController {
   List<Widget> bottomNavScreens = [
     const DashboardUI(),
     const CategoriesView(),
+    const SearchView(
+      passedSearchQuery: "",
+      isCalledForDeals: true,
+    ),
     const CartView(),
     SettingsView(),
-    SearchView(
-      isCalledForDeals: true,
-    )
   ];
 
   var currentPage = 0.obs;
 
   void changePage(int index) {
-    if (index == 4) {
-      Get.find<CustomSearchController>().searchProducts("");
-      Get.find<CustomSearchController>().searchTextController.clear();
-    }
+    // if (index == 3) {
+    //   Get.find<CustomSearchController>().searchProducts("");
+    //   Get.find<CustomSearchController>().searchTextController.clear();
+    // }
 
     currentPage.value = index;
     bottomNavPageController.jumpToPage(index);

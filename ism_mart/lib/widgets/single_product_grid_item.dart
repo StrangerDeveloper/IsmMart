@@ -30,10 +30,12 @@ class SingleProductItems extends StatelessWidget {
         padding: const EdgeInsets.all(5.0),
         child: GestureDetector(
           onTap: () {
-            Get.to(SingleProductView(productId: "${model.id}", calledFor: 'customer',));
+            Get.to(ProductView(
+              productId: "${model.id}",
+              calledFor: 'customer',
+            ));
           },
-          child:
-          Container(
+          child: Container(
             clipBehavior: Clip.hardEdge,
             margin: const EdgeInsets.only(right: 4, left: 4),
             decoration: BoxDecoration(
@@ -127,16 +129,14 @@ class SingleProductItems extends StatelessWidget {
                     return SafeArea(
                       child: Container(
                         height: AppResponsiveness.height * 0.91,
-                        child: SingleProductView(
+                        child: ProductView(
                           productId: "${model!.id}",
                         ),
                       ),
                     );
                   });
             },
-        child:
-
-        Container(
+        child: Container(
           clipBehavior: Clip.hardEdge,
           margin: const EdgeInsets.symmetric(horizontal: 5),
           //padding: const EdgeInsets.all(1),

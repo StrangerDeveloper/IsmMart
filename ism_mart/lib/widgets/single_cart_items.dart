@@ -23,7 +23,7 @@ class SingleCartItems extends StatelessWidget {
       onTap: () {
         // Get.toNamed('/product/${cartModel!.productId!}',
         //     arguments: {"calledFor": "seller"});
-        Get.to(SingleProductView(
+        Get.to(ProductView(
           productId: "${cartModel!.productId}",
           calledFor: 'seller',
         ));

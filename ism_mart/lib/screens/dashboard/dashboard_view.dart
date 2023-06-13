@@ -28,9 +28,10 @@ class DashboardUI extends GetView<BaseController> {
                 _topCategoriesGrid(controller.categories),
                 //Top Vendors List
                 StickyLabel(text: langKey.topVendors.tr),
-                _topVendorCategoriesList(),
+                _topVendors(),
                 StickyLabel(text: langKey.discountDeals.tr),
                 _displayDiscountProducts(),
+
                 Obx(
                   () => _displayProducts(
                     productMap: controller.productsWithTypesMap,
@@ -90,13 +91,10 @@ class DashboardUI extends GetView<BaseController> {
                     itemCount: list.length,
                     itemBuilder: (context, index) {
                       SliderModel model = list[index];
-                      return InkWell(
-                        onTap: () {}, //Get.toNamed(Routes.registerRoute),
-                        child: CustomNetworkImage(
-                          imageUrl: model.image!,
-                          fit: BoxFit.fill,
-                          width: AppConstant.getSize().width,
-                        ),
+                      return CustomNetworkImage(
+                        imageUrl: model.image!,
+                        fit: BoxFit.fill,
+                        width: AppConstant.getSize().width,
                       );
                     },
                   ),
@@ -166,7 +164,7 @@ class DashboardUI extends GetView<BaseController> {
         DateTime.now().add(const Duration(hours: 17)).millisecondsSinceEpoch;
     return InkWell(
       onTap: () {
-        Get.to(SingleProductView(
+        Get.to(ProductView(
           productId: "${model.id}",
           calledFor: 'customer',
         ));
@@ -321,10 +319,13 @@ class DashboardUI extends GetView<BaseController> {
                 textSize: 20,
                 onTap: () {
                   Get.to(() => SearchView(
-                        passedSearchQuery: '${e.key}',
-                        calledForCategory: true,
-
-                        ///used flag to call method of getProductByTypes
+                        // Passing empty search text if all products.
+                        passedSearchQuery:
+                            calledForCategoryProducts! ? "" : '${e.key}',
+                        //used flag to call method of getProductByTypes
+                        isCalledForTypesProd: true,
+                        // calling for all products key.
+                        isCalledForDeals: calledForCategoryProducts,
                       ));
                 }),
             AppConstant.spaceWidget(height: 10),
@@ -462,7 +463,7 @@ class DashboardUI extends GetView<BaseController> {
     return aspectRatio;
   }*/
 
-  Widget _topVendorCategoriesList() {
+  Widget _topVendors() {
     return Obx(
       () => Padding(
         padding: const EdgeInsets.fromLTRB(10, 8, 10, 5),
