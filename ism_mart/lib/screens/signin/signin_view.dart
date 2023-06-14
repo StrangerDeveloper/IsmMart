@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/global_variables.dart';
 import 'package:ism_mart/helper/no_internet_view.dart';
-import 'package:ism_mart/screens/forgot_password1/forgot_password1_view.dart';
 import 'package:ism_mart/screens/signin/signin_viewmodel.dart';
 import 'package:ism_mart/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';

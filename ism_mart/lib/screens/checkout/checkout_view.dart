@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
-import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/screens/cart/cart_viewmodel.dart';
 import 'package:ism_mart/screens/checkout/checkout_viewmodel.dart';
@@ -32,21 +31,19 @@ class CheckoutView extends StatelessWidget {
                   ///Shipping Address Section
                   StickyLabel(text: langKey.shippingDetails.tr),
                   Obx(() => viewModel.noDefaultAddress.value ? _buildNewAddress()
-                      : _shippingAddressDetails(viewModel.userModel.value)
+                      : _shippingAddressDetails()
                   ),
 
                   ///Shipping Cost Cards
                   StickyLabel(text: langKey.shippingCost.tr),
                   Obx(() => Column(
-                    children: [
-                      _singleShippingCostItem(
-                          title: langKey.standard.tr,
-                          price: 250,
-                          delivery: 7),
-                      _singleShippingCostItem(
-                          title: langKey.free.tr, price: 0, delivery: 14),
-                    ],
-                  ),
+                        children: [
+                          _singleShippingCostItem(
+                              title: langKey.standard.tr, price: 250, delivery: 7),
+                          _singleShippingCostItem(
+                              title: langKey.free.tr, price: 0, delivery: 14),
+                        ],
+                      ),
                   ),
 
                   ///Cart Items
@@ -61,40 +58,8 @@ class CheckoutView extends StatelessWidget {
                   ///Sub-total Card
                   _subTotalDetails(),
 
-                  Column(
-                    children: [
-                      AppConstant.spaceWidget(height: 20),
-                      CustomTextBtn(
-                          width: 280,
-                          height: 50,
-                          title: langKey.confirmOrder.tr,
-                          onPressed: () {
-                            if (cartViewModel.totalCartAmount.value <=
-                                num.parse(currencyController.convertCurrency(
-                                    currentPrice: "1000")!)) {
-                              AppConstant.displaySnackBar(
-                                langKey.errorTitle.tr,
-                                langKey.toProceedWithPurchase.tr,
-                              );
-                              //You cannot use Free Shipping Service under Rs1000
-                              return;
-                            } else if (viewModel.isCardPaymentEnabled.isFalse) {
-                              AppConstant.displaySnackBar(
-                                  langKey.errorTitle.tr,
-                                  langKey.preferredPayment.tr
-                              );
-                              return;
-                            }
-                            // else {
-                            //   controller.makePayment(
-                            //       amount: controller.totalAmount.value
-                            //           .toString());
-                            // }
-                          },
-                        ),
-                      AppConstant.spaceWidget(height: 20),
-                    ],
-                  ),
+                  ///Confirm Order Button
+                  _confirmOrderButton(),
                 ],
               ),
             ),
@@ -121,7 +86,75 @@ class CheckoutView extends StatelessWidget {
     );
   }
 
-  _singleShippingCostItem({title, price, delivery}) {
+  Padding _buildNewAddress() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            NoDataFound(
+              text: langKey.noDefaultAddressFound.tr,
+              fontSize: 13,
+            ),
+            AppConstant.spaceWidget(height: 10),
+            CustomTextBtn(
+              width: 150,
+              height: 40,
+              onPressed: () => Get.toNamed(Routes.changeAddressRoute),
+              title: langKey.addNewAddress.tr,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Padding _shippingAddressDetails() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: CustomCard(
+        color: kWhiteColor,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ListTile(
+            title: CustomText(
+                title: viewModel.userModel.value.name!, size: 16, weight: FontWeight.bold),
+            subtitle: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CustomText(
+                    title: viewModel.userModel.value.phone ?? "",
+                    style: bodyText2.copyWith(color: kDarkColor)),
+                CustomText(
+                    style: bodyText2.copyWith(color: kDarkColor),
+                    title: "${viewModel.userModel.value.address!}, "
+                        "${viewModel.userModel.value.zipCode!}, "
+                        "${viewModel.userModel.value.name!},"
+                        " ${viewModel.userModel.value.name!}"),
+              ],
+            ),
+            isThreeLine: true,
+            dense: false,
+            trailing: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                // OutlinedButton(onPressed: () => showAddressesDialog(), child: CustomText(title: "Change",),)
+                _tileActionBtn(
+                    onTap: () => Get.toNamed(Routes.changeAddressRoute),
+                    title: langKey.changeBtn.tr)
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Padding _singleShippingCostItem({title, price, delivery}) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
       child: Column(
@@ -150,58 +183,13 @@ class CheckoutView extends StatelessWidget {
           ),
           if (price == 0)
             CustomText(
-                title:
-                    "${langKey.freeShipping.tr} ${viewModel.convertStaticPrice(price: 1000)}")
+                title: "${langKey.freeShipping.tr} ${viewModel.convertStaticPrice(price: 1000)}")
         ],
       ),
     );
   }
 
-  Padding _shippingAddressDetails(UserModel? userModel) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: CustomCard(
-        color: kWhiteColor,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: ListTile(
-            title: CustomText(
-                title: userModel!.name!, size: 16, weight: FontWeight.bold),
-            subtitle: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CustomText(
-                    title: userModel.phone ?? "",
-                    style: bodyText2.copyWith(color: kDarkColor)),
-                CustomText(
-                    style: bodyText2.copyWith(color: kDarkColor),
-                    title: "${userModel.address!}, "
-                        "${userModel.zipCode!}, "
-                        "${userModel.city!.name!},"
-                        " ${userModel.country!.name!}"),
-              ],
-            ),
-            isThreeLine: true,
-            dense: false,
-            trailing: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                // OutlinedButton(onPressed: () => showAddressesDialog(), child: CustomText(title: "Change",),)
-                _tileActionBtn(
-                    onTap: () => Get.toNamed(Routes.changeAddressRoute),
-                    title: langKey.changeBtn.tr)
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  _tileActionBtn({onTap, title, txtColor}) {
+  InkWell _tileActionBtn({onTap, title, txtColor}) {
     return InkWell(
       onTap: onTap,
       child: CustomText(
@@ -211,32 +199,6 @@ class CheckoutView extends StatelessWidget {
       ),
     );
   }
-
-  Padding _buildNewAddress() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            NoDataFound(
-              text: langKey.noDefaultAddressFound.tr,
-              fontSize: 13,
-            ),
-            AppConstant.spaceWidget(height: 10),
-            CustomTextBtn(
-              width: 150,
-              height: 40,
-              onPressed: () => Get.toNamed(Routes.changeAddressRoute),
-              title: langKey.addNewAddress.tr,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  ///TOO: Payments Details
 
   _buildPaymentDetails() {
     return Obx(
@@ -301,7 +263,7 @@ class CheckoutView extends StatelessWidget {
     );
   }
 
-  _singlePaymentOptionItem({title, value, icon, isEnabled}) {
+  Padding _singlePaymentOptionItem({title, value, icon, isEnabled}) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
       child: Column(
@@ -334,8 +296,6 @@ class CheckoutView extends StatelessWidget {
       ),
     );
   }
-
-  ///TOO: Order Summary
 
   Padding _buildCartItemSection() {
     return Padding(
@@ -490,7 +450,7 @@ class CheckoutView extends StatelessWidget {
     );
   }
 
-  couponTextField(){
+  TextField couponTextField(){
     return TextField(
       controller: viewModel.couponCodeController,
       cursorColor: kPrimaryColor,
@@ -530,6 +490,40 @@ class CheckoutView extends StatelessWidget {
           fontWeight: FontWeight.w600,
           fontSize: 13.0,
         ),
+      ),
+    );
+  }
+
+  Padding _confirmOrderButton() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 15.0),
+      child: CustomTextBtn(
+        width: 280,
+        height: 50,
+        title: langKey.confirmOrder.tr,
+        onPressed: () {
+          if (cartViewModel.totalCartAmount.value <=
+              num.parse(currencyController.convertCurrency(
+                  currentPrice: "1000")!)) {
+            AppConstant.displaySnackBar(
+              langKey.errorTitle.tr,
+              langKey.toProceedWithPurchase.tr,
+            );
+            //You cannot use Free Shipping Service under Rs1000
+            return;
+          } else if (viewModel.isCardPaymentEnabled.isFalse) {
+            AppConstant.displaySnackBar(
+                langKey.errorTitle.tr,
+                langKey.preferredPayment.tr
+            );
+            return;
+          }
+          // else {
+          //   controller.makePayment(
+          //       amount: controller.totalAmount.value
+          //           .toString());
+          // }
+        },
       ),
     );
   }

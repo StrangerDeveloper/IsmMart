@@ -121,7 +121,7 @@ class ApiBaseHelper {
     bool withBearer = false,
     bool withAuthorization = false,
   }) async {
-    Map<String, String> header = {'Content-Type': 'application/json'};
+    Map<String, String> header = {'Content-Type': 'application/json', 'Cookie': 'XSRF-token=$token'};
 
     if (withAuthorization) {
       header['Authorization'] = withBearer ? 'Bearer $token' : token;
