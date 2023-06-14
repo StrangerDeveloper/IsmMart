@@ -10,25 +10,26 @@ class CustomSearchController extends GetxController {
 
   CustomSearchController(this._apiProvider);
 
-  var searchTextController = TextEditingController();
+  TextEditingController minPriceController = TextEditingController();
+  TextEditingController maxPriceController = TextEditingController();
+  ScrollController scrollController = ScrollController();
+ 
+ int searchLimit = 15;
+ int page = 1;
+  
 
-  var minPriceController = TextEditingController();
-  var maxPriceController = TextEditingController();
+  var productList = <ProductModel>[].obs;
 
   var selectedCategoryId = 0.obs;
-
-  RxString selectedCategory = ''.obs;
+  var selectedCategory = ''.obs;
+  var subCategoryID = 0.obs;
   var isLoadingMore = false.obs;
-  ScrollController scrollController = ScrollController();
-
-  RxInt subCategoryID = 0.obs;
   var _sortBy = ''.obs;
-
   String? get sortBy => _sortBy.value;
 
   setSortBy(String value) {
     _sortBy.value = value;
-    searchProducts(searchTextController.text);
+    //searchProducts(searchTextController.text);
   }
 
   @override
@@ -36,37 +37,16 @@ class CustomSearchController extends GetxController {
     // TOO: implement onReady
     super.onReady();
 
-    //searchTextController.addListener(() {
-    //  search(searchTextController.text);
-    // });
-
     scrollController.addListener(() {
       if (stopLoadMore.isFalse) {
-        loadMoreSearchedProducts(searchTextController.text);
+        loadMoreSearchedProducts();
       }
     });
+
   }
 
-  var isLoading = false.obs;
-  var productList = <ProductModel>[].obs;
-  var suggestionList = <ProductModel>[].obs;
 
-  int searchLimit = 15;
-  int page = 1;
-  searchProducts(String? query) async {
-    isLoading(true);
-    await _apiProvider
-        .search(text: query, page: page, limit: searchLimit, sortBy: sortBy)
-        .then((response) {
-      isLoading(false);
-      suggestionList.clear();
-      suggestionList.addAll(response.products.productRows!);
-      //productList.clear();
-      //productList.addAll(response.products.productRows!);
-    }).catchError((error) {
-      isLoading(false);
-    });
-  }
+
 
   void loadMoreSearchedProducts(String? searchQuery) async {
     if (scrollController.hasClients &&
@@ -181,15 +161,6 @@ class CustomSearchController extends GetxController {
 
   //   searchWithFilters(filters: );
   // }
-
-  goBack() {
-    productList.clear();
-    searchLimit = 15;
-    selectedCategory('');
-    subCategoryID.value = 0;
-    searchTextController.clear();
-    Get.back();
-  }
 
   clearFilters() async {
     minPriceController.clear();
