@@ -29,10 +29,11 @@ class SearchDetailsView extends GetView<CustomSearchController> {
     print("SearchView: $isCalledForDeals--$searchQuery---$productTypeKey");
 
     if (isCalledForDeals!) {
-      String? query = searchQuery!.isEmpty ? " " : searchQuery!;
+      //String? query = searchQuery!.isEmpty ? " " : searchQuery!;
       //controller.filters.addIf(searchQuery!.isNotEmpty, "text", searchQuery!);
-      controller.addFilters("text", query);
+      controller.addFilters("type", "Discounts");
     } else {
+      controller.addFilters("text", searchQuery);
       controller.addFilters(
           "type", baseController.getProductTypeKeys(productTypeKey));
       controller.addFilters("category", categoryID);
@@ -110,7 +111,7 @@ class SearchDetailsView extends GetView<CustomSearchController> {
                   color: kPrimaryColor,
                 ),
               ),
-        title: CustomSearchBar(searchText: "")
+        title: CustomSearchBar(searchText: searchQuery)
 
         //  Container(
         //   height: 36,
