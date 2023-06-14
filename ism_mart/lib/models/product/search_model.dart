@@ -10,7 +10,6 @@ class SearchProductResponse {
   List<SellerModel> stores;
 
   factory SearchProductResponse.fromJson(Map<String, dynamic> json) {
-
     return SearchProductResponse(
       products: Product.fromJson(json["products"]),
       stores: List<SellerModel>.from(

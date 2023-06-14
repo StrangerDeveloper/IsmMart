@@ -9,18 +9,15 @@ import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 class SearchDetailsView extends GetView<CustomSearchController> {
   const SearchDetailsView({
     Key? key,
-    this.passedSearchQuery = "",
+    this.searchQuery = "",
+    this.productTypeKey = "",
     this.subCategoryID = 0,
     this.categoryID = 0,
-    this.isCalledForTypesProd = false,
     this.isCalledForDeals = false,
-    // this.calledForCategory,
   }) : super(key: key);
 
   final bool? isCalledForDeals;
-  final String? passedSearchQuery;
-  //final bool? calledForCategory;
-  final bool? isCalledForTypesProd;
+  final String? searchQuery, productTypeKey;
   final int? categoryID, subCategoryID;
 
   @override
@@ -29,28 +26,26 @@ class SearchDetailsView extends GetView<CustomSearchController> {
     // 1. all products (dashboard)
     // 2. Deals
     //3. on SearchBar (dashboard)
-    print(
-        "SearchView: $isCalledForDeals--$passedSearchQuery---$isCalledForTypesProd");
-    var filters = {
-      "limit": "25",
-      "page": "1",
-    };
+    print("SearchView: $isCalledForDeals--$searchQuery---$productTypeKey");
+
     if (isCalledForDeals!) {
-      filters.addIf(passedSearchQuery!.isNotEmpty, "text", passedSearchQuery!);
-
-      //controller.searchProducts(passedSearchQuery);
+      //controller.filters.addIf(searchQuery!.isNotEmpty, "text", searchQuery!);
+      controller.addFilters("text", searchQuery!);
     } else {
-      filters.addIf(isCalledForTypesProd! && passedSearchQuery!.isNotEmpty,
-          "type", baseController.getProductTypeKeys(passedSearchQuery));
-      filters.addIf(categoryID! > 0, "category", "$categoryID");
-      filters.addIf(subCategoryID! > 0, "subCategory", "$subCategoryID");
+      controller.addFilters(
+          "type", baseController.getProductTypeKeys(productTypeKey));
+      controller.addFilters("category", categoryID);
+      controller.addFilters("subCategory", subCategoryID);
+      // controller.filters.addIf(productTypeKey!.isNotEmpty, "type",
+      //     baseController.getProductTypeKeys(productTypeKey));
+      //controller.filters.addIf(categoryID! > 0, "category", "$categoryID");
+      // controller.filters
+      //     .addIf(subCategoryID! > 0, "subCategory", "$subCategoryID");
 
-      print("Filters: ${filters.toString()}");
+      print("Filters: ${controller.filters.toString()}");
 
-      controller.searchWithFilters(filters: filters);
+      //controller.searchWithFilters(filters: filters);
     }
-
-    controller.searchWithFilters(filters: filters);
 
     //  final controller = Get.find<SearchController>();
     //controller.searchTextController.clear();
@@ -95,70 +90,72 @@ class SearchDetailsView extends GetView<CustomSearchController> {
 
   _searchAppBar() {
     return AppBar(
-      backgroundColor: kAppBarColor,
-      elevation: 0,
-      automaticallyImplyLeading: false,
-      leadingWidth: 40,
-      leading: isCalledForDeals!
-          ? null
-          : InkWell(
-              onTap: () {
-                Get.back();
-                //controller.productList.clear();
-                // controller.searchLimit = 15;
-                //controller.searchTextController.clear();
-                //controller.goBack();
-              },
-              child: Icon(
-                Icons.arrow_back_ios_new,
-                size: 18,
-                color: kPrimaryColor,
+        backgroundColor: kAppBarColor,
+        elevation: 0,
+        automaticallyImplyLeading: false,
+        leadingWidth: 40,
+        leading: isCalledForDeals!
+            ? null
+            : InkWell(
+                onTap: () {
+                  Get.back();
+                  //controller.productList.clear();
+                  // controller.searchLimit = 15;
+                  //controller.searchTextController.clear();
+                  //controller.goBack();
+                },
+                child: Icon(
+                  Icons.arrow_back_ios_new,
+                  size: 18,
+                  color: kPrimaryColor,
+                ),
               ),
-            ),
-      title: Container(
-        height: 36,
-        child: TextField(
-          //controller: controller.searchTextController,
-          //focusNode: controller.focus,
-          enabled: false,
-          cursorColor: kPrimaryColor,
-          autofocus: false,
-          maxLines: 1,
-          style: TextStyle(
-            color: kLightColor,
-            fontWeight: FontWeight.w600,
-            fontSize: 15.0,
-          ),
-          textAlignVertical: TextAlignVertical.center,
-          decoration: InputDecoration(
-            filled: true,
-            prefixIcon: Icon(Icons.search, color: kPrimaryColor),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: kLightGreyColor,
-                width: 0.5,
-              ), //BorderSide.none,
-              borderRadius: BorderRadius.all(Radius.circular(8)),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: kLightGreyColor,
-                width: 0.5,
-              ), //BorderSide.none,
-              borderRadius: BorderRadius.all(Radius.circular(8)),
-            ),
-            fillColor: kWhiteColor,
-            contentPadding: EdgeInsets.zero,
-            hintText: langKey.searchIn.tr,
-            hintStyle: TextStyle(
-              color: kLightColor,
-              fontWeight: FontWeight.w600,
-              fontSize: 13.0,
-            ),
-          ),
-        ),
-      ),
-    );
+        title: CustomSearchBar(searchText: "")
+
+        //  Container(
+        //   height: 36,
+        //   child: TextField(
+        //     //controller: controller.searchTextController,
+        //     //focusNode: controller.focus,
+        //     enabled: false,
+        //     cursorColor: kPrimaryColor,
+        //     autofocus: false,
+        //     maxLines: 1,
+        //     style: TextStyle(
+        //       color: kLightColor,
+        //       fontWeight: FontWeight.w600,
+        //       fontSize: 15.0,
+        //     ),
+        //     textAlignVertical: TextAlignVertical.center,
+        //     decoration: InputDecoration(
+        //       filled: true,
+        //       prefixIcon: Icon(Icons.search, color: kPrimaryColor),
+        //       enabledBorder: OutlineInputBorder(
+        //         borderSide: BorderSide(
+        //           color: kLightGreyColor,
+        //           width: 0.5,
+        //         ), //BorderSide.none,
+        //         borderRadius: BorderRadius.all(Radius.circular(8)),
+        //       ),
+        //       focusedBorder: OutlineInputBorder(
+        //         borderSide: BorderSide(
+        //           color: kLightGreyColor,
+        //           width: 0.5,
+        //         ), //BorderSide.none,
+        //         borderRadius: BorderRadius.all(Radius.circular(8)),
+        //       ),
+        //       fillColor: kWhiteColor,
+        //       contentPadding: EdgeInsets.zero,
+        //       hintText: langKey.searchIn.tr,
+        //       hintStyle: TextStyle(
+        //         color: kLightColor,
+        //         fontWeight: FontWeight.w600,
+        //         fontSize: 13.0,
+        //       ),
+        //     ),
+        //),
+        //),
+        );
   }
 
   _body() {

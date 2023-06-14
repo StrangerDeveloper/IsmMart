@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:ism_mart/api_helper/api_service.dart';
-import 'package:ism_mart/models/exports_model.dart';
 
 class SellersApiRepo {
   final ApiService _apiService;
@@ -18,7 +16,4 @@ class SellersApiRepo {
         await _apiService.get(endpoint: "categoryFields", query: params);
     return response.body != null ? response.body['data'] : [];
   }
-
-
-
 }

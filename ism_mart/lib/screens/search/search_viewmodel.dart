@@ -11,9 +11,10 @@ class SearchViewModel extends GetxController {
 
   var searchTextController = TextEditingController();
   var suggestionList = <ProductModel>[].obs;
-  int searchLimit = 15;
+  int searchLimit = 25;
   int page = 1;
 
+  var isSearchingStarted = false.obs;
   @override
   void onReady() {
     super.onReady();
@@ -28,9 +29,15 @@ class SearchViewModel extends GetxController {
       suggestionList.clear();
       suggestionList.addAll(response.products.productRows!);
     }).catchError((error) {
+      print("SearchProduct: $error");
       GlobalVariable.showLoader(false);
     });
   }
 
-  
+  @override
+  void onClose() {
+    searchTextController.clear();
+    suggestionList.clear();
+    super.onClose();
+  }
 }

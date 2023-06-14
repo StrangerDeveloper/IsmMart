@@ -27,8 +27,8 @@ import '../search/search_view.dart';
 
 import '../../search_details/search_details_view.dart';
 
-class DashboardUI extends GetView<BaseController> {
-  const DashboardUI({Key? key}) : super(key: key);
+class DashboardView extends GetView<BaseController> {
+  const DashboardView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -336,10 +336,9 @@ class DashboardUI extends GetView<BaseController> {
                 onTap: () {
                   Get.to(() => SearchDetailsView(
                         // Passing empty search text if all products.
-                        passedSearchQuery:
-                            calledForCategoryProducts! ? "" : '${e.key}',
+                        searchQuery: "",
                         //used flag to call method of getProductByTypes
-                        isCalledForTypesProd: true,
+                        productTypeKey: "${e.key}",
                         // calling for all products key.
                         isCalledForDeals: calledForCategoryProducts,
                       ));

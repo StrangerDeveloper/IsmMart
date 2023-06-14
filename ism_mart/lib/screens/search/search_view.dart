@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ism_mart/api_helper/global_variables.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/screens/search/search_viewmodel.dart';
@@ -22,7 +23,7 @@ class SearchView extends GetView<SearchViewModel> {
             () => Stack(
               children: [
                 _body(),
-                controller.suggestionList.isNotEmpty
+                controller.isSearchingStarted.isTrue
                     ? Positioned(
                         top: 1,
                         child: _suggestionList(controller.suggestionList),
@@ -43,7 +44,7 @@ class SearchView extends GetView<SearchViewModel> {
       backgroundColor: kAppBarColor,
       elevation: 0,
       automaticallyImplyLeading: false,
-      leadingWidth: 40,
+      leadingWidth: 30,
       leading: InkWell(
         onTap: () {
           controller.suggestionList.clear();
@@ -58,11 +59,13 @@ class SearchView extends GetView<SearchViewModel> {
       title: Container(
         height: 36,
         child: TextField(
-          controller: controller.searchTextController,
+          //controller: controller.searchTextController,
           onChanged: (value) {
-            if (value.isNotEmpty)
+            controller.isSearchingStarted(false);
+            if (value.isNotEmpty) {
+              controller.isSearchingStarted(true);
               controller.searchProducts(value);
-            else
+            } else
               controller.suggestionList.clear();
           },
           cursorColor: kPrimaryColor,
@@ -116,33 +119,49 @@ class SearchView extends GetView<SearchViewModel> {
   }
 
   _suggestionList(List<ProductModel> list) {
+    print("list: ${list.length}");
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 40),
-      child: CustomGreyBorderContainer(
-        borderColor: kTransparent,
-        hasShadow: false,
-        height: AppResponsiveness.getHeightByPoints(points: 0.3),
-        width: AppResponsiveness.getWidthByPoints(points: 0.95),
-        child: UnconstrainedBox(
-          child: ListView.builder(
-              shrinkWrap: true,
-              physics: const BouncingScrollPhysics(),
-              itemCount: list.length,
-              itemBuilder: (_, index) {
-                ProductModel model = list[index];
-                return ListTile(
-                  onTap: () => Get.off(SearchDetailsView(
-                    isCalledForDeals: true,
-                    passedSearchQuery: model.name ?? "",
-                  )),
-                  title: CustomText(
-                    title: model.name ?? "",
-                  ),
-                  // tileColor: controller.selectedIndex.value == index
-                  //     ? Colors.black12
-                  //     : kAccentColor,
-                );
-              }),
+      padding: EdgeInsets.only(left: 50),
+      child: SizedBox(
+        height: 300,
+        width: AppResponsiveness.getWidthByPoints(points: 0.82),
+        child: CustomGreyBorderContainer(
+          borderColor: kTransparent,
+          child: GlobalVariable.showLoader.isTrue
+              ? CustomLoading(
+                  isItForWidget: true,
+                  color: kPrimaryColor,
+                )
+              : ListView.builder(
+                  shrinkWrap: true,
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: list.length,
+                  itemBuilder: (_, index) {
+                    ProductModel model = list[index];
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        InkWell(
+                          onTap: () => Get.off(
+                            () => SearchDetailsView(
+                              searchQuery: model.name ?? "",
+                              isCalledForDeals: true,
+                            ),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: CustomText(
+                              title: model.name ?? "",
+                            ),
+                          ),
+                        ),
+                        Divider(
+                          color: Colors.grey.shade600,
+                          thickness: 0.1,
+                        ),
+                      ],
+                    );
+                  }),
         ),
       ),
     );

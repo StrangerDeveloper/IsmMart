@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ism_mart/controllers/controllers.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
 class CustomSearchBar extends StatelessWidget {
@@ -42,7 +41,7 @@ class CustomSearchBar extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(left: 4.0),
                 child: Text(
-                  searchIn.tr,
+                  searchText != "" ? searchText! : searchIn.tr,
                   style: TextStyle(
                     color: kLightColor,
                     fontWeight: FontWeight.w600,
