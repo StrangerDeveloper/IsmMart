@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/global_variables.dart';
-import 'package:ism_mart/exports/export_account.dart';
 import 'package:ism_mart/screens/signup/signup_viewmodel.dart';
 import 'package:ism_mart/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
