@@ -140,7 +140,7 @@ class SearchView extends GetView<SearchViewModel> {
                           onTap: () => Get.off(
                             () => SearchDetailsView(
                               searchQuery: model.name ?? "",
-                              isCalledForDeals: true,
+                              isCalledForDeals: false,
                             ),
                           ),
                           child: Padding(

@@ -28,6 +28,8 @@ class CustomSearchController extends GetxController {
 
   setSortBy(String value) {
     _sortBy.value = value;
+    // filters.addIf(value.isNotEmpty, "sort", value);
+    addFilters("sort", value);
     //searchProducts(searchTextController.text);
   }
 
@@ -42,11 +44,10 @@ class CustomSearchController extends GetxController {
       loadMoreFilteredProducts();
     });
 
-    ever(filters, handleFilters);
+    // ever(filters, handleFilters);
   }
 
   handleFilters(Map<String, String> filters) {
-    print("Called");
     filters.addIf(page > 0, "page", "$page");
     filters.addIf(searchLimit > 0, "limit", "$searchLimit");
 
@@ -78,11 +79,14 @@ class CustomSearchController extends GetxController {
   }
 
   addFilters(key, value) {
+    //clearFilters();
+    //filters.clear();
     if (value is String) {
       filters.addIf(value.isNotEmpty, key, value);
     } else if (value is int) {
       filters.addIf(value > 0, key, "$value");
     }
+    handleFilters(filters);
   }
 
   deleteFilter(key) {
@@ -120,7 +124,7 @@ class CustomSearchController extends GetxController {
     //int page = 1;
     //int limit = 10;
 
-    //await searchWithFilters(filters: filters);
+    // await searchWithFilters(filters: filters);
   }
 
   var isLoading = false.obs;
@@ -139,17 +143,21 @@ class CustomSearchController extends GetxController {
   }
 
   loadMoreFilteredProducts() async {
-    page++;
-    searchLimit += 15;
-    isLoadingMore(true);
-    await _apiProvider.filterSearch(appliedFilters: filters).then((products) {
-      //productList.clear();
-      productList.addAll(products);
-      isLoadingMore(false);
-    }).catchError((onError) {
-      isLoadingMore(false);
-      debugPrint("loadMoreFilterProduct: $onError");
-    });
+    if (scrollController.hasClients &&
+        isLoadingMore.isFalse &&
+        scrollController.position.maxScrollExtent == scrollController.offset) {
+      page++;
+      searchLimit += 15;
+      isLoadingMore(true);
+      await _apiProvider.filterSearch(appliedFilters: filters).then((products) {
+        //productList.clear();
+        productList.addAll(products);
+        isLoadingMore(false);
+      }).catchError((onError) {
+        isLoadingMore(false);
+        debugPrint("loadMoreFilterProduct: $onError");
+      });
+    }
   }
 
   clearFilters() async {
@@ -171,6 +179,7 @@ class CustomSearchController extends GetxController {
   @override
   void onClose() {
     super.onClose();
+    clearFilters();
     //searchTextController.removeListener(() {});
     //scrollController.removeListener(() {});
     //focus.removeListener(_onFocusChange);
