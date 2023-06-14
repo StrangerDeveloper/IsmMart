@@ -37,7 +37,7 @@ class MyProductView extends StatelessWidget {
         padding: const EdgeInsets.only(top: 10, right: 20, left: 20, bottom: 5),
         child: CustomTextBtn(
           onPressed: () {
-            Get.to(() => AddProductsView());
+            Get.to(() => AddProductView());
           },
           title: langKey.addProduct.tr,
         ),
