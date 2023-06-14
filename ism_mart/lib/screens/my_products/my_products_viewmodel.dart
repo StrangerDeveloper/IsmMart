@@ -34,8 +34,7 @@ class MyProductsViewModel extends GetxController {
         var data = parsedJson['data']['products'] as List;
         myProductsList.addAll(data.map((e) => VendorProduct.fromJson(e)));
       } else {
-        GlobalVariable.internetErr(true);
-        // AppConstant.displaySnackBar(errorTitle.tr, parsedJson['message']);
+        AppConstant.displaySnackBar(errorTitle.tr, parsedJson['message']);
       }
     }).catchError((e) {
       GlobalVariable.internetErr(true);
@@ -60,12 +59,10 @@ class MyProductsViewModel extends GetxController {
           parsedJson['message'],
         );
       } else {
-        GlobalVariable.internetErr(true);
-
-        // AppConstant.displaySnackBar(
-        //   langKey.errorTitle.tr,
-        //   langKey.recordDoNotExist.tr,
-        // );
+        AppConstant.displaySnackBar(
+          langKey.errorTitle.tr,
+          langKey.recordDoNotExist.tr,
+        );
       }
     }).catchError((e) {
       GlobalVariable.internetErr(true);

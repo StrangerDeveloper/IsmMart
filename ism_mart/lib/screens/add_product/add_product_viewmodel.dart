@@ -250,10 +250,10 @@ class AddProductViewModel extends GetxController {
         debugPrint('Error: ${value.toString()}');
         GlobalVariable.internetErr(false);
 
-        // AppConstant.displaySnackBar(
-        //   langKey.errorTitle.tr,
-        //   "${value['message'] != null ? value['message'] : langKey.someThingWentWrong.tr}",
-        // );
+        AppConstant.displaySnackBar(
+          langKey.errorTitle.tr,
+          "${value['message'] != null ? value['message'] : langKey.someThingWentWrong.tr}",
+        );
       }
     }).catchError((e) {
       GlobalVariable.internetErr(true);
