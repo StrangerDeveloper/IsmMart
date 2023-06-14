@@ -13,6 +13,7 @@ import 'package:ism_mart/screens/product_questions/product_questions_view.dart';
 import 'package:ism_mart/screens/update_vendor/update_vendor_view.dart';
 import 'package:ism_mart/screens/vendor_detail/vendor_detail_view.dart';
 import 'package:ism_mart/screens/vendor_question/vendor_question_view.dart';
+import 'package:ism_mart/search_details/search_details_view.dart';
 import '../screens/contact_us/contact_us_view.dart';
 import '../screens/forgot_password2/forgot_password2_view.dart';
 import '../screens/seller_store_detail/seller_store_detail_view.dart';
@@ -40,7 +41,8 @@ class Routes {
   static const generalSetting = "/generalSetting";
   static const myProduct = "/myProduct";
   static const productQuestions = "/productQuestions";
-  static const searchRoute = "/search";
+  static const searchRoute = "/searchView";
+  static const searchDetails = "/searchDetailsView";
   static const sellerHomeRoute = "/sellerDash";
   static const settings = "/settings";
   static const loginRoute = "/signIn";
@@ -154,9 +156,16 @@ class Routes {
       //binding: SearchBindings(),
       bindings: [
         SearchBindings(),
-        ProductBinding(),
       ],
     ),
+
+    GetPage(
+      name: searchDetails,
+      page: () => SearchDetailsView(),
+      //binding: SearchBindings(),
+      bindings: [SearchBindings(), ProductBinding()],
+    ),
+
     GetPage(
       name: sellerHomeRoute,
       page: () => const SellerHomeView(),
@@ -204,7 +213,6 @@ class Routes {
     GetPage(
       name: singleProductDetails,
       page: () => SingleProductDetailsView(),
-
     ),
     GetPage(
       name: '/orderDetails/:id',

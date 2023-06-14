@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/global_variables.dart';
+import 'package:ism_mart/controllers/buyer/search/custom_search_controller.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/screens/search/search_viewmodel.dart';
@@ -137,12 +138,13 @@ class SearchView extends GetView<SearchViewModel> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         InkWell(
-                          onTap: () => Get.off(
-                            () => SearchDetailsView(
-                              searchQuery: model.name ?? "",
-                              isCalledForDeals: false,
-                            ),
-                          ),
+                          onTap: () {
+                            Get.find<CustomSearchController>().filters.clear();
+                            Get.off(
+                              () => SearchDetailsView(
+                                  searchQuery: model.name ?? ""),
+                            );
+                          },
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: CustomText(

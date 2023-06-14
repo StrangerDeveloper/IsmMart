@@ -174,10 +174,9 @@ class DashboardView extends GetView<BaseController> {
         DateTime.now().add(const Duration(hours: 17)).millisecondsSinceEpoch;
     return InkWell(
       onTap: () {
-        Get.toNamed(Routes.singleProductDetails, arguments: [{
-          "calledFor": "customer",
-          "productID": "${model.id}"
-        }]);
+        Get.toNamed(Routes.singleProductDetails, arguments: [
+          {"calledFor": "customer", "productID": "${model.id}"}
+        ]);
       },
       child: Stack(
         fit: StackFit.loose,
@@ -328,6 +327,11 @@ class DashboardView extends GetView<BaseController> {
                 title: e.key,
                 textSize: 20,
                 onTap: () {
+                  // Get.toNamed(Routes.searchDetails, arguments: {
+                  //   "productTypeKey": "${e.key}",
+                  //   "isCalledForDeals":
+                  // });
+                  Get.find<CustomSearchController>().filters.clear();
                   Get.to(() => SearchDetailsView(
                         // Passing empty search text if all products.
                         searchQuery: "",

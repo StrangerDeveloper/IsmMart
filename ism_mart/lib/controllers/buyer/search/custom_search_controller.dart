@@ -86,6 +86,7 @@ class CustomSearchController extends GetxController {
     } else if (value is int) {
       filters.addIf(value > 0, key, "$value");
     }
+
     handleFilters(filters);
   }
 
