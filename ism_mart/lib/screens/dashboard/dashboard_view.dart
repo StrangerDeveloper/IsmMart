@@ -4,14 +4,11 @@ import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/api_service.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
-// import 'package:ism_mart/exports/exports_ui.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/screens/top_vendors/top_vendors_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
-// import 'package:ism_mart/widgets/export_widgets.dart';
 import 'package:ism_mart/screens/single_product_details/single_product_details_view.dart';
-
 import '../../widgets/custom_grey_border_container.dart';
 import '../../widgets/custom_loading.dart';
 import '../../widgets/custom_network_image.dart';
@@ -23,8 +20,6 @@ import '../../widgets/single_category_item.dart';
 import '../../widgets/single_product_grid_item.dart';
 import '../../widgets/sticky_label_with_view_more.dart';
 import '../../widgets/sticky_labels.dart';
-import '../search/search_view.dart';
-
 import '../../search_details/search_details_view.dart';
 
 class DashboardView extends GetView<BaseController> {

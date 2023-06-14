@@ -222,7 +222,7 @@ class SingleCartItems extends StatelessWidget {
     return Row(
       children: [
         CustomText(
-            title: 'Item Total Price: ',
+            title: 'Total: ',
           style: bodyText1,
         ),
         CustomPriceWidget(

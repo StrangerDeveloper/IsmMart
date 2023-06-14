@@ -4,13 +4,13 @@ import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
-import '../controllers/buyer/search/allproducts_model.dart';
+// import '../controllers/buyer/search/allproducts_model.dart';
 import '../screens/single_product_details/single_product_details_view.dart';
 
 class SingleProductItems extends StatelessWidget {
   const SingleProductItems({
     Key? key,
-    this.allProductsModel,
+    // this.allProductsModel,
     this.productModel,
     this.isCategoryProducts = false,
     this.onTap,
@@ -18,7 +18,7 @@ class SingleProductItems extends StatelessWidget {
   final ProductModel? productModel;
   final bool? isCategoryProducts;
   final GestureTapCallback? onTap;
-  final AllProductsModel? allProductsModel;
+  // final AllProductsModel? allProductsModel;
 
   @override
   Widget build(BuildContext context) {

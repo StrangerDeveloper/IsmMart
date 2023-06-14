@@ -15,6 +15,8 @@ import 'package:ism_mart/screens/vendor_detail/vendor_detail_view.dart';
 import 'package:ism_mart/screens/vendor_question/vendor_question_view.dart';
 import '../screens/contact_us/contact_us_view.dart';
 import '../screens/forgot_password2/forgot_password2_view.dart';
+import '../screens/seller_store_detail/seller_store_detail_view.dart';
+import '../screens/single_product_details/single_product_details_view.dart';
 import '../screens/vendor_orders/vendor_orders_view.dart';
 
 class Routes {
@@ -48,10 +50,11 @@ class Routes {
   static const vendorDetail = "/vendorDetail";
   static const vendorOrders = "/vendorOrders";
   static const vendorQuestion = "/vendorQuestion";
+  static const singleProductDetails = "/singleProductDetails";
 
   //static const aboutUsRoute = "/aboutUs";
   ///Pages with passing :ID
-  static const productDetailsRoute = "/product/:id";
+  // static const productDetailsRoute = "/product/:id";
   static const orderDetailsRoute = "/orderDetails/:id";
   static const storeDetailsRoute = "/storeDetails/:id";
 
@@ -195,9 +198,14 @@ class Routes {
     ),
     /////////////////////////////////////////////////////////////////////////
     GetPage(
-      name: '/product/:id',
-      page: () => const ProductView(),
-      binding: ProductBinding(),
+        name: sellerHomeRoute,
+        page: () => const SellerHomeView(),
+        binding: SellerBindings()),
+    GetPage(
+      name: singleProductDetails,
+      // arguments: ['calledFor'],
+      page: () => SingleProductDetailsView(),
+      // binding: ProductBinding(),
     ),
     GetPage(
       name: '/orderDetails/:id',
