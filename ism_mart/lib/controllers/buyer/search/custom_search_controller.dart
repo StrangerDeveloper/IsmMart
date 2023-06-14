@@ -13,10 +13,9 @@ class CustomSearchController extends GetxController {
   TextEditingController minPriceController = TextEditingController();
   TextEditingController maxPriceController = TextEditingController();
   ScrollController scrollController = ScrollController();
- 
- int searchLimit = 15;
- int page = 1;
-  
+
+  int searchLimit = 15;
+  int page = 1;
 
   var productList = <ProductModel>[].obs;
 
@@ -39,14 +38,10 @@ class CustomSearchController extends GetxController {
 
     scrollController.addListener(() {
       if (stopLoadMore.isFalse) {
-        loadMoreSearchedProducts();
+        loadMoreSearchedProducts("");
       }
     });
-
   }
-
-
-
 
   void loadMoreSearchedProducts(String? searchQuery) async {
     if (scrollController.hasClients &&
@@ -143,6 +138,8 @@ class CustomSearchController extends GetxController {
     await searchWithFilters(filters: filters);
   }
 
+  var isLoading = false.obs;
+
   searchWithFilters({filters}) async {
     isLoading(true);
     await _apiProvider.filterSearch(appliedFilters: filters).then((products) {
@@ -178,7 +175,6 @@ class CustomSearchController extends GetxController {
   @override
   void onClose() {
     super.onClose();
-    searchTextController.text = "";
     //searchTextController.removeListener(() {});
     //scrollController.removeListener(() {});
     //focus.removeListener(_onFocusChange);

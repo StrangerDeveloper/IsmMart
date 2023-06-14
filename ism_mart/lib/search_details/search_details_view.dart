@@ -37,7 +37,7 @@ class SearchDetailsView extends GetView<CustomSearchController> {
     };
     if (isCalledForDeals!) {
       filters.addIf(passedSearchQuery!.isNotEmpty, "text", passedSearchQuery!);
-      
+
       //controller.searchProducts(passedSearchQuery);
     } else {
       filters.addIf(isCalledForTypesProd! && passedSearchQuery!.isNotEmpty,
@@ -79,21 +79,13 @@ class SearchDetailsView extends GetView<CustomSearchController> {
     //       : controller.searchWithSubCategory(subCategoryID);
     // }
 
-    return Hero(
-      tag: "productSearchBar",
-      child: SafeArea(
-        child: WillPopScope(
-          onWillPop: () {
-            return controller.goBack();
-          },
-          child: Scaffold(
-            backgroundColor: Colors.grey[100]!,
-            appBar: _searchAppBar(),
-            body: _body(),
-            //floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-            //floatingActionButton: _filterBar(),
-          ),
-        ),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.grey[100]!,
+        appBar: _searchAppBar(),
+        body: _body(),
+        //floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        //floatingActionButton: _filterBar(),
       ),
     );
     /* return controller.obx((state) {
@@ -114,7 +106,7 @@ class SearchDetailsView extends GetView<CustomSearchController> {
                 Get.back();
                 //controller.productList.clear();
                 // controller.searchLimit = 15;
-                controller.searchTextController.clear();
+                //controller.searchTextController.clear();
                 //controller.goBack();
               },
               child: Icon(
@@ -126,26 +118,9 @@ class SearchDetailsView extends GetView<CustomSearchController> {
       title: Container(
         height: 36,
         child: TextField(
-          controller: controller.searchTextController,
+          //controller: controller.searchTextController,
           //focusNode: controller.focus,
-
-          onChanged: (value) {
-            if (value != '') {
-              //controller.selectedCategory('');
-              controller.searchProducts(value);
-
-              //controller.searchLimit = 15;
-              //controller.suggestionSearch();
-            }
-            // else if (controller.searchTextController.text.isEmpty ||
-            //     controller.suggestionList.length == 0 ||
-            //     value == "") {
-            //   controller.suggestionList.clear();
-            // }
-            else {
-              controller.suggestionList.clear();
-            }
-          },
+          enabled: false,
           cursorColor: kPrimaryColor,
           autofocus: false,
           maxLines: 1,
@@ -190,69 +165,13 @@ class SearchDetailsView extends GetView<CustomSearchController> {
     return Obx(() => controller.isLoading.isTrue
         ? CustomLoading(isItForWidget: true, color: kPrimaryColor)
         : controller.productList.isEmpty
-            ? Stack(
-                children: [
-                  Center(
-                    child: NoDataFoundWithIcon(
-                      title: langKey.emptyProductSearch.tr,
-                      subTitle: langKey.emptyProductSearchMsg.tr,
-                    ),
-                  ),
-                ],
+            ? Center(
+                child: NoDataFoundWithIcon(
+                  title: langKey.emptyProductSearch.tr,
+                  subTitle: langKey.emptyProductSearchMsg.tr,
+                ),
               )
-            : Stack(
-                children: [
-                  controller.suggestionList.isNotEmpty
-                      ? Opacity(
-                          opacity: .5,
-                          child: _buildProductView(controller.productList))
-                      : _buildProductView(controller.productList),
-                  Positioned(
-                      top: 1,
-                      child: Obx(
-                        () => controller.suggestionList.isNotEmpty
-                            ? Container(
-                                padding: EdgeInsets.symmetric(horizontal: 40),
-                                color: Colors.white,
-                                height: 400,
-                                width: AppResponsiveness.getWidthPoint90(),
-                                child: ListView.builder(
-                                  itemCount: controller.suggestionList.length,
-                                  itemBuilder: (context, index) {
-                                    return ListTile(
-                                      onTap: () {
-                                        //controller.selectedIndex.value = index;
-
-                                        controller.searchTextController.text =
-                                            controller
-                                                .suggestionList[index].name!;
-
-                                        // controller.selectedCategory('');
-                                        // controller.searchProducts(controller
-                                        //     .searchTextController.text);
-                                        // controller.searchLimit = 15;
-
-                                        // controller.suggestionList.clear();
-                                        // controller.finalSerach(true);
-                                      },
-                                      tileColor:
-                                          controller.selectedIndex.value ==
-                                                  index
-                                              ? Colors.black12
-                                              : kAccentColor,
-                                      title: CustomText(
-                                        title: controller
-                                                .suggestionList[index].name ??
-                                            "",
-                                      ),
-                                    );
-                                  },
-                                ),
-                              )
-                            : SizedBox(),
-                      )),
-                ],
-              ));
+            : _buildProductView(controller.productList));
   }
 
   Widget _buildProductView(List<ProductModel> list) {
