@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/global_variables.dart';
+import 'package:ism_mart/helper/no_internet_view.dart';
+import 'package:ism_mart/screens/forgot_password1/forgot_password1_view.dart';
 import 'package:ism_mart/screens/signin/signin_viewmodel.dart';
 import 'package:ism_mart/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/widgets/loader_view.dart';
 import 'package:ism_mart/widgets/obscure_suffix_icon.dart';
 
 class SignInView extends StatelessWidget {
@@ -15,29 +18,37 @@ class SignInView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-          child: Form(
-            key: viewModel.signInFormKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                logoCloseIcon(),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10, bottom: 40),
-                  child: CustomText(
-                    title: langKey.loginGreetings.tr,
-                    style: headline2,
-                  ),
+        body: Stack(
+          children: [
+            SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              child: Form(
+                key: viewModel.signInFormKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    logoCloseIcon(),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10, bottom: 40),
+                      child: CustomText(
+                        title: langKey.loginGreetings.tr,
+                        style: headline2,
+                      ),
+                    ),
+                    emailTextField(),
+                    passwordTextField(),
+                    signInBtn(),
+                    forgotPassword(),
+                    doNotHaveAnAccount(),
+                  ],
                 ),
-                emailTextField(),
-                passwordTextField(),
-                signInBtn(),
-                forgotPassword(),
-                doNotHaveAnAccount(),
-              ],
+              ),
             ),
-          ),
+            NoInternetView(
+              onPressed: () => viewModel.signIn(),
+            ),
+            LoaderView()
+          ],
         ),
       ),
     );

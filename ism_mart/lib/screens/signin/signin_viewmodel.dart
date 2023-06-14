@@ -25,6 +25,7 @@ class SignInViewModel extends GetxController {
   }
 
   void signIn() {
+    GlobalVariable.internetErr(false);
     if (signInFormKey.currentState?.validate() ?? false) {
       Map<String, dynamic> param = {
         "email": emailController.text,
@@ -37,8 +38,10 @@ class SignInViewModel extends GetxController {
           .postMethod(url: Urls.login, body: param)
           .then((parsedJson) async {
         if (parsedJson['success'] == true) {
+          GlobalVariable.internetErr(false);
+
           authController.currUserToken.value = parsedJson['data']['token'];
-            getCurrentUser(parsedJson);
+          getCurrentUser(parsedJson);
         } else if (parsedJson['message'] == 'Invalid credentials') {
           AppConstant.displaySnackBar(
             langKey.errorTitle.tr,
@@ -51,16 +54,17 @@ class SignInViewModel extends GetxController {
           );
         }
       }).catchError((e) {
+        GlobalVariable.internetErr(true);
         print(e);
         GlobalVariable.showLoader.value = false;
       });
     }
   }
 
-  void getCurrentUser(Map<String, dynamic> json)async{
-    await ApiBaseHelper().getMethod(
-        url: 'user/profile', withAuthorization: true).
-    then((value) async {
+  void getCurrentUser(Map<String, dynamic> json) async {
+    await ApiBaseHelper()
+        .getMethod(url: 'user/profile', withAuthorization: true)
+        .then((value) async {
       if (value['success'] == true) {
         UserResponse userResponse = UserResponse.fromResponse(value);
         userResponse.userModel!.token = json['data']['token'];
@@ -69,8 +73,7 @@ class SignInViewModel extends GetxController {
         settingViewModel.setUserModel(userResponse.userModel);
         Get.back();
         baseController.changePage(0);
-        await LocalStorageHelper.storeUser(
-            userModel: userResponse.userModel)
+        await LocalStorageHelper.storeUser(userModel: userResponse.userModel)
             .then((value) {});
         // print('>>User Model: ${userResponse.userModel}');
         AppConstant.displaySnackBar(
