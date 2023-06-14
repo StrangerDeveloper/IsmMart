@@ -14,7 +14,7 @@ class CustomSearchController extends GetxController {
   TextEditingController maxPriceController = TextEditingController();
   ScrollController scrollController = ScrollController();
 
-  int searchLimit = 15;
+  int searchLimit = 25;
   int page = 1;
 
   var productList = <ProductModel>[].obs;
@@ -39,15 +39,14 @@ class CustomSearchController extends GetxController {
     super.onReady();
 
     scrollController.addListener(() {
-      if (stopLoadMore.isFalse) {
-        //loadMoreSearchedProducts("");
-      }
+      loadMoreFilteredProducts();
     });
 
     ever(filters, handleFilters);
   }
 
   handleFilters(Map<String, String> filters) {
+    print("Called");
     filters.addIf(page > 0, "page", "$page");
     filters.addIf(searchLimit > 0, "limit", "$searchLimit");
 
@@ -127,6 +126,7 @@ class CustomSearchController extends GetxController {
   var isLoading = false.obs;
 
   searchWithFilters({filters}) async {
+    print("SearchWithFilters: ${filters.toString()}");
     isLoading(true);
     await _apiProvider.filterSearch(appliedFilters: filters).then((products) {
       productList.clear();

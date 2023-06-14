@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:ism_mart/helper/api_base_helper.dart';
 import 'package:ism_mart/api_helper/global_variables.dart';
 import 'package:ism_mart/helper/urls.dart';
-import 'package:ism_mart/exports/export_account.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
@@ -55,7 +54,7 @@ class SignUpViewModel extends GetxController {
         GlobalVariable.showLoader.value = false;
 
         if (parsedJson['message'] == 'User registered successfully.') {
-          Get.off(() => SignInView());
+          Get.offNamed(Routes.loginRoute);
           AppConstant.displaySnackBar(
             langKey.successTitle.tr,
             parsedJson['message'],

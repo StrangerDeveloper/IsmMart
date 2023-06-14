@@ -60,7 +60,7 @@ class ProductQuestionsViewModel extends GetxController {
 
   loginCheck(){
     if(GlobalVariable.userModel == null) {
-      return Get.to(() => SignInView());
+      return Get.toNamed(Routes.loginRoute);
     }
     else{
       return ProductQuestionsView().askQuestionBottomSheet();

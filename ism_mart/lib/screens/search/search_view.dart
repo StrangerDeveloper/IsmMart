@@ -10,31 +10,27 @@ import 'package:ism_mart/utils/exports_utils.dart';
 class SearchView extends GetView<SearchViewModel> {
   SearchView({super.key});
 
-  //final SearchViewModel viewModel = Get.put(SearchViewModel(Get.find<ApiProvider>()));
   @override
   Widget build(BuildContext context) {
-    return Hero(
-      tag: "productSearchBar",
-      child: SafeArea(
-        child: Scaffold(
-          backgroundColor: Colors.grey[50]!,
-          appBar: _searchAppBar(),
-          body: Obx(
-            () => Stack(
-              children: [
-                _body(),
-                controller.isSearchingStarted.isTrue
-                    ? Positioned(
-                        top: 1,
-                        child: _suggestionList(controller.suggestionList),
-                      )
-                    : Container()
-              ],
-            ),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.grey[50]!,
+        appBar: _searchAppBar(),
+        body: Obx(
+          () => Stack(
+            children: [
+              _body(),
+              controller.isSearchingStarted.isTrue
+                  ? Positioned(
+                      top: 1,
+                      child: _suggestionList(controller.suggestionList),
+                    )
+                  : Container()
+            ],
           ),
-          //floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-          //floatingActionButton: _filterBar(),
         ),
+        //floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        //floatingActionButton: _filterBar(),
       ),
     );
   }
@@ -119,7 +115,6 @@ class SearchView extends GetView<SearchViewModel> {
   }
 
   _suggestionList(List<ProductModel> list) {
-    print("list: ${list.length}");
     return Padding(
       padding: EdgeInsets.only(left: 50),
       child: SizedBox(
