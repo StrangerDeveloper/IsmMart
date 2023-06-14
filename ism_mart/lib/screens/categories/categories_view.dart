@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/exports/exports_ui.dart';
+import 'package:ism_mart/search_details/search_details_view.dart';
 import 'package:ism_mart/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
@@ -162,7 +163,7 @@ class CategoriesView extends GetView<CategoryController> {
       borderRadius: BorderRadius.circular(13),
       child: InkWell(
         onTap: () {
-          Get.to(() => SearchView(
+          Get.to(() => SearchDetailsView(
                 subCategoryID: subCategory.id,
               ));
         },

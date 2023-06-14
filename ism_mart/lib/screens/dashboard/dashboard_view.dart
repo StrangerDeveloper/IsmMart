@@ -25,6 +25,8 @@ import '../../widgets/sticky_label_with_view_more.dart';
 import '../../widgets/sticky_labels.dart';
 import '../search/search_view.dart';
 
+import '../../search_details/search_details_view.dart';
+
 class DashboardUI extends GetView<BaseController> {
   const DashboardUI({Key? key}) : super(key: key);
 
@@ -332,7 +334,7 @@ class DashboardUI extends GetView<BaseController> {
                 title: e.key,
                 textSize: 20,
                 onTap: () {
-                  Get.to(() => SearchView(
+                  Get.to(() => SearchDetailsView(
                         // Passing empty search text if all products.
                         passedSearchQuery:
                             calledForCategoryProducts! ? "" : '${e.key}',

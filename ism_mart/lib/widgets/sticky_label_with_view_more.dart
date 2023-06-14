@@ -4,7 +4,7 @@ import 'package:ism_mart/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
 class StickyLabelWithViewMoreOption extends StatelessWidget {
-  final String? title;
+  final String? title, moreOptionText;
   final Color? textColor;
   final double? textSize;
   final GestureTapCallback? onTap;
@@ -12,6 +12,7 @@ class StickyLabelWithViewMoreOption extends StatelessWidget {
   const StickyLabelWithViewMoreOption({
     Key? key,
     required this.title,
+    this.moreOptionText,
     this.textColor,
     this.textSize = 17,
     required this.onTap,
@@ -26,12 +27,12 @@ class StickyLabelWithViewMoreOption extends StatelessWidget {
           text: title!,
           style: headline3,
         ),
-        GestureDetector(
+        InkWell(
           onTap: onTap,
-          child:  Padding(
+          child: Padding(
             padding: EdgeInsets.only(right: kDefaultPadding),
             child: StickyLabel(
-              text: seeAll.tr,
+              text: moreOptionText ?? seeAll.tr,
               style: bodyText1,
             ),
           ),

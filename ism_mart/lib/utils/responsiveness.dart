@@ -23,6 +23,14 @@ class AppResponsiveness {
     return width * 0.9;
   }
 
+  static double getWidthByPoints({double? points = 0.5}) {
+    return width * points!;
+  }
+
+  static double getHeightByPoints({double points = 0.5}) {
+    return height * points;
+  }
+
   // container heights
   static double getHeight50_60() {
     return _isTabletScreen() ? 60 : 50;

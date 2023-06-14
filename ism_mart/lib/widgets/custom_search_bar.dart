@@ -19,36 +19,39 @@ class CustomSearchBar extends StatelessWidget {
               arguments: {"searchText": searchText ?? " "},
               preventDuplicates: true);*/
         } else {
-          baseController.changePage(2);
+          //baseController.changePage(2);
 
-          /*Get.toNamed(Routes.searchRoute,
-            arguments: {"searchText": searchText ?? " "});*/
+          Get.toNamed(Routes.searchRoute,
+              arguments: {"searchText": searchText ?? " "});
         }
       },
-      child: Container(
-        height: 34.0,
-        alignment: Alignment.center,
-        padding: const EdgeInsets.symmetric(horizontal: kFixPadding),
-        decoration: BoxDecoration(
-          color: kWhiteColor,
-          border: Border.all(color: kLightGreyColor),
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        child: Row(
-          children: [
-            Icon(Icons.search, color: kPrimaryColor),
-            Padding(
-              padding: EdgeInsets.only(left: 4.0),
-              child: Text(
-                searchIn.tr,
-                style: TextStyle(
-                  color: kLightColor,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 13.0,
+      child: Hero(
+        tag: "productSearchBar",
+        child: Container(
+          height: 34.0,
+          alignment: Alignment.center,
+          padding: const EdgeInsets.symmetric(horizontal: kFixPadding),
+          decoration: BoxDecoration(
+            color: kWhiteColor,
+            border: Border.all(color: kLightGreyColor),
+            borderRadius: BorderRadius.circular(8.0),
+          ),
+          child: Row(
+            children: [
+              Icon(Icons.search, color: kPrimaryColor),
+              Padding(
+                padding: EdgeInsets.only(left: 4.0),
+                child: Text(
+                  searchIn.tr,
+                  style: TextStyle(
+                    color: kLightColor,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 13.0,
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
