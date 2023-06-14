@@ -21,6 +21,7 @@ class MyProductsViewModel extends GetxController {
   }
 
   loadInitialProducts() {
+    GlobalVariable.internetErr(false);
     page = 1;
     GlobalVariable.showLoader.value = true;
 
@@ -33,15 +34,18 @@ class MyProductsViewModel extends GetxController {
         var data = parsedJson['data']['products'] as List;
         myProductsList.addAll(data.map((e) => VendorProduct.fromJson(e)));
       } else {
-        AppConstant.displaySnackBar(errorTitle.tr, parsedJson['message']);
+        GlobalVariable.internetErr(true);
+        // AppConstant.displaySnackBar(errorTitle.tr, parsedJson['message']);
       }
     }).catchError((e) {
+      GlobalVariable.internetErr(true);
       print(e);
       GlobalVariable.showLoader.value = false;
     });
   }
 
   deleteProduct(String productId, {required int index}) {
+    GlobalVariable.internetErr(false);
     ApiBaseHelper()
         .deleteMethod(
             url: Urls.deleteProduct + productId, withAuthorization: true)
@@ -55,12 +59,15 @@ class MyProductsViewModel extends GetxController {
           parsedJson['message'],
         );
       } else {
-        AppConstant.displaySnackBar(
-          langKey.errorTitle.tr,
-          langKey.recordDoNotExist.tr,
-        );
+        GlobalVariable.internetErr(true);
+
+        // AppConstant.displaySnackBar(
+        //   langKey.errorTitle.tr,
+        //   langKey.recordDoNotExist.tr,
+        // );
       }
     }).catchError((e) {
+      GlobalVariable.internetErr(true);
       print(e);
     });
   }
@@ -84,9 +91,13 @@ class MyProductsViewModel extends GetxController {
           var data = parsedJson['data']['products'] as List;
           myProductsList.addAll(data.map((e) => VendorProduct.fromJson(e)));
         } else {
-          AppConstant.displaySnackBar(errorTitle.tr, parsedJson['message']);
+          GlobalVariable.internetErr(true);
+
+          //   AppConstant.displaySnackBar(errorTitle.tr, parsedJson['message']);
         }
       }).catchError((e) {
+        GlobalVariable.internetErr(true);
+
         print(e);
         GlobalVariable.showLoader.value = false;
       });
