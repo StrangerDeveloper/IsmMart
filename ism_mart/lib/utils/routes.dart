@@ -6,22 +6,36 @@ import 'package:ism_mart/screens/email_verification/email_verification_view.dart
 
 class Routes {
   static const initRoute = "/";
-  static const loginRoute = "/signIn";
-
-  //static const resetPasswordRoute = "/resetPassword";
-  static const passwordResetEmailInput = "/inputEmail";
-  static const registerRoute = "/register";
-  static const emailVerificationLinkRoute = "/emailVerificationLink";
-  static const categoriesRoute = "/categories";
+  static const addProduct = "/addProduct";
+  static const allDispute = "/allDispute";
+  static const buyerOrdersRoute = "/buyerOrders";
+  static const buyerProfile = "/buyerProfile";
   static const cartRoute = "/cart";
-  static const checkOutRoute = "/checkout";
+  static const categories = "/categories";
   static const changeAddressRoute = "/changeAddress";
-  static const profileRoute = "/profile";
+  static const changePassword = "/changePassword";
+  static const checkOutRoute = "/checkout";
+  static const contactUs = "/contactUs";
+  static const dashboard = "/dashboard";
+  static const disputeDetail = "/disputeDetail";
+  static const emailVerificationLinkRoute = "/emailVerificationLink";
+  static const emailVerify = "/api/auth/verifyEmail";
+  static const faq = "/faq";
+  static const forgotPassword1 = "/forgotPassword1";
+  static const forgotPassword2 = "/forgotPassword2";
+  static const generalSetting = "/generalSetting";
+  static const myProduct = "/myProduct";
+  static const productQuestions = "/productQuestions";
   static const searchRoute = "/search";
   static const sellerHomeRoute = "/sellerDash";
-  static const buyerOrdersRoute = "/buyerOrders";
-  static const settingsRoute = "/settings";
-  static const emailVerify = "/api/auth/verifyEmail";
+  static const settings = "/settings";
+  static const loginRoute = "/signIn";
+  static const registerRoute = "/register";
+  static const updateProduct = "/updateProduct";
+  static const updateVendor = "/updateVendor";
+  static const vendorDetail = "/vendorDetail";
+  static const vendorOrders = "/vendorOrders";
+  static const vendorQuestion = "/vendorQuestion";
 
   //static const aboutUsRoute = "/aboutUs";
   ///Pages with passing :ID
@@ -30,11 +44,6 @@ class Routes {
   static const storeDetailsRoute = "/storeDetails/:id";
 
   static final pages = [
-    /* GetPage(
-      name: aboutUsRoute,
-      page: () => AboutUS(),
-    ),*/
-
     GetPage(
         name: initRoute,
         page: () => const BottomNavigationView(),
@@ -49,14 +58,6 @@ class Routes {
       page: () => SignUpView(),
       binding: BaseBindings(),
     ),
-    // GetPage(
-    //     name: resetPasswordRoute,
-    //     page: () => ForgotPassword2View(),
-    //     binding: BaseBindings()),
-    // GetPage(
-    //     name: passwordResetEmailInput,
-    //     page: () => const ForgotPasswordView(),
-    //     binding: BaseBindings()),
     GetPage(
         name: emailVerificationLinkRoute,
         page: () => EmailVerificationView(),

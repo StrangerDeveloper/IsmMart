@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:ism_mart/helper/api_base_helper.dart';
 import 'package:ism_mart/api_helper/global_variables.dart';
 import 'package:ism_mart/helper/urls.dart';
-import 'package:ism_mart/screens/dispute_list/all_dispute_model.dart';
+import 'package:ism_mart/screens/all_dispute/all_dispute_model.dart';
 
 class DisputeListViewModel extends GetxController {
   List<AllDisputeModel> allDisputeList = <AllDisputeModel>[].obs;
