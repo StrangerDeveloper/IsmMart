@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:iconly/iconly.dart';
-import 'package:ism_mart/controllers/controllers.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/utils/constants.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart';
-import 'package:ism_mart/helper/validator.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class GeneralSettingView extends StatelessWidget {
-  const GeneralSettingView(
-      {Key? key, this.title, this.isContactUsCalled = false})
-      : super(key: key);
+  const GeneralSettingView({Key? key, this.title}) : super(key: key);
 
   final String? title;
-  final bool? isContactUsCalled;
 
   @override
   Widget build(BuildContext context) {
@@ -36,39 +30,36 @@ class GeneralSettingView extends StatelessWidget {
                 ),
               ),
             ),
-            if (isContactUsCalled!)
-              _buildContactUs()
-            else
-              Padding(
-                padding: const EdgeInsets.fromLTRB(18, 0, 22, 16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: getData().map((e) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        AppConstant.spaceWidget(height: 15),
-                        if (e['header'] != '')
-                          CustomText(
-                            title: "${e['header']}",
-                            style: headline2,
+            Padding(
+              padding: const EdgeInsets.fromLTRB(18, 0, 22, 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: getData().map((e) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      AppConstant.spaceWidget(height: 15),
+                      if (e['header'] != '')
+                        CustomText(
+                          title: "${e['header']}",
+                          style: headline2,
+                        ),
+                      if (e['header'] != '') Divider(),
+                      if (e['body'].toString().isNotEmpty)
+                        Text(
+                          "${e['body'].toString()}",
+                          style: GoogleFonts.poppins(
+                            fontSize: 13.5,
+                            color: kDarkColor,
+                            height: 1.7,
                           ),
-                        if (e['header'] != '') Divider(),
-                        if (e['body'].toString().isNotEmpty)
-                          Text(
-                            "${e['body'].toString()}",
-                            style: GoogleFonts.poppins(
-                              fontSize: 13.5,
-                              color: kDarkColor,
-                              height: 1.7,
-                            ),
-                          ),
-                      ],
-                    );
-                  }).toList(),
-                ),
+                        ),
+                    ],
+                  );
+                }).toList(),
               ),
+            ),
           ],
         ),
       ),
@@ -91,173 +82,6 @@ class GeneralSettingView extends StatelessWidget {
     );
   }
 
-  Widget _buildContactUs() {
-    var formKey = GlobalKey<FormState>();
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 10, 16, 16),
-      child: ListView(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        children: [
-          Column(
-            children: getContactUsData()
-                .map(
-                  (e) => Padding(
-                padding: const EdgeInsets.only(top: 15),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      padding: EdgeInsets.all(13),
-                      decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.05),
-                        borderRadius: BorderRadius.circular(4),
-                        border: Border.all(
-                          color: Colors.black.withOpacity(0.06),
-                        ),
-                      ),
-                      child: Icon(
-                        e["icon"],
-                        size: 22,
-                        color: kPrimaryColor,
-                      ),
-                    ),
-                    SizedBox(width: 15),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CustomText(
-                            title: e['title'].toString().capitalize,
-                            style: headline3.copyWith(
-                              fontSize: 14.5,
-                            ),
-                          ),
-                          SizedBox(height: 5),
-                          CustomText(
-                            title: e['description'].toString(),
-                            style: bodyText2Poppins.copyWith(
-                              color: Colors.grey.shade700,
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            )
-                .toList(),
-          ),
-          AppConstant.spaceWidget(height: 15),
-          Container(
-            margin: EdgeInsets.only(bottom: 15, top: 15),
-            padding: EdgeInsets.all(15),
-            decoration: BoxDecoration(
-              color: Colors.black.withOpacity(0.03),
-              borderRadius: BorderRadius.circular(4),
-              border: Border.all(
-                color: Colors.black.withOpacity(0.08),
-              ),
-            ),
-            child: Form(
-              key: formKey,
-              child: Column(
-                children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: CustomText(
-                      title: langKey.forAnyQueryJust.tr,
-                      style: headline2,
-                    ),
-                  ),
-                  SizedBox(height: 15),
-                  FormInputFieldWithIcon(
-                    controller: authController.firstNameController,
-                    iconPrefix: Icons.person_rounded,
-                    labelText: fullName.tr,
-                    iconColor: kPrimaryColor,
-                    autofocus: false,
-                    textStyle: bodyText1,
-                    autoValidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (value) {
-                      return Validator().validateName(value);
-                    },
-                    keyboardType: TextInputType.name,
-                    onChanged: (value) {},
-                    onSaved: (value) {},
-                  ),
-                  AppConstant.spaceWidget(height: 10),
-                  FormInputFieldWithIcon(
-                    controller: authController.emailController,
-                    iconPrefix: Icons.email_rounded,
-                    labelText: email.tr,
-                    iconColor: kPrimaryColor,
-                    autofocus: false,
-                    textStyle: bodyText1,
-                    autoValidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (value) {
-                      return Validator().validateEmail(value);
-                    },
-                    keyboardType: TextInputType.name,
-                    onChanged: (value) {},
-                    onSaved: (value) {},
-                  ),
-                  AppConstant.spaceWidget(height: 10),
-                  FormInputFieldWithIcon(
-                    controller: authController.subjectController,
-                    iconPrefix: Icons.subject_rounded,
-                    labelText: subject.tr,
-                    iconColor: kPrimaryColor,
-                    autofocus: false,
-                    textStyle: bodyText1,
-                    autoValidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (value) =>
-                    GetUtils.isBlank(value!)! ? subjectReq.tr : null,
-                    keyboardType: TextInputType.name,
-                    onChanged: (value) {},
-                    onSaved: (value) {},
-                  ),
-                  AppConstant.spaceWidget(height: 10),
-                  FormInputFieldWithIcon(
-                    controller: authController.storeDescController,
-                    iconPrefix: Icons.description,
-                    labelText: message.tr,
-                    iconColor: kPrimaryColor,
-                    autofocus: false,
-                    textStyle: bodyText1,
-                    autoValidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (value) =>
-                    GetUtils.isBlank(value!)! ? messageReq.tr : null,
-                    keyboardType: TextInputType.text,
-                    onChanged: (value) {},
-                    onSaved: (value) {},
-                  ),
-                  AppConstant.spaceWidget(height: 20),
-                  Obx(
-                        () => authController.isLoading.isTrue
-                        ? CustomLoading(isItBtn: true)
-                        : CustomTextBtn(
-                      onPressed: () async {
-                        if (formKey.currentState!.validate()) {
-                          await authController.postContactUs();
-                          formKey.currentState!.reset();
-                        }
-                      },
-                      title: send.tr,
-                      height: 40,
-                      width: 150,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   List getData() {
     if (title!.contains(termsAndConditions.tr)) {
       return getTermConditionData();
@@ -276,35 +100,6 @@ class GeneralSettingView extends StatelessWidget {
       {'header': langKey.aboutHeader4.tr, 'body': langKey.aboutBody4.tr},
       {'header': langKey.aboutHeader5.tr, 'body': langKey.aboutBody5.tr},
       {'header': langKey.aboutHeader6.tr, 'body': langKey.aboutBody6.tr},
-    ];
-  }
-
-  List getContactUsData() {
-    return [
-      {
-        'icon': Icons.email_outlined,
-        'title': langKey.email.tr,
-        'subTitle': null,
-        'description': 'businesses@ismmart.com\n'
-      },
-      {
-        'icon': IconlyBold.calling,
-        'title': langKey.call.tr,
-        'subTitle': null,
-        'description': '+92 51 111 007 123\n+92 3329999969'
-      },
-      {
-        'icon': IconlyLight.location,
-        'title': langKey.centralHeadquarters.tr,
-        'subTitle': ":",
-        'description': langKey.centralHeadquartersValue.tr
-      },
-      {
-        'icon': IconlyLight.location,
-        'title': langKey.globalHeadquarters.tr,
-        'subTitle': ":",
-        'description': langKey.globalHeadquartersValue.tr
-      }
     ];
   }
 

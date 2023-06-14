@@ -341,40 +341,6 @@ class AuthController extends GetxController {
     });
   }
 
-  //END Current User
-
-  ///Contact us
-  var subjectController = TextEditingController();
-  var messageController = TextEditingController();
-
-  postContactUs() async {
-    isLoading(true);
-    var data = {
-      "name": "${firstNameController.text}",
-      "email": "${emailController.text.trim()}",
-      "subject": "${subjectController.text}",
-      "message": "${storeDescController.text}"
-    };
-    await authProvider.contactUs(data: data).then((ApiResponse? apiResponse) {
-      isLoading(false);
-      if (apiResponse != null) {
-        if (apiResponse.success!) {
-          // Get.back();
-          AppConstant.displaySnackBar(
-              langKey.successTitle.tr, apiResponse.message);
-          clearContactUsControllers();
-        } else
-          AppConstant.displaySnackBar(
-              langKey.errorTitle.tr, apiResponse.message);
-      } else
-        AppConstant.displaySnackBar(
-            langKey.errorTitle.tr, langKey.someThingWentWrong.tr);
-    }).catchError((e) {
-      isLoading(false);
-
-      AppConstant.displaySnackBar(langKey.errorTitle.tr, "$e");
-    });
-  }
 
   void showSnackBar({title = 'error', message = 'Something went wrong'}) {
     AppConstant.displaySnackBar(title, message);
@@ -383,8 +349,6 @@ class AuthController extends GetxController {
   clearContactUsControllers() {
     firstNameController.clear();
     emailController.clear();
-    subjectController.clear();
-    messageController.clear();
   }
 
 
