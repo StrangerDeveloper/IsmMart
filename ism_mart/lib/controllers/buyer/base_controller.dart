@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
+import 'package:ism_mart/search_details/search_details_view.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import '../../exports/export_buyers.dart';
 
@@ -261,7 +262,7 @@ class BaseController extends GetxController {
   List<Widget> bottomNavScreens = [
     const DashboardView(),
     const CategoriesView(),
-    const SearchView(
+    const SearchDetailsView(
       passedSearchQuery: "",
       isCalledForDeals: true,
     ),
