@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/global_variables.dart';
-<<<<<<< Updated upstream
-=======
 import 'package:ism_mart/exports/export_account.dart';
 import 'package:ism_mart/helper/no_internet_view.dart';
->>>>>>> Stashed changes
 import 'package:ism_mart/screens/signup/signup_viewmodel.dart';
 import 'package:ism_mart/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
@@ -182,11 +179,8 @@ class SignUpView extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
         onTap: () {
-<<<<<<< Updated upstream
           Get.offNamed(Routes.loginRoute);
-=======
           Get.off(() => SignInView());
->>>>>>> Stashed changes
         },
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
