@@ -7,8 +7,6 @@ import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/loader_view.dart';
 
-import '../all_dispute/all_dispute_view.dart';
-
 enum AppBarMenuNames { disputes }
 
 class BuyerOrderView extends StatelessWidget {

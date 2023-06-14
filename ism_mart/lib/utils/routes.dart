@@ -195,13 +195,11 @@ class Routes {
     /////////////////////////////////////////////////////////////////////////
     GetPage(
       name: '/product/:id',
-      //arguments: ['calledFor'],
       page: () => const ProductView(),
       binding: ProductBinding(),
     ),
     GetPage(
       name: '/orderDetails/:id',
-      //arguments: ['calledForBuyerOrderDetails'],
       page: () => const SingleOrderDetailsUI(),
       binding: OrdersBindings(),
     ),
