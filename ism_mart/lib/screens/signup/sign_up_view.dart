@@ -179,7 +179,6 @@ class SignUpView extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
         onTap: () {
-          Get.offNamed(Routes.loginRoute);
           Get.off(() => SignInView());
         },
         child: Padding(

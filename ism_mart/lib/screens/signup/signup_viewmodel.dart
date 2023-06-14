@@ -61,11 +61,10 @@ class SignUpViewModel extends GetxController {
             parsedJson['message'],
           );
         } else {
-          GlobalVariable.internetErr(true);
-          // AppConstant.displaySnackBar(
-          //   langKey.errorTitle.tr,
-          //   parsedJson['message'],
-          // );
+          AppConstant.displaySnackBar(
+            langKey.errorTitle.tr,
+            parsedJson['message'],
+          );
         }
       }).catchError((e) {
         GlobalVariable.internetErr(true);
