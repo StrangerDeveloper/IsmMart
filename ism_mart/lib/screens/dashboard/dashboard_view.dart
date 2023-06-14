@@ -8,7 +8,6 @@ import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/screens/top_vendors/top_vendors_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
-import 'package:ism_mart/screens/single_product_details/single_product_details_view.dart';
 import '../../widgets/custom_grey_border_container.dart';
 import '../../widgets/custom_loading.dart';
 import '../../widgets/custom_network_image.dart';
@@ -175,7 +174,7 @@ class DashboardView extends GetView<BaseController> {
         DateTime.now().add(const Duration(hours: 17)).millisecondsSinceEpoch;
     return InkWell(
       onTap: () {
-        Get.to(() => SingleProductDetailsView(), arguments: [{
+        Get.toNamed(Routes.singleProductDetails, arguments: [{
           "calledFor": "customer",
           "productID": "${model.id}"
         }]);

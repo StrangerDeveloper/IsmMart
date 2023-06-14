@@ -110,7 +110,7 @@ class MyProductView extends StatelessWidget {
       aspectRatio: 0.75,
       child: GestureDetector(
         onTap: () {
-          Get.to(() => SingleProductDetailsView(), arguments: [{
+          Get.toNamed(Routes.singleProductDetails, arguments: [{
             "calledFor": "seller",
             "productID": "${model.id}"
           }]);

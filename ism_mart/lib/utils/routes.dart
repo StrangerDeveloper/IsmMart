@@ -203,9 +203,8 @@ class Routes {
         binding: SellerBindings()),
     GetPage(
       name: singleProductDetails,
-      // arguments: ['calledFor'],
       page: () => SingleProductDetailsView(),
-      // binding: ProductBinding(),
+
     ),
     GetPage(
       name: '/orderDetails/:id',

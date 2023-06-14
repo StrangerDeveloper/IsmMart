@@ -262,7 +262,7 @@ class VendorQuestionView extends StatelessWidget {
                       null) {
                     print('Product ID: ${viewModel.productQuestionsList[index].product?.id}');
 
-                    Get.to(() => SingleProductDetailsView(), arguments: [{
+                    Get.toNamed(Routes.singleProductDetails, arguments: [{
                       "calledFor": "seller",
                       "productID": "${viewModel.productQuestionsList[index].product?.id}"
                     }]);

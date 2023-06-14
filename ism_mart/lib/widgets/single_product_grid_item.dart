@@ -34,7 +34,7 @@ class SingleProductItems extends StatelessWidget {
         padding: const EdgeInsets.all(5.0),
         child: GestureDetector(
           onTap: () {
-            Get.to(() => SingleProductDetailsView(), arguments: [{
+            Get.toNamed(Routes.singleProductDetails, arguments: [{
               "calledFor": "customer",
               "productID": "${model.id}"
             }]);
@@ -122,7 +122,7 @@ class SingleProductItems extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap ??
             () {
-          Get.to(() => SingleProductDetailsView(), arguments: [{
+              Get.toNamed(Routes.singleProductDetails, arguments: [{
           "calledFor": "customer",
           "productID": "${model!.id}"
           }]);

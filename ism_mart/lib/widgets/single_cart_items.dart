@@ -21,7 +21,7 @@ class SingleCartItems extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(() => SingleProductDetailsView(), arguments: [{
+        Get.toNamed(Routes.singleProductDetails, arguments: [{
           "calledFor": "customer",
           "productID": "${viewModel.cartItemsList[index!].productId}"
         }]);
