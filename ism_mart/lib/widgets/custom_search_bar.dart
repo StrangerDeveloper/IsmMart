@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ism_mart/controllers/controllers.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
 class CustomSearchBar extends StatelessWidget {

@@ -95,70 +95,72 @@ class SearchDetailsView extends GetView<CustomSearchController> {
 
   _searchAppBar() {
     return AppBar(
-      backgroundColor: kAppBarColor,
-      elevation: 0,
-      automaticallyImplyLeading: false,
-      leadingWidth: 40,
-      leading: isCalledForDeals!
-          ? null
-          : InkWell(
-              onTap: () {
-                Get.back();
-                //controller.productList.clear();
-                // controller.searchLimit = 15;
-                //controller.searchTextController.clear();
-                //controller.goBack();
-              },
-              child: Icon(
-                Icons.arrow_back_ios_new,
-                size: 18,
-                color: kPrimaryColor,
+        backgroundColor: kAppBarColor,
+        elevation: 0,
+        automaticallyImplyLeading: false,
+        leadingWidth: 40,
+        leading: isCalledForDeals!
+            ? null
+            : InkWell(
+                onTap: () {
+                  Get.back();
+                  //controller.productList.clear();
+                  // controller.searchLimit = 15;
+                  //controller.searchTextController.clear();
+                  //controller.goBack();
+                },
+                child: Icon(
+                  Icons.arrow_back_ios_new,
+                  size: 18,
+                  color: kPrimaryColor,
+                ),
               ),
-            ),
-      title: Container(
-        height: 36,
-        child: TextField(
-          //controller: controller.searchTextController,
-          //focusNode: controller.focus,
-          enabled: false,
-          cursorColor: kPrimaryColor,
-          autofocus: false,
-          maxLines: 1,
-          style: TextStyle(
-            color: kLightColor,
-            fontWeight: FontWeight.w600,
-            fontSize: 15.0,
-          ),
-          textAlignVertical: TextAlignVertical.center,
-          decoration: InputDecoration(
-            filled: true,
-            prefixIcon: Icon(Icons.search, color: kPrimaryColor),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: kLightGreyColor,
-                width: 0.5,
-              ), //BorderSide.none,
-              borderRadius: BorderRadius.all(Radius.circular(8)),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: kLightGreyColor,
-                width: 0.5,
-              ), //BorderSide.none,
-              borderRadius: BorderRadius.all(Radius.circular(8)),
-            ),
-            fillColor: kWhiteColor,
-            contentPadding: EdgeInsets.zero,
-            hintText: langKey.searchIn.tr,
-            hintStyle: TextStyle(
-              color: kLightColor,
-              fontWeight: FontWeight.w600,
-              fontSize: 13.0,
-            ),
-          ),
-        ),
-      ),
-    );
+        title: CustomSearchBar()
+
+        //  Container(
+        //   height: 36,
+        //   child: TextField(
+        //     //controller: controller.searchTextController,
+        //     //focusNode: controller.focus,
+        //     enabled: false,
+        //     cursorColor: kPrimaryColor,
+        //     autofocus: false,
+        //     maxLines: 1,
+        //     style: TextStyle(
+        //       color: kLightColor,
+        //       fontWeight: FontWeight.w600,
+        //       fontSize: 15.0,
+        //     ),
+        //     textAlignVertical: TextAlignVertical.center,
+        //     decoration: InputDecoration(
+        //       filled: true,
+        //       prefixIcon: Icon(Icons.search, color: kPrimaryColor),
+        //       enabledBorder: OutlineInputBorder(
+        //         borderSide: BorderSide(
+        //           color: kLightGreyColor,
+        //           width: 0.5,
+        //         ), //BorderSide.none,
+        //         borderRadius: BorderRadius.all(Radius.circular(8)),
+        //       ),
+        //       focusedBorder: OutlineInputBorder(
+        //         borderSide: BorderSide(
+        //           color: kLightGreyColor,
+        //           width: 0.5,
+        //         ), //BorderSide.none,
+        //         borderRadius: BorderRadius.all(Radius.circular(8)),
+        //       ),
+        //       fillColor: kWhiteColor,
+        //       contentPadding: EdgeInsets.zero,
+        //       hintText: langKey.searchIn.tr,
+        //       hintStyle: TextStyle(
+        //         color: kLightColor,
+        //         fontWeight: FontWeight.w600,
+        //         fontSize: 13.0,
+        //       ),
+        //     ),
+        //),
+        //),
+        );
   }
 
   _body() {
