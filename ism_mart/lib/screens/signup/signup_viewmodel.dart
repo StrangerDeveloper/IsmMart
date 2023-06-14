@@ -37,6 +37,7 @@ class SignUpViewModel extends GetxController {
   }
 
   void signUp() {
+    GlobalVariable.internetErr(false);
     if (signUpFormKey.currentState?.validate() ?? false) {
       GlobalVariable.showLoader.value = true;
       String? phoneNumber = countryCode.value + phoneNumberController.text;
@@ -60,12 +61,14 @@ class SignUpViewModel extends GetxController {
             parsedJson['message'],
           );
         } else {
-          AppConstant.displaySnackBar(
-            langKey.errorTitle.tr,
-            parsedJson['message'],
-          );
+          GlobalVariable.internetErr(true);
+          // AppConstant.displaySnackBar(
+          //   langKey.errorTitle.tr,
+          //   parsedJson['message'],
+          // );
         }
       }).catchError((e) {
+        GlobalVariable.internetErr(true);
         print(e);
         GlobalVariable.showLoader.value = false;
       });

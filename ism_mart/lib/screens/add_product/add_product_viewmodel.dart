@@ -248,15 +248,17 @@ class AddProductViewModel extends GetxController {
         AppConstant.displaySnackBar(langKey.success.tr, value['message']);
       } else {
         debugPrint('Error: ${value.toString()}');
-        AppConstant.displaySnackBar(
-          langKey.errorTitle.tr,
-          "${value['message'] != null ? value['message'] : langKey.someThingWentWrong.tr}",
-        );
+        GlobalVariable.internetErr(false);
+
+        // AppConstant.displaySnackBar(
+        //   langKey.errorTitle.tr,
+        //   "${value['message'] != null ? value['message'] : langKey.someThingWentWrong.tr}",
+        // );
       }
     }).catchError((e) {
       GlobalVariable.internetErr(true);
       debugPrint('Error: ${e.toString()}');
-      AppConstant.displaySnackBar(langKey.errorTitle, "${e.message}");
+      //   AppConstant.displaySnackBar(langKey.errorTitle, "${e.message}");
     });
   }
 }

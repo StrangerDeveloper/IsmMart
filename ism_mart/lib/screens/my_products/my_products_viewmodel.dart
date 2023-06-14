@@ -51,6 +51,7 @@ class MyProductsViewModel extends GetxController {
             url: Urls.deleteProduct + productId, withAuthorization: true)
         .then((parsedJson) {
       if (parsedJson['success'] == true && parsedJson['data'] != null) {
+        GlobalVariable.internetErr(false);
         Get.back();
         myProductsList.removeAt(index);
 
