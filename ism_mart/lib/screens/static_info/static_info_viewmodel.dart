@@ -1,93 +1,22 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:ism_mart/exports/export_presentation.dart';
-import 'package:ism_mart/utils/constants.dart';
-import 'package:ism_mart/utils/languages/translations_key.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
-class GeneralSettingView extends StatelessWidget {
-  const GeneralSettingView({Key? key, this.title}) : super(key: key);
-
-  final String? title;
+class StaticInfoViewModel extends GetxController {
+  String title = '';
 
   @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: _appBar(),
-        body: ListView(
-          shrinkWrap: true,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16, top: 6),
-              child: Text(
-                title!,
-                style: headline1.copyWith(
-                  fontSize: 25,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(18, 0, 22, 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: getData().map((e) {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      AppConstant.spaceWidget(height: 15),
-                      if (e['header'] != '')
-                        CustomText(
-                          title: "${e['header']}",
-                          style: headline2,
-                        ),
-                      if (e['header'] != '') Divider(),
-                      if (e['body'].toString().isNotEmpty)
-                        Text(
-                          "${e['body'].toString()}",
-                          style: GoogleFonts.poppins(
-                            fontSize: 13.5,
-                            color: kDarkColor,
-                            height: 1.7,
-                          ),
-                        ),
-                    ],
-                  );
-                }).toList(),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  _appBar() {
-    return AppBar(
-      backgroundColor: kAppBarColor,
-      elevation: 0,
-      leading: InkWell(
-        onTap: () => Get.back(),
-        child: Icon(
-          Icons.arrow_back_ios_new,
-          size: 18,
-          color: kPrimaryColor,
-        ),
-      ),
-      title: CustomText(title: title, style: appBarTitleSize),
-    );
+  void onInit() {
+    title = Get.arguments['title'];
+    getData();
+    super.onInit();
   }
 
   List getData() {
-    if (title!.contains(termsAndConditions.tr)) {
+    if (title == langKey.termsAndConditions.tr) {
       return getTermConditionData();
-    } else if (title!.contains(privacyPolicy.tr))
+    } else if (title == langKey.privacyPolicy.tr)
       return getPrivacyData();
-    else if (title!.contains(returnAndExchange.tr))
+    else if (title == langKey.returnAndExchange.tr)
       return getReturnExchangeData();
     return getAboutUsData();
   }
@@ -104,7 +33,6 @@ class GeneralSettingView extends StatelessWidget {
   }
 
   List getPrivacyData() {
-    //String dot = "\u2022";
     return [
       {'header': langKey.privacyHeader1.tr, 'body': langKey.privacyBody1.tr},
       {'header': langKey.privacyHeader2.tr, 'body': langKey.privacyBody2.tr},
@@ -151,7 +79,6 @@ class GeneralSettingView extends StatelessWidget {
   }
 
   List getReturnExchangeData() {
-    //String dot = "\u2022";
     return [
       {
         'header': langKey.exchangeHeader1.tr,
