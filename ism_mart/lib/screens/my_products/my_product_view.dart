@@ -36,7 +36,7 @@ class MyProductView extends StatelessWidget {
         padding: const EdgeInsets.only(top: 10, right: 20, left: 20, bottom: 5),
         child: CustomTextBtn(
           onPressed: () {
-            Get.to(() => AddProductView());
+            Get.toNamed(Routes.addProduct);
           },
           title: langKey.addProduct.tr,
         ),
@@ -194,7 +194,7 @@ class MyProductView extends StatelessWidget {
                   children: [
                     CustomActionIcon(
                         onTap: () {
-                          Get.to(() => UpdateProductView(), arguments: [
+                          Get.toNamed(Routes.updateProduct, arguments: [
                             {'productId': '${model.id}'}
                           ]);
                         },

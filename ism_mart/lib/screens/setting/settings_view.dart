@@ -6,12 +6,9 @@ import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/models/exports_model.dart';
-import 'package:ism_mart/screens/buyer_profile/buyer_profile_view.dart';
-import 'package:ism_mart/screens/contact_us/contact_us_view.dart';
 import 'package:ism_mart/screens/setting/settings_viewmodel.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
-import '../update_vendor/update_vendor_view.dart';
 
 class SettingsView extends StatelessWidget {
   SettingsView({Key? key}) : super(key: key);
@@ -157,7 +154,7 @@ class SettingsView extends StatelessWidget {
                 Get.toNamed(Routes.sellerHomeRoute);
                 // authController.newAcc.value = false;
               } else {
-                Get.to(() => UpdateVendorView(),
+                Get.toNamed(Routes.updateVendor,
                     arguments: {'isRegisterScreen': true});
               }
             } else {
@@ -182,7 +179,8 @@ class SettingsView extends StatelessWidget {
         ),
         singleSettingsItem(
           onTap: () {
-            Get.to(() => BuyerProfileView());
+            Get.toNamed(Routes.buyerProfile);
+            // Get.to(() => BuyerProfileView());
           },
           icon: IconlyBold.user_2,
           color: Colors.pink,
@@ -236,8 +234,8 @@ class SettingsView extends StatelessWidget {
             title: langKey.notifications.tr,),*/
         singleSettingsItem(
           onTap: () {
-            Get.to(() =>
-                GeneralSettingView(title: langKey.termsAndConditions.tr));
+            Get.to(
+                () => GeneralSettingView(title: langKey.termsAndConditions.tr));
           },
           icon: Icons.rule_outlined,
           color: Colors.indigo,
@@ -270,7 +268,7 @@ class SettingsView extends StatelessWidget {
         ),
         singleSettingsItem(
           onTap: () {
-            Get.to(() => ContactUsView());
+            Get.toNamed(Routes.contactUs);
           },
           icon: Icons.contactless_outlined,
           color: Colors.green,
@@ -278,7 +276,7 @@ class SettingsView extends StatelessWidget {
         ),
         singleSettingsItem(
           onTap: () {
-            Get.to(() => FaqView());
+            Get.toNamed(Routes.faq);
           },
           icon: Icons.question_answer,
           color: Colors.purple,

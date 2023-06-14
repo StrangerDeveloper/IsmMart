@@ -529,7 +529,7 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                     (orderItem?.tickets?.isNotEmpty ?? false) ? false : true,
                 onTap: () {
                   Navigator.of(context).pop();
-                  Get.to(() => DisputeDetailView(),
+                  Get.toNamed(Routes.disputeDetail,
                       arguments: {'id': orderItem!.tickets![0].id.toString()});
                 },
               ),

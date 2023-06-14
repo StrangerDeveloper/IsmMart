@@ -10,7 +10,6 @@ import 'package:ism_mart/utils/exports_utils.dart';
 class SearchView extends GetView<SearchViewModel> {
   SearchView({super.key});
 
-  //final SearchViewModel viewModel = Get.put(SearchViewModel(Get.find<ApiProvider>()));
   @override
   Widget build(BuildContext context) {
     return Hero(
