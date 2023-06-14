@@ -31,6 +31,8 @@ class CustomSearchController extends GetxController {
     //searchProducts(searchTextController.text);
   }
 
+  var filters = Map<String, String>().obs;
+
   @override
   void onReady() {
     // TOO: implement onReady
@@ -38,41 +40,25 @@ class CustomSearchController extends GetxController {
 
     scrollController.addListener(() {
       if (stopLoadMore.isFalse) {
-        loadMoreSearchedProducts("");
+        //loadMoreSearchedProducts("");
       }
     });
+
+    ever(filters, handleFilters);
   }
 
-  void loadMoreSearchedProducts(String? searchQuery) async {
-    if (scrollController.hasClients &&
-        isLoadingMore.isFalse &&
-        scrollController.position.maxScrollExtent == scrollController.offset) {
-      isLoadingMore(true);
-      searchLimit += 10;
-      page++;
-      await _apiProvider
-          .search(
-              text: searchQuery!.toLowerCase(),
-              page: page,
-              limit: searchLimit,
-              sortBy: sortBy)
-          .then((response) {
-        // productList.clear();
-        productList.addAll(response.products.productRows!);
-        isLoadingMore(false);
-      }).catchError((error) {
-        isLoadingMore(false);
-      });
-    }
+  handleFilters(Map<String, String> filters) {
+    filters.addIf(page > 0, "page", "$page");
+    filters.addIf(searchLimit > 0, "limit", "$searchLimit");
+
+    searchWithFilters(filters: filters);
   }
 
   var categoriesList = <CategoryModel>[].obs;
 
   setCategories(List<CategoryModel> list) {
     categoriesList.clear();
-
     categoriesList.addAll(list);
-
     categoriesList.refresh();
   }
 
@@ -92,25 +78,22 @@ class CustomSearchController extends GetxController {
     }
   }
 
-  Rx<int> selectedIndex = 0.obs;
-  //Rx<String> changeValue = ''.obs;
-  //RxBool finalSerach = false.obs;
-  // var myFocusNode = FocusNode();
+  addFilters(key, value) {
+    if (value is String) {
+      filters.addIf(value.isNotEmpty, key, value);
+    } else if (value is int) {
+      filters.addIf(value > 0, key, "$value");
+    }
+  }
 
-  // void suggestionSearch() {
-  //   suggestionList.clear();
-  //   //  productList.map((element) => l.add(element.name));
-  //   for (var element in productList) {
-  //     suggestionList.add(element.name.toString());
-  //   }
-
-  //   print("suggestin hasnain ----------- ${suggestionList.length}");
-  // }
+  deleteFilter(key) {
+    filters.remove(key);
+  }
 
   var stopLoadMore = false.obs;
 
   applyFilter() async {
-    stopLoadMore.value = true;
+    //stopLoadMore.value = true;
     int? categoryId = selectedCategoryId.value;
     num? minPrice = num.parse(minPriceController.text.isNotEmpty
         ? minPriceController.text.toString().trim()
@@ -119,23 +102,26 @@ class CustomSearchController extends GetxController {
         ? maxPriceController.text.toString().trim()
         : "0");
 
-    Map<String, dynamic>? filters = Map();
-    filters.addIf(categoryId > 0, "category", "$categoryId");
-    if (minPrice != 0 && maxPrice != 0) if (minPrice.isLowerThan(maxPrice)) {
-      filters.addIf(minPrice > 0, "minPrice", "$minPrice");
-      filters.addIf(maxPrice > 0, "maxPrice", "$maxPrice");
-    } else
-      AppConstant.displaySnackBar(
-        langKey.errorTitle.tr,
-        langKey.minPriceShouldNotBe.tr,
-      );
+    addFilters("category", categoryId);
+
+    //filters.addIf(categoryId > 0, "category", "$categoryId");
+    if (minPrice != 0 && maxPrice != 0) {
+      if (minPrice.isLowerThan(maxPrice)) {
+        addFilters("minPrice", minPrice);
+        addFilters("maxPrice", maxPrice);
+        //filters.addIf(minPrice > 0, "minPrice", "$minPrice");
+        //filters.addIf(maxPrice > 0, "maxPrice", "$maxPrice");
+      } else
+        AppConstant.displaySnackBar(
+          langKey.errorTitle.tr,
+          langKey.minPriceShouldNotBe.tr,
+        );
+    }
 
     //int page = 1;
     //int limit = 10;
-    filters.addIf(page > 0, "page", "$page");
-    filters.addIf(searchLimit > 0, "limit", "$searchLimit");
 
-    await searchWithFilters(filters: filters);
+    //await searchWithFilters(filters: filters);
   }
 
   var isLoading = false.obs;
@@ -152,24 +138,34 @@ class CustomSearchController extends GetxController {
     });
   }
 
-  // loadMoreFilteredProducts() async {
-  //   page++;
-  //   searchLimit += 15;
-
-  //   searchWithFilters(filters: );
-  // }
+  loadMoreFilteredProducts() async {
+    page++;
+    searchLimit += 15;
+    isLoadingMore(true);
+    await _apiProvider.filterSearch(appliedFilters: filters).then((products) {
+      //productList.clear();
+      productList.addAll(products);
+      isLoadingMore(false);
+    }).catchError((onError) {
+      isLoadingMore(false);
+      debugPrint("loadMoreFilterProduct: $onError");
+    });
+  }
 
   clearFilters() async {
     minPriceController.clear();
     maxPriceController.clear();
+    searchLimit = 25;
+    page = 1;
+    filters.clear();
 
-    Map<String, dynamic>? filters = Map();
-    int page = 1;
-    int limit = 10;
-    filters.addIf(page > 0, "page", "$page");
-    filters.addIf(limit > 0, "limit", "$limit");
+    //Map<String, dynamic>? filters = Map();
+    //int page = 1;
+    //int limit = 10;
+    //filters.addIf(page > 0, "page", "$page");
+    //filters.addIf(limit > 0, "limit", "$limit");
 
-    await searchWithFilters(filters: filters);
+    //await searchWithFilters(filters: filters);
   }
 
   @override

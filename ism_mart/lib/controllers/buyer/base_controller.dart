@@ -263,7 +263,7 @@ class BaseController extends GetxController {
     const DashboardView(),
     const CategoriesView(),
     const SearchDetailsView(
-      passedSearchQuery: "",
+      searchQuery: "",
       isCalledForDeals: true,
     ),
     CartView(),

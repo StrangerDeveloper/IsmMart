@@ -9,18 +9,15 @@ import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 class SearchDetailsView extends GetView<CustomSearchController> {
   const SearchDetailsView({
     Key? key,
-    this.passedSearchQuery = "",
+    this.searchQuery = "",
+    this.productTypeKey = "",
     this.subCategoryID = 0,
     this.categoryID = 0,
-    this.isCalledForTypesProd = false,
     this.isCalledForDeals = false,
-    // this.calledForCategory,
   }) : super(key: key);
 
   final bool? isCalledForDeals;
-  final String? passedSearchQuery;
-  //final bool? calledForCategory;
-  final bool? isCalledForTypesProd;
+  final String? searchQuery, productTypeKey;
   final int? categoryID, subCategoryID;
 
   @override
@@ -29,28 +26,26 @@ class SearchDetailsView extends GetView<CustomSearchController> {
     // 1. all products (dashboard)
     // 2. Deals
     //3. on SearchBar (dashboard)
-    print(
-        "SearchView: $isCalledForDeals--$passedSearchQuery---$isCalledForTypesProd");
-    var filters = {
-      "limit": "25",
-      "page": "1",
-    };
+    print("SearchView: $isCalledForDeals--$searchQuery---$productTypeKey");
+
     if (isCalledForDeals!) {
-      filters.addIf(passedSearchQuery!.isNotEmpty, "text", passedSearchQuery!);
-
-      //controller.searchProducts(passedSearchQuery);
+      //controller.filters.addIf(searchQuery!.isNotEmpty, "text", searchQuery!);
+      controller.addFilters("text", searchQuery!);
     } else {
-      filters.addIf(isCalledForTypesProd! && passedSearchQuery!.isNotEmpty,
-          "type", baseController.getProductTypeKeys(passedSearchQuery));
-      filters.addIf(categoryID! > 0, "category", "$categoryID");
-      filters.addIf(subCategoryID! > 0, "subCategory", "$subCategoryID");
+      controller.addFilters(
+          "type", baseController.getProductTypeKeys(productTypeKey));
+      controller.addFilters("category", categoryID);
+      controller.addFilters("subCategory", subCategoryID);
+      // controller.filters.addIf(productTypeKey!.isNotEmpty, "type",
+      //     baseController.getProductTypeKeys(productTypeKey));
+      //controller.filters.addIf(categoryID! > 0, "category", "$categoryID");
+      // controller.filters
+      //     .addIf(subCategoryID! > 0, "subCategory", "$subCategoryID");
 
-      print("Filters: ${filters.toString()}");
+      print("Filters: ${controller.filters.toString()}");
 
-      controller.searchWithFilters(filters: filters);
+      //controller.searchWithFilters(filters: filters);
     }
-
-    controller.searchWithFilters(filters: filters);
 
     //  final controller = Get.find<SearchController>();
     //controller.searchTextController.clear();
@@ -115,7 +110,7 @@ class SearchDetailsView extends GetView<CustomSearchController> {
                   color: kPrimaryColor,
                 ),
               ),
-        title: CustomSearchBar()
+        title: CustomSearchBar(searchText: "")
 
         //  Container(
         //   height: 36,

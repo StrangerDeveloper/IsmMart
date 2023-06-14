@@ -322,10 +322,9 @@ class DashboardView extends GetView<BaseController> {
                 onTap: () {
                   Get.to(() => SearchDetailsView(
                         // Passing empty search text if all products.
-                        passedSearchQuery:
-                            calledForCategoryProducts! ? "" : '${e.key}',
+                        searchQuery: "",
                         //used flag to call method of getProductByTypes
-                        isCalledForTypesProd: true,
+                        productTypeKey: "${e.key}",
                         // calling for all products key.
                         isCalledForDeals: calledForCategoryProducts,
                       ));

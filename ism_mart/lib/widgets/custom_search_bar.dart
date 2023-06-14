@@ -41,7 +41,7 @@ class CustomSearchBar extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(left: 4.0),
                 child: Text(
-                  searchIn.tr,
+                  searchText != "" ? searchText! : searchIn.tr,
                   style: TextStyle(
                     color: kLightColor,
                     fontWeight: FontWeight.w600,
