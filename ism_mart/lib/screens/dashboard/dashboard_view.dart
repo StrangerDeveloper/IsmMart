@@ -13,8 +13,8 @@ import 'package:ism_mart/widgets/export_widgets.dart';
 
 import '../../search_details/search_details_view.dart';
 
-class DashboardUI extends GetView<BaseController> {
-  const DashboardUI({Key? key}) : super(key: key);
+class DashboardView extends GetView<BaseController> {
+  const DashboardView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
