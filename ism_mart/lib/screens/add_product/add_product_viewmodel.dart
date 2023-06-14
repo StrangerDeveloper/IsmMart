@@ -70,11 +70,13 @@ class AddProductViewModel extends GetxController {
     categoriesList.insert(0, CategoryModel(name: chooseCategory.value, id: 0));
     await ApiBaseHelper().getMethod(url: 'category/all').then((parsedJson) {
       if (parsedJson['success'] == true) {
+        GlobalVariable.internetErr(false);
         var parsedJsonData = parsedJson['data'] as List;
         categoriesList
             .addAll(parsedJsonData.map((e) => CategoryModel.fromJson(e)));
       }
     }).catchError((e) {
+      GlobalVariable.internetErr(true);
       print(e);
     });
   }
@@ -84,6 +86,7 @@ class AddProductViewModel extends GetxController {
         .getMethod(url: 'subcategory/$categoryID')
         .then((parsedJson) {
       if (parsedJson['success'] == true) {
+        GlobalVariable.internetErr(false);
         var parsesJsonData = parsedJson['data'] as List;
         selectedSubCategory(SubCategory(name: chooseSubCategory.value, id: 0));
         subCategoriesList.insert(
@@ -92,6 +95,8 @@ class AddProductViewModel extends GetxController {
             .addAll(parsesJsonData.map((e) => SubCategory.fromJson(e)));
       }
     }).catchError((e) {
+      GlobalVariable.internetErr(true);
+
       print(e);
     });
   }
@@ -132,6 +137,7 @@ class AddProductViewModel extends GetxController {
                 'categoryFields?categoryId=$selectedCategoryID&subcategoryId=$selectedSubCategoryID')
         .then((parsedJson) {
       if (parsedJson['success'] == true) {
+        GlobalVariable.internetErr(false);
         var parsedJsonData = parsedJson['data'] as List;
         productVariantsFieldsList.clear();
         productVariantsFieldsList.addAll(parsedJsonData
@@ -139,6 +145,7 @@ class AddProductViewModel extends GetxController {
             .toList());
       }
     }).catchError((e) {
+      GlobalVariable.internetErr(true);
       print(e);
     });
   }
@@ -151,6 +158,7 @@ class AddProductViewModel extends GetxController {
   }
 
   void addProdBtnPress() {
+    GlobalVariable.internetErr(false);
     if (formKey.currentState!.validate()) {
       if (subCategoriesList.isNotEmpty) {
         if (discountMessage.isEmpty) {
@@ -230,6 +238,7 @@ class AddProductViewModel extends GetxController {
         .then((value) async {
       GlobalVariable.showLoader.value = false;
       if (value['success'] == true) {
+        GlobalVariable.internetErr(false);
         MyProductsViewModel myProductsViewModel = Get.find();
         myProductsViewModel.loadInitialProducts();
         // await sellersController.fetchMyProducts();
@@ -243,6 +252,7 @@ class AddProductViewModel extends GetxController {
         );
       }
     }).catchError((e) {
+      GlobalVariable.internetErr(true);
       debugPrint('Error: ${e.toString()}');
       AppConstant.displaySnackBar(langKey.errorTitle, "${e.message}");
     });

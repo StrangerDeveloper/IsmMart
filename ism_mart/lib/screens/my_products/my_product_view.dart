@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 import 'package:ism_mart/exports/exports_ui.dart';
+import 'package:ism_mart/helper/no_internet_view.dart';
 import 'package:ism_mart/screens/my_products/my_products_viewmodel.dart';
 import 'package:ism_mart/screens/my_products/vendor_product_model.dart';
 import 'package:ism_mart/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/widgets/loader_view.dart';
 
 class MyProductView extends StatelessWidget {
   MyProductView({super.key});
@@ -17,12 +19,20 @@ class MyProductView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Column(
+        body: Stack(
           children: [
-            addProduct(context),
-            Expanded(
-              child: _buildProductBody(),
+            Column(
+              children: [
+                addProduct(context),
+                Expanded(
+                  child: _buildProductBody(),
+                ),
+              ],
             ),
+            NoInternetView(
+              onPressed: () => viewModel.loadInitialProducts(),
+            ),
+            LoaderView()
           ],
         ),
       ),
@@ -36,7 +46,7 @@ class MyProductView extends StatelessWidget {
         padding: const EdgeInsets.only(top: 10, right: 20, left: 20, bottom: 5),
         child: CustomTextBtn(
           onPressed: () {
-            Get.to(() => AddProductView());
+            Get.toNamed(Routes.addProduct);
           },
           title: langKey.addProduct.tr,
         ),
@@ -194,7 +204,7 @@ class MyProductView extends StatelessWidget {
                   children: [
                     CustomActionIcon(
                         onTap: () {
-                          Get.to(() => UpdateProductView(), arguments: [
+                          Get.toNamed(Routes.updateProduct, arguments: [
                             {'productId': '${model.id}'}
                           ]);
                         },

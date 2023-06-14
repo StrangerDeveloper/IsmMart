@@ -168,7 +168,7 @@ class SignUpView extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
         onTap: () {
-          Get.off(()=>SignInView());
+          Get.offNamed(Routes.loginRoute);
         },
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),

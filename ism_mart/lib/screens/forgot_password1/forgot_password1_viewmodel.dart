@@ -37,7 +37,7 @@ class ForgotPassword1ViewModel extends GetxController {
         GlobalVariable.showLoader.value = false;
 
         if (parsedJson['success'] == true) {
-          Get.off(() => ForgotPassword2View(), arguments: {'email' : emailController.text});
+          Get.offNamed(Routes.forgotPassword2, arguments: {'email' : emailController.text});
           AppConstant.displaySnackBar(
             langKey.successTitle.tr,
             parsedJson['message'],

@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/screens/update_vendor/update_vendor_view.dart';
 import 'package:ism_mart/screens/vendor_detail/vendor_detail_viewmodel.dart';
+import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class VendorDetailView extends StatelessWidget {
@@ -32,7 +33,7 @@ class VendorDetailView extends StatelessWidget {
               CustomTextBtn(
                 width: Get.width * 0.5,
                 onPressed: () {
-                  Get.to(() => UpdateVendorView(),
+                  Get.toNamed(Routes.updateVendor,
                       arguments: {'isRegisterScreen': false});
                 },
                 title: langKey.updateBtn.tr,

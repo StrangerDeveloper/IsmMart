@@ -13,7 +13,6 @@ import 'package:ism_mart/screens/product_questions/product_questions_view.dart';
 import 'package:ism_mart/screens/update_vendor/update_vendor_view.dart';
 import 'package:ism_mart/screens/vendor_detail/vendor_detail_view.dart';
 import 'package:ism_mart/screens/vendor_question/vendor_question_view.dart';
-
 import '../screens/contact_us/contact_us_view.dart';
 import '../screens/forgot_password2/forgot_password2_view.dart';
 import '../screens/vendor_orders/vendor_orders_view.dart';
