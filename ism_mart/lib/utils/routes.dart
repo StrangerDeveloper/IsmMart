@@ -17,6 +17,7 @@ import '../screens/contact_us/contact_us_view.dart';
 import '../screens/forgot_password2/forgot_password2_view.dart';
 import '../screens/seller_store_detail/seller_store_detail_view.dart';
 import '../screens/single_product_details/single_product_details_view.dart';
+import '../screens/static_info/static_info_view.dart';
 import '../screens/vendor_orders/vendor_orders_view.dart';
 
 class Routes {
@@ -37,7 +38,7 @@ class Routes {
   static const faq = "/faq";
   static const forgotPassword1 = "/forgotPassword1";
   static const forgotPassword2 = "/forgotPassword2";
-  static const generalSetting = "/generalSetting";
+  static const staticInfo = "/staticInfo";
   static const myProduct = "/myProduct";
   static const productQuestions = "/productQuestions";
   static const searchRoute = "/search";
@@ -137,8 +138,8 @@ class Routes {
       page: () => ForgotPassword2View(),
     ),
     GetPage(
-      name: generalSetting,
-      page: () => GeneralSettingView(),
+      name: staticInfo,
+      page: () => StaticInfoView(),
     ),
     GetPage(
       name: myProduct,

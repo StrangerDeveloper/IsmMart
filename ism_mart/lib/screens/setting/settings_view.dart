@@ -234,8 +234,7 @@ class SettingsView extends StatelessWidget {
             title: langKey.notifications.tr,),*/
         singleSettingsItem(
           onTap: () {
-            Get.to(
-                () => GeneralSettingView(title: langKey.termsAndConditions.tr));
+            Get.toNamed(Routes.staticInfo, arguments: {'title' : langKey.termsAndConditions.tr});
           },
           icon: Icons.rule_outlined,
           color: Colors.indigo,
@@ -243,7 +242,7 @@ class SettingsView extends StatelessWidget {
         ),
         singleSettingsItem(
           onTap: () {
-            Get.to(() => GeneralSettingView(title: langKey.privacyPolicy.tr));
+            Get.toNamed(Routes.staticInfo, arguments: {'title' : langKey.privacyPolicy.tr});
           },
           icon: IconlyLight.paper,
           color: Colors.purpleAccent,
@@ -251,8 +250,7 @@ class SettingsView extends StatelessWidget {
         ),
         singleSettingsItem(
           onTap: () {
-            Get.to(
-                () => GeneralSettingView(title: langKey.returnAndExchange.tr));
+            Get.toNamed(Routes.staticInfo, arguments: {'title' : langKey.returnAndExchange.tr});
           },
           icon: Icons.assignment_return_rounded,
           color: Colors.lime,
@@ -260,7 +258,8 @@ class SettingsView extends StatelessWidget {
         ),
         singleSettingsItem(
           onTap: () {
-            Get.to(() => GeneralSettingView(title: langKey.aboutUs.tr));
+            Get.toNamed(Routes.staticInfo, arguments: {'title' : langKey.aboutUs.tr});
+
           },
           icon: IconlyLight.info_circle,
           color: Colors.pinkAccent,
