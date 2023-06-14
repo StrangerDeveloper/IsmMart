@@ -4,17 +4,21 @@ import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+// import '../controllers/buyer/search/allproducts_model.dart';
+import '../screens/single_product_details/single_product_details_view.dart';
 
 class SingleProductItems extends StatelessWidget {
-  const SingleProductItems(
-      {Key? key,
-      this.productModel,
-      this.isCategoryProducts = false,
-      this.onTap})
-      : super(key: key);
+  const SingleProductItems({
+    Key? key,
+    // this.allProductsModel,
+    this.productModel,
+    this.isCategoryProducts = false,
+    this.onTap,
+  }) : super(key: key);
   final ProductModel? productModel;
   final bool? isCategoryProducts;
   final GestureTapCallback? onTap;
+  // final AllProductsModel? allProductsModel;
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +34,10 @@ class SingleProductItems extends StatelessWidget {
         padding: const EdgeInsets.all(5.0),
         child: GestureDetector(
           onTap: () {
-            Get.to(ProductView(
-              productId: "${model.id}",
-              calledFor: 'customer',
-            ));
+            Get.toNamed(Routes.singleProductDetails, arguments: [{
+              "calledFor": "customer",
+              "productID": "${model.id}"
+            }]);
           },
           child: Container(
             clipBehavior: Clip.hardEdge,
@@ -118,24 +122,28 @@ class SingleProductItems extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap ??
             () {
-              showModalBottomSheet(
-                  //isDismissible: false,
-                  isScrollControlled: true,
-                  context: buildContext!,
-                  backgroundColor: kWhiteColor,
-                  enableDrag: true,
-                  elevation: 0,
-                  builder: (_) {
-                    return SafeArea(
-                      child: Container(
-                        height: AppResponsiveness.height * 0.91,
-                        child: ProductView(
-                          productId: "${model!.id}",
-                        ),
-                      ),
-                    );
-                  });
-            },
+              Get.toNamed(Routes.singleProductDetails, arguments: [{
+          "calledFor": "customer",
+          "productID": "${model!.id}"
+          }]);
+      // showModalBottomSheet(
+      //     //isDismissible: false,
+      //     isScrollControlled: true,
+      //     context: buildContext!,
+      //     backgroundColor: kWhiteColor,
+      //     enableDrag: true,
+      //     elevation: 0,
+      //     builder: (_) {
+      //       return SafeArea(
+      //         child: Container(
+      //           height: AppResponsiveness.height * 0.91,
+      //           child: SingleProductView(
+      //             productId: "${model!.id}",
+      //           ),
+      //         ),
+      //       );
+      //     });
+      },
         child: Container(
           clipBehavior: Clip.hardEdge,
           margin: const EdgeInsets.symmetric(horizontal: 5),
@@ -167,8 +175,8 @@ class SingleProductItems extends StatelessWidget {
                           ],
                         ),
                       )
-                      //child: CustomNetworkImage(imageUrl: model!.thumbnail),
-                      ),
+                    //child: CustomNetworkImage(imageUrl: model!.thumbnail),
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(6),
                     child: Column(
@@ -225,7 +233,7 @@ class SingleProductItems extends StatelessWidget {
             ],
           ),
         ),
-      ),
+      )
     );
   }
 }

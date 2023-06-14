@@ -24,6 +24,8 @@ class English {
             'Are you sure you want to delete question?',
         key.question: 'Question',
         key.topVendors: 'Top Vendors',
+        key.productVariant: 'Product Variant',
+        key.productDetails: 'Product Details',
 
         ///errors
         key.serverUnableToHandle: 'server is unable to handle request',

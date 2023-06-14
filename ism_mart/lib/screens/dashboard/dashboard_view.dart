@@ -4,13 +4,21 @@ import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/api_service.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
-import 'package:ism_mart/exports/exports_ui.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/screens/top_vendors/top_vendors_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
-import 'package:ism_mart/widgets/export_widgets.dart';
-
+import '../../widgets/custom_grey_border_container.dart';
+import '../../widgets/custom_loading.dart';
+import '../../widgets/custom_network_image.dart';
+import '../../widgets/custom_price_widget.dart';
+import '../../widgets/custom_search_bar.dart';
+import '../../widgets/custom_text.dart';
+import '../../widgets/no_data_found.dart';
+import '../../widgets/single_category_item.dart';
+import '../../widgets/single_product_grid_item.dart';
+import '../../widgets/sticky_label_with_view_more.dart';
+import '../../widgets/sticky_labels.dart';
 import '../../search_details/search_details_view.dart';
 
 class DashboardView extends GetView<BaseController> {
@@ -166,10 +174,10 @@ class DashboardView extends GetView<BaseController> {
         DateTime.now().add(const Duration(hours: 17)).millisecondsSinceEpoch;
     return InkWell(
       onTap: () {
-        Get.to(ProductView(
-          productId: "${model.id}",
-          calledFor: 'customer',
-        ));
+        Get.toNamed(Routes.singleProductDetails, arguments: [{
+          "calledFor": "customer",
+          "productID": "${model.id}"
+        }]);
       },
       child: Stack(
         fit: StackFit.loose,

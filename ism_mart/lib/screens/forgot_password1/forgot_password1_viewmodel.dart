@@ -6,8 +6,6 @@ import 'package:ism_mart/helper/urls.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
-import '../forgot_password2/forgot_password2_view.dart';
-
 class ForgotPassword1ViewModel extends GetxController {
   GlobalKey<FormState> forgotPasswordFormKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();

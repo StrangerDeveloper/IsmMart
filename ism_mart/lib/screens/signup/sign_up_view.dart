@@ -3,10 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/global_variables.dart';
 import 'package:ism_mart/exports/export_account.dart';
+import 'package:ism_mart/helper/no_internet_view.dart';
 import 'package:ism_mart/screens/signup/signup_viewmodel.dart';
 import 'package:ism_mart/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/widgets/loader_view.dart';
 import 'package:ism_mart/widgets/obscure_suffix_icon.dart';
 
 class SignUpView extends StatelessWidget {
@@ -17,31 +19,39 @@ class SignUpView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-          child: Form(
-            key: viewModel.signUpFormKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                logoCloseIcon(),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10, bottom: 40),
-                  child: CustomText(
-                    title: langKey.registerGreetings.tr,
-                    style: headline2,
-                  ),
+        body: Stack(
+          children: [
+            SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              child: Form(
+                key: viewModel.signUpFormKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    logoCloseIcon(),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10, bottom: 40),
+                      child: CustomText(
+                        title: langKey.registerGreetings.tr,
+                        style: headline2,
+                      ),
+                    ),
+                    fullNameField(),
+                    emailTextField(),
+                    passwordTextField(),
+                    phoneNumberTextField(),
+                    signUpBtn(),
+                    SizedBox(height: 20),
+                    alreadyHaveAnAccount(),
+                  ],
                 ),
-                fullNameField(),
-                emailTextField(),
-                passwordTextField(),
-                phoneNumberTextField(),
-                signUpBtn(),
-                SizedBox(height: 20),
-                alreadyHaveAnAccount(),
-              ],
+              ),
             ),
-          ),
+            NoInternetView(
+              onPressed: () => viewModel.signUp(),
+            ),
+            LoaderView()
+          ],
         ),
       ),
     );
@@ -141,7 +151,8 @@ class SignUpView extends StatelessWidget {
           },
           onChanged: (value) {
             viewModel.countryCode.value = value.dialCode ?? '+92';
-            String newPhoneValue = viewModel.countryCode.value + viewModel.phoneNumberController.text;
+            String newPhoneValue = viewModel.countryCode.value +
+                viewModel.phoneNumberController.text;
             viewModel.validatorPhoneNumber(newPhoneValue);
           },
         ),
@@ -168,7 +179,7 @@ class SignUpView extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
         onTap: () {
-          Get.offNamed(Routes.loginRoute);
+          Get.off(() => SignInView());
         },
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),

@@ -150,7 +150,8 @@ const addToCart = 'addToCart',
     yourDiscountShould = 'yourDiscountShould',
     outOfStock = 'outOfStock',
     productNotFound = 'productNotFound',
-    uploadImageLessThan = 'uploadImageLessThan';
+    uploadImageLessThan = 'uploadImageLessThan',
+    productVariant = 'productVariant';
 
 ///my_orders
 const invoiceNo = 'invoiceNo',

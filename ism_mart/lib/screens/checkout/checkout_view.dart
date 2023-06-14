@@ -4,125 +4,120 @@ import 'package:get/get.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
+import 'package:ism_mart/screens/cart/cart_viewmodel.dart';
+import 'package:ism_mart/screens/checkout/checkout_viewmodel.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/widgets/loader_view.dart';
 
-class CheckoutView extends GetView<CheckoutController> {
-  const CheckoutView({Key? key}) : super(key: key);
+class CheckoutView extends StatelessWidget {
+  CheckoutView({Key? key}) : super(key: key);
+
+  final CheckoutViewModel viewModel = Get.put(CheckoutViewModel());
+  final CartViewModel cartViewModel = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.grey[100]!,
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: kAppBarColor,
-          leading: InkWell(
-            onTap: () => Get.back(),
-            child: Icon(
-              Icons.arrow_back_ios_new,
-              size: 18,
-              color: kPrimaryColor,
+        appBar: _appBar(),
+        body: Stack(
+          children: [
+            SingleChildScrollView(
+              physics: ScrollPhysics(),
+              child: Column(
+                children: [
+
+                  ///Shipping Address Section
+                  StickyLabel(text: langKey.shippingDetails.tr),
+                  Obx(() => viewModel.noDefaultAddress.value ? _buildNewAddress()
+                      : _shippingAddressDetails(viewModel.userModel.value)
+                  ),
+
+                  ///Shipping Cost Cards
+                  StickyLabel(text: langKey.shippingCost.tr),
+                  Obx(() => Column(
+                    children: [
+                      _singleShippingCostItem(
+                          title: langKey.standard.tr,
+                          price: 250,
+                          delivery: 7),
+                      _singleShippingCostItem(
+                          title: langKey.free.tr, price: 0, delivery: 14),
+                    ],
+                  ),
+                  ),
+
+                  ///Cart Items
+                  StickyLabel(text: langKey.orderSummary.tr),
+                  _buildCartItemSection(),
+
+
+                  ///Payment Methods Cards
+                  StickyLabel(text: langKey.paymentMethod.tr),
+                  _buildPaymentDetails(),
+
+                  ///Sub-total Card
+                  _subTotalDetails(),
+
+                  Column(
+                    children: [
+                      AppConstant.spaceWidget(height: 20),
+                      CustomTextBtn(
+                          width: 280,
+                          height: 50,
+                          title: langKey.confirmOrder.tr,
+                          onPressed: () {
+                            if (cartViewModel.totalCartAmount.value <=
+                                num.parse(currencyController.convertCurrency(
+                                    currentPrice: "1000")!)) {
+                              AppConstant.displaySnackBar(
+                                langKey.errorTitle.tr,
+                                langKey.toProceedWithPurchase.tr,
+                              );
+                              //You cannot use Free Shipping Service under Rs1000
+                              return;
+                            } else if (viewModel.isCardPaymentEnabled.isFalse) {
+                              AppConstant.displaySnackBar(
+                                  langKey.errorTitle.tr,
+                                  langKey.preferredPayment.tr
+                              );
+                              return;
+                            }
+                            // else {
+                            //   controller.makePayment(
+                            //       amount: controller.totalAmount.value
+                            //           .toString());
+                            // }
+                          },
+                        ),
+                      AppConstant.spaceWidget(height: 20),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-          title: CustomText(title: langKey.checkout.tr, style: appBarTitleSize),
+            LoaderView(),
+          ],
         ),
-        body: _body(),
       ),
     );
   }
 
-  ///
-
-  Widget _body() {
-    return CustomScrollView(
-      slivers: [
-        SliverList(
-          delegate: SliverChildListDelegate(
-            [
-              StickyLabel(text: langKey.shippingDetails.tr),
-              Obx(() => controller.defaultAddressModel!.defaultAddress!
-                  ? _shippingAddressDetails(controller.defaultAddressModel)
-                  : _buildNewAddress()),
-              StickyLabel(text: langKey.shippingCost.tr),
-              Obx(
-                () => Column(
-                  children: [
-                    _singleShippingCostItem(
-                        title: langKey.standard.tr, price: 250, delivery: 7),
-                    _singleShippingCostItem(
-                        title: langKey.free.tr, price: 0, delivery: 14),
-                  ],
-                ),
-              ),
-              StickyLabel(text: langKey.orderSummary.tr),
-              _buildCartItemSection(),
-              StickyLabel(text: langKey.paymentMethod.tr),
-              _buildPaymentDetails(),
-              _subTotalDetails(),
-              Column(
-                children: [
-                  AppConstant.spaceWidget(height: 20),
-                  Obx(
-                    () => controller.isLoading.isTrue
-                        ? CustomLoading(isItBtn: true)
-                        : CustomTextBtn(
-                            width: 280,
-                            height: 50,
-                            title: langKey.confirmOrder.tr,
-                            onPressed: () {
-                              if (controller
-                                      .cartController.totalCartAmount.value <=
-                                  num.parse(currencyController.convertCurrency(
-                                      currentPrice: "1000")!)) {
-                                controller.showSnackBar(
-                                  title: langKey.errorTitle.tr,
-                                  message: langKey.toProceedWithPurchase.tr,
-                                );
-                                //You cannot use Free Shipping Service under Rs1000
-                                return;
-                              } else if (controller
-                                  .isCardPaymentEnabled.isFalse) {
-                                controller.showSnackBar(
-                                    title: langKey.errorTitle.tr,
-                                    message: langKey.preferredPayment.tr);
-                                return;
-                              } else if (controller
-                                  .isCardPaymentEnabled.isFalse) {
-                                controller.showSnackBar(
-                                  title: langKey.errorTitle.tr,
-                                  message: langKey.preferredPayment.tr,
-                                );
-                                return;
-                              } else if (controller.defaultAddressModel!.id ==
-                                  null) {
-                                controller.showSnackBar(
-                                    title: langKey.errorTitle.tr,
-                                    message: langKey.noDefaultAddressFound.tr);
-                                return;
-                              } else if (controller
-                                  .getCartItemsList()
-                                  .isEmpty) {
-                                controller.showSnackBar(
-                                    title: langKey.errorTitle.tr,
-                                    message: langKey.cartMustNotEmpty.tr);
-                                return;
-                              } else {
-                                controller.makePayment(
-                                    amount: controller.totalAmount.value
-                                        .toString());
-                              }
-                            },
-                          ),
-                  ),
-                  AppConstant.spaceWidget(height: 20),
-                ],
-              ),
-            ],
-          ),
+  AppBar _appBar() {
+    return AppBar(
+      elevation: 0,
+      backgroundColor: kAppBarColor,
+      leading: InkWell(
+        onTap: () => Get.back(),
+        child: Icon(
+          Icons.arrow_back_ios_new,
+          size: 18,
+          color: kPrimaryColor,
         ),
-      ],
+      ),
+      title: CustomText(title: langKey.checkout.tr, style: appBarTitleSize),
     );
   }
 
@@ -133,7 +128,7 @@ class CheckoutView extends GetView<CheckoutController> {
         children: [
           CustomCard(
             child: IgnorePointer(
-              ignoring: controller.cartController.totalCartAmount.value <= 1000,
+              ignoring: cartViewModel.totalCartAmount.value <= 1000,
               child: RadioListTile(
                 activeColor: kPrimaryColor,
                 toggleable: false,
@@ -143,14 +138,12 @@ class CheckoutView extends GetView<CheckoutController> {
                   title: "$title " + langKey.delivery.tr,
                 ),
                 subtitle: CustomText(
-                  title: langKey.delivery.tr +
-                      ": $delivery " +
-                      langKey.daysCost.tr +
-                      " :${convertStaticPrice(price: price!)}",
+                  title: langKey.delivery.tr + ": $delivery " +
+                      langKey.daysCost.tr + " :${viewModel.convertStaticPrice(price: price!)}",
                 ),
-                groupValue: controller.shippingCost.value,
+                groupValue: viewModel.shippingCost.value,
                 onChanged: (value) {
-                  controller.setShippingCost(value!);
+                  viewModel.setShippingCost(value!);
                 },
               ),
             ),
@@ -158,21 +151,13 @@ class CheckoutView extends GetView<CheckoutController> {
           if (price == 0)
             CustomText(
                 title:
-                    "${langKey.freeShipping.tr} ${convertStaticPrice(price: 1000)}")
+                    "${langKey.freeShipping.tr} ${viewModel.convertStaticPrice(price: 1000)}")
         ],
       ),
     );
   }
 
-  String convertStaticPrice({num? price}) {
-    num? priceAfter = num.parse(
-        currencyController.convertCurrency(currentPrice: price.toString())!);
-    return "${AppConstant.getCurrencySymbol(currencyCode: currencyController.currency.value)} ${priceAfter.toStringAsFixed(2)}";
-  }
-
-  ///TOO: Shipping Details
-  ///
-  Widget _shippingAddressDetails(UserModel? userModel) {
+  Padding _shippingAddressDetails(UserModel? userModel) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: CustomCard(
@@ -227,7 +212,7 @@ class CheckoutView extends GetView<CheckoutController> {
     );
   }
 
-  Widget _buildNewAddress() {
+  Padding _buildNewAddress() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -251,10 +236,9 @@ class CheckoutView extends GetView<CheckoutController> {
     );
   }
 
-  ///
   ///TOO: Payments Details
-  ///
-  Widget _buildPaymentDetails() {
+
+  _buildPaymentDetails() {
     return Obx(
       () => Padding(
         padding: const EdgeInsets.all(8.0),
@@ -275,38 +259,40 @@ class CheckoutView extends GetView<CheckoutController> {
               CustomCard(
                 color: Colors.white,
                 child: Visibility(
-                    visible: controller.isCardPaymentEnabled.isTrue,
+                    visible: viewModel.isCardPaymentEnabled.value,
                     child: CardField(
                         enablePostalCode: true,
                         onCardChanged: (card) async {
                           //await Stripe.instance.createPaymentMethod(params);
-                          try {
-                            var paymentMethod =
-                                await Stripe.instance.createPaymentMethod(
-                              params: PaymentMethodParams.card(
-                                paymentMethodData: PaymentMethodData(
-                                  billingDetails: BillingDetails(
-                                    name:
-                                        controller.defaultAddressModel?.name ??
-                                            "",
-                                    email:
-                                        controller.defaultAddressModel?.email ??
-                                            "",
-                                    phone:
-                                        controller.defaultAddressModel?.phone ??
-                                            "",
-                                    address: null,
-                                  ),
-                                ),
-                              ),
-                            );
-                            debugPrint(
-                                ">>>CardPaymentMethod: ${paymentMethod.id}");
-                            controller.setPaymentIntentId(paymentMethod.id);
-                          } on StripeException catch (e) {
-                            print(">>>stripeException: $e");
-                          }
-                        })),
+                          // try {
+                          //   var paymentMethod =
+                          //       await Stripe.instance.createPaymentMethod(
+                          //     params: PaymentMethodParams.card(
+                          //       paymentMethodData: PaymentMethodData(
+                          //         billingDetails: BillingDetails(
+                          //           name:
+                          //               controller.defaultAddressModel?.name ??
+                          //                   "",
+                          //           email:
+                          //               controller.defaultAddressModel?.email ??
+                          //                   "",
+                          //           phone:
+                          //               controller.defaultAddressModel?.phone ??
+                          //                   "",
+                          //           address: null,
+                          //         ),
+                          //       ),
+                          //     ),
+                          //   );
+                          //   debugPrint(
+                          //       ">>>CardPaymentMethod: ${paymentMethod.id}");
+                          //   controller.setPaymentIntentId(paymentMethod.id);
+                          // } on StripeException catch (e) {
+                          //   print(">>>stripeException: $e");
+                          // }
+                        }
+                        )
+                ),
               ),
             ],
           ),
@@ -337,9 +323,9 @@ class CheckoutView extends GetView<CheckoutController> {
                     Icon(icon),
                   ],
                 ),
-                groupValue: controller.paymentType,
+                groupValue: viewModel.paymentType.value,
                 onChanged: (value) {
-                  controller.enableCardPayment(value);
+                  viewModel.enableCardPayment(value);
                 },
               ),
             ),
@@ -349,25 +335,20 @@ class CheckoutView extends GetView<CheckoutController> {
     );
   }
 
-  ///
-  ///TOO: Order Summery
-  ///
+  ///TOO: Order Summary
 
-  Widget _buildCartItemSection() {
+  Padding _buildCartItemSection() {
     return Padding(
       padding: const EdgeInsets.all(5.0),
-      child: Obx(
-        () => controller.getCartItemsList().isEmpty
+      child: Obx(() => cartViewModel.cartItemsList.isEmpty
             ? NoDataFound(text: langKey.noCartItemFound.tr)
             : ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: controller.getCartItemsList().length,
+                itemCount: cartViewModel.cartItemsList.length,
                 itemBuilder: (context, index) {
-                  CartModel cartModel = controller.getCartItemsList()[index];
                   return SingleCartItems(
                     index: index,
-                    cartModel: cartModel,
                     calledFromCheckout: true,
                   );
                 },
@@ -376,9 +357,8 @@ class CheckoutView extends GetView<CheckoutController> {
     );
   }
 
-  Widget _subTotalDetails() {
-    return Obx(
-      () => Padding(
+  _subTotalDetails() {
+    return Obx(() => Padding(
         padding: const EdgeInsets.all(8.0),
         child: CustomCard(
           child: Padding(
@@ -400,75 +380,22 @@ class CheckoutView extends GetView<CheckoutController> {
                         //height: 40.0,
                         padding: const EdgeInsets.symmetric(horizontal: 5),
                         margin: const EdgeInsets.symmetric(horizontal: 5),
-                        child: TextField(
-                          controller: controller.couponCodeController,
-                          cursorColor: kPrimaryColor,
-                          autofocus: false,
-                          style: bodyText1,
-                          enabled: controller.coinsModel?.silver != null &&
-                              controller.coinsModel!.silver!
-                                  .isGreaterThan(fixedRedeemCouponThreshold),
-                          textInputAction: TextInputAction.search,
-                          // onChanged: controller.search,
-                          decoration: InputDecoration(
-                            filled: true,
-                            prefixIcon:
-                                Icon(Icons.search, color: kPrimaryColor),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: kLightGreyColor,
-                                width: 0.5,
-                              ), //BorderSide.none,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(8)),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: kLightGreyColor,
-                                width: 0.5,
-                              ), //BorderSide.none,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(8)),
-                            ),
-                            fillColor: kWhiteColor,
-                            contentPadding: EdgeInsets.zero,
-                            hintText:
-                                '${langKey.wantToRedeem.tr} ${controller.coinsModel?.silver ?? 0} ${langKey.coins.tr}?',
-                            hintStyle: TextStyle(
-                              color: kLightColor,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 13.0,
-                            ),
-                          ),
-                        ),
+                        child: couponTextField()
                       ),
                     ),
 
                     ///Apply Button
                     Expanded(
                         child: OutlinedButton(
-                      onPressed: () {
-                        String? value =
-                            controller.couponCodeController.text.isEmpty
-                                ? "0"
-                                : controller.couponCodeController.text;
-                        controller.applyRedeemCode(num.parse(value));
-                        // if (controller.coinsModel != null &&
-                        //     controller.coinsModel!.silver!
-                        //         .isGreaterThan(fixedRedeemCouponThreshold) &&
-                        //     value.isNotEmpty)
-                        //   controller.applyRedeemCode(num.parse(value));
-                        // else
-                        //   AppConstant.displaySnackBar(
-                        //     langKey.errorTitle.tr,
-                        //     langKey.needMoreCoins.tr,
-                        //   );
-                      },
-                      child: CustomText(
-                        title: langKey.redeemBtn.tr,
-                        weight: FontWeight.w600,
-                      ),
-                    )),
+                          onPressed: () {
+                              viewModel.redeemCoins();
+                            },
+                          child: CustomText(
+                            title: langKey.redeemBtn.tr,
+                            weight: FontWeight.w600,
+                          ),
+                        ),
+                    ),
                   ],
                 ),
 
@@ -485,14 +412,14 @@ class CheckoutView extends GetView<CheckoutController> {
                               style: bodyText1),
                           TextSpan(
                               text:
-                                  "(${controller.cartController.totalQtyCart.value} ${langKey.items.tr})",
+                                  "(${cartViewModel.totalQtyCart.value} ${langKey.items.tr})",
                               style: caption),
                         ],
                       ),
                     ),
                     CustomPriceWidget(
                         title:
-                            "${controller.cartController.totalCartAmount.value}",
+                            "${cartViewModel.totalCartAmount.value}",
                         style: bodyText1),
                   ],
                 ),
@@ -502,7 +429,7 @@ class CheckoutView extends GetView<CheckoutController> {
                   children: [
                     CustomText(title: langKey.shippingFee.tr, style: bodyText1),
                     Obx(() => CustomPriceWidget(
-                        title: "${controller.shippingCost.value}",
+                        title: "${viewModel.shippingCost.value}",
                         style: bodyText1)),
                   ],
                 ),
@@ -513,7 +440,7 @@ class CheckoutView extends GetView<CheckoutController> {
                     CustomText(
                         title: langKey.prodDiscount.tr, style: bodyText1),
                     Obx(() => CustomPriceWidget(
-                        title: "${controller.totalDiscount.value}",
+                        title: "${viewModel.totalDiscount.value}",
                         style: bodyText1.copyWith(color: Colors.amber))),
                   ],
                 ),
@@ -534,7 +461,7 @@ class CheckoutView extends GetView<CheckoutController> {
                     ),
                     Obx(
                       () => CustomPriceWidget(
-                          title: "${controller.totalAmount.value}"),
+                          title: "${viewModel.totalAmount.value}"),
                     ),
                   ],
                 ),
@@ -558,6 +485,50 @@ class CheckoutView extends GetView<CheckoutController> {
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  couponTextField(){
+    return TextField(
+      controller: viewModel.couponCodeController,
+      cursorColor: kPrimaryColor,
+      autofocus: false,
+      style: bodyText1,
+      enabled: viewModel.coinsModel.value.silver != null &&
+          viewModel.coinsModel.value.silver!
+              .isGreaterThan(fixedRedeemCouponThreshold),
+      textInputAction: TextInputAction.search,
+      // onChanged: controller.search,
+      decoration: InputDecoration(
+        filled: true,
+        prefixIcon:
+        Icon(Icons.search, color: kPrimaryColor),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: kLightGreyColor,
+            width: 0.5,
+          ), //BorderSide.none,
+          borderRadius:
+          BorderRadius.all(Radius.circular(8)),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: kLightGreyColor,
+            width: 0.5,
+          ), //BorderSide.none,
+          borderRadius:
+          BorderRadius.all(Radius.circular(8)),
+        ),
+        fillColor: kWhiteColor,
+        contentPadding: EdgeInsets.zero,
+        hintText:
+        '${langKey.wantToRedeem.tr} ${viewModel.coinsModel.value.silver ?? 0} ${langKey.coins.tr}?',
+        hintStyle: TextStyle(
+          color: kLightColor,
+          fontWeight: FontWeight.w600,
+          fontSize: 13.0,
         ),
       ),
     );

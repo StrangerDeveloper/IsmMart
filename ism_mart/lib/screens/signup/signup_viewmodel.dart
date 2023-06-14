@@ -37,6 +37,7 @@ class SignUpViewModel extends GetxController {
   }
 
   void signUp() {
+    GlobalVariable.internetErr(false);
     if (signUpFormKey.currentState?.validate() ?? false) {
       GlobalVariable.showLoader.value = true;
       String? phoneNumber = countryCode.value + phoneNumberController.text;
@@ -66,6 +67,7 @@ class SignUpViewModel extends GetxController {
           );
         }
       }).catchError((e) {
+        GlobalVariable.internetErr(true);
         print(e);
         GlobalVariable.showLoader.value = false;
       });
