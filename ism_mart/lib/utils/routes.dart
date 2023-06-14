@@ -16,19 +16,14 @@ class Routes {
   static const cartRoute = "/cart";
   static const checkOutRoute = "/checkout";
   static const changeAddressRoute = "/changeAddress";
-
   static const profileRoute = "/profile";
-
   static const searchRoute = "/search";
   static const sellerHomeRoute = "/sellerDash";
-
   static const buyerOrdersRoute = "/buyerOrders";
-
   static const settingsRoute = "/settings";
   static const emailVerify = "/api/auth/verifyEmail";
 
   //static const aboutUsRoute = "/aboutUs";
-
   ///Pages with passing :ID
   static const productDetailsRoute = "/product/:id";
   static const orderDetailsRoute = "/orderDetails/:id";
@@ -87,7 +82,7 @@ class Routes {
     ),
     GetPage(
       name: changeAddressRoute,
-      page: () => ChangeAddressUI(),
+      page: () => ChangeAddressView(),
       binding: CheckoutBinding(),
       middlewares: [AuthMiddleWare(priority: 1)],
     ),
@@ -114,7 +109,7 @@ class Routes {
     ),
     GetPage(
       name: '/storeDetails/:storeId',
-      page: () => const SellerStoreDetailsView(),
+      page: () => const SellerStoreDetailView(),
       binding: ProductBinding(),
     )
   ];

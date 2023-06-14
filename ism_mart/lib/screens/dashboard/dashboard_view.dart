@@ -11,8 +11,8 @@ import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/export_widgets.dart';
 
-class DashboardUI extends GetView<BaseController> {
-  const DashboardUI({Key? key}) : super(key: key);
+class DashboardView extends GetView<BaseController> {
+  const DashboardView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

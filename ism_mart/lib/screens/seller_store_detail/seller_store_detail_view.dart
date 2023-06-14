@@ -6,8 +6,8 @@ import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:iconly/iconly.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
-class SellerStoreDetailsView extends GetView<ProductController> {
-  const SellerStoreDetailsView({Key? key}) : super(key: key);
+class SellerStoreDetailView extends GetView<ProductController> {
+  const SellerStoreDetailView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

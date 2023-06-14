@@ -8,8 +8,8 @@ import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
-class ChangeAddressUI extends GetView<CheckoutController> {
-  const ChangeAddressUI({super.key});
+class ChangeAddressView extends GetView<CheckoutController> {
+  const ChangeAddressView({super.key});
 
   @override
   Widget build(BuildContext context) {

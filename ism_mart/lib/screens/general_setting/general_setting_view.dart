@@ -9,8 +9,8 @@ import 'package:ism_mart/utils/languages/translations_key.dart';
 import 'package:ism_mart/helper/validator.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
-class GeneralSettingsView extends StatelessWidget {
-  const GeneralSettingsView(
+class GeneralSettingView extends StatelessWidget {
+  const GeneralSettingView(
       {Key? key, this.title, this.isContactUsCalled = false})
       : super(key: key);
 
