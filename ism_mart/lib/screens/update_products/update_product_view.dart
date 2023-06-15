@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ism_mart/screens/single_product_full_image/single_product_full_image_view.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/screens/update_products/update_product_viewmodel.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
@@ -372,12 +371,17 @@ class UpdateProductView extends StatelessWidget {
         child: GestureDetector(
             onTap: () {
               viewModel.imageIndex(index);
-              Get.to(() =>
-                  SingleProductFullImageView(
-                    initialImage: index,
-                    imagesToUpdate: calledForAddedImages ? viewModel.imagesToUpdate : null,
-                    productImages: calledForAddedImages ? null : viewModel.productImages,
-                  ));
+              Get.toNamed(Routes.singleProductFullImage, arguments: [{
+                "initialImage": index,
+                "imagesToUpdate": calledForAddedImages ? viewModel.imagesToUpdate : null,
+                "productImages": calledForAddedImages ? null : viewModel.productImages,
+              }]
+                  // SingleProductFullImageView(
+                  //   initialImage: index,
+                  //   imagesToUpdate: calledForAddedImages ? viewModel.imagesToUpdate : null,
+                  //   productImages: calledForAddedImages ? null : viewModel.productImages,
+                  // )
+              );
             },
             child: Container(
               width: 90,

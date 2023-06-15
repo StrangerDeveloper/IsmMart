@@ -2,22 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/screens/single_product_full_image/single_product_full_image_viewmodel.dart';
-import '../../models/product/product_model.dart';
 import '../../utils/constants.dart';
 
-// ignore: must_be_immutable
-class SingleProductFullImageView extends GetView<ProductController> {
-  SingleProductFullImageView({this.productImages, this.initialImage, this.imagesToUpdate});
-
-  List<ProductImages>? productImages;
-  int? initialImage;
-  List? imagesToUpdate;
+class SingleProductFullImageView extends StatelessWidget {
+  SingleProductFullImageView({super.key});
 
   final SingleProductFullImageViewModel viewModel = Get.put(SingleProductFullImageViewModel());
 
   @override
   Widget build(BuildContext context) {
-    viewModel.initalizeImageController(initialImage);
     return WillPopScope(
       onWillPop: () => viewModel.popProductImageView(),
       child: Scaffold(
@@ -30,15 +23,15 @@ class SingleProductFullImageView extends GetView<ProductController> {
               child: PageView.builder(
                   controller: viewModel.imageController,
                   onPageChanged: viewModel.changeImage,
-                  itemCount: productImages == null ? imagesToUpdate!.length : productImages!.length,
+                  itemCount: viewModel.productImages.isEmpty ? viewModel.imagesToUpdate.length : viewModel.productImages.length,
                   itemBuilder: (context, index) {
                     return InteractiveViewer(
                         minScale: 0.1,
                         maxScale: 2.0,
-                        child: productImages != null ? CustomNetworkImage(
-                          imageUrl: productImages![index].url,
+                        child: viewModel.productImages.isNotEmpty ? CustomNetworkImage(
+                          imageUrl: viewModel.productImages[index].url,
                           fit: BoxFit.contain,
-                        ) : Image.file(imagesToUpdate?[index], fit: BoxFit.fill,)
+                        ) : Image.file(viewModel.imagesToUpdate[index], fit: BoxFit.fill,)
                     );
                   }),
             ),
@@ -50,7 +43,7 @@ class SingleProductFullImageView extends GetView<ProductController> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(
-                    productImages != null ? productImages!.length : imagesToUpdate!.length,
+                    viewModel.productImages.isNotEmpty ? viewModel.productImages.length : viewModel.imagesToUpdate.length,
                         (index) => AnimatedContainer(
                       duration: const Duration(milliseconds: 400),
                       height: 6.0,

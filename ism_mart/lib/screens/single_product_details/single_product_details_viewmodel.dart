@@ -5,8 +5,7 @@ import 'package:ism_mart/models/exports_model.dart';
 import '../../api_helper/local_storage/local_storage_helper.dart';
 import '../../utils/constants.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
-
-import '../single_product_full_image/single_product_full_image_view.dart';
+import '../../utils/routes.dart';
 
 class SingleProductDetailsViewModel extends GetxController{
 
@@ -78,10 +77,10 @@ class SingleProductDetailsViewModel extends GetxController{
 
   void moveToProductImageView(int index){
     imageIndex(index);
-    Get.to(() => SingleProductFullImageView(
-      productImages: productModel.value.images!,
-      initialImage: index,
-    ));
+    Get.toNamed(Routes.singleProductFullImage, arguments: [{
+    "initialImage": index,
+    "productImages": productModel.value.images,
+    }]);
   }
 
   getProductQuestions() async {

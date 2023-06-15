@@ -10,6 +10,7 @@ import 'package:ism_mart/screens/email_verification/email_verification_view.dart
 import 'package:ism_mart/screens/forgot_password1/forgot_password1_view.dart';
 import 'package:ism_mart/screens/my_products/my_product_view.dart';
 import 'package:ism_mart/screens/product_questions/product_questions_view.dart';
+import 'package:ism_mart/screens/single_product_full_image/single_product_full_image_view.dart';
 import 'package:ism_mart/screens/update_vendor/update_vendor_view.dart';
 import 'package:ism_mart/screens/vendor_detail/vendor_detail_view.dart';
 import 'package:ism_mart/screens/vendor_question/vendor_question_view.dart';
@@ -54,6 +55,7 @@ class Routes {
   static const vendorOrders = "/vendorOrders";
   static const vendorQuestion = "/vendorQuestion";
   static const singleProductDetails = "/singleProductDetails";
+  static const singleProductFullImage = "/singleProductFullImage";
 
   //static const aboutUsRoute = "/aboutUs";
   ///Pages with passing :ID
@@ -159,7 +161,10 @@ class Routes {
         SearchBindings(),
       ],
     ),
-
+    GetPage(
+        name: singleProductFullImage,
+        page: () => SingleProductFullImageView()
+    ),
     GetPage(
       name: searchDetails,
       page: () => SearchDetailsView(),
