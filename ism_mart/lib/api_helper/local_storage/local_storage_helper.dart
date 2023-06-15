@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:get_storage/get_storage.dart';
 import 'package:ism_mart/api_helper/global_variables.dart';
 import 'package:ism_mart/models/exports_model.dart';
@@ -5,6 +7,7 @@ import 'package:ism_mart/models/exports_model.dart';
 class LocalStorageHelper {
   LocalStorageHelper._();
 
+  static const searchHistoryKey = "searchHistory";
   static const currentUserKey = "currentUser";
 
   static const cartItemKey = "cartItem";
@@ -44,7 +47,30 @@ class LocalStorageHelper {
     }
     return UserModel();
   }
+////////////////// Search History ////////////////////////////////////////////////
 
+  static Future<void> saveHistory({String? history}) async {
+    getHistory().then((List<String> list) {
+      if (!list.contains(history)) {
+        list.add(history!);
+      }
+      print("SaveHistory: ${list.toString()}");
+      localStorage.write(searchHistoryKey, jsonEncode(list));
+    });
+  }
+
+  static Future<List<String>> getHistory() async {
+    if (localStorage.read(searchHistoryKey) != null) {
+      return List<String>.from(jsonDecode(localStorage.read(searchHistoryKey)));
+    }
+    return [];
+  }
+
+  static Future<void> clearHistory() async {
+    localStorage.remove(searchHistoryKey);
+  }
+
+///////////////// Cart Section //////////////////////////////////////////////////
   static Future<void> addItemToCart({CartModel? cartModel}) async {
     var list = <CartModel>[];
 

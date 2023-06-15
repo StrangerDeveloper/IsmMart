@@ -11,6 +11,7 @@ class SearchViewModel extends GetxController {
 
   var searchTextController = TextEditingController();
   var suggestionList = <ProductModel>[].obs;
+  var historyList = <String>[].obs;
   int searchLimit = 25;
   int page = 1;
 
@@ -18,6 +19,12 @@ class SearchViewModel extends GetxController {
   @override
   void onReady() {
     super.onReady();
+
+    getHistory();
+    LocalStorageHelper.localStorage
+        .listenKey(LocalStorageHelper.searchHistoryKey, (value) {
+      getHistory();
+    });
   }
 
   searchProducts(String? query) async {
@@ -32,6 +39,22 @@ class SearchViewModel extends GetxController {
       print("SearchProduct: $error");
       GlobalVariable.showLoader(false);
     });
+  }
+
+  addHistory({String? search}) async {
+    await LocalStorageHelper.saveHistory(history: search!);
+  }
+
+  void getHistory() async {
+    await LocalStorageHelper.getHistory().then((value) {
+      print(">>GetHistory: ${value.toString()}");
+      historyList.addAll(value);
+    });
+  }
+
+  clearHistory() async {
+    historyList.clear();
+    await LocalStorageHelper.clearHistory();
   }
 
   @override

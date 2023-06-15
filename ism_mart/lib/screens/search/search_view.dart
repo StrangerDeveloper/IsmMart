@@ -56,7 +56,7 @@ class SearchView extends GetView<SearchViewModel> {
       title: Container(
         height: 36,
         child: TextField(
-          //controller: controller.searchTextController,
+          controller: controller.searchTextController,
           onChanged: (value) {
             controller.isSearchingStarted(false);
             if (value.isNotEmpty) {
@@ -109,8 +109,24 @@ class SearchView extends GetView<SearchViewModel> {
     return Column(
       children: [
         StickyLabelWithViewMoreOption(
-            title: "Recent Searches", moreOptionText: clear.tr, onTap: () {}),
+            title: "Recent Searches",
+            moreOptionText: clear.tr,
+            onTap: () => controller.clearHistory()),
         AppConstant.spaceWidget(height: 10),
+        Expanded(
+            child: controller.historyList.isEmpty
+                ? NoDataFoundWithIcon(
+                    title: noDataFound.tr,
+                    icon: Icons.search,
+                  )
+                : ListView.builder(
+                    shrinkWrap: true,
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: controller.historyList.length,
+                    itemBuilder: (_, index) {
+                      String? text = controller.historyList[index];
+                      return _singleListViewItem(text: text);
+                    })),
       ],
     );
   }
@@ -134,33 +150,41 @@ class SearchView extends GetView<SearchViewModel> {
                   itemCount: list.length,
                   itemBuilder: (_, index) {
                     ProductModel model = list[index];
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            Get.find<CustomSearchController>().filters.clear();
-                            Get.off(
-                              () => SearchDetailsView(
-                                  searchQuery: model.name ?? ""),
-                            );
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: CustomText(
-                              title: model.name ?? "",
-                            ),
-                          ),
-                        ),
-                        Divider(
-                          color: Colors.grey.shade600,
-                          thickness: 0.1,
-                        ),
-                      ],
-                    );
+                    return _singleListViewItem(
+                        text: model.name ?? "", isCalledForSearch: true);
                   }),
         ),
       ),
+    );
+  }
+
+  _singleListViewItem({String? text, bool? isCalledForSearch = false}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        InkWell(
+          onTap: () {
+            if (isCalledForSearch!) {
+              controller.addHistory(
+                  search: controller.searchTextController.text);
+            }
+            Get.find<CustomSearchController>().filters.clear();
+            Get.off(
+              () => SearchDetailsView(searchQuery: text),
+            );
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: CustomText(
+              title: text,
+            ),
+          ),
+        ),
+        Divider(
+          color: Colors.grey.shade600,
+          thickness: 0.1,
+        ),
+      ],
     );
   }
 }
