@@ -60,8 +60,6 @@ class BottomNavigationView extends GetView<BaseController> {
               title: langKey.deals.tr,
               page: 2,
             ),
-            // controller.cartCount.value <= 0
-            //     ?
             _getNavBarItems(
                 icon: IconlyLight.buy,
                 title: langKey.myCart.tr,
@@ -153,10 +151,10 @@ class BottomNavigationView extends GetView<BaseController> {
                           alignment: Alignment.center,
                           height: 14,
                           width: 14,
-                          //padding: const EdgeInsets.all(4),
                           decoration: BoxDecoration(
-                              color: kOrangeColor,
-                              borderRadius: BorderRadius.circular(15)),
+                            color: kOrangeColor,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
                           child: CustomText(
                             title: "${baseController.cartCount.value}",
                             size: 10,

@@ -56,14 +56,12 @@ class AddProductView extends StatelessWidget {
                           stockField(),
                           discountField(),
                           descriptionField(),
-                          AppConstant.spaceWidget(height: 40),
+                          SizedBox(height: 40),
                           CustomTextBtn(
                             onPressed: () {
                               viewModel.addProdBtnPress();
                             },
                             title: langKey.addProduct.tr,
-                            height: 50,
-                            width: 300,
                           ),
                         ],
                       ),
@@ -103,7 +101,6 @@ class AddProductView extends StatelessWidget {
   }
 
   Widget _createDynamicFormFields(ProductVariantsModel model) {
-    //controller.newVariantModel = model;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextFormField(
@@ -114,21 +111,25 @@ class AddProductView extends StatelessWidget {
             viewModel.onDynamicFieldsValueChanged(value, model),
         decoration: InputDecoration(
           labelText: model.label,
-          //hintText: model.placeholder,
           labelStyle: bodyText1,
           prefixIcon: Icon(
             IconlyLight.discovery,
             color: kPrimaryColor,
           ),
-          //hintStyle: bodyText2,
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-                color: Colors.black, width: 1, style: BorderStyle.solid), //B
+              color: Colors.black,
+              width: 1,
+              style: BorderStyle.solid,
+            ), //B
             borderRadius: BorderRadius.circular(8),
           ),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
-                color: Colors.black, width: 1, style: BorderStyle.solid), //B
+              color: Colors.black,
+              width: 1,
+              style: BorderStyle.solid,
+            ),
             borderRadius: BorderRadius.circular(8),
           ),
         ),
@@ -140,7 +141,7 @@ class AddProductView extends StatelessWidget {
     return ListView.builder(
       scrollDirection: Axis.horizontal,
       itemCount: viewModel.productImages.length,
-      itemBuilder: (_, index) {
+      itemBuilder: (BuildContext, index) {
         File file = viewModel.productImages[index];
         return Container(
           width: 60,
@@ -259,7 +260,6 @@ class AddProductView extends StatelessWidget {
           searchDelay: const Duration(milliseconds: 0),
           searchFieldProps: AppConstant.searchFieldProp(),
         ),
-        //showSelectedItems: true),
         items: viewModel.categoriesList,
         itemAsString: (model) => model.name ?? "",
         dropdownDecoratorProps: DropDownDecoratorProps(
@@ -279,7 +279,6 @@ class AddProductView extends StatelessWidget {
         ),
         onChanged: (CategoryModel? newValue) {
           viewModel.setSelectedCategory(category: newValue!);
-          //debugPrint(">>> $newValue");
         },
         selectedItem: viewModel.selectedCategory.value,
       ),
@@ -309,7 +308,7 @@ class AddProductView extends StatelessWidget {
               color: Colors.black,
               width: 1,
               style: BorderStyle.solid,
-            ), //B
+            ),
             borderRadius: BorderRadius.circular(8),
           ),
         ),
@@ -352,7 +351,7 @@ class AddProductView extends StatelessWidget {
             label: langKey.prodPrice.tr,
             autoValidateMode: AutovalidateMode.onUserInteraction,
             validator: (value) {
-              return GetUtils.isBlank(value!)! ? langKey.prodPriceReq.tr : null;
+              return Validator().validateDefaultTxtField(value);
             },
             onChanged: (value) {
               viewModel.onPriceFieldChange(value);
@@ -405,8 +404,9 @@ class AddProductView extends StatelessWidget {
         prefixIcon: Icons.inventory_outlined,
         label: langKey.prodStock.tr,
         autoValidateMode: AutovalidateMode.onUserInteraction,
-        validator: (value) =>
-            !GetUtils.isNumericOnly(value!) ? langKey.prodStockReq.tr : null,
+        validator: (value) {
+          return Validator().validateDefaultTxtField(value);
+        },
         keyboardType: TextInputType.number,
       ),
     );
