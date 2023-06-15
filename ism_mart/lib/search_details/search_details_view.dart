@@ -75,13 +75,18 @@ class SearchDetailsView extends GetView<CustomSearchController> {
     //       : controller.searchWithSubCategory(subCategoryID);
     // }
 
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.grey[100]!,
-        appBar: _searchAppBar(),
-        body: _body(),
-        //floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        //floatingActionButton: _filterBar(),
+    return WillPopScope(
+      onWillPop: (){
+        return controller.clearFilters();
+      },
+      child: SafeArea(
+        child: Scaffold(
+          backgroundColor: Colors.grey[100]!,
+          appBar: _searchAppBar(),
+          body: _body(),
+          //floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+          //floatingActionButton: _filterBar(),
+        ),
       ),
     );
     /* return controller.obx((state) {
@@ -100,6 +105,7 @@ class SearchDetailsView extends GetView<CustomSearchController> {
             : InkWell(
                 onTap: () {
                   Get.back();
+                  controller.clearFilters();
                   //controller.productList.clear();
                   // controller.searchLimit = 15;
                   //controller.searchTextController.clear();

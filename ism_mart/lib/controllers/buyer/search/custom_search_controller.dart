@@ -147,11 +147,11 @@ class CustomSearchController extends GetxController {
     if (scrollController.hasClients &&
         isLoadingMore.isFalse &&
         scrollController.position.maxScrollExtent == scrollController.offset) {
-      //page++;
-      searchLimit += 15;
       isLoadingMore(true);
+      filters.remove('page');
+      filters.addIf(page>0, 'page', "${page++}");
       await _apiProvider.filterSearch(appliedFilters: filters).then((products) {
-        //productList.clear();
+        productList.clear();
         productList.addAll(products);
         isLoadingMore(false);
       }).catchError((onError) {
