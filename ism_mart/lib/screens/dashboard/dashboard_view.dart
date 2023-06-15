@@ -8,6 +8,7 @@ import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/screens/top_vendors/top_vendors_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+
 import '../../widgets/custom_grey_border_container.dart';
 import '../../widgets/custom_loading.dart';
 import '../../widgets/custom_network_image.dart';
@@ -482,15 +483,15 @@ class DashboardView extends GetView<BaseController> {
         padding: const EdgeInsets.fromLTRB(10, 8, 10, 5),
         child: SizedBox(
           height: 120,
-          child: topVendorsViewModel.topvendorList.isEmpty
+          child: topVendorsViewModel.topVendorList.isEmpty
               ? NoDataFound()
               : ListView.builder(
                   scrollDirection: Axis.horizontal,
                   physics: const BouncingScrollPhysics(),
-                  itemCount: topVendorsViewModel.topvendorList.length,
+                  itemCount: topVendorsViewModel.topVendorList.length,
                   itemBuilder: (context, index) {
                     TopVendorsModel vendorsModel =
-                        topVendorsViewModel.topvendorList[index];
+                        topVendorsViewModel.topVendorList[index];
                     return topVendorsListViewItem(vendorsModel: vendorsModel);
                   },
                 ),

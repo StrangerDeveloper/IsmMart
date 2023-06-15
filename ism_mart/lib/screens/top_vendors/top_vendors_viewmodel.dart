@@ -44,7 +44,7 @@ class TopVendorsViewModel extends GetxController {
   //   }
   // }
 
-  RxList<TopVendorsModel> topvendorList = <TopVendorsModel>[].obs;
+  RxList<TopVendorsModel> topVendorList = <TopVendorsModel>[].obs;
   getData() {
     GlobalVariable.showLoader.value = true;
     var limit = '15';
@@ -55,7 +55,7 @@ class TopVendorsViewModel extends GetxController {
       if (parsedJson['success'] == true) {
         var data = parsedJson['data'] as List;
 
-        topvendorList.addAll(data.map((e) => TopVendorsModel.fromJson(e)));
+        topVendorList.addAll(data.map((e) => TopVendorsModel.fromJson(e)));
 
         //print(topvendorList.length);
       }
