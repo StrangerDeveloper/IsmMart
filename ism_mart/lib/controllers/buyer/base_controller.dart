@@ -19,23 +19,16 @@ class BaseController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-
     fetchSliderImages();
     runSliderTimer();
-
     fetchSliderDiscountProducts();
     fetchCategories();
-
-    getAllFAQs();
-
     //setCartCount(LocalStorageHelper.getCartItemsCount());
     setCartItemCount();
     LocalStorageHelper.localStorage.listenKey(LocalStorageHelper.cartItemKey,
         (value) {
       setCartItemCount();
     });
-
-    // ever(categories, getRandomTextForSearch);
     LocalStorageHelper.localStorage
         .listenKey(LocalStorageHelper.currCurrencyKey, (value) {});
   }
@@ -243,19 +236,6 @@ class BaseController extends GetxController {
   }
 
   //END Fetch Product
-
-  //TOD:: fetch All FAQ
-  var faqsList = <FAQModel>[].obs;
-
-  getAllFAQs() async {
-    faqsList.clear();
-
-    await _apiProvider.getAllFaqs(token: authController.userToken).then((faqs) {
-      faqsList.addAll(faqs);
-    }).catchError((error) {
-      print(">>>GetAllFaqs: $error");
-    });
-  }
 
   //TOO: Start Bottom Navigation setup
   var bottomNavPageController = PageController(initialPage: 0);

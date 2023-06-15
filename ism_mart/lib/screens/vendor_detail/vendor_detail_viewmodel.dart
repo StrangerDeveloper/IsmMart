@@ -13,6 +13,5 @@ class VendorDetailViewModel extends GetxController {
 
   getData() {
     userModel.value = GlobalVariable.userModel;
-    print(userModel.value?.toJson());
   }
 }

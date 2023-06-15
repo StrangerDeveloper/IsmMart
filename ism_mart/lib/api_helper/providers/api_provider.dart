@@ -154,13 +154,4 @@ class ApiProvider {
     return CurrencyModel.fromJson(response);
   }
 
-  /**
-   *
-   * FAQs
-   * */
-
-  Future<List<FAQModel>> getAllFaqs({token}) async {
-    var response = await _apiRepository.fetchAllFAQ(token: token);
-    return response.map((e) => FAQModel.fromJson(e)).toList();
-  }
 }
