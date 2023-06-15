@@ -38,7 +38,6 @@ class Product {
   List<ProductModel>? productRows;
 
   factory Product.fromJson(Map<String, dynamic> json) {
-    print("Search(): ${json["rows"].toString()}");
     return Product(
       count: json["count"],
       productRows: List<ProductModel>.from(
