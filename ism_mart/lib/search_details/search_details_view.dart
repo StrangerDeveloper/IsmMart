@@ -106,6 +106,7 @@ class SearchDetailsView extends GetView<CustomSearchController> {
                 onTap: () {
                   Get.back();
                   controller.clearFilters();
+                  controller.productList.clear();
                   //controller.productList.clear();
                   // controller.searchLimit = 15;
                   //controller.searchTextController.clear();
@@ -422,7 +423,7 @@ class SearchDetailsView extends GetView<CustomSearchController> {
 
   Widget _filtersBtn() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 20, 20, 15),
+      padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceAround,

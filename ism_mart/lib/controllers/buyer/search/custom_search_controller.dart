@@ -167,6 +167,9 @@ class CustomSearchController extends GetxController {
     maxPriceController.clear();
     searchLimit = 25;
     page = 1;
+    _sortBy.value = '';
+    selectedCategory.value = '';
+    selectedCategoryId.value = 0;
     filters.clear();
 
     //Map<String, dynamic>? filters = Map();

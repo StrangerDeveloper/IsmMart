@@ -258,7 +258,7 @@ class DashboardView extends GetView<BaseController> {
                                               color: kRedColor)),
                                       TextSpan(
                                           text: langKey.OFF.tr,
-                                          style: bodyText1),
+                                          style: bodyText2),
                                     ]),
                                   ),
                                 ],
