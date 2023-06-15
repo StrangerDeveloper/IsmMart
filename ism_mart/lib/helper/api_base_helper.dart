@@ -48,8 +48,8 @@ class ApiBaseHelper {
       return parsedJSON;
     } on SocketException catch (_) {
       GlobalVariable.showLoader.value = false;
-      GetxHelper.showSnackBar(title: 'Error', message: Errors.noInternetError);
-      throw Errors.noInternetError;
+      // GetxHelper.showSnackBar(title: 'Error', message: Errors.noInternetError);
+      // throw Errors.noInternetError;
     } on TimeoutException catch (_) {
       GlobalVariable.showLoader.value = false;
       GetxHelper.showSnackBar(title: 'Error', message: Errors.timeOutException);
@@ -214,9 +214,7 @@ class ApiBaseHelper {
     try {
       Uri urlValue = Uri.parse(_baseUrl + url);
       http.MultipartRequest request = http.MultipartRequest('POST', urlValue);
-      Map<String, String> header = {
-        'Content-Type': 'multipart/form-data'
-      };
+      Map<String, String> header = {'Content-Type': 'multipart/form-data'};
 
       if (withAuthorization) {
         header['Authorization'] = withBearer ? 'Bearer $token' : token;
@@ -227,7 +225,7 @@ class ApiBaseHelper {
       request.files.addAll(files);
       http.StreamedResponse response = await request.send();
       Map<String, dynamic> parsedJson =
-      await jsonDecode(await response.stream.bytesToString());
+          await jsonDecode(await response.stream.bytesToString());
 
       print('********************** Response ********************************');
       print(urlValue.toString());
@@ -274,7 +272,7 @@ class ApiBaseHelper {
       request.files.addAll(files);
       http.StreamedResponse response = await request.send();
       Map<String, dynamic> parsedJson =
-      await jsonDecode(await response.stream.bytesToString());
+          await jsonDecode(await response.stream.bytesToString());
 
       print('********************** Response ********************************');
       print(urlValue.toString());

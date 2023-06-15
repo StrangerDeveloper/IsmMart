@@ -14,7 +14,9 @@ import 'firebase_options.dart';
 import 'api_helper/export_api_helper.dart';
 
 void main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
+  
   await GetStorage.init();
 
   Stripe.publishableKey = ApiConstant.PUBLISHABLE_KEY;

@@ -548,21 +548,5 @@ class Italian {
             'I membri premium avranno meno accesso a tutte le aziende in tutto il mondo, sia come venditore e acquirente, come IsmMART garantirà direttamente e verificherà tali membri e qualsiasi accordo che fanno.',
         key.memPlan3Desc9:
             'Poiché tutti i membri premium vengono esaminati e vengono verificati attraverso il processo di verifica ISMMART, in modo che tutti questi membri possano preoccuparsi meno commercio tra loro, in qualsiasi parte del mondo.',
-        key.q1: 'Come funziona IsmMart?',
-        key.q2: 'Posso annullare il mio abbonamento in qualsiasi momento?',
-        key.q3: 'Quale metodo di pagamento dovresti accettare?',
-        key.q4: 'Quali sono i vantaggi dell\'utilizzo dell\'affiliata ISMMART?',
-        key.q5:
-            'Cos\'è la gestione della flotta e in che modo è diverso dal ridimensionamento dinamico?',
-        key.ans1:
-            'Il sistema fornirà uno spazio/negozio virtuale ai venditori che desiderano vendere qualcosa al mercato. Possono essere singoli fornitori o alcuni marchi affermati che vogliono migliorare la loro presenza nel mondo digitale. I nostri fornitori si registreranno con noi con alcune spese mensili di abbonamento/ piattaforma. Verificheremo l\'autenticità dei venditori prendendo le loro informazioni di base e prepareremo un accordo con loro. Allo stesso modo i nostri clienti/acquirenti devono anche essere registrati con noi nel nostro negozio di e -commerce. I clienti saranno in grado di vedere il profilo del fornitore, valutarli (dopo aver ottenuto servizi), effettuare i loro acquisti e tenersi aggiornati con i prodotti sul mercato. Ad esempio, abbiamo un fornitore/negozio registrato come ALI Electronics che si occupa di tutti i tipi di elettrodomestici. Lascia che Ayesha vuole acquistare un bollitore elettrico e lei dopo aver cercato trova il suo prodotto desiderato su Ali Electronics. Esse effettuerà il suo ordine e effettuerà il suo pagamento in anticipo, che sarà sul conto dell\'azienda fino al completamento dell\'ordine. Ali Electronics riceverà una notifica sull\'ordine. Imbellerà il prodotto pertinente e lo spedirà attraverso il nostro servizio (i nostri servizi di corriere definiti attraverso il nostro account). Una volta che la signorina Ayesha riceve il prodotto e verifica che ha ottenuto il prodotto desiderato, il pagamento verrà rilasciato e raggiungerà il conto del fornitore nel periodo di tempo definito (15 giorni).',
-        key.ans2:
-            'SÌ. Puoi annullare l\'abbonamento in qualsiasi momento. L\'abbonamento continuerà ad essere attivo fino alla fine del termine attuale (mese o anno) ma non sarà automatico. A meno che non elimini manualmente il tuo account, il tuo account e tutti i dati verranno eliminati 60 giorni dal giorno in cui l\'abbonamento diventa inattivo.',
-        key.ans3:
-            'Holistic coinvolge mercati di nicchia appiccicosi prima della collaborazione collaborativa e della condivisione delle idee. Facilitare fosforescamente applicazioni parallele con imperativi unici. Plagio in modo proattivo i risultati delle funzionalità tramite soluzioni economiche. Abbracciare collaborativamente gli intermediari abilitati al Web anziché procedure di test diverse.',
-        key.ans4:
-            'Imparsi senza soluzione di continuità per le migliori pratiche migliori. Facilitare fosforescamente applicazioni parallele con imperativi unici. Plagio in modo proattivo i risultati delle funzionalità tramite soluzioni economiche. Abbracciare collaborativamente gli intermediari abilitati al Web anziché procedure di test diverse.',
-        key.ans5:
-            'Avviare distintamente canali privi di errori con ROI altamente efficiente. Intrinsic Envision Dati di livello mondiale tramite le migliori pratiche migliori. Abilita in modo efficiente i tiler E potenziati dopo servizi incrociati. Accelerare in modo univoco i rivenditori senza soluzione di continuità tramite interfacce cooperative. Il cliente monotonicamente miocardico ha diretto i meta-servici mentre scenari senza errori.',
-      };
+  };
 }

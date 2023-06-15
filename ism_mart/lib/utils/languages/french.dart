@@ -555,22 +555,5 @@ class French {
             'Les membres Premium auront moins d\'accès à toutes les entreprises du monde entier, à la fois en tant que vendeur et acheteur, car Ismmart garantira et vérifiera directement ces membres et toutes les offres qu\'ils concluent.',
         key.memPlan3Desc9:
             'Comme tous les membres premium sont examinés et vérifiés par le processus de vérification ISMMart, de sorte que tous ces membres peuvent faire moins de commerce les uns avec les autres, partout dans le monde.',
-        key.q1: 'Comment fonctionne l\'ISMMart?',
-        key.q2: 'Puis-je annuler mon abonnement à tout moment?',
-        key.q3: 'Quelle méthode de paiement devriez-vous accepter?',
-        key.q4:
-            'Quels sont les avantages de l\'utilisation de l\'affilié Ismmart?',
-        key.q5:
-            'Qu\'est-ce que la gestion de la flotte et en quoi est-elle différente de la mise à l\'échelle dynamique?',
-        key.ans1:
-            'Le système fournira un espace / magasin virtuel aux vendeurs qui souhaitent vendre quelque chose au marché. Il peut s\'agir de fournisseurs individuels ou de marques établies qui souhaitent améliorer leur présence dans le monde numérique. Nos fournisseurs s\'inscrire auprès de nous sur certains frais d\'abonnement mensuels / frais de plate-forme. Nous vérifierons l\'authenticité des vendeurs en prenant leurs informations de base et en préparant un accord avec eux. De même, nos clients / acheteurs seront également enregistrés chez nous dans notre magasin de commerce électronique. Les clients pourront voir le profil du fournisseur, les évaluer (après avoir obtenu des services), effectuer leurs achats et se tenir au courant des produits sur le marché. Par exemple, nous avons un fournisseur / magasin enregistré comme Ali Electronics qui traite de toutes sortes d\'appareils électroménagers. Disons, Ayesha veut acheter une bouilloire électrique et elle en cherchant trouve son produit souhaité sur Ali Electronics. Elle passera sa commande et effectuera son paiement à l\'avance qui sera sur le compte de la société jusqu\'à la fin de la commande. Ali Electronics recevra une notification sur la commande. Il emballera le produit pertinent et le rendra via notre service (nos services de messagerie définis via notre compte). Une fois que Miss Ayesha reçoit le produit et vérifie qu\'elle a obtenu le produit souhaité, le paiement sera publié et atteindra le compte du fournisseur dans une période définie (15 jours).',
-        key.ans2:
-            'Oui. Vous pouvez annuler votre abonnement à tout moment. Votre abonnement continuera d\'être actif jusqu\'à la fin de votre mandat actuel (mois ou année), mais il ne se rendra pas automatiquement. À moins que vous ne supprimez votre compte manuellement, votre compte et toutes les données seront supprimés à 60 jours du jour où votre abonnement devient inactif.',
-        key.ans3:
-            'Holistique engage les marchés de niche collants avant la collaboration collaborative et le partage des idées. Faciliter phosphorescent les applications parallèles avec des impératifs uniques. Plagier de manière proactive les livrables de fonctionnalité via des solutions peu coûteuses. Embrassez en collaboration des intermédiaires compatibles Web plutôt que diverses procédures de test.',
-        key.ans4:
-            'Impact en permanence les impératifs transparents pour les meilleures pratiques des meilleures race. Faciliter phosphorescent les applications parallèles avec des impératifs uniques. Plagier de manière proactive les livrables de fonctionnalité via des solutions peu coûteuses. Embrassez en collaboration des intermédiaires compatibles Web plutôt que diverses procédures de test.',
-        key.ans5:
-            'Lancer distinctement les canaux sans erreur avec un retour sur investissement très efficace. Intrinsèque envisage des données de classe mondiale via les meilleures pratiques de race. Activer efficacement les e-tilers habilités après des services à unité croisée. Accélérer uniquement les détaillants transparents via des interfaces coopératives. Le client myocardique monotonique a dirigé des méta-services tandis que des scénarios sans erreur.',
       };
 }

@@ -544,21 +544,5 @@ class Turkish {
         key.memPlan3Desc8:
             'Premium üyeler, hem satıcı hem de alıcı olarak, bu tür üyeleri ve yaptıkları anlaşmaları doğrudan garanti edip doğrulayacak şekilde dünya çapındaki tüm işletmelere daha az erişimden endişe duyacaktır.',
         key.memPlan3Desc9:
-            'Tüm premium üyeler incelendiğinden ve ISMMART doğrulama süreci ile doğrulandığından, bu tür tüm üyeler dünyanın herhangi bir yerinde birbirleriyle daha az ticaret endişelenebilirler.',
-        key.q1: 'Ismmart nasıl çalışıyor?',
-        key.q2: 'Aboneliğimi istediğiniz zaman iptal edebilir miyim?',
-        key.q3: 'Hangi ödeme yöntemini kabul etmelisiniz?',
-        key.q4: 'Ismmart bağlı kuruluşunu kullanmanın faydaları nelerdir?',
-        key.q5: 'Filo yönetimi nedir ve dinamik ölçeklemeden nasıl farklıdır?',
-        key.ans1:
-            'Sistem, piyasaya bir şeyler satmak isteyen satıcılara sanal bir alan/mağaza sağlayacaktır. Bireysel satıcılar veya dijital dünyadaki varlıklarını geliştirmek isteyen bazı yerleşik markalar olabilirler. Satıcılarımız aylık bazı abonelik ücretleri/ platform ücretleri için kendimize kaydolacaklar. Temel bilgilerini alarak satıcıların gerçekliğini doğrulayacağız ve onlarla bir anlaşma hazırlayacağız. Benzer şekilde müşterilerimiz/alıcılarımız da e -ticaret mağazamızda bize kayıtlı olacaktır. Müşteriler satıcı profilini görebilecek, (hizmet aldıktan sonra) değerlendirebilecek, satın alımlarını yapabilecek ve piyasadaki ürünlerle güncel tutabilecekler. Örneğin, her türlü ev aletiyle ilgilenen Ali Electronics olarak kayıtlı bir satıcı/mağazamız var. Diyelim ki Ayesha elektrikli bir su ısıtıcısı satın almak istiyor ve Arama yaptıktan sonra istenen ürünü Ali Electronics\'te buluyor. Siparişini verecek ve sipariş tamamlanana kadar şirketin hesabına olacak ödemesini önceden yapacak. Ali Electronics, sipariş hakkında bir bildirim alacaktır. İlgili ürünü paketleyecek ve hizmetimiz aracılığıyla (tanımlanmış kurye hizmetlerimiz hesabımız aracılığıyla) gönderecektir. Bayan Ayesha ürünü aldıktan ve istenen ürünü aldığını doğruladıktan sonra, ödeme yayınlanacak ve satıcı hesabına tanımlanmış sürede (15 gün) ulaşacaktır.',
-        key.ans2:
-            'Evet. Aboneliğinizi istediğiniz zaman iptal edebilirsiniz. Aboneliğiniz mevcut döneminizin (ay veya yıl) sonuna kadar aktif olmaya devam edecektir, ancak otomatik olarak yenilenmeyecektir. Hesabınızı manuel olarak silmezseniz, hesabınız ve tüm veriler aboneliğinizin aktif olmadığı günden itibaren 60 gün silinecektir.',
-        key.ans3:
-            'Holistic, işbirlikçi işbirliği ve fikir paylaşımından önce yapışkan niş pazarları. Eşsiz zorunluluklarla paralel uygulamaları fosfor olarak kolaylaştırır. Ucuz çözümler yoluyla işlevsellik çıktılarını proaktif olarak intihal eder. Çeşitli test prosedürleri yerine web özellikli aracıları işbirliği içinde kucaklayın.',
-        key.ans4:
-            'En iyi en iyi uygulamalar için kesintisiz zorunlulukları sürekli etkiler. Eşsiz zorunluluklarla paralel uygulamaları fosfor olarak kolaylaştırır. Ucuz çözümler yoluyla işlevsellik çıktılarını proaktif olarak intihal eder. Çeşitli test prosedürleri yerine web özellikli aracıları işbirliği içinde kucaklayın.',
-        key.ans5:
-            'Yüksek verimli ROI ile hatasız kanalları belirgin bir şekilde başlatın. En iyi en iyi uygulamalar aracılığıyla dünya standartlarında verileri içsel öngörmek. Çapraz birim hizmetlerinden sonra güçlendirilmiş e-tilatörleri verimli bir şekilde etkinleştirin. Kooperatif arayüzleri aracılığıyla kesintisiz perakendecileri benzersiz bir şekilde hızlandırır. Monotonik miyokardiyal müşteri meta hizmetleri yönlendirirken, hatasız senaryolar.',
-      };
+            'Tüm premium üyeler incelendiğinden ve ISMMART doğrulama süreci ile doğrulandığından, bu tür tüm üyeler dünyanın herhangi bir yerinde birbirleriyle daha az ticaret endişelenebilirler.',   };
 }

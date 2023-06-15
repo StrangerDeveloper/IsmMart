@@ -190,18 +190,6 @@ const updateProfile = 'updateProfile',
     updateVendorDetails = 'updateVendorDetails',
     fieldIsRequired = 'fieldIsRequired';
 
-///faq
-const q1 = 'q1',
-    q2 = 'q2',
-    q3 = 'q3',
-    q4 = 'q4',
-    q5 = 'q5',
-    ans1 = 'ans1',
-    ans2 = 'ans2',
-    ans3 = 'ans3',
-    ans4 = 'ans4',
-    ans5 = 'ans5';
-
 ///general
 const call = 'call',
     centralHeadquarters = 'centralHeadquarters',
@@ -465,10 +453,10 @@ final productName = "productName",
 
 ///Update Product
 final productImageSection = 'productImageSection',
-      productThumbnail = 'productThumbnail',
-      uploadThumbnail = 'uploadThumbnail',
-      productImages = 'productImages',
-      addedImages = 'addedImages';
+    productThumbnail = 'productThumbnail',
+    uploadThumbnail = 'uploadThumbnail',
+    productImages = 'productImages',
+    addedImages = 'addedImages';
 
 /**
  * Membership Plans
