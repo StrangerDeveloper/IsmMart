@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
-import 'package:ism_mart/api_helper/global_variables.dart';
+import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/screens/product_questions/product_questions_viewmodel.dart';
 import 'package:ism_mart/utils/exports_utils.dart';

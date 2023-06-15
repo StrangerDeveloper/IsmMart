@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 import 'package:ism_mart/helper/api_base_helper.dart';
-import 'package:ism_mart/api_helper/global_variables.dart';
+import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/urls.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart';
 import 'package:ism_mart/widgets/getx_helper.dart';

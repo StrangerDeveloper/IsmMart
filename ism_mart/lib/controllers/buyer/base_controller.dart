@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
-import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/search_details/search_details_view.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
@@ -42,47 +41,11 @@ class BaseController extends GetxController {
         setCartCount(0);
       }
     });
-
-    /* if (authController.isSessionExpired!)
-      await LocalStorageHelper.fetchCartItems()
-          .then((List<CartModel> list) async {
-        if (list.isNotEmpty) {
-          debugPrint("");
-          setCartCount(list.length);
-        } else {
-          setCartCount(0);
-        }
-      });
-    else if (!authController.isSessionExpired! &&
-        authController.userToken!.isNotEmpty) {
-      await _apiProvider
-          .getCartItems(token: authController.userToken)
-          .then((data) {
-        setCartCount(data.length);
-      });
-    } else {
-      setCartCount(0);
-    }*/
   }
 
   setCartCount(int count) {
     cartCount(count);
   }
-
-  /*//TDO: Current User Info
-  var _userModel = UserModel().obs;
-
-  setUserModel(UserModel? userModel) => _userModel(userModel);
-
-  UserModel? get userModel => _userModel.value;
-
-  getCurrentUser() async {
-    await LocalStorageHelper.getStoredUser().then((user) {
-      setUserModel(user);
-    });
-  }*/
-
-  //END Current User
 
   //TDO:Start Fetch SliderImages Section
 

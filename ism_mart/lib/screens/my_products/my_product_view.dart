@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
-import 'package:ism_mart/helper/no_internet_view.dart';
+import 'package:ism_mart/widgets/no_internet_view.dart';
 import 'package:ism_mart/screens/my_products/my_products_viewmodel.dart';
 import 'package:ism_mart/screens/my_products/vendor_product_model.dart';
 import 'package:ism_mart/widgets/export_widgets.dart';

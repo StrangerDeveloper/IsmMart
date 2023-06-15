@@ -5,7 +5,7 @@ import 'package:http_parser/src/media_type.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/screens/my_products/my_products_viewmodel.dart';
 import '../../helper/api_base_helper.dart';
-import '../../api_helper/global_variables.dart';
+import '../../helper/global_variables.dart';
 import '../../models/product/product_model.dart';
 import '../../utils/constants.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
