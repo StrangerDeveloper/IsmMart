@@ -19,7 +19,7 @@ import '../../widgets/single_category_item.dart';
 import '../../widgets/single_product_grid_item.dart';
 import '../../widgets/sticky_label_with_view_more.dart';
 import '../../widgets/sticky_labels.dart';
-import '../../search_details/search_details_view.dart';
+import '../search_details/search_details_view.dart';
 
 class DashboardView extends GetView<BaseController> {
   const DashboardView({Key? key}) : super(key: key);

@@ -46,7 +46,7 @@ class SearchDetailsView extends GetView<CustomSearchController> {
 
       //controller.searchWithFilters(filters: filters);
     }
-    print("Filters: ${controller.filters.toString()}");
+    // print("Filters: ${controller.filters.toString()}");
 
     //  final controller = Get.find<SearchController>();
     //controller.searchTextController.clear();
@@ -76,7 +76,7 @@ class SearchDetailsView extends GetView<CustomSearchController> {
     // }
 
     return WillPopScope(
-      onWillPop: (){
+      onWillPop: () {
         return controller.clearFilters();
       },
       child: SafeArea(

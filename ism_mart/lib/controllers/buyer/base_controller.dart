@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/models/exports_model.dart';
-import 'package:ism_mart/search_details/search_details_view.dart';
+import 'package:ism_mart/screens/search_details/search_details_view.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import '../../exports/export_buyers.dart';
 

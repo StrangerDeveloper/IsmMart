@@ -17,7 +17,7 @@ class TopVendorsViewModel extends GetxController {
   void onInit() {
     super.onInit();
     // getTopVendors();
-    // getData();
+    getData();
   }
 
   // getTopVendors() async {
@@ -47,7 +47,7 @@ class TopVendorsViewModel extends GetxController {
   RxList<TopVendorsModel> topvendorList = <TopVendorsModel>[].obs;
   getData() {
     GlobalVariable.showLoader.value = true;
-    var limit = '10';
+    var limit = '15';
     ApiBaseHelper()
         .getMethod(url: Urls.getTopVendors + limit)
         .then((parsedJson) {
@@ -57,7 +57,7 @@ class TopVendorsViewModel extends GetxController {
 
         topvendorList.addAll(data.map((e) => TopVendorsModel.fromJson(e)));
 
-        print(topvendorList.length);
+        //print("TopVendors: ${topvendorList.length}");
       }
     }).catchError((e) {
       print(e);

@@ -13,7 +13,7 @@ import 'package:ism_mart/screens/product_questions/product_questions_view.dart';
 import 'package:ism_mart/screens/update_vendor/update_vendor_view.dart';
 import 'package:ism_mart/screens/vendor_detail/vendor_detail_view.dart';
 import 'package:ism_mart/screens/vendor_question/vendor_question_view.dart';
-import 'package:ism_mart/search_details/search_details_view.dart';
+import 'package:ism_mart/screens/search_details/search_details_view.dart';
 import '../screens/contact_us/contact_us_view.dart';
 import '../screens/forgot_password2/forgot_password2_view.dart';
 import '../screens/seller_store_detail/seller_store_detail_view.dart';

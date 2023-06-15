@@ -12,91 +12,97 @@ import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class SingleProductDetailsView extends StatelessWidget {
-  SingleProductDetailsView({super.key});  
+  SingleProductDetailsView({super.key});
 
-  final SingleProductDetailsViewModel viewModel = Get.put(SingleProductDetailsViewModel());
+  final SingleProductDetailsViewModel viewModel =
+      Get.put(SingleProductDetailsViewModel());
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () => viewModel.popSingleProductView(),
-      child: Obx(() => viewModel.productModel.value == ProductModel() ? Scaffold(
-        body: Center(
-          child: viewModel.productFoundCheck.value ? CustomLoading() : NoDataFoundWithIcon(
-            title: langKey.productNotFound.tr,
-          ),
-        ),
-      ) : Scaffold(
-          appBar: _appBar(),
-          backgroundColor: Colors.grey[300]!,
-          resizeToAvoidBottomInset: true,
-          body: Stack(
-            fit: StackFit.expand,
-            children: [
-              SingleChildScrollView(
-                child: Column(
-                    children: [
-                      _productImages(),
+        onWillPop: () => viewModel.popSingleProductView(),
+        child: Obx(() => viewModel.productModel.value == ProductModel()
+            ? Scaffold(
+                body: Center(
+                  child: viewModel.productFoundCheck.value
+                      ? CustomLoading()
+                      : NoDataFoundWithIcon(
+                          title: langKey.productNotFound.tr,
+                        ),
+                ),
+              )
+            : Scaffold(
+                appBar: _appBar(),
+                backgroundColor: Colors.grey[300]!,
+                resizeToAvoidBottomInset: true,
+                body: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          _productImages(),
 
-                        /// Product Basic Details.
-                        _productBasicDetails(),
+                          /// Product Basic Details.
+                          _productBasicDetails(),
 
-                        /// Product features
-                        if (viewModel.productModel.value.productFeatures!.isNotEmpty)
-                          _productVariantsDetails(),
+                          /// Product features
+                          if (viewModel
+                              .productModel.value.productFeatures!.isNotEmpty)
+                            _productVariantsDetails(),
 
-                        //_vendorStoreDetails(productModel: productModel),
+                          //_vendorStoreDetails(productModel: productModel),
 
-                        ///product description
-                        _productAdvanceDetails(),
+                          ///product description
+                          _productAdvanceDetails(),
 
-                        ///product reviews
-                        // _productReviews(productModel: productModel),
+                          ///product reviews
+                          // _productReviews(productModel: productModel),
 
-                        ///Product Questions
-                        productQuestions(),
+                          ///Product Questions
+                          productQuestions(),
 
-                        // if (Get.arguments != null &&
-                        //     Get.arguments["calledFor"] != null &&
-                        //     Get.arguments["calledFor"]!.contains("customer"))
-                        //   _buildCustomerAlsoViewed(
-                        //       controller.subCategoryProductList),
-                      ],
+                          // if (Get.arguments != null &&
+                          //     Get.arguments["calledFor"] != null &&
+                          //     Get.arguments["calledFor"]!.contains("customer"))
+                          //   _buildCustomerAlsoViewed(
+                          //       controller.subCategoryProductList),
+                        ],
+                      ),
                     ),
-                  ),
-              Get.arguments[0]["calledFor"] == 'seller'
-                  ? Container()
-                  : _outOfStockBottom(),
-              LoaderView(),
-            ],
-              ),
-          )
-    )
-    );
+                    Get.arguments[0]["calledFor"] == 'seller'
+                        ? Container()
+                        : _outOfStockBottom(),
+                    LoaderView(),
+                  ],
+                ),
+              )));
   }
 
-  AppBar _appBar(){
+  AppBar _appBar() {
     return AppBar(
-        actions: Get.arguments[0]["calledFor"] == 'customer' ? [
-          Align(
-            alignment: Alignment.center,
-            child: Padding(
-              padding: const EdgeInsets.only(right: 12.0),
-              child: CartIcon(
-                onTap: () {
-                  Get.offNamed(Routes.cartRoute,
-                      arguments: {"calledFromSPV": true},
-                      preventDuplicates: false);
-                },
-                iconWidget: Icon(
-                  IconlyLight.buy,
-                  size: 25,
-                  color: kPrimaryColor,
+        actions: Get.arguments[0]["calledFor"] == 'customer'
+            ? [
+                Align(
+                  alignment: Alignment.center,
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 12.0),
+                    child: CartIcon(
+                      onTap: () {
+                        Get.offNamed(Routes.cartRoute,
+                            arguments: {"calledFromSPV": true},
+                            preventDuplicates: false);
+                      },
+                      iconWidget: Icon(
+                        IconlyLight.buy,
+                        size: 25,
+                        color: kPrimaryColor,
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          ),
-        ] : null,
+              ]
+            : null,
         backgroundColor: kAppBarColor,
         centerTitle: true,
         leading: InkWell(
@@ -110,8 +116,7 @@ class SingleProductDetailsView extends StatelessWidget {
         title: CustomText(
           title: langKey.productDetails.tr,
           style: appBarTitleSize.copyWith(fontSize: 18),
-        )
-    );
+        ));
   }
 
   // SliverAppBar _sliverAppBar(ProductModel productModel) {
@@ -171,10 +176,10 @@ class SingleProductDetailsView extends StatelessWidget {
 
   Stack _productImages() {
     viewModel.productModel.value.images!.forEach((element) {
-      if(element.url == viewModel.productModel.value.thumbnail){
-         var elementData = element;
-         viewModel.productModel.value.images!.remove(element);
-         viewModel.productModel.value.images!.insert(0, elementData);
+      if (element.url == viewModel.productModel.value.thumbnail) {
+        var elementData = element;
+        viewModel.productModel.value.images!.remove(element);
+        viewModel.productModel.value.images!.insert(0, elementData);
       }
     });
     return Stack(
@@ -200,14 +205,14 @@ class SingleProductDetailsView extends StatelessWidget {
             },
           ),
         ),
-        Obx(() => Positioned(
+        Obx(
+          () => Positioned(
             bottom: 16.0,
             left: 0.0,
             right: 0.0,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: animatedContainer()
-            ),
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: animatedContainer()),
           ),
         ),
       ],
@@ -242,14 +247,16 @@ class SingleProductDetailsView extends StatelessWidget {
                       title: viewModel.productModel.value.stock == 0
                           ? 'Out Of Stock'
                           : "Stock: ${viewModel.productModel.value.stock}",
-                      color:
-                      viewModel.productModel.value.stock == 0 ? kRedColor : kPrimaryColor,
+                      color: viewModel.productModel.value.stock == 0
+                          ? kRedColor
+                          : kPrimaryColor,
                       weight: viewModel.productModel.value.stock == 0
                           ? FontWeight.bold
                           : FontWeight.w600),
                 ),
               ],
             ),
+
             ///Price section
             productPriceAndDiscount(),
 
@@ -267,7 +274,7 @@ class SingleProductDetailsView extends StatelessWidget {
     );
   }
 
-  Padding productPriceAndDiscount(){
+  Padding productPriceAndDiscount() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12.0),
       child: Row(
@@ -295,20 +302,20 @@ class SingleProductDetailsView extends StatelessWidget {
     );
   }
 
-  Padding showStoreDetails(){
+  Padding showStoreDetails() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: ListTile(
         onTap: () {
-          Get.toNamed('/storeDetails/${viewModel.productModel.value.sellerModel!.id}');
+          Get.toNamed(
+              '/storeDetails/${viewModel.productModel.value.sellerModel!.id}');
         },
         //dense: true,
         leading: Container(
           width: 45,
           height: 45,
           decoration: BoxDecoration(
-              color: kLightGreyColor.withOpacity(0.15),
-              shape: BoxShape.circle),
+              color: kLightGreyColor.withOpacity(0.15), shape: BoxShape.circle),
           child: Icon(
             Icons.storefront_rounded,
             size: 25,
@@ -323,9 +330,7 @@ class SingleProductDetailsView extends StatelessWidget {
                   style: bodyText1.copyWith(color: kLightGreyColor)),
               TextSpan(
                   text:
-                  "${viewModel.productModel.value.sellerModel!.storeName ??
-                      viewModel.productModel.value.sellerModel!.user!.firstName
-                      ?? viewModel.productModel.value.sellerModel!.user!.name ?? ""}",
+                      "${viewModel.productModel.value.sellerModel!.storeName ?? viewModel.productModel.value.sellerModel!.user!.firstName ?? viewModel.productModel.value.sellerModel!.user!.name ?? ""}",
                   style: headline3),
             ],
           ),
@@ -355,7 +360,7 @@ class SingleProductDetailsView extends StatelessWidget {
     );
   }
 
-  Row showProductReviews(){
+  Row showProductReviews() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -367,7 +372,8 @@ class SingleProductDetailsView extends StatelessWidget {
             children: [
               Obx(
                 () => CustomText(
-                  title: "${viewModel.getRating()} (${viewModel.reviewResponse.value.count})",
+                  title:
+                      "${viewModel.getRating()} (${viewModel.reviewResponse.value.count})",
                   style: bodyText1,
                 ),
               ),
@@ -389,7 +395,7 @@ class SingleProductDetailsView extends StatelessWidget {
     );
   }
 
-  Padding showProductCategories(){
+  Padding showProductCategories() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12.0),
       child: Wrap(
@@ -429,7 +435,10 @@ class SingleProductDetailsView extends StatelessWidget {
               physics: NeverScrollableScrollPhysics(),
               itemCount: viewModel.productModel.value.productFeatures?.length,
               itemBuilder: (_, index) {
-                String? key = viewModel.productModel.value.productFeatures?.entries.elementAt(index).key;
+                String? key = viewModel
+                    .productModel.value.productFeatures?.entries
+                    .elementAt(index)
+                    .key;
                 return _productVariantWidget(title: key);
               },
             ),
@@ -454,9 +463,11 @@ class SingleProductDetailsView extends StatelessWidget {
             width: AppResponsiveness.width * 0.8,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: viewModel.productModel.value.productFeatures![title]!.map((e) => isNextBtnClicked!
-                ? _buildChip(featureModel: e)
-                : _singleVariantsListItems(feature: e)).toList(),
+              children: viewModel.productModel.value.productFeatures![title]!
+                  .map((e) => isNextBtnClicked!
+                      ? _buildChip(featureModel: e)
+                      : _singleVariantsListItems(feature: e))
+                  .toList(),
             ),
           ),
         ),
@@ -488,25 +499,26 @@ class SingleProductDetailsView extends StatelessWidget {
   }
 
   Widget _buildChip({ProductFeature? featureModel}) {
-    return Obx(() => Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ChoiceChip(
-        label: CustomText(
-            title: featureModel!.value!,
-            style: bodyText1.copyWith(color: Colors.white)),
-        selected: viewModel.selectedFeatureIDsList.contains(featureModel.id),
-        selectedColor: kPrimaryColor,
-        onSelected: (isSelected) {
-          if (isSelected) {
-            viewModel.selectedFeatureIDsList.add(featureModel.id!);
-            viewModel.selectedFeatureNamesList.add(featureModel.value!);
-          } else {
-            viewModel.selectedFeatureIDsList.remove(featureModel.id);
-            viewModel.selectedFeatureNamesList.remove(featureModel.value!);
-          }
-        },
+    return Obx(
+      () => Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ChoiceChip(
+          label: CustomText(
+              title: featureModel!.value!,
+              style: bodyText1.copyWith(color: Colors.white)),
+          selected: viewModel.selectedFeatureIDsList.contains(featureModel.id),
+          selectedColor: kPrimaryColor,
+          onSelected: (isSelected) {
+            if (isSelected) {
+              viewModel.selectedFeatureIDsList.add(featureModel.id!);
+              viewModel.selectedFeatureNamesList.add(featureModel.value!);
+            } else {
+              viewModel.selectedFeatureIDsList.remove(featureModel.id);
+              viewModel.selectedFeatureNamesList.remove(featureModel.value!);
+            }
+          },
+        ),
       ),
-    ),
     );
   }
 
@@ -527,10 +539,12 @@ class SingleProductDetailsView extends StatelessWidget {
                     children: [
                       if (viewModel.productModel.value.brand!.isNotEmpty)
                         TextSpan(
-                            text: "Brand: ${viewModel.productModel.value.brand},",
+                            text:
+                                "Brand: ${viewModel.productModel.value.brand},",
                             style: bodyText2),
                       TextSpan(
-                          text: "Sku: ${viewModel.productModel.value.sku}", style: bodyText2)
+                          text: "Sku: ${viewModel.productModel.value.sku}",
+                          style: bodyText2)
                     ],
                   ),
                 ),
@@ -719,17 +733,18 @@ class SingleProductDetailsView extends StatelessWidget {
     );
   }
 
-  ListTile productPriceAndThumbnail(){
+  ListTile productPriceAndThumbnail() {
     return ListTile(
       leading: CustomNetworkImage(
-          imageUrl: viewModel.productModel.value.thumbnail ?? AppConstant.defaultImgUrl,
-          height: 60
-      ),
+          imageUrl: viewModel.productModel.value.thumbnail ??
+              AppConstant.defaultImgUrl,
+          height: 60),
       title: CustomText(title: viewModel.productModel.value.name),
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomPriceWidget(title: "${viewModel.productModel.value.discountPrice}"),
+          CustomPriceWidget(
+              title: "${viewModel.productModel.value.discountPrice}"),
           if (viewModel.productModel.value.discount! > 0)
             Row(
               children: [
@@ -739,7 +754,8 @@ class SingleProductDetailsView extends StatelessWidget {
                         decoration: TextDecoration.lineThrough)),
                 AppConstant.spaceWidget(width: 5),
                 CustomText(
-                    title: "${viewModel.productModel.value.discount}% ${langKey.OFF.tr}",
+                    title:
+                        "${viewModel.productModel.value.discount}% ${langKey.OFF.tr}",
                     style: bodyText2.copyWith(color: Colors.redAccent))
               ],
             ),
@@ -748,7 +764,7 @@ class SingleProductDetailsView extends StatelessWidget {
     );
   }
 
-  Column productFeaturesList(){
+  Column productFeaturesList() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -759,11 +775,9 @@ class SingleProductDetailsView extends StatelessWidget {
           physics: NeverScrollableScrollPhysics(),
           itemCount: viewModel.productModel.value.productFeatures?.length,
           itemBuilder: (_, index) {
-            String? key = viewModel.productModel.value.productFeatures?.keys.elementAt(index);
-            return _productVariantWidget(
-                title: key,
-                isNextBtnClicked: false
-            );
+            String? key = viewModel.productModel.value.productFeatures?.keys
+                .elementAt(index);
+            return _productVariantWidget(title: key, isNextBtnClicked: false);
           },
         ),
       ],
@@ -771,7 +785,8 @@ class SingleProductDetailsView extends StatelessWidget {
   }
 
   productQuestions() {
-    return Obx(() => CustomCard(
+    return Obx(
+      () => CustomCard(
         margin: const EdgeInsets.fromLTRB(8, 5, 8, 50),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
@@ -792,10 +807,12 @@ class SingleProductDetailsView extends StatelessWidget {
               else
                 InkWell(
                   onTap: () {
-                    Get.to(() => ProductQuestionsView(), arguments: [{
-                      "productId": "${viewModel.productID.value}",
-                      "productModel": viewModel.productModel.value
-                    }]);
+                    Get.to(() => ProductQuestionsView(), arguments: [
+                      {
+                        "productId": "${viewModel.productID.value}",
+                        "productModel": viewModel.productModel.value
+                      }
+                    ]);
                   },
                   child: CustomGreyBorderContainer(
                     width: double.infinity,
@@ -803,9 +820,9 @@ class SingleProductDetailsView extends StatelessWidget {
                     borderColor: kWhiteColor,
                     child: Center(
                         child: CustomText(
-                          title: langKey.askQuestion.tr,
-                          color: kRedColor,
-                        )),
+                      title: langKey.askQuestion.tr,
+                      color: kRedColor,
+                    )),
                   ),
                 ),
             ],
@@ -816,21 +833,23 @@ class SingleProductDetailsView extends StatelessWidget {
   }
 
   questionListView() {
-    return viewModel.productQuestions.isEmpty ? Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: NoDataFound(text: langKey.noQuestionFound.tr),
-    ) : ListView.separated(
-      shrinkWrap: true,
-      padding: EdgeInsets.zero,
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: viewModel.productQuestions.length,
-      itemBuilder: (BuildContext context, int index) {
-        return questionListViewItem(index);
-      },
-      separatorBuilder: (BuildContext context, int index) {
-        return kSmallDivider;
-      },
-    );
+    return viewModel.productQuestions.isEmpty
+        ? Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: NoDataFound(text: langKey.noQuestionFound.tr),
+          )
+        : ListView.separated(
+            shrinkWrap: true,
+            padding: EdgeInsets.zero,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: viewModel.productQuestions.length,
+            itemBuilder: (BuildContext context, int index) {
+              return questionListViewItem(index);
+            },
+            separatorBuilder: (BuildContext context, int index) {
+              return kSmallDivider;
+            },
+          );
   }
 
   Padding questionListViewItem(int index) {
@@ -843,16 +862,15 @@ class SingleProductDetailsView extends StatelessWidget {
               isQuestion: true,
               title: viewModel.productQuestions[index].question,
               name: viewModel.productQuestions[index].user!.firstName!,
-              date: viewModel.productQuestions[index].createdAt, index: index
-          ),
+              date: viewModel.productQuestions[index].createdAt,
+              index: index),
           if (viewModel.productQuestions[index].answer != null)
             questionAnswerItem(
                 title: viewModel.productQuestions[index].answer!.answer,
                 name: viewModel.productModel.value.sellerModel!.storeName ??
                     viewModel.productModel.value.sellerModel!.user!.firstName,
                 date: viewModel.productQuestions[index].answer!.createdAt,
-                index: index
-            ),
+                index: index),
         ],
       ),
     );
@@ -860,10 +878,10 @@ class SingleProductDetailsView extends StatelessWidget {
 
   Padding questionAnswerItem(
       {bool isQuestion = false,
-        String? title,
-        name,
-        date,
-        required int index}) {
+      String? title,
+      name,
+      date,
+      required int index}) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       child: Row(
@@ -905,7 +923,7 @@ class SingleProductDetailsView extends StatelessWidget {
                       ),
                       TextSpan(
                         text:
-                        " - ${AppConstant.formattedDataTime("dd-MMM-yy", date)}",
+                            " - ${AppConstant.formattedDataTime("dd-MMM-yy", date)}",
                         style: caption.copyWith(
                           color: kLightColor,
                         ),
@@ -922,44 +940,47 @@ class SingleProductDetailsView extends StatelessWidget {
   }
 
   Widget _buildCustomerAlsoViewed(List<ProductModel> list) {
-    return Obx(() => list.isEmpty ? Container() : Card(
-      margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SizedBox(
-          height: AppResponsiveness.getBoxHeightPoint30(),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              CustomText(
-                title: langKey.peopleAlsoViewed.tr,
-                size: 18,
-                weight: FontWeight.w600,
-              ),
-              AppConstant.spaceWidget(height: 10),
-              Expanded(
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: list.length,
-                  itemBuilder: (context, index) {
-                    ProductModel productModel = list[index];
-                    return SingleProductItems(
-                      productModel: productModel,
-                      onTap: () {
-                        Get.offNamed('/product/${productModel.id}',
-                            preventDuplicates: false,
-                            arguments: {"calledFor": "customer"});
-                      },
-                    );
-                  },
+    return Obx(
+      () => list.isEmpty
+          ? Container()
+          : Card(
+              margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SizedBox(
+                  height: AppResponsiveness.getBoxHeightPoint30(),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      CustomText(
+                        title: langKey.peopleAlsoViewed.tr,
+                        size: 18,
+                        weight: FontWeight.w600,
+                      ),
+                      AppConstant.spaceWidget(height: 10),
+                      Expanded(
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: list.length,
+                          itemBuilder: (context, index) {
+                            ProductModel productModel = list[index];
+                            return SingleProductItems(
+                              productModel: productModel,
+                              onTap: () {
+                                Get.offNamed('/product/${productModel.id}',
+                                    preventDuplicates: false,
+                                    arguments: {"calledFor": "customer"});
+                              },
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ],
-          ),
-        ),
-      ),
-    ),
+            ),
     );
   }
 
@@ -1009,18 +1030,17 @@ class SingleProductDetailsView extends StatelessWidget {
     );
   }
 
-  List<Widget> animatedContainer(){
+  List<Widget> animatedContainer() {
     return List.generate(
       viewModel.productModel.value.images!.length,
-          (index) => AnimatedContainer(
+      (index) => AnimatedContainer(
         duration: const Duration(milliseconds: 400),
         height: 6.0,
         width: /*controller.sliderIndex.value == index ? 14.0 :*/ 6.0,
         margin: const EdgeInsets.only(right: 4.0),
         decoration: BoxDecoration(
-          color: viewModel.pageIndex.value == index
-              ? kPrimaryColor
-              : kLightColor,
+          color:
+              viewModel.pageIndex.value == index ? kPrimaryColor : kLightColor,
           borderRadius: BorderRadius.circular(8.0),
         ),
       ),
@@ -1061,26 +1081,27 @@ class SingleProductDetailsView extends StatelessWidget {
         bottom: 0,
         child: viewModel.productModel.value.stock == 0
             ? IgnorePointer(
-          child: BottomAppBar(
-            elevation: 0,
-            height: 48,
-            child: Container(
-              width: AppResponsiveness.width,
-              decoration: BoxDecoration(
-                  color: Colors.grey.shade300,
-                  //borderRadius: BorderRadius.all(Radius.circular(12)),
-                  border:
-                  Border.all(width: 0, color: Colors.grey.shade300)),
-              child: Center(
-                child: CustomText(
-                  title: langKey.outOfStock.tr,
-                  textAlign: TextAlign.center,
-                  size: 18,
-                  color: kRedColor,
+                child: BottomAppBar(
+                  elevation: 0,
+                  height: 48,
+                  child: Container(
+                    width: AppResponsiveness.width,
+                    decoration: BoxDecoration(
+                        color: Colors.grey.shade300,
+                        //borderRadius: BorderRadius.all(Radius.circular(12)),
+                        border:
+                            Border.all(width: 0, color: Colors.grey.shade300)),
+                    child: Center(
+                      child: CustomText(
+                        title: langKey.outOfStock.tr,
+                        textAlign: TextAlign.center,
+                        size: 18,
+                        color: kRedColor,
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          ),
-        ) : _footerBottomBar());
+              )
+            : _footerBottomBar());
   }
 }
