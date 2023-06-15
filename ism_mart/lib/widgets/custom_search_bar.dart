@@ -12,45 +12,40 @@ class CustomSearchBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (calledFromSPV!) {
-          Get.back();
+          // Get.back();
           /*Get.offNamed(Routes.searchRoute,
               arguments: {"searchText": searchText ?? " "},
               preventDuplicates: true);*/
-        } else {
+        // else {
           //baseController.changePage(2);
 
-          Get.toNamed(Routes.searchRoute,
+          Get.offNamed(Routes.searchRoute,
               arguments: {"searchText": searchText ?? " "});
-        }
       },
-      child: Hero(
-        tag: "productSearchBar",
-        child: Container(
-          height: 34.0,
-          alignment: Alignment.center,
-          padding: const EdgeInsets.symmetric(horizontal: kFixPadding),
-          decoration: BoxDecoration(
-            color: kWhiteColor,
-            border: Border.all(color: kLightGreyColor),
-            borderRadius: BorderRadius.circular(8.0),
-          ),
-          child: Row(
-            children: [
-              Icon(Icons.search, color: kPrimaryColor),
-              Padding(
-                padding: EdgeInsets.only(left: 4.0),
-                child: Text(
-                  searchText != "" ? searchText! : searchIn.tr,
-                  style: TextStyle(
-                    color: kLightColor,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 13.0,
-                  ),
+      child: Container(
+        height: 34.0,
+        alignment: Alignment.center,
+        padding: const EdgeInsets.symmetric(horizontal: kFixPadding),
+        decoration: BoxDecoration(
+          color: kWhiteColor,
+          border: Border.all(color: kLightGreyColor),
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        child: Row(
+          children: [
+            Icon(Icons.search, color: kPrimaryColor),
+            Padding(
+              padding: EdgeInsets.only(left: 4.0),
+              child: Text(
+                searchText != "" ? searchText! : searchIn.tr,
+                style: TextStyle(
+                  color: kLightColor,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 13.0,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
