@@ -172,17 +172,6 @@ class ApiRepository {
   }
 
   /**
-   * FAQ Api
-   *
-   * */
-
-  Future<List<dynamic>> fetchAllFAQ({token}) async {
-    var response = await _apiService.get(
-        endpoint: 'faq/allFaq', token: token, requiresAuthToken: true);
-    return response.body != null ? response.body['data'] : [];
-  }
-
-  /**
    *
    * Flutter Stripe Integration
    * */

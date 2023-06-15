@@ -61,6 +61,10 @@ class Urls {
 
   //SellerDashBoardViewModel
   static String getSellerOrdersStats = "order/vendorStats";
-  static String getVendorOrdersForDashboard =
-      "order/vendorOrders?limit=10&page=";
+  static String getVendorOrdersForDashboard = "order/vendorOrders?limit=10&page=";
+
+  //FaqViewModel
+  static String getFaq = "faq/allFaq";
+
+
 }
