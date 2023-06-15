@@ -199,8 +199,10 @@ class AuthController extends GetxController {
         LocalStorageHelper.storeUser(userModel: userModel);
         setSession(true);
       });
-    } else
+    } else {
+      GlobalVariable.internetErr(false);
       setSession(true);
+    }
   }
 
   updateUserEmailVerification({UserModel? fromApi, UserModel? stored}) async {

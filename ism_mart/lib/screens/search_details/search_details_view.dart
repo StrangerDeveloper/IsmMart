@@ -83,7 +83,11 @@ class SearchDetailsView extends GetView<CustomSearchController> {
         child: Scaffold(
           backgroundColor: Colors.grey[100]!,
           appBar: _searchAppBar(),
-          body: _body(),
+          body: Stack(
+            children: [
+              _body(),
+            ],
+          ),
           //floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
           //floatingActionButton: _filterBar(),
         ),

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
+import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/screens/search_details/search_details_view.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
@@ -14,16 +15,19 @@ class BaseController extends GetxController {
 
   var searchController = TextEditingController();
   var cartCount = 0.obs;
-
-  @override
-  void onReady() {
-    super.onReady();
+  getAllApiFucnc() {
     fetchSliderImages();
     runSliderTimer();
     fetchSliderDiscountProducts();
     fetchCategories();
     //setCartCount(LocalStorageHelper.getCartItemsCount());
     setCartItemCount();
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
+    getAllApiFucnc();
     LocalStorageHelper.localStorage.listenKey(LocalStorageHelper.cartItemKey,
         (value) {
       setCartItemCount();
@@ -55,10 +59,22 @@ class BaseController extends GetxController {
   fetchSliderImages() async {
     isSliderLoading(true);
     await _apiProvider.fetchSliderImages().then((data) {
-      sliderImages.addAll(data);
+      if (data.length == 0) {
+        GlobalVariable.internetErr(true);
+        GlobalVariable.btnPress(false);
+      } else {
+        GlobalVariable.internetErr(false);
+        sliderImages.clear();
+        if (sliderImages.isEmpty) {
+          sliderImages.addAll(data);
+        }
+      }
+
       isSliderLoading(false);
       //runSliderTimer(value);
     }).catchError((error) {
+      GlobalVariable.internetErr(true);
+      print(" hhh  images err ${GlobalVariable.internetErr.value}");
       isSliderLoading(false);
       debugPrint(">>>>FetchSliderImageError $error");
       //fetchSliderImages();
@@ -93,6 +109,8 @@ class BaseController extends GetxController {
       discountSliderProductsList.addAll(data);
       isProductsLoading(false);
     }).catchError((error) {
+      GlobalVariable.internetErr(true);
+      print(" hhh  slider disc err ${GlobalVariable.internetErr.value}");
       isProductsLoading(false);
       debugPrint(">>>fetchSliderDiscountProducts: $error");
     });
@@ -112,10 +130,14 @@ class BaseController extends GetxController {
       categories.addAll(data);
       isCategoriesLoading(false);
     }).catchError((error) {
+      GlobalVariable.internetErr(true);
       if (_minNoOfCategoriesRequest != 0) {
         _minNoOfCategoriesRequest--;
         fetchCategories();
       } else {
+        GlobalVariable.internetErr(true);
+        print(" hhh  categories err ${GlobalVariable.internetErr.value}");
+
         debugPrint("FetchCategoriesError $error");
         isCategoriesLoading(false);
       }
@@ -164,6 +186,7 @@ class BaseController extends GetxController {
         isProductsLoading(false);
         productsWithTypesMap.putIfAbsent(element['value'], () => value);
       }).catchError((error) {
+        GlobalVariable.internetErr(true);
         isProductsLoading(false);
         debugPrint(">>>FetchProductsByType $error");
       });
