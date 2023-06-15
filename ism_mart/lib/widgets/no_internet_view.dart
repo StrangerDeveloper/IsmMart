@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:ism_mart/api_helper/global_variables.dart';
+import 'package:ism_mart/helper/global_variables.dart';
 
 import '../screens/add_product/add_product_viewmodel.dart';
-import '../widgets/custom_button.dart';
+import 'custom_button.dart';
 
 class NoInternetView extends StatelessWidget {
   final VoidCallback? onPressed;
@@ -21,7 +21,7 @@ class NoInternetView extends StatelessWidget {
       () => (GlobalVariable.internetErr.isTrue)
           ? Container(
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              color: Get.isDarkMode ? Colors.black : Colors.white,
+              color: Colors.white,
               height: double.infinity,
               width: double.infinity,
               child: Column(
@@ -43,7 +43,7 @@ class NoInternetView extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 15,
-                        color: Get.isDarkMode ? Colors.black38 : Colors.grey,
+                        color: Colors.grey,
                       ),
                     ),
                   ),
@@ -58,8 +58,6 @@ class NoInternetView extends StatelessWidget {
   Widget tryAgainBtn() {
     return CustomTextBtn(
       child: const Text("Try Again"),
-      // minimumSize: Size(200, 45),
-      // backgroundColor: ,
       onPressed: onPressed,
     );
   }

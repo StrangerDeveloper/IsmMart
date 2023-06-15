@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:ism_mart/api_helper/api_constant.dart';
 import 'package:ism_mart/helper/errors.dart';
-import 'package:ism_mart/api_helper/global_variables.dart';
+import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/controllers/controllers.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/getx_helper.dart';

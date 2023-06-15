@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ism_mart/api_helper/global_variables.dart';
+import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/controllers/buyer/search/custom_search_controller.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/models/exports_model.dart';

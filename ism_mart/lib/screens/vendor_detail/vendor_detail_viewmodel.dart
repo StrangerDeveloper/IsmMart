@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:ism_mart/api_helper/global_variables.dart';
+import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/models/exports_model.dart';
 
 class VendorDetailViewModel extends GetxController {
