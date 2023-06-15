@@ -35,35 +35,40 @@ class SingleProductFullImageView extends StatelessWidget {
                     );
                   }),
             ),
-            Obx(
-                  () => Positioned(
-                bottom: 16.0,
-                left: 0.0,
-                right: 0.0,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(
-                    viewModel.productImages.isNotEmpty ? viewModel.productImages.length : viewModel.imagesToUpdate.length,
-                        (index) => AnimatedContainer(
-                      duration: const Duration(milliseconds: 400),
-                      height: 6.0,
-                      width: /*controller.sliderIndex.value == index ? 14.0 :*/
-                      6.0,
-                      margin: const EdgeInsets.only(right: 4.0),
-                      decoration: BoxDecoration(
-                        color: viewModel.imageIndex.value == index
-                            ? kPrimaryColor
-                            : kLightColor,
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            animatedContainersAtBottom(),
           ],
         ),
       ),
     );
   }
+
+  animatedContainersAtBottom() {
+    return Obx(() => Positioned(
+      bottom: 16.0,
+      left: 0.0,
+      right: 0.0,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: List.generate(
+          viewModel.productImages.isNotEmpty ? viewModel.productImages
+              .length : viewModel.imagesToUpdate.length,
+              (index) => AnimatedContainer(
+                duration: const Duration(milliseconds: 400),
+                height: 6.0,
+                width: /*controller.sliderIndex.value == index ? 14.0 :*/
+                6.0,
+                margin: const EdgeInsets.only(right: 4.0),
+                decoration: BoxDecoration(
+                  color: viewModel.imageIndex.value == index
+                      ? kPrimaryColor
+                      : kLightColor,
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+              ),
+            ),
+          ),
+        ),
+    );
+  }
+
 }
