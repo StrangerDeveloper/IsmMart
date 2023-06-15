@@ -67,6 +67,12 @@ class BaseController extends GetxController {
         sliderImages.clear();
         if (sliderImages.isEmpty) {
           sliderImages.addAll(data);
+          Future.delayed(
+            Duration(
+              seconds: 3,
+            ),
+            () => GlobalVariable.btnPress(false),
+          );
         }
       }
 
