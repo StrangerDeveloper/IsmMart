@@ -549,21 +549,5 @@ class Spanish {
             'Los miembros premium tendrán menos acceso a todas las empresas en todo el mundo, tanto como vendedor como comprador, ya que Ismmart garantizará y verificará directamente a dichos miembros y cualquier oferta que hagan.',
         key.memPlan3Desc9:
             'Como todos los miembros premium son examinados y se verifican a través del proceso de verificación ISMMART, por lo que todos estos miembros pueden preocuparse menos comercio entre sí, en cualquier parte del mundo.',
-        key.q1: '¿Cómo funciona el ismmart?',
-        key.q2: '¿Puedo cancelar mi suscripción en cualquier momento?',
-        key.q3: '¿Qué método de pago debe aceptar?',
-        key.q4: '¿Cuáles son los beneficios de usar el afiliado de Ismmart?',
-        key.q5:
-            '¿Qué es la gestión de la flota y cómo es diferente de la escala dinámica?',
-        key.ans1:
-            'El sistema proporcionará un espacio/tienda virtual a los vendedores que deseen vender algo al mercado. Pueden ser proveedores individuales, o algunas marcas establecidas que desean mejorar su presencia en el mundo digital. Nuestros proveedores se registrarán con nosotros en algunos cargos mensuales de suscripción/ tarifas de plataforma. Verificaremos la autenticidad de los proveedores tomando su información básica y prepararemos un acuerdo con ellos. Del mismo modo, nuestros clientes/compradores también se registrarán con nosotros en nuestra tienda de comercio electrónico. Los clientes podrán ver el perfil del proveedor, calificarlos (después de obtener servicios), realizar sus compras y mantenerse actualizados con los productos en el mercado. Por ejemplo, tenemos un proveedor/tienda registrado como Ali Electronics que se ocupa de todo tipo de electrodomésticos. Digamos, Ayesha quiere comprar una tetera eléctrica y al buscar encuentra su producto deseado en Ali Electronics. Ella realizará su pedido y realizará su pago por adelantado, lo que estará en la cuenta de la compañía hasta que se complete el pedido. Ali Electronics recibirá una notificación sobre el pedido. Empacará el producto relevante y lo enviará a través de nuestro servicio (nuestros servicios de mensajería definidos a través de nuestra cuenta). Una vez que la señorita Ayesha recibe el producto y verifica que obtuvo el producto deseado, el pago se publicará y llegará a la cuenta del proveedor en un período de tiempo definido (15 días).',
-        key.ans2:
-            'Sí. Puede cancelar su suscripción en cualquier momento. Su suscripción continuará estando activa hasta el final de su término actual (mes o año), pero no se renovará automáticamente. A menos que elimine su cuenta manualmente, su cuenta y todos los datos se eliminarán 60 días desde el día en que su suscripción se vuelve inactiva.',
-        key.ans3:
-            'Holistic Engage Sticky Markets antes de la colaboración colaborativa y el intercambio de ideas. Fosforescentemente facilita aplicaciones paralelas con imperativos únicos. Plagiar proactivamente los entregables de funcionalidad a través de soluciones económicas. Coloque colaborativamente, adopta intermediarios habilitados en la web en lugar de diversos procedimientos de prueba.',
-        key.ans4:
-            'Continuamente impactan los imperativos perfectos para las mejores prácticas de las mejores de reproducción. Fosforescentemente facilita aplicaciones paralelas con imperativos únicos. Plagiar proactivamente los entregables de funcionalidad a través de soluciones económicas. Coloque colaborativamente, adopta intermediarios habilitados en la web en lugar de diversos procedimientos de prueba.',
-        key.ans5:
-            'Iniciar distintivamente canales sin errores con ROI altamente eficiente. Imagen intrínseco datos de clase mundial a través de las mejores prácticas de las mejores de reproducción. Habilite de manera eficiente los e-Tilers E empoderado después de los servicios de una unidad cruzada. Expede de forma única a los minoristas perfectos a través de interfaces cooperativas. Meta-Meta-servicios dirigidos por el cliente monotónicamente miocárdico, mientras que escenarios sin errores.',
       };
 }

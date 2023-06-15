@@ -1,6 +1,5 @@
 export 'category/category_model.dart';
 export 'category/sub_category_model.dart';
-export 'faq/faq_model.dart';
 export 'order/cart/cart_model.dart';
 export 'order/order_model.dart';
 export 'product/product_model.dart';
