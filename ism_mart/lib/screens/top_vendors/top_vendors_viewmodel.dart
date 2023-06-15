@@ -2,14 +2,14 @@ import 'package:get/get.dart';
 import 'package:ism_mart/screens/top_vendors/top_vendors_model.dart';
 
 import '../../helper/api_base_helper.dart';
-import '../../api_helper/global_variables.dart';
+import '../../helper/global_variables.dart';
 import '../../helper/urls.dart';
 
 class TopVendorsViewModel extends GetxController {
   Rx<TopVendorsModel> topVendorsModel = TopVendorsModel().obs;
   @override
   void onReady() {
-    //getData();
+    getData();
     super.onReady();
   }
 
@@ -17,7 +17,7 @@ class TopVendorsViewModel extends GetxController {
   void onInit() {
     super.onInit();
     // getTopVendors();
-    getData();
+    // getData();
   }
 
   // getTopVendors() async {

@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:ism_mart/helper/api_base_helper.dart';
-import 'package:ism_mart/api_helper/global_variables.dart';
+import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/urls.dart';
 import 'package:ism_mart/screens/dispute_detail/dispute_detail_model.dart';
 import 'package:ism_mart/utils/constants.dart';

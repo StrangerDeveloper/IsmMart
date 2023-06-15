@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
-import 'package:ism_mart/api_helper/global_variables.dart';
+import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/models/product/product_model.dart';
 
 class SearchViewModel extends GetxController {
@@ -47,7 +47,7 @@ class SearchViewModel extends GetxController {
 
   void getHistory() async {
     await LocalStorageHelper.getHistory().then((value) {
-      print(">>GetHistory: ${value.toString()}");
+      //print(">>GetHistory: ${value.toString()}");
       historyList.addAll(value);
     });
   }

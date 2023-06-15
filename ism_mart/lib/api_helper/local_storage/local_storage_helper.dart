@@ -1,7 +1,6 @@
 import 'dart:convert';
-
 import 'package:get_storage/get_storage.dart';
-import 'package:ism_mart/api_helper/global_variables.dart';
+import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/models/exports_model.dart';
 
 class LocalStorageHelper {

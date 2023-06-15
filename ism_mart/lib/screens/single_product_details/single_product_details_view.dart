@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 import 'package:ism_mart/models/exports_model.dart';
-import 'package:ism_mart/exports/exports_ui.dart';
 import 'package:ism_mart/screens/cart/cart_viewmodel.dart';
 import 'package:ism_mart/screens/product_questions/product_questions_view.dart';
 import 'package:ism_mart/screens/single_product_details/single_product_details_viewmodel.dart';
@@ -939,50 +938,50 @@ class SingleProductDetailsView extends StatelessWidget {
     );
   }
 
-  Widget _buildCustomerAlsoViewed(List<ProductModel> list) {
-    return Obx(
-      () => list.isEmpty
-          ? Container()
-          : Card(
-              margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SizedBox(
-                  height: AppResponsiveness.getBoxHeightPoint30(),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      CustomText(
-                        title: langKey.peopleAlsoViewed.tr,
-                        size: 18,
-                        weight: FontWeight.w600,
-                      ),
-                      AppConstant.spaceWidget(height: 10),
-                      Expanded(
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: list.length,
-                          itemBuilder: (context, index) {
-                            ProductModel productModel = list[index];
-                            return SingleProductItems(
-                              productModel: productModel,
-                              onTap: () {
-                                Get.offNamed('/product/${productModel.id}',
-                                    preventDuplicates: false,
-                                    arguments: {"calledFor": "customer"});
-                              },
-                            );
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-    );
-  }
+  // Widget _buildCustomerAlsoViewed(List<ProductModel> list) {
+  //   return Obx(
+  //     () => list.isEmpty
+  //         ? Container()
+  //         : Card(
+  //             margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5),
+  //             child: Padding(
+  //               padding: const EdgeInsets.all(8.0),
+  //               child: SizedBox(
+  //                 height: AppResponsiveness.getBoxHeightPoint30(),
+  //                 child: Column(
+  //                   crossAxisAlignment: CrossAxisAlignment.start,
+  //                   //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //                   children: [
+  //                     CustomText(
+  //                       title: langKey.peopleAlsoViewed.tr,
+  //                       size: 18,
+  //                       weight: FontWeight.w600,
+  //                     ),
+  //                     AppConstant.spaceWidget(height: 10),
+  //                     Expanded(
+  //                       child: ListView.builder(
+  //                         scrollDirection: Axis.horizontal,
+  //                         itemCount: list.length,
+  //                         itemBuilder: (context, index) {
+  //                           ProductModel productModel = list[index];
+  //                           return SingleProductItems(
+  //                             productModel: productModel,
+  //                             onTap: () {
+  //                               Get.offNamed('/product/${productModel.id}',
+  //                                   preventDuplicates: false,
+  //                                   arguments: {"calledFor": "customer"});
+  //                             },
+  //                           );
+  //                         },
+  //                       ),
+  //                     ),
+  //                   ],
+  //                 ),
+  //               ),
+  //             ),
+  //           ),
+  //   );
+  // }
 
   Row _buildQtyChosen() {
     return Row(

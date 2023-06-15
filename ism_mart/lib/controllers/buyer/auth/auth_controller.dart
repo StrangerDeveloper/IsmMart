@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
-import 'package:ism_mart/api_helper/global_variables.dart';
+import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
@@ -42,7 +42,6 @@ class AuthController extends GetxController {
     super.onInit();
     getCurrentUser();
   }
-
 
   @override
   void onReady() {
@@ -107,7 +106,6 @@ class AuthController extends GetxController {
       debugPrint("Verification Link Error: $onError");
     });
   }
-
 
   var coverImgPath = "".obs;
   var profileImgPath = "".obs;
@@ -213,7 +211,6 @@ class AuthController extends GetxController {
     }
     setUserModel(fromApi);
   }
-
 
   var currUserToken = "".obs;
 
@@ -341,7 +338,6 @@ class AuthController extends GetxController {
     });
   }
 
-
   void showSnackBar({title = 'error', message = 'Something went wrong'}) {
     AppConstant.displaySnackBar(title, message);
   }
@@ -350,7 +346,6 @@ class AuthController extends GetxController {
     firstNameController.clear();
     emailController.clear();
   }
-
 
   clearForgotPasswordControllers() {
     newPasswordController.clear();

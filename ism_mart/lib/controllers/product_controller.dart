@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
-import 'package:ism_mart/api_helper/global_variables.dart';
+import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
@@ -30,7 +30,6 @@ class ProductController extends GetxController with StateMixin {
   var loadMoreVisibility = false.obs;
 
   get userModel => authController.userModel!;
-
 
   fetchProduct(int id) async {
     change(null, status: RxStatus.loading());

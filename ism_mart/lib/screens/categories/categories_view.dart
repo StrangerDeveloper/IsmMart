@@ -70,7 +70,8 @@ class CategoriesView extends GetView<CategoryController> {
             () => Expanded(
               flex: 5,
               child: CustomSearchBar(
-                  searchText: controller.selectedCategory.value),
+                searchText: controller.selectedCategory.value,
+              ),
             ),
           ),
         ],
@@ -188,41 +189,4 @@ class CategoriesView extends GetView<CategoryController> {
       ),
     );
   }
-
-/*Widget _buildSubCategoryItemNew(SubCategory? subCategory) {
-    return InkWell(
-      onTap: () {
-        Get.toNamed(Routes.searchRoute,
-            arguments: {"searchText": "${subCategory.name}"});
-      },
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-          padding: const EdgeInsets.all(5),
-          decoration: BoxDecoration(
-            //shape: BoxShape.circle,
-            borderRadius: BorderRadius.circular(50),
-            color: kWhiteColor,
-            border: Border.all(color: kPrimaryColor),
-            boxShadow: [
-              BoxShadow(
-                color: kLightGreyColor,
-                blurRadius: 10,
-                offset: const Offset(0, 1),
-              ),
-            ],
-          ),
-          child: Center(
-            child: CustomText(
-              title: subCategory!.name,
-              //color: kWhiteColor,
-              size: 11,
-              textAlign: TextAlign.center,
-              weight: FontWeight.bold,
-            ),
-          ),
-        ),
-      ),
-    );
-  }*/
 }

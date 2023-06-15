@@ -18,7 +18,6 @@ class CartViewModel extends GetxController {
   @override
   void onInit() {
     fetchCartItemsFromLocal();
-    //quantityController.text = count.value.toString();
     super.onInit();
   }
 
