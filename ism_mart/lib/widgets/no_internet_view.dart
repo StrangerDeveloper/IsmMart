@@ -2,18 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/helper/global_variables.dart';
-
-import '../controllers/buyer/base_controller.dart';
 import '../widgets/custom_button.dart';
 
 class NoInternetView extends StatelessWidget {
-  final VoidCallback? onPressed;
-
   NoInternetView({
     Key? key,
     this.onPressed,
   }) : super(key: key);
-  var controller = Get.put(BaseController(Get.find()));
+  final VoidCallback? onPressed;
   @override
   Widget build(BuildContext context) {
     return Obx(
