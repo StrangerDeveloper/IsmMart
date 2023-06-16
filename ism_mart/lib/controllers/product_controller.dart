@@ -101,8 +101,9 @@ class ProductController extends GetxController with StateMixin {
   var sellerStoreResponse = SellerModelResponse().obs;
   //var vendorID = 0.obs;
   fetchStoreDetailsByID({storeID}) async {
+    GlobalVariable.internetErr(false);
     isLoading(true);
-    //change(null, status: RxStatus.loading());
+    //change(null, status: RxStat)us.loading());
     await _apiProvider
         .getVendorStoreById(storeID: storeID, token: authController.userToken)
         .then((sellerModelResponse) {
@@ -113,6 +114,8 @@ class ProductController extends GetxController with StateMixin {
       page = 1;
       getVendorProducts(vendorId: sellerModelResponse.vendorStore!.id!);
     }).catchError((error) {
+      GlobalVariable.internetErr(true);
+
       //change(null, status: RxStatus.empty());
       isLoading(false);
       print(">>>StoreDetails $error");
