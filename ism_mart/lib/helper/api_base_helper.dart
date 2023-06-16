@@ -10,6 +10,8 @@ import 'package:ism_mart/controllers/controllers.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/getx_helper.dart';
 
+import '../utils/constants.dart';
+
 class ApiBaseHelper {
   final String _baseUrl = ApiConstant.baseUrl;
   final String token = authController.userToken!;
@@ -65,7 +67,7 @@ class ApiBaseHelper {
     }
   }
 
-  Future<dynamic> patchMethod({
+  Future<dynamic> putMethod({
     required String url,
     dynamic body,
     bool withBearer = false,
@@ -84,7 +86,7 @@ class ApiBaseHelper {
       print(_baseUrl + url);
       Uri urlValue = Uri.parse(_baseUrl + url);
       http.Response response = await http
-          .patch(urlValue, headers: header, body: body)
+          .put(urlValue, headers: header, body: body)
           .timeout(Duration(seconds: 30));
 
       print(response.body);
@@ -96,6 +98,60 @@ class ApiBaseHelper {
       print('body => ' + body);
       print(parsedJSON);
       print('&&&&&&&&&&&&&&&&&&&&&&& End of Response &&&&&&&&&&&&&&&&&&&&&&\n');
+      return parsedJSON;
+    } on SocketException catch (_) {
+      GlobalVariable.showLoader.value = false;
+      // GetxHelper.showSnackBar(title: 'Error', message: Errors.noInternetError);
+      // throw Errors.noInternetError;
+    } on TimeoutException catch (_) {
+      GlobalVariable.showLoader.value = false;
+      GetxHelper.showSnackBar(title: 'Error', message: Errors.timeOutException);
+      throw Errors.timeOutException;
+    } on FormatException catch (_) {
+      GlobalVariable.showLoader.value = false;
+      GetxHelper.showSnackBar(title: 'Error', message: Errors.formatException);
+      throw Errors.formatException;
+    } catch (e) {
+      GlobalVariable.showLoader.value = false;
+      GetxHelper.showSnackBar(title: 'Error', message: Errors.generalApiError);
+      throw e.toString();
+    }
+  }
+
+  Future<dynamic> patchMethod({
+    required String url,
+    Object? body,
+    bool withBearer = false,
+    bool withAuthorization = false,
+  }) async {
+    Map<String, String> header = {'Content-Type': 'application/json'};
+
+    if (withAuthorization) {
+      header['Authorization'] = withBearer ? 'Bearer $token' : token;
+    }
+
+    try {
+      if (body != null) {
+        body = jsonEncode(body);
+      }
+      print(
+          '********************************* Request ******************************************');
+      print(_baseUrl + url);
+      print(body);
+
+      Uri urlValue = Uri.parse(_baseUrl + url);
+      http.Response response = await http
+          .patch(urlValue, headers: header, body: body)
+          .timeout(Duration(seconds: 30));
+
+      print(
+          '********************************* Response ********************************************');
+      print(_baseUrl + url);
+      print(response.body);
+      AppConstant.colorConsole(
+          '****************************************************************************************');
+
+      Map<String, dynamic> parsedJSON = jsonDecode(response.body);
       return parsedJSON;
     } on SocketException catch (_) {
       GlobalVariable.showLoader.value = false;

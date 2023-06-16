@@ -61,10 +61,19 @@ class Urls {
 
   //SellerDashBoardViewModel
   static String getSellerOrdersStats = "order/vendorStats";
-  static String getVendorOrdersForDashboard = "order/vendorOrders?limit=10&page=";
+  static String getVendorOrdersForDashboard =
+      "order/vendorOrders?limit=10&page=";
 
   //FaqViewModel
   static String getFaq = "faq/allFaq";
 
+  //ChangeAddressViewModel
+  static String getShippingDetails = "user/getShippingDetails?limit=3";
+  static String changeDefaultAddress = "user/changeDefaultAddress/";
+  // static String getDefaultShippingDetails = "user/getDefaultShippingDetails";
+  static String deleteShippingDetails = "user/deleteShippingDetails/";
 
+  //AddUpdateAddressViewModel
+  static String updateShippingDetails = "user/updateShippingDetails";
+  static String addShippingDetails = "user/addShippingDetails";
 }
