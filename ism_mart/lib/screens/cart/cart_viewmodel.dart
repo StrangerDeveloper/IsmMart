@@ -4,7 +4,6 @@ import '../../api_helper/local_storage/local_storage_helper.dart';
 import '../../models/order/cart/cart_model.dart';
 
 class CartViewModel extends GetxController {
-
   final cartItemsList = <CartModel>[].obs;
   var quantityController = TextEditingController();
   final count = RxInt(1);
@@ -44,7 +43,7 @@ class CartViewModel extends GetxController {
             item.productModel!.discountPrice != null
                 ? item.productModel!.discountPrice.toString()
                 : "0");
-        var qty = int.parse(item.quantity.toString());
+        int qty = int.parse(item.quantity.toString());
         totalAmount += (discountPrice.round() * qty);
         totalQty += qty;
       }
@@ -53,32 +52,31 @@ class CartViewModel extends GetxController {
     totalQtyCart(totalQty);
   }
 
-  incrementQuantity(int index)async{
+  incrementQuantity(int index) async {
     int quantity = int.parse(cartItemsList[index].quantity!);
-    if (quantity >= cartItemsList[index].productModel!.stock!)
-      return;
+    if (quantity >= cartItemsList[index].productModel!.stock!) return;
     cartItemsList[index].quantity = "${quantity + 1}";
     cartItemsList[index].productModel!.totalPrice = totalCartAmount.value;
     cartItemsList[index].itemPrice = (quantity + 1) *
-    cartItemsList[index].productModel!.discountPrice!.round();
-    cartItemsList.refresh();
-    getTotalCartAmount();
-    await LocalStorageHelper.updateCartItems(
-        cartModel: cartItemsList[index]);
-  }
-
-  decrementQuantity(int index)async{
-    int quantity = int.parse(cartItemsList[index].quantity!);
-    if (quantity <= 1) return;
-    cartItemsList[index].quantity = "${quantity - 1}";
-    cartItemsList[index].productModel!.totalPrice = totalCartAmount.value;
-    cartItemsList[index].itemPrice = ((quantity - 1) * cartItemsList[index].productModel!.discountPrice!.round());
+        cartItemsList[index].productModel!.discountPrice!.round();
     cartItemsList.refresh();
     getTotalCartAmount();
     await LocalStorageHelper.updateCartItems(cartModel: cartItemsList[index]);
   }
 
-  deleteItem(int index){
+  decrementQuantity(int index) async {
+    int quantity = int.parse(cartItemsList[index].quantity!);
+    if (quantity <= 1) return;
+    cartItemsList[index].quantity = "${quantity - 1}";
+    cartItemsList[index].productModel!.totalPrice = totalCartAmount.value;
+    cartItemsList[index].itemPrice = ((quantity - 1) *
+        cartItemsList[index].productModel!.discountPrice!.round());
+    cartItemsList.refresh();
+    getTotalCartAmount();
+    await LocalStorageHelper.updateCartItems(cartModel: cartItemsList[index]);
+  }
+
+  deleteItem(int index) {
     cartItemsList.removeAt(index);
     getTotalCartAmount();
     LocalStorageHelper.removeSingleItem(cartList: cartItemsList);

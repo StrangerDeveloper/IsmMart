@@ -5,6 +5,7 @@ import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/screens/cart/cart_viewmodel.dart';
 import 'package:ism_mart/screens/checkout/checkout_viewmodel.dart';
+import 'package:ism_mart/screens/checkout/payment_view.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/loader_view.dart';
@@ -27,29 +28,30 @@ class CheckoutView extends StatelessWidget {
               physics: ScrollPhysics(),
               child: Column(
                 children: [
-
                   ///Shipping Address Section
                   StickyLabel(text: langKey.shippingDetails.tr),
-                  Obx(() => viewModel.noDefaultAddress.value ? _buildNewAddress()
-                      : _shippingAddressDetails()
-                  ),
+                  Obx(() => viewModel.noDefaultAddress.value
+                      ? _buildNewAddress()
+                      : _shippingAddressDetails()),
 
                   ///Shipping Cost Cards
                   StickyLabel(text: langKey.shippingCost.tr),
-                  Obx(() => Column(
-                        children: [
-                          _singleShippingCostItem(
-                              title: langKey.standard.tr, price: 250, delivery: 7),
-                          _singleShippingCostItem(
-                              title: langKey.free.tr, price: 0, delivery: 14),
-                        ],
-                      ),
+                  Obx(
+                    () => Column(
+                      children: [
+                        _singleShippingCostItem(
+                            title: langKey.standard.tr,
+                            price: 250,
+                            delivery: 7),
+                        _singleShippingCostItem(
+                            title: langKey.free.tr, price: 0, delivery: 14),
+                      ],
+                    ),
                   ),
 
                   ///Cart Items
                   StickyLabel(text: langKey.orderSummary.tr),
                   _buildCartItemSection(),
-
 
                   ///Payment Methods Cards
                   StickyLabel(text: langKey.paymentMethod.tr),
@@ -119,7 +121,9 @@ class CheckoutView extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: ListTile(
             title: CustomText(
-                title: viewModel.userModel.value.name!, size: 16, weight: FontWeight.bold),
+                title: viewModel.userModel.value.name!,
+                size: 16,
+                weight: FontWeight.bold),
             subtitle: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -171,8 +175,10 @@ class CheckoutView extends StatelessWidget {
                   title: "$title " + langKey.delivery.tr,
                 ),
                 subtitle: CustomText(
-                  title: langKey.delivery.tr + ": $delivery " +
-                      langKey.daysCost.tr + " :${viewModel.convertStaticPrice(price: price!)}",
+                  title: langKey.delivery.tr +
+                      ": $delivery " +
+                      langKey.daysCost.tr +
+                      " :${viewModel.convertStaticPrice(price: price!)}",
                 ),
                 groupValue: viewModel.shippingCost.value,
                 onChanged: (value) {
@@ -183,7 +189,8 @@ class CheckoutView extends StatelessWidget {
           ),
           if (price == 0)
             CustomText(
-                title: "${langKey.freeShipping.tr} ${viewModel.convertStaticPrice(price: 1000)}")
+                title:
+                    "${langKey.freeShipping.tr} ${viewModel.convertStaticPrice(price: 1000)}")
         ],
       ),
     );
@@ -252,9 +259,7 @@ class CheckoutView extends StatelessWidget {
                           // } on StripeException catch (e) {
                           //   print(">>>stripeException: $e");
                           // }
-                        }
-                        )
-                ),
+                        })),
               ),
             ],
           ),
@@ -300,7 +305,8 @@ class CheckoutView extends StatelessWidget {
   Padding _buildCartItemSection() {
     return Padding(
       padding: const EdgeInsets.all(5.0),
-      child: Obx(() => cartViewModel.cartItemsList.isEmpty
+      child: Obx(
+        () => cartViewModel.cartItemsList.isEmpty
             ? NoDataFound(text: langKey.noCartItemFound.tr)
             : ListView.builder(
                 shrinkWrap: true,
@@ -318,7 +324,8 @@ class CheckoutView extends StatelessWidget {
   }
 
   _subTotalDetails() {
-    return Obx(() => Padding(
+    return Obx(
+      () => Padding(
         padding: const EdgeInsets.all(8.0),
         child: CustomCard(
           child: Padding(
@@ -336,25 +343,24 @@ class CheckoutView extends StatelessWidget {
                     Expanded(
                       flex: 3,
                       child: Container(
-                        height: 36,
-                        //height: 40.0,
-                        padding: const EdgeInsets.symmetric(horizontal: 5),
-                        margin: const EdgeInsets.symmetric(horizontal: 5),
-                        child: couponTextField()
-                      ),
+                          height: 36,
+                          //height: 40.0,
+                          padding: const EdgeInsets.symmetric(horizontal: 5),
+                          margin: const EdgeInsets.symmetric(horizontal: 5),
+                          child: couponTextField()),
                     ),
 
                     ///Apply Button
                     Expanded(
-                        child: OutlinedButton(
-                          onPressed: () {
-                              viewModel.redeemCoins();
-                            },
-                          child: CustomText(
-                            title: langKey.redeemBtn.tr,
-                            weight: FontWeight.w600,
-                          ),
+                      child: OutlinedButton(
+                        onPressed: () {
+                          viewModel.redeemCoins();
+                        },
+                        child: CustomText(
+                          title: langKey.redeemBtn.tr,
+                          weight: FontWeight.w600,
                         ),
+                      ),
                     ),
                   ],
                 ),
@@ -378,8 +384,7 @@ class CheckoutView extends StatelessWidget {
                       ),
                     ),
                     CustomPriceWidget(
-                        title:
-                            "${cartViewModel.totalCartAmount.value}",
+                        title: "${cartViewModel.totalCartAmount.value}",
                         style: bodyText1),
                   ],
                 ),
@@ -450,7 +455,7 @@ class CheckoutView extends StatelessWidget {
     );
   }
 
-  TextField couponTextField(){
+  TextField couponTextField() {
     return TextField(
       controller: viewModel.couponCodeController,
       cursorColor: kPrimaryColor,
@@ -463,28 +468,25 @@ class CheckoutView extends StatelessWidget {
       // onChanged: controller.search,
       decoration: InputDecoration(
         filled: true,
-        prefixIcon:
-        Icon(Icons.search, color: kPrimaryColor),
+        prefixIcon: Icon(Icons.search, color: kPrimaryColor),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color: kLightGreyColor,
             width: 0.5,
           ), //BorderSide.none,
-          borderRadius:
-          BorderRadius.all(Radius.circular(8)),
+          borderRadius: BorderRadius.all(Radius.circular(8)),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color: kLightGreyColor,
             width: 0.5,
           ), //BorderSide.none,
-          borderRadius:
-          BorderRadius.all(Radius.circular(8)),
+          borderRadius: BorderRadius.all(Radius.circular(8)),
         ),
         fillColor: kWhiteColor,
         contentPadding: EdgeInsets.zero,
         hintText:
-        '${langKey.wantToRedeem.tr} ${viewModel.coinsModel.value.silver ?? 0} ${langKey.coins.tr}?',
+            '${langKey.wantToRedeem.tr} ${viewModel.coinsModel.value.silver ?? 0} ${langKey.coins.tr}?',
         hintStyle: TextStyle(
           color: kLightColor,
           fontWeight: FontWeight.w600,
@@ -503,26 +505,31 @@ class CheckoutView extends StatelessWidget {
         title: langKey.confirmOrder.tr,
         onPressed: () {
           if (cartViewModel.totalCartAmount.value <=
-              num.parse(currencyController.convertCurrency(
-                  currentPrice: "1000")!)) {
+              num.parse(
+                  currencyController.convertCurrency(currentPrice: "1000")!)) {
             AppConstant.displaySnackBar(
               langKey.errorTitle.tr,
               langKey.toProceedWithPurchase.tr,
             );
             //You cannot use Free Shipping Service under Rs1000
             return;
-          } else if (viewModel.isCardPaymentEnabled.isFalse) {
-            AppConstant.displaySnackBar(
-                langKey.errorTitle.tr,
-                langKey.preferredPayment.tr
-            );
-            return;
           }
-          // else {
-          //   controller.makePayment(
-          //       amount: controller.totalAmount.value
-          //           .toString());
+          // else if (viewModel.isCardPaymentEnabled.isFalse) {
+          //   AppConstant.displaySnackBar(
+          //       langKey.errorTitle.tr, langKey.preferredPayment.tr);
+          //   return;
           // }
+
+          else {
+            // viewModel.makePayment(
+            //     amount: viewModel.totalAmount.value
+            //         .toString());
+
+            Get.to(PaymentView(
+              orderId: 120,
+              amount: viewModel.totalAmount.value,
+            ));
+          }
         },
       ),
     );

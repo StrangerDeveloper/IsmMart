@@ -7,8 +7,7 @@ import '../../utils/constants.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import '../../utils/routes.dart';
 
-class SingleProductDetailsViewModel extends GetxController{
-
+class SingleProductDetailsViewModel extends GetxController {
   var selectedFeatureIDsList = <int>[].obs;
   var selectedFeatureNamesList = <String>[].obs;
   final productID = RxInt(0);
@@ -57,9 +56,8 @@ class SingleProductDetailsViewModel extends GetxController{
 
   increment() {
     if (count.value == int.parse(productModel.value.stock.toString())) {
-      return ;
-    }
-    else {
+      return;
+    } else {
       count.value++;
       quantityController.text = count.value.toString();
     }
@@ -75,23 +73,26 @@ class SingleProductDetailsViewModel extends GetxController{
     }
   }
 
-  void moveToProductImageView(int index){
+  void moveToProductImageView(int index) {
     imageIndex(index);
-    Get.toNamed(Routes.singleProductFullImage, arguments: [{
-    "initialImage": index,
-    "productImages": productModel.value.images,
-    }]);
+    Get.toNamed(Routes.singleProductFullImage, arguments: [
+      {
+        "initialImage": index,
+        "productImages": productModel.value.images,
+      }
+    ]);
   }
 
   getProductQuestions() async {
-    await ApiBaseHelper().getMethod(url: 'product/questions/${productModel.value.id}')
+    await ApiBaseHelper()
+        .getMethod(url: 'product/questions/${productModel.value.id}')
         .then((value) {
-       if(value['success'] == true && value['data'] != null) {
+      if (value['success'] == true && value['data'] != null) {
         productQuestions.clear();
         var data = value['data'] as List;
         productQuestions.addAll(data.map((e) => QuestionModel.fromJson(e)));
-       }
-    }).catchError((e){
+      }
+    }).catchError((e) {
       AppConstant.displaySnackBar(langKey.errorTitle.tr, e.toString());
     });
   }
@@ -103,15 +104,17 @@ class SingleProductDetailsViewModel extends GetxController{
   }
 
   addItemLocalCart() async {
-    productModel.value.totalPrice = int.parse(
-        quantityController.text.isEmpty ? "1" : quantityController.text) *
-        productModel.value.discountPrice!.toDouble();
+    String? quantity =
+        quantityController.text.isEmpty ? "1" : quantityController.text;
+    productModel.value.totalPrice =
+        int.parse(quantity) * productModel.value.discountPrice!.toDouble();
     productModel.value.vendorId = productModel.value.sellerModel!.id;
+
     CartModel cart = CartModel(
       productId: productModel.value.id,
       productModel: productModel.value,
       itemPrice: productModel.value.totalPrice,
-      quantity: quantityController.text,
+      quantity: quantity,
       featuresID: selectedFeatureIDsList,
       featuresName: selectedFeatureNamesList,
       onQuantityClicked: false,
@@ -124,14 +127,17 @@ class SingleProductDetailsViewModel extends GetxController{
   }
 
   fetchProduct() async {
-    await ApiBaseHelper().getMethod(url: 'products/${productID.value}').then((response)async {
+    await ApiBaseHelper()
+        .getMethod(url: 'products/${productID.value}')
+        .then((response) async {
       if (response['success'] == true && response['data'] != null) {
         productModel.value = ProductModel.fromJson(response['data']);
         await getProductQuestions();
-        print('>>product Feature: ${productModel.value.productFeatures?.length}');
-      } else if(response['success'] == false){
+        print(
+            '>>product Feature: ${productModel.value.productFeatures?.length}');
+      } else if (response['success'] == false) {
         productFoundCheck.value = false;
-      }else{
+      } else {
         productFoundCheck.value = false;
         AppConstant.displaySnackBar(langKey.errorTitle.tr, langKey.errorMsg.tr);
       }
