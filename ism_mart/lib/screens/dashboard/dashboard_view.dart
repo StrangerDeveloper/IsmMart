@@ -77,7 +77,7 @@ class DashboardView extends GetView<BaseController> {
           AppConstant.spaceWidget(width: 5),
           Expanded(
             flex: 5,
-            child: CustomSearchBar(searchText: ""),
+            child: CustomSearchBar(searchText: "", calledFromDashboard: true,),
           ),
           //const Expanded(flex:1,child:Center())
         ],
@@ -334,12 +334,13 @@ class DashboardView extends GetView<BaseController> {
                   // });
                   Get.find<CustomSearchController>().filters.clear();
                   Get.to(() => SearchDetailsView(
+                    isCalledForLatestAndBestSeller: e.key == 'Best Seller' || e.key == 'Popular Products' ? true : false,
                         // Passing empty search text if all products.
                         searchQuery: "",
                         //used flag to call method of getProductByTypes
                         productTypeKey: "${e.key}",
                         // calling for all products key.
-                        isCalledForDeals: calledForCategoryProducts,
+                        isCalledForDeals: e.key == 'All Products' ? false : calledForCategoryProducts,
                       ));
                 }),
             AppConstant.spaceWidget(height: 10),

@@ -34,33 +34,6 @@ class CartView extends StatelessWidget {
       );
   }
 
-  // SliverAppBar _sliverAppBar() {
-  //   return SliverAppBar(
-  //     expandedHeight: 14.0,
-  //     floating: true,
-  //     pinned: false,
-  //     automaticallyImplyLeading: false,
-  //     backgroundColor: kAppBarColor,
-  //     flexibleSpace: FlexibleSpaceBar(
-  //       centerTitle: false,
-  //       titlePadding: const EdgeInsets.symmetric(horizontal: 16),
-  //       title: Row(
-  //         children: [
-  //           buildSvgLogo(),
-  //           AppConstant.spaceWidget(width: 10),
-  //           Obx(
-  //             () => CustomText(
-  //               title:
-  //                   '${langKey.myCart.tr} (${viewModel.totalQtyCart.value} ${langKey.items.tr})',
-  //               style: appBarTitleSize,
-  //             ),
-  //           ),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
-
   AppBar _appBar(){
     return AppBar(
       backgroundColor: kAppBarColor,

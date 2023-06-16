@@ -13,10 +13,12 @@ class SearchDetailsView extends GetView<CustomSearchController> {
     this.productTypeKey = "",
     this.subCategoryID = 0,
     this.categoryID = 0,
+    this.isCalledForLatestAndBestSeller = false,
     this.isCalledForDeals = false,
+
   }) : super(key: key);
 
-  final bool? isCalledForDeals;
+  final bool? isCalledForDeals, isCalledForLatestAndBestSeller;
   final String? searchQuery, productTypeKey;
   final int? categoryID, subCategoryID;
 
@@ -33,11 +35,25 @@ class SearchDetailsView extends GetView<CustomSearchController> {
       //controller.filters.addIf(searchQuery!.isNotEmpty, "text", searchQuery!);
       controller.addFilters("type", "Discounts");
     } else {
-      controller.addFilters("text", searchQuery);
-      controller.addFilters(
-          "type", baseController.getProductTypeKeys(productTypeKey));
-      controller.addFilters("category", categoryID);
-      controller.addFilters("subCategory", subCategoryID);
+      // controller.isLoading.value = true;
+      if(searchQuery != null && searchQuery != '') {
+        controller.addFilters("text", searchQuery);
+      }
+      if(productTypeKey != null && productTypeKey != '') {
+        print('Type: $productTypeKey');
+        if (productTypeKey == 'All Products') {
+           null;
+        } else {
+          controller.addFilters(
+              "type", baseController.getProductTypeKeys(productTypeKey));
+        }
+      }
+      if(categoryID != null && categoryID != 0) {
+        controller.addFilters("category", categoryID);
+      }
+      if(subCategoryID != null && subCategoryID != 0) {
+        controller.addFilters("subCategory", subCategoryID);
+      }
       // controller.filters.addIf(productTypeKey!.isNotEmpty, "type",
       //     baseController.getProductTypeKeys(productTypeKey));
       //controller.filters.addIf(categoryID! > 0, "category", "$categoryID");
@@ -100,69 +116,32 @@ class SearchDetailsView extends GetView<CustomSearchController> {
         elevation: 0,
         automaticallyImplyLeading: false,
         leadingWidth: 40,
-        leading: isCalledForDeals!
-            ? null
-            : InkWell(
+        leading: InkWell(
                 onTap: () {
-                  Get.back();
-                  controller.clearFilters();
-                  controller.productList.clear();
-                  //controller.productList.clear();
-                  // controller.searchLimit = 15;
-                  //controller.searchTextController.clear();
-                  //controller.goBack();
-                },
+                  if(isCalledForDeals == true){
+                    baseController.changePage(0);
+                    controller.clearFilters();
+                    controller.productList.clear();
+                  } else {
+                    Get.back();
+                    controller.clearFilters();
+                    controller.productList.clear();
+                    //controller.productList.clear();
+                    // controller.searchLimit = 15;
+                    //controller.searchTextController.clear();
+                    //controller.goBack();
+                  }
+                  },
                 child: Icon(
                   Icons.arrow_back_ios_new,
                   size: 18,
                   color: kPrimaryColor,
                 ),
               ),
-        title: CustomSearchBar(searchText: searchQuery)
-
-        //  Container(
-        //   height: 36,
-        //   child: TextField(
-        //     //controller: controller.searchTextController,
-        //     //focusNode: controller.focus,
-        //     enabled: false,
-        //     cursorColor: kPrimaryColor,
-        //     autofocus: false,
-        //     maxLines: 1,
-        //     style: TextStyle(
-        //       color: kLightColor,
-        //       fontWeight: FontWeight.w600,
-        //       fontSize: 15.0,
-        //     ),
-        //     textAlignVertical: TextAlignVertical.center,
-        //     decoration: InputDecoration(
-        //       filled: true,
-        //       prefixIcon: Icon(Icons.search, color: kPrimaryColor),
-        //       enabledBorder: OutlineInputBorder(
-        //         borderSide: BorderSide(
-        //           color: kLightGreyColor,
-        //           width: 0.5,
-        //         ), //BorderSide.none,
-        //         borderRadius: BorderRadius.all(Radius.circular(8)),
-        //       ),
-        //       focusedBorder: OutlineInputBorder(
-        //         borderSide: BorderSide(
-        //           color: kLightGreyColor,
-        //           width: 0.5,
-        //         ), //BorderSide.none,
-        //         borderRadius: BorderRadius.all(Radius.circular(8)),
-        //       ),
-        //       fillColor: kWhiteColor,
-        //       contentPadding: EdgeInsets.zero,
-        //       hintText: langKey.searchIn.tr,
-        //       hintStyle: TextStyle(
-        //         color: kLightColor,
-        //         fontWeight: FontWeight.w600,
-        //         fontSize: 13.0,
-        //       ),
-        //     ),
-        //),
-        //),
+        title: CustomSearchBar(
+          searchText: searchQuery,
+          calledFromSearchDetailsView: !isCalledForDeals!,
+        )
         );
   }
 
@@ -204,6 +183,7 @@ class SearchDetailsView extends GetView<CustomSearchController> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
+                      if(isCalledForLatestAndBestSeller == false && isCalledForDeals == false)
                       TextButton.icon(
                         onPressed: () => showSortBottomSheet(),
                         icon: Icon(

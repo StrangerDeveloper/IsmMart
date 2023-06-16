@@ -14,9 +14,15 @@ class CustomSearchController extends GetxController {
   TextEditingController maxPriceController = TextEditingController();
   ScrollController scrollController = ScrollController();
 
+@override
+  void onInit() {
+    isLoading.value = true;
+    super.onInit();
+  }
+
   int searchLimit = 25;
   int page = 1;
-
+  var isLoading = false.obs;
   var productList = <ProductModel>[].obs;
 
   var selectedCategoryId = 0.obs;
@@ -50,7 +56,7 @@ class CustomSearchController extends GetxController {
   handleFilters(Map<String, String> filters) {
     filters.addIf(page > 0, "page", "$page");
     filters.addIf(searchLimit > 0, "limit", "$searchLimit");
-
+    // isLoading.value = true;
     searchWithFilters(filters: filters);
   }
 
@@ -128,17 +134,16 @@ class CustomSearchController extends GetxController {
     // await searchWithFilters(filters: filters);
   }
 
-  var isLoading = false.obs;
 
   searchWithFilters({filters}) async {
     print("SearchWithFilters: ${filters.toString()}");
-    isLoading(true);
+    // isLoading.value = true;
     await _apiProvider.filterSearch(appliedFilters: filters).then((products) {
       productList.clear();
       productList.addAll(products);
-      isLoading(false);
+      isLoading.value = false;
     }).catchError((onError) {
-      isLoading(false);
+      isLoading.value = false;
       debugPrint("searchFilter: $onError");
     });
   }
@@ -147,8 +152,10 @@ class CustomSearchController extends GetxController {
     if (scrollController.hasClients &&
         isLoadingMore.isFalse &&
         scrollController.position.maxScrollExtent == scrollController.offset) {
-      //page++;
-      searchLimit += 15;
+      filters.remove('page');
+      page++;
+      filters.addIf(page>0, 'page', "$page");
+      // searchLimit += 15;
       isLoadingMore(true);
       await _apiProvider.filterSearch(appliedFilters: filters).then((products) {
         //productList.clear();

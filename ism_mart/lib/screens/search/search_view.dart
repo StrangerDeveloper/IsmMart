@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ism_mart/controllers/controllers.dart';
 import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/controllers/buyer/search/custom_search_controller.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
@@ -45,6 +46,10 @@ class SearchView extends GetView<SearchViewModel> {
       leading: InkWell(
         onTap: () {
           controller.suggestionList.clear();
+          if(Get.arguments['isCalledFromDeals'] == true){
+            Get.back();
+            baseController.changePage(0);
+          }
           Get.back();
         },
         child: Icon(
@@ -59,7 +64,7 @@ class SearchView extends GetView<SearchViewModel> {
           controller: controller.searchTextController,
           onChanged: (value) {
             controller.isSearchingStarted(false);
-            if (value.isNotEmpty) {
+            if (value.isNotEmpty && value.length >= 2) {
               controller.isSearchingStarted(true);
               controller.searchProducts(value);
             } else
@@ -132,7 +137,7 @@ class SearchView extends GetView<SearchViewModel> {
   }
 
   _suggestionList(List<ProductModel> list) {
-    return Padding(
+    return controller.suggestionList.isEmpty ? Container() : Padding(
       padding: EdgeInsets.only(left: 50),
       child: SizedBox(
         height: 300,
@@ -151,14 +156,17 @@ class SearchView extends GetView<SearchViewModel> {
                   itemBuilder: (_, index) {
                     ProductModel model = list[index];
                     return _singleListViewItem(
-                        text: model.name ?? "", isCalledForSearch: true);
+                        text: model.name ?? "",
+                        isCalledForSearch: true,
+                      url: model.thumbnail
+                    );
                   }),
         ),
       ),
     );
   }
 
-  _singleListViewItem({String? text, bool? isCalledForSearch = false}) {
+  _singleListViewItem({String? text, String? url, bool? isCalledForSearch = false}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -170,14 +178,24 @@ class SearchView extends GetView<SearchViewModel> {
             }
 
             Get.find<CustomSearchController>().filters.clear();
-            Get.off(
-              () => SearchDetailsView(searchQuery: text),
+            Get.to(() => SearchDetailsView(searchQuery: text),
             );
+            controller.searchTextController.clear();
+            controller.suggestionList.clear();
           },
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: CustomText(
-              title: text,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CustomText(
+                  title: text,
+                ),
+                url == null ? Container() : SizedBox(
+                  width: 35,
+                    height: 35,
+                    child: CustomNetworkImage(imageUrl: url.toString()))
+              ],
             ),
           ),
         ),
