@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ism_mart/helper/no_internet_view.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
@@ -25,36 +26,45 @@ class SellerStoreDetailView extends GetView<ProductController> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.grey[100]!,
-        body: Obx(
-          () => controller.isLoading.isTrue
-              ? CustomLoading(
-                  isItForWidget: true,
-                  color: kPrimaryColor,
-                )
-              : controller.sellerStoreResponse.value.vendorStore == null
-                  ? Center(
-                      child: NoDataFoundWithIcon(
-                      icon: Icons.dataset_linked_rounded,
-                      title: langKey.noDataFound.tr,
-                    ))
-                  : CustomScrollView(
-                      slivers: [
-                        _sliverAppBar(),
-                        SliverList(
-                          delegate: SliverChildListDelegate(
-                            [
-                              _storeBasicDetails(
-                                  model: controller
-                                      .sellerStoreResponse.value.vendorStore),
-                              _storeRatingAndCustomerCard(
-                                  modelResponse:
-                                      controller.sellerStoreResponse.value),
-                              _buildTopProducts(controller.vendorProductList),
-                            ],
-                          ),
+        body: Stack(
+          children: [
+            Obx(
+              () => controller.isLoading.isTrue
+                  ? CustomLoading(
+                      isItForWidget: true,
+                      color: kPrimaryColor,
+                    )
+                  : controller.sellerStoreResponse.value.vendorStore == null
+                      ? Center(
+                          child: NoDataFoundWithIcon(
+                          icon: Icons.dataset_linked_rounded,
+                          title: langKey.noDataFound.tr,
+                        ))
+                      : CustomScrollView(
+                          slivers: [
+                            _sliverAppBar(),
+                            SliverList(
+                              delegate: SliverChildListDelegate(
+                                [
+                                  _storeBasicDetails(
+                                      model: controller.sellerStoreResponse
+                                          .value.vendorStore),
+                                  _storeRatingAndCustomerCard(
+                                      modelResponse:
+                                          controller.sellerStoreResponse.value),
+                                  _buildTopProducts(
+                                      controller.vendorProductList),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+            ),
+            NoInternetView(
+              onPressed: () => controller.fetchStoreDetailsByID(
+                  storeID: int.parse(Get.parameters['storeId']!)),
+            )
+          ],
         ),
       ),
     );
