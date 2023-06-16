@@ -59,7 +59,7 @@ class SearchView extends GetView<SearchViewModel> {
           controller: controller.searchTextController,
           onChanged: (value) {
             controller.isSearchingStarted(false);
-            if (value.isNotEmpty) {
+            if (value.isNotEmpty && value.length >= 2) {
               controller.isSearchingStarted(true);
               controller.searchProducts(value);
             } else
