@@ -55,6 +55,9 @@ class SearchDetailsView extends GetView<CustomSearchController> {
       if(subCategoryID != null && subCategoryID != 0) {
         controller.addFilters("subCategory", subCategoryID);
       }
+      if(controller.filters.isEmpty){
+        controller.handleFilters(controller.filters);
+      }
       // controller.filters.addIf(productTypeKey!.isNotEmpty, "type",
       //     baseController.getProductTypeKeys(productTypeKey));
       //controller.filters.addIf(categoryID! > 0, "category", "$categoryID");

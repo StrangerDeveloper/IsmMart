@@ -17,7 +17,7 @@ class CustomSearchController extends GetxController {
 
 @override
   void onInit() {
-    isLoading.value = true;
+
     super.onInit();
   }
 
