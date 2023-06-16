@@ -98,7 +98,7 @@ class Routes {
     ),
     GetPage(
       name: changeAddressRoute,
-      page: () => ChangeAddressView(),
+      page: () => ChangeAddressOldView(),
       binding: CheckoutBinding(),
       middlewares: [AuthMiddleWare(priority: 1)],
     ),

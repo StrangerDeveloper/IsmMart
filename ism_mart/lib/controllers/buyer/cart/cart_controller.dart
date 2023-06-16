@@ -137,12 +137,12 @@ class CartController extends GetxController
     double totalAmount = 0.0;
     int totalQty = 0;
     if (list.isNotEmpty) {
-      for (var value in list) {
+      for (CartModel? model in list) {
         var discountPrice = double.parse(
-            value.productModel!.discountPrice != null
-                ? value.productModel!.discountPrice.toString()
+            model!.productModel!.discountPrice != null
+                ? model.productModel!.discountPrice.toString()
                 : "0");
-        var qty = int.parse(value.quantity.toString());
+        var qty = int.parse(model.quantity!);
         totalAmount += (discountPrice.round() * qty);
         totalQty += qty;
       }

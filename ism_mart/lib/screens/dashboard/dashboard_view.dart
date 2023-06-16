@@ -4,11 +4,12 @@ import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/api_service.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
+import 'package:ism_mart/helper/global_variables.dart';
+import 'package:ism_mart/helper/no_internet_view.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/screens/top_vendors/top_vendors_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
-
 import '../../widgets/custom_grey_border_container.dart';
 import '../../widgets/custom_loading.dart';
 import '../../widgets/custom_network_image.dart';
@@ -28,37 +29,47 @@ class DashboardView extends GetView<BaseController> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: CustomScrollView(
-        slivers: [
-          _sliverAppBar(),
-          SliverList(
-            delegate: SliverChildListDelegate(
-              [
-                _slider(controller.sliderImages),
-                StickyLabel(text: langKey.topCategories.tr),
-                _topCategoriesGrid(controller.categories),
-                //Top Vendors List
-                StickyLabel(text: langKey.topVendors.tr),
-                _topVendors(),
-                StickyLabel(text: langKey.discountDeals.tr),
-                _displayDiscountProducts(),
+      child: Stack(
+        children: [
+          CustomScrollView(
+            slivers: [
+              _sliverAppBar(),
+              SliverList(
+                delegate: SliverChildListDelegate(
+                  [
+                    _slider(controller.sliderImages),
+                    StickyLabel(text: langKey.topCategories.tr),
+                    _topCategoriesGrid(controller.categories),
+                    //Top Vendors List
+                    StickyLabel(text: langKey.topVendors.tr),
+                    _topVendors(),
+                    StickyLabel(text: langKey.discountDeals.tr),
+                    _displayDiscountProducts(),
 
-                Obx(
-                  () => _displayProducts(
-                    productMap: controller.productsWithTypesMap,
-                  ),
-                ),
+                    Obx(
+                      () => _displayProducts(
+                        productMap: controller.productsWithTypesMap,
+                      ),
+                    ),
 
-                kDivider,
-                Obx(
-                  () => _displayProducts(
-                    productMap: controller.productsMap,
-                    calledForCategoryProducts: true,
-                  ),
+                    kDivider,
+                    Obx(
+                      () => _displayProducts(
+                        productMap: controller.productsMap,
+                        calledForCategoryProducts: true,
+                      ),
+                    ),
+                    // _productByCategories(),
+                  ],
                 ),
-                // _productByCategories(),
-              ],
-            ),
+              ),
+            ],
+          ),
+          NoInternetView(
+            onPressed: () {
+              controller.getAllApiFucnc();
+              GlobalVariable.btnPress(true);
+            },
           ),
         ],
       ),

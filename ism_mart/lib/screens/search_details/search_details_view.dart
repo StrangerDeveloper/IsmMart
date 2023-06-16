@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
+import 'package:ism_mart/helper/no_internet_view.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
@@ -99,7 +100,14 @@ class SearchDetailsView extends GetView<CustomSearchController> {
         child: Scaffold(
           backgroundColor: Colors.grey[100]!,
           appBar: _searchAppBar(),
-          body: _body(),
+          body: Stack(
+            children: [
+              _body(),
+              NoInternetView(
+                onPressed: () => controller.applyFilter(),
+              )
+            ],
+          ),
           //floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
           //floatingActionButton: _filterBar(),
         ),
