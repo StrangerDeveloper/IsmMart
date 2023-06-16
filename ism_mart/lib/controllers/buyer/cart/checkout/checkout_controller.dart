@@ -160,6 +160,7 @@ class CheckoutController extends GetxController {
     }).catchError(onError);
   }
 
+  onError(){}
   var _userDefaultAddressModel = UserModel().obs;
 
   UserModel? get defaultAddressModel => _userDefaultAddressModel.value;
@@ -268,52 +269,52 @@ class CheckoutController extends GetxController {
     _paymentMethodId(paymentMethodId);
   }
 
-  Future<void> makePayment({String? amount}) async {
-    // try {
-
-    isLoading(true);
-    Future.delayed(Duration(seconds: 2), () async {
-      if (_paymentMethodId.isNotEmpty)
-        await sendPaymentIntent(paymentId: _paymentMethodId.value);
-      else {
-        showSnackBar(message: langKey.paymentCardFailed.tr, title: "error");
-        isLoading(false);
-        print("Payment intent is null");
-      }
-    });
-    /*  //STEP 1: Create Payment Intent
-     // paymentIntent = await createPaymentIntent(amount!, 'PKR');
-
-      //STEP 2: Initialize Payment Sheet
-      await Stripe.instance
-          .initPaymentSheet(
-              paymentSheetParameters: SetupPaymentSheetParameters(
-                  appearance: PaymentSheetAppearance(
-                      primaryButton: PaymentSheetPrimaryButtonAppearance(
-                    shapes: PaymentSheetPrimaryButtonShape(blurRadius: 8),
-                    colors: PaymentSheetPrimaryButtonTheme(
-                      light: PaymentSheetPrimaryButtonThemeColors(
-                        background: kPrimaryColor,
-                        text: kWhiteColor,
-                        border: kLightGreyColor,
-                      ),
-                    ),
-                  )),
-                  paymentIntentClientSecret: paymentIntent!['client_secret'],
-                  // customFlow: true,
-                  //Gotten from payment intent
-                  //style: ThemeMode.light,
-                  merchantDisplayName: 'ISMMART'))
-          .then((value) {});
-
-      //STEP 3: Display Payment sheet
-      displayPaymentSheet();*/
-    /*} catch (err) {
-      isLoading(false);
-      print(">>>MakePaymentError: $err");
-      throw Exception(err);
-    }*/
-  }
+  // Future<void> makePayment({String? amount}) async {
+  //   // try {
+  //
+  //   isLoading(true);
+  //   Future.delayed(Duration(seconds: 2), () async {
+  //     if (_paymentMethodId.isNotEmpty)
+  //       await sendPaymentIntent(paymentId: _paymentMethodId.value);
+  //     else {
+  //       showSnackBar(message: langKey.paymentCardFailed.tr, title: "error");
+  //       isLoading(false);
+  //       print("Payment intent is null");
+  //     }
+  //   });
+  //   /*  //STEP 1: Create Payment Intent
+  //    // paymentIntent = await createPaymentIntent(amount!, 'PKR');
+  //
+  //     //STEP 2: Initialize Payment Sheet
+  //     await Stripe.instance
+  //         .initPaymentSheet(
+  //             paymentSheetParameters: SetupPaymentSheetParameters(
+  //                 appearance: PaymentSheetAppearance(
+  //                     primaryButton: PaymentSheetPrimaryButtonAppearance(
+  //                   shapes: PaymentSheetPrimaryButtonShape(blurRadius: 8),
+  //                   colors: PaymentSheetPrimaryButtonTheme(
+  //                     light: PaymentSheetPrimaryButtonThemeColors(
+  //                       background: kPrimaryColor,
+  //                       text: kWhiteColor,
+  //                       border: kLightGreyColor,
+  //                     ),
+  //                   ),
+  //                 )),
+  //                 paymentIntentClientSecret: paymentIntent!['client_secret'],
+  //                 // customFlow: true,
+  //                 //Gotten from payment intent
+  //                 //style: ThemeMode.light,
+  //                 merchantDisplayName: 'ISMMART'))
+  //         .then((value) {});
+  //
+  //     //STEP 3: Display Payment sheet
+  //     displayPaymentSheet();*/
+  //   /*} catch (err) {
+  //     isLoading(false);
+  //     print(">>>MakePaymentError: $err");
+  //     throw Exception(err);
+  //   }*/
+  // }
 
   /*createPaymentIntent(String amount, String currency) async {
     try {
@@ -363,88 +364,88 @@ class CheckoutController extends GetxController {
     AppConstant.displaySnackBar(title, message);
   }
 
-  sendPaymentIntent({paymentId}) async {
-    var cartItems = [];
-    cartController.cartItemsList.forEach((element) {
-      cartItems.addAll([element.toOrderCreationJson()]);
-    });
-    JSON data = {
-      "shippingPrice": shippingCost.value,
-      "paymentMethod": "$paymentId",
-      "redeemCoins": _isRedeemApplied.value,
-      "cartItems": cartItems,
-    };
-    await _orderProvider
-        .createPaymentIntent(token: authController.userToken, data: data)
-        .then((ApiResponse? apiResponse) async {
-      if (apiResponse != null) {
-        if (apiResponse.success!) {
-          await Stripe.instance
-              .confirmPayment(
-                  paymentIntentClientSecret: apiResponse.data["client_secret"],
-                  data: PaymentMethodParams.card(
-                    paymentMethodData: PaymentMethodData(
-                      billingDetails: BillingDetails(
-                        name: defaultAddressModel?.name ?? "",
-                        email: defaultAddressModel?.email ?? "",
-                        phone: defaultAddressModel?.phone ?? "",
-                        address: null,
-                      ),
-                    ),
-                  ))
-              .then((PaymentIntent paymentIntent) async {
-            await createOrder(
-              paymentMethod: isCardPaymentEnabled.isTrue ? "Card" : "COD",
-              cartItems: cartItems,
-            );
-          }).catchError(onError);
-        } else {
-          showSnackBar(
-              title: langKey.errorTitle.tr, message: apiResponse.message!);
-        }
-      } else
-        showSnackBar(
-          title: langKey.errorTitle,
-          message: langKey.orderNotCreated.tr,
-        );
-    }).catchError(onError);
-  }
+  // sendPaymentIntent({paymentId}) async {
+  //   var cartItems = [];
+  //   cartController.cartItemsList.forEach((element) {
+  //     cartItems.addAll([element.toOrderCreationJson()]);
+  //   });
+  //   JSON data = {
+  //     "shippingPrice": shippingCost.value,
+  //     "paymentMethod": "$paymentId",
+  //     "redeemCoins": _isRedeemApplied.value,
+  //     "cartItems": cartItems,
+  //   };
+  //   await _orderProvider
+  //       .createPaymentIntent(token: authController.userToken, data: data)
+  //       .then((ApiResponse? apiResponse) async {
+  //     if (apiResponse != null) {
+  //       if (apiResponse.success!) {
+  //         await Stripe.instance
+  //             .confirmPayment(
+  //                 paymentIntentClientSecret: apiResponse.data["client_secret"],
+  //                 data: PaymentMethodParams.card(
+  //                   paymentMethodData: PaymentMethodData(
+  //                     billingDetails: BillingDetails(
+  //                       name: defaultAddressModel?.name ?? "",
+  //                       email: defaultAddressModel?.email ?? "",
+  //                       phone: defaultAddressModel?.phone ?? "",
+  //                       address: null,
+  //                     ),
+  //                   ),
+  //                 ))
+  //             .then((PaymentIntent paymentIntent) async {
+  //           await createOrder(
+  //             paymentMethod: isCardPaymentEnabled.isTrue ? "Card" : "COD",
+  //             cartItems: cartItems,
+  //           );
+  //         }).catchError(onError);
+  //       } else {
+  //         showSnackBar(
+  //             title: langKey.errorTitle.tr, message: apiResponse.message!);
+  //       }
+  //     } else
+  //       showSnackBar(
+  //         title: langKey.errorTitle,
+  //         message: langKey.orderNotCreated.tr,
+  //       );
+  //   }).catchError(onError);
+  // }
+  //
+  // onError(error) {
+  //   isLoading(false);
+  //   debugPrint(">>>>ConfirmPayment: $error");
+  //   // showSnackBar(title: langKey.errorTitle, message: error);
+  // }
 
-  onError(error) {
-    isLoading(false);
-    debugPrint(">>>>ConfirmPayment: $error");
-    // showSnackBar(title: langKey.errorTitle, message: error);
-  }
-
-  createOrder({paymentMethod = "COD", cartItems}) async {
-    JSON data = {
-      "paymentMethod": paymentMethod,
-      "shippingPrice": shippingCost.value,
-      "shippingDetailsId": defaultAddressModel!.id,
-      "redeemCoins": _isRedeemApplied.value,
-      "exchangeRate": currencyController.currencyModel!.exchangeRate ?? 1,
-      "cartItems": cartItems,
-    };
-
-    await _orderProvider
-        .createOrder(token: authController.userToken, data: data)
-        .then((OrderResponse? response) {
-      isLoading(false);
-      if (response != null) {
-        if (response.success!) {
-          showSnackBar(title: langKey.success, message: response.message!);
-          showSuccessDialog(response: response);
-          // paymentIntent = null;
-          LocalStorageHelper.clearAllCart();
-        } else
-          showSnackBar(title: langKey.errorTitle, message: response.message!);
-      } else
-        showSnackBar(
-          title: langKey.errorTitle,
-          message: langKey.orderNotCreated.tr,
-        );
-    }).catchError(onError);
-  }
+  // createOrder({paymentMethod = "COD", cartItems}) async {
+  //   JSON data = {
+  //     "paymentMethod": paymentMethod,
+  //     "shippingPrice": shippingCost.value,
+  //     "shippingDetailsId": defaultAddressModel!.id,
+  //     "redeemCoins": _isRedeemApplied.value,
+  //     "exchangeRate": currencyController.currencyModel!.exchangeRate ?? 1,
+  //     "cartItems": cartItems,
+  //   };
+  //
+  //   await _orderProvider
+  //       .createOrder(token: authController.userToken, data: data)
+  //       .then((OrderResponse? response) {
+  //     isLoading(false);
+  //     if (response != null) {
+  //       if (response.success!) {
+  //         showSnackBar(title: langKey.success, message: response.message!);
+  //         showSuccessDialog(response: response);
+  //         // paymentIntent = null;
+  //         LocalStorageHelper.clearAllCart();
+  //       } else
+  //         showSnackBar(title: langKey.errorTitle, message: response.message!);
+  //     } else
+  //       showSnackBar(
+  //         title: langKey.errorTitle,
+  //         message: langKey.orderNotCreated.tr,
+  //       );
+  //   }).catchError(onError);
+  // }
 
   void showSuccessDialog({OrderResponse? response}) {
     Get.defaultDialog(

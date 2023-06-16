@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:ism_mart/api_helper/export_api_helper.dart';
 import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/api_base_helper.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/utils/constants.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import '../../api_helper/api_service.dart';
 import '../../controllers/controllers.dart';
 import '../cart/cart_viewmodel.dart';
 
@@ -96,9 +98,8 @@ class CheckoutViewModel extends GetxController{
 
   fetchUserCoins() async {
 
-    // if (GlobalVariable.userModel!.token!.isNotEmpty) {
-      await ApiBaseHelper().getMethod(
-          url: 'coin/getUserCoins',
+    await ApiBaseHelper().getMethod(
+      url: 'coin/getUserCoins',
         withBearer: true,
         withAuthorization: true,
       ).then((response) {
@@ -109,9 +110,94 @@ class CheckoutViewModel extends GetxController{
           return;
         }
       }).catchError((e){
-
+        print(e);
       });
     }
+
+  createOrder({paymentMethod = "COD"}) async {
+    GlobalVariable.showLoader.value = true;
+    JSON data = {
+      "paymentMethod": paymentMethod,
+      "shippingPrice": shippingCost.value,
+      "shippingDetailsId": userModel.value.id,
+      "redeemCoins": isRedeemedApplied.value,
+      "exchangeRate": currencyController.currencyModel!.exchangeRate ?? 1,
+      "cartItems": cartViewModel.cartItemsList,
+    };
+    await ApiBaseHelper().postMethod(
+        url: 'order/createOrder',
+        body: data,
+        withAuthorization: true
+    ).then((response) {
+      GlobalVariable.showLoader.value = true;
+      if(response['success'] == true && response['data'] != null){
+        AppConstant.displaySnackBar(langKey.success.tr, response['message']);
+        LocalStorageHelper.clearAllCart();
+        Get.back();
+      } else if(response['data'] == null){
+        AppConstant.displaySnackBar(langKey.errorTitle.tr, response['message']);
+      }
+      else{
+        AppConstant.displaySnackBar(langKey.errorTitle.tr, langKey.orderNotCreated.tr);
+      }
+    }).catchError((e){
+      print(e);
+    });
+  }
+
+  // void showSuccessDialog({OrderResponse? response}) {
+  //   Get.defaultDialog(
+  //     title: langKey.orderInformation.tr,
+  //     titleStyle: appBarTitleSize,
+  //     barrierDismissible: false,
+  //     content: Column(
+  //       mainAxisSize: MainAxisSize.min,
+  //       children: [
+  //         Icon(
+  //           Icons.check_circle,
+  //           color: kPrimaryColor,
+  //           size: 70.0,
+  //         ),
+  //         AppConstant.spaceWidget(height: 10.0),
+  //         CustomText(
+  //           title: langKey.paymentSuccessful.tr,
+  //           textAlign: TextAlign.center,
+  //           weight: FontWeight.w600,
+  //         ),
+  //         CustomText(
+  //           title: "${langKey.orderId.tr} #${response!.data["orderId"]}",
+  //           size: 17,
+  //           weight: FontWeight.bold,
+  //         ),
+  //         AppConstant.spaceWidget(height: 10),
+  //         Row(
+  //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //           children: [
+  //             /* CustomButton(
+  //               onTap: () {
+  //                 Get.offNamed(Routes.buyerOrdersRoute);
+  //               },
+  //               text: "My Orders",
+  //               width: 100,
+  //               height: 35,
+  //               color: kPrimaryColor,
+  //             ),*/
+  //             CustomTextBtn(
+  //               onPressed: () {
+  //                 Get.offAllNamed(Routes.initRoute);
+  //                 //Get.back();
+  //               },
+  //               title: langKey.continueShopping.tr,
+  //               width: 200,
+  //               height: 40,
+  //             ),
+  //           ],
+  //         )
+  //       ],
+  //     ),
+  //   );
+  // }
+
   }
 
   // Future<void> makePayment({String? amount}) async {
