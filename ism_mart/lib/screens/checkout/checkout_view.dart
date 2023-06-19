@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/screens/cart/cart_viewmodel.dart';
+import 'package:ism_mart/screens/change_address/change_address_view.dart';
 import 'package:ism_mart/screens/checkout/checkout_viewmodel.dart';
 import 'package:ism_mart/screens/checkout/payment_view.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
@@ -103,7 +104,7 @@ class CheckoutView extends StatelessWidget {
             CustomTextBtn(
               width: 150,
               height: 40,
-              onPressed: () => Get.toNamed(Routes.changeAddressRoute),
+              onPressed: () {},
               title: langKey.addNewAddress.tr,
             ),
           ],
@@ -146,10 +147,12 @@ class CheckoutView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // OutlinedButton(onPressed: () => showAddressesDialog(), child: CustomText(title: "Change",),)
                 _tileActionBtn(
-                    onTap: () => Get.toNamed(Routes.changeAddressRoute),
-                    title: langKey.changeBtn.tr)
+                  onTap: () {
+                    Get.toNamed(Routes.changeAddressRoute);
+                  },
+                  title: langKey.changeBtn.tr,
+                )
               ],
             ),
           ),

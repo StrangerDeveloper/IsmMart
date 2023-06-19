@@ -4,6 +4,7 @@ import 'package:ism_mart/exports/exports_ui.dart';
 import 'package:ism_mart/screens/all_dispute/all_dispute_view.dart';
 import 'package:ism_mart/screens/buyer_orders/buyer_order_view.dart';
 import 'package:ism_mart/screens/buyer_profile/buyer_profile_view.dart';
+import 'package:ism_mart/screens/change_address/change_address_view.dart';
 import 'package:ism_mart/screens/change_password/change_password_view.dart';
 import 'package:ism_mart/screens/dispute_detail/dispute_detail_view.dart';
 import 'package:ism_mart/screens/email_verification/email_verification_view.dart';
@@ -98,7 +99,7 @@ class Routes {
     ),
     GetPage(
       name: changeAddressRoute,
-      page: () => ChangeAddressOldView(),
+      page: () => ChangeAddressView(),
       binding: CheckoutBinding(),
       middlewares: [AuthMiddleWare(priority: 1)],
     ),
