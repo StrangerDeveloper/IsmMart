@@ -162,8 +162,8 @@ class SearchDetailsView extends GetView<CustomSearchController> {
         : controller.productList.isEmpty
             ? Center(
                 child: NoDataFoundWithIcon(
-                  title: langKey.emptyProductSearch.tr,
-                  subTitle: langKey.emptyProductSearchMsg.tr,
+                    title: langKey.emptyProductSearch.tr,
+                    subTitle: langKey.emptyProductSearchMsg.tr,
                 ),
               )
             : _buildProductView(controller.productList));

@@ -58,7 +58,7 @@ class CustomSearchController extends GetxController {
     filters.addIf(page > 0, "page", "$page");
     filters.addIf(searchLimit > 0, "limit", "$searchLimit");
     // isLoading.value = true;
-    searchWithFilters(filters: filters);
+    searchWithFilters();
   }
 
   var categoriesList = <CategoryModel>[].obs;
@@ -69,7 +69,7 @@ class CustomSearchController extends GetxController {
     categoriesList.refresh();
   }
 
-  setSelectedCategory(CategoryModel? categoryModel) {
+    setSelectedCategory(CategoryModel? categoryModel) {
     var list = <CategoryModel>[];
     if (categoriesList.isNotEmpty) {
       list.clear();
@@ -137,20 +137,34 @@ class CustomSearchController extends GetxController {
   }
 
 
-  searchWithFilters({filters}) async {
+  searchWithFilters() async {
     print("SearchWithFilters: ${filters.toString()}");
     // isLoading.value = true;
-    await _apiProvider.filterSearch(appliedFilters: filters).then((products) {
-      if (products.length == 0) {
-        GlobalVariable.internetErr(true);
+    int i = 0;
+    var url = 'filter';
+    filters.forEach((key, value) {
+      if(i == 0) {
+        url = '$url?${key}=$value';
+        i++;
       }
-      productList.clear();
-      productList.addAll(products);
-      isLoading.value = false;
-    }).catchError((onError) {
-      isLoading.value = false;
-      debugPrint("searchFilter: $onError");
+      else{
+        url = '$url&${key}=$value';
+      }
     });
+    print(url);
+    // await ApiBaseHelper().getMethod(url: 'filter')
+
+    // await _apiProvider.filterSearch(appliedFilters: filters).then((products) {
+    //   if (products.length == 0) {
+    //     GlobalVariable.internetErr(true);
+    //   }
+    //   productList.clear();
+    //   productList.addAll(products);
+    //   isLoading.value = false;
+    // }).catchError((onError) {
+    //   isLoading.value = false;
+    //   debugPrint("searchFilter: $onError");
+    // });
   }
 
   loadMoreFilteredProducts() async {

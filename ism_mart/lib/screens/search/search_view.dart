@@ -18,8 +18,7 @@ class SearchView extends GetView<SearchViewModel> {
       child: Scaffold(
         backgroundColor: Colors.grey[50]!,
         appBar: _searchAppBar(),
-        body: Obx(
-          () => Stack(
+        body: Obx(() => Stack(
             children: [
               _body(),
               controller.isSearchingStarted.isTrue
@@ -131,7 +130,9 @@ class SearchView extends GetView<SearchViewModel> {
                     itemBuilder: (_, index) {
                       String? text = controller.historyList[index];
                       return _singleListViewItem(text: text);
-                    })),
+                    }
+                    )
+        ),
       ],
     );
   }
