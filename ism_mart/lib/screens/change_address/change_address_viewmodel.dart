@@ -11,11 +11,6 @@ import '../checkout/checkout_viewmodel.dart';
 class ChangeAddressViewModel extends GetxController {
   List<UserModel> shippingAddressList = <UserModel>[].obs;
 
-  // @override
-  // void onInit() {
-  //   super.onInit();
-  // }
-
   @override
   void onReady() {
     getAllAddress();

@@ -71,8 +71,8 @@ class ChangeAddressView extends StatelessWidget {
                 );
                 return;
               }
-              // Get.to(() => AddUpdateAddressView(),
-              //     arguments: {'isUpdateScreen': false});
+              Get.toNamed(Routes.addUpdateAddress,
+                  arguments: {'isUpdateScreen': false});
             },
             title: langKey.addNew.tr,
           ),
@@ -108,7 +108,8 @@ class ChangeAddressView extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
             child: ListTile(
               onTap: () {
-                viewModel.changeDefaultShippingAddress(viewModel.shippingAddressList[index].id.toString());
+                viewModel.changeDefaultShippingAddress(
+                    viewModel.shippingAddressList[index].id.toString());
               },
               title: CustomText(
                 title: viewModel.shippingAddressList[index].name,
@@ -139,13 +140,10 @@ class ChangeAddressView extends StatelessWidget {
               children: [
                 CustomActionIcon(
                   onTap: () {
-                    // AppConstant.showBottomSheet(
-                    //   widget: addNewORUpdateAddressContents(
-                    //     userModel: userModel,
-                    //     calledForUpdate: true,
-                    //   ),
-                    //   isGetXBottomSheet: true,
-                    // );
+                    Get.toNamed(Routes.addUpdateAddress, arguments: {
+                      'isUpdateScreen': true,
+                      'model': viewModel.shippingAddressList[index]
+                    });
                   },
                   size: 15,
                   height: 25,
@@ -156,7 +154,8 @@ class ChangeAddressView extends StatelessWidget {
                 AppConstant.spaceWidget(width: 5),
                 CustomActionIcon(
                   onTap: () {
-                    viewModel.deleteShippingDetails(viewModel.shippingAddressList[index].id);
+                    viewModel.deleteShippingDetails(
+                        viewModel.shippingAddressList[index].id);
                   },
                   size: 15,
                   height: 25,
@@ -200,212 +199,4 @@ class ChangeAddressView extends StatelessWidget {
       ),
     );
   }
-
-// Widget addNewORUpdateAddressContents({UserModel? userModel, calledForUpdate = false}) {
-//   return SingleChildScrollView(
-//     child: Form(
-//       key: formKey,
-//       child: Padding(
-//         padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 20),
-//         child: Column(
-//           children: [
-//             CustomText(
-//               title:
-//                   "${calledForUpdate ? langKey.updateBtn.tr : langKey.addNew.tr} ${langKey.shipping.tr} ${langKey.address.tr}",
-//               style: headline2,
-//             ),
-//             AppConstant.spaceWidget(height: 15),
-//             FormInputFieldWithIcon(
-//               controller: controller.nameController,
-//               iconPrefix: Icons.person,
-//               labelText: langKey.fullName.tr,
-//               iconColor: kPrimaryColor,
-//               autofocus: false,
-//               textStyle: bodyText1,
-//               autoValidateMode: AutovalidateMode.onUserInteraction,
-//               validator: (value) {
-//                 return Validator().validateName(value);
-//               },
-//               keyboardType: TextInputType.name,
-//               onChanged: (value) {},
-//               onSaved: (value) {},
-//             ),
-//             AppConstant.spaceWidget(height: 10),
-//             FormInputFieldWithIcon(
-//               controller: controller.phoneController,
-//               iconPrefix: Icons.phone_iphone_rounded,
-//               labelText: langKey.phone.tr,
-//               iconColor: kPrimaryColor,
-//               autofocus: false,
-//               textStyle: bodyText1,
-//               autoValidateMode: AutovalidateMode.onUserInteraction,
-//               inputFormatters: [
-//                 FilteringTextInputFormatter.allow(RegExp(r'^(?:[+])?\d*'))
-//               ],
-//               validator: Validator().validatePhoneNumber,
-//               keyboardType: TextInputType.number,
-//               onChanged: (value) {},
-//               onSaved: (value) {},
-//             ),
-//             AppConstant.spaceWidget(height: 10),
-//             FormInputFieldWithIcon(
-//               controller: controller.zipCodeController,
-//               iconPrefix: Icons.code,
-//               labelText: langKey.zipCode.tr,
-//               iconColor: kPrimaryColor,
-//               autofocus: false,
-//               textStyle: bodyText1,
-//               autoValidateMode: AutovalidateMode.onUserInteraction,
-//               validator: (value) {
-//                 return Validator().validateDefaultTxtField(value);
-//               },
-//               keyboardType: TextInputType.number,
-//               onChanged: (value) {},
-//               onSaved: (value) {},
-//             ),
-//             AppConstant.spaceWidget(height: 10),
-//
-//             FormInputFieldWithIcon(
-//               controller: controller.addressController,
-//               iconPrefix: Icons.location_on_rounded,
-//               labelText: langKey.address.tr,
-//               iconColor: kPrimaryColor,
-//               autofocus: false,
-//               textStyle: bodyText1,
-//               autoValidateMode: AutovalidateMode.onUserInteraction,
-//               validator: (value) {
-//                 return Validator().validateDefaultTxtField(value);
-//               },
-//               keyboardType: TextInputType.name,
-//               onChanged: (value) {},
-//               onSaved: (value) {},
-//             ),
-//             AppConstant.spaceWidget(height: 15),
-//
-//             ///: Countries
-//             if (!calledForUpdate)
-//               Column(
-//                 children: [
-//                   //Countries
-//                   Obx(
-//                     () => DropdownSearch<CountryModel>(
-//                       popupProps: PopupProps.dialog(
-//                           showSearchBox: true,
-//                           dialogProps: DialogProps(
-//                               shape: RoundedRectangleBorder(
-//                                   borderRadius: BorderRadius.circular(10))),
-//                           searchFieldProps: AppConstant.searchFieldProp()),
-//                       items: controller.authController.countries,
-//                       itemAsString: (model) => model.name ?? "",
-//                       dropdownDecoratorProps: DropDownDecoratorProps(
-//                         baseStyle: bodyText1,
-//                         dropdownSearchDecoration: InputDecoration(
-//                           labelText: langKey.selectCountry.tr,
-//                           labelStyle: bodyText1,
-//                           hintText: langKey.chooseCountry.tr,
-//                           enabledBorder: OutlineInputBorder(
-//                             borderSide: BorderSide(
-//                                 color: Colors.black,
-//                                 width: 1,
-//                                 style: BorderStyle.solid), //B
-//                             borderRadius: BorderRadius.circular(8),
-//                           ),
-//                         ),
-//                       ),
-//                       onChanged: (CountryModel? newValue) {
-//                         controller.setSelectedCountry(newValue!);
-//                         //debugPrint(">>> $newValue");
-//                       },
-//                       selectedItem:
-//                           controller.authController.selectedCountry.value,
-//                     ),
-//                   ),
-//
-//                   AppConstant.spaceWidget(height: 15),
-//
-//                   ///TOO: Sub Cities
-//                   Obx(
-//                     () => authController.cities.isEmpty
-//                         ? Container()
-//                         : authController.isLoading.isTrue
-//                             ? CustomLoading(
-//                                 isItForWidget: true,
-//                                 color: kPrimaryColor,
-//                               )
-//                             : DropdownSearch<CountryModel>(
-//                                 popupProps: PopupProps.dialog(
-//                                     showSearchBox: true,
-//                                     dialogProps: DialogProps(
-//                                         shape: RoundedRectangleBorder(
-//                                             borderRadius:
-//                                                 BorderRadius.circular(10))),
-//                                     searchFieldProps:
-//                                         AppConstant.searchFieldProp()),
-//                                 //showSelectedItems: true),
-//
-//                                 items: controller.authController.cities,
-//                                 itemAsString: (model) => model.name ?? "",
-//                                 dropdownDecoratorProps:
-//                                     DropDownDecoratorProps(
-//                                   baseStyle: bodyText1,
-//                                   dropdownSearchDecoration: InputDecoration(
-//                                     labelText: langKey.selectCity.tr,
-//                                     labelStyle: bodyText1,
-//                                     hintText: langKey.chooseCity.tr,
-//                                     enabledBorder: OutlineInputBorder(
-//                                       borderSide: BorderSide(
-//                                           color: Colors.black,
-//                                           width: 1,
-//                                           style: BorderStyle.solid), //B
-//                                       borderRadius: BorderRadius.circular(8),
-//                                     ),
-//                                   ),
-//                                 ),
-//
-//                                 onChanged: (CountryModel? newValue) {
-//                                   controller.setSelectedCity(newValue!);
-//                                 },
-//                                 selectedItem: controller
-//                                     .authController.selectedCity.value,
-//                               ),
-//                   ),
-//                 ],
-//               ),
-//
-//             AppConstant.spaceWidget(height: 40),
-//             Obx(
-//               () => controller.isLoading.isTrue
-//                   ? CustomLoading(isItForWidget: true, color: kPrimaryColor)
-//                   : CustomTextBtn(
-//                       onPressed: () {
-//                         if (formKey.currentState!.validate()) {
-//                           if (calledForUpdate) {
-//                             controller.updateShippingAddress(userModel);
-//                           } else {
-//                             if (controller.countryId.value > 0 &&
-//                                 controller.cityId.value > 0) {
-//                               controller.addShippingAddress();
-//                             } else {
-//                               AppConstant.displaySnackBar(
-//                                 'error',
-//                                 langKey.plzSelectCountry.tr,
-//                               );
-//                             }
-//                           }
-//                           Get.back();
-//                         }
-//                       },
-//                       title: calledForUpdate
-//                           ? langKey.updateBtn.tr
-//                           : langKey.add.tr,
-//                       height: 50,
-//                       width: 300,
-//                     ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     ),
-//   );
-// }
 }

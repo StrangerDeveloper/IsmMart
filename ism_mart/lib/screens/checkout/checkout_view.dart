@@ -3,6 +3,7 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
+import 'package:ism_mart/screens/add_update_address/add_update_address_view.dart';
 import 'package:ism_mart/screens/cart/cart_viewmodel.dart';
 import 'package:ism_mart/screens/change_address/change_address_view.dart';
 import 'package:ism_mart/screens/checkout/checkout_viewmodel.dart';
@@ -104,7 +105,9 @@ class CheckoutView extends StatelessWidget {
             CustomTextBtn(
               width: 150,
               height: 40,
-              onPressed: () {},
+              onPressed: () {
+                Get.toNamed(Routes.changeAddressRoute);
+              },
               title: langKey.addNewAddress.tr,
             ),
           ],
