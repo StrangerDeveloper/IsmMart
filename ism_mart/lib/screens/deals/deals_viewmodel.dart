@@ -4,7 +4,7 @@ import 'package:ism_mart/helper/api_base_helper.dart';
 import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/constants.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
-import '../../models/category/category_model.dart';
+import '../categories/model/category_model.dart';
 import '../../models/product/product_model.dart';
 
 class DealsViewModel extends GetxController{

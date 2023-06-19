@@ -4,7 +4,7 @@ import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/screens/deals/deals_viewmodel.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import '../../controllers/controllers.dart';
-import '../../models/category/category_model.dart';
+import '../categories/model/category_model.dart';
 import '../../models/product/product_model.dart';
 import '../../helper/constants.dart';
 import '../../helper/responsiveness.dart';

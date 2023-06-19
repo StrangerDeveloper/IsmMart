@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ism_mart/models/category/category_model.dart';
+import 'package:ism_mart/screens/categories/model/category_model.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/screens/search_details/search_details_view.dart';
 
