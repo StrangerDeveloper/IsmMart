@@ -4,7 +4,6 @@ export 'buyer/base_binding.dart';
 export 'buyer/base_controller.dart';
 export 'buyer/cart/cart_controller.dart';
 export 'buyer/cart/checkout/checkout_binding.dart';
-export 'buyer/cart/checkout/checkout_controller.dart';
 export 'buyer/categories/category_controller.dart';
 export 'buyer/my_orders/order_controller.dart';
 export 'buyer/my_orders/orders_bindings.dart';

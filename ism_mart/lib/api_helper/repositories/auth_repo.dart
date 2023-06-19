@@ -70,63 +70,6 @@ class AuthRepository {
     return response.body;
   }
 
-  /**
-   *
-   * Shipping Details of current User
-   *
-   * */
-
-  Future<dynamic> addShippingDetails({String? token, data}) async {
-    var response = await _apiService.post(
-        endpoint: 'user/addShippingDetails',
-        token: token,
-        requiresAuthToken: true,
-        body: data);
-    return response.body;
-  }
-
-  Future<List<dynamic>> getShippingDetails({token}) async {
-    var response = await _apiService.get(
-        endpoint: "user/getShippingDetails?limit=3",
-        requiresAuthToken: true,
-        token: token);
-    return response.body != null ? response.body['data'] : [];
-  }
-
-  Future<dynamic> getDefaultShippingDetails({token}) async {
-    var response = await _apiService.get(
-        endpoint: "user/getDefaultShippingDetails",
-        requiresAuthToken: true,
-        token: token);
-    return response.body != null ? response.body['data'] : null;
-  }
-
-  Future<dynamic> changeDefaultShippingAddress({int? addressId, token}) async {
-    var response = await _apiService.get(
-      endpoint: 'user/changeDefaultAddress/$addressId',
-      requiresAuthToken: true,
-      token: token,
-    );
-    return response.body;
-  }
-
-  Future<dynamic> deleteShippingDetails({token, id}) async {
-    var response = await _apiService.patch(
-        endpoint: 'user/deleteShippingDetails/$id',
-        token: token,
-        requiresAuthToken: true);
-    return response.body;
-  }
-
-  Future<dynamic> updateShippingDetails({token, data}) async {
-    var response = await _apiService.put(
-        endpoint: 'user/updateShippingDetails',
-        body: data,
-        token: token,
-        requiresAuthToken: true);
-
-    return response.body;
-  }
 
   /**
    *
