@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
+import 'package:ism_mart/helper/no_internet_view.dart';
 import 'package:ism_mart/screens/buyer_profile/buyer_profile_viewmodel.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
@@ -35,6 +36,12 @@ class BuyerProfileView extends StatelessWidget {
                 ],
               ),
             ),
+          ),
+          NoInternetView(
+            onPressed: () {
+              viewModel.getData();
+              viewModel.updateData();
+            },
           ),
           LoaderView(),
         ],
@@ -113,8 +120,7 @@ class BuyerProfileView extends StatelessWidget {
           bottom: 6,
           child: InkWell(
             onTap: () async {
-              viewModel.imageFile.value =
-                  await PickImage().pickSingleImage();
+              viewModel.imageFile.value = await PickImage().pickSingleImage();
             },
             child: Container(
               padding: EdgeInsets.all(5),
