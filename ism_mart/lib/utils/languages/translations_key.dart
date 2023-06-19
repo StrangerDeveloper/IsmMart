@@ -1,4 +1,8 @@
 //////////////////////////////////////////////////////////////////////
+///Add Update Address
+const updateShippingAdd = 'updateShippingAdd',
+    addShippingAdd = 'addShippingAdd';
+
 ///answer_question_view
 const addAnswer = 'addAnswer',
     viewProduct = 'viewProduct',

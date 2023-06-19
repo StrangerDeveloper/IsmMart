@@ -2,6 +2,10 @@ import 'translations_key.dart' as key;
 
 class English {
   Map<String, String> get translations => {
+        ///Add Update Address
+        key.updateShippingAdd: 'Update Shipping Address',
+        key.addShippingAdd: 'Add Shipping Address',
+
         ///change password
         key.currentPassword: 'Current Password is required',
         key.changePasswordDesc: 'Fill the following details to change password',
@@ -137,7 +141,8 @@ class English {
         key.cancel: 'Cancel',
         key.emailVerificationLink: 'Enter Email To Receive Verification Link',
         key.emailVerification: 'Email Verification',
-        key.emailVerificationLinkSent: 'An Email Verification link has already been sent to your email',
+        key.emailVerificationLinkSent:
+            'An Email Verification link has already been sent to your email',
         key.verifyEmail: 'Verify Email',
 
         ///DisputeDetailView

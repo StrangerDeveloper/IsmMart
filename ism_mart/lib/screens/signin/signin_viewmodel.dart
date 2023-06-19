@@ -47,11 +47,15 @@ class SignInViewModel extends GetxController {
             langKey.errorTitle.tr,
             langKey.wrongWithCredentials.tr,
           );
+
+          GlobalVariable.showLoader.value = false;
         } else {
           AppConstant.displaySnackBar(
             langKey.errorTitle.tr,
             parsedJson['message'],
           );
+
+          GlobalVariable.showLoader.value = false;
         }
       }).catchError((e) {
         GlobalVariable.internetErr(true);

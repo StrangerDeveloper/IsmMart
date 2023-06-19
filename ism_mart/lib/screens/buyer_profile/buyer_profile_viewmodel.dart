@@ -36,6 +36,7 @@ class BuyerProfileViewModel extends GetxController {
   }
 
   getData() {
+    GlobalVariable.internetErr(false);
     GlobalVariable.showLoader.value = true;
 
     ApiBaseHelper()
@@ -53,6 +54,7 @@ class BuyerProfileViewModel extends GetxController {
         AppConstant.displaySnackBar(errorTitle.tr, recordDoNotExist.tr);
       }
     }).catchError((e) {
+      GlobalVariable.internetErr(true);
       print(e);
       GlobalVariable.showLoader.value = false;
     });
@@ -80,6 +82,7 @@ class BuyerProfileViewModel extends GetxController {
   }
 
   updateData() async {
+    GlobalVariable.internetErr(false);
     if (buyerProfileFormKey.currentState?.validate() ?? false) {
       GlobalVariable.showLoader.value = true;
 
@@ -115,6 +118,7 @@ class BuyerProfileViewModel extends GetxController {
           AppConstant.displaySnackBar(errorTitle.tr, parsedJson['message']);
         }
       }).catchError((e) {
+        GlobalVariable.internetErr(true);
         GlobalVariable.showLoader.value = false;
         print(e);
       });

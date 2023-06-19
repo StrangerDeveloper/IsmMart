@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/exports/exports_ui.dart';
+import 'package:ism_mart/screens/add_update_address/add_update_address_view.dart';
 import 'package:ism_mart/screens/all_dispute/all_dispute_view.dart';
 import 'package:ism_mart/screens/buyer_orders/buyer_order_view.dart';
 import 'package:ism_mart/screens/buyer_profile/buyer_profile_view.dart';
@@ -32,6 +33,7 @@ class Routes {
   static const cartRoute = "/cart";
   static const categories = "/categories";
   static const changeAddressRoute = "/changeAddress";
+  static const addUpdateAddress = "/addUpdateAddress";
   static const changePassword = "/changePassword";
   static const checkOutRoute = "/checkout";
   static const contactUs = "/contactUs";
@@ -102,6 +104,10 @@ class Routes {
       page: () => ChangeAddressView(),
       binding: CheckoutBinding(),
       middlewares: [AuthMiddleWare(priority: 1)],
+    ),
+    GetPage(
+      name: addUpdateAddress,
+      page: () => AddUpdateAddressView(),
     ),
     GetPage(
       name: changePassword,
