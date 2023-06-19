@@ -14,6 +14,7 @@ class DealsViewModel extends GetxController {
   var limit = 15.obs;
   var page = 1;
   var selectedCategoryId = 0.obs;
+  var searchEnabled = false.obs;
   var url = 'filter?type=Discounts&';
   ScrollController scrollController = ScrollController();
   var isLoadingMore = false.obs;
@@ -24,18 +25,18 @@ class DealsViewModel extends GetxController {
   RxBool noProductsFound = false.obs;
 
   @override
+  void onInit() {
+    url = '${url}page=$page&limit=$limit&';
+    getProducts();
+    super.onInit();
+  }
+
+  @override
   void onReady() {
     super.onReady();
     scrollController.addListener(() {
       loadMoreFilteredProducts();
     });
-  }
-
-  @override
-  void onInit() {
-    url = '${url}page=$page&limit=$limit&';
-    getProducts();
-    super.onInit();
   }
 
   addPriceFilter() async {
@@ -76,6 +77,11 @@ class DealsViewModel extends GetxController {
     categoriesList.refresh();
   }
 
+  unselectCategory(){
+    int index = categoriesList.indexWhere((element) => element.isPressed == true);
+    categoriesList[index].isPressed = false;
+  }
+
   setSelectedCategory(CategoryModel? categoryModel) {
     var list = <CategoryModel>[];
     if (categoriesList.isNotEmpty) {
@@ -98,11 +104,17 @@ class DealsViewModel extends GetxController {
     noProductsFound.value = false;
     productList.clear();
     await ApiBaseHelper().getMethod(url: url).then((response) {
-      if (response['success'] == true && response['data'] != null) {
+      if(response['success'] == true && response['data'] != []){
         productList.clear();
         var data = response['data'] as List;
-        productList.addAll(data.map((e) => ProductModel.fromJson(e)));
-        GlobalVariable.showLoader.value = false;
+        if(data.isEmpty){
+          noProductsFound.value = true;
+          GlobalVariable.showLoader.value = false;
+        }
+        else {
+          productList.addAll(data.map((e) => ProductModel.fromJson(e)));
+          GlobalVariable.showLoader.value = false;
+        }
       } else {
         noProductsFound.value = true;
         GlobalVariable.showLoader.value = false;
@@ -115,13 +127,14 @@ class DealsViewModel extends GetxController {
       GlobalVariable.showLoader.value = false;
     });
   }
-
-  searchProductsForSuggestion(String value) async {
+  
+  searchProducts(String value)async{
     GlobalVariable.showLoader.value = true;
     productList.clear();
     await ApiBaseHelper().getMethod(url: '${url}text=$value&').then((response) {
       GlobalVariable.showLoader.value = false;
-      if (response['success'] == true && response['data'] != null) {
+      if(response['success'] == true && response['data'] != null){
+        searchEnabled.value = true;
         var data = response['data'] as List;
         productList.addAll(data.map((e) => ProductModel.fromJson(e)));
       }

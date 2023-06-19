@@ -19,109 +19,163 @@ class DealsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(
-      appBar: _appBar(),
-      body:
-          // Obx(
-          //   () => viewModel.noProductsFound.value
-          //       ? Center(child: NoInternetView(
-          //           onPressed: () {
-          //             viewModel.addFilters();
-          //           },
-          //         )
-          //           // NoDataFoundWithIcon(
-          //           //   title: langKey.emptyProductSearch.tr,
-          //           //   subTitle: langKey.emptyProductSearchMsg.tr,
-          //           // ),
-          //           )
-          //       :
-          Stack(
-        children: [
-          Column(
+      child: Scaffold(
+        appBar: _appBar(),
+        body: Obx(() =>
+        viewModel.noProductsFound.value ?
+        Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Material(
-                elevation: 1,
-                child: Container(
-                  height: AppConstant.getSize().height * 0.05,
-                  color: kWhiteColor,
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        flex: 2,
-                        child: CustomText(
-                          title:
-                              "${viewModel.productList.length} ${langKey.itemsFound.tr}",
-                          weight: FontWeight.w600,
-                        ),
-                      ),
-                      Expanded(
-                        flex: 4,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            TextButton.icon(
-                              onPressed: () {
-                                viewModel
-                                    .setCategories(baseController.categories);
-                                showFilterBottomSheet();
-                              },
-                              icon: Icon(
-                                Icons.filter_alt_rounded,
-                                color: kPrimaryColor,
-                              ),
-                              label: CustomText(
-                                title: langKey.filter.tr,
-                                color: kPrimaryColor,
-                                weight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+              NoDataFoundWithIcon(
+                title: langKey.emptyProductSearch.tr,
+                subTitle: langKey.emptyProductSearchMsg.tr,
               ),
-              AppConstant.spaceWidget(height: 13),
-              Expanded(
-                child: GridView.builder(
-                  padding: EdgeInsets.all(8),
-                  controller: viewModel.scrollController,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: AppResponsiveness.getGridItemCount(),
-                      mainAxisSpacing: 10,
-                      crossAxisSpacing: 10,
-                      childAspectRatio:
-                          AppResponsiveness.getChildAspectRatioPoint90()
-                      // mainAxisExtent:
-                      //     AppResponsiveness.getMainAxisExtentPoint25(),
-                      ),
-                  itemCount: viewModel.productList.length,
-                  itemBuilder: (_, index) {
-                    ProductModel productModel = viewModel.productList[index];
-                    return SingleProductItems(productModel: productModel);
-                  },
-                ),
+              AppConstant.spaceWidget(
+                height: 18
               ),
-              if (viewModel.isLoadingMore.isTrue)
-                CustomLoading(
-                  isItForWidget: true,
+              TextButton(
+                  onPressed: ()async {
+                    viewModel.filters.clear();
+                    viewModel.page = 1;
+                    viewModel.searchTextController.clear();
+                    viewModel.searchEnabled.value = false;
+                    viewModel.selectedCategoryId.value = 0;
+                    viewModel.unselectCategory();
+                    viewModel.url = 'filter?type=Discounts&limit=${viewModel
+                        .limit}&page=${viewModel.page}&';
+                    await viewModel.getProducts();
+                  }, child: Text(
+                'Clear Filters',
+                style: TextStyle(
                   color: kPrimaryColor,
-                )
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17
+                ),
+              ))
             ],
           ),
-          NoInternetView(
-            onPressed: () {
-              viewModel.addFilters();
-              // viewModel.addFilters();
-              // viewModel.addPriceFilter();
-            },
-          ),
-          LoaderView(),
-        ],
+          // NoInternetView(
+          // onPressed: () {
+          //   viewModel.addFilters();
+          //   },
+          // ),
+        ) : Stack(
+          children: [
+            Column(
+              children: [
+                Material(
+                  elevation: 1,
+                  child: Container(
+                    height: AppConstant
+                        .getSize()
+                        .height * 0.05,
+                    color: kWhiteColor,
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 2,
+                          child: CustomText(
+                            title:
+                            "${viewModel.productList.length} ${langKey
+                                .itemsFound.tr}",
+                            weight: FontWeight.w600,
+                          ),
+                        ),
+                        Expanded(
+                          flex: 4,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              TextButton.icon(
+                                onPressed: () {
+                                  viewModel.setCategories(baseController.categories);
+                                  showFilterBottomSheet();
+                                },
+                                icon: Icon(
+                                  Icons.filter_alt_rounded,
+                                  color: kPrimaryColor,
+                                ),
+                                label: CustomText(
+                                  title: langKey.filter.tr,
+                                  color: kPrimaryColor,
+                                  weight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                // AppConstant.spaceWidget(height: 13),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 6.0, horizontal: 4),
+                    child: Visibility(
+                        child: viewModel.searchEnabled.value ? TextButton(
+                          onPressed: () {
+                            viewModel.filters.remove('text');
+                            viewModel.searchTextController.clear();
+                            viewModel.searchEnabled.value = false;
+                            viewModel.addFilters();
+                          },
+                          child: Text(
+                            'Clear Search',
+                            style: TextStyle(
+                                color: kPrimaryColor,
+                                fontWeight: FontWeight.bold,
+                                decoration: TextDecoration.underline
+                            ),
+                          ),
+                        ) : Container()
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: GridView.builder(
+                    padding: EdgeInsets.all(8),
+                    controller: viewModel.scrollController,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: AppResponsiveness.getGridItemCount(),
+                        mainAxisSpacing: 10,
+                        crossAxisSpacing: 10,
+                        childAspectRatio:
+                        AppResponsiveness.getChildAspectRatioPoint90()
+                      // mainAxisExtent:
+                      //     AppResponsiveness.getMainAxisExtentPoint25(),
+                    ),
+                    itemCount: viewModel.productList.length,
+                    itemBuilder: (_, index) {
+                      ProductModel productModel = viewModel.productList[index];
+                      return SingleProductItems(productModel: productModel);
+                    },
+                  ),
+                ),
+                if (viewModel.isLoadingMore.isTrue)
+                  CustomLoading(
+                    isItForWidget: true,
+                    color: kPrimaryColor,
+                  )
+              ],
+            ),
+            NoInternetView(
+              onPressed: () {
+                viewModel.addFilters();
+                // viewModel.addFilters();
+                // viewModel.addPriceFilter();
+              },
+            ),
+            LoaderView(),
+          ],
+        ),
+        ),
       ),
-    ));
+    );
   }
 
   AppBar _appBar() {
@@ -152,10 +206,11 @@ class DealsView extends StatelessWidget {
           onSubmitted: (value) {
             viewModel.filters.clear();
             viewModel.page = 1;
+            viewModel.unselectCategory();
             viewModel.url =
                 'filter?type=Discounts&limit=${viewModel.limit}&page=${viewModel.page}&';
             viewModel.filters.addAll({'text': value});
-            viewModel.searchProductsForSuggestion(value);
+            viewModel.searchProducts(value);
           },
           cursorColor: kPrimaryColor,
           autofocus: false,

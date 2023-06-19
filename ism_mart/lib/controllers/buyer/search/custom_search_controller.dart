@@ -25,6 +25,7 @@ class CustomSearchController extends GetxController {
   var subCategoryID = 0.obs;
   var isLoadingMore = false.obs;
   var _sortBy = ''.obs;
+  var noProductsFound = false.obs;
 
   String? get sortBy => _sortBy.value;
 
@@ -114,7 +115,7 @@ class CustomSearchController extends GetxController {
 
   searchWithFilters() async {
     print("SearchWithFilters: ${filters.toString()}");
-    // isLoading.value = true;
+    isLoading.value = true;
     int i = 0;
     var url = 'filter';
     filters.forEach((key, value) {
@@ -124,6 +125,18 @@ class CustomSearchController extends GetxController {
       } else {
         url = '$url&${key}=$value';
       }
+    });
+    await _apiProvider.filterSearch(appliedFilters: filters).then((products) {
+      if (products.length == 0) {
+        noProductsFound.value = true;
+      }
+      noProductsFound.value = false;
+      productList.clear();
+      productList.addAll(products);
+      isLoading.value = false;
+    }).catchError((onError) {
+      isLoading.value = false;
+      debugPrint("searchFilter: $onError");
     });
   }
 

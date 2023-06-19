@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ism_mart/controllers/controllers.dart';
 import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/controllers/buyer/search/custom_search_controller.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
@@ -45,10 +44,10 @@ class SearchView extends GetView<SearchViewModel> {
       leading: InkWell(
         onTap: () {
           controller.suggestionList.clear();
-          if(Get.arguments['isCalledFromDeals'] == true){
-            Get.back();
-            baseController.changePage(0);
-          }
+          // if(Get.arguments['isCalledFromDeals'] == true){
+          //   Get.back();
+          //   baseController.changePage(0);
+          // }
           Get.back();
         },
         child: Icon(
@@ -178,7 +177,9 @@ class SearchView extends GetView<SearchViewModel> {
                   search: controller.searchTextController.text);
             }
 
-            Get.find<CustomSearchController>().filters.clear();
+            CustomSearchController customSearchController = Get.find();
+            customSearchController.productList.clear();
+            customSearchController.filters.clear();
             Get.to(() => SearchDetailsView(searchQuery: text),
             );
             controller.searchTextController.clear();

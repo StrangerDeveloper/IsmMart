@@ -358,9 +358,6 @@ class DashboardView extends GetView<BaseController> {
                         //used flag to call method of getProductByTypes
                         productTypeKey: "${e.key}",
                         // calling for all products key.
-                        isCalledForDeals: e.key == 'All Products'
-                            ? false
-                            : calledForCategoryProducts,
                       ));
                 }),
             AppConstant.spaceWidget(height: 10),

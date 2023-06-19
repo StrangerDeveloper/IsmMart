@@ -3,10 +3,14 @@ import 'package:get/get.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
 class CustomSearchBar extends StatelessWidget {
-  const CustomSearchBar({Key? key, this.searchText, this.calledFromDashboard = false, this.calledFromSearchDetailsView = false})
-      : super(key: key);
+  const CustomSearchBar({Key? key,
+    this.searchText,
+    this.calledFromDashboard = false,
+    this.calledFromSearchDetailsView = false,
+    this.calledFromCategories = false
+  }) : super(key: key);
   final String? searchText;
-  final bool calledFromDashboard, calledFromSearchDetailsView;
+  final bool calledFromDashboard, calledFromSearchDetailsView, calledFromCategories;
 
   @override
   Widget build(BuildContext context) {
@@ -19,16 +23,13 @@ class CustomSearchBar extends StatelessWidget {
               preventDuplicates: true);*/
       // else {
       //baseController.changePage(2);
-      if (calledFromDashboard) {
+      if (calledFromDashboard || calledFromCategories) {
         Get.toNamed(Routes.searchRoute,
             arguments: {"searchText": searchText ?? " "});
-      }else if(calledFromSearchDetailsView == true){
-        Get.back();
-    }else {
-          Get.toNamed(Routes.searchRoute,
-              arguments: {"searchText": searchText ?? " ", 'isCalledFromDeals': true});
-        }
-        },
+      }else {
+        Get.offNamed(Routes.searchRoute);
+      }
+      },
       child: Container(
         height: 34.0,
         alignment: Alignment.center,

@@ -15,11 +15,11 @@ class SearchDetailsView extends GetView<CustomSearchController> {
     this.subCategoryID = 0,
     this.categoryID = 0,
     this.isCalledForLatestAndBestSeller = false,
-    this.isCalledForDeals = false,
+    this.calledFromCategories,
 
   }) : super(key: key);
 
-  final bool? isCalledForDeals, isCalledForLatestAndBestSeller;
+  final bool? isCalledForLatestAndBestSeller, calledFromCategories;
   final String? searchQuery, productTypeKey;
   final int? categoryID, subCategoryID;
 
@@ -29,13 +29,7 @@ class SearchDetailsView extends GetView<CustomSearchController> {
     // 1. all products (dashboard)
     // 2. Deals
     //3. on SearchBar (dashboard)
-    print("SearchView: $isCalledForDeals--$searchQuery---$productTypeKey");
-
-    if (isCalledForDeals!) {
-      //String? query = searchQuery!.isEmpty ? " " : searchQuery!;
-      //controller.filters.addIf(searchQuery!.isNotEmpty, "text", searchQuery!);
-      controller.addFilters("type", "Discounts");
-    } else {
+    // print("SearchView: $isCalledForDeals--$searchQuery---$productTypeKey");
       // controller.isLoading.value = true;
       if(searchQuery != null && searchQuery != '') {
         controller.addFilters("text", searchQuery);
@@ -65,7 +59,6 @@ class SearchDetailsView extends GetView<CustomSearchController> {
       //     .addIf(subCategoryID! > 0, "subCategory", "$subCategoryID");
 
       //controller.searchWithFilters(filters: filters);
-    }
     // print("Filters: ${controller.filters.toString()}");
 
     //  final controller = Get.find<SearchController>();
@@ -103,7 +96,12 @@ class SearchDetailsView extends GetView<CustomSearchController> {
         child: Scaffold(
           backgroundColor: Colors.grey[100]!,
           appBar: _searchAppBar(),
-          body: Stack(
+          body: Obx(() => controller.noProductsFound.value ? Center(
+            child: NoDataFoundWithIcon(
+              title: langKey.emptyProductSearch.tr,
+              subTitle: langKey.emptyProductSearchMsg.tr,
+            ),
+          ) : Stack(
             children: [
               _body(),
               NoInternetView(
@@ -111,6 +109,7 @@ class SearchDetailsView extends GetView<CustomSearchController> {
               )
             ],
           ),
+      )
           //floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
           //floatingActionButton: _filterBar(),
         ),
@@ -129,19 +128,13 @@ class SearchDetailsView extends GetView<CustomSearchController> {
         leadingWidth: 40,
         leading: InkWell(
                 onTap: () {
-                  if(isCalledForDeals == true){
-                    baseController.changePage(0);
-                    controller.clearFilters();
-                    controller.productList.clear();
-                  } else {
-                    Get.back();
+                    Get.until((route) => Get.currentRoute == '/');
                     controller.clearFilters();
                     controller.productList.clear();
                     //controller.productList.clear();
                     // controller.searchLimit = 15;
                     //controller.searchTextController.clear();
                     //controller.goBack();
-                  }
                   },
                 child: Icon(
                   Icons.arrow_back_ios_new,
@@ -151,7 +144,8 @@ class SearchDetailsView extends GetView<CustomSearchController> {
               ),
         title: CustomSearchBar(
           searchText: searchQuery,
-          calledFromSearchDetailsView: !isCalledForDeals!,
+          calledFromSearchDetailsView: true,
+          // calledFromCategories: calledFromCategories != null ? true : false,
         )
         );
   }
@@ -194,7 +188,7 @@ class SearchDetailsView extends GetView<CustomSearchController> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      if(isCalledForLatestAndBestSeller == false && isCalledForDeals == false)
+                      if(isCalledForLatestAndBestSeller == false)
                       TextButton.icon(
                         onPressed: () => showSortBottomSheet(),
                         icon: Icon(

@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/helper/no_internet_view.dart';
 import 'package:ism_mart/models/exports_model.dart';
-import 'package:ism_mart/exports/exports_ui.dart';
 import 'package:ism_mart/screens/search_details/search_details_view.dart';
 import 'package:ism_mart/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
@@ -73,14 +72,14 @@ class CategoriesView extends GetView<CategoryController> {
         children: [
           buildSvgLogo(),
           AppConstant.spaceWidget(width: 5),
-          Obx(
-            () => Expanded(
-              flex: 5,
-              child: CustomSearchBar(
-                searchText: controller.selectedCategory.value,
-              ),
-            ),
-          ),
+          // Obx(
+          //   () => Expanded(
+          //     flex: 5,
+          //     child: CustomSearchBar(
+          //       searchText: controller.selectedCategory.value,
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );
@@ -173,6 +172,7 @@ class CategoriesView extends GetView<CategoryController> {
         onTap: () {
           Get.to(() => SearchDetailsView(
                 subCategoryID: subCategory.id,
+            calledFromCategories: true,
               ));
         },
         borderRadius: BorderRadius.circular(13),
