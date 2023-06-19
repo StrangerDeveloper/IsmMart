@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/widgets/custom_text.dart';
-import 'package:ism_mart/utils/constants.dart';
+import 'package:ism_mart/helper/constants.dart';
 
 import '../utils/languages/translations_key.dart' as langKey;
 
