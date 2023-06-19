@@ -11,7 +11,7 @@ class CheckoutBinding extends Bindings {
     //Get.lazyPut<OrderProvider>(()=>OrderProvider(Get.find()));
     Get.lazyPut<OrderProvider>(() => OrderProvider(Get.find()));
 
-    Get.lazyPut<CheckoutController>(() => CheckoutController(
-        Get.find(), Get.find<AuthController>(), Get.find<CartController>()));
+    // Get.lazyPut<CheckoutController>(() => CheckoutController(
+    //     Get.find(), Get.find<AuthController>(), Get.find<CartController>()));
   }
 }
