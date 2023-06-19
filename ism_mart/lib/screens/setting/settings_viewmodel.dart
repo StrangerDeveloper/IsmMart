@@ -2,8 +2,8 @@ import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/export_api_helper.dart';
 import '../../models/user/user_model.dart';
-import '../../utils/constants.dart';
-import '../../utils/routes.dart';
+import '../../helper/constants.dart';
+import '../../helper/routes.dart';
 
 class SettingViewModel extends GetxController {
 

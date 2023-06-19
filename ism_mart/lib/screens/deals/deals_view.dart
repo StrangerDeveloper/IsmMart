@@ -6,8 +6,8 @@ import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import '../../controllers/controllers.dart';
 import '../../models/category/category_model.dart';
 import '../../models/product/product_model.dart';
-import '../../utils/constants.dart';
-import '../../utils/responsiveness.dart';
+import '../../helper/constants.dart';
+import '../../helper/responsiveness.dart';
 import '../../widgets/loader_view.dart';
 
 class DealsView extends StatelessWidget {

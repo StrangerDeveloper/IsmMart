@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/screens/single_product_full_image/single_product_full_image_viewmodel.dart';
-import '../../utils/constants.dart';
+import '../../helper/constants.dart';
 
 class SingleProductFullImageView extends StatelessWidget {
   SingleProductFullImageView({super.key});

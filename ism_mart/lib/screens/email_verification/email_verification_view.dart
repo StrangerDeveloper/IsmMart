@@ -3,7 +3,7 @@ import 'package:ism_mart/api_helper/local_storage/local_storage_helper.dart';
 import 'package:ism_mart/controllers/buyer/auth/auth_controller.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:get/get.dart';
-import 'package:ism_mart/utils/constants.dart';
+import 'package:ism_mart/helper/constants.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class EmailVerificationView extends GetView<AuthController> {

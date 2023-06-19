@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/helper/global_variables.dart';
-import 'package:ism_mart/exports/export_account.dart';
 import 'package:ism_mart/widgets/no_internet_view.dart';
 import 'package:ism_mart/screens/signup/signup_viewmodel.dart';
 import 'package:ism_mart/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/obscure_suffix_icon.dart';
+
+import '../signin/signin_view.dart';
 
 class SignUpView extends StatelessWidget {
   SignUpView({Key? key}) : super(key: key);

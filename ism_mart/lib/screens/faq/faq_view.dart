@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/controllers/buyer/base_controller.dart';
 import 'package:ism_mart/screens/faq/faq_viewmodel.dart';
-import 'package:ism_mart/utils/constants.dart';
+import 'package:ism_mart/helper/constants.dart';
 import 'package:ism_mart/widgets/custom_text.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/loader_view.dart';

@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:ism_mart/utils/constants.dart';
+import 'package:ism_mart/helper/constants.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class PaymentViewModel extends GetxController {

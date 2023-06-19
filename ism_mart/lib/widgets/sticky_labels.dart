@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ism_mart/utils/constants.dart';
+import 'package:ism_mart/helper/constants.dart';
 
 
 class StickyLabel extends StatelessWidget {

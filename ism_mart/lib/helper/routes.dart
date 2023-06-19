@@ -20,6 +20,8 @@ import 'package:ism_mart/screens/search_details/search_details_view.dart';
 import '../screens/contact_us/contact_us_view.dart';
 import '../screens/forgot_password2/forgot_password2_view.dart';
 import '../screens/seller_store_detail/seller_store_detail_view.dart';
+import '../screens/signin/signin_view.dart';
+import '../screens/signup/sign_up_view.dart';
 import '../screens/single_product_details/single_product_details_view.dart';
 import '../screens/static_info/static_info_view.dart';
 import '../screens/vendor_orders/vendor_orders_view.dart';

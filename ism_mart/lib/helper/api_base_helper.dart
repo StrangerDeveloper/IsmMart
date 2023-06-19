@@ -10,7 +10,7 @@ import 'package:ism_mart/controllers/controllers.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/getx_helper.dart';
 
-import '../utils/constants.dart';
+import 'constants.dart';
 
 class ApiBaseHelper {
   final String _baseUrl = ApiConstant.baseUrl;

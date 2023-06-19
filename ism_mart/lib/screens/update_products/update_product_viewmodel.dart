@@ -7,7 +7,7 @@ import 'package:ism_mart/screens/my_products/my_products_viewmodel.dart';
 import '../../helper/api_base_helper.dart';
 import '../../helper/global_variables.dart';
 import '../../models/product/product_model.dart';
-import '../../utils/constants.dart';
+import '../../helper/constants.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import 'package:http/http.dart' as http;
 

@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 import 'package:ism_mart/helper/api_base_helper.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import '../../api_helper/local_storage/local_storage_helper.dart';
-import '../../utils/constants.dart';
+import '../../helper/constants.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
-import '../../utils/routes.dart';
+import '../../helper/routes.dart';
 
 class SingleProductDetailsViewModel extends GetxController {
   var selectedFeatureIDsList = <int>[].obs;

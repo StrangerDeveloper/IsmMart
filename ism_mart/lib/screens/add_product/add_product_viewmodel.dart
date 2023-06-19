@@ -11,7 +11,7 @@ import '../../models/category/sub_category_model.dart';
 import '../../models/product/product_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
-import '../../utils/constants.dart';
+import '../../helper/constants.dart';
 
 class AddProductViewModel extends GetxController {
   TextEditingController prodNameController = TextEditingController();
