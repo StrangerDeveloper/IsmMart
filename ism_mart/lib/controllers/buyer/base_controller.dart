@@ -7,6 +7,7 @@ import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/screens/deals/deals_view.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import '../../exports/export_buyers.dart';
+import '../../screens/setting/settings_view.dart';
 
 class BaseController extends GetxController {
   BaseController(this._apiProvider);
@@ -15,12 +16,13 @@ class BaseController extends GetxController {
 
   var searchController = TextEditingController();
   var cartCount = 0.obs;
+
   getAllApiFucnc() {
     fetchSliderImages();
     runSliderTimer();
     fetchSliderDiscountProducts();
     fetchCategories();
-    //setCartCount(LocalStorageHelper.getCartItemsCount());
+
     setCartItemCount();
   }
 
@@ -242,15 +244,8 @@ class BaseController extends GetxController {
   var currentPage = 0.obs;
 
   void changePage(int index) {
-    // if (index == 3) {
-    //   Get.find<CustomSearchController>().searchProducts("");
-    //   Get.find<CustomSearchController>().searchTextController.clear();
-    // }
-
     currentPage.value = index;
     bottomNavPageController.jumpToPage(index);
-    /*bottomNavPageController.animateToPage(index,
-        duration: const Duration(milliseconds: 500), curve: Curves.easeIn);*/
   }
 
   Future<bool> onBackPressed(BuildContext context) async {

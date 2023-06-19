@@ -54,7 +54,6 @@ class AuthController extends GetxController {
         (value) {
       print(">>>Listening... currentUserKey");
       getToken();
-      //getCurrentUser();
     });
   }
 

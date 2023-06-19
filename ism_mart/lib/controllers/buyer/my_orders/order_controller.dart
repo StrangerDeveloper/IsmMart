@@ -45,30 +45,24 @@ class OrderController extends GetxController
   CoinsModel? get coinsModel => authController.coinsModel;
 
   fetchOrderById(orderId) async {
-    // change(null, status: RxStatus.loading());
     await _orderProvider
         .getBuyerOrdersDetails(
             token: authController.userToken, orderId: orderId)
         .then((data) {
       _orderDetailsModel(data);
-      //change(data, status: RxStatus.success());
     }).catchError((error) {
       debugPrint(">>>>fetchOrderById: $error");
-      // change(null, status: RxStatus.error(error));
     });
   }
 
   fetchVendorOrderById(orderId) async {
-    //change(null, status: RxStatus.loading());
     await _orderProvider
         .getVendorOrdersDetails(
             token: authController.userToken, orderId: orderId)
         .then((value) {
       _orderDetailsModel(value);
-      //change(value, status: RxStatus.success());
     }).catchError((error) {
       debugPrint(">>>>fetchVendorOrderById: $error");
-      //change(null, status: RxStatus.error(error));
     });
   }
 

@@ -15,12 +15,6 @@ class CustomSearchController extends GetxController {
   TextEditingController maxPriceController = TextEditingController();
   ScrollController scrollController = ScrollController();
 
-@override
-  void onInit() {
-
-    super.onInit();
-  }
-
   int searchLimit = 25;
   int page = 1;
   var isLoading = false.obs;
@@ -31,33 +25,27 @@ class CustomSearchController extends GetxController {
   var subCategoryID = 0.obs;
   var isLoadingMore = false.obs;
   var _sortBy = ''.obs;
+
   String? get sortBy => _sortBy.value;
 
   setSortBy(String value) {
     _sortBy.value = value;
-    // filters.addIf(value.isNotEmpty, "sort", value);
     addFilters("sort", value);
-    //searchProducts(searchTextController.text);
   }
 
   var filters = Map<String, String>().obs;
 
   @override
   void onReady() {
-    // TOO: implement onReady
-    super.onReady();
-
     scrollController.addListener(() {
       loadMoreFilteredProducts();
     });
-
-    // ever(filters, handleFilters);
+    super.onReady();
   }
 
   handleFilters(Map<String, String> filters) {
     filters.addIf(page > 0, "page", "$page");
     filters.addIf(searchLimit > 0, "limit", "$searchLimit");
-    // isLoading.value = true;
     searchWithFilters();
   }
 
@@ -69,7 +57,7 @@ class CustomSearchController extends GetxController {
     categoriesList.refresh();
   }
 
-    setSelectedCategory(CategoryModel? categoryModel) {
+  setSelectedCategory(CategoryModel? categoryModel) {
     var list = <CategoryModel>[];
     if (categoriesList.isNotEmpty) {
       list.clear();
@@ -86,14 +74,11 @@ class CustomSearchController extends GetxController {
   }
 
   addFilters(key, value) {
-    //clearFilters();
-    //filters.clear();
     if (value is String) {
       filters.addIf(value.isNotEmpty, key, value);
     } else if (value is int) {
       filters.addIf(value > 0, key, "$value");
     }
-
     handleFilters(filters);
   }
 
@@ -105,7 +90,6 @@ class CustomSearchController extends GetxController {
 
   applyFilter() async {
     GlobalVariable.internetErr(false);
-    //stopLoadMore.value = true;
     int? categoryId = selectedCategoryId.value;
     num? minPrice = num.parse(minPriceController.text.isNotEmpty
         ? minPriceController.text.toString().trim()
@@ -116,26 +100,17 @@ class CustomSearchController extends GetxController {
 
     addFilters("category", categoryId);
 
-    //filters.addIf(categoryId > 0, "category", "$categoryId");
     if (minPrice != 0 && maxPrice != 0) {
       if (minPrice.isLowerThan(maxPrice)) {
         addFilters("minPrice", minPrice);
         addFilters("maxPrice", maxPrice);
-        //filters.addIf(minPrice > 0, "minPrice", "$minPrice");
-        //filters.addIf(maxPrice > 0, "maxPrice", "$maxPrice");
       } else
         AppConstant.displaySnackBar(
           langKey.errorTitle.tr,
           langKey.minPriceShouldNotBe.tr,
         );
     }
-
-    //int page = 1;
-    //int limit = 10;
-
-    // await searchWithFilters(filters: filters);
   }
-
 
   searchWithFilters() async {
     print("SearchWithFilters: ${filters.toString()}");
@@ -143,28 +118,13 @@ class CustomSearchController extends GetxController {
     int i = 0;
     var url = 'filter';
     filters.forEach((key, value) {
-      if(i == 0) {
+      if (i == 0) {
         url = '$url?${key}=$value';
         i++;
-      }
-      else{
+      } else {
         url = '$url&${key}=$value';
       }
     });
-    print(url);
-    // await ApiBaseHelper().getMethod(url: 'filter')
-
-    // await _apiProvider.filterSearch(appliedFilters: filters).then((products) {
-    //   if (products.length == 0) {
-    //     GlobalVariable.internetErr(true);
-    //   }
-    //   productList.clear();
-    //   productList.addAll(products);
-    //   isLoading.value = false;
-    // }).catchError((onError) {
-    //   isLoading.value = false;
-    //   debugPrint("searchFilter: $onError");
-    // });
   }
 
   loadMoreFilteredProducts() async {
@@ -173,7 +133,7 @@ class CustomSearchController extends GetxController {
         scrollController.position.maxScrollExtent == scrollController.offset) {
       filters.remove('page');
       page++;
-      filters.addIf(page>0, 'page', "$page");
+      filters.addIf(page > 0, 'page', "$page");
       // searchLimit += 15;
       isLoadingMore(true);
       await _apiProvider.filterSearch(appliedFilters: filters).then((products) {
@@ -196,23 +156,11 @@ class CustomSearchController extends GetxController {
     selectedCategory.value = '';
     selectedCategoryId.value = 0;
     filters.clear();
-
-    //Map<String, dynamic>? filters = Map();
-    //int page = 1;
-    //int limit = 10;
-    //filters.addIf(page > 0, "page", "$page");
-    //filters.addIf(limit > 0, "limit", "$limit");
-
-    //await searchWithFilters(filters: filters);
   }
 
   @override
   void onClose() {
     super.onClose();
     clearFilters();
-    //searchTextController.removeListener(() {});
-    //scrollController.removeListener(() {});
-    //focus.removeListener(_onFocusChange);
-    //focus.dispose();
   }
 }

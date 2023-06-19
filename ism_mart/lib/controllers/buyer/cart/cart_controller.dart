@@ -83,47 +83,7 @@ class CartController extends GetxController
       debugPrint(">>>>FetchCartItems $error");
       change(null, status: RxStatus.error(error));
     });
-    // ever(cartItemsList, getTotalCartAmount);
   }
-  //
-  // updateCart({cartItemId, quantity}) async {
-  //   var cartData = {"cartItemId": "$cartItemId", "quantity": quantity};
-  //   await LocalStorageHelper.getStoredUser().then((user) async {
-  //     await _apiProvider
-  //         .updateCartItem(token: user.token, data: cartData)
-  //         .then((CartResponse? response) {
-  //       if (response != null) {
-  //         if (response.success!) {
-  //           showSnackBar(langKey.success.tr, response.message);
-  //           fetchCartItems();
-  //         } else
-  //           showSnackBar(langKey.errorTitle.tr, response.message);
-  //       } else
-  //         showSnackBar(langKey.errorTitle.tr, langKey.someThingWentWrong.tr);
-  //     }).catchError((error) {
-  //       debugPrint(">>>>updateCart $error");
-  //     });
-  //   });
-  // }
-  //
-  // deleteCartItem({cartItemId}) async {
-  //   await LocalStorageHelper.getStoredUser().then((user) async {
-  //     await _apiProvider
-  //         .deleteCartItem(token: user.token, cartId: cartItemId)
-  //         .then((CartResponse? response) {
-  //       if (response != null) {
-  //         if (response.success!) {
-  //           showSnackBar(langKey.success.tr, response.message);
-  //           fetchCartItems();
-  //         } else
-  //           showSnackBar(langKey.errorTitle.tr, response.message);
-  //       } else
-  //         showSnackBar(langKey.errorTitle.tr, langKey.someThingWentWrong.tr);
-  //     }).catchError((error) {
-  //       debugPrint(">>>>DeleteItem $error");
-  //     });
-  //   });
-  // }
 
   showSnackBar(title, message) {
     AppConstant.displaySnackBar(title, message);
@@ -155,6 +115,7 @@ class CartController extends GetxController
   CartModel? cartModel;
   int moqq = 10;
   var counter = 1.obs;
+
   void increment() async {
     if (counter.value == moqq) return;
     counter.value++;

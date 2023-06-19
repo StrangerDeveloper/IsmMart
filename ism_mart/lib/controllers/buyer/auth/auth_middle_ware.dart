@@ -5,14 +5,10 @@ import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
 class AuthMiddleWare extends GetMiddleware {
-  // final authController = findOrInit;
-
   AuthMiddleWare({int? priority}) : super(priority: priority!);
 
   @override
   RouteSettings? redirect(String? route) {
-    // return (findOrInit.userModel!.emailVerified == false ?
-    // RouteSettings(name: Routes.emailVerificationLinkRoute) :
     return (findOrInit.userModel!.email != null &&
                 !findOrInit.isSessionExpired! &&
                 findOrInit.userToken != null) ||

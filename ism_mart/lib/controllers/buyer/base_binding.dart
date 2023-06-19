@@ -8,16 +8,9 @@ class BaseBindings extends Bindings {
   void dependencies() {
     Get.put<CustomSearchController>(CustomSearchController(Get.find()));
     Get.lazyPut<BaseController>(() => BaseController(Get.find()));
-
-    //Get.lazyPut<OrderProvider>(() => OrderProvider(Get.find()));
-
-    //Get.put<AuthController>(AuthController(Get.find()));
-
     Get.put<CartController>(CartController(Get.find()));
     Get.put<CategoryController>(CategoryController(Get.find()));
-
     Get.put<OrderRepository>(OrderRepository(Get.find()));
-
     Get.put<ProductController>(ProductController(Get.find()));
   }
 }

@@ -5,8 +5,6 @@ import 'custom_search_controller.dart';
 class SearchBindings extends Bindings {
   @override
   void dependencies() {
-    // : implement dependencies
-
     Get.lazyPut<CustomSearchController>(
         () => CustomSearchController(Get.find()));
     Get.lazyPut<SearchViewModel>(() => SearchViewModel(Get.find()));

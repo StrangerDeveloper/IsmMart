@@ -69,9 +69,6 @@ class CategoryController extends GetxController with StateMixin {
       }
 
       change(list, status: RxStatus.success());
-      /*categories.clear();
-      categories.addAll(list);
-      categories.refresh();*/
     }
   }
 

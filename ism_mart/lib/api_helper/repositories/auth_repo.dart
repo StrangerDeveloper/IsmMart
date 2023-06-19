@@ -15,15 +15,6 @@ class AuthRepository {
     return response.body != null ? response.body['data'] : [];
   }
 
-  Future<dynamic> login({email, password}) async {
-    var body = {"email": email, "password": password};
-
-    var response = await _apiService.post(
-      endpoint: "auth/login",
-      body: body, //UserModel(email: email, password: password).toJson(),
-    );
-    return response.body;
-  }
 
   Future<dynamic> resendVerificationLink({String? email}) async {
     var queryParam = {"email": email};
@@ -46,41 +37,13 @@ class AuthRepository {
     return response.body != null ? response.body['data'] : [];
   }
 
-  Future<dynamic> updateUser({token, data}) async {
-    var response = await _apiService.patch(
-        endpoint: 'user/update',
-        body: data,
-        token: token,
-        requiresAuthToken: true);
-
-    return response.body;
-  }
-
   Future<dynamic> fetchCurrentUser({String? token}) async {
     var response = await _apiService.get(
         endpoint: "user/profile", requiresAuthToken: true, token: token);
     return response.body;
   }
 
-  Future<dynamic> recoverPasswordWithOtp({data}) async {
-    var response = await _apiService.post(
-      endpoint: "auth/forgetPasswordOtp",
-      body: data,
-    );
-    return response.body;
-  }
 
-
-  /**
-   *
-   * Contact US
-   *
-   * */
-
-  Future<dynamic> postContactUs({data}) async {
-    var response = await _apiService.post(endpoint: 'user/contact', body: data);
-    return response.body;
-  }
 
   ///Coins Api
   Future<dynamic> fetchUserCoins({token}) async {

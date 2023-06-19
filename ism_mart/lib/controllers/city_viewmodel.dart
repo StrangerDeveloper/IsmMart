@@ -13,18 +13,16 @@ class CityViewModel extends GetxController {
 
   Rx<TopVendorsModel> topVendorsModel = TopVendorsModel().obs;
 
-
-
   var countryId = 0.obs;
   var cityId = 0.obs;
   var selectedCountry = CountryModel().obs;
   var selectedCity = CountryModel().obs;
+
   void setSelectedCountry(CountryModel? model) async {
     authController.selectedCountry(model);
-    //getCityByCountryName(name);
     countryId(model!.id);
     authController.cities.clear();
-    // authController.update();
+
     await authController.getCitiesByCountry(countryId: model.id!);
   }
 
@@ -41,11 +39,10 @@ class CityViewModel extends GetxController {
   }
 
   RxString selectedcity = ''.obs;
+
   void setSelectedCity(CountryModel model) {
     authController.selectedCity(model);
     cityId(model.id);
-    //  print("city id ======>${model.id}> ${cityId.value}");
-    //getCityIdByName(value);
   }
 
   getCityIdByName(String? city) {
