@@ -98,7 +98,6 @@ var headline3 = GoogleFonts.lato(
 var headline4 = GoogleFonts.lato(
     fontSize: 15, color: Colors.black, fontWeight: FontWeight.w600);
 
-
 var bodyText1 = GoogleFonts.lato(
     fontSize: 13, fontWeight: FontWeight.w600, color: Colors.black);
 var bodyText2 = GoogleFonts.lato(

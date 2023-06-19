@@ -108,10 +108,9 @@ class MyProductView extends StatelessWidget {
       aspectRatio: 0.75,
       child: GestureDetector(
         onTap: () {
-          Get.toNamed(Routes.singleProductDetails, arguments: [{
-            "calledFor": "seller",
-            "productID": "${model.id}"
-          }]);
+          Get.toNamed(Routes.singleProductDetails, arguments: [
+            {"calledFor": "seller", "productID": "${model.id}"}
+          ]);
         },
         child: Container(
           clipBehavior: Clip.hardEdge,

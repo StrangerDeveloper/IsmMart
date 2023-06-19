@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/controllers/export_controllers.dart';
+import 'package:ism_mart/helper/no_internet_view.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/exports/exports_ui.dart';
 import 'package:ism_mart/screens/search_details/search_details_view.dart';
@@ -20,16 +21,22 @@ class CategoriesView extends GetView<CategoryController> {
       if (state is List<CategoryModel>) {
         return _build(state: state);
       }
-      return NoDataFoundWithIcon(
-        icon: Icons.category_outlined,
-        title: langKey.noCategoryFound.tr,
-      );
+      return NoInternetView();
+      // NoDataFoundWithIcon(
+      //   icon: Icons.category_outlined,
+      //   title: langKey.noCategoryFound.tr,
+      // );
     },
         onLoading: CustomLoading(isDarkMode: Get.isDarkMode),
-        onEmpty: NoDataFoundWithIcon(
-          icon: Icons.category_outlined,
-          title: langKey.noCategoryFound.tr,
-        ));
+        onEmpty: NoInternetView(
+          onPressed: () => controller.fetchCategories(),
+        )
+        //  NoDataFoundWithIcon(
+        //   icon: Icons.category_outlined,
+        //   title: langKey.noCategoryFound.tr,
+        // )
+
+        );
   }
 
   Widget _build({state}) {

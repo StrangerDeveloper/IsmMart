@@ -7,8 +7,7 @@ import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import '../categories/model/category_model.dart';
 import '../../models/product/product_model.dart';
 
-class DealsViewModel extends GetxController{
-
+class DealsViewModel extends GetxController {
   final productList = <ProductModel>[].obs;
   var suggestionList = <ProductModel>[].obs;
   final filters = Map<String, String>().obs;
@@ -39,7 +38,7 @@ class DealsViewModel extends GetxController{
     super.onInit();
   }
 
-  addPriceFilter()async{
+  addPriceFilter() async {
     int minPrice = int.parse(minPriceController.text);
     int maxPrice = int.parse(maxPriceController.text);
     if (minPrice != 0 && maxPrice != 0) {
@@ -61,7 +60,7 @@ class DealsViewModel extends GetxController{
     }
   }
 
-  addFilters()async{
+  addFilters() async {
     url = 'filter?type=Discounts&page=$page&limit=$limit&';
     filters.forEach((key, value) {
       url = '$url$key=$value&';
@@ -93,40 +92,40 @@ class DealsViewModel extends GetxController{
     }
   }
 
-  getProducts()async{
+  getProducts() async {
+    GlobalVariable.internetErr(false);
     GlobalVariable.showLoader.value = true;
     noProductsFound.value = false;
     productList.clear();
     await ApiBaseHelper().getMethod(url: url).then((response) {
-      if(response['success'] == true && response['data'] != null){
+      if (response['success'] == true && response['data'] != null) {
         productList.clear();
         var data = response['data'] as List;
         productList.addAll(data.map((e) => ProductModel.fromJson(e)));
         GlobalVariable.showLoader.value = false;
-      } else{
+      } else {
         noProductsFound.value = true;
         GlobalVariable.showLoader.value = false;
         AppConstant.displaySnackBar(langKey.errorTitle.tr, response['message']);
         print('>>>No Products Value: ${noProductsFound.value}');
       }
-    }).catchError((e){
+    }).catchError((e) {
+      GlobalVariable.internetErr(true);
       print(e);
       GlobalVariable.showLoader.value = false;
     });
   }
-  
-  searchProductsForSuggestion(String value)async{
+
+  searchProductsForSuggestion(String value) async {
     GlobalVariable.showLoader.value = true;
     productList.clear();
-    await ApiBaseHelper().getMethod(url: '${url}text=$value&').then((response){
+    await ApiBaseHelper().getMethod(url: '${url}text=$value&').then((response) {
       GlobalVariable.showLoader.value = false;
-      if(response['success'] == true && response['data'] != null){
+      if (response['success'] == true && response['data'] != null) {
         var data = response['data'] as List;
-        productList.addAll(
-          data.map((e) => ProductModel.fromJson(e))
-        );
+        productList.addAll(data.map((e) => ProductModel.fromJson(e)));
       }
-    }).catchError((e){
+    }).catchError((e) {
       print(e);
     });
   }
@@ -143,15 +142,14 @@ class DealsViewModel extends GetxController{
       isLoadingMore(true);
       print('>>>Load More: $url');
       await ApiBaseHelper().getMethod(url: url).then((response) {
-        if(response['success'] == true && response['data'] != null){
+        if (response['success'] == true && response['data'] != null) {
           var data = response['data'] as List;
           productList.addAll(data.map((e) => ProductModel.fromJson(e)));
           isLoadingMore(false);
-        }
-        else{
+        } else {
           isLoadingMore(false);
         }
-      }).catchError((e){
+      }).catchError((e) {
         isLoadingMore(false);
       });
       // await _apiProvider.filterSearch(appliedFilters: filters).then((products) {
