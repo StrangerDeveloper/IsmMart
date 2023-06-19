@@ -439,8 +439,8 @@ class AppConstant {
     return outputDate;
   }
 
-  static String colorConsole(String value) {
-    return '\x1B[31m$value\x1B[0m';
+  static colorConsole(String value) {
+    print('\x1B[32m$value\x1B[0m');
     // Black:   \x1B[30m
     // Red:     \x1B[31m
     // Green:   \x1B[32m

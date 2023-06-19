@@ -4,8 +4,6 @@ import 'package:get/get.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class Validator {
-  Validator();
-
   /////////////////////  Formatters  /////////////////////////
   ///Number should start from + sign...
   final List<TextInputFormatter>? phoneNumberFormatter = [
@@ -66,5 +64,4 @@ class Validator {
       return null;
     }
   }
-
 }

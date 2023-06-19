@@ -18,40 +18,38 @@ class ApiBaseHelper {
 
   Future<dynamic> postMethod({
     required String url,
-    dynamic body,
+    Object? body,
     bool withBearer = false,
     bool withAuthorization = false,
   }) async {
-    Map<String, String> header = {'Content-Type': 'application/json'};
-
-    if (withAuthorization) {
-      header['Authorization'] = withBearer ? 'Bearer $token' : token;
-    }
-
     try {
-      body = jsonEncode(body);
-      print('*********************** Request ********************************');
-      print(body);
-      print(_baseUrl + url);
+      Map<String, String> header = {'Content-Type': 'application/json'};
+      if (withAuthorization) {
+        header['Authorization'] = withBearer ? 'Bearer $token' : token;
+      }
+      if (body != null) {
+        body = jsonEncode(body);
+      }
       Uri urlValue = Uri.parse(_baseUrl + url);
+      print('*********************** Request ********************************');
+      print(urlValue);
+      print(body);
+
       http.Response response = await http
           .post(urlValue, headers: header, body: body)
           .timeout(Duration(seconds: 30));
 
+      print('*********************** Response ********************************');
+      print(urlValue);
       print(response.body);
+      AppConstant.colorConsole('****************************************************************************************');
 
       Map<String, dynamic> parsedJSON = jsonDecode(response.body);
-      print(
-          '*********************** Response **********************************');
-      print(urlValue.toString());
-      print('body => ' + body);
-      print(parsedJSON);
-      print('&&&&&&&&&&&&&&&&&&&&&&& End of Response &&&&&&&&&&&&&&&&&&&&&&\n');
       return parsedJSON;
     } on SocketException catch (_) {
       GlobalVariable.showLoader.value = false;
       // GetxHelper.showSnackBar(title: 'Error', message: Errors.noInternetError);
-      // throw Errors.noInternetError;
+      throw Errors.noInternetError;
     } on TimeoutException catch (_) {
       GlobalVariable.showLoader.value = false;
       GetxHelper.showSnackBar(title: 'Error', message: Errors.timeOutException);
@@ -69,40 +67,38 @@ class ApiBaseHelper {
 
   Future<dynamic> putMethod({
     required String url,
-    dynamic body,
+    Object? body,
     bool withBearer = false,
     bool withAuthorization = false,
   }) async {
-    Map<String, String> header = {'Content-Type': 'application/json'};
-
-    if (withAuthorization) {
-      header['Authorization'] = withBearer ? 'Bearer $token' : token;
-    }
-
     try {
-      body = jsonEncode(body);
-      print('*********************** Request ********************************');
-      print(body);
-      print(_baseUrl + url);
+      Map<String, String> header = {'Content-Type': 'application/json'};
+      if (withAuthorization) {
+        header['Authorization'] = withBearer ? 'Bearer $token' : token;
+      }
+      if (body != null) {
+        body = jsonEncode(body);
+      }
       Uri urlValue = Uri.parse(_baseUrl + url);
+      print('*********************** Request ********************************');
+      print(urlValue);
+      print(body);
+
       http.Response response = await http
           .put(urlValue, headers: header, body: body)
           .timeout(Duration(seconds: 30));
 
+      print('*********************** Response ********************************');
+      print(urlValue);
       print(response.body);
+      AppConstant.colorConsole('****************************************************************************************');
 
       Map<String, dynamic> parsedJSON = jsonDecode(response.body);
-      print(
-          '*********************** Response **********************************');
-      print(urlValue.toString());
-      print('body => ' + body);
-      print(parsedJSON);
-      print('&&&&&&&&&&&&&&&&&&&&&&& End of Response &&&&&&&&&&&&&&&&&&&&&&\n');
       return parsedJSON;
     } on SocketException catch (_) {
       GlobalVariable.showLoader.value = false;
       // GetxHelper.showSnackBar(title: 'Error', message: Errors.noInternetError);
-      // throw Errors.noInternetError;
+      throw Errors.noInternetError;
     } on TimeoutException catch (_) {
       GlobalVariable.showLoader.value = false;
       GetxHelper.showSnackBar(title: 'Error', message: Errors.timeOutException);
@@ -124,32 +120,28 @@ class ApiBaseHelper {
     bool withBearer = false,
     bool withAuthorization = false,
   }) async {
-    Map<String, String> header = {'Content-Type': 'application/json'};
-
-    if (withAuthorization) {
-      header['Authorization'] = withBearer ? 'Bearer $token' : token;
-    }
-
     try {
+      Map<String, String> header = {'Content-Type': 'application/json'};
+      if (withAuthorization) {
+        header['Authorization'] = withBearer ? 'Bearer $token' : token;
+      }
       if (body != null) {
         body = jsonEncode(body);
       }
-      print(
-          '********************************* Request ******************************************');
-      print(_baseUrl + url);
+      Uri urlValue = Uri.parse(_baseUrl + url);
+      print('*********************** Request ********************************');
+      print(urlValue);
       print(body);
 
-      Uri urlValue = Uri.parse(_baseUrl + url);
+
       http.Response response = await http
           .patch(urlValue, headers: header, body: body)
           .timeout(Duration(seconds: 30));
 
-      print(
-          '********************************* Response ********************************************');
-      print(_baseUrl + url);
+      print('*********************** Response ********************************');
+      print(urlValue);
       print(response.body);
-      AppConstant.colorConsole(
-          '****************************************************************************************');
+      AppConstant.colorConsole('****************************************************************************************');
 
       Map<String, dynamic> parsedJSON = jsonDecode(response.body);
       return parsedJSON;
@@ -177,33 +169,32 @@ class ApiBaseHelper {
     bool withBearer = false,
     bool withAuthorization = false,
   }) async {
-    Map<String, String> header = {
-      'Content-Type': 'application/json',
-      'Cookie': 'XSRF-token=$token'
-    };
-
-    if (withAuthorization) {
-      header['Authorization'] = withBearer ? 'Bearer $token' : token;
-    }
-
     try {
+      Map<String, String> header = {
+        'Content-Type': 'application/json',
+        'Cookie': 'XSRF-token=$token'
+      };
+      if (withAuthorization) {
+        header['Authorization'] = withBearer ? 'Bearer $token' : token;
+      }
       Uri urlValue = Uri.parse(_baseUrl + url);
+      print('*********************** Request ********************************');
       print(urlValue);
+
       http.Response response = await http
           .get(urlValue, headers: header)
           .timeout(Duration(seconds: 50));
 
+      print('*********************** Response ********************************');
+      print(urlValue);
+      print(response.body);
+      AppConstant.colorConsole('****************************************************************************************');
+
       Map<String, dynamic> parsedJSON = jsonDecode(response.body);
-      print(
-          '*********************** Response **********************************');
-      print(urlValue.toString());
-      print(parsedJSON);
-      print('&&&&&&&&&&&&&&&&&&&&&&& End of Response &&&&&&&&&&&&&&&&&&&&&&\n');
       return parsedJSON;
     } on SocketException {
       GlobalVariable.showLoader.value = false;
-      //  GetxHelper.showSnackBar(
-      //     title: langKey.errorTitle.tr, message: Errors.noInternetError);
+      //  GetxHelper.showSnackBar(title: langKey.errorTitle.tr, message: Errors.noInternetError);
       throw Errors.noInternetError;
     } on TimeoutException {
       GlobalVariable.showLoader.value = false;
@@ -224,30 +215,29 @@ class ApiBaseHelper {
     bool withBearer = false,
     bool withAuthorization = false,
   }) async {
-    Map<String, String> header = {'Content-Type': 'application/json'};
-
-    if (withAuthorization) {
-      header['Authorization'] = withBearer ? 'Bearer $token' : token;
-    }
-
     try {
+      Map<String, String> header = {'Content-Type': 'application/json'};
+      if (withAuthorization) {
+        header['Authorization'] = withBearer ? 'Bearer $token' : token;
+      }
       Uri urlValue = Uri.parse(_baseUrl + url);
+      print('*********************** Request ********************************');
       print(urlValue);
+
+
       http.Response response = await http
           .delete(urlValue, headers: header)
           .timeout(Duration(seconds: 50));
 
+      print('*********************** Response ********************************');
+      print(urlValue);
+      print(response.body);
+      AppConstant.colorConsole('****************************************************************************************');
       Map<String, dynamic> parsedJSON = jsonDecode(response.body);
-      print(
-          '*********************** Response **********************************');
-      print(urlValue.toString());
-      print(parsedJSON);
-      print('&&&&&&&&&&&&&&&&&&&&&&& End of Response &&&&&&&&&&&&&&&&&&&&&&\n');
       return parsedJSON;
     } on SocketException {
       GlobalVariable.showLoader.value = false;
-      // GetxHelper.showSnackBar(
-      //     title: langKey.errorTitle.tr, message: Errors.noInternetError);
+      // GetxHelper.showSnackBar(title: langKey.errorTitle.tr, message: Errors.noInternetError);
       throw Errors.noInternetError;
     } on TimeoutException {
       GlobalVariable.showLoader.value = false;
@@ -271,25 +261,25 @@ class ApiBaseHelper {
     bool withAuthorization = false,
   }) async {
     try {
-      Uri urlValue = Uri.parse(_baseUrl + url);
-      http.MultipartRequest request = http.MultipartRequest('POST', urlValue);
       Map<String, String> header = {'Content-Type': 'multipart/form-data'};
-
       if (withAuthorization) {
         header['Authorization'] = withBearer ? 'Bearer $token' : token;
       }
+      Uri urlValue = Uri.parse(_baseUrl + url);
+      print('*********************** Request ********************************');
+      print(urlValue);
 
+      http.MultipartRequest request = http.MultipartRequest('POST', urlValue);
       request.headers.addAll(header);
       request.fields.addAll(fields);
       request.files.addAll(files);
       http.StreamedResponse response = await request.send();
-      Map<String, dynamic> parsedJson =
-          await jsonDecode(await response.stream.bytesToString());
+      Map<String, dynamic> parsedJson = await jsonDecode(await response.stream.bytesToString());
 
-      print('********************** Response ********************************');
-      print(urlValue.toString());
+      print('*********************** Response ********************************');
+      print(urlValue);
       print(parsedJson.toString());
-      print('&&&&&&&&&&&&&&&&&&&&&&& End of Response &&&&&&&&&&&&&&&&&&&&&&\n');
+      AppConstant.colorConsole('****************************************************************************************');
       return parsedJson;
     } on SocketException catch (_) {
       GlobalVariable.showLoader.value = false;
@@ -318,13 +308,16 @@ class ApiBaseHelper {
     bool withAuthorization = false,
   }) async {
     try {
-      Uri urlValue = Uri.parse(_baseUrl + url);
-      http.MultipartRequest request = http.MultipartRequest('PATCH', urlValue);
       Map<String, String> header = {'Content-Type': 'multipart/form-data'};
 
       if (withAuthorization) {
         header['Authorization'] = withBearer ? 'Bearer $token' : token;
       }
+      Uri urlValue = Uri.parse(_baseUrl + url);
+      print('*********************** Request ********************************');
+      print(urlValue);
+
+      http.MultipartRequest request = http.MultipartRequest('PATCH', urlValue);
 
       request.headers.addAll(header);
       request.fields.addAll(fields);
@@ -333,10 +326,10 @@ class ApiBaseHelper {
       Map<String, dynamic> parsedJson =
           await jsonDecode(await response.stream.bytesToString());
 
-      print('********************** Response ********************************');
-      print(urlValue.toString());
+      print('*********************** Response ********************************');
+      print(urlValue);
       print(parsedJson.toString());
-      print('&&&&&&&&&&&&&&&&&&&&&&& End of Response &&&&&&&&&&&&&&&&&&&&&&\n');
+      AppConstant.colorConsole('****************************************************************************************');
       return parsedJson;
     } on SocketException catch (_) {
       GlobalVariable.showLoader.value = false;
