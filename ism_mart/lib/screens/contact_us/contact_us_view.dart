@@ -6,9 +6,9 @@ import 'package:ism_mart/helper/constants.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart';
 import 'package:ism_mart/helper/validator.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
+import 'package:ism_mart/widgets/no_internet_view.dart';
 
 class ContactUsView extends StatelessWidget {
-
   ContactUsView({Key? key}) : super(key: key);
   final ContactUsViewModel viewModel = Get.put(ContactUsViewModel());
 
@@ -27,6 +27,9 @@ class ContactUsView extends StatelessWidget {
                 contactUsForm(),
               ],
             ),
+          ),
+          NoInternetView(
+            onPressed: () => viewModel.contactUsBtn(),
           ),
           LoaderView(),
         ],
