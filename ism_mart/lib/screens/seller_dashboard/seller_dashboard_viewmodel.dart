@@ -24,8 +24,8 @@ class SellerDashBoardViewModel extends GetxController {
   }
 
   getStats() {
+    GlobalVariable.internetErr(false);
     GlobalVariable.showLoader.value = true;
-
     ApiBaseHelper()
         .getMethod(url: Urls.getSellerOrdersStats, withAuthorization: true)
         .then((parsedJson) {
@@ -34,6 +34,7 @@ class SellerDashBoardViewModel extends GetxController {
         vendorStats.value = VendorStats.fromJson(parsedJson['data']);
       }
     }).catchError((e) {
+      GlobalVariable.internetErr(true);
       print(e);
       GlobalVariable.showLoader.value = false;
     });

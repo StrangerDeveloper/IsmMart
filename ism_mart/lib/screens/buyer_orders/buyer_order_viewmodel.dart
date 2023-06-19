@@ -6,7 +6,6 @@ import 'package:ism_mart/helper/urls.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 
-
 class BuyerOrderViewModel extends GetxController {
   ScrollController scrollController = ScrollController();
   int pageNo = 0;
@@ -25,6 +24,7 @@ class BuyerOrderViewModel extends GetxController {
   }
 
   getStats() {
+    GlobalVariable.internetErr(false);
     GlobalVariable.showLoader.value = true;
 
     ApiBaseHelper()
@@ -35,6 +35,7 @@ class BuyerOrderViewModel extends GetxController {
         statsModel.value = OrderStats.fromJson(parsedJson['data']);
       }
     }).catchError((e) {
+      GlobalVariable.internetErr(true);
       print(e);
       GlobalVariable.showLoader.value = false;
     });

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
+import 'package:ism_mart/helper/no_internet_view.dart';
 import 'package:ism_mart/screens/buyer_orders/buyer_order_viewmodel.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
@@ -27,6 +28,12 @@ class BuyerOrderView extends StatelessWidget {
                 _orderStats(),
                 Expanded(child: listView()),
               ],
+            ),
+            NoInternetView(
+              onPressed: () {
+                viewModel.getStats();
+                viewModel.getOrders();
+              },
             ),
             LoaderView(),
           ],

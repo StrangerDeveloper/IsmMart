@@ -155,7 +155,7 @@ class ApiBaseHelper {
       return parsedJSON;
     } on SocketException catch (_) {
       GlobalVariable.showLoader.value = false;
-      GetxHelper.showSnackBar(title: 'Error', message: Errors.noInternetError);
+      //  GetxHelper.showSnackBar(title: 'Error', message: Errors.noInternetError);
       throw Errors.noInternetError;
     } on TimeoutException catch (_) {
       GlobalVariable.showLoader.value = false;
@@ -202,8 +202,8 @@ class ApiBaseHelper {
       return parsedJSON;
     } on SocketException {
       GlobalVariable.showLoader.value = false;
-      GetxHelper.showSnackBar(
-          title: langKey.errorTitle.tr, message: Errors.noInternetError);
+      //  GetxHelper.showSnackBar(
+      //     title: langKey.errorTitle.tr, message: Errors.noInternetError);
       throw Errors.noInternetError;
     } on TimeoutException {
       GlobalVariable.showLoader.value = false;
@@ -246,8 +246,8 @@ class ApiBaseHelper {
       return parsedJSON;
     } on SocketException {
       GlobalVariable.showLoader.value = false;
-      GetxHelper.showSnackBar(
-          title: langKey.errorTitle.tr, message: Errors.noInternetError);
+      // GetxHelper.showSnackBar(
+      //     title: langKey.errorTitle.tr, message: Errors.noInternetError);
       throw Errors.noInternetError;
     } on TimeoutException {
       GlobalVariable.showLoader.value = false;
