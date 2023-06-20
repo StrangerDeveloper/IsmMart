@@ -101,7 +101,7 @@ class SellerHomeView extends GetView<SellersController> {
           ),
         ),
       ),
-    )
+    );
   }
 
   Widget _singleDrawerItem({icon, title, onTap}) {
