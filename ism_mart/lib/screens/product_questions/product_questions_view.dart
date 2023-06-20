@@ -8,6 +8,8 @@ import 'package:ism_mart/screens/product_questions/product_questions_viewmodel.d
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
 
+import '../../helper/validator.dart';
+
 class ProductQuestionsView extends StatelessWidget {
   ProductQuestionsView({Key? key}) : super(key: key);
 

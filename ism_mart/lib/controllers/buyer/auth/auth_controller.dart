@@ -7,6 +7,8 @@ import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
+import '../../../helper/permission_handler.dart';
+
 class AuthController extends GetxController {
   final AuthProvider authProvider;
 

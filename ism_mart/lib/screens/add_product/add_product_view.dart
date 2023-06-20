@@ -14,6 +14,8 @@ import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/loader_view.dart';
 import 'package:ism_mart/widgets/pick_image.dart';
 
+import '../../helper/validator.dart';
+
 class AddProductView extends StatelessWidget {
   AddProductView({Key? key}) : super(key: key);
   final AddProductViewModel viewModel = Get.put(AddProductViewModel());

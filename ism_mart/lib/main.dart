@@ -12,6 +12,7 @@ import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'api_helper/export_api_helper.dart';
+import 'helper/theme_helper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

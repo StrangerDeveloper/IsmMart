@@ -11,6 +11,8 @@ import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:iconly/iconly.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
+import '../helper/validator.dart';
+
 class SingleOrderDetailsUI extends GetView<OrderController> {
   const SingleOrderDetailsUI(
       {Key? key, this.orderModel, this.calledForBuyerOrderDetails})

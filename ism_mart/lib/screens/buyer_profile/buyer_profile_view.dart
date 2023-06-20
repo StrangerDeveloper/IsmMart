@@ -9,6 +9,8 @@ import 'package:ism_mart/widgets/loader_view.dart';
 import 'package:ism_mart/widgets/pick_image.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
+import '../../helper/validator.dart';
+
 class BuyerProfileView extends StatelessWidget {
   BuyerProfileView({Key? key}) : super(key: key);
   final BuyerProfileViewModel viewModel = Get.put(BuyerProfileViewModel());

@@ -8,6 +8,8 @@ import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/obscure_suffix_icon.dart';
 
+import '../../helper/validator.dart';
+
 class SignInView extends StatelessWidget {
   SignInView({Key? key}) : super(key: key);
   final SignInViewModel viewModel = Get.put(SignInViewModel());

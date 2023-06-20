@@ -7,6 +7,8 @@ import 'package:ism_mart/screens/vendor_question/vendor_question_viewmodel.dart'
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
 
+import '../../helper/validator.dart';
+
 class VendorQuestionView extends StatelessWidget {
   VendorQuestionView({Key? key}) : super(key: key);
   final VendorQuestionViewModel viewModel = Get.put(VendorQuestionViewModel());

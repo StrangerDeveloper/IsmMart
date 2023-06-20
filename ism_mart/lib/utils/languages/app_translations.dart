@@ -1,12 +1,16 @@
 import 'package:get/get.dart';
-import 'package:ism_mart/utils/exports_utils.dart';
-import 'package:ism_mart/utils/languages/dutch_german.dart';
-import 'package:ism_mart/utils/languages/french.dart';
-import 'package:ism_mart/utils/languages/italian.dart';
-import 'package:ism_mart/utils/languages/japanese.dart';
-import 'package:ism_mart/utils/languages/korean.dart';
-import 'package:ism_mart/utils/languages/spanish.dart';
-import 'package:ism_mart/utils/languages/turkish.dart';
+import 'arabic.dart';
+import 'chinese.dart';
+import 'dutch_german.dart';
+import 'english.dart';
+import 'french.dart';
+import 'italian.dart';
+import 'japanese.dart';
+import 'korean.dart';
+import 'russian.dart';
+import 'spanish.dart';
+import 'turkish.dart';
+import 'urdu.dart';
 
 class AppTranslations extends Translations {
   @override

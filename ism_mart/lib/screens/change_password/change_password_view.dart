@@ -7,6 +7,8 @@ import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/loader_view.dart';
 import 'package:ism_mart/widgets/obscure_suffix_icon.dart';
 
+import '../../helper/validator.dart';
+
 class ChangePasswordView extends StatelessWidget {
   ChangePasswordView({Key? key}) : super(key: key);
 
