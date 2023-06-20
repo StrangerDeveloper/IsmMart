@@ -6,7 +6,7 @@ import '../../helper/api_base_helper.dart';
 import '../../helper/global_variables.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import '../../models/user/user_model.dart';
-import '../../utils/exports_utils.dart';
+import '../../exports/exports_utils.dart';
 import '../change_address/change_address_viewmodel.dart';
 import '../checkout/checkout_viewmodel.dart';
 

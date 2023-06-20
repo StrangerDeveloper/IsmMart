@@ -1,4 +1,4 @@
-import 'package:ism_mart/models/exports_model.dart';
+import 'package:ism_mart/exports/exports_model.dart';
 
 
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
-import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/exports/exports_utils.dart';
 
 class NoDataFoundWithIcon extends StatelessWidget {
   const NoDataFoundWithIcon({Key? key, this.icon, this.title, this.subTitle, this.iconColor = kPrimaryColor})

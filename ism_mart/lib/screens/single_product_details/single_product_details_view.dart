@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 import 'package:ism_mart/helper/no_internet_view.dart';
-import 'package:ism_mart/models/exports_model.dart';
+import 'package:ism_mart/exports/exports_model.dart';
 import 'package:ism_mart/screens/cart/cart_viewmodel.dart';
 import 'package:ism_mart/screens/product_questions/product_questions_view.dart';
 import 'package:ism_mart/screens/single_product_details/single_product_details_viewmodel.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
-import 'package:ism_mart/widgets/export_widgets.dart';
-import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/exports/export_widgets.dart';
+import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class SingleProductDetailsView extends StatelessWidget {

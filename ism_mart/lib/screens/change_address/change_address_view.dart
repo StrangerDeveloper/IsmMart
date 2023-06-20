@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/screens/change_address/change_address_viewmodel.dart';
-import '../../utils/exports_utils.dart';
-import '../../widgets/export_widgets.dart';
+import '../../exports/exports_utils.dart';
+import '../../exports/export_widgets.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import '../../widgets/loader_view.dart';
 

@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/api_service.dart';
-import 'package:ism_mart/models/exports_model.dart';
+import 'package:ism_mart/exports/exports_model.dart';
 
 List<ProductModel> productModelFromJson(String str) => List<ProductModel>.from(
     json.decode(str).map((x) => ProductModel.fromJson(x)));

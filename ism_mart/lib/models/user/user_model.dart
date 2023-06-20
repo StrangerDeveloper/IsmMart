@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/api_service.dart';
-import 'package:ism_mart/models/exports_model.dart';
-import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/exports/exports_model.dart';
+import 'package:ism_mart/exports/exports_utils.dart';
 
 List<UserModel> userModelFromJson(String str) =>
     List<UserModel>.from(json.decode(str).map((x) => UserModel.fromJson(x)));

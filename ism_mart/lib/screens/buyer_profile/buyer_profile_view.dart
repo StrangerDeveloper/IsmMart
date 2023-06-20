@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/helper/no_internet_view.dart';
 import 'package:ism_mart/screens/buyer_profile/buyer_profile_viewmodel.dart';
-import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
 import 'package:ism_mart/widgets/pick_image.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;

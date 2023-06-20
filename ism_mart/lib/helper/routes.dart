@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:ism_mart/controllers/export_controllers.dart';
+import 'package:ism_mart/exports/export_controllers.dart';
 import 'package:ism_mart/exports/exports_ui.dart';
 import 'package:ism_mart/screens/add_update_address/add_update_address_view.dart';
 import 'package:ism_mart/screens/all_dispute/all_dispute_view.dart';

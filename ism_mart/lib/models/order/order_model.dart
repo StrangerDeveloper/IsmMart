@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:ism_mart/api_helper/api_service.dart';
-import 'package:ism_mart/models/exports_model.dart';
+import 'package:ism_mart/exports/exports_model.dart';
 
 List<OrderModel> orderModelFromJson(String str) =>
     List<OrderModel>.from(json.decode(str).map((x) => OrderModel.fromJson(x)));

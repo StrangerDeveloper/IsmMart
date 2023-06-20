@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:io';
 import 'package:http_parser/src/media_type.dart';
-import 'package:ism_mart/api_helper/export_api_helper.dart';
+import 'package:ism_mart/exports/export_api_helper.dart';
 import 'package:ism_mart/screens/my_products/my_products_viewmodel.dart';
 import '../../helper/api_base_helper.dart';
 import '../../helper/global_variables.dart';

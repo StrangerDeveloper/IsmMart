@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:ism_mart/api_helper/export_api_helper.dart';
-import 'package:ism_mart/controllers/export_controllers.dart';
+import 'package:ism_mart/exports/export_api_helper.dart';
+import 'package:ism_mart/exports/export_controllers.dart';
 
 class OrdersBindings extends Bindings{
   @override
