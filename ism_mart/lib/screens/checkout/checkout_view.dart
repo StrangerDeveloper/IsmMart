@@ -8,6 +8,7 @@ import 'package:ism_mart/screens/checkout/checkout_viewmodel.dart';
 import 'package:ism_mart/screens/payment/payment_view.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/widgets/custom_appbar.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
 
 class CheckoutView extends StatelessWidget {
@@ -21,7 +22,7 @@ class CheckoutView extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.grey[100]!,
-        appBar: _appBar(),
+        appBar: CustomAppBar(title: langKey.checkout.tr),
         body: Stack(
           children: [
             SingleChildScrollView(
@@ -69,22 +70,6 @@ class CheckoutView extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-
-  AppBar _appBar() {
-    return AppBar(
-      elevation: 0,
-      backgroundColor: kAppBarColor,
-      leading: InkWell(
-        onTap: () => Get.back(),
-        child: Icon(
-          Icons.arrow_back_ios_new,
-          size: 18,
-          color: kPrimaryColor,
-        ),
-      ),
-      title: CustomText(title: langKey.checkout.tr, style: appBarTitleSize),
     );
   }
 

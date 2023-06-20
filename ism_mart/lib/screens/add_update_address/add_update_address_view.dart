@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/screens/add_update_address/add_update_address_viewmodel.dart';
+import 'package:ism_mart/widgets/custom_appbar.dart';
 import '../../controllers/controllers.dart';
 import '../../models/user/country_city_model.dart';
 import '../../utils/exports_utils.dart';
@@ -20,7 +21,11 @@ class AddUpdateAddressView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: appBar(),
+        appBar: CustomAppBar(
+          title: viewModel.isUpdateScreen
+              ? langKey.updateShippingAdd.tr
+              : langKey.addShippingAdd.tr,
+        ),
         body: Stack(
           children: [
             SingleChildScrollView(

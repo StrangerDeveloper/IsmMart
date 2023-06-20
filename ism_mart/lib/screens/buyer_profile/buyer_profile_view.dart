@@ -5,6 +5,7 @@ import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/helper/no_internet_view.dart';
 import 'package:ism_mart/screens/buyer_profile/buyer_profile_viewmodel.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/widgets/custom_appbar.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
 import 'package:ism_mart/widgets/pick_image.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
@@ -17,7 +18,7 @@ class BuyerProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: appBar(),
+      appBar: CustomAppBar(title: profile.tr,),
       body: Stack(
         children: [
           SingleChildScrollView(
@@ -49,24 +50,7 @@ class BuyerProfileView extends StatelessWidget {
     );
   }
 
-  AppBar appBar() {
-    return AppBar(
-      backgroundColor: kAppBarColor,
-      leading: InkWell(
-        onTap: () => Get.back(),
-        child: Icon(
-          Icons.arrow_back_ios_new,
-          size: 18,
-          color: kPrimaryColor,
-        ),
-      ),
-      title: CustomText(title: profile.tr, style: appBarTitleSize),
-    );
-  }
-
-  Widget profileImage() {
-    print(viewModel.imageFile.value?.path);
-    print(viewModel.buyerProfileNewModel.value.image);
+  Stack profileImage() {
     return Stack(
       children: [
         Obx(
@@ -140,7 +124,7 @@ class BuyerProfileView extends StatelessWidget {
     );
   }
 
-  Widget firstNameTextField() {
+  Padding firstNameTextField() {
     return Padding(
       padding: const EdgeInsets.only(top: 30, bottom: 20),
       child: CustomTextField2(
@@ -154,7 +138,7 @@ class BuyerProfileView extends StatelessWidget {
     );
   }
 
-  Widget lastNameTextField() {
+  CustomTextField2 lastNameTextField() {
     return CustomTextField2(
       label: langKey.lastName.tr,
       controller: viewModel.lastNameController,
@@ -165,7 +149,7 @@ class BuyerProfileView extends StatelessWidget {
     );
   }
 
-  Widget phoneTextField() {
+  Padding phoneTextField() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: CustomTextField2(
@@ -181,7 +165,7 @@ class BuyerProfileView extends StatelessWidget {
     );
   }
 
-  Widget addressTextField() {
+  CustomTextField2 addressTextField() {
     return CustomTextField2(
       label: langKey.address.tr,
       controller: viewModel.addressController,
@@ -192,7 +176,7 @@ class BuyerProfileView extends StatelessWidget {
     );
   }
 
-  Widget updateBtn() {
+  Row updateBtn() {
     return Row(
       children: [
         Expanded(

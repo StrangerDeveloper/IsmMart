@@ -12,35 +12,28 @@ class SellerHomeView extends GetView<SellersController> {
   @override
   Widget build(BuildContext context) {
     return Obx(() => Scaffold(
-        appBar: _buildAppBar(),
-        //   elevation: 0,
-        //   title: Obx(
-        //     () => CustomText(
-        //         title: controller.appBarTitle.value.tr, style: appBarTitleSize),
-        //   ),
-        //   iconTheme: IconThemeData(color: kPrimaryColor),
-        //   centerTitle: true,
-        //   backgroundColor: kAppBarColor,
-        //   actions: [
-        //     InkWell(
-        //       onTap: () async {
-        //         controller.clearControllers();
-        //         BaseController baseController = Get.find<BaseController>();
-        //         await baseController.fetchProducts();
-        //         await baseController.fetchProductsByTypes();
-        //         Get.back();
-        //         //baseController.changePage(0);
-        //       },
-        //       child: Padding(
-        //         padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        //         child: Icon(
-        //           IconlyLight.logout,
-        //           color: kRedColor,
-        //         ),
-        //       ),
-        //     ),
-        //   ],
-        // ),
+        appBar: CustomAppBar(
+          title: controller.appBarTitle.value.tr,
+          onTap: ()async{
+            controller.clearControllers();
+            BaseController baseController = Get.find<BaseController>();
+            await baseController.fetchProducts();
+            await baseController.fetchProductsByTypes();
+            Get.back();
+          },
+          actionItem: InkWell(
+            onTap: (){
+              Get.back();
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Icon(
+                IconlyLight.logout,
+                color: kRedColor,
+              ),
+            ),
+          ),
+        ),
       body: PageView(
           controller: controller.pageViewController,
           physics: const NeverScrollableScrollPhysics(),
@@ -106,23 +99,6 @@ class SellerHomeView extends GetView<SellersController> {
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  _buildAppBar(){
-    return CustomAppBar(
-      barTitle: controller.appBarTitle.value.tr,
-      onTap: ()async{
-        controller.clearControllers();
-        BaseController baseController = Get.find<BaseController>();
-        await baseController.fetchProducts();
-        await baseController.fetchProductsByTypes();
-        Get.back();
-      },
-      actionIcon: Icon(
-        IconlyLight.logout,
-        color: kRedColor,
       ),
     );
   }

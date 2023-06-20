@@ -6,6 +6,7 @@ import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/screens/forgot_password2/forgot_password2_viewmodel.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/widgets/custom_appbar.dart';
 import 'package:ism_mart/widgets/obscure_suffix_icon.dart';
 
 class ForgotPassword2View extends GetView<AuthController> {
@@ -17,7 +18,8 @@ class ForgotPassword2View extends GetView<AuthController> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: appBar(),
+        appBar: CustomAppBar(),
+        // appBar(),
         body: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
           child: Form(

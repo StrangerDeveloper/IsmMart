@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ism_mart/screens/dispute_detail/dispute_detail_viewmodel.dart';
+import 'package:ism_mart/widgets/custom_appbar.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
 import 'package:ism_mart/helper/constants.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -15,7 +16,10 @@ class DisputeDetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(),
+      appBar: CustomAppBar(
+        title: langKey.disputeDetail.tr,
+      ),
+      // appBar(),
       body: Stack(
         children: [
           SingleChildScrollView(
@@ -90,28 +94,7 @@ class DisputeDetailView extends StatelessWidget {
     );
   }
 
-  PreferredSizeWidget appBar() {
-    return AppBar(
-      title: Text(
-        langKey.disputeDetail.tr,
-        style: appBarTitleSize,
-      ),
-      backgroundColor: Colors.white,
-      centerTitle: true,
-      leading: IconButton(
-        onPressed: () {
-          Get.back();
-        },
-        icon: Icon(
-          Icons.arrow_back_ios_new,
-          size: 18,
-          color: kPrimaryColor,
-        ),
-      ),
-    );
-  }
-
-  Widget titleItem(String value) {
+  Text titleItem(String value) {
     return Text(
       value,
       style: GoogleFonts.lato(
@@ -122,7 +105,7 @@ class DisputeDetailView extends StatelessWidget {
     );
   }
 
-  Widget valueItem(String value) {
+  Padding valueItem(String value) {
     return Padding(
       padding: const EdgeInsets.only(top: 3, bottom: 10),
       child: Text(
@@ -181,7 +164,7 @@ class DisputeDetailView extends StatelessWidget {
     );
   }
 
-  Widget carouselImage(int index) {
+  CachedNetworkImage carouselImage(int index) {
     return CachedNetworkImage(
       width: double.infinity,
       imageUrl:

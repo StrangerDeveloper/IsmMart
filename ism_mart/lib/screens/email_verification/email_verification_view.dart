@@ -5,6 +5,7 @@ import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/helper/constants.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/widgets/custom_appbar.dart';
 
 class EmailVerificationView extends GetView<AuthController> {
   EmailVerificationView({Key? key}) : super(key: key);
@@ -13,7 +14,7 @@ class EmailVerificationView extends GetView<AuthController> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: appBar(),
+        appBar: CustomAppBar(),
         body: SingleChildScrollView(
           padding: EdgeInsets.fromLTRB(16, 0, 16, 16),
           child: Column(

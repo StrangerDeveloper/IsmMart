@@ -85,7 +85,7 @@ class English {
         key.minPriceShouldNotBe:
             'Min. Price should not be greater than Max. price!',
         key.plzSelectCountry: 'Please select country and city',
-        key.shippingAddressDetail: 'Shipping address details',
+        key.shippingAddressDetail: 'Shipping Address Details',
         key.cashOnDelivery: 'Cash On Delivery (Not Available)',
         key.creditCard: 'Credit Card',
         key.wantToRedeem: 'Want to redeem',

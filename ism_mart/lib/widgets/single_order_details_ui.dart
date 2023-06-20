@@ -10,6 +10,7 @@ import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:iconly/iconly.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/widgets/custom_sliver_appbar.dart';
 
 class SingleOrderDetailsUI extends GetView<OrderController> {
   const SingleOrderDetailsUI(
@@ -74,7 +75,7 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
       //backgroundColor: Colors.grey[300]!,
       body: CustomScrollView(
         slivers: [
-          _sliverAppBar(),
+          CustomSliverAppBar(title: langKey.orderDetail.tr,),
           SliverList(
             delegate: SliverChildListDelegate(
               [
@@ -174,33 +175,33 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
     );
   }
 
-  SliverAppBar _sliverAppBar() {
-    return SliverAppBar(
-      backgroundColor: kAppBarColor,
-      automaticallyImplyLeading: true,
-      leadingWidth: 30,
-      floating: true,
-      pinned: true,
-      //centerTitle: true,
-      leading: InkWell(
-        onTap: () => Get.back(),
-        child: Icon(
-          Icons.arrow_back_ios_new,
-          size: 18,
-          color: kPrimaryColor,
-        ),
-      ),
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          CustomText(
-              title: "${langKey.orderDetail.tr}", style: appBarTitleSize),
-          buildSvgLogo(),
-        ],
-      ),
-    );
-  }
+  // SliverAppBar _sliverAppBar() {
+  //   return SliverAppBar(
+  //     backgroundColor: kAppBarColor,
+  //     automaticallyImplyLeading: true,
+  //     leadingWidth: 30,
+  //     floating: true,
+  //     pinned: true,
+  //     //centerTitle: true,
+  //     leading: InkWell(
+  //       onTap: () => Get.back(),
+  //       child: Icon(
+  //         Icons.arrow_back_ios_new,
+  //         size: 18,
+  //         color: kPrimaryColor,
+  //       ),
+  //     ),
+  //     title: Row(
+  //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //       crossAxisAlignment: CrossAxisAlignment.center,
+  //       children: [
+  //         CustomText(
+  //             title: "${langKey.orderDetail.tr}", style: appBarTitleSize),
+  //         buildSvgLogo(),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   String getAddress({UserModel? model}) {
     return "${model?.name ?? null}\n ${model?.phone ?? null}\n ${model?.address ?? ""}, ${model?.zipCode ?? null}\n ${model?.city?.name ?? null}, ${model?.country?.name ?? null}";

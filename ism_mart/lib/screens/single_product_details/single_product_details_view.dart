@@ -11,6 +11,8 @@ import 'package:ism_mart/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
+import '../../widgets/custom_appbar.dart';
+
 class SingleProductDetailsView extends StatelessWidget {
   SingleProductDetailsView({super.key});
 
@@ -35,7 +37,29 @@ class SingleProductDetailsView extends StatelessWidget {
                     ),
               )
             : Scaffold(
-                appBar: _appBar(),
+                appBar: CustomAppBar(
+                  title: langKey.productDetails.tr,
+                  actionItem: Get.arguments[0]["calledFor"] != 'customer' ?
+                    Align(
+                      alignment: Alignment.center,
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 12.0),
+                        child: CartIcon(
+                          onTap: () {
+                            Get.offNamed(Routes.cartRoute,
+                                arguments: {"calledFromSPV": true},
+                                preventDuplicates: true);
+                          },
+                          iconWidget: Icon(
+                            IconlyLight.buy,
+                            size: 25,
+                            color: kPrimaryColor,
+                          ),
+                        ),
+                      ),
+                    ) : null,
+                ),
+                // _appBar(),
                 backgroundColor: Colors.grey[300]!,
                 resizeToAvoidBottomInset: true,
                 body: Stack(
@@ -82,45 +106,45 @@ class SingleProductDetailsView extends StatelessWidget {
               )));
   }
 
-  AppBar _appBar() {
-    return AppBar(
-        actions: Get.arguments[0]["calledFor"] == 'customer'
-            ? [
-                Align(
-                  alignment: Alignment.center,
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 12.0),
-                    child: CartIcon(
-                      onTap: () {
-                        Get.offNamed(Routes.cartRoute,
-                            arguments: {"calledFromSPV": true},
-                            preventDuplicates: false);
-                      },
-                      iconWidget: Icon(
-                        IconlyLight.buy,
-                        size: 25,
-                        color: kPrimaryColor,
-                      ),
-                    ),
-                  ),
-                ),
-              ]
-            : null,
-        backgroundColor: kAppBarColor,
-        centerTitle: true,
-        leading: InkWell(
-          onTap: () => Get.back(),
-          child: Icon(
-            Icons.arrow_back_ios_new,
-            size: 21,
-            color: kPrimaryColor,
-          ),
-        ),
-        title: CustomText(
-          title: langKey.productDetails.tr,
-          style: appBarTitleSize.copyWith(fontSize: 18),
-        ));
-  }
+  // AppBar _appBar() {
+  //   return AppBar(
+  //       actions: Get.arguments[0]["calledFor"] == 'customer'
+  //           ? [
+  //               Align(
+  //                 alignment: Alignment.center,
+  //                 child: Padding(
+  //                   padding: const EdgeInsets.only(right: 12.0),
+  //                   child: CartIcon(
+  //                     onTap: () {
+  //                       Get.offNamed(Routes.cartRoute,
+  //                           arguments: {"calledFromSPV": true},
+  //                           preventDuplicates: false);
+  //                     },
+  //                     iconWidget: Icon(
+  //                       IconlyLight.buy,
+  //                       size: 25,
+  //                       color: kPrimaryColor,
+  //                     ),
+  //                   ),
+  //                 ),
+  //               ),
+  //             ]
+  //           : null,
+  //       backgroundColor: kAppBarColor,
+  //       centerTitle: true,
+  //       leading: InkWell(
+  //         onTap: () => Get.back(),
+  //         child: Icon(
+  //           Icons.arrow_back_ios_new,
+  //           size: 21,
+  //           color: kPrimaryColor,
+  //         ),
+  //       ),
+  //       title: CustomText(
+  //         title: langKey.productDetails.tr,
+  //         style: appBarTitleSize.copyWith(fontSize: 18),
+  //       ));
+  // }
 
   // SliverAppBar _sliverAppBar(ProductModel productModel) {
   //   return SliverAppBar(

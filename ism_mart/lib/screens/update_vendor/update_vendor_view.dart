@@ -7,6 +7,7 @@ import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/screens/update_vendor/update_vendor_viewmodel.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/widgets/custom_appbar.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
 import 'package:ism_mart/widgets/pick_image.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
@@ -19,7 +20,9 @@ class UpdateVendorView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(),
+      appBar: CustomAppBar(title: viewModel.isRegisterScreen
+          ? langKey.vendorRegistration.tr
+          : langKey.updateVendorDetails.tr,),
       body: Stack(
         children: [
           SingleChildScrollView(
@@ -63,28 +66,6 @@ class UpdateVendorView extends StatelessWidget {
           ),
           LoaderView(),
         ],
-      ),
-    );
-  }
-
-  PreferredSizeWidget appBar() {
-    return AppBar(
-      backgroundColor: kAppBarColor,
-      leading: IconButton(
-        onPressed: () {
-          Get.back();
-        },
-        icon: Icon(
-          Icons.arrow_back_ios_new,
-          size: 18,
-          color: kPrimaryColor,
-        ),
-      ),
-      title: CustomText(
-        title: viewModel.isRegisterScreen
-            ? langKey.vendorRegistration.tr
-            : langKey.updateVendorDetails.tr,
-        style: appBarTitleSize,
       ),
     );
   }

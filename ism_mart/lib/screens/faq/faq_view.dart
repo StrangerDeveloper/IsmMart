@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:ism_mart/controllers/buyer/base_controller.dart';
 import 'package:ism_mart/screens/faq/faq_viewmodel.dart';
 import 'package:ism_mart/helper/constants.dart';
+import 'package:ism_mart/widgets/custom_appbar.dart';
 import 'package:ism_mart/widgets/custom_text.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/loader_view.dart';
@@ -15,7 +16,8 @@ class FaqView extends GetView<BaseController> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: appBar(),
+        appBar: CustomAppBar(title: langKey.faqs.tr,),
+        // appBar(),
         body: Stack(
           children: [
             Column(

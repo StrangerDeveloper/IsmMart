@@ -6,6 +6,7 @@ import 'package:ism_mart/helper/no_internet_view.dart';
 import 'package:ism_mart/screens/buyer_orders/buyer_order_viewmodel.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/widgets/custom_appbar.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
 
 enum AppBarMenuNames { disputes }
@@ -19,7 +20,12 @@ class BuyerOrderView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: appBar(),
+        appBar: CustomAppBar(
+          title: langKey.userOrders.tr,
+          actionItem: appBarPopupMenu(),
+
+        ),
+        // appBar(),
         backgroundColor: Colors.grey[100]!,
         body: Stack(
           children: [

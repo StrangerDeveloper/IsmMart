@@ -6,6 +6,7 @@ import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/screens/cart/cart_viewmodel.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/widgets/custom_appbar.dart';
 
 class CartView extends StatelessWidget {
   CartView({Key? key}) : super(key: key);
@@ -17,7 +18,14 @@ class CartView extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.grey[100]!,
-        appBar: _appBar(),
+        appBar: CustomAppBar(
+          title: langKey.myCart.tr,
+          leading: Get.arguments != null && Get.arguments["calledFromSPV"] ?
+          null : Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 5.0),
+            child: buildSvgLogo(),
+          ),
+        ),
         body: Obx(() => viewModel.cartItemsList.isEmpty ? Center(
           child: NoDataFoundWithIcon(
             icon: IconlyLight.buy,
@@ -32,33 +40,6 @@ class CartView extends StatelessWidget {
         bottomNavigationBar: viewModel.cartItemsList.isEmpty ? null : _checkOutBottomBar(),
         ),
       );
-  }
-
-  AppBar _appBar(){
-    return AppBar(
-      backgroundColor: kAppBarColor,
-      automaticallyImplyLeading: false,
-      leading: (Get.arguments != null && Get.arguments["calledFromSPV"]) ?
-      InkWell(
-        onTap: () => Get.back(),
-        child: Icon(
-          Icons.arrow_back_ios_new,
-          size: 18,
-          color: kPrimaryColor,
-        ),
-      ) : null,
-      title: Row(
-        children: [
-          buildSvgLogo(),
-          AppConstant.spaceWidget(width: 10),
-          CustomText(
-            title: langKey.myCart.tr,
-            style: appBarTitleSize,
-            //style: textTheme.headline6!.copyWith(color: kWhiteColor),
-          ),
-        ],
-      ),
-    );
   }
 
   Widget _buildCartItemSection() {

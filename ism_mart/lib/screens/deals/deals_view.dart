@@ -3,12 +3,11 @@ import 'package:get/get.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/helper/no_internet_view.dart';
 import 'package:ism_mart/screens/deals/deals_viewmodel.dart';
+import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
-import '../../controllers/controllers.dart';
+import 'package:ism_mart/widgets/custom_appbar.dart';
 import '../categories/model/category_model.dart';
 import '../../models/product/product_model.dart';
-import '../../helper/constants.dart';
-import '../../helper/responsiveness.dart';
 import '../../widgets/loader_view.dart';
 
 class DealsView extends StatelessWidget {
@@ -20,9 +19,13 @@ class DealsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        // appBar: _appBar(),
-        body: Obx(() =>
-        viewModel.noProductsFound.value ?
+        appBar: CustomAppBar(
+          leading: buildSvgLogo(),
+          searchBar: CustomSearchBar(
+            searchText: "",
+          ),
+        ),
+        body: Obx(() => viewModel.noProductsFound.value ?
         Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -55,11 +58,6 @@ class DealsView extends StatelessWidget {
               ))
             ],
           ),
-          // NoInternetView(
-          // onPressed: () {
-          //   viewModel.addFilters();
-          //   },
-          // ),
         ) : Stack(
           children: [
             Column(
@@ -69,70 +67,45 @@ class DealsView extends StatelessWidget {
                   child: Container(
                     height: AppConstant
                         .getSize()
-                        .height * 0.05,
+                        .height * 0.04,
                     color: kWhiteColor,
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Row(
                       children: [
-                        Expanded(
-                          flex: 2,
-                          child: CustomText(
-                            title:
-                            "${viewModel.productList.length} ${langKey
-                                .itemsFound.tr}",
-                            weight: FontWeight.w600,
-                          ),
+                        CustomText(
+                          title:
+                          "${viewModel.productList.length} ${langKey
+                              .itemsFound.tr}",
+                          weight: FontWeight.w600,
                         ),
-                        Expanded(
-                          flex: 4,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              TextButton.icon(
-                                onPressed: () {
-                                  viewModel.setCategories(baseController.categories);
-                                  showFilterBottomSheet();
-                                },
-                                icon: Icon(
-                                  Icons.filter_alt_rounded,
-                                  color: kPrimaryColor,
-                                ),
-                                label: CustomText(
-                                  title: langKey.filter.tr,
-                                  color: kPrimaryColor,
-                                  weight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                        // Expanded(
+                        //   flex: 4,
+                        //   child: Row(
+                        //     mainAxisAlignment: MainAxisAlignment.end,
+                        //     children: [
+                        //       TextButton.icon(
+                        //         onPressed: () {
+                        //           viewModel.setCategories(baseController.categories);
+                        //           showFilterBottomSheet();
+                        //         },
+                        //         icon: Icon(
+                        //           Icons.filter_alt_rounded,
+                        //           color: kPrimaryColor,
+                        //         ),
+                        //         label: CustomText(
+                        //           title: langKey.filter.tr,
+                        //           color: kPrimaryColor,
+                        //           weight: FontWeight.bold,
+                        //         ),
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),
                 ),
                 // AppConstant.spaceWidget(height: 13),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 6.0, horizontal: 4),
-                    child: Visibility(
-                        child: viewModel.searchEnabled.value ? TextButton(
-                          onPressed: () {
-                            viewModel.filters.remove('text');
-                            viewModel.searchTextController.clear();
-                            viewModel.searchEnabled.value = false;
-                            viewModel.addFilters();
-                          },
-                          child: Text(
-                            'Clear Search',
-                            style: TextStyle(
-                                color: kPrimaryColor,
-                                fontWeight: FontWeight.bold,
-                                decoration: TextDecoration.underline
-                            ),
-                          ),
-                        ),
                         Expanded(
                           child: GridView.builder(
                             padding: EdgeInsets.all(8),
@@ -178,79 +151,79 @@ class DealsView extends StatelessWidget {
     );
   }
 
-  AppBar _appBar() {
-    return AppBar(
-      backgroundColor: kAppBarColor,
-      elevation: 0,
-      automaticallyImplyLeading: false,
-      leadingWidth: 40,
-      leading: InkWell(
-        onTap: () {
-          baseController.changePage(0);
-          viewModel.productList.clear();
-          viewModel.page = 1;
-          viewModel.limit.value = 15;
-          viewModel.searchTextController.clear();
-        },
-        child: Icon(
-          Icons.arrow_back_ios_new,
-          size: 18,
-          color: kPrimaryColor,
-        ),
-      ),
-      title: Container(
-        height: 36,
-        child: TextField(
-          controller: viewModel.searchTextController,
-          textInputAction: TextInputAction.search,
-          onSubmitted: (value) {
-            viewModel.filters.clear();
-            viewModel.page = 1;
-            viewModel.unselectCategory();
-            viewModel.url =
-                'filter?type=Discounts&limit=${viewModel.limit}&page=${viewModel.page}&';
-            viewModel.filters.addAll({'text': value});
-            viewModel.searchProducts(value);
-          },
-          cursorColor: kPrimaryColor,
-          autofocus: false,
-          maxLines: 1,
-          style: TextStyle(
-            color: kLightColor,
-            fontWeight: FontWeight.w600,
-            fontSize: 15.0,
-          ),
-          textAlignVertical: TextAlignVertical.center,
-          decoration: InputDecoration(
-            filled: true,
-            prefixIcon: Icon(Icons.search, color: kPrimaryColor),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: kLightGreyColor,
-                width: 0.5,
-              ), //BorderSide.none,
-              borderRadius: BorderRadius.all(Radius.circular(8)),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: kLightGreyColor,
-                width: 0.5,
-              ), //BorderSide.none,
-              borderRadius: BorderRadius.all(Radius.circular(8)),
-            ),
-            fillColor: kWhiteColor,
-            contentPadding: EdgeInsets.zero,
-            hintText: langKey.searchIn.tr,
-            hintStyle: TextStyle(
-              color: kLightColor,
-              fontWeight: FontWeight.w600,
-              fontSize: 13.0,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+  // AppBar _appBar() {
+  //   return AppBar(
+  //     backgroundColor: kAppBarColor,
+  //     elevation: 0,
+  //     automaticallyImplyLeading: false,
+  //     leadingWidth: 40,
+  //     leading: InkWell(
+  //       onTap: () {
+  //         baseController.changePage(0);
+  //         viewModel.productList.clear();
+  //         viewModel.page = 1;
+  //         viewModel.limit.value = 15;
+  //         viewModel.searchTextController.clear();
+  //       },
+  //       child: Icon(
+  //         Icons.arrow_back_ios_new,
+  //         size: 18,
+  //         color: kPrimaryColor,
+  //       ),
+  //     ),
+  //     title: Container(
+  //       height: 36,
+  //       child: TextField(
+  //         controller: viewModel.searchTextController,
+  //         textInputAction: TextInputAction.search,
+  //         onSubmitted: (value) {
+  //           viewModel.filters.clear();
+  //           viewModel.page = 1;
+  //           viewModel.unselectCategory();
+  //           viewModel.url =
+  //               'filter?type=Discounts&limit=${viewModel.limit}&page=${viewModel.page}&';
+  //           viewModel.filters.addAll({'text': value});
+  //           viewModel.searchProducts(value);
+  //         },
+  //         cursorColor: kPrimaryColor,
+  //         autofocus: false,
+  //         maxLines: 1,
+  //         style: TextStyle(
+  //           color: kLightColor,
+  //           fontWeight: FontWeight.w600,
+  //           fontSize: 15.0,
+  //         ),
+  //         textAlignVertical: TextAlignVertical.center,
+  //         decoration: InputDecoration(
+  //           filled: true,
+  //           prefixIcon: Icon(Icons.search, color: kPrimaryColor),
+  //           enabledBorder: OutlineInputBorder(
+  //             borderSide: BorderSide(
+  //               color: kLightGreyColor,
+  //               width: 0.5,
+  //             ), //BorderSide.none,
+  //             borderRadius: BorderRadius.all(Radius.circular(8)),
+  //           ),
+  //           focusedBorder: OutlineInputBorder(
+  //             borderSide: BorderSide(
+  //               color: kLightGreyColor,
+  //               width: 0.5,
+  //             ), //BorderSide.none,
+  //             borderRadius: BorderRadius.all(Radius.circular(8)),
+  //           ),
+  //           fillColor: kWhiteColor,
+  //           contentPadding: EdgeInsets.zero,
+  //           hintText: langKey.searchIn.tr,
+  //           hintStyle: TextStyle(
+  //             color: kLightColor,
+  //             fontWeight: FontWeight.w600,
+  //             fontSize: 13.0,
+  //           ),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   void showFilterBottomSheet() {
     AppConstant.showBottomSheet(

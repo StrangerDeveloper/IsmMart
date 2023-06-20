@@ -6,6 +6,7 @@ import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/screens/update_products/update_product_viewmodel.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/widgets/custom_appbar.dart';
 import 'package:ism_mart/widgets/pick_image.dart';
 import '../../widgets/loader_view.dart';
 import '../../widgets/single_image_view.dart';
@@ -19,7 +20,7 @@ class UpdateProductView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-          appBar: _appBar(),
+          appBar: CustomAppBar(title: langKey.updateProduct.tr,),
           body: Stack(
             children: [
               AppConstant.spaceWidget(height: 20),
@@ -63,24 +64,6 @@ class UpdateProductView extends StatelessWidget {
             ],
           ),
         ));
-  }
-
-  AppBar _appBar(){
-    return AppBar(
-      centerTitle: true,
-      leading: CustomActionIcon(
-        icon: Icons.arrow_back_ios,
-        size: 23,
-        iconColor: kPrimaryColor,
-        onTap: (){
-          Get.back();
-        },
-      ),
-      title: CustomText(
-        title: langKey.updateProduct.tr,
-        style: headline2,
-      ),
-    );
   }
 
   Padding productPriceField(){

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/screens/change_address/change_address_viewmodel.dart';
+import 'package:ism_mart/widgets/custom_appbar.dart';
 import '../../utils/exports_utils.dart';
 import '../../widgets/export_widgets.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
@@ -15,7 +16,10 @@ class ChangeAddressView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: appBar(),
+        appBar: CustomAppBar(
+          title: langKey.shippingAddressDetail.tr,
+        ),
+        // appBar(),
         body: Stack(
           children: [
             Column(

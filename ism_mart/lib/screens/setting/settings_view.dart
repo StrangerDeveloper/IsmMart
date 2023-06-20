@@ -9,6 +9,7 @@ import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/screens/setting/settings_viewmodel.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/widgets/custom_sliver_appbar.dart';
 
 class SettingsView extends StatelessWidget {
   SettingsView({Key? key}) : super(key: key);
@@ -20,12 +21,12 @@ class SettingsView extends StatelessWidget {
       child: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [
-            SliverAppBar(
+            CustomSliverAppBar(
+              leading: Container(),
               expandedHeight: 100.0,
               floating: false,
               pinned: true,
-              backgroundColor: kAppBarColor,
-              flexibleSpace: FlexibleSpaceBar(
+              flexibleSpaceBar: FlexibleSpaceBar(
                 centerTitle: false,
                 titlePadding: const EdgeInsets.symmetric(horizontal: 16),
                 title: Text(

@@ -5,8 +5,10 @@ import 'package:ism_mart/screens/contact_us/contact_us_viewmodel.dart';
 import 'package:ism_mart/helper/constants.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart';
 import 'package:ism_mart/helper/validator.dart';
+import 'package:ism_mart/widgets/custom_appbar.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
 import 'package:ism_mart/widgets/no_internet_view.dart';
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class ContactUsView extends StatelessWidget {
   ContactUsView({Key? key}) : super(key: key);
@@ -15,7 +17,10 @@ class ContactUsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(),
+      appBar: CustomAppBar(
+        title: langKey.contactUs.tr,
+      ),
+      // appBar(),
       body: Stack(
         children: [
           SingleChildScrollView(
@@ -37,24 +42,7 @@ class ContactUsView extends StatelessWidget {
     );
   }
 
-  PreferredSizeWidget appBar() {
-    return AppBar(
-      backgroundColor: kAppBarColor,
-      leading: IconButton(
-        onPressed: () {
-          Get.back();
-        },
-        icon: Icon(
-          Icons.arrow_back_ios_new,
-          size: 18,
-          color: kPrimaryColor,
-        ),
-      ),
-      title: CustomText(title: 'Contact Us', style: appBarTitleSize),
-    );
-  }
-
-  Widget contactDetail() {
+  Column contactDetail() {
     return Column(
       children: viewModel
           .getContactUsData()
@@ -108,7 +96,7 @@ class ContactUsView extends StatelessWidget {
     );
   }
 
-  Widget contactUsForm() {
+  Container contactUsForm() {
     return Container(
       margin: EdgeInsets.only(bottom: 15, top: 15),
       padding: EdgeInsets.all(15),

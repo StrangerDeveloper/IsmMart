@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/screens/payment/payment_viewmodel.dart';
-import 'package:ism_mart/helper/constants.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/widgets/custom_appbar.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class PaymentView extends StatelessWidget {
@@ -21,26 +20,10 @@ class PaymentView extends StatelessWidget {
     viewModel.amount!(amount);
     return Scaffold(
       backgroundColor: Colors.grey[100]!,
-      appBar: _appBar(),
+      appBar: CustomAppBar(title: langKey.checkout.tr,),
       body: WebViewWidget(
         controller: viewModel.webViewController,
       ),
     );
   }
-}
-
-AppBar _appBar() {
-  return AppBar(
-    elevation: 0,
-    backgroundColor: kAppBarColor,
-    leading: InkWell(
-      onTap: () => Get.back(),
-      child: Icon(
-        Icons.arrow_back_ios_new,
-        size: 18,
-        color: kPrimaryColor,
-      ),
-    ),
-    title: CustomText(title: langKey.checkout.tr, style: appBarTitleSize),
-  );
 }
