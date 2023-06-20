@@ -42,7 +42,7 @@ class CategoriesView extends GetView<CategoryController> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.grey[100]!,
-        appBar: _appBar(),
+        // appBar: _appBar(),
         body: Padding(
           padding: const EdgeInsets.only(left: 8, right: 8, top: 8),
           child: Column(

@@ -33,7 +33,7 @@ class DashboardView extends GetView<BaseController> {
         children: [
           CustomScrollView(
             slivers: [
-              _sliverAppBar(),
+              // _sliverAppBar(),
               SliverList(
                 delegate: SliverChildListDelegate(
                   [

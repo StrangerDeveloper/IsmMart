@@ -7,6 +7,8 @@ import 'package:ism_mart/widgets/export_widgets.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
+import '../../widgets/custom_search_bar.dart';
+
 class BottomNavigationView extends GetView<BaseController> {
   const BottomNavigationView({Key? key}) : super(key: key);
 
@@ -16,24 +18,47 @@ class BottomNavigationView extends GetView<BaseController> {
       onWillPop: () {
         return controller.onBackPressed(context);
       },
-      child: Scaffold(
-        extendBodyBehindAppBar: true,
-        body: PageView(
-          controller: controller.bottomNavPageController,
-          physics: const NeverScrollableScrollPhysics(),
-          children: [...controller.bottomNavScreens],
+      child: Obx(() => Scaffold(
+          appBar: controller.currentPage.value == 3 || controller.currentPage.value == 4 ? null : _buildAppBar(),
+          extendBodyBehindAppBar: true,
+          body: PageView(
+            controller: controller.bottomNavPageController,
+            physics: const NeverScrollableScrollPhysics(),
+            children: [...controller.bottomNavScreens],
+          ),
+          bottomNavigationBar: _buildBottomNavBar(controller),
+          //: Work remaining of reward button if needed
+          /*floatingActionButton: FloatingActionButton.extended(
+            onPressed: (){},
+            elevation: 5,
+            icon: Icon(Icons.shopping_bag, color: kPrimaryColor, ),
+            label: CustomText(title: 'Rewards', style: headline3,),
+            //foregroundColor: Colors.blueGrey,
+            backgroundColor:  Colors.indigo[100]!,
+          ),
+          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,*/
         ),
-        bottomNavigationBar: _buildBottomNavBar(controller),
-        //: Work remaining of reward button if needed
-        /*floatingActionButton: FloatingActionButton.extended(
-          onPressed: (){},
-          elevation: 5,
-          icon: Icon(Icons.shopping_bag, color: kPrimaryColor, ),
-          label: CustomText(title: 'Rewards', style: headline3,),
-          //foregroundColor: Colors.blueGrey,
-          backgroundColor:  Colors.indigo[100]!,
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,*/
+      ),
+    );
+  }
+
+  AppBar _buildAppBar(){
+    return AppBar(
+      backgroundColor: kAppBarColor,
+      title: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          buildSvgLogo(),
+          AppConstant.spaceWidget(width: 5),
+          Expanded(
+            flex: 5,
+            child: CustomSearchBar(
+              searchText: "",
+              calledFromDashboard: true,
+            ),
+          ),
+          //const Expanded(flex:1,child:Center())
+        ],
       ),
     );
   }

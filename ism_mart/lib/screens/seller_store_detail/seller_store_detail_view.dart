@@ -6,6 +6,7 @@ import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:iconly/iconly.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/widgets/custom_sliver_appbar.dart';
 
 class SellerStoreDetailView extends GetView<ProductController> {
   const SellerStoreDetailView({Key? key}) : super(key: key);
@@ -42,7 +43,7 @@ class SellerStoreDetailView extends GetView<ProductController> {
                         ))
                       : CustomScrollView(
                           slivers: [
-                            _sliverAppBar(),
+                            CustomSliverAppBar(title: langKey.storeDetail.tr,),
                             SliverList(
                               delegate: SliverChildListDelegate(
                                 [
@@ -66,37 +67,6 @@ class SellerStoreDetailView extends GetView<ProductController> {
             )
           ],
         ),
-      ),
-    );
-  }
-
-  SliverAppBar _sliverAppBar() {
-    return SliverAppBar(
-      expandedHeight: 14.0,
-      floating: true,
-      elevation: 10,
-      pinned: false,
-      automaticallyImplyLeading: false,
-      backgroundColor: kAppBarColor,
-      title: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          InkWell(
-            onTap: () => Get.back(),
-            child: Icon(
-              Icons.arrow_back_ios_new,
-              size: 18,
-              color: kPrimaryColor,
-            ),
-          ),
-          //AppConstant.spaceWidget(width: 10),
-          //buildSvgLogo(),
-          AppConstant.spaceWidget(width: 10),
-          CustomText(
-            title: langKey.storeDetail.tr,
-            style: appBarTitleSize,
-          )
-        ],
       ),
     );
   }

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
+import 'package:ism_mart/widgets/custom_appbar.dart';
 import 'package:ism_mart/widgets/no_internet_view.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
@@ -22,6 +23,7 @@ class AddProductView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        // appBar: CustomSimpleAppBar(title: langKey.addProduct.tr,).build(),
         appBar: appBar(),
         body: Stack(
           children: [
@@ -80,24 +82,25 @@ class AddProductView extends StatelessWidget {
     );
   }
 
-  AppBar appBar() {
-    return AppBar(
-      backgroundColor: kAppBarColor,
-      leading: IconButton(
-        onPressed: () {
-          Get.back();
-        },
-        icon: Icon(
-          Icons.arrow_back_ios_new,
-          size: 18,
-          color: kPrimaryColor,
-        ),
-      ),
-      title: CustomText(
-        title: langKey.addProduct.tr,
-        style: headline2,
-      ),
-    );
+  appBar() {
+    return CustomSimpleAppBar(title: langKey.addProduct.tr,);
+    // return AppBar(
+    //   backgroundColor: kAppBarColor,
+    //   leading: IconButton(
+    //     onPressed: () {
+    //       Get.back();
+    //     },
+    //     icon: Icon(
+    //       Icons.arrow_back_ios_new,
+    //       size: 18,
+    //       color: kPrimaryColor,
+    //     ),
+    //   ),
+    //   title: CustomText(
+    //     title: langKey.addProduct.tr,
+    //     style: headline2,
+    //   ),
+    // );
   }
 
   Widget _createDynamicFormFields(ProductVariantsModel model) {

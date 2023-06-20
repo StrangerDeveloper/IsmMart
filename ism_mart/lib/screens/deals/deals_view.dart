@@ -20,7 +20,7 @@ class DealsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: _appBar(),
+        // appBar: _appBar(),
         body: Obx(() =>
         viewModel.noProductsFound.value ?
         Center(
@@ -184,34 +184,35 @@ class DealsView extends StatelessWidget {
       elevation: 0,
       automaticallyImplyLeading: false,
       leadingWidth: 40,
-      leading: InkWell(
-        onTap: () {
-          baseController.changePage(0);
-          viewModel.productList.clear();
-          viewModel.page = 1;
-          viewModel.limit.value = 15;
-          viewModel.searchTextController.clear();
-        },
-        child: Icon(
-          Icons.arrow_back_ios_new,
-          size: 18,
-          color: kPrimaryColor,
-        ),
-      ),
+      // leading: InkWell(
+      //   onTap: () {
+      //     baseController.changePage(0);
+      //     viewModel.productList.clear();
+      //     viewModel.page = 1;
+      //     viewModel.limit.value = 15;
+      //     viewModel.searchTextController.clear();
+      //   },
+      //   child: Icon(
+      //     Icons.arrow_back_ios_new,
+      //     size: 18,
+      //     color: kPrimaryColor,
+      //   ),
+      // ),
       title: Container(
         height: 36,
         child: TextField(
           controller: viewModel.searchTextController,
           textInputAction: TextInputAction.search,
-          onSubmitted: (value) {
-            viewModel.filters.clear();
-            viewModel.page = 1;
-            viewModel.unselectCategory();
-            viewModel.url =
-                'filter?type=Discounts&limit=${viewModel.limit}&page=${viewModel.page}&';
-            viewModel.filters.addAll({'text': value});
-            viewModel.searchProducts(value);
-          },
+          // onT
+          // onSubmitted: (value) {
+          //   viewModel.filters.clear();
+          //   viewModel.page = 1;
+          //   viewModel.unselectCategory();
+          //   viewModel.url =
+          //       'filter?type=Discounts&limit=${viewModel.limit}&page=${viewModel.page}&';
+          //   viewModel.filters.addAll({'text': value});
+          //   viewModel.searchProducts(value);
+          // },
           cursorColor: kPrimaryColor,
           autofocus: false,
           maxLines: 1,
