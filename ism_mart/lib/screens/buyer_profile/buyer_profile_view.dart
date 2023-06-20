@@ -4,11 +4,13 @@ import 'package:get/get.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/helper/no_internet_view.dart';
 import 'package:ism_mart/screens/buyer_profile/buyer_profile_viewmodel.dart';
-import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/widgets/custom_appbar.dart';
+import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
 import 'package:ism_mart/widgets/pick_image.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+
+import '../../helper/validator.dart';
 
 class BuyerProfileView extends StatelessWidget {
   BuyerProfileView({Key? key}) : super(key: key);
@@ -18,7 +20,7 @@ class BuyerProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: CustomAppBar(title: profile.tr,),
+      appBar: CustomAppBar(title: langKey.profile.tr,),
       body: Stack(
         children: [
           SingleChildScrollView(
@@ -138,7 +140,7 @@ class BuyerProfileView extends StatelessWidget {
     );
   }
 
-  CustomTextField2 lastNameTextField() {
+  Widget lastNameTextField() {
     return CustomTextField2(
       label: langKey.lastName.tr,
       controller: viewModel.lastNameController,

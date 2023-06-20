@@ -3,10 +3,10 @@ import 'package:get/get.dart';
 import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/controllers/buyer/search/custom_search_controller.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
-import 'package:ism_mart/models/exports_model.dart';
+import 'package:ism_mart/exports/exports_model.dart';
 import 'package:ism_mart/screens/search/search_viewmodel.dart';
 import 'package:ism_mart/screens/search_details/search_details_view.dart';
-import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/exports/exports_utils.dart';
 
 class SearchView extends GetView<SearchViewModel> {
   SearchView({super.key});

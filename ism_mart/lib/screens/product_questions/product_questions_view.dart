@@ -5,9 +5,11 @@ import 'package:iconly/iconly.dart';
 import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/screens/product_questions/product_questions_viewmodel.dart';
-import 'package:ism_mart/utils/exports_utils.dart';
 import 'package:ism_mart/widgets/custom_appbar.dart';
+import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
+
+import '../../helper/validator.dart';
 
 class ProductQuestionsView extends StatelessWidget {
   ProductQuestionsView({Key? key}) : super(key: key);

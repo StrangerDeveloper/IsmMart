@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ism_mart/controllers/export_controllers.dart';
 import 'package:ism_mart/widgets/custom_appbar.dart';
+import 'package:ism_mart/exports/export_controllers.dart';
 import 'package:ism_mart/widgets/custom_text.dart';
 import 'package:ism_mart/helper/constants.dart';
 import 'package:iconly/iconly.dart';
@@ -24,6 +24,7 @@ class SellerHomeView extends GetView<SellersController> {
           actionItem: InkWell(
             onTap: (){
               Get.back();
+              //baseController.changePage(0);
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -100,7 +101,7 @@ class SellerHomeView extends GetView<SellersController> {
           ),
         ),
       ),
-    );
+    )
   }
 
   Widget _singleDrawerItem({icon, title, onTap}) {

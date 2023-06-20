@@ -5,7 +5,7 @@
 import 'dart:convert';
 
 import 'package:ism_mart/api_helper/api_service.dart';
-import 'package:ism_mart/models/exports_model.dart';
+import 'package:ism_mart/exports/exports_model.dart';
 
 List<CategoryModel> categoryModelFromJson(String str) =>
     List<CategoryModel>.from(

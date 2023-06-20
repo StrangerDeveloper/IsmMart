@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/api_base_helper.dart';
 import 'package:ism_mart/helper/urls.dart';
-import 'package:ism_mart/models/exports_model.dart';
-import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/exports/exports_model.dart';
+import 'package:ism_mart/exports/exports_utils.dart';
 
 class SellerDashBoardViewModel extends GetxController {
   ScrollController scrollController = ScrollController();

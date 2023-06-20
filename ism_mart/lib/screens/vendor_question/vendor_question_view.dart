@@ -4,8 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/screens/vendor_question/vendor_question_viewmodel.dart';
-import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
+
+import '../../helper/validator.dart';
 
 class VendorQuestionView extends StatelessWidget {
   VendorQuestionView({Key? key}) : super(key: key);

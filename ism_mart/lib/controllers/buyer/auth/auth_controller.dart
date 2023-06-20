@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:ism_mart/api_helper/export_api_helper.dart';
+import 'package:ism_mart/exports/export_api_helper.dart';
 import 'package:ism_mart/helper/global_variables.dart';
-import 'package:ism_mart/models/exports_model.dart';
-import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/exports/exports_model.dart';
+import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+
+import '../../../helper/permission_handler.dart';
 
 class AuthController extends GetxController {
   final AuthProvider authProvider;

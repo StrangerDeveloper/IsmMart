@@ -3,9 +3,11 @@ import 'package:get/get.dart';
 import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/screens/forgot_password1/forgot_password1_viewmodel.dart';
-import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/custom_appbar.dart';
+
+import '../../helper/validator.dart';
 
 class ForgotPassword1View extends StatelessWidget {
   ForgotPassword1View({Key? key}) : super(key: key);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ism_mart/widgets/export_widgets.dart';
-import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/exports/export_widgets.dart';
+import 'package:ism_mart/exports/exports_utils.dart';
 
 class StickyLabelWithViewMoreOption extends StatelessWidget {
   final String? title, moreOptionText;

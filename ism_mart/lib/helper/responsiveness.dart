@@ -1,4 +1,4 @@
-import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/exports/exports_utils.dart';
 
 class AppResponsiveness {
   AppResponsiveness._();

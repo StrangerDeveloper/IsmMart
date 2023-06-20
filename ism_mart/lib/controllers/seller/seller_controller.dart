@@ -7,10 +7,10 @@ import 'package:ism_mart/screens/vendor_question/vendor_question_view.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ism_mart/api_helper/export_api_helper.dart';
-import 'package:ism_mart/controllers/export_controllers.dart';
-import 'package:ism_mart/models/exports_model.dart';
-import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/exports/export_api_helper.dart';
+import 'package:ism_mart/exports/export_controllers.dart';
+import 'package:ism_mart/exports/exports_model.dart';
+import 'package:ism_mart/exports/exports_utils.dart';
 
 class SellersController extends GetxController with StateMixin<ProductModel> {
   final SellersApiProvider apiProvider;

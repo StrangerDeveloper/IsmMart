@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ism_mart/api_helper/export_api_helper.dart';
-import 'package:ism_mart/controllers/export_controllers.dart';
-import 'package:ism_mart/utils/exports_utils.dart';
+import 'package:ism_mart/exports/export_api_helper.dart';
+import 'package:ism_mart/exports/export_controllers.dart';
+import 'package:ism_mart/exports/exports_utils.dart';
 
 class AuthMiddleWare extends GetMiddleware {
   AuthMiddleWare({int? priority}) : super(priority: priority!);

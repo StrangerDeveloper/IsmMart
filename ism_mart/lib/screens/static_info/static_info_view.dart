@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ism_mart/screens/static_info/static_info_viewmodel.dart';
 
-import '../../utils/exports_utils.dart';
-import '../../widgets/export_widgets.dart';
+import '../../exports/exports_utils.dart';
+import '../../exports/export_widgets.dart';
 
 class StaticInfoView extends StatelessWidget {
   StaticInfoView({super.key});
