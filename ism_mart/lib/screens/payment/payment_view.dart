@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
-import 'package:ism_mart/screens/checkout/payment_viewmodel.dart';
+import 'package:ism_mart/screens/payment/payment_viewmodel.dart';
 import 'package:ism_mart/helper/constants.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import 'package:webview_flutter/webview_flutter.dart';

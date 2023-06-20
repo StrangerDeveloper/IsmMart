@@ -51,7 +51,6 @@ class DashboardView extends GetView<BaseController> {
                         productMap: controller.productsWithTypesMap,
                       ),
                     ),
-
                     kDivider,
                     Obx(
                       () => _displayProducts(
@@ -59,7 +58,6 @@ class DashboardView extends GetView<BaseController> {
                         calledForCategoryProducts: true,
                       ),
                     ),
-                    // _productByCategories(),
                   ],
                 ),
               ),

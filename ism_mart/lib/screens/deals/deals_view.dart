@@ -132,47 +132,47 @@ class DealsView extends StatelessWidget {
                                 decoration: TextDecoration.underline
                             ),
                           ),
-                        ) : Container()
+                        ),
+                        Expanded(
+                          child: GridView.builder(
+                            padding: EdgeInsets.all(8),
+                            controller: viewModel.scrollController,
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount:
+                                    AppResponsiveness.getGridItemCount(),
+                                mainAxisSpacing: 10,
+                                crossAxisSpacing: 10,
+                                childAspectRatio: AppResponsiveness
+                                    .getChildAspectRatioPoint90()
+                                // mainAxisExtent:
+                                //     AppResponsiveness.getMainAxisExtentPoint25(),
+                                ),
+                            itemCount: viewModel.productList.length,
+                            itemBuilder: (_, index) {
+                              ProductModel productModel =
+                                  viewModel.productList[index];
+                              return SingleProductItems(
+                                  productModel: productModel);
+                            },
+                          ),
+                        ),
+                        if (viewModel.isLoadingMore.isTrue)
+                          CustomLoading(
+                            isItForWidget: true,
+                            color: kPrimaryColor,
+                          )
+                      ],
                     ),
-                  ),
-                ),
-                Expanded(
-                  child: GridView.builder(
-                    padding: EdgeInsets.all(8),
-                    controller: viewModel.scrollController,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: AppResponsiveness.getGridItemCount(),
-                        mainAxisSpacing: 10,
-                        crossAxisSpacing: 10,
-                        childAspectRatio:
-                        AppResponsiveness.getChildAspectRatioPoint90()
-                      // mainAxisExtent:
-                      //     AppResponsiveness.getMainAxisExtentPoint25(),
+                    NoInternetView(
+                      onPressed: () {
+                        viewModel.addFilters();
+                        // viewModel.addFilters();
+                        // viewModel.addPriceFilter();
+                      },
                     ),
-                    itemCount: viewModel.productList.length,
-                    itemBuilder: (_, index) {
-                      ProductModel productModel = viewModel.productList[index];
-                      return SingleProductItems(productModel: productModel);
-                    },
-                  ),
+                    LoaderView(),
+                  ],
                 ),
-                if (viewModel.isLoadingMore.isTrue)
-                  CustomLoading(
-                    isItForWidget: true,
-                    color: kPrimaryColor,
-                  )
-              ],
-            ),
-            NoInternetView(
-              onPressed: () {
-                viewModel.addFilters();
-                // viewModel.addFilters();
-                // viewModel.addPriceFilter();
-              },
-            ),
-            LoaderView(),
-          ],
-        ),
         ),
       ),
     );
@@ -184,35 +184,34 @@ class DealsView extends StatelessWidget {
       elevation: 0,
       automaticallyImplyLeading: false,
       leadingWidth: 40,
-      // leading: InkWell(
-      //   onTap: () {
-      //     baseController.changePage(0);
-      //     viewModel.productList.clear();
-      //     viewModel.page = 1;
-      //     viewModel.limit.value = 15;
-      //     viewModel.searchTextController.clear();
-      //   },
-      //   child: Icon(
-      //     Icons.arrow_back_ios_new,
-      //     size: 18,
-      //     color: kPrimaryColor,
-      //   ),
-      // ),
+      leading: InkWell(
+        onTap: () {
+          baseController.changePage(0);
+          viewModel.productList.clear();
+          viewModel.page = 1;
+          viewModel.limit.value = 15;
+          viewModel.searchTextController.clear();
+        },
+        child: Icon(
+          Icons.arrow_back_ios_new,
+          size: 18,
+          color: kPrimaryColor,
+        ),
+      ),
       title: Container(
         height: 36,
         child: TextField(
           controller: viewModel.searchTextController,
           textInputAction: TextInputAction.search,
-          // onT
-          // onSubmitted: (value) {
-          //   viewModel.filters.clear();
-          //   viewModel.page = 1;
-          //   viewModel.unselectCategory();
-          //   viewModel.url =
-          //       'filter?type=Discounts&limit=${viewModel.limit}&page=${viewModel.page}&';
-          //   viewModel.filters.addAll({'text': value});
-          //   viewModel.searchProducts(value);
-          // },
+          onSubmitted: (value) {
+            viewModel.filters.clear();
+            viewModel.page = 1;
+            viewModel.unselectCategory();
+            viewModel.url =
+                'filter?type=Discounts&limit=${viewModel.limit}&page=${viewModel.page}&';
+            viewModel.filters.addAll({'text': value});
+            viewModel.searchProducts(value);
+          },
           cursorColor: kPrimaryColor,
           autofocus: false,
           maxLines: 1,

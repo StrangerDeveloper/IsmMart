@@ -86,22 +86,11 @@ class BottomNavigationView extends GetView<BaseController> {
               page: 2,
             ),
             _getNavBarItems(
-                icon: IconlyLight.buy,
-                title: langKey.myCart.tr,
-                page: 3,
-                showBadge: true),
-
-            // : Expanded(
-            //     child: CartIcon(
-            //     onTap: () {
-            //       //Get.to(Routes.cartRoute);
-            //       controller.changePage(2);
-            //     },
-            //     iconWidget: _getNavBarItems(
-            //         icon: IconlyLight.buy,
-            //         title: langKey.myCart.tr,
-            //         page: 2),
-            //   )),
+              icon: IconlyLight.buy,
+              title: langKey.myCart.tr,
+              page: 3,
+              showBadge: true,
+            ),
             _getNavBarItems(
               icon: Icons.menu,
               title: langKey.menu.tr,

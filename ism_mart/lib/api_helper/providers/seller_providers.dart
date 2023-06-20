@@ -8,10 +8,7 @@ class SellersApiProvider {
 
   Future<List<ProductVariantsModel>> getProductVariantsFieldsByCategories(
       {catId, subCatId}) async {
-    var fieldsResponse = await _sellersApiRepo.fetchCategoriesFields(
-        categoryId: catId, subCategoryId: subCatId);
-    return fieldsResponse
-        .map((field) => ProductVariantsModel.fromJson(field))
-        .toList();
+    var fieldsResponse = await _sellersApiRepo.fetchCategoriesFields(categoryId: catId, subCategoryId: subCatId);
+    return fieldsResponse.map((field) => ProductVariantsModel.fromJson(field)).toList();
   }
 }
