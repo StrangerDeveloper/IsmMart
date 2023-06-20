@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/helper/api_base_helper.dart';
+import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import '../../api_helper/local_storage/local_storage_helper.dart';
 import '../../helper/constants.dart';
@@ -127,6 +128,7 @@ class SingleProductDetailsViewModel extends GetxController {
   }
 
   fetchProduct() async {
+    GlobalVariable.internetErr(false);
     await ApiBaseHelper()
         .getMethod(url: 'products/${productID.value}')
         .then((response) async {
@@ -139,10 +141,12 @@ class SingleProductDetailsViewModel extends GetxController {
         productFoundCheck.value = false;
       } else {
         productFoundCheck.value = false;
-        AppConstant.displaySnackBar(langKey.errorTitle.tr, langKey.errorMsg.tr);
+        // AppConstant.displaySnackBar(langKey.errorTitle.tr, langKey.errorMsg.tr);
       }
     }).catchError((error) {
-      AppConstant.displaySnackBar(langKey.errorTitle.tr, langKey.errorMsg.tr);
+      GlobalVariable.internetErr(true);
+      productFoundCheck.value = false;
+      // AppConstant.displaySnackBar(langKey.errorTitle.tr, langKey.errorMsg.tr);
       viewCheck.value = false;
     });
   }

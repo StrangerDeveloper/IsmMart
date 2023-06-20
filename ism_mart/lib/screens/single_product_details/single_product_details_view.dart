@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
+import 'package:ism_mart/helper/no_internet_view.dart';
 import 'package:ism_mart/models/exports_model.dart';
 import 'package:ism_mart/screens/cart/cart_viewmodel.dart';
 import 'package:ism_mart/screens/product_questions/product_questions_view.dart';
@@ -23,12 +24,15 @@ class SingleProductDetailsView extends StatelessWidget {
         child: Obx(() => viewModel.productModel.value == ProductModel()
             ? Scaffold(
                 body: Center(
-                  child: viewModel.productFoundCheck.value
-                      ? CustomLoading()
-                      : NoDataFoundWithIcon(
-                          title: langKey.productNotFound.tr,
-                        ),
-                ),
+                    child: viewModel.productFoundCheck.value
+                        ? CustomLoading()
+                        : NoInternetView(
+                            onPressed: () => viewModel.fetchProduct(),
+                          )
+                    //  NoDataFoundWithIcon(
+                    //     title: langKey.productNotFound.tr,
+                    //   ),
+                    ),
               )
             : Scaffold(
                 appBar: _appBar(),
