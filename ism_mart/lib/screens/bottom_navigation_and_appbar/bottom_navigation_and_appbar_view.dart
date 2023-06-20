@@ -57,7 +57,6 @@ class BottomNavigationView extends GetView<BaseController> {
               calledFromDashboard: true,
             ),
           ),
-          //const Expanded(flex:1,child:Center())
         ],
       ),
     );

@@ -14,7 +14,6 @@ import '../../widgets/custom_grey_border_container.dart';
 import '../../widgets/custom_loading.dart';
 import '../../widgets/custom_network_image.dart';
 import '../../widgets/custom_price_widget.dart';
-import '../../widgets/custom_search_bar.dart';
 import '../../widgets/custom_text.dart';
 import '../../widgets/no_data_found.dart';
 import '../../widgets/single_category_item.dart';
@@ -33,7 +32,6 @@ class DashboardView extends GetView<BaseController> {
         children: [
           CustomScrollView(
             slivers: [
-              // _sliverAppBar(),
               SliverList(
                 delegate: SliverChildListDelegate(
                   [
@@ -74,28 +72,28 @@ class DashboardView extends GetView<BaseController> {
     );
   }
 
-  SliverAppBar _sliverAppBar() {
-    return SliverAppBar(
-      backgroundColor: kAppBarColor,
-      floating: true,
-      pinned: true,
-      title: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          buildSvgLogo(),
-          AppConstant.spaceWidget(width: 5),
-          Expanded(
-            flex: 5,
-            child: CustomSearchBar(
-              searchText: "",
-              calledFromDashboard: true,
-            ),
-          ),
-          //const Expanded(flex:1,child:Center())
-        ],
-      ),
-    );
-  }
+  // SliverAppBar _sliverAppBar() {
+  //   return SliverAppBar(
+  //     backgroundColor: kAppBarColor,
+  //     floating: true,
+  //     pinned: true,
+  //     title: Row(
+  //       crossAxisAlignment: CrossAxisAlignment.center,
+  //       children: [
+  //         buildSvgLogo(),
+  //         AppConstant.spaceWidget(width: 5),
+  //         Expanded(
+  //           flex: 5,
+  //           child: CustomSearchBar(
+  //             searchText: "",
+  //             calledFromDashboard: true,
+  //           ),
+  //         ),
+  //         //const Expanded(flex:1,child:Center())
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Widget _slider(List<SliderModel> list) {
     return Obx(

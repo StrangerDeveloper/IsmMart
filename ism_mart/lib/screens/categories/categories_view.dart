@@ -63,28 +63,6 @@ class CategoriesView extends GetView<CategoryController> {
     );
   }
 
-  AppBar _appBar() {
-    return AppBar(
-      backgroundColor: kAppBarColor,
-      elevation: 0,
-      title: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          buildSvgLogo(),
-          AppConstant.spaceWidget(width: 5),
-          // Obx(
-          //   () => Expanded(
-          //     flex: 5,
-          //     child: CustomSearchBar(
-          //       searchText: controller.selectedCategory.value,
-          //     ),
-          //   ),
-          // ),
-        ],
-      ),
-    );
-  }
-
   //having split but different design
   _buildBodyNew({List<CategoryModel>? categoryList}) {
     //var height = AppConstant.getSize().height;
