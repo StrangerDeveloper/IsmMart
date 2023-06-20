@@ -24,16 +24,6 @@ class BottomNavigationView extends GetView<BaseController> {
           children: [...controller.bottomNavScreens],
         ),
         bottomNavigationBar: _buildBottomNavBar(controller),
-        //: Work remaining of reward button if needed
-        /*floatingActionButton: FloatingActionButton.extended(
-          onPressed: (){},
-          elevation: 5,
-          icon: Icon(Icons.shopping_bag, color: kPrimaryColor, ),
-          label: CustomText(title: 'Rewards', style: headline3,),
-          //foregroundColor: Colors.blueGrey,
-          backgroundColor:  Colors.indigo[100]!,
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,*/
       ),
     );
   }
@@ -61,22 +51,11 @@ class BottomNavigationView extends GetView<BaseController> {
               page: 2,
             ),
             _getNavBarItems(
-                icon: IconlyLight.buy,
-                title: langKey.myCart.tr,
-                page: 3,
-                showBadge: true),
-
-            // : Expanded(
-            //     child: CartIcon(
-            //     onTap: () {
-            //       //Get.to(Routes.cartRoute);
-            //       controller.changePage(2);
-            //     },
-            //     iconWidget: _getNavBarItems(
-            //         icon: IconlyLight.buy,
-            //         title: langKey.myCart.tr,
-            //         page: 2),
-            //   )),
+              icon: IconlyLight.buy,
+              title: langKey.myCart.tr,
+              page: 3,
+              showBadge: true,
+            ),
             _getNavBarItems(
               icon: Icons.menu,
               title: langKey.menu.tr,
@@ -94,15 +73,9 @@ class BottomNavigationView extends GetView<BaseController> {
     title,
     bool? showBadge = false,
   }) {
-    //return BottomNavigationBarItem(icon: Icon(icon), label: "$page");
-
     return Expanded(
       child: InkWell(
         onTap: () {
-          /*if(page == 4){
-             controller.currentPage(page);
-             Get.toNamed(Routes.searchRoute, arguments: {"searchText": " "});
-           }else*/
           controller.changePage(page);
         },
         child: Stack(

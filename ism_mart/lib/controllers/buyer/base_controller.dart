@@ -163,19 +163,6 @@ class BaseController extends GetxController {
     await _apiProvider.getAllProducts(limit: 30).then((data) {
       productsMap.putIfAbsent("All Products", () => data);
     });
-
-    // if (categories.isNotEmpty) {
-    //   productsMap.clear();
-    //   categories.forEach((element) async {
-    //     await _apiProvider.getProductsByCategory(element.id!).then((data) {
-    //       //debugPrint("FetchProducts: inside $data");
-    //       productsMap.putIfAbsent(element.name!, () => data);
-    //       //debugPrint("FetchProducts: inside Ln ${productList.first}");
-    //     }).catchError((error) {
-    //       print(">>>FetchProductByCategory: $error");
-    //     });
-    //   });
-    // }
   }
 
   /// Fetch Products by Type
