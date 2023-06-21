@@ -13,29 +13,21 @@ class CategoriesView extends GetView<CategoryController> {
 
   @override
   Widget build(BuildContext context) {
-    return controller.obx((state) {
-      if (state == null) {
-        return CustomLoading(isDarkMode: Get.isDarkMode);
-      }
-      if (state is List<CategoryModel>) {
-        return _build(state: state);
-      }
-      return NoInternetView();
-      // NoDataFoundWithIcon(
-      //   icon: Icons.category_outlined,
-      //   title: langKey.noCategoryFound.tr,
-      // );
-    },
-        onLoading: CustomLoading(isDarkMode: Get.isDarkMode),
-        onEmpty: NoInternetView(
-          onPressed: () => controller.fetchCategories(),
-        )
-        //  NoDataFoundWithIcon(
-        //   icon: Icons.category_outlined,
-        //   title: langKey.noCategoryFound.tr,
-        // )
-
-        );
+    return controller.obx(
+      (state) {
+        if (state == null) {
+          return CustomLoading(isDarkMode: Get.isDarkMode);
+        }
+        if (state is List<CategoryModel>) {
+          return _build(state: state);
+        }
+        return NoInternetView();
+      },
+      onLoading: CustomLoading(isDarkMode: Get.isDarkMode),
+      onEmpty: NoInternetView(
+        onPressed: () => controller.fetchCategories(),
+      ),
+    );
   }
 
   Widget _build({state}) {
@@ -63,7 +55,7 @@ class CategoriesView extends GetView<CategoryController> {
   }
 
   //having split but different design
-  Row _buildBodyNew({List<CategoryModel>? categoryList}) {
+  Widget _buildBodyNew({List<CategoryModel>? categoryList}) {
     //var height = AppConstant.getSize().height;
     return Row(
       children: [

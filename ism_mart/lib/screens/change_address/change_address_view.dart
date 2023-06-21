@@ -170,9 +170,8 @@ class ChangeAddressView extends StatelessWidget {
               width: 150,
               height: 40,
               onPressed: () {
-                // Get.back();
-                // AppConstant.showBottomSheet(
-                //     widget: addNewORUpdateAddressContents());
+                Get.toNamed(Routes.addUpdateAddress,
+                    arguments: {'isUpdateScreen': false});
               },
               title: langKey.addNewAddress.tr,
             ),

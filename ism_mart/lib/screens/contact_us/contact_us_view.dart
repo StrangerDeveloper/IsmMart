@@ -42,7 +42,7 @@ class ContactUsView extends StatelessWidget {
     );
   }
 
-  Column contactDetail() {
+  Widget contactDetail() {
     return Column(
       children: viewModel
           .getContactUsData()
@@ -96,7 +96,7 @@ class ContactUsView extends StatelessWidget {
     );
   }
 
-  Container contactUsForm() {
+  Widget contactUsForm() {
     return Container(
       margin: EdgeInsets.only(bottom: 15, top: 15),
       padding: EdgeInsets.all(15),

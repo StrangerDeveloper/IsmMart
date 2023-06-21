@@ -73,7 +73,7 @@ class CheckoutView extends StatelessWidget {
     );
   }
 
-  Padding _buildNewAddress() {
+  Widget _buildNewAddress() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -99,7 +99,7 @@ class CheckoutView extends StatelessWidget {
     );
   }
 
-  Padding _shippingAddressDetails() {
+  Widget _shippingAddressDetails() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: CustomCard(
@@ -147,7 +147,7 @@ class CheckoutView extends StatelessWidget {
     );
   }
 
-  Padding _singleShippingCostItem({title, price, delivery}) {
+  Widget _singleShippingCostItem({title, price, delivery}) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
       child: Column(
@@ -185,7 +185,7 @@ class CheckoutView extends StatelessWidget {
     );
   }
 
-  InkWell _tileActionBtn({onTap, title, txtColor}) {
+  Widget _tileActionBtn({onTap, title, txtColor}) {
     return InkWell(
       onTap: onTap,
       child: CustomText(
@@ -257,7 +257,7 @@ class CheckoutView extends StatelessWidget {
     );
   }
 
-  Padding _singlePaymentOptionItem({title, value, icon, isEnabled}) {
+  Widget _singlePaymentOptionItem({title, value, icon, isEnabled}) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
       child: Column(
@@ -291,7 +291,7 @@ class CheckoutView extends StatelessWidget {
     );
   }
 
-  Padding _buildCartItemSection() {
+  Widget _buildCartItemSection() {
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: Obx(
@@ -312,7 +312,7 @@ class CheckoutView extends StatelessWidget {
     );
   }
 
-  _subTotalDetails() {
+  Widget _subTotalDetails() {
     return Obx(
       () => Padding(
         padding: const EdgeInsets.all(8.0),
@@ -444,7 +444,7 @@ class CheckoutView extends StatelessWidget {
     );
   }
 
-  TextField couponTextField() {
+  Widget couponTextField() {
     return TextField(
       controller: viewModel.couponCodeController,
       cursorColor: kPrimaryColor,
@@ -485,7 +485,7 @@ class CheckoutView extends StatelessWidget {
     );
   }
 
-  Padding _confirmOrderButton() {
+  Widget _confirmOrderButton() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 15.0),
       child: CustomTextBtn(

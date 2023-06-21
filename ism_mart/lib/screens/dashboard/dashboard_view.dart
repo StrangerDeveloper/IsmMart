@@ -43,7 +43,6 @@ class DashboardView extends GetView<BaseController> {
                     _topVendors(),
                     StickyLabel(text: langKey.discountDeals.tr),
                     _displayDiscountProducts(),
-
                     Obx(
                       () => _displayProducts(
                         productMap: controller.productsWithTypesMap,
@@ -71,29 +70,6 @@ class DashboardView extends GetView<BaseController> {
       ),
     );
   }
-
-  // SliverAppBar _sliverAppBar() {
-  //   return SliverAppBar(
-  //     backgroundColor: kAppBarColor,
-  //     floating: true,
-  //     pinned: true,
-  //     title: Row(
-  //       crossAxisAlignment: CrossAxisAlignment.center,
-  //       children: [
-  //         buildSvgLogo(),
-  //         AppConstant.spaceWidget(width: 5),
-  //         Expanded(
-  //           flex: 5,
-  //           child: CustomSearchBar(
-  //             searchText: "",
-  //             calledFromDashboard: true,
-  //           ),
-  //         ),
-  //         //const Expanded(flex:1,child:Center())
-  //       ],
-  //     ),
-  //   );
-  // }
 
   Widget _slider(List<SliderModel> list) {
     return Obx(
@@ -155,8 +131,6 @@ class DashboardView extends GetView<BaseController> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            //StickyLabel(text: langKey.discountDeals.tr),
-            //AppConstant.spaceWidget(height: 10),
             controller.discountSliderProductsList.isEmpty
                 ? NoDataFound()
                 : SizedBox(
@@ -165,7 +139,6 @@ class DashboardView extends GetView<BaseController> {
                     child: ListView.builder(
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
-                      //physics: const AlwaysScrollableScrollPhysics(),
                       itemCount: controller.discountSliderProductsList.length,
                       itemBuilder: (_, index) {
                         ProductModel model =
@@ -180,7 +153,7 @@ class DashboardView extends GetView<BaseController> {
     );
   }
 
-  _singleDiscountProductItem(ProductModel model) {
+  Widget _singleDiscountProductItem(ProductModel model) {
     var endTime =
         DateTime.now().add(const Duration(hours: 17)).millisecondsSinceEpoch;
     return InkWell(
@@ -202,7 +175,6 @@ class DashboardView extends GetView<BaseController> {
             ),
             child: CustomNetworkImage(
               imageUrl: model.thumbnail,
-              //fit: BoxFit.fill,
             ),
           ),
           Positioned(
@@ -210,9 +182,10 @@ class DashboardView extends GetView<BaseController> {
             left: 0,
             right: 0,
             child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
-                //height: 60,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 0,
+                ),
                 child: Column(
                   children: [
                     CountdownTimer(
@@ -246,7 +219,6 @@ class DashboardView extends GetView<BaseController> {
                                 weight: FontWeight.bold,
                               ),
                               Row(
-                                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   CustomPriceWidget(
@@ -257,20 +229,26 @@ class DashboardView extends GetView<BaseController> {
                                   CustomPriceWidget(
                                     title: "${model.price!}",
                                     style: bodyText1.copyWith(
-                                        decoration: TextDecoration.lineThrough,
-                                        fontSize: 13),
+                                      decoration: TextDecoration.lineThrough,
+                                      fontSize: 13,
+                                    ),
                                   ),
                                   AppConstant.spaceWidget(width: 8),
                                   RichText(
-                                    text: TextSpan(children: [
-                                      TextSpan(
+                                    text: TextSpan(
+                                      children: [
+                                        TextSpan(
                                           text: "${model.discount}% ",
                                           style: bodyText1.copyWith(
-                                              color: kRedColor)),
-                                      TextSpan(
+                                            color: kRedColor,
+                                          ),
+                                        ),
+                                        TextSpan(
                                           text: langKey.OFF.tr,
-                                          style: bodyText2),
-                                    ]),
+                                          style: bodyText2,
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),
@@ -300,7 +278,7 @@ class DashboardView extends GetView<BaseController> {
     );
   }
 
-  _timeCard(int timePart, String format) {
+  Widget _timeCard(int timePart, String format) {
     return Card(
       child: SizedBox(
         width: AppResponsiveness.getWidth50(),
@@ -335,24 +313,23 @@ class DashboardView extends GetView<BaseController> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             StickyLabelWithViewMoreOption(
-                title: e.key,
-                textSize: 20,
-                onTap: () {
-                  Get.find<CustomSearchController>().filters.clear();
-                  Get.to(() => SearchDetailsView(
-                        isCalledForLatestAndBestSeller:
-                            e.key == 'Best Seller' ||
-                                    e.key == 'Popular Products'
-                                ? true
-                                : false,
-                        // Passing empty search text if all products.
-                        searchQuery: "",
-                        //used flag to call method of getProductByTypes
-                        productTypeKey: "${e.key}",
-                        calledToGoBackOnce: true,
-                        // calling for all products key.
-                      ));
-                }),
+              title: e.key,
+              textSize: 20,
+              onTap: () {
+                Get.find<CustomSearchController>().filters.clear();
+                Get.to(
+                  () => SearchDetailsView(
+                    isCalledForLatestAndBestSeller:
+                        e.key == 'Best Seller' || e.key == 'Popular Products'
+                            ? true
+                            : false,
+                    searchQuery: "",
+                    productTypeKey: "${e.key}",
+                    calledToGoBackOnce: true,
+                  ),
+                );
+              },
+            ),
             AppConstant.spaceWidget(height: 10),
             _trendingProducts(list as List<ProductModel>, isPopular,
                 calledForCategoryProducts)
@@ -365,8 +342,10 @@ class DashboardView extends GetView<BaseController> {
   }
 
   Widget _trendingProducts(
-      List<ProductModel> list, bool? isPopular, bool? isCategoryProducts) {
-    //var height = AppConstant.getSize().height;
+    List<ProductModel> list,
+    bool? isPopular,
+    bool? isCategoryProducts,
+  ) {
     if (isPopular!)
       return Padding(
         padding: const EdgeInsets.all(6.0),
@@ -380,7 +359,6 @@ class DashboardView extends GetView<BaseController> {
               addRepaintBoundaries: false,
               physics: const NeverScrollableScrollPhysics(),
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                //crossAxisCount: AppResponsiveness.getGridItemCount(),
                 maxCrossAxisExtent: 200,
                 // Maximum width of each item
                 childAspectRatio: 0.92,
@@ -481,13 +459,6 @@ class DashboardView extends GetView<BaseController> {
     );
   }
 
-/* _getChildAspectRatio(context) {
-    double aspectRatio = MediaQuery.of(context).size.width /
-        (MediaQuery.of(context).size.height / 2.5);
-    print("aspectRatio: $aspectRatio");
-    return aspectRatio;
-  }*/
-
   Widget _topVendors() {
     return Obx(
       () => Padding(
@@ -522,14 +493,11 @@ class DashboardView extends GetView<BaseController> {
         child: CustomGreyBorderContainer(
           width: 100,
           padding: const EdgeInsets.all(8),
-          //hasShadow: false,
           borderColor: kTransparent,
-          //bgColor: Colors.white60,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Container(
-                //margin: EdgeInsets.only(left: 6, bottom: 6),
                 padding: EdgeInsets.all(1),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
@@ -545,53 +513,16 @@ class DashboardView extends GetView<BaseController> {
                   ),
                 ),
               ),
-
-              // ClipOval(
-
               Flexible(
                 child: CustomText(
                   title: vendorsModel.storeName,
                   maxLines: 2,
-                  //size: 12,
                   textAlign: TextAlign.center,
                   weight: FontWeight.w600,
                 ),
               )
             ],
           ),
-
-          // Column(
-          //   children: [
-          //
-          //
-          //
-          //     Container(
-          //       width: 60,
-          //       height: 60,
-          //       margin: EdgeInsets.only(bottom: 2),
-          //       padding: EdgeInsets.all(5),
-          //       decoration: BoxDecoration(shape: BoxShape.circle),
-          //       child: ClipOval(
-          //         child: SizedBox.fromSize(
-          //           child: SizedBox.fromSize(
-          //             size: Size.fromRadius(25), // Image radius
-          //             child: CustomNetworkImage(
-          //                 imageUrl: vendorsModel!.storeImage),
-          //           ),
-          //         ),
-          //       ),
-          //     ),
-          //     Expanded(
-          //       child: CustomText(
-          //         title: vendorsModel.storeName,
-          //         maxLines: 2,
-          //         size: 11,
-          //         textAlign: TextAlign.center,
-          //         weight: FontWeight.w600,
-          //       ),
-          //     )
-          //   ],
-          // ),
         ),
       ),
     );
