@@ -149,7 +149,7 @@ class CategoriesView extends GetView<CategoryController> {
         onTap: () {
           Get.to(() => SearchDetailsView(
                 subCategoryID: subCategory.id,
-            calledFromCategories: true,
+            calledToGoBackOnce: true,
               ));
         },
         borderRadius: BorderRadius.circular(13),

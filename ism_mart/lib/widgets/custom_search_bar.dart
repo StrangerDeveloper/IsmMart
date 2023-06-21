@@ -16,13 +16,16 @@ class CustomSearchBar extends StatelessWidget {
     return GestureDetector(
       onTap: () {
       if (calledFromDashboard) {
+        print('>>>Dashboard');
         Get.toNamed(Routes.searchRoute,
             arguments: {"searchText": searchText ?? " "});
       }else if(calledFromSearchDetailsView == true){
+        print('>>>CalledFromSearchDetails');
         int count = 0;
         Get.offNamedUntil(Routes.searchRoute, (route) => count++ >= 2);
       }
       else {
+        print('>>>Else');
         Get.offNamed(
             Routes.searchRoute, arguments: {"searchText": searchText ?? " "});
       }

@@ -40,7 +40,7 @@ class CartView extends StatelessWidget {
       title: langKey.myCart.tr,
       leading: Get.arguments != null && Get.arguments["calledFromSPV"] ?
       null : Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 5.0),
+        padding: const EdgeInsets.symmetric(horizontal: 6.0),
         child: buildSvgLogo(),
       ),
     );

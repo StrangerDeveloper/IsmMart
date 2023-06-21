@@ -16,12 +16,11 @@ class SearchDetailsView extends GetView<CustomSearchController> {
     this.subCategoryID = 0,
     this.categoryID = 0,
     this.isCalledForLatestAndBestSeller = false,
-    this.calledFromCategories,
     this.calledToGoBackOnce
 
   }) : super(key: key);
 
-  final bool? isCalledForLatestAndBestSeller, calledFromCategories, calledToGoBackOnce;
+  final bool? isCalledForLatestAndBestSeller, calledToGoBackOnce;
   final String? searchQuery, productTypeKey;
   final int? categoryID, subCategoryID;
 
