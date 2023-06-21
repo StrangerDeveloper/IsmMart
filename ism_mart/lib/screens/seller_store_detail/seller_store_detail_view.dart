@@ -5,7 +5,7 @@ import 'package:ism_mart/exports/exports_model.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:iconly/iconly.dart';
-import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/custom_sliver_appbar.dart';
 
 class SellerStoreDetailView extends GetView<ProductController> {

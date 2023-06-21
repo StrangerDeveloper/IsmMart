@@ -8,7 +8,7 @@ import '../../helper/api_base_helper.dart';
 import '../../helper/global_variables.dart';
 import '../../models/product/product_model.dart';
 import '../../helper/constants.dart';
-import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:http/http.dart' as http;
 
 class UpdateProductViewModel extends GetxController {

@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:ism_mart/exports/export_controllers.dart';
-import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/current_remaining_time.dart';

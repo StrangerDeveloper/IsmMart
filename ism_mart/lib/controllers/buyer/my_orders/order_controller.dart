@@ -11,7 +11,7 @@ import 'package:ism_mart/helper/urls.dart';
 import 'package:ism_mart/controllers/controllers.dart';
 import 'package:ism_mart/exports/exports_model.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
-import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 

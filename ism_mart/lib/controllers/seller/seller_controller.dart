@@ -4,7 +4,7 @@ import 'package:ism_mart/screens/seller_dashboard/seller_dashboard_view.dart';
 import 'package:ism_mart/screens/vendor_detail/vendor_detail_view.dart';
 import 'package:ism_mart/screens/vendor_orders/vendor_orders_view.dart';
 import 'package:ism_mart/screens/vendor_question/vendor_question_view.dart';
-import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/exports/export_api_helper.dart';

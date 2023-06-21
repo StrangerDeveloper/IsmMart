@@ -12,7 +12,7 @@ import 'package:ism_mart/screens/vendor_detail/vendor_detail_viewmodel.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
-import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 
 class UpdateVendorViewModel extends GetxController {
 
@@ -80,7 +80,7 @@ class UpdateVendorViewModel extends GetxController {
   updateData() async {
     if (updateVendorFormKey.currentState?.validate() ?? false) {
       if (cityViewModel.authController.selectedCity.value.id == null) {
-        AppConstant.displaySnackBar(errorTitle.tr, langKey.plzSelectCountry.tr);
+        AppConstant.displaySnackBar(langKey.errorTitle.tr, langKey.plzSelectCountry.tr);
         return;
       }
       GlobalVariable.showLoader.value = true;
@@ -138,9 +138,9 @@ class UpdateVendorViewModel extends GetxController {
             vendorDetailViewModel.getData();
           }
           Get.back();
-          AppConstant.displaySnackBar(success.tr, parsedJson['message']);
+          AppConstant.displaySnackBar(langKey.success.tr, parsedJson['message']);
         } else {
-          AppConstant.displaySnackBar(errorTitle.tr, parsedJson['message']);
+          AppConstant.displaySnackBar(langKey.errorTitle.tr, parsedJson['message']);
         }
       }).catchError((e) {
         GlobalVariable.showLoader.value = false;

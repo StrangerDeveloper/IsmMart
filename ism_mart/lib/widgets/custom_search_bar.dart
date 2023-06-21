@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 
 class CustomSearchBar extends StatelessWidget {
   const CustomSearchBar({Key? key,
@@ -45,7 +46,7 @@ class CustomSearchBar extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: 4.0),
               child: Text(
-                searchText != "" ? searchText! : searchIn.tr,
+                searchText != "" ? searchText! : langKey.searchIn.tr,
                 style: TextStyle(
                   color: kLightColor,
                   fontWeight: FontWeight.w600,

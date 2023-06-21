@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/exports/export_widgets.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 
 class StickyLabelWithViewMoreOption extends StatelessWidget {
   final String? title, moreOptionText;
@@ -32,7 +33,7 @@ class StickyLabelWithViewMoreOption extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.only(right: kDefaultPadding),
             child: StickyLabel(
-              text: moreOptionText ?? seeAll.tr,
+              text: moreOptionText ?? langKey.seeAll.tr,
               style: bodyText1,
             ),
           ),

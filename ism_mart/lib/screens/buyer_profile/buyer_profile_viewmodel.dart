@@ -9,6 +9,8 @@ import 'package:ism_mart/helper/urls.dart';
 import 'package:ism_mart/screens/buyer_profile/buyer_profile_model.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:http/http.dart' as http;
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
+
 
 class BuyerProfileViewModel extends GetxController {
   GlobalKey<FormState> buyerProfileFormKey = GlobalKey<FormState>();
@@ -51,7 +53,7 @@ class BuyerProfileViewModel extends GetxController {
         phoneController.text = buyerProfileNewModel.value.phone ?? '';
         addressController.text = buyerProfileNewModel.value.address ?? '';
       } else {
-        AppConstant.displaySnackBar(errorTitle.tr, recordDoNotExist.tr);
+        AppConstant.displaySnackBar(langKey.errorTitle.tr, langKey.recordDoNotExist.tr);
       }
     }).catchError((e) {
       GlobalVariable.internetErr(true);
@@ -71,9 +73,9 @@ class BuyerProfileViewModel extends GetxController {
       LocalStorageHelper.deleteUserData();
       GlobalVariable.showLoader.value = false;
       if (parsedJson['success'] == true && parsedJson['data'] != null) {
-        AppConstant.displaySnackBar(successTitle.tr, recordDoNotExist.tr);
+        AppConstant.displaySnackBar(langKey.successTitle.tr, langKey.recordDoNotExist.tr);
       } else {
-        AppConstant.displaySnackBar(errorTitle.tr, recordDoNotExist.tr);
+        AppConstant.displaySnackBar(langKey.errorTitle.tr, langKey.recordDoNotExist.tr);
       }
     }).catchError((e) {
       print(e);
@@ -113,9 +115,9 @@ class BuyerProfileViewModel extends GetxController {
           .then((parsedJson) {
         GlobalVariable.showLoader.value = false;
         if (parsedJson['message'] == "User updated successfully") {
-          AppConstant.displaySnackBar(success.tr, parsedJson['message']);
+          AppConstant.displaySnackBar(langKey.success.tr, parsedJson['message']);
         } else {
-          AppConstant.displaySnackBar(errorTitle.tr, parsedJson['message']);
+          AppConstant.displaySnackBar(langKey.errorTitle.tr, parsedJson['message']);
         }
       }).catchError((e) {
         GlobalVariable.internetErr(true);

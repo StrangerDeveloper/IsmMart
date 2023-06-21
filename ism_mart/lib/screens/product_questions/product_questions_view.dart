@@ -8,7 +8,7 @@ import 'package:ism_mart/screens/product_questions/product_questions_viewmodel.d
 import 'package:ism_mart/widgets/custom_appbar.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
-
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import '../../helper/validator.dart';
 
 class ProductQuestionsView extends StatelessWidget {
@@ -21,7 +21,7 @@ class ProductQuestionsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: productQuestions.tr,
+        title: langKey.productQuestions.tr,
       ),
       body: Stack(
         children: [
@@ -47,7 +47,7 @@ class ProductQuestionsView extends StatelessWidget {
           viewModel.loginCheck();
         },
         child: Text(
-          askQuestion.tr,
+          langKey.askQuestion.tr,
           style: TextStyle(color: Colors.white),
         ),
       ),
@@ -60,7 +60,7 @@ class ProductQuestionsView extends StatelessWidget {
           ? Center(
               child: NoDataFoundWithIcon(
                 icon: IconlyLight.search,
-                title: noQuestionFound.tr,
+                title: langKey.noQuestionFound.tr,
               ),
             )
           : ListView.builder(
@@ -256,7 +256,7 @@ class ProductQuestionsView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           StickyLabel(
-                            text: addQuestion.tr,
+                            text: langKey.addQuestion.tr,
                             style: headline1,
                           ),
                         ],
@@ -265,7 +265,7 @@ class ProductQuestionsView extends StatelessWidget {
                         padding: const EdgeInsets.only(top: 10, bottom: 20),
                         child: CustomTextField1(
                           controller: viewModel.addQuestionController,
-                          title: question.tr,
+                          title: langKey.question.tr,
                           asterisk: true,
                           minLines: 4,
                           maxLines: 6,
@@ -276,7 +276,7 @@ class ProductQuestionsView extends StatelessWidget {
                         ),
                       ),
                       CustomTextBtn(
-                        child: Text(addQuestion.tr),
+                        child: Text(langKey.addQuestion.tr),
                         onPressed: () {
                           viewModel.addQuestion();
                         },
@@ -316,7 +316,7 @@ class ProductQuestionsView extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 5),
                     child: Text(
-                      questions.tr,
+                      langKey.questions.tr,
                       style: GoogleFonts.lato(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -335,7 +335,7 @@ class ProductQuestionsView extends StatelessWidget {
               ),
               Divider(),
               BottomSheetItemRow(
-                title: updateQuestion.tr,
+                title: langKey.updateQuestion.tr,
                 icon: IconlyLight.edit,
                 isDisabled: false,
                 onTap: () {
@@ -344,7 +344,7 @@ class ProductQuestionsView extends StatelessWidget {
                 },
               ),
               BottomSheetItemRow(
-                title: deleteQuestion.tr,
+                title: langKey.deleteQuestion.tr,
                 icon: IconlyLight.delete,
                 isDisabled: false,
                 onTap: () {
@@ -364,8 +364,8 @@ class ProductQuestionsView extends StatelessWidget {
       context: Get.context!,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(deleteQuestion.tr),
-          content: Text(deleteQuestionDialogDesc.tr),
+          title: Text(langKey.deleteQuestion.tr),
+          content: Text(langKey.deleteQuestionDialogDesc.tr),
           actions: [
             Row(
               children: [
@@ -376,7 +376,7 @@ class ProductQuestionsView extends StatelessWidget {
                       foregroundColor: Colors.grey,
                     ),
                     child: Text(
-                      noBtn.tr,
+                      langKey.noBtn.tr,
                       style: TextStyle(
                         color: Colors.black,
                       ),
@@ -393,7 +393,7 @@ class ProductQuestionsView extends StatelessWidget {
                       foregroundColor: Colors.grey,
                     ),
                     child: Text(
-                      yesBtn.tr,
+                      langKey.yesBtn.tr,
                       style: TextStyle(
                         color: Colors.black,
                       ),
@@ -442,7 +442,7 @@ class ProductQuestionsView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           StickyLabel(
-                            text: updateQuestion.tr,
+                            text: langKey.updateQuestion.tr,
                             style: headline1,
                           ),
                         ],
@@ -451,7 +451,7 @@ class ProductQuestionsView extends StatelessWidget {
                         padding: const EdgeInsets.only(top: 10, bottom: 20),
                         child: CustomTextField1(
                           controller: viewModel.updateQuestionController,
-                          title: question.tr,
+                          title: langKey.question.tr,
                           asterisk: true,
                           minLines: 4,
                           maxLines: 6,
@@ -462,7 +462,7 @@ class ProductQuestionsView extends StatelessWidget {
                         ),
                       ),
                       CustomTextBtn(
-                        child: Text(updateBtn.tr),
+                        child: Text(langKey.updateBtn.tr),
                         onPressed: () {
                           viewModel.updateQuestion(index);
                         },

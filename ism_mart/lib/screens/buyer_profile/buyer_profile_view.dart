@@ -5,10 +5,9 @@ import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/helper/no_internet_view.dart';
 import 'package:ism_mart/screens/buyer_profile/buyer_profile_viewmodel.dart';
 import 'package:ism_mart/widgets/custom_appbar.dart';
-import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
 import 'package:ism_mart/widgets/pick_image.dart';
-import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 
 import '../../helper/validator.dart';
 
@@ -210,8 +209,8 @@ class BuyerProfileView extends StatelessWidget {
       context: Get.context!,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(deactivateBtn.tr),
-          content: Text(deActivateMsg.tr),
+          title: Text(langKey.deactivateBtn.tr),
+          content: Text(langKey.deActivateMsg.tr),
           actions: [
             Row(
               children: [
@@ -222,7 +221,7 @@ class BuyerProfileView extends StatelessWidget {
                       foregroundColor: Colors.grey,
                     ),
                     child: Text(
-                      noBtn.tr,
+                      langKey.noBtn.tr,
                       style: TextStyle(
                         color: Colors.black,
                       ),
@@ -239,7 +238,7 @@ class BuyerProfileView extends StatelessWidget {
                       foregroundColor: Colors.grey,
                     ),
                     child: Text(
-                      yesBtn.tr,
+                      langKey.yesBtn.tr,
                       style: TextStyle(
                         color: Colors.black,
                       ),

@@ -6,7 +6,7 @@ import 'package:ism_mart/helper/urls.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
 import '../../api_helper/local_storage/local_storage_helper.dart';
 import '../../models/user/user_model.dart';
-import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 
 class ChangePasswordViewModel extends GetxController {
   TextEditingController newPasswordController = TextEditingController();
@@ -50,9 +50,9 @@ class ChangePasswordViewModel extends GetxController {
           newPasswordController.text = "";
           confirmPasswordController.text = "";
           Get.back();
-          AppConstant.displaySnackBar(success.tr, parsedJson['message']);
+          AppConstant.displaySnackBar(langKey.success.tr, parsedJson['message']);
         } else {
-          AppConstant.displaySnackBar(errorTitle.tr, parsedJson['message']);
+          AppConstant.displaySnackBar(langKey.errorTitle.tr, parsedJson['message']);
         }
       }).catchError((e) {
         GlobalVariable.showLoader.value = false;

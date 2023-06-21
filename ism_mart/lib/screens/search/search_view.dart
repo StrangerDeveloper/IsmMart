@@ -8,7 +8,7 @@ import 'package:ism_mart/screens/search/search_viewmodel.dart';
 import 'package:ism_mart/screens/search_details/search_details_view.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/widgets/custom_appbar.dart';
-import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 
 class SearchView extends GetView<SearchViewModel> {
   SearchView({super.key});
@@ -89,7 +89,7 @@ class SearchView extends GetView<SearchViewModel> {
             ),
             fillColor: kWhiteColor,
             contentPadding: EdgeInsets.zero,
-            hintText: searchIn.tr,
+            hintText: langKey.searchIn.tr,
             hintStyle: TextStyle(
               color: kLightColor,
               fontWeight: FontWeight.w600,
@@ -106,23 +106,25 @@ class SearchView extends GetView<SearchViewModel> {
       children: [
         StickyLabelWithViewMoreOption(
             title: langKey.recentSearches.tr,
-            moreOptionText: clear.tr,
+            moreOptionText: langKey.clear.tr,
             onTap: () => controller.clearHistory()),
         AppConstant.spaceWidget(height: 10),
         Expanded(
-            child: controller.historyList.isEmpty
-                ? NoDataFoundWithIcon(
-                    title: noDataFound.tr,
-                    icon: Icons.search,
-                  )
-                : ListView.builder(
-                    shrinkWrap: true,
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: controller.historyList.length,
-                    itemBuilder: (_, index) {
-                      String? text = controller.historyList[index];
-                      return _singleListViewItem(text: text);
-                    })),
+          child: controller.historyList.isEmpty
+              ? NoDataFoundWithIcon(
+                  title: langKey.noDataFound.tr,
+                  icon: Icons.search,
+                )
+              : ListView.builder(
+                  shrinkWrap: true,
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: controller.historyList.length,
+                  itemBuilder: (_, index) {
+                    String? text = controller.historyList[index];
+                    return _singleListViewItem(text: text);
+                  },
+                ),
+        ),
       ],
     );
   }

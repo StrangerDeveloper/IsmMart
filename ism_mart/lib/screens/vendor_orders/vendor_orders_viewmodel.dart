@@ -4,6 +4,7 @@ import 'package:ism_mart/helper/api_base_helper.dart';
 import 'package:ism_mart/helper/urls.dart';
 import 'package:ism_mart/exports/exports_model.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 
 class VendorOrdersViewModel extends GetxController {
   // int selectedTabIndex = 0;
@@ -86,7 +87,7 @@ class VendorOrdersViewModel extends GetxController {
           pendingOrdersList.addAll(data.map((e) => VendorOrder.fromJson(e)));
           pendingLoader.value = false;
         } else {
-          AppConstant.displaySnackBar(errorTitle.tr, parsedJson['message']);
+          AppConstant.displaySnackBar(langKey.errorTitle.tr, parsedJson['message']);
         }
       }).catchError((e) {
         print(e);
@@ -118,7 +119,7 @@ class VendorOrdersViewModel extends GetxController {
           acceptedOrdersList.addAll(data.map((e) => VendorOrder.fromJson(e)));
           acceptedLoader.value = false;
         } else {
-          AppConstant.displaySnackBar(errorTitle.tr, parsedJson['message']);
+          AppConstant.displaySnackBar(langKey.errorTitle.tr, parsedJson['message']);
         }
       }).catchError((e) {
         print(e);
@@ -150,7 +151,7 @@ class VendorOrdersViewModel extends GetxController {
           shippedOrdersList.addAll(data.map((e) => VendorOrder.fromJson(e)));
           shippedLoader.value = false;
         } else {
-          AppConstant.displaySnackBar(errorTitle.tr, parsedJson['message']);
+          AppConstant.displaySnackBar(langKey.errorTitle.tr, parsedJson['message']);
         }
       }).catchError((e) {
         print(e);
@@ -182,7 +183,7 @@ class VendorOrdersViewModel extends GetxController {
           deliveredOrdersList.addAll(data.map((e) => VendorOrder.fromJson(e)));
           deliveredLoader.value = false;
         } else {
-          AppConstant.displaySnackBar(errorTitle.tr, parsedJson['message']);
+          AppConstant.displaySnackBar(langKey.errorTitle.tr, parsedJson['message']);
         }
       }).catchError((e) {
         print(e);
@@ -214,7 +215,7 @@ class VendorOrdersViewModel extends GetxController {
           cancelledOrdersList.addAll(data.map((e) => VendorOrder.fromJson(e)));
           cancelledLoader.value = false;
         } else {
-          AppConstant.displaySnackBar(errorTitle.tr, parsedJson['message']);
+          AppConstant.displaySnackBar(langKey.errorTitle.tr, parsedJson['message']);
         }
       }).catchError((e) {
         print(e);

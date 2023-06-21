@@ -7,7 +7,7 @@ import 'package:iconly/iconly.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ism_mart/helper/constants.dart';
 import 'package:ism_mart/widgets/single_order_details_ui.dart';
-import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 
 class PickImage {
   File? selectedImage;

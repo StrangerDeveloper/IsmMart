@@ -9,7 +9,7 @@ import 'package:ism_mart/exports/exports_model.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:iconly/iconly.dart';
-import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/custom_sliver_appbar.dart';
 
 import '../helper/validator.dart';
@@ -451,7 +451,7 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                                     await controller.submitReviewBtn(
                                         orderItem: orderItem);
                                   },
-                                  title: submit.tr,
+                                  title: langKey.submit.tr,
                                   height: 40,
                                   width: 200,
                                 ),
@@ -735,13 +735,13 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
               FormInputFieldWithIcon(
                 controller: controller.titleController,
                 iconPrefix: Icons.title,
-                labelText: titleKey.tr,
+                labelText: langKey.titleKey.tr,
                 iconColor: kPrimaryColor,
                 autofocus: false,
                 textStyle: bodyText1,
                 autoValidateMode: AutovalidateMode.onUserInteraction,
                 validator: (value) =>
-                    GetUtils.isBlank(value!)! ? titleReq.tr : null,
+                    GetUtils.isBlank(value!)! ? langKey.titleReq.tr : null,
                 keyboardType: TextInputType.name,
                 onChanged: (value) {},
                 onSaved: (value) {},
@@ -750,13 +750,13 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
               FormInputFieldWithIcon(
                 controller: controller.descriptionController,
                 iconPrefix: Icons.description,
-                labelText: description.tr,
+                labelText: langKey.description.tr,
                 iconColor: kPrimaryColor,
                 autofocus: false,
                 textStyle: bodyText1,
                 autoValidateMode: AutovalidateMode.onUserInteraction,
                 validator: (value) =>
-                    GetUtils.isBlank(value!)! ? descriptionReq.tr : null,
+                    GetUtils.isBlank(value!)! ? langKey.descriptionReq.tr : null,
                 keyboardType: TextInputType.name,
                 onChanged: (value) {},
                 onSaved: (value) {},
@@ -772,7 +772,7 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                                 orderItem: orderItem, orderId: orderModel!.id!);
                           }
                         },
-                        title: submit.tr,
+                        title: langKey.submit.tr,
                         height: 40,
                         width: 200,
                       ),

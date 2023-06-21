@@ -1,9 +1,9 @@
 import 'dart:convert';
-
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/api_service.dart';
 import 'package:ism_mart/exports/exports_model.dart';
-import 'package:ism_mart/exports/exports_utils.dart';
+
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 
 List<UserModel> userModelFromJson(String str) =>
     List<UserModel>.from(json.decode(str).map((x) => UserModel.fromJson(x)));
@@ -138,7 +138,7 @@ class UserResponse {
     // print(">>Body: ${response.toString()}");
     String? message = "";
     if (response['message'] == null) {
-      message = someThingWentWrong.tr;
+      message = langKey.someThingWentWrong.tr;
     } else if (response['message'] is List<dynamic>) {
       message = (response['message'] as List).first;
     } else {

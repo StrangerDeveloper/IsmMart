@@ -3,12 +3,11 @@ import 'package:get/get.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/screens/contact_us/contact_us_viewmodel.dart';
 import 'package:ism_mart/helper/constants.dart';
-import 'package:ism_mart/utils/languages/translations_key.dart';
 import 'package:ism_mart/helper/validator.dart';
 import 'package:ism_mart/widgets/custom_appbar.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
 import 'package:ism_mart/widgets/no_internet_view.dart';
-import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 
 class ContactUsView extends StatelessWidget {
   ContactUsView({Key? key}) : super(key: key);
@@ -114,7 +113,7 @@ class ContactUsView extends StatelessWidget {
             Align(
               alignment: Alignment.centerLeft,
               child: CustomText(
-                title: forAnyQueryJust.tr,
+                title: langKey.forAnyQueryJust.tr,
                 style: headline2,
               ),
             ),
@@ -122,7 +121,7 @@ class ContactUsView extends StatelessWidget {
             FormInputFieldWithIcon(
               controller: viewModel.firstNameController,
               iconPrefix: Icons.person_rounded,
-              labelText: fullName.tr,
+              labelText: langKey.fullName.tr,
               iconColor: kPrimaryColor,
               autofocus: false,
               textStyle: bodyText1,
@@ -136,7 +135,7 @@ class ContactUsView extends StatelessWidget {
             FormInputFieldWithIcon(
               controller: viewModel.emailController,
               iconPrefix: Icons.email_rounded,
-              labelText: email.tr,
+              labelText: langKey.email.tr,
               iconColor: kPrimaryColor,
               autofocus: false,
               textStyle: bodyText1,
@@ -152,13 +151,13 @@ class ContactUsView extends StatelessWidget {
             FormInputFieldWithIcon(
               controller: viewModel.subjectController,
               iconPrefix: Icons.subject_rounded,
-              labelText: subject.tr,
+              labelText: langKey.subject.tr,
               iconColor: kPrimaryColor,
               autofocus: false,
               textStyle: bodyText1,
               autoValidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) =>
-                  GetUtils.isBlank(value!)! ? subjectReq.tr : null,
+                  GetUtils.isBlank(value!)! ? langKey.subjectReq.tr : null,
               keyboardType: TextInputType.name,
               onChanged: (value) {},
               onSaved: (value) {},
@@ -167,13 +166,13 @@ class ContactUsView extends StatelessWidget {
             FormInputFieldWithIcon(
               controller: viewModel.storeDescController,
               iconPrefix: Icons.description,
-              labelText: message.tr,
+              labelText: langKey.message.tr,
               iconColor: kPrimaryColor,
               autofocus: false,
               textStyle: bodyText1,
               autoValidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) =>
-                  GetUtils.isBlank(value!)! ? messageReq.tr : null,
+                  GetUtils.isBlank(value!)! ? langKey.messageReq.tr : null,
               keyboardType: TextInputType.text,
               onChanged: (value) {},
               onSaved: (value) {},
@@ -183,7 +182,7 @@ class ContactUsView extends StatelessWidget {
               onPressed: () {
                 viewModel.contactUsBtn();
               },
-              title: send.tr,
+              title: langKey.send.tr,
               height: 40,
               width: 150,
             ),

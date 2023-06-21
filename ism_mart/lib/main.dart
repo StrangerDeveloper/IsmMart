@@ -12,6 +12,7 @@ import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'exports/export_api_helper.dart';
+import 'helper/languages/app_translations.dart';
 import 'helper/theme_helper.dart';
 
 void main() async {

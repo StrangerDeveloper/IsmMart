@@ -4,7 +4,7 @@ import 'package:iconly/iconly.dart';
 import 'package:ism_mart/helper/api_base_helper.dart';
 import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/urls.dart';
-import 'package:ism_mart/utils/languages/translations_key.dart';
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/getx_helper.dart';
 
 class ContactUsViewModel extends GetxController {
@@ -27,23 +27,23 @@ class ContactUsViewModel extends GetxController {
     return [
       {
         'icon': Icons.email_outlined,
-        'title': email.tr,
+        'title': langKey.email.tr,
         'description': 'businesses@ismmart.com\n'
       },
       {
         'icon': IconlyBold.calling,
-        'title': call.tr,
+        'title': langKey.call.tr,
         'description': '+92 51 111 007 123\n+92 3329999969'
       },
       {
         'icon': IconlyLight.location,
-        'title': centralHeadquarters.tr,
-        'description': centralHeadquartersValue.tr
+        'title': langKey.centralHeadquarters.tr,
+        'description': langKey.centralHeadquartersValue.tr
       },
       {
         'icon': IconlyLight.location,
-        'title': globalHeadquarters.tr,
-        'description': globalHeadquartersValue.tr
+        'title': langKey.globalHeadquarters.tr,
+        'description': langKey.globalHeadquartersValue.tr
       }
     ];
   }
@@ -69,10 +69,14 @@ class ContactUsViewModel extends GetxController {
         if (parsedJson['success'] == true) {
           GlobalVariable.internetErr(false);
           GetxHelper.showSnackBar(
-              title: successTitle.tr, message: parsedJson['message']);
+            title: langKey.successTitle.tr,
+            message: parsedJson['message'],
+          );
         } else {
           GetxHelper.showSnackBar(
-              title: errorTitle.tr, message: parsedJson['message']);
+            title: langKey.errorTitle.tr,
+            message: parsedJson['message'],
+          );
         }
       }).catchError((e) {
         GlobalVariable.internetErr(true);

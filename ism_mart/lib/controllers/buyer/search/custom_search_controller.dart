@@ -4,7 +4,7 @@ import 'package:ism_mart/exports/export_api_helper.dart';
 import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/exports/exports_model.dart';
 import 'package:ism_mart/helper/constants.dart';
-import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 
 class CustomSearchController extends GetxController {
   final ApiProvider _apiProvider;

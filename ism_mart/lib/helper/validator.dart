@@ -1,7 +1,7 @@
 import 'dart:core';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 
 class Validator {
   /////////////////////  Formatters  /////////////////////////

@@ -1,4 +1,4 @@
-import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:get/get.dart';
 import 'package:ism_mart/exports/export_api_helper.dart';
 import '../../models/user/user_model.dart';

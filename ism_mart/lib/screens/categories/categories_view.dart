@@ -6,7 +6,7 @@ import 'package:ism_mart/exports/exports_model.dart';
 import 'package:ism_mart/screens/search_details/search_details_view.dart';
 import 'package:ism_mart/exports/export_widgets.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
-import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 
 class CategoriesView extends GetView<CategoryController> {
   const CategoriesView({Key? key}) : super(key: key);

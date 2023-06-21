@@ -5,9 +5,9 @@ import 'package:ism_mart/helper/no_internet_view.dart';
 import 'package:ism_mart/exports/exports_model.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
-import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/custom_appbar.dart';
-
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 class SearchDetailsView extends GetView<CustomSearchController> {
   const SearchDetailsView(
       {Key? key,
@@ -382,7 +382,7 @@ class SearchDetailsView extends GetView<CustomSearchController> {
           Expanded(
             child: CustomTextBtn(
               onPressed: () => controller.clearFilters(),
-              title: clear.tr,
+              title: langKey.clear.tr,
               height: 36,
             ),
           ),

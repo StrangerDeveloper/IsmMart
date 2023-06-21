@@ -5,7 +5,7 @@ import 'package:ism_mart/widgets/no_internet_view.dart';
 import 'package:ism_mart/screens/signin/signin_viewmodel.dart';
 import 'package:ism_mart/exports/export_widgets.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
-import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/obscure_suffix_icon.dart';
 
 import '../../helper/validator.dart';

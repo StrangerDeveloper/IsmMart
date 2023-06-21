@@ -5,7 +5,7 @@ import 'package:ism_mart/screens/all_dispute/all_dispute_viewmodel.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/widgets/custom_appbar.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
-import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 
 class AllDisputeView extends StatelessWidget {
   AllDisputeView({Key? key}) : super(key: key);

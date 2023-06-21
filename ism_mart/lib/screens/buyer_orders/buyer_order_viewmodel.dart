@@ -5,6 +5,7 @@ import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/urls.dart';
 import 'package:ism_mart/exports/exports_model.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 
 class BuyerOrderViewModel extends GetxController {
   ScrollController scrollController = ScrollController();
@@ -63,7 +64,7 @@ class BuyerOrderViewModel extends GetxController {
           ordersList.addAll(data.map((e) => OrderModel.fromJson(e)));
           showLoader.value = false;
         } else {
-          AppConstant.displaySnackBar(errorTitle.tr, parsedJson['message']);
+          AppConstant.displaySnackBar(langKey.errorTitle.tr, parsedJson['message']);
         }
       }).catchError((e) {
         print(e);

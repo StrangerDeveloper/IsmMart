@@ -5,6 +5,7 @@ import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/urls.dart';
 import 'package:ism_mart/screens/vendor_question/vendor_question_model.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 
 class VendorQuestionViewModel extends GetxController {
   List<VendorQuestionModel> productQuestionsList = <VendorQuestionModel>[].obs;
@@ -61,10 +62,10 @@ class VendorQuestionViewModel extends GetxController {
         if (parsedJson['message'] == "Answer added successfully") {
 
           answerController.text = "";
-          AppConstant.displaySnackBar(success.tr, parsedJson['message']);
+          AppConstant.displaySnackBar(langKey.success.tr, parsedJson['message']);
           getData();
         } else {
-          AppConstant.displaySnackBar(errorTitle.tr, parsedJson['message']);
+          AppConstant.displaySnackBar(langKey.errorTitle.tr, parsedJson['message']);
         }
       }).catchError((e) {
         GlobalVariable.showLoader.value = false;
@@ -91,10 +92,10 @@ class VendorQuestionViewModel extends GetxController {
         if (parsedJson['message'] == "Answer updated successfully") {
 
           updateAnswerController.text = "";
-          AppConstant.displaySnackBar(success.tr, parsedJson['message']);
+          AppConstant.displaySnackBar(langKey.success.tr, parsedJson['message']);
           getData();
         } else {
-          AppConstant.displaySnackBar(errorTitle.tr, parsedJson['message']);
+          AppConstant.displaySnackBar(langKey.errorTitle.tr, parsedJson['message']);
         }
       }).catchError((e) {
         GlobalVariable.showLoader.value = false;
@@ -112,10 +113,10 @@ class VendorQuestionViewModel extends GetxController {
         .then((parsedJson) {
       GlobalVariable.showLoader.value = false;
       if (parsedJson['message'] == "Answer deleted successfully") {
-        AppConstant.displaySnackBar(success.tr, parsedJson['message']);
+        AppConstant.displaySnackBar(langKey.success.tr, parsedJson['message']);
         getData();
       } else {
-        AppConstant.displaySnackBar(errorTitle.tr, parsedJson['message']);
+        AppConstant.displaySnackBar(langKey.errorTitle.tr, parsedJson['message']);
       }
     }).catchError((e) {
       GlobalVariable.showLoader.value = false;

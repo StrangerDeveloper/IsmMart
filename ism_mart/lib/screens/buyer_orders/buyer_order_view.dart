@@ -5,7 +5,7 @@ import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/helper/no_internet_view.dart';
 import 'package:ism_mart/screens/buyer_orders/buyer_order_viewmodel.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
-import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/custom_appbar.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
 

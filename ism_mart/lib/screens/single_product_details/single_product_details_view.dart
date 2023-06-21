@@ -9,7 +9,7 @@ import 'package:ism_mart/screens/single_product_details/single_product_details_v
 import 'package:ism_mart/widgets/loader_view.dart';
 import 'package:ism_mart/exports/export_widgets.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
-import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import '../../widgets/custom_appbar.dart';
 
 class SingleProductDetailsView extends StatelessWidget {

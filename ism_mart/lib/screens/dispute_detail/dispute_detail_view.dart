@@ -7,7 +7,7 @@ import 'package:ism_mart/widgets/custom_appbar.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
 import 'package:ism_mart/helper/constants.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 
 class DisputeDetailView extends StatelessWidget {
   DisputeDetailView({Key? key}) : super(key: key);

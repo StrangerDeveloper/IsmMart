@@ -4,11 +4,12 @@ import 'package:ism_mart/helper/urls.dart';
 import '../../controllers/controllers.dart';
 import '../../helper/api_base_helper.dart';
 import '../../helper/global_variables.dart';
-import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import '../../models/user/user_model.dart';
 import '../../exports/exports_utils.dart';
 import '../change_address/change_address_viewmodel.dart';
 import '../checkout/checkout_viewmodel.dart';
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 
 class AddUpdateAddressViewModel extends GetxController {
   bool isUpdateScreen = false;
@@ -56,7 +57,7 @@ class AddUpdateAddressViewModel extends GetxController {
     if (shippingAddressFormKey.currentState?.validate() ?? false) {
       if (cityViewModel.authController.selectedCity.value.id == null &&
           cityViewModel.authController.selectedCity.value.id == null) {
-        AppConstant.displaySnackBar(errorTitle.tr, langKey.plzSelectCountry.tr);
+        AppConstant.displaySnackBar(langKey.errorTitle.tr, langKey.plzSelectCountry.tr);
         return;
       }
 

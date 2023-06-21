@@ -4,7 +4,7 @@ import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/urls.dart';
 import 'package:ism_mart/screens/dispute_detail/dispute_detail_model.dart';
 import 'package:ism_mart/helper/constants.dart';
-import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 
 class DisputeDetailViewModel extends GetxController {
   Rx<DisputeDetailModel> disputeDetailModel = DisputeDetailModel().obs;

@@ -4,7 +4,7 @@ import 'package:ism_mart/screens/change_address/change_address_viewmodel.dart';
 import 'package:ism_mart/widgets/custom_appbar.dart';
 import '../../exports/exports_utils.dart';
 import '../../exports/export_widgets.dart';
-import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import '../../widgets/loader_view.dart';
 
 class ChangeAddressView extends StatelessWidget {

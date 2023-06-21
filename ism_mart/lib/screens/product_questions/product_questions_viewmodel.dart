@@ -7,6 +7,7 @@ import 'package:ism_mart/controllers/product_controller.dart';
 import 'package:ism_mart/exports/exports_model.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
 import 'product_questions_view.dart';
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 
 class ProductQuestionsViewModel extends GetxController {
 
@@ -83,14 +84,14 @@ class ProductQuestionsViewModel extends GetxController {
         if (parsedJson['message'] == "Product question created successfully") {
           addQuestionController.text = "";
           Get.back();
-          AppConstant.displaySnackBar(success.tr, parsedJson['message']);
+          AppConstant.displaySnackBar(langKey.success.tr, parsedJson['message']);
           /////////////
           getQuestionAnswers(productId.value);
           ProductController controller = Get.find();
           controller.getProductQuestions(productId: productId);
           ////////////
         } else {
-          AppConstant.displaySnackBar(errorTitle.tr, parsedJson['message']);
+          AppConstant.displaySnackBar(langKey.errorTitle.tr, parsedJson['message']);
         }
       }).catchError((e) {
         GlobalVariable.showLoader.value = false;
@@ -117,14 +118,14 @@ class ProductQuestionsViewModel extends GetxController {
         GlobalVariable.showLoader.value = false;
         if (parsedJson['message'] == "Product question updated successfully") {
           updateQuestionController.text = "";
-          AppConstant.displaySnackBar(success.tr, parsedJson['message']);
+          AppConstant.displaySnackBar(langKey.success.tr, parsedJson['message']);
           /////////////
           getQuestionAnswers(productId.value);
           ProductController controller = Get.find();
           controller.getProductQuestions(productId: productId);
           ////////////
         } else {
-          AppConstant.displaySnackBar(errorTitle.tr, parsedJson['message']);
+          AppConstant.displaySnackBar(langKey.errorTitle.tr, parsedJson['message']);
         }
       }).catchError((e) {
         GlobalVariable.showLoader.value = false;
@@ -143,13 +144,13 @@ class ProductQuestionsViewModel extends GetxController {
         .then((parsedJson) {
       GlobalVariable.showLoader.value = false;
       if (parsedJson['message'] == "Question deleted successfully") {
-        AppConstant.displaySnackBar(success.tr, parsedJson['message']);
+        AppConstant.displaySnackBar(langKey.success.tr, parsedJson['message']);
         getQuestionAnswers(productId.value);
         ProductController controller = Get.find();
         controller.getProductQuestions(productId: productId);
         // Get.to(ProductQuestionsView());
       } else {
-        AppConstant.displaySnackBar(errorTitle.tr, parsedJson['message']);
+        AppConstant.displaySnackBar(langKey.errorTitle.tr, parsedJson['message']);
       }
     }).catchError((e) {
       GlobalVariable.showLoader.value = false;

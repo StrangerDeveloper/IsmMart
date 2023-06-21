@@ -6,7 +6,7 @@ import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/screens/vendor_question/vendor_question_viewmodel.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
-
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import '../../helper/validator.dart';
 
 class VendorQuestionView extends StatelessWidget {
@@ -31,7 +31,7 @@ class VendorQuestionView extends StatelessWidget {
           ? Center(
               child: NoDataFoundWithIcon(
                 icon: IconlyLight.search,
-                title: noQuestionFound.tr,
+                title: langKey.noQuestionFound.tr,
               ),
             )
           : ListView.builder(
@@ -196,7 +196,7 @@ class VendorQuestionView extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 5),
                     child: Text(
-                      questions.tr,
+                      langKey.questions.tr,
                       style: GoogleFonts.lato(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -215,7 +215,7 @@ class VendorQuestionView extends StatelessWidget {
               ),
               Divider(),
               BottomSheetItemRow(
-                title: addAnswer.tr,
+                title: langKey.addAnswer.tr,
                 icon: Icons.add,
                 isDisabled: viewModel.productQuestionsList[index].answer != null
                     ? true
@@ -228,7 +228,7 @@ class VendorQuestionView extends StatelessWidget {
                       },
               ),
               BottomSheetItemRow(
-                title: updateAnswer.tr,
+                title: langKey.updateAnswer.tr,
                 icon: IconlyLight.edit,
                 isDisabled: viewModel.productQuestionsList[index].answer != null
                     ? false
@@ -241,7 +241,7 @@ class VendorQuestionView extends StatelessWidget {
                     : null,
               ),
               BottomSheetItemRow(
-                title: deleteAnswer.tr,
+                title: langKey.deleteAnswer.tr,
                 icon: IconlyLight.delete,
                 isDisabled: viewModel.productQuestionsList[index].answer != null
                     ? false
@@ -254,7 +254,7 @@ class VendorQuestionView extends StatelessWidget {
                     : null,
               ),
               BottomSheetItemRow(
-                title: viewProduct.tr,
+                title: langKey.viewProduct.tr,
                 icon: Icons.feed_outlined,
                 isDisabled: false,
                 onTap: () {
@@ -271,12 +271,6 @@ class VendorQuestionView extends StatelessWidget {
                             "${viewModel.productQuestionsList[index].product?.id}"
                       }
                     ]);
-
-                    // Get.to(() => SingleProductView(
-                    //       productId:
-                    //           "${viewModel.productQuestionsList[index].product?.id}",
-                    //       calledFor: 'seller',
-                    //     ));
                   }
                 },
               ),
@@ -315,7 +309,7 @@ class VendorQuestionView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           StickyLabel(
-                            text: addAnswer.tr,
+                            text: langKey.addAnswer.tr,
                             style: headline1,
                           ),
                         ],
@@ -324,7 +318,7 @@ class VendorQuestionView extends StatelessWidget {
                         padding: const EdgeInsets.only(top: 10, bottom: 20),
                         child: CustomTextField1(
                           controller: viewModel.answerController,
-                          title: answer.tr,
+                          title: langKey.answer.tr,
                           asterisk: true,
                           minLines: 4,
                           maxLines: 6,
@@ -335,7 +329,7 @@ class VendorQuestionView extends StatelessWidget {
                         ),
                       ),
                       CustomTextBtn(
-                        child: Text(addAnswer.tr),
+                        child: Text(langKey.addAnswer.tr),
                         onPressed: () {
                           viewModel.addAnswer(index);
                         },
@@ -387,7 +381,7 @@ class VendorQuestionView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           StickyLabel(
-                            text: addAnswer.tr,
+                            text: langKey.addAnswer.tr,
                             style: headline1,
                           ),
                         ],
@@ -396,7 +390,7 @@ class VendorQuestionView extends StatelessWidget {
                         padding: const EdgeInsets.only(top: 10, bottom: 20),
                         child: CustomTextField1(
                           controller: viewModel.updateAnswerController,
-                          title: answer.tr,
+                          title: langKey.answer.tr,
                           asterisk: true,
                           minLines: 4,
                           maxLines: 6,
@@ -407,7 +401,7 @@ class VendorQuestionView extends StatelessWidget {
                         ),
                       ),
                       CustomTextBtn(
-                        child: Text(addAnswer.tr),
+                        child: Text(langKey.addAnswer.tr),
                         onPressed: () {
                           viewModel.updateAnswer(index);
                         },
