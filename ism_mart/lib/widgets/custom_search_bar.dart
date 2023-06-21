@@ -26,8 +26,12 @@ class CustomSearchBar extends StatelessWidget {
       if (calledFromDashboard || calledFromCategories) {
         Get.toNamed(Routes.searchRoute,
             arguments: {"searchText": searchText ?? " "});
-      }else {
-        Get.offNamed(Routes.searchRoute);
+      }else if(calledFromSearchDetailsView == true){
+        int count = 0;
+        Get.offNamedUntil(Routes.searchRoute, (route) => count++ >= 2);
+      }
+      else{
+        Get.offNamed(Routes.searchRoute, arguments: {"searchText": searchText ?? " "});
       }
       },
       child: Container(

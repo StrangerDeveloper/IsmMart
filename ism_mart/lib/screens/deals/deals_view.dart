@@ -4,10 +4,8 @@ import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/helper/no_internet_view.dart';
 import 'package:ism_mart/screens/deals/deals_viewmodel.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
-import 'package:ism_mart/widgets/custom_appbar.dart';
 import '../../helper/constants.dart';
 import '../../helper/responsiveness.dart';
-import '../../widgets/svg_helper.dart';
 import '../categories/model/category_model.dart';
 import '../../models/product/product_model.dart';
 import '../../widgets/loader_view.dart';
@@ -21,13 +19,8 @@ class DealsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: CustomAppBar(
-          leading: buildSvgLogo(),
-          searchBar: CustomSearchBar(
-            searchText: "",
-          ),
-        ),
-        body: Obx(() => viewModel.noProductsFound.value ?
+        body: Obx(() =>
+        viewModel.noProductsFound.value ?
         Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -37,10 +30,10 @@ class DealsView extends StatelessWidget {
                 subTitle: langKey.emptyProductSearchMsg.tr,
               ),
               AppConstant.spaceWidget(
-                height: 18
+                  height: 18
               ),
               TextButton(
-                  onPressed: ()async {
+                  onPressed: () async {
                     viewModel.filters.clear();
                     viewModel.page = 1;
                     viewModel.searchTextController.clear();
@@ -53,9 +46,9 @@ class DealsView extends StatelessWidget {
                   }, child: Text(
                 'Clear Filters',
                 style: TextStyle(
-                  color: kPrimaryColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 17
+                    color: kPrimaryColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 17
                 ),
               ))
             ],
@@ -80,74 +73,50 @@ class DealsView extends StatelessWidget {
                               .itemsFound.tr}",
                           weight: FontWeight.w600,
                         ),
-                        // Expanded(
-                        //   flex: 4,
-                        //   child: Row(
-                        //     mainAxisAlignment: MainAxisAlignment.end,
-                        //     children: [
-                        //       TextButton.icon(
-                        //         onPressed: () {
-                        //           viewModel.setCategories(baseController.categories);
-                        //           showFilterBottomSheet();
-                        //         },
-                        //         icon: Icon(
-                        //           Icons.filter_alt_rounded,
-                        //           color: kPrimaryColor,
-                        //         ),
-                        //         label: CustomText(
-                        //           title: langKey.filter.tr,
-                        //           color: kPrimaryColor,
-                        //           weight: FontWeight.bold,
-                        //         ),
-                        //       ),
-                        //     ],
-                        //   ),
-                        // ),
                       ],
                     ),
                   ),
                 ),
-                // AppConstant.spaceWidget(height: 13),
-                        Expanded(
-                          child: GridView.builder(
-                            padding: EdgeInsets.all(8),
-                            controller: viewModel.scrollController,
-                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount:
-                                    AppResponsiveness.getGridItemCount(),
-                                mainAxisSpacing: 10,
-                                crossAxisSpacing: 10,
-                                childAspectRatio: AppResponsiveness
-                                    .getChildAspectRatioPoint90()
-                                // mainAxisExtent:
-                                //     AppResponsiveness.getMainAxisExtentPoint25(),
-                                ),
-                            itemCount: viewModel.productList.length,
-                            itemBuilder: (_, index) {
-                              ProductModel productModel =
-                                  viewModel.productList[index];
-                              return SingleProductItems(
-                                  productModel: productModel);
-                            },
-                          ),
-                        ),
-                        if (viewModel.isLoadingMore.isTrue)
-                          CustomLoading(
-                            isItForWidget: true,
-                            color: kPrimaryColor,
-                          )
-                      ],
+                Expanded(
+                  child: GridView.builder(
+                    padding: EdgeInsets.all(8),
+                    controller: viewModel.scrollController,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount:
+                        AppResponsiveness.getGridItemCount(),
+                        mainAxisSpacing: 10,
+                        crossAxisSpacing: 10,
+                        childAspectRatio: AppResponsiveness
+                            .getChildAspectRatioPoint90()
+                      // mainAxisExtent:
+                      //     AppResponsiveness.getMainAxisExtentPoint25(),
                     ),
-                    NoInternetView(
-                      onPressed: () {
-                        viewModel.addFilters();
-                        // viewModel.addFilters();
-                        // viewModel.addPriceFilter();
-                      },
-                    ),
-                    LoaderView(),
-                  ],
+                    itemCount: viewModel.productList.length,
+                    itemBuilder: (_, index) {
+                      ProductModel productModel =
+                      viewModel.productList[index];
+                      return SingleProductItems(
+                          productModel: productModel);
+                    },
+                  ),
                 ),
+                if (viewModel.isLoadingMore.isTrue)
+                  CustomLoading(
+                    isItForWidget: true,
+                    color: kPrimaryColor,
+                  )
+              ],
+            ),
+            NoInternetView(
+              onPressed: () {
+                viewModel.addFilters();
+                // viewModel.addFilters();
+                // viewModel.addPriceFilter();
+              },
+            ),
+            LoaderView(),
+          ],
+        ),
         ),
       ),
     );

@@ -135,8 +135,6 @@ class SingleProductDetailsViewModel extends GetxController {
       if (response['success'] == true && response['data'] != null) {
         productModel.value = ProductModel.fromJson(response['data']);
         await getProductQuestions();
-        print(
-            '>>product Feature: ${productModel.value.productFeatures?.length}');
       } else if (response['success'] == false) {
         productFoundCheck.value = false;
       } else {

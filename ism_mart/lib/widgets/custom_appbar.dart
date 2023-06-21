@@ -40,7 +40,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget{
           title: title?.tr,
           style: appBarTitleSize
       ),
-      // iconTheme: IconThemeData(color: kPrimaryColor),
       centerTitle: true,
       backgroundColor: kAppBarColor,
       actions: actionItem ?? null,
@@ -50,33 +49,3 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget{
   @override
   Size get preferredSize => Size.fromHeight(height);
 }
-
-// class CustomSimpleAppBar extends CustomAppBar{
-//
-//   CustomSimpleAppBar({this.title, this.leading});
-//
-//   final String? title;
-//   final Widget? leading;
-//
-//   @override
-//   Widget build(BuildContext context){
-//     return AppBar(
-//       actions: [],
-//       leading: leading == null ? InkWell(
-//         onTap: (){
-//           Get.back();
-//         },
-//         child: Icon(
-//           Icons.arrow_back_ios,
-//           color: kPrimaryColor,
-//           size: 20,
-//         ),
-//       ) : leading,
-//       centerTitle: true,
-//       title: CustomText(
-//         title: title,
-//         style: appBarTitleSize,
-//       ),
-//     );
-//   }
-// }

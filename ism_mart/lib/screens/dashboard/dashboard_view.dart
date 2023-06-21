@@ -353,6 +353,7 @@ class DashboardView extends GetView<BaseController> {
                         searchQuery: "",
                         //used flag to call method of getProductByTypes
                         productTypeKey: "${e.key}",
+                        calledToGoBackOnce: true,
                         // calling for all products key.
                       ));
                 }),

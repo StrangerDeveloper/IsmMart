@@ -23,6 +23,7 @@ class SingleCategoryItem extends StatelessWidget {
       onTap: () {
         Get.to(() => SearchDetailsView(
               categoryID: categoryModel!.id,
+          calledToGoBackOnce: true,
             ));
         // Get.toNamed(Routes.searchRoute,
         //     arguments: {"searchText": "${category.name}"});

@@ -10,7 +10,6 @@ import 'package:ism_mart/widgets/loader_view.dart';
 import 'package:ism_mart/exports/export_widgets.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
-
 import '../../widgets/custom_appbar.dart';
 
 class SingleProductDetailsView extends StatelessWidget {
@@ -39,7 +38,7 @@ class SingleProductDetailsView extends StatelessWidget {
             : Scaffold(
                 appBar: CustomAppBar(
                   title: langKey.productDetails.tr,
-                  actionItem: Get.arguments[0]["calledFor"] != 'customer' ?
+                  actionItem: Get.arguments[0]["calledFor"] == 'customer' ? [
                     Align(
                       alignment: Alignment.center,
                       child: Padding(
@@ -48,7 +47,7 @@ class SingleProductDetailsView extends StatelessWidget {
                           onTap: () {
                             Get.offNamed(Routes.cartRoute,
                                 arguments: {"calledFromSPV": true},
-                                preventDuplicates: true);
+                                preventDuplicates: false);
                           },
                           iconWidget: Icon(
                             IconlyLight.buy,
@@ -57,9 +56,8 @@ class SingleProductDetailsView extends StatelessWidget {
                           ),
                         ),
                       ),
-                    ) : null,
+                    ) ] : null,
                 ),
-                // _appBar(),
                 backgroundColor: Colors.grey[300]!,
                 resizeToAvoidBottomInset: true,
                 body: Stack(
@@ -103,103 +101,10 @@ class SingleProductDetailsView extends StatelessWidget {
                     LoaderView(),
                   ],
                 ),
-              )));
+              ),
+        ),
+    );
   }
-
-  // AppBar _appBar() {
-  //   return AppBar(
-  //       actions: Get.arguments[0]["calledFor"] == 'customer'
-  //           ? [
-  //               Align(
-  //                 alignment: Alignment.center,
-  //                 child: Padding(
-  //                   padding: const EdgeInsets.only(right: 12.0),
-  //                   child: CartIcon(
-  //                     onTap: () {
-  //                       Get.offNamed(Routes.cartRoute,
-  //                           arguments: {"calledFromSPV": true},
-  //                           preventDuplicates: false);
-  //                     },
-  //                     iconWidget: Icon(
-  //                       IconlyLight.buy,
-  //                       size: 25,
-  //                       color: kPrimaryColor,
-  //                     ),
-  //                   ),
-  //                 ),
-  //               ),
-  //             ]
-  //           : null,
-  //       backgroundColor: kAppBarColor,
-  //       centerTitle: true,
-  //       leading: InkWell(
-  //         onTap: () => Get.back(),
-  //         child: Icon(
-  //           Icons.arrow_back_ios_new,
-  //           size: 21,
-  //           color: kPrimaryColor,
-  //         ),
-  //       ),
-  //       title: CustomText(
-  //         title: langKey.productDetails.tr,
-  //         style: appBarTitleSize.copyWith(fontSize: 18),
-  //       ));
-  // }
-
-  // SliverAppBar _sliverAppBar(ProductModel productModel) {
-  //   return SliverAppBar(
-  //     backgroundColor: kAppBarColor,
-  //     automaticallyImplyLeading: true,
-  //     leadingWidth: 30,
-  //     floating: true,
-  //     pinned: true,
-  //     centerTitle: true,
-  //     leading: InkWell(
-  //       onTap: () => Get.back(),
-  //       child: Icon(
-  //         Icons.arrow_back_ios_new,
-  //         size: 18,
-  //         color: kPrimaryColor,
-  //       ),
-  //     ),
-  //     title: Get.arguments != null &&
-  //         Get.arguments["calledFor"] != null &&
-  //         Get.arguments["calledFor"]!.contains("seller")
-  //         ? CustomText(
-  //       title: "Product Details",
-  //       style: appBarTitleSize,
-  //     )
-  //         : Column(
-  //       children: [
-  //         Row(
-  //           crossAxisAlignment: CrossAxisAlignment.center,
-  //           children: [
-  //             Expanded(
-  //                 flex: 5,
-  //                 child: CustomSearchBar(
-  //                   searchText: productModel.name,
-  //                   calledFromSPV: true,
-  //                 )),
-  //             AppConstant.spaceWidget(width: 10),
-  //             CartIcon(
-  //               onTap: () {
-  //                 //called from SingleProductView (SPV)
-  //                 Get.offNamed(Routes.cartRoute,
-  //                     arguments: {"calledFromSPV": true},
-  //                     preventDuplicates: false);
-  //               },
-  //               iconWidget: Icon(
-  //                 IconlyLight.buy,
-  //                 size: 25,
-  //                 color: kPrimaryColor,
-  //               ),
-  //             ),
-  //           ],
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
 
   Stack _productImages() {
     viewModel.productModel.value.images!.forEach((element) {
