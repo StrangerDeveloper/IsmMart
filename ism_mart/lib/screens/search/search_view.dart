@@ -19,7 +19,8 @@ class SearchView extends GetView<SearchViewModel> {
       child: Scaffold(
         backgroundColor: Colors.grey[50]!,
         appBar: _appBar(),
-        body: Obx(() => Stack(
+        body: Obx(
+          () => Stack(
             children: [
               _body(),
               controller.isSearchingStarted.isTrue
@@ -35,7 +36,7 @@ class SearchView extends GetView<SearchViewModel> {
     );
   }
 
-  CustomAppBar _appBar(){
+  CustomAppBar _appBar() {
     return CustomAppBar(
       leading: InkWell(
         onTap: () {
@@ -100,7 +101,7 @@ class SearchView extends GetView<SearchViewModel> {
     );
   }
 
-  Column _body() {
+  Widget _body() {
     return Column(
       children: [
         StickyLabelWithViewMoreOption(
@@ -111,54 +112,58 @@ class SearchView extends GetView<SearchViewModel> {
         Expanded(
             child: controller.historyList.isEmpty
                 ? NoDataFoundWithIcon(
-              title: noDataFound.tr,
-              icon: Icons.search,
-            )
+                    title: noDataFound.tr,
+                    icon: Icons.search,
+                  )
                 : ListView.builder(
-                shrinkWrap: true,
-                physics: const BouncingScrollPhysics(),
-                itemCount: controller.historyList.length,
-                itemBuilder: (_, index) {
-                  String? text = controller.historyList[index];
-                  return _singleListViewItem(text: text);
-                }
-            )
-        ),
+                    shrinkWrap: true,
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: controller.historyList.length,
+                    itemBuilder: (_, index) {
+                      String? text = controller.historyList[index];
+                      return _singleListViewItem(text: text);
+                    })),
       ],
     );
   }
 
-  _suggestionList(List<ProductModel> list) {
-    return controller.suggestionList.isEmpty ? Container() : Padding(
-      padding: EdgeInsets.only(left: 50),
-      child: SizedBox(
-        height: 300,
-        width: AppResponsiveness.getWidthByPoints(points: 0.82),
-        child: CustomGreyBorderContainer(
-          borderColor: kTransparent,
-          child: GlobalVariable.showLoader.isTrue
-              ? CustomLoading(
-            isItForWidget: true,
-            color: kPrimaryColor,
-          )
-              : ListView.builder(
-              shrinkWrap: true,
-              physics: const BouncingScrollPhysics(),
-              itemCount: list.length,
-              itemBuilder: (_, index) {
-                ProductModel model = list[index];
-                return _singleListViewItem(
-                    text: model.name ?? "",
-                    isCalledForSearch: true,
-                    url: model.thumbnail
-                );
-              }),
-        ),
-      ),
-    );
+  Widget _suggestionList(List<ProductModel> list) {
+    return controller.suggestionList.isEmpty
+        ? Container()
+        : Padding(
+            padding: EdgeInsets.only(left: 50),
+            child: SizedBox(
+              height: 300,
+              width: AppResponsiveness.getWidthByPoints(points: 0.82),
+              child: CustomGreyBorderContainer(
+                borderColor: kTransparent,
+                child: GlobalVariable.showLoader.isTrue
+                    ? CustomLoading(
+                        isItForWidget: true,
+                        color: kPrimaryColor,
+                      )
+                    : ListView.builder(
+                        shrinkWrap: true,
+                        physics: const BouncingScrollPhysics(),
+                        itemCount: list.length,
+                        itemBuilder: (_, index) {
+                          ProductModel model = list[index];
+                          return _singleListViewItem(
+                              text: model.name ?? "",
+                              isCalledForSearch: true,
+                              url: model.thumbnail);
+                        },
+                      ),
+              ),
+            ),
+          );
   }
 
-  Column _singleListViewItem({String? text, String? url, bool? isCalledForSearch = false}) {
+  Widget _singleListViewItem({
+    String? text,
+    String? url,
+    bool? isCalledForSearch = false,
+  }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -172,7 +177,8 @@ class SearchView extends GetView<SearchViewModel> {
             CustomSearchController customSearchController = Get.find();
             customSearchController.productList.clear();
             customSearchController.filters.clear();
-            Get.to(() => SearchDetailsView(searchQuery: text),
+            Get.to(
+              () => SearchDetailsView(searchQuery: text),
             );
             controller.searchTextController.clear();
             controller.suggestionList.clear();
@@ -185,10 +191,15 @@ class SearchView extends GetView<SearchViewModel> {
                 CustomText(
                   title: text,
                 ),
-                url == null ? Container() : SizedBox(
-                    width: 35,
-                    height: 35,
-                    child: CustomNetworkImage(imageUrl: url.toString()))
+                url == null
+                    ? Container()
+                    : SizedBox(
+                        width: 35,
+                        height: 35,
+                        child: CustomNetworkImage(
+                          imageUrl: url.toString(),
+                        ),
+                      )
               ],
             ),
           ),

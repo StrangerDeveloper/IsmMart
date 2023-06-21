@@ -14,12 +14,15 @@ import '../../helper/validator.dart';
 class ProductQuestionsView extends StatelessWidget {
   ProductQuestionsView({Key? key}) : super(key: key);
 
-  final ProductQuestionsViewModel viewModel = Get.put(ProductQuestionsViewModel());
+  final ProductQuestionsViewModel viewModel =
+      Get.put(ProductQuestionsViewModel());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: productQuestions.tr,),
+      appBar: CustomAppBar(
+        title: productQuestions.tr,
+      ),
       body: Stack(
         children: [
           Column(
@@ -36,7 +39,7 @@ class ProductQuestionsView extends StatelessWidget {
     );
   }
 
-  Padding askQuestionBtn() {
+  Widget askQuestionBtn() {
     return Padding(
       padding: const EdgeInsets.all(15),
       child: CustomTextBtn(
@@ -52,7 +55,8 @@ class ProductQuestionsView extends StatelessWidget {
   }
 
   Widget listView() {
-    return Obx(() => viewModel.productQuestionsList.isEmpty
+    return Obx(
+      () => viewModel.productQuestionsList.isEmpty
           ? Center(
               child: NoDataFoundWithIcon(
                 icon: IconlyLight.search,
@@ -60,7 +64,6 @@ class ProductQuestionsView extends StatelessWidget {
               ),
             )
           : ListView.builder(
-              // padding: EdgeInsets.zero,
               itemCount: viewModel.productQuestionsList.length,
               itemBuilder: (context, index) {
                 return listViewItem(index);
@@ -69,7 +72,7 @@ class ProductQuestionsView extends StatelessWidget {
     );
   }
 
-  Column listViewItem(int index) {
+  Widget listViewItem(int index) {
     return Column(
       children: [
         questionItem(index),
@@ -80,7 +83,7 @@ class ProductQuestionsView extends StatelessWidget {
     );
   }
 
-  Padding questionItem(int index) {
+  Widget questionItem(int index) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: InkWell(
@@ -162,16 +165,10 @@ class ProductQuestionsView extends StatelessWidget {
     );
   }
 
-  InkWell answerItem(int index) {
+  Widget answerItem(int index) {
     return InkWell(
       borderRadius: BorderRadius.circular(8),
       onTap: null,
-      // (GlobalVariable.userModel?.email ==
-      //         viewModel.productQuestionsList[index].user?.email)
-      //     ? () {
-      //         //questionAnswerActionsBottomSheet(index);
-      //       }
-      //     : null,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         child: Row(
@@ -198,13 +195,15 @@ class ProductQuestionsView extends StatelessWidget {
                 children: [
                   CustomText(
                     title: viewModel.productQuestionsList[index].answer!.answer,
-                    maxLines: viewModel.productQuestionsList[index].answer!.answer!.length,
+                    maxLines: viewModel
+                        .productQuestionsList[index].answer!.answer!.length,
                   ),
                   RichText(
                     text: TextSpan(
                       children: [
                         TextSpan(
-                          text: viewModel.productModel.value.sellerModel?.user?.firstName ??
+                          text: viewModel.productModel.value.sellerModel?.user
+                                  ?.firstName ??
                               'N/A',
                           style: caption.copyWith(
                             color: kLightColor,
@@ -223,21 +222,12 @@ class ProductQuestionsView extends StatelessWidget {
                 ],
               ),
             ),
-            // (GlobalVariable.userModel?.email ==
-            //         viewModel.productQuestionsList[index].user?.email)
-            //     ? Icon(
-            //         IconlyLight.more_square,
-            //         color: kLightColor,
-            //         size: 18,
-            //       )
-            //     : SizedBox(height: 0),
           ],
         ),
       ),
     );
   }
 
-  ///////////////////////////////////////////
   askQuestionBottomSheet() {
     showModalBottomSheet(
       useSafeArea: true,

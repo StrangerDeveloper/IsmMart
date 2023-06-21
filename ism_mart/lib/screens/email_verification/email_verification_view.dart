@@ -48,7 +48,7 @@ class EmailVerificationView extends GetView<AuthController> {
     );
   }
 
-  Padding emailTextField() {
+  Widget emailTextField() {
     return Padding(
       padding: const EdgeInsets.only(top: 15, bottom: 20),
       child: Form(
@@ -75,7 +75,7 @@ class EmailVerificationView extends GetView<AuthController> {
     );
   }
 
-  Row buttons() {
+  Widget buttons() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [

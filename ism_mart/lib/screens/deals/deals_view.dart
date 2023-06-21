@@ -18,82 +18,80 @@ class DealsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Obx(() => viewModel.noProductsFound.value ?
-        Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              NoDataFoundWithIcon(
-                title: langKey.emptyProductSearch.tr,
-                subTitle: langKey.emptyProductSearchMsg.tr,
-              ),
-              AppConstant.spaceWidget(
-                  height: 18
-              ),
-            ],
-          ),
-        ) : Stack(
-          children: [
-            Column(
-              children: [
-                Material(
-                  elevation: 1,
-                  child: Container(
-                    height: AppConstant
-                        .getSize()
-                        .height * 0.04,
-                    color: kWhiteColor,
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Row(
+        body: Obx(
+          () => viewModel.noProductsFound.value
+              ? Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      NoDataFoundWithIcon(
+                        title: langKey.emptyProductSearch.tr,
+                        subTitle: langKey.emptyProductSearchMsg.tr,
+                      ),
+                      AppConstant.spaceWidget(height: 18),
+                    ],
+                  ),
+                )
+              : Stack(
+                  children: [
+                    Column(
                       children: [
-                        CustomText(
-                          title:
-                          "${viewModel.productList.length} ${langKey
-                              .itemsFound.tr}",
-                          weight: FontWeight.w600,
+                        Material(
+                          elevation: 1,
+                          child: Container(
+                            height: AppConstant.getSize().height * 0.04,
+                            color: kWhiteColor,
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Row(
+                              children: [
+                                CustomText(
+                                  title:
+                                      "${viewModel.productList.length} ${langKey.itemsFound.tr}",
+                                  weight: FontWeight.w600,
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
+                        Expanded(
+                          child: GridView.builder(
+                            padding: EdgeInsets.all(8),
+                            controller: viewModel.scrollController,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount:
+                                  AppResponsiveness.getGridItemCount(),
+                              mainAxisSpacing: 10,
+                              crossAxisSpacing: 10,
+                              childAspectRatio: AppResponsiveness
+                                  .getChildAspectRatioPoint90(),
+                            ),
+                            itemCount: viewModel.productList.length,
+                            itemBuilder: (_, index) {
+                              ProductModel productModel =
+                                  viewModel.productList[index];
+                              return SingleProductItems(
+                                productModel: productModel,
+                              );
+                            },
+                          ),
+                        ),
+                        if (viewModel.isLoadingMore.isTrue)
+                          CustomLoading(
+                            isItForWidget: true,
+                            color: kPrimaryColor,
+                          )
                       ],
                     ),
-                  ),
-                ),
-                Expanded(
-                  child: GridView.builder(
-                    padding: EdgeInsets.all(8),
-                    controller: viewModel.scrollController,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount:
-                        AppResponsiveness.getGridItemCount(),
-                        mainAxisSpacing: 10,
-                        crossAxisSpacing: 10,
-                        childAspectRatio: AppResponsiveness
-                            .getChildAspectRatioPoint90()
-                      // mainAxisExtent:
-                      //     AppResponsiveness.getMainAxisExtentPoint25(),
+                    NoInternetView(
+                      onPressed: () async {
+                        await viewModel.getProducts();
+                      },
                     ),
-                    itemCount: viewModel.productList.length,
-                    itemBuilder: (_, index) {
-                      ProductModel productModel =
-                      viewModel.productList[index];
-                      return SingleProductItems(
-                          productModel: productModel);
-                    },
-                  ),
+                    LoaderView(),
+                  ],
                 ),
-                if (viewModel.isLoadingMore.isTrue)
-                  CustomLoading(
-                    isItForWidget: true,
-                    color: kPrimaryColor,
-                  )
-              ],
-            ),
-            NoInternetView(
-              onPressed: () async{
-                await viewModel.getProducts();
-              },
-            ),
-            LoaderView(),
-          ],
-        ),
         ),
       ),
     );

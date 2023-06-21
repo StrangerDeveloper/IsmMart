@@ -52,7 +52,7 @@ class ForgotPassword1View extends StatelessWidget {
     );
   }
 
-  Padding emailTextField() {
+  Widget emailTextField() {
     return Padding(
       padding: const EdgeInsets.only(top: 15, bottom: 25),
       child: Form(

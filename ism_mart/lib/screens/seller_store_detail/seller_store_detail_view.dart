@@ -81,7 +81,7 @@ class SellerStoreDetailView extends GetView<ProductController> {
     );
   }
 
-  _storeRatingAndCustomerCard({SellerModelResponse? modelResponse}) {
+  Widget _storeRatingAndCustomerCard({SellerModelResponse? modelResponse}) {
     return SizedBox(
       height: AppResponsiveness.getBoxHeightPoint25(),
       child: Padding(
@@ -293,45 +293,6 @@ class SellerStoreDetailView extends GetView<ProductController> {
                               },
                             ),
                           ),
-
-                          // Expanded(
-                          //   child: GridView.builder(
-                          //     controller: controller.scrollController,
-                          //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          //         crossAxisCount:
-                          //             AppResponsiveness.getGridItemCount(),
-                          //         mainAxisSpacing: 5,
-                          //         crossAxisSpacing: 5,
-                          //         childAspectRatio: AppResponsiveness
-                          //             .getChildAspectRatioPoint90()
-                          //         // mainAxisExtent:
-                          //         //     AppResponsiveness.getMainAxisExtentPoint25(),
-                          //         ),
-                          //     shrinkWrap: true,
-                          //     physics: const BouncingScrollPhysics(),
-                          //     //scrollDirection: Axis.horizontal,
-                          //     itemCount: list.length,
-                          //     itemBuilder: (context, index) {
-                          //       ProductModel productModel = list[index];
-                          //       return SingleProductItems(
-                          //         productModel: productModel,
-                          //         onTap: () {
-                          //           Get.offNamed(
-                          //             '/product/${productModel.id}',
-                          //             preventDuplicates: false,
-                          //             arguments: {"calledFor": "customer"},
-                          //           );
-                          //         },
-                          //       );
-                          //     },
-                          //   ),
-                          // ),
-                          // AppConstant.spaceWidget(height: 10),
-                          // if (controller.loadMoreVisibilty.isTrue)
-                          //   CustomLoading(
-                          //     isItForWidget: true,
-                          //     color: kPrimaryColor,
-                          //   )
                         ],
                       ),
                     ),

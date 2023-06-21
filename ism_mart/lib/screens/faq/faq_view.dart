@@ -32,7 +32,7 @@ class FaqView extends GetView<BaseController> {
     );
   }
 
-  Padding title() {
+  Widget title() {
     return Padding(
       padding: const EdgeInsets.only(left: 15, right: 16, top: 6),
       child: FittedBox(
@@ -71,7 +71,7 @@ class FaqView extends GetView<BaseController> {
     );
   }
 
-  ExpansionTile listViewItem(int index) {
+  Widget listViewItem(int index) {
     return ExpansionTile(
       backgroundColor: Colors.black.withOpacity(0.03),
       childrenPadding: EdgeInsets.only(left: 16, bottom: 10, right: 24),

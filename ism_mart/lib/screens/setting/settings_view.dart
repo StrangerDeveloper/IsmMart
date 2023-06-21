@@ -27,7 +27,8 @@ class SettingsView extends StatelessWidget {
               pinned: true,
               flexibleSpaceBar: FlexibleSpaceBar(
                 centerTitle: false,
-                titlePadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+                titlePadding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
                 title: Text(
                   langKey.settings.tr,
                   style: appBarTitleSize,
@@ -48,45 +49,47 @@ class SettingsView extends StatelessWidget {
     );
   }
 
-  _accountSetup() {
-    return Obx(() => viewModel.userDetails.value?.email == null &&
-            viewModel.userDetails.value?.token == null
-        ? Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: Column(
+  Widget _accountSetup() {
+    return Obx(
+      () => viewModel.userDetails.value?.email == null &&
+              viewModel.userDetails.value?.token == null
+          ? Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5, bottom: 5, top: 20),
+                    child: CustomText(
+                      title: langKey.account.tr,
+                      size: 16,
+                    ),
+                  ),
+                  _account(),
+                ],
+              ),
+            )
+          : Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                _userCard(),
                 Padding(
-                  padding: const EdgeInsets.only(left: 5, bottom: 5, top: 20),
+                  padding: const EdgeInsets.only(left: 30, bottom: 5),
                   child: CustomText(
-                    title: langKey.account.tr,
+                    title: langKey.myAccount.tr,
                     size: 16,
                   ),
                 ),
-                _account(),
+                SizedBox(height: 10),
+                Obx(() => viewModel.userDetails.value?.token == null
+                    ? Container()
+                    : _accountSettings())
               ],
             ),
-          )
-        : Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _userCard(),
-              Padding(
-                padding: const EdgeInsets.only(left: 30, bottom: 5),
-                child: CustomText(
-                  title: langKey.myAccount.tr,
-                  size: 16,
-                ),
-              ),
-              SizedBox(height: 10),
-              Obx(() => viewModel.userDetails.value?.token == null
-                  ? Container()
-                  : _accountSettings())
-            ],
-          ));
+    );
   }
 
-  _userCard() {
+  Widget _userCard() {
     return Obx(
       () => viewModel.userDetails.value?.email == null
           ? Container()
@@ -119,7 +122,7 @@ class SettingsView extends StatelessWidget {
     );
   }
 
-  Container _account() {
+  Widget _account() {
     return Container(
       margin: EdgeInsets.only(top: 5),
       decoration: BoxDecoration(
@@ -142,7 +145,7 @@ class SettingsView extends StatelessWidget {
     );
   }
 
-  Column _accountSettings() {
+  Widget _accountSettings() {
     return Column(
       children: [
         singleSettingsItem(
@@ -185,16 +188,12 @@ class SettingsView extends StatelessWidget {
           icon: IconlyBold.user_2,
           color: Colors.pink,
           title: 'Buyer Profile',
-        ), /* _singleSettingsItem(
-            onTap: () => Get.to(() => PremiumMembershipUI()),
-            icon: Icons.workspace_premium_outlined,
-            iconColor: kOrangeColor,
-            title: langKey.membershipPlans.tr),*/
+        ),
       ],
     );
   }
 
-  Column generalSettings() {
+  Widget generalSettings() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -227,11 +226,6 @@ class SettingsView extends StatelessWidget {
             countryCode: languageController.countryKey.value,
           ),
         ),
-        /*_singleSettingsItem(
-            onTap: () => Get.to(() => NotificationUI()),
-            icon: IconlyLight.notification,
-            iconColor: Colors.lightBlue,
-            title: langKey.notifications.tr,),*/
         singleSettingsItem(
           onTap: () {
             Get.toNamed(Routes.staticInfo,
@@ -243,8 +237,10 @@ class SettingsView extends StatelessWidget {
         ),
         singleSettingsItem(
           onTap: () {
-            Get.toNamed(Routes.staticInfo,
-                arguments: {'title': langKey.privacyPolicy.tr});
+            Get.toNamed(
+              Routes.staticInfo,
+              arguments: {'title': langKey.privacyPolicy.tr},
+            );
           },
           icon: IconlyLight.paper,
           color: Colors.purpleAccent,
@@ -252,8 +248,10 @@ class SettingsView extends StatelessWidget {
         ),
         singleSettingsItem(
           onTap: () {
-            Get.toNamed(Routes.staticInfo,
-                arguments: {'title': langKey.returnAndExchange.tr});
+            Get.toNamed(
+              Routes.staticInfo,
+              arguments: {'title': langKey.returnAndExchange.tr},
+            );
           },
           icon: Icons.assignment_return_rounded,
           color: Colors.lime,
@@ -261,8 +259,10 @@ class SettingsView extends StatelessWidget {
         ),
         singleSettingsItem(
           onTap: () {
-            Get.toNamed(Routes.staticInfo,
-                arguments: {'title': langKey.aboutUs.tr});
+            Get.toNamed(
+              Routes.staticInfo,
+              arguments: {'title': langKey.aboutUs.tr},
+            );
           },
           icon: IconlyLight.info_circle,
           color: Colors.pinkAccent,

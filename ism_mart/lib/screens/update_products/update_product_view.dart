@@ -19,56 +19,58 @@ class UpdateProductView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(
-          appBar: CustomAppBar(
-            title: langKey.updateProduct.tr,
-          ),
-          body: Stack(
-            children: [
-              AppConstant.spaceWidget(height: 20),
-              SingleChildScrollView(
-                physics: ScrollPhysics(),
-                child: Form(
-                  key: viewModel.formKey,
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          CustomTextField2(
-                            label: langKey.productName.tr,
-                            controller: viewModel.prodNameController,
-                            autoValidateMode: AutovalidateMode.onUserInteraction,
-                            validator: (value) {
-                              return GetUtils.isBlank(value)! ?
-                              langKey.productNameReq.tr : null;
-                            },
-                          ),
-                          productPriceField(),
-                          productStockField(),
-                          productDiscountField(),
-                          productDescriptionField(),
-                          imagesUpdateSection(),
-                          CustomTextBtn(
-                              onPressed: () {
-                                viewModel.updateButtonPress();
-                              },
-                              title: langKey.updateBtn.tr,
-                              height: 50,
-                              width: 300,
-                            ),
-                        ]),
-                  ),
+      child: Scaffold(
+        appBar: CustomAppBar(
+          title: langKey.updateProduct.tr,
+        ),
+        body: Stack(
+          children: [
+            AppConstant.spaceWidget(height: 20),
+            SingleChildScrollView(
+              physics: ScrollPhysics(),
+              child: Form(
+                key: viewModel.formKey,
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CustomTextField2(
+                          label: langKey.productName.tr,
+                          controller: viewModel.prodNameController,
+                          autoValidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value) {
+                            return GetUtils.isBlank(value)!
+                                ? langKey.productNameReq.tr
+                                : null;
+                          },
+                        ),
+                        productPriceField(),
+                        productStockField(),
+                        productDiscountField(),
+                        productDescriptionField(),
+                        imagesUpdateSection(),
+                        CustomTextBtn(
+                          onPressed: () {
+                            viewModel.updateButtonPress();
+                          },
+                          title: langKey.updateBtn.tr,
+                          height: 50,
+                          width: 300,
+                        ),
+                      ]),
                 ),
               ),
-              LoaderView(),
-            ],
-          ),
-        ));
+            ),
+            LoaderView(),
+          ],
+        ),
+      ),
+    );
   }
 
-  Padding productPriceField(){
+  Widget productPriceField() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 15.0),
       child: Column(
@@ -77,8 +79,7 @@ class UpdateProductView extends StatelessWidget {
             controller: viewModel.prodPriceController,
             label: langKey.prodPrice.tr,
             autoValidateMode: AutovalidateMode.onUserInteraction,
-            validator: (value) =>
-            !GetUtils.isNumericOnly(value!)
+            validator: (value) => !GetUtils.isNumericOnly(value!)
                 ? langKey.prodPriceReq.tr
                 : null,
             keyboardType: TextInputType.number,
@@ -87,43 +88,41 @@ class UpdateProductView extends StatelessWidget {
             },
           ),
           Obx(() => Visibility(
-            visible: viewModel.showPriceAfterCommission.value,
-            child: CustomText(
-              title:
-              "${langKey.finalPriceWould.tr} ${viewModel.priceAfterCommission.value} ${langKey.afterPlatformFee.tr} 5%",
-              color: kRedColor,
-            ),
-          ))
+                visible: viewModel.showPriceAfterCommission.value,
+                child: CustomText(
+                  title:
+                      "${langKey.finalPriceWould.tr} ${viewModel.priceAfterCommission.value} ${langKey.afterPlatformFee.tr} 5%",
+                  color: kRedColor,
+                ),
+              ))
         ],
       ),
     );
   }
 
-  productStockField(){
+  Widget productStockField() {
     return CustomTextField2(
       controller: viewModel.prodStockController,
       label: langKey.prodStock.tr,
       autoValidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) =>
-      !GetUtils.isNumericOnly(value!)
-          ? langKey.prodStockReq.tr
-          : null,
+          !GetUtils.isNumericOnly(value!) ? langKey.prodStockReq.tr : null,
       keyboardType: TextInputType.number,
     );
   }
 
-  productDescriptionField(){
+  Widget productDescriptionField() {
     return CustomTextField2(
       controller: viewModel.prodDescriptionController,
       label: langKey.description.tr,
       autoValidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) =>
-      GetUtils.isBlank(value!)! ? langKey.descriptionReq.tr : null,
+          GetUtils.isBlank(value!)! ? langKey.descriptionReq.tr : null,
       keyboardType: TextInputType.text,
     );
   }
 
-  Padding productDiscountField(){
+  Widget productDiscountField() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 15.0),
       child: Column(
@@ -133,12 +132,12 @@ class UpdateProductView extends StatelessWidget {
             label: langKey.prodDiscount.tr,
             autoValidateMode: AutovalidateMode.onUserInteraction,
             keyboardType: TextInputType.number,
-            onChanged: (value){
+            onChanged: (value) {
               viewModel.productDiscountOnChange(value);
             },
           ),
           Obx(
-                () => Visibility(
+            () => Visibility(
               visible: viewModel.prodDiscountController.text.isNotEmpty,
               child: CustomText(
                 title: viewModel.discountMessage.value,
@@ -150,8 +149,8 @@ class UpdateProductView extends StatelessWidget {
       ),
     );
   }
-  
-  Padding imagesUpdateSection(){
+
+  Widget imagesUpdateSection() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 15.0),
       child: Column(
@@ -190,11 +189,9 @@ class UpdateProductView extends StatelessWidget {
               width: 55,
               height: 55,
               child: CustomActionIcon(
-                onTap: ()async {
-                  // await viewModel.pickMultipleImages();
-                  viewModel.imagesToUpdate.addAll(
-                      await PickImage().pickMultipleImage()
-                  );
+                onTap: () async {
+                  viewModel.imagesToUpdate
+                      .addAll(await PickImage().pickMultipleImage());
                 },
                 icon: Icons.cloud_upload_outlined,
                 size: 35,
@@ -207,80 +204,82 @@ class UpdateProductView extends StatelessWidget {
     );
   }
 
-  thumbnailSection() {
+  Widget thumbnailSection() {
     return Obx(
-          () =>
-          Column(
-            children: [
-              DottedBorder(
-                borderType: BorderType.RRect,
-                radius: const Radius.circular(10),
-                dashPattern: const [10, 4],
-                strokeCap: StrokeCap.round,
-                color:
-                viewModel.thumbnailImageSizeInMb.value > 2.0 ? kRedColor : kPrimaryColor,
-                child: Container(
-                    padding:
-                    EdgeInsets.symmetric(vertical: 8),
-                    width: double.infinity,
-                    height: 150,
-                    decoration: BoxDecoration(
-                      borderRadius:
-                      BorderRadius.circular(10),
-                    ),
-                    child: viewModel.thumbnailUrl.value == '' && viewModel.thumbnailSelectedImage.value!.path == ''
-                        ? GestureDetector(
-                      onTap: () async{
-                        viewModel.thumbnailSelectedImage.value = await PickImage().pickSingleImage();
-                        if(viewModel.thumbnailSelectedImage.value != File('') ){
-                          viewModel.thumbnailNotAvailable(false);
-                        }
-                      },
-                      child: Column(
-                        mainAxisAlignment:
-                        MainAxisAlignment.center,
-                        children: [
-                          const Icon(
-                            Icons.cloud_upload_rounded,
-                            size: 30,
-                          ),
-                          const SizedBox(height: 5),
-                          CustomText(
-                            title: langKey.clickHereToUpload.tr,
-                            color: kLightColor,
-                          ),
-                        ],
-                      ),
-                    ) : showThumbnailImage()),
-              ),
-              AppConstant.spaceWidget(height: 6),
-              Visibility(
-                  visible: viewModel.thumbnailNotAvailable.value,
-                  child: CustomText(
-                    title: langKey.uploadThumbnail.tr,
-                    color: kRedColor,
-                  ))
-            ],
+      () => Column(
+        children: [
+          DottedBorder(
+            borderType: BorderType.RRect,
+            radius: const Radius.circular(10),
+            dashPattern: const [10, 4],
+            strokeCap: StrokeCap.round,
+            color: viewModel.thumbnailImageSizeInMb.value > 2.0
+                ? kRedColor
+                : kPrimaryColor,
+            child: Container(
+                padding: EdgeInsets.symmetric(vertical: 8),
+                width: double.infinity,
+                height: 150,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: viewModel.thumbnailUrl.value == '' &&
+                        viewModel.thumbnailSelectedImage.value!.path == ''
+                    ? GestureDetector(
+                        onTap: () async {
+                          viewModel.thumbnailSelectedImage.value =
+                              await PickImage().pickSingleImage();
+                          if (viewModel.thumbnailSelectedImage.value !=
+                              File('')) {
+                            viewModel.thumbnailNotAvailable(false);
+                          }
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(
+                              Icons.cloud_upload_rounded,
+                              size: 30,
+                            ),
+                            const SizedBox(height: 5),
+                            CustomText(
+                              title: langKey.clickHereToUpload.tr,
+                              color: kLightColor,
+                            ),
+                          ],
+                        ),
+                      )
+                    : showThumbnailImage()),
           ),
+          AppConstant.spaceWidget(height: 6),
+          Visibility(
+            visible: viewModel.thumbnailNotAvailable.value,
+            child: CustomText(
+              title: langKey.uploadThumbnail.tr,
+              color: kRedColor,
+            ),
+          )
+        ],
+      ),
     );
   }
 
-  Stack showThumbnailImage() {
+  Widget showThumbnailImage() {
     return Stack(
       fit: StackFit.expand,
       children: <Widget>[
         GestureDetector(
           onTap: () => Get.to(() => SingleImageView(
-            imageUrlOrPath: viewModel.thumbnailUrl.value == ''
-                ? viewModel.thumbnailSelectedImage.value!.path
-                : viewModel.thumbnailUrl.value,
-            url: false,
-          )),
+                imageUrlOrPath: viewModel.thumbnailUrl.value == ''
+                    ? viewModel.thumbnailSelectedImage.value!.path
+                    : viewModel.thumbnailUrl.value,
+                url: false,
+              )),
           child: viewModel.thumbnailUrl.value != ''
               ? CustomNetworkImage(
-            imageUrl: viewModel.thumbnailUrl.value,
-            fit: BoxFit.fitHeight,
-          )
+                  imageUrl: viewModel.thumbnailUrl.value,
+                  fit: BoxFit.fitHeight,
+                )
               : Image.file(File(viewModel.thumbnailSelectedImage.value!.path)),
         ),
         Positioned(
@@ -298,105 +297,107 @@ class UpdateProductView extends StatelessWidget {
       ],
     );
   }
-  
-  Column productImagesSection(){
+
+  Widget productImagesSection() {
     return Column(
       children: <Widget>[
         Obx(() => viewModel.productImages.isNotEmpty
             ? CustomText(
-          title: langKey.productImages.tr,
-          style: headline2,
-        )
+                title: langKey.productImages.tr,
+                style: headline2,
+              )
             : Container()),
         AppConstant.spaceWidget(height: 15),
-        Obx(() => viewModel.productImages.isNotEmpty ? SizedBox(
-          width: AppResponsiveness.width * 0.87,
-          height: AppResponsiveness.height * 0.25,
-          child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              shrinkWrap: true,
-              itemCount: viewModel.productImages.length,
-              itemBuilder: (_, index) {
-                return imageInList(index, false);
-              }),
-        )
-            : Container(),
+        Obx(
+          () => viewModel.productImages.isNotEmpty
+              ? SizedBox(
+                  width: AppResponsiveness.width * 0.87,
+                  height: AppResponsiveness.height * 0.25,
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      itemCount: viewModel.productImages.length,
+                      itemBuilder: (_, index) {
+                        return imageInList(index, false);
+                      }),
+                )
+              : Container(),
         ),
       ],
     );
   }
 
-  addedImagesSection() {
+  Widget addedImagesSection() {
     return Obx(() => viewModel.imagesToUpdate.isNotEmpty
         ? Column(
-      children: [
-        CustomText(
-          title: langKey.addedImages.tr,
-          style: headline2,
-        ),
-        AppConstant.spaceWidget(height: 8),
-        SizedBox(
-            width: AppResponsiveness.width * 0.87,
-            height: AppResponsiveness.height * 0.25,
-            child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                shrinkWrap: true,
-                itemCount: viewModel.imagesToUpdate.length,
-                itemBuilder: (_, index) {
-                  return imageInList(index, true);
-                })),
-      ],
-    ) : Container());
+            children: [
+              CustomText(
+                title: langKey.addedImages.tr,
+                style: headline2,
+              ),
+              AppConstant.spaceWidget(height: 8),
+              SizedBox(
+                  width: AppResponsiveness.width * 0.87,
+                  height: AppResponsiveness.height * 0.25,
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      itemCount: viewModel.imagesToUpdate.length,
+                      itemBuilder: (_, index) {
+                        return imageInList(index, true);
+                      })),
+            ],
+          )
+        : Container());
   }
-  
-  Padding imageInList(int index, bool calledForAddedImages) {
+
+  Widget imageInList(int index, bool calledForAddedImages) {
     return Padding(
-        padding:
-        const EdgeInsets.all(8.0),
-        child: GestureDetector(
-            onTap: () {
-              viewModel.imageIndex(index);
-              Get.toNamed(Routes.singleProductFullImage, arguments: [{
-                "initialImage": index,
-                "imagesToUpdate": calledForAddedImages ? viewModel.imagesToUpdate : null,
-                "productImages": calledForAddedImages ? null : viewModel.productImages,
-              }]
-                  // SingleProductFullImageView(
-                  //   initialImage: index,
-                  //   imagesToUpdate: calledForAddedImages ? viewModel.imagesToUpdate : null,
-                  //   productImages: calledForAddedImages ? null : viewModel.productImages,
-                  // )
-              );
-            },
-            child: Container(
-              width: 90,
-              child: calledForAddedImages == false ? Stack(
-                fit: StackFit.expand,
-                children: [
-                  CustomNetworkImage(
-                    imageUrl: viewModel.productImages[index].url,
-                    fit: BoxFit.fill,
-                  ),
-                  Obx(() =>
-                  viewModel.productImages[index].url ==
-                      viewModel.thumbnailUrl.value ? Container() :
-                  Positioned(
-                    right: 5,
-                    top: 3,
-                    child: CustomActionIcon(
-                      bgColor: Colors.red,
-                      width: 25,
-                      icon: Icons.delete,
-                      height: 25,
-                      onTap: () {
-                        viewModel.imagesToDelete.add(viewModel.productImages[index].id);
-                        viewModel.productImages.removeAt(index);
-                      },
+      padding: const EdgeInsets.all(8.0),
+      child: GestureDetector(
+        onTap: () {
+          viewModel.imageIndex(index);
+          Get.toNamed(Routes.singleProductFullImage, arguments: [
+            {
+              "initialImage": index,
+              "imagesToUpdate":
+                  calledForAddedImages ? viewModel.imagesToUpdate : null,
+              "productImages":
+                  calledForAddedImages ? null : viewModel.productImages,
+            }
+          ]);
+        },
+        child: Container(
+          width: 90,
+          child: calledForAddedImages == false
+              ? Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    CustomNetworkImage(
+                      imageUrl: viewModel.productImages[index].url,
+                      fit: BoxFit.fill,
                     ),
-                  )
-                  )
-                ],
-              ) : Stack(
+                    Obx(() => viewModel.productImages[index].url ==
+                            viewModel.thumbnailUrl.value
+                        ? Container()
+                        : Positioned(
+                            right: 5,
+                            top: 3,
+                            child: CustomActionIcon(
+                              bgColor: Colors.red,
+                              width: 25,
+                              icon: Icons.delete,
+                              height: 25,
+                              onTap: () {
+                                viewModel.imagesToDelete
+                                    .add(viewModel.productImages[index].id);
+                                viewModel.productImages.removeAt(index);
+                              },
+                            ),
+                          ))
+                  ],
+                )
+              : Stack(
                   fit: StackFit.expand,
                   children: [
                     Image.file(
@@ -416,10 +417,10 @@ class UpdateProductView extends StatelessWidget {
                         },
                       ),
                     )
-                  ]
-              ),
-            )
-        )
+                  ],
+                ),
+        ),
+      ),
     );
   }
 }

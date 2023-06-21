@@ -21,8 +21,9 @@ class SingleProductDetailsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-        onWillPop: () => viewModel.popSingleProductView(),
-        child: Obx(() => viewModel.productModel.value == ProductModel()
+      onWillPop: () => viewModel.popSingleProductView(),
+      child: Obx(
+        () => viewModel.productModel.value == ProductModel()
             ? Scaffold(
                 body: Center(
                     child: viewModel.productFoundCheck.value
@@ -38,25 +39,28 @@ class SingleProductDetailsView extends StatelessWidget {
             : Scaffold(
                 appBar: CustomAppBar(
                   title: langKey.productDetails.tr,
-                  actionItem: Get.arguments[0]["calledFor"] == 'customer' ? [
-                    Align(
-                      alignment: Alignment.center,
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 12.0),
-                        child: CartIcon(
-                          onTap: () {
-                            Get.offNamed(Routes.cartRoute,
-                                arguments: {"calledFromSPV": true},
-                                preventDuplicates: false);
-                          },
-                          iconWidget: Icon(
-                            IconlyLight.buy,
-                            size: 25,
-                            color: kPrimaryColor,
-                          ),
-                        ),
-                      ),
-                    ) ] : null,
+                  actionItem: Get.arguments[0]["calledFor"] == 'customer'
+                      ? [
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 12.0),
+                              child: CartIcon(
+                                onTap: () {
+                                  Get.offNamed(Routes.cartRoute,
+                                      arguments: {"calledFromSPV": true},
+                                      preventDuplicates: false);
+                                },
+                                iconWidget: Icon(
+                                  IconlyLight.buy,
+                                  size: 25,
+                                  color: kPrimaryColor,
+                                ),
+                              ),
+                            ),
+                          )
+                        ]
+                      : null,
                 ),
                 backgroundColor: Colors.grey[300]!,
                 resizeToAvoidBottomInset: true,
@@ -102,11 +106,11 @@ class SingleProductDetailsView extends StatelessWidget {
                   ],
                 ),
               ),
-        ),
+      ),
     );
   }
 
-  Stack _productImages() {
+  Widget _productImages() {
     viewModel.productModel.value.images!.forEach((element) {
       if (element.url == viewModel.productModel.value.thumbnail) {
         var elementData = element;
@@ -151,7 +155,7 @@ class SingleProductDetailsView extends StatelessWidget {
     );
   }
 
-  Card _productBasicDetails() {
+  Widget _productBasicDetails() {
     return Card(
       margin: const EdgeInsets.all(8.0),
       child: Padding(
@@ -206,7 +210,7 @@ class SingleProductDetailsView extends StatelessWidget {
     );
   }
 
-  Padding productPriceAndDiscount() {
+  Widget productPriceAndDiscount() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12.0),
       child: Row(
@@ -234,7 +238,7 @@ class SingleProductDetailsView extends StatelessWidget {
     );
   }
 
-  Padding showStoreDetails() {
+  Widget showStoreDetails() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: ListTile(
@@ -267,22 +271,7 @@ class SingleProductDetailsView extends StatelessWidget {
             ],
           ),
         ),
-        // subtitle: Row(
-        //   // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        //   children: [
-        //     const Icon(Icons.star_rounded, color: Colors.amber),
-        //     CustomText(
-        //       title:
-        //           "${productModel.sellerModel!.rating!.toStringAsFixed(1)}",
-        //       style: bodyText1,
-        //     ),
-        //     AppConstant.spaceWidget(width: 10),
-        //     CustomText(
-        //       title: "${_getPositiveResponse()}",
-        //       style: bodyText2,
-        //     )
-        //   ],
-        // ),
+
         trailing: const Icon(
           Icons.arrow_forward_ios_sharp,
           color: kPrimaryColor,
@@ -292,7 +281,7 @@ class SingleProductDetailsView extends StatelessWidget {
     );
   }
 
-  Row showProductReviews() {
+  Widget showProductReviews() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -327,7 +316,7 @@ class SingleProductDetailsView extends StatelessWidget {
     );
   }
 
-  Padding showProductCategories() {
+  Widget showProductCategories() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12.0),
       child: Wrap(
@@ -353,7 +342,7 @@ class SingleProductDetailsView extends StatelessWidget {
     );
   }
 
-  Card _productVariantsDetails() {
+  Widget _productVariantsDetails() {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5),
       child: Padding(
@@ -380,7 +369,7 @@ class SingleProductDetailsView extends StatelessWidget {
     );
   }
 
-  Column _productVariantWidget({title, bool? isNextBtnClicked = false}) {
+  Widget _productVariantWidget({title, bool? isNextBtnClicked = false}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -407,7 +396,7 @@ class SingleProductDetailsView extends StatelessWidget {
     );
   }
 
-  Padding _singleVariantsListItems({ProductFeature? feature}) {
+  Widget _singleVariantsListItems({ProductFeature? feature}) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: CustomGreyBorderContainer(
@@ -454,7 +443,7 @@ class SingleProductDetailsView extends StatelessWidget {
     );
   }
 
-  Card _productAdvanceDetails() {
+  Widget _productAdvanceDetails() {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5),
       child: Padding(
@@ -665,7 +654,7 @@ class SingleProductDetailsView extends StatelessWidget {
     );
   }
 
-  ListTile productPriceAndThumbnail() {
+  Widget productPriceAndThumbnail() {
     return ListTile(
       leading: CustomNetworkImage(
           imageUrl: viewModel.productModel.value.thumbnail ??
@@ -696,7 +685,7 @@ class SingleProductDetailsView extends StatelessWidget {
     );
   }
 
-  Column productFeaturesList() {
+  Widget productFeaturesList() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -716,7 +705,7 @@ class SingleProductDetailsView extends StatelessWidget {
     );
   }
 
-  productQuestions() {
+  Widget productQuestions() {
     return Obx(
       () => CustomCard(
         margin: const EdgeInsets.fromLTRB(8, 5, 8, 50),
@@ -764,7 +753,7 @@ class SingleProductDetailsView extends StatelessWidget {
     );
   }
 
-  questionListView() {
+  Widget questionListView() {
     return viewModel.productQuestions.isEmpty
         ? Padding(
             padding: const EdgeInsets.all(8.0),
@@ -784,7 +773,7 @@ class SingleProductDetailsView extends StatelessWidget {
           );
   }
 
-  Padding questionListViewItem(int index) {
+  Widget questionListViewItem(int index) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Column(
@@ -808,7 +797,7 @@ class SingleProductDetailsView extends StatelessWidget {
     );
   }
 
-  Padding questionAnswerItem(
+  Widget questionAnswerItem(
       {bool isQuestion = false,
       String? title,
       name,
@@ -916,7 +905,7 @@ class SingleProductDetailsView extends StatelessWidget {
   //   );
   // }
 
-  Row _buildQtyChosen() {
+  Widget _buildQtyChosen() {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -933,7 +922,7 @@ class SingleProductDetailsView extends StatelessWidget {
     );
   }
 
-  Row _buildBuyNowAndCartBtn() {
+  Widget _buildBuyNowAndCartBtn() {
     return Row(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -979,7 +968,7 @@ class SingleProductDetailsView extends StatelessWidget {
     );
   }
 
-  Container _footerBottomBar() {
+  Widget _footerBottomBar() {
     return Container(
       height: 55,
       color: Colors.white,
@@ -1008,7 +997,7 @@ class SingleProductDetailsView extends StatelessWidget {
     );
   }
 
-  Positioned _outOfStockBottom() {
+  Widget _outOfStockBottom() {
     return Positioned(
         bottom: 0,
         child: viewModel.productModel.value.stock == 0

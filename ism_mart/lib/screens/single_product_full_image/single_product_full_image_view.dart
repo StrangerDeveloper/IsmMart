@@ -7,7 +7,8 @@ import '../../helper/constants.dart';
 class SingleProductFullImageView extends StatelessWidget {
   SingleProductFullImageView({super.key});
 
-  final SingleProductFullImageViewModel viewModel = Get.put(SingleProductFullImageViewModel());
+  final SingleProductFullImageViewModel viewModel =
+      Get.put(SingleProductFullImageViewModel());
 
   @override
   Widget build(BuildContext context) {
@@ -23,16 +24,22 @@ class SingleProductFullImageView extends StatelessWidget {
               child: PageView.builder(
                   controller: viewModel.imageController,
                   onPageChanged: viewModel.changeImage,
-                  itemCount: viewModel.productImages.isEmpty ? viewModel.imagesToUpdate.length : viewModel.productImages.length,
+                  itemCount: viewModel.productImages.isEmpty
+                      ? viewModel.imagesToUpdate.length
+                      : viewModel.productImages.length,
                   itemBuilder: (context, index) {
                     return InteractiveViewer(
                         minScale: 0.1,
                         maxScale: 2.0,
-                        child: viewModel.productImages.isNotEmpty ? CustomNetworkImage(
-                          imageUrl: viewModel.productImages[index].url,
-                          fit: BoxFit.contain,
-                        ) : Image.file(viewModel.imagesToUpdate[index], fit: BoxFit.fill,)
-                    );
+                        child: viewModel.productImages.isNotEmpty
+                            ? CustomNetworkImage(
+                                imageUrl: viewModel.productImages[index].url,
+                                fit: BoxFit.contain,
+                              )
+                            : Image.file(
+                                viewModel.imagesToUpdate[index],
+                                fit: BoxFit.fill,
+                              ));
                   }),
             ),
             animatedContainersAtBottom(),
@@ -42,33 +49,34 @@ class SingleProductFullImageView extends StatelessWidget {
     );
   }
 
-  animatedContainersAtBottom() {
-    return Obx(() => Positioned(
-      bottom: 16.0,
-      left: 0.0,
-      right: 0.0,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: List.generate(
-          viewModel.productImages.isNotEmpty ? viewModel.productImages
-              .length : viewModel.imagesToUpdate.length,
-              (index) => AnimatedContainer(
-                duration: const Duration(milliseconds: 400),
-                height: 6.0,
-                width: /*controller.sliderIndex.value == index ? 14.0 :*/
-                6.0,
-                margin: const EdgeInsets.only(right: 4.0),
-                decoration: BoxDecoration(
-                  color: viewModel.imageIndex.value == index
-                      ? kPrimaryColor
-                      : kLightColor,
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
+  Widget animatedContainersAtBottom() {
+    return Obx(
+      () => Positioned(
+        bottom: 16.0,
+        left: 0.0,
+        right: 0.0,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: List.generate(
+            viewModel.productImages.isNotEmpty
+                ? viewModel.productImages.length
+                : viewModel.imagesToUpdate.length,
+            (index) => AnimatedContainer(
+              duration: const Duration(milliseconds: 400),
+              height: 6.0,
+              width: /*controller.sliderIndex.value == index ? 14.0 :*/
+                  6.0,
+              margin: const EdgeInsets.only(right: 4.0),
+              decoration: BoxDecoration(
+                color: viewModel.imageIndex.value == index
+                    ? kPrimaryColor
+                    : kLightColor,
+                borderRadius: BorderRadius.circular(8.0),
               ),
             ),
           ),
         ),
+      ),
     );
   }
-
 }

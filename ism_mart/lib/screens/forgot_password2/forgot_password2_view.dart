@@ -56,7 +56,7 @@ class ForgotPassword2View extends GetView<AuthController> {
     );
   }
 
-  CustomTextField2 otpTxtField() {
+  Widget otpTxtField() {
     return CustomTextField2(
       prefixIcon: Icons.title,
       label: langKey.otp.tr,

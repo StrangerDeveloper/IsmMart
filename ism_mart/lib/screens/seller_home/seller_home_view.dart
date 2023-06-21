@@ -11,10 +11,11 @@ class SellerHomeView extends GetView<SellersController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => Scaffold(
+    return Obx(
+      () => Scaffold(
         appBar: CustomAppBar(
           title: controller.appBarTitle.value.tr,
-          onTap: ()async{
+          onTap: () async {
             controller.clearControllers();
             BaseController baseController = Get.find<BaseController>();
             await baseController.fetchProducts();
@@ -22,7 +23,7 @@ class SellerHomeView extends GetView<SellersController> {
             Get.back();
           },
           actionItem: InkWell(
-            onTap: (){
+            onTap: () {
               Get.back();
               //baseController.changePage(0);
             },
@@ -35,7 +36,7 @@ class SellerHomeView extends GetView<SellersController> {
             ),
           ),
         ),
-      body: PageView(
+        body: PageView(
           controller: controller.pageViewController,
           physics: const NeverScrollableScrollPhysics(),
           children: [...controller.NavScreens],
@@ -50,17 +51,6 @@ class SellerHomeView extends GetView<SellersController> {
                 () => DrawerHeader(
                   decoration: BoxDecoration(
                     color: kPrimaryColor,
-                    /* gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.topLeft,
-                      stops: [0.1, 0.5, 0.7, 0.9],
-                      colors: [
-                        kLightColor,
-                        kPrimaryColor,
-                        kPrimaryColor,
-                        kLightGreyColor,
-                      ],
-                    ),*/
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

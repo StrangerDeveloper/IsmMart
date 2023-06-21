@@ -38,7 +38,7 @@ class MyProductView extends StatelessWidget {
     );
   }
 
-  Align addProduct(BuildContext context) {
+  Widget addProduct(BuildContext context) {
     return Align(
       alignment: Alignment.centerRight,
       child: Padding(
@@ -103,7 +103,7 @@ class MyProductView extends StatelessWidget {
     );
   }
 
-  AspectRatio _buildProductItem({VendorProduct? model, required int index}) {
+  Widget _buildProductItem({VendorProduct? model, required int index}) {
     return AspectRatio(
       aspectRatio: 0.75,
       child: GestureDetector(
