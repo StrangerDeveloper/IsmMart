@@ -11,7 +11,6 @@ import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:http/http.dart' as http;
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 
-
 class BuyerProfileViewModel extends GetxController {
   GlobalKey<FormState> buyerProfileFormKey = GlobalKey<FormState>();
   Rx<BuyerProfileModel> buyerProfileNewModel = BuyerProfileModel().obs;
@@ -38,13 +37,13 @@ class BuyerProfileViewModel extends GetxController {
   }
 
   getData() {
-    GlobalVariable.internetErr(false);
     GlobalVariable.showLoader.value = true;
 
     ApiBaseHelper()
         .getMethod(url: Urls.getVendorAccountData, withAuthorization: true)
         .then((parsedJson) {
       GlobalVariable.showLoader.value = false;
+      GlobalVariable.internetErr(false);
       if (parsedJson['success'] == true && parsedJson['data'] != null) {
         buyerProfileNewModel.value =
             BuyerProfileModel.fromJson(parsedJson['data']);
@@ -53,7 +52,8 @@ class BuyerProfileViewModel extends GetxController {
         phoneController.text = buyerProfileNewModel.value.phone ?? '';
         addressController.text = buyerProfileNewModel.value.address ?? '';
       } else {
-        AppConstant.displaySnackBar(langKey.errorTitle.tr, langKey.recordDoNotExist.tr);
+        AppConstant.displaySnackBar(
+            langKey.errorTitle.tr, langKey.recordDoNotExist.tr);
       }
     }).catchError((e) {
       GlobalVariable.internetErr(true);
@@ -73,9 +73,11 @@ class BuyerProfileViewModel extends GetxController {
       LocalStorageHelper.deleteUserData();
       GlobalVariable.showLoader.value = false;
       if (parsedJson['success'] == true && parsedJson['data'] != null) {
-        AppConstant.displaySnackBar(langKey.successTitle.tr, langKey.recordDoNotExist.tr);
+        AppConstant.displaySnackBar(
+            langKey.successTitle.tr, langKey.recordDoNotExist.tr);
       } else {
-        AppConstant.displaySnackBar(langKey.errorTitle.tr, langKey.recordDoNotExist.tr);
+        AppConstant.displaySnackBar(
+            langKey.errorTitle.tr, langKey.recordDoNotExist.tr);
       }
     }).catchError((e) {
       print(e);
@@ -84,7 +86,6 @@ class BuyerProfileViewModel extends GetxController {
   }
 
   updateData() async {
-    GlobalVariable.internetErr(false);
     if (buyerProfileFormKey.currentState?.validate() ?? false) {
       GlobalVariable.showLoader.value = true;
 
@@ -115,9 +116,12 @@ class BuyerProfileViewModel extends GetxController {
           .then((parsedJson) {
         GlobalVariable.showLoader.value = false;
         if (parsedJson['message'] == "User updated successfully") {
-          AppConstant.displaySnackBar(langKey.success.tr, parsedJson['message']);
+          GlobalVariable.internetErr(false);
+          AppConstant.displaySnackBar(
+              langKey.success.tr, parsedJson['message']);
         } else {
-          AppConstant.displaySnackBar(langKey.errorTitle.tr, parsedJson['message']);
+          AppConstant.displaySnackBar(
+              langKey.errorTitle.tr, parsedJson['message']);
         }
       }).catchError((e) {
         GlobalVariable.internetErr(true);
