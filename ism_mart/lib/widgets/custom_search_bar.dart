@@ -7,31 +7,24 @@ class CustomSearchBar extends StatelessWidget {
     this.searchText,
     this.calledFromDashboard = false,
     this.calledFromSearchDetailsView = false,
-    this.calledFromCategories = false
   }) : super(key: key);
   final String? searchText;
-  final bool calledFromDashboard, calledFromSearchDetailsView, calledFromCategories;
+  final bool calledFromDashboard, calledFromSearchDetailsView;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: ()
-    {
-      // Get.back();
-      /*Get.offNamed(Routes.searchRoute,
-              arguments: {"searchText": searchText ?? " "},
-              preventDuplicates: true);*/
-      // else {
-      //baseController.changePage(2);
-      if (calledFromDashboard || calledFromCategories) {
+      onTap: () {
+      if (calledFromDashboard) {
         Get.toNamed(Routes.searchRoute,
             arguments: {"searchText": searchText ?? " "});
       }else if(calledFromSearchDetailsView == true){
         int count = 0;
         Get.offNamedUntil(Routes.searchRoute, (route) => count++ >= 2);
       }
-      else{
-        Get.offNamed(Routes.searchRoute, arguments: {"searchText": searchText ?? " "});
+      else {
+        Get.offNamed(
+            Routes.searchRoute, arguments: {"searchText": searchText ?? " "});
       }
       },
       child: Container(
