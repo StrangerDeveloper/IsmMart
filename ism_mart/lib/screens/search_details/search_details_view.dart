@@ -7,7 +7,7 @@ import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/custom_appbar.dart';
-import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
+
 class SearchDetailsView extends GetView<CustomSearchController> {
   const SearchDetailsView(
       {Key? key,

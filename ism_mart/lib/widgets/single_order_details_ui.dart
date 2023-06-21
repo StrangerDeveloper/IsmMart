@@ -10,6 +10,7 @@ import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:iconly/iconly.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/widgets/custom_appbar.dart';
 import 'package:ism_mart/widgets/custom_sliver_appbar.dart';
 
 import '../helper/validator.dart';
@@ -42,25 +43,8 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
   Widget noDataFound() {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: kAppBarColor,
-          automaticallyImplyLeading: false,
-          leading: InkWell(
-            onTap: () => Get.back(),
-            child: Icon(
-              Icons.arrow_back_ios_new,
-              size: 18,
-              color: kPrimaryColor,
-            ),
-          ),
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              CustomText(title: langKey.orderDetail.tr, style: appBarTitleSize),
-              // buildSvgLogo(),
-            ],
-          ),
+        appBar: CustomAppBar(
+          title: langKey.orderDetail.tr,
         ),
         body: Center(
           child: NoDataFoundWithIcon(
@@ -74,10 +58,19 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
 
   Widget _build({OrderModel? model}) {
     return Scaffold(
-      //backgroundColor: Colors.grey[300]!,
       body: CustomScrollView(
         slivers: [
-          CustomSliverAppBar(title: langKey.orderDetail.tr,),
+          CustomSliverAppBar(
+            title: langKey.orderDetail.tr,
+            leading: InkWell(
+              onTap: () => Get.back(),
+              child: Icon(
+                Icons.arrow_back_ios,
+                color: kPrimaryColor,
+                size: 20,
+              ),
+            ),
+          ),
           SliverList(
             delegate: SliverChildListDelegate(
               [

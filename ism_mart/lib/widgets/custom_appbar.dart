@@ -5,9 +5,9 @@ import 'custom_text.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   CustomAppBar(
-      {this.title, this.onTap, this.action, this.leading, this.searchBar});
+      {this.title, this.menuItem, this.action, this.leading, this.searchBar});
 
-  final GestureTapCallback? onTap;
+  final bool? menuItem;
   final String? title;
   final List<Widget>? action;
   final Widget? leading;
@@ -18,17 +18,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       elevation: 0,
-      leading: leading ??
+      leading: leading == null ? menuItem == null ?
           InkWell(
-            onTap: () {
-              Get.back();
-            },
+            onTap: () => Get.back(),
             child: Icon(
               Icons.arrow_back_ios,
               color: kPrimaryColor,
               size: 20,
             ),
-          ),
+          ) : null : leading,
       title: searchBar ?? CustomText(title: title?.tr, style: appBarTitleSize),
       centerTitle: true,
       backgroundColor: kAppBarColor,

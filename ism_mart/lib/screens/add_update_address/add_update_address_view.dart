@@ -26,6 +26,16 @@ class AddUpdateAddressView extends StatelessWidget {
           title: viewModel.isUpdateScreen
               ? langKey.updateShippingAdd.tr
               : langKey.addShippingAdd.tr,
+          leading: InkWell(
+            onTap:() {
+              Get.back();
+            },
+            child: Icon(
+              Icons.arrow_back_ios,
+              color: kPrimaryColor,
+              size: 20,
+            ),
+          ),
         ),
         body: Stack(
           children: [

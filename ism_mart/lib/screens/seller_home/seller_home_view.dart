@@ -15,19 +15,15 @@ class SellerHomeView extends GetView<SellersController> {
       () => Scaffold(
         appBar: CustomAppBar(
           title: controller.appBarTitle.value.tr,
-          onTap: () async {
-            print('asdasd');
-            controller.clearControllers();
-            BaseController baseController = Get.find<BaseController>();
-            await baseController.fetchProducts();
-            await baseController.fetchProductsByTypes();
-            Get.back();
-          },
+          menuItem: true,
           action: [
             InkWell(
-              onTap: () {
+              onTap: () async{
+                controller.clearControllers();
+                BaseController baseController = Get.find<BaseController>();
+                await baseController.fetchProducts();
+                await baseController.fetchProductsByTypes();
                 Get.back();
-                //baseController.changePage(0);
               },
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),

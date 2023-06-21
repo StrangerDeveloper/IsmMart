@@ -26,6 +26,16 @@ class AddProductView extends StatelessWidget {
       child: Scaffold(
         appBar: CustomAppBar(
           title: langKey.addProduct.tr,
+          leading: InkWell(
+            onTap:() {
+              Get.back();
+            },
+            child: Icon(
+              Icons.arrow_back_ios,
+              color: kPrimaryColor,
+              size: 20,
+            ),
+          ),
         ),
         body: Stack(
           children: [
