@@ -9,6 +9,7 @@ import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/custom_appbar.dart';
 
 import '../../widgets/custom_search_bar.dart';
+import '../../widgets/svg_helper.dart';
 
 class BottomNavigationView extends GetView<BaseController> {
   const BottomNavigationView({Key? key}) : super(key: key);

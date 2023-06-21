@@ -10,6 +10,7 @@ import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/obscure_suffix_icon.dart';
 
 import '../../helper/validator.dart';
+import '../../widgets/svg_helper.dart';
 import '../signin/signin_view.dart';
 
 class SignUpView extends StatelessWidget {
