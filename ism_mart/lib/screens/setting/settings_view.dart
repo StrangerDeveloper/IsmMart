@@ -22,7 +22,6 @@ class SettingsView extends StatelessWidget {
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [
             CustomSliverAppBar(
-              leading: Container(),
               expandedHeight: 100.0,
               floating: false,
               pinned: true,

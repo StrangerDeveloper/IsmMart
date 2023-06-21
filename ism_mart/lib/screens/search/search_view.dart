@@ -7,6 +7,8 @@ import 'package:ism_mart/exports/exports_model.dart';
 import 'package:ism_mart/screens/search/search_viewmodel.dart';
 import 'package:ism_mart/screens/search_details/search_details_view.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
+import 'package:ism_mart/widgets/custom_appbar.dart';
+import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 
 class SearchView extends GetView<SearchViewModel> {
   SearchView({super.key});
@@ -16,7 +18,7 @@ class SearchView extends GetView<SearchViewModel> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.grey[50]!,
-        appBar: _searchAppBar(),
+        appBar: _appBar(),
         body: Obx(() => Stack(
             children: [
               _body(),
@@ -29,25 +31,15 @@ class SearchView extends GetView<SearchViewModel> {
             ],
           ),
         ),
-        //floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        //floatingActionButton: _filterBar(),
       ),
     );
   }
 
-  _searchAppBar() {
-    return AppBar(
-      backgroundColor: kAppBarColor,
-      elevation: 0,
-      automaticallyImplyLeading: false,
-      leadingWidth: 30,
+  CustomAppBar _appBar(){
+    return CustomAppBar(
       leading: InkWell(
         onTap: () {
           controller.suggestionList.clear();
-          // if(Get.arguments['isCalledFromDeals'] == true){
-          //   Get.back();
-          //   baseController.changePage(0);
-          // }
           Get.back();
         },
         child: Icon(
@@ -56,7 +48,7 @@ class SearchView extends GetView<SearchViewModel> {
           color: kPrimaryColor,
         ),
       ),
-      title: Container(
+      searchBar: Container(
         height: 36,
         child: TextField(
           controller: controller.searchTextController,
@@ -108,29 +100,29 @@ class SearchView extends GetView<SearchViewModel> {
     );
   }
 
-  Widget _body() {
+  Column _body() {
     return Column(
       children: [
         StickyLabelWithViewMoreOption(
-            title: "Recent Searches",
+            title: langKey.recentSearches.tr,
             moreOptionText: clear.tr,
             onTap: () => controller.clearHistory()),
         AppConstant.spaceWidget(height: 10),
         Expanded(
             child: controller.historyList.isEmpty
                 ? NoDataFoundWithIcon(
-                    title: noDataFound.tr,
-                    icon: Icons.search,
-                  )
+              title: noDataFound.tr,
+              icon: Icons.search,
+            )
                 : ListView.builder(
-                    shrinkWrap: true,
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: controller.historyList.length,
-                    itemBuilder: (_, index) {
-                      String? text = controller.historyList[index];
-                      return _singleListViewItem(text: text);
-                    }
-                    )
+                shrinkWrap: true,
+                physics: const BouncingScrollPhysics(),
+                itemCount: controller.historyList.length,
+                itemBuilder: (_, index) {
+                  String? text = controller.historyList[index];
+                  return _singleListViewItem(text: text);
+                }
+            )
         ),
       ],
     );
@@ -146,27 +138,27 @@ class SearchView extends GetView<SearchViewModel> {
           borderColor: kTransparent,
           child: GlobalVariable.showLoader.isTrue
               ? CustomLoading(
-                  isItForWidget: true,
-                  color: kPrimaryColor,
-                )
+            isItForWidget: true,
+            color: kPrimaryColor,
+          )
               : ListView.builder(
-                  shrinkWrap: true,
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: list.length,
-                  itemBuilder: (_, index) {
-                    ProductModel model = list[index];
-                    return _singleListViewItem(
-                        text: model.name ?? "",
-                        isCalledForSearch: true,
-                      url: model.thumbnail
-                    );
-                  }),
+              shrinkWrap: true,
+              physics: const BouncingScrollPhysics(),
+              itemCount: list.length,
+              itemBuilder: (_, index) {
+                ProductModel model = list[index];
+                return _singleListViewItem(
+                    text: model.name ?? "",
+                    isCalledForSearch: true,
+                    url: model.thumbnail
+                );
+              }),
         ),
       ),
     );
   }
 
-  _singleListViewItem({String? text, String? url, bool? isCalledForSearch = false}) {
+  Column _singleListViewItem({String? text, String? url, bool? isCalledForSearch = false}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -194,7 +186,7 @@ class SearchView extends GetView<SearchViewModel> {
                   title: text,
                 ),
                 url == null ? Container() : SizedBox(
-                  width: 35,
+                    width: 35,
                     height: 35,
                     child: CustomNetworkImage(imageUrl: url.toString()))
               ],

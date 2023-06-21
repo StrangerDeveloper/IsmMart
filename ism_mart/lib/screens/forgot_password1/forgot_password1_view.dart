@@ -6,7 +6,6 @@ import 'package:ism_mart/screens/forgot_password1/forgot_password1_viewmodel.dar
 import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/custom_appbar.dart';
-
 import '../../helper/validator.dart';
 
 class ForgotPassword1View extends StatelessWidget {
@@ -19,7 +18,6 @@ class ForgotPassword1View extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: CustomAppBar(),
-        // appBar(),
         body: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
           child: Column(
@@ -54,23 +52,7 @@ class ForgotPassword1View extends StatelessWidget {
     );
   }
 
-  PreferredSizeWidget appBar() {
-    return AppBar(
-      elevation: 0,
-      leading: IconButton(
-        onPressed: () {
-          Get.back();
-        },
-        icon: Icon(
-          Icons.arrow_back_ios_new,
-          size: 18,
-          color: kPrimaryColor,
-        ),
-      ),
-    );
-  }
-
-  Widget emailTextField() {
+  Padding emailTextField() {
     return Padding(
       padding: const EdgeInsets.only(top: 15, bottom: 25),
       child: Form(

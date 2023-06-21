@@ -8,7 +8,6 @@ import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/custom_appbar.dart';
 import 'package:ism_mart/widgets/obscure_suffix_icon.dart';
-
 import '../../helper/validator.dart';
 
 class ForgotPassword2View extends GetView<AuthController> {
@@ -21,7 +20,6 @@ class ForgotPassword2View extends GetView<AuthController> {
     return SafeArea(
       child: Scaffold(
         appBar: CustomAppBar(),
-        // appBar(),
         body: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
           child: Form(
@@ -58,23 +56,7 @@ class ForgotPassword2View extends GetView<AuthController> {
     );
   }
 
-  PreferredSizeWidget appBar() {
-    return AppBar(
-      elevation: 0,
-      leading: IconButton(
-        onPressed: () {
-          Get.back();
-        },
-        icon: Icon(
-          Icons.arrow_back_ios_new,
-          size: 18,
-          color: kPrimaryColor,
-        ),
-      ),
-    );
-  }
-
-  Widget otpTxtField() {
+  CustomTextField2 otpTxtField() {
     return CustomTextField2(
       prefixIcon: Icons.title,
       label: langKey.otp.tr,

@@ -6,6 +6,7 @@ import 'package:ism_mart/exports/exports_model.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/widgets/custom_appbar.dart';
 
 class SearchDetailsView extends GetView<CustomSearchController> {
   const SearchDetailsView({
@@ -53,41 +54,6 @@ class SearchDetailsView extends GetView<CustomSearchController> {
       if(controller.filters.isEmpty){
         controller.handleFilters(controller.filters);
       }
-      // controller.filters.addIf(productTypeKey!.isNotEmpty, "type",
-      //     baseController.getProductTypeKeys(productTypeKey));
-      //controller.filters.addIf(categoryID! > 0, "category", "$categoryID");
-      // controller.filters
-      //     .addIf(subCategoryID! > 0, "subCategory", "$subCategoryID");
-
-      //controller.searchWithFilters(filters: filters);
-    // print("Filters: ${controller.filters.toString()}");
-
-    //  final controller = Get.find<SearchController>();
-    //controller.searchTextController.clear();
-    //controller.subCategoryID.value = 0;
-    //controller.selectedCategory('');
-    // String searchQuery = '';
-
-    // if (passedSearchQuery == 'ISMMART Originals') {
-    //   searchQuery = 'IsmmartOriginal';
-    //   controller.selectedCategory.value = searchQuery;
-    // } else if (passedSearchQuery == 'Popular Products') {
-    //   searchQuery = 'Latest';
-    //   controller.selectedCategory.value = searchQuery;
-    // } else if (passedSearchQuery == 'Featured Products') {
-    //   searchQuery = 'Featured';
-    //   controller.selectedCategory.value = searchQuery;
-    // } else {
-    //   controller.selectedCategory(passedSearchQuery);
-    // }
-
-    // if (calledForCategory == null) {
-    //   null;
-    // } else {
-    //   calledForCategory!
-    //       ? controller.searchProductsByCategory(searchQuery)
-    //       : controller.searchWithSubCategory(subCategoryID);
-    // }
 
     return WillPopScope(
       onWillPop: () {
@@ -96,7 +62,7 @@ class SearchDetailsView extends GetView<CustomSearchController> {
       child: SafeArea(
         child: Scaffold(
           backgroundColor: Colors.grey[100]!,
-          appBar: _searchAppBar(),
+          appBar: _appBar(),
           body: Obx(() => controller.noProductsFound.value ? Center(
             child: NoDataFoundWithIcon(
               title: langKey.emptyProductSearch.tr,
@@ -110,48 +76,38 @@ class SearchDetailsView extends GetView<CustomSearchController> {
               )
             ],
           ),
-      )
-          //floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-          //floatingActionButton: _filterBar(),
+          )
         ),
       ),
     );
-    /* return controller.obx((state) {
-
-    },onLoading: NoDataFound());*/
   }
 
-  _searchAppBar() {
-    return AppBar(
-        backgroundColor: kAppBarColor,
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        leadingWidth: 40,
-        leading: InkWell(
-                onTap: () {
-                  if(calledToGoBackOnce == true){
-                    Get.back();
-                  }
-                  else {
-                    int count = 0;
-                    Get.offNamedUntil(
-                        Routes.searchRoute, (route) => count++ >= 2);
-                    controller.clearFilters();
-                    controller.productList.clear();
-                  }
-                  },
-                child: Icon(
-                  Icons.arrow_back_ios_new,
-                  size: 18,
-                  color: kPrimaryColor,
-                ),
-              ),
-        title: CustomSearchBar(
-          searchText: searchQuery,
-          calledFromSearchDetailsView: calledToGoBackOnce != null ? false : true,
-          // calledFromCategories: calledFromCategories != null ? true : false,
-        )
-        );
+  CustomAppBar _appBar(){
+    return CustomAppBar(
+      leading: InkWell(
+        onTap: () {
+          if(calledToGoBackOnce == true){
+            Get.back();
+          }
+          else {
+            int count = 0;
+            Get.offNamedUntil(
+                Routes.searchRoute, (route) => count++ >= 2);
+            controller.clearFilters();
+            controller.productList.clear();
+          }
+        },
+        child: Icon(
+          Icons.arrow_back_ios_new,
+          size: 18,
+          color: kPrimaryColor,
+        ),
+      ),
+      searchBar: CustomSearchBar(
+        searchText: searchQuery,
+        calledFromSearchDetailsView: calledToGoBackOnce != null ? false : true,
+      ),
+    );
   }
 
   _body() {
@@ -167,7 +123,7 @@ class SearchDetailsView extends GetView<CustomSearchController> {
             : _buildProductView(controller.productList));
   }
 
-  Widget _buildProductView(List<ProductModel> list) {
+  Column _buildProductView(List<ProductModel> list) {
     return Column(
       children: [
         ///Filter bar
@@ -410,7 +366,7 @@ class SearchDetailsView extends GetView<CustomSearchController> {
     );
   }
 
-  Widget _filtersBtn() {
+  Padding _filtersBtn() {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
       child: Row(

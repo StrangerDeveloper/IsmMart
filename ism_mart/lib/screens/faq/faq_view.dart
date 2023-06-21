@@ -4,7 +4,6 @@ import 'package:ism_mart/controllers/buyer/base_controller.dart';
 import 'package:ism_mart/screens/faq/faq_viewmodel.dart';
 import 'package:ism_mart/helper/constants.dart';
 import 'package:ism_mart/widgets/custom_appbar.dart';
-import 'package:ism_mart/widgets/custom_text.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/loader_view.dart';
 
@@ -17,7 +16,6 @@ class FaqView extends GetView<BaseController> {
     return SafeArea(
       child: Scaffold(
         appBar: CustomAppBar(title: langKey.faqs.tr,),
-        // appBar(),
         body: Stack(
           children: [
             Column(
@@ -34,25 +32,7 @@ class FaqView extends GetView<BaseController> {
     );
   }
 
-  PreferredSizeWidget appBar() {
-    return AppBar(
-      backgroundColor: kAppBarColor,
-      leading: InkWell(
-        onTap: () => Get.back(),
-        child: Icon(
-          Icons.arrow_back_ios_new,
-          size: 18,
-          color: kPrimaryColor,
-        ),
-      ),
-      title: CustomText(
-        title: langKey.faqs.tr,
-        style: appBarTitleSize,
-      ),
-    );
-  }
-
-  Widget title() {
+  Padding title() {
     return Padding(
       padding: const EdgeInsets.only(left: 15, right: 16, top: 6),
       child: FittedBox(
@@ -91,7 +71,7 @@ class FaqView extends GetView<BaseController> {
     );
   }
 
-  Widget listViewItem(int index) {
+  ExpansionTile listViewItem(int index) {
     return ExpansionTile(
       backgroundColor: Colors.black.withOpacity(0.03),
       childrenPadding: EdgeInsets.only(left: 16, bottom: 10, right: 24),

@@ -6,6 +6,7 @@ import 'package:ism_mart/exports/export_controllers.dart';
 import 'package:ism_mart/exports/export_widgets.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/widgets/custom_appbar.dart';
 
 import '../../widgets/custom_search_bar.dart';
 
@@ -42,22 +43,15 @@ class BottomNavigationView extends GetView<BaseController> {
     );
   }
 
-  AppBar _buildAppBar(){
-    return AppBar(
-      backgroundColor: kAppBarColor,
-      title: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          buildSvgLogo(),
-          AppConstant.spaceWidget(width: 5),
-          Expanded(
-            flex: 5,
-            child: CustomSearchBar(
-              searchText: "",
-              calledFromDashboard: true,
-            ),
-          ),
-        ],
+  CustomAppBar _buildAppBar(){
+    return CustomAppBar(
+      leading: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 6),
+        child: buildSvgLogo(),
+      ),
+      searchBar: CustomSearchBar(
+        searchText: "",
+        calledFromDashboard: true,
       ),
     );
   }

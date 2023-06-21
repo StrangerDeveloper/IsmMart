@@ -48,23 +48,7 @@ class EmailVerificationView extends GetView<AuthController> {
     );
   }
 
-  PreferredSizeWidget appBar() {
-    return AppBar(
-      elevation: 0,
-      leading: IconButton(
-        onPressed: () {
-          Get.back();
-        },
-        icon: Icon(
-          Icons.arrow_back_ios_new,
-          size: 18,
-          color: kPrimaryColor,
-        ),
-      ),
-    );
-  }
-
-  Widget emailTextField() {
+  Padding emailTextField() {
     return Padding(
       padding: const EdgeInsets.only(top: 15, bottom: 20),
       child: Form(
@@ -91,7 +75,7 @@ class EmailVerificationView extends GetView<AuthController> {
     );
   }
 
-  Widget buttons() {
+  Row buttons() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [

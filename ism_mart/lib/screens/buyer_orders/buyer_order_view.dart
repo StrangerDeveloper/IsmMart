@@ -23,9 +23,7 @@ class BuyerOrderView extends StatelessWidget {
         appBar: CustomAppBar(
           title: langKey.userOrders.tr,
           actionItem: appBarPopupMenu(),
-
         ),
-        // appBar(),
         backgroundColor: Colors.grey[100]!,
         body: Stack(
           children: [
@@ -45,26 +43,6 @@ class BuyerOrderView extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-
-  AppBar appBar() {
-    return AppBar(
-      elevation: 0,
-      leading: IconButton(
-        onPressed: () {
-          Get.back();
-        },
-        icon: Icon(
-          Icons.arrow_back_ios_new,
-          size: 18,
-          color: kPrimaryColor,
-        ),
-      ),
-      title: CustomText(title: langKey.userOrders.tr, style: appBarTitleSize),
-      actions: [
-        appBarPopupMenu(),
-      ],
     );
   }
 
@@ -108,7 +86,7 @@ class BuyerOrderView extends StatelessWidget {
     );
   }
 
-  Widget _orderStats() {
+  SizedBox _orderStats() {
     return SizedBox(
       height: 250, //AppResponsiveness.getBoxHeightPoint22(),
       child: Padding(

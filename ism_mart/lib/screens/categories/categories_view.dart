@@ -42,7 +42,6 @@ class CategoriesView extends GetView<CategoryController> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.grey[100]!,
-        // appBar: _appBar(),
         body: Padding(
           padding: const EdgeInsets.only(left: 8, right: 8, top: 8),
           child: Column(
@@ -64,7 +63,7 @@ class CategoriesView extends GetView<CategoryController> {
   }
 
   //having split but different design
-  _buildBodyNew({List<CategoryModel>? categoryList}) {
+  Row _buildBodyNew({List<CategoryModel>? categoryList}) {
     //var height = AppConstant.getSize().height;
     return Row(
       children: [

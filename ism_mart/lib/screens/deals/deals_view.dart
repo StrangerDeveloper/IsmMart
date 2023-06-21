@@ -6,7 +6,6 @@ import 'package:ism_mart/screens/deals/deals_viewmodel.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import '../../helper/constants.dart';
 import '../../helper/responsiveness.dart';
-import '../categories/model/category_model.dart';
 import '../../models/product/product_model.dart';
 import '../../widgets/loader_view.dart';
 
@@ -19,8 +18,7 @@ class DealsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Obx(() =>
-        viewModel.noProductsFound.value ?
+        body: Obx(() => viewModel.noProductsFound.value ?
         Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -32,25 +30,6 @@ class DealsView extends StatelessWidget {
               AppConstant.spaceWidget(
                   height: 18
               ),
-              TextButton(
-                  onPressed: () async {
-                    viewModel.filters.clear();
-                    viewModel.page = 1;
-                    viewModel.searchTextController.clear();
-                    viewModel.searchEnabled.value = false;
-                    viewModel.selectedCategoryId.value = 0;
-                    viewModel.unselectCategory();
-                    viewModel.url = 'filter?type=Discounts&limit=${viewModel
-                        .limit}&page=${viewModel.page}&';
-                    await viewModel.getProducts();
-                  }, child: Text(
-                'Clear Filters',
-                style: TextStyle(
-                    color: kPrimaryColor,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 17
-                ),
-              ))
             ],
           ),
         ) : Stack(
@@ -108,281 +87,14 @@ class DealsView extends StatelessWidget {
               ],
             ),
             NoInternetView(
-              onPressed: () {
-                viewModel.addFilters();
-                // viewModel.addFilters();
-                // viewModel.addPriceFilter();
+              onPressed: () async{
+                await viewModel.getProducts();
               },
             ),
             LoaderView(),
           ],
         ),
         ),
-      ),
-    );
-  }
-
-  // AppBar _appBar() {
-  //   return AppBar(
-  //     backgroundColor: kAppBarColor,
-  //     elevation: 0,
-  //     automaticallyImplyLeading: false,
-  //     leadingWidth: 40,
-  //     leading: InkWell(
-  //       onTap: () {
-  //         baseController.changePage(0);
-  //         viewModel.productList.clear();
-  //         viewModel.page = 1;
-  //         viewModel.limit.value = 15;
-  //         viewModel.searchTextController.clear();
-  //       },
-  //       child: Icon(
-  //         Icons.arrow_back_ios_new,
-  //         size: 18,
-  //         color: kPrimaryColor,
-  //       ),
-  //     ),
-  //     title: Container(
-  //       height: 36,
-  //       child: TextField(
-  //         controller: viewModel.searchTextController,
-  //         textInputAction: TextInputAction.search,
-  //         onSubmitted: (value) {
-  //           viewModel.filters.clear();
-  //           viewModel.page = 1;
-  //           viewModel.unselectCategory();
-  //           viewModel.url =
-  //               'filter?type=Discounts&limit=${viewModel.limit}&page=${viewModel.page}&';
-  //           viewModel.filters.addAll({'text': value});
-  //           viewModel.searchProducts(value);
-  //         },
-  //         cursorColor: kPrimaryColor,
-  //         autofocus: false,
-  //         maxLines: 1,
-  //         style: TextStyle(
-  //           color: kLightColor,
-  //           fontWeight: FontWeight.w600,
-  //           fontSize: 15.0,
-  //         ),
-  //         textAlignVertical: TextAlignVertical.center,
-  //         decoration: InputDecoration(
-  //           filled: true,
-  //           prefixIcon: Icon(Icons.search, color: kPrimaryColor),
-  //           enabledBorder: OutlineInputBorder(
-  //             borderSide: BorderSide(
-  //               color: kLightGreyColor,
-  //               width: 0.5,
-  //             ), //BorderSide.none,
-  //             borderRadius: BorderRadius.all(Radius.circular(8)),
-  //           ),
-  //           focusedBorder: OutlineInputBorder(
-  //             borderSide: BorderSide(
-  //               color: kLightGreyColor,
-  //               width: 0.5,
-  //             ), //BorderSide.none,
-  //             borderRadius: BorderRadius.all(Radius.circular(8)),
-  //           ),
-  //           fillColor: kWhiteColor,
-  //           contentPadding: EdgeInsets.zero,
-  //           hintText: langKey.searchIn.tr,
-  //           hintStyle: TextStyle(
-  //             color: kLightColor,
-  //             fontWeight: FontWeight.w600,
-  //             fontSize: 13.0,
-  //           ),
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
-
-  void showFilterBottomSheet() {
-    AppConstant.showBottomSheet(
-      widget: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 8, right: 8, top: 10),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 5),
-                      child: CustomText(
-                        title: langKey.filter.tr,
-                        weight: FontWeight.bold,
-                        size: 16,
-                      ),
-                    ),
-                    IconButton(
-                      visualDensity: VisualDensity.compact,
-                      onPressed: () {
-                        Get.back();
-                      },
-                      icon: Icon(Icons.close),
-                    ),
-                  ],
-                ),
-                Divider(),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 13),
-            child: CustomText(
-              title: langKey.categories.tr,
-              weight: FontWeight.bold,
-              size: 14,
-            ),
-          ),
-          Obx(
-            () => Container(
-              height: 70,
-              child: ListView.builder(
-                physics: BouncingScrollPhysics(),
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                scrollDirection: Axis.horizontal,
-                itemCount: viewModel.categoriesList.length,
-                itemBuilder: (_, index) {
-                  CategoryModel categoryModel = viewModel.categoriesList[index];
-                  return Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 5, vertical: 13),
-                    child: InkWell(
-                      onTap: () {
-                        viewModel.selectedCategoryId(categoryModel.id!);
-                        viewModel.setSelectedCategory(categoryModel);
-                        if (viewModel.filters.containsKey('category')) {
-                          viewModel.filters.remove('category');
-                          viewModel.filters
-                              .addAll({'category': '${categoryModel.id}'});
-                          viewModel.addFilters();
-                        } else {
-                          viewModel.filters
-                              .addAll({'category': '${categoryModel.id}'});
-                          viewModel.addFilters();
-                        }
-                        Get.back();
-                      },
-                      borderRadius: BorderRadius.circular(5),
-                      child: Container(
-                        alignment: Alignment.center,
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color: categoryModel.isPressed!
-                              ? kPrimaryColor
-                              : kTransparent,
-                          border: categoryModel.isPressed!
-                              ? Border()
-                              : Border.all(),
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: CustomText(
-                          title: categoryModel.name,
-                          color: categoryModel.isPressed!
-                              ? kWhiteColor
-                              : kDarkColor,
-                          weight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 13, top: 10),
-            child: CustomText(
-              title: langKey.price.tr,
-              weight: FontWeight.bold,
-              size: 14,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              children: [
-                Expanded(
-                  child: FormInputFieldWithIcon(
-                    controller: viewModel.minPriceController,
-                    iconPrefix: Icons.attach_money_rounded,
-                    labelText: langKey.minPrice.tr,
-                    iconColor: kPrimaryColor,
-                    enableBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: kPrimaryColor,
-                        width: 1.5,
-                      ),
-                    ),
-                    autofocus: false,
-                    textStyle: bodyText1,
-                    keyboardType: TextInputType.number,
-                    onChanged: (value) {},
-                    onSaved: (value) {},
-                  ),
-                ),
-                SizedBox(width: 20),
-                Expanded(
-                  child: FormInputFieldWithIcon(
-                    controller: viewModel.maxPriceController,
-                    iconPrefix: Icons.attach_money_rounded,
-                    labelText: langKey.maxPrice.tr,
-                    iconColor: kPrimaryColor,
-                    autofocus: false,
-                    enableBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: kPrimaryColor,
-                        width: 1.5,
-                      ),
-                    ),
-                    textStyle: bodyText1,
-                    keyboardType: TextInputType.number,
-                    onChanged: (value) {},
-                    onSaved: (value) {},
-                  ),
-                ),
-              ],
-            ),
-          ),
-          _filtersBtn(),
-        ],
-      ),
-    );
-  }
-
-  Widget _filtersBtn() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Expanded(
-            child: CustomTextBtn(
-              onPressed: () {}, //=> controller.clearFilters(),
-              title: langKey.clear.tr,
-              height: 36,
-            ),
-          ),
-          SizedBox(width: 20),
-          Expanded(
-            child: CustomTextBtn(
-              onPressed: () {
-                viewModel.addPriceFilter();
-                // controller.applyFilter();
-                // Get.back();
-                // controller.minPriceController.clear();
-                // controller.maxPriceController.clear();
-              },
-              title: langKey.search.tr,
-              height: 36,
-            ),
-          ),
-        ],
       ),
     );
   }

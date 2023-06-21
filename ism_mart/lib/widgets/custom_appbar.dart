@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ism_mart/exports/export_buyers.dart';
 import '../helper/constants.dart';
 import 'custom_text.dart';
 
@@ -20,7 +19,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget{
   final dynamic actionItem;
   final Widget? leading;
   final double height = 55;
-  final CustomSearchBar? searchBar;
+  final Widget? searchBar;
 
   @override
   Widget build(BuildContext context) {

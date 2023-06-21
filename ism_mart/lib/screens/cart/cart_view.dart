@@ -18,14 +18,7 @@ class CartView extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.grey[100]!,
-        appBar: CustomAppBar(
-          title: langKey.myCart.tr,
-          leading: Get.arguments != null && Get.arguments["calledFromSPV"] ?
-          null : Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 5.0),
-            child: buildSvgLogo(),
-          ),
-        ),
+        appBar: _appBar(),
         body: Obx(() => viewModel.cartItemsList.isEmpty ? Center(
           child: NoDataFoundWithIcon(
             icon: IconlyLight.buy,
@@ -40,6 +33,17 @@ class CartView extends StatelessWidget {
         bottomNavigationBar: viewModel.cartItemsList.isEmpty ? null : _checkOutBottomBar(),
         ),
       );
+  }
+
+  CustomAppBar _appBar(){
+    return CustomAppBar(
+      title: langKey.myCart.tr,
+      leading: Get.arguments != null && Get.arguments["calledFromSPV"] ?
+      null : Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5.0),
+        child: buildSvgLogo(),
+      ),
+    );
   }
 
   Widget _buildCartItemSection() {

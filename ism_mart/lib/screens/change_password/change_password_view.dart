@@ -96,7 +96,7 @@ class ChangePasswordView extends StatelessWidget {
     );
   }
 
-  Widget proceedBtn() {
+  CustomTextBtn proceedBtn() {
     return CustomTextBtn(
       title: langKey.proceed.tr,
       onPressed: () {

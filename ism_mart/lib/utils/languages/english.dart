@@ -495,6 +495,7 @@ class English {
         key.proceedToCheckOut: 'Proceed To Checkout',
         key.addProduct: 'Add Product',
         key.redeemBtn: 'Redeem',
+        key.recentSearches: 'Recent Searches',
 
         ///Form Validations
         key.storeName: 'Store Name',

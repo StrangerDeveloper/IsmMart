@@ -56,29 +56,7 @@ class AddUpdateAddressView extends StatelessWidget {
     );
   }
 
-  AppBar appBar() {
-    return AppBar(
-      backgroundColor: kAppBarColor,
-      leading: InkWell(
-        onTap: () {
-          Get.back();
-        },
-        child: Icon(
-          Icons.arrow_back_ios_new,
-          size: 18,
-          color: kPrimaryColor,
-        ),
-      ),
-      title: CustomText(
-        title: viewModel.isUpdateScreen
-            ? langKey.updateShippingAdd.tr
-            : langKey.addShippingAdd.tr,
-        style: appBarTitleSize,
-      ),
-    );
-  }
-
-  Widget fullNameTextField() {
+  CustomTextField2 fullNameTextField() {
     return CustomTextField2(
       label: langKey.fullName.tr,
       controller: viewModel.fullNameController,
@@ -89,7 +67,7 @@ class AddUpdateAddressView extends StatelessWidget {
     );
   }
 
-  Widget phoneTextField() {
+  Padding phoneTextField() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: CustomTextField2(
@@ -107,7 +85,7 @@ class AddUpdateAddressView extends StatelessWidget {
     );
   }
 
-  Widget zipCodeTextField() {
+  CustomTextField2 zipCodeTextField() {
     return CustomTextField2(
       label: langKey.zipCode.tr,
       controller: viewModel.zipCodeController,
@@ -119,7 +97,7 @@ class AddUpdateAddressView extends StatelessWidget {
     );
   }
 
-  Widget addressTextField() {
+  Padding addressTextField() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: CustomTextField2(
@@ -220,7 +198,7 @@ class AddUpdateAddressView extends StatelessWidget {
     );
   }
 
-  Widget submitBtn() {
+  CustomTextBtn submitBtn() {
     return CustomTextBtn(
       onPressed: () {
         viewModel.isUpdateScreen

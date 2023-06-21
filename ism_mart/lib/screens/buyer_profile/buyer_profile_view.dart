@@ -140,7 +140,7 @@ class BuyerProfileView extends StatelessWidget {
     );
   }
 
-  Widget lastNameTextField() {
+  CustomTextField2 lastNameTextField() {
     return CustomTextField2(
       label: langKey.lastName.tr,
       controller: viewModel.lastNameController,

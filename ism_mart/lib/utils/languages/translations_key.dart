@@ -539,7 +539,8 @@ const add = "add",
     addNewAddress = "addNewAddress",
     addPayment = "addPayments",
     proceedToCheckOut = "proceedToCheckOut",
-    redeemBtn = "redeem";
+    redeemBtn = "redeem",
+    recentSearches = "recentSearches";
 
 /**
  * No Page found messages

@@ -19,7 +19,6 @@ class ChangeAddressView extends StatelessWidget {
         appBar: CustomAppBar(
           title: langKey.shippingAddressDetail.tr,
         ),
-        // appBar(),
         body: Stack(
           children: [
             Column(
@@ -35,27 +34,7 @@ class ChangeAddressView extends StatelessWidget {
     );
   }
 
-  PreferredSizeWidget appBar() {
-    return AppBar(
-      backgroundColor: kAppBarColor,
-      leading: IconButton(
-        onPressed: () {
-          Get.back();
-        },
-        icon: Icon(
-          Icons.arrow_back_ios_new,
-          size: 18,
-          color: kPrimaryColor,
-        ),
-      ),
-      title: CustomText(
-        title: langKey.shippingAddressDetail.tr,
-        style: appBarTitleSize,
-      ),
-    );
-  }
-
-  Widget addNewAddress() {
+  Padding addNewAddress() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
@@ -100,7 +79,7 @@ class ChangeAddressView extends StatelessWidget {
     );
   }
 
-  Widget listViewItem(int index) {
+  Padding listViewItem(int index) {
     return Padding(
       padding: const EdgeInsets.all(5),
       child: Stack(
@@ -174,7 +153,7 @@ class ChangeAddressView extends StatelessWidget {
     );
   }
 
-  Widget _buildNewAddress() {
+  Padding _buildNewAddress() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(

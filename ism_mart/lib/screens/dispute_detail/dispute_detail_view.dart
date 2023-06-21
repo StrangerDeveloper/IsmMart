@@ -19,7 +19,6 @@ class DisputeDetailView extends StatelessWidget {
       appBar: CustomAppBar(
         title: langKey.disputeDetail.tr,
       ),
-      // appBar(),
       body: Stack(
         children: [
           SingleChildScrollView(

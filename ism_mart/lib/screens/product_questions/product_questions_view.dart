@@ -20,7 +20,6 @@ class ProductQuestionsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(title: productQuestions.tr,),
-      // appBar(),
       body: Stack(
         children: [
           Column(
@@ -37,24 +36,7 @@ class ProductQuestionsView extends StatelessWidget {
     );
   }
 
-  AppBar appBar() {
-    return AppBar(
-      leading: InkWell(
-        onTap: () => Get.back(),
-        child: Icon(
-          Icons.arrow_back_ios_new,
-          size: 18,
-          color: kPrimaryColor,
-        ),
-      ),
-      title: CustomText(
-        title: productQuestions.tr,
-        style: appBarTitleSize,
-      ),
-    );
-  }
-
-  Widget askQuestionBtn() {
+  Padding askQuestionBtn() {
     return Padding(
       padding: const EdgeInsets.all(15),
       child: CustomTextBtn(
@@ -70,8 +52,7 @@ class ProductQuestionsView extends StatelessWidget {
   }
 
   Widget listView() {
-    return Obx(
-      () => viewModel.productQuestionsList.isEmpty
+    return Obx(() => viewModel.productQuestionsList.isEmpty
           ? Center(
               child: NoDataFoundWithIcon(
                 icon: IconlyLight.search,
@@ -88,7 +69,7 @@ class ProductQuestionsView extends StatelessWidget {
     );
   }
 
-  Widget listViewItem(int index) {
+  Column listViewItem(int index) {
     return Column(
       children: [
         questionItem(index),
@@ -99,7 +80,7 @@ class ProductQuestionsView extends StatelessWidget {
     );
   }
 
-  Widget questionItem(int index) {
+  Padding questionItem(int index) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: InkWell(
@@ -181,7 +162,7 @@ class ProductQuestionsView extends StatelessWidget {
     );
   }
 
-  Widget answerItem(int index) {
+  InkWell answerItem(int index) {
     return InkWell(
       borderRadius: BorderRadius.circular(8),
       onTap: null,

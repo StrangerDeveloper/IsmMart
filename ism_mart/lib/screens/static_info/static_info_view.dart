@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ism_mart/screens/static_info/static_info_viewmodel.dart';
-
+import 'package:ism_mart/widgets/custom_appbar.dart';
 import '../../exports/exports_utils.dart';
 import '../../exports/export_widgets.dart';
 
@@ -15,7 +15,7 @@ class StaticInfoView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: appBar(),
+        appBar: CustomAppBar(title: viewModel.title,),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,7 +46,9 @@ class StaticInfoView extends StatelessWidget {
                             style: headline2,
                           ),
                         if (e['header'] != '') Divider(),
-                        if (e['body'].toString().isNotEmpty)
+                        if (e['body']
+                            .toString()
+                            .isNotEmpty)
                           Text(
                             "${e['body'].toString()}",
                             style: GoogleFonts.poppins(
@@ -63,26 +65,6 @@ class StaticInfoView extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  AppBar appBar() {
-    return AppBar(
-      backgroundColor: kAppBarColor,
-      leading: IconButton(
-        onPressed: () {
-          Get.back();
-        },
-        icon: Icon(
-          Icons.arrow_back_ios_new,
-          size: 18,
-          color: kPrimaryColor,
-        ),
-      ),
-      title: CustomText(
-        title: viewModel.title,
-        style: headline2,
       ),
     );
   }

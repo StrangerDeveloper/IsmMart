@@ -20,7 +20,9 @@ class UpdateProductView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-          appBar: CustomAppBar(title: langKey.updateProduct.tr,),
+          appBar: CustomAppBar(
+            title: langKey.updateProduct.tr,
+          ),
           body: Stack(
             children: [
               AppConstant.spaceWidget(height: 20),

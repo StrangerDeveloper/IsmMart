@@ -338,10 +338,6 @@ class DashboardView extends GetView<BaseController> {
                 title: e.key,
                 textSize: 20,
                 onTap: () {
-                  // Get.toNamed(Routes.searchDetails, arguments: {
-                  //   "productTypeKey": "${e.key}",
-                  //   "isCalledForDeals":
-                  // });
                   Get.find<CustomSearchController>().filters.clear();
                   Get.to(() => SearchDetailsView(
                         isCalledForLatestAndBestSeller:

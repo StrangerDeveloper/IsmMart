@@ -26,7 +26,7 @@ class CustomSliverAppBar extends StatelessWidget{
         pinned: pinned ?? false,
         automaticallyImplyLeading: false,
         backgroundColor: kAppBarColor,
-        leading: leading ?? null,
+        leading: leading,
         flexibleSpace: flexibleSpaceBar,
         centerTitle: true,
         title: flexibleSpaceBar == null ? CustomText(

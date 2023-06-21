@@ -14,7 +14,6 @@ import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/loader_view.dart';
 import 'package:ism_mart/widgets/pick_image.dart';
-
 import '../../helper/validator.dart';
 
 class AddProductView extends StatelessWidget {
@@ -25,7 +24,6 @@ class AddProductView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        // appBar: CustomSimpleAppBar(title: langKey.addProduct.tr,).build(),
         appBar: CustomAppBar(title: langKey.addProduct.tr,),
         body: Stack(
           children: [
@@ -84,7 +82,7 @@ class AddProductView extends StatelessWidget {
     );
   }
 
-  Widget _createDynamicFormFields(ProductVariantsModel model) {
+  Padding _createDynamicFormFields(ProductVariantsModel model) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextFormField(
@@ -165,7 +163,7 @@ class AddProductView extends StatelessWidget {
     );
   }
 
-  _buildImageSection() {
+  GestureDetector _buildImageSection() {
     return GestureDetector(
       onTap: () async {
         viewModel.productImages.addAll(await PickImage().pickMultipleImage());
