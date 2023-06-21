@@ -114,6 +114,7 @@ class CustomSearchController extends GetxController {
   }
 
   searchWithFilters() async {
+    GlobalVariable.internetErr(false);
     print("SearchWithFilters: ${filters.toString()}");
     isLoading.value = true;
     int i = 0;
@@ -133,6 +134,9 @@ class CustomSearchController extends GetxController {
       noProductsFound.value = false;
       productList.clear();
       productList.addAll(products);
+      productList.isEmpty
+          ? GlobalVariable.internetErr(true)
+          : GlobalVariable.internetErr(false);
       isLoading.value = false;
     }).catchError((onError) {
       isLoading.value = false;

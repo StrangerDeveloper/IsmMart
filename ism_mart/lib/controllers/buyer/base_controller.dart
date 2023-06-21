@@ -135,6 +135,7 @@ class BaseController extends GetxController {
   fetchCategories() async {
     isCategoriesLoading(true);
     await _apiProvider.fetchCategories().then((data) {
+      categories.clear();
       categories.addAll(data);
       isCategoriesLoading(false);
     }).catchError((error) {

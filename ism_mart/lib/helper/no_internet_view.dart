@@ -47,7 +47,9 @@ class NoInternetView extends StatelessWidget {
                       ),
                     ),
                   ),
-                  tryAgainBtn(),
+                  GlobalVariable.btnPress.value == true
+                      ? SizedBox()
+                      : tryAgainBtn(),
                 ],
               ),
             )
