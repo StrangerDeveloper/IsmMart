@@ -9,18 +9,20 @@ import 'package:ism_mart/utils/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/custom_appbar.dart';
 
 class SearchDetailsView extends GetView<CustomSearchController> {
-  const SearchDetailsView({
-    Key? key,
-    this.searchQuery = "",
-    this.productTypeKey = "",
-    this.subCategoryID = 0,
-    this.categoryID = 0,
-    this.isCalledForLatestAndBestSeller = false,
-    this.calledToGoBackOnce
+  const SearchDetailsView(
+      {Key? key,
+      this.searchQuery = "",
+      this.productTypeKey = "",
+      this.subCategoryID = 0,
+      this.categoryID = 0,
+      this.isCalledForLatestAndBestSeller = false,
+      this.calledFromCategories,
+      this.calledToGoBackOnce})
+      : super(key: key);
 
-  }) : super(key: key);
-
-  final bool? isCalledForLatestAndBestSeller, calledToGoBackOnce;
+  final bool? isCalledForLatestAndBestSeller,
+      calledFromCategories,
+      calledToGoBackOnce;
   final String? searchQuery, productTypeKey;
   final int? categoryID, subCategoryID;
 
@@ -31,67 +33,72 @@ class SearchDetailsView extends GetView<CustomSearchController> {
     // 2. Deals
     //3. on SearchBar (dashboard)
     // print("SearchView: $isCalledForDeals--$searchQuery---$productTypeKey");
-      // controller.isLoading.value = true;
-      if(searchQuery != null && searchQuery != '') {
-        controller.addFilters("text", searchQuery);
+    // controller.isLoading.value = true;
+    if (searchQuery != null && searchQuery != '') {
+      controller.addFilters("text", searchQuery);
+    }
+    if (productTypeKey != null && productTypeKey != '') {
+      print('Type: $productTypeKey');
+      if (productTypeKey == 'All Products') {
+        null;
+      } else {
+        controller.addFilters(
+            "type", baseController.getProductTypeKeys(productTypeKey));
       }
-      if(productTypeKey != null && productTypeKey != '') {
-        print('Type: $productTypeKey');
-        if (productTypeKey == 'All Products') {
-           null;
-        } else {
-          controller.addFilters(
-              "type", baseController.getProductTypeKeys(productTypeKey));
-        }
-      }
-      if(categoryID != null && categoryID != 0) {
-        controller.addFilters("category", categoryID);
-      }
-      if(subCategoryID != null && subCategoryID != 0) {
-        controller.addFilters("subCategory", subCategoryID);
-      }
-      if(controller.filters.isEmpty){
-        controller.handleFilters(controller.filters);
-      }
+    }
+    if (categoryID != null && categoryID != 0) {
+      controller.addFilters("category", categoryID);
+    }
+    if (subCategoryID != null && subCategoryID != 0) {
+      controller.addFilters("subCategory", subCategoryID);
+    }
+    if (controller.filters.isEmpty) {
+      controller.handleFilters(controller.filters);
+    }
 
     return WillPopScope(
       onWillPop: () {
+        Future.delayed(
+          Duration(seconds: 2),
+          () => Get.back(),
+        );
+
         return controller.clearFilters();
       },
       child: SafeArea(
         child: Scaffold(
-          backgroundColor: Colors.grey[100]!,
-          appBar: _appBar(),
-          body: Obx(() => controller.noProductsFound.value ? Center(
-            child: NoDataFoundWithIcon(
-              title: langKey.emptyProductSearch.tr,
-              subTitle: langKey.emptyProductSearchMsg.tr,
-            ),
-          ) : Stack(
-            children: [
-              _body(),
-              NoInternetView(
-                onPressed: () => controller.applyFilter(),
-              )
-            ],
-          ),
-          )
-        ),
+            backgroundColor: Colors.grey[100]!,
+            appBar: _appBar(),
+            body: Obx(
+              () => controller.noProductsFound.value
+                  ? Center(
+                      child: NoDataFoundWithIcon(
+                        title: langKey.emptyProductSearch.tr,
+                        subTitle: langKey.emptyProductSearchMsg.tr,
+                      ),
+                    )
+                  : Stack(
+                      children: [
+                        _body(),
+                        NoInternetView(
+                          onPressed: () => controller.applyFilter(),
+                        )
+                      ],
+                    ),
+            )),
       ),
     );
   }
 
-  CustomAppBar _appBar(){
+  CustomAppBar _appBar() {
     return CustomAppBar(
       leading: InkWell(
         onTap: () {
-          if(calledToGoBackOnce == true){
+          if (calledToGoBackOnce == true) {
             Get.back();
-          }
-          else {
+          } else {
             int count = 0;
-            Get.offNamedUntil(
-                Routes.searchRoute, (route) => count++ >= 2);
+            Get.offNamedUntil(Routes.searchRoute, (route) => count++ >= 2);
             controller.clearFilters();
             controller.productList.clear();
           }
@@ -115,8 +122,8 @@ class SearchDetailsView extends GetView<CustomSearchController> {
         : controller.productList.isEmpty
             ? Center(
                 child: NoDataFoundWithIcon(
-                    title: langKey.emptyProductSearch.tr,
-                    subTitle: langKey.emptyProductSearchMsg.tr,
+                  title: langKey.emptyProductSearch.tr,
+                  subTitle: langKey.emptyProductSearchMsg.tr,
                 ),
               )
             : _buildProductView(controller.productList));
@@ -147,19 +154,19 @@ class SearchDetailsView extends GetView<CustomSearchController> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      if(isCalledForLatestAndBestSeller == false)
-                      TextButton.icon(
-                        onPressed: () => showSortBottomSheet(),
-                        icon: Icon(
-                          Icons.sort_rounded,
-                          color: kPrimaryColor,
+                      if (isCalledForLatestAndBestSeller == false)
+                        TextButton.icon(
+                          onPressed: () => showSortBottomSheet(),
+                          icon: Icon(
+                            Icons.sort_rounded,
+                            color: kPrimaryColor,
+                          ),
+                          label: CustomText(
+                            title: langKey.sortBy.tr,
+                            color: kPrimaryColor,
+                            weight: FontWeight.bold,
+                          ),
                         ),
-                        label: CustomText(
-                          title: langKey.sortBy.tr,
-                          color: kPrimaryColor,
-                          weight: FontWeight.bold,
-                        ),
-                      ),
                       TextButton.icon(
                         onPressed: () {
                           controller.setCategories(baseController.categories);
