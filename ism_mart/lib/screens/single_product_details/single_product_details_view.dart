@@ -39,7 +39,7 @@ class SingleProductDetailsView extends StatelessWidget {
             : Scaffold(
                 appBar: CustomAppBar(
                   title: langKey.productDetails.tr,
-                  actionItem: Get.arguments[0]["calledFor"] == 'customer'
+                  action: Get.arguments[0]["calledFor"] == 'customer'
                       ? [
                           Align(
                             alignment: Alignment.center,

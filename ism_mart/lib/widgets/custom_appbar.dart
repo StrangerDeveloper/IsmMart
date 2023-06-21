@@ -3,20 +3,13 @@ import 'package:get/get.dart';
 import '../helper/constants.dart';
 import 'custom_text.dart';
 
-class CustomAppBar extends StatelessWidget implements PreferredSizeWidget{
-  CustomAppBar({
-    this.title,
-    this.onTap,
-    this.actionIcon,
-    this.actionItem,
-    this.leading,
-    this.searchBar
-  });
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  CustomAppBar(
+      {this.title, this.onTap, this.action, this.leading, this.searchBar});
 
   final GestureTapCallback? onTap;
   final String? title;
-  final Icon? actionIcon;
-  final dynamic actionItem;
+  final List<Widget>? action;
   final Widget? leading;
   final double height = 55;
   final Widget? searchBar;
@@ -25,23 +18,21 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget{
   Widget build(BuildContext context) {
     return AppBar(
       elevation: 0,
-      leading: leading ?? InkWell(
-        onTap: (){
-          Get.back();
-        },
-        child: Icon(
-          Icons.arrow_back_ios,
-          color: kPrimaryColor,
-          size: 20,
-        ),
-      ),
-      title: searchBar ?? CustomText(
-          title: title?.tr,
-          style: appBarTitleSize
-      ),
+      leading: leading ??
+          InkWell(
+            onTap: () {
+              Get.back();
+            },
+            child: Icon(
+              Icons.arrow_back_ios,
+              color: kPrimaryColor,
+              size: 20,
+            ),
+          ),
+      title: searchBar ?? CustomText(title: title?.tr, style: appBarTitleSize),
       centerTitle: true,
       backgroundColor: kAppBarColor,
-      actions: actionItem ?? null,
+      actions: action ?? null,
     );
   }
 

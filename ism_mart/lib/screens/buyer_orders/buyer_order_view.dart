@@ -22,7 +22,7 @@ class BuyerOrderView extends StatelessWidget {
       child: Scaffold(
         appBar: CustomAppBar(
           title: langKey.userOrders.tr,
-          actionItem: appBarPopupMenu(),
+          action: [appBarPopupMenu()],
         ),
         backgroundColor: Colors.grey[100]!,
         body: Stack(

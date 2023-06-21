@@ -16,25 +16,28 @@ class SellerHomeView extends GetView<SellersController> {
         appBar: CustomAppBar(
           title: controller.appBarTitle.value.tr,
           onTap: () async {
+            print('asdasd');
             controller.clearControllers();
             BaseController baseController = Get.find<BaseController>();
             await baseController.fetchProducts();
             await baseController.fetchProductsByTypes();
             Get.back();
           },
-          actionItem: InkWell(
-            onTap: () {
-              Get.back();
-              //baseController.changePage(0);
-            },
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Icon(
-                IconlyLight.logout,
-                color: kRedColor,
+          action: [
+            InkWell(
+              onTap: () {
+                Get.back();
+                //baseController.changePage(0);
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Icon(
+                  IconlyLight.logout,
+                  color: kRedColor,
+                ),
               ),
             ),
-          ),
+          ]
         ),
         body: PageView(
           controller: controller.pageViewController,
