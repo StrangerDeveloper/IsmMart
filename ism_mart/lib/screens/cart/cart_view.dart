@@ -19,30 +19,35 @@ class CartView extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.grey[100]!,
         appBar: _appBar(),
-        body: Obx(() => viewModel.cartItemsList.isEmpty ? Center(
-          child: NoDataFoundWithIcon(
-            icon: IconlyLight.buy,
-            title: langKey.emptyCart.tr,
-            subTitle: langKey.emptyCartMsg.tr,
-          ),
-        ) : SingleChildScrollView(
-          physics: ScrollPhysics(),
-          child: _buildCartItemSection(),
+        body: Obx(
+          () => viewModel.cartItemsList.isEmpty
+              ? Center(
+                  child: NoDataFoundWithIcon(
+                    icon: IconlyLight.buy,
+                    title: langKey.emptyCart.tr,
+                    subTitle: langKey.emptyCartMsg.tr,
+                  ),
+                )
+              : SingleChildScrollView(
+                  physics: ScrollPhysics(),
+                  child: _buildCartItemSection(),
+                ),
         ),
-        ),
-        bottomNavigationBar: viewModel.cartItemsList.isEmpty ? null : _checkOutBottomBar(),
-        ),
-      );
+        bottomNavigationBar:
+            viewModel.cartItemsList.isEmpty ? null : _checkOutBottomBar(),
+      ),
+    );
   }
 
-  CustomAppBar _appBar(){
+  CustomAppBar _appBar() {
     return CustomAppBar(
       title: langKey.myCart.tr,
-      leading: Get.arguments != null && Get.arguments["calledFromSPV"] ?
-      null : Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 6.0),
-        child: buildSvgLogo(),
-      ),
+      leading: Get.arguments != null && Get.arguments["calledFromSPV"]
+          ? null
+          : Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 6.0),
+              child: buildSvgLogo(),
+            ),
     );
   }
 
@@ -58,7 +63,7 @@ class CartView extends StatelessWidget {
     );
   }
 
-  BottomAppBar _checkOutBottomBar() {
+  Widget _checkOutBottomBar() {
     return BottomAppBar(
       elevation: 22,
       child: Container(
@@ -67,11 +72,13 @@ class CartView extends StatelessWidget {
         child: Column(
           //mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Obx(() => Row(
+            Obx(
+              () => Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomText(
-                    title: "${viewModel.totalQtyCart.value} ${langKey.items.tr}",
+                    title:
+                        "${viewModel.totalQtyCart.value} ${langKey.items.tr}",
                     style: headline3,
                   ),
                   CustomPriceWidget(

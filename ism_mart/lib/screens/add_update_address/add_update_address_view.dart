@@ -56,7 +56,7 @@ class AddUpdateAddressView extends StatelessWidget {
     );
   }
 
-  CustomTextField2 fullNameTextField() {
+  Widget fullNameTextField() {
     return CustomTextField2(
       label: langKey.fullName.tr,
       controller: viewModel.fullNameController,
@@ -67,7 +67,7 @@ class AddUpdateAddressView extends StatelessWidget {
     );
   }
 
-  Padding phoneTextField() {
+  Widget phoneTextField() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: CustomTextField2(
@@ -85,7 +85,7 @@ class AddUpdateAddressView extends StatelessWidget {
     );
   }
 
-  CustomTextField2 zipCodeTextField() {
+  Widget zipCodeTextField() {
     return CustomTextField2(
       label: langKey.zipCode.tr,
       controller: viewModel.zipCodeController,
@@ -97,7 +97,7 @@ class AddUpdateAddressView extends StatelessWidget {
     );
   }
 
-  Padding addressTextField() {
+  Widget addressTextField() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: CustomTextField2(
@@ -198,7 +198,7 @@ class AddUpdateAddressView extends StatelessWidget {
     );
   }
 
-  CustomTextBtn submitBtn() {
+  Widget submitBtn() {
     return CustomTextBtn(
       onPressed: () {
         viewModel.isUpdateScreen

@@ -20,7 +20,9 @@ class BuyerProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: CustomAppBar(title: langKey.profile.tr,),
+      appBar: CustomAppBar(
+        title: langKey.profile.tr,
+      ),
       body: Stack(
         children: [
           SingleChildScrollView(
@@ -52,7 +54,7 @@ class BuyerProfileView extends StatelessWidget {
     );
   }
 
-  Stack profileImage() {
+  Widget profileImage() {
     return Stack(
       children: [
         Obx(
@@ -126,7 +128,7 @@ class BuyerProfileView extends StatelessWidget {
     );
   }
 
-  Padding firstNameTextField() {
+  Widget firstNameTextField() {
     return Padding(
       padding: const EdgeInsets.only(top: 30, bottom: 20),
       child: CustomTextField2(
@@ -140,7 +142,7 @@ class BuyerProfileView extends StatelessWidget {
     );
   }
 
-  CustomTextField2 lastNameTextField() {
+  Widget lastNameTextField() {
     return CustomTextField2(
       label: langKey.lastName.tr,
       controller: viewModel.lastNameController,
@@ -151,7 +153,7 @@ class BuyerProfileView extends StatelessWidget {
     );
   }
 
-  Padding phoneTextField() {
+  Widget phoneTextField() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: CustomTextField2(
@@ -167,7 +169,7 @@ class BuyerProfileView extends StatelessWidget {
     );
   }
 
-  CustomTextField2 addressTextField() {
+  Widget addressTextField() {
     return CustomTextField2(
       label: langKey.address.tr,
       controller: viewModel.addressController,
@@ -178,7 +180,7 @@ class BuyerProfileView extends StatelessWidget {
     );
   }
 
-  Row updateBtn() {
+  Widget updateBtn() {
     return Row(
       children: [
         Expanded(

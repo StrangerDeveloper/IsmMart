@@ -24,7 +24,9 @@ class AddProductView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: CustomAppBar(title: langKey.addProduct.tr,),
+        appBar: CustomAppBar(
+          title: langKey.addProduct.tr,
+        ),
         body: Stack(
           children: [
             SingleChildScrollView(
@@ -82,7 +84,7 @@ class AddProductView extends StatelessWidget {
     );
   }
 
-  Padding _createDynamicFormFields(ProductVariantsModel model) {
+  Widget _createDynamicFormFields(ProductVariantsModel model) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextFormField(
@@ -119,7 +121,7 @@ class AddProductView extends StatelessWidget {
     );
   }
 
-  _showImages() {
+  Widget _showImages() {
     return ListView.builder(
       scrollDirection: Axis.horizontal,
       itemCount: viewModel.productImages.length,
@@ -163,7 +165,7 @@ class AddProductView extends StatelessWidget {
     );
   }
 
-  GestureDetector _buildImageSection() {
+  Widget _buildImageSection() {
     return GestureDetector(
       onTap: () async {
         viewModel.productImages.addAll(await PickImage().pickMultipleImage());
@@ -228,7 +230,7 @@ class AddProductView extends StatelessWidget {
     );
   }
 
-  Padding selectCategoryField() {
+  Widget selectCategoryField() {
     return Padding(
       padding: const EdgeInsets.only(top: 20.0, bottom: 15),
       child: DropdownSearch<CategoryModel>(
@@ -302,7 +304,7 @@ class AddProductView extends StatelessWidget {
     );
   }
 
-  Padding nameField() {
+  Widget nameField() {
     return Padding(
       padding: const EdgeInsets.only(top: 12.0),
       child: CustomTextField2(
@@ -318,7 +320,7 @@ class AddProductView extends StatelessWidget {
     );
   }
 
-  Padding priceField() {
+  Widget priceField() {
     return Padding(
       padding: EdgeInsets.only(top: viewModel.fieldsPaddingSpace),
       child: Column(
@@ -358,7 +360,7 @@ class AddProductView extends StatelessWidget {
     );
   }
 
-  productVariantsAndFeaturesField() {
+  Widget productVariantsAndFeaturesField() {
     return Obx(
       () => viewModel.productVariantsFieldsList.isEmpty
           ? Container()
@@ -374,7 +376,7 @@ class AddProductView extends StatelessWidget {
     );
   }
 
-  Padding stockField() {
+  Widget stockField() {
     return Padding(
       padding: const EdgeInsets.only(top: 12.0),
       child: CustomTextField2(
@@ -394,7 +396,7 @@ class AddProductView extends StatelessWidget {
     );
   }
 
-  Padding discountField() {
+  Widget discountField() {
     return Padding(
       padding: const EdgeInsets.only(top: 12.0),
       child: Column(
@@ -427,7 +429,7 @@ class AddProductView extends StatelessWidget {
     );
   }
 
-  Padding descriptionField() {
+  Widget descriptionField() {
     return Padding(
       padding: const EdgeInsets.only(top: 12.0),
       child: CustomTextField2(

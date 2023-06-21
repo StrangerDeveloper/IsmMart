@@ -86,7 +86,7 @@ class BuyerOrderView extends StatelessWidget {
     );
   }
 
-  SizedBox _orderStats() {
+  Widget _orderStats() {
     return SizedBox(
       height: 250, //AppResponsiveness.getBoxHeightPoint22(),
       child: Padding(
