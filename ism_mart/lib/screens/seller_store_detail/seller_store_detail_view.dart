@@ -6,6 +6,7 @@ import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:iconly/iconly.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/screens/single_product_details/single_product_details_view.dart';
 import 'package:ism_mart/widgets/custom_sliver_appbar.dart';
 
 class SellerStoreDetailView extends GetView<ProductController> {
@@ -275,11 +276,10 @@ class SellerStoreDetailView extends GetView<ProductController> {
                                 return SingleProductItems(
                                   productModel: productModel,
                                   onTap: () {
-                                    Get.offNamed(
-                                      '/product/${productModel.id}',
-                                      preventDuplicates: false,
-                                      arguments: {"calledFor": "customer"},
-                                    );
+                                    Get.to(() => SingleProductDetailsView(), arguments: [{
+                                      'calledFor': 'customer',
+                                      'productID': "${productModel.id}"
+                                    }]);
                                   },
                                 );
                               },
