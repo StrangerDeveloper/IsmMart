@@ -1,15 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
-import 'package:ism_mart/helper/no_internet_view.dart';
-import 'package:ism_mart/screens/buyer_profile/buyer_profile_viewmodel.dart';
-import 'package:ism_mart/widgets/custom_appbar.dart';
-import 'package:ism_mart/widgets/loader_view.dart';
-import 'package:ism_mart/widgets/pick_image.dart';
+import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
-
-import '../../helper/validator.dart';
+import 'package:ism_mart/screens/buyer_profile/buyer_profile_viewmodel.dart';
+import 'package:ism_mart/widgets/loader_view.dart';
+import '../../helper/no_internet_view.dart';
+import '../../widgets/custom_appbar.dart';
 
 class BuyerProfileView extends StatelessWidget {
   BuyerProfileView({Key? key}) : super(key: key);
@@ -17,243 +16,174 @@ class BuyerProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: CustomAppBar(
-        title: langKey.profile.tr,
-      ),
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            padding: EdgeInsets.all(16),
-            child: Form(
-              key: viewModel.buyerProfileFormKey,
+    return SafeArea(
+      child: Scaffold(
+        appBar: CustomAppBar(title: langKey.profile.tr),
+        body: Stack(
+          children: [
+            SingleChildScrollView(
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
               child: Column(
                 children: [
                   profileImage(),
-                  firstNameTextField(),
-                  lastNameTextField(),
-                  phoneTextField(),
-                  addressTextField(),
-                  SizedBox(height: 25),
-                  updateBtn(),
+                  SizedBox(height: 20),
+                  CustomTextBtn(
+                    width: Get.width * 0.5,
+                    onPressed: () {
+                      Get.toNamed(Routes.updateBuyerProfile, arguments: {'model' : viewModel.buyerProfileModel.value});
+                    },
+                    title: langKey.updateBtn.tr,
+                  ),
+                  storeInfo(),
                 ],
               ),
             ),
-          ),
-          NoInternetView(
-            onPressed: () {
-              viewModel.getData();
-              viewModel.updateData();
-            },
-          ),
-          LoaderView(),
-        ],
+            NoInternetView(
+              onPressed: () {
+                viewModel.getData();
+              },
+            ),
+            LoaderView(),
+          ],
+        ),
       ),
     );
   }
 
   Widget profileImage() {
-    return Stack(
-      children: [
-        Obx(
-          () => (viewModel.imageFile.value?.path != "")
-              ? Container(
-                  height: 100,
-                  width: 100,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      image: FileImage(viewModel.imageFile.value!),
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                )
-              : CachedNetworkImage(
-                  height: 100,
-                  width: 100,
-                  imageUrl: viewModel.buyerProfileNewModel.value.image ?? '',
-                  imageBuilder: (context, imageProvider) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                          image: imageProvider,
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                    );
-                  },
-                  errorWidget: (context, url, error) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                          image: AssetImage('assets/images/no_image_found.jpg'),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    );
-                  },
-                  placeholder: (context, url) {
-                    return const Center(
-                      child: CircularProgressIndicator(strokeWidth: 0.5),
-                    );
-                  },
-                ),
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          shape: BoxShape.circle,
         ),
-        Positioned(
-          right: 10,
-          bottom: 6,
-          child: InkWell(
-            onTap: () async {
-              viewModel.imageFile.value = await PickImage().pickSingleImage();
+        padding: EdgeInsets.all(3.5),
+        child: Obx(
+          () => CachedNetworkImage(
+            height: 95,
+            width: 95,
+            imageUrl: viewModel.buyerProfileModel.value.image ?? '',
+            imageBuilder: (context, imageProvider) {
+              return Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                    image: imageProvider,
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              );
             },
-            child: Container(
-              padding: EdgeInsets.all(5),
-              decoration: BoxDecoration(
-                color: Colors.black,
-                shape: BoxShape.circle,
-              ),
-              child: Icon(
-                Icons.edit_outlined,
-                size: 13,
-                color: Colors.white,
-              ),
-            ),
+            errorWidget: (context, url, error) {
+              return Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/no_image_found.jpg'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              );
+            },
+            placeholder: (context, url) {
+              return const Center(
+                child: CircularProgressIndicator(strokeWidth: 0.5),
+              );
+            },
           ),
         ),
-      ],
-    );
-  }
-
-  Widget firstNameTextField() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 30, bottom: 20),
-      child: CustomTextField2(
-        label: langKey.firstName.tr,
-        controller: viewModel.firstNameController,
-        autoValidateMode: AutovalidateMode.onUserInteraction,
-        validator: (value) {
-          return Validator().validateName(value);
-        },
       ),
     );
   }
 
-  Widget lastNameTextField() {
-    return CustomTextField2(
-      label: langKey.lastName.tr,
-      controller: viewModel.lastNameController,
-      autoValidateMode: AutovalidateMode.onUserInteraction,
-      validator: (value) {
-        return Validator().validateName(value);
-      },
-    );
-  }
-
-  Widget phoneTextField() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20),
-      child: CustomTextField2(
-        label: langKey.phone.tr,
-        controller: viewModel.phoneController,
-        keyboardType: TextInputType.phone,
-        inputFormatters: Validator().phoneNumberFormatter,
-        autoValidateMode: AutovalidateMode.onUserInteraction,
-        validator: (value) {
-          return Validator().validatePhoneNumber(value);
-        },
+  Widget storeInfo() {
+    return containerDecoration(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          containerTitleItem(langKey.personalInfo.tr),
+          Divider(height: 30),
+          titleItem(langKey.firstName.tr),
+          Obx(
+            () => valueItem(
+              viewModel.buyerProfileModel.value.firstName ?? 'N/A',
+            ),
+          ),
+          titleItem(langKey.lastName.tr),
+          Obx(
+            () => valueItem(
+              viewModel.buyerProfileModel.value.lastName ?? 'N/A',
+            ),
+          ),
+          titleItem(langKey.phone.tr),
+          Obx(
+            () => valueItem(
+              viewModel.buyerProfileModel.value.phone ?? 'N/A',
+            ),
+          ),
+          titleItem(langKey.address.tr),
+          Obx(
+            () => valueItem(
+              viewModel.buyerProfileModel.value.address ?? 'N/A',
+            ),
+          ),
+        ],
       ),
     );
   }
 
-  Widget addressTextField() {
-    return CustomTextField2(
-      label: langKey.address.tr,
-      controller: viewModel.addressController,
-      autoValidateMode: AutovalidateMode.onUserInteraction,
-      validator: (value) {
-        return Validator().validateDefaultTxtField(value);
-      },
+  Widget containerTitleItem(String value) {
+    return Align(
+      alignment: Alignment.center,
+      child: Text(
+        value,
+        style: GoogleFonts.lato(
+          fontSize: 18,
+        ),
+      ),
     );
   }
 
-  Widget updateBtn() {
-    return Row(
-      children: [
-        Expanded(
-          child: CustomTextBtn(
-            backgroundColor: Colors.red.shade700,
-            onPressed: () {
-              showDeleteQuestionDialog();
-            },
-            child: Text(langKey.deactivateBtn.tr),
-          ),
+  Widget titleItem(String value) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 3),
+      child: Text(
+        value,
+        style: GoogleFonts.lato(
+          fontSize: 13,
         ),
-        SizedBox(width: 10),
-        Expanded(
-          child: CustomTextBtn(
-            onPressed: () {
-              viewModel.updateData();
-            },
-            child: Text(langKey.updateProfile.tr),
-          ),
-        ),
-      ],
+      ),
     );
   }
 
-  Future showDeleteQuestionDialog() async {
-    return showDialog(
-      context: Get.context!,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(langKey.deactivateBtn.tr),
-          content: Text(langKey.deActivateMsg.tr),
-          actions: [
-            Row(
-              children: [
-                Expanded(
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      minimumSize: Size(double.infinity, 40),
-                      foregroundColor: Colors.grey,
-                    ),
-                    child: Text(
-                      langKey.noBtn.tr,
-                      style: TextStyle(
-                        color: Colors.black,
-                      ),
-                    ),
-                    onPressed: () {
-                      Navigator.of(Get.context!).pop();
-                    },
-                  ),
-                ),
-                Expanded(
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      minimumSize: Size(double.infinity, 40),
-                      foregroundColor: Colors.grey,
-                    ),
-                    child: Text(
-                      langKey.yesBtn.tr,
-                      style: TextStyle(
-                        color: Colors.black,
-                      ),
-                    ),
-                    onPressed: () {
-                      Navigator.of(Get.context!).pop();
-                      viewModel.deleteAccount();
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ],
-        );
-      },
+  Widget valueItem(String value) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 15),
+      child: Text(
+        value,
+        style: GoogleFonts.lato(
+          fontSize: 15.5,
+          fontWeight: FontWeight.bold,
+          color: Colors.black,
+        ),
+      ),
+    );
+  }
+
+  Widget containerDecoration({required Widget child}) {
+    return Container(
+      width: double.infinity,
+      margin: EdgeInsets.only(top: 20),
+      padding: EdgeInsets.fromLTRB(16, 10, 16, 0),
+      decoration: BoxDecoration(
+        color: Colors.black.withOpacity(0.03),
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(
+          color: Colors.black.withOpacity(0.08),
+        ),
+      ),
+      child: child,
     );
   }
 }
