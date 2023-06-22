@@ -27,6 +27,7 @@ class SellerStoreDetailView extends GetView<ProductController> {
   Widget _build() {
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: true,
         backgroundColor: Colors.grey[100]!,
         body: Stack(
           children: [
@@ -256,7 +257,7 @@ class SellerStoreDetailView extends GetView<ProductController> {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: SizedBox(
-                      height: AppResponsiveness.getBoxHeightPoint30(),
+                      height: 700,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -268,8 +269,17 @@ class SellerStoreDetailView extends GetView<ProductController> {
                           ),
                           AppConstant.spaceWidget(height: 10),
                           Expanded(
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
+                            child: GridView.builder(
+                              physics: BouncingScrollPhysics(),
+                              scrollDirection: Axis.vertical,
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                //maxCrossAxisExtent: 150,
+                                crossAxisCount: 2,
+                                //childAspectRatio: 1,
+                                mainAxisSpacing: 5,
+                                crossAxisSpacing: 5,
+                              ),
                               itemCount: list.length,
                               itemBuilder: (context, index) {
                                 ProductModel productModel = list[index];

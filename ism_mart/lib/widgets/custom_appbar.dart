@@ -2,8 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../helper/constants.dart';
 import 'custom_text.dart';
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final bool? menuItem;
+  final String? title;
+  final List<Widget>? action;
+  final Widget? leading;
+  final double height = 55;
+  final Widget? searchBar;
+  final bool? centerTitle;
+  final double? leadingWidth;
+  final void Function()? onTap;
+
   CustomAppBar({
     this.title,
     this.menuItem,
@@ -15,35 +26,33 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.onTap,
   });
 
-  final bool? menuItem;
-  final GestureTapCallback? onTap;
-  final String? title;
-  final List<Widget>? action;
-  final Widget? leading;
-  final bool? centerTitle;
-  final double height = 55;
-  final Widget? searchBar;
-  final double? leadingWidth;
-
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      leadingWidth: leadingWidth,
       elevation: 0,
-      leadingWidth: leadingWidth ?? null,
-      titleSpacing: 8,
-      leading: leading == null ? menuItem == null ?
-          InkWell(
-            onTap: onTap ?? () => Get.back(),
-            child: Icon(
-              Icons.arrow_back_ios,
-              color: kPrimaryColor,
-              size: 18,
-            ),
-          ) : null : leading,
-      title: searchBar ?? CustomText(title: title?.tr, style: appBarTitleSize),
-      centerTitle: centerTitle ?? true,
+      centerTitle: centerTitle,
       backgroundColor: kAppBarColor,
-      actions: action ?? null,
+      actions: action,
+      title: searchBar ??
+          CustomText(
+            title: title ?? '',
+            style: appBarTitleSize,
+          ),
+      leading: leading ??
+          (menuItem != null
+              ? null
+              : InkWell(
+                  onTap: onTap ??
+                      () {
+                        Get.back();
+                      },
+                  child: Icon(
+                    Icons.arrow_back_ios,
+                    color: kPrimaryColor,
+                    size: 20,
+                  ),
+                )),
     );
   }
 

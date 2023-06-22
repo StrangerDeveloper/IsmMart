@@ -72,7 +72,7 @@ class ContactUsView extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CustomText(
-                          title: e['title'].toString().capitalize,
+                          title: e['title'].toString().capitalize ?? '',
                           style: headline3.copyWith(
                             fontSize: 14.5,
                           ),

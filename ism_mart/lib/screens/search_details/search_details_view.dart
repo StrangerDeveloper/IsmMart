@@ -290,7 +290,7 @@ class SearchDetailsView extends GetView<CustomSearchController> {
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: CustomText(
-                          title: categoryModel.name,
+                          title: categoryModel.name ?? '',
                           color: categoryModel.isPressed!
                               ? kWhiteColor
                               : kDarkColor,

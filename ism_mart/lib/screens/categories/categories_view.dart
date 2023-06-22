@@ -84,7 +84,7 @@ class CategoriesView extends GetView<CategoryController> {
                   child: RotatedBox(
                     quarterTurns: -1,
                     child: CustomText(
-                      title: categoryModel.name,
+                      title: categoryModel.name ?? '',
                       size: AppResponsiveness.getTextSize13_16(),
                       color:
                           categoryModel.isPressed! ? kDarkColor : kWhiteColor,

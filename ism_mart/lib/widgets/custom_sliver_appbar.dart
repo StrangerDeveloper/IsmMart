@@ -40,7 +40,7 @@ class CustomSliverAppBar extends StatelessWidget{
         flexibleSpace: flexibleSpaceBar,
         centerTitle: true,
         title: flexibleSpaceBar == null ? CustomText(
-          title: title,
+          title: title ?? '',
           style: appBarTitleSize,
         ) : null
     );

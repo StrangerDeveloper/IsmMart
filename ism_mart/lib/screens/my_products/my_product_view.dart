@@ -170,7 +170,7 @@ class MyProductView extends StatelessWidget {
                             ),
                             AppConstant.spaceWidget(width: 2),
                             CustomText(
-                              title: model.status!.capitalizeFirst,
+                              title: model.status?.capitalizeFirst ?? '',
                               weight: FontWeight.w600,
                               color: getStatusColor(model),
                             ),

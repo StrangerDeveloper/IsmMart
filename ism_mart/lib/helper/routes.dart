@@ -24,7 +24,8 @@ import '../screens/signin/signin_view.dart';
 import '../screens/signup/sign_up_view.dart';
 import '../screens/single_product_details/single_product_details_view.dart';
 import '../screens/static_info/static_info_view.dart';
-import '../screens/update_vendor_profile/update_vendor_view.dart';
+import '../screens/update_buyer_profile/update_buyer_profile_view.dart';
+import '../screens/update_vendor_profile/update_vendor_profile_view.dart';
 import '../screens/vendor_orders/vendor_orders_view.dart';
 import '../screens/vendor_profile/vendor_profile_view.dart';
 
@@ -34,6 +35,7 @@ class Routes {
   static const allDispute = "/allDispute";
   static const buyerOrdersRoute = "/buyerOrders";
   static const buyerProfile = "/buyerProfile";
+  static const updateBuyerProfile = "/updateBuyerProfile";
   static const cartRoute = "/cart";
   static const categories = "/categories";
   static const changeAddressRoute = "/changeAddress";
@@ -92,6 +94,10 @@ class Routes {
     GetPage(
       name: buyerProfile,
       page: () => BuyerProfileView(),
+    ),
+    GetPage(
+      name: updateBuyerProfile,
+      page: () => UpdateBuyerProfileView(),
     ),
     GetPage(
       name: cartRoute,
@@ -208,7 +214,7 @@ class Routes {
     ),
     GetPage(
       name: updateVendor,
-      page: () => UpdateVendorView(),
+      page: () => UpdateVendorProfileView(),
     ),
     GetPage(
       name: vendorDetail,

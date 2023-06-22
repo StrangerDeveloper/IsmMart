@@ -169,7 +169,7 @@ class SingleProductDetailsView extends StatelessWidget {
                 Expanded(
                   flex: 5,
                   child: CustomText(
-                    title: viewModel.productModel.value.name,
+                    title: viewModel.productModel.value.name ?? '',
                     maxLines: 3,
                     style: headline3,
                   ),
@@ -406,7 +406,7 @@ class SingleProductDetailsView extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: Center(
             child: CustomText(
-              title: feature?.value,
+              title: feature?.value ?? '',
               maxLines: 1,
               size: 11,
               color: kWhiteColor,
@@ -476,7 +476,7 @@ class SingleProductDetailsView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomText(
-                    title: viewModel.productModel.value.description,
+                    title: viewModel.productModel.value.description ?? '',
                     maxLines: viewModel.productModel.value.description!.length,
                     style: bodyText2Poppins,
                   ),
@@ -658,7 +658,7 @@ class SingleProductDetailsView extends StatelessWidget {
           imageUrl: viewModel.productModel.value.thumbnail ??
               AppConstant.defaultImgUrl,
           height: 60),
-      title: CustomText(title: viewModel.productModel.value.name),
+      title: CustomText(title: viewModel.productModel.value.name ?? ''),
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -828,7 +828,7 @@ class SingleProductDetailsView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomText(
-                  title: title,
+                  title: title ?? '',
                   maxLines: title!.length,
                 ),
                 RichText(

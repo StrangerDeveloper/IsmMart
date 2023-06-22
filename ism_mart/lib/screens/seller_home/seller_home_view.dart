@@ -14,27 +14,26 @@ class SellerHomeView extends GetView<SellersController> {
     return Obx(
       () => Scaffold(
         appBar: CustomAppBar(
-          title: controller.appBarTitle.value.tr,
-          menuItem: true,
-          action: [
-            InkWell(
-              onTap: () async{
-                controller.clearControllers();
-                BaseController baseController = Get.find<BaseController>();
-                await baseController.fetchProducts();
-                await baseController.fetchProductsByTypes();
-                Get.back();
-              },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Icon(
-                  IconlyLight.logout,
-                  color: kRedColor,
+            title: controller.appBarTitle.value.tr,
+            menuItem: true,
+            action: [
+              InkWell(
+                onTap: () async {
+                  controller.clearControllers();
+                  BaseController baseController = Get.find<BaseController>();
+                  await baseController.fetchProducts();
+                  await baseController.fetchProductsByTypes();
+                  Get.back();
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Icon(
+                    IconlyLight.logout,
+                    color: kRedColor,
+                  ),
                 ),
               ),
-            ),
-          ]
-        ),
+            ]),
         body: PageView(
           controller: controller.pageViewController,
           physics: const NeverScrollableScrollPhysics(),
@@ -63,7 +62,7 @@ class SellerHomeView extends GetView<SellersController> {
                         color: kWhiteColor,
                       ),
                       CustomText(
-                        title: authController.userModel?.email,
+                        title: authController.userModel?.email ?? '',
                         size: 15,
                         weight: FontWeight.w600,
                         color: kWhiteColor,

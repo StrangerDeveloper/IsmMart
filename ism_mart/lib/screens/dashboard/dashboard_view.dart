@@ -214,7 +214,7 @@ class DashboardView extends GetView<BaseController> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               CustomText(
-                                title: model.name,
+                                title: model.name ?? '',
                                 size: 16,
                                 weight: FontWeight.bold,
                               ),
@@ -515,7 +515,7 @@ class DashboardView extends GetView<BaseController> {
               ),
               Flexible(
                 child: CustomText(
-                  title: vendorsModel.storeName,
+                  title: vendorsModel.storeName ?? '',
                   maxLines: 2,
                   textAlign: TextAlign.center,
                   weight: FontWeight.w600,

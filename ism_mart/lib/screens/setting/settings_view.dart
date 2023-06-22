@@ -512,7 +512,7 @@ class SettingsView extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: CustomText(
-                      title: value.toString().capitalizeFirst,
+                      title: value.toString().capitalizeFirst!,
                       style: caption.copyWith(
                         fontWeight: FontWeight.w600,
                         fontSize: 13,

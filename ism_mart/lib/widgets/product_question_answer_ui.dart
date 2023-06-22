@@ -123,7 +123,7 @@ class ProductQuestionAnswerUI extends GetView<ProductController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomText(
-                  title: title,
+                  title: title ?? '',
                   maxLines: title!.length,
                 ),
                 RichText(

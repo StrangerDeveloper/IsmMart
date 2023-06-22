@@ -95,7 +95,7 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                           ],
                         ),
                         trailing: CustomText(
-                          title: model?.status?.capitalizeFirst,
+                          title: model?.status?.capitalizeFirst ?? '',
                           color: AppConstant.getStatusColor(model),
                           weight: FontWeight.w600,
                         ),
@@ -748,8 +748,9 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
                 autofocus: false,
                 textStyle: bodyText1,
                 autoValidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value) =>
-                    GetUtils.isBlank(value!)! ? langKey.descriptionReq.tr : null,
+                validator: (value) => GetUtils.isBlank(value!)!
+                    ? langKey.descriptionReq.tr
+                    : null,
                 keyboardType: TextInputType.name,
                 onChanged: (value) {},
                 onSaved: (value) {},
