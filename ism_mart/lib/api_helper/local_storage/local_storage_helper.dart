@@ -140,6 +140,7 @@ class LocalStorageHelper {
   static deleteUserData() {
     localStorage.remove(currentUserKey);
     GlobalVariable.userModel = null;
+
   }
 
   static storeEmailVerificationDetails() {

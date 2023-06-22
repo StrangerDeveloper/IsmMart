@@ -1,14 +1,14 @@
 import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:http_parser/http_parser.dart';
-import 'package:ism_mart/helper/api_base_helper.dart';
-import 'package:ism_mart/exports/export_api_helper.dart';
-import 'package:ism_mart/helper/global_variables.dart';
-import 'package:ism_mart/helper/urls.dart';
-import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart';
+import 'package:ism_mart/exports/exports_utils.dart';
+import 'package:ism_mart/helper/api_base_helper.dart';
+import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/helper/urls.dart';
 import 'package:ism_mart/screens/buyer_profile/buyer_profile_model.dart';
 
 import '../../helper/errors.dart';
@@ -48,30 +48,6 @@ class UpdateBuyerProfileViewModel extends GetxController {
     addressController.text = buyerProfileNewModel.value.address ?? '';
   }
 
-  deleteAccount() {
-    GlobalVariable.showLoader.value = true;
-
-    ApiBaseHelper()
-        .getMethod(
-        url: Urls.deleteAccount, withAuthorization: true, withBearer: false)
-        .then((parsedJson) {
-      GlobalVariable.showLoader.value = false;
-      if (parsedJson['success'] == true && parsedJson['data'] != null) {
-        Get.back();
-        Get.back();
-        LocalStorageHelper.deleteUserData();
-        AppConstant.displaySnackBar(
-            langKey.successTitle.tr, langKey.recordDoNotExist.tr);
-      } else {
-        AppConstant.displaySnackBar(
-            langKey.errorTitle.tr, langKey.recordDoNotExist.tr);
-      }
-    }).catchError((e) {
-      print(e);
-      GlobalVariable.showLoader.value = false;
-    });
-  }
-
   updateData() async {
     if (buyerProfileFormKey.currentState?.validate() ?? false) {
       GlobalVariable.showLoader.value = true;
@@ -96,10 +72,10 @@ class UpdateBuyerProfileViewModel extends GetxController {
 
       ApiBaseHelper()
           .patchMethodForImage(
-          url: Urls.updateVendorData,
-          withAuthorization: true,
-          files: fileList,
-          fields: param)
+              url: Urls.updateVendorData,
+              withAuthorization: true,
+              files: fileList,
+              fields: param)
           .then((parsedJson) {
         GlobalVariable.showLoader.value = false;
         if (parsedJson['message'] == "User updated successfully") {

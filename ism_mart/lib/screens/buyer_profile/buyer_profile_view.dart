@@ -7,6 +7,7 @@ import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/screens/buyer_profile/buyer_profile_viewmodel.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
+
 import '../../helper/no_internet_view.dart';
 import '../../widgets/custom_appbar.dart';
 
@@ -26,15 +27,8 @@ class BuyerProfileView extends StatelessWidget {
               child: Column(
                 children: [
                   profileImage(),
-                  SizedBox(height: 20),
-                  CustomTextBtn(
-                    width: Get.width * 0.5,
-                    onPressed: () {
-                      Get.toNamed(Routes.updateBuyerProfile, arguments: {'model' : viewModel.buyerProfileModel.value});
-                    },
-                    title: langKey.updateBtn.tr,
-                  ),
                   storeInfo(),
+                  buttons(),
                 ],
               ),
             ),
@@ -98,37 +92,40 @@ class BuyerProfileView extends StatelessWidget {
   }
 
   Widget storeInfo() {
-    return containerDecoration(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          containerTitleItem(langKey.personalInfo.tr),
-          Divider(height: 30),
-          titleItem(langKey.firstName.tr),
-          Obx(
-            () => valueItem(
-              viewModel.buyerProfileModel.value.firstName ?? 'N/A',
+    return Padding(
+      padding: const EdgeInsets.only(top: 10, bottom: 25),
+      child: containerDecoration(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            containerTitleItem(langKey.personalInfo.tr),
+            Divider(height: 30),
+            titleItem(langKey.firstName.tr),
+            Obx(
+              () => valueItem(
+                viewModel.buyerProfileModel.value.firstName ?? 'N/A',
+              ),
             ),
-          ),
-          titleItem(langKey.lastName.tr),
-          Obx(
-            () => valueItem(
-              viewModel.buyerProfileModel.value.lastName ?? 'N/A',
+            titleItem(langKey.lastName.tr),
+            Obx(
+              () => valueItem(
+                viewModel.buyerProfileModel.value.lastName ?? 'N/A',
+              ),
             ),
-          ),
-          titleItem(langKey.phone.tr),
-          Obx(
-            () => valueItem(
-              viewModel.buyerProfileModel.value.phone ?? 'N/A',
+            titleItem(langKey.phone.tr),
+            Obx(
+              () => valueItem(
+                viewModel.buyerProfileModel.value.phone ?? 'N/A',
+              ),
             ),
-          ),
-          titleItem(langKey.address.tr),
-          Obx(
-            () => valueItem(
-              viewModel.buyerProfileModel.value.address ?? 'N/A',
+            titleItem(langKey.address.tr),
+            Obx(
+              () => valueItem(
+                viewModel.buyerProfileModel.value.address ?? 'N/A',
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -184,6 +181,85 @@ class BuyerProfileView extends StatelessWidget {
         ),
       ),
       child: child,
+    );
+  }
+
+  Widget buttons() {
+    return Row(
+      children: [
+        Expanded(
+          child: CustomTextBtn(
+            backgroundColor: Colors.red.shade700,
+            onPressed: () {
+              showDeleteQuestionDialog();
+            },
+            child: Text(langKey.deactivateBtn.tr),
+          ),
+        ),
+        SizedBox(width: 10),
+        Expanded(
+          child: CustomTextBtn(
+            onPressed: () {
+              Get.toNamed(Routes.updateBuyerProfile,
+                  arguments: {'model': viewModel.buyerProfileModel.value});
+            },
+            child: Text(langKey.updateProfile.tr),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Future showDeleteQuestionDialog() async {
+    return showDialog(
+      context: Get.context!,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(langKey.deactivateBtn.tr),
+          content: Text(langKey.deActivateMsg.tr),
+          actions: [
+            Row(
+              children: [
+                Expanded(
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      minimumSize: Size(double.infinity, 40),
+                      foregroundColor: Colors.grey,
+                    ),
+                    child: Text(
+                      langKey.noBtn.tr,
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.of(Get.context!).pop();
+                    },
+                  ),
+                ),
+                Expanded(
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      minimumSize: Size(double.infinity, 40),
+                      foregroundColor: Colors.grey,
+                    ),
+                    child: Text(
+                      langKey.yesBtn.tr,
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.of(Get.context!).pop();
+                      viewModel.deleteAccount();
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ],
+        );
+      },
     );
   }
 }

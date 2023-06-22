@@ -16,6 +16,7 @@ class SearchViewModel extends GetxController {
   int page = 1;
 
   var isSearchingStarted = false.obs;
+
   @override
   void onReady() {
     super.onReady();
