@@ -11,6 +11,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? leading;
   final double height = 55;
   final Widget? searchBar;
+  final bool? centerTitle;
+  final double? leadingWidth;
+  final void Function()? onTap;
 
   CustomAppBar({
     this.title,
@@ -18,28 +21,38 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.action,
     this.leading,
     this.searchBar,
+    this.centerTitle,
+    this.leadingWidth,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      leadingWidth: leadingWidth,
       elevation: 0,
-      leading: leading == null
-          ? menuItem == null
+      centerTitle: centerTitle,
+      backgroundColor: kAppBarColor,
+      actions: action,
+      title: searchBar ??
+          CustomText(
+            title: title ?? '',
+            style: appBarTitleSize,
+          ),
+      leading: leading ??
+          (menuItem == null
               ? InkWell(
-                  onTap: () => Get.back(),
+                  onTap: onTap ??
+                      () {
+                        Get.back();
+                      },
                   child: Icon(
                     Icons.arrow_back_ios,
                     color: kPrimaryColor,
                     size: 20,
                   ),
                 )
-              : null
-          : leading,
-      title: searchBar ?? CustomText(title: title ?? '', style: appBarTitleSize),
-      centerTitle: true,
-      backgroundColor: kAppBarColor,
-      actions: action ?? null,
+              : null),
     );
   }
 

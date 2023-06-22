@@ -15,7 +15,7 @@ class SellerHomeView extends GetView<SellersController> {
       () => Scaffold(
         appBar: CustomAppBar(
           title: controller.appBarTitle.value.tr,
-          menuItem: true,
+          //menuItem: true,
           action: [
             InkWell(
               onTap: () async{
