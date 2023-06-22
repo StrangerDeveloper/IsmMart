@@ -28,9 +28,6 @@ class VendorOrdersView extends StatelessWidget {
 
   TabBar tabBar() {
     return TabBar(
-      // onTap: (index) {
-      //   viewModel.selectedTabIndex = index;
-      // },
       labelStyle: headline4,
       isScrollable: true,
       labelPadding: const EdgeInsets.symmetric(horizontal: 15),
