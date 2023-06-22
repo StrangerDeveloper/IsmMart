@@ -2,12 +2,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/helper/no_internet_view.dart';
 import 'package:ism_mart/screens/update_buyer_profile/update_buyer_profile_viewmodel.dart';
 import 'package:ism_mart/widgets/custom_appbar.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
 import 'package:ism_mart/widgets/pick_image.dart';
-import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
+
 import '../../helper/validator.dart';
 
 class UpdateBuyerProfileView extends StatelessWidget {
@@ -180,80 +181,11 @@ class UpdateBuyerProfileView extends StatelessWidget {
   }
 
   Widget updateBtn() {
-    return Row(
-      children: [
-        Expanded(
-          child: CustomTextBtn(
-            backgroundColor: Colors.red.shade700,
-            onPressed: () {
-              showDeleteQuestionDialog();
-            },
-            child: Text(langKey.deactivateBtn.tr),
-          ),
-        ),
-        SizedBox(width: 10),
-        Expanded(
-          child: CustomTextBtn(
-            onPressed: () {
-              viewModel.updateData();
-            },
-            child: Text(langKey.updateProfile.tr),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Future showDeleteQuestionDialog() async {
-    return showDialog(
-      context: Get.context!,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(langKey.deactivateBtn.tr),
-          content: Text(langKey.deActivateMsg.tr),
-          actions: [
-            Row(
-              children: [
-                Expanded(
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      minimumSize: Size(double.infinity, 40),
-                      foregroundColor: Colors.grey,
-                    ),
-                    child: Text(
-                      langKey.noBtn.tr,
-                      style: TextStyle(
-                        color: Colors.black,
-                      ),
-                    ),
-                    onPressed: () {
-                      Navigator.of(Get.context!).pop();
-                    },
-                  ),
-                ),
-                Expanded(
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      minimumSize: Size(double.infinity, 40),
-                      foregroundColor: Colors.grey,
-                    ),
-                    child: Text(
-                      langKey.yesBtn.tr,
-                      style: TextStyle(
-                        color: Colors.black,
-                      ),
-                    ),
-                    onPressed: () {
-                      Navigator.of(Get.context!).pop();
-                      viewModel.deleteAccount();
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ],
-        );
+    return CustomTextBtn(
+      onPressed: () {
+        viewModel.updateData();
       },
+      child: Text(langKey.updateProfile.tr),
     );
   }
 }

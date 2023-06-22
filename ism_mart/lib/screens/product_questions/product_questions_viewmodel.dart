@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ism_mart/helper/api_base_helper.dart';
-import 'package:ism_mart/helper/global_variables.dart';
-import 'package:ism_mart/helper/urls.dart';
 import 'package:ism_mart/controllers/product_controller.dart';
 import 'package:ism_mart/exports/exports_model.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
-import 'product_questions_view.dart';
+import 'package:ism_mart/helper/api_base_helper.dart';
+import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/helper/urls.dart';
+
+import 'product_questions_view.dart';
 
 class ProductQuestionsViewModel extends GetxController {
-
   RxString productId = ''.obs;
   List<QuestionModel> productQuestionsList = <QuestionModel>[].obs;
   final productModel = ProductModel().obs;
@@ -58,11 +58,10 @@ class ProductQuestionsViewModel extends GetxController {
     });
   }
 
-  loginCheck(){
-    if(GlobalVariable.userModel == null) {
+  loginCheck() {
+    if (GlobalVariable.userModel == null) {
       return Get.toNamed(Routes.loginRoute);
-    }
-    else{
+    } else {
       return ProductQuestionsView().askQuestionBottomSheet();
     }
   }
@@ -84,14 +83,16 @@ class ProductQuestionsViewModel extends GetxController {
         if (parsedJson['message'] == "Product question created successfully") {
           addQuestionController.text = "";
           Get.back();
-          AppConstant.displaySnackBar(langKey.success.tr, parsedJson['message']);
+          AppConstant.displaySnackBar(
+              langKey.success.tr, parsedJson['message']);
           /////////////
           getQuestionAnswers(productId.value);
           ProductController controller = Get.find();
           controller.getProductQuestions(productId: productId);
           ////////////
         } else {
-          AppConstant.displaySnackBar(langKey.errorTitle.tr, parsedJson['message']);
+          AppConstant.displaySnackBar(
+              langKey.errorTitle.tr, parsedJson['message']);
         }
       }).catchError((e) {
         GlobalVariable.showLoader.value = false;
@@ -118,14 +119,16 @@ class ProductQuestionsViewModel extends GetxController {
         GlobalVariable.showLoader.value = false;
         if (parsedJson['message'] == "Product question updated successfully") {
           updateQuestionController.text = "";
-          AppConstant.displaySnackBar(langKey.success.tr, parsedJson['message']);
+          AppConstant.displaySnackBar(
+              langKey.success.tr, parsedJson['message']);
           /////////////
           getQuestionAnswers(productId.value);
           ProductController controller = Get.find();
           controller.getProductQuestions(productId: productId);
           ////////////
         } else {
-          AppConstant.displaySnackBar(langKey.errorTitle.tr, parsedJson['message']);
+          AppConstant.displaySnackBar(
+              langKey.errorTitle.tr, parsedJson['message']);
         }
       }).catchError((e) {
         GlobalVariable.showLoader.value = false;
@@ -150,7 +153,8 @@ class ProductQuestionsViewModel extends GetxController {
         controller.getProductQuestions(productId: productId);
         // Get.to(ProductQuestionsView());
       } else {
-        AppConstant.displaySnackBar(langKey.errorTitle.tr, parsedJson['message']);
+        AppConstant.displaySnackBar(
+            langKey.errorTitle.tr, parsedJson['message']);
       }
     }).catchError((e) {
       GlobalVariable.showLoader.value = false;

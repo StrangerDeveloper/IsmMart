@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
-import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
+import 'package:ism_mart/exports/exports_utils.dart';
+import 'package:ism_mart/helper/global_variables.dart';
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/screens/product_questions/product_questions_viewmodel.dart';
 import 'package:ism_mart/widgets/custom_appbar.dart';
-import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
-import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
+
 import '../../helper/validator.dart';
 
 class ProductQuestionsView extends StatelessWidget {
@@ -119,7 +120,8 @@ class ProductQuestionsView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomText(
-                      title: viewModel.productQuestionsList[index].question ?? '',
+                      title:
+                          viewModel.productQuestionsList[index].question ?? '',
                       maxLines: viewModel
                           .productQuestionsList[index].question!.length,
                     ),
@@ -194,7 +196,9 @@ class ProductQuestionsView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomText(
-                    title: viewModel.productQuestionsList[index].answer?.answer ?? '',
+                    title:
+                        viewModel.productQuestionsList[index].answer?.answer ??
+                            '',
                     maxLines: viewModel
                         .productQuestionsList[index].answer!.answer!.length,
                   ),
