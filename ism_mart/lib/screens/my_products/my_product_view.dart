@@ -20,34 +20,22 @@ class MyProductView extends StatelessWidget {
       child: Scaffold(
         body: Stack(
           children: [
-            Column(
-              children: [
-                addProduct(context),
-                Expanded(
-                  child: _buildProductBody(),
-                ),
-              ],
-            ),
+            _buildProductBody(),
             NoInternetView(
-              onPressed: () => viewModel.loadInitialProducts(),
+              onPressed: () {
+                viewModel.loadInitialProducts();
+              },
             ),
             LoaderView()
           ],
         ),
-      ),
-    );
-  }
-
-  Widget addProduct(BuildContext context) {
-    return Align(
-      alignment: Alignment.centerRight,
-      child: Padding(
-        padding: const EdgeInsets.only(top: 10, right: 20, left: 20, bottom: 5),
-        child: CustomTextBtn(
+        floatingActionButton: FloatingActionButton.extended(
+          backgroundColor: kPrimaryColor,
+          icon: Icon(Icons.add),
           onPressed: () {
             Get.toNamed(Routes.addProduct);
           },
-          title: langKey.addProduct.tr,
+          label: Text(langKey.addProduct.tr),
         ),
       ),
     );
