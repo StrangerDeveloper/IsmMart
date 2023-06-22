@@ -40,8 +40,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             style: appBarTitleSize,
           ),
       leading: leading ??
-          (menuItem == null
-              ? InkWell(
+          (menuItem != null
+              ? null
+              : InkWell(
                   onTap: onTap ??
                       () {
                         Get.back();
@@ -51,8 +52,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     color: kPrimaryColor,
                     size: 20,
                   ),
-                )
-              : null),
+                )),
     );
   }
 
