@@ -46,6 +46,7 @@ class BottomNavigationView extends GetView<BaseController> {
 
   CustomAppBar _buildAppBar(){
     return CustomAppBar(
+      centerTitle: false,
       leading: Padding(
         padding: EdgeInsets.symmetric(horizontal: 6),
         child: buildSvgLogo(),

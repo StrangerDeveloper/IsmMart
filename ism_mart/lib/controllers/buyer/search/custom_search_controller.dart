@@ -75,6 +75,7 @@ class CustomSearchController extends GetxController {
   }
 
   addFilters(key, value) {
+    print('>>>Adding: $key');
     if (value is String) {
       filters.addIf(value.isNotEmpty, key, value);
     } else if (value is int) {
@@ -117,16 +118,7 @@ class CustomSearchController extends GetxController {
     GlobalVariable.internetErr(false);
     print("SearchWithFilters: ${filters.toString()}");
     isLoading.value = true;
-    int i = 0;
-    var url = 'filter';
-    filters.forEach((key, value) {
-      if (i == 0) {
-        url = '$url?${key}=$value';
-        i++;
-      } else {
-        url = '$url&${key}=$value';
-      }
-    });
+    print(filters);
     await _apiProvider.filterSearch(appliedFilters: filters).then((products) {
       if (products.length == 0) {
         noProductsFound.value = true;
@@ -164,7 +156,7 @@ class CustomSearchController extends GetxController {
     }
   }
 
-  clearFilters() async {
+  clearFilters() {
     minPriceController.clear();
     maxPriceController.clear();
     searchLimit = 25;
@@ -173,11 +165,12 @@ class CustomSearchController extends GetxController {
     selectedCategory.value = '';
     selectedCategoryId.value = 0;
     filters.clear();
+
   }
 
   @override
   void onClose() {
-    super.onClose();
     clearFilters();
+    super.onClose();
   }
 }

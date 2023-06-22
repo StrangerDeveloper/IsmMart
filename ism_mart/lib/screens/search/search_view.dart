@@ -38,6 +38,7 @@ class SearchView extends GetView<SearchViewModel> {
 
   CustomAppBar _appBar() {
     return CustomAppBar(
+      leadingWidth: 35,
       leading: InkWell(
         onTap: () {
           controller.suggestionList.clear();

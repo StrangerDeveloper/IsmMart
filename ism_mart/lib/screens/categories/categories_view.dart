@@ -140,8 +140,9 @@ class CategoriesView extends GetView<CategoryController> {
       child: InkWell(
         onTap: () {
           Get.to(() => SearchDetailsView(
+            searchQuery: "",
                 subCategoryID: subCategory.id,
-                calledFromCategories: true,
+                calledToGoBackOnce: true,
               ));
         },
         borderRadius: BorderRadius.circular(13),

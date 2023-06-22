@@ -17,42 +17,42 @@ class CartIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return
-
-      InkWell(
-      onTap: onTap,
-      child: Stack(
-        children: [
-         iconWidget?? Icon(
-           IconlyLight.buy,
-            color: baseController.currentPage == 2 ? kPrimaryColor : kLightColor,
-            size: 25,
-          ),
-          Obx(
-            () => baseController.cartCount.value <= 0
-                ? Container()
-                : Positioned(
-                    top: 0,
-                    right: 0,
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: badgeHeight ?? 14,
-                      width: badgeWidth ?? 14,
-                      //padding: const EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                          color: kOrangeColor,
-                          borderRadius: BorderRadius.circular(15)),
-                      child: CustomText(
-                        title: "${baseController.cartCount.value}",
-                        size: 10,
-                        color: kWhiteColor,
-                        maxLines: 1,
+    return Align(
+      alignment: Alignment.center,
+      child: InkWell(
+        onTap: onTap,
+        child: Stack(
+          children: [
+           iconWidget?? Icon(
+             IconlyLight.buy,
+              color: baseController.currentPage == 2 ? kPrimaryColor : kLightColor,
+              size: 25,
+            ),
+            Obx(() => baseController.cartCount.value <= 0
+                  ? Container()
+                  : Positioned(
+                      top: 0,
+                      right: 0,
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: badgeHeight ?? 14,
+                        width: badgeWidth ?? 14,
+                        //padding: const EdgeInsets.all(4),
+                        decoration: BoxDecoration(
+                            color: kOrangeColor,
+                            borderRadius: BorderRadius.circular(15)),
+                        child: CustomText(
+                          title: "${baseController.cartCount.value}",
+                          size: 10,
+                          color: kWhiteColor,
+                          maxLines: 1,
+                        ),
                       ),
                     ),
-                  ),
-          ),
-        ],
-      ),
-    );
+            ),
+          ],
+        ),
+    ),
+      );
   }
 }
