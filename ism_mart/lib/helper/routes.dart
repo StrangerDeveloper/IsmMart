@@ -13,8 +13,6 @@ import 'package:ism_mart/screens/forgot_password1/forgot_password1_view.dart';
 import 'package:ism_mart/screens/my_products/my_product_view.dart';
 import 'package:ism_mart/screens/product_questions/product_questions_view.dart';
 import 'package:ism_mart/screens/single_product_full_image/single_product_full_image_view.dart';
-import 'package:ism_mart/screens/update_vendor/update_vendor_view.dart';
-import 'package:ism_mart/screens/vendor_detail/vendor_detail_view.dart';
 import 'package:ism_mart/screens/vendor_question/vendor_question_view.dart';
 import 'package:ism_mart/screens/search_details/search_details_view.dart';
 import '../screens/contact_us/contact_us_view.dart';
@@ -26,7 +24,9 @@ import '../screens/signin/signin_view.dart';
 import '../screens/signup/sign_up_view.dart';
 import '../screens/single_product_details/single_product_details_view.dart';
 import '../screens/static_info/static_info_view.dart';
+import '../screens/update_vendor_profile/update_vendor_view.dart';
 import '../screens/vendor_orders/vendor_orders_view.dart';
+import '../screens/vendor_profile/vendor_profile_view.dart';
 
 class Routes {
   static const initRoute = "/";
@@ -212,7 +212,7 @@ class Routes {
     ),
     GetPage(
       name: vendorDetail,
-      page: () => VendorDetailView(),
+      page: () => VendorProfileView(),
     ),
     GetPage(
       name: vendorOrders,

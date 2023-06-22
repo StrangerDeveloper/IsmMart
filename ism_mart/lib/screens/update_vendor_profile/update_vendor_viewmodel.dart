@@ -8,11 +8,12 @@ import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/urls.dart';
 import 'package:ism_mart/exports/export_controllers.dart';
 import 'package:ism_mart/exports/exports_model.dart';
-import 'package:ism_mart/screens/vendor_detail/vendor_detail_viewmodel.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
+
+import '../vendor_profile/vendor_profile_viewmodel.dart';
 
 class UpdateVendorViewModel extends GetxController {
 
@@ -134,7 +135,7 @@ class UpdateVendorViewModel extends GetxController {
           AuthController controller = Get.find();
           await controller.getCurrentUser();
           if(!isRegisterScreen){
-            VendorDetailViewModel vendorDetailViewModel = Get.find();
+            VendorProfileViewModel vendorDetailViewModel = Get.find();
             vendorDetailViewModel.getData();
           }
           Get.back();

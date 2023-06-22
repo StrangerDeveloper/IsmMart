@@ -73,6 +73,7 @@ class SettingsView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _userCard(),
+                verifyEmailLabel(),
                 Padding(
                   padding: const EdgeInsets.only(left: 30, bottom: 5),
                   child: CustomText(
@@ -81,9 +82,11 @@ class SettingsView extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 10),
-                Obx(() => viewModel.userDetails.value?.token == null
-                    ? Container()
-                    : _accountSettings())
+                Obx(
+                  () => viewModel.userDetails.value?.token == null
+                      ? Container()
+                      : _accountSettings(),
+                )
               ],
             ),
     );
@@ -93,32 +96,60 @@ class SettingsView extends StatelessWidget {
     return Obx(
       () => viewModel.userDetails.value?.email == null
           ? Container()
-          : Padding(
-              padding: const EdgeInsets.only(left: 15, top: 8, bottom: 8),
-              child: ListTile(
-                trailing: viewModel.userDetails.value?.emailVerified == true
-                    ? null
-                    : InkWell(
-                        onTap: () async {
-                          await viewModel.emailVerificationCheck();
-                        },
-                        child: Text(
-                          langKey.verifyEmail.tr,
-                          style: bodyText1.copyWith(
-                              decoration: TextDecoration.underline),
-                        ),
-                      ),
-                title: CustomText(
-                  title:
-                      "${langKey.welcome.tr} ${viewModel.userDetails.value?.firstName}",
-                  style: headline2,
-                ),
-                subtitle: CustomText(
-                  title: "${viewModel.userDetails.value?.email}",
-                  style: bodyText1,
+          : ListTile(
+              visualDensity: VisualDensity.compact,
+              onTap: () {
+                Get.toNamed(Routes.buyerProfile);
+              },
+              contentPadding: EdgeInsets.only(left: 30, right: 25),
+              trailing: CircleAvatar(
+                radius: 14,
+                backgroundColor: Colors.grey.shade300,
+                child: Icon(
+                  Icons.mode_edit_outlined,
+                  color: Colors.black,
+                  size: 18,
                 ),
               ),
+              title: CustomText(
+                title:
+                    "${langKey.welcome.tr} ${viewModel.userDetails.value?.firstName}",
+                style: headline2,
+              ),
+              subtitle: CustomText(
+                title: "${viewModel.userDetails.value?.email}",
+                style: bodyText1,
+              ),
             ),
+    );
+  }
+
+  Widget verifyEmailLabel() {
+    return Obx(
+      () => viewModel.userDetails.value?.emailVerified == false
+          ? Align(
+              alignment: Alignment.centerRight,
+              child: Padding(
+                padding: const EdgeInsets.only(right: 20),
+                child: InkWell(
+                  onTap: () async {
+                    await viewModel.emailVerificationCheck();
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        left: 10, bottom: 10, top: 10, right: 10),
+                    child: Text(
+                      langKey.verifyEmail.tr,
+                      style: bodyText1.copyWith(
+                        decoration: TextDecoration.underline,
+                        color: kRedColor,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            )
+          : SizedBox(),
     );
   }
 
@@ -179,15 +210,6 @@ class SettingsView extends StatelessWidget {
           icon: IconlyBold.bag,
           color: Colors.teal,
           title: langKey.userOrders.tr,
-        ),
-        singleSettingsItem(
-          onTap: () {
-            Get.toNamed(Routes.buyerProfile);
-            // Get.to(() => BuyerProfileView());
-          },
-          icon: IconlyBold.user_2,
-          color: Colors.pink,
-          title: 'Buyer Profile',
         ),
       ],
     );

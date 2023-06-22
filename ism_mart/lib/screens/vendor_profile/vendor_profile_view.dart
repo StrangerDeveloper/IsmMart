@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
-import 'package:ism_mart/screens/vendor_detail/vendor_detail_viewmodel.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/screens/vendor_profile/vendor_profile_viewmodel.dart';
 
-class VendorDetailView extends StatelessWidget {
-  VendorDetailView({Key? key}) : super(key: key);
-  final VendorDetailViewModel viewModel = Get.put(VendorDetailViewModel());
+class VendorProfileView extends StatelessWidget {
+  VendorProfileView({Key? key}) : super(key: key);
+  final VendorProfileViewModel viewModel = Get.put(VendorProfileViewModel());
 
   @override
   Widget build(BuildContext context) {

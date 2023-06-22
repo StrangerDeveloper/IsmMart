@@ -1,7 +1,6 @@
 import 'package:ism_mart/screens/change_password/change_password_view.dart';
 import 'package:ism_mart/screens/my_products/my_product_view.dart';
 import 'package:ism_mart/screens/seller_dashboard/seller_dashboard_view.dart';
-import 'package:ism_mart/screens/vendor_detail/vendor_detail_view.dart';
 import 'package:ism_mart/screens/vendor_orders/vendor_orders_view.dart';
 import 'package:ism_mart/screens/vendor_question/vendor_question_view.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
@@ -11,6 +10,8 @@ import 'package:ism_mart/exports/export_api_helper.dart';
 import 'package:ism_mart/exports/export_controllers.dart';
 import 'package:ism_mart/exports/exports_model.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
+
+import '../../screens/vendor_profile/vendor_profile_view.dart';
 
 class SellersController extends GetxController with StateMixin<ProductModel> {
   final SellersApiProvider apiProvider;
@@ -119,7 +120,7 @@ class SellersController extends GetxController with StateMixin<ProductModel> {
     MyProductView(),
     VendorOrdersView(),
     //const PremiumMembershipUI(),
-    VendorDetailView(),
+    VendorProfileView(),
     VendorQuestionView(),
     ChangePasswordView()
   ];
