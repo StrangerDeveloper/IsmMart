@@ -348,7 +348,7 @@ class AppConstant {
                   ),
             AppConstant.spaceWidget(height: 12),
             CustomText(
-              title: passedBodyLangKey,
+              title: passedBodyLangKey ?? '',
               weight: FontWeight.w600,
               textAlign: TextAlign.center,
               size: givenFontSize,

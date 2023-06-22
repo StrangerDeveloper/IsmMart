@@ -119,7 +119,7 @@ class ProductQuestionsView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomText(
-                      title: viewModel.productQuestionsList[index].question,
+                      title: viewModel.productQuestionsList[index].question ?? '',
                       maxLines: viewModel
                           .productQuestionsList[index].question!.length,
                     ),
@@ -194,7 +194,7 @@ class ProductQuestionsView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomText(
-                    title: viewModel.productQuestionsList[index].answer!.answer,
+                    title: viewModel.productQuestionsList[index].answer?.answer ?? '',
                     maxLines: viewModel
                         .productQuestionsList[index].answer!.answer!.length,
                   ),

@@ -63,7 +63,7 @@ class SellerHomeView extends GetView<SellersController> {
                         color: kWhiteColor,
                       ),
                       CustomText(
-                        title: authController.userModel?.email,
+                        title: authController.userModel?.email ?? '',
                         size: 15,
                         weight: FontWeight.w600,
                         color: kWhiteColor,

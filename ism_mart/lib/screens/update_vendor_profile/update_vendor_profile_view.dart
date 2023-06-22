@@ -6,17 +6,17 @@ import 'package:ism_mart/controllers/controllers.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/exports/exports_model.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
-import 'package:ism_mart/screens/update_vendor_profile/update_vendor_viewmodel.dart';
+import 'package:ism_mart/screens/update_vendor_profile/update_vendor_profile_viewmodel.dart';
 import 'package:ism_mart/widgets/custom_appbar.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
 import 'package:ism_mart/widgets/pick_image.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import '../../helper/validator.dart';
 
-class UpdateVendorView extends StatelessWidget {
-  UpdateVendorView({super.key});
+class UpdateVendorProfileView extends StatelessWidget {
+  UpdateVendorProfileView({super.key});
 
-  final UpdateVendorViewModel viewModel = Get.put(UpdateVendorViewModel());
+  final UpdateVendorProfileViewModel viewModel = Get.put(UpdateVendorProfileViewModel());
 
   @override
   Widget build(BuildContext context) {

@@ -15,7 +15,7 @@ import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 
 import '../vendor_profile/vendor_profile_viewmodel.dart';
 
-class UpdateVendorViewModel extends GetxController {
+class UpdateVendorProfileViewModel extends GetxController {
 
   bool isRegisterScreen = false;
   Rx<File?> profileImageFile = File('').obs;

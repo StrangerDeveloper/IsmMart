@@ -76,7 +76,7 @@ class SingleCartItems extends StatelessWidget {
             Container(
               width: AppResponsiveness.width * 0.6,
               child: CustomText(
-                title: viewModel.cartItemsList[index!].productModel!.name,
+                title: viewModel.cartItemsList[index!].productModel?.name ?? '',
                 style: headline3,
                 maxLines: 3,
               ),

@@ -59,7 +59,7 @@ class CustomOrderStatsItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   CustomText(
-                    title: title,
+                    title: title ?? '',
                     weight: FontWeight.w600,
                     textAlign: TextAlign.start,
                     size: 15,
@@ -141,7 +141,7 @@ class CustomOrderStatsItem2 extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CustomText(
-                      title: title,
+                      title: title ?? '',
                       weight: FontWeight.w600,
                       textAlign: TextAlign.center,
                       size: 15,

@@ -94,7 +94,7 @@ class ChangeAddressView extends StatelessWidget {
                     viewModel.shippingAddressList[index].id.toString());
               },
               title: CustomText(
-                title: viewModel.shippingAddressList[index].name,
+                title: viewModel.shippingAddressList[index].name ?? '',
                 style: headline3,
               ),
               subtitle: Column(
