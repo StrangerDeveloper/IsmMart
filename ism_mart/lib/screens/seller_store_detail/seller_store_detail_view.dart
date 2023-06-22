@@ -45,14 +45,6 @@ class SellerStoreDetailView extends GetView<ProductController> {
                           slivers: [
                             CustomSliverAppBar(
                               title: langKey.storeDetail.tr,
-                              leading: InkWell(
-                                onTap: () => Get.back(),
-                                child: Icon(
-                                  Icons.arrow_back_ios_new,
-                                  size: 18,
-                                  color: kPrimaryColor,
-                                ),
-                              ),
                             ),
                             SliverList(
                               delegate: SliverChildListDelegate(

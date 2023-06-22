@@ -16,12 +16,10 @@ class SearchDetailsView extends GetView<CustomSearchController> {
       this.subCategoryID = 0,
       this.categoryID = 0,
       this.isCalledForLatestAndBestSeller = false,
-      this.calledFromCategories,
       this.calledToGoBackOnce})
       : super(key: key);
 
   final bool? isCalledForLatestAndBestSeller,
-      calledFromCategories,
       calledToGoBackOnce;
   final String? searchQuery, productTypeKey;
   final int? categoryID, subCategoryID;
@@ -93,23 +91,12 @@ class SearchDetailsView extends GetView<CustomSearchController> {
 
   CustomAppBar _appBar() {
     return CustomAppBar(
-      leading: InkWell(
-        onTap: () {
-          if (calledToGoBackOnce == true) {
-            Get.back();
-          } else {
-            int count = 0;
-            Get.offNamedUntil(Routes.searchRoute, (route) => count++ >= 2);
-            controller.clearFilters();
-            controller.productList.clear();
-          }
-        },
-        child: Icon(
-          Icons.arrow_back_ios_new,
-          size: 18,
-          color: kPrimaryColor,
-        ),
-      ),
+      onTap: (){
+        controller.clearFilters();
+        Get.back();
+      },
+      leadingWidth: 35,
+      centerTitle: false,
       searchBar: CustomSearchBar(
         searchText: searchQuery,
         calledFromSearchDetailsView: calledToGoBackOnce != null ? false : true,

@@ -38,27 +38,25 @@ class SingleProductDetailsView extends StatelessWidget {
               )
             : Scaffold(
                 appBar: CustomAppBar(
+                  centerTitle: true,
                   title: langKey.productDetails.tr,
                   action: Get.arguments[0]["calledFor"] == 'customer'
                       ? [
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 12.0),
-                              child: CartIcon(
-                                onTap: () {
-                                  Get.offNamed(Routes.cartRoute,
-                                      arguments: {"calledFromSPV": true},
-                                      preventDuplicates: false);
-                                },
-                                iconWidget: Icon(
-                                  IconlyLight.buy,
-                                  size: 25,
-                                  color: kPrimaryColor,
-                                ),
-                              ),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 12.0),
+                          child: CartIcon(
+                            onTap: () {
+                              Get.offNamed(Routes.cartRoute,
+                                  arguments: {"calledFromSPV": true},
+                                  preventDuplicates: false);
+                            },
+                            iconWidget: Icon(
+                              IconlyLight.buy,
+                              size: 25,
+                              color: kPrimaryColor,
                             ),
-                          )
+                          ),
+                        )
                         ]
                       : null,
                 ),

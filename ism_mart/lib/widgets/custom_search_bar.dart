@@ -33,6 +33,7 @@ class CustomSearchBar extends StatelessWidget {
       },
       child: Container(
         height: 34.0,
+        width: double.infinity,
         alignment: Alignment.center,
         padding: const EdgeInsets.symmetric(horizontal: kFixPadding),
         decoration: BoxDecoration(
