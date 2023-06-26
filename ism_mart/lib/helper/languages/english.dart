@@ -233,7 +233,7 @@ class English {
         key.call: 'call',
         key.centralHeadquarters: 'Central Headquarters',
         key.centralHeadquartersValue:
-            '2nd Floor, Emirates Tower, M-13, F7 Markaz, Islamabad. Pakistan',
+            'street 12, G-8/1 ISMMART GROUP OF INDUSTRIES Islamabad. Pakistan',
         key.globalHeadquarters: 'Global Headquarters',
         key.globalHeadquartersValue:
             'Tower 42, 25 Old Broad St, Cornhill, London, United Kingdom',
