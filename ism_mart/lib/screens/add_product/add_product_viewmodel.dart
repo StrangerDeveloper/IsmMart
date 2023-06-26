@@ -243,18 +243,6 @@ class AddProductViewModel extends GetxController {
         GlobalVariable.internetErr(false);
         MyProductsViewModel myProductsViewModel = Get.find();
         myProductsViewModel.loadInitialProducts();
-        
-        //clearing all the controllers so that when vendor goes back to add products again, it wouldn't show the previous values in the fields
-        prodNameController.clear();
-        prodPriceController.clear();
-        prodStockController.clear();
-        prodDescriptionController.clear();
-        prodDiscountController.clear();
-        dynamicFieldsValuesList.clear();
-        productImages.clear();
-        uploadImagesError.value = false;
-        selectedCategory.value = CategoryModel();
-        selectedSubCategory.value = SubCategory();
 
         Get.back();
         AppConstant.displaySnackBar(langKey.success.tr, value['message']);

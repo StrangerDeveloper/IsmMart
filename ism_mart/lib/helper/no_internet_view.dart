@@ -3,7 +3,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/helper/global_variables.dart';
 
-import '../screens/add_product/add_product_viewmodel.dart';
 import '../widgets/custom_button.dart';
 
 class NoInternetView extends StatelessWidget {
@@ -13,7 +12,6 @@ class NoInternetView extends StatelessWidget {
     Key? key,
     this.onPressed,
   }) : super(key: key);
-  final AddProductViewModel viewModel = Get.put(AddProductViewModel());
 
   @override
   Widget build(BuildContext context) {
