@@ -341,6 +341,11 @@ class AuthController extends GetxController {
     });
   }
 
+  resetValues(){
+    selectedCountry.value = CountryModel(name: "Select Country", id: 0);
+    selectedCity.value = CountryModel(name: "Select City", id: 0);
+  }
+
   void showSnackBar({title = 'error', message = 'Something went wrong'}) {
     AppConstant.displaySnackBar(title, message);
   }

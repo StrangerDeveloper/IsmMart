@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/helper/urls.dart';
+
 import '../../controllers/controllers.dart';
+import '../../exports/exports_utils.dart';
 import '../../helper/api_base_helper.dart';
 import '../../helper/global_variables.dart';
-import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
+import '../../models/user/country_city_model.dart';
 import '../../models/user/user_model.dart';
-import '../../exports/exports_utils.dart';
 import '../change_address/change_address_viewmodel.dart';
 import '../checkout/checkout_viewmodel.dart';
 
@@ -24,6 +26,8 @@ class AddUpdateAddressViewModel extends GetxController {
     isUpdateScreen = Get.arguments['isUpdateScreen'];
     if (isUpdateScreen) {
       setData();
+    } else {
+      cityViewModel.authController.resetValues();
     }
     super.onInit();
   }
@@ -52,11 +56,14 @@ class AddUpdateAddressViewModel extends GetxController {
     }
   }
 
+
+
   void addShippingAddress() {
     if (shippingAddressFormKey.currentState?.validate() ?? false) {
       if (cityViewModel.authController.selectedCity.value.id == null &&
           cityViewModel.authController.selectedCity.value.id == null) {
-        AppConstant.displaySnackBar(langKey.errorTitle.tr, langKey.plzSelectCountry.tr);
+        AppConstant.displaySnackBar(
+            langKey.errorTitle.tr, langKey.plzSelectCountry.tr);
         return;
       }
 
