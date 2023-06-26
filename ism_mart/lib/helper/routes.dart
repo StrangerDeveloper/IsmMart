@@ -179,9 +179,7 @@ class Routes {
       ],
     ),
     GetPage(
-        name: singleProductFullImage,
-        page: () => SingleProductFullImageView()
-    ),
+        name: singleProductFullImage, page: () => SingleProductFullImageView()),
     GetPage(
       name: searchDetails,
       page: () => SearchDetailsView(),

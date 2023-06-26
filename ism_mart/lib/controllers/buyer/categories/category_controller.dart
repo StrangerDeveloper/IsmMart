@@ -72,6 +72,10 @@ class CategoryController extends GetxController with StateMixin {
     }
   }
 
+  void fitstTimeCall() async {
+    await fetchCategories();
+  }
+
   @override
   void onClose() {
     super.onClose();

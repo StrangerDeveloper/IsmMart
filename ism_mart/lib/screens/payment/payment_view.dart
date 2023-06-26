@@ -16,11 +16,13 @@ class PaymentView extends StatelessWidget {
   final PaymentViewModel viewModel = Get.put(PaymentViewModel());
   @override
   Widget build(BuildContext context) {
-    viewModel.orderId!(orderId);
-    viewModel.amount!(amount);
+    // viewModel.orderId!(orderId);
+    // viewModel.amount!(amount);
     return Scaffold(
       backgroundColor: Colors.grey[100]!,
-      appBar: CustomAppBar(title: langKey.checkout.tr,),
+      appBar: CustomAppBar(
+        title: langKey.checkout.tr,
+      ),
       body: WebViewWidget(
         controller: viewModel.webViewController,
       ),

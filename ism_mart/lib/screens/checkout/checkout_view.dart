@@ -515,8 +515,8 @@ class CheckoutView extends StatelessWidget {
             //         .toString());
 
             Get.to(PaymentView(
-              orderId: 120,
-              amount: viewModel.totalAmount.value,
+              orderId: 123,
+              amount: 5,
             ));
           }
         },
