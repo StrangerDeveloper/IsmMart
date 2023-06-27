@@ -134,6 +134,7 @@ class PaymentViewModel extends GetxController {
   String scriptInjectedHtml = "";
   String paymentHtml() {
     return '''
+
      <html>
         <head>
           <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
@@ -251,6 +252,7 @@ class PaymentViewModel extends GetxController {
     </style>
         </head>
         <body>
+        
          <div id="dvLoader" style="display: none">
       <img style="width: 10%" src="https://mvisa.bankalfalah.com/APGONLINE/HostedCheckoutFiles/Loader.gif" />
     </div>
@@ -284,6 +286,7 @@ const urlParams = new URLSearchParams(window.location.search);
   const amount = urlParams.get('amount');
   console.log(orderId, amount);
   \$(document).ready(function () {
+   print(" hasnain -----${orderId!.value} ${amount!.value}") ;
     /Pass Order Id and Transaction Amount below/
     var StoreId = '030848';
     var TransType = '3';

@@ -37,7 +37,7 @@ class BuyerProfileView extends StatelessWidget {
                 viewModel.getData();
               },
             ),
-            LoaderView(),
+            LoaderView()
           ],
         ),
       ),

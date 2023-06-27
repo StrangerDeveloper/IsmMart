@@ -25,8 +25,8 @@ class BuyerProfileViewModel extends GetxController {
     ApiBaseHelper()
         .getMethod(url: Urls.getVendorAccountData, withAuthorization: true)
         .then((parsedJson) {
-      GlobalVariable.showLoader.value = false;
       GlobalVariable.internetErr(false);
+      GlobalVariable.showLoader.value = false;
       if (parsedJson['success'] == true && parsedJson['data'] != null) {
         buyerProfileModel.value =
             BuyerProfileModel.fromJson(parsedJson['data']);

@@ -10,6 +10,7 @@ import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/custom_appbar.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
+import 'dart:math';
 
 class CheckoutView extends StatelessWidget {
   CheckoutView({Key? key}) : super(key: key);
@@ -513,10 +514,11 @@ class CheckoutView extends StatelessWidget {
             // viewModel.makePayment(
             //     amount: viewModel.totalAmount.value
             //         .toString());
-
+            Random random = new Random();
+            int orderId = random.nextInt(100000);
             Get.to(PaymentView(
-              orderId: 123,
-              amount: 5,
+              orderId: orderId,
+              amount: cartViewModel.totalCartAmount.value,
             ));
           }
         },

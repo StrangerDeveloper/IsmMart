@@ -16,8 +16,9 @@ class PaymentView extends StatelessWidget {
   final PaymentViewModel viewModel = Get.put(PaymentViewModel());
   @override
   Widget build(BuildContext context) {
-    // viewModel.orderId!(orderId);
-    // viewModel.amount!(amount);
+    viewModel.orderId!(orderId);
+    viewModel.amount!(amount);
+    print("pay id hasnain $orderId $amount");
     return Scaffold(
       backgroundColor: Colors.grey[100]!,
       appBar: CustomAppBar(
