@@ -13,7 +13,6 @@ class PaymentViewModel extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    webViewController.goForward();
     webViewController = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(const Color(0x00000000))
