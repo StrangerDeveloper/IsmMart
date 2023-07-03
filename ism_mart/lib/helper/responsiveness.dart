@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
 
 class AppResponsiveness {
@@ -56,8 +57,9 @@ class AppResponsiveness {
     return _isTabletScreen() ? 100 : 50;
   }
 
-  static double getHeight90_140() {
-    return _isTabletScreen() ? 140 : 90;
+  static double getHeight90_140(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    return _isTabletScreen() ? screenHeight * 0.14 : screenHeight * 0.09;
   }
 
   static double getHeight100_120() {

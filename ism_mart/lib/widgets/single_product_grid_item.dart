@@ -57,7 +57,7 @@ class SingleProductItems extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                        height: AppResponsiveness.getHeight90_140(),
+                        height: AppResponsiveness.getHeight90_140( buildContext!),
                         width: double.infinity,
                         child: Center(
                           child: Stack(
@@ -156,7 +156,7 @@ class SingleProductItems extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                        height: AppResponsiveness.getHeight90_140(),
+                        height: AppResponsiveness.getHeight90_140( buildContext!),
                         //width: double.infinity,
                         child: Center(
                           child: Stack(
