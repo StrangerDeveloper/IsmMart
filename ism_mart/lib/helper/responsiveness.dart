@@ -58,8 +58,7 @@ class AppResponsiveness {
   }
 
   static double getHeight90_140(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
-    return _isTabletScreen() ? screenHeight * 0.14 : screenHeight * 0.09;
+    return _isTabletScreen() ? height * 0.14 : height * 0.12;
   }
 
   static double getHeight100_120() {
