@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:get/get.dart';
 import 'package:ism_mart/helper/constants.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -7,10 +9,37 @@ class PaymentViewModel extends GetxController {
 
   RxInt? orderId = 0.obs;
   RxDouble? amount = (0.0).obs;
+
   @override
   void onInit() {
     super.onInit();
-    webViewController = WebViewController();
+    webViewController.goForward();
+    webViewController = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..setBackgroundColor(const Color(0x00000000))
+      ..setNavigationDelegate(
+        NavigationDelegate(
+          onProgress: (int progress) {
+            // Update loading bar.
+          },
+          onPageStarted: (String url) {},
+          onPageFinished: (String url) {},
+          onWebResourceError: (WebResourceError error) {},
+          onNavigationRequest: (NavigationRequest request) {
+            if (request.url.startsWith('https://www.youtube.com/')) {
+              return NavigationDecision.prevent;
+            }
+            return NavigationDecision.navigate;
+          },
+        ),
+      )
+      ..loadRequest(Uri.parse('https://flutter.dev'));
+    ;
+  }
+
+  @override
+  void onReady() {
+    webViewController.reload();
     webViewController
       ..enableZoom(true)
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
@@ -23,6 +52,19 @@ class PaymentViewModel extends GetxController {
         },
       )
       ..loadHtmlString(paymentHtml());
+
+    print("on ready hasnain $orderId $amount");
+    // TODO: implement onReady
+    super.onReady();
+  }
+
+  @override
+  void onClose() {
+    webViewController.clearCache();
+    webViewController.goBack();
+    print(" hasnain payment controller close ");
+    // TODO: implement onClose
+    super.onClose();
   }
 
   String? htmlContent = '''
@@ -250,9 +292,19 @@ class PaymentViewModel extends GetxController {
         font-size: 17px;
       }
     </style>
+    
+         <script>
+    function myFunction() {
+      var orderid = "${orderId!.value}";
+      var amount = " ${amount!.value}";
+      document.getElementById("myText").innerHTML = orderid + amount;
+          console.log("hasnai myfunc call");
+    }
+  </script>
         </head>
-        <body>
+        <body >
         
+         <h1>"The value for number is: " <span id="myText"></span></h1>
          <div id="dvLoader" style="display: none">
       <img style="width: 10%" src="https://mvisa.bankalfalah.com/APGONLINE/HostedCheckoutFiles/Loader.gif" />
     </div>
@@ -274,41 +326,27 @@ class PaymentViewModel extends GetxController {
       <input class="CustomerName allow_alphabet" id="CustomerName" name="TransCustomerName" type="text" placeholder="Customer Name" value="" /><br /><br />
       <input class="CustomerEmailAddress" id="CustomerEmailAddress" name="TransCustomerEmailAddress" type="text" placeholder="Customer Email Address" value="" /><br /><br />
       <input class="CustomerMobileNumber allow_numeric" id="CustomerMobileNumber" name="TransCustomerMobileNumber" type="text" placeholder="Customer Mobile Number" value="" /><br /><br />
-      <button type="button" class="btn btn-custon-four btn-danger" id="InitiateTrans" name="TransInitiateTrans">Initiate</button><br />
+      <button onclick="myFunction()" type="button" class="btn btn-custon-four btn-danger" id="InitiateTrans" name="TransInitiateTrans">Initiate</button><br />
       <label class="errorlbl" id="errorlbl"></label>
     </form>
 
     <div id="dv3DS"></div>
           <script>
-
 const urlParams = new URLSearchParams(window.location.search);
-  const orderId = urlParams.get('orderId');
-  const amount = urlParams.get('amount');
+  const orderId = urlParams.get('${orderId!.value}');
+  const amount = urlParams.get('${amount!.value}');
   console.log(orderId, amount);
   \$(document).ready(function () {
-   print(" hasnain -----${orderId!.value} ${amount!.value}") ;
     /Pass Order Id and Transaction Amount below/
     var StoreId = '030848';
     var TransType = '3';
-    var OrderId = 127;
-    var Amount = 5;
+    var OrderId = orderId;
+    var Amount = amount;
     InitializeValues(StoreId, TransType, OrderId, Amount);
-  });
-
-            // function successCallback() {}
-            // function failedCallback() {}
-
-            // (document).ready(function() {
-            //   var StoreId = '030848';
-            //   var TransType = '3';
-            //   var OrderId = 1122334456; // Replace with the actual order ID
-            //   var Amount = 5; // Replace with the actual amount
-            //   InitializeValues(StoreId, TransType, OrderId, Amount);
-            // });
-          </script>
-
-
-        </body>
+  }
+);
+ </script> 
+  </body>
       </html>
     ''';
   }

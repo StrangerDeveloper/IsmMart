@@ -12,10 +12,16 @@ import 'package:ism_mart/widgets/custom_appbar.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
 import 'dart:math';
 
-class CheckoutView extends StatelessWidget {
+class CheckoutView extends StatefulWidget {
   CheckoutView({Key? key}) : super(key: key);
 
+  @override
+  State<CheckoutView> createState() => _CheckoutViewState();
+}
+
+class _CheckoutViewState extends State<CheckoutView> {
   final CheckoutViewModel viewModel = Get.put(CheckoutViewModel());
+
   final CartViewModel cartViewModel = Get.find();
 
   @override
@@ -514,12 +520,14 @@ class CheckoutView extends StatelessWidget {
             // viewModel.makePayment(
             //     amount: viewModel.totalAmount.value
             //         .toString());
-            Random random = new Random();
-            int orderId = random.nextInt(100000);
-            Get.to(PaymentView(
-              orderId: orderId,
-              amount: cartViewModel.totalCartAmount.value,
-            ));
+            setState(() {
+              Random random = new Random();
+              int orderId = random.nextInt(100000);
+              Get.to(PaymentView(
+                orderId: orderId,
+                amount: cartViewModel.totalCartAmount.value,
+              ));
+            });
           }
         },
       ),

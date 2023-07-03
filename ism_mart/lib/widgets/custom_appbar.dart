@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../helper/constants.dart';
 import 'custom_text.dart';
-import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool? menuItem;
