@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/exports/export_api_helper.dart';
@@ -24,6 +26,11 @@ class CheckoutViewModel extends GetxController{
   TextEditingController couponCodeController = TextEditingController();
 
   CartViewModel cartViewModel = Get.find();
+  RxInt orderId=0.obs;
+  generateOrderId() {
+    Random random = Random();
+  orderId.value = random.nextInt(100000);
+  }
 
   @override
   void onInit() {

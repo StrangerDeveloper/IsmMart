@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'dart:ui';
 
 import 'package:get/get.dart';
@@ -10,11 +9,6 @@ class PaymentViewModel extends GetxController {
 
   RxInt orderId = 0.obs;
   RxDouble amount = (0.0).obs;
-
-  generateOrderId() {
-    Random random = Random();
-    orderId.value = random.nextInt(100000);
-  }
 
   @override
   void onInit() {
@@ -283,7 +277,7 @@ class PaymentViewModel extends GetxController {
   </script>
 </head>
 <body>
-   <h1>"The value for number is: " <span id="myText"></span></h1>
+   <h1>"The value for number is: ${orderId.value} " <span id="myText"></span></h1>
 <div id="dvLoader" style="display: none">
     <img style="width: 10%"
          src="https://mvisa.bankalfalah.com/APGONLINE/HostedCheckoutFiles/Loader.gif"/>
@@ -355,7 +349,7 @@ class PaymentViewModel extends GetxController {
         <label class="form-label" for="CustomerMobileNumber">Phone</label>
     </div>
 
-    <button  onclick="myFunction()" type="button" class="btn btn-custon-four btn-danger cardButton" id="InitiateTrans"
+     <button onclick="myFunction()" type="button" class="btn btn-custon-four btn-danger cardButton" id="InitiateTrans"
             name="TransInitiateTrans"> Confirm Payment
     </button>
     <br/>
