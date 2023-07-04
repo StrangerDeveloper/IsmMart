@@ -283,7 +283,7 @@ class PaymentViewModel extends GetxController {
   </script>
 </head>
 <body>
-<h1>  order id => payment =</h1?>
+   <h1>"The value for number is: " <span id="myText"></span></h1>
 <div id="dvLoader" style="display: none">
     <img style="width: 10%"
          src="https://mvisa.bankalfalah.com/APGONLINE/HostedCheckoutFiles/Loader.gif"/>
