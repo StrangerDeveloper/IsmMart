@@ -9,15 +9,16 @@ import 'package:ism_mart/screens/change_address/change_address_view.dart';
 import 'package:ism_mart/screens/change_password/change_password_view.dart';
 import 'package:ism_mart/screens/dispute_detail/dispute_detail_view.dart';
 import 'package:ism_mart/screens/email_verification/email_verification_view.dart';
-import 'package:ism_mart/screens/forgot_password1/forgot_password1_view.dart';
+import 'package:ism_mart/screens/forgot_password/forgot_password_view.dart';
 import 'package:ism_mart/screens/my_products/my_product_view.dart';
+import 'package:ism_mart/screens/password_verification/verifiy_password_view.dart';
 import 'package:ism_mart/screens/product_questions/product_questions_view.dart';
+import 'package:ism_mart/screens/search_details/search_details_view.dart';
 import 'package:ism_mart/screens/single_product_full_image/single_product_full_image_view.dart';
 import 'package:ism_mart/screens/vendor_question/vendor_question_view.dart';
-import 'package:ism_mart/screens/search_details/search_details_view.dart';
+
 import '../screens/contact_us/contact_us_view.dart';
 import '../screens/faq/faq_view.dart';
-import '../screens/forgot_password2/forgot_password2_view.dart';
 import '../screens/seller_store_detail/seller_store_detail_view.dart';
 import '../screens/setting/settings_view.dart';
 import '../screens/signin/signin_view.dart';
@@ -152,11 +153,11 @@ class Routes {
     ),
     GetPage(
       name: forgotPassword1,
-      page: () => ForgotPassword1View(),
+      page: () => ForgotPasswordView(),
     ),
     GetPage(
       name: forgotPassword2,
-      page: () => ForgotPassword2View(),
+      page: () => VerifyPasswordView(),
     ),
     GetPage(
       name: staticInfo,

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ism_mart/helper/api_base_helper.dart';
 import 'package:ism_mart/exports/export_api_helper.dart';
-import 'package:ism_mart/helper/global_variables.dart';
-import 'package:ism_mart/helper/urls.dart';
 import 'package:ism_mart/exports/export_controllers.dart';
 import 'package:ism_mart/exports/exports_model.dart';
-import 'package:ism_mart/screens/setting/settings_viewmodel.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
+import 'package:ism_mart/helper/api_base_helper.dart';
+import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/helper/urls.dart';
+import 'package:ism_mart/screens/setting/settings_viewmodel.dart';
 
 class SignInViewModel extends GetxController {
   GlobalKey<FormState> signInFormKey = GlobalKey<FormState>();
@@ -39,7 +39,6 @@ class SignInViewModel extends GetxController {
           .then((parsedJson) async {
         if (parsedJson['success'] == true) {
           GlobalVariable.internetErr(false);
-
           authController.currUserToken.value = parsedJson['data']['token'];
           getCurrentUser(parsedJson);
         } else if (parsedJson['message'] == 'Invalid credentials') {

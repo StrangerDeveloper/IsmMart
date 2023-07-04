@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
-import 'package:ism_mart/screens/forgot_password1/forgot_password1_viewmodel.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
+import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/screens/forgot_password/forgot_password_viewmodel.dart';
 import 'package:ism_mart/widgets/custom_appbar.dart';
+
 import '../../helper/validator.dart';
 
-class ForgotPassword1View extends StatelessWidget {
-  ForgotPassword1View({Key? key}) : super(key: key);
-  final ForgotPassword1ViewModel viewModel =
-      Get.put(ForgotPassword1ViewModel());
+class ForgotPasswordView extends StatelessWidget {
+  ForgotPasswordView({Key? key}) : super(key: key);
+  final ForgotPasswordViewModel viewModel =
+      Get.put(ForgotPasswordViewModel());
 
   @override
   Widget build(BuildContext context) {

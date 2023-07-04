@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/controllers/buyer/auth/auth_controller.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
-import 'package:ism_mart/screens/forgot_password2/forgot_password2_viewmodel.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
+import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/screens/password_verification/verify_password_viewmodel.dart';
 import 'package:ism_mart/widgets/custom_appbar.dart';
 import 'package:ism_mart/widgets/obscure_suffix_icon.dart';
+
 import '../../helper/validator.dart';
 
-class ForgotPassword2View extends GetView<AuthController> {
-  ForgotPassword2View({Key? key}) : super(key: key);
-  final ForgotPassword2ViewModel viewModel =
-      Get.put(ForgotPassword2ViewModel());
+class VerifyPasswordView extends GetView<AuthController> {
+  VerifyPasswordView({Key? key}) : super(key: key);
+  final VerifyPasswordViewModel viewModel =
+      Get.put(VerifyPasswordViewModel());
 
   @override
   Widget build(BuildContext context) {

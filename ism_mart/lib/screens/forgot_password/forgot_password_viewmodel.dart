@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/helper/api_base_helper.dart';
 import 'package:ism_mart/helper/global_variables.dart';
-import 'package:ism_mart/helper/urls.dart';
-import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/helper/urls.dart';
 
-class ForgotPassword1ViewModel extends GetxController {
+class ForgotPasswordViewModel extends GetxController {
   GlobalKey<FormState> forgotPasswordFormKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
 
