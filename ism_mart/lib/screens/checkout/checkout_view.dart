@@ -10,7 +10,8 @@ import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/custom_appbar.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
-import 'dart:math';
+
+import '../payment/payment_viewmodel.dart';
 
 class CheckoutView extends StatefulWidget {
   CheckoutView({Key? key}) : super(key: key);
@@ -21,6 +22,7 @@ class CheckoutView extends StatefulWidget {
 
 class _CheckoutViewState extends State<CheckoutView> {
   final CheckoutViewModel viewModel = Get.put(CheckoutViewModel());
+  final PaymentViewModel viewModelPayment = Get.put(PaymentViewModel());
 
   final CartViewModel cartViewModel = Get.find();
 
@@ -520,14 +522,11 @@ class _CheckoutViewState extends State<CheckoutView> {
             // viewModel.makePayment(
             //     amount: viewModel.totalAmount.value
             //         .toString());
-            setState(() {
-              Random random = new Random();
-              int orderId = random.nextInt(100000);
-              Get.to(PaymentView(
-                orderId: orderId,
-                amount: cartViewModel.totalCartAmount.value,
-              ));
-            });
+            viewModelPayment.generateOrderId();
+            Get.to(PaymentView(
+              orderId: viewModelPayment.orderId.value,
+              amount: cartViewModel.totalCartAmount.value,
+            ));
           }
         },
       ),
