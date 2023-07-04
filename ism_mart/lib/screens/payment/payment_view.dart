@@ -5,7 +5,7 @@ import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/custom_appbar.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class PaymentView extends StatelessWidget {
+class PaymentView extends StatefulWidget {
   PaymentView({
     super.key,
     required this.orderId,
@@ -13,13 +13,24 @@ class PaymentView extends StatelessWidget {
   });
   final int? orderId;
   final double? amount;
+
+  @override
+  State<PaymentView> createState() => _PaymentViewState();
+}
+
+class _PaymentViewState extends State<PaymentView> {
   final PaymentViewModel viewModel = Get.put(PaymentViewModel());
   @override
-  Widget build(BuildContext context) {
-    print("hasnain html page ${orderId} payment $amount ");
+  void initState() {
     viewModel.webViewController.reload();
-    viewModel.orderId(orderId);
-    viewModel.amount(amount);
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    viewModel.webViewController.reload();
+    viewModel.orderId(widget.orderId);
+    viewModel.amount(widget.amount);
 
     print(
         "hasnain html page after value assign ${viewModel.orderId.value} payment ${viewModel.amount.value}");
