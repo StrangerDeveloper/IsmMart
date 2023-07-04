@@ -11,11 +11,11 @@ import 'package:ism_mart/screens/dispute_detail/dispute_detail_view.dart';
 import 'package:ism_mart/screens/email_verification/email_verification_view.dart';
 import 'package:ism_mart/screens/forgot_password/forgot_password_view.dart';
 import 'package:ism_mart/screens/my_products/my_product_view.dart';
-import 'package:ism_mart/screens/password_verification/verifiy_password_view.dart';
 import 'package:ism_mart/screens/product_questions/product_questions_view.dart';
 import 'package:ism_mart/screens/search_details/search_details_view.dart';
 import 'package:ism_mart/screens/single_product_full_image/single_product_full_image_view.dart';
 import 'package:ism_mart/screens/vendor_question/vendor_question_view.dart';
+import 'package:ism_mart/screens/verify_password/verify_password_view.dart';
 
 import '../screens/contact_us/contact_us_view.dart';
 import '../screens/faq/faq_view.dart';
