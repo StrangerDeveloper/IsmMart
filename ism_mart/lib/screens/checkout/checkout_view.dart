@@ -1,24 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/exports/export_controllers.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
+import 'package:ism_mart/exports/exports_utils.dart';
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/screens/cart/cart_viewmodel.dart';
 import 'package:ism_mart/screens/checkout/checkout_viewmodel.dart';
 import 'package:ism_mart/screens/payment/payment_view.dart';
-import 'package:ism_mart/exports/exports_utils.dart';
-import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/custom_appbar.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
 
-class CheckoutView extends StatefulWidget {
-  CheckoutView({Key? key}) : super(key: key);
 
-  @override
-  State<CheckoutView> createState() => _CheckoutViewState();
-}
-
-class _CheckoutViewState extends State<CheckoutView> {
+class CheckoutView extends StatelessWidget {
   final CheckoutViewModel viewModel = Get.put(CheckoutViewModel());
 
   final CartViewModel cartViewModel = Get.find();
@@ -61,8 +54,8 @@ class _CheckoutViewState extends State<CheckoutView> {
                   _buildCartItemSection(),
 
                   ///Payment Methods Cards
-                  StickyLabel(text: langKey.paymentMethod.tr),
-                  _buildPaymentDetails(),
+                  //StickyLabel(text: langKey.paymentMethod.tr),
+                  //_buildPaymentDetails(),
 
                   ///Sub-total Card
                   _subTotalDetails(),
@@ -202,7 +195,7 @@ class _CheckoutViewState extends State<CheckoutView> {
     );
   }
 
-  _buildPaymentDetails() {
+  /*_buildPaymentDetails() {
     return Obx(
       () => Padding(
         padding: const EdgeInsets.all(8.0),
@@ -220,7 +213,7 @@ class _CheckoutViewState extends State<CheckoutView> {
                   icon: Icons.credit_card,
                   value: true,
                   isEnabled: false),
-              CustomCard(
+             /* CustomCard(
                 color: Colors.white,
                 child: Visibility(
                     visible: viewModel.isCardPaymentEnabled.value,
@@ -255,7 +248,7 @@ class _CheckoutViewState extends State<CheckoutView> {
                           //   print(">>>stripeException: $e");
                           // }
                         })),
-              ),
+              ),*/
             ],
           ),
         ),
@@ -287,7 +280,7 @@ class _CheckoutViewState extends State<CheckoutView> {
                 ),
                 groupValue: viewModel.paymentType.value,
                 onChanged: (value) {
-                  viewModel.enableCardPayment(value);
+                  //viewModel.enableCardPayment(value);
                 },
               ),
             ),
@@ -295,7 +288,7 @@ class _CheckoutViewState extends State<CheckoutView> {
         ],
       ),
     );
-  }
+  }*/
 
   Widget _buildCartItemSection() {
     return Padding(
@@ -519,6 +512,7 @@ class _CheckoutViewState extends State<CheckoutView> {
             // viewModel.makePayment(
             //     amount: viewModel.totalAmount.value
             //         .toString());
+
             viewModel.generateOrderId();
             Get.to(PaymentView(
               orderId: viewModel.orderId.value,
@@ -556,7 +550,6 @@ class _CheckoutViewState extends State<CheckoutView> {
                         fontSize: 18,
                       ),
                     ),
-                    Divider(indent: 25, endIndent: 25, height: 20,),
                     Padding(
                       padding: const EdgeInsets.only(top: 5, bottom: 10),
                       child: Text(

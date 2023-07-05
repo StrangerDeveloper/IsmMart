@@ -19,6 +19,14 @@ class AppResponsiveness {
   }
 
   // width
+  static double getWidthWRTPoint({double? points = 0.5}) {
+    return width * points!;
+  }
+
+  static double getHeightWRTPoint({double? points = 0.5}) {
+   return height * points!;
+    // return height * (_isTabletScreen() ? 0.08 : 0.12);
+  }
 
   static double getWidthPoint90() {
     return width * 0.9;
@@ -76,6 +84,7 @@ class AppResponsiveness {
 
   /// box/section size based on small screen
   ///
+
   static double getBoxHeightPoint5() {
     return height * (_isTabletScreen() ? 0.08 : 0.12);
   }
