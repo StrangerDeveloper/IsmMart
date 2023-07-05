@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -26,31 +27,17 @@ class ProductQuestionsView extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          Column(
-            children: [
-              askQuestionBtn(),
-              Expanded(
-                child: listView(),
-              ),
-            ],
-          ),
+          listView(),
           LoaderView(),
         ],
       ),
-    );
-  }
-
-  Widget askQuestionBtn() {
-    return Padding(
-      padding: const EdgeInsets.all(15),
-      child: CustomTextBtn(
+      floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: kPrimaryColor,
+        icon: Icon(CupertinoIcons.question),
         onPressed: () {
           viewModel.loginCheck();
         },
-        child: Text(
-          langKey.askQuestion.tr,
-          style: TextStyle(color: Colors.white),
-        ),
+        label: Text(langKey.askQuestion.tr),
       ),
     );
   }
@@ -266,7 +253,7 @@ class ProductQuestionsView extends StatelessWidget {
                         ],
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 10, bottom: 20),
+                        padding: const EdgeInsets.only(top: 10),
                         child: CustomTextField1(
                           controller: viewModel.addQuestionController,
                           title: langKey.question.tr,
@@ -279,6 +266,7 @@ class ProductQuestionsView extends StatelessWidget {
                           },
                         ),
                       ),
+                      Divider(height: 28),
                       CustomTextBtn(
                         child: Text(langKey.addQuestion.tr),
                         onPressed: () {

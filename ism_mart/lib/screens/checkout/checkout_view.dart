@@ -556,6 +556,7 @@ class _CheckoutViewState extends State<CheckoutView> {
                         fontSize: 18,
                       ),
                     ),
+                    Divider(indent: 25, endIndent: 25, height: 20,),
                     Padding(
                       padding: const EdgeInsets.only(top: 5, bottom: 10),
                       child: Text(
