@@ -58,7 +58,7 @@ class AppResponsiveness {
   }
 
   static double getHeight90_140(BuildContext context) {
-    return _isTabletScreen() ? height * 0.14 : height * 0.12;
+    return _isTabletScreen() ? height * 0.14 : height * 0.09;
   }
 
   static double getHeight100_120() {
