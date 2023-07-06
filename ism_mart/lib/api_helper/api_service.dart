@@ -92,30 +92,30 @@ class ApiService {
     return response;
   }
 
-  Future<Response> postStripe<T>({
-    required String endpoint,
-    dynamic body,
-    JSON? query,
-    String? clientSecretId,
-  }) async {
-    var customHeaders = {
-      'Accept': '*/*',
-      'Authorization': 'Bearer $clientSecretId',
-      'Content-Type': 'application/x-www-form-urlencoded'
-    };
-
-    _baseProvider.httpClient.baseUrl = ApiConstant.stripeBaseUrl;
-    final response = await _baseProvider.post(
-      endpoint,
-      body,
-      headers: customHeaders,
-      query: query,
-    );
-    /*debugPrint("BaseUrl: after ${_baseProvider.httpClient.baseUrl}");
-    debugPrint("STripe: ${response.body}");
-    debugPrint("STripe: ${response.statusCode}");*/
-    return response;
-  }
+  // Future<Response> postStripe<T>({
+  //   required String endpoint,
+  //   dynamic body,
+  //   JSON? query,
+  //   String? clientSecretId,
+  // }) async {
+  //   var customHeaders = {
+  //     'Accept': '*/*',
+  //     'Authorization': 'Bearer $clientSecretId',
+  //     'Content-Type': 'application/x-www-form-urlencoded'
+  //   };
+  //
+  //   _baseProvider.httpClient.baseUrl = ApiConstant.stripeBaseUrl;
+  //   final response = await _baseProvider.post(
+  //     endpoint,
+  //     body,
+  //     headers: customHeaders,
+  //     query: query,
+  //   );
+  //   /*debugPrint("BaseUrl: after ${_baseProvider.httpClient.baseUrl}");
+  //   debugPrint("STripe: ${response.body}");
+  //   debugPrint("STripe: ${response.statusCode}");*/
+  //   return response;
+  // }
 
   Future<Response> put<T>({
     required String endpoint,

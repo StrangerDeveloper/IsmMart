@@ -137,11 +137,11 @@ class ApiProvider {
    * Flutter Stripe
    * */
 
-  Future<JSON> postStripePaymentInfo({data}) async {
+  /*Future<JSON> postStripePaymentInfo({data}) async {
     var response = await _apiRepository.reqStripePayment(
         client_secret: ApiConstant.SECRET_KEY, body: data);
     return response;
-  }
+  }*/
 
   /**
    *

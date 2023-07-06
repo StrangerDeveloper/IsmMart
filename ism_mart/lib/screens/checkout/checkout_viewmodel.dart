@@ -3,11 +3,12 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/exports/export_api_helper.dart';
-import 'package:ism_mart/helper/global_variables.dart';
-import 'package:ism_mart/helper/api_base_helper.dart';
 import 'package:ism_mart/exports/exports_model.dart';
+import 'package:ism_mart/helper/api_base_helper.dart';
 import 'package:ism_mart/helper/constants.dart';
+import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
+
 import '../../controllers/controllers.dart';
 import '../cart/cart_viewmodel.dart';
 
@@ -15,8 +16,8 @@ class CheckoutViewModel extends GetxController{
 
   final userModel = UserModel().obs;
   final noDefaultAddress = true.obs;
-  final paymentType = ''.obs;
-  final isCardPaymentEnabled = false.obs;
+ // final paymentType = ''.obs;
+//  final isCardPaymentEnabled = false.obs;
   final paymentMethodId = ''.obs;
   final shippingCost = 0.obs;
   final isRedeemedApplied = false.obs;
@@ -61,24 +62,24 @@ class CheckoutViewModel extends GetxController{
     });
   }
 
-  enableCardPayment(String value) {
+  /*enableCardPayment(String value) {
     paymentType.value = value;
     isCardPaymentEnabled(value.contains("Credit Card") ? true : false);
-  }
+  }*/
 
-  setTotalAmount() {
+ void setTotalAmount() {
     double netTotal = (cartViewModel.totalCartAmount.value + shippingCost.value) -
             totalDiscount.value;
 
     totalAmount.value = netTotal;
   }
 
-  redeemCoins(){
+ void redeemCoins(){
     String? value = couponCodeController.text.isEmpty ? "0" : couponCodeController.text;
     applyRedeemCode(num.parse(value));
   }
 
-  applyRedeemCode(num? value) {
+  void applyRedeemCode(num? value) {
     if (coinsModel.value != CoinsModel() &&
         value!.isGreaterThan(0) &&
         coinsModel.value.silver!.isGreaterThan(fixedRedeemCouponThreshold)) {

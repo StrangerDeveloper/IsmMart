@@ -1,17 +1,15 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:ism_mart/api_helper/api_constant.dart';
 import 'package:ism_mart/app_binding/app_init_binding.dart';
 import 'package:ism_mart/exports/export_controllers.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
-import 'package:firebase_core/firebase_core.dart';
+
 import 'firebase_options.dart';
-import 'exports/export_api_helper.dart';
 import 'helper/theme_helper.dart';
 
 void main() async {
@@ -19,7 +17,7 @@ void main() async {
 
   await GetStorage.init();
 
-  Stripe.publishableKey = ApiConstant.PUBLISHABLE_KEY;
+  //Stripe.publishableKey = ApiConstant.PUBLISHABLE_KEY;
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   SystemChrome.setSystemUIOverlayStyle(
