@@ -502,12 +502,17 @@ class _CheckoutViewState extends State<CheckoutView> {
           if (cartViewModel.totalCartAmount.value <=
               num.parse(
                   currencyController.convertCurrency(currentPrice: "1000")!)) {
-            AppConstant.displaySnackBar(
-              langKey.errorTitle.tr,
-              langKey.toProceedWithPurchase.tr,
-            );
-            //You cannot use Free Shipping Service under Rs1000
-            return;
+            viewModel.generateOrderId();
+            Get.to(PaymentView(
+              orderId: viewModel.orderId.value,
+              amount: 5,
+            ));
+            // AppConstant.displaySnackBar(
+            //   langKey.errorTitle.tr,
+            //   langKey.toProceedWithPurchase.tr,
+            // );
+            // //You cannot use Free Shipping Service under Rs1000
+            // return;
           }
           // else if (viewModel.isCardPaymentEnabled.isFalse) {
           //   AppConstant.displaySnackBar(
