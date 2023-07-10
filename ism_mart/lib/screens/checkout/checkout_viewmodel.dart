@@ -12,11 +12,10 @@ import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import '../../controllers/controllers.dart';
 import '../cart/cart_viewmodel.dart';
 
-class CheckoutViewModel extends GetxController{
-
+class CheckoutViewModel extends GetxController {
   final userModel = UserModel().obs;
   final noDefaultAddress = true.obs;
- // final paymentType = ''.obs;
+  // final paymentType = ''.obs;
 //  final isCardPaymentEnabled = false.obs;
   final paymentMethodId = ''.obs;
   final shippingCost = 0.obs;
@@ -27,10 +26,10 @@ class CheckoutViewModel extends GetxController{
   TextEditingController couponCodeController = TextEditingController();
 
   CartViewModel cartViewModel = Get.find();
-  RxInt orderId=0.obs;
+  RxInt orderId = 0.obs;
   generateOrderId() {
     Random random = Random();
-  orderId.value = random.nextInt(100000);
+    orderId.value = random.nextInt(100000);
   }
 
   @override
@@ -40,24 +39,26 @@ class CheckoutViewModel extends GetxController{
     super.onInit();
   }
 
-  setShippingCost(int cost){
+  setShippingCost(int cost) {
     shippingCost.value = cost;
     setTotalAmount();
   }
 
-  getDefaultShippingAddress()async{
+  getDefaultShippingAddress() async {
     GlobalVariable.showLoader.value = true;
-    await ApiBaseHelper().getMethod(
-        url: "user/getDefaultShippingDetails",
+    await ApiBaseHelper()
+        .getMethod(
+      url: "user/getDefaultShippingDetails",
       withAuthorization: true,
       withBearer: true,
-    ).then((response) async {
+    )
+        .then((response) async {
       GlobalVariable.showLoader.value = false;
-      if(response['success'] == true && response['data'] != null){
+      if (response['success'] == true && response['data'] != null) {
         userModel.value = UserModel.fromJson(response['data']);
         noDefaultAddress.value = false;
       }
-    }).catchError((e){
+    }).catchError((e) {
       AppConstant.displaySnackBar(langKey.errorTitle.tr, e);
     });
   }
@@ -67,15 +68,17 @@ class CheckoutViewModel extends GetxController{
     isCardPaymentEnabled(value.contains("Credit Card") ? true : false);
   }*/
 
- void setTotalAmount() {
-    double netTotal = (cartViewModel.totalCartAmount.value + shippingCost.value) -
+  void setTotalAmount() {
+    double netTotal =
+        (cartViewModel.totalCartAmount.value + shippingCost.value) -
             totalDiscount.value;
 
     totalAmount.value = netTotal;
   }
 
- void redeemCoins(){
-    String? value = couponCodeController.text.isEmpty ? "0" : couponCodeController.text;
+  void redeemCoins() {
+    String? value =
+        couponCodeController.text.isEmpty ? "0" : couponCodeController.text;
     applyRedeemCode(num.parse(value));
   }
 
@@ -104,22 +107,22 @@ class CheckoutViewModel extends GetxController{
   }
 
   fetchUserCoins() async {
-
-    await ApiBaseHelper().getMethod(
+    await ApiBaseHelper()
+        .getMethod(
       url: 'coin/getUserCoins',
-        withBearer: true,
-        withAuthorization: true,
-      ).then((response) {
-        if(response['success'] == true && response['data'] != null){
-          coinsModel.value = CoinsModel.fromJson(response['data']);
-        }
-        else{
-          return;
-        }
-      }).catchError((e){
-        print(e);
-      });
-    }
+      withBearer: true,
+      withAuthorization: true,
+    )
+        .then((response) {
+      if (response['success'] == true && response['data'] != null) {
+        coinsModel.value = CoinsModel.fromJson(response['data']);
+      } else {
+        return;
+      }
+    }).catchError((e) {
+      print(e);
+    });
+  }
 
   createOrder({paymentMethod = "COD"}) async {
     GlobalVariable.showLoader.value = true;
@@ -131,23 +134,22 @@ class CheckoutViewModel extends GetxController{
       "exchangeRate": currencyController.currencyModel!.exchangeRate ?? 1,
       "cartItems": cartViewModel.cartItemsList,
     };
-    await ApiBaseHelper().postMethod(
-        url: 'order/createOrder',
-        body: data,
-        withAuthorization: true
-    ).then((response) {
+    await ApiBaseHelper()
+        .postMethod(
+            url: 'order/createOrder', body: data, withAuthorization: true)
+        .then((response) {
       GlobalVariable.showLoader.value = true;
-      if(response['success'] == true && response['data'] != null){
+      if (response['success'] == true && response['data'] != null) {
         AppConstant.displaySnackBar(langKey.success.tr, response['message']);
         LocalStorageHelper.clearAllCart();
         Get.back();
-      } else if(response['data'] == null){
+      } else if (response['data'] == null) {
         AppConstant.displaySnackBar(langKey.errorTitle.tr, response['message']);
+      } else {
+        AppConstant.displaySnackBar(
+            langKey.errorTitle.tr, langKey.orderNotCreated.tr);
       }
-      else{
-        AppConstant.displaySnackBar(langKey.errorTitle.tr, langKey.orderNotCreated.tr);
-      }
-    }).catchError((e){
+    }).catchError((e) {
       print(e);
     });
   }
@@ -204,8 +206,7 @@ class CheckoutViewModel extends GetxController{
   //     ),
   //   );
   // }
-
-  }
+}
 
   // Future<void> makePayment({String? amount}) async {
   //   Future.delayed(Duration(seconds: 2), () async {

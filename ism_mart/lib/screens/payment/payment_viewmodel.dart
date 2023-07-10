@@ -478,17 +478,17 @@ class PaymentViewModel extends GetxController {
     </style>
     
          <script>
-    function myFunction() {
-      var orderid = "${orderId.value}";
-      var amount = " ${amount.value}";
-      document.getElementById("myText").innerHTML = orderid + amount;
-          console.log("hasnai myfunc call");
-    }
+    // function myFunction() {
+    //   var orderid = "${orderId.value}";
+    //   var amount = " ${amount.value}";
+    //   document.getElementById("myText").innerHTML = orderid + amount;
+    //       console.log("hasnai myfunc call");
+    // }
   </script>
         </head>
         <body >
         
-         <h1>"The value for number is: " <span id="myText"></span></h1>
+
          <div id="dvLoader" style="display: none">
       <img style="width: 10%" src="https://mvisa.bankalfalah.com/APGONLINE/HostedCheckoutFiles/Loader.gif" />
     </div>
@@ -510,6 +510,15 @@ class PaymentViewModel extends GetxController {
       <input class="CustomerName allow_alphabet" id="CustomerName" name="TransCustomerName" type="text" placeholder="Customer Name" value="" /><br /><br />
       <input class="CustomerEmailAddress" id="CustomerEmailAddress" name="TransCustomerEmailAddress" type="text" placeholder="Customer Email Address" value="" /><br /><br />
       <input class="CustomerMobileNumber allow_numeric" id="CustomerMobileNumber" name="TransCustomerMobileNumber" type="text" placeholder="Customer Mobile Number" value="" /><br /><br />
+        <div class="col-sm-5 text-sm-center justify-content-center pt-4 pb-4">
+                            <small class="text-sm text-muted">Order number</small>
+                            <h5 class="mb-5">${orderId.value}</h5>
+                            <small class="text-sm text-muted">Payment amount</small>  </div>
+                            <div class="row px-3 justify-content-sm-center">
+                                <h2 class=""><span
+                                        class="text-sm font-weight-bold mr-2">\Rs </span><span
+                                        class="text-danger" id="myText">${amount.value}</span></h2>
+                            </div>
       <button onclick="myFunction()" type="button" class="btn btn-custon-four btn-danger" id="InitiateTrans" name="TransInitiateTrans">Initiate</button><br />
       <label class="errorlbl" id="errorlbl"></label>
     </form>

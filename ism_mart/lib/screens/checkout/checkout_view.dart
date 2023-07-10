@@ -10,7 +10,6 @@ import 'package:ism_mart/screens/payment/payment_view.dart';
 import 'package:ism_mart/widgets/custom_appbar.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
 
-
 class CheckoutView extends StatelessWidget {
   final CheckoutViewModel viewModel = Get.put(CheckoutViewModel());
 
@@ -496,16 +495,16 @@ class CheckoutView extends StatelessWidget {
               num.parse(
                   currencyController.convertCurrency(currentPrice: "1000")!)) {
             viewModel.generateOrderId();
-            Get.to(PaymentView(
-              orderId: viewModel.orderId.value,
-              amount: 5,
-            ));
-            // AppConstant.displaySnackBar(
-            //   langKey.errorTitle.tr,
-            //   langKey.toProceedWithPurchase.tr,
-            // );
-            // //You cannot use Free Shipping Service under Rs1000
-            // return;
+            // Get.to(PaymentView(
+            //   orderId: viewModel.orderId.value,
+            //   amount: 5,
+            // ));
+            AppConstant.displaySnackBar(
+              langKey.errorTitle.tr,
+              langKey.toProceedWithPurchase.tr,
+            );
+            //You cannot use Free Shipping Service under Rs1000
+            return;
           }
           // else if (viewModel.isCardPaymentEnabled.isFalse) {
           //   AppConstant.displaySnackBar(
