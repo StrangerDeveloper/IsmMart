@@ -540,7 +540,7 @@ class PaymentViewModel extends GetxController {
                         <div class="col-sm-7 border-line pb-3">
                             <div class="form-group">
                                 <p class="text-muted text-sm mb-0">Name on the card</p>
-                                <input class="CustomerName allow_alphabet"  id="CustomerName" name="TransCustomerName" type="text" placeholder="Customer Name" value=""
+                                <input class="CustomerName allow_alphabet"  id="CustomerName" name="TransCustomerName" type="text" placeholder="John Doe"  value=""
                                        size="15"/>
                             </div>
                             <div class="form-group">
@@ -554,15 +554,24 @@ id="CardNumber" name="TransCardNumber" type="text"  placeholder="0000 0000 0000 
                                 </div>
                             </div>
                             <div class="form-group">
-                                <p class="text-muted text-sm mb-0">Expiry date</p>
+                                <p class="text-muted text-sm mb-0">Expiry Month</p>
                                 <input class="ExpiryMonth allow_numeric"
-                                id="ExpiryMonth" name="TransExpiryMonth" type="text" placeholder="Expiry Month MM" value=""
+                                id="ExpiryMonth" name="TransExpiryMonth" type="text" placeholder="00" value=""
                                 
                                        size="6"
                                        minlength="5" maxlength="5"
 
+                                // <input class="ExpiryYear allow_numeric"
+                                // id="ExpiryYear" name="TransExpiryYear" type="text" placeholder="Expiry Year 0000" value=""
+                                //  size="6"
+                                //        minlength="5" maxlength="5"
+                         </div>
+                            <div class="form-group">
+                                <p class="text-muted text-sm mb-0">Expiry Year</p>
+                             
+
                                 <input class="ExpiryYear allow_numeric"
-                                id="ExpiryYear" name="TransExpiryYear" type="text" placeholder="Expiry Year 0000" value=""
+                                id="ExpiryYear" name="TransExpiryYear" type="text" placeholder="0000" value=""
                                  size="6"
                                        minlength="5" maxlength="5"
                          </div>
@@ -570,7 +579,7 @@ id="CardNumber" name="TransCardNumber" type="text"  placeholder="0000 0000 0000 
                          <div class="form-group">
                             <p class="text-muted text-sm mb-0">CVV/CVC</p>
                             <input class="CVV allow_numeric"
-                            id="CVV" name="TransCVV" type="text" placeholder="CVV" value=""
+                            id="CVV" name="TransCVV" type="text" placeholder="123" value=""
                                    size="1"
                                    minlength="3" maxlength="3"
                                  />
@@ -615,20 +624,7 @@ id="CustomerMobileNumber" name="TransCustomerMobileNumber" type="text" placehold
 
 
 
-// //form actual
 
-//     <form id="TransactionForm" class="form-container">
-//       <!-- Hosted Fields -->
-//       <input class="CardNumber allow_numeric" id="CardNumber" name="TransCardNumber" type="text" placeholder="Card Number" value="" /><br /><br />
-//       <input class="CVV allow_numeric" id="CVV" name="TransCVV" type="text" placeholder="CVV" value="" /><br /><br />
-//       <input class="ExpiryMonth allow_numeric" id="ExpiryMonth" name="TransExpiryMonth" type="text" placeholder="Expiry Month" value="" /><br /><br />
-//       <input class="ExpiryYear allow_numeric" id="ExpiryYear" name="TransExpiryYear" type="text" placeholder="Expiry Year" value="" /><br /><br />
-//       <input class="CustomerName allow_alphabet" id="CustomerName" name="TransCustomerName" type="text" placeholder="Customer Name" value="" /><br /><br />
-//       <input class="CustomerEmailAddress" id="CustomerEmailAddress" name="TransCustomerEmailAddress" type="text" placeholder="Customer Email Address" value="" /><br /><br />
-//       <input class="CustomerMobileNumber allow_numeric" id="CustomerMobileNumber" name="TransCustomerMobileNumber" type="text" placeholder="Customer Mobile Number" value="" /><br /><br />
-//       <button onclick="myFunction()" type="button"  class="btn btn-custon-four btn-danger" id="InitiateTrans" name="TransInitiateTrans">Initiate</button><br />
-//       <label class="errorlbl" id="errorlbl"></label>
-//     </form>
 
     <div id="dv3DS"></div>
           <script>
@@ -656,3 +652,21 @@ const urlParams = new URLSearchParams(window.location.search);
     ''';
   }
 }
+
+
+
+
+/** //form actual
+
+//     <form id="TransactionForm" class="form-container">
+//       <!-- Hosted Fields -->
+//       <input class="CardNumber allow_numeric" id="CardNumber" name="TransCardNumber" type="text" placeholder="Card Number" value="" /><br /><br />
+//       <input class="CVV allow_numeric" id="CVV" name="TransCVV" type="text" placeholder="CVV" value="" /><br /><br />
+//       <input class="ExpiryMonth allow_numeric" id="ExpiryMonth" name="TransExpiryMonth" type="text" placeholder="Expiry Month" value="" /><br /><br />
+//       <input class="ExpiryYear allow_numeric" id="ExpiryYear" name="TransExpiryYear" type="text" placeholder="Expiry Year" value="" /><br /><br />
+//       <input class="CustomerName allow_alphabet" id="CustomerName" name="TransCustomerName" type="text" placeholder="Customer Name" value="" /><br /><br />
+//       <input class="CustomerEmailAddress" id="CustomerEmailAddress" name="TransCustomerEmailAddress" type="text" placeholder="Customer Email Address" value="" /><br /><br />
+//       <input class="CustomerMobileNumber allow_numeric" id="CustomerMobileNumber" name="TransCustomerMobileNumber" type="text" placeholder="Customer Mobile Number" value="" /><br /><br />
+//       <button onclick="myFunction()" type="button"  class="btn btn-custon-four btn-danger" id="InitiateTrans" name="TransInitiateTrans">Initiate</button><br />
+//       <label class="errorlbl" id="errorlbl"></label>
+//     </form> **/
