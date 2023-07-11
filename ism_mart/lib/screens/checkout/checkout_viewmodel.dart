@@ -18,7 +18,7 @@ class CheckoutViewModel extends GetxController {
   // final paymentType = ''.obs;
 //  final isCardPaymentEnabled = false.obs;
   final paymentMethodId = ''.obs;
-  final shippingCost = 0.obs;
+  final shippingCost = 250.obs;
   final isRedeemedApplied = false.obs;
   final totalDiscount = 0.0.obs;
   final totalAmount = 0.0.obs;
@@ -36,6 +36,8 @@ class CheckoutViewModel extends GetxController {
   void onInit() {
     getDefaultShippingAddress();
     fetchUserCoins();
+    setTotalAmount();
+
     super.onInit();
   }
 

@@ -7,7 +7,6 @@ import '../../controllers/controllers.dart';
 import '../../exports/exports_utils.dart';
 import '../../helper/api_base_helper.dart';
 import '../../helper/global_variables.dart';
-import '../../models/user/country_city_model.dart';
 import '../../models/user/user_model.dart';
 import '../change_address/change_address_viewmodel.dart';
 import '../checkout/checkout_viewmodel.dart';
@@ -55,8 +54,6 @@ class AddUpdateAddressViewModel extends GetxController {
       cityViewModel.authController.selectedCountry.value = userModel.country!;
     }
   }
-
-
 
   void addShippingAddress() {
     if (shippingAddressFormKey.currentState?.validate() ?? false) {
