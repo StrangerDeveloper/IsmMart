@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:ism_mart/screens/payment/payment_viewmodel.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/custom_appbar.dart';
+import 'package:ism_mart/widgets/loader_view.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class PaymentView extends StatelessWidget {
@@ -29,9 +30,15 @@ class PaymentView extends StatelessWidget {
       backgroundColor: Colors.grey[100]!,
       appBar: CustomAppBar(
         title: langKey.checkout.tr,
+        elevation: 0.5,
       ),
-      body: WebViewWidget(
-        controller: viewModel.webViewController,
+      body: Stack(
+        children: [
+          WebViewWidget(
+            controller: viewModel.webViewController,
+          ),
+          LoaderView(),
+        ],
       ),
     );
   }

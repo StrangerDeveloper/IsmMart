@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:ism_mart/helper/constants.dart';
+import 'package:ism_mart/helper/global_variables.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class PaymentViewModel extends GetxController {
@@ -13,34 +14,33 @@ class PaymentViewModel extends GetxController {
   void onInit() {
     super.onInit();
     webViewController = WebViewController();
-
-    webViewController.reload();
-    Future.delayed(
-        Duration(milliseconds: 500),
-        () => webViewController
-          ..enableZoom(true)
-          ..setJavaScriptMode(JavaScriptMode.unrestricted)
-          // ..setBackgroundColor(kPrimaryColor)
-          //..setNavigationDelegate(delegate)
-          ..addJavaScriptChannel(
-            'Toaster',
-            onMessageReceived: (JavaScriptMessage message) {
-              AppConstant.displaySnackBar("sucess", message);
-            },
-          )
-          ..loadHtmlString(paymentHtml()));
-
-    print("on ready hasnain $orderId $amount");
   }
 
   @override
   void onReady() {
     super.onReady();
+
+    //webViewController.reload();
+    webViewController
+      ..enableZoom(true)
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      // ..setBackgroundColor(kPrimaryColor)
+      ..setNavigationDelegate(NavigationDelegate(onPageStarted: (url) {
+        GlobalVariable.showLoader(true);
+      }, onPageFinished: (url) {
+        GlobalVariable.showLoader(false);
+      }))
+      ..addJavaScriptChannel(
+        'Toaster',
+        onMessageReceived: (JavaScriptMessage message) {
+          AppConstant.displaySnackBar("sucess", message);
+        },
+      )
+      ..loadHtmlString(paymentHtml());
   }
 
   @override
   void onClose() {
-    webViewController.reload();
     webViewController.clearCache();
     webViewController.goBack();
     super.onClose();
@@ -50,8 +50,8 @@ class PaymentViewModel extends GetxController {
     return '''
 <html>
   <head>
-      <meta name="viewport" content="width=device-width, initial-scale=0.8">
-
+      <meta name="viewport" content="width=device-width, initial-scale=0.9">
+      <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
       <script src="https://merchants.bankalfalah.com/merchantportalprelive/HostedCheckoutFiles/HostedCheckoutPayments.js"></script>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -226,7 +226,7 @@ class PaymentViewModel extends GetxController {
                                       <p class="text-muted text-sm mb-0">Card Number</p>
                                       <div class="row px-3">
                                           <input  class="CardNumber allow_numeric" id="CardNumber" name="TransCardNumber"
-                                                  type="number"
+                                                  type="text"
                                               placeholder="0000 0000 0000 0000" size="18"
                                               minlength="19" maxlength="19">
 
@@ -275,6 +275,7 @@ class PaymentViewModel extends GetxController {
                                   </div>
 
                               </div>
+                              <label class="errorlbl" id="errorlbl"></label>
                               <div class="col-sm-5 text-sm-center justify-content-center pt-4 pb-4">
                                   <small class="text-sm text-muted">Order number</small>
                                   <h5 class="mb-5">${orderId.value}</h5>
@@ -285,8 +286,10 @@ class PaymentViewModel extends GetxController {
                                               class="text-danger">${amount.value}</span></h2>
                                   </div>
                                   <button type="button" 
-                                  name="TransInitiateTrans" class="btn btn-red text-center mt-4">PAY</button>
+                                  name="TransInitiateTrans" id="InitiateTrans" class="btn btn-red text-center mt-6">PAY</button>
                               </div>
+                              
+                              
                           </div>
                       </div>
                   </div>
@@ -303,23 +306,23 @@ class PaymentViewModel extends GetxController {
       //const urlParams = new URLSearchParams(window.location.search);
       const orderId = ${orderId.value}; //urlParams.get('orderId');
       const amount =   ${amount.value};//  urlParams.get('amount');
-      console.log(orderId, amount);
+      //console.log(orderId, amount);
       
-        \$(document).ready(function () {
-                //Pass Order Id and Transaction Amount below
+     
+       \$(document).ready(function(){
+              //Pass Order Id and Transaction Amount below
+              \$("#InitiateTrans").click(function(){
                 var StoreId = '030848';
                 var TransType = '3';
                 var OrderId = orderId;
-                var Amount = amount;
+                var Amount = '5';
                 InitializeValues(StoreId, TransType, OrderId, Amount);
-            });
-      
-      
-          \$(document).ready(function(){
+              
+              });
+       
               //For Card Number formatted input
-              var cardNum = document.getElementById('CardNumber');
-              cardNum.onkeyup = function (e) {
-                  if (this.value == this.lastValue) return;
+               \$("#CardNumber").keyup(function(){
+               if (this.value == this.lastValue) return;
                   var caretPosition = this.selectionStart;
                   var sanitizedValue = this.value.replace(/[^0-9]/gi, '');
                   var parts = [];
@@ -335,10 +338,11 @@ class PaymentViewModel extends GetxController {
                   caretPosition += Math.floor(caretPosition / 4);
                   this.value = this.lastValue = parts.join(' ');
                   this.selectionStart = this.selectionEnd = caretPosition;
-              }
+                    });
+               
+               
           });
-          
-      </script>
+          </script>
 
   </body>
 </html>

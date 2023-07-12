@@ -74,7 +74,6 @@ class CheckoutViewModel extends GetxController {
     double netTotal =
         (cartViewModel.totalCartAmount.value + shippingCost.value) -
             totalDiscount.value;
-
     totalAmount.value = netTotal;
   }
 

@@ -520,7 +520,7 @@ class CheckoutView extends StatelessWidget {
             viewModel.generateOrderId();
             Get.to(PaymentView(
               orderId: viewModel.orderId.value,
-              amount: cartViewModel.totalCartAmount.value,
+              amount: viewModel.totalAmount.value,
               currencyCode: currencyController.currency.value,
             ));
           }

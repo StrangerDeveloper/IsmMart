@@ -8,10 +8,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
   final List<Widget>? action;
   final Widget? leading;
-  final double height = 55;
+  final double? height;
   final Widget? searchBar;
   final bool? centerTitle;
-  final double? leadingWidth;
+  final double? leadingWidth, elevation;
   final void Function()? onTap;
 
   CustomAppBar({
@@ -19,9 +19,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.menuItem,
     this.action,
     this.leading,
+    this.height = 55,
     this.searchBar,
     this.centerTitle,
     this.leadingWidth,
+    this.elevation = 0,
     this.onTap,
   });
 
@@ -29,7 +31,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       leadingWidth: leadingWidth,
-      elevation: 0,
+      elevation: elevation,
       centerTitle: centerTitle,
       backgroundColor: kAppBarColor,
       actions: action,
@@ -56,5 +58,5 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(height);
+  Size get preferredSize => Size.fromHeight(height!);
 }
