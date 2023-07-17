@@ -36,7 +36,7 @@ class PaymentViewModel extends GetxController {
           AppConstant.displaySnackBar("sucess", message);
         },
       )
-      ..loadHtmlString(paymentHtml());
+      ..loadHtmlString(paymentHtml())..reload();
   }
 
   @override

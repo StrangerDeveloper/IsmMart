@@ -21,7 +21,7 @@ class PaymentView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //viewModel.webViewController.reload();
+    viewModel.webViewController.reload();
     viewModel.orderId(orderId);
     viewModel.amount(amount);
     viewModel.currencyCode(currencyCode);
