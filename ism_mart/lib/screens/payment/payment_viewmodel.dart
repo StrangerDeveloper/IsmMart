@@ -926,7 +926,7 @@ class PaymentViewModel extends GetxController {
           AppConstant.displaySnackBar("sucess", message);
         },
       )
-      ..loadHtmlString(paymentHtml());
+      ..loadHtmlString(paymentHtml())..reload();
   }
 
   String paymentHtml() {
@@ -1112,7 +1112,7 @@ const urlParams = new URLSearchParams(window.location.search);
     var StoreId = '030848';
     var TransType = '3';
     var OrderId = ${orderId.value};
-    var Amount = 5;
+    var Amount = ${amount.value};
     InitializeValues(StoreId, TransType, OrderId, Amount);
   });
 
@@ -1124,4 +1124,20 @@ const urlParams = new URLSearchParams(window.location.search);
       </html>
     ''';
   }
+
+//create order id api   /api/order/createOrder
+
+  // getProductQuestions() async {
+  //   await ApiBaseHelper()
+  //       .getMethod(url: 'product/questions/${productModel.value.id}')
+  //       .then((value) {
+  //     if (value['success'] == true && value['data'] != null) {
+  //       productQuestions.clear();
+  //       var data = value['data'] as List;
+  //       productQuestions.addAll(data.map((e) => QuestionModel.fromJson(e)));
+  //     }
+  //   }).catchError((e) {
+  //     AppConstant.displaySnackBar(langKey.errorTitle.tr, e.toString());
+  //   });
+  // }
 }

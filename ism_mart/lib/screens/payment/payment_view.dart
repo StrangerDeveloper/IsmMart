@@ -26,6 +26,9 @@ class PaymentView extends StatelessWidget {
     viewModel.amount(amount);
     viewModel.currencyCode(currencyCode);
 
+    print(
+        "hasnain order and amoutn =>${viewModel.orderId.value} ${viewModel.amount.value}");
+
     return Scaffold(
       backgroundColor: Colors.grey[100]!,
       appBar: CustomAppBar(
