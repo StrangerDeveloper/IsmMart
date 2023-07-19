@@ -59,6 +59,7 @@ class CheckoutViewModel extends GetxController {
         noDefaultAddress.value = false;
       }
     }).catchError((e) {
+      GlobalVariable.showLoader.value = false;
       AppConstant.displaySnackBar(langKey.errorTitle.tr, e);
     });
   }
@@ -124,7 +125,7 @@ class CheckoutViewModel extends GetxController {
   }
 
   createOrder({paymentMethod = "Card"}) async {
-    GlobalVariable.showLoader.value = true;
+    //   GlobalVariable.showLoader.value = true;
     JSON data = {
       "paymentMethod": paymentMethod,
       "shippingPrice": shippingCost.value,
@@ -138,7 +139,7 @@ class CheckoutViewModel extends GetxController {
             url: 'order/createOrder', body: data, withAuthorization: true)
         .then((response) {
       if (response['success'] == true && response['data'] != null) {
-        GlobalVariable.showLoader.value = false;
+        //  GlobalVariable.showLoader.value = false;
         orderId.value = response['data']['orderId'];
         print(
             "hasnain order id order Id=>${orderId.value}  ${totalAmount.value}");
@@ -146,10 +147,10 @@ class CheckoutViewModel extends GetxController {
         LocalStorageHelper.clearAllCart();
         Get.back();
       } else if (response['data'] == null) {
-        GlobalVariable.showLoader.value = false;
+        //  GlobalVariable.showLoader.value = false;
         AppConstant.displaySnackBar(langKey.errorTitle.tr, response['message']);
       } else {
-        GlobalVariable.showLoader.value = false;
+        //  GlobalVariable.showLoader.value = false;
         print("hasnain order id res=> ${response['data']}");
         AppConstant.displaySnackBar(
             langKey.errorTitle.tr, langKey.orderNotCreated.tr);

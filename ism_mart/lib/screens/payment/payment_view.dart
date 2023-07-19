@@ -22,12 +22,9 @@ class PaymentView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     viewModel.webViewController.reload();
-    viewModel.orderId(orderId);
-    viewModel.amount(amount);
+    // viewModel.orderId(orderId);
+    // viewModel.amount(amount);
     viewModel.currencyCode(currencyCode);
-
-    print(
-        "hasnain order and amoutn =>${viewModel.orderId.value} ${viewModel.amount.value}");
 
     return Scaffold(
       backgroundColor: Colors.grey[100]!,

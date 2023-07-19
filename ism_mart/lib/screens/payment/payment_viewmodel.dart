@@ -898,7 +898,10 @@ import 'package:get/get.dart';
 import 'package:ism_mart/helper/constants.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+import '../checkout/checkout_viewmodel.dart';
+
 class PaymentViewModel extends GetxController {
+  final CheckoutViewModel viewModel = Get.put(CheckoutViewModel());
   late WebViewController webViewController;
 
   RxInt orderId = 0.obs;
@@ -907,6 +910,9 @@ class PaymentViewModel extends GetxController {
 
   @override
   void onInit() {
+    orderId.value = viewModel.orderId.value;
+    amount.value = viewModel.totalAmount.value;
+
     super.onInit();
     webViewController = WebViewController();
   }
@@ -915,18 +921,21 @@ class PaymentViewModel extends GetxController {
   void onReady() {
     // TODO: implement onReady
     super.onReady();
-    webViewController
-      ..enableZoom(true)
-      ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      // ..setBackgroundColor(kPrimaryColor)
-      //..setNavigationDelegate(delegate)
-      ..addJavaScriptChannel(
-        'Toaster',
-        onMessageReceived: (JavaScriptMessage message) {
-          AppConstant.displaySnackBar("sucess", message);
-        },
-      )
-      ..loadHtmlString(paymentHtml())..reload();
+    webViewController.reload();
+    Future.delayed(
+        Duration(seconds: 1),
+        () => webViewController
+          ..enableZoom(true)
+          ..setJavaScriptMode(JavaScriptMode.unrestricted)
+          // ..setBackgroundColor(kPrimaryColor)
+          //..setNavigationDelegate(delegate)
+          ..addJavaScriptChannel(
+            'Toaster',
+            onMessageReceived: (JavaScriptMessage message) {
+              AppConstant.displaySnackBar("sucess", message);
+            },
+          )
+          ..loadHtmlString(paymentHtml()));
   }
 
   String paymentHtml() {
