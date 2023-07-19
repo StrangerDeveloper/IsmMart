@@ -8,9 +8,6 @@ import 'package:ism_mart/screens/cart/cart_viewmodel.dart';
 import 'package:ism_mart/screens/checkout/checkout_viewmodel.dart';
 import 'package:ism_mart/screens/payment/payment_view.dart';
 import 'package:ism_mart/widgets/custom_appbar.dart';
-import 'package:ism_mart/widgets/loader_view.dart';
-
-import '../payment/payment_viewmodel.dart';
 
 class CheckoutView extends StatelessWidget {
   final CheckoutViewModel viewModel = Get.put(CheckoutViewModel());
@@ -67,7 +64,7 @@ class CheckoutView extends StatelessWidget {
                 ],
               ),
             ),
-            LoaderView(),
+            // LoaderView(),
           ],
         ),
       ),
