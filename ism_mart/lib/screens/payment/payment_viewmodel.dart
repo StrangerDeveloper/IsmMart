@@ -922,20 +922,18 @@ class PaymentViewModel extends GetxController {
     // TODO: implement onReady
     super.onReady();
     webViewController.reload();
-    Future.delayed(
-        Duration(seconds: 1),
-        () => webViewController
-          ..enableZoom(true)
-          ..setJavaScriptMode(JavaScriptMode.unrestricted)
-          // ..setBackgroundColor(kPrimaryColor)
-          //..setNavigationDelegate(delegate)
-          ..addJavaScriptChannel(
-            'Toaster',
-            onMessageReceived: (JavaScriptMessage message) {
-              AppConstant.displaySnackBar("sucess", message);
-            },
-          )
-          ..loadHtmlString(paymentHtml()));
+    webViewController
+      ..enableZoom(true)
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      // ..setBackgroundColor(kPrimaryColor)
+      //..setNavigationDelegate(delegate)
+      ..addJavaScriptChannel(
+        'Toaster',
+        onMessageReceived: (JavaScriptMessage message) {
+          AppConstant.displaySnackBar("sucess", message);
+        },
+      )
+      ..loadHtmlString(paymentHtml());
   }
 
   String paymentHtml() {

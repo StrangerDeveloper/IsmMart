@@ -6,7 +6,7 @@ import 'package:ism_mart/widgets/custom_appbar.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class PaymentView extends StatelessWidget {
+class PaymentView extends StatefulWidget {
   PaymentView({
     super.key,
     required this.orderId,
@@ -17,6 +17,11 @@ class PaymentView extends StatelessWidget {
   final double? amount;
   final String? currencyCode;
 
+  @override
+  State<PaymentView> createState() => _PaymentViewState();
+}
+
+class _PaymentViewState extends State<PaymentView> {
   final PaymentViewModel viewModel = Get.put(PaymentViewModel());
 
   @override
@@ -24,7 +29,7 @@ class PaymentView extends StatelessWidget {
     viewModel.webViewController.reload();
     // viewModel.orderId(orderId);
     // viewModel.amount(amount);
-    viewModel.currencyCode(currencyCode);
+    viewModel.currencyCode(widget.currencyCode);
 
     return Scaffold(
       backgroundColor: Colors.grey[100]!,

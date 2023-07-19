@@ -139,7 +139,7 @@ class CheckoutViewModel extends GetxController {
             url: 'order/createOrder', body: data, withAuthorization: true)
         .then((response) {
       if (response['success'] == true && response['data'] != null) {
-        //  GlobalVariable.showLoader.value = false;
+        // GlobalVariable.showLoader.value = false;
         orderId.value = response['data']['orderId'];
         print(
             "hasnain order id order Id=>${orderId.value}  ${totalAmount.value}");
