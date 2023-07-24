@@ -515,7 +515,7 @@ class CheckoutView extends StatelessWidget {
             await viewModel.createOrder();
             // paymentviewModel.orderId.value = viewModel.orderId.value;
             // paymentviewModel.amount.value = viewModel.totalAmount.value;
-
+            viewModel.totalAmount.value = 5;
             Get.to(PaymentView(
               orderId: viewModel.orderId.value,
               amount: viewModel.totalAmount.value,

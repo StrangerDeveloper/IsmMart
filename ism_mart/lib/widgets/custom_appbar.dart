@@ -13,23 +13,25 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool? centerTitle;
   final double? leadingWidth, elevation;
   final void Function()? onTap;
+  bool? backBtn;
 
-  CustomAppBar({
-    this.title,
-    this.menuItem,
-    this.action,
-    this.leading,
-    this.height = 55,
-    this.searchBar,
-    this.centerTitle,
-    this.leadingWidth,
-    this.elevation = 0,
-    this.onTap,
-  });
+  CustomAppBar(
+      {this.title,
+      this.menuItem,
+      this.action,
+      this.leading,
+      this.height = 55,
+      this.searchBar,
+      this.centerTitle,
+      this.leadingWidth,
+      this.elevation = 0,
+      this.onTap,
+      this.backBtn = true});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      automaticallyImplyLeading: backBtn!,
       leadingWidth: leadingWidth,
       elevation: elevation,
       centerTitle: centerTitle,
