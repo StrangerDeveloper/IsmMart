@@ -27,6 +27,9 @@ class Urls {
   //TopVendorsViewModel
   static String getTopVendors = "getTopVendors?limit=";
 
+  //vendor order update status call at paymentviewModel
+
+  static String updateOrderStatus = "order/updateOrderStatus";
   //allProducts for searc screen
   static String allProducts = "products/all";
 
