@@ -13,7 +13,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool? centerTitle;
   final double? leadingWidth, elevation;
   final void Function()? onTap;
-  bool? backBtn;
+  final bool? backBtn;
 
   CustomAppBar(
       {this.title,
