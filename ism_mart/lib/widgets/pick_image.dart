@@ -1,13 +1,16 @@
 import 'dart:async';
 import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ism_mart/helper/constants.dart';
-import 'package:ism_mart/widgets/single_order_details_ui.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/widgets/single_order_details_ui.dart';
+import 'package:path_provider/path_provider.dart' as path_provider;
 
 class PickImage {
   File? selectedImage;
@@ -82,8 +85,7 @@ class PickImage {
     XFile? pickedFile =
         await ImagePicker().pickImage(source: ImageSource.camera);
     if (pickedFile != null) {
-      File file = File(pickedFile.path);
-      return await compressImage(file);
+      return await compressSingleImage(pickedFile);
     }
     return null;
   }
@@ -91,22 +93,33 @@ class PickImage {
   Future<File?> imgFromGallery() async {
     XFile? pickedFile =
         await ImagePicker().pickImage(source: ImageSource.gallery);
+
     if (pickedFile != null) {
-      File file = File(pickedFile.path);
-      return await compressImage(file);
+      return await compressSingleImage(pickedFile);
     }
     return null;
   }
 
-  Future<File?> compressImage(File image) async {
-    File? file = await AppConstant.compressImage(image.path,
-        fileLength: await image.length());
-    var lengthInMb = await file.lengthSync() * 0.000001;
-    if (lengthInMb > 2) {
+  Future<File?> compressSingleImage(XFile image) async {
+    String timeStamp = DateTime.now().millisecondsSinceEpoch.toString();
+    final dir = await path_provider.getTemporaryDirectory();
+    final targetPath = '${dir.absolute.path}/$timeStamp.jpg';
+
+    final result =
+        await FlutterImageCompress.compressAndGetFile(image.path, targetPath,
+            minHeight: 1080, //you can play with this to reduce siz
+            minWidth: 1080,
+            quality: 100);
+
+    double length = await checkImageSize(result!);
+
+    if (length > 2) {
       AppConstant.displaySnackBar(
           langKey.errorTitle.tr, langKey.imageSizeDesc.tr + ' 2MB');
       return null;
     }
+
+    File file = File(result.path);
     return file;
   }
 
@@ -185,25 +198,34 @@ class PickImage {
     List<XFile> pickedFile = await ImagePicker().pickMultiImage();
 
     if (pickedFile.isNotEmpty) {
-      List<File> tempImage = pickedFile.map((e) => File(e.path)).toList();
-      return await compressMultipleImage(tempImage);
+      return await compressMultipleImage(pickedFile);
     } else {
       return [];
     }
   }
 
-  Future<List<File>> compressMultipleImage(List<File> images) async {
-    print('compressMultipleImage');
+  Future<List<File>> compressMultipleImage(List<XFile> images) async {
     List<File> tempList = <File>[];
     if (images.isNotEmpty) {
       for (int i = 0; i < images.length; i++) {
-        File? file = await AppConstant.compressImage(images[i].path,
-            fileLength: await images[i].length());
-        var lengthInMb = await file.lengthSync() * 0.000001;
-        if (lengthInMb > 2) {
+        String timeStamp = DateTime.now().millisecondsSinceEpoch.toString();
+        final dir = await path_provider.getTemporaryDirectory();
+        final targetPath = '${dir.absolute.path}/$timeStamp.jpg';
+
+        final result = await FlutterImageCompress.compressAndGetFile(
+          images[i].path, targetPath,
+          minHeight: 1080, //you can play with this to reduce siz
+          minWidth: 1080,
+          quality: 100,
+        );
+
+        double length = await checkImageSize(result!);
+
+        if (length > 2) {
           AppConstant.displaySnackBar(
               langKey.errorTitle.tr, langKey.imageSizeDesc.tr + ' 2MB');
         } else {
+          File file = File(result.path);
           tempList.add(file);
         }
       }
@@ -212,5 +234,13 @@ class PickImage {
     } else {
       return [];
     }
+  }
+
+  Future<double> checkImageSize(XFile file) async {
+    final data = await file.readAsBytes();
+    final newKb = data.length / 1024;
+    final newMb = newKb / 1024;
+    print('IMAGE SIZE : $newMb');
+    return newMb;
   }
 }
