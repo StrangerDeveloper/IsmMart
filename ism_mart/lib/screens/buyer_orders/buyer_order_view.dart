@@ -194,10 +194,10 @@ class BuyerOrderView extends StatelessWidget {
                   child: ListView.builder(
                     physics: BouncingScrollPhysics(),
                     controller: viewModel.scrollController,
-                    itemCount: viewModel.ordersList.length,
+                    itemCount: viewModel.statusAcceptedList.length,
                     itemBuilder: (BuildContext, index) {
                       return SingleRecentOrderItems(
-                        orderModel: viewModel.ordersList[index],
+                        orderModel: viewModel.statusAcceptedList[index],
                         calledForBuyerOrderDetails: true,
                       );
                     },

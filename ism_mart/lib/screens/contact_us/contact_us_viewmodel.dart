@@ -10,6 +10,8 @@ import 'package:ism_mart/widgets/getx_helper.dart';
 class ContactUsViewModel extends GetxController {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController subjectController = TextEditingController();
   TextEditingController storeDescController = TextEditingController();
@@ -28,7 +30,7 @@ class ContactUsViewModel extends GetxController {
       {
         'icon': Icons.email_outlined,
         'title': langKey.email.tr,
-        'description': 'businesses@ismmart.com\n'
+        'description': 'support@ismmart.com\n'
       },
       {
         'icon': IconlyBold.calling,
@@ -52,10 +54,13 @@ class ContactUsViewModel extends GetxController {
     GlobalVariable.internetErr(false);
     if (formKey.currentState?.validate() ?? false) {
       Map<String, dynamic> param = {
-        "name": firstNameController.text,
+        "firstName": firstNameController.text,
+        "lastName": lastNameController.text,
         "email": emailController.text,
+        "phone": phoneController.text,
         "subject": subjectController.text,
-        "message": storeDescController.text
+        "message": storeDescController.text,
+        "website": "support@ismmart.com"
       };
 
       GlobalVariable.showLoader.value = true;
