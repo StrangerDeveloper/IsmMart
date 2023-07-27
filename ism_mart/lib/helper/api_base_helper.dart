@@ -9,7 +9,6 @@ import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/controllers/controllers.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/getx_helper.dart';
-
 import 'constants.dart';
 
 class ApiBaseHelper {
@@ -39,10 +38,12 @@ class ApiBaseHelper {
           .post(urlValue, headers: header, body: body)
           .timeout(Duration(seconds: 30));
 
-      print('*********************** Response ********************************');
+      print(
+          '*********************** Response ********************************');
       print(urlValue);
       print(response.body);
-      AppConstant.colorConsole('****************************************************************************************');
+      AppConstant.colorConsole(
+          '****************************************************************************************');
 
       Map<String, dynamic> parsedJSON = jsonDecode(response.body);
       return parsedJSON;
@@ -88,10 +89,12 @@ class ApiBaseHelper {
           .put(urlValue, headers: header, body: body)
           .timeout(Duration(seconds: 30));
 
-      print('*********************** Response ********************************');
+      print(
+          '*********************** Response ********************************');
       print(urlValue);
       print(response.body);
-      AppConstant.colorConsole('****************************************************************************************');
+      AppConstant.colorConsole(
+          '****************************************************************************************');
 
       Map<String, dynamic> parsedJSON = jsonDecode(response.body);
       return parsedJSON;
@@ -133,15 +136,16 @@ class ApiBaseHelper {
       print(urlValue);
       print(body);
 
-
       http.Response response = await http
           .patch(urlValue, headers: header, body: body)
           .timeout(Duration(seconds: 30));
 
-      print('*********************** Response ********************************');
+      print(
+          '*********************** Response ********************************');
       print(urlValue);
       print(response.body);
-      AppConstant.colorConsole('****************************************************************************************');
+      AppConstant.colorConsole(
+          '****************************************************************************************');
 
       Map<String, dynamic> parsedJSON = jsonDecode(response.body);
       return parsedJSON;
@@ -185,10 +189,12 @@ class ApiBaseHelper {
           .get(urlValue, headers: header)
           .timeout(Duration(seconds: 50));
 
-      print('*********************** Response ********************************');
+      print(
+          '*********************** Response ********************************');
       print(urlValue);
       print(response.body);
-      AppConstant.colorConsole('****************************************************************************************');
+      AppConstant.colorConsole(
+          '****************************************************************************************');
 
       Map<String, dynamic> parsedJSON = jsonDecode(response.body);
       return parsedJSON;
@@ -224,15 +230,16 @@ class ApiBaseHelper {
       print('*********************** Request ********************************');
       print(urlValue);
 
-
       http.Response response = await http
           .delete(urlValue, headers: header)
           .timeout(Duration(seconds: 50));
 
-      print('*********************** Response ********************************');
+      print(
+          '*********************** Response ********************************');
       print(urlValue);
       print(response.body);
-      AppConstant.colorConsole('****************************************************************************************');
+      AppConstant.colorConsole(
+          '****************************************************************************************');
       Map<String, dynamic> parsedJSON = jsonDecode(response.body);
       return parsedJSON;
     } on SocketException {
@@ -274,12 +281,15 @@ class ApiBaseHelper {
       request.fields.addAll(fields);
       request.files.addAll(files);
       http.StreamedResponse response = await request.send();
-      Map<String, dynamic> parsedJson = await jsonDecode(await response.stream.bytesToString());
+      Map<String, dynamic> parsedJson =
+          await jsonDecode(await response.stream.bytesToString());
 
-      print('*********************** Response ********************************');
+      print(
+          '*********************** Response ********************************');
       print(urlValue);
       print(parsedJson.toString());
-      AppConstant.colorConsole('****************************************************************************************');
+      AppConstant.colorConsole(
+          '****************************************************************************************');
       return parsedJson;
     } on SocketException catch (_) {
       GlobalVariable.showLoader.value = false;
@@ -326,10 +336,12 @@ class ApiBaseHelper {
       Map<String, dynamic> parsedJson =
           await jsonDecode(await response.stream.bytesToString());
 
-      print('*********************** Response ********************************');
+      print(
+          '*********************** Response ********************************');
       print(urlValue);
       print(parsedJson.toString());
-      AppConstant.colorConsole('****************************************************************************************');
+      AppConstant.colorConsole(
+          '****************************************************************************************');
       return parsedJson;
     } on SocketException catch (_) {
       GlobalVariable.showLoader.value = false;

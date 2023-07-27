@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/exports/export_api_helper.dart';
@@ -27,10 +25,10 @@ class CheckoutViewModel extends GetxController {
 
   CartViewModel cartViewModel = Get.find();
   RxInt orderId = 0.obs;
-  generateOrderId() {
-    Random random = Random();
-    orderId.value = random.nextInt(100000);
-  }
+  // generateOrderId() {
+  //   Random random = Random();
+  //   orderId.value = random.nextInt(100000);
+  // }
 
   @override
   void onInit() {
@@ -47,7 +45,7 @@ class CheckoutViewModel extends GetxController {
   }
 
   getDefaultShippingAddress() async {
-    GlobalVariable.showLoader.value = true;
+    // GlobalVariable.showLoader.value = true;
     await ApiBaseHelper()
         .getMethod(
       url: "user/getDefaultShippingDetails",
@@ -55,12 +53,13 @@ class CheckoutViewModel extends GetxController {
       withBearer: true,
     )
         .then((response) async {
-      GlobalVariable.showLoader.value = false;
+      //  GlobalVariable.showLoader.value = false;
       if (response['success'] == true && response['data'] != null) {
         userModel.value = UserModel.fromJson(response['data']);
         noDefaultAddress.value = false;
       }
     }).catchError((e) {
+      //  GlobalVariable.showLoader.value = false;
       AppConstant.displaySnackBar(langKey.errorTitle.tr, e);
     });
   }
@@ -125,7 +124,7 @@ class CheckoutViewModel extends GetxController {
     });
   }
 
-  createOrder({paymentMethod = "COD"}) async {
+  createOrder({paymentMethod = "Card"}) async {
     GlobalVariable.showLoader.value = true;
     JSON data = {
       "paymentMethod": paymentMethod,
@@ -139,21 +138,74 @@ class CheckoutViewModel extends GetxController {
         .postMethod(
             url: 'order/createOrder', body: data, withAuthorization: true)
         .then((response) {
-      GlobalVariable.showLoader.value = true;
       if (response['success'] == true && response['data'] != null) {
+        GlobalVariable.showLoader.value = false;
+        orderId.value = response['data']['orderId'];
+        print(
+            "hasnain order id order Id=>${orderId.value}  ${totalAmount.value}");
         AppConstant.displaySnackBar(langKey.success.tr, response['message']);
         LocalStorageHelper.clearAllCart();
         Get.back();
       } else if (response['data'] == null) {
+        GlobalVariable.showLoader.value = false;
         AppConstant.displaySnackBar(langKey.errorTitle.tr, response['message']);
       } else {
+        GlobalVariable.showLoader.value = false;
+        print("hasnain order id res=> ${response['data']}");
         AppConstant.displaySnackBar(
             langKey.errorTitle.tr, langKey.orderNotCreated.tr);
       }
     }).catchError((e) {
       print(e);
     });
+
+//order id
   }
+
+  // void orderIdGenerate() async {
+  //   var headers = {
+  //     'authorization':
+  //         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjYsImlhbSI6InZlbmRvciIsInZpZCI6NCwiaWF0IjoxNjg1NDM0MzUwMjI4LCJleHAiOjE2ODU2MDcxNTAyMjh9.BxevcvNZedyC4zazgo9P0vp55CLs6tPpliX2Dzro6jI',
+  //     'Content-Type': 'application/json',
+  //     'Cookie':
+  //         'XSRF-token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjM1NDQsImlhbSI6InZlbmRvciIsInZpZCI6MzUzNywiaWF0IjoxNjg5NjY4NjA2MjY4LCJleHAiOjE2ODk4NDE0MDYyNjh9.BOXSNzghWe8N6BPjqSHs-ISjDMHq9c3zUnVKTHrv7I4'
+  //   };
+  //   var request = http.Request(
+  //       'POST', Uri.parse('https://ismmart-api.com/api/order/createOrder'));
+  //   request.body = json.encode({
+  //     "paymentMethod": "Card",
+  //     "shippingPrice": 250,
+  //     "shippingDetailsId": 401,
+  //     "redeemCoins": false,
+  //     "exchangeRate": 1,
+  //     "cartItems": [
+  //       {
+  //         "productId": 14,
+  //         "quantity": 2,
+  //         "features": [],
+  //         "Product": {
+  //           "name": "Nivea Men Scrub",
+  //           "thumbnail":
+  //               "https://ismmart-bucket.s3.amazonaws.com/file-1671425168354.PNG",
+  //           "vendorId": 4,
+  //           "discountPrice": 376,
+  //           "totalPrice": 752
+  //         }
+  //       }
+  //     ]
+  //   });
+  //   request.headers.addAll(headers);
+
+  //   http.StreamedResponse response = await request.send();
+  //   var data = await http.Response.fromStream(response);
+  //   var res = jsonDecode(data.body);
+  //   print("hasnain order id => $res");
+  //   if (response.statusCode == 200) {
+  //     print(await response.stream.bytesToString());
+  //   } else {
+  //     print(response.reasonPhrase);
+  //   }
+  // }
 
   // void showSuccessDialog({OrderResponse? response}) {
   //   Get.defaultDialog(

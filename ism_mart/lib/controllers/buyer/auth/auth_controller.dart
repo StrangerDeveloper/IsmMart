@@ -83,7 +83,7 @@ class AuthController extends GetxController {
   var isLoading = false.obs;
 
   resendEmailVerificationLink() async {
-    isLoading(false);
+     isLoading(false);
     String email = emailController.text;
 
     await authProvider
@@ -341,7 +341,7 @@ class AuthController extends GetxController {
     });
   }
 
-  resetValues(){
+  resetValues() {
     selectedCountry.value = CountryModel(name: "Select Country", id: 0);
     selectedCity.value = CountryModel(name: "Select City", id: 0);
   }

@@ -8,12 +8,12 @@ import 'package:ism_mart/screens/cart/cart_viewmodel.dart';
 import 'package:ism_mart/screens/checkout/checkout_viewmodel.dart';
 import 'package:ism_mart/screens/payment/payment_view.dart';
 import 'package:ism_mart/widgets/custom_appbar.dart';
-import 'package:ism_mart/widgets/loader_view.dart';
 
 class CheckoutView extends StatelessWidget {
   final CheckoutViewModel viewModel = Get.put(CheckoutViewModel());
 
   final CartViewModel cartViewModel = Get.find();
+  // final PaymentViewModel paymentviewModel = Get.put(PaymentViewModel());
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +64,7 @@ class CheckoutView extends StatelessWidget {
                 ],
               ),
             ),
-            LoaderView(),
+            // LoaderView(),
           ],
         ),
       ),
@@ -490,11 +490,10 @@ class CheckoutView extends StatelessWidget {
         width: 280,
         height: 50,
         title: langKey.confirmOrder.tr,
-        onPressed: () {
+        onPressed: () async {
           if (cartViewModel.totalCartAmount.value <=
               num.parse(
                   currencyController.convertCurrency(currentPrice: "1000")!)) {
-            viewModel.generateOrderId();
             // Get.to(PaymentView(
             //   orderId: viewModel.orderId.value,
             //   amount: 5,
@@ -513,11 +512,10 @@ class CheckoutView extends StatelessWidget {
           // }
 
           else {
-            // viewModel.makePayment(
-            //     amount: viewModel.totalAmount.value
-            //         .toString());
-
-            viewModel.generateOrderId();
+            await viewModel.createOrder();
+            // paymentviewModel.orderId.value = viewModel.orderId.value;
+            // paymentviewModel.amount.value = viewModel.totalAmount.value;
+            viewModel.totalAmount.value = 5;
             Get.to(PaymentView(
               orderId: viewModel.orderId.value,
               amount: viewModel.totalAmount.value,

@@ -12,6 +12,7 @@ class BuyerOrderViewModel extends GetxController {
   int pageNo = 0;
   RxBool showLoader = false.obs;
   List<OrderModel> ordersList = <OrderModel>[].obs;
+  List<OrderModel> statusAcceptedList = <OrderModel>[].obs;
   Rx<OrderStats> statsModel = OrderStats().obs;
 
   @override
@@ -58,13 +59,23 @@ class BuyerOrderViewModel extends GetxController {
           .then((parsedJson) {
         if (parsedJson['success'] == true && parsedJson['data'] != null) {
           var data = parsedJson['data'] as List;
+          //  print("hasnain ${data}");
           if (data.isEmpty) {
             scrollController.dispose();
           }
+
           ordersList.addAll(data.map((e) => OrderModel.fromJson(e)));
+
+          for (var i in ordersList) {
+            if (i.status == 'accepted') {
+              print("hasnain ${i.status}");
+              statusAcceptedList.add(i);
+            }
+          }
           showLoader.value = false;
         } else {
-          AppConstant.displaySnackBar(langKey.errorTitle.tr, parsedJson['message']);
+          AppConstant.displaySnackBar(
+              langKey.errorTitle.tr, parsedJson['message']);
         }
       }).catchError((e) {
         print(e);
