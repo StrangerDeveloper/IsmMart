@@ -494,10 +494,6 @@ class CheckoutView extends StatelessWidget {
           if (cartViewModel.totalCartAmount.value <=
               num.parse(
                   currencyController.convertCurrency(currentPrice: "1000")!)) {
-            // Get.to(PaymentView(
-            //   orderId: viewModel.orderId.value,
-            //   amount: 5,
-            // ));
             AppConstant.displaySnackBar(
               langKey.errorTitle.tr,
               langKey.toProceedWithPurchase.tr,
@@ -515,7 +511,7 @@ class CheckoutView extends StatelessWidget {
             await viewModel.createOrder();
             // paymentviewModel.orderId.value = viewModel.orderId.value;
             // paymentviewModel.amount.value = viewModel.totalAmount.value;
-            viewModel.totalAmount.value = 5;
+
             Get.to(PaymentView(
               orderId: viewModel.orderId.value,
               amount: viewModel.totalAmount.value,
