@@ -12,10 +12,16 @@ import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:http/http.dart' as http;
 
 class UpdateProductViewModel extends GetxController {
+  // @override
+  // void onInit() {
+  //   getProductById(Get.arguments[0]['productId']);
+  //   super.onInit();
+  // }
+  //
   @override
-  void onInit() {
+  void onReady() {
     getProductById(Get.arguments[0]['productId']);
-    super.onInit();
+    super.onReady();
   }
 
   @override
