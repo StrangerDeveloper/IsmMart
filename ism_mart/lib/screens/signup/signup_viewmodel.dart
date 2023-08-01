@@ -16,6 +16,7 @@ class SignUpViewModel extends GetxController {
   RxBool obscureConfirmPassword = true.obs;
   Rxn phoneErrorText = Rxn<String>();
   RxString countryCode = '+92'.obs;
+  RxBool termAndCondition = false.obs;
 
   validatorPhoneNumber(String? value) {
     if (GetUtils.isBlank(value)!) {

@@ -128,10 +128,12 @@ var textStylePoppins = GoogleFonts.lato(
 
 var dmSerifDisplay1 = GoogleFonts.dmSerifDisplay(
   color: newColorDarkBlack2,
+  fontSize: 14,
 );
 
 var newFontStyle0 = GoogleFonts.dmSans(
   fontWeight: FontWeight.w400,
+  fontSize: 14,
 );
 var newFontStyle1 = GoogleFonts.dmSans(
   fontWeight: FontWeight.w500,

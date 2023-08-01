@@ -45,7 +45,7 @@ class SignUpView extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(top: 20, bottom: 10),
                             child: CustomText(
-                              title: 'Create an account',
+                              title: langKey.createAnAccount.tr,
                               style: newFontStyle2.copyWith(
                                 fontSize: 20,
                                 color: newColorDarkBlack2,
@@ -55,7 +55,7 @@ class SignUpView extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(bottom: 25),
                             child: Text(
-                              'Get onboard as a user',
+                              langKey.getOnboardUser.tr,
                               style: newFontStyle0.copyWith(
                                 color: newColorLightGrey2,
                               ),
@@ -71,7 +71,6 @@ class SignUpView extends StatelessWidget {
                           cityPicker(),
                           checkBoxTermCondition(),
                           signUpBtn(),
-                          SizedBox(height: 20),
                           alreadyHaveAnAccount(),
                         ],
                       ),
@@ -160,7 +159,7 @@ class SignUpView extends StatelessWidget {
       () => Padding(
         padding: const EdgeInsets.only(top: 20, bottom: 30),
         child: CountryCodePickerTextField2(
-          title: 'Phone Number',
+          title: langKey.phoneNumber.tr,
           hintText: '336 5563138',
           keyboardType: TextInputType.number,
           controller: viewModel.phoneNumberController,
@@ -190,6 +189,7 @@ class SignUpView extends StatelessWidget {
       () => CustomTextField3(
         controller: viewModel.passwordController,
         title: langKey.password.tr,
+        hintText: '● ● ● ● ● ● ● ● ● ●',
         autoValidateMode: AutovalidateMode.onUserInteraction,
         validator: (value) {
           return Validator().validatePassword(value);
@@ -212,6 +212,7 @@ class SignUpView extends StatelessWidget {
         child: CustomTextField3(
           //controller: viewModel.passwordController,
           title: langKey.confirmPass.tr,
+          hintText: '● ● ● ● ● ● ● ● ● ●',
           autoValidateMode: AutovalidateMode.onUserInteraction,
           validator: (value) {
             return Validator().validateDefaultTxtField(value);
@@ -237,7 +238,7 @@ class SignUpView extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: 3),
             child: Text(
-              'Country',
+              langKey.country.tr,
               style: GoogleFonts.dmSans(
                 fontSize: 14,
                 fontWeight: FontWeight.w700,
@@ -267,6 +268,7 @@ class SignUpView extends StatelessWidget {
                 suffixIconColor: Color(0xffADBCCB),
                 isDense: true,
                 hintText: langKey.chooseCountry.tr,
+                hintStyle: TextStyle(color: Colors.black),
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Color(0xffEEEEEE)),
                 ),
@@ -304,7 +306,7 @@ class SignUpView extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 3),
                         child: Text(
-                          'City',
+                          langKey.city.tr,
                           style: GoogleFonts.dmSans(
                             fontSize: 14,
                             fontWeight: FontWeight.w700,
@@ -358,10 +360,17 @@ class SignUpView extends StatelessWidget {
   }
 
   Widget checkBoxTermCondition() {
-    return CustomCheckBox(
-      title:
-          'By creating your account you have to agree with our terms & conditions.',
-      value: false,
+    return Obx(
+      () => Padding(
+        padding: const EdgeInsets.only(bottom: 25, top: 5),
+        child: CustomCheckBox(
+          title: langKey.termsAndConditionsCheckbox.tr,
+          value: viewModel.termAndCondition.value,
+          onChanged: (value) {
+            viewModel.termAndCondition.value = value;
+          },
+        ),
+      ),
     );
   }
 
@@ -380,27 +389,30 @@ class SignUpView extends StatelessWidget {
 
   Widget alreadyHaveAnAccount() {
     return Center(
-      child: InkWell(
-        borderRadius: BorderRadius.circular(12),
-        onTap: () {
-          Get.off(() => SignInView());
-        },
-        child: RichText(
-          text: TextSpan(
-            children: [
-              TextSpan(
-                text: langKey.alreadyHaveAccount.tr + ' ',
-                style: newFontStyle0.copyWith(
-                  color: newColorLightGrey2,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 30),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(12),
+          onTap: () {
+            Get.off(() => SignInView());
+          },
+          child: RichText(
+            text: TextSpan(
+              children: [
+                TextSpan(
+                  text: langKey.alreadyHaveAccount.tr + ' ',
+                  style: newFontStyle0.copyWith(
+                    color: newColorLightGrey2,
+                  ),
                 ),
-              ),
-              TextSpan(
-                text: langKey.signIn.tr,
-                style: newFontStyle2.copyWith(
-                  color: newColorDarkBlack2,
+                TextSpan(
+                  text: langKey.signIn.tr,
+                  style: newFontStyle2.copyWith(
+                    color: newColorDarkBlack2,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
