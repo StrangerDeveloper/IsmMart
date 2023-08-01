@@ -255,6 +255,99 @@ class CustomTextField2 extends StatelessWidget {
   }
 }
 
+class CustomTextField3 extends StatelessWidget {
+  final String? title;
+  final String? hintText;
+  final Widget? suffixIcon;
+  final EdgeInsetsGeometry? contentPadding;
+  final bool obscureText;
+  final TextEditingController? controller;
+  final bool readOnly;
+  final bool? showCursor;
+  final AutovalidateMode? autoValidateMode;
+  final FormFieldValidator<String>? validator;
+  final List<TextInputFormatter>? inputFormatters;
+  final TextInputType? keyboardType;
+  final void Function(String)? onChanged;
+
+  CustomTextField3({
+    Key? key,
+    this.showCursor,
+    this.readOnly = false,
+    this.onChanged,
+    this.contentPadding = EdgeInsets.zero,
+    this.controller,
+    this.suffixIcon,
+    this.obscureText = false,
+    this.hintText,
+    this.title,
+    this.autoValidateMode,
+    this.validator,
+    this.inputFormatters,
+    this.keyboardType,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (title != null)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 3),
+            child: Text(
+              title!,
+              style: GoogleFonts.dmSans(
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
+                color: newColorDarkBlack2,
+              ),
+            ),
+          ),
+        TextFormField(
+          keyboardType: keyboardType,
+          inputFormatters: inputFormatters,
+          validator: validator,
+          autovalidateMode: autoValidateMode,
+          showCursor: showCursor,
+          readOnly: readOnly,
+          controller: controller,
+          obscureText: obscureText,
+          onChanged: onChanged,
+          style: newFontStyle0.copyWith(
+            color: newColorDarkBlack2,
+          ),
+          obscuringCharacter: '●',
+          decoration: InputDecoration(
+            hintText: hintText,
+            hintStyle: newFontStyle0.copyWith(
+              color: newColorLightGrey2,
+            ),
+            contentPadding: EdgeInsets.only(top: 8, bottom: 10),
+            suffixIcon: suffixIcon,
+            suffixIconConstraints: BoxConstraints.tight(Size(40, 25)),
+            errorStyle: GoogleFonts.dmSans(
+              color: Colors.red.shade700,
+            ),
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Color(0xffEEEEEE)),
+            ),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Color(0xff929AAB)),
+            ),
+            errorBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.red.shade700, width: 0.3),
+            ),
+            focusedErrorBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.red.shade700, width: 0.6),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
 class CountryCodePickerTextField extends StatelessWidget {
   final TextEditingController? controller;
   final TextInputType? keyboardType;
@@ -381,6 +474,137 @@ class CountryCodePickerTextField extends StatelessWidget {
   }
 }
 
+class CountryCodePickerTextField2 extends StatelessWidget {
+  final String? title;
+  final TextEditingController? controller;
+  final TextInputType? keyboardType;
+  final String? initialValue;
+  final FormFieldValidator<String>? validator;
+  final AutovalidateMode? autoValidateMode;
+  final ValueChanged<CountryCode>? onChanged;
+  final ValueChanged<String>? onPhoneFieldChange;
+  final bool? showCursor;
+  final bool readOnly;
+  final bool enabled;
+  final String? errorText;
+  final TextStyle? textStyle;
+  final List<TextInputFormatter>? inputFormatters;
+  final String? hintText;
+
+  CountryCodePickerTextField2({
+    this.validator,
+    this.autoValidateMode,
+    this.controller,
+    this.initialValue,
+    this.keyboardType,
+    this.onChanged,
+    this.showCursor,
+    this.readOnly = false,
+    this.enabled = true,
+    this.inputFormatters,
+    this.errorText,
+    this.onPhoneFieldChange,
+    this.textStyle,
+    this.title,
+    this.hintText,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (title != null)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 3),
+            child: Text(
+              title!,
+              style: GoogleFonts.dmSans(
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
+                color: newColorDarkBlack2,
+              ),
+            ),
+          ),
+        TextFormField(
+          inputFormatters: inputFormatters,
+          showCursor: showCursor,
+          readOnly: readOnly,
+          autovalidateMode: autoValidateMode,
+          validator: validator,
+          onChanged: onPhoneFieldChange,
+          decoration: InputDecoration(
+            hintText: hintText,
+            hintStyle: newFontStyle0.copyWith(
+              color: newColorLightGrey2,
+            ),
+
+            errorText: errorText,
+            prefixIconConstraints: BoxConstraints.tight(Size(120, 50)),
+            prefixIcon: Row(
+              children: [
+                CountryCodePicker(
+                  padding: EdgeInsets.zero,
+                  flagDecoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(1),
+                  ),
+                  searchDecoration: InputDecoration(
+                    contentPadding: EdgeInsets.zero,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.black,
+                        width: 1,
+                        style: BorderStyle.solid,
+                      ), //B
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.black,
+                        width: 1,
+                        style: BorderStyle.solid,
+                      ), //B
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  textStyle: newFontStyle0.copyWith(
+                    color: newColorDarkBlack2,
+                  ),
+                  enabled: enabled,
+                  onChanged: onChanged,
+                  // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
+                  initialSelection: initialValue,
+                  favorite: ['+92'],
+                ),
+                Icon(
+                  Icons.arrow_drop_down_sharp,
+                  size: 16,
+                  color: newColorLightGrey2,
+                ),
+              ],
+            ),
+            contentPadding: EdgeInsets.only(top: 16),
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Color(0xffEEEEEE)),
+            ),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Color(0xff929AAB)),
+            ),
+            errorBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.red.shade700, width: 0.3),
+            ),
+            focusedErrorBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.red.shade700, width: 0.6),
+            ),
+          ),
+          controller: controller,
+          keyboardType: keyboardType,
+        ),
+      ],
+    );
+  }
+}
+
 class FormInputFieldWithIcon extends StatelessWidget {
   const FormInputFieldWithIcon({
     Key? key,
@@ -443,9 +667,9 @@ class FormInputFieldWithIcon extends StatelessWidget {
         prefixIcon: iconPrefix == null
             ? null
             : Icon(
-          iconPrefix,
-          color: kPrimaryColor,
-        ),
+                iconPrefix,
+                color: kPrimaryColor,
+              ),
         labelText: labelText,
         labelStyle: textStyle,
         hintText: hintText,
@@ -482,22 +706,22 @@ class FormInputFieldWithIcon extends StatelessWidget {
 class FormPasswordInputFieldWithIcon extends StatefulWidget {
   const FormPasswordInputFieldWithIcon(
       {Key? key,
-        required this.controller,
-        this.iconPrefix,
-        required this.labelText,
-        required this.validator,
-        this.iconColor,
-        this.textStyle,
-        this.keyboardType = TextInputType.text,
-        this.obscureText = false,
-        this.minLines = 1,
-        this.maxLines,
-        this.maxLength,
-        this.maxLengthEnforcement,
-        this.onPasswordVisible,
-        required this.onChanged,
-        this.onSaved,
-        this.autoValidateMode})
+      required this.controller,
+      this.iconPrefix,
+      required this.labelText,
+      required this.validator,
+      this.iconColor,
+      this.textStyle,
+      this.keyboardType = TextInputType.text,
+      this.obscureText = false,
+      this.minLines = 1,
+      this.maxLines,
+      this.maxLength,
+      this.maxLengthEnforcement,
+      this.onPasswordVisible,
+      required this.onChanged,
+      this.onSaved,
+      this.autoValidateMode})
       : super(key: key);
   final AutovalidateMode? autoValidateMode;
   final TextEditingController controller;
@@ -532,16 +756,16 @@ class _FormPasswordInputFieldWithIconState
   @override
   Widget build(BuildContext context) {
     return Obx(
-          () => TextFormField(
+      () => TextFormField(
         autovalidateMode: widget.autoValidateMode,
         decoration: InputDecoration(
             filled: false,
             prefixIcon: widget.iconPrefix == null
                 ? null
                 : Icon(
-              widget.iconPrefix,
-              color: kPrimaryColor,
-            ),
+                    widget.iconPrefix,
+                    color: kPrimaryColor,
+                  ),
             // enabledBorder: OutlineInputBorder(
             //   //borderRadius: BorderRadius.circular(10),
             //   borderSide: BorderSide(
@@ -554,24 +778,26 @@ class _FormPasswordInputFieldWithIconState
             focusColor: widget.iconColor,
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(
-                  color: Colors.black, width: 1, style: BorderStyle.solid), //B
+                  color: Colors.black, width: 1, style: BorderStyle.solid),
+              //B
               borderRadius: BorderRadius.circular(8),
             ),
             border: OutlineInputBorder(
               borderSide: BorderSide(
-                  color: Colors.black, width: 1, style: BorderStyle.solid), //B
+                  color: Colors.black, width: 1, style: BorderStyle.solid),
+              //B
               borderRadius: BorderRadius.circular(8),
             ),
             suffixIcon: widget.obscureText!
                 ? GestureDetector(
-              onTap: _toggle,
-              child: Icon(
-                passVisibility.isTrue
-                    ? Icons.visibility_off
-                    : Icons.visibility,
-                color: Colors.black87,
-              ),
-            )
+                    onTap: _toggle,
+                    child: Icon(
+                      passVisibility.isTrue
+                          ? Icons.visibility_off
+                          : Icons.visibility,
+                      color: Colors.black87,
+                    ),
+                  )
                 : null),
         controller: widget.controller,
         cursorColor: widget.iconColor,

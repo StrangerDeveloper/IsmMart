@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ism_mart/helper/global_variables.dart';
-import 'package:ism_mart/widgets/no_internet_view.dart';
-import 'package:ism_mart/screens/signin/signin_viewmodel.dart';
 import 'package:ism_mart/exports/export_widgets.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
+import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/screens/signin/signin_viewmodel.dart';
+import 'package:ism_mart/widgets/back_button.dart';
+import 'package:ism_mart/widgets/become_vendor.dart';
+import 'package:ism_mart/widgets/no_internet_view.dart';
 import 'package:ism_mart/widgets/obscure_suffix_icon.dart';
+import 'package:ism_mart/widgets/scrollable_column.dart';
 
 import '../../helper/validator.dart';
-import '../../widgets/svg_helper.dart';
 
 class SignInView extends StatelessWidget {
   SignInView({Key? key}) : super(key: key);
@@ -19,30 +21,46 @@ class SignInView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: Stack(
           children: [
-            SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-              child: Form(
-                key: viewModel.signInFormKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    logoCloseIcon(),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10, bottom: 40),
-                      child: CustomText(
-                        title: langKey.loginGreetings.tr,
-                        style: headline2,
+            Form(
+              key: viewModel.signInFormKey,
+              child: ScrollableColumn(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  titleAndBackBtn(),
+                  Spacer(),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(top: 20, bottom: 10, left: 20),
+                    child: CustomText(
+                      title: langKey.welcome.tr + '!',
+                      style: newFontStyle2.copyWith(
+                        fontSize: 20,
+                        color: newColorDarkBlack2,
                       ),
                     ),
-                    emailTextField(),
-                    passwordTextField(),
-                    signInBtn(),
-                    forgotPassword(),
-                    doNotHaveAnAccount(),
-                  ],
-                ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(left: 20, right: 20, bottom: 25),
+                    child: Text(
+                      langKey.seamlessShopping.tr,
+                      style: newFontStyle0.copyWith(
+                        color: newColorLightGrey2,
+                      ),
+                    ),
+                  ),
+                  emailTextField(),
+                  passwordTextField(),
+                  forgotPassword(),
+                  logInBtn(),
+                  or(),
+                  Spacer(),
+                  doNotHaveAnAccount(),
+                  BecomeVendor(),
+                ],
               ),
             ),
             NoInternetView(
@@ -54,50 +72,56 @@ class SignInView extends StatelessWidget {
     );
   }
 
-  Widget logoCloseIcon() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        SizedBox(
-          height: 70,
-          child: FittedBox(
-            child: buildSvgLogo(),
+  Widget titleAndBackBtn() {
+    return Container(
+      padding: EdgeInsets.only(left: 20, top: 30),
+      width: double.infinity,
+      child: Stack(
+        alignment: Alignment.centerLeft,
+        children: [
+          Align(
+            alignment: Alignment.center,
+            child: Text(
+              langKey.login.tr,
+              style: dmSerifDisplay1.copyWith(
+                fontSize: 32,
+              ),
+            ),
           ),
-        ),
-        IconButton(
-          visualDensity: VisualDensity.compact,
-          onPressed: () {
-            Get.back();
-          },
-          icon: const Icon(Icons.close),
-        ),
-      ],
+          CustomBackButton(
+            onTap: () {
+              Get.back();
+            },
+          ),
+        ],
+      ),
     );
   }
 
   Widget emailTextField() {
-    return CustomTextField2(
-      contentPadding: EdgeInsets.symmetric(vertical: 16),
-      label: langKey.email.tr,
-      controller: viewModel.emailController,
-      prefixIcon: Icons.email,
-      autoValidateMode: AutovalidateMode.onUserInteraction,
-      validator: (value) {
-        return Validator().validateEmail(value);
-      },
-      keyboardType: TextInputType.emailAddress,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: CustomTextField3(
+        title: langKey.email.tr,
+        hintText: 'asha****iq11@gmail.com',
+        controller: viewModel.emailController,
+        autoValidateMode: AutovalidateMode.onUserInteraction,
+        validator: (value) {
+          return Validator().validateEmail(value);
+        },
+        keyboardType: TextInputType.emailAddress,
+      ),
     );
   }
 
   Widget passwordTextField() {
     return Obx(
       () => Padding(
-        padding: const EdgeInsets.only(top: 20, bottom: 40),
-        child: CustomTextField2(
-          contentPadding: EdgeInsets.symmetric(vertical: 16),
+        padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+        child: CustomTextField3(
           controller: viewModel.passwordController,
-          prefixIcon: Icons.lock_rounded,
-          label: langKey.password.tr,
+          title: langKey.password.tr,
+          hintText: '● ● ● ● ● ● ● ● ● ●',
           autoValidateMode: AutovalidateMode.onUserInteraction,
           validator: (value) {
             return Validator().validateDefaultTxtField(value);
@@ -115,23 +139,29 @@ class SignInView extends StatelessWidget {
     );
   }
 
-  Widget signInBtn() {
-    return Obx(
-      () => GlobalVariable.showLoader.value
-          ? CustomLoading(isItBtn: true)
-          : CustomTextBtn(
-              title: langKey.signIn.tr,
-              height: 48,
-              onPressed: () {
-                viewModel.signIn();
-              },
-            ),
+  Widget logInBtn() {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 20, 20, 25),
+      child: Obx(
+        () => GlobalVariable.showLoader.value
+            ? CustomLoading(isItBtn: true)
+            : CustomRoundedTextBtn(
+                backgroundColor: newColorDarkBlack,
+                child: Text(
+                  langKey.login.tr,
+                  style: newFontStyle3,
+                ),
+                onPressed: () {
+                  viewModel.signIn();
+                },
+              ),
+      ),
     );
   }
 
   Widget forgotPassword() {
     return Container(
-      margin: EdgeInsets.only(top: 20, bottom: 20),
+      margin: EdgeInsets.only(bottom: 20, right: 20, top: 10),
       alignment: Alignment.centerRight,
       child: InkWell(
         onTap: () {
@@ -141,14 +171,34 @@ class SignInView extends StatelessWidget {
                 : ''
           });
         },
-        child: Text(
-          langKey.forgotPassword.tr + '?',
-          style: headline3.copyWith(
-            decoration: TextDecoration.underline,
-            fontSize: 14,
+        child: Text(langKey.forgotPassword.tr, style: newFontStyle1),
+      ),
+    );
+  }
+
+  Widget or() {
+    return Row(
+      children: [
+        Expanded(
+          child: Divider(
+            color: newColorLightGrey,
+            thickness: 1,
           ),
         ),
-      ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Text(
+            langKey.or.tr,
+            style: newFontStyle4,
+          ),
+        ),
+        Expanded(
+          child: Divider(
+            color: newColorLightGrey,
+            thickness: 1,
+          ),
+        ),
+      ],
     );
   }
 
@@ -159,23 +209,19 @@ class SignInView extends StatelessWidget {
         onTap: () {
           Get.offNamed(Routes.registerRoute);
         },
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-          child: Column(
+        child: RichText(
+          text: TextSpan(
             children: [
-              Text(
-                langKey.donTHaveAccount.tr,
-                style: bodyText1.copyWith(
-                  fontSize: 14,
+              TextSpan(
+                text: langKey.donTHaveAccount.tr + ' ',
+                style: newFontStyle0.copyWith(
+                  color: newColorLightGrey2,
                 ),
               ),
-              SizedBox(height: 3),
-              Text(
-                langKey.signUp.tr,
-                style: bodyText1.copyWith(
-                  decoration: TextDecoration.underline,
-                  color: kPrimaryColor,
-                  fontSize: 14,
+              TextSpan(
+                text: langKey.signUp.tr,
+                style: newFontStyle2.copyWith(
+                  color: newColorDarkBlack2,
                 ),
               ),
             ],
