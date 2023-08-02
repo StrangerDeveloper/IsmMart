@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+//import 'package:webview_flutter/webview_flutter.dart';
 import '../../api_helper/api_constant.dart';
 import '../../controllers/controllers.dart';
 import '../../helper/constants.dart';
@@ -12,7 +12,7 @@ import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 
 class PaymentViewModel extends GetxController {
   final CheckoutViewModel viewModel = Get.put(CheckoutViewModel());
-  late WebViewController webViewController;
+  //late WebViewController webViewController;
 
   RxInt orderId = 0.obs;
   RxDouble amount = (0.0).obs;
@@ -29,7 +29,7 @@ class PaymentViewModel extends GetxController {
     print("hasnain totalAmount => ${viewModel.totalAmount.value}");
 
     super.onInit();
-    webViewController = WebViewController();
+    //webViewController = WebViewController();
   }
 
 //Update order status

@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:ism_mart/exports/export_api_helper.dart';
 import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/exports/exports_model.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
-
-import '../../../helper/permission_handler.dart';
 
 class AuthController extends GetxController {
   final AuthProvider authProvider;
@@ -83,7 +80,7 @@ class AuthController extends GetxController {
   var isLoading = false.obs;
 
   resendEmailVerificationLink() async {
-     isLoading(false);
+    isLoading(false);
     String email = emailController.text;
 
     await authProvider
@@ -105,53 +102,6 @@ class AuthController extends GetxController {
         );
     }).catchError((onError) {
       debugPrint("Verification Link Error: $onError");
-    });
-  }
-
-  var coverImgPath = "".obs;
-  var profileImgPath = "".obs;
-  var _picker = ImagePicker();
-
-  pickOrCaptureImageGallery(int? imageSource,
-      {calledForProfile = true, calledForBuyerProfile = false}) async {
-    await PermissionsHandler().checkPermissions().then((isGranted) async {
-      if (isGranted) {
-        try {
-          XFile? imgFile = await _picker.pickImage(
-              source:
-                  imageSource == 0 ? ImageSource.camera : ImageSource.gallery);
-          if (imgFile != null) {
-            await imgFile.length().then((length) async {
-              await AppConstant.compressImage(imgFile.path, fileLength: length)
-                  .then((compressedFile) {
-                var lengthInMb = compressedFile.lengthSync() * 0.000001;
-                if (lengthInMb > 2) {
-                  showSnackBar(message: langKey.imageSizeDesc.tr + ' 2MB');
-                } else {
-                  if (calledForProfile) {
-                    profileImgPath(compressedFile.path);
-
-                    //updateUser();
-                  } else
-                    coverImgPath(compressedFile.path);
-                  //updateUser();
-
-                  if (calledForBuyerProfile) {
-                    updateUser(
-                        title: 'image',
-                        value: profileImgPath.value,
-                        field: 'image');
-                  }
-                }
-                Get.back();
-              });
-            });
-          }
-        } catch (e) {
-          print("UploadImage: $e");
-        }
-      } else
-        await PermissionsHandler().requestPermissions();
     });
   }
 
@@ -236,46 +186,6 @@ class AuthController extends GetxController {
     });
 
     //update();
-  }
-
-  updateUser({title, value, field}) async {
-    title = editingTextController.text;
-    if (field == "firstName") {
-      userModel!.firstName = title;
-    } else if (field == "lastName") {
-      userModel!.lastName = title;
-    } else if (field == "phone") {
-      userModel!.phone = title;
-    } else if (field == "address") {
-      userModel!.address = title;
-    } else if (field == "image") userModel!.imageUrl = profileImgPath.value;
-
-    if (userToken != null) {
-      isLoading(true);
-      await authProvider
-          .updateUser(
-              token: userToken, title: title, value: value, field: field)
-          .then((UserResponse? userResponse) {
-        isLoading(false);
-        if (userResponse != null) {
-          if (userResponse.success!) {
-            //Get.back();
-            AppConstant.displaySnackBar("success", userResponse.message);
-            editingTextController.clear();
-            //getCurrentUser();
-            profileImgPath.value = '';
-          } else
-            //getCurrentUser();
-            AppConstant.displaySnackBar('error', userResponse.message);
-        } else
-          AppConstant.displaySnackBar('error', langKey.someThingWentWrong.tr);
-        getCurrentUser();
-      }).catchError((error) {
-        getCurrentUser();
-        isLoading(false);
-        debugPrint("RegisterStore: Error $error");
-      });
-    }
   }
 
   emailVerificationCheck() async {

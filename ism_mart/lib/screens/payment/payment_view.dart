@@ -33,7 +33,7 @@ class _PaymentViewState extends State<PaymentView> {
 
   @override
   Widget build(BuildContext context) {
-    viewModel.webViewController.reload();
+    // viewModel.webViewController.reload();
     // viewModel.orderId(orderId);
     // viewModel.amount(amount);
     viewModel.currencyCode(widget.currencyCode);
