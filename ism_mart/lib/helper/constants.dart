@@ -154,6 +154,8 @@ class AppConstant {
 
   static const defaultImgUrl =
       "https://i.ibb.co/dLxHqcR/vecteezy-icon-image-not-found-vector.jpg";
+  static const SESSION_EXPIRED = "session is expired";
+  static const INVALID_USER = "invalid user recieved";
 
   static searchFieldProp() {
     return TextFieldProps(
@@ -175,9 +177,6 @@ class AppConstant {
           ),
         ));
   }
-
-  static const SESSION_EXPIRED = "session is expired";
-  static const INVALID_USER = "invalid user recieved";
 
   static displaySnackBar(String title, message, {SnackPosition? position}) {
     var bgColor = kLimeGreenColor;
