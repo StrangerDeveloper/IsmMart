@@ -291,9 +291,10 @@ class Japanese {
         key.fieldIsRequired: 'フィールドは必須項目です',
         key.call: '電話',
         key.centralHeadquarters: '中央本部',
-        key.centralHeadquartersValue: '2階、エミレーツタワー、M-13、F7マルカズ、イスラマバード。パキスタン',
         key.globalHeadquarters: 'グローバル本部',
-        key.globalHeadquartersValue: 'タワー42、25オールドブロードストリート、コーンヒル、ロンドン、イギリス',
+        key.centralHeadquartersValue:
+            'プロット番号、60 Street 12、G-8/1、イスラマバード首都領44080パキスタン',
+        key.globalHeadquartersValue: 'オフィス1005-1006、10階、引用タワー、ビジネスベイ、ドバイ',
         key.aboutHeader1: 'ismmartとは何ですか？',
         key.aboutHeader2: '我々の使命',
         key.aboutHeader3: '私たちのビジョン',
@@ -522,5 +523,5 @@ class Japanese {
             'プレミアムメンバーは、ISMMARTがそのようなメンバーと彼らが行う取引を直接保証および検証するため、売り手と買い手として世界中のすべてのビジネスへのアクセスが少なくなります。',
         key.memPlan3Desc9:
             'すべてのプレミアムメンバーは精査され、iSmmart検証プロセスを通じて検証されているため、そのようなメンバーはすべて、世界のどこでも互いに貿易を心配することが少なくなります。',
-  };
+      };
 }

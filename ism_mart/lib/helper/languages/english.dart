@@ -233,10 +233,10 @@ class English {
         key.call: 'call',
         key.centralHeadquarters: 'Central Headquarters',
         key.centralHeadquartersValue:
-            'street 12, G-8/1 ISMMART GROUP OF INDUSTRIES Islamabad. Pakistan',
+            'Plot No, 60 Street 12, G-8/1, Islamabad Capital Territory 44080 Pakistan',
         key.globalHeadquarters: 'Global Headquarters',
         key.globalHeadquartersValue:
-            'Tower 42, 25 Old Broad St, Cornhill, London, United Kingdom',
+            'Office 1005-1006, 10th Floor, Citedal Tower, Business Bay, Dubai',
         key.privacyHeader1: '',
         key.privacyHeader2: 'Use of Your Personal information',
         key.privacyHeader3: 'What data we collect and how we collect it?',
@@ -387,10 +387,11 @@ class English {
         key.joinOurMarketplace:
             'Join our marketplace and start selling your products today!',
         key.seamlessShopping: 'Enter details for seamless shopping experience',
-        key.createAnAccount : 'Create an account',
-        key.getOnboardUser : 'Get onboard as a user',
-        key.phoneNumber : 'Phone Number',
-        key.termsAndConditionsCheckbox : 'By creating your account you have to agree with our terms & conditions.',
+        key.createAnAccount: 'Create an account',
+        key.getOnboardUser: 'Get onboard as a user',
+        key.phoneNumber: 'Phone Number',
+        key.termsAndConditionsCheckbox:
+            'By creating your account you have to agree with our terms & conditions.',
 
         ///bottom bar
         key.home: 'Home',

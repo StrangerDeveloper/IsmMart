@@ -304,11 +304,11 @@ class Spanish {
         key.fieldIsRequired: 'Se requiere campo',
         key.call: 'llamar',
         key.centralHeadquarters: 'Sede central',
-        key.centralHeadquartersValue:
-            '2do piso, Emirates Tower, M-13, F7 Markaz, Islamabad. Pakistán',
         key.globalHeadquarters: 'La sede mundial',
+        key.centralHeadquartersValue:
+            'Parcela no, 60 Street 12, G-8/1, Islamabad Capital Territorio 44080 Pakistán',
         key.globalHeadquartersValue:
-            'Torre 42, 25 Old Broad St, Cornhill, Londres, Reino Unido',
+            'Oficina 1005-1006, piso 10, Citedal Tower, Business Bay, Dubai',
         key.aboutHeader1: '¿Qué es Ismmart?',
         key.aboutHeader2: 'Nuestra misión',
         key.aboutHeader3: 'Nuestra visión',

@@ -1,15 +1,11 @@
-import 'dart:io';
-
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/current_remaining_time.dart';
-import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:ism_mart/exports/export_controllers.dart';
 import 'package:ism_mart/exports/exports_model.dart';
-import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 
 import '../widgets/custom_button.dart';
 import '../widgets/custom_text.dart';
@@ -158,6 +154,8 @@ class AppConstant {
 
   static const defaultImgUrl =
       "https://i.ibb.co/dLxHqcR/vecteezy-icon-image-not-found-vector.jpg";
+  static const SESSION_EXPIRED = "session is expired";
+  static const INVALID_USER = "invalid user recieved";
 
   static searchFieldProp() {
     return TextFieldProps(
@@ -179,9 +177,6 @@ class AppConstant {
           ),
         ));
   }
-
-  static const SESSION_EXPIRED = "session is expired";
-  static const INVALID_USER = "invalid user recieved";
 
   static displaySnackBar(String title, message, {SnackPosition? position}) {
     var bgColor = kLimeGreenColor;
@@ -334,23 +329,6 @@ class AppConstant {
     }
   }
 
-  static Future<File> compressImage(imagePath, {fileLength}) async {
-    return await FlutterNativeImage.compressImage(imagePath,
-        quality: 100, percentage: getCompressionPercentage(length: fileLength));
-  }
-
-  static int getCompressionPercentage({length}) {
-    var lengthInMb = length * 0.000001;
-
-    if (lengthInMb < 1) {
-      return 40;
-    } else if (lengthInMb > 1 && lengthInMb < 2.5) {
-      return 25;
-    } else {
-      return 15;
-    }
-  }
-
   static void showConfirmDeleteDialog(
       {VoidCallback? ontap,
       String? passedHeadingLangKey,
@@ -414,60 +392,6 @@ class AppConstant {
             )
           ],
         ),
-      ),
-    );
-  }
-
-  static pickImage({calledForProfile = true, calledBuyerProfile = false}) {
-    Get.defaultDialog(
-      title: langKey.pickFrom.tr,
-      contentPadding: const EdgeInsets.all(10),
-      titleStyle: appBarTitleSize,
-      content: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          _imageBtn(
-            onTap: () => authController.pickOrCaptureImageGallery(0,
-                calledForProfile: calledForProfile,
-                calledForBuyerProfile: calledBuyerProfile),
-            title: langKey.camera.tr,
-            icon: Icons.camera_alt_rounded,
-            color: Colors.blue,
-          ),
-          _imageBtn(
-            onTap: () => authController.pickOrCaptureImageGallery(
-              1,
-              calledForBuyerProfile: calledBuyerProfile,
-              calledForProfile: calledForProfile,
-            ),
-            title: langKey.gallery.tr,
-            icon: Icons.photo_library_rounded,
-            color: Colors.redAccent,
-          ),
-        ],
-      ),
-      //onCancel: ()=>Get.back()
-    );
-  }
-
-  static Widget _imageBtn({onTap, icon, title, color}) {
-    return InkWell(
-      onTap: onTap,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Icon(
-            icon,
-            color: color,
-            size: 30,
-          ),
-          AppConstant.spaceWidget(height: 10),
-          CustomText(
-            title: title,
-            color: color,
-          )
-        ],
       ),
     );
   }
