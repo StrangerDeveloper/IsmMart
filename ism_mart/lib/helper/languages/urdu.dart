@@ -327,11 +327,12 @@ class Urdu {
         key.fieldIsRequired: 'فیلڈ کی ضرورت ہے',
         key.call: 'کال کریں',
         key.centralHeadquarters: 'مرکزی صدر دفاتر',
-        key.centralHeadquartersValue:
-            'دوسری منزل ، امارات ٹاور ، ایم 13 ، ایف 7 مارکاز ، اسلام آباد۔ پاکستان',
         key.globalHeadquarters: 'عالمی ہیڈ کوارٹر',
+
+        key.centralHeadquartersValue:
+            'پلاٹ نمبر ، 60 اسٹریٹ 12 ، G-8/1 ، اسلام آباد کیپیٹل علاقہ 44080 پاکستان',
         key.globalHeadquartersValue:
-            'ٹاور 42 ، 25 اولڈ براڈ سینٹ ، کارن ہیل ، لندن ، برطانیہ',
+            'آفس 1005-1006 ، 10 واں منزل ، سٹیڈل ٹاور ، بزنس بے ، دبئی',
 
         key.tCHeader1: 'تعارف',
         key.tCBody1:

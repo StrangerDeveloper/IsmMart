@@ -305,11 +305,11 @@ class DutchGerman {
         key.fieldIsRequired: 'Feld ist erforderlich',
         key.call: 'Forderung',
         key.centralHeadquarters: 'Zentrale Hauptquartier',
-        key.centralHeadquartersValue:
-            '2. Stock, Emirates Tower, M-13, F7 Markaz, Islamabad. Pakistan',
         key.globalHeadquarters: 'Globales Hauptquartier',
+        key.centralHeadquartersValue:
+            'Grundstück Nr. 60 Street 12, G-8/1, Islamabad Capital Territory 44080 Pakistan',
         key.globalHeadquartersValue:
-            'Tower 42, 25 Old Broad Street, Cornhill, London, Vereinigtes Königreich',
+            'Büro 1005-1006, 10. Stock, zitierter Tower, Business Bay, Dubai',
         key.aboutHeader1: 'Was ist Ismmart?',
         key.aboutHeader2: 'Unsere Aufgabe',
         key.aboutHeader3: 'Unsere Vision',

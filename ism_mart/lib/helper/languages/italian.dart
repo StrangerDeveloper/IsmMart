@@ -304,11 +304,11 @@ class Italian {
         key.fieldIsRequired: 'Il campo è obbligatiorio',
         key.call: 'chiamata',
         key.centralHeadquarters: 'Quartier generale centrale',
-        key.centralHeadquartersValue:
-            '2 ° piano, Emirates Tower, M-13, F7 Markaz, Islamabad. Pakistan',
         key.globalHeadquarters: 'Quartier generale globale',
+        key.centralHeadquartersValue:
+            'Trama n. 60 Street 12, G-8/1, Islamabad Capital Territory 44080 Pakistan',
         key.globalHeadquartersValue:
-            'Torre 42, 25 Old Broad St, Cornhill, Londra, Regno Unito',
+            'Office 1005-1006, 10th Floor, Citedal Tower, Business Bay, Dubai',
         key.aboutHeader1: 'Cos\'è Ismmart?',
         key.aboutHeader2: 'La nostra missione',
         key.aboutHeader3: 'La nostra visione',
@@ -548,5 +548,5 @@ class Italian {
             'I membri premium avranno meno accesso a tutte le aziende in tutto il mondo, sia come venditore e acquirente, come IsmMART garantirà direttamente e verificherà tali membri e qualsiasi accordo che fanno.',
         key.memPlan3Desc9:
             'Poiché tutti i membri premium vengono esaminati e vengono verificati attraverso il processo di verifica ISMMART, in modo che tutti questi membri possano preoccuparsi meno commercio tra loro, in qualsiasi parte del mondo.',
-  };
+      };
 }
