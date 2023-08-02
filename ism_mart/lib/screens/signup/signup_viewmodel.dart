@@ -49,47 +49,48 @@ class SignUpViewModel extends GetxController {
   void signUp() {
     GlobalVariable.internetErr(false);
     if (signUpFormKey.currentState?.validate() ?? false) {
-      print('Validated');
       if (countryID.value != 0 && cityID.value != 0) {
-        print('Country and City');
-        GlobalVariable.showLoader.value = true;
-        String? phoneNumber = countryCode.value + phoneNumberController.text;
+        if(termAndCondition.value == true) {
+          GlobalVariable.showLoader.value = true;
+          String? phoneNumber = countryCode.value + phoneNumberController.text;
 
-        Map<String, dynamic> param = {
-          "firstName": firstNameController.text,
-          "email": emailController.text,
-          "phone": phoneNumber,
-          "password": passwordController.text,
-          'cityId': cityID.value,
-          'countryId': countryID.value,
-        };
+          Map<String, dynamic> param = {
+            "firstName": firstNameController.text,
+            "email": emailController.text,
+            "phone": phoneNumber,
+            "password": passwordController.text,
+            'cityId': cityID.value,
+            'countryId': countryID.value,
+          };
 
-        ApiBaseHelper()
-            .postMethod(url: Urls.signUp, body: param)
-            .then((parsedJson) async {
-          GlobalVariable.showLoader.value = false;
+          ApiBaseHelper()
+              .postMethod(url: Urls.signUp, body: param)
+              .then((parsedJson) async {
+            GlobalVariable.showLoader.value = false;
 
-          if (parsedJson['message'] == 'User registered successfully.') {
-            Get.offNamed(Routes.loginRoute);
-            AppConstant.displaySnackBar(
-              langKey.successTitle.tr,
-              parsedJson['message'],
-            );
-            cityViewModel.cityId.value = 0;
-            cityViewModel.countryId.value = 0;
-            cityViewModel.authController.selectedCountry.value = CountryModel();
-            cityViewModel.authController.selectedCity.value = CountryModel();
-          } else {
-            AppConstant.displaySnackBar(
-              langKey.errorTitle.tr,
-              parsedJson['message'],
-            );
-          }
-        }).catchError((e) {
-          GlobalVariable.internetErr(true);
-          print(e);
-          GlobalVariable.showLoader.value = false;
-        });
+            if (parsedJson['message'] == 'User registered successfully.') {
+              Get.offNamed(Routes.loginRoute);
+              AppConstant.displaySnackBar(
+                langKey.successTitle.tr,
+                parsedJson['message'],
+              );
+              cityViewModel.cityId.value = 0;
+              cityViewModel.countryId.value = 0;
+              cityViewModel.authController.selectedCountry.value =
+                  CountryModel();
+              cityViewModel.authController.selectedCity.value = CountryModel();
+            } else {
+              AppConstant.displaySnackBar(
+                langKey.errorTitle.tr,
+                parsedJson['message'],
+              );
+            }
+          }).catchError((e) {
+            GlobalVariable.internetErr(true);
+            print(e);
+            GlobalVariable.showLoader.value = false;
+          });
+        }
       } else if (countryID.value == 0) {
         countryErrorVisibility.value = true;
       } else if (cityID.value == 0) {

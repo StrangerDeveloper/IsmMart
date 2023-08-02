@@ -159,8 +159,11 @@ class SignUpView extends StatelessWidget {
       () => Padding(
         padding: const EdgeInsets.only(top: 20, bottom: 30),
         child: CountryCodePickerTextField2(
+          validator: (value){
+            return Validator().validatePhoneNumber(value);
+          },
           title: langKey.phoneNumber.tr,
-          hintText: '336 5563138',
+          hintText: '12345678',
           keyboardType: TextInputType.number,
           controller: viewModel.phoneNumberController,
           initialValue: viewModel.countryCode.value,
@@ -280,6 +283,9 @@ class SignUpView extends StatelessWidget {
             onChanged: (CountryModel? newValue) {
               cityViewModel.setSelectedCountry(newValue!);
               viewModel.countryID.value = newValue.id!;
+              cityViewModel.selectedCity.value = CountryModel();
+              cityViewModel.cityId.value = 0;
+              cityViewModel.authController.selectedCity.value = CountryModel();
               viewModel.countryErrorVisibility.value = false;
             },
             selectedItem: authController.newAcc.value == true

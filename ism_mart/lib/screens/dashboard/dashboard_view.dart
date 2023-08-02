@@ -29,48 +29,46 @@ class DashboardView extends GetView<BaseController> {
   @override
   Widget build(BuildContext context) {
     /// Update Alert used for display update dialog of the app Updates
-    return UpgradeAlert(
-      child: SafeArea(
-        child: Stack(
-          children: [
-            CustomScrollView(
-              slivers: [
-                SliverList(
-                  delegate: SliverChildListDelegate(
-                    [
-                      _slider(controller.sliderImages),
-                      StickyLabel(text: langKey.topCategories.tr),
-                      _topCategoriesGrid(controller.categories),
-                      //Top Vendors List
-                      StickyLabel(text: langKey.topVendors.tr),
-                      _topVendors(),
-                      StickyLabel(text: langKey.discountDeals.tr),
-                      _displayDiscountProducts(),
-                      Obx(
-                        () => _displayProducts(
-                          productMap: controller.productsWithTypesMap,
-                        ),
+    return SafeArea(
+      child: Stack(
+        children: [
+          CustomScrollView(
+            slivers: [
+              SliverList(
+                delegate: SliverChildListDelegate(
+                  [
+                    _slider(controller.sliderImages),
+                    StickyLabel(text: langKey.topCategories.tr),
+                    _topCategoriesGrid(controller.categories),
+                    //Top Vendors List
+                    StickyLabel(text: langKey.topVendors.tr),
+                    _topVendors(),
+                    StickyLabel(text: langKey.discountDeals.tr),
+                    _displayDiscountProducts(),
+                    Obx(
+                      () => _displayProducts(
+                        productMap: controller.productsWithTypesMap,
                       ),
-                      kDivider,
-                      Obx(
-                        () => _displayProducts(
-                          productMap: controller.productsMap,
-                          calledForCategoryProducts: true,
-                        ),
+                    ),
+                    kDivider,
+                    Obx(
+                      () => _displayProducts(
+                        productMap: controller.productsMap,
+                        calledForCategoryProducts: true,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            NoInternetView(
-              onPressed: () {
-                controller.getAllApiFucnc();
-                GlobalVariable.btnPress(true);
-              },
-            ),
-          ],
-        ),
+              ),
+            ],
+          ),
+          NoInternetView(
+            onPressed: () {
+              controller.getAllApiFucnc();
+              GlobalVariable.btnPress(true);
+            },
+          ),
+        ],
       ),
     );
   }
