@@ -1,8 +1,4 @@
 import 'dart:io';
-
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -11,8 +7,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:ism_mart/app_binding/app_init_binding.dart';
 import 'package:ism_mart/exports/export_controllers.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
-
-import 'firebase_options.dart';
 import 'helper/theme_helper.dart';
 
 void main() async {
@@ -50,19 +44,19 @@ void main() async {
 
   ///firebase integration for crashlytics
   ///
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  // await Firebase.initializeApp(
+  //   options: DefaultFirebaseOptions.currentPlatform,
+  // );
 
-  FlutterError.onError = (errorDetails) {
-    // If you wish to record a "non-fatal" exception, please use `FirebaseCrashlytics.instance.recordFlutterError` instead
-    FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
-  };
-  PlatformDispatcher.instance.onError = (error, stack) {
-    // If you wish to record a "non-fatal" exception, please remove the "fatal" parameter
-    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
-    return true;
-  };
+  // FlutterError.onError = (errorDetails) {
+  //   // If you wish to record a "non-fatal" exception, please use `FirebaseCrashlytics.instance.recordFlutterError` instead
+  //   FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+  // };
+  // PlatformDispatcher.instance.onError = (error, stack) {
+  //   // If you wish to record a "non-fatal" exception, please remove the "fatal" parameter
+  //   FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+  //   return true;
+  // };
 
   runApp(const MyApp());
 }
