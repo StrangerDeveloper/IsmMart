@@ -8,13 +8,15 @@ import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 
 class SignUpViewModel extends GetxController {
   GlobalKey<FormState> signUpFormKey = GlobalKey<FormState>();
-  TextEditingController fullNameController = TextEditingController();
+  TextEditingController firstNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
-  RxBool obscurePassword = false.obs;
+  RxBool obscurePassword = true.obs;
+  RxBool obscureConfirmPassword = true.obs;
   Rxn phoneErrorText = Rxn<String>();
   RxString countryCode = '+92'.obs;
+  RxBool termAndCondition = false.obs;
 
   validatorPhoneNumber(String? value) {
     if (GetUtils.isBlank(value)!) {
@@ -28,7 +30,7 @@ class SignUpViewModel extends GetxController {
 
   @override
   void onClose() {
-    fullNameController.dispose();
+    firstNameController.dispose();
     emailController.dispose();
     passwordController.dispose();
     phoneNumberController.dispose();
@@ -43,7 +45,7 @@ class SignUpViewModel extends GetxController {
       String? phoneNumber = countryCode.value + phoneNumberController.text;
 
       Map<String, dynamic> param = {
-        "firstName": fullNameController.text,
+        "firstName": firstNameController.text,
         "email": emailController.text,
         "phone": phoneNumber,
         "password": passwordController.text,

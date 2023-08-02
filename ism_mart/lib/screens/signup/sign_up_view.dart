@@ -1,17 +1,23 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:ism_mart/helper/global_variables.dart';
-import 'package:ism_mart/widgets/no_internet_view.dart';
-import 'package:ism_mart/screens/signup/signup_viewmodel.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:ism_mart/controllers/controllers.dart';
 import 'package:ism_mart/exports/export_widgets.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
+import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/models/user/country_city_model.dart';
+import 'package:ism_mart/screens/login/login_view.dart';
+import 'package:ism_mart/screens/signup/signup_viewmodel.dart';
+import 'package:ism_mart/widgets/back_button.dart';
+import 'package:ism_mart/widgets/become_vendor.dart';
+import 'package:ism_mart/widgets/custom_checkbox.dart';
+import 'package:ism_mart/widgets/no_internet_view.dart';
 import 'package:ism_mart/widgets/obscure_suffix_icon.dart';
 
 import '../../helper/validator.dart';
-import '../../widgets/svg_helper.dart';
-import '../signin/signin_view.dart';
 
 class SignUpView extends StatelessWidget {
   SignUpView({Key? key}) : super(key: key);
@@ -21,32 +27,57 @@ class SignUpView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: Stack(
           children: [
             SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-              child: Form(
-                key: viewModel.signUpFormKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    logoCloseIcon(),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10, bottom: 40),
-                      child: CustomText(
-                        title: langKey.registerGreetings.tr,
-                        style: headline2,
+              child: Column(
+                children: [
+                  Form(
+                    key: viewModel.signUpFormKey,
+                    child: Padding(
+                      padding:
+                          const EdgeInsets.only(top: 30, left: 20, right: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          titleAndBackBtn(),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 20, bottom: 10),
+                            child: CustomText(
+                              title: langKey.createAnAccount.tr,
+                              style: newFontStyle2.copyWith(
+                                fontSize: 20,
+                                color: newColorDarkBlack2,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 25),
+                            child: Text(
+                              langKey.getOnboardUser.tr,
+                              style: newFontStyle0.copyWith(
+                                color: newColorLightGrey2,
+                              ),
+                            ),
+                          ),
+                          firstNameField(),
+                          lastNameField(),
+                          emailTextField(),
+                          phoneNumberTextField(),
+                          passwordTextField(),
+                          confirmPasswordTextField(),
+                          countryPicker(),
+                          cityPicker(),
+                          checkBoxTermCondition(),
+                          signUpBtn(),
+                          alreadyHaveAnAccount(),
+                        ],
                       ),
                     ),
-                    fullNameField(),
-                    emailTextField(),
-                    passwordTextField(),
-                    phoneNumberTextField(),
-                    signUpBtn(),
-                    SizedBox(height: 20),
-                    alreadyHaveAnAccount(),
-                  ],
-                ),
+                  ),
+                  BecomeVendor(),
+                ],
               ),
             ),
             NoInternetView(
@@ -58,77 +89,68 @@ class SignUpView extends StatelessWidget {
     );
   }
 
-  Widget logoCloseIcon() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        SizedBox(
-          height: 70,
-          child: FittedBox(
-            child: buildSvgLogo(),
+  Widget titleAndBackBtn() {
+    return Container(
+      width: double.infinity,
+      child: Stack(
+        alignment: Alignment.centerLeft,
+        children: [
+          Align(
+            alignment: Alignment.center,
+            child: Text(
+              langKey.signUp.tr,
+              style: dmSerifDisplay1.copyWith(
+                fontSize: 32,
+              ),
+            ),
           ),
-        ),
-        IconButton(
-          visualDensity: VisualDensity.compact,
-          onPressed: () {
-            Get.back();
-          },
-          icon: const Icon(Icons.close),
-        ),
-      ],
+          CustomBackButton(
+            onTap: () {
+              Get.back();
+            },
+          ),
+        ],
+      ),
     );
   }
 
-  Widget fullNameField() {
-    return CustomTextField2(
-      contentPadding: EdgeInsets.symmetric(vertical: 16),
-      label: langKey.fullName.tr,
-      controller: viewModel.fullNameController,
-      prefixIcon: Icons.title,
+  Widget firstNameField() {
+    return CustomTextField3(
+      title: langKey.firstName.tr,
+      hintText: 'John',
+      controller: viewModel.firstNameController,
       autoValidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
         return Validator().validateName(value);
       },
-      keyboardType: TextInputType.emailAddress,
+    );
+  }
+
+  Widget lastNameField() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20),
+      child: CustomTextField3(
+        title: langKey.lastName.tr,
+        hintText: 'Kel',
+        //controller: viewModel.fullNameController,
+        autoValidateMode: AutovalidateMode.onUserInteraction,
+        validator: (value) {
+          return Validator().validateName(value);
+        },
+      ),
     );
   }
 
   Widget emailTextField() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20),
-      child: CustomTextField2(
-        contentPadding: EdgeInsets.symmetric(vertical: 16),
-        label: langKey.email.tr,
-        controller: viewModel.emailController,
-        prefixIcon: Icons.email_outlined,
-        autoValidateMode: AutovalidateMode.onUserInteraction,
-        validator: (value) {
-          return Validator().validateEmail(value);
-        },
-        keyboardType: TextInputType.emailAddress,
-      ),
-    );
-  }
-
-  Widget passwordTextField() {
-    return Obx(
-      () => CustomTextField2(
-        contentPadding: EdgeInsets.symmetric(vertical: 16),
-        controller: viewModel.passwordController,
-        prefixIcon: Icons.lock_rounded,
-        label: langKey.password.tr,
-        autoValidateMode: AutovalidateMode.onUserInteraction,
-        validator: (value) {
-          return Validator().validatePassword(value);
-        },
-        obscureText: viewModel.obscurePassword.value ? true : false,
-        suffixIcon: ObscureSuffixIcon(
-          isObscured: viewModel.obscurePassword.value ? true : false,
-          onPressed: () {
-            viewModel.obscurePassword.value = !viewModel.obscurePassword.value;
-          },
-        ),
-      ),
+    return CustomTextField3(
+      title: langKey.email.tr,
+      hintText: 'asha****iq11@gmail.com',
+      controller: viewModel.emailController,
+      autoValidateMode: AutovalidateMode.onUserInteraction,
+      validator: (value) {
+        return Validator().validateEmail(value);
+      },
+      keyboardType: TextInputType.emailAddress,
     );
   }
 
@@ -136,12 +158,13 @@ class SignUpView extends StatelessWidget {
     return Obx(
       () => Padding(
         padding: const EdgeInsets.only(top: 20, bottom: 30),
-        child: CountryCodePickerTextField(
+        child: CountryCodePickerTextField2(
+          title: langKey.phoneNumber.tr,
+          hintText: '336 5563138',
           keyboardType: TextInputType.number,
           controller: viewModel.phoneNumberController,
           initialValue: viewModel.countryCode.value,
           textStyle: bodyText1,
-          labelText: langKey.phone.tr,
           inputFormatters: [
             FilteringTextInputFormatter.allow(RegExp(r'^\d+?\d*')),
           ],
@@ -161,13 +184,202 @@ class SignUpView extends StatelessWidget {
     );
   }
 
+  Widget passwordTextField() {
+    return Obx(
+      () => CustomTextField3(
+        controller: viewModel.passwordController,
+        title: langKey.password.tr,
+        hintText: '● ● ● ● ● ● ● ● ● ●',
+        autoValidateMode: AutovalidateMode.onUserInteraction,
+        validator: (value) {
+          return Validator().validatePassword(value);
+        },
+        obscureText: viewModel.obscurePassword.value ? true : false,
+        suffixIcon: ObscureSuffixIcon(
+          isObscured: viewModel.obscurePassword.value ? true : false,
+          onPressed: () {
+            viewModel.obscurePassword.value = !viewModel.obscurePassword.value;
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget confirmPasswordTextField() {
+    return Obx(
+      () => Padding(
+        padding: const EdgeInsets.symmetric(vertical: 20),
+        child: CustomTextField3(
+          //controller: viewModel.passwordController,
+          title: langKey.confirmPass.tr,
+          hintText: '● ● ● ● ● ● ● ● ● ●',
+          autoValidateMode: AutovalidateMode.onUserInteraction,
+          validator: (value) {
+            return Validator().validateDefaultTxtField(value);
+          },
+          obscureText: viewModel.obscureConfirmPassword.value ? true : false,
+          suffixIcon: ObscureSuffixIcon(
+            isObscured: viewModel.obscureConfirmPassword.value ? true : false,
+            onPressed: () {
+              viewModel.obscureConfirmPassword.value =
+                  !viewModel.obscureConfirmPassword.value;
+            },
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget countryPicker() {
+    return Obx(
+      () => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(bottom: 3),
+            child: Text(
+              langKey.country.tr,
+              style: GoogleFonts.dmSans(
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
+                color: newColorDarkBlack2,
+              ),
+            ),
+          ),
+          DropdownSearch<CountryModel>(
+            popupProps: PopupProps.dialog(
+              showSearchBox: true,
+              dialogProps: DialogProps(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              searchFieldProps: AppConstant.searchFieldProp(),
+            ),
+            items: cityViewModel.authController.countries,
+            itemAsString: (model) => model.name ?? "",
+            dropdownDecoratorProps: DropDownDecoratorProps(
+              baseStyle: newFontStyle0.copyWith(
+                color: newColorDarkBlack2,
+                fontSize: 15,
+              ),
+              dropdownSearchDecoration: InputDecoration(
+                contentPadding: EdgeInsets.only(top: 13.5),
+                suffixIconColor: Color(0xffADBCCB),
+                isDense: true,
+                hintText: langKey.chooseCountry.tr,
+                hintStyle: TextStyle(color: Colors.black),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Color(0xffEEEEEE)),
+                ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Color(0xff929AAB)),
+                ),
+              ),
+            ),
+            onChanged: (CountryModel? newValue) {
+              cityViewModel.setSelectedCountry(newValue!);
+            },
+            selectedItem: authController.newAcc.value == true
+                ? cityViewModel.selectedCountry.value
+                : cityViewModel.authController.selectedCountry.value,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget cityPicker() {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 20),
+      child: Obx(
+        () => authController.cities.isEmpty
+            ? Container()
+            : authController.isLoading.isTrue
+                ? CustomLoading(
+                    isItForWidget: true,
+                    color: kPrimaryColor,
+                  )
+                : Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 3),
+                        child: Text(
+                          langKey.city.tr,
+                          style: GoogleFonts.dmSans(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w700,
+                            color: newColorDarkBlack2,
+                          ),
+                        ),
+                      ),
+                      DropdownSearch<CountryModel>(
+                        popupProps: PopupProps.dialog(
+                          showSearchBox: true,
+                          dialogProps: DialogProps(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                          searchFieldProps: AppConstant.searchFieldProp(),
+                        ),
+                        items: cityViewModel.authController.cities,
+                        itemAsString: (model) => model.name ?? "",
+                        dropdownDecoratorProps: DropDownDecoratorProps(
+                          baseStyle: newFontStyle0.copyWith(
+                            color: newColorDarkBlack2,
+                            fontSize: 15,
+                          ),
+                          dropdownSearchDecoration: InputDecoration(
+                            contentPadding: EdgeInsets.only(top: 13.5),
+                            suffixIconColor: Color(0xffADBCCB),
+                            isDense: true,
+                            hintText: langKey.chooseCountry.tr,
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xffEEEEEE)),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xff929AAB)),
+                            ),
+                          ),
+                        ),
+                        onChanged: (CountryModel? newValue) {
+                          cityViewModel.selectedcity.value =
+                              newValue!.name ?? "";
+                          cityViewModel.setSelectedCity(newValue);
+                        },
+                        selectedItem: authController.newAcc.value == true
+                            ? cityViewModel.selectedCity.value
+                            : cityViewModel.authController.selectedCity.value,
+                      ),
+                    ],
+                  ),
+      ),
+    );
+  }
+
+  Widget checkBoxTermCondition() {
+    return Obx(
+      () => Padding(
+        padding: const EdgeInsets.only(bottom: 25, top: 5),
+        child: CustomCheckBox(
+          title: langKey.termsAndConditionsCheckbox.tr,
+          value: viewModel.termAndCondition.value,
+          onChanged: (value) {
+            viewModel.termAndCondition.value = value;
+          },
+        ),
+      ),
+    );
+  }
+
   Widget signUpBtn() {
     return Obx(
       () => GlobalVariable.showLoader.value
           ? CustomLoading(isItBtn: true)
-          : CustomTextBtn(
+          : CustomRoundedTextBtn(
               title: langKey.signUp.tr,
-              height: 48,
               onPressed: () {
                 viewModel.signUp();
               },
@@ -177,31 +389,30 @@ class SignUpView extends StatelessWidget {
 
   Widget alreadyHaveAnAccount() {
     return Center(
-      child: InkWell(
-        borderRadius: BorderRadius.circular(12),
-        onTap: () {
-          Get.off(() => SignInView());
-        },
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-          child: Column(
-            children: [
-              Text(
-                langKey.alreadyHaveAccount.tr,
-                style: bodyText1.copyWith(
-                  fontSize: 14,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 30),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(12),
+          onTap: () {
+            Get.off(() => LogInView());
+          },
+          child: RichText(
+            text: TextSpan(
+              children: [
+                TextSpan(
+                  text: langKey.alreadyHaveAccount.tr + ' ',
+                  style: newFontStyle0.copyWith(
+                    color: newColorLightGrey2,
+                  ),
                 ),
-              ),
-              SizedBox(height: 3),
-              Text(
-                langKey.signIn.tr,
-                style: bodyText1.copyWith(
-                  decoration: TextDecoration.underline,
-                  color: kPrimaryColor,
-                  fontSize: 14,
+                TextSpan(
+                  text: langKey.signIn.tr,
+                  style: newFontStyle2.copyWith(
+                    color: newColorDarkBlack2,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

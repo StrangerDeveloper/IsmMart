@@ -381,7 +381,16 @@ class English {
         key.send: 'Send',
         key.optional: 'Optional',
         key.verification: 'Verification',
-        key.alreadyHaveAccount: 'Already have an Account!',
+        key.alreadyHaveAccount: 'Already have an Account?',
+        key.or: 'or',
+        key.becomeAVendor: 'Become a vendor',
+        key.joinOurMarketplace:
+            'Join our marketplace and start selling your products today!',
+        key.seamlessShopping: 'Enter details for seamless shopping experience',
+        key.createAnAccount : 'Create an account',
+        key.getOnboardUser : 'Get onboard as a user',
+        key.phoneNumber : 'Phone Number',
+        key.termsAndConditionsCheckbox : 'By creating your account you have to agree with our terms & conditions.',
 
         ///bottom bar
         key.home: 'Home',

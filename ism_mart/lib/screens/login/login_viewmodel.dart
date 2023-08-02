@@ -10,7 +10,7 @@ import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/helper/urls.dart';
 import 'package:ism_mart/screens/setting/settings_viewmodel.dart';
 
-class SignInViewModel extends GetxController {
+class LogInViewModel extends GetxController {
   GlobalKey<FormState> signInFormKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();

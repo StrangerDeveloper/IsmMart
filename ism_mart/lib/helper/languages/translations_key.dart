@@ -405,7 +405,14 @@ const login = "login",
     optional = "optional",
     alreadyHaveAccount = "alreadyHaveAccount",
     signIn = "singIn",
-    signUp = "singUp";
+    signUp = "singUp",
+    or = 'or',
+    becomeAVendor = 'becomeAVendor',
+    joinOurMarketplace = 'joinOurMarketplace',
+    seamlessShopping = 'seamlessShopping',
+    createAnAccount = 'createAnAccount',
+    getOnboardUser = 'getOnboardUser',
+    phoneNumber = 'phoneNumber', termsAndConditionsCheckbox= 'termsAndConditionsCheckbox';
 
 /**
  * Form Validations

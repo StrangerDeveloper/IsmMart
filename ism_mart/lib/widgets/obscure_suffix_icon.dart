@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ism_mart/helper/constants.dart';
 
 class ObscureSuffixIcon extends StatelessWidget {
   final bool isObscured;
@@ -20,7 +21,7 @@ class ObscureSuffixIcon extends StatelessWidget {
         icon: Icon(
           isObscured ? CupertinoIcons.eye_slash : CupertinoIcons.eye,
           size: 20,
-          color: Colors.black,
+          color: newColorLightGrey2,
         ),
         onPressed: onPressed,
       ),

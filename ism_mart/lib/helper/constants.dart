@@ -23,12 +23,16 @@ const kRedColor = Color(0xFFF54141);
 const kLightRedColor = Color(0xBBEF5350);
 const kGoldColor = Color(0xFFFFD700);
 const kOrangeColor = Colors.deepOrange;
-
 Color kGrey900 = Colors.grey[900]!;
 Color kGrey800 = Colors.grey[800]!;
-
 const kDarkColor = Color(0xFF303030);
 const kTransparent = Colors.transparent;
+const newColorNavyBlue = Color(0xff0C1A30);
+const newColorDarkBlack = Color(0xff0E1216);
+const newColorDarkBlack2 = Color(0xff24282D);
+const newColorLightGrey = Color(0xffEEEEEE);
+const newColorLightGrey2 = Color(0xff929AAB);
+const newColorBlue = Color(0xff3669C9);
 
 const kDefaultPadding = 16.0;
 const kLessPadding = 10.0;
@@ -59,6 +63,12 @@ const kVerticalDivider = VerticalDivider(
 const maxImageUploadSizeInMBs = 2.0;
 const fixedRedeemCouponThreshold = 20;
 
+var poppinsH1 = GoogleFonts.poppins(
+  fontSize: 12,
+  fontWeight: FontWeight.w500,
+  color: Colors.white,
+);
+
 /*var headline1 = GoogleFonts.poppins(
     fontSize: 30, color: kGrey900, fontWeight: FontWeight.bold);
 var headline2 = GoogleFonts.poppins(
@@ -71,6 +81,8 @@ var headline5 = GoogleFonts.poppins(
     fontSize: 18, color: kGrey900, fontWeight: FontWeight.bold);
 var headline6 = GoogleFonts.poppins(
     fontSize: 15, color: kGrey900, fontWeight: FontWeight.bold);
+
+
 
 var bodyText1 = GoogleFonts.poppins(
     fontSize: 14, fontWeight: FontWeight.w600, color: Colors.black);
@@ -108,6 +120,33 @@ var appBarTitleSize = GoogleFonts.lato(
     color: kPrimaryColor, fontSize: 15, fontWeight: FontWeight.bold);
 var textStylePoppins = GoogleFonts.lato(
   color: Colors.black,
+);
+
+var dmSerifDisplay1 = GoogleFonts.dmSerifDisplay(
+  color: newColorDarkBlack2,
+  fontSize: 14,
+);
+
+var newFontStyle0 = GoogleFonts.dmSans(
+  fontWeight: FontWeight.w400,
+  fontSize: 14,
+);
+var newFontStyle1 = GoogleFonts.dmSans(
+  fontWeight: FontWeight.w500,
+  color: newColorNavyBlue,
+);
+var newFontStyle2 = GoogleFonts.dmSans(
+  fontWeight: FontWeight.w700,
+  color: newColorNavyBlue,
+);
+var newFontStyle3 = GoogleFonts.dmSans(
+  fontSize: 16,
+  fontWeight: FontWeight.w700,
+);
+var newFontStyle4 = GoogleFonts.dmSans(
+  fontSize: 16,
+  fontWeight: FontWeight.w400,
+  color: newColorNavyBlue,
 );
 
 class AppConstant {

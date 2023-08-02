@@ -6,24 +6,28 @@ import 'package:ism_mart/controllers/controllers.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/exports/exports_model.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/screens/update_vendor_profile/update_vendor_profile_viewmodel.dart';
 import 'package:ism_mart/widgets/custom_appbar.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
 import 'package:ism_mart/widgets/pick_image.dart';
-import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
+
 import '../../helper/validator.dart';
 
 class UpdateVendorProfileView extends StatelessWidget {
   UpdateVendorProfileView({super.key});
 
-  final UpdateVendorProfileViewModel viewModel = Get.put(UpdateVendorProfileViewModel());
+  final UpdateVendorProfileViewModel viewModel =
+      Get.put(UpdateVendorProfileViewModel());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: viewModel.isRegisterScreen
-          ? langKey.vendorRegistration.tr
-          : langKey.updateVendorDetails.tr,),
+      appBar: CustomAppBar(
+        title: viewModel.isRegisterScreen
+            ? langKey.vendorRegistration.tr
+            : langKey.updateVendorDetails.tr,
+      ),
       body: Stack(
         children: [
           SingleChildScrollView(
@@ -124,7 +128,8 @@ class UpdateVendorProfileView extends StatelessWidget {
             bottom: 6,
             child: InkWell(
               onTap: () async {
-                viewModel.coverImageFile.value =  await PickImage().pickSingleImage();
+                viewModel.coverImageFile.value =
+                    await PickImage().pickSingleImage();
               },
               child: Container(
                 padding: EdgeInsets.all(5),
@@ -288,6 +293,7 @@ class UpdateVendorProfileView extends StatelessWidget {
         dropdownDecoratorProps: DropDownDecoratorProps(
           baseStyle: bodyText1,
           dropdownSearchDecoration: InputDecoration(
+            isDense: true,
             labelText: langKey.selectCountry.tr,
             labelStyle: bodyText1,
             hintText: langKey.chooseCountry.tr,
@@ -335,6 +341,7 @@ class UpdateVendorProfileView extends StatelessWidget {
                   dropdownDecoratorProps: DropDownDecoratorProps(
                     baseStyle: bodyText1,
                     dropdownSearchDecoration: InputDecoration(
+                      isDense: true,
                       labelText: langKey.selectCity.tr,
                       labelStyle: bodyText1,
                       hintText: langKey.chooseCity.tr,
