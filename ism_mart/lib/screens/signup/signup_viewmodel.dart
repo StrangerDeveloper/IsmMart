@@ -56,6 +56,7 @@ class SignUpViewModel extends GetxController {
 
           Map<String, dynamic> param = {
             "firstName": firstNameController.text,
+            "lastName": lastNameController.text,
             "email": emailController.text,
             "phone": phoneNumber,
             "password": passwordController.text,
