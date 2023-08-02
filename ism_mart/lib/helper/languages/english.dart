@@ -545,6 +545,8 @@ class English {
         key.titleReq: 'Title is required',
         key.updateProduct: 'Update Product',
         key.stock: 'Stock',
+        key.countryReq: 'Select Country',
+        key.cityReq: 'Select City',
 
         ///empty screens
         key.emptyCart: 'Your cart is empty',

@@ -441,7 +441,9 @@ const email = "email",
     forgotPassword = "forgotPassword",
     proceed = 'proceed',
     currentPassword = 'currentPassword',
-    changePasswordDesc = 'changePasswordDesc';
+    changePasswordDesc = 'changePasswordDesc',
+    countryReq = "countryReq",
+    cityReq = "cityReq";
 
 const storeName = "storeName",
     storeNameReq = "storeNameRequired",

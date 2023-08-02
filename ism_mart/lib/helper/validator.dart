@@ -64,4 +64,15 @@ class Validator {
       return null;
     }
   }
+
+  ///Confirm Password
+  String? validateConfirmPassword(String? value1, String? value2){
+    if(GetUtils.isBlank(value1)!){
+      return langKey.fieldIsRequired.tr;
+    } else if(value1 != value2){
+      return langKey.passwordNotMatched.tr;
+    } else{
+      return null;
+    }
+  }
 }
