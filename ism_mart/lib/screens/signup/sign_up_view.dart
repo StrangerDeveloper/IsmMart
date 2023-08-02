@@ -9,6 +9,7 @@ import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/models/user/country_city_model.dart';
+import 'package:ism_mart/screens/login/login_view.dart';
 import 'package:ism_mart/screens/signup/signup_viewmodel.dart';
 import 'package:ism_mart/widgets/back_button.dart';
 import 'package:ism_mart/widgets/become_vendor.dart';
@@ -17,7 +18,6 @@ import 'package:ism_mart/widgets/no_internet_view.dart';
 import 'package:ism_mart/widgets/obscure_suffix_icon.dart';
 
 import '../../helper/validator.dart';
-import '../signin/signin_view.dart';
 
 class SignUpView extends StatelessWidget {
   SignUpView({Key? key}) : super(key: key);
@@ -394,7 +394,7 @@ class SignUpView extends StatelessWidget {
         child: InkWell(
           borderRadius: BorderRadius.circular(12),
           onTap: () {
-            Get.off(() => SignInView());
+            Get.off(() => LogInView());
           },
           child: RichText(
             text: TextSpan(
