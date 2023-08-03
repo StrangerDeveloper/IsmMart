@@ -56,12 +56,12 @@ class VendorSignUp3View extends StatelessWidget {
                         onTap: () {},
                       ),
                       imageLayoutContainer(
-                        title: 'Shop Image',
+                        title: langKey.shopImage.tr,
                         filePath: '',
                         onTap: () {},
                       ),
                       imageLayoutContainer(
-                        title: 'Shop Cover Image',
+                        title: langKey.shopCoverImage.tr,
                         filePath: '',
                         onTap: () {},
                       ),
@@ -202,8 +202,8 @@ class VendorSignUp3View extends StatelessWidget {
 
   Widget bankNameTextField() {
     return CustomTextField3(
-      title: 'Bank Name',
-      hintText: 'Your Bank Name',
+      title: langKey.bankName.tr,
+      hintText: langKey.yourBankName.tr,
       //controller: viewModel.emailController,
       autoValidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
@@ -217,8 +217,8 @@ class VendorSignUp3View extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: CustomTextField3(
-        title: 'Bank Account Title',
-        hintText: 'Your Account Title',
+        title: langKey.accountTitle.tr,
+        hintText: langKey.yourAccountTitle.tr,
         //controller: viewModel.emailController,
         autoValidateMode: AutovalidateMode.onUserInteraction,
         validator: (value) {
@@ -231,8 +231,8 @@ class VendorSignUp3View extends StatelessWidget {
 
   Widget bankAccountNumberTextField() {
     return CustomTextField3(
-      title: 'Bank Account Number',
-      hintText: 'Your Account Number',
+      title: langKey.bankAccountNumber.tr,
+      hintText: langKey.yourAccountNumber.tr,
       //controller: viewModel.emailController,
       autoValidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
