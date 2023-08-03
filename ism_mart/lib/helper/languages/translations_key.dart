@@ -441,7 +441,23 @@ const login = "login",
     celebrateFreedomAndSavings = 'celebrateFreedomAndSavings',
     descriptionOfFreedomAndSavings = 'descriptionOfFreedomAndSavings',
     boostYourBusiness = 'boostYourBusiness',
-    descriptionOfBoostYourBusiness = 'descriptionOfBoostYourBusiness';
+    descriptionOfBoostYourBusiness = 'descriptionOfBoostYourBusiness',
+    shopCountry = 'shopCountry',
+    shopCity = 'shopCity',
+    yourOwnerName = 'yourOwnerName',
+    ownerCNIC = 'ownerCNIC',
+    yourOwnerCNIC = 'yourOwnerCNIC',
+    shopCategory = 'shopCategory',
+    yourShopCategory = 'yourShopCategory',
+    shopDescription = 'shopDescription',
+    yourShopDescription = 'yourShopDescription',
+    shopImage = 'shopImage',
+    shopCoverImage = 'shopCoverImage',
+    yourBankName = 'yourBankName',
+    yourAccountTitle = 'yourAccountTitle',
+    accountTitle = 'accountTitle',
+    bankAccountNumber = 'bankAccountNumber',
+    yourAccountNumber = 'yourAccountNumber';
 
 /**
  * Form Validations

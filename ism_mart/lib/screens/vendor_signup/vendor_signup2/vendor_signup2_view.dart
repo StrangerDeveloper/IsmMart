@@ -1,11 +1,14 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ism_mart/controllers/controllers.dart';
 import 'package:ism_mart/exports/export_widgets.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/models/user/country_city_model.dart';
 import 'package:ism_mart/screens/vendor_signup/vendor_signup2/vendor_signup2_viewmodel.dart';
 import 'package:ism_mart/screens/vendor_signup/vendor_signup3/vendor_signup3_view.dart';
 import 'package:ism_mart/widgets/back_button.dart';
@@ -37,31 +40,15 @@ class VendorSignUp2View extends StatelessWidget {
                       createAVendorAccount(),
                       progress(),
                       shopNameField(),
+                      shopCategoryField(),
                       shopAddressField(),
+                      shopPhoneNoTextField(),
+                      countryPicker(),
+                      cityPicker(),
+                      ownerNameField(),
+                      ownerCNICField(),
                       ntnTextField(),
-                      phoneNumberTextField(),
-                      imageLayoutContainer(
-                        title: 'CNIC',
-                        subTitle: langKey.frontSide.tr,
-                        filePath: '',
-                        onTap: () {},
-                      ),
-                      imageLayoutContainer(
-                        title: 'CNIC',
-                        subTitle: langKey.backSide.tr,
-                        filePath: '',
-                        onTap: () {},
-                      ),
-                      imageLayoutContainer(
-                        title: langKey.legalDocument.tr,
-                        filePath: '',
-                        onTap: () {},
-                      ),
-                      imageLayoutContainer(
-                        title: langKey.shopLogoImage.tr,
-                        filePath: '',
-                        onTap: () {},
-                      ),
+                      shopDescriptionTextField(),
                       submitBtn(),
                     ],
                   ),
@@ -209,38 +196,10 @@ class VendorSignUp2View extends StatelessWidget {
     );
   }
 
-  Widget shopAddressField() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20),
-      child: CustomTextField3(
-        title: langKey.shopAddress.tr,
-        hintText: langKey.youShopAddress.tr,
-        //controller: viewModel.fullNameController,
-        autoValidateMode: AutovalidateMode.onUserInteraction,
-        validator: (value) {
-          return Validator().validateName(value);
-        },
-      ),
-    );
-  }
-
-  Widget ntnTextField() {
-    return CustomTextField3(
-      title: 'NTN (${langKey.ifAvailable.tr})',
-      hintText: langKey.yourShopNTNNumber.tr,
-      //controller: viewModel.emailController,
-      autoValidateMode: AutovalidateMode.onUserInteraction,
-      validator: (value) {
-        return Validator().validateEmail(value);
-      },
-      keyboardType: TextInputType.emailAddress,
-    );
-  }
-
-  Widget phoneNumberTextField() {
+  Widget shopPhoneNoTextField() {
     return Obx(
       () => Padding(
-        padding: const EdgeInsets.only(top: 20, bottom: 30),
+        padding: const EdgeInsets.only(top: 20, bottom: 20),
         child: CountryCodePickerTextField2(
           title: langKey.shopNumber.tr,
           hintText: '336 5563138',
@@ -267,6 +226,218 @@ class VendorSignUp2View extends StatelessWidget {
     );
   }
 
+  Widget countryPicker() {
+    return Obx(
+      () => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(bottom: 3),
+            child: Text(
+              langKey.shopCountry.tr,
+              style: GoogleFonts.dmSans(
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
+                color: newColorDarkBlack2,
+              ),
+            ),
+          ),
+          DropdownSearch<CountryModel>(
+            popupProps: PopupProps.dialog(
+              showSearchBox: true,
+              dialogProps: DialogProps(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              searchFieldProps: AppConstant.searchFieldProp(),
+            ),
+            items: cityViewModel.authController.countries,
+            itemAsString: (model) => model.name ?? "",
+            dropdownDecoratorProps: DropDownDecoratorProps(
+              baseStyle: newFontStyle0.copyWith(
+                color: newColorDarkBlack2,
+                fontSize: 15,
+              ),
+              dropdownSearchDecoration: InputDecoration(
+                contentPadding: EdgeInsets.only(top: 13.5),
+                suffixIconColor: Color(0xffADBCCB),
+                isDense: true,
+                hintText: langKey.chooseCountry.tr,
+                hintStyle: TextStyle(color: Colors.black),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Color(0xffEEEEEE)),
+                ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Color(0xff929AAB)),
+                ),
+              ),
+            ),
+            onChanged: (CountryModel? newValue) {
+              cityViewModel.setSelectedCountry(newValue!);
+            },
+            selectedItem: authController.newAcc.value == true
+                ? cityViewModel.selectedCountry.value
+                : cityViewModel.authController.selectedCountry.value,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget cityPicker() {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 20),
+      child: Obx(
+        () => authController.cities.isEmpty
+            ? Container()
+            : authController.isLoading.isTrue
+                ? CustomLoading(
+                    isItForWidget: true,
+                    color: kPrimaryColor,
+                  )
+                : Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 3),
+                        child: Text(
+                          langKey.shopCity.tr,
+                          style: GoogleFonts.dmSans(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w700,
+                            color: newColorDarkBlack2,
+                          ),
+                        ),
+                      ),
+                      DropdownSearch<CountryModel>(
+                        popupProps: PopupProps.dialog(
+                          showSearchBox: true,
+                          dialogProps: DialogProps(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                          searchFieldProps: AppConstant.searchFieldProp(),
+                        ),
+                        items: cityViewModel.authController.cities,
+                        itemAsString: (model) => model.name ?? "",
+                        dropdownDecoratorProps: DropDownDecoratorProps(
+                          baseStyle: newFontStyle0.copyWith(
+                            color: newColorDarkBlack2,
+                            fontSize: 15,
+                          ),
+                          dropdownSearchDecoration: InputDecoration(
+                            contentPadding: EdgeInsets.only(top: 13.5),
+                            suffixIconColor: Color(0xffADBCCB),
+                            isDense: true,
+                            hintText: langKey.chooseCountry.tr,
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xffEEEEEE)),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xff929AAB)),
+                            ),
+                          ),
+                        ),
+                        onChanged: (CountryModel? newValue) {
+                          cityViewModel.selectedcity.value =
+                              newValue!.name ?? "";
+                          cityViewModel.setSelectedCity(newValue);
+                        },
+                        selectedItem: authController.newAcc.value == true
+                            ? cityViewModel.selectedCity.value
+                            : cityViewModel.authController.selectedCity.value,
+                      ),
+                    ],
+                  ),
+      ),
+    );
+  }
+
+  Widget ownerNameField() {
+    return CustomTextField3(
+      title: langKey.ownerName.tr,
+      hintText: langKey.yourOwnerName.tr,
+      //controller: viewModel.firstNameController,
+      autoValidateMode: AutovalidateMode.onUserInteraction,
+      validator: (value) {
+        return Validator().validateName(value);
+      },
+    );
+  }
+
+  Widget ownerCNICField() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20),
+      child: CustomTextField3(
+        title: langKey.ownerCNIC.tr,
+        hintText: langKey.yourOwnerCNIC.tr,
+        //controller: viewModel.firstNameController,
+        autoValidateMode: AutovalidateMode.onUserInteraction,
+        validator: (value) {
+          return Validator().validateName(value);
+        },
+      ),
+    );
+  }
+
+  Widget shopCategoryField() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20),
+      child: CustomTextField3(
+        title: langKey.shopCategory.tr,
+        hintText: langKey.yourShopCategory.tr,
+        //controller: viewModel.firstNameController,
+        autoValidateMode: AutovalidateMode.onUserInteraction,
+        validator: (value) {
+          return Validator().validateName(value);
+        },
+      ),
+    );
+  }
+
+  Widget shopAddressField() {
+    return CustomTextField3(
+      title: langKey.shopAddress.tr,
+      hintText: langKey.youShopAddress.tr,
+      //controller: viewModel.fullNameController,
+      autoValidateMode: AutovalidateMode.onUserInteraction,
+      validator: (value) {
+        return Validator().validateName(value);
+      },
+    );
+  }
+
+  Widget ntnTextField() {
+    return CustomTextField3(
+      title: 'NTN (${langKey.ifAvailable.tr})',
+      hintText: langKey.yourShopNTNNumber.tr,
+      //controller: viewModel.emailController,
+      autoValidateMode: AutovalidateMode.onUserInteraction,
+      validator: (value) {
+        return Validator().validateEmail(value);
+      },
+      keyboardType: TextInputType.emailAddress,
+    );
+  }
+
+  Widget shopDescriptionTextField() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20),
+      child: CustomTextField3(
+        title: langKey.shopDescription.tr,
+        hintText: langKey.yourShopDescription.tr,
+        //controller: viewModel.emailController,
+        autoValidateMode: AutovalidateMode.onUserInteraction,
+        validator: (value) {
+          return Validator().validateEmail(value);
+        },
+        keyboardType: TextInputType.emailAddress,
+      ),
+    );
+  }
+
   Widget submitBtn() {
     return Padding(
       padding: const EdgeInsets.only(top: 25, bottom: 25),
@@ -280,74 +451,6 @@ class VendorSignUp2View extends StatelessWidget {
                 },
               ),
       ),
-    );
-  }
-
-  Widget imageLayoutContainer({
-    required void Function() onTap,
-    required String title,
-    String? subTitle,
-    required String filePath,
-  }) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            Text(
-              title,
-              style: newFontStyle2.copyWith(
-                color: newColorDarkBlack,
-              ),
-            ),
-            if (subTitle != null)
-              Padding(
-                padding: const EdgeInsets.only(left: 8),
-                child: Text(
-                  subTitle,
-                  style: newFontStyle0.copyWith(
-                    color: newColorBlue4,
-                  ),
-                ),
-              ),
-            Spacer(),
-            Text(
-              langKey.lessThanMb.tr,
-              style: newFontStyle0.copyWith(
-                color: newColorBlue4,
-                fontSize: 12,
-              ),
-            ),
-          ],
-        ),
-        SizedBox(height: 15),
-        Row(
-          children: [
-            InkWell(
-              onTap: onTap,
-              child: Text(
-                langKey.chooseFile.tr,
-                style: newFontStyle0.copyWith(
-                  color: red2,
-                  fontSize: 12,
-                ),
-              ),
-            ),
-            SizedBox(width: 4),
-            Text(
-              filePath == '' ? langKey.noFileChosen.tr : filePath,
-              style: newFontStyle0.copyWith(
-                color: newColorBlue4,
-                fontSize: 12,
-              ),
-            ),
-          ],
-        ),
-        Divider(
-          color: Color(0xffEEEEEE),
-          thickness: 1,
-          height: 30,
-        ),
-      ],
     );
   }
 }
