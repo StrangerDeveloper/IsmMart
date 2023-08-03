@@ -444,7 +444,14 @@ const login = "login",
     shopCategory = 'shopCategory',
     yourShopCategory = 'yourShopCategory',
     shopDescription = 'shopDescription',
-    yourShopDescription = 'yourShopDescription';
+    yourShopDescription = 'yourShopDescription',
+    shopImage = 'shopImage',
+    shopCoverImage = 'shopCoverImage',
+    yourBankName = 'yourBankName',
+    yourAccountTitle = 'yourAccountTitle',
+    accountTitle = 'accountTitle',
+    bankAccountNumber = 'bankAccountNumber',
+    yourAccountNumber = 'yourAccountNumber';
 
 /**
  * Form Validations

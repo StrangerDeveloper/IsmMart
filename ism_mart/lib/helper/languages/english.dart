@@ -422,6 +422,13 @@ class English {
         key.yourShopCategory : 'Your Shop Category',
         key.shopDescription : 'Shop Description',
         key.yourShopDescription : 'Your Shop Description',
+        key.shopImage : 'Shop Image',
+        key.shopCoverImage : 'Shop Cover Image',
+        key.yourBankName : 'Your Bank Name',
+        key.yourAccountTitle : 'Your Account Title',
+        key.accountTitle : 'Bank Account Title',
+        key.bankAccountNumber : 'Bank Account Number',
+        key.yourAccountNumber : 'Your Account Number',
 
         ///bottom bar
         key.home: 'Home',
