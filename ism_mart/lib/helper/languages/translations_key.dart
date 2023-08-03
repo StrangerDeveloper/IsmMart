@@ -435,7 +435,13 @@ const login = "login",
     waitForVerification = 'waitForVerification',
     vendor = 'vendor',
     submitted = 'submitted',
-    lastStep = 'lastStep';
+    lastStep = 'lastStep',
+    availAmazingDiscount = 'availAmazingDiscount',
+    descriptionOfDiscount = 'descriptionOfDiscount',
+    celebrateFreedomAndSavings = 'celebrateFreedomAndSavings',
+    descriptionOfFreedomAndSavings = 'descriptionOfFreedomAndSavings',
+    boostYourBusiness = 'boostYourBusiness',
+    descriptionOfBoostYourBusiness = 'descriptionOfBoostYourBusiness';
 
 /**
  * Form Validations

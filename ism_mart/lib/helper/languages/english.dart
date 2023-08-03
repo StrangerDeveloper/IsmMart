@@ -414,6 +414,14 @@ class English {
         key.submitted : 'submitted',
         key.lastStep : 'Last Step',
 
+        //onboard screen
+        key.availAmazingDiscount: 'Avail amazing discounts',
+        key.descriptionOfDiscount: 'Save big with 30% off on all our products!',
+        key.celebrateFreedomAndSavings : 'Celebrate freedom and savings',
+        key.descriptionOfFreedomAndSavings : 'Exclusive offers for Independence Day!',
+        key.boostYourBusiness : 'Boost your business with ISMMART',
+        key.descriptionOfBoostYourBusiness : 'Zero platform registration fee for vendors!',
+
         ///bottom bar
         key.home: 'Home',
         key.categories: 'Categories',

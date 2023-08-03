@@ -15,11 +15,13 @@ import 'package:ism_mart/screens/my_products/my_product_view.dart';
 import 'package:ism_mart/screens/product_questions/product_questions_view.dart';
 import 'package:ism_mart/screens/search_details/search_details_view.dart';
 import 'package:ism_mart/screens/single_product_full_image/single_product_full_image_view.dart';
+import 'package:ism_mart/screens/splash/splash_view.dart';
 import 'package:ism_mart/screens/vendor_question/vendor_question_view.dart';
 import 'package:ism_mart/screens/verify_password/verify_password_view.dart';
 
 import '../screens/contact_us/contact_us_view.dart';
 import '../screens/faq/faq_view.dart';
+import '../screens/onBoard/onboard_view.dart';
 import '../screens/seller_store_detail/seller_store_detail_view.dart';
 import '../screens/setting/settings_view.dart';
 import '../screens/signup/sign_up_view.dart';
@@ -32,6 +34,8 @@ import '../screens/vendor_profile/vendor_profile_view.dart';
 
 class Routes {
   static const initRoute = "/";
+  static const onBoard = "/onBoard";
+  static const bottomNavigation = "/bottomNavigation";
   static const addProduct = "/addProduct";
   static const allDispute = "/allDispute";
   static const buyerOrdersRoute = "/buyerOrders";
@@ -76,6 +80,16 @@ class Routes {
   static final pages = [
     GetPage(
       name: initRoute,
+      page: () => SplashView(),
+      //binding: BaseBindings(),
+    ),
+    GetPage(
+      name: onBoard,
+      page: () => OnBoardView(),
+      //binding: BaseBindings(),
+    ),
+    GetPage(
+      name: bottomNavigation,
       page: () => const BottomNavigationView(),
       binding: BaseBindings(),
     ),
