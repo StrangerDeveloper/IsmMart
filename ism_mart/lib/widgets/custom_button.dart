@@ -73,7 +73,7 @@ class CustomRoundedTextBtn extends StatelessWidget {
     this.title = "",
     this.width = double.infinity,
     required this.onPressed,
-    this.backgroundColor = kPrimaryColor,
+    this.backgroundColor = newColorDarkBlack,
     this.foregroundColor = Colors.white,
     this.child,
     this.padding,

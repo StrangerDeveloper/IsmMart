@@ -34,6 +34,8 @@ dependencies:
   upgrader: ^7.1.0
   #webview_flutter: ^4.2.2
   flutter_inappwebview: ^5.7.2+3
+  percent_indicator: ^4.2.3
+
 
 dev_dependencies:
   flutter_launcher_icons: ^0.13.1

@@ -79,7 +79,6 @@ class Routes {
       page: () => const BottomNavigationView(),
       binding: BaseBindings(),
     ),
-
     GetPage(
       name: addProduct,
       page: () => AddProductView(),
