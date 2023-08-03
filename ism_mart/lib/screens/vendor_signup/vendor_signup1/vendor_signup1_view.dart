@@ -147,9 +147,9 @@ class VendorSignUp1View extends StatelessWidget {
 
   Widget firstNameField() {
     return CustomTextField3(
-      title: langKey.firstName.tr,
+      title: langKey.firstName.tr + '*',
       hintText: 'John',
-      //controller: viewModel.firstNameController,
+      controller: viewModel.firstNameController,
       autoValidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
         return Validator().validateName(value);
@@ -161,9 +161,9 @@ class VendorSignUp1View extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: CustomTextField3(
-        title: langKey.lastName.tr,
+        title: langKey.lastName.tr + '*',
         hintText: 'Kel',
-        //controller: viewModel.fullNameController,
+        controller: viewModel.lastNameController,
         autoValidateMode: AutovalidateMode.onUserInteraction,
         validator: (value) {
           return Validator().validateName(value);
@@ -174,9 +174,9 @@ class VendorSignUp1View extends StatelessWidget {
 
   Widget emailTextField() {
     return CustomTextField3(
-      title: langKey.email.tr,
+      title: langKey.email.tr + '*',
       hintText: 'asha****iq11@gmail.com',
-      //controller: viewModel.emailController,
+      controller: viewModel.emailController,
       autoValidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
         return Validator().validateEmail(value);
@@ -190,7 +190,10 @@ class VendorSignUp1View extends StatelessWidget {
       () => Padding(
         padding: const EdgeInsets.only(top: 20, bottom: 30),
         child: CountryCodePickerTextField2(
-          title: langKey.phoneNumber.tr,
+          validator: (value){
+            return Validator().validatePhoneNumber(value);
+          },
+          title: langKey.phoneNumber.tr + '*',
           hintText: '336 5563138',
           keyboardType: TextInputType.number,
           controller: viewModel.phoneNumberController,
@@ -219,7 +222,7 @@ class VendorSignUp1View extends StatelessWidget {
     return Obx(
       () => CustomTextField3(
         controller: viewModel.passwordController,
-        title: langKey.password.tr,
+        title: langKey.password.tr + '*',
         hintText: '● ● ● ● ● ● ● ● ● ●',
         autoValidateMode: AutovalidateMode.onUserInteraction,
         validator: (value) {
@@ -241,12 +244,12 @@ class VendorSignUp1View extends StatelessWidget {
       () => Padding(
         padding: const EdgeInsets.symmetric(vertical: 20),
         child: CustomTextField3(
-          //controller: viewModel.passwordController,
-          title: langKey.confirmPass.tr,
+          controller: viewModel.confirmPasswordController,
+          title: langKey.confirmPass.tr + '*',
           hintText: '● ● ● ● ● ● ● ● ● ●',
           autoValidateMode: AutovalidateMode.onUserInteraction,
           validator: (value) {
-            return Validator().validateDefaultTxtField(value);
+            return Validator().validateConfirmPassword(value, viewModel.passwordController.text);
           },
           obscureText: viewModel.obscureConfirmPassword.value ? true : false,
           suffixIcon: ObscureSuffixIcon(
@@ -269,7 +272,7 @@ class VendorSignUp1View extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: 3),
             child: Text(
-              langKey.country.tr,
+              langKey.country.tr + '*',
               style: GoogleFonts.dmSans(
                 fontSize: 14,
                 fontWeight: FontWeight.w700,
@@ -310,11 +313,25 @@ class VendorSignUp1View extends StatelessWidget {
             ),
             onChanged: (CountryModel? newValue) {
               cityViewModel.setSelectedCountry(newValue!);
-            },
+              viewModel.countryID.value = newValue.id!;
+              cityViewModel.selectedCity.value = CountryModel();
+              cityViewModel.cityId.value = 0;
+              cityViewModel.authController.selectedCity.value = CountryModel();
+              viewModel.countryErrorVisibility.value = false;
+              },
             selectedItem: authController.newAcc.value == true
                 ? cityViewModel.selectedCountry.value
                 : cityViewModel.authController.selectedCountry.value,
           ),
+          Visibility(
+            visible: viewModel.countryErrorVisibility.value,
+            child: Text(
+              langKey.countryReq.tr,
+              style: GoogleFonts.dmSans(
+                color: Colors.red.shade700,
+              ),
+            ),
+          )
         ],
       ),
     );
@@ -337,7 +354,7 @@ class VendorSignUp1View extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 3),
                         child: Text(
-                          langKey.city.tr,
+                          langKey.city.tr + '*',
                           style: GoogleFonts.dmSans(
                             fontSize: 14,
                             fontWeight: FontWeight.w700,
@@ -379,11 +396,22 @@ class VendorSignUp1View extends StatelessWidget {
                           cityViewModel.selectedcity.value =
                               newValue!.name ?? "";
                           cityViewModel.setSelectedCity(newValue);
+                          viewModel.cityID.value = newValue.id!;
+                          viewModel.cityErrorVisibility.value = false;
                         },
                         selectedItem: authController.newAcc.value == true
                             ? cityViewModel.selectedCity.value
                             : cityViewModel.authController.selectedCity.value,
                       ),
+                      Visibility(
+                        visible: viewModel.cityErrorVisibility.value,
+                        child: Text(
+                          langKey.cityReq.tr,
+                          style: GoogleFonts.dmSans(
+                            color: Colors.red.shade700,
+                          ),
+                        ),
+                      )
                     ],
                   ),
       ),
@@ -446,7 +474,7 @@ class VendorSignUp1View extends StatelessWidget {
           : CustomRoundedTextBtn(
               title: 'Create Account',
               onPressed: () {
-                Get.to(()=>VendorSignUp2View());
+                viewModel.signUp();
               },
             ),
     );

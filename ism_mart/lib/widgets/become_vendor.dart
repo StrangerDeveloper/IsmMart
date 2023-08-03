@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/helper/constants.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/screens/vendor_signup/vendor_signup1/vendor_signup1_view.dart';
 import 'package:ism_mart/widgets/custom_button.dart';
 
 class BecomeVendor extends StatelessWidget {
@@ -43,7 +44,9 @@ class BecomeVendor extends StatelessWidget {
             radius: 30,
             height: 34,
             width: 145,
-            onPressed: () {},
+            onPressed: () {
+              Get.off(() => VendorSignUp1View());
+            },
             child: Text(
               buttonText ?? langKey.becomeAVendor.tr,
               style: poppinsH1,

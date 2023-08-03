@@ -16,6 +16,7 @@ import 'package:ism_mart/screens/product_questions/product_questions_view.dart';
 import 'package:ism_mart/screens/search_details/search_details_view.dart';
 import 'package:ism_mart/screens/single_product_full_image/single_product_full_image_view.dart';
 import 'package:ism_mart/screens/vendor_question/vendor_question_view.dart';
+import 'package:ism_mart/screens/vendor_signup/vendor_signup1/vendor_signup1_view.dart';
 import 'package:ism_mart/screens/verify_password/verify_password_view.dart';
 
 import '../screens/contact_us/contact_us_view.dart';
@@ -29,6 +30,8 @@ import '../screens/update_buyer_profile/update_buyer_profile_view.dart';
 import '../screens/update_vendor_profile/update_vendor_profile_view.dart';
 import '../screens/vendor_orders/vendor_orders_view.dart';
 import '../screens/vendor_profile/vendor_profile_view.dart';
+import '../screens/vendor_signup/vendor_signup2/vendor_signup2_view.dart';
+import '../screens/vendor_signup/vendor_signup3/vendor_signup3_view.dart';
 
 class Routes {
   static const initRoute = "/";
@@ -58,6 +61,9 @@ class Routes {
   static const sellerHomeRoute = "/sellerDash";
   static const settings = "/settings";
   static const loginRoute = "/signIn";
+  static const vendorSignUp1 = "/vendorSignUp1";
+  static const vendorSignUp2 = "/vendorSignUp1";
+  static const vendorSignUp3 = "/vendorSignUp3";
   static const registerRoute = "/register";
   static const updateProduct = "/updateProduct";
   static const updateVendor = "/updateVendor";
@@ -220,6 +226,18 @@ class Routes {
     GetPage(
       name: vendorDetail,
       page: () => VendorProfileView(),
+    ),
+    GetPage(
+        name: vendorSignUp1,
+        page: () => VendorSignUp1View(),
+    ),
+    GetPage(
+      name: vendorSignUp2,
+      page: () => VendorSignUp2View(),
+    ),
+    GetPage(
+      name: vendorSignUp3,
+      page: () => VendorSignUp3View(),
     ),
     GetPage(
       name: vendorOrders,

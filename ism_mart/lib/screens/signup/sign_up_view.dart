@@ -163,11 +163,12 @@ class SignUpView extends StatelessWidget {
             return Validator().validatePhoneNumber(value);
           },
           title: langKey.phoneNumber.tr,
-          hintText: '12345678',
+          hintText: '336 5563138',
           keyboardType: TextInputType.number,
           controller: viewModel.phoneNumberController,
           initialValue: viewModel.countryCode.value,
           textStyle: bodyText1,
+          autoValidateMode: AutovalidateMode.onUserInteraction,
           inputFormatters: [
             FilteringTextInputFormatter.allow(RegExp(r'^\d+?\d*')),
           ],

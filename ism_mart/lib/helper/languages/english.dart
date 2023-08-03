@@ -563,6 +563,8 @@ class English {
         key.prodDiscountReq: 'Discount is required',
         key.prodSku: 'Product SKU',
         key.prodSkuReq: 'Product sku required',
+        key.cityReq: 'Select City',
+        key.countryReq: 'Select Country',
 
         key.email: "Email",
         key.emailReq: 'Email is required!.',

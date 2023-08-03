@@ -50,7 +50,7 @@ class UserModel {
   factory UserModel.fromErrorJson(json) => UserModel(error: json);
 
   factory UserModel.fromJson(JSON json) => UserModel(
-        id: json["id"],
+        id: json["id"] ?? null,
         firstName: json["firstName"] ?? "",
         lastName: json["lastName"] ?? "",
         name: json['name'] == null ? null : json['name'],

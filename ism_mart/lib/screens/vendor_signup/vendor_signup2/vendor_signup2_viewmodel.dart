@@ -15,6 +15,12 @@ class VendorSignUp2ViewModel extends GetxController{
   RxString countryCode = '+92'.obs;
   RxBool termAndCondition = false.obs;
 
+  @override
+  void onInit() {
+    // print(Get.arguments['firstPageDetails']);
+    super.onInit();
+  }
+
   validatorPhoneNumber(String? value) {
     if (GetUtils.isBlank(value)!) {
       phoneErrorText.value = langKey.fieldIsRequired.tr;
