@@ -413,6 +413,15 @@ class English {
         key.vendor : 'Vendor',
         key.submitted : 'submitted',
         key.lastStep : 'Last Step',
+        key.shopCountry : 'Shop Country',
+        key.shopCity : 'Shop City',
+        key.yourOwnerName : 'Your Owner Name',
+        key.ownerCNIC : 'Owner CNIC',
+        key.yourOwnerCNIC : 'Your Owner CNIC',
+        key.shopCategory : 'Shop Category',
+        key.yourShopCategory : 'Your Shop Category',
+        key.shopDescription : 'Shop Description',
+        key.yourShopDescription : 'Your Shop Description',
 
         ///bottom bar
         key.home: 'Home',

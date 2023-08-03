@@ -435,7 +435,16 @@ const login = "login",
     waitForVerification = 'waitForVerification',
     vendor = 'vendor',
     submitted = 'submitted',
-    lastStep = 'lastStep';
+    lastStep = 'lastStep',
+    shopCountry = 'shopCountry',
+    shopCity = 'shopCity',
+    yourOwnerName = 'yourOwnerName',
+    ownerCNIC = 'ownerCNIC',
+    yourOwnerCNIC = 'yourOwnerCNIC',
+    shopCategory = 'shopCategory',
+    yourShopCategory = 'yourShopCategory',
+    shopDescription = 'shopDescription',
+    yourShopDescription = 'yourShopDescription';
 
 /**
  * Form Validations
