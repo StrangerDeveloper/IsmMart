@@ -302,11 +302,11 @@ class Turkish {
         key.fieldIsRequired: 'Alan gereklidir',
         key.call: 'Arama',
         key.centralHeadquarters: 'Merkezi merkez',
-        key.centralHeadquartersValue:
-            '2. Kat, Emirates Kulesi, M-13, F7 Markaz, İslamabad. Pakistan',
         key.globalHeadquarters: 'küresel merkezler',
+        key.centralHeadquartersValue:
+            'Arsa No, 60 Street 12, G-8/1, İslamabad Başkenti Bölgesi 44080 Pakistan',
         key.globalHeadquartersValue:
-            'Tower 42, 25 Old Broad St, Cornhill, Londra, Birleşik Krallık',
+            'Office 1005-1006, 10. kat, alıntı kulesi, Business Bay, Dubai',
         key.aboutHeader1: 'Ismmart nedir?',
         key.aboutHeader2: 'Görevimiz',
         key.aboutHeader3: 'Vizyonumuz',
@@ -544,5 +544,6 @@ class Turkish {
         key.memPlan3Desc8:
             'Premium üyeler, hem satıcı hem de alıcı olarak, bu tür üyeleri ve yaptıkları anlaşmaları doğrudan garanti edip doğrulayacak şekilde dünya çapındaki tüm işletmelere daha az erişimden endişe duyacaktır.',
         key.memPlan3Desc9:
-            'Tüm premium üyeler incelendiğinden ve ISMMART doğrulama süreci ile doğrulandığından, bu tür tüm üyeler dünyanın herhangi bir yerinde birbirleriyle daha az ticaret endişelenebilirler.',   };
+            'Tüm premium üyeler incelendiğinden ve ISMMART doğrulama süreci ile doğrulandığından, bu tür tüm üyeler dünyanın herhangi bir yerinde birbirleriyle daha az ticaret endişelenebilirler.',
+      };
 }

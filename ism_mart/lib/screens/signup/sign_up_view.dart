@@ -132,7 +132,7 @@ class SignUpView extends StatelessWidget {
       child: CustomTextField3(
         title: langKey.lastName.tr,
         hintText: 'Kel',
-        //controller: viewModel.fullNameController,
+        controller: viewModel.lastNameController,
         autoValidateMode: AutovalidateMode.onUserInteraction,
         validator: (value) {
           return Validator().validateName(value);
@@ -159,8 +159,11 @@ class SignUpView extends StatelessWidget {
       () => Padding(
         padding: const EdgeInsets.only(top: 20, bottom: 30),
         child: CountryCodePickerTextField2(
+          validator: (value){
+            return Validator().validatePhoneNumber(value);
+          },
           title: langKey.phoneNumber.tr,
-          hintText: '336 5563138',
+          hintText: '12345678',
           keyboardType: TextInputType.number,
           controller: viewModel.phoneNumberController,
           initialValue: viewModel.countryCode.value,
@@ -210,12 +213,12 @@ class SignUpView extends StatelessWidget {
       () => Padding(
         padding: const EdgeInsets.symmetric(vertical: 20),
         child: CustomTextField3(
-          //controller: viewModel.passwordController,
+          controller: viewModel.confirmPasswordController,
           title: langKey.confirmPass.tr,
           hintText: '● ● ● ● ● ● ● ● ● ●',
           autoValidateMode: AutovalidateMode.onUserInteraction,
           validator: (value) {
-            return Validator().validateDefaultTxtField(value);
+            return Validator().validateConfirmPassword(value, viewModel.passwordController.text);
           },
           obscureText: viewModel.obscureConfirmPassword.value ? true : false,
           suffixIcon: ObscureSuffixIcon(
@@ -279,11 +282,26 @@ class SignUpView extends StatelessWidget {
             ),
             onChanged: (CountryModel? newValue) {
               cityViewModel.setSelectedCountry(newValue!);
+              viewModel.countryID.value = newValue.id!;
+              cityViewModel.selectedCity.value = CountryModel();
+              cityViewModel.cityId.value = 0;
+              cityViewModel.authController.selectedCity.value = CountryModel();
+              viewModel.countryErrorVisibility.value = false;
             },
             selectedItem: authController.newAcc.value == true
                 ? cityViewModel.selectedCountry.value
                 : cityViewModel.authController.selectedCountry.value,
           ),
+          Obx(() => Visibility(
+            visible: viewModel.countryErrorVisibility.value,
+            child: Text(
+              langKey.countryReq.tr,
+              style: GoogleFonts.dmSans(
+                color: Colors.red.shade700,
+              ),
+            ),
+          ),
+          )
         ],
       ),
     );
@@ -348,11 +366,23 @@ class SignUpView extends StatelessWidget {
                           cityViewModel.selectedcity.value =
                               newValue!.name ?? "";
                           cityViewModel.setSelectedCity(newValue);
+                          viewModel.cityID.value = newValue.id!;
+                          viewModel.cityErrorVisibility.value = false;
                         },
                         selectedItem: authController.newAcc.value == true
                             ? cityViewModel.selectedCity.value
                             : cityViewModel.authController.selectedCity.value,
                       ),
+                      Obx(() => Visibility(
+                        visible: viewModel.cityErrorVisibility.value,
+                        child: Text(
+                          langKey.cityReq.tr,
+                          style: GoogleFonts.dmSans(
+                            color: Colors.red.shade700,
+                          ),
+                        ),
+                      ),
+                      )
                     ],
                   ),
       ),
@@ -381,6 +411,7 @@ class SignUpView extends StatelessWidget {
           : CustomRoundedTextBtn(
               title: langKey.signUp.tr,
               onPressed: () {
+                print('Sign Up Button Pressed');
                 viewModel.signUp();
               },
             ),

@@ -26,9 +26,11 @@ class SettingsView extends StatelessWidget {
               elevation: 0,
               floating: false,
               pinned: true,
+              leading: Container(),
               flexibleSpaceBar: FlexibleSpaceBar(
                 centerTitle: false,
-                titlePadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+                titlePadding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
                 title: Text(
                   langKey.settings.tr,
                   style: appBarTitleSize,

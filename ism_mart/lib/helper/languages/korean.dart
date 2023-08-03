@@ -291,11 +291,10 @@ class Korean {
         key.fieldIsRequired: '필드가 필요합니다',
         key.call: '부르다',
         key.centralHeadquarters: '중앙 본사',
-        key.centralHeadquartersValue:
-            '2 층, 에미레이트 타워, M-13, F7 Markaz, Islamabad. 파키스탄',
         key.globalHeadquarters: '글로벌 본부',
-        key.globalHeadquartersValue:
-            '타워 42, 25 Old Broad St, Cornhill, London, United',
+        key.centralHeadquartersValue:
+            'Plot No, 60 Street 12, G-8/1, Islamabad Capital Territory 44080 파키스탄',
+        key.globalHeadquartersValue: '사무실 1005-1006, 10 층, 인용 타워, 비즈니스 베이, 두바이',
         key.aboutHeader1: 'ISMMART 란 무엇입니까?',
         key.aboutHeader2: '우리의 미션',
         key.aboutHeader3: '우리의 비젼',
@@ -526,5 +525,5 @@ class Korean {
             'Premium 회원은 전 세계 모든 비즈니스에 대한 걱정이 적습니다. ISMMART는 판매자 및 구매자로서 그러한 회원 및 거래를 직접 보장하고 확인할 것입니다.',
         key.memPlan3Desc9:
             '모든 프리미엄 회원이 면밀히 조사되고 ISMMART 확인 프로세스를 통해 검증되므로 이러한 모든 회원은 전 세계 어디에서나 서로 거래를 덜 걱정할 수 있습니다.',
-  };
+      };
 }

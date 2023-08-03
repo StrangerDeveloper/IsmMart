@@ -308,11 +308,11 @@ class French {
         key.fieldIsRequired: 'Champ requis',
         key.call: 'appel',
         key.centralHeadquarters: 'Siège central',
-        key.centralHeadquartersValue:
-            '2e étage, Emirates Tower, M-13, F7 Markaz, Islamabad. Pakistan',
         key.globalHeadquarters: 'Siège social mondial',
+        key.centralHeadquartersValue:
+            'Le numéro de terrain de 44080 Pakistan, la capitale d\'Islamabad, n ° 12/1, G-8/1',
         key.globalHeadquartersValue:
-            'Tour 42, 25 Old Broad St, Cornhill, Londres, Royaume-Uni',
+            'Office 1005-1006, 10e étage, Cityal Tower, Business Bay, Dubaï',
         key.aboutHeader1: 'Qu\'est-ce que ISMMART?',
         key.aboutHeader2: 'Notre mission',
         key.aboutHeader3: 'Notre vision',

@@ -22,8 +22,9 @@
 // //      1207021985----> FAQS
 // //      572245348----> MembershipAndPlans
 // //      368543940 ---> PrivacyPolicy
+// //      38595980-----> Contact Us
 
-//   String sheetId = "1207021985";
+//   String sheetId = "38595980";
 
 //   String _phraseKey = '';
 //   List<LocalizationModel> _localizations = [];
@@ -121,9 +122,9 @@
 //     stdout.writeln('---------------------------------------');
 //     //stdout.writeln('Saving app_translation_new.g.dart');
 //     //stdout.writeln('Saving app_translation_about_us.g.dart');
-//     stdout.writeln('Saving app_translation_sheetId_1207021985.g.dart');
+//     stdout.writeln('Saving app_translation_sheetId_38595980.g.dart');
 //     stdout.writeln('---------------------------------------');
-//     final file = File('app_translation_sheet_1207021985.g.dart');
+//     final file = File('app_translation_sheet_38595980.g.dart');
 //     await file.writeAsString(_localizationFile);
 //     stdout.writeln('Done...');
 //   } catch (e) {

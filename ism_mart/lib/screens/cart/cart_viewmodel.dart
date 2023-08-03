@@ -66,7 +66,8 @@ class CartViewModel extends GetxController {
 
   decrementQuantity(int index) async {
     int quantity = int.parse(cartItemsList[index].quantity!);
-    if (quantity <= 1) return;
+    if (quantity == 1) return;
+
     cartItemsList[index].quantity = "${quantity - 1}";
     cartItemsList[index].productModel!.totalPrice = totalCartAmount.value;
     cartItemsList[index].itemPrice = ((quantity - 1) *

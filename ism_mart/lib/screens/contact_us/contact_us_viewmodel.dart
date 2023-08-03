@@ -35,7 +35,7 @@ class ContactUsViewModel extends GetxController {
       {
         'icon': IconlyBold.calling,
         'title': langKey.call.tr,
-        'description': '+92 51 111 007 123\n+92 3329999969'
+        'description': '+92 51 111 007 123\n+92 333 1832356'
       },
       {
         'icon': IconlyLight.location,
