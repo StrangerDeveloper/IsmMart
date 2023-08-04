@@ -136,7 +136,7 @@ class UpdateBuyerProfileView extends StatelessWidget {
         controller: viewModel.firstNameController,
         autoValidateMode: AutovalidateMode.onUserInteraction,
         validator: (value) {
-          return Validator().validateName(value);
+          return Validator().validateName(value, fieldType: langKey.firstName.tr);
         },
       ),
     );
@@ -148,7 +148,7 @@ class UpdateBuyerProfileView extends StatelessWidget {
       controller: viewModel.lastNameController,
       autoValidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
-        return Validator().validateName(value);
+        return Validator().validateName(value, fieldType: langKey.lastName.tr);
       },
     );
   }

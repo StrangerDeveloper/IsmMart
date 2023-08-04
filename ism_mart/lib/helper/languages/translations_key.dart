@@ -192,6 +192,9 @@ const updateProfile = 'updateProfile',
     pickFrom = 'pickFrom',
     yourCoverAndProfile = 'yourCoverAndProfile',
     updateVendorDetails = 'updateVendorDetails',
+    emailIsRequired = 'emailIsRequired',
+    passwordIsRequired = 'passwordIsRequired',
+    passwordConfirmIsRequired = 'passwordConfirmIsRequired',
     fieldIsRequired = 'fieldIsRequired';
 
 ///general
@@ -368,7 +371,9 @@ const profile = "profile",
     bankAccountReq = "bankAccountReq",
     bankAccountHolder = "bAccHolder",
     bankAccHolderReq = "bankAccReq",
-    deActivateMsg = "deActivateMsg";
+    deActivateMsg = "deActivateMsg",
+    FirstNameReq = "FirstNameReq",
+    LastNameReq = "LastNameReq";
 
 ///
 /// Add Product

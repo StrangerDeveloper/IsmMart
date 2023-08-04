@@ -121,7 +121,7 @@ class SignUpView extends StatelessWidget {
       controller: viewModel.firstNameController,
       autoValidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
-        return Validator().validateName(value);
+        return Validator().validateName(value, fieldType: langKey.FirstNameReq.tr);
       },
     );
   }
@@ -135,7 +135,7 @@ class SignUpView extends StatelessWidget {
         controller: viewModel.lastNameController,
         autoValidateMode: AutovalidateMode.onUserInteraction,
         validator: (value) {
-          return Validator().validateName(value);
+          return Validator().validateName(value, fieldType: langKey.LastNameReq.tr);
         },
       ),
     );
