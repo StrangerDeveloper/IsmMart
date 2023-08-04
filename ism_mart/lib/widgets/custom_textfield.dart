@@ -269,6 +269,7 @@ class CustomTextField3 extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final TextInputType? keyboardType;
   final void Function(String)? onChanged;
+  final bool required;
 
   CustomTextField3({
     Key? key,
@@ -285,6 +286,7 @@ class CustomTextField3 extends StatelessWidget {
     this.validator,
     this.inputFormatters,
     this.keyboardType,
+    this.required = true,
   }) : super(key: key);
 
   @override
@@ -295,12 +297,21 @@ class CustomTextField3 extends StatelessWidget {
         if (title != null)
           Padding(
             padding: const EdgeInsets.only(bottom: 3),
-            child: Text(
-              title!,
-              style: GoogleFonts.dmSans(
-                fontSize: 14,
-                fontWeight: FontWeight.w700,
-                color: newColorDarkBlack2,
+            child: RichText(
+              text: TextSpan(
+                text: title!,
+                style: GoogleFonts.dmSans(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w700,
+                  color: newColorDarkBlack2,
+                ),
+                children: [
+                  if (required)
+                    TextSpan(
+                      text: ' *',
+                      style: TextStyle(color: Colors.red),
+                    )
+                ],
               ),
             ),
           ),
@@ -538,7 +549,6 @@ class CountryCodePickerTextField2 extends StatelessWidget {
             hintStyle: newFontStyle0.copyWith(
               color: newColorLightGrey2,
             ),
-
             errorText: errorText,
             prefixIconConstraints: BoxConstraints.tight(Size(120, 50)),
             prefixIcon: Row(
