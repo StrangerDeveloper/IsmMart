@@ -227,6 +227,9 @@ class English {
         key.yourCoverAndProfile:
             'Your cover and profile must be a PNG or JPG, up to',
         key.updateVendorDetails: 'Update Vendor Details',
+        key.emailIsRequired : 'Email is required',
+        key.passwordIsRequired : 'Password is required',
+        key.passwordConfirmIsRequired : 'Password Confirmation is required',
         key.fieldIsRequired: 'Field is required',
 
         ///general
@@ -503,6 +506,8 @@ class English {
         key.bankAccountReq: 'Bank Account Number Required',
         key.bankAccountHolder: 'Account Title',
         key.bankAccHolderReq: 'Account title is Required',
+        key.FirstNameReq: 'First name is required',
+        key.LastNameReq: 'Last name is required',
 
         ///contact us
         key.subject: 'Subject',

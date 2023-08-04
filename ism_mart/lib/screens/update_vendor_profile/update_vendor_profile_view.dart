@@ -245,7 +245,7 @@ class UpdateVendorProfileView extends StatelessWidget {
         controller: viewModel.ownerNameController,
         autoValidateMode: AutovalidateMode.onUserInteraction,
         validator: (value) {
-          return Validator().validateName(value);
+          return Validator().validateName(value, fieldType: langKey.ownerName.tr);
         },
       ),
     );

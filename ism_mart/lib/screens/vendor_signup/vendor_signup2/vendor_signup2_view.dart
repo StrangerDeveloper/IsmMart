@@ -191,7 +191,7 @@ class VendorSignUp2View extends StatelessWidget {
       //controller: viewModel.firstNameController,
       autoValidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
-        return Validator().validateName(value);
+        return Validator().validateName(value, fieldType: langKey.shopName.tr);
       },
     );
   }
@@ -362,7 +362,7 @@ class VendorSignUp2View extends StatelessWidget {
       //controller: viewModel.firstNameController,
       autoValidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
-        return Validator().validateName(value);
+        return Validator().validateName(value, fieldType: langKey.ownerName.tr);
       },
     );
   }
