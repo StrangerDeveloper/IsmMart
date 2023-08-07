@@ -289,7 +289,7 @@ const settings = "settings",
     selectLanguage = "selectLanguage",
     selectCurrency = "selectCurrency",
     returnAndExchange = "returnAndExchange",
-    termsAndConditions = "termsAndConditions";
+    termsAndConditions = "termsAndConditions", helpCenter = "helpCenter";
 
 /**
  * Bottom nav bar
