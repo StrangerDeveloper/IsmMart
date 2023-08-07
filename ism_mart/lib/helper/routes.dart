@@ -18,7 +18,6 @@ import 'package:ism_mart/screens/single_product_full_image/single_product_full_i
 import 'package:ism_mart/screens/splash/splash_view.dart';
 import 'package:ism_mart/screens/vendor_question/vendor_question_view.dart';
 import 'package:ism_mart/screens/verify_password/verify_password_view.dart';
-
 import '../screens/contact_us/contact_us_view.dart';
 import '../screens/faq/faq_view.dart';
 import '../screens/onBoard/onboard_view.dart';

@@ -12,7 +12,7 @@ class BuyerOrderViewModel extends GetxController {
   int pageNo = 0;
   RxBool showLoader = false.obs;
   List<OrderModel> ordersList = <OrderModel>[].obs;
-  List<OrderModel> statusAcceptedList = <OrderModel>[].obs;
+//  List<OrderModel> statusAcceptedList = <OrderModel>[].obs;
   Rx<OrderStats> statsModel = OrderStats().obs;
 
   @override
@@ -66,12 +66,12 @@ class BuyerOrderViewModel extends GetxController {
 
           ordersList.addAll(data.map((e) => OrderModel.fromJson(e)));
 
-          for (var i in ordersList) {
-            if (i.status == 'accepted') {
-              print("hasnain ${i.status}");
-              statusAcceptedList.add(i);
-            }
-          }
+          // for (var i in ordersList) {
+          //   if (i.status == 'accepted') {
+          //     print("hasnain ${i.status}");
+          //  //   statusAcceptedList.add(i);
+          //   }
+          // }
           showLoader.value = false;
         } else {
           AppConstant.displaySnackBar(
