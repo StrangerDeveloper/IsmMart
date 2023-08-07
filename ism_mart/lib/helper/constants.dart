@@ -1,4 +1,3 @@
-import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/current_remaining_time.dart';
@@ -6,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:ism_mart/exports/exports_model.dart';
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 
 import '../widgets/custom_button.dart';
 import '../widgets/custom_text.dart';
@@ -20,6 +20,7 @@ const kLightColor = Color(0xFF808080);
 const kLightGreyColor = Color(0xFFD1D1D1);
 const kLightBlueColor = Color(0xFFE2E8F0);
 const kRedColor = Color(0xFFF54141);
+const red2 = Color(0xFFF80B0B);
 const kLightRedColor = Color(0xBBEF5350);
 const kGoldColor = Color(0xFFFFD700);
 const kOrangeColor = Colors.deepOrange;
@@ -33,6 +34,9 @@ const newColorDarkBlack2 = Color(0xff24282D);
 const newColorLightGrey = Color(0xffEEEEEE);
 const newColorLightGrey2 = Color(0xff929AAB);
 const newColorBlue = Color(0xff3669C9);
+const newColorBlue2 = Color(0xff364554);
+const newColorBlue3 = Color(0xffADBCCB);
+const newColorBlue4 = Color(0xff5D738A);
 
 const kDefaultPadding = 16.0;
 const kLessPadding = 10.0;
@@ -66,6 +70,12 @@ const fixedRedeemCouponThreshold = 20;
 var poppinsH1 = GoogleFonts.poppins(
   fontSize: 12,
   fontWeight: FontWeight.w500,
+  color: Colors.white,
+);
+
+var poppinsH2 = GoogleFonts.poppins(
+  fontSize: 14,
+  fontWeight: FontWeight.w400,
   color: Colors.white,
 );
 

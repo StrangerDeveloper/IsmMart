@@ -192,6 +192,9 @@ const updateProfile = 'updateProfile',
     pickFrom = 'pickFrom',
     yourCoverAndProfile = 'yourCoverAndProfile',
     updateVendorDetails = 'updateVendorDetails',
+    emailIsRequired = 'emailIsRequired',
+    passwordIsRequired = 'passwordIsRequired',
+    passwordConfirmIsRequired = 'passwordConfirmIsRequired',
     fieldIsRequired = 'fieldIsRequired';
 
 ///general
@@ -286,7 +289,7 @@ const settings = "settings",
     selectLanguage = "selectLanguage",
     selectCurrency = "selectCurrency",
     returnAndExchange = "returnAndExchange",
-    termsAndConditions = "termsAndConditions";
+    termsAndConditions = "termsAndConditions", helpCenter = "helpCenter";
 
 /**
  * Bottom nav bar
@@ -368,7 +371,9 @@ const profile = "profile",
     bankAccountReq = "bankAccountReq",
     bankAccountHolder = "bAccHolder",
     bankAccHolderReq = "bankAccReq",
-    deActivateMsg = "deActivateMsg";
+    deActivateMsg = "deActivateMsg",
+    FirstNameReq = "FirstNameReq",
+    LastNameReq = "LastNameReq";
 
 ///
 /// Add Product
@@ -412,7 +417,52 @@ const login = "login",
     seamlessShopping = 'seamlessShopping',
     createAnAccount = 'createAnAccount',
     getOnboardUser = 'getOnboardUser',
-    phoneNumber = 'phoneNumber', termsAndConditionsCheckbox= 'termsAndConditionsCheckbox';
+    phoneNumber = 'phoneNumber',
+    termsAndConditionsCheckbox = 'termsAndConditionsCheckbox',
+    frontSide = 'frontSide',
+    backSide = 'backSide',
+    legalDocument = 'legalDocument',
+    shopLogoImage = 'shopLogoImage',
+    business = 'business',
+    information = 'information',
+    vendorAccountCreation = 'vendorAccountCreation',
+    profileStatus = 'profileStatus',
+    shopName = 'shopName',
+    youShopName = 'youShopName',
+    shopAddress = 'shopAddress',
+    youShopAddress = 'youShopAddress',
+    ifAvailable = 'ifAvailable',
+    yourShopNTNNumber = 'yourShopNTNNumber',
+    shopNumber = 'shopNumber',
+    lessThanMb = 'lessThanMb',
+    chooseFile = 'chooseFile',
+    noFileChosen = 'noFileChosen',
+    waitForVerification = 'waitForVerification',
+    vendor = 'vendor',
+    submitted = 'submitted',
+    lastStep = 'lastStep',
+    availAmazingDiscount = 'availAmazingDiscount',
+    descriptionOfDiscount = 'descriptionOfDiscount',
+    celebrateFreedomAndSavings = 'celebrateFreedomAndSavings',
+    descriptionOfFreedomAndSavings = 'descriptionOfFreedomAndSavings',
+    boostYourBusiness = 'boostYourBusiness',
+    descriptionOfBoostYourBusiness = 'descriptionOfBoostYourBusiness',
+    shopCountry = 'shopCountry',
+    shopCity = 'shopCity',
+    yourOwnerName = 'yourOwnerName',
+    ownerCNIC = 'ownerCNIC',
+    yourOwnerCNIC = 'yourOwnerCNIC',
+    shopCategory = 'shopCategory',
+    yourShopCategory = 'yourShopCategory',
+    shopDescription = 'shopDescription',
+    yourShopDescription = 'yourShopDescription',
+    shopImage = 'shopImage',
+    shopCoverImage = 'shopCoverImage',
+    yourBankName = 'yourBankName',
+    yourAccountTitle = 'yourAccountTitle',
+    accountTitle = 'accountTitle',
+    bankAccountNumber = 'bankAccountNumber',
+    yourAccountNumber = 'yourAccountNumber';
 
 /**
  * Form Validations

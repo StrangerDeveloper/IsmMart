@@ -21,16 +21,28 @@ class Validator {
   }
 
   ///Name
-  String? validateName(String? value) {
-    RegExp regex = RegExp(r'^[a-zA-Z -]+$');
-    if (GetUtils.isBlank(value)!) {
-      return langKey.fieldIsRequired.tr;
-    } else if (!regex.hasMatch(value!)) {
-      return langKey.nameAlphabaticReq.tr;
-    } else {
-      return null;
-    }
+  String? validateName(String? value, {String? fieldType}) {
+  RegExp regex = RegExp(r'^[a-zA-Z -]+$');
+  if (GetUtils.isBlank(value)!) {
+    // Using fieldType parameter to construct the error message dynamically
+    return fieldType;
+  } else if (!regex.hasMatch(value!)) {
+    return langKey.nameAlphabaticReq.tr;
+  } else {
+    return null;
   }
+}
+
+  // String? validateName(String? value) {
+  //   RegExp regex = RegExp(r'^[a-zA-Z -]+$');
+  //   if (GetUtils.isBlank(value)!) {
+  //     return langKey.fieldIsRequired.tr;
+  //   } else if (!regex.hasMatch(value!)) {
+  //     return langKey.nameAlphabaticReq.tr;
+  //   } else {
+  //     return null;
+  //   }
+  // }
 
   ///Phone Number : that should NOT start from + sign...
   String? validatePhoneNumber(String? value) {
@@ -46,7 +58,7 @@ class Validator {
   ///Email
   String? validateEmail(String? value) {
     if (GetUtils.isBlank(value)!) {
-      return langKey.fieldIsRequired.tr;
+      return langKey.emailIsRequired.tr;
     } else if (!GetUtils.isEmail(value!)) {
       return langKey.invalidEmail.tr;
     } else {
@@ -57,7 +69,7 @@ class Validator {
   ///Password
   String? validatePassword(String? value) {
     if (GetUtils.isBlank(value)!) {
-      return langKey.fieldIsRequired.tr;
+      return langKey.passwordIsRequired.tr;
     } else if (GetUtils.isLengthLessThan(value, 8)) {
       return langKey.passwordLengthReq.tr;
     } else {
@@ -68,7 +80,7 @@ class Validator {
   ///Confirm Password
   String? validateConfirmPassword(String? value1, String? value2){
     if(GetUtils.isBlank(value1)!){
-      return langKey.fieldIsRequired.tr;
+      return langKey.passwordConfirmIsRequired.tr;
     } else if(value1 != value2){
       return langKey.passwordNotMatched.tr;
     } else{

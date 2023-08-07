@@ -6,10 +6,11 @@ import 'package:ism_mart/widgets/custom_button.dart';
 
 class BecomeVendor extends StatelessWidget {
   final String? text;
+  final String? buttonText;
 
   BecomeVendor({
     super.key,
-    this.text,
+    this.text, this.buttonText,
   });
 
   @override
@@ -44,7 +45,7 @@ class BecomeVendor extends StatelessWidget {
             width: 145,
             onPressed: () {},
             child: Text(
-              langKey.becomeAVendor.tr,
+              buttonText ?? langKey.becomeAVendor.tr,
               style: poppinsH1,
             ),
           )

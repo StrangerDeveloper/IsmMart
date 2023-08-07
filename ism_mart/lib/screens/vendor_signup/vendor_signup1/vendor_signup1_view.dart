@@ -10,18 +10,19 @@ import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/models/user/country_city_model.dart';
 import 'package:ism_mart/screens/login/login_view.dart';
-import 'package:ism_mart/screens/signup/signup_viewmodel.dart';
+import 'package:ism_mart/screens/vendor_signup/vendor_signup1/vendor_signup1_viewmodel.dart';
+import 'package:ism_mart/screens/vendor_signup/vendor_signup2/vendor_signup2_view.dart';
 import 'package:ism_mart/widgets/back_button.dart';
 import 'package:ism_mart/widgets/become_vendor.dart';
 import 'package:ism_mart/widgets/custom_checkbox.dart';
 import 'package:ism_mart/widgets/no_internet_view.dart';
 import 'package:ism_mart/widgets/obscure_suffix_icon.dart';
 
-import '../../helper/validator.dart';
+import '../../../helper/validator.dart';
 
-class SignUpView extends StatelessWidget {
-  SignUpView({Key? key}) : super(key: key);
-  final SignUpViewModel viewModel = Get.put(SignUpViewModel());
+class VendorSignUp1View extends StatelessWidget {
+  VendorSignUp1View({Key? key}) : super(key: key);
+  final VendorSignUp1ViewModel viewModel = Get.put(VendorSignUp1ViewModel());
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,7 @@ class SignUpView extends StatelessWidget {
               child: Column(
                 children: [
                   Form(
-                    key: viewModel.signUpFormKey,
+                    key: viewModel.vendorSignUpFormKey,
                     child: Padding(
                       padding:
                           const EdgeInsets.only(top: 30, left: 20, right: 20),
@@ -42,20 +43,11 @@ class SignUpView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           titleAndBackBtn(),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 20, bottom: 10),
-                            child: CustomText(
-                              title: langKey.createAnAccount.tr,
-                              style: newFontStyle2.copyWith(
-                                fontSize: 20,
-                                color: newColorDarkBlack2,
-                              ),
-                            ),
-                          ),
+                          createAVendorAccount(),
                           Padding(
                             padding: const EdgeInsets.only(bottom: 25),
                             child: Text(
-                              langKey.getOnboardUser.tr,
+                              'Unleash great opportunities as a vendor here',
                               style: newFontStyle0.copyWith(
                                 color: newColorLightGrey2,
                               ),
@@ -76,12 +68,18 @@ class SignUpView extends StatelessWidget {
                       ),
                     ),
                   ),
-                  BecomeVendor(),
+                  BecomeVendor(
+                    buttonText: 'Become a user',
+                    text:
+                        'Unlock limitless shopping possibilities and join our ISMMART family today.',
+                  ),
                 ],
               ),
             ),
             NoInternetView(
-              onPressed: () => viewModel.signUp(),
+              onPressed: () {
+                // viewModel.signUp();
+              },
             ),
           ],
         ),
@@ -114,14 +112,47 @@ class SignUpView extends StatelessWidget {
     );
   }
 
+  Widget createAVendorAccount() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 20, bottom: 10),
+      child: RichText(
+        text: TextSpan(
+          children: [
+            TextSpan(
+              text: 'Create a',
+              style: newFontStyle2.copyWith(
+                fontSize: 20,
+                color: newColorDarkBlack2,
+              ),
+            ),
+            TextSpan(
+              text: ' vendor ',
+              style: newFontStyle2.copyWith(
+                fontSize: 20,
+                color: newColorBlue,
+              ),
+            ),
+            TextSpan(
+              text: 'account',
+              style: newFontStyle2.copyWith(
+                fontSize: 20,
+                color: newColorDarkBlack2,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget firstNameField() {
     return CustomTextField3(
       title: langKey.firstName.tr,
       hintText: 'John',
-      controller: viewModel.firstNameController,
+      //controller: viewModel.firstNameController,
       autoValidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
-        return Validator().validateName(value, fieldType: langKey.FirstNameReq.tr);
+        return Validator().validateName(value, fieldType: langKey.firstName.tr);
       },
     );
   }
@@ -132,10 +163,10 @@ class SignUpView extends StatelessWidget {
       child: CustomTextField3(
         title: langKey.lastName.tr,
         hintText: 'Kel',
-        controller: viewModel.lastNameController,
+        //controller: viewModel.fullNameController,
         autoValidateMode: AutovalidateMode.onUserInteraction,
         validator: (value) {
-          return Validator().validateName(value, fieldType: langKey.LastNameReq.tr);
+          return Validator().validateName(value, fieldType: langKey.lastName.tr);
         },
       ),
     );
@@ -145,7 +176,7 @@ class SignUpView extends StatelessWidget {
     return CustomTextField3(
       title: langKey.email.tr,
       hintText: 'asha****iq11@gmail.com',
-      controller: viewModel.emailController,
+      //controller: viewModel.emailController,
       autoValidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
         return Validator().validateEmail(value);
@@ -159,11 +190,8 @@ class SignUpView extends StatelessWidget {
       () => Padding(
         padding: const EdgeInsets.only(top: 20, bottom: 30),
         child: CountryCodePickerTextField2(
-          validator: (value){
-            return Validator().validatePhoneNumber(value);
-          },
           title: langKey.phoneNumber.tr,
-          hintText: '12345678',
+          hintText: '336 5563138',
           keyboardType: TextInputType.number,
           controller: viewModel.phoneNumberController,
           initialValue: viewModel.countryCode.value,
@@ -213,12 +241,12 @@ class SignUpView extends StatelessWidget {
       () => Padding(
         padding: const EdgeInsets.symmetric(vertical: 20),
         child: CustomTextField3(
-          controller: viewModel.confirmPasswordController,
+          //controller: viewModel.passwordController,
           title: langKey.confirmPass.tr,
           hintText: '● ● ● ● ● ● ● ● ● ●',
           autoValidateMode: AutovalidateMode.onUserInteraction,
           validator: (value) {
-            return Validator().validateConfirmPassword(value, viewModel.passwordController.text);
+            return Validator().validateDefaultTxtField(value);
           },
           obscureText: viewModel.obscureConfirmPassword.value ? true : false,
           suffixIcon: ObscureSuffixIcon(
@@ -282,26 +310,11 @@ class SignUpView extends StatelessWidget {
             ),
             onChanged: (CountryModel? newValue) {
               cityViewModel.setSelectedCountry(newValue!);
-              viewModel.countryID.value = newValue.id!;
-              cityViewModel.selectedCity.value = CountryModel();
-              cityViewModel.cityId.value = 0;
-              cityViewModel.authController.selectedCity.value = CountryModel();
-              viewModel.countryErrorVisibility.value = false;
             },
             selectedItem: authController.newAcc.value == true
                 ? cityViewModel.selectedCountry.value
                 : cityViewModel.authController.selectedCountry.value,
           ),
-          Obx(() => Visibility(
-            visible: viewModel.countryErrorVisibility.value,
-            child: Text(
-              langKey.countryReq.tr,
-              style: GoogleFonts.dmSans(
-                color: Colors.red.shade700,
-              ),
-            ),
-          ),
-          )
         ],
       ),
     );
@@ -366,23 +379,11 @@ class SignUpView extends StatelessWidget {
                           cityViewModel.selectedcity.value =
                               newValue!.name ?? "";
                           cityViewModel.setSelectedCity(newValue);
-                          viewModel.cityID.value = newValue.id!;
-                          viewModel.cityErrorVisibility.value = false;
                         },
                         selectedItem: authController.newAcc.value == true
                             ? cityViewModel.selectedCity.value
                             : cityViewModel.authController.selectedCity.value,
                       ),
-                      Obx(() => Visibility(
-                        visible: viewModel.cityErrorVisibility.value,
-                        child: Text(
-                          langKey.cityReq.tr,
-                          style: GoogleFonts.dmSans(
-                            color: Colors.red.shade700,
-                          ),
-                        ),
-                      ),
-                      )
                     ],
                   ),
       ),
@@ -393,12 +394,46 @@ class SignUpView extends StatelessWidget {
     return Obx(
       () => Padding(
         padding: const EdgeInsets.only(bottom: 25, top: 5),
-        child: CustomCheckBox(
-          title: langKey.termsAndConditionsCheckbox.tr,
+        child: CustomCheckBox2(
           value: viewModel.termAndCondition.value,
           onChanged: (value) {
             viewModel.termAndCondition.value = value;
           },
+          text: Padding(
+            padding: const EdgeInsets.only(top: 6),
+            child: RichText(
+              text: TextSpan(
+                style: newFontStyle0.copyWith(
+                  color: newColorLightGrey2,
+                ),
+                children: [
+                  TextSpan(
+                    text:
+                        'By clicking ‘Create Account’, you’ve read and agreed to our ',
+                  ),
+                  TextSpan(
+                    text: 'Terms & Conditions',
+                    style: newFontStyle0.copyWith(
+                      decoration: TextDecoration.underline,
+                      color: newColorLightGrey2,
+                    ),
+                  ),
+                  TextSpan(
+                    text:
+                        ' and for my personal data to be processed according to',
+                  ),
+                  TextSpan(
+                    text: ' ISMMART ',
+                    style: newFontStyle0.copyWith(
+                      color: newColorBlue2,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  TextSpan(text: 'Privacy Policy.'),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );
@@ -409,10 +444,9 @@ class SignUpView extends StatelessWidget {
       () => GlobalVariable.showLoader.value
           ? CustomLoading(isItBtn: true)
           : CustomRoundedTextBtn(
-              title: langKey.signUp.tr,
+              title: 'Create Account',
               onPressed: () {
-                print('Sign Up Button Pressed');
-                viewModel.signUp();
+                Get.to(()=>VendorSignUp2View());
               },
             ),
     );

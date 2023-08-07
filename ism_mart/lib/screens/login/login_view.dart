@@ -10,6 +10,7 @@ import 'package:ism_mart/widgets/become_vendor.dart';
 import 'package:ism_mart/widgets/no_internet_view.dart';
 import 'package:ism_mart/widgets/obscure_suffix_icon.dart';
 import 'package:ism_mart/widgets/scrollable_column.dart';
+
 import '../../helper/validator.dart';
 
 class LogInView extends StatelessWidget {

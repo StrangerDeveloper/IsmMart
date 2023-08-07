@@ -7,6 +7,9 @@ import 'package:get_storage/get_storage.dart';
 import 'package:ism_mart/app_binding/app_init_binding.dart';
 import 'package:ism_mart/exports/export_controllers.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
+import 'package:ism_mart/screens/bottom_navigation_and_appbar/bottom_navigation_and_appbar_view.dart';
+import 'package:ism_mart/screens/onBoard/onboard_view.dart';
+import 'package:ism_mart/screens/onboard/onboard_viewModel.dart';
 import 'helper/theme_helper.dart';
 
 void main() async {
@@ -52,6 +55,7 @@ void main() async {
   //   // If you wish to record a "non-fatal" exception, please use `FirebaseCrashlytics.instance.recordFlutterError` instead
   //   FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
   // };
+  
   // PlatformDispatcher.instance.onError = (error, stack) {
   //   // If you wish to record a "non-fatal" exception, please remove the "fatal" parameter
   //   FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
