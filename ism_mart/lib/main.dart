@@ -42,12 +42,12 @@ void main() async {
   SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(statusBarColor: Colors.grey[300]!));
 
-  ///firebase integration for crashlytics
-  ///
+  //firebase integration for crashlytics
+  //
   // await Firebase.initializeApp(
   //   options: DefaultFirebaseOptions.currentPlatform,
   // );
-
+  //
   // FlutterError.onError = (errorDetails) {
   //   // If you wish to record a "non-fatal" exception, please use `FirebaseCrashlytics.instance.recordFlutterError` instead
   //   FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);

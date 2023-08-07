@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/helper/api_base_helper.dart';
 import 'package:ism_mart/exports/export_api_helper.dart';
@@ -14,7 +13,6 @@ import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 import 'package:ism_mart/widgets/pick_image.dart';
 
-import '../../../helper/permission_handler.dart';
 
 class OrderController extends GetxController
     with StateMixin, GetSingleTickerProviderStateMixin {
@@ -132,41 +130,8 @@ class OrderController extends GetxController
   //var imagesSizeInMb = 0.0.obs;
 
   pickMultipleImages() async {
-    await PermissionsHandler().checkPermissions().then((isGranted) async {
-      if (isGranted) {
-        try {
-          List<File> images = await PickImage().multipleImgFromGallery();
-          pickedImagesList.addAll(images);
-
-          // List<XFile> images = await _picker.pickMultiImage(imageQuality: 100);
-          // if (images.isNotEmpty) {
-          //   images.forEach((XFile? file) async {
-          //     var compressedFile = await FlutterNativeImage.compressImage(
-          //         file!.path,
-          //         quality: 100,
-          //         percentage: 25);
-          //     var lengthInMb = compressedFile.lengthSync() * 0.000001;
-
-          //     imagesSizeInMb.value += lengthInMb;
-          //     if (lengthInMb > 2) {
-          //       showSnackBar(message: langKey.fileMustBe.tr + ' 2MB');
-          //     } else {
-          //       //: needs to add check if file exist
-          //       pickedImagesList.add(compressedFile);
-          //     }
-          //   });
-        } on PlatformException catch (e) {
-          print(e);
-          AppConstant.displaySnackBar(
-            langKey.errorTitle.tr,
-            langKey.invalidImageFormat.tr,
-          );
-        }
-      } else {
-        print("called");
-        await PermissionsHandler().requestPermissions();
-      }
-    });
+    List<File> images = await PickImage().multipleImgFromGallery();
+    pickedImagesList.addAll(images);
   }
 
   clearControllers() {

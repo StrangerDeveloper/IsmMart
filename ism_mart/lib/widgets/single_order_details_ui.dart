@@ -1,7 +1,6 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ism_mart/exports/export_controllers.dart';
@@ -13,7 +12,6 @@ import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/custom_appbar.dart';
 import 'package:ism_mart/widgets/custom_sliver_appbar.dart';
 
-import '../helper/validator.dart';
 
 class SingleOrderDetailsUI extends GetView<OrderController> {
   const SingleOrderDetailsUI(
@@ -349,123 +347,123 @@ class SingleOrderDetailsUI extends GetView<OrderController> {
     );
   }
 
-  addReviewBottomSheet({OrderItem? orderItem}) {
-    controller.rating.value = 0;
-    showModalBottomSheet(
-      useSafeArea: true,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
-      ),
-      context: Get.context!,
-      builder: (BuildContext context) {
-        return Padding(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).viewInsets.bottom + 10,
-          ),
-          child: Stack(
-            alignment: Alignment.topRight,
-            children: [
-              Form(
-                key: controller.reviewFormKey,
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(horizontal: 13),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          StickyLabel(
-                            text: langKey.reviews.tr,
-                            style: headline1,
-                          ),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 5, bottom: 5),
-                        child: RichText(
-                          text: TextSpan(
-                            text: langKey.rating.tr,
-                            style: const TextStyle(
-                              //fontSize: 12,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w500,
-                            ),
-                            children: [
-                              const TextSpan(
-                                text: '*',
-                                style: TextStyle(
-                                  color: Colors.red,
-                                  fontSize: 16.0,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      RatingBar.builder(
-                        onRatingUpdate: (rating) {
-                          controller.rating.value = rating;
-                        },
-                        initialRating: controller.rating.value,
-                        glowColor: Color(0xFFFFCC80),
-                        direction: Axis.horizontal,
-                        unratedColor: Color(0xffC4C4C4),
-                        itemCount: 5,
-                        itemSize: 25,
-                        itemBuilder: (context, _) => Icon(
-                          Icons.star,
-                          color: Color(0xFFFFA726),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10, bottom: 20),
-                        child: CustomTextField1(
-                          controller: controller.reviewTxtFieldController,
-                          title: langKey.reviews.tr,
-                          asterisk: true,
-                          minLines: 4,
-                          maxLines: 6,
-                          autoValidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (value) {
-                            return Validator().validateDefaultTxtField(value);
-                          },
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.center,
-                        child: Obx(
-                          () => controller.isLoading.isTrue
-                              ? CustomLoading(isItBtn: true)
-                              : CustomTextBtn(
-                                  onPressed: () async {
-                                    await controller.submitReviewBtn(
-                                        orderItem: orderItem);
-                                  },
-                                  title: langKey.submit.tr,
-                                  height: 40,
-                                  width: 200,
-                                ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              IconButton(
-                onPressed: () {
-                  Get.back();
-                },
-                icon: Icon(Icons.close),
-              )
-            ],
-          ),
-        );
-      },
-    );
-  }
+  // addReviewBottomSheet({OrderItem? orderItem}) {
+  //   controller.rating.value = 0;
+  //   showModalBottomSheet(
+  //     useSafeArea: true,
+  //     isScrollControlled: true,
+  //     shape: const RoundedRectangleBorder(
+  //       borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
+  //     ),
+  //     context: Get.context!,
+  //     builder: (BuildContext context) {
+  //       return Padding(
+  //         padding: EdgeInsets.only(
+  //           bottom: MediaQuery.of(context).viewInsets.bottom + 10,
+  //         ),
+  //         child: Stack(
+  //           alignment: Alignment.topRight,
+  //           children: [
+  //             Form(
+  //               key: controller.reviewFormKey,
+  //               child: SingleChildScrollView(
+  //                 padding: const EdgeInsets.symmetric(horizontal: 13),
+  //                 child: Column(
+  //                   crossAxisAlignment: CrossAxisAlignment.start,
+  //                   mainAxisSize: MainAxisSize.min,
+  //                   children: [
+  //                     Row(
+  //                       mainAxisAlignment: MainAxisAlignment.center,
+  //                       children: [
+  //                         StickyLabel(
+  //                           text: langKey.reviews.tr,
+  //                           style: headline1,
+  //                         ),
+  //                       ],
+  //                     ),
+  //                     Padding(
+  //                       padding: const EdgeInsets.only(top: 5, bottom: 5),
+  //                       child: RichText(
+  //                         text: TextSpan(
+  //                           text: langKey.rating.tr,
+  //                           style: const TextStyle(
+  //                             //fontSize: 12,
+  //                             color: Colors.black,
+  //                             fontWeight: FontWeight.w500,
+  //                           ),
+  //                           children: [
+  //                             const TextSpan(
+  //                               text: '*',
+  //                               style: TextStyle(
+  //                                 color: Colors.red,
+  //                                 fontSize: 16.0,
+  //                               ),
+  //                             ),
+  //                           ],
+  //                         ),
+  //                       ),
+  //                     ),
+  //                     RatingBar.builder(
+  //                       onRatingUpdate: (rating) {
+  //                         controller.rating.value = rating;
+  //                       },
+  //                       initialRating: controller.rating.value,
+  //                       glowColor: Color(0xFFFFCC80),
+  //                       direction: Axis.horizontal,
+  //                       unratedColor: Color(0xffC4C4C4),
+  //                       itemCount: 5,
+  //                       itemSize: 25,
+  //                       itemBuilder: (context, _) => Icon(
+  //                         Icons.star,
+  //                         color: Color(0xFFFFA726),
+  //                       ),
+  //                     ),
+  //                     Padding(
+  //                       padding: const EdgeInsets.only(top: 10, bottom: 20),
+  //                       child: CustomTextField1(
+  //                         controller: controller.reviewTxtFieldController,
+  //                         title: langKey.reviews.tr,
+  //                         asterisk: true,
+  //                         minLines: 4,
+  //                         maxLines: 6,
+  //                         autoValidateMode: AutovalidateMode.onUserInteraction,
+  //                         validator: (value) {
+  //                           return Validator().validateDefaultTxtField(value);
+  //                         },
+  //                       ),
+  //                     ),
+  //                     Align(
+  //                       alignment: Alignment.center,
+  //                       child: Obx(
+  //                         () => controller.isLoading.isTrue
+  //                             ? CustomLoading(isItBtn: true)
+  //                             : CustomTextBtn(
+  //                                 onPressed: () async {
+  //                                   await controller.submitReviewBtn(
+  //                                       orderItem: orderItem);
+  //                                 },
+  //                                 title: langKey.submit.tr,
+  //                                 height: 40,
+  //                                 width: 200,
+  //                               ),
+  //                       ),
+  //                     ),
+  //                   ],
+  //                 ),
+  //               ),
+  //             ),
+  //             IconButton(
+  //               onPressed: () {
+  //                 Get.back();
+  //               },
+  //               icon: Icon(Icons.close),
+  //             )
+  //           ],
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 
   disputeActionsBottomSheet({OrderItem? orderItem}) {
     showModalBottomSheet(

@@ -230,6 +230,15 @@ class SettingsView extends StatelessWidget {
         ),
         singleSettingsItem(
           onTap: () {
+            viewModel.whatsapp();
+          },
+          icon: Icons.wechat,
+          color: Color.fromARGB(255, 160, 235, 94),
+          title: langKey.currencyKey.tr,
+          value: "What's App",
+        ),
+        singleSettingsItem(
+          onTap: () {
             //_showCurrencyChangeBS();
           },
           icon: Icons.currency_exchange,
