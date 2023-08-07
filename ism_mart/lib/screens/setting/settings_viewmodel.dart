@@ -54,4 +54,6 @@ class SettingViewModel extends GetxController {
   void showSnackBar({title = 'error', message = 'Something went wrong'}) {
     AppConstant.displaySnackBar(title, message);
   }
+
+
 }

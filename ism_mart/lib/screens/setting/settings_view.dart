@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
@@ -6,9 +7,9 @@ import 'package:ism_mart/exports/export_api_helper.dart';
 import 'package:ism_mart/exports/export_controllers.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/exports/exports_model.dart';
-import 'package:ism_mart/screens/setting/settings_viewmodel.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/screens/setting/settings_viewmodel.dart';
 import 'package:ism_mart/widgets/custom_sliver_appbar.dart';
 
 class SettingsView extends StatelessWidget {
@@ -322,6 +323,13 @@ class SettingsView extends StatelessWidget {
                 )
               : Container(),
         ),
+        singleSettingsItem(
+          onTap: () {},
+          isIcon: false,
+          svgIcons: 'assets/svg/whatsapp.svg',
+          color: Color(0xff25D366),
+          title: langKey.helpCenter.tr,
+        ),
       ],
     );
   }
@@ -467,8 +475,10 @@ class SettingsView extends StatelessWidget {
   // }
 
   InkWell singleSettingsItem({
+    bool isIcon = true,
+    String? svgIcons,
     required onTap,
-    required IconData icon,
+    IconData? icon,
     required Color color,
     required String title,
     value,
@@ -487,11 +497,19 @@ class SettingsView extends StatelessWidget {
                 color: color.withOpacity(0.15),
                 shape: BoxShape.circle,
               ),
-              child: Icon(
-                icon,
-                size: 25,
-                color: color,
-              ),
+              child: isIcon
+                  ? Icon(
+                      icon,
+                      size: 25,
+                      color: color,
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: SvgPicture.asset(
+                        svgIcons!,
+                        color: color,
+                      ),
+                    ),
             ),
             SizedBox(width: 10),
             Expanded(

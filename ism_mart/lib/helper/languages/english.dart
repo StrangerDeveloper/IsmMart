@@ -370,6 +370,7 @@ class English {
         key.logout: 'Log out',
         key.selectCurrency: 'Select Currency',
         key.currencyKey: "Currency",
+        key.helpCenter: "Help Center",
 
         ///Login and register
         key.login: 'Login',
