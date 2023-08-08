@@ -3,12 +3,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/helper/constants.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/screens/welcome/welcome_viewmodel.dart';
 import 'package:ism_mart/widgets/back_button.dart';
 import 'package:ism_mart/widgets/custom_button.dart';
 import 'package:ism_mart/widgets/custom_text.dart';
 
 class WelcomeView extends StatelessWidget {
-  const WelcomeView({super.key});
+  WelcomeView({super.key});
+
+  final WelcomeViewModel viewModel = Get.put(WelcomeViewModel());
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +28,7 @@ class WelcomeView extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 20, bottom: 10),
                 child: CustomText(
-                  title: 'Get onboard!',
+                  title: langKey.getOnboard.tr + '!',
                   style: newFontStyle2.copyWith(
                     fontSize: 20,
                     color: newColorDarkBlack2,
@@ -33,7 +36,7 @@ class WelcomeView extends StatelessWidget {
                 ),
               ),
               Text(
-                'Create your account',
+                langKey.createYourAccount.tr,
                 style: newFontStyle0.copyWith(
                   color: newColorLightGrey2,
                 ),
@@ -83,7 +86,7 @@ class WelcomeView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Continue With same email',
+              langKey.continueWithSameEmail.tr,
               style: newFontStyle1.copyWith(
                 fontSize: 16,
                 color: Colors.white,
@@ -104,7 +107,7 @@ class WelcomeView extends StatelessWidget {
       foregroundColor: Colors.transparent,
       backgroundColor: Colors.transparent,
       child: Text(
-        'With different email',
+        langKey.continueWithDiffEmail.tr,
         style: newFontStyle4.copyWith(
           color: Color(0xff929AAB),
         ),
