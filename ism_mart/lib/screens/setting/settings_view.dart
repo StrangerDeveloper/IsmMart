@@ -324,7 +324,9 @@ class SettingsView extends StatelessWidget {
               : Container(),
         ),
         singleSettingsItem(
-          onTap: () {},
+          onTap: () {
+            viewModel.whatsapp();
+          },
           isIcon: false,
           svgIcons: 'assets/svg/whatsapp.svg',
           color: Color(0xff25D366),
