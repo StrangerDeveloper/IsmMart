@@ -8,6 +8,7 @@ import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/screens/vendor_signup/vendor_signup3/vendor_signup3_viewmodel.dart';
+import 'package:ism_mart/screens/vendor_signup/vendor_signup4/vendor_signup4_view.dart';
 import 'package:ism_mart/widgets/back_button.dart';
 import 'package:ism_mart/widgets/no_internet_view.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -139,7 +140,7 @@ class VendorSignUp3View extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  langKey.vendorAccountCreation.tr,
+                  langKey.vendorBankAccount.tr,
                   style: newFontStyle1.copyWith(
                     color: newColorBlue2,
                   ),
@@ -176,7 +177,7 @@ class VendorSignUp3View extends StatelessWidget {
             backgroundColor: Color(0xffEBEFF3),
             progressColor: Color(0xff0CBC8B),
             center: new Text(
-              "2 of 3",
+              "3 of 4",
               style: poppinsH2.copyWith(
                 color: newColorBlue2,
               ),
@@ -204,9 +205,6 @@ class VendorSignUp3View extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: CustomTextField3(
-        inputFormatters: [
-          FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]+|\s')),
-        ],
         title: langKey.accountTitle.tr,
         hintText: langKey.yourAccountTitle.tr,
         controller: viewModel.bankAccTitleController,
@@ -221,10 +219,6 @@ class VendorSignUp3View extends StatelessWidget {
 
   Widget bankAccountNumberTextField() {
     return CustomTextField3(
-      inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-        FilteringTextInputFormatter.digitsOnly
-      ],
       title: langKey.bankAccountNumber.tr,
       hintText: langKey.yourAccountNumber.tr,
       controller: viewModel.bankAccNumberController,
@@ -235,7 +229,7 @@ class VendorSignUp3View extends StatelessWidget {
       keyboardType: TextInputType.number,
     );
   }
-  
+
   Widget branchCodeTextField() {
     return Padding(
       padding: const EdgeInsets.only(top: 25.0),

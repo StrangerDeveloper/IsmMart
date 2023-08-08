@@ -2,6 +2,12 @@ import 'translations_key.dart' as key;
 
 class English {
   Map<String, String> get translations => {
+        ///Welcome
+        key.getOnboard : 'Get onboard',
+        key.createYourAccount : 'Create your account',
+        key.continueWithSameEmail : 'Continue With same email',
+        key.continueWithDiffEmail: 'With different email',
+
         ///Add Update Address
         key.updateShippingAdd: 'Update Shipping Address',
         key.addShippingAdd: 'Add Shipping Address',
@@ -409,7 +415,7 @@ class English {
         key.business : 'Business',
         key.information : 'Information',
         key.vendorAccountCreation : 'Vendor Account Creation',
-        key.vendorAccountRequest: 'Request for Vendor account has been successfully sent',
+        key.vendorBankAccount : 'Vendor Bank Account',
         key.profileStatus : 'Profile Status',
         key.shopName : 'Shop Name',
         key.youShopName : 'Your Shop Name',

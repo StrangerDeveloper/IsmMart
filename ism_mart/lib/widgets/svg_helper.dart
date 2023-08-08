@@ -3,4 +3,7 @@ import 'package:ism_mart/helper/constants.dart';
 
 SvgPicture buildSvgLogo({color = kDarkColor}) {
   return SvgPicture.asset("assets/svg/logo_new.svg", width: 50);
+
 }
+
+
