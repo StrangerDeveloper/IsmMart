@@ -1,4 +1,10 @@
 //////////////////////////////////////////////////////////////////////
+///Welcome
+const getOnboard = 'getOnboard',
+    createYourAccount = 'createYourAccount',
+    continueWithSameEmail = 'continueWithSameEmail',
+    continueWithDiffEmail = 'continueWithDiffEmail';
+
 ///Add Update Address
 const updateShippingAdd = 'updateShippingAdd',
     addShippingAdd = 'addShippingAdd';
@@ -289,7 +295,8 @@ const settings = "settings",
     selectLanguage = "selectLanguage",
     selectCurrency = "selectCurrency",
     returnAndExchange = "returnAndExchange",
-    termsAndConditions = "termsAndConditions", helpCenter = "helpCenter";
+    termsAndConditions = "termsAndConditions",
+    helpCenter = "helpCenter";
 
 /**
  * Bottom nav bar
@@ -426,6 +433,7 @@ const login = "login",
     business = 'business',
     information = 'information',
     vendorAccountCreation = 'vendorAccountCreation',
+    vendorBankAccount = 'vendorBankAccount',
     profileStatus = 'profileStatus',
     shopName = 'shopName',
     youShopName = 'youShopName',
