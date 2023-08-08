@@ -1,0 +1,38 @@
+{
+  "project_info": {
+    "project_number": "702705477596",
+    "project_id": "ismmart-659b8",
+    "storage_bucket": "ismmart-659b8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:702705477596:android:013db51c259715ac7b9119",
+        "android_client_info": {
+          "package_name": "com.ismmartgroup.ism_mart"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkHmPWpH2qDCdNFGAF2SNxV4s9LBexffc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "702705477596-ltta753tha71njtdfee9p1tgs3orc5pt.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ismmartgroup.ismMart",
+                "app_store_id": "1667354027"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

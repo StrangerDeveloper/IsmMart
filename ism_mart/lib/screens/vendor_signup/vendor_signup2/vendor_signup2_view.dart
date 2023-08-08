@@ -165,14 +165,14 @@ class VendorSignUp2View extends StatelessWidget {
               ],
             ),
           ),
-          new CircularPercentIndicator(
+           CircularPercentIndicator(
             circularStrokeCap: CircularStrokeCap.round,
             radius: 33,
             lineWidth: 6,
             percent: 0.7,
             backgroundColor: Color(0xffEBEFF3),
             progressColor: Color(0xff0CBC8B),
-            center: new Text(
+            center: Text(
               "2 of 3",
               style: poppinsH2.copyWith(
                 color: newColorBlue2,
