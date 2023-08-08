@@ -164,7 +164,7 @@ class VendorSignUp4View extends StatelessWidget {
             backgroundColor: Color(0xffEBEFF3),
             progressColor: Color(0xff0CBC8B),
             center: new Text(
-              "3 of 3",
+              "4 of 4",
               style: poppinsH2.copyWith(
                 color: newColorBlue2,
               ),

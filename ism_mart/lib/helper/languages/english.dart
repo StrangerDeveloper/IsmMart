@@ -408,6 +408,7 @@ class English {
         key.business : 'Business',
         key.information : 'Information',
         key.vendorAccountCreation : 'Vendor Account Creation',
+        key.vendorBankAccount : 'Vendor Bank Account',
         key.profileStatus : 'Profile Status',
         key.shopName : 'Shop Name',
         key.youShopName : 'Your Shop Name',

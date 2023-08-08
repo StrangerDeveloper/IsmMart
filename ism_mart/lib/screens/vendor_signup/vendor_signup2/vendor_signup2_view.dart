@@ -153,7 +153,7 @@ class VendorSignUp2View extends StatelessWidget {
                         ),
                       ),
                       TextSpan(
-                        text: langKey.profileStatus.tr,
+                        text: langKey.bankDetails.tr,
                         style: newFontStyle1.copyWith(
                           fontSize: 12,
                           color: newColorBlue3,
@@ -169,11 +169,11 @@ class VendorSignUp2View extends StatelessWidget {
             circularStrokeCap: CircularStrokeCap.round,
             radius: 33,
             lineWidth: 6,
-            percent: 0.7,
+            percent: 0.5,
             backgroundColor: Color(0xffEBEFF3),
             progressColor: Color(0xff0CBC8B),
             center: new Text(
-              "2 of 3",
+              "2 of 4",
               style: poppinsH2.copyWith(
                 color: newColorBlue2,
               ),
