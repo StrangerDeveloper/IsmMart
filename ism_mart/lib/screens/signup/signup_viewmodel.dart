@@ -80,6 +80,7 @@ class SignUpViewModel extends GetxController {
               cityViewModel.authController.selectedCountry.value =
                   CountryModel();
               cityViewModel.authController.selectedCity.value = CountryModel();
+              Get.offNamed(Routes.loginRoute);
             } else {
               AppConstant.displaySnackBar(
                 langKey.errorTitle.tr,
@@ -91,10 +92,22 @@ class SignUpViewModel extends GetxController {
             print(e);
             GlobalVariable.showLoader.value = false;
           });
+        } else{
+          AppConstant.displaySnackBar(langKey.errorTitle.tr, 'Accept terms and conditions to proceed');
         }
-      } else if (countryID.value == 0) {
+      } else {
+        if (countryID.value == 0) {
+          countryErrorVisibility.value = true;
+        }
+        if (cityID.value == 0) {
+          cityErrorVisibility.value = true;
+        }
+      }
+    } else{
+      if (countryID.value == 0) {
         countryErrorVisibility.value = true;
-      } else if (cityID.value == 0) {
+      }
+      if (cityID.value == 0) {
         cityErrorVisibility.value = true;
       }
     }

@@ -15,12 +15,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   dotted_border: ^2.0.0+3
   dropdown_search: ^5.0.5
-  firebase_core: ^2.13.1
-  firebase_crashlytics: ^3.3.2
   flutter:
     sdk: flutter
   flutter_countdown_timer: ^4.1.0
-  flutter_rating_bar: ^4.0.1
   flutter_svg: ^2.0.1
   get: ^4.6.5
   get_storage: ^2.0.3
@@ -29,13 +26,12 @@ dependencies:
   iconly: ^1.0.1
   image_picker: ^1.0.0
   intl: ^0.18.1
-  permission_handler: ^10.2.0
   smooth_page_indicator: ^1.1.0
-  upgrader: ^7.1.0
+#  upgrader: ^7.1.0
   #webview_flutter: ^4.2.2
   flutter_inappwebview: ^5.7.2+3
   percent_indicator: ^4.2.3
-  fluttertoast: ^8.2.2
+  csv: ^5.0.2
 
 
 dev_dependencies:

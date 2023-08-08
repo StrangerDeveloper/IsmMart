@@ -12,6 +12,7 @@ class SettingViewModel extends GetxController {
   @override
   void onInit() async{
     userDetails.value = await LocalStorageHelper.getStoredUser();
+    print(userDetails.value?.token);
     super.onInit();
   }
 

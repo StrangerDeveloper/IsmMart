@@ -245,7 +245,7 @@ class UpdateVendorProfileView extends StatelessWidget {
         controller: viewModel.ownerNameController,
         autoValidateMode: AutovalidateMode.onUserInteraction,
         validator: (value) {
-          return Validator().validateName(value, fieldType: langKey.ownerName.tr);
+          return Validator().validateName(value, errorToPrompt: langKey.ownerName.tr);
         },
       ),
     );
@@ -405,7 +405,7 @@ class UpdateVendorProfileView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 20, bottom: 30),
       child: CustomTextField2(
-        label: langKey.bankAccount.tr,
+        label: langKey.branchCode.tr,
         controller: viewModel.accountNumberController,
         autoValidateMode: AutovalidateMode.onUserInteraction,
         validator: (value) {

@@ -21,7 +21,7 @@ import 'package:ism_mart/screens/vendor_signup/vendor_signup1/vendor_signup1_vie
 import 'package:ism_mart/screens/verify_password/verify_password_view.dart';
 import '../screens/contact_us/contact_us_view.dart';
 import '../screens/faq/faq_view.dart';
-import '../screens/onBoard/onboard_view.dart';
+import '../screens/onboard/onboard_view.dart';
 import '../screens/seller_store_detail/seller_store_detail_view.dart';
 import '../screens/setting/settings_view.dart';
 import '../screens/signup/sign_up_view.dart';
@@ -33,6 +33,7 @@ import '../screens/vendor_orders/vendor_orders_view.dart';
 import '../screens/vendor_profile/vendor_profile_view.dart';
 import '../screens/vendor_signup/vendor_signup2/vendor_signup2_view.dart';
 import '../screens/vendor_signup/vendor_signup3/vendor_signup3_view.dart';
+import '../screens/vendor_signup/vendor_signup4/vendor_signup4_view.dart';
 
 class Routes {
   static const initRoute = "/";
@@ -65,8 +66,9 @@ class Routes {
   static const settings = "/settings";
   static const loginRoute = "/signIn";
   static const vendorSignUp1 = "/vendorSignUp1";
-  static const vendorSignUp2 = "/vendorSignUp1";
+  static const vendorSignUp2 = "/vendorSignUp2";
   static const vendorSignUp3 = "/vendorSignUp3";
+  static const vendorSignUp4 = "/vendorSignUp4";
   static const registerRoute = "/register";
   static const updateProduct = "/updateProduct";
   static const updateVendor = "/updateVendor";
@@ -251,6 +253,10 @@ class Routes {
     GetPage(
       name: vendorSignUp3,
       page: () => VendorSignUp3View(),
+    ),
+    GetPage(
+      name: vendorSignUp4,
+      page: () => VendorSignUp4View(),
     ),
     GetPage(
       name: vendorOrders,

@@ -1,77 +1,109 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ism_mart/exports/exports_utils.dart';
+import 'package:ism_mart/helper/api_base_helper.dart';
 import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
+import '../../../widgets/pick_image.dart';
+import 'package:http/http.dart' as http;
+import 'package:http_parser/src/media_type.dart';
 
 class VendorSignUp3ViewModel extends GetxController{
-  GlobalKey<FormState> vendorSignUp2FormKey = GlobalKey<FormState>();
-  TextEditingController firstNameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController phoneNumberController = TextEditingController();
-  RxBool obscurePassword = true.obs;
-  RxBool obscureConfirmPassword = true.obs;
-  Rxn phoneErrorText = Rxn<String>();
-  RxString countryCode = '+92'.obs;
-  RxBool termAndCondition = false.obs;
+  GlobalKey<FormState> vendorSignUp3FormKey = GlobalKey<FormState>();
+  TextEditingController bankNameController = TextEditingController();
+  TextEditingController bankAccTitleController = TextEditingController();
+  TextEditingController bankAccNumberController = TextEditingController();
+  TextEditingController branchCodeController = TextEditingController();
+  RxMap<String, String> params = <String, String>{}.obs;
+  RxString bankChequeImage = ''.obs;
+  RxBool chequeImageErrorVisibility = false.obs;
 
-  validatorPhoneNumber(String? value) {
-    if (GetUtils.isBlank(value)!) {
-      phoneErrorText.value = langKey.fieldIsRequired.tr;
-    } else if (value!.length > 16 || value.length < 7) {
-      phoneErrorText.value = langKey.phoneValidate.tr;
-    } else {
-      phoneErrorText.value = null;
+  @override
+  void onInit() {
+    params.value = Get.arguments['shopDetails'];
+    print(params['cnicFront']);
+    super.onInit();
+  }
+
+  selectImage(RxString imageVar, RxBool imageVisibilityVar)async{
+    final image = await PickImage().pickSingleImage();
+    if(image != null){
+      imageVar.value = image.path;
+      imageVisibilityVar.value = false;
     }
   }
 
+  signUp() async{
+    if(vendorSignUp3FormKey.currentState!.validate()){
+      if(bankChequeImage.value != ''){
+        GlobalVariable.showLoader.value = true;
+        params.addAll({
+          'bankName': bankNameController.text,
+          'accountTitle': bankAccTitleController.text,
+          'accountNumber': bankAccNumberController.text,
+          'membership': 'Free',
+          'premium': 'false',
+        });
 
-  @override
-  void onClose() {
-    firstNameController.dispose();
-    emailController.dispose();
-    passwordController.dispose();
-    phoneNumberController.dispose();
-    GlobalVariable.showLoader.value = false;
-    super.onClose();
+        List<http.MultipartFile> fileList = [];
+        fileList.add(
+            await http.MultipartFile.fromPath(
+                'cnicFront',
+                params['cnicFront']!,
+                contentType: MediaType.parse('image/jpeg')
+            )
+        );
+        fileList.addAll({
+          await http.MultipartFile.fromPath(
+              'storeImage',
+              params['storeImage']!,
+              contentType: MediaType.parse('image/jpeg')
+          ),
+          await http.MultipartFile.fromPath(
+              'cnicBack',
+              params['cnicBack']!,
+              contentType: MediaType.parse('image/jpeg')
+          ),
+          // await http.MultipartFile.fromPath(
+          //     '',
+          //     // shopLogoImage.value,
+          //     contentType: MediaType.parse('image/jpeg')
+          // )
+        });
+        print(params);
+        ApiBaseHelper().postMethodForImage(
+            url: 'auth/vendor/register',
+            files: fileList,
+            fields: params,
+          withAuthorization: true
+        ).then((parsedJson) async {
+          GlobalVariable.showLoader.value = false;
+          if(parsedJson['success'] == true){
+            AppConstant.displaySnackBar(
+            langKey.successTitle.tr,
+              langKey.vendorAccountRequest.tr
+            );
+            Get.toNamed(Routes.vendorSignUp4, arguments: {
+              'fromSettings': false,
+            });
+          } else{
+            AppConstant.displaySnackBar(
+                langKey.errorTitle.tr,
+                parsedJson['message']
+            );
+          }
+        }).catchError((e){
+          GlobalVariable.showLoader.value = false;
+          AppConstant.displaySnackBar(langKey.errorTitle.tr, e);
+          GlobalVariable.internetErr(true);
+        });
+      } else{
+        chequeImageErrorVisibility.value = true;
+      }
+    } else{
+      if(bankChequeImage.value == ''){
+        chequeImageErrorVisibility.value = true;
+      }
+    }
   }
-
-  void signUp() {
-    // GlobalVariable.internetErr(false);
-    // if (signUpFormKey.currentState?.validate() ?? false) {
-    //   GlobalVariable.showLoader.value = true;
-    //   String? phoneNumber = countryCode.value + phoneNumberController.text;
-    //
-    //   Map<String, dynamic> param = {
-    //     "firstName": firstNameController.text,
-    //     "email": emailController.text,
-    //     "phone": phoneNumber,
-    //     "password": passwordController.text,
-    //   };
-    //
-    //   ApiBaseHelper()
-    //       .postMethod(url: Urls.signUp, body: param)
-    //       .then((parsedJson) async {
-    //     GlobalVariable.showLoader.value = false;
-    //
-    //     if (parsedJson['message'] == 'User registered successfully.') {
-    //       Get.offNamed(Routes.loginRoute);
-    //       AppConstant.displaySnackBar(
-    //         langKey.successTitle.tr,
-    //         parsedJson['message'],
-    //       );
-    //     } else {
-    //       AppConstant.displaySnackBar(
-    //         langKey.errorTitle.tr,
-    //         parsedJson['message'],
-    //       );
-    //     }
-    //   }).catchError((e) {
-    //     GlobalVariable.internetErr(true);
-    //     print(e);
-    //     GlobalVariable.showLoader.value = false;
-    //   });
-    // }
-  }
-
 }

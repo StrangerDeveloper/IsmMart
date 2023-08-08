@@ -1,4 +1,5 @@
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -11,7 +12,6 @@ import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/models/user/country_city_model.dart';
 import 'package:ism_mart/screens/login/login_view.dart';
 import 'package:ism_mart/screens/vendor_signup/vendor_signup1/vendor_signup1_viewmodel.dart';
-import 'package:ism_mart/screens/vendor_signup/vendor_signup2/vendor_signup2_view.dart';
 import 'package:ism_mart/widgets/back_button.dart';
 import 'package:ism_mart/widgets/become_vendor.dart';
 import 'package:ism_mart/widgets/custom_checkbox.dart';
@@ -77,8 +77,8 @@ class VendorSignUp1View extends StatelessWidget {
               ),
             ),
             NoInternetView(
-              onPressed: () {
-                // viewModel.signUp();
+              onPressed: () async{
+                await viewModel.signUp();
               },
             ),
           ],
@@ -147,12 +147,15 @@ class VendorSignUp1View extends StatelessWidget {
 
   Widget firstNameField() {
     return CustomTextField3(
-      title: langKey.firstName.tr + '*',
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]+|\s')),
+      ],
+      title: langKey.firstName.tr,
       hintText: 'John',
       controller: viewModel.firstNameController,
       autoValidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
-        return Validator().validateName(value, fieldType: langKey.firstName.tr);
+        return Validator().validateName(value, errorToPrompt: langKey.FirstNameReq.tr);
       },
     );
   }
@@ -161,12 +164,15 @@ class VendorSignUp1View extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: CustomTextField3(
-        title: langKey.lastName.tr + '*',
+        inputFormatters: [
+          FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]+|\s')),
+        ],
+        title: langKey.lastName.tr,
         hintText: 'Kel',
         controller: viewModel.lastNameController,
         autoValidateMode: AutovalidateMode.onUserInteraction,
         validator: (value) {
-          return Validator().validateName(value, fieldType: langKey.lastName.tr);
+          return Validator().validateName(value, errorToPrompt: langKey.LastNameReq.tr);
         },
       ),
     );
@@ -174,7 +180,7 @@ class VendorSignUp1View extends StatelessWidget {
 
   Widget emailTextField() {
     return CustomTextField3(
-      title: langKey.email.tr + '*',
+      title: langKey.email.tr,
       hintText: 'asha****iq11@gmail.com',
       controller: viewModel.emailController,
       autoValidateMode: AutovalidateMode.onUserInteraction,
@@ -193,7 +199,7 @@ class VendorSignUp1View extends StatelessWidget {
           validator: (value){
             return Validator().validatePhoneNumber(value);
           },
-          title: langKey.phoneNumber.tr + '*',
+          title: langKey.phoneNumber.tr,
           hintText: '336 5563138',
           keyboardType: TextInputType.number,
           controller: viewModel.phoneNumberController,
@@ -222,7 +228,7 @@ class VendorSignUp1View extends StatelessWidget {
     return Obx(
       () => CustomTextField3(
         controller: viewModel.passwordController,
-        title: langKey.password.tr + '*',
+        title: langKey.password.tr,
         hintText: '● ● ● ● ● ● ● ● ● ●',
         autoValidateMode: AutovalidateMode.onUserInteraction,
         validator: (value) {
@@ -245,7 +251,7 @@ class VendorSignUp1View extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 20),
         child: CustomTextField3(
           controller: viewModel.confirmPasswordController,
-          title: langKey.confirmPass.tr + '*',
+          title: langKey.confirmPass.tr,
           hintText: '● ● ● ● ● ● ● ● ● ●',
           autoValidateMode: AutovalidateMode.onUserInteraction,
           validator: (value) {
@@ -271,12 +277,20 @@ class VendorSignUp1View extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(bottom: 3),
-            child: Text(
-              langKey.country.tr + '*',
-              style: GoogleFonts.dmSans(
-                fontSize: 14,
-                fontWeight: FontWeight.w700,
-                color: newColorDarkBlack2,
+            child: RichText(
+              text: TextSpan(
+                text: langKey.country.tr,
+                style: GoogleFonts.dmSans(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w700,
+                  color: newColorDarkBlack2,
+                ),
+                children: [
+                    TextSpan(
+                      text: ' *',
+                      style: TextStyle(color: Colors.red),
+                    )
+                ],
               ),
             ),
           ),
@@ -316,6 +330,7 @@ class VendorSignUp1View extends StatelessWidget {
               viewModel.countryID.value = newValue.id!;
               cityViewModel.selectedCity.value = CountryModel();
               cityViewModel.cityId.value = 0;
+              viewModel.cityID.value = 0;
               cityViewModel.authController.selectedCity.value = CountryModel();
               viewModel.countryErrorVisibility.value = false;
               },
@@ -353,12 +368,20 @@ class VendorSignUp1View extends StatelessWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(bottom: 3),
-                        child: Text(
-                          langKey.city.tr + '*',
-                          style: GoogleFonts.dmSans(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w700,
-                            color: newColorDarkBlack2,
+                        child: RichText(
+                          text: TextSpan(
+                            text: langKey.city.tr,
+                            style: GoogleFonts.dmSans(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700,
+                              color: newColorDarkBlack2,
+                            ),
+                            children: [
+                                TextSpan(
+                                  text: ' *',
+                                  style: TextStyle(color: Colors.red),
+                                )
+                            ],
                           ),
                         ),
                       ),
@@ -445,6 +468,11 @@ class VendorSignUp1View extends StatelessWidget {
                       decoration: TextDecoration.underline,
                       color: newColorLightGrey2,
                     ),
+                    recognizer: TapGestureRecognizer()..onTap = () {
+                      Get.toNamed(Routes.staticInfo, arguments: {
+                        'title': langKey.termsAndConditions.tr
+                      });
+                    }
                   ),
                   TextSpan(
                     text:

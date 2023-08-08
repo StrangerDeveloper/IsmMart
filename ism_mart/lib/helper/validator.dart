@@ -12,20 +12,47 @@ class Validator {
 
   /////////////////////  Validators  /////////////////////////
   ///EmptyField
-  String? validateDefaultTxtField(String? value) {
+  String? validateDefaultTxtField(String? value, {String? errorPrompt}) {
     if (GetUtils.isBlank(value)!) {
-      return langKey.fieldIsRequired.tr;
+      if(errorPrompt == null) {
+        return langKey.fieldIsRequired.tr;
+      } else{
+        return errorPrompt;
+      }
     } else {
       return null;
     }
   }
 
+  ///Address
+  String? validateAddress(String? value){
+    RegExp regex = RegExp(r'^[#.0-9a-zA-Z\s,-]+$');
+    if(GetUtils.isBlank(value)!){
+      return langKey.shopAddressReq.tr;
+    } else if(!regex.hasMatch(value!)){
+      return langKey.incorrectAddress.tr;
+    } else{
+      return null;
+    }
+  }
+
+  ///CNIC
+  String? validateCNIC(String? value){
+    if(GetUtils.isBlank(value)!){
+      return langKey.cnicReq.tr;
+    } else if(value!.length < 11 || value.length > 18){
+      return langKey.incorrectCNIC.tr;
+    } else {
+      return null;
+    }
+  }
+  
   ///Name
-  String? validateName(String? value, {String? fieldType}) {
+  String? validateName(String? value, {String? errorToPrompt}) {
   RegExp regex = RegExp(r'^[a-zA-Z -]+$');
   if (GetUtils.isBlank(value)!) {
-    // Using fieldType parameter to construct the error message dynamically
-    return fieldType;
+    // Using errorToPrompt parameter to construct the error message dynamically
+    return errorToPrompt;
   } else if (!regex.hasMatch(value!)) {
     return langKey.nameAlphabaticReq.tr;
   } else {
@@ -55,12 +82,45 @@ class Validator {
     }
   }
 
+  ///NTN
+  String? validateNTN(String? value){
+    if(GetUtils.isBlank(value)!){
+      return null;
+    } else if(value?.length != 7){
+      return langKey.incorrectNTN.tr;
+    } else {
+      return null;
+    }
+  }
+
   ///Email
   String? validateEmail(String? value) {
     if (GetUtils.isBlank(value)!) {
       return langKey.emailIsRequired.tr;
     } else if (!GetUtils.isEmail(value!)) {
       return langKey.invalidEmail.tr;
+    } else {
+      return null;
+    }
+  }
+
+  ///Bank Account
+  String? validateBankAcc(String? value){
+    if(GetUtils.isBlank(value)!){
+      return langKey.bankAccountReq.tr;
+    } else if(value!.length < 16 || value.length > 33){
+      return langKey.incorrectAccOrIbanNo.tr;
+    } else {
+      return null;
+    }
+  }
+
+  ///IBAN
+  String? validateBranchCode(String? value){
+    if(GetUtils.isBlank(value)!){
+      return null;
+    } else if(value!.length != 4){
+      return langKey.incorrectBranchCode.tr;
     } else {
       return null;
     }

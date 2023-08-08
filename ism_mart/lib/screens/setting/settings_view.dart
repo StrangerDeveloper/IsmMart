@@ -188,8 +188,13 @@ class SettingsView extends StatelessWidget {
               if (viewModel.userDetails.value!.role!
                   .toLowerCase()
                   .contains("vendor")) {
-                Get.toNamed(Routes.sellerHomeRoute);
-                // authController.newAcc.value = false;
+                if(viewModel.userDetails.value?.vendor?.status == 'pending'){
+                  Get.toNamed(Routes.vendorSignUp4, arguments: {
+                    'fromSettings': true,
+                  });
+                } else {
+                  Get.toNamed(Routes.sellerHomeRoute);
+                }
               } else {
                 Get.toNamed(Routes.updateVendor,
                     arguments: {'isRegisterScreen': true});

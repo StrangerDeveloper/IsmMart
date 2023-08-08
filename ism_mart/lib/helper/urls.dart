@@ -8,6 +8,9 @@ class Urls {
   //ForgotPasswordViewModel
   static String forgetPassword = "auth/forgetPassword";
 
+  //User Details
+  static String getUserDetails = "user/profile";
+
   //DisputeDetailViewModel
   static String ticketDetail = "tickets/";
   static String allTickets = "tickets/myTickets";

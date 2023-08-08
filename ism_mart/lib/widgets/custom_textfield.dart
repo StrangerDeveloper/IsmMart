@@ -271,7 +271,7 @@ class CustomTextField3 extends StatelessWidget {
   final void Function(String)? onChanged;
   final bool required;
 
-  CustomTextField3({
+    CustomTextField3({
     Key? key,
     this.showCursor,
     this.readOnly = false,
@@ -338,6 +338,7 @@ class CustomTextField3 extends StatelessWidget {
             suffixIcon: suffixIcon,
             suffixIconConstraints: BoxConstraints.tight(Size(40, 25)),
             errorStyle: GoogleFonts.dmSans(
+              fontSize: 13,
               color: Colors.red.shade700,
             ),
             enabledBorder: UnderlineInputBorder(
@@ -497,6 +498,7 @@ class CountryCodePickerTextField2 extends StatelessWidget {
   final bool? showCursor;
   final bool readOnly;
   final bool enabled;
+  final bool required;
   final String? errorText;
   final TextStyle? textStyle;
   final List<TextInputFormatter>? inputFormatters;
@@ -518,6 +520,7 @@ class CountryCodePickerTextField2 extends StatelessWidget {
     this.textStyle,
     this.title,
     this.hintText,
+    this.required = true,
   });
 
   @override
@@ -528,12 +531,21 @@ class CountryCodePickerTextField2 extends StatelessWidget {
         if (title != null)
           Padding(
             padding: const EdgeInsets.only(bottom: 3),
-            child: Text(
-              title!,
-              style: GoogleFonts.dmSans(
-                fontSize: 14,
-                fontWeight: FontWeight.w700,
-                color: newColorDarkBlack2,
+            child: RichText(
+              text: TextSpan(
+                text: title!,
+                style: GoogleFonts.dmSans(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w700,
+                  color: newColorDarkBlack2,
+                ),
+                children: [
+                  if (required)
+                    TextSpan(
+                      text: ' *',
+                      style: TextStyle(color: Colors.red),
+                    )
+                ],
               ),
             ),
           ),
@@ -604,6 +616,10 @@ class CountryCodePickerTextField2 extends StatelessWidget {
             ),
             focusedErrorBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.red.shade700, width: 0.6),
+            ),
+            errorStyle: GoogleFonts.dmSans(
+              fontSize: 13,
+              color: Colors.red.shade700,
             ),
           ),
           controller: controller,
