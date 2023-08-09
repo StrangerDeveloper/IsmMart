@@ -53,7 +53,11 @@ class BecomeVendor extends StatelessWidget {
               cityViewModel.cityId.value = 0;
               cityViewModel.authController.selectedCountry.value = CountryModel();
               cityViewModel.authController.selectedCity.value = CountryModel();
-              Get.offNamed(Routes.vendorSignUp1);
+              if(buttonText == 'Become a user'){
+                Get.offNamed(Routes.registerRoute);
+              } else{
+                Get.offNamed(Routes.vendorSignUp1);
+              }
             },
             child: Text(
               buttonText ?? langKey.becomeAVendor.tr,
