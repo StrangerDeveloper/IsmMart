@@ -32,6 +32,8 @@ dependencies:
   flutter_inappwebview: ^5.7.2+3
   percent_indicator: ^4.2.3
   csv: ^5.0.2
+  url_launcher: ^6.1.12
+  flutter_image_compress: ^2.0.4
 
 
 dev_dependencies:
