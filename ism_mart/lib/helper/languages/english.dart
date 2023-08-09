@@ -3,9 +3,9 @@ import 'translations_key.dart' as key;
 class English {
   Map<String, String> get translations => {
         ///Welcome
-        key.getOnboard : 'Get onboard',
-        key.createYourAccount : 'Create your account',
-        key.continueWithSameEmail : 'Continue with same email',
+        key.getOnboard: 'Get onboard',
+        key.createYourAccount: 'Create your account',
+        key.continueWithSameEmail: 'Continue with same email',
         key.continueWithDiffEmail: 'With different email',
 
         ///Add Update Address
@@ -233,9 +233,9 @@ class English {
         key.yourCoverAndProfile:
             'Your cover and profile must be a PNG or JPG, up to',
         key.updateVendorDetails: 'Update Vendor Details',
-        key.emailIsRequired : 'Email is required',
-        key.passwordIsRequired : 'Password is required',
-        key.passwordConfirmIsRequired : 'Confirm Password is required',
+        key.emailIsRequired: 'Email is required',
+        key.passwordIsRequired: 'Password is required',
+        key.passwordConfirmIsRequired: 'Confirm Password is required',
         key.fieldIsRequired: 'Field is required',
         key.isRequired: 'is required',
         key.shopNameReq: 'Shop name is required',
@@ -400,55 +400,56 @@ class English {
         key.joinOurMarketplace:
             'Join our marketplace and start selling your products today!',
         key.seamlessShopping: 'Enter details for seamless shopping experience',
-        key.createAnAccount : 'Create an account',
-        key.getOnboardUser : 'Get onboard as a user',
-        key.phoneNumber : 'Phone Number',
-        key.termsAndConditionsCheckbox : 'By creating your account you have to agree with our terms & conditions.',
-        key.frontSide : 'Front Side',
+        key.createAnAccount: 'Create an account',
+        key.getOnboardUser: 'Get onboard as a user',
+        key.phoneNumber: 'Phone Number',
+        key.termsAndConditionsCheckbox:
+            'By creating your account you have to agree with our terms & conditions.',
+        key.frontSide: 'Front Side',
         key.frontSideReq: 'CNIC front side image is required',
-        key.backSide : 'Back Side',
+        key.backSide: 'Back Side',
         key.backSideReq: 'CNIC back side image is required',
-        key.chequeImage : 'Bank Cheque Image',
+        key.chequeImage: 'Bank Cheque Image',
         key.chequeImageReq: 'Bank cheque image is required',
-        key.shopLogoImage : 'Shop Logo/Image',
+        key.shopLogoImage: 'Shop Logo/Image',
         key.shopLogoImageReq: 'Shop logo/image is required',
-        key.business : 'Business',
-        key.information : 'Information',
-        key.vendorAccountCreation : 'Vendor Account Creation',
-        key.vendorBankAccount : 'Vendor Bank Account',
-        key.profileStatus : 'Profile Status',
-        key.shopName : 'Shop Name',
-        key.youShopName : 'Your Shop Name',
-        key.shopAddress : 'Shop Address',
-        key.youShopAddress : 'Your Shop Address',
-        key.ifAvailable : 'if available',
-        key.yourShopNTNNumber : 'Your Shop NTN Number',
-        key.shopNumber : 'Shop Number',
-        key.lessThanMb : 'Less than 2MB',
-        key.chooseFile : 'Choose File',
-        key.noFileChosen : 'No file chosen',
-        key.waitForVerification : 'Wait for verification',
-        key.vendor : 'Vendor',
-        key.submitted : 'submitted',
-        key.lastStep : 'Last Step',
-        key.shopCountry : 'Shop Country',
-        key.shopCity : 'Shop City',
-        key.yourOwnerName : 'Your Owner Name',
-        key.vendorCNIC : 'Vendor CNIC',
-        key.yourOwnerCNIC : 'Your Owner CNIC',
+        key.business: 'Business',
+        key.information: 'Information',
+        key.vendorAccountCreation: 'Vendor Account Creation',
+        key.vendorBankAccount: 'Vendor Bank Account',
+        key.profileStatus: 'Profile Status',
+        key.shopName: 'Shop Name',
+        key.youShopName: 'Your Shop Name',
+        key.shopAddress: 'Shop Address',
+        key.youShopAddress: 'Your Shop Address',
+        key.ifAvailable: 'if available',
+        key.yourShopNTNNumber: 'Your Shop NTN Number',
+        key.shopNumber: 'Shop Number',
+        key.lessThanMb: 'Less than 2MB',
+        key.chooseFile: 'Choose File',
+        key.noFileChosen: 'No file chosen',
+        key.waitForVerification: 'Wait for verification',
+        key.vendor: 'Vendor',
+        key.submitted: 'submitted',
+        key.lastStep: 'Last Step',
+        key.shopCountry: 'Shop Country',
+        key.shopCity: 'Shop City',
+        key.yourOwnerName: 'Your Owner Name',
+        key.vendorCNIC: 'Vendor CNIC',
+        key.yourOwnerCNIC: 'Your Owner CNIC',
         key.enterCNIC: 'Enter CNIC',
-        key.shopCategory : 'Shop Category',
-        key.yourShopCategory : 'Your Shop Category',
-        key.shopDescription : 'Shop Description',
+        key.shopCategory: 'Shop Category',
+        key.yourShopCategory: 'Your Shop Category',
+        key.shopDescription: 'Shop Description',
         key.shopDescReq: 'Shop description is required',
-        key.enterShopDescription : 'Enter Shop Description',
+        key.enterShopDescription: 'Enter Shop Description',
         // key.shopImage : 'Shop Image',
         // key.shopCoverImage : 'Shop Cover Image',
-        key.yourBankName : 'Your Bank Name',
-        key.yourAccountTitle : 'Your Account Title',
-        key.accountTitle : 'Bank Account Title',
-        key.bankAccountNumber : 'Bank Account Number / IBAN',
-        key.yourAccountNumber : 'Your Account Number',
+        key.yourBankName: 'Your Bank Name',
+        key.yourAccountTitle: 'Your Account Title',
+        key.accountTitle: 'Bank Account Title',
+        key.bankAccountNumber: 'Bank Account Number / IBAN',
+        key.yourAccountNumber: 'Your Account Number',
         key.yourBranchCode: 'Your Branch Code',
 
         //onboard screen
@@ -532,7 +533,8 @@ class English {
         key.bankAccountReq: 'Bank account number is required',
         key.incorrectAccOrIbanNo: 'Enter correct account number or IBAN',
         key.ibanReq: 'Enter correct IBAN',
-        key.chequeImageNote: 'This cheque image should have the same bank details visible as you mentioned above',
+        key.chequeImageNote:
+            'This cheque image should have the same bank details visible as you mentioned above',
 
         ///contact us
         key.subject: 'Subject',
@@ -839,60 +841,56 @@ class English {
         key.vendorBody13:
             '10.1 A party ("Receiving Party") shall keep in strict confidence all technical or commercial know-how, specifications, inventions, processes, or initiatives which are of a confidential nature and have been disclosed to the Receiving Party by the other party ("Disclosing Party"), and any other confidential information concerning the Disclosing Party\'s business, its products, and services which the receiving party may obtain.\n10.2 The Receiving Party shall only disclose such confidential information to those of its employees, agents, and subcontractors who need to know it for the purpose of discharging the Receiving Party\'s obligations under this agreement.\n10.3 Parties shall keep all information relating to ordering and delivery procedures confidential and shall at no time disclose any information to customers.\n10.4 In case the details are required to be disclosed by law, any governmental or regulatory authority or by a court of competent jurisdiction to any governmental body or regulatory authority, the same shall be communicated to the other party in advance in writing.\n10.5 This clause 10 shall survive termination of this agreement.',
 
-        key.vendorHeader14: '12. No Partnership',
+        key.vendorHeader14: '11. No Partnership',
         key.vendorBody14:
             'Nothing in this agreement is intended to or shall be deemed to, establish any corporate partnership or joint venture between the Parties.',
 
-        key.vendorHeader15: '13. Amendments:',
+        key.vendorHeader15: '12. Amendments:',
         key.vendorBody15:
-            '13.1 The Provider shall have the right to increase the success fee at any time as per the Provider’s discretion. The same shall be informed to the Vendor through an official email and/or through Vendor dashboard.\n13.2 The Provider shall have the right to amend, remove, correct and/or add any commitments, obligations, and responsibility for itself and/or on part of the Vendor by a way of an addendum. The same shall be informed to the Vendor through an official email and/or via the Vendor dashboard.\n13.3 In the event of the Vendor disagreeing with such amendments, he/she shall have the right to terminate this agreement in accordance with the provisions of clause 19.\n13.4 It is specifically agreed that all amendments shall be effective between the Parties with effect from the date notified by the Provider in accordance with clause 13.2.',
+            '12.1 The Provider shall have the right to increase the success fee at any time as per the Provider’s discretion. The same shall be informed to the Vendor through an official email and/or through Vendor dashboard.\n12.2 The Provider shall have the right to amend, remove, correct and/or add any commitments, obligations, and responsibility for itself and/or on part of the Vendor by a way of an addendum. The same shall be informed to the Vendor through an official email and/or via the Vendor dashboard.\n12.3 In the event of the Vendor disagreeing with such amendments, he/she shall have the right to terminate this agreement in accordance with the provisions of clause 18.\n12.4 It is specifically agreed that all amendments shall be effective between the Parties with effect from the date notified by the Provider in accordance with clause 12.2.',
 
-        key.vendorHeader16: '14. Force Majeure:',
+        key.vendorHeader16: '13. Force Majeure:',
         key.vendorBody16:
             'For the purposes of this agreement, "Force Majeure Event" means an event beyond the reasonable control of either party including but not limited to acts of God, war, riot, civil commotion, or terrorist action. Neither Party shall be liable to the other Party as a direct result of any delay or failure to perform its obligations under this agreement as a result of a Force Majeure	Event.',
 
-        key.vendorHeader17: '15. Third Parties:',
+        key.vendorHeader17: '14. Third Parties:',
         key.vendorBody17:
             'A person who is not a party to this agreement shall not have any rights to enforce its terms.',
 
-        key.vendorHeader18: '16. Notices:',
+        key.vendorHeader18: '15. Notices:',
         key.vendorBody18:
-            '16.1 All notices under this agreement shall be in writing, addressed to the agreed contact person/address as per this agreement, and be deemed duly given on the same day when agreed upon during the Vendor Registration process.',
+            '15.1 All notices under this agreement shall be in writing, addressed to the agreed contact person/address as per this agreement, and be deemed duly given on the same day when agreed upon during the Vendor Registration process.',
 
-        key.vendorHeader19: '17. Assignment:',
+        key.vendorHeader19: '16. Assignment:',
         key.vendorBody19:
-            '17.1 The Provider may at any time assign, transfer, mortgage, charge, subcontract, or deal in any other manner with all or any of its rights under this agreement and may subcontract or delegate in any manner any or all of its obligations under this agreement to any third party or agent.\n17.2 The Vendor shall not, without the prior written consent of the Provider, which shall not be unreasonably withheld, assign, transfer, mortgage, charge, subcontract, or declare a trust over or deal in any other manner with any or all of its rights or obligations under this agreement.',
+            '16.1 The Provider may at any time assign, transfer, mortgage, charge, subcontract, or deal in any other manner with all or any of its rights under this agreement and may subcontract or delegate in any manner any or all of its obligations under this agreement to any third party or agent.\n16.2 The Vendor shall not, without the prior written consent of the Provider, which shall not be unreasonably withheld, assign, transfer, mortgage, charge, subcontract, or declare a trust over or deal in any other manner with any or all of its rights or obligations under this agreement.',
 
-        key.vendorHeader20: '18. Waiver:',
+        key.vendorHeader20: '17. Waiver:',
         key.vendorBody20:
             'A waiver of any right under this agreement or law is only effective if it is in writing and shall not be deemed to be a waiver of any subsequent breach or default. No failure in exercising any right or remedy provided under this agreement or by law shall constitute a waiver of any right or remedy, nor shall it prevent or restrict its further exercise of that or any other right or remedy.',
 
-        key.vendorHeader21: '19. Term and Termination:',
+        key.vendorHeader21: '18. Term and Termination:',
         key.vendorBody21:
-            '19.1 This agreement shall commence on the Commencement Date and will continue for an indefinite period, unless terminated earlier in accordance with this clause 19.1 . This agreement may be terminated:\n(a) by either Party for convenience by giving not less than five (5) days prior written notice.\n(b) with immediate effect upon the provision of written notice by either Party in the event of material breach of this agreement by the other party.\n(c) at any time by mutual written agreement between the Parties.\n19.2 The Provider shall have the right to terminate this agreement, with immediate effect and without any liability, in the event of a breach of section 2.12 and 2.13, where the Vendor has failed to remedy the breach within a maximum period of two (2) business days from notification.',
+            '18.1 This agreement shall commence on the Commencement Date and will continue for an indefinite period, unless terminated earlier in accordance with this clause 18.1 . This agreement may be terminated:\n(a) by either Party for convenience by giving not less than five (5) days prior written notice.\n(b) with immediate effect upon the provision of written notice by either Party in the event of material breach of this agreement by the other party.\n(c) at any time by mutual written agreement between the Parties.\n18.2 The Provider shall have the right to terminate this agreement, with immediate effect and without any liability, in the event of a breach of section 2.12 and 2.13, where the Vendor has failed to remedy the breach within a maximum period of two (2) business days from notification.',
 
-        key.vendorHeader22: '20. Limitation of Liability:',
+        key.vendorHeader22: '19. Limitation of Liability:',
         key.vendorBody22:
-            '20.1 Nothing in this agreement shall limit or exclude either Party’s liability for death or personal injury caused by its negligence, or the negligence of its employees, agents, or subcontractors.\n20.2 Subject to clause 20.1, neither Party shall be liable to the other Party, whether in contract, tort (including negligence), breach of statutory duty, or otherwise, for any loss of profit, or any indirect or consequential loss or damages arising under or in connection with this agreement.\n20.3 This clause shall survive termination of this agreement.',
+            '19.1 Nothing in this agreement shall limit or exclude either Party’s liability for death or personal injury caused by its negligence, or the negligence of its employees, agents, or subcontractors.\n19.2 Subject to clause 19.1, neither Party shall be liable to the other Party, whether in contract, tort (including negligence), breach of statutory duty, or otherwise, for any loss of profit, or any indirect or consequential loss or damages arising under or in connection with this agreement.\n19.3 This clause shall survive termination of this agreement.',
 
-        key.vendorHeader23: '21. Conflicting Terms:',
+        key.vendorHeader23: '20. Conflicting Terms:',
         key.vendorBody23:
             'To the extent that any of these Terms conflict with the terms stated on the Vendor Registration Form (including, without limitation, any Special Conditions detailed on the Vendor Registration Form), the terms of the Vendor Registration Form shall prevail.',
 
-        key.vendorHeader24: '21. Conflicting Terms:',
-        key.vendorBody24:
-            'To the extent that any of these Terms conflict with the terms stated on the Vendor Registration Form (including, without limitation, any Special Conditions detailed on the Vendor Registration Form), the terms of the Vendor Registration Form shall prevail.',
-
-        key.vendorHeader25: '22. Entire Agreement:',
+        key.vendorHeader25: '21. Entire Agreement:',
         key.vendorBody25:
             'To the extent that any of these Terms conflict with the terms stated on the Vendor Registration Form (including, without limitation, any Special Conditions detailed on the Vendor Registration Form), the terms of the Vendor Registration Form shall prevail.',
 
-        key.vendorHeader26: '23. Severability:',
+        key.vendorHeader26: '22. Severability:',
         key.vendorBody26:
             'If any provision or part-provision of this Agreement is or becomes invalid, illegal, or unenforceable, it shall be deemed modified to the minimum extent necessary to make it valid, legal, and enforceable. If such modification is not possible, the relevant provision or part-provision shall be deemed deleted. Any modification to or deletion of a provision or part-provision under this clause shall not affect the validity and enforceability of the rest of this agreement.',
 
-        key.vendorHeader27: '24. Governing Law and Jurisdiction:',
+        key.vendorHeader27: '23. Governing Law and Jurisdiction:',
         key.vendorBody27:
-            '24.1 This agreement, and any dispute or claim arising out of or in connection with it or its subject matter or formation (including non-contractual disputes or claims), shall be governed by, and construed in accordance with the laws of Pakistan.\n24.2 Each Party agrees that any dispute arising out of this agreement shall be subject to the non-exclusive jurisdiction of the courts of Pakistan, who shall settle any dispute or claim arising out of or in connection with this agreement or its subject matter or formation (including non-contractual disputes or claims).\nPerformance of this agreement shall continue during any court proceedings or any other dispute resolution mechanism. No payment due or payable by the Vendor or amount to be transferred by the Provider shall be withheld on account of a pending court dispute or other dispute resolution mechanism except to the extent that such payment is the subject of such disputes.',
+            '23.1 This agreement, and any dispute or claim arising out of or in connection with it or its subject matter or formation (including non-contractual disputes or claims), shall be governed by, and construed in accordance with the laws of Pakistan.\n23.2 Each Party agrees that any dispute arising out of this agreement shall be subject to the non-exclusive jurisdiction of the courts of Pakistan, who shall settle any dispute or claim arising out of or in connection with this agreement or its subject matter or formation (including non-contractual disputes or claims).\nPerformance of this agreement shall continue during any court proceedings or any other dispute resolution mechanism. No payment due or payable by the Vendor or amount to be transferred by the Provider shall be withheld on account of a pending court dispute or other dispute resolution mechanism except to the extent that such payment is the subject of such disputes.',
       };
 }

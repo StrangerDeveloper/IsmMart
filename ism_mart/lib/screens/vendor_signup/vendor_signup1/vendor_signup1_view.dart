@@ -77,7 +77,7 @@ class VendorSignUp1View extends StatelessWidget {
               ),
             ),
             NoInternetView(
-              onPressed: () async{
+              onPressed: () async {
                 await viewModel.signUp();
               },
             ),
@@ -155,7 +155,8 @@ class VendorSignUp1View extends StatelessWidget {
       controller: viewModel.firstNameController,
       autoValidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
-        return Validator().validateName(value, errorToPrompt: langKey.FirstNameReq.tr);
+        return Validator()
+            .validateName(value, errorToPrompt: langKey.FirstNameReq.tr);
       },
     );
   }
@@ -172,7 +173,8 @@ class VendorSignUp1View extends StatelessWidget {
         controller: viewModel.lastNameController,
         autoValidateMode: AutovalidateMode.onUserInteraction,
         validator: (value) {
-          return Validator().validateName(value, errorToPrompt: langKey.LastNameReq.tr);
+          return Validator()
+              .validateName(value, errorToPrompt: langKey.LastNameReq.tr);
         },
       ),
     );
@@ -196,7 +198,7 @@ class VendorSignUp1View extends StatelessWidget {
       () => Padding(
         padding: const EdgeInsets.only(top: 20, bottom: 30),
         child: CountryCodePickerTextField2(
-          validator: (value){
+          validator: (value) {
             return Validator().validatePhoneNumber(value);
           },
           title: langKey.phoneNumber.tr,
@@ -256,7 +258,8 @@ class VendorSignUp1View extends StatelessWidget {
           hintText: '● ● ● ● ● ● ● ● ● ●',
           autoValidateMode: AutovalidateMode.onUserInteraction,
           validator: (value) {
-            return Validator().validateConfirmPassword(value, viewModel.passwordController.text);
+            return Validator().validateConfirmPassword(
+                value, viewModel.passwordController.text);
           },
           obscureText: viewModel.obscureConfirmPassword.value ? true : false,
           suffixIcon: ObscureSuffixIcon(
@@ -287,10 +290,10 @@ class VendorSignUp1View extends StatelessWidget {
                   color: newColorDarkBlack2,
                 ),
                 children: [
-                    TextSpan(
-                      text: ' *',
-                      style: TextStyle(color: Colors.red),
-                    )
+                  TextSpan(
+                    text: ' *',
+                    style: TextStyle(color: Colors.red),
+                  )
                 ],
               ),
             ),
@@ -334,7 +337,7 @@ class VendorSignUp1View extends StatelessWidget {
               viewModel.cityID.value = 0;
               cityViewModel.authController.selectedCity.value = CountryModel();
               viewModel.countryErrorVisibility.value = false;
-              },
+            },
             selectedItem: authController.newAcc.value == true
                 ? cityViewModel.selectedCountry.value
                 : cityViewModel.authController.selectedCountry.value,
@@ -378,10 +381,10 @@ class VendorSignUp1View extends StatelessWidget {
                               color: newColorDarkBlack2,
                             ),
                             children: [
-                                TextSpan(
-                                  text: ' *',
-                                  style: TextStyle(color: Colors.red),
-                                )
+                              TextSpan(
+                                text: ' *',
+                                style: TextStyle(color: Colors.red),
+                              )
                             ],
                           ),
                         ),
@@ -454,7 +457,7 @@ class VendorSignUp1View extends StatelessWidget {
           text: Padding(
             padding: const EdgeInsets.only(top: 6),
             child: InkWell(
-              onTap: (){
+              onTap: () {
                 showTermsAndConditionDialog();
               },
               child: RichText(
@@ -468,17 +471,17 @@ class VendorSignUp1View extends StatelessWidget {
                           'By clicking ‘Create Account’, you’ve read and agreed to our ',
                     ),
                     TextSpan(
-                      text: 'Terms & Conditions',
-                      style: newFontStyle0.copyWith(
-                        decoration: TextDecoration.underline,
-                        color: newColorLightGrey2,
-                      ),
-                      recognizer: TapGestureRecognizer()..onTap = () {
-                        Get.toNamed(Routes.staticInfo, arguments: {
-                          'title': langKey.termsAndConditions.tr
-                        });
-                      }
-                    ),
+                        text: langKey.termsAndConditions.tr,
+                        style: newFontStyle0.copyWith(
+                          decoration: TextDecoration.underline,
+                          color: newColorLightGrey2,
+                        ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            Get.toNamed(Routes.staticInfo, arguments: {
+                              'title': langKey.termsAndConditions.tr
+                            });
+                          }),
                     TextSpan(
                       text:
                           ' and for my personal data to be processed according to',
@@ -490,7 +493,7 @@ class VendorSignUp1View extends StatelessWidget {
                         fontWeight: FontWeight.w700,
                       ),
                     ),
-                    TextSpan(text: 'Privacy Policy.'),
+                    TextSpan(text: langKey.privacyPolicy.tr),
                   ],
                 ),
               ),
