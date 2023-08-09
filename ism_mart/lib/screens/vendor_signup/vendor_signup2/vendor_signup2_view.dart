@@ -197,7 +197,7 @@ class VendorSignUp2View extends StatelessWidget {
               ],
             ),
           ),
-          new CircularPercentIndicator(
+          CircularPercentIndicator(
             circularStrokeCap: CircularStrokeCap.round,
             radius: 33,
             lineWidth: 6,
