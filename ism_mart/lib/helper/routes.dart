@@ -18,6 +18,7 @@ import 'package:ism_mart/screens/single_product_full_image/single_product_full_i
 import 'package:ism_mart/screens/splash/splash_view.dart';
 import 'package:ism_mart/screens/vendor_question/vendor_question_view.dart';
 import 'package:ism_mart/screens/verify_password/verify_password_view.dart';
+import '../email_verified/email_verified_view.dart';
 import '../screens/contact_us/contact_us_view.dart';
 import '../screens/faq/faq_view.dart';
 import '../screens/onBoard/onboard_view.dart';
@@ -50,6 +51,7 @@ class Routes {
   static const dashboard = "/dashboard";
   static const disputeDetail = "/disputeDetail";
   static const emailVerificationLinkRoute = "/emailVerificationLink";
+  static const emailVerified = "/api/auth/verifyEmail";
   static const faq = "/faq";
   static const forgotPassword1 = "/forgotPassword1";
   static const forgotPassword2 = "/forgotPassword2";
@@ -90,6 +92,11 @@ class Routes {
     GetPage(
       name: bottomNavigation,
       page: () => const BottomNavigationView(),
+      binding: BaseBindings(),
+    ),
+    GetPage(
+      name: emailVerified,
+      page: () => const EmailVerifedView(),
       binding: BaseBindings(),
     ),
     GetPage(
