@@ -552,8 +552,8 @@ class VendorSignUp2View extends StatelessWidget {
           FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
           FilteringTextInputFormatter.digitsOnly,
         ],
-        title: langKey.ownerCNIC.tr,
-        hintText: 'CNIC',
+        title: langKey.vendorCNIC.tr,
+        hintText: langKey.enterCNIC.tr,
         controller: viewModel.ownerCnicController,
         autoValidateMode: AutovalidateMode.onUserInteraction,
         validator: (value) {
@@ -582,7 +582,7 @@ class VendorSignUp2View extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: CustomTextField3(
         title: langKey.shopDescription.tr,
-        hintText: langKey.yourShopDescription.tr,
+        hintText: langKey.enterShopDescription.tr,
         controller: viewModel.shopDescController,
         autoValidateMode: AutovalidateMode.onUserInteraction,
         validator: (value) {

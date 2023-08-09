@@ -2,6 +2,7 @@ import 'dart:core';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/screens/vendor_signup/vendor_signup3/vendor_signup3_viewmodel.dart';
 
 class Validator {
   /////////////////////  Formatters  /////////////////////////
@@ -49,7 +50,7 @@ class Validator {
   
   ///Name
   String? validateName(String? value, {String? errorToPrompt}) {
-  RegExp regex = RegExp(r'^[a-zA-Z -]+$');
+  RegExp regex = RegExp(r'^[a-zA-Z0-9 -]+$');
   if (GetUtils.isBlank(value)!) {
     // Using errorToPrompt parameter to construct the error message dynamically
     return errorToPrompt;
@@ -108,20 +109,42 @@ class Validator {
   String? validateBankAcc(String? value){
     if(GetUtils.isBlank(value)!){
       return langKey.bankAccountReq.tr;
-    } else if(value!.length < 16 || value.length > 33){
-      return langKey.incorrectAccOrIbanNo.tr;
     } else {
-      return null;
+      VendorSignUp3ViewModel vendorSignUp3ViewModel = Get.find();
+      if(value!.length < 16 || value.length > 33){
+
+        Future.delayed(Duration(milliseconds: 500), (){
+          vendorSignUp3ViewModel.enableBranchCode.value = false;
+        });
+      return langKey.incorrectAccOrIbanNo.tr;
+    } else{
+        if(RegExp(r'^-?(([0-9]*)|(([0-9]*)\.([0-9]*)))$').hasMatch(value)){
+        Future.delayed(Duration(milliseconds: 500), (){
+          vendorSignUp3ViewModel.enableBranchCode.value = true;
+        });
+        return null;
+        } else{
+          Future.delayed(Duration(milliseconds: 500), (){
+            vendorSignUp3ViewModel.enableBranchCode.value = false;
+          });
+          return null;
+        }
+      }
     }
   }
 
-  ///IBAN
-  String? validateBranchCode(String? value){
-    if(GetUtils.isBlank(value)!){
-      return null;
-    } else if(value!.length != 4){
+  ///Branch Code
+  String? validateBranchCode(String? value, String bankAcc) {
+    if (GetUtils.isBlank(value)!) {
+      if(bankAcc.isEmpty || bankAcc == ''){
+        return null;
+      } else {
+        return langKey.enterBranchCode.tr;
+      }
+    } else if (value?.length != 4) {
       return langKey.incorrectBranchCode.tr;
-    } else {
+    }
+    else {
       return null;
     }
   }

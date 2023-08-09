@@ -8,9 +8,7 @@ import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/screens/vendor_signup/vendor_signup3/vendor_signup3_viewmodel.dart';
-import 'package:ism_mart/screens/vendor_signup/vendor_signup4/vendor_signup4_view.dart';
 import 'package:ism_mart/widgets/back_button.dart';
-import 'package:ism_mart/widgets/no_internet_view.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import '../../../helper/validator.dart';
 import '../../../widgets/image_layout_container.dart';
@@ -40,10 +38,11 @@ class VendorSignUp3View extends StatelessWidget {
                       bankNameTextField(),
                       bankAccountTitleTextField(),
                       bankAccountNumberTextField(),
-                      branchCodeTextField(),
+                      Obx(() => branchCodeTextField()),
                       SizedBox(height: 20),
 
                       Obx(() => ImageLayoutContainer(
+                        description: true,
                           title: langKey.chequeImage.tr,
                           filePath: viewModel.bankChequeImage.value == '' ? '' : basename(viewModel.bankChequeImage.value),
                           onTap: ()async{
@@ -59,11 +58,11 @@ class VendorSignUp3View extends StatelessWidget {
                 ),
               ),
             ),
-            NoInternetView(
-              onPressed: () {
-                // viewModel.signUp();
-              },
-            ),
+            // NoInternetView(
+            //   onPressed: () {
+            //     viewModel.signUp();
+            //   },
+            // ),
           ],
         ),
       ),
@@ -226,7 +225,7 @@ class VendorSignUp3View extends StatelessWidget {
       validator: (value) {
         return Validator().validateBankAcc(value);
       },
-      keyboardType: TextInputType.number,
+      keyboardType: TextInputType.text,
     );
   }
 
@@ -234,21 +233,22 @@ class VendorSignUp3View extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 25.0),
       child: CustomTextField3(
-        required: false,
-        title: langKey.branchCode.tr,
-        inputFormatters: [
-          FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-          FilteringTextInputFormatter.digitsOnly,
-        ],
-        hintText: langKey.yourAccountNumber.tr,
-        controller: viewModel.branchCodeController,
-        autoValidateMode: AutovalidateMode.onUserInteraction,
-        validator: (value) {
-          return Validator().validateBranchCode(value);
-        },
-        keyboardType: TextInputType.number,
-      ),
-    );
+        enabled: viewModel.enableBranchCode.value,
+          required: false,
+          title: langKey.branchCode.tr,
+          inputFormatters: [
+            FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+            FilteringTextInputFormatter.digitsOnly,
+          ],
+          hintText: langKey.yourBranchCode.tr,
+          controller: viewModel.branchCodeController,
+          autoValidateMode: AutovalidateMode.onUserInteraction,
+          validator: (value) {
+            return Validator().validateBranchCode(value, viewModel.bankAccNumberController.text);
+          },
+          keyboardType: TextInputType.number,
+        ),
+      );
   }
 
   Widget submitBtn() {

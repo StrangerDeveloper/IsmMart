@@ -185,27 +185,22 @@ class SettingsView extends StatelessWidget {
         singleSettingsItem(
           onTap: () async {
             if (viewModel.checkVendorAccountStatus()!) {
-              if (viewModel.userDetails.value!.role!
-                  .toLowerCase()
-                  .contains("vendor")) {
                 if(viewModel.userDetails.value?.vendor?.status == 'pending'){
                   Get.toNamed(Routes.vendorSignUp4, arguments: {
                     'fromSettings': true,
                   });
-                } else {
+                } else if(viewModel.userDetails.value?.vendor?.status == 'false'){
+                    Get.toNamed(Routes.chooseEmail);
+                } else if(viewModel.userDetails.value?.vendor?.status == 'approved'){
                   Get.toNamed(Routes.sellerHomeRoute);
                 }
               } else {
-                Get.toNamed(Routes.updateVendor,
-                    arguments: {'isRegisterScreen': true});
-              }
-            } else {
               AppConstant.displaySnackBar(
                 langKey.errorTitle.tr,
                 langKey.youStoreHas.tr,
               );
             }
-          },
+            },
           icon: Icons.dashboard_rounded,
           color: kPrimaryColor,
           title: langKey.vendorDashboard.tr,

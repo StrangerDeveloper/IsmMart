@@ -203,6 +203,7 @@ class VendorSignUp1View extends StatelessWidget {
           hintText: '336 5563138',
           keyboardType: TextInputType.number,
           controller: viewModel.phoneNumberController,
+          autoValidateMode: AutovalidateMode.onUserInteraction,
           initialValue: viewModel.countryCode.value,
           textStyle: bodyText1,
           inputFormatters: [

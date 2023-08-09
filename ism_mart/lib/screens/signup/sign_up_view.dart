@@ -1,4 +1,5 @@
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -241,12 +242,20 @@ class SignUpView extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(bottom: 3),
-            child: Text(
-              langKey.country.tr,
-              style: GoogleFonts.dmSans(
-                fontSize: 14,
-                fontWeight: FontWeight.w700,
-                color: newColorDarkBlack2,
+            child: RichText(
+              text: TextSpan(
+                text: langKey.country.tr,
+                style: GoogleFonts.dmSans(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w700,
+                  color: newColorDarkBlack2,
+                ),
+                children: [
+                  TextSpan(
+                    text: ' *',
+                    style: TextStyle(color: Colors.red),
+                  )
+                ],
               ),
             ),
           ),
@@ -324,12 +333,20 @@ class SignUpView extends StatelessWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(bottom: 3),
-                        child: Text(
-                          langKey.city.tr,
-                          style: GoogleFonts.dmSans(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w700,
-                            color: newColorDarkBlack2,
+                        child: RichText(
+                          text: TextSpan(
+                            text: langKey.city.tr,
+                            style: GoogleFonts.dmSans(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700,
+                              color: newColorDarkBlack2,
+                            ),
+                            children: [
+                              TextSpan(
+                                text: ' *',
+                                style: TextStyle(color: Colors.red),
+                              )
+                            ],
                           ),
                         ),
                       ),
@@ -394,12 +411,51 @@ class SignUpView extends StatelessWidget {
     return Obx(
       () => Padding(
         padding: const EdgeInsets.only(bottom: 25, top: 5),
-        child: CustomCheckBox(
-          title: langKey.termsAndConditionsCheckbox.tr,
+        child: CustomCheckBox2(
           value: viewModel.termAndCondition.value,
           onChanged: (value) {
             viewModel.termAndCondition.value = value;
           },
+          text: Padding(
+            padding: const EdgeInsets.only(top: 6),
+            child: RichText(
+              text: TextSpan(
+                style: newFontStyle0.copyWith(
+                  color: newColorLightGrey2,
+                ),
+                children: [
+                  TextSpan(
+                    text:
+                    'By clicking ‘Create Account’, you’ve read and agreed to our ',
+                  ),
+                  TextSpan(
+                      text: 'Terms & Conditions',
+                      style: newFontStyle0.copyWith(
+                        decoration: TextDecoration.underline,
+                        color: newColorLightGrey2,
+                      ),
+                      recognizer: TapGestureRecognizer()..onTap = () {
+                        Get.toNamed(Routes.staticInfo, arguments: {
+                          'title': langKey.termsAndConditions.tr
+                        });
+                      }
+                  ),
+                  TextSpan(
+                    text:
+                    ' and for my personal data to be processed according to',
+                  ),
+                  TextSpan(
+                    text: ' ISMMART ',
+                    style: newFontStyle0.copyWith(
+                      color: newColorBlue2,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  TextSpan(text: 'Privacy Policy.'),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );

@@ -37,14 +37,11 @@ class LocalStorageHelper {
   }
 
   static Future<void> storeUser({UserModel? userModel}) async {
-    print('>>>To Json: ${userModel?.toJson()}');
     localStorage.write(currentUserKey, userModel!.toJson()).then((value) {});
-    print('>>>User Model from Local Memory: ${localStorage.read(currentUserKey)}');
   }
 
   static Future<UserModel> getStoredUser() async {
     if (localStorage.read(currentUserKey) != null) {
-      print('Not null>>> ${localStorage.read(currentUserKey)}');
       return UserModel.fromJson(localStorage.read(currentUserKey));
     } else {
       return UserModel();

@@ -270,6 +270,7 @@ class CustomTextField3 extends StatelessWidget {
   final TextInputType? keyboardType;
   final void Function(String)? onChanged;
   final bool required;
+  final bool enabled;
 
     CustomTextField3({
     Key? key,
@@ -284,6 +285,7 @@ class CustomTextField3 extends StatelessWidget {
     this.title,
     this.autoValidateMode,
     this.validator,
+      this.enabled = true,
     this.inputFormatters,
     this.keyboardType,
     this.required = true,
@@ -321,6 +323,7 @@ class CustomTextField3 extends StatelessWidget {
           validator: validator,
           autovalidateMode: autoValidateMode,
           showCursor: showCursor,
+          enabled: enabled,
           readOnly: readOnly,
           controller: controller,
           obscureText: obscureText,
@@ -340,6 +343,9 @@ class CustomTextField3 extends StatelessWidget {
             errorStyle: GoogleFonts.dmSans(
               fontSize: 13,
               color: Colors.red.shade700,
+            ),
+            disabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Color(0xffEEEEEE)),
             ),
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Color(0xffEEEEEE)),

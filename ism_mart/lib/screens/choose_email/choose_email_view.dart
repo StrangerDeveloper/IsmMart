@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:ism_mart/api_helper/local_storage/local_storage_helper.dart';
+import 'package:ism_mart/controllers/controllers.dart';
+import 'package:ism_mart/exports/exports_model.dart';
 import 'package:ism_mart/helper/constants.dart';
+import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
-import 'package:ism_mart/screens/welcome/welcome_viewmodel.dart';
+import 'package:ism_mart/screens/setting/settings_viewmodel.dart';
+import '../../helper/routes.dart';
+import 'choose_email_viewmodel.dart';
 import 'package:ism_mart/widgets/back_button.dart';
 import 'package:ism_mart/widgets/custom_button.dart';
 import 'package:ism_mart/widgets/custom_text.dart';
 
-class WelcomeView extends StatelessWidget {
-  WelcomeView({super.key});
+class ChooseEmail extends StatelessWidget {
+  ChooseEmail({super.key});
 
-  final WelcomeViewModel viewModel = Get.put(WelcomeViewModel());
+  final ChooseEmailViewModel viewModel = Get.put(ChooseEmailViewModel());
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +102,7 @@ class WelcomeView extends StatelessWidget {
             Icon(Icons.arrow_forward_rounded)
           ],
         ),
-        onPressed: () {},
+        onPressed: () => Get.offNamed(Routes.vendorSignUp2),
       ),
     );
   }
@@ -112,7 +118,15 @@ class WelcomeView extends StatelessWidget {
           color: Color(0xff929AAB),
         ),
       ),
-      onPressed: () {},
+      onPressed: () async{
+        await LocalStorageHelper.deleteUserData();
+        SettingViewModel settingViewModel = Get.find();
+        authController.setCurrUserToken('');
+        authController.setUserModel(UserModel());
+        GlobalVariable.userModel = UserModel();
+        settingViewModel.userDetails.value = UserModel();
+        Get.offNamed(Routes.vendorSignUp1);
+      },
     );
   }
 

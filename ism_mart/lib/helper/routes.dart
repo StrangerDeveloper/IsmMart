@@ -34,6 +34,7 @@ import '../screens/vendor_profile/vendor_profile_view.dart';
 import '../screens/vendor_signup/vendor_signup2/vendor_signup2_view.dart';
 import '../screens/vendor_signup/vendor_signup3/vendor_signup3_view.dart';
 import '../screens/vendor_signup/vendor_signup4/vendor_signup4_view.dart';
+import '../screens/choose_email/choose_email_view.dart';
 
 class Routes {
   static const initRoute = "/";
@@ -75,6 +76,7 @@ class Routes {
   static const vendorDetail = "/vendorDetail";
   static const vendorOrders = "/vendorOrders";
   static const vendorQuestion = "/vendorQuestion";
+  static const chooseEmail = "/chooseEmail";
   static const singleProductDetails = "/singleProductDetails";
   static const singleProductFullImage = "/singleProductFullImage";
 
@@ -257,6 +259,10 @@ class Routes {
     GetPage(
       name: vendorSignUp4,
       page: () => VendorSignUp4View(),
+    ),
+    GetPage(
+      name: chooseEmail,
+      page: () => ChooseEmail(),
     ),
     GetPage(
       name: vendorOrders,

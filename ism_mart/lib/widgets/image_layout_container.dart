@@ -10,9 +10,10 @@ class ImageLayoutContainer extends StatelessWidget {
     required this.title,
     this.subTitle,
      required this.filePath,
-     this. required = true,
+     this.required = true,
      this.errorPrompt = '',
      this.errorVisibility = false,
+     this.description = false,
   });
 
   final void Function() onTap;
@@ -22,7 +23,7 @@ class ImageLayoutContainer extends StatelessWidget {
   final bool required;
   final String errorPrompt;
   final bool errorVisibility;
-
+  final bool description;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -94,6 +95,14 @@ class ImageLayoutContainer extends StatelessWidget {
             thickness: 1,
             height: 20,
           ),
+          if(description)
+            Text(
+              "This cheque image should have the same bank details visible as you mentioned above",
+              style: GoogleFonts.dmSans(
+                  fontSize: 12,
+                  color: newColorLightGrey2
+              ),
+            ),
           Visibility(
             visible: errorVisibility,
             child: Align(

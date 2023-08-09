@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:ism_mart/controllers/controllers.dart';
 import 'package:ism_mart/exports/exports_model.dart';
 import 'package:ism_mart/helper/constants.dart';
-import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/custom_button.dart';
 import '../helper/routes.dart';
@@ -54,12 +53,7 @@ class BecomeVendor extends StatelessWidget {
               cityViewModel.cityId.value = 0;
               cityViewModel.authController.selectedCountry.value = CountryModel();
               cityViewModel.authController.selectedCity.value = CountryModel();
-              Get.toNamed(Routes.vendorSignUp2);
-              // if(GlobalVariable.userModel?.token != null) {
-              //   Get.offNamed(Routes.vendorSignUp2);
-              // } else{
-              //   Get.offNamed(Routes.vendorSignUp1);
-              // }
+              Get.offNamed(Routes.vendorSignUp1);
             },
             child: Text(
               buttonText ?? langKey.becomeAVendor.tr,

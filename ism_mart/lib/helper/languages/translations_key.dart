@@ -385,7 +385,8 @@ const profile = "profile",
     FirstNameReq = "FirstNameReq",
     LastNameReq = "LastNameReq",
     incorrectAccOrIbanNo = 'incorrectAccNo',
-    incorrectBranchCode = 'incorrectBranchCode';
+    incorrectBranchCode = 'incorrectBranchCode',
+    enterBranchCode = 'enterBranchCode';
 
 ///
 /// Add Product
@@ -467,20 +468,24 @@ const login = "login",
     shopCountry = 'shopCountry',
     shopCity = 'shopCity',
     yourOwnerName = 'yourOwnerName',
-    ownerCNIC = 'ownerCNIC',
+    vendorCNIC = 'vendorCNIC',
     yourOwnerCNIC = 'yourOwnerCNIC',
+    enterCNIC = 'enterCNIC',
     shopCategory = 'shopCategory',
     yourShopCategory = 'yourShopCategory',
     shopDescription = 'shopDescription',
     shopDescReq = 'shopDescReq',
-    yourShopDescription = 'yourShopDescription',
+    enterShopDescription = 'enterShopDescription',
     // shopImage = 'shopImage',
     // shopCoverImage = 'shopCoverImage',
     yourBankName = 'yourBankName',
     yourAccountTitle = 'yourAccountTitle',
     accountTitle = 'accountTitle',
     bankAccountNumber = 'bankAccountNumber',
-    yourAccountNumber = 'yourAccountNumber';
+    yourAccountNumber = 'yourAccountNumber',
+    yourBranchCode = 'yourBranchCode',
+    ibanReq = 'ibanReq',
+    chequeImageNote = 'This cheque image should have the same bank details visible as you mentioned above';
 
 /**
  * Form Validations

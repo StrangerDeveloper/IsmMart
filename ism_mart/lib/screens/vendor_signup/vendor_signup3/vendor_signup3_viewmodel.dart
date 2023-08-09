@@ -17,11 +17,11 @@ class VendorSignUp3ViewModel extends GetxController{
   RxMap<String, String> params = <String, String>{}.obs;
   RxString bankChequeImage = ''.obs;
   RxBool chequeImageErrorVisibility = false.obs;
+  RxBool enableBranchCode = false.obs;
 
   @override
   void onInit() {
     params.value = Get.arguments['shopDetails'];
-    print(params['cnicFront']);
     super.onInit();
   }
 
@@ -45,6 +45,8 @@ class VendorSignUp3ViewModel extends GetxController{
           'premium': 'false',
         });
 
+        params.addIf(enableBranchCode.value, 'branchCode', branchCodeController.text);
+
         List<http.MultipartFile> fileList = [];
         fileList.add(
             await http.MultipartFile.fromPath(
@@ -64,13 +66,12 @@ class VendorSignUp3ViewModel extends GetxController{
               params['cnicBack']!,
               contentType: MediaType.parse('image/jpeg')
           ),
-          // await http.MultipartFile.fromPath(
-          //     '',
-          //     // shopLogoImage.value,
-          //     contentType: MediaType.parse('image/jpeg')
-          // )
+          await http.MultipartFile.fromPath(
+              'chequeImage',
+              bankChequeImage.value,
+              contentType: MediaType.parse('image/jpeg')
+          )
         });
-        print(params);
         ApiBaseHelper().postMethodForImage(
             url: 'auth/vendor/register',
             files: fileList,
@@ -81,7 +82,7 @@ class VendorSignUp3ViewModel extends GetxController{
           if(parsedJson['success'] == true){
             AppConstant.displaySnackBar(
             langKey.successTitle.tr,
-              langKey.vendorAccountRequest.tr
+              parsedJson['message']
             );
             Get.toNamed(Routes.vendorSignUp4, arguments: {
               'fromSettings': false,
@@ -97,6 +98,7 @@ class VendorSignUp3ViewModel extends GetxController{
           AppConstant.displaySnackBar(langKey.errorTitle.tr, e);
           GlobalVariable.internetErr(true);
         });
+
       } else{
         chequeImageErrorVisibility.value = true;
       }

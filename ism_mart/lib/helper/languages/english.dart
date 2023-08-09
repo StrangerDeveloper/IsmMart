@@ -5,7 +5,7 @@ class English {
         ///Welcome
         key.getOnboard : 'Get onboard',
         key.createYourAccount : 'Create your account',
-        key.continueWithSameEmail : 'Continue With same email',
+        key.continueWithSameEmail : 'Continue with same email',
         key.continueWithDiffEmail: 'With different email',
 
         ///Add Update Address
@@ -434,13 +434,14 @@ class English {
         key.shopCountry : 'Shop Country',
         key.shopCity : 'Shop City',
         key.yourOwnerName : 'Your Owner Name',
-        key.ownerCNIC : 'Owner CNIC',
+        key.vendorCNIC : 'Vendor CNIC',
         key.yourOwnerCNIC : 'Your Owner CNIC',
+        key.enterCNIC: 'Enter CNIC',
         key.shopCategory : 'Shop Category',
         key.yourShopCategory : 'Your Shop Category',
         key.shopDescription : 'Shop Description',
         key.shopDescReq: 'Shop description is required',
-        key.yourShopDescription : 'Your Shop Description',
+        key.enterShopDescription : 'Enter Shop Description',
         // key.shopImage : 'Shop Image',
         // key.shopCoverImage : 'Shop Cover Image',
         key.yourBankName : 'Your Bank Name',
@@ -448,6 +449,7 @@ class English {
         key.accountTitle : 'Bank Account Title',
         key.bankAccountNumber : 'Bank Account Number / IBAN',
         key.yourAccountNumber : 'Your Account Number',
+        key.yourBranchCode: 'Your Branch Code',
 
         //onboard screen
         key.availAmazingDiscount: 'Avail amazing discounts',
@@ -523,9 +525,12 @@ class English {
         key.bankAccHolderReq: 'Account title is required',
         key.FirstNameReq: 'First name is required',
         key.LastNameReq: 'Last name is required',
-        key.incorrectBranchCode: 'Enter correct IBAN',
+        key.incorrectBranchCode: 'Enter correct branch code',
+        key.enterBranchCode: 'Enter branch code',
         key.bankAccountReq: 'Bank account number is required',
         key.incorrectAccOrIbanNo: 'Enter correct account number or IBAN',
+        key.ibanReq: 'Enter correct IBAN',
+        key.chequeImageNote: 'This cheque image should have the same bank details visible as you mentioned above',
 
         ///contact us
         key.subject: 'Subject',

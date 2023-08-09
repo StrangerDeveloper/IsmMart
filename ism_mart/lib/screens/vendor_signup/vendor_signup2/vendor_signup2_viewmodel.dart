@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
-
 import '../../../helper/api_base_helper.dart';
 import '../../../helper/routes.dart';
 import '../../../widgets/pick_image.dart';
@@ -86,7 +84,6 @@ class VendorSignUp2ViewModel extends GetxController{
             "phone": countryCode.value + phoneNumberController.text,
             "country": "${countryID.value}",
             "city": "${cityID.value}",
-            "ownerName": ownerNameController.text,
             "ownerCnic": ownerCnicController.text,
             "storeDesc": shopDescController.text,
             'cnicFront': cnicFrontImage.value,
@@ -95,7 +92,7 @@ class VendorSignUp2ViewModel extends GetxController{
             'address': shopAddressController.text,
           };
 
-          if(ntnController.text.isEmpty){
+          if(ntnController.text.isNotEmpty){
             details.addAll({
               'storeNtn': ntnController.text,
             });
