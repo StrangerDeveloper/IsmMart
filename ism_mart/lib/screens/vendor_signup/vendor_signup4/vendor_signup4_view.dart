@@ -86,12 +86,7 @@ class VendorSignUp4View extends StatelessWidget {
           ),
           CustomBackButton(
             onTap: () {
-              if(viewModel.fromSettings.value == false) {
-                int count = 0;
-                Get.until((route) => count++ >= 3);
-              } else{
                 Get.back();
-              }
             },
           ),
         ],

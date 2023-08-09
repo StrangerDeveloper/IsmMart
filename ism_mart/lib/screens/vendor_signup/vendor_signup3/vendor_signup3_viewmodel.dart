@@ -47,6 +47,8 @@ class VendorSignUp3ViewModel extends GetxController{
 
         params.addIf(enableBranchCode.value, 'branchCode', branchCodeController.text);
 
+        print(params);
+
         List<http.MultipartFile> fileList = [];
         fileList.add(
             await http.MultipartFile.fromPath(
@@ -84,8 +86,10 @@ class VendorSignUp3ViewModel extends GetxController{
             langKey.successTitle.tr,
               parsedJson['message']
             );
+            int count = 0;
+            Get.until((route) => count++ >= 2);
             Get.toNamed(Routes.vendorSignUp4, arguments: {
-              'fromSettings': false,
+              'fromSettings': false
             });
           } else{
             AppConstant.displaySnackBar(
