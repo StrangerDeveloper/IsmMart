@@ -352,19 +352,19 @@ class AddProductView extends StatelessWidget {
             },
             keyboardType: TextInputType.number,
           ),
-          Obx(
-            () => Visibility(
-              visible: viewModel.prodPriceController.text.isNotEmpty,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 4.0),
-                child: CustomText(
-                  title:
-                      "${langKey.finalPriceWould.tr} ${viewModel.priceAfterCommission.value} ${langKey.afterPlatformFee.tr} 5%",
-                  color: kRedColor,
-                ),
-              ),
-            ),
-          )
+          // Obx(
+          //   () => Visibility(
+          //     visible: viewModel.prodPriceController.text.isNotEmpty,
+          //     child: Padding(
+          //       padding: const EdgeInsets.only(top: 4.0),
+          //       // child: CustomText(
+          //       //   title:
+          //       //       "${langKey.finalPriceWould.tr} ${viewModel.priceAfterCommission.value} ${langKey.afterPlatformFee.tr} 5%",
+          //       //   color: kRedColor,
+          //       // ),
+          //     ),
+          //   ),
+          // )
         ],
       ),
     );
