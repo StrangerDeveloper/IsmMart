@@ -89,11 +89,15 @@ class UpdateProductView extends StatelessWidget {
           ),
           Obx(() => Visibility(
                 visible: viewModel.showPriceAfterCommission.value,
-                child: CustomText(
-                  title:
-                      "${langKey.finalPriceWould.tr} ${viewModel.priceAfterCommission.value} ${langKey.afterPlatformFee.tr} 5%",
-                  color: kRedColor,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4.0),
+                  
                 ),
+                // child: CustomText(
+                //   title:
+                //       "${langKey.finalPriceWould.tr} ${viewModel.priceAfterCommission.value} ${langKey.afterPlatformFee.tr} 5%",
+                //   color: kRedColor,
+                // ),
               ))
         ],
       ),
