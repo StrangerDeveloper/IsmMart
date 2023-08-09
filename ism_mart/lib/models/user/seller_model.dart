@@ -37,7 +37,7 @@ class SellerModel {
   bool? premium;
   DateTime? createdAt, updatedAt;
   UserModel? user;
-  String? bankName, accountTitle, accountNumber;
+  String? bankName, accountTitle, accountNumber, branchCode;
   String? storeImage, coverImage, totalSold;
 
   SellerModel({
@@ -61,6 +61,7 @@ class SellerModel {
     this.accountNumber,
     this.accountTitle,
     this.bankName,
+    this.branchCode,
     this.coverImage,
     this.storeImage,
     this.address,
@@ -90,6 +91,7 @@ class SellerModel {
         json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
         address: json["address"] == null ? null : json["updatedAt"],
         bankName: json["bankName"],
+        // branchCode: json['branchCode'],
         accountTitle: json["accountTitle"],
         accountNumber: json["accountNumber"],
         storeImage: json["storeImage"],
@@ -117,6 +119,7 @@ class SellerModel {
         "bankName": bankName,
         "accountTitle": accountTitle,
         "accountNumber": accountNumber,
+        // "branchCode": branchCode,
         "storeImage": storeImage,
         "coverImage": coverImage,
         "updatedAt": updatedAt == null ? null : updatedAt!.toIso8601String(),

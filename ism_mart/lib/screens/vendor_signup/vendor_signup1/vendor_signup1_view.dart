@@ -1,4 +1,5 @@
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -11,7 +12,6 @@ import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/models/user/country_city_model.dart';
 import 'package:ism_mart/screens/login/login_view.dart';
 import 'package:ism_mart/screens/vendor_signup/vendor_signup1/vendor_signup1_viewmodel.dart';
-import 'package:ism_mart/screens/vendor_signup/vendor_signup2/vendor_signup2_view.dart';
 import 'package:ism_mart/widgets/back_button.dart';
 import 'package:ism_mart/widgets/become_vendor.dart';
 import 'package:ism_mart/widgets/custom_checkbox.dart';
@@ -77,8 +77,8 @@ class VendorSignUp1View extends StatelessWidget {
               ),
             ),
             NoInternetView(
-              onPressed: () {
-                // viewModel.signUp();
+              onPressed: () async {
+                await viewModel.signUp();
               },
             ),
           ],
@@ -147,12 +147,16 @@ class VendorSignUp1View extends StatelessWidget {
 
   Widget firstNameField() {
     return CustomTextField3(
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]+|\s')),
+      ],
       title: langKey.firstName.tr,
       hintText: 'John',
-      //controller: viewModel.firstNameController,
+      controller: viewModel.firstNameController,
       autoValidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
-        return Validator().validateName(value, fieldType: langKey.firstName.tr);
+        return Validator()
+            .validateName(value, errorToPrompt: langKey.FirstNameReq.tr);
       },
     );
   }
@@ -161,12 +165,16 @@ class VendorSignUp1View extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: CustomTextField3(
+        inputFormatters: [
+          FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]+|\s')),
+        ],
         title: langKey.lastName.tr,
         hintText: 'Kel',
-        //controller: viewModel.fullNameController,
+        controller: viewModel.lastNameController,
         autoValidateMode: AutovalidateMode.onUserInteraction,
         validator: (value) {
-          return Validator().validateName(value, fieldType: langKey.lastName.tr);
+          return Validator()
+              .validateName(value, errorToPrompt: langKey.LastNameReq.tr);
         },
       ),
     );
@@ -176,7 +184,7 @@ class VendorSignUp1View extends StatelessWidget {
     return CustomTextField3(
       title: langKey.email.tr,
       hintText: 'asha****iq11@gmail.com',
-      //controller: viewModel.emailController,
+      controller: viewModel.emailController,
       autoValidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
         return Validator().validateEmail(value);
@@ -190,10 +198,14 @@ class VendorSignUp1View extends StatelessWidget {
       () => Padding(
         padding: const EdgeInsets.only(top: 20, bottom: 30),
         child: CountryCodePickerTextField2(
+          validator: (value) {
+            return Validator().validatePhoneNumber(value);
+          },
           title: langKey.phoneNumber.tr,
           hintText: '336 5563138',
           keyboardType: TextInputType.number,
           controller: viewModel.phoneNumberController,
+          autoValidateMode: AutovalidateMode.onUserInteraction,
           initialValue: viewModel.countryCode.value,
           textStyle: bodyText1,
           inputFormatters: [
@@ -241,12 +253,13 @@ class VendorSignUp1View extends StatelessWidget {
       () => Padding(
         padding: const EdgeInsets.symmetric(vertical: 20),
         child: CustomTextField3(
-          //controller: viewModel.passwordController,
+          controller: viewModel.confirmPasswordController,
           title: langKey.confirmPass.tr,
           hintText: '● ● ● ● ● ● ● ● ● ●',
           autoValidateMode: AutovalidateMode.onUserInteraction,
           validator: (value) {
-            return Validator().validateDefaultTxtField(value);
+            return Validator().validateConfirmPassword(
+                value, viewModel.passwordController.text);
           },
           obscureText: viewModel.obscureConfirmPassword.value ? true : false,
           suffixIcon: ObscureSuffixIcon(
@@ -268,12 +281,20 @@ class VendorSignUp1View extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(bottom: 3),
-            child: Text(
-              langKey.country.tr,
-              style: GoogleFonts.dmSans(
-                fontSize: 14,
-                fontWeight: FontWeight.w700,
-                color: newColorDarkBlack2,
+            child: RichText(
+              text: TextSpan(
+                text: langKey.country.tr,
+                style: GoogleFonts.dmSans(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w700,
+                  color: newColorDarkBlack2,
+                ),
+                children: [
+                  TextSpan(
+                    text: ' *',
+                    style: TextStyle(color: Colors.red),
+                  )
+                ],
               ),
             ),
           ),
@@ -310,11 +331,26 @@ class VendorSignUp1View extends StatelessWidget {
             ),
             onChanged: (CountryModel? newValue) {
               cityViewModel.setSelectedCountry(newValue!);
+              viewModel.countryID.value = newValue.id!;
+              cityViewModel.selectedCity.value = CountryModel();
+              cityViewModel.cityId.value = 0;
+              viewModel.cityID.value = 0;
+              cityViewModel.authController.selectedCity.value = CountryModel();
+              viewModel.countryErrorVisibility.value = false;
             },
             selectedItem: authController.newAcc.value == true
                 ? cityViewModel.selectedCountry.value
                 : cityViewModel.authController.selectedCountry.value,
           ),
+          Visibility(
+            visible: viewModel.countryErrorVisibility.value,
+            child: Text(
+              langKey.countryReq.tr,
+              style: GoogleFonts.dmSans(
+                color: Colors.red.shade700,
+              ),
+            ),
+          )
         ],
       ),
     );
@@ -336,12 +372,20 @@ class VendorSignUp1View extends StatelessWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(bottom: 3),
-                        child: Text(
-                          langKey.city.tr,
-                          style: GoogleFonts.dmSans(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w700,
-                            color: newColorDarkBlack2,
+                        child: RichText(
+                          text: TextSpan(
+                            text: langKey.city.tr,
+                            style: GoogleFonts.dmSans(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700,
+                              color: newColorDarkBlack2,
+                            ),
+                            children: [
+                              TextSpan(
+                                text: ' *',
+                                style: TextStyle(color: Colors.red),
+                              )
+                            ],
                           ),
                         ),
                       ),
@@ -379,11 +423,22 @@ class VendorSignUp1View extends StatelessWidget {
                           cityViewModel.selectedcity.value =
                               newValue!.name ?? "";
                           cityViewModel.setSelectedCity(newValue);
+                          viewModel.cityID.value = newValue.id!;
+                          viewModel.cityErrorVisibility.value = false;
                         },
                         selectedItem: authController.newAcc.value == true
                             ? cityViewModel.selectedCity.value
                             : cityViewModel.authController.selectedCity.value,
                       ),
+                      Visibility(
+                        visible: viewModel.cityErrorVisibility.value,
+                        child: Text(
+                          langKey.cityReq.tr,
+                          style: GoogleFonts.dmSans(
+                            color: Colors.red.shade700,
+                          ),
+                        ),
+                      )
                     ],
                   ),
       ),
@@ -401,36 +456,46 @@ class VendorSignUp1View extends StatelessWidget {
           },
           text: Padding(
             padding: const EdgeInsets.only(top: 6),
-            child: RichText(
-              text: TextSpan(
-                style: newFontStyle0.copyWith(
-                  color: newColorLightGrey2,
+            child: InkWell(
+              onTap: () {
+                showTermsAndConditionDialog();
+              },
+              child: RichText(
+                text: TextSpan(
+                  style: newFontStyle0.copyWith(
+                    color: newColorLightGrey2,
+                  ),
+                  children: [
+                    TextSpan(
+                      text:
+                          'By clicking ‘Create Account’, you’ve read and agreed to our ',
+                    ),
+                    TextSpan(
+                        text: langKey.termsAndConditions.tr,
+                        style: newFontStyle0.copyWith(
+                          decoration: TextDecoration.underline,
+                          color: newColorLightGrey2,
+                        ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            Get.toNamed(Routes.staticInfo, arguments: {
+                              'title': langKey.termsAndConditions.tr
+                            });
+                          }),
+                    TextSpan(
+                      text:
+                          ' and for my personal data to be processed according to',
+                    ),
+                    TextSpan(
+                      text: ' ISMMART ',
+                      style: newFontStyle0.copyWith(
+                        color: newColorBlue2,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    TextSpan(text: langKey.privacyPolicy.tr),
+                  ],
                 ),
-                children: [
-                  TextSpan(
-                    text:
-                        'By clicking ‘Create Account’, you’ve read and agreed to our ',
-                  ),
-                  TextSpan(
-                    text: 'Terms & Conditions',
-                    style: newFontStyle0.copyWith(
-                      decoration: TextDecoration.underline,
-                      color: newColorLightGrey2,
-                    ),
-                  ),
-                  TextSpan(
-                    text:
-                        ' and for my personal data to be processed according to',
-                  ),
-                  TextSpan(
-                    text: ' ISMMART ',
-                    style: newFontStyle0.copyWith(
-                      color: newColorBlue2,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  TextSpan(text: 'Privacy Policy.'),
-                ],
               ),
             ),
           ),
@@ -446,7 +511,7 @@ class VendorSignUp1View extends StatelessWidget {
           : CustomRoundedTextBtn(
               title: 'Create Account',
               onPressed: () {
-                Get.to(()=>VendorSignUp2View());
+                viewModel.signUp();
               },
             ),
     );
@@ -481,6 +546,80 @@ class VendorSignUp1View extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Future showTermsAndConditionDialog() async {
+    return showDialog(
+      barrierDismissible: true,
+      context: Get.context!,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+          insetPadding: EdgeInsets.symmetric(horizontal: 18, vertical: 20),
+          child: Stack(
+            alignment: Alignment.topRight,
+            children: [
+              SingleChildScrollView(
+                padding: EdgeInsets.only(top: 20),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      'Terms & conditions',
+                      style: headline1.copyWith(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    Divider(),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(18, 0, 22, 16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: viewModel.getTermConditionData().map((e) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              AppConstant.spaceWidget(height: 15),
+                              if (e['header'] != '')
+                                CustomText(
+                                  title: "${e['header']}",
+                                  style: headline2.copyWith(
+                                    fontSize: 17,
+                                  ),
+                                ),
+                              if (e['header'] != '') Divider(),
+                              if (e['body'].toString().isNotEmpty)
+                                Text(
+                                  "${e['body'].toString()}",
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 13.5,
+                                    color: kDarkColor,
+                                    height: 1.7,
+                                  ),
+                                ),
+                            ],
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              IconButton(
+                onPressed: () {
+                  Get.back();
+                },
+                icon: Icon(Icons.close),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

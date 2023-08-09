@@ -1,4 +1,5 @@
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -121,7 +122,8 @@ class SignUpView extends StatelessWidget {
       controller: viewModel.firstNameController,
       autoValidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
-        return Validator().validateName(value, fieldType: langKey.FirstNameReq.tr);
+        return Validator()
+            .validateName(value, errorToPrompt: langKey.FirstNameReq.tr);
       },
     );
   }
@@ -135,7 +137,8 @@ class SignUpView extends StatelessWidget {
         controller: viewModel.lastNameController,
         autoValidateMode: AutovalidateMode.onUserInteraction,
         validator: (value) {
-          return Validator().validateName(value, fieldType: langKey.LastNameReq.tr);
+          return Validator()
+              .validateName(value, errorToPrompt: langKey.LastNameReq.tr);
         },
       ),
     );
@@ -159,15 +162,16 @@ class SignUpView extends StatelessWidget {
       () => Padding(
         padding: const EdgeInsets.only(top: 20, bottom: 30),
         child: CountryCodePickerTextField2(
-          validator: (value){
+          validator: (value) {
             return Validator().validatePhoneNumber(value);
           },
           title: langKey.phoneNumber.tr,
-          hintText: '12345678',
+          hintText: '336 5563138',
           keyboardType: TextInputType.number,
           controller: viewModel.phoneNumberController,
           initialValue: viewModel.countryCode.value,
           textStyle: bodyText1,
+          autoValidateMode: AutovalidateMode.onUserInteraction,
           inputFormatters: [
             FilteringTextInputFormatter.allow(RegExp(r'^\d+?\d*')),
           ],
@@ -218,7 +222,8 @@ class SignUpView extends StatelessWidget {
           hintText: '● ● ● ● ● ● ● ● ● ●',
           autoValidateMode: AutovalidateMode.onUserInteraction,
           validator: (value) {
-            return Validator().validateConfirmPassword(value, viewModel.passwordController.text);
+            return Validator().validateConfirmPassword(
+                value, viewModel.passwordController.text);
           },
           obscureText: viewModel.obscureConfirmPassword.value ? true : false,
           suffixIcon: ObscureSuffixIcon(
@@ -240,12 +245,20 @@ class SignUpView extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(bottom: 3),
-            child: Text(
-              langKey.country.tr,
-              style: GoogleFonts.dmSans(
-                fontSize: 14,
-                fontWeight: FontWeight.w700,
-                color: newColorDarkBlack2,
+            child: RichText(
+              text: TextSpan(
+                text: langKey.country.tr,
+                style: GoogleFonts.dmSans(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w700,
+                  color: newColorDarkBlack2,
+                ),
+                children: [
+                  TextSpan(
+                    text: ' *',
+                    style: TextStyle(color: Colors.red),
+                  )
+                ],
               ),
             ),
           ),
@@ -292,15 +305,16 @@ class SignUpView extends StatelessWidget {
                 ? cityViewModel.selectedCountry.value
                 : cityViewModel.authController.selectedCountry.value,
           ),
-          Obx(() => Visibility(
-            visible: viewModel.countryErrorVisibility.value,
-            child: Text(
-              langKey.countryReq.tr,
-              style: GoogleFonts.dmSans(
-                color: Colors.red.shade700,
+          Obx(
+            () => Visibility(
+              visible: viewModel.countryErrorVisibility.value,
+              child: Text(
+                langKey.countryReq.tr,
+                style: GoogleFonts.dmSans(
+                  color: Colors.red.shade700,
+                ),
               ),
             ),
-          ),
           )
         ],
       ),
@@ -323,12 +337,20 @@ class SignUpView extends StatelessWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(bottom: 3),
-                        child: Text(
-                          langKey.city.tr,
-                          style: GoogleFonts.dmSans(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w700,
-                            color: newColorDarkBlack2,
+                        child: RichText(
+                          text: TextSpan(
+                            text: langKey.city.tr,
+                            style: GoogleFonts.dmSans(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700,
+                              color: newColorDarkBlack2,
+                            ),
+                            children: [
+                              TextSpan(
+                                text: ' *',
+                                style: TextStyle(color: Colors.red),
+                              )
+                            ],
                           ),
                         ),
                       ),
@@ -373,15 +395,16 @@ class SignUpView extends StatelessWidget {
                             ? cityViewModel.selectedCity.value
                             : cityViewModel.authController.selectedCity.value,
                       ),
-                      Obx(() => Visibility(
-                        visible: viewModel.cityErrorVisibility.value,
-                        child: Text(
-                          langKey.cityReq.tr,
-                          style: GoogleFonts.dmSans(
-                            color: Colors.red.shade700,
+                      Obx(
+                        () => Visibility(
+                          visible: viewModel.cityErrorVisibility.value,
+                          child: Text(
+                            langKey.cityReq.tr,
+                            style: GoogleFonts.dmSans(
+                              color: Colors.red.shade700,
+                            ),
                           ),
                         ),
-                      ),
                       )
                     ],
                   ),
@@ -393,12 +416,51 @@ class SignUpView extends StatelessWidget {
     return Obx(
       () => Padding(
         padding: const EdgeInsets.only(bottom: 25, top: 5),
-        child: CustomCheckBox(
-          title: langKey.termsAndConditionsCheckbox.tr,
+        child: CustomCheckBox2(
           value: viewModel.termAndCondition.value,
           onChanged: (value) {
             viewModel.termAndCondition.value = value;
           },
+          text: Padding(
+            padding: const EdgeInsets.only(top: 6),
+            child: RichText(
+              text: TextSpan(
+                style: newFontStyle0.copyWith(
+                  color: newColorLightGrey2,
+                ),
+                children: [
+                  TextSpan(
+                    text:
+                        'By clicking ‘Create Account’, you’ve read and agreed to our ',
+                  ),
+                  TextSpan(
+                      text: 'Terms & Conditions',
+                      style: newFontStyle0.copyWith(
+                        decoration: TextDecoration.underline,
+                        color: newColorLightGrey2,
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Get.toNamed(Routes.staticInfo, arguments: {
+                            'title': langKey.termsAndConditions.tr
+                          });
+                        }),
+                  TextSpan(
+                    text:
+                        ' and for my personal data to be processed according to',
+                  ),
+                  TextSpan(
+                    text: ' ISMMART ',
+                    style: newFontStyle0.copyWith(
+                      color: newColorBlue2,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  TextSpan(text: 'Privacy Policy.'),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );

@@ -14,7 +14,7 @@ class LogInViewModel extends GetxController {
   GlobalKey<FormState> signInFormKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  RxBool obscurePassword = false.obs;
+  RxBool obscurePassword = true.obs;
 
   @override
   void onClose() {
@@ -74,8 +74,8 @@ class LogInViewModel extends GetxController {
         GlobalVariable.userModel = userResponse.userModel;
         SettingViewModel settingViewModel = Get.find();
         settingViewModel.setUserModel(userResponse.userModel);
-        Get.back();
         baseController.changePage(0);
+        Get.back();
         await LocalStorageHelper.storeUser(userModel: userResponse.userModel)
             .then((value) {});
         // print('>>User Model: ${userResponse.userModel}');

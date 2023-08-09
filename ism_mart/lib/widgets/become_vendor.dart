@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ism_mart/controllers/controllers.dart';
+import 'package:ism_mart/exports/exports_model.dart';
 import 'package:ism_mart/helper/constants.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/custom_button.dart';
+import '../helper/routes.dart';
 
 class BecomeVendor extends StatelessWidget {
   final String? text;
@@ -43,7 +46,19 @@ class BecomeVendor extends StatelessWidget {
             radius: 30,
             height: 34,
             width: 145,
-            onPressed: () {},
+            onPressed: () {
+              cityViewModel.selectedCountry.value = CountryModel();
+              cityViewModel.selectedCity.value = CountryModel();
+              cityViewModel.countryId.value = 0;
+              cityViewModel.cityId.value = 0;
+              cityViewModel.authController.selectedCountry.value = CountryModel();
+              cityViewModel.authController.selectedCity.value = CountryModel();
+              if(buttonText == 'Become a user'){
+                Get.offNamed(Routes.registerRoute);
+              } else{
+                Get.offNamed(Routes.vendorSignUp1);
+              }
+            },
             child: Text(
               buttonText ?? langKey.becomeAVendor.tr,
               style: poppinsH1,

@@ -303,12 +303,13 @@ class _PaymentViewState extends State<PaymentView> {
                 controller.addJavaScriptHandler(
                     handlerName: 'saveFormData',
                     callback: (arguments) {
-                      viewModel.updateOrderStatus("accepted");
+                      viewModel.updateOrderStatus("Payment Successfull");
                       Get.off(DealsView());
                     });
                 controller.addJavaScriptHandler(
                     handlerName: 'dvFailed',
                     callback: (arguments) {
+                      viewModel.updateOrderStatus("Payment Failed");
                       Get.off(CheckoutView());
                     });
               },

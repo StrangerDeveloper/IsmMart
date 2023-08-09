@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:path/path.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ism_mart/exports/export_widgets.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
@@ -7,10 +9,9 @@ import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/screens/vendor_signup/vendor_signup3/vendor_signup3_viewmodel.dart';
 import 'package:ism_mart/widgets/back_button.dart';
-import 'package:ism_mart/widgets/no_internet_view.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-
 import '../../../helper/validator.dart';
+import '../../../widgets/image_layout_container.dart';
 
 class VendorSignUp3View extends StatelessWidget {
   VendorSignUp3View({Key? key}) : super(key: key);
@@ -25,7 +26,7 @@ class VendorSignUp3View extends StatelessWidget {
           children: [
             SingleChildScrollView(
               child: Form(
-                key: viewModel.vendorSignUp2FormKey,
+                key: viewModel.vendorSignUp3FormKey,
                 child: Padding(
                   padding: const EdgeInsets.only(top: 30, left: 20, right: 20),
                   child: Column(
@@ -37,33 +38,19 @@ class VendorSignUp3View extends StatelessWidget {
                       bankNameTextField(),
                       bankAccountTitleTextField(),
                       bankAccountNumberTextField(),
+                      Obx(() => branchCodeTextField()),
                       SizedBox(height: 20),
-                      imageLayoutContainer(
-                        title: 'CNIC',
-                        subTitle: langKey.frontSide.tr,
-                        filePath: '',
-                        onTap: () {},
-                      ),
-                      imageLayoutContainer(
-                        title: 'CNIC',
-                        subTitle: langKey.backSide.tr,
-                        filePath: '',
-                        onTap: () {},
-                      ),
-                      imageLayoutContainer(
-                        title: langKey.legalDocument.tr,
-                        filePath: '',
-                        onTap: () {},
-                      ),
-                      imageLayoutContainer(
-                        title: langKey.shopImage.tr,
-                        filePath: '',
-                        onTap: () {},
-                      ),
-                      imageLayoutContainer(
-                        title: langKey.shopCoverImage.tr,
-                        filePath: '',
-                        onTap: () {},
+
+                      Obx(() => ImageLayoutContainer(
+                        description: true,
+                          title: langKey.chequeImage.tr,
+                          filePath: viewModel.bankChequeImage.value == '' ? '' : basename(viewModel.bankChequeImage.value),
+                          onTap: ()async{
+                            await viewModel.selectImage(viewModel.bankChequeImage, viewModel.chequeImageErrorVisibility);
+                          },
+                          errorVisibility: viewModel.chequeImageErrorVisibility.value,
+                          errorPrompt: langKey.chequeImageReq.tr
+                        ),
                       ),
                       submitBtn(),
                     ],
@@ -71,11 +58,11 @@ class VendorSignUp3View extends StatelessWidget {
                 ),
               ),
             ),
-            NoInternetView(
-              onPressed: () {
-                // viewModel.signUp();
-              },
-            ),
+            // NoInternetView(
+            //   onPressed: () {
+            //     viewModel.signUp();
+            //   },
+            // ),
           ],
         ),
       ),
@@ -152,7 +139,7 @@ class VendorSignUp3View extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  langKey.vendorAccountCreation.tr,
+                  langKey.vendorBankAccount.tr,
                   style: newFontStyle1.copyWith(
                     color: newColorBlue2,
                   ),
@@ -189,7 +176,7 @@ class VendorSignUp3View extends StatelessWidget {
             backgroundColor: Color(0xffEBEFF3),
             progressColor: Color(0xff0CBC8B),
             center: new Text(
-              "2 of 3",
+              "3 of 4",
               style: poppinsH2.copyWith(
                 color: newColorBlue2,
               ),
@@ -204,12 +191,12 @@ class VendorSignUp3View extends StatelessWidget {
     return CustomTextField3(
       title: langKey.bankName.tr,
       hintText: langKey.yourBankName.tr,
-      //controller: viewModel.emailController,
+      controller: viewModel.bankNameController,
       autoValidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
-        return Validator().validateEmail(value);
+        return Validator().validateName(value, errorToPrompt: langKey.bankNameReq.tr);
       },
-      keyboardType: TextInputType.emailAddress,
+      keyboardType: TextInputType.text,
     );
   }
 
@@ -219,12 +206,12 @@ class VendorSignUp3View extends StatelessWidget {
       child: CustomTextField3(
         title: langKey.accountTitle.tr,
         hintText: langKey.yourAccountTitle.tr,
-        //controller: viewModel.emailController,
+        controller: viewModel.bankAccTitleController,
         autoValidateMode: AutovalidateMode.onUserInteraction,
         validator: (value) {
-          return Validator().validateEmail(value);
+          return Validator().validateName(value, errorToPrompt: langKey.bankAccHolderReq.tr);
         },
-        keyboardType: TextInputType.emailAddress,
+        keyboardType: TextInputType.text,
       ),
     );
   }
@@ -233,13 +220,35 @@ class VendorSignUp3View extends StatelessWidget {
     return CustomTextField3(
       title: langKey.bankAccountNumber.tr,
       hintText: langKey.yourAccountNumber.tr,
-      //controller: viewModel.emailController,
+      controller: viewModel.bankAccNumberController,
       autoValidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
-        return Validator().validateEmail(value);
+        return Validator().validateBankAcc(value);
       },
-      keyboardType: TextInputType.emailAddress,
+      keyboardType: TextInputType.text,
     );
+  }
+
+  Widget branchCodeTextField() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 25.0),
+      child: CustomTextField3(
+        enabled: viewModel.enableBranchCode.value,
+          required: false,
+          title: langKey.branchCode.tr,
+          inputFormatters: [
+            FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+            FilteringTextInputFormatter.digitsOnly,
+          ],
+          hintText: langKey.yourBranchCode.tr,
+          controller: viewModel.branchCodeController,
+          autoValidateMode: AutovalidateMode.onUserInteraction,
+          validator: (value) {
+            return Validator().validateBranchCode(value, viewModel.bankAccNumberController.text);
+          },
+          keyboardType: TextInputType.number,
+        ),
+      );
   }
 
   Widget submitBtn() {
@@ -250,79 +259,13 @@ class VendorSignUp3View extends StatelessWidget {
             ? CustomLoading(isItBtn: true)
             : CustomRoundedTextBtn(
                 title: langKey.submit.tr,
-                onPressed: () {
-                  Get.to(() => VendorSignUp3View());
+                onPressed: () async{
+                  await viewModel.signUp();
+                  // Get.to(() => VendorSignUp3View());
                 },
               ),
       ),
     );
   }
 
-  Widget imageLayoutContainer({
-    required void Function() onTap,
-    required String title,
-    String? subTitle,
-    required String filePath,
-  }) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            Text(
-              title,
-              style: newFontStyle2.copyWith(
-                color: newColorDarkBlack,
-              ),
-            ),
-            if (subTitle != null)
-              Padding(
-                padding: const EdgeInsets.only(left: 8),
-                child: Text(
-                  subTitle,
-                  style: newFontStyle0.copyWith(
-                    color: newColorBlue4,
-                  ),
-                ),
-              ),
-            Spacer(),
-            Text(
-              langKey.lessThanMb.tr,
-              style: newFontStyle0.copyWith(
-                color: newColorBlue4,
-                fontSize: 12,
-              ),
-            ),
-          ],
-        ),
-        SizedBox(height: 15),
-        Row(
-          children: [
-            InkWell(
-              onTap: onTap,
-              child: Text(
-                langKey.chooseFile.tr,
-                style: newFontStyle0.copyWith(
-                  color: red2,
-                  fontSize: 12,
-                ),
-              ),
-            ),
-            SizedBox(width: 4),
-            Text(
-              filePath == '' ? langKey.noFileChosen.tr : filePath,
-              style: newFontStyle0.copyWith(
-                color: newColorBlue4,
-                fontSize: 12,
-              ),
-            ),
-          ],
-        ),
-        Divider(
-          color: Color(0xffEEEEEE),
-          thickness: 1,
-          height: 30,
-        ),
-      ],
-    );
-  }
 }

@@ -147,7 +147,7 @@ class AuthController extends GetxController {
       }).catchError((error) {
         isLoading(false);
         //if invalid users received
-        LocalStorageHelper.storeUser(userModel: userModel);
+        // LocalStorageHelper.storeUser(userModel: userModel);
         setSession(true);
       });
     } else {

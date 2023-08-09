@@ -2,18 +2,66 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
+import '../../../helper/api_base_helper.dart';
+import '../../../helper/routes.dart';
+import '../../../widgets/pick_image.dart';
+import '../../categories/model/category_model.dart';
 
 class VendorSignUp2ViewModel extends GetxController{
   GlobalKey<FormState> vendorSignUp2FormKey = GlobalKey<FormState>();
-  TextEditingController firstNameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController shopNameController = TextEditingController();
+  TextEditingController shopAddressController = TextEditingController();
+  TextEditingController ownerNameController = TextEditingController();
+  TextEditingController ownerCnicController = TextEditingController();
+  TextEditingController ntnController = TextEditingController();
+  TextEditingController shopDescController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
-  RxBool obscurePassword = true.obs;
-  RxBool obscureConfirmPassword = true.obs;
+  List<CategoryModel> categoriesList = <CategoryModel>[].obs;
+  RxInt countryID = 0.obs;
+  RxString cnicFrontImage = ''.obs;
+  RxString cnicBackImage = ''.obs;
+  RxString shopLogoImage = ''.obs;
+  RxBool cnicFrontErrorVisibility = false.obs;
+  RxBool cnicBackErrorVisibility = false.obs;
+  RxBool shopImageErrorVisibility = false.obs;
+  RxBool countryErrorVisibility = false.obs;
+  RxInt cityID = 0.obs;
+  RxBool cityErrorVisibility = false.obs;
+  RxInt shopCategoryId = 0.obs;
   Rxn phoneErrorText = Rxn<String>();
   RxString countryCode = '+92'.obs;
-  RxBool termAndCondition = false.obs;
+  Rx<CategoryModel> selectedCategory = CategoryModel().obs;
+  RxBool categoryErrorVisibility = false.obs;
+
+  @override
+  void onInit() {
+    fetchCategories();
+    super.onInit();
+  }
+
+  void fetchCategories() async {
+    categoriesList.clear();
+    categoriesList.insert(0, CategoryModel(name: 'Select Category', id: 0));
+    await ApiBaseHelper().getMethod(url: 'category/all').then((parsedJson) {
+      if (parsedJson['success'] == true) {
+        GlobalVariable.internetErr(false);
+        var parsedJsonData = parsedJson['data'] as List;
+        categoriesList
+            .addAll(parsedJsonData.map((e) => CategoryModel.fromJson(e)));
+      }
+    }).catchError((e) {
+      GlobalVariable.internetErr(true);
+      print(e);
+    });
+  }
+
+  selectImage(RxString imageVar, RxBool imageVisibilityVar)async{
+    final image = await PickImage().pickSingleImage();
+    if(image != null){
+      imageVar.value = image.path;
+      imageVisibilityVar.value = false;
+    }
+  }
 
   validatorPhoneNumber(String? value) {
     if (GetUtils.isBlank(value)!) {
@@ -25,53 +73,71 @@ class VendorSignUp2ViewModel extends GetxController{
     }
   }
 
+  Future<void> proceed() async{
+    if (vendorSignUp2FormKey.currentState?.validate() ?? false) {
+      if(checkImages() == true && checkDropDowns() == true){
+          GlobalVariable.showLoader.value = false;
 
-  @override
-  void onClose() {
-    firstNameController.dispose();
-    emailController.dispose();
-    passwordController.dispose();
-    phoneNumberController.dispose();
-    GlobalVariable.showLoader.value = false;
-    super.onClose();
+          Map<String, String> details = {
+            "storeName": shopNameController.text,
+            "category": "${shopCategoryId.value}",
+            "phone": countryCode.value + phoneNumberController.text,
+            "country": "${countryID.value}",
+            "city": "${cityID.value}",
+            "ownerCnic": ownerCnicController.text,
+            "storeDesc": shopDescController.text,
+            'cnicFront': cnicFrontImage.value,
+            'cnicBack': cnicBackImage.value,
+            'storeImage': shopLogoImage.value,
+            'address': shopAddressController.text,
+          };
+
+          if(ntnController.text.isNotEmpty){
+            details.addAll({
+              'storeNtn': ntnController.text,
+            });
+          }
+          Get.toNamed(Routes.vendorSignUp3, arguments: {
+            'shopDetails': details
+          });
+      }
+    } else{
+      checkImages();
+      checkDropDowns();
+    }
   }
 
-  void signUp() {
-    // GlobalVariable.internetErr(false);
-    // if (signUpFormKey.currentState?.validate() ?? false) {
-    //   GlobalVariable.showLoader.value = true;
-    //   String? phoneNumber = countryCode.value + phoneNumberController.text;
-    //
-    //   Map<String, dynamic> param = {
-    //     "firstName": firstNameController.text,
-    //     "email": emailController.text,
-    //     "phone": phoneNumber,
-    //     "password": passwordController.text,
-    //   };
-    //
-    //   ApiBaseHelper()
-    //       .postMethod(url: Urls.signUp, body: param)
-    //       .then((parsedJson) async {
-    //     GlobalVariable.showLoader.value = false;
-    //
-    //     if (parsedJson['message'] == 'User registered successfully.') {
-    //       Get.offNamed(Routes.loginRoute);
-    //       AppConstant.displaySnackBar(
-    //         langKey.successTitle.tr,
-    //         parsedJson['message'],
-    //       );
-    //     } else {
-    //       AppConstant.displaySnackBar(
-    //         langKey.errorTitle.tr,
-    //         parsedJson['message'],
-    //       );
-    //     }
-    //   }).catchError((e) {
-    //     GlobalVariable.internetErr(true);
-    //     print(e);
-    //     GlobalVariable.showLoader.value = false;
-    //   });
-    // }
+  checkDropDowns(){
+    bool proceed1 = true;
+    if(countryID.value == 0){
+      countryErrorVisibility.value = true;
+      proceed1 = false;
+    }
+    if(cityID.value == 0){
+      cityErrorVisibility.value = true;
+      proceed1 = false;
+    }
+    if(shopCategoryId.value == 0){
+      categoryErrorVisibility.value = true;
+      proceed1 = false;
+    }
+    return proceed1;
   }
 
+  bool checkImages(){
+    bool proceed2 = true;
+    if(cnicFrontImage.value == ''){
+      cnicFrontErrorVisibility.value = true;
+      proceed2 = false;
+    }
+    if(cnicBackImage.value == ''){
+      cnicBackErrorVisibility.value = true;
+      proceed2 = false;
+    }
+    if(shopLogoImage.value == ''){
+      shopImageErrorVisibility.value = true;
+      proceed2 = false;
+    }
+    return proceed2;
+  }
 }

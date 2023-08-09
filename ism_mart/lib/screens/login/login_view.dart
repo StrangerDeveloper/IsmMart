@@ -124,7 +124,7 @@ class LogInView extends StatelessWidget {
           hintText: '● ● ● ● ● ● ● ● ● ●',
           autoValidateMode: AutovalidateMode.onUserInteraction,
           validator: (value) {
-            return Validator().validateDefaultTxtField(value);
+            return Validator().validateDefaultTxtField(value, errorPrompt: langKey.passwordIsRequired.tr);
           },
           obscureText: viewModel.obscurePassword.value ? true : false,
           suffixIcon: ObscureSuffixIcon(

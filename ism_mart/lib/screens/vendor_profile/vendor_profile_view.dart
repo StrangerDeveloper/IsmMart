@@ -185,7 +185,7 @@ class VendorProfileView extends StatelessWidget {
               viewModel.userModel.value?.vendor?.accountTitle ?? 'N/A',
             ),
           ),
-          titleItem(langKey.bankAccount.tr),
+          titleItem(langKey.branchCode.tr),
           Obx(
             () => valueItem(
               viewModel.userModel.value?.vendor?.accountNumber ?? 'N/A',

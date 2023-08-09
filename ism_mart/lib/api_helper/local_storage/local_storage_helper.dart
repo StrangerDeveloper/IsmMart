@@ -43,8 +43,9 @@ class LocalStorageHelper {
   static Future<UserModel> getStoredUser() async {
     if (localStorage.read(currentUserKey) != null) {
       return UserModel.fromJson(localStorage.read(currentUserKey));
+    } else {
+      return UserModel();
     }
-    return UserModel();
   }
 ////////////////// Search History ////////////////////////////////////////////////
 
