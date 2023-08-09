@@ -135,4 +135,37 @@ class VendorSignUp1ViewModel extends GetxController{
       }
     });
   }
+
+  List getTermConditionData() {
+    return [
+      {'header': langKey.vendorHeader0.tr, 'body': langKey.vendorBody0.tr},
+      {'header': langKey.vendorHeader1.tr, 'body': langKey.vendorBody1.tr},
+      {'header': langKey.vendorHeader2.tr, 'body': langKey.vendorBody2.tr},
+      {'header': langKey.vendorHeader3.tr, 'body': langKey.vendorBody3.tr},
+      {'header': langKey.vendorHeader4.tr, 'body': langKey.vendorBody4.tr},
+      {'header': langKey.vendorHeader5.tr, 'body': langKey.vendorBody5.tr},
+      {'header': langKey.vendorHeader6.tr, 'body': langKey.vendorBody6.tr},
+      {'header': langKey.vendorHeader7.tr, 'body': langKey.vendorBody7.tr},
+      {'header': langKey.vendorHeader8.tr, 'body': langKey.vendorBody8.tr},
+      {'header': langKey.vendorHeader9.tr, 'body': langKey.vendorBody9.tr},
+      {'header': langKey.vendorHeader10.tr, 'body': langKey.vendorBody10.tr},
+      {'header': langKey.vendorHeader11.tr, 'body': langKey.vendorBody11.tr},
+      {'header': langKey.vendorHeader12.tr, 'body': langKey.vendorBody12.tr},
+      {'header': langKey.vendorHeader13.tr, 'body': langKey.vendorBody13.tr},
+      {'header': langKey.vendorHeader14.tr, 'body': langKey.vendorBody14.tr},
+      {'header': langKey.vendorHeader15.tr, 'body': langKey.vendorBody15.tr},
+      {'header': langKey.vendorHeader16.tr, 'body': langKey.vendorBody16.tr},
+      {'header': langKey.vendorHeader17.tr, 'body': langKey.vendorBody17.tr},
+      {'header': langKey.vendorHeader18.tr, 'body': langKey.vendorBody18.tr},
+      {'header': langKey.vendorHeader19.tr, 'body': langKey.vendorBody19.tr},
+      {'header': langKey.vendorHeader20.tr, 'body': langKey.vendorBody20.tr},
+      {'header': langKey.vendorHeader21.tr, 'body': langKey.vendorBody21.tr},
+      {'header': langKey.vendorHeader22.tr, 'body': langKey.vendorBody22.tr},
+      {'header': langKey.vendorHeader23.tr, 'body': langKey.vendorBody23.tr},
+      {'header': langKey.vendorHeader24.tr, 'body': langKey.vendorBody24.tr},
+      {'header': langKey.vendorHeader25.tr, 'body': langKey.vendorBody25.tr},
+      {'header': langKey.vendorHeader26.tr, 'body': langKey.vendorBody26.tr},
+      {'header': langKey.vendorHeader27.tr, 'body': langKey.vendorBody27.tr},
+    ];
+  }
 }

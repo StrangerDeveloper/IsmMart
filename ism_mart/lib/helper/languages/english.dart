@@ -454,10 +454,12 @@ class English {
         //onboard screen
         key.availAmazingDiscount: 'Avail amazing discounts',
         key.descriptionOfDiscount: 'Save big with 30% off on all our products!',
-        key.celebrateFreedomAndSavings : 'Celebrate freedom and savings',
-        key.descriptionOfFreedomAndSavings : 'Exclusive offers for Independence Day!',
-        key.boostYourBusiness : 'Boost your business with ISMMART',
-        key.descriptionOfBoostYourBusiness : 'Zero platform registration fee for vendors!',
+        key.celebrateFreedomAndSavings: 'Celebrate freedom and savings',
+        key.descriptionOfFreedomAndSavings:
+            'Exclusive offers for Independence Day!',
+        key.boostYourBusiness: 'Boost your business with ISMMART',
+        key.descriptionOfBoostYourBusiness:
+            'Zero platform registration fee for vendors!',
 
         ///bottom bar
         key.home: 'Home',
@@ -778,5 +780,119 @@ class English {
             '\n  • Unlimited deliveries on eligible items.\n'
             '\nNote: All members (Sellers & Buyers) are requested to follow all trading rules and procedures mentioned by ISMMART to avoid any kind of inconvenience in payment or delivery. Commission Fee Structure Transaction value below PKR100,000/- ~ 0.5% Commission Transaction value above PKR100,000/- and below PKR250,00,00/- ~ 1.00% Commission Transaction value above PKR250,00,00/- but below PKR250,00,000/- ~ 1.75% Commission Transaction value above PKR250,00,000/- flat 2.25% Commission For any wholesale transaction a flat 3.5% Commission will be charged.'
             '\nNote: Transaction value excludes shipping and insurance cost.',
+
+        ///Vendor Terms&Conditions
+        key.vendorHeader0: '',
+        key.vendorBody0:
+            'The Provider (ISMMART Group of Industries PVT LTD. Pakistan) and the Vendor (defined as third-party vendors) shall collectively be referred to as “Parties” and individually as “Party”, as the case may be.\n\nWHEREAS, Provider acts as an independent contractor of the Vendor, who, through this agreement, grants Provider full authority to conclude and negotiate contracts with customers in the name and for the account of the Vendor, as well as for the offers of the Vendor, made via Provider’s online platform www.ismmart.com (“Website”) and mobile applications (where applicable). It is understood that the Provider does not act on behalf of the customers.\n\nWHEREAS, all contracts concluded by the Provider in its function as agent on behalf of the Vendor with customers via the Provider\'s online marketplace will be based on the General Terms and Conditions with the customers as found on the Website.\n\nWHEREAS, these terms and conditions form part of this agreement under which Provider, provides an online product ordering platform to the Vendor, and, where applicable, shipment services to the customer.\n\nWHEREAS Parties shall provide each other with their NTN# and STN#. In case of any change, the same shall also be communicated to the other party.',
+
+        key.vendorHeader1: '1. Provider Rights, Obligations and Duties:',
+        key.vendorBody1:
+            '1.1: The Provider shall be transferring the order(s) through Vendor Dashboard or phone call (Only in case, if the website is not working) to the respective outlet(s).\n\n1.2: The Provider shall transmit an order placed by a customer on the platform to the Vendor through the website or via call (when the website is not working) and accept the customer\'s payment online or in cash.\n\n1.3: In the event of the Provider performing the delivery services, have the right to charge the customer a delivery fee (“ISMMART Delivery Fee”), and determine a minimum order value, at its own discretion; In order to perform the Services, Provider shall:\n\t1.3.1 Ensure that the delivery time stated on the Website complies with the delivery time actually required.\n\t1.3.2 Ensure that all ordered items will be delivered in a state that a customer would expect for that type of item, provided that Vendor complies with the obligation in clause 2.7.\n\t1.3.3 The Revenue transfer to the vendor generated for such orders minus the Agency Fee/commission is as per clause 6 of these terms.\n\t1.3.4 Inform the Vendor in writing of any changes implemented to the procedures by the Provider at least two (2) days before the intended change takes place, and the Vendor shall comply with all such change(s).\n\t1.3.5 Have the right to alter, at its sole discretion, any services related to delivery, including delivery areas and operational timing, without prior notice.\n\t1.3.6 The Provider shall provide contact details of the relevant stakeholder/point of contact for the Vendor. In case, the Provider intends to update the contact information, the same shall be notified to the Vendor seven (7) days before the effective date of change of contact information.',
+
+        key.vendorHeader2:
+            '2 Third-Party Vendor Rights, Obligations and Duties:',
+        key.vendorBody2:
+            'The vendor shall:\n2.1 Provide the Provider with a list of all items “Item List” as agreed on with Provider. Item List to be made available for display on the website.\n2.2 Should the Vendor wish to make any changes to the Item List, the product(s) status shall be changed to "Pending". The Provider will review the changes and approve or disapprove the changes according to the Provider\'s product policies within two (2) business days.\n2.3 Comply with all local Laws and Regulations and obtain and maintain all necessary licenses, permissions, and consents (which may be required in order to perform its obligations under this Agreement)\n2.4 Provide the Provider, and its Rider’s (defined as the Provider’s own rider and/or our delivery partners, i.e., TCS,Fedex & DHL) access to the Vendor\'s premises as reasonably required by the Provider to perform the Services.\n2.5 Provide the Provider with a clear acceptance or rejection of order(s), no later than 12 hours from the time, the order was made available to the Vendor, provided that the order must be completed within the specified time period as given by the Provider. If the Vendor neither accepts or rejects the order, it will automatically be rejected by the Provider.\n2.6 In case, the Vendor providing Provider with a rejection as per clause 2.5, the Vendor should clearly state the reason(s) for such rejection, no later than 12 hours from the time the order was made available to the Vendor.\n2.7 Upon accepting an order, prepare and pack the order without delay in it at no less than the common standard of the Vendor, and transfer it to the Provider\'s delivery person or the Customer (in case of Vendor delivery).\n2.8 Ensure that all ordered items provided to its indirect customers availing Provider’s services shall be of the same quality as provided by the Vendor to its direct customers.\n2.9 Vendor accepts, acknowledges and undertakes that:\n\t2.9.1 The Vendor will not deliver items that have reached/and or crossed their expiry/best-before date as printed on the packaging by the manufacturer.\n\t2.9.2 The Vendor will not alter, change, amend, and/or remove the expiry/best-before date as printed on the packaging by the manufacturer of the item.\n\t2.9.3 In the event of a breach of clause 2.9.1, the Vendor shall be liable and responsible for any health conditions developed by the customer as a result of consuming/using expired items as delivered by the Vendor and will be held responsible for all acts of the customer including litigation.\n\t2.9.4 Be solely responsible and liable for any and all customer queries, claims, and/or complaints in respect of the contents, missing items, wrong items, and quality of the items and any consequential effects thereof.\n2.10  Ensure that the Vendor, at all times, has sufficient capacity (including staff, items and equipment) available to process all orders in accordance with the average delivery time provided to the customers.\n2.11 Immediately update the stock on Vendor Dashboard on the platform in case of unavailability of a product.',
+
+        key.vendorHeader3: '2.12 Prices:',
+        key.vendorBody3:
+            '2.12.1 Vendor hereby warrants that the prices made available to the Provider are identical to the real-time prices offered to customers when placing orders by the platform.\n2.12.2 If the Vendor intends any price reduction, promotion or discount for any of the items ordered through the platform, Vendor shall notify the Provider at least seven (7) days in advance stating the extent of the price reduction, promotions or discounts, the respective effective date and the duration thereof.\n2.13 Treat Provider’s riders in case the Vendor uses Provider’s Delivery system in a respectful and civilized manner, which includes but is not limited to the prohibition of the use of abusive language, abusive behavior, harassment, assault, and battery. Training shall be provided to the Vendor and its staff in this regard. Breach of this clause shall constitute a breach of this agreement.\n2.14 The vendor agrees to accept Electronic Vouchers issued by the Provider to customers to be used while order check-out. The payment of all such vouchers will be reimbursed by the Provider in the monthly/weekly invoice in the registered bank account of the Vendor.\n2.15 Perform the vendor obligations, under this agreement, at all times in a competent, professional, and businesslike manner, within established industry standards, practices, and principles, and within the time deadlines set forth herein.\n2.16 The Vendor shall provide contact information and address as required by the Provider. In case, the Vendor intends to update the provided information, the Vendor shall notify the Provider seven (7) days prior to the effective date of change in contact information.',
+
+        key.vendorHeader4: '3. Customer recovery charge – Damages/Penalty:',
+        key.vendorBody4:
+            '3.1 The Vendor acknowledges that the Provider is a reputable company in Pakistan, which seeks to provide convenience, reliability, and quality to its customers. As Provider’s systems and operations are heavily dependent on customer experience and feedback, the Vendor confirms and agrees with the Provider that in the event the Vendor fails to observe or comply with the Provider’s operational standards, the Vendor shall pay the Provider such sum as shall be determined by the Provider as liquidated damages (“Customer Recovery Charge”). The aforesaid Customer Recovery Charge shall not prejudice the right of the Provider to claim damages for the costs and expense of taking such steps as deemed necessary by the Provider to rectify such non-observation and/or non-compliance with such operational standards.\n3.2 Vendor acknowledges that it has read, understood, and agrees with the provisions of clause 3 and also agrees that the application of the provisions of clause 3 shall be applicable until notification of suspension by the Provider, provided that Vendor is given a minimum of seven (7) days written notice.\n3.3 Any feedback received by the Provider from a customer in relation to the delivered order shall be considered as an inspection performed by the Provider and the Vendor shall accept any such outcome without contest. Furthermore, despite the payment of the liquidated damages, the Provider shall reserve all its rights at law in relation to the breaches.',
+
+        key.vendorHeader5: '4 Suspension:',
+        key.vendorBody5:
+            '4.1 Provider shall have the right to temporarily suspend the Vendor from the platform, without penalty, if:\n\t4.1.1 The Vendor has failed to pay the Provider invoices that have become due.\n\t4.1.2 In its reasonable opinion, the Vendor is in breach of any terms of this agreement or may be negatively affecting the Provider’s business.\n4.2 To avoid any doubts, any suspension shall not result in the termination of this agreement, the provisions of which shall remain fully applicable.',
+
+        key.vendorHeader6: '5 Indemnification from Third Party Claims:',
+        key.vendorBody6:
+            '5.1 Either party shall at its expense, defend any of the following types of third party claims brought against the other Party, its directors, officers, or agents (collectively, “Indemnitees”) and indemnify against:\n\t5.1.1 Any claim that, if true, would constitute a breach of this agreement by either Party, its employees, agents, or representatives.\n\t5.1.2 Any claim related to injury to or death of any person or damage to any property arising out of or related to either Parties obligations arising out of this agreement; or arising from the negligence, acts, or failures to act, of either Party its employees, agents, or representatives.\n\t5.1.3 Either Party shall indemnify and hold harmless the Indemnitees from any costs, losses, claims, damages, and fees (including reasonable legal fees) incurred by any of them that are attributable to any such claim.',
+
+        key.vendorHeader7: '6 Fees, Payment and Collection of Funds:',
+        key.vendorBody7:
+            '6.1 The Vendor grants the Provider authority to receive any funds in the name, and for the account, of the Vendor paid by the customers, whether by online means or in cash.\n6.2 In the event of cash payment by the customer at delivery, the Provider shall be responsible for collecting the cash payment and reconciling with the other Party in accordance with the provisions of clause 6.\n6.3 In the event of online payment, the Provider shall collect money and reconcile in accordance with the provisions of clause 6.\n6.4 The Parties agree and accept that the revenue generated, the commission Fee and the delivery fee will be calculated and payable in the amount agreed to, in this agreement and that no other fees or charges shall apply between the Parties or towards the customers, except as provided for in this agreement. The vendor specifically accepts that, if applicable, the Provider may set off the Agency/Aggregator Fee against the revenue generated.\n6.5 The Parties agree and accept to pay the Vendor his dues, within ten (10) business days from the time of order delivery.',
+
+        key.vendorHeader8: '6.6 Invoicing & Payments – Provider Delivery:',
+        key.vendorBody8:
+            '6.6.1 The Provider will collect all orders on credit and will invoice (“Order Statement”) the Vendor on a bimonthly basis through email.\n6.6.2 The Provider within three (3) days of invoice will do weekly reimbursements after deducting commissions and all applicable taxes on a weekly basis to the registered bank account of the Vendor.\n6.6.3 The Provider will be sending a monthly/weekly order summary and payment notification to Vendor’s registered e-mail address.\n6.6.4 Bank Service fee  according to the  _Bank_% , will be charged to the Vendor against all order received on Online Payments.',
+
+        key.vendorHeader9: '6.7 Online Ordering and Corporate Orders:',
+        key.vendorBody9:
+            '6.7.1 All Online Payments will be transferred and treated as regular orders and will be paid out to the Vendor.\n6.8 Saving the provisions of clause 3.1, the Provider shall also issue the Vendor with an outline of liquidated damages due by the Vendor to the Provider (“Notification of Damages”).\n6.9 The Vendor shall have the right to appeal the Order Statement and Notification of Damages in accordance with the below:\n6.9.1 The Vendor shall object in writing within five (5) business days of the issuing date of the relevant Order Statement or Notification of Damages and shall clearly state all the reasons for the appeal, including any supporting documentation.\n6.9.2 The Provider shall review the objection within three (3) business days from being notified of the Vendor’s objection and:\ni. If agreed with, the Provider shall adjust the Order Statement or Notification of Damages accordingly.\nii. If the Provider disagrees with the Vendor, it shall inform Vendor of such and the Parties will attempt in good faith to resolve any dispute or claim arising out of or in relation to this agreement through negotiations between a director or authorized representative of each of the Parties with authority to settle the relevant dispute.\n6.9.3 If the dispute cannot be settled amicably within fourteen (14) days of receipt of the appeal either Party shall be entitled to apply the provisions of clause 19 and/or 24 respectively.',
+
+        key.vendorHeader10: '7 Commencement of Services:',
+        key.vendorBody10:
+            'The Vendor shall only be listed on the platform after the receipt of all information requested by Provider including, but not limited to the Item List; a logo and approved images of products. Provider shall inform the Vendor, of the starting date of the Services (“Commencement Date”), which notification shall be annexed to this Agreement.',
+
+        key.vendorHeader11: '8. Policy and Procedure Compliance:',
+        key.vendorBody11:
+            '8.1 The Vendor understands that the Provider may suspend Vendor’s services with or without notice in case of complaint (quality and/or delivery/pickup complaints) ratio exceeds 2% of the total orders arriving at the Vendor’s business which may result in reorder rate to lower than average.\n8.2 The Vendor accepts that upon rejection of order(s), his outlet will be deactivated from the platform for a duration as per Provider’s discretion.\n8.3 The vendor will ensure to provide discount vouchers to the customers where applicable in case of genuine complaint of the customer.\n8.4 In case of customer complaints, the Vendor shall in no case complain about or incriminate the Provider in any manner whatsoever.\n8.5 The Vendor agrees not to pay any discount/commissions to the Provider’s delivery person.',
+
+        key.vendorHeader12: '9. Warranties:',
+        key.vendorBody12:
+            'The Vendor represents, warrants and undertakes that the use by the Vendor of its intellectual property shall not infringe upon, misappropriate or otherwise come in conflict with any intellectual property rights of the third-party. The Vendor shall indemnify in full the Provider against any IP right infringement claims brought against them by the Third party as per Clause 5 stated above.',
+
+        key.vendorHeader13: '10. Confidentiality:',
+        key.vendorBody13:
+            '10.1 A party ("Receiving Party") shall keep in strict confidence all technical or commercial know-how, specifications, inventions, processes, or initiatives which are of a confidential nature and have been disclosed to the Receiving Party by the other party ("Disclosing Party"), and any other confidential information concerning the Disclosing Party\'s business, its products, and services which the receiving party may obtain.\n10.2 The Receiving Party shall only disclose such confidential information to those of its employees, agents, and subcontractors who need to know it for the purpose of discharging the Receiving Party\'s obligations under this agreement.\n10.3 Parties shall keep all information relating to ordering and delivery procedures confidential and shall at no time disclose any information to customers.\n10.4 In case the details are required to be disclosed by law, any governmental or regulatory authority or by a court of competent jurisdiction to any governmental body or regulatory authority, the same shall be communicated to the other party in advance in writing.\n10.5 This clause 10 shall survive termination of this agreement.',
+
+        key.vendorHeader14: '12. No Partnership',
+        key.vendorBody14:
+            'Nothing in this agreement is intended to or shall be deemed to, establish any corporate partnership or joint venture between the Parties.',
+
+        key.vendorHeader15: '13. Amendments:',
+        key.vendorBody15:
+            '13.1 The Provider shall have the right to increase the success fee at any time as per the Provider’s discretion. The same shall be informed to the Vendor through an official email and/or through Vendor dashboard.\n13.2 The Provider shall have the right to amend, remove, correct and/or add any commitments, obligations, and responsibility for itself and/or on part of the Vendor by a way of an addendum. The same shall be informed to the Vendor through an official email and/or via the Vendor dashboard.\n13.3 In the event of the Vendor disagreeing with such amendments, he/she shall have the right to terminate this agreement in accordance with the provisions of clause 19.\n13.4 It is specifically agreed that all amendments shall be effective between the Parties with effect from the date notified by the Provider in accordance with clause 13.2.',
+
+        key.vendorHeader16: '14. Force Majeure:',
+        key.vendorBody16:
+            'For the purposes of this agreement, "Force Majeure Event" means an event beyond the reasonable control of either party including but not limited to acts of God, war, riot, civil commotion, or terrorist action. Neither Party shall be liable to the other Party as a direct result of any delay or failure to perform its obligations under this agreement as a result of a Force Majeure	Event.',
+
+        key.vendorHeader17: '15. Third Parties:',
+        key.vendorBody17:
+            'A person who is not a party to this agreement shall not have any rights to enforce its terms.',
+
+        key.vendorHeader18: '16. Notices:',
+        key.vendorBody18:
+            '16.1 All notices under this agreement shall be in writing, addressed to the agreed contact person/address as per this agreement, and be deemed duly given on the same day when agreed upon during the Vendor Registration process.',
+
+        key.vendorHeader19: '17. Assignment:',
+        key.vendorBody19:
+            '17.1 The Provider may at any time assign, transfer, mortgage, charge, subcontract, or deal in any other manner with all or any of its rights under this agreement and may subcontract or delegate in any manner any or all of its obligations under this agreement to any third party or agent.\n17.2 The Vendor shall not, without the prior written consent of the Provider, which shall not be unreasonably withheld, assign, transfer, mortgage, charge, subcontract, or declare a trust over or deal in any other manner with any or all of its rights or obligations under this agreement.',
+
+        key.vendorHeader20: '18. Waiver:',
+        key.vendorBody20:
+            'A waiver of any right under this agreement or law is only effective if it is in writing and shall not be deemed to be a waiver of any subsequent breach or default. No failure in exercising any right or remedy provided under this agreement or by law shall constitute a waiver of any right or remedy, nor shall it prevent or restrict its further exercise of that or any other right or remedy.',
+
+        key.vendorHeader21: '19. Term and Termination:',
+        key.vendorBody21:
+            '19.1 This agreement shall commence on the Commencement Date and will continue for an indefinite period, unless terminated earlier in accordance with this clause 19.1 . This agreement may be terminated:\n(a) by either Party for convenience by giving not less than five (5) days prior written notice.\n(b) with immediate effect upon the provision of written notice by either Party in the event of material breach of this agreement by the other party.\n(c) at any time by mutual written agreement between the Parties.\n19.2 The Provider shall have the right to terminate this agreement, with immediate effect and without any liability, in the event of a breach of section 2.12 and 2.13, where the Vendor has failed to remedy the breach within a maximum period of two (2) business days from notification.',
+
+        key.vendorHeader22: '20. Limitation of Liability:',
+        key.vendorBody22:
+            '20.1 Nothing in this agreement shall limit or exclude either Party’s liability for death or personal injury caused by its negligence, or the negligence of its employees, agents, or subcontractors.\n20.2 Subject to clause 20.1, neither Party shall be liable to the other Party, whether in contract, tort (including negligence), breach of statutory duty, or otherwise, for any loss of profit, or any indirect or consequential loss or damages arising under or in connection with this agreement.\n20.3 This clause shall survive termination of this agreement.',
+
+        key.vendorHeader23: '21. Conflicting Terms:',
+        key.vendorBody23:
+            'To the extent that any of these Terms conflict with the terms stated on the Vendor Registration Form (including, without limitation, any Special Conditions detailed on the Vendor Registration Form), the terms of the Vendor Registration Form shall prevail.',
+
+        key.vendorHeader24: '21. Conflicting Terms:',
+        key.vendorBody24:
+            'To the extent that any of these Terms conflict with the terms stated on the Vendor Registration Form (including, without limitation, any Special Conditions detailed on the Vendor Registration Form), the terms of the Vendor Registration Form shall prevail.',
+
+        key.vendorHeader25: '22. Entire Agreement:',
+        key.vendorBody25:
+            'To the extent that any of these Terms conflict with the terms stated on the Vendor Registration Form (including, without limitation, any Special Conditions detailed on the Vendor Registration Form), the terms of the Vendor Registration Form shall prevail.',
+
+        key.vendorHeader26: '23. Severability:',
+        key.vendorBody26:
+            'If any provision or part-provision of this Agreement is or becomes invalid, illegal, or unenforceable, it shall be deemed modified to the minimum extent necessary to make it valid, legal, and enforceable. If such modification is not possible, the relevant provision or part-provision shall be deemed deleted. Any modification to or deletion of a provision or part-provision under this clause shall not affect the validity and enforceability of the rest of this agreement.',
+
+        key.vendorHeader27: '24. Governing Law and Jurisdiction:',
+        key.vendorBody27:
+            '24.1 This agreement, and any dispute or claim arising out of or in connection with it or its subject matter or formation (including non-contractual disputes or claims), shall be governed by, and construed in accordance with the laws of Pakistan.\n24.2 Each Party agrees that any dispute arising out of this agreement shall be subject to the non-exclusive jurisdiction of the courts of Pakistan, who shall settle any dispute or claim arising out of or in connection with this agreement or its subject matter or formation (including non-contractual disputes or claims).\nPerformance of this agreement shall continue during any court proceedings or any other dispute resolution mechanism. No payment due or payable by the Vendor or amount to be transferred by the Provider shall be withheld on account of a pending court dispute or other dispute resolution mechanism except to the extent that such payment is the subject of such disputes.',
       };
 }

@@ -122,7 +122,8 @@ class SignUpView extends StatelessWidget {
       controller: viewModel.firstNameController,
       autoValidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
-        return Validator().validateName(value, errorToPrompt: langKey.FirstNameReq.tr);
+        return Validator()
+            .validateName(value, errorToPrompt: langKey.FirstNameReq.tr);
       },
     );
   }
@@ -136,7 +137,8 @@ class SignUpView extends StatelessWidget {
         controller: viewModel.lastNameController,
         autoValidateMode: AutovalidateMode.onUserInteraction,
         validator: (value) {
-          return Validator().validateName(value, errorToPrompt: langKey.LastNameReq.tr);
+          return Validator()
+              .validateName(value, errorToPrompt: langKey.LastNameReq.tr);
         },
       ),
     );
@@ -160,7 +162,7 @@ class SignUpView extends StatelessWidget {
       () => Padding(
         padding: const EdgeInsets.only(top: 20, bottom: 30),
         child: CountryCodePickerTextField2(
-          validator: (value){
+          validator: (value) {
             return Validator().validatePhoneNumber(value);
           },
           title: langKey.phoneNumber.tr,
@@ -220,7 +222,8 @@ class SignUpView extends StatelessWidget {
           hintText: '● ● ● ● ● ● ● ● ● ●',
           autoValidateMode: AutovalidateMode.onUserInteraction,
           validator: (value) {
-            return Validator().validateConfirmPassword(value, viewModel.passwordController.text);
+            return Validator().validateConfirmPassword(
+                value, viewModel.passwordController.text);
           },
           obscureText: viewModel.obscureConfirmPassword.value ? true : false,
           suffixIcon: ObscureSuffixIcon(
@@ -302,15 +305,16 @@ class SignUpView extends StatelessWidget {
                 ? cityViewModel.selectedCountry.value
                 : cityViewModel.authController.selectedCountry.value,
           ),
-          Obx(() => Visibility(
-            visible: viewModel.countryErrorVisibility.value,
-            child: Text(
-              langKey.countryReq.tr,
-              style: GoogleFonts.dmSans(
-                color: Colors.red.shade700,
+          Obx(
+            () => Visibility(
+              visible: viewModel.countryErrorVisibility.value,
+              child: Text(
+                langKey.countryReq.tr,
+                style: GoogleFonts.dmSans(
+                  color: Colors.red.shade700,
+                ),
               ),
             ),
-          ),
           )
         ],
       ),
@@ -391,15 +395,16 @@ class SignUpView extends StatelessWidget {
                             ? cityViewModel.selectedCity.value
                             : cityViewModel.authController.selectedCity.value,
                       ),
-                      Obx(() => Visibility(
-                        visible: viewModel.cityErrorVisibility.value,
-                        child: Text(
-                          langKey.cityReq.tr,
-                          style: GoogleFonts.dmSans(
-                            color: Colors.red.shade700,
+                      Obx(
+                        () => Visibility(
+                          visible: viewModel.cityErrorVisibility.value,
+                          child: Text(
+                            langKey.cityReq.tr,
+                            style: GoogleFonts.dmSans(
+                              color: Colors.red.shade700,
+                            ),
                           ),
                         ),
-                      ),
                       )
                     ],
                   ),
@@ -426,7 +431,7 @@ class SignUpView extends StatelessWidget {
                 children: [
                   TextSpan(
                     text:
-                    'By clicking ‘Create Account’, you’ve read and agreed to our ',
+                        'By clicking ‘Create Account’, you’ve read and agreed to our ',
                   ),
                   TextSpan(
                       text: 'Terms & Conditions',
@@ -434,15 +439,15 @@ class SignUpView extends StatelessWidget {
                         decoration: TextDecoration.underline,
                         color: newColorLightGrey2,
                       ),
-                      recognizer: TapGestureRecognizer()..onTap = () {
-                        Get.toNamed(Routes.staticInfo, arguments: {
-                          'title': langKey.termsAndConditions.tr
-                        });
-                      }
-                  ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Get.toNamed(Routes.staticInfo, arguments: {
+                            'title': langKey.termsAndConditions.tr
+                          });
+                        }),
                   TextSpan(
                     text:
-                    ' and for my personal data to be processed according to',
+                        ' and for my personal data to be processed according to',
                   ),
                   TextSpan(
                     text: ' ISMMART ',

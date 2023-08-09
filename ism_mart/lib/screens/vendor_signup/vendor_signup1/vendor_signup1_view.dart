@@ -453,41 +453,46 @@ class VendorSignUp1View extends StatelessWidget {
           },
           text: Padding(
             padding: const EdgeInsets.only(top: 6),
-            child: RichText(
-              text: TextSpan(
-                style: newFontStyle0.copyWith(
-                  color: newColorLightGrey2,
+            child: InkWell(
+              onTap: (){
+                showTermsAndConditionDialog();
+              },
+              child: RichText(
+                text: TextSpan(
+                  style: newFontStyle0.copyWith(
+                    color: newColorLightGrey2,
+                  ),
+                  children: [
+                    TextSpan(
+                      text:
+                          'By clicking ‘Create Account’, you’ve read and agreed to our ',
+                    ),
+                    TextSpan(
+                      text: 'Terms & Conditions',
+                      style: newFontStyle0.copyWith(
+                        decoration: TextDecoration.underline,
+                        color: newColorLightGrey2,
+                      ),
+                      recognizer: TapGestureRecognizer()..onTap = () {
+                        Get.toNamed(Routes.staticInfo, arguments: {
+                          'title': langKey.termsAndConditions.tr
+                        });
+                      }
+                    ),
+                    TextSpan(
+                      text:
+                          ' and for my personal data to be processed according to',
+                    ),
+                    TextSpan(
+                      text: ' ISMMART ',
+                      style: newFontStyle0.copyWith(
+                        color: newColorBlue2,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    TextSpan(text: 'Privacy Policy.'),
+                  ],
                 ),
-                children: [
-                  TextSpan(
-                    text:
-                        'By clicking ‘Create Account’, you’ve read and agreed to our ',
-                  ),
-                  TextSpan(
-                    text: 'Terms & Conditions',
-                    style: newFontStyle0.copyWith(
-                      decoration: TextDecoration.underline,
-                      color: newColorLightGrey2,
-                    ),
-                    recognizer: TapGestureRecognizer()..onTap = () {
-                      Get.toNamed(Routes.staticInfo, arguments: {
-                        'title': langKey.termsAndConditions.tr
-                      });
-                    }
-                  ),
-                  TextSpan(
-                    text:
-                        ' and for my personal data to be processed according to',
-                  ),
-                  TextSpan(
-                    text: ' ISMMART ',
-                    style: newFontStyle0.copyWith(
-                      color: newColorBlue2,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  TextSpan(text: 'Privacy Policy.'),
-                ],
               ),
             ),
           ),
@@ -538,6 +543,80 @@ class VendorSignUp1View extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Future showTermsAndConditionDialog() async {
+    return showDialog(
+      barrierDismissible: true,
+      context: Get.context!,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+          insetPadding: EdgeInsets.symmetric(horizontal: 18, vertical: 20),
+          child: Stack(
+            alignment: Alignment.topRight,
+            children: [
+              SingleChildScrollView(
+                padding: EdgeInsets.only(top: 20),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      'Terms & conditions',
+                      style: headline1.copyWith(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    Divider(),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(18, 0, 22, 16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: viewModel.getTermConditionData().map((e) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              AppConstant.spaceWidget(height: 15),
+                              if (e['header'] != '')
+                                CustomText(
+                                  title: "${e['header']}",
+                                  style: headline2.copyWith(
+                                    fontSize: 17,
+                                  ),
+                                ),
+                              if (e['header'] != '') Divider(),
+                              if (e['body'].toString().isNotEmpty)
+                                Text(
+                                  "${e['body'].toString()}",
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 13.5,
+                                    color: kDarkColor,
+                                    height: 1.7,
+                                  ),
+                                ),
+                            ],
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              IconButton(
+                onPressed: () {
+                  Get.back();
+                },
+                icon: Icon(Icons.close),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
