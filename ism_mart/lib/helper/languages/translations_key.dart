@@ -384,6 +384,7 @@ const profile = "profile",
     deActivateMsg = "deActivateMsg",
     FirstNameReq = "FirstNameReq",
     LastNameReq = "LastNameReq",
+    legalDocument = "legalDocument",
     incorrectAccOrIbanNo = 'incorrectAccNo',
     incorrectBranchCode = 'incorrectBranchCode',
     enterBranchCode = 'enterBranchCode';
@@ -475,15 +476,16 @@ const login = "login",
     shopDescription = 'shopDescription',
     shopDescReq = 'shopDescReq',
     enterShopDescription = 'enterShopDescription',
-    // shopImage = 'shopImage',
-    // shopCoverImage = 'shopCoverImage',
+    shopImage = 'shopImage',
+    shopCoverImage = 'shopCoverImage',
     enterBankName = 'enterBankName',
     enterAccountTitle = 'enterAccountTitle',
     accountTitle = 'accountTitle',
     bankAccountNumber = 'bankAccountNumber',
     enterAccountNumberOrIban = 'enterAccountNumberOrIban',
     ibanReq = 'ibanReq',
-    chequeImageNote = 'This cheque image should have the same bank details visible as you mentioned above';
+    chequeImageNote =
+        'This cheque image should have the same bank details visible as you mentioned above';
 
 /**
  * Form Validations

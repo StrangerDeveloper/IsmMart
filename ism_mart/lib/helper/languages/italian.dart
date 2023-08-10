@@ -548,5 +548,198 @@ class Italian {
             'I membri premium avranno meno accesso a tutte le aziende in tutto il mondo, sia come venditore e acquirente, come IsmMART garantirà direttamente e verificherà tali membri e qualsiasi accordo che fanno.',
         key.memPlan3Desc9:
             'Poiché tutti i membri premium vengono esaminati e vengono verificati attraverso il processo di verifica ISMMART, in modo che tutti questi membri possano preoccuparsi meno commercio tra loro, in qualsiasi parte del mondo.',
+        key.vendorHeader0: '0',
+        key.vendorBody0:
+            'Il fornitore (ISMMART Group of Industries Pvt Ltd. Pakistan) e il venditore (definito come fornitori di terze parti) devono essere definiti collettivamente come "parti" e individualmente come "parte", come potrebbe essere il caso. \ N \ nwhereas, Il fornitore funge da appaltatore indipendente del venditore, che, attraverso il presente Accordo, garantisce la piena autorità per concludere e negoziare contratti con i clienti a nome e per il conto del venditore, nonché per le offerte del venditore, fatte tramite Piattaforma online del provider www.ismmart.com ("sito Web") e applicazioni mobili (ove applicabile). Resta inteso che il fornitore non agisce per conto dei clienti. \ N \ nwhereas, tutti i contratti conclusi dal fornitore nella sua funzione di agente per conto del fornitore con i clienti tramite il mercato online del provider saranno basati su I termini e le condizioni generali con i clienti che si trovano sul sito Web. \ n \ nwhereas, questi termini e condizioni fanno parte del presente accordo in base al quale il fornitore fornisce una piattaforma di ordinazione del prodotto online al fornitore e, ove applicabile, servizi di spedizione a Il cliente. \ n \ nwhereas Parties si fornirà reciprocamente il proprio NTN# e STN#. In caso di modifiche, lo stesso deve essere comunicato anche all\'altra parte.',
+        key.vendorHeader1: '1. Diritti, obblighi e doveri dei fornitori:',
+        key.vendorBody1:
+            '1.1: il provider deve trasferire gli ordini tramite la dashboard del fornitore o la telefonata (solo nel caso, se il sito Web non funziona) ai rispettivi outlet. ordine effettuato da un cliente sulla piattaforma al fornitore tramite il sito Web o tramite chiamata (quando il sito Web non funziona) e accetta il pagamento del cliente online o in contanti. \ N1.3: in caso di Provider che esegue i servizi di consegna, ha il diritto di addebitare al cliente una commissione di consegna ("Commissione di consegna ISMMART") e determinare un valore di ordine minimo, a propria discrezione; Per eseguire i servizi, il provider deve: \ n \ t1.3.1 Assicurarsi che il tempo di consegna indicato sul sito Web sia conforme ai tempi di consegna effettivamente richiesti. \ N1.3.2 Assicurarsi che tutti gli articoli ordinati vengano consegnati in uno stato che A Il cliente si aspetterebbe per quel tipo di articolo, a condizione che il fornitore sia conforme all\'obbligo nella clausola 2.7. \ N \ T1.3.3 Il trasferimento delle entrate al fornitore generato per tali ordini meno la commissione dell\'agenzia è come da clausola 6 di questi termini . \ N \ T1.3.4 Informare il fornitore per iscritto di eventuali modifiche attuate alle procedure del fornitore almeno due (2) giorni prima che avvengano la modifica prevista e il fornitore deve rispettare tutte queste modifiche. \ N \ T1.3.5 hanno il diritto di alterare, a sua esclusiva discrezione, qualsiasi servizio relativo alla consegna, comprese le aree di consegna e i tempi operativi, senza preavviso. \ n \ t1.3.6 Il fornitore deve fornire i dettagli di contatto del pertinente stakeholder/ punto di contatto per il venditore. Nel caso in cui il fornitore intenda aggiornare le informazioni di contatto, lo stesso deve essere avvisato al fornitore sette (7) giorni prima della data di entrata in vigore delle informazioni di contatto.',
+        key.vendorHeader2:
+            '2 diritti, obblighi e doveri dei fornitori di terze parti:',
+        key.vendorBody2:
+            'Il fornitore deve: \ n \ n2.1 fornisce al provider un elenco di tutti gli elementi "elenco degli articoli" come concordato con il provider. Elenco degli articoli da rendere disponibile per la visualizzazione sul sito Web. \ N2.2 Se il fornitore desidera apportare eventuali modifiche all\'elenco degli articoli, lo stato dei prodotti deve essere modificato in "pendente". Il fornitore esaminerà le modifiche e approverà o disapproverà le modifiche in base alle politiche del prodotto del provider entro due (2) giorni lavorativi. Le autorizzazioni e i consensi (che possono essere richiesti per eseguire i propri obblighi ai sensi del presente Accordo) \ N2.4 forniscono il fornitore e il suo pilota (definito come pilota del fornitore e/o i nostri partner di consegna, ad esempio TCS, FedEx & DHL) Accesso alle locali del fornitore come ragionevolmente richiesto dal fornitore per eseguire i servizi. \ N2.5 fornisce al fornitore una chiara accettazione o rifiuto degli ordini, non oltre 12 ore dal momento , l\'ordine è stato reso disponibile al venditore, a condizione che l\'ordine debba essere completato entro il periodo di tempo specificato come indicato dal fornitore. Se il fornitore non accetta né rifiuta l\'ordine, verrà automaticamente respinto dal fornitore. \ N2.6 Nel caso Per tale rifiuto, non oltre 12 ore dal momento in cui l\'ordine è stato messo a disposizione del venditore. \ N2.7 Dopo aver accettato un ordine, preparare e mettere l\'ordine senza indugio a non meno dello standard comune del Fornitore e trasferiscilo alla persona di consegna del provider o al cliente (in caso di consegna del fornitore). \ N2.8 Assicurarsi che tutti gli articoli ordinati forniti ai suoi clienti indiretti che si avvaleno dei servizi del fornitore siano della stessa qualità fornito dal venditore ai suoi clienti diretti. \ n \ n2.9 Il fornitore accetta, riconosce e si impegna Stampato sull\'imballaggio dal produttore. \ N \ N2.9.2 Il fornitore non modificherà, cambierà, modificherà e/o rimuoverà la data di scadenza/prima di prima, come stampata sulla confezione dal produttore dell\'articolo. \ N \ N2.9.3 In caso di violazione della Clauso Tutti gli atti del cliente compresi i contenziosi. \ N2.9.4 essere esclusivamente responsabili per tutte le domande, i reclami e/o i reclami dei clienti in relazione ai contenuti, agli articoli mancanti, agli articoli errati e alla qualità degli articoli Eventuali effetti consequenziali. \ N2.11 Aggiorna immediatamente lo stock sulla dashboard del fornitore sulla piattaforma in caso di indisponibilità di un prodotto.',
+        key.vendorHeader3: '2.12 Prezzi:',
+        key.vendorBody3:
+            '2.12.1 Il fornitore con la presente garantisce che i prezzi resi disponibili al fornitore sono identici ai prezzi in tempo reale offerti ai clienti quando si effettuano gli ordini dalla piattaforma. \ N2.12.2 Se il fornitore intende una riduzione, promozione o sconto dei prezzi per Uno degli articoli ordinati tramite la piattaforma, il fornitore deve avvisare il fornitore almeno sette (7) giorni di anticipo indicando l\'entità della riduzione del prezzo, delle promozioni o degli sconti, la rispettiva data di efficacia e la sua durata. \ N2.13 Tratta i ciclisti del fornitore nel caso in cui il fornitore utilizzi il sistema di consegna del fornitore in modo rispettoso e civile, che include ma non si limita al divieto dell\'uso di linguaggio offensivo, comportamento offensivo, molestie, assalti e batteria. La formazione deve essere fornita al venditore e al suo personale al riguardo. La violazione della presente clausola costituirà una violazione del presente Accordo. \ N2.14 Il venditore accetta di accettare buoni elettronici emessi dal fornitore ai clienti da utilizzare durante il check-out degli ordini. Il pagamento di tutti questi voucher verrà rimborsato dal fornitore nella fattura mensile/settimanale nel conto bancario registrato del venditore. \ N2.15 eseguono gli obblighi del fornitore, in base al presente Accordo, in ogni momento e in modo professionale, all\'interno degli standard, delle pratiche e dei principi del settore stabiliti e entro i tempi di scadenza stabiliti nel presente documento. \ N2.16 Il fornitore deve fornire informazioni di contatto e indirizzo come richiesto dal fornitore. Nel caso in cui il fornitore intenda aggiornare le informazioni fornite, il fornitore deve informare il fornitore sette (7) giorni prima della data di effetto di modifica delle informazioni di contatto.',
+        key.vendorHeader4: '3. COMPORT CONSEGNO DEL CLIENTE - danni/penalità:',
+        key.vendorBody4:
+            '3.1 Il venditore riconosce che il fornitore è una società affidabile in Pakistan, che cerca di fornire comodità, affidabilità e qualità ai propri clienti. Poiché i sistemi e le operazioni del fornitore dipendono fortemente dall\'esperienza e dal feedback del cliente, il fornitore conferma e concorda con il fornitore che nel caso in cui il fornitore non riesca a osservare o rispettare gli standard operativi del fornitore, il fornitore deve pagare il fornitore come la somma del fornitore che deve essere Determinato dal fornitore come danni liquidati ("COMPOSSAZIONE DI PROVETURA DEL CLIENTE"). Il suddetto addebito per il recupero dei clienti non pregiudica il diritto del fornitore di richiedere danni per i costi e le spese di adottare le misure ritenute necessarie dal fornitore per correggere tale non osservazione e/o non conformità con tali standard operativi. \ n3.2 Il fornitore riconosce di aver letto, compreso e concorda con le disposizioni della clausola 3 e concorda anche che l\'applicazione delle disposizioni della clausola 3 sarà applicabile fino alla notifica della sospensione da parte del fornitore, a condizione che venga fornito un Minimo di sette (7) giorni di preavviso scritto. \ n \ n3.3 Qualsiasi feedback ricevuto dal fornitore da un cliente in relazione all\'ordine consegnato deve essere considerato come un\'ispezione eseguita dal fornitore e il fornitore accetta tale risultato senza concorso. Inoltre, nonostante il pagamento dei danni liquidati, il fornitore dovrà riservare tutti i suoi diritti per le violazioni.',
+        key.vendorHeader5: '4 sospensioni:',
+        key.vendorBody5:
+            '4.1 Il fornitore avrà il diritto di sospendere temporaneamente il venditore dalla piattaforma, senza penalità, se: \ n4.1.1 Il venditore non ha pagato le fatture del fornitore che sono state dovute. \ N \ n4.1.2 , il venditore è in violazione di tutti i termini del presente Accordo o può influire negativamente sul business del fornitore. \ N4.2 Per evitare eventuali dubbi, qualsiasi sospensione non deve comportare la risoluzione del presente Accordo, le cui disposizioni restano Completamente applicabile.',
+        key.vendorHeader6: '5 indennizzo da reclami di terzi:',
+        key.vendorBody6:
+            '5.1 entrambe le parti a sue spese, difende uno dei seguenti tipi di richieste di terze parti presentate contro l\'altra parte, i suoi amministratori, funzionari o agenti (collettivamente, "indenniti") e indennizzano contro: \ n5.1.1 che, se vero, costituirebbe una violazione del presente accordo da parte di una parte, dei suoi dipendenti, agenti o rappresentanti. relativi a entrambe le parti obbligazioni derivanti dal presente Accordo; o derivante dalla negligenza, dagli atti o dai guasti ad agire, di una delle parti dei suoi dipendenti, agenti o rappresentanti. commissioni (comprese le spese legali ragionevoli) sostenute da una di esse attribuibili a tale reclamo.',
+        key.vendorHeader7: '6 commissioni, pagamento e raccolta di fondi:',
+        key.vendorBody7:
+            '6.1 Il venditore concede all\'autorità del fornitore di ricevere fondi in nome e per il conto, del fornitore pagato dai clienti, sia per mezzo online che in contanti. \ N6.2 in caso di pagamento in contanti da parte del pagamento in contanti Cliente alla consegna, il fornitore sarà responsabile della riscossione del pagamento in contanti e della riconciliazione con l\'altra parte in conformità con le disposizioni della clausola 6. \ n \ n6.3 In caso di pagamento online, il fornitore deve riscuotere denaro e riconciliazione in conformità con le disposizioni della clausola 6. \ n \ n6.4 Le parti concordano e accettano che le entrate generate, la commissione della commissione e la commissione di consegna saranno calcolate e pagabili nell\'importo concordato, nel presente Accordo e che nessun\'altra commissione o si applicano addebiti tra le parti o verso i clienti, ad eccezione di quanto previsto nel presente Accordo. Il fornitore accetta specificamente che, se applicabile, il provider può scatenare la commissione di agenzia/aggregatore rispetto alle entrate generate. Il tempo della consegna dell\'ordine.',
+        key.vendorHeader8:
+            '6.6 Fatturazione e pagamenti - Consegna del fornitore:',
+        key.vendorBody8:
+            '6.6.1 Il provider raccoglierà tutti gli ordini a credito e faranno fatture ("Dichiarazione degli ordini") il fornitore su base bimestrale tramite e -mail. \ N \ n6.6.2 Il provider entro tre (3) giorni dalla fattura farà rimborsi settimanali dopo dedurre commissioni e tutte le tasse applicabili su base settimanale al conto bancario registrato del venditore. \ N \ N6.6.3 Il provider invierà un riepilogo degli ordini mensili/settimanali e una notifica di pagamento all\'indirizzo e-mail registrato del fornitore. \ N \ N6.6.4 Commissione di servizio bancario secondo _bank_%, verrà addebitato al fornitore rispetto a tutti gli ordini ricevuti sui pagamenti online.',
+        key.vendorHeader9: '6.7 Ordinaggio online e ordini aziendali:',
+        key.vendorBody9:
+            '6.7.1 Tutti i pagamenti online verranno trasferiti e trattati come ordini regolari e saranno pagati al venditore. \ N \ n6.8 Risparmio delle disposizioni della clausola 3.1, il fornitore emette anche il venditore con uno schema di danni liquidati dovuti dal venditore al fornitore ("Notifica dei danni"). \ N \ N6.9 Il venditore avrà il diritto di appellarsi alla dichiarazione dell\'ordine e alla notifica dei danni in conformità con il seguente: \ n \ n6.9.1 oggetto per iscritto entro cinque (5) giorni lavorativi dalla data di rilascio della dichiarazione dell\'ordine pertinente o notifica dei danni e dovrà chiaramente dichiarare tutti i motivi del ricorso, compresa qualsiasi documentazione a supporto. \ n \ n6.9.2 Il fornitore deve rivedere il Obiezione entro tre (3) giorni lavorativi dall\'essere notificati all\'obiezione del venditore e: \ n \ ni. Se concordato con, il fornitore deve regolare la dichiarazione dell\'ordine o la notifica dei danni di conseguenza. \ N \ nii. Se il fornitore non è d\'accordo con il venditore, informerà il venditore di tale e le parti tenteranno in buona fede di risolvere qualsiasi controversia o rivendicazione derivante da o in relazione al presente Accordo attraverso i negoziati tra un direttore o rappresentante autorizzato di ciascuna delle parti con l\'autorità di risolvere la controversia pertinente. \ n \ n6.9.3 Se la controversia non può essere risolta amichevolmente entro quattordici (14) giorni dal ricevimento del ricorso, entrambe le parti avranno il diritto di applicare rispettivamente le disposizioni della clausola 19 e/o 24.',
+        key.vendorHeader10: '7 inizio dei servizi:',
+        key.vendorBody10:
+            'Il venditore deve essere elencato sulla piattaforma solo dopo la ricezione di tutte le informazioni richieste dal fornitore, incluso, ma non limitato all\'elenco degli articoli; Un logo e immagini approvate di prodotti. Il fornitore deve informare il venditore, della data di inizio dei Servizi ("Data di inizio"), che la notifica deve essere allegata al presente Accordo.',
+        key.vendorHeader11: '8. Conformità politica e procedura:',
+        key.vendorBody11:
+            '8.1 Il fornitore comprende che il fornitore può sospendere i servizi del fornitore con o senza preavviso in caso di reclamo (la qualità e/o i reclami di consegna/pickup) supera il 2% degli ordini totali che arrivano all\'attività del fornitore che può comportare il tasso di riordino per ridurre il tasso di riordino della media. \ n \ n8.2 Il venditore accetta che al momento del rifiuto degli ordini, il suo outlet sarà disattivato dalla piattaforma per una durata secondo la discrezione del provider. \ n \ n8.3 Il fornitore garantirà lo sconto I voucher ai clienti ove applicabili in caso di autentica reclamo del cliente. \ N \ N8.4 In caso di reclami del cliente, il venditore non deve in alcun caso lamentarsi o incriminare il fornitore in alcun modo. Il venditore accetta di non pagare alcuna sconto/commissioni alla persona di consegna del fornitore.',
+        key.vendorHeader12: '9. Garanzie:',
+        key.vendorBody12:
+            'Il venditore rappresenta, garantisce e sostiene che l\'uso da parte del venditore della sua proprietà intellettuale non deve violare, appropriarsi male o altrimenti in conflitto con eventuali diritti di proprietà intellettuale della terza parte. Il venditore deve indennizzare per intero il fornitore contro qualsiasi richiesta di violazione del diritto di IP presentate contro di loro dalla terza parte secondo la clausola 5 sopra indicata.',
+        key.vendorHeader13: '10. Riservatezza:',
+        key.vendorBody13:
+            '10.1 Una parte ("Parte di ricezione") mantiene in stretta fiducia tutto il know-how tecnico o commerciale, le specifiche, le invenzioni, i processi o le iniziative che sono di natura confidenziale e sono state divulgate alla parte ricevente dall\'altra parte (" Parte divulgata ") e qualsiasi altra informazione riservata relativa all\'attività di divulgazione della parte, ai suoi prodotti e servizi che la parte ricevente può ottenere. Dipendenti, agenti e subappaltatori che devono conoscerlo allo scopo di scaricare gli obblighi della parte ricevente ai sensi del presente Accordo. \ N \ N10.3 Le parti devono mantenere riservate tutte le informazioni relative alle procedure di ordinazione e consegna e in nessun momento divulgare qualsiasi informazione ai clienti. \ n \ n10.4 Nel caso in cui i dettagli devono essere divulgati per legge, qualsiasi autorità governativa o regolatrice o da un tribunale di giurisdizione competente a qualsiasi ente governativo o autorità di regolamentazione, lo stesso deve essere comunicato L\'altra parte in anticipo per iscritto. \ N \ N10.5 Questa clausola 10 sopravvive alla risoluzione del presente Accordo.',
+        key.vendorHeader14: '11. Nessuna partnership',
+        key.vendorBody14:
+            'Nulla nel presente Accordo è destinato a o deve essere considerato, stabilire qualsiasi partenariato aziendale o joint venture tra le parti.',
+        key.vendorHeader15: '12. Emendamenti:',
+        key.vendorBody15:
+            '12.1 Il fornitore avrà il diritto di aumentare la commissione di successo in qualsiasi momento secondo la discrezione del fornitore. Lo stesso deve essere informato al fornitore tramite un\'e -mail ufficiale e/o tramite il dashboard del fornitore. \ N12.2 Il fornitore avrà il diritto di modificare, rimuovere, correggere e/o aggiungere eventuali impegni, obblighi e responsabilità per se stesso e/o su una parte del venditore a modo di un addendum. Lo stesso deve essere informato al fornitore tramite un\'e -mail ufficiale e/o tramite il dashboard del fornitore. \ N12.3 In caso di non essere d\'accordo con tali emendamenti, avrà il diritto di interrompere il presente Accordo in conformità Con le disposizioni della clausola 18. \ n \ n12.4 è specificamente concordato che tutti gli emendamenti saranno efficaci tra le parti con effetto dalla data notificata dal fornitore in conformità con la clausola 12.2.',
+        key.vendorHeader16: '13. Forza Majeure:',
+        key.vendorBody16:
+            'Ai fini del presente Accordo, "Force Majeure Event" indica un evento al di fuori del ragionevole controllo di entrambe le parti, incluso ma non limitato agli atti di Dio, alla guerra, alla rivolta, alla confusione civile o all\'azione terroristica. Nessuna delle parti sarà responsabile nei confronti dell\'altra parte come risultato diretto di eventuali ritardi o mancato rispetto dei propri obblighi ai sensi del presente Accordo a seguito di un evento di Force Majeure.',
+        key.vendorHeader17: '14. Terze parti:',
+        key.vendorBody17:
+            'Una persona che non è parte del presente Accordo non ha alcun diritto di applicare i suoi termini.',
+        key.vendorHeader18: '15. Avvisi:',
+        key.vendorBody18:
+            '15.1 Tutti gli avvisi ai sensi del presente Accordo devono essere scritti, indirizzati alla persona/indirizzo di contatto concordato secondo il presente Accordo, ed essere ritenuti debitamente forniti lo stesso giorno in cui concordato durante il processo di registrazione del fornitore.',
+        key.vendorHeader19: '16. Assegnazione:',
+        key.vendorBody19:
+            '16.1 Il fornitore può in qualsiasi momento assegnare, trasferimento, mutuo, addebito, subappalto o gestire in qualsiasi altro modo con tutti i suoi diritti ai sensi del presente Accordo e può subappaltare o delegare in qualsiasi modo o tutti i suoi obblighi ai sensi del presente Accordo a qualsiasi terza parte o agente. \ n \ n16.2 Il venditore non deve, senza il previo consenso scritto del fornitore, che non sarà irragionevolmente trattenuto, assegnazione, trasferimento, mutuo, addebito, subappalto o dichiarare una fiducia su o Affare in qualsiasi altro modo con uno o tutti i suoi diritti o obblighi ai sensi del presente Accordo.',
+        key.vendorHeader20: '17. Rinuncia:',
+        key.vendorBody20:
+            'Una rinuncia di qualsiasi diritto ai sensi del presente Accordo o Legge è efficace solo se è per iscritto e non sarà considerata una rinuncia a qualsiasi successiva violazione o inadempienza. Nessun fallimento nell\'esercizio di alcun diritto o rimedio fornito ai sensi del presente Accordo o per legge costituisce una rinuncia a qualsiasi diritto o rimedio, né impedirà o limiterà il suo ulteriore esercizio di tale o di qualsiasi altro diritto o rimedio.',
+        key.vendorHeader21: '18. Termine e risoluzione:',
+        key.vendorBody21:
+            '18.1 Il presente Accordo inizierà alla data di inizio e continuerà per un periodo indefinito, a meno che non sia risolto prima in conformità con la presente clausola 18.1. Il presente Accordo può essere risolto: \ n \ n (a) da entrambe le parti per comodità fornendo non meno di cinque (5) giorni preventivi scritti. \ N \ n (b) con effetto immediato sulla fornitura di preavviso scritto da entrambi Parte in caso di violazione materiale del presente accordo da parte dell\'altra parte. \ N \ n (c) in qualsiasi momento da un reciproco accordo scritto tra le parti. \ N \ n18.2 Il fornitore avrà il diritto di risolvere il presente Accordo, Con effetto immediato e senza alcuna responsabilità, in caso di violazione della sezione 2.12 e 2.13, in cui il venditore non ha porre rimedio alla violazione entro un periodo massimo di due (2) giorni lavorativi dalla notifica.',
+        key.vendorHeader22: '19. Limitazione della responsabilità:',
+        key.vendorBody22:
+            '19.1 Nulla nel presente Accordo limiterà o esclude la responsabilità di una delle parti per la morte o le lesioni personali causate dalla sua negligenza o dalla negligenza dei suoi dipendenti, agenti o subappaltatori. \ N \ N19.2 soggetto alla clausola 19.1, nessuna delle parti sarà responsabile all\'altra parte, in contratto, illecito (inclusa la negligenza), violazione del dazio legale o in altro modo, per qualsiasi perdita di profitto, sia per perdite indirette o consequenziali derivanti da o in relazione al presente Accordo. \ N \ N19 .3 Questa clausola sopravviverà alla risoluzione del presente Accordo.',
+        key.vendorHeader23: '20. Termini contrastanti:',
+        key.vendorBody23:
+            'Nella misura in cui uno di questi termini è in conflitto con i termini indicati nel modulo di registrazione del fornitore (incluso, a titolo esemplificativo, eventuali condizioni speciali dettagliate nel modulo di registrazione del fornitore), i termini del modulo di registrazione del fornitore prevalgono.',
+        key.vendorHeader25: '21. Intero accordo:',
+        key.vendorBody25:
+            'Nella misura in cui uno di questi termini è in conflitto con i termini indicati nel modulo di registrazione del fornitore (incluso, a titolo esemplificativo, eventuali condizioni speciali dettagliate nel modulo di registrazione del fornitore), i termini del modulo di registrazione del fornitore prevalgono.',
+        key.vendorHeader26: '22. Severabilità:',
+        key.vendorBody26:
+            'Se una disposizione o la fornitura di parte del presente Accordo è o diventa non valida, illegale o inapplicabile, è considerata modificata nella misura minima necessaria per renderlo valido, legale e esecutivo. Se tale modifica non è possibile, la disposizione pertinente o la proposta di parte è considerata eliminata. Qualsiasi modifica o eliminazione di una disposizione o di una proposta di parte ai sensi della presente clausola non deve influire sulla validità e l\'applicabilità del resto del presente Accordo.',
+        key.vendorHeader27: '23. Legge diretta e giurisdizione:',
+        key.vendorBody27:
+            '23.1 Il presente Accordo, e qualsiasi controversia o richiesta derivante da o in relazione ad esso o in materia o formazione (comprese le controversie o le richieste non contrattuali), saranno regolate e interpretate in conformità con le leggi del Pakistan. \ N \ N23.2 ciascuna parte accetta che qualsiasi controversia derivante dal presente Accordo sarà soggetta alla giurisdizione non esclusiva dei tribunali del Pakistan, che risolverà qualsiasi controversia o rivendicazione derivante da o in relazione al presente Accordo o alla sua materia o formazione (comprese le controversie o le richieste non contrattuali). \ N \ nPerformance del presente Accordo continuerà durante qualsiasi procedimento giudiziario o qualsiasi altro meccanismo di risoluzione delle controversie. Nessun pagamento dovuto o pagabile dal fornitore o dall\'importo da trasferire dal fornitore deve essere trattenuto a causa di una controversia in sospeso o di altri meccanismi di risoluzione delle controversie se non nella misura in cui tale pagamento è oggetto di tali controversie.',
+        key.or: 'O',
+        key.becomeAVendor: 'Diventare un venditore',
+        key.joinOurMarketplace:
+            'Unisciti al nostro mercato e inizia a vendere i tuoi prodotti oggi!',
+        key.seamlessShopping:
+            'Inserisci i dettagli per un\'esperienza di acquisto senza soluzione di continuità',
+        key.createAnAccount: 'Creare un account',
+        key.getOnboardUser: 'Sali a bordo come utilizzo',
+        key.phoneNumber: 'Numero di telefono',
+        key.termsAndConditionsCheckbox:
+            'Creando il tuo account devi essere d\'accordo con i nostri termini e condizioni.',
+        key.frontSide: 'Fronte',
+        key.backSide: 'Lato posteriore',
+        key.legalDocument: 'Documento legale',
+        key.shopLogoImage: 'Acquista logo/immagine',
+        key.business: 'Attività commerciale',
+        key.information: 'Informazione',
+        key.vendorAccountCreation: 'Creazione dell\'account del fornitore',
+        key.profileStatus: 'Stato del profilo',
+        key.shopName: 'Nome del negozio',
+        key.enterShopName: 'Immettere il nome del negozio',
+        key.shopAddress: 'Indirizzo del negozio',
+        key.enterShopAddress: 'Inserisci l\'indirizzo del negozio',
+        key.ifAvailable: 'se disponibile',
+        key.shopNumber: 'Numero del negozio',
+        key.lessThanMb: 'Meno di 2 MB',
+        key.chooseFile: 'Scegli il file',
+        key.noFileChosen: 'Nessun file scelto',
+        key.waitForVerification: 'Attendere la verifica',
+        key.vendor: 'Venditore',
+        key.submitted: 'Presentato',
+        key.lastStep: 'Ultimo passo',
+        key.availAmazingDiscount: 'Avanza di sconti incredibili',
+        key.descriptionOfDiscount:
+            'Risparmia grande con uno sconto del 30% su tutti i nostri prodotti!',
+        key.celebrateFreedomAndSavings: 'Celebra la libertà e i risparmi',
+        key.descriptionOfFreedomAndSavings:
+            'Offerte esclusive per il Giorno dell\'Indipendenza!',
+        key.boostYourBusiness: 'Aumenta la tua attività con Ismmart',
+        key.descriptionOfBoostYourBusiness:
+            'Zero Commissione di registrazione della piattaforma per i venditori!',
+        key.shopCountry: 'Paese del negozio',
+        key.shopCity: 'Shop City',
+        key.vendorCNIC: 'Fornitore CNIC',
+        key.shopCategory: 'Categoria del negozio',
+        key.yourShopCategory: 'La tua categoria del negozio',
+        key.shopDescription: 'Descrizione del negozio',
+        key.enterShopDescription: 'Inserisci la descrizione del negozio',
+        key.shopImage: 'Immagine del negozio',
+        key.shopCoverImage: 'Immagine di copertina del negozio',
+        key.enterBankName: 'Immettere il nome della banca',
+        key.enterAccountTitle: 'Immettere il titolo dell\'account',
+        key.accountTitle: 'Titolo del conto bancario',
+        key.enterAccountNumberOrIban: 'Immettere il numero di conto / iban',
+        key.cityReq: 'Seleziona la città',
+        key.countryReq: 'Seleziona il paese',
+        key.emailIsRequired: 'È richiesta l\'e -mail',
+        key.passwordIsRequired: 'E \'richiesta la password',
+        key.passwordConfirmIsRequired: 'È richiesta la conferma della password',
+        key.FirstNameReq: 'È richiesto il nome',
+        key.LastNameReq: 'È richiesto cognome',
+        key.incorrectAddress: 'Immettere l\'indirizzo corretto',
+        key.incorrectNTN: 'Immettere NTN corretto',
+        key.incorrectCNIC: 'Immettere CNIC corretto',
+        key.cnicReq: 'CNIC è richiesto',
+        key.categoryReq: 'Seleziona categoria',
+        key.incorrectBranchCode: 'Immettere il codice di filiale corretto',
+        key.shopDescReq: 'È richiesta la descrizione del negozio',
+        key.frontSideReq: 'È richiesta l\'immagine del lato anteriore CNIC',
+        key.backSideReq: 'È richiesta l\'immagine del retro del CNIC',
+        key.chequeImageReq: 'Controllare l\'immagine è richiesta',
+        key.shopLogoImageReq: 'Shop Logo/Immagine è richiesta',
+        key.helpCenter: 'Centro assistenza',
+        key.shopAddressReq: 'È richiesto l\'indirizzo del negozio',
+        key.shopNameReq: 'È richiesto il nome del negozio',
+        key.getOnboard: 'Salire a bordo',
+        key.createYourAccount: 'crea il tuo account',
+        key.continueWithSameEmail: 'Continua con la stessa email',
+        key.continueWithDiffEmail: 'Con e -mail diversa',
+        key.chequeImageNote:
+            'Questa immagine di controllo dovrebbe avere le stesse dettagli della banca visibili come menzionato sopra',
+        key.enterCNIC: 'Inserisci CNIC',
+        key.enterBranchCode: 'Immettere il codice di filiale',
+        key.maxAddressLimitMsg:
+            'Limite di indirizzo massimo raggiunto. Si prega di aggiornare/eliminare l\'indirizzo per procedere',
+        key.forgotPasswordDesc:
+            'Inserisci la tua e -mail per ricevere un\'e -mail \ nwith il codice OTP.',
+        key.emailVerification: 'verifica email',
+        key.serverUnableToHandle:
+            'Il server non è in grado di gestire la richiesta',
+        key.serverTakingTooLong:
+            'Il server sta impiegando troppo tempo per rispondere',
+        key.noInternetConnection: 'Nessuna connessione internet',
+        key.questions: 'Domande',
+        key.updateQuestion: 'Domanda di aggiornamento',
+        key.deleteQuestion: 'Elimina domanda',
+        key.deleteQuestionDialogDesc:
+            'Sei sicuro di voler eliminare la domanda?',
+        key.question: 'Domande',
+        key.addAnswer: 'Aggiungi risposta',
+        key.viewProduct: 'Visualizza il prodotto',
+        key.answer: 'Risposta',
+        key.updateAnswer: 'Aggiorna risposta',
+        key.deleteAnswer: 'Elimina la risposta',
+        key.addQuestion: 'Aggiungi domanda',
+        key.updateProfile: 'Aggiornamento dell\'account',
+        key.pickImage: 'Scegli l\'immagine',
+        key.currentPassword: 'È richiesta la password corrente',
+        key.updateShippingAdd: 'Aggiorna indirizzo di spedizione',
+        key.addShippingAdd: 'Aggiungi indirizzo di spedizione',
       };
 }

@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 
-import '../helper/routes.dart';
+import '../../helper/routes.dart';
 
 class EmailVerifedView extends StatefulWidget {
   const EmailVerifedView({super.key});

@@ -545,5 +545,196 @@ class Turkish {
             'Premium üyeler, hem satıcı hem de alıcı olarak, bu tür üyeleri ve yaptıkları anlaşmaları doğrudan garanti edip doğrulayacak şekilde dünya çapındaki tüm işletmelere daha az erişimden endişe duyacaktır.',
         key.memPlan3Desc9:
             'Tüm premium üyeler incelendiğinden ve ISMMART doğrulama süreci ile doğrulandığından, bu tür tüm üyeler dünyanın herhangi bir yerinde birbirleriyle daha az ticaret endişelenebilirler.',
+        key.vendorHeader0: '0',
+        key.vendorBody0:
+            'Sağlayıcı (Ismmart Grubu Pvt Ltd. Pakistan) ve satıcı (üçüncü taraf satıcılar olarak tanımlanır) toplu olarak “taraf” ve bireysel olarak “parti” olarak adlandırılacaktır. \ N \ nweas. Sağlayıcı, bu anlaşma yoluyla, sağlayıcısının müşterilerle ve satıcının hesabı ile ilgili sözleşmeleri ve aynı zamanda satıcının teklifleri için yapılan teklifleri tamamlama ve müzakere etme yetkisi veren tedarikçinin bağımsız bir yüklenicisi olarak hareket eder. Sağlayıcının çevrimiçi platformu www.ismmart.com (“web sitesi”) ve mobil uygulamalar (varsa). Sağlayıcının müşteriler adına hareket etmediği anlaşılmaktadır. \ N \ nwease, sağlayıcı tarafından sağlayıcının çevrimiçi pazarı aracılığıyla müşterilerle satıcı adına ajan olarak işlevinde sonuçlandırılan tüm sözleşmeler, Web sitesinde bulunan müşterilerle genel şartlar ve koşullar. Müşteri. Herhangi bir değişiklik olması durumunda, aynısı diğer tarafa da iletilecektir.',
+        key.vendorHeader1: '1. Sağlayıcı hakları, yükümlülükler ve görevler:',
+        key.vendorBody1:
+            '1.1: Sağlayıcı sipariş (ler) i satıcı kontrol paneli veya telefon görüşmesi (yalnızca web sitesi çalışmıyorsa) ile ilgili çıkışlara aktaracak. \ N \ n1.2: Sağlayıcı bir Bir müşteri tarafından Web Sitesi aracılığıyla veya arama yoluyla (web sitesi çalışmadığında) bir müşteri tarafından satıcıya verilen sipariş ve müşterinin çevrimiçi veya nakit olarak ödemesini kabul edin. \ n \ n1.3: Teslimat hizmetlerini gerçekleştiren sağlayıcı, müşteriye bir teslimat ücreti (“ISMMART teslimat ücreti”) talep etme ve kendi takdirine bağlı olarak asgari sipariş değerini belirleme hakkına sahiptir; Hizmetleri gerçekleştirmek için sağlayıcı: \ n \ t1.3.1 Web sitesinde belirtilen teslimat süresinin gerçekten gerekli teslimat süresine uygun olduğundan emin olun. Müşteri, satıcının 2.7. \ n \ t1.3.4 Tedarikçiyi, amaçlanan değişikliğin gerçekleşmesinden en az iki (2) gün önce sağlayıcı tarafından prosedürlere uygulanan değişiklikleri yazılı olarak bilgilendirir ve satıcı bu tür değişikliklere uymalıdır. \. n \ t1.3.5, tamamen kendi takdirine bağlı olarak, teslimat alanları ve operasyonel zamanlama dahil olmak üzere teslimatla ilgili herhangi bir hizmeti önceden haber vermeksizin değiştirme hakkına sahiptir. satıcı için temas noktası. Sağlayıcının iletişim bilgilerini güncellemeyi planlaması durumunda, aynı şey temas bilgilerinin değişim tarihinden yedi (7) gün önce satıcıya bildirilir.',
+        key.vendorHeader2:
+            '2 Üçüncü taraf satıcı hakları, yükümlülükleri ve görevleri:',
+        key.vendorBody2:
+            'Satıcı: \ n \ n2.1, sağlayıcıya sağlayıcıda üzerinde anlaşmaya varıldığı gibi tüm öğelerin “Öğe Listesi” nin bir listesini sağlayacaktır. Web sitesinde görüntülenecek ürün listesi sunulacak. \ N \ n2.2 Satıcı, öğe listesinde herhangi bir değişiklik yapmak istiyorsa, ürün (ler) durumu "beklemede" olarak değiştirilir. Sağlayıcı değişiklikleri gözden geçirecek ve iki (2) iş günü içinde sağlayıcının ürün politikalarına göre değişiklikleri onaylayacak veya onaylamayacaktır. izinler ve onaylar (bu sözleşme kapsamındaki yükümlülüklerini yerine getirmek için gerekli olabilecek) \ n2.4 Sağlayıcıyı ve binicisini (sağlayıcının kendi sürücüsü ve/veya teslimat ortaklarımız, yani TCS, FedEx & DHL) sağlayıcının hizmetleri gerçekleştirmesi için makul bir şekilde gerektirdiği gibi satıcının tesislerine erişim. , siparişin sağlayıcı tarafından verildiği şekilde belirtilen süre içinde tamamlanması şartıyla, sipariş satıcıya sunuldu. Satıcı siparişi ne kabul etmez veya reddederse, sağlayıcı tarafından otomatik olarak reddedilirse. Böyle bir reddetme için, siparişin satıcıya sunulduğu andan itibaren en geç 12 saatten itibaren. Satıcı ve bunu sağlayıcının teslimat kişisine veya müşterisine aktarın (satıcı teslimi durumunda). \ N \ n2.8 Dolaylı müşterilerine sağlanan tüm sipariş edilen ürünlerin hizmeti sağlayıcının hizmetlerine sahip olmasının aynı kalitede olacağından emin olun. satıcı tarafından doğrudan müşterilerine sağlanır. \ n \ n2.9 satıcı: \ n \ n2.9.1 şunları kabul eder, kabul eder ve üstlenir: satıcı, ulaşan/ve veya en iyi tarihlerini aşan öğeleri teslim etmeyecektir. Üretici tarafından ambalaj üzerine basılmıştır. \ n \ n2.9.2 Satıcı, öğenin üreticisi tarafından ambalaja yazdırıldığı gibi, son kullanma/en iyi tarihi değiştirmeyecek, değiştirmeyecek, değiştirmeyecek ve/veya en iyi tarihi kaldırmayacaktır. \ N \. n2.9.3 Madde 2.9.1\'in ihlali durumunda, satıcı, satıcı tarafından teslim edilen süresi dolmuş öğeleri tüketme/kullanma sonucu müşteri tarafından geliştirilen sağlık koşullarından sorumlu ve sorumlu olacaktır ve sorumlu tutulacaktır. Müşterinin dava dahil tüm eylemleri. Herhangi bir sonuçta elde edilen etkiler. \ n2.11, bir ürünün kullanılamaması durumunda platformdaki satıcı kontrol panelindeki hisse senedini hemen güncelleyin.',
+        key.vendorHeader3: '2.12 Fiyatlar:',
+        key.vendorBody3:
+            '2.12.1 Tedarikçi, sağlayıcıya sunulan fiyatların, platformun siparişlerini verirken müşterilere sunulan gerçek zamanlı fiyatlarla aynı olduğunu garanti eder. Platform aracılığıyla sipariş edilen ürünlerden herhangi biri, sağlayıcıya fiyat azaltma, promosyonlar veya indirimler, ilgili geçerli tarih ve bunun süresini belirten en az yedi (7) gün önceden bildirecektir. \ N \ n2.13. Tedarikçinin, sağlayıcının dağıtım sistemini saygılı ve medeni bir şekilde kullanması durumunda, kötü niyetli dil, küfürlü davranış, taciz, saldırı ve batarya kullanımının yasaklanması ile sınırlı olmayan saygılı ve medeni bir şekilde kullanırlarsa. Bu konuda satıcıya ve personeline eğitim verilecektir. Bu maddenin ihlali, bu Sözleşmenin ihlali anlamına gelir. \ N \ n2.14 Satıcı, sağlayıcı tarafından verilen elektronik kuponları, sipariş verilirken kullanılması için müşterilere verilen elektronik kuponları kabul etmeyi kabul eder. Bu tür tüm bu kuponların ödenmesi, satıcının kayıtlı banka hesabında aylık/haftalık faturada sağlayıcı tarafından geri ödenecektir. ve iş benzeri bir şekilde, yerleşik endüstri standartları, uygulamalar ve ilkeler dahilinde ve burada belirtilen süreler içinde. Tedarikçinin sağlanan bilgileri güncellemeyi planlaması durumunda, satıcı, iletişim bilgilerindeki geçerlilik tarihinden yedi (7) gün önce sağlayıcıya yedi (7) gün önce bilgilendirecektir.',
+        key.vendorHeader4: '3. Müşteri Kurtarma Ücreti - Zararlar/Ceza:',
+        key.vendorBody4:
+            '3.1 Satıcı, sağlayıcının Pakistan\'da müşterilerine rahatlık, güvenilirlik ve kalite sağlamayı amaçlayan saygın bir şirket olduğunu kabul ediyor. Sağlayıcının sistemleri ve operasyonları büyük ölçüde müşteri deneyimine ve geri bildirimlere bağlı olduğundan, satıcı, tedarikçinin sağlayıcının operasyonel standartlarını gözlemleyememesi veya bunlara uymaması durumunda, sağlayıcının sağlayıcıya olacağı gibi ödeyeceğini onaylar ve kabul eder. Tedarikçi hasar olarak sağlayıcı tarafından belirlenir (“Müşteri Kurtarma Ücreti”). Yukarıda belirtilen müşteri kurtarma ücreti, sağlayıcının, sağlayıcının bu tür gözlem olmaması ve/veya bu tür operasyonel standartlara uyulmaması gerektiği düşünülen adımları atma maliyetleri ve masrafları için zarar talep etme hakkını önyargılamaz. \ N \ n3.2 Satıcı, Madde 3 hükümlerini okuduğunu, anladığını ve kabul ettiğini kabul eder ve ayrıca, satıcıya verilmesi şartıyla, sağlayıcı tarafından askıya alma bildirimine kadar uygulanabileceğini kabul eder. En az yedi (7) günlük yazılı bildirim. \ n \ n3.3 Bir müşteri tarafından sağlayıcı tarafından teslim edilen siparişle ilgili olarak alınan geri bildirimler, sağlayıcı tarafından gerçekleştirilen bir denetim olarak değerlendirilir ve satıcı bu tür herhangi bir sonucu olmadan kabul edecektir. yarışma. Ayrıca, tasfiye edilen hasarların ödenmesine rağmen, sağlayıcı, ihlallerle ilgili olarak tüm haklarını ayırt edecektir.',
+        key.vendorHeader5: '4 süspansiyon:',
+        key.vendorBody5:
+            '4.1 Sağlayıcı, satıcıyı ceza almadan platformdan geçici olarak askıya alma hakkına sahip olacaktır. , satıcı bu sözleşmenin herhangi bir dönemini ihlal ediyor veya sağlayıcının işini olumsuz etkiliyor olabilir. tamamen uygulanabilir.',
+        key.vendorHeader6: '5 Üçüncü Taraf Taleplerinden Tazminat:',
+        key.vendorBody6:
+            '5.1 Her iki taraf da pahasına, diğer tarafa, yöneticilerine, memurlarına veya acentelerine (toplu olarak “tazminatlar”) karşı getirilen üçüncü taraf taleplerinden herhangi birini savunacak ve aşağıdakileri tazmin edecek: \ n \ n5.1.1 eğer doğruysa, bu anlaşmanın bir taraf, çalışanları, temsilcileri veya temsilcileri tarafından bir ihlali oluşturur. her iki tarafın bu anlaşmadan kaynaklanan yükümlülükleri ile ilgili; veya her iki tarafın çalışanlarını, temsilcilerini veya temsilcilerini ihmalden, eylemlerden veya harekete geçme başarısızlıklarından kaynaklanan. herhangi bir iddiaya atfedilebilen herhangi bir kişi tarafından yapılan ücretler (makul yasal ücretler dahil).',
+        key.vendorHeader7: '6 Ücret, Ödeme ve Fon Toplama:',
+        key.vendorBody7:
+            '6.1 Satıcı, sağlayıcı yetkilisine, çevrimiçi veya nakit olarak müşteriler tarafından ödenen satıcının adına ve hesap için herhangi bir fon alma yetkisi verir. \ N \ n6.2 Nakit ödeme durumunda Müşteri Teslimatta, sağlayıcı nakit ödemeyi tahsil etmek ve diğer tarafla mutabakat etmekten sorumludur. 6. \ n \ n6.3 Çevrimiçi ödeme durumunda, sağlayıcı para toplayacak ve uzlaşacaktır. Madde 6. \ n \ n6.4 Taraflar, üretilen gelirin, komisyon ücretinin ve teslimat ücretinin, bu Sözleşmede kararlaştırılan tutarda hesaplanacağını ve ödeneceğini kabul eder ve kabul eder. veya bu Sözleşmede öngörülen durumlar dışında, taraflar arasında veya müşterilere yönelik ücretler uygulanır. Satıcı, özellikle varsa, sağlayıcının üretilen gelire karşı ajans/toplayıcı ücretini başlatabileceğini kabul eder. Sipariş teslimat zamanı.',
+        key.vendorHeader8:
+            '6.6 Faturalandırma ve Ödemeler - Sağlayıcı Teslimat:',
+        key.vendorBody8:
+            '6.6.1 Sağlayıcı, kredi ile ilgili tüm siparişleri alacak ve faturayı fatura eder (“sipariş bildirimi”) Satıcıya e -posta yoluyla iki ayda bir. Komisyonların ve yürürlükteki tüm vergilerin haftalık olarak satıcının kayıtlı banka hesabına düşmesi. N6.6.4 Banka Servis Ücreti _bank_% \'e göre, çevrimiçi ödemelerde alınan tüm siparişlere karşı satıcıya tahsil edilecektir.',
+        key.vendorHeader9: '6.7 Çevrimiçi Sipariş ve Kurumsal Siparişler:',
+        key.vendorBody9:
+            '6.7.1 Tüm çevrimiçi ödemeler düzenli sipariş olarak devredilecek ve ele alınacak ve satıcıya ödenecektir. Satıcı tarafından sağlayıcıya (“hasarların bildirimi”). Nesne Yazılı olarak, ilgili sipariş beyanının verilen tarihinin beş (5) iş günü içinde veya hasarların bildirilmesine ilişkin iş günü, herhangi bir destekleyici belge de dahil olmak üzere temyiz nedenlerini açıkça belirtmelidir. \ n \ n6.9.2 Sağlayıcı, Üç (3) iş günü içinde, satıcının itirazından haberdar olmaktan ve: \ n \ ni. Kabul edilirse, sağlayıcı sipariş ifadesini veya zarar bildirimini buna göre ayarlayacaktır. \ N \ nii. Sağlayıcı satıcı ile aynı fikirde değilse, satıcıyı bu konuda bilgilendirir ve taraflar, bir müdür veya tarafların her biri arasındaki müzakereler yoluyla bu anlaşmadan veya bu sözleşmeden kaynaklanan herhangi bir anlaşmazlığı veya iddiayı çözmek için iyi niyetle çalışacaktır. İlgili anlaşmazlığı çözme yetkisi ile. \ n \ n6.9.3 İzin, temyiz başvurusunun alınmasından sonraki on dört (14) gün içinde dostane bir şekilde çözülemezse, her iki tarafın sırasıyla 19 ve/veya 24. maddelerin hükümlerini uygulama hakkına sahip olacaktır.',
+        key.vendorHeader10: '7 Hizmetlerin Başlaması:',
+        key.vendorBody10:
+            'Satıcı, Platformda yalnızca Sağlayıcı tarafından talep edilen tüm bilgilerin alındıktan sonra, ancak bunlarla sınırlı olmamak üzere listelenir; Bir logo ve onaylanmış ürün görüntüleri. Sağlayıcı, bu Sözleşmeye ilhak edilecek olan bildirimin ilhak edileceği hizmetlerin başlangıç ​​tarihi (“Başlangıç ​​Tarihi”) satıcıyı bilgilendirir.',
+        key.vendorHeader11: '8. Politika ve prosedür uyumluluğu:',
+        key.vendorBody11:
+            '8.1 Satıcı, sağlayıcının şikayet (kalite ve/veya teslimat/pikap şikayetleri) oranı durumunda satıcının hizmetlerini veya bildirimde bulunmadan, satıcının işine gelen toplam siparişlerin% 2\'sini aşabileceğini anlar ve bu da yeniden sipariş oranına neden olabilecek toplam siparişlerin% 2\'sini aşar \ n \ n8.2 Satıcı, sipariş (ler) i reddedildikten sonra, çıkışının sağlayıcının takdirine bağlı olarak platformdan devre dışı bırakılacağını kabul eder. \ n \ n8.3 Satıcı indirim sağlayacak Müşterinin gerçek şikayeti durumunda uygulanabilir olan müşterilere kuponlar. \ N \ n8.4 Müşteri şikayetleri durumunda, satıcı hiçbir durumda sağlayıcıya herhangi bir şekilde şikayet etmeyecek veya suçlamayacaktır. \ N \ n8.5 Satıcı, sağlayıcının teslimat kişisine herhangi bir indirim/komisyon ödememeyi kabul eder.',
+        key.vendorHeader12: '9. Garantiler:',
+        key.vendorBody12:
+            'Satıcı, fikri mülkiyetinin satıcısının kullanımının, üçüncü tarafın herhangi bir fikri mülkiyet hakları ile ihlal etmeyeceğini, kötüye kullanılmayacağını veya başka bir şekilde çatışmayacağını temsil eder, garanti eder ve taahhüt eder. Satıcı, yukarıda belirtilen 5. maddeye göre, üçüncü taraf tarafından kendilerine verilen IP hak ihlali taleplerine karşı sağlayıcıyı tam olarak tazmin edecektir.',
+        key.vendorHeader13: '10. Gizlilik:',
+        key.vendorBody13:
+            '10.1 Bir parti ("alıcı taraf") sıkı bir güvende, gizli nitelikte olan ve diğer taraf tarafından alıcı tarafa açıklanan tüm teknik veya ticari bilgi, özellikler, icatlar, süreçler veya girişimler (" Tarafın ifşa edilmesi ") ve ifşa eden tarafın işine, alıcı tarafın elde edebileceği ürünleri ve hizmetleri ile ilgili diğer gizli bilgiler. Bu Sözleşme kapsamındaki alıcı tarafın yükümlülüklerini yerine getirmek amacıyla bilmesi gereken çalışanlar, temsilciler ve taşeronlar. Müşterilere herhangi bir bilgiyi ifşa edin. \ n \ n10.4 Detayların yasalar, herhangi bir hükümet veya düzenleyici makam veya herhangi bir devlet kurumuna veya düzenleyici otoriteye yetkili bir yargı mahkemesi tarafından açıklanması gerektiğinde, aynı diğer taraf önceden yazılı olarak.',
+        key.vendorHeader14: '11. Ortaklık yok',
+        key.vendorBody14:
+            'Bu Sözleşmede hiçbir şey, taraflar arasında herhangi bir kurumsal ortaklık veya ortak girişim oluşturmaya yönelik değildir veya kabul edilecektir.',
+        key.vendorHeader15: '12. Değişiklikler:',
+        key.vendorBody15:
+            '12.1 Sağlayıcı, sağlayıcının takdirine göre herhangi bir zamanda başarı ücretini artırma hakkına sahiptir. Aynı şey satıcıya resmi bir e -posta ve/veya satıcı kontrol paneli aracılığıyla bilgilendirilecektir. \ N \ n12.2 Sağlayıcı, kendisi için herhangi bir taahhüt, yükümlülük ve sorumluluk değiştirme, kaldırma, düzeltme ve/veya ekleme hakkına sahip olacaktır. ve/veya satıcının bir kısmı bir zeyil ile. Aynı şey satıcıya resmi bir e -posta yoluyla ve/veya satıcı kontrol paneli aracılığıyla bilgilendirilecektir. \ N \ n12.3 Bu tür değişikliklerle aynı fikirde olmaması durumunda, bu Sözleşmeyi uygun olarak feshetme hakkına sahip olacaktır. Madde 18. \ n \ n12.4 hükümleri ile, tüm değişikliklerin, sağlayıcı tarafından bildirilen tarihten itibaren 12.2.',
+        key.vendorHeader16: '13. Kuvvet Majeure:',
+        key.vendorBody16:
+            'Bu Anlaşmanın amaçları doğrultusunda, "Kuvvet Majeure Etkinliği", Tanrı, Savaş, İsyan, Sivil Kargaşa veya terörist eylemlerin eylemleri dahil ancak bunlarla sınırlı olmamak üzere, her iki tarafın makul kontrolünün ötesinde bir olay anlamına gelir. Her iki taraf da, bir kuvvet Majeure olayı sonucunda bu Sözleşme kapsamındaki yükümlülüklerini yerine getirme gecikmesi veya başarısızlığının doğrudan bir sonucu olarak diğer tarafa karşı sorumlu olmayacaktır.',
+        key.vendorHeader17: '14. Üçüncü Taraflar:',
+        key.vendorBody17:
+            'Bu Sözleşmeye taraf olmayan bir kişinin şartlarını uygulama hakkı yoktur.',
+        key.vendorHeader18: '15. Bildirimler:',
+        key.vendorBody18:
+            '15.1 Bu Sözleşme kapsamındaki tüm bildirimler yazılı olarak, bu Sözleşmeye göre kararlaştırılan iletişim kişisine/adresine yönelik olacak ve aynı gün satıcı kayıt süreci sırasında üzerinde anlaşmaya varıldığında usulüne uygun olarak verilecektir.',
+        key.vendorHeader19: '16. Ödev:',
+        key.vendorBody19:
+            '16.1 Sağlayıcı herhangi bir zamanda bu Sözleşme kapsamındaki haklarının tamamını veya herhangi biriyle herhangi bir şekilde herhangi bir şekilde atayabilir, transfer, ipotek, ücret, alt sözleşme veya anlaşma yapabilir ve bu Sözleşme kapsamındaki yükümlülüklerinin herhangi birine veya tümünü alt sözleşmeye veya devretebilir veya devretebilir herhangi bir üçüncü tarafa veya acente. Bu Sözleşme kapsamındaki hak veya yükümlülüklerin herhangi biriyle veya tamamı ile başka bir şekilde ele alın.',
+        key.vendorHeader20: '17. Feragat:',
+        key.vendorBody20:
+            'Bu Sözleşme veya Yasa kapsamındaki herhangi bir haktan feragat ancak yalnızca yazılısa ve sonraki herhangi bir ihlal veya temerrütten feragat olarak kabul edilmeyecektir. Bu Sözleşme veya yasa uyarınca herhangi bir hak veya hukuk yolunun uygulanmasında başarısızlık, herhangi bir hak veya çare feragatini oluşturmaz, ne de bu veya başka bir hak ya da çare daha fazla uygulamasını önlemez veya kısıtlamayacaktır.',
+        key.vendorHeader21: '18. Terim ve fesih:',
+        key.vendorBody21:
+            '18.1 Bu Anlaşma Başlangıç ​​Tarihinde başlayacaktır ve bu Madde 18.1\'e göre daha önce feshedilmedikçe belirsiz bir süre için devam edecektir. Bu Anlaşma feshedilebilir: \ n \ n (a) her iki taraftan en az beş (5) gün önceden yazılı bildirimde bulunarak kolaylık sağlamak için. Parti Bu Sözleşmenin diğer taraf tarafından önemli ihlali durumunda. \ N \ n (c) Taraflar arasında karşılıklı yazılı anlaşma ile herhangi bir zamanda. Hemen yürürlükte ve herhangi bir yükümlülük olmaksızın, satıcının ihlali bildirimden maksimum iki (2) iş günü içinde ihlal edemediği Bölüm 2.12 ve 2.13 ihlali durumunda.',
+        key.vendorHeader22: '19. Sorumluluk Sınırlaması:',
+        key.vendorBody22:
+            '19.1 Bu Sözleşmedeki hiçbir şey, tarafın ihmalinden kaynaklanan ölüm veya kişisel yaralanma sorumluluğunu veya çalışanlarının, temsilcilerinin veya taşeronlarının ihmalini sınırlamayacak veya hariç tutamaz. diğer tarafa, sözleşmede, haksız fiil (ihmal dahil), yasal görevin ihlali veya herhangi bir kâr kaybı veya bu Sözleşme kapsamında veya bu Sözleşme ile bağlantılı olarak ortaya çıkan dolaylı veya sonuçsal kayıp veya zararlar için. .3 Bu madde, bu Anlaşmanın feshinden kurtulacaktır.',
+        key.vendorHeader23: '20. Çatışan Terimler:',
+        key.vendorBody23:
+            'Bu Koşullardan herhangi birinin satıcı kayıt formunda belirtilen şartlarla çeliştiği ölçüde (sınırlama olmaksızın, satıcı kayıt formunda ayrıntılı olarak ayrıntılı olarak açıklanan özel koşullar dahil), satıcı kayıt formunun şartları geçerli olacaktır.',
+        key.vendorHeader25: '21. Tüm Sözleşme:',
+        key.vendorBody25:
+            'Bu Koşullardan herhangi birinin satıcı kayıt formunda belirtilen şartlarla çeliştiği ölçüde (sınırlama olmaksızın, satıcı kayıt formunda ayrıntılı olarak ayrıntılı olarak açıklanan özel koşullar dahil), satıcı kayıt formunun şartları geçerli olacaktır.',
+        key.vendorHeader26: '22. Kesilebilirlik:',
+        key.vendorBody26:
+            'Bu Sözleşmenin herhangi bir hükmü veya bir kısım, geçersiz, yasadışı veya uygulanamaz hale gelirse, geçerli, yasal ve uygulanabilir hale getirmek için gereken asgari ölçüde değiştirilecektir. Bu tür bir değişiklik mümkün değilse, ilgili hükmün veya kısmen sağlama silinecektir. Bu madde kapsamında bir hükmün veya kısmen tedarikte yapılan herhangi bir değişiklik veya silinme, bu Anlaşmanın geri kalanının geçerliliğini ve uygulanabilirliğini etkilemeyecektir.',
+        key.vendorHeader27: '23. Yönetim yasası ve yargı yetkisi:',
+        key.vendorBody27:
+            '23.1 Bu Sözleşme ve kendisinden veya onun konusu veya oluşumundan (sözleşme dışı anlaşmazlıklar veya talepler dahil) ortaya çıkan veya bu konuda ortaya çıkan herhangi bir anlaşmazlık veya talep, Pakistan yasalarına göre yönetilecek ve yorumlanacaktır. \ N \ n23.2 Her bir taraf, bu anlaşmadan kaynaklanan herhangi bir anlaşmazlığın, bu anlaşmadan veya konuyla bağlantılı olarak ortaya çıkan herhangi bir anlaşmazlığı veya talepte bulunacak olan Pakistan mahkemelerinin münhasır olmayan yargı yetkisine tabi olacağını kabul eder. veya oluşum (sözleşmez uyuşmazlıklar veya talepler dahil). Bu Anlaşmanın herhangi bir mahkeme işlemi veya diğer herhangi bir uyuşmazlık çözümü mekanizması sırasında devam edecektir. Tedarikçi tarafından ödenmesi veya ödenmesi gereken veya ödenecek herhangi bir ödeme, bu tür bir ödemenin bu tür anlaşmazlıkların konusu olması dışında, bekleyen bir mahkeme anlaşmazlığı veya başka bir uyuşmazlık çözümü mekanizması nedeniyle sağlayıcı tarafından devredilecek tutarın saklanması gerekir.',
+        key.or: 'veya',
+        key.becomeAVendor: 'Satıcı ol',
+        key.joinOurMarketplace:
+            'Pazarımıza katılın ve ürünlerinizi bugün satmaya başlayın!',
+        key.seamlessShopping:
+            'Kesintisiz alışveriş deneyimi için ayrıntıları girin',
+        key.createAnAccount: 'Bir hesap oluşturun',
+        key.getOnboardUser: 'Kullanım olarak yer almak',
+        key.phoneNumber: 'Telefon numarası',
+        key.termsAndConditionsCheckbox:
+            'Hesabınızı oluşturarak Şartlar ve Koşullarımızı kabul etmelisiniz.',
+        key.frontSide: 'Ön taraf',
+        key.backSide: 'Arka taraf',
+        key.legalDocument: 'Yasal belge',
+        key.shopLogoImage: 'Mağaza Logosu/Resim',
+        key.business: 'İşletme',
+        key.information: 'Bilgi',
+        key.vendorAccountCreation: 'Satıcı hesabı oluşturma',
+        key.profileStatus: 'Profil Durumu',
+        key.shopName: 'Mağaza adı',
+        key.enterShopName: 'Mağaza İsmini Girin',
+        key.shopAddress: 'Mağaza adresi',
+        key.enterShopAddress: 'Mağaza Adresine Girin',
+        key.ifAvailable: 'mümkün ise',
+        key.shopNumber: 'Dükkan numarası',
+        key.lessThanMb: '2MB\'den az',
+        key.chooseFile: 'Dosya seçin',
+        key.noFileChosen: 'Dosya seçili değil',
+        key.waitForVerification: 'Doğrulama için bekle',
+        key.vendor: 'SATICI',
+        key.submitted: 'gönderilen',
+        key.lastStep: 'Son adım',
+        key.availAmazingDiscount: 'İnanılmaz İndirimler',
+        key.descriptionOfDiscount:
+            'Tüm ürünlerimizde% 30 indirim ile büyük tasarruf edin!',
+        key.celebrateFreedomAndSavings: 'Özgürlük ve tasarrufları kutlayın',
+        key.descriptionOfFreedomAndSavings:
+            'Bağımsızlık Günü için özel teklifler!',
+        key.boostYourBusiness: 'Ismmart ile işinizi artırın',
+        key.descriptionOfBoostYourBusiness:
+            'Satıcılar için sıfır platform kayıt ücreti!',
+        key.shopCountry: 'Dükkan ülkesi',
+        key.shopCity: 'Mağaza Şehri',
+        key.vendorCNIC: 'Satıcı cnic',
+        key.shopCategory: 'Mağaza kategorisi',
+        key.yourShopCategory: 'Mağazanız kategoriniz',
+        key.shopDescription: 'Mağaza Tanımı',
+        key.enterShopDescription: 'Mağaza Tanımına Girin',
+        key.shopImage: 'Mağaza görüntüsü',
+        key.shopCoverImage: 'Mağaza örtüsü görüntüsü',
+        key.enterBankName: 'Banka İsmini Girin',
+        key.enterAccountTitle: 'Hesap başlığını girin',
+        key.accountTitle: 'Banka Hesabı Başlığı',
+        key.enterAccountNumberOrIban: 'Hesap Numarası / Iban girin',
+        key.cityReq: 'Şehir seç',
+        key.countryReq: 'Ülke Seçin',
+        key.emailIsRequired: 'Email gereklidir',
+        key.passwordIsRequired: 'Şifre gereklidir',
+        key.passwordConfirmIsRequired: 'Şifre Onayı Gerekiyor',
+        key.FirstNameReq: 'Adı gerekli',
+        key.LastNameReq: 'Soyadı gerekli',
+        key.incorrectAddress: 'Doğru adresi girin',
+        key.incorrectNTN: 'Doğru NTN girin',
+        key.incorrectCNIC: 'Doğru CNICE girin',
+        key.cnicReq: 'CNIC gereklidir',
+        key.categoryReq: 'Kategori seç',
+        key.incorrectBranchCode: 'Doğru Şube Kodunu Girin',
+        key.shopDescReq: 'Mağaza Tanımı gereklidir',
+        key.frontSideReq: 'CNIC ön taraf görüntüsü gereklidir',
+        key.backSideReq: 'CNIC Arka Yan Görüntü gereklidir',
+        key.chequeImageReq: 'Görüntünün gerekli olduğunu kontrol edin',
+        key.shopLogoImageReq: 'Mağaza logosu/resim gereklidir',
+        key.helpCenter: 'Yardım Merkezi',
+        key.shopAddressReq: 'Mağaza adresi gerekli',
+        key.shopNameReq: 'Mağaza adı gerekli',
+        key.getOnboard: 'Gemiye Alın',
+        key.createYourAccount: 'hesabını oluştur',
+        key.continueWithSameEmail: 'Aynı e -postayla devam edin',
+        key.continueWithDiffEmail: 'Farklı e -postayla',
+        key.chequeImageNote:
+            'Bu kontrol görüntüsü, yukarıda belirttiğinizle aynı banka ayrıntılarına sahip olmalıdır',
+        key.enterCNIC: 'CNICE GİRİN',
+        key.enterBranchCode: 'Şube Kodunu Girin',
+        key.maxAddressLimitMsg:
+            'Maksimum adres sınırı ulaşıldı. Lütfen devam etmek için adresi güncelleyin/silin',
+        key.forgotPasswordDesc:
+            'OTP kodunda bir e -posta almak için e -postanızı girin.',
+        key.emailVerification: 'Eposta Doğrulama',
+        key.serverUnableToHandle: 'Sunucu isteği işleyemiyor',
+        key.serverTakingTooLong: 'Sunucu yanıt vermek için çok uzun sürüyor',
+        key.noInternetConnection: 'İnternet bağlantısı yok',
+        key.questions: 'Soru',
+        key.updateQuestion: 'Güncelleme Sorusu',
+        key.deleteQuestion: 'Soru Sil',
+        key.deleteQuestionDialogDesc:
+            'Soruyu silmek istediğinden emin misiniz?',
+        key.question: 'Soru',
+        key.addAnswer: 'Cevap Ekle',
+        key.viewProduct: 'Ürünü görüntüle',
+        key.answer: 'Cevap',
+        key.updateAnswer: 'Cevap Güncelle',
+        key.deleteAnswer: 'Cevabı Sil',
+        key.addQuestion: 'Soru Ekle',
+        key.updateProfile: 'Hesabı güncelle',
+        key.pickImage: 'Resim Seçin',
+        key.currentPassword: 'Mevcut şifre gerekli',
+        key.updateShippingAdd: 'Gönderim Adresini Güncelle',
+        key.addShippingAdd: 'Nakliye Adresi Ekle',
       };
 }
