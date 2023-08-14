@@ -660,6 +660,12 @@ const errorTitle = "error",
 const plzSelectSubCategory = "plzSelectSubCategory",
     someThingWentWrong = "someThingWentWrong";
 
+/// Alert Message
+const updateInfoAlertMsg = 'updateInfoAlertDetails',
+    skip = 'skip',
+    updateInfoToProceed = 'updateInfoToProceed',
+    updateInfo = "updateInfo";
+
 /// AboutUS Text
 
 const aboutHeader1 = "key.aboutHeader1",

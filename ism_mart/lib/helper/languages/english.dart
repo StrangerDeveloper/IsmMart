@@ -652,6 +652,12 @@ class English {
         key.plzSelectSubCategory: 'Plz select Sub Category',
         key.someThingWentWrong: 'Something went wrong',
         key.delProdMsg: 'Are you sure to Delete this?',
+        key.updateInfoToProceed: 'Update information to proceed',
+
+        ///Alert Message
+        key.updateInfo: 'Update Information',
+        key.updateInfoAlertMsg: 'Our terms and conditions have been updated. To ensure a seamless business relationship, kindly tap on proceed',
+        key.skip: 'Skip',
 
         ///About US
         key.aboutHeader1: 'What is ISMMART?',
