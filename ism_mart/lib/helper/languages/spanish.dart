@@ -549,5 +549,197 @@ class Spanish {
             'Los miembros premium tendrán menos acceso a todas las empresas en todo el mundo, tanto como vendedor como comprador, ya que Ismmart garantizará y verificará directamente a dichos miembros y cualquier oferta que hagan.',
         key.memPlan3Desc9:
             'Como todos los miembros premium son examinados y se verifican a través del proceso de verificación ISMMART, por lo que todos estos miembros pueden preocuparse menos comercio entre sí, en cualquier parte del mundo.',
+        key.vendorHeader0: '0',
+        key.vendorBody0:
+            'El proveedor (ISMMART Group of Industries Pvt Ltd. Pakistán) y el proveedor (definido como proveedores de terceros) se denominará colectivamente "Partes" e individualmente como "parte", según sea el caso. El proveedor actúa como un contratista independiente del proveedor, quien, a través de este Acuerdo, otorga a la autoridad completa del proveedor para concluir y negociar contratos con los clientes en nombre y para la cuenta del proveedor, así como para las ofertas del proveedor, realizadas a través de Plataforma en línea del proveedor www.ismmart.com ("Sitio web") y aplicaciones móviles (cuando corresponda). Se entiende que el proveedor no actúa en nombre de los clientes. Los términos y condiciones generales con los clientes que se encuentran en el sitio web. \ n \ n. el cliente. \ n \ n. En el caso de cualquier cambio, el mismo también se comunicará a la otra parte.',
+        key.vendorHeader1: '1. Derechos, obligaciones y deberes del proveedor:',
+        key.vendorBody1:
+            '1.1: El proveedor transferirá la (s) orden (s) a través del tablero del proveedor o la llamada telefónica (solo en caso de que el sitio web no funcione) a la (s) salida (s) respectiva (s). \ N \ n1.2: el proveedor transmitirá un Pedido realizado por un cliente en la plataforma al proveedor a través del sitio web o a través de la llamada (cuando el sitio web no funciona) y acepte el pago del cliente en línea o en efectivo. \ n \ n1.3: en caso de que el El proveedor que realiza los servicios de entrega, tiene derecho a cobrar al cliente una tarifa de entrega ("Tarifa de entrega de ISMMART") y determinar un valor mínimo de pedido, a su propia discreción; Para realizar los servicios, el proveedor debe: \ n \ t1.3.1 asegurarse de que el tiempo de entrega establecido en el sitio web cumpla con el tiempo de entrega realmente requerido. El cliente esperaría para ese tipo de artículo, siempre que el proveedor cumpla con la obligación en la cláusula 2.7. \ n \ t1.3.3 La transferencia de ingresos al proveedor generado para dichos pedidos menos la tarifa/comisión de la agencia es según la cláusula 6 de estos términos . \ n \ t1.3.4 Informe al proveedor por escrito de cualquier cambio implementado en los procedimientos por el proveedor al menos dos (2) días antes de que se realice el cambio previsto, y el proveedor deberá cumplir con todos estos cambios. n \ t1.3.5 tiene derecho a alterar, a su exclusivo criterio, cualquier servicio relacionado con la entrega, incluidas las áreas de entrega y el tiempo operativo, sin previo aviso. punto de contacto para el proveedor. En el caso de que el proveedor tenga la intención de actualizar la información de contacto, la misma se notificará al proveedor siete (7) días antes de la fecha de vigencia de cambio de cambio.',
+        key.vendorHeader2:
+            '2 Derechos, obligaciones y deberes del proveedor de terceros:',
+        key.vendorBody2:
+            'El proveedor deberá: \ n \ n2.1 proporcionar al proveedor una lista de todos los elementos "lista de elementos" según lo acordado con el proveedor. Lista de elementos que se pondrá a disposición para mostrar en el sitio web. \ N \ n2.2 Si el proveedor desea realizar algún cambio en la lista de artículos, el estado del producto (s) se cambiará a "pendiente". El proveedor revisará los cambios y aprobará o desapruebará los cambios de acuerdo con las políticas de producto del proveedor dentro de dos (2) días hábiles. \ N \ n2.3 cumplir con todas las leyes y regulaciones locales y obtener y mantener todas las licencias necesarias, Permisos y consentimientos (que pueden ser requeridos para cumplir con sus obligaciones bajo este Acuerdo) \ N2.4 proporcionan al proveedor y a sus pilotos (definidos como el propio piloto del proveedor y/o nuestros socios de entrega, es decir, TCS, FedEx & Dhl) acceso a las instalaciones del proveedor como el proveedor requerido razonablemente para realizar los servicios. \ N \ n2.5 Proporcione al proveedor una aceptación o rechazo claros de orden (s), a más tardar 12 horas desde el tiempo. , el pedido se puso a disposición del proveedor, siempre que el pedido debe completarse dentro del período de tiempo especificado según lo dado por el proveedor. Si el proveedor no acepta ni rechaza la orden, el proveedor lo rechazará automáticamente. Para tal rechazo, a más tardar 12 horas desde el momento en que el pedido se puso a disposición del proveedor. Proveedor, y transferirlo a la persona de entrega del proveedor o al cliente (en el caso de la entrega del proveedor). \ N \ n2.8 Asegúrese de que todos los artículos ordenados proporcionados a sus clientes indirectos que aprovechen los servicios del proveedor serán de la misma calidad que proporcionado por el proveedor a sus clientes directos. \ n \ n2.9 El proveedor acepta, reconoce y emprende que: \ n \ n2.9.1 El proveedor no entregará elementos que han alcanzado/o cruzado su fecha de vencimiento/mejor antes que Impreso en el embalaje del fabricante. \ n \ n2.9.2 El proveedor no alterará, cambiará, enmendará y/o elimina la fecha de vencimiento/mejor antes que imprimida en el empaque del fabricante del artículo. \ n \ \ N2.9.3 En caso de incumplimiento de la cláusula 2.9.1, el proveedor será responsable y responsable de cualquier condición de salud desarrollada por el cliente como resultado de consumir/usar artículos caducados según lo entregado por el proveedor y será responsable de Todos los actos del cliente, incluidos los litigios. \ n \ n2.9.4 ser el único responsable y responsable de todas y cada una de las consultas, reclamos y/o quejas del cliente con respecto al contenido, artículos faltantes, artículos incorrectos y calidad de los artículos y los artículos y Cualquier efecto consecuente de los mismos. \ N2.11 Actualice inmediatamente el stock en el tablero de proveedores en la plataforma en caso de que no sea disponible de un producto.',
+        key.vendorHeader3: '2.12 Precios:',
+        key.vendorBody3:
+            '2.12.1 El proveedor por la presente garantiza que los precios disponibles para el proveedor son idénticos a los precios en tiempo real ofrecidos a los clientes al realizar pedidos por la plataforma. \ N \ n2.12.2 Cualquiera de los elementos ordenados a través de la plataforma, el proveedor notificará al proveedor con al menos siete (7) días de anticipación indicando el alcance de la reducción de precios, promociones o descuentos, la fecha efectiva respectiva y la duración del mismo. \ n \ n2.13 Trate los corredores del proveedor en caso de que el proveedor use el sistema de entrega del proveedor de una manera respetuosa y civilizada, que incluye, entre otros, la prohibición del uso de lenguaje abusivo, comportamiento abusivo, acoso, asalto y agresión. La capacitación se proporcionará al proveedor y a su personal a este respecto. El incumplimiento de esta cláusula constituirá una violación de este Acuerdo. \ N \ N2.14 El proveedor acepta aceptar cupones electrónicos emitidos por el proveedor a los clientes que se utilizarán mientras se realiza el pago. El proveedor reembolsará el pago de todos estos cupones en la factura mensual/semanal en la cuenta bancaria registrada del proveedor. , y una manera empresarial, dentro de los estándares, prácticas y principios establecidos de la industria, y dentro de los plazos de tiempo establecidos en este documento. En el caso de que el proveedor tenga la intención de actualizar la información proporcionada, el proveedor notificará al proveedor siete (7) días antes de la fecha efectiva del cambio en la información de contacto.',
+        key.vendorHeader4:
+            '3. Cargo de recuperación del cliente: daños/penalización:',
+        key.vendorBody4:
+            '3.1 El proveedor reconoce que el proveedor es una empresa acreditada en Pakistán, que busca proporcionar conveniencia, confiabilidad y calidad a sus clientes. Como los sistemas y operaciones del proveedor dependen en gran medida de la experiencia y la retroalimentación del cliente, el proveedor confirma y acepta con el proveedor que, en caso de que el proveedor no se observe o cumpla con los estándares operativos del proveedor, el proveedor le pagará la suma que sea la suma que sea Determinado por el proveedor como daños liquidados ("cargo de recuperación del cliente"). El cargo de recuperación del cliente mencionado mencionado no perjudicará el derecho del proveedor a reclamar daños por los costos y gastos de tomar las medidas que el proveedor considere necesaria para rectificar dicha no observación y/o incumplimiento de dichos estándares operativos. \ n3.2 El proveedor reconoce que ha leído, entendido y está de acuerdo con las disposiciones de la cláusula 3 y también acepta que la aplicación de las disposiciones de la Cláusula 3 será aplicable hasta que la notificación de la suspensión del proveedor, siempre que el proveedor se le otorgue un proveedor. mínimo de siete (7) días de notificación por escrito. \ n \ n3.3 Cualquier comentario recibido por el proveedor de un cliente en relación con la orden entregada se considerará como una inspección realizada por el proveedor y el proveedor aceptará dicho resultado sin concurso. Además, a pesar del pago de los daños liquidados, el proveedor reservará todos sus derechos en relación con las infracciones.',
+        key.vendorHeader5: '4 suspensión:',
+        key.vendorBody5:
+            '4.1 El proveedor tendrá derecho a suspender temporalmente al proveedor de la plataforma, sin penalización, si: \ n \ n4.1.1 El proveedor no ha podido pagar a las facturas del proveedor que se han vencido. \ N \ n4.1.2 en su opinión razonable , el proveedor está incumpliendo cualquier término de este Acuerdo o puede afectar negativamente los negocios del proveedor. Totalmente aplicable.',
+        key.vendorHeader6: '5 indemnización de reclamos de terceros:',
+        key.vendorBody6:
+            '5.1 Cualquiera de las partes deberá, a su costa, defender cualquiera de los siguientes tipos de reclamos de terceros presentados contra la otra parte, sus directores, oficiales o agentes (colectivamente, "indemnizos") e indemnizan contra: \ n \ n5.1.1 cualquier reclamo que, si es cierto, constituiría una violación de este acuerdo por parte de cualquier parte, sus empleados, agentes o representantes. relacionado con las obligaciones de cualquiera de las partes que surgen de este Acuerdo; o derivado de la negligencia, los actos o las fallas para actuar, de cualquiera de las partes, sus empleados, agentes o representantes. Los honorarios (incluidos los honorarios legales razonables) incurridos por cualquiera de ellos que sean atribuibles a cualquier reclamo.',
+        key.vendorHeader7: '6 tarifas, pago y cobro de fondos:',
+        key.vendorBody7:
+            '6.1 El proveedor otorga a la autoridad del proveedor para recibir fondos en el nombre y para la cuenta, del proveedor pagado por los clientes, ya sea por medios en línea o en efectivo. \ N \ n6.2 en caso de pago en efectivo por parte del pago por el Cliente En la entrega, el proveedor será responsable de recaudar el pago en efectivo y conciliarse con la otra parte de acuerdo con las disposiciones de la cláusula 6. \ n \ n6.3 De acuerdo con las disposiciones de la cláusula 6. \ n \ n6.4 Las partes acuerdan y aceptan que los ingresos generados, la tarifa de la comisión y la tarifa de entrega se calcularán y pagarán en el monto acordado, en este Acuerdo y que no hay otras tarifas o los cargos se aplicarán entre las partes o hacia los clientes, excepto lo dispuesto en este Acuerdo. El proveedor acepta específicamente que, si corresponde, el proveedor puede desencadenar la tarifa de agencia/agregador contra los ingresos generados. el tiempo de entrega de pedidos.',
+        key.vendorHeader8: '6.6 Factura y pagos - Entrega del proveedor:',
+        key.vendorBody8:
+            '6.6.1 El proveedor recopilará todos los pedidos a crédito y facturará ("Declaración de pedido") El proveedor de forma bimensual a través del correo electrónico. \ N \ n6.6.2 El proveedor dentro de los tres (3) días posteriores a deducir las comisiones y todos los impuestos aplicables semanalmente a la cuenta bancaria registrada del proveedor. N6.6.4 Tarifa de servicio bancario Según el _bank_%, se le cobrará al proveedor contra todos los pedidos recibidos en los pagos en línea.',
+        key.vendorHeader9: '6.7 Pedidos en línea y pedidos corporativos:',
+        key.vendorBody9:
+            '6.7.1 Todos los pagos en línea serán transferidos y tratados como pedidos regulares y se pagarán al proveedor. por el proveedor al proveedor ("Notificación de daños"). \ n \ n6.9 El proveedor tendrá derecho a apelar la declaración de orden y la notificación de daños de acuerdo con lo siguiente: \ n \ n6.9.1 El proveedor deberá objeto por escrito dentro de los cinco (5) días hábiles de la fecha de emisión de la declaración de orden correspondiente o notificación de daños y deberá indicar claramente todos los motivos de la apelación, incluida cualquier documentación de apoyo. \ n \ n6.9.2 El proveedor deberá revisar el objeción dentro de los tres (3) días hábiles desde la notificación de la objeción del proveedor y: \ n \ ni. Si se acuerda, el proveedor ajustará la declaración de orden o la notificación de daños en consecuencia. \ N \ nii. Si el proveedor no está de acuerdo con el proveedor, informará al proveedor de tal y las partes intentarán de buena fe resolver cualquier disputa o reclamo que surja de o en relación con este acuerdo a través de negociaciones entre un director o representante autorizado de cada una de las partes con autoridad para resolver la disputa pertinente. \ n \ n6.9.3 Si la disputa no puede resolverse amigablemente dentro de los catorce (14) días posteriores a la recepción de la apelación, cualquiera de las partes tendrá derecho a aplicar las disposiciones de la cláusula 19 y/o 24 respectivamente.',
+        key.vendorHeader10: '7 Comienzo de servicios:',
+        key.vendorBody10:
+            'El proveedor solo se incluirá en la plataforma después de la recepción de toda la información solicitada por el proveedor, incluida, entre otros, la lista de artículos; un logotipo e imágenes aprobadas de productos. El proveedor informará al proveedor, la fecha de inicio de los Servicios ("Fecha de inicio"), qué notificación se anexará a este Acuerdo.',
+        key.vendorHeader11: '8. Cumplimiento de políticas y procedimientos:',
+        key.vendorBody11:
+            '8.1 El proveedor entiende que el proveedor puede suspender los servicios del proveedor con o sin previo aviso en caso de queja (calidad y/o quejas de entrega/recogida) excede que el promedio. \ n \ n8.2 El proveedor acepta que tras el rechazo de orden (s), su salida se desactivará de la plataforma durante una duración según la discreción del proveedor. \ n \ n8.3 El proveedor se asegurará de proporcionar descuento Vales a los clientes cuando corresponda en caso de queja genuina del cliente. \ n \ n8.4 En caso de quejas del cliente, el proveedor no se quejará o incriminará en ningún caso al proveedor de ninguna manera. \ n \ n8.5 El proveedor acepta no pagar ningún descuento/comisión a la persona de entrega del proveedor.',
+        key.vendorHeader12: '9. Garantías:',
+        key.vendorBody12:
+            'El proveedor representa, garantiza y se compromete que el uso del proveedor de su propiedad intelectual no infringirá, mal apropiada o entrará en conflicto con ningún derecho de propiedad intelectual de la tercera parte. El proveedor indemnizará en su totalidad el proveedor contra cualquier reclamo de infracción de derecho IP presentado contra ellos por el tercero según la cláusula 5 indicada anteriormente.',
+        key.vendorHeader13: '10. Confidencialidad:',
+        key.vendorBody13:
+            '10.1 Una parte ("Parte receptora") mantendrá en estricta confianza todos los conocimientos técnicos o comerciales, especificaciones, inventos, procesos o iniciativas de naturaleza confidencial y que la otra parte recepera ha revelado a la parte receptora ("(" Divulgación de la parte "), y cualquier otra información confidencial sobre el negocio de la parte divulgadora, sus productos y servicios que la parte receptora puede obtener. empleados, agentes y subcontratistas que necesiten conocerlo con el fin de descargar las obligaciones de la parte receptora bajo este Acuerdo. divulgar cualquier información a los clientes. \ n \ n10.4 En caso de que los detalles sean revelados por ley, cualquier autoridad gubernamental o reguladora o por un tribunal de jurisdicción competente a cualquier organismo o autoridad reguladora gubernamental, lo mismo se comunicará a La otra parte de antemano por escrito. \ n \ n10.5 Esta cláusula 10 sobrevivirá a la terminación de este Acuerdo.',
+        key.vendorHeader14: '11. Sin asociación',
+        key.vendorBody14:
+            'Nada en este Acuerdo está destinado o se considerará, establecer ninguna asociación corporativa o empresa conjunta entre las partes.',
+        key.vendorHeader15: '12. Enmiendas:',
+        key.vendorBody15:
+            '12.1 El proveedor tendrá derecho a aumentar la tarifa de éxito en cualquier momento según la discreción del proveedor. Lo mismo se informará al proveedor a través de un correo electrónico oficial y/o mediante el tablero de proveedores. y/o parte del proveedor por una forma de un apéndice. Lo mismo se informará al proveedor a través de un correo electrónico oficial y/o a través del tablero de proveedores. Con las disposiciones de la cláusula 18. \ n \ n12.4 se acuerda específicamente que todas las enmiendas serán efectivas entre las partes con efecto a partir de la fecha notificada por el proveedor de acuerdo con la cláusula 12.2.',
+        key.vendorHeader16: '13. Fuerza mayor:',
+        key.vendorBody16:
+            'A los fines de este Acuerdo, el "evento de fuerza mayor" significa un evento más allá del control razonable de cualquiera de las partes, incluidas, entre otros, actos de Dios, guerra, disturbios, conmoción civil o acción terrorista. Ninguna de las partes será responsable ante la otra parte como resultado directo de cualquier retraso o falta de cumplimiento de sus obligaciones bajo este Acuerdo como resultado de un evento de fuerza mayor.',
+        key.vendorHeader17: '14. Terceros:',
+        key.vendorBody17:
+            'Una persona que no es parte de este Acuerdo no tendrá ningún derecho para hacer cumplir sus términos.',
+        key.vendorHeader18: '15. AVISOS:',
+        key.vendorBody18:
+            '15.1 Todos los avisos bajo este Acuerdo serán por escrito, dirigidos a la persona/dirección de contacto acordada según este Acuerdo, y se considere debidamente dada el mismo día cuando se acuerda durante el proceso de registro del proveedor.',
+        key.vendorHeader19: '16. Asignación:',
+        key.vendorBody19:
+            '16.1 El proveedor puede en cualquier momento asignar, transferir, hipotecar, cargar, subcontratar o tratar de cualquier otra manera con todos o cualquiera de sus derechos en virtud de este Acuerdo y puede subcontratar o delegar de cualquier manera o todas sus obligaciones bajo este Acuerdo. a cualquier tercero o agente. \ n \ n16.2 El proveedor no deberá, sin el consentimiento previo por escrito del proveedor, que no será retenido, asignar, transferir, hipotecar, cargos, subcontrataciones o declarar un fideicomiso o tratar de cualquier otra manera con cualquiera o todos sus derechos u obligaciones bajo este Acuerdo.',
+        key.vendorHeader20: '17. Renuncia:',
+        key.vendorBody20:
+            'Una renuncia a cualquier derecho bajo este Acuerdo o Ley solo es efectiva si está por escrito y no se considerará una renuncia a cualquier incumplimiento o incumplimiento posterior. Ninguna falla en el ejercicio de ningún derecho o remedio proporcionado en virtud de este Acuerdo o por ley constituirá una exención de ningún derecho o remedio, ni prevenirá o restringirá su ejercicio adicional de ese o cualquier otro derecho o remedio.',
+        key.vendorHeader21: '18. Término y terminación:',
+        key.vendorBody21:
+            '18.1 Este Acuerdo comenzará en la fecha de inicio y continuará por un período indefinido, a menos que se rescance anteriormente de acuerdo con esta cláusula 18.1. Este acuerdo puede ser rescindido: \ n \ n (a) por cualquiera de las partes por conveniencia dando no menos de cinco (5) días de notificación previa por escrito. \ N \ n (b) con efecto inmediato sobre la disposición de notificación por escrito por cualquiera Parte en caso de incumplimiento material de este acuerdo por parte de la otra parte. \ N \ n (c) en cualquier momento por acuerdo por escrito mutuo entre las partes. \ N \ n18.2 El proveedor tendrá derecho a rescindir este acuerdo, Con efecto inmediato y sin ninguna responsabilidad, en el caso de una violación de la Sección 2.12 y 2.13, donde el proveedor no ha podido remediar la violación dentro de un período máximo de dos (2) días hábiles de notificación.',
+        key.vendorHeader22: '19. Limitación de responsabilidad:',
+        key.vendorBody22:
+            '19.1 Nada en este Acuerdo limitará o excluye la responsabilidad de la parte por la muerte o las lesiones personales causadas por su negligencia, o la negligencia de sus empleados, agentes o subcontratistas. \ N \ n19.2 Sujeto a la cláusula 19.1, ninguna de las partes será responsable a la otra parte, ya sea en contrato, agravio (incluida la negligencia), el incumplimiento del deber legal, o de otra manera, por cualquier pérdida de ganancias, o cualquier pérdida o daños consecuentes que surjan bajo o en relación con este Acuerdo. \ N \ N19 .3 Esta cláusula sobrevivirá a la terminación de este Acuerdo.',
+        key.vendorHeader23: '20. Términos conflictivos:',
+        key.vendorBody23:
+            'En la medida en que cualquiera de estos términos entra en conflicto con los términos establecidos en el formulario de registro del proveedor (incluida, entre otras, prevalecerán las condiciones especiales detalladas en el formulario de registro del proveedor), prevalecerán los términos del formulario de registro del proveedor.',
+        key.vendorHeader25: '21. Acuerdo completo:',
+        key.vendorBody25:
+            'En la medida en que cualquiera de estos términos entra en conflicto con los términos establecidos en el formulario de registro del proveedor (incluida, entre otras, prevalecerán las condiciones especiales detalladas en el formulario de registro del proveedor), prevalecerán los términos del formulario de registro del proveedor.',
+        key.vendorHeader26: '22. Rieve:',
+        key.vendorBody26:
+            'Si alguna disposición o provisión parcial de este Acuerdo es o se vuelve inválida, ilegal o inaplicable, se considerará modificada en la medida mínima necesaria para hacerlo válido, legal y exigible. Si dicha modificación no es posible, la disposición o la provisión parcial se considerará eliminada. Cualquier modificación o eliminación de una disposición o provisión parcial bajo esta cláusula no afectará la validez y la ejecución del resto de este Acuerdo.',
+        key.vendorHeader27: '23. Ley de gobierno y jurisdicción:',
+        key.vendorBody27:
+            '23.1 Este Acuerdo, y cualquier disputa o reclamo que surja de o en relación con él o su tema o formación (incluidas disputas o reclamos no contractuales), se regirá e interpretará de acuerdo con las leyes de Pakistán. \ n23.2 Cada parte acepta que cualquier disputa que surja de este Acuerdo estará sujeta a la jurisdicción no exclusiva de los tribunales de Pakistán, quien resolverá cualquier disputa o reclamo que surja de o en relación con este Acuerdo o su tema o formación (incluidas las disputas o reclamos no contractuales). \ n \ El desempeño de este Acuerdo continuará durante cualquier procedimiento judicial o cualquier otro mecanismo de resolución de disputas. El proveedor no transferirá ningún pago adeudado o pagadero por el proveedor a causa de una disputa judicial pendiente u otro mecanismo de resolución de disputas, excepto en la medida en que dicho pago sea objeto de tales disputas.',
+        key.or: 'o',
+        key.becomeAVendor: 'Conviértete en un proveedor',
+        key.joinOurMarketplace:
+            '¡Únase a nuestro mercado y comience a vender sus productos hoy!',
+        key.seamlessShopping:
+            'Ingrese detalles para una experiencia de compra sin problemas',
+        key.createAnAccount: 'Crea una cuenta',
+        key.getOnboardUser: 'Ponte a bordo como uso',
+        key.phoneNumber: 'Número de teléfono',
+        key.termsAndConditionsCheckbox:
+            'Al crear su cuenta, debe estar de acuerdo con nuestros Términos y condiciones.',
+        key.frontSide: 'Lado delantero',
+        key.backSide: 'Parte posterior',
+        key.legalDocument: 'Documento legal',
+        key.shopLogoImage: 'Logotipo/imagen de la tienda',
+        key.business: 'Negocio',
+        key.information: 'Información',
+        key.vendorAccountCreation: 'Creación de cuenta de proveedores',
+        key.profileStatus: 'Estado del perfil',
+        key.shopName: 'Nombre de tienda',
+        key.enterShopName: 'Ingrese el nombre de la tienda',
+        key.shopAddress: 'Dirección de la tienda',
+        key.enterShopAddress: 'Ingrese la dirección de la tienda',
+        key.ifAvailable: 'si está disponible',
+        key.shopNumber: 'Número de tienda',
+        key.lessThanMb: 'Menos de 2 MB',
+        key.chooseFile: 'Elija el archivo',
+        key.noFileChosen: 'Ningún archivo elegido',
+        key.waitForVerification: 'Esperar la verificación',
+        key.vendor: 'Proveedor',
+        key.submitted: 'enviado',
+        key.lastStep: 'Último paso',
+        key.availAmazingDiscount: 'Disponible descuentos increíbles',
+        key.descriptionOfDiscount:
+            '¡Ahorre grande con un 30% de descuento en todos nuestros productos!',
+        key.celebrateFreedomAndSavings: 'Celebre la libertad y los ahorros',
+        key.descriptionOfFreedomAndSavings:
+            '¡Ofertas exclusivas para el Día de la Independencia!',
+        key.boostYourBusiness: 'Aumente su negocio con Ismmart',
+        key.descriptionOfBoostYourBusiness:
+            '¡Tarifa de registro de plataforma cero para proveedores!',
+        key.shopCountry: 'Shop country',
+        key.shopCity: 'Ciudad de la tienda',
+        key.vendorCNIC: 'Vendedor CNIC',
+        key.shopCategory: 'Categoría de tiendas',
+        key.yourShopCategory: 'Su categoría de tienda',
+        key.shopDescription: 'Descripción de la tienda',
+        key.enterShopDescription: 'Ingrese la descripción de la tienda',
+        key.shopImage: 'Imagen de la tienda',
+        key.shopCoverImage: 'Imagen de portada de la tienda',
+        key.enterBankName: 'Ingrese el nombre del banco',
+        key.enterAccountTitle: 'Ingrese el título de la cuenta',
+        key.accountTitle: 'Título de la cuenta bancaria',
+        key.enterAccountNumberOrIban: 'Ingrese el número de cuenta / Iban',
+        key.cityReq: 'Ciudad selecta',
+        key.countryReq: 'Seleccionar país',
+        key.emailIsRequired: 'correo electronico es requerido',
+        key.passwordIsRequired: 'se requiere contraseña',
+        key.passwordConfirmIsRequired: 'Se requiere confirmación de contraseña',
+        key.FirstNameReq: 'Se requiere el primer nombre',
+        key.LastNameReq: 'Se requiere apellido',
+        key.incorrectAddress: 'Ingrese la dirección correcta',
+        key.incorrectNTN: 'Ingrese NTN correcto',
+        key.incorrectCNIC: 'Ingrese CNIC correcto',
+        key.cnicReq: 'Se requiere CNIC',
+        key.categoryReq: 'selecciona una categoría',
+        key.incorrectBranchCode: 'Ingrese el código de rama correcto',
+        key.shopDescReq: 'Se requiere una descripción de la tienda',
+        key.frontSideReq: 'Se requiere una imagen del lado frontal cnic',
+        key.backSideReq: 'Se requiere una imagen del lado posterior cnic',
+        key.chequeImageReq: 'Verifique la imagen es necesaria',
+        key.shopLogoImageReq: 'Se requiere logotipo/imagen de la tienda',
+        key.helpCenter: 'Centro de ayuda',
+        key.shopAddressReq: 'Se requiere la dirección de la tienda',
+        key.shopNameReq: 'Se requiere el nombre de la tienda',
+        key.getOnboard: 'Suban a bordo',
+        key.createYourAccount: 'Crea tu cuenta',
+        key.continueWithSameEmail: 'Continuar con el mismo correo electrónico',
+        key.continueWithDiffEmail: 'Con un correo electrónico diferente',
+        key.chequeImageNote:
+            'Esta imagen de cheque debe tener los mismos datos bancarios visibles que mencionó anteriormente',
+        key.enterCNIC: 'Ingrese CNIC',
+        key.enterBranchCode: 'Ingrese el código de rama',
+        key.maxAddressLimitMsg:
+            'Límite de dirección máximo alcanzado. Actualice/elimine la dirección para continuar',
+        key.forgotPasswordDesc:
+            'Ingrese su correo electrónico para recibir un correo electrónico \ con el código OTP.',
+        key.emailVerification: 'verificacion de email',
+        key.serverUnableToHandle: 'El servidor no puede manejar la solicitud',
+        key.serverTakingTooLong:
+            'El servidor está tardando demasiado en responder',
+        key.noInternetConnection: 'Sin conexión a Internet',
+        key.questions: 'Preguntas',
+        key.updateQuestion: 'Pregunta de actualización',
+        key.deleteQuestion: 'Eliminar pregunta',
+        key.deleteQuestionDialogDesc:
+            '¿Estás seguro de que quieres eliminar la pregunta?',
+        key.question: 'Preguntas',
+        key.addAnswer: 'Agregar respuesta',
+        key.viewProduct: 'Ver el producto',
+        key.answer: 'Respuesta',
+        key.updateAnswer: 'Respuesta de actualización',
+        key.deleteAnswer: 'Eliminar respuesta',
+        key.addQuestion: 'Agregar pregunta',
+        key.updateProfile: 'Actualizar cuenta',
+        key.pickImage: 'Seleccionar imagen',
+        key.currentPassword: 'Se requiere una contraseña actual',
+        key.updateShippingAdd: 'Actualizar la dirección de envío',
+        key.addShippingAdd: 'Agregar dirección de envío',
       };
 }
