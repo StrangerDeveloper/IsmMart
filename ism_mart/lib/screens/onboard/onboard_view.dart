@@ -19,6 +19,8 @@ class OnBoardView extends StatelessWidget {
               itemBuilder: (context, index) => Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  //SvgPicture.asset(viewModel.list[index].image, height: 447, width: 347,),
+                 
                   Image.asset(
                     viewModel.list[index].image,
                     height: 449,

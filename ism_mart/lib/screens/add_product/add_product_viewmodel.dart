@@ -50,20 +50,30 @@ class AddProductViewModel extends GetxController {
   }
 
   void onPriceFieldChange(String value) {
-    if (value.isNotEmpty) {
-      int amount = int.parse(value);
-      int totalAfter = amount + (amount * 0.05).round();
-      priceAfterCommission(totalAfter);
-    } else {
-      priceAfterCommission(0);
-    }
+  if (value.isNotEmpty) {
+    int amount = int.parse(value);
+    priceAfterCommission(amount); // Updating priceAfterCommission directly
+  } else {
+    priceAfterCommission(0);
   }
+}
 
-  void totalTax() {
-    int price = int.parse(prodPriceController.text.toString());
-    var a = (5 / 100) * price;
-    priceAfterCommission.value = priceAfterCommission.value + a.toInt();
-  }
+
+  // void onPriceFieldChange(String value) {
+  //   if (value.isNotEmpty) {
+  //     int amount = int.parse(value);
+  //     int totalAfter = amount + (amount * 0.05).round();
+  //     priceAfterCommission(totalAfter);
+  //   } else {
+  //     priceAfterCommission(0);
+  //   }
+  // }
+
+  // void totalTax() {
+  //   int price = int.parse(prodPriceController.text.toString());
+  //   var a = (5 / 100) * price;
+  //   priceAfterCommission.value = priceAfterCommission.value + a.toInt();
+  // }
 
   void fetchCategories() async {
     categoriesList.clear();
