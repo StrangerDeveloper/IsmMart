@@ -138,8 +138,10 @@ class Validator {
     if (GetUtils.isBlank(value)!) {
       if(bankAcc.isEmpty || bankAcc == ''){
         return null;
-      } else {
-        return langKey.enterBranchCode.tr;
+      } else if(RegExp(r'^-?(([0-9]*)|(([0-9]*)\.([0-9]*)))$').hasMatch(bankAcc)){
+          return langKey.enterBranchCode.tr;
+      } else{
+        return null;
       }
     } else if (value?.length != 4) {
       return langKey.incorrectBranchCode.tr;

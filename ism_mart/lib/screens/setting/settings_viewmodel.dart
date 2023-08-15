@@ -1,12 +1,13 @@
 import 'dart:io';
 
-import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:get/get.dart';
 import 'package:ism_mart/exports/export_api_helper.dart';
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:url_launcher/url_launcher.dart';
-import '../../models/user/user_model.dart';
+
 import '../../helper/constants.dart';
 import '../../helper/routes.dart';
+import '../../models/user/user_model.dart';
 
 class SettingViewModel extends GetxController {
   Rx<UserModel?> userDetails = UserModel().obs;
@@ -58,11 +59,10 @@ class SettingViewModel extends GetxController {
   }
 
   whatsapp() async {
-    String contact = "9233155535903";
-    String androidUrl =
-        "whatsapp://send?phone=$contact&text=Hi, I need some help";
-    String iosUrl =
-        "https://wa.me/$contact?text=${Uri.parse('Hi, I need some help')}";
+    String contact = "923331157046";
+    String text = '';
+    String androidUrl = "whatsapp://send?phone=$contact&text=$text";
+    String iosUrl = "https://wa.me/$contact?text=${Uri.parse(text)}";
 
     String webUrl = 'https://api.whatsapp.com/send/?phone=$contact&text=hi';
 

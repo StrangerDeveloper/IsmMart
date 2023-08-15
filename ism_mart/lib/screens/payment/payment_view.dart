@@ -52,6 +52,7 @@ class _PaymentViewState extends State<PaymentView> {
             child: InAppWebView(
               key: webViewKey,
               initialData: InAppWebViewInitialData(data: ''' 
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script
   src="https://code.jquery.com/jquery-1.12.4.min.js"
   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
@@ -60,7 +61,6 @@ class _PaymentViewState extends State<PaymentView> {
 <script src="https://merchants.bankalfalah.com/merchantportalprelive/HostedCheckoutFiles/HostedCheckoutPayments.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
 
-<script></script>
 
 <style type="text/css">
   #TransactionForm {

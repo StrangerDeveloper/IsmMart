@@ -19,7 +19,7 @@ import 'package:ism_mart/screens/splash/splash_view.dart';
 import 'package:ism_mart/screens/vendor_question/vendor_question_view.dart';
 import 'package:ism_mart/screens/vendor_signup/vendor_signup1/vendor_signup1_view.dart';
 import 'package:ism_mart/screens/verify_password/verify_password_view.dart';
-import '../email_verified/email_verified_view.dart';
+import '../screens/email_verified/email_verified_view.dart';
 import '../screens/contact_us/contact_us_view.dart';
 import '../screens/faq/faq_view.dart';
 import '../screens/onboard/onboard_view.dart';

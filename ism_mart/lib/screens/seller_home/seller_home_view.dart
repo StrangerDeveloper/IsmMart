@@ -35,10 +35,10 @@ class SellerHomeView extends GetView<SellersController> {
               ),
             ]),
         body: PageView(
-          controller: controller.pageViewController,
-          physics: const NeverScrollableScrollPhysics(),
-          children: [...controller.NavScreens],
-        ),
+              controller: controller.pageViewController,
+              physics: const NeverScrollableScrollPhysics(),
+              children: [...controller.NavScreens],
+          ),
         drawer: Drawer(
           elevation: 0,
           width: MediaQuery.of(context).size.width * 0.65,
