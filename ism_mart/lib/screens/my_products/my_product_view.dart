@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
+import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/widgets/no_internet_view.dart';
 import 'package:ism_mart/screens/my_products/my_products_viewmodel.dart';
 import 'package:ism_mart/screens/my_products/vendor_product_model.dart';
@@ -33,7 +34,11 @@ class MyProductView extends StatelessWidget {
           backgroundColor: kPrimaryColor,
           icon: Icon(Icons.add),
           onPressed: () {
-            Get.toNamed(Routes.addProduct);
+            if(GlobalVariable.userModel?.infoCompleted == 1){
+              Get.toNamed(Routes.addProduct);
+            } else{
+              AppConstant.displaySnackBar(langKey.errorTitle.tr, langKey.updateInfoToProceed.tr);
+            }
           },
           label: Text(langKey.addProduct.tr),
         ),
@@ -96,9 +101,13 @@ class MyProductView extends StatelessWidget {
       aspectRatio: 0.75,
       child: GestureDetector(
         onTap: () {
-          Get.toNamed(Routes.singleProductDetails, arguments: [
-            {"calledFor": "seller", "productID": "${model.id}"}
-          ]);
+          if(GlobalVariable.userModel?.infoCompleted == 1) {
+            Get.toNamed(Routes.singleProductDetails, arguments: [
+              {"calledFor": "seller", "productID": "${model.id}"}
+            ]);
+          } else{
+            AppConstant.displaySnackBar(langKey.errorTitle.tr, langKey.updateInfoToProceed.tr);
+          }
         },
         child: Container(
           clipBehavior: Clip.hardEdge,
@@ -188,22 +197,35 @@ class MyProductView extends StatelessWidget {
                   children: [
                     CustomActionIcon(
                         onTap: () {
-                          Get.toNamed(Routes.updateProduct, arguments: [
-                            {'productId': '${model.id}'}
-                          ]);
+                          if(GlobalVariable.userModel?.infoCompleted == 1){
+                            Get.toNamed(Routes.updateProduct, arguments: [
+                              {'productId': '${model.id}'}
+                            ]);
+                          } else{
+                            AppConstant.displaySnackBar(
+                            langKey.errorTitle.tr,
+                                langKey.updateInfoToProceed.tr
+                            );
+                          }
                         },
                         icon: Icons.edit_rounded,
                         bgColor: kPrimaryColor),
                     AppConstant.spaceWidget(width: 5),
                     CustomActionIcon(
-                      onTap: () => AppConstant.showConfirmDeleteDialog(
-                        ontap: () {
-                          viewModel.deleteProduct(model.id.toString(),
-                              index: index);
-                        },
-                        passedHeadingLangKey: langKey.areYouSure.tr,
-                        passedBodyLangKey: langKey.deletionProcessDetail.tr,
-                      ),
+                      onTap: () {
+                        if(GlobalVariable.userModel?.infoCompleted == 1) {
+                          AppConstant.showConfirmDeleteDialog(
+                            ontap: () {
+                              viewModel.deleteProduct(model.id.toString(),
+                                  index: index);
+                            },
+                            passedHeadingLangKey: langKey.areYouSure.tr,
+                            passedBodyLangKey: langKey.deletionProcessDetail.tr,
+                          );
+                        } else{
+                          AppConstant.displaySnackBar(langKey.errorTitle.tr, langKey.updateInfoToProceed.tr);
+                        }
+                      },
                       icon: Icons.delete_rounded,
                       bgColor: kRedColor,
                     )
