@@ -35,8 +35,6 @@ class OnBoardViewModel extends GetxController {
 
   Future<void> completeOnboarding() async {
     GetStorage().write('onboarding_completed', true);
-  // var  onboardingCompleted = GetStorage().read('onboarding_completed');
-  //   print('farhaaaaad${onboardingCompleted}');
   }
 
   void goToDashboard() {
