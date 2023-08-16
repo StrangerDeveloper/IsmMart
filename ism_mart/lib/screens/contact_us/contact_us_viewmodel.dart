@@ -7,6 +7,8 @@ import 'package:ism_mart/helper/urls.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/getx_helper.dart';
 
+import '../../helper/constants.dart';
+
 class ContactUsViewModel extends GetxController {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController firstNameController = TextEditingController();
@@ -73,9 +75,10 @@ class ContactUsViewModel extends GetxController {
 
         if (parsedJson['success'] == true) {
           GlobalVariable.internetErr(false);
-          GetxHelper.showSnackBar(
-            title: langKey.successTitle.tr,
-            message: parsedJson['message'],
+
+          AppConstant.displaySnackBar(
+           langKey.successTitle.tr,
+          parsedJson['message'],
           );
         } else {
           GetxHelper.showSnackBar(

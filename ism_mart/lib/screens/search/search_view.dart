@@ -191,9 +191,15 @@ class SearchView extends GetView<SearchViewModel> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CustomText(
-                  title: text ?? '',
+
+
+                Expanded(
+                  child: CustomText(
+                    maxLines: 1,
+                    title: text ?? '',
+                    ),
                 ),
+
                 url == null
                     ? Container()
                     : SizedBox(

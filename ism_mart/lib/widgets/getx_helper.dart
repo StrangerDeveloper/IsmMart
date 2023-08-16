@@ -7,7 +7,7 @@ class GetxHelper {
       title,
       message,
       colorText: Colors.white,
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.green,
       animationDuration: Duration(milliseconds: 500),
       duration: Duration(milliseconds: 1800),
     );
