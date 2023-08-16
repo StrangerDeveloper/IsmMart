@@ -6,6 +6,7 @@ import 'package:ism_mart/api_helper/api_service.dart';
 import 'package:ism_mart/exports/export_controllers.dart';
 import 'package:ism_mart/helper/no_internet_view.dart';
 import 'package:ism_mart/exports/exports_model.dart';
+import 'package:ism_mart/screens/dashboard/dashboard_viewmodel.dart';
 import 'package:ism_mart/screens/top_vendors/top_vendors_model.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
@@ -23,7 +24,9 @@ import '../../widgets/sticky_labels.dart';
 import '../search_details/search_details_view.dart';
 
 class DashboardView extends GetView<BaseController> {
-  const DashboardView({Key? key}) : super(key: key);
+  DashboardView({Key? key}) : super(key: key);
+
+  final DashboardViewModel viewModel = Get.put(DashboardViewModel());
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +63,56 @@ class DashboardView extends GetView<BaseController> {
                 ),
               ),
             ],
+          ),
+          Positioned(
+            bottom: 12,
+            right: 10,
+            child: GestureDetector(
+              onTap: ()async{
+                await viewModel.getCurrentLocation();
+              },
+              child: Container(
+                width: MediaQuery.of(Get.context!).size.width/3,
+                height: 55,
+                decoration: BoxDecoration(
+                  color: Color(0xffefda37),
+                  borderRadius: BorderRadius.all(Radius.circular(12)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.2),
+                      offset: Offset(0, 3),
+                      blurRadius: 1,
+                      spreadRadius: 1
+                    )
+                  ]
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 13.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.chat_outlined,
+                        size: 30,
+                        color: Colors.black,
+                      ),
+                      Expanded(
+                        child: Center(
+                          child: Text(
+                            'Chat',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 18
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
           ),
           NoInternetView(
             onPressed: () {
