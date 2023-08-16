@@ -701,5 +701,9 @@ class Japanese {
         key.currentPassword: '現在のパスワードが必要です',
         key.updateShippingAdd: '配送先住所を更新します',
         key.addShippingAdd: '配送先住所を追加します',
+        key.updateInfoToProceed: '続行するには情報を更新します',
+        key.updateInfoAlertMsg: '契約条件が更新されました。シームレスなビジネス関係を確保するには、親切に続行してください',
+        key.skip: 'スキップ',
+        key.updateInfo: '情報を更新します',
       };
 }

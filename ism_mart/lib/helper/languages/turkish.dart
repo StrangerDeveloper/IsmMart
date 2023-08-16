@@ -736,5 +736,10 @@ class Turkish {
         key.currentPassword: 'Mevcut şifre gerekli',
         key.updateShippingAdd: 'Gönderim Adresini Güncelle',
         key.addShippingAdd: 'Nakliye Adresi Ekle',
+        key.updateInfoToProceed: 'Devam Etmek İçin Bilgileri Güncelle',
+        key.updateInfoAlertMsg:
+            'Şartlar ve koşullarımız güncellendi. Kesintisiz bir iş ilişkisi sağlamak için lütfen devam edin',
+        key.skip: 'Atlamak',
+        key.updateInfo: 'Bilgileri Güncelle',
       };
 }

@@ -738,5 +738,10 @@ class Arabic {
         key.currentPassword: 'كلمة المرور الحالية مطلوبة',
         key.updateShippingAdd: 'تحديث عنوان الشحن',
         key.addShippingAdd: 'إضافة عنوان الشحن',
+        key.updateInfoToProceed: 'تحديث المعلومات للمتابعة',
+        key.updateInfoAlertMsg:
+            'تم تحديث شروطنا وأحكامنا. لضمان وجود علاقة تجارية سلسة ، يرجى النقر على المتابعة',
+        key.skip: 'يتخطى',
+        key.updateInfo: 'تحديث المعلومات',
       };
 }

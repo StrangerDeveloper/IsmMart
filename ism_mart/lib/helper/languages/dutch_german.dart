@@ -740,5 +740,11 @@ class DutchGerman {
         key.currentPassword: 'Aktuelles Passwort ist erforderlich',
         key.updateShippingAdd: 'Versandadresse aktualisieren',
         key.addShippingAdd: 'Versandadresse hinzufügen',
+        key.updateInfoToProceed:
+            'Aktualisieren Sie Informationen, um fortzufahren',
+        key.updateInfoAlertMsg:
+            'Unsere Allgemeinen Geschäftsbedingungen wurden aktualisiert. Um eine nahtlose Geschäftsbeziehung zu gewährleisten, tippen Sie bitte auf fortfahren',
+        key.skip: 'Überspringen',
+        key.updateInfo: 'Informationen aktualisieren',
       };
 }

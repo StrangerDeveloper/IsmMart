@@ -741,5 +741,10 @@ class Italian {
         key.currentPassword: 'È richiesta la password corrente',
         key.updateShippingAdd: 'Aggiorna indirizzo di spedizione',
         key.addShippingAdd: 'Aggiungi indirizzo di spedizione',
+        key.updateInfoToProceed: 'Aggiorna le informazioni per procedere',
+        key.updateInfoAlertMsg:
+            'I nostri termini e condizioni sono stati aggiornati. Per garantire una relazione commerciale senza soluzione di continuità, tocca gentilmente procedere',
+        key.skip: 'Saltare',
+        key.updateInfo: 'Aggiorna informazioni',
       };
 }
