@@ -549,5 +549,196 @@ class DutchGerman {
             'Premium -Mitglieder haben weniger Zugang zu allen Unternehmen weltweit, sowohl als Verkäufer als auch als Käufer, da IsMmart diese Mitglieder direkt garantieren und überprüft, und alle Angebote, die sie abgeben.',
         key.memPlan3Desc9:
             'Da alle Premium -Mitglieder überprüft werden und durch den ISMMART -Überprüfungsprozess verifiziert werden, können sich alle dieser Mitglieder weniger Sorgen machen, überall auf der Welt.',
+        key.vendorHeader0: '0',
+        key.vendorBody0:
+            'Der Anbieter (Ismmart Group of Industries Pvt Ltd. Pakistan) und der Verkäufer (definiert als Drittanbieter) werden gemeinsam als „Parteien“ und individuell als „Partei“ bezeichnet, so wie es der Fall sein kann. Anbieter fungiert als unabhängiger Auftragnehmer des Anbieters, der durch diese Vereinbarung den Anbieter die vollständige Befugnis gewährt Online -Plattform des Anbieters www.ismmart.com („Website“) und mobile Anwendungen (gegebenenfalls zutreffend). Es wird davon ausgegangen, dass der Anbieter nicht im Namen der Kunden handelt. Die allgemeinen Geschäftsbedingungen bei den Kunden, die auf der Website gefunden wurden. Der Kunde. Im Falle einer Änderung wird dies auch der anderen Partei mitgeteilt.',
+        key.vendorHeader1: '1. Anbieterrechte, Pflichten und Pflichten:',
+        key.vendorBody1:
+            '1.1: Der Anbieter muss die Bestellung (en) über das Dashboard oder einen Telefonanruf (nur falls die Website nicht funktionieren) an die jeweiligen Auslasss übertragen. Bestellung von einem Kunden auf der Plattform an den Anbieter über die Website oder per Anruf (wenn die Website nicht funktioniert) und akzeptieren Sie die Zahlung des Kunden online oder in bar. \ n \ n1.3: Im Falle des Falls Anbieter, der die Lieferdienste durchführt, haben das Recht, dem Kunden eine Liefergebühr („ISMMART -Liefergebühr“) zu berechnen und nach eigenem Ermessen einen Mindestbestellwert zu ermitteln. Um die Dienste auszuführen Der Kunde würde für diese Art von Gegenstand erwarten, sofern der Lieferant die Verpflichtung in Ziffer 2.7 entspricht. . N \ t1.3.5 haben das Recht, nach eigenem Ermessen alle mit der Lieferung im Zusammenhang mit Liefergebieten und dem betrieblichen Zeitpunkt ohne vorherige Ankündigung zu ändern. Kontaktpunkt für den Verkäufer. Im Falle des Anbieters beabsichtigt der Anbieter, die Kontaktinformationen zu aktualisieren, das gleiche mit dem Anbieter sieben (7) Tage vor dem Datum der Änderung der Kontaktinformationen in Bezug auf die Inkrafttreten der Kontaktinformationen mitgeteilt.',
+        key.vendorHeader2: '2 Drittanbieterrechte, Pflichten und Pflichten:',
+        key.vendorBody2:
+            'Der Anbieter muss: \ n \ n2.1 dem Anbieter eine Liste aller Elemente „Elementliste“ zur Verfügung stellen, wie sie mit dem Anbieter vereinbart wurde. Artikelliste, die auf der Website angezeigt werden soll. \ N \ N2.2 Sollte der Anbieter Änderungen an der Artikelliste vornehmen, wird der Status des Produkts in "anhängig" geändert. Der Anbieter wird die Änderungen überprüfen und die Änderungen gemäß den Produktrichtlinien des Anbieters innerhalb von zwei (2) Geschäftstagen genehmigen oder missbilligen. Berechtigungen und Zustimmungen (die erforderlich sein können, um seine Verpflichtungen im Rahmen dieser Vereinbarung nachzubilden) \ n2.4 bieten dem Anbieter und seinen Fahrern (definiert als der eigene Reiter des Anbieters und/oder unsere Lieferpartner, d. H. TCS, FedEx & DHL) Zugriff auf die Räumlichkeiten des Anbieters, die vom Anbieter für die Erbringung der Dienste vernünftigerweise verlangt werden. Die Bestellung wurde dem Anbieter zur Verfügung gestellt, sofern die Bestellung innerhalb des vom Anbieter angegebenen Zeitraums abgeschlossen sein muss. Wenn der Anbieter die Bestellung weder akzeptiert noch ablehnt, wird er automatisch vom Anbieter abgelehnt. Für eine solche Ablehnung, spätestens 12 Stunden ab dem Zeitpunkt, an dem der Anbieter die Bestellung zur Verfügung gestellt wurde. Verkäufer und übertragen Sie es an die Lieferperson oder den Kunden des Anbieters (im Falle einer Lieferantenzustellung). \ N \ n2.8 Stellen Sie sicher vom Verkäufer an seine direkten Kunden bereitgestellt. Auf der Verpackung vom Hersteller gedruckt. N2.9.3 Im Falle eines Verstoßes gegen Klausel 2.9.1 haftet der Anbieter für alle vom Kunden entwickelten Gesundheitszustände, die vom Kunden konsumiert/verwendet wurden, wie vom Anbieter geliefert und wird dafür verantwortlich Alle Akte des Kunden, einschließlich Rechtsstreitigkeiten. Alle Folgeauswirkungen davon. \ n2.11 aktualisieren Sie die Aktien auf dem Hersteller -Dashboard sofort auf der Plattform im Falle einer Nichtverfügbarkeit eines Produkts.',
+        key.vendorHeader3: '2.12 Preise:',
+        key.vendorBody3:
+            '2.12.1 Anbieter hiermit recht Der Anbieter wird dem Anbieter mindestens sieben (7) Tage im Voraus über den Ausmaß der Preissenkung, Werbeaktionen oder Rabatte, das jeweilige Datum des Inkrafttretens und die Dauer der Dauer des Anbieters, der über die Plattform bestellt wurde, mindestens sieben (7) Tage. Die Fahrer des Anbieters für den Fall, dass der Anbieter das Liefersystem des Anbieters in respektvoller und zivilisierter Weise verwendet, die auf das Verbot der Verwendung von missbräuchlichem Sprache, missbräuchlichem Verhalten, Belästigung, Angriff und Batterie einbezogen wird. Die Schulung ist dem Anbieter und seinen Mitarbeitern in dieser Hinsicht vorgelegt. Die Verletzung dieser Klausel stellt einen Verstoß gegen diese Vereinbarung dar. Die Zahlung all dieser Gutscheine wird vom Anbieter in der monatlichen/wöchentlichen Rechnung auf dem registrierten Bankkonto des Anbieters erstattet. und geschäftsmäßige Art und Weise, innerhalb der etablierten Branchenstandards, Praktiken und Prinzipien sowie innerhalb der hier festgelegten Zeitfristen. Im Fall, dass der Anbieter beabsichtigt, die angegebenen Informationen zu aktualisieren, benachrichtigt der Anbieter den Anbieter sieben (7) Tage vor dem Datum der Änderung der Kontaktinformationen in Bezug auf die Änderung der Kontaktinformationen.',
+        key.vendorHeader4:
+            '3. Kundenwiederherstellungsgebühr - Schadensersatz/Strafe:',
+        key.vendorBody4:
+            '3.1 Der Anbieter erkennt an, dass der Anbieter ein seriöses Unternehmen in Pakistan ist, das seinen Kunden bequem, Zuverlässigkeit und Qualität bieten soll. Da die Systeme und Vorgänge des Anbieters stark von Kundenerfahrung und Feedback abhängen vom Anbieter als liquidierten Schadenersatz („Kundenwiederherstellung“) festgelegt. Die oben genannte Gebühr für Kundenrückgewinnung darf das Recht des Anbieters nicht beeinträchtigen, Schadensersatz für die Kosten und Kosten für die von dem Anbieter als notwendigen Maßnahmen zu ergreifen \ n3.2 Der Anbieter erkennt an, dass er die Bestimmungen von Klausel 3 gelesen, verstanden und zustimmt und auch einverstanden ist Mindestens sieben (7) Tage schriftliche Mitteilung. Wettbewerb. Darüber hinaus reserviert der Anbieter trotz der Zahlung des liquidierten Schadensersatzes alle Rechtsrechte in Bezug auf die Verstöße.',
+        key.vendorHeader5: '4 Suspendierung:',
+        key.vendorBody5:
+            '4.1 Der Anbieter hat das Recht, den Anbieter vorübergehend von der Plattform auszusetzen, ohne Strafe, wenn: \ n \ n4.1.1 Der Anbieter hat die Anbieter -Rechnungen, die fällig geworden sind , Der Verkäufer verstößt gegen irgendwelche Bedingungen dieser Vereinbarung oder kann das Geschäft des Anbieters negativ beeinflussen. \ n \ n4.2 Um Zweifel zu vermeiden vollständig anwendbar.',
+        key.vendorHeader6: '5 Entschädigung von Ansprüchen Dritter:',
+        key.vendorBody6:
+            '5.1 Jede Partei hat auf Kosten, verteidigt eine der folgenden Arten von Ansprüchen von Dritten, die gegen die andere Partei, ihre Direktoren, Beamten oder Agenten (zusammen „entschädigte“), und entschädigen sich gegen: \ n \ n5.1.1 irgendwelche Ansprüche Dies würde, wenn wahr, eine Verstoß gegen diese Vereinbarung durch die Partei, ihre Mitarbeiter, Vertreter oder Vertreter darstellen. im Zusammenhang mit den Verpflichtungen der Parteien, die sich aus dieser Vereinbarung ergeben; oder aus der Fahrlässigkeit, Handlungen oder Handlungen oder Misserfolg, entweder der Partei ihrer Mitarbeiter, Agenten oder Vertreter. Gebühren (einschließlich angemessener Anwaltskosten), die einer von ihnen entstanden sind, die auf eine solche Ansprüche zurückzuführen sind.',
+        key.vendorHeader7: '6 Gebühren, Zahlung und Sammlung von Geldern:',
+        key.vendorBody7:
+            '6.1 Der Anbieter gewährt dem Anbieter die Behörde, Mittel im Namen und für das Konto des von den Kunden bezahlten Verkäufers zu erhalten, sei es mit Online -Mitteln oder in bar. Der Kunde bei der Lieferung ist der Anbieter für die Erhöhung der Barzahlung und in Einklang mit der anderen Partei gemäß den Bestimmungen von Ziffer 6. \ n \ n6.3 Im Falle der Online -Zahlung sammelt der Anbieter Geld ein und scheun Übereinstimmung mit den Bestimmungen von Klausel 6. \ n \ n6.4 Die Parteien sind sich einig und akzeptieren, dass die Einnahmen, die Provisionsgebühr und die Liefergebühr im in dieser Vereinbarung vereinbarten Betrag berechnet und zu zahlen sind und dass keine weiteren Gebühren oder Gebühren gelten zwischen den Parteien oder den Kunden, außer wie in dieser Vereinbarung vorgesehen. Der Anbieter akzeptiert ausdrücklich, dass der Anbieter gegebenenfalls die Gebühr der Agentur/Aggregator gegen die generierten Einnahmen auslassen kann. die Zeit der Bestellung Lieferung.',
+        key.vendorHeader8:
+            '6.6 Rechnungsstellung und Zahlungen - Lieferung von Anbietern:',
+        key.vendorBody8:
+            '6.6.1 Der Anbieter sammelt alle Anweisungen für Krediten und in Rechnung („Bestellaussage“) den Anbieter in zweimonatlicher Basis per E -Mail. Abzweigung von Provisionen und allen geltenden Steuern wöchentlich auf das registrierte Bankkonto des Anbieters. N6.6.4 Bankdienstgebühr gemäß _Bank_% wird dem Anbieter gegen alle auf Online -Zahlungen erhaltenen Bestellung in Rechnung gestellt.',
+        key.vendorHeader9: '6.7 Online -Bestell- und Unternehmensbestellungen:',
+        key.vendorBody9:
+            '6.7.1 Alle Online -Zahlungen werden als reguläre Bestellungen übertragen und behandelt und an den Anbieter ausgezahlt. durch den Verkäufer des Anbieters („Benachrichtigung von Schäden“). Objekt schriftlich innerhalb von fünf (5) Geschäftstagen nach dem Ausstellungsdatum der entsprechenden Auftragserklärung oder der Benachrichtigung von Schäden und gilt eindeutig alle Gründe für die Beschwerde, einschließlich einer unterstützenden Dokumentation. \ n \ n6.9.2 Der Anbieter überprüft die Einspruch innerhalb von drei (3) Geschäftstagen, die über den Einwand des Verkäufers informiert wurden und: \ n \ ni. Wenn der Anbieter vereinbart wird, muss der Anbieter die Auftragserklärung oder die Benachrichtigung von Schäden entsprechend anpassen. \ N \ nii. Wenn der Anbieter dem Verkäufer nicht einverstanden ist, informiert er den Anbieter über solche und die Parteien werden nach Treu und Glauben versuchen, einen Streit oder Anspruch aus oder in Bezug auf diese Vereinbarung durch Verhandlungen zwischen einem Direktor oder dem autorisierten Vertreter der einzelnen Parteien zu lösen Mit der Befugnis, den zuständigen Streit beizulegen.',
+        key.vendorHeader10: '7 Beginn der Dienstleistungen:',
+        key.vendorBody10:
+            'Der Anbieter darf nach Erhalt aller vom Anbieter angeforderten Informationen nur auf der Plattform aufgeführt sein, einschließlich, aber nicht beschränkt auf die Artikelliste. ein Logo und zugelassene Bilder von Produkten. Der Anbieter informiert den Anbieter über das Startdatum der Dienstleistungen („Eröffnungsdatum“), die dieser Vereinbarung annektiert.',
+        key.vendorHeader11: '8. Einhaltung von Richtlinien und Verfahren:',
+        key.vendorBody11:
+            '8.1 Der Anbieter ist sich bekannt als durchschnittlich. gegebenenfalls Gutscheine an die Kunden im Falle einer echten Beschwerde des Kunden. Der Verkäufer erklärt sich damit einverstanden, den Lieferperson des Anbieters keine Rabatt/Provisionen zu zahlen.',
+        key.vendorHeader12: '9. Garantien:',
+        key.vendorBody12:
+            'Der Verkäufer repräsentiert, garantiert und verpflichtet, dass die Verwendung des Verkäufers seines geistigen Eigentums nicht gegen geistige Eigentumsrechte des Dritten an geistigem Eigentum in Konflikt geraten, missbilligt oder anderweitig in Konflikt geraten. Der Verkäufer versichert den Anbieter in vollem Umfang gegen eine von den Dritten gemäß Ziffer 5 angegebene IP -Rechtsverletzungsansprüche gegen sie.',
+        key.vendorHeader13: '10. Vertraulichkeit:',
+        key.vendorBody13:
+            '10.1 Eine Partei ("Empfangspartei") hat streng zuversichtlich, alle technischen oder kommerziellen Know-how, Spezifikationen, Erfindungen, Prozesse oder Initiativen, die vertraulich sind und der empfangenden Partei von der anderen Partei ("der empfangenden Partei offengelegt wurden (", ("bekannt gegeben wurden (" Offenlegung der Partei ") und andere vertrauliche Informationen über das Geschäft der Partei, ihre Produkte und Dienstleistungen, die die empfangende Partei erhalten kann. Mitarbeiter, Agenten und Subunternehmer, die es zum Zwecke der Erfüllung der Verpflichtungen der empfangenden Partei im Rahmen dieser Vereinbarung wissen müssen. Weitergeben Sie Informationen an die Kunden. Die andere Partei im Voraus schriftlich. \ n \ n10.5 Diese Klausel 10 überlebt die Beendigung dieser Vereinbarung.',
+        key.vendorHeader14: '11. Keine Partnerschaft',
+        key.vendorBody14:
+            'Nichts in dieser Vereinbarung soll eine Unternehmenspartnerschaft oder ein Joint Venture zwischen den Parteien eingehen oder angenommen werden.',
+        key.vendorHeader15: '12. Änderungen:',
+        key.vendorBody15:
+            '12.1 Der Anbieter hat das Recht, die Erfolgsgebühr jederzeit gemäß dem Ermessen des Anbieters zu erhöhen. Gleiches gilt dem Verkäufer über eine offizielle E -Mail und/oder über das Dashboard des Lieferanten. und/oder ein Teil des Verkäufers durch eine Art und Weise eines Nachtrags. Gleiches gilt dem Verkäufer über eine offizielle E -Mail und/oder über das Hersteller Dashboard. \ N \ n12.3 Im Falle des Verkäufers, der mit solchen Änderungen nicht einverstanden ist Mit den Bestimmungen von Klausel 18. \ n \ n12.4 ist ausdrücklich vereinbart, dass alle Änderungen zwischen den Parteien mit Wirkung ab dem vom Anbieter gemäß Abschnitt 12.2 angegebenen Datum wirksam sind.',
+        key.vendorHeader16: '13. Force Majeure:',
+        key.vendorBody16:
+            'Für die Zwecke dieser Vereinbarung bedeutet "Force Majeure Event" ein Ereignis, das über die vernünftige Kontrolle einer Partei hinausgeht, einschließlich, aber nicht beschränkt auf Handlungen Gottes, Krieg, Aufruhr, Zivilmuts oder terroristische Maßnahmen. Keine Partei haftet der anderen Partei als direktes Ergebnis einer Verzögerung oder der Versäumnis, ihre Verpflichtungen im Rahmen dieser Vereinbarung aufgrund eines Ereignisses der Gewaltstufe zu erfüllen.',
+        key.vendorHeader17: '14. Dritte:',
+        key.vendorBody17:
+            'Eine Person, die keine Partei dieser Vereinbarung ist, hat kein Recht, ihre Bedingungen durchzusetzen.',
+        key.vendorHeader18: '15. Mitteilungen:',
+        key.vendorBody18:
+            '15.1 Alle Mitteilungen aus dieser Vereinbarung werden schriftlich erfolgen, gemäß dieser Vereinbarung an die vereinbarte Kontaktperson/-adresse gerichtet und am selben Tag als ordnungsgemäß angegeben, wenn er während des Registrierungsverfahrens des Verkäufers vereinbart wurde.',
+        key.vendorHeader19: '16. Aufgabe:',
+        key.vendorBody19:
+            '16.1 Der Anbieter kann jederzeit mit allen oder einer seiner Rechte im Rahmen dieser Vereinbarung in irgendeiner Weise zuweisen, übertragen, hypotheken, Anklagepunkte, Gebühren, Unterauftrag an Dritte oder Agenten. auf andere Weise mit einem oder all seinen Rechten oder Pflichten aus dieser Vereinbarung abwickeln.',
+        key.vendorHeader20: '17. Verzicht:',
+        key.vendorBody20:
+            'Ein Verzicht eines Rechts nach dieser Vereinbarung oder dem Recht ist nur dann wirksam, wenn es schriftlich ist und nicht als Verzicht auf einen nachfolgenden Verstoß oder Verzug angesehen wird. Es ist kein Versäumnis, Recht oder Rechtsbehelfe auszuüben, die gemäß dieser Vereinbarung oder gesetzlich vorgesehen sind, einen Verzicht auf Recht oder Rechtsbehelfe, noch verhindern oder beschränken sie seine weitere Ausübung dieses oder eines anderen Rechts oder eines anderen Rechtsmittels.',
+        key.vendorHeader21: '18. Term und Kündigung:',
+        key.vendorBody21:
+            '18.1 Diese Vereinbarung beginnt mit dem Beginn des Datums und wird für eine unbestimmte Zeit fortgesetzt, sofern nicht früher gemäß dieser Klausel 18.1 beendet wird. Diese Vereinbarung kann beendet werden: \ n \ n (a) von einer Partei zur Einfachheit Partei im Falle eines materiellen Verstoßes dieser Vereinbarung durch die andere Partei. \ N \ n (c) jederzeit durch gegenseitige schriftliche Vereinbarung zwischen den Parteien. Mit sofortiger Wirkung und ohne Haftung, im Falle eines Verstoßes gegen Abschnitt 2.12 und 2.13, wobei der Verkäufer den Verstoß nicht innerhalb eines maximalen Zeitraums von zwei (2) Geschäftstagen nach der Benachrichtigung behoben hat.',
+        key.vendorHeader22: '19. Haftungsbeschränkung:',
+        key.vendorBody22:
+            '19.1 Nichts in dieser Vereinbarung beschränkt oder ausschließt die Haftung einer Partei für Tod oder Personenschäden durch ihre Fahrlässigkeit oder die Fahrlässigkeit ihrer Mitarbeiter, Agenten oder Subunternehmer. an die andere Partei, sei es in Vertrag, unerlaubter Handlung (einschließlich Fahrlässigkeit), Verstoß gegen die gesetzliche Pflicht oder anderweitig für einen Gewinnverlust oder einen indirekten oder Folgeverlust oder -schaden, der im Zusammenhang mit dieser Vereinbarung oder im Zusammenhang mit dieser Vereinbarung entsteht. \ n \ n19 .3 Diese Klausel überlebt die Beendigung dieser Vereinbarung.',
+        key.vendorHeader23: '20. widersprüchliche Begriffe:',
+        key.vendorBody23:
+            'In dem Maße, in dem eine dieser Begriffe mit den im Anbieterregistrierungsformular angegebenen Bedingungen (einschließlich, ohne Einschränkung die auf dem Anmeldeformular angegebenen besonderen Bedingungen) in Konflikt stehen, bestehen die Bestimmungen des Anbietungsregistrierungsformulars.',
+        key.vendorHeader25: '21. Ganze Vereinbarung:',
+        key.vendorBody25:
+            'In dem Maße, in dem eine dieser Begriffe mit den im Anbieterregistrierungsformular angegebenen Bedingungen (einschließlich, ohne Einschränkung die auf dem Anmeldeformular angegebenen besonderen Bedingungen) in Konflikt stehen, bestehen die Bestimmungen des Anbietungsregistrierungsformulars.',
+        key.vendorHeader26: '22. Trennbarkeit:',
+        key.vendorBody26:
+            'Wenn eine Bestimmung oder Teilprovision dieser Vereinbarung ungültig, illegal oder nicht durchsetzbar ist oder wird, gilt sie in mindestens erforderlicher Umfang, um sie gültig, rechtlich und durchsetzbar zu machen. Wenn eine solche Änderung nicht möglich ist, gilt die relevante Bestimmung oder Teilprovision als gelöscht. Jede Änderung oder Löschung einer Bestimmung oder Teilprovision im Rahmen dieser Klausel hat die Gültigkeit und Durchsetzbarkeit des Restes dieser Vereinbarung nicht beeinträchtigt.',
+        key.vendorHeader27: '23. Regierungsrecht und Gerichtsbarkeit:',
+        key.vendorBody27:
+            '23.1 Diese Vereinbarung und jeder Streit oder Anspruch, der sich aus oder im Zusammenhang mit ihr oder ihrem Gegenstand oder Bildung (einschließlich nicht vertraglicher Streitigkeiten oder Ansprüche) ergibt, unterliegt den Gesetzen Pakistans und ausgelegt. \ n23.2 Jede Partei stimmt zu, dass ein Streit aus dieser Vereinbarung der nicht ausschließlichen Zuständigkeit der Gerichtsgerichte von Pakistan unterliegt, die Streitigkeiten oder Ansprüche, die sich aus oder im Zusammenhang mit dieser Vereinbarung oder seinem Gegenstand ergeben oder Bildung (einschließlich nicht vertraglicher Streitigkeiten oder Ansprüche). Keine vom Verkäufer fällige oder zu zahlende Zahlung oder Betrag, die vom Anbieter übertragen werden soll, wird wegen eines ausstehenden Gerichtsstreits oder einem anderen Streitbeilegungsmechanismus zurückgehalten, außer in dem Maße, in dem eine solche Zahlung Gegenstand solcher Streitigkeiten ist.',
+        key.or: 'oder',
+        key.becomeAVendor: 'Werden Sie ein Anbieter',
+        key.joinOurMarketplace:
+            'Treten Sie unserem Marktplatz bei und verkaufen Sie noch heute Ihre Produkte!',
+        key.seamlessShopping:
+            'Geben Sie Details für ein nahtloses Einkaufserlebnis ein',
+        key.createAnAccount: 'Ein Konto erstellen',
+        key.getOnboardUser: 'Gehen Sie als Verwendung an Bord',
+        key.phoneNumber: 'Telefonnummer',
+        key.termsAndConditionsCheckbox:
+            'Wenn Sie Ihr Konto erstellen, müssen Sie unseren Allgemeinen Geschäftsbedingungen zustimmen.',
+        key.frontSide: 'Vorderseite',
+        key.backSide: 'Rückseite',
+        key.legalDocument: 'Rechtsdokument',
+        key.shopLogoImage: 'Laden Sie Logo/Bild ein',
+        key.business: 'Geschäft',
+        key.information: 'Information',
+        key.vendorAccountCreation: 'Herstellerkontoerstellung',
+        key.profileStatus: 'Profilstatus',
+        key.shopName: 'Laden Name',
+        key.enterShopName: 'Geben Sie den Ladennamen ein',
+        key.shopAddress: 'Ladenadresse',
+        key.enterShopAddress: 'Geben Sie die Ladenadresse ein',
+        key.ifAvailable: 'wenn verfügbar',
+        key.shopNumber: 'Ladennummer',
+        key.lessThanMb: 'Weniger als 2 MB',
+        key.chooseFile: 'Datei wählen',
+        key.noFileChosen: 'Keine Datei ausgewählt',
+        key.waitForVerification: 'Warten Sie auf Überprüfung',
+        key.vendor: 'Verkäufer',
+        key.submitted: 'eingereicht',
+        key.lastStep: 'Letzter Schritt',
+        key.availAmazingDiscount: 'Nutzen Sie erstaunliche Rabatte',
+        key.descriptionOfDiscount:
+            'Sparen Sie groß mit 30% Rabatt für alle unsere Produkte!',
+        key.celebrateFreedomAndSavings: 'Feiern Sie Freiheit und Ersparnisse',
+        key.descriptionOfFreedomAndSavings:
+            'Exklusive Angebote für den Unabhängigkeitstag!',
+        key.boostYourBusiness: 'Steigern Sie Ihr Geschäft mit ismmart',
+        key.descriptionOfBoostYourBusiness:
+            'Null -Plattform -Registrierungsgebühr für Anbieter!',
+        key.shopCountry: 'Ladenland',
+        key.shopCity: 'Shop City',
+        key.vendorCNIC: 'Verkäufer CNIC',
+        key.shopCategory: 'Ladenkategorie',
+        key.yourShopCategory: 'Ihre Shop -Kategorie',
+        key.shopDescription: 'Ladenbeschreibung',
+        key.enterShopDescription: 'Geben Sie die Ladenbeschreibung ein',
+        key.shopImage: 'Shop -Bild',
+        key.shopCoverImage: 'Shop Coverbild',
+        key.enterBankName: 'Geben Sie den Banknamen ein',
+        key.enterAccountTitle: 'Eingeben Sie den Kontotitel',
+        key.accountTitle: 'Bankkontotitel',
+        key.enterAccountNumberOrIban: 'Geben Sie die Kontonummer / Iban ein',
+        key.cityReq: 'Stadt wählen',
+        key.countryReq: 'Land auswählen',
+        key.emailIsRequired: 'E-Mail ist erforderlich',
+        key.passwordIsRequired: 'Passwort wird benötigt',
+        key.passwordConfirmIsRequired: 'Passwortbestätigung ist erforderlich',
+        key.FirstNameReq: 'Vorname ist erforderlich',
+        key.LastNameReq: 'Nachname ist erforderlich',
+        key.incorrectAddress: 'Geben Sie die richtige Adresse ein',
+        key.incorrectNTN: 'Geben Sie den richtigen NTN ein',
+        key.incorrectCNIC: 'Geben Sie die richtige CNIC ein',
+        key.cnicReq: 'CNIC ist erforderlich',
+        key.categoryReq: 'Kategorie wählen',
+        key.incorrectBranchCode: 'Geben Sie den richtigen Zweig -Code ein',
+        key.shopDescReq: 'Ladenbeschreibung ist erforderlich',
+        key.frontSideReq: 'CNIC -Vorderseite ist erforderlich',
+        key.backSideReq: 'CNIC -Rückseite ist erforderlich',
+        key.chequeImageReq: 'Überprüfen Sie das Bild ist erforderlich',
+        key.shopLogoImageReq: 'Shop -Logo/Image ist erforderlich',
+        key.helpCenter: 'Hilfezentrum',
+        key.shopAddressReq: 'Ladenadresse ist erforderlich',
+        key.shopNameReq: 'Ladenname ist erforderlich',
+        key.getOnboard: 'An Bord zu holen',
+        key.createYourAccount: 'Erstelle deinen Account',
+        key.continueWithSameEmail: 'Fahren Sie mit derselben E -Mail fort',
+        key.continueWithDiffEmail: 'Mit unterschiedlichen E -Mails',
+        key.chequeImageNote:
+            'Dieses Scheckbild sollte die gleichen Bankdetails zu sich genommen haben, wie oben erwähnt',
+        key.enterCNIC: 'Geben Sie CNIC ein',
+        key.enterBranchCode: 'Geben Sie die Filiale ein',
+        key.maxAddressLimitMsg:
+            'Maximale Adressgrenze erreicht. Bitte aktualisieren/löschen Sie die Adresse, um fortzufahren',
+        key.forgotPasswordDesc:
+            'Geben Sie Ihre E -Mail ein, um eine E -Mail \ nwith den OTP -Code zu erhalten.',
+        key.emailVerification: 'E-Mail-Verifizierung',
+        key.serverUnableToHandle: 'Der Server kann keine Anfrage bearbeiten',
+        key.serverTakingTooLong: 'Der Server braucht zu lange, um zu antworten',
+        key.noInternetConnection: 'Keine Internetverbindung',
+        key.questions: 'Fragen',
+        key.updateQuestion: 'Fragen aktualisieren',
+        key.deleteQuestion: 'Frage löschen',
+        key.deleteQuestionDialogDesc:
+            'Sind Sie sicher, dass Sie Frage löschen möchten?',
+        key.question: 'Fragen',
+        key.addAnswer: 'Antwort hinzufügen',
+        key.viewProduct: 'Produkt anzeigen',
+        key.answer: 'Antwort',
+        key.updateAnswer: 'Aktualisieren Sie die Antwort',
+        key.deleteAnswer: 'Antwort löschen',
+        key.addQuestion: 'Frage hinzufügen',
+        key.updateProfile: 'Account aktualisieren',
+        key.pickImage: 'Bild wählen',
+        key.currentPassword: 'Aktuelles Passwort ist erforderlich',
+        key.updateShippingAdd: 'Versandadresse aktualisieren',
+        key.addShippingAdd: 'Versandadresse hinzufügen',
       };
 }

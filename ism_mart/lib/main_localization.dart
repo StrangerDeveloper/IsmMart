@@ -23,9 +23,11 @@
 // //      572245348----> MembershipAndPlans
 // //      368543940 ---> PrivacyPolicy
 // //      38595980-----> Contact Us
-//   //1563929016 ---> hayat
+// //      1563929016 ---> hayat
+// //      15336104 ----> Sheet4
+// //      1522681252 ---> VendorTermsAndConditions
 //
-//   String sheetId = "1563929016";
+//   String sheetId = "15336104";
 //
 //   String _phraseKey = '';
 //   List<LocalizationModel> _localizations = [];
@@ -123,9 +125,9 @@
 //     stdout.writeln('---------------------------------------');
 //     //stdout.writeln('Saving app_translation_new.g.dart');
 //     //stdout.writeln('Saving app_translation_about_us.g.dart');
-//     stdout.writeln('Saving app_translation_sheetId_38595980.g.dart');
+//     stdout.writeln('Saving app_translation_sheetId_$sheetId.g.dart');
 //     stdout.writeln('---------------------------------------');
-//     final file = File('app_translation_sheet_38595980.g.dart');
+//     final file = File('app_translation_sheet_$sheetId.g.dart');
 //     await file.writeAsString(_localizationFile);
 //     stdout.writeln('Done...');
 //   } catch (e) {

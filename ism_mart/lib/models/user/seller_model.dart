@@ -29,7 +29,7 @@ class SellerModelResponse {
 }
 
 class SellerModel {
-  int? id, userId, cityId;
+  int? id, userId, cityId, countryId;
   String? storeName, storeDesc, storeUrl, cityName;
   String? ownerName, status, visibility, address;
   num? rating;
@@ -48,6 +48,7 @@ class SellerModel {
     this.storeUrl,
     this.ownerName,
     this.cityId,
+    this.countryId,
     this.status,
     this.visibility,
     this.rating,
@@ -72,8 +73,9 @@ class SellerModel {
         id: json["id"],
         storeName: json["storeName"] == null ? null : json["storeName"],
         cityName: json["cityName"] == null ? null : json["cityName"],
-        cityId: json["cityId"] == null ? null : json["cityId"],
-        storeDesc: json["storeDesc"] == null ? null : json["storeDesc"],
+        cityId: json["city"] == null ? null : json["city"],
+        countryId: json['country'] == null ? null : json['country'],
+      storeDesc: json["storeDesc"] == null ? null : json["storeDesc"],
         storeUrl: json["storeURL"] == null ? null : json["storeURL"],
         ownerName: json["ownerName"] == null ? null : json["ownerName"],
         status: json["status"],
@@ -91,7 +93,7 @@ class SellerModel {
         json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
         address: json["address"] == null ? null : json["updatedAt"],
         bankName: json["bankName"],
-        // branchCode: json['branchCode'],
+        branchCode: json['branchCode'],
         accountTitle: json["accountTitle"],
         accountNumber: json["accountNumber"],
         storeImage: json["storeImage"],
@@ -104,6 +106,7 @@ class SellerModel {
         "storeName": storeName == null ? null : storeName,
         "cityName": cityName == null ? null : cityName,
         "cityId": cityId == null ? null : cityId,
+        "countryId": countryId == null ? null : countryId,
         "storeDesc": storeDesc == null ? null : storeDesc,
         "storeURL": storeUrl == null ? null : storeUrl,
         "ownerName": ownerName == null ? null : ownerName,
@@ -119,7 +122,7 @@ class SellerModel {
         "bankName": bankName,
         "accountTitle": accountTitle,
         "accountNumber": accountNumber,
-        // "branchCode": branchCode,
+        "branchCode": branchCode,
         "storeImage": storeImage,
         "coverImage": coverImage,
         "updatedAt": updatedAt == null ? null : updatedAt!.toIso8601String(),

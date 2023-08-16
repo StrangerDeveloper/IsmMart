@@ -54,6 +54,7 @@ class DealsView extends StatelessWidget {
                             ),
                           ),
                         ),
+
                         Expanded(
                           child: GridView.builder(
                             padding: EdgeInsets.all(8),
@@ -84,6 +85,7 @@ class DealsView extends StatelessWidget {
                           )
                       ],
                     ),
+
                     NoInternetView(
                       onPressed: () async {
                         await viewModel.getProducts();

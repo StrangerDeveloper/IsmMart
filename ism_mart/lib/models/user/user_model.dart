@@ -31,13 +31,14 @@ class UserModel {
     this.countryId,
     this.cityId,
     this.zipCode,
+    this.infoCompleted,
     this.defaultAddress = false,
     this.name,
     this.imageUrl,
     this.vendor,
   });
 
-  int? id, countryId, cityId;
+  int? id, countryId, cityId, infoCompleted;
   String? firstName, lastName, name, email, token;
   String? address, phone, password, zipCode;
   String? role, imageUrl;
@@ -66,6 +67,7 @@ class UserModel {
         password: json["password"],
         role: json["role"],
         emailVerified: json["email_verified"],
+        infoCompleted: json['infoCompleted'],
         city: json["City"] == null ? null : CountryModel.fromJson(json["City"]),
         country: json["Country"] == null
             ? null
@@ -95,6 +97,7 @@ class UserModel {
         "role": role,
         "country": country?.toJson(),
         "city": city?.toJson(),
+        "infoCompleted": infoCompleted,
         "email_verified": emailVerified,
         "createdAt": createdAt?.toIso8601String(),
         "updatedAt": updatedAt?.toIso8601String(),

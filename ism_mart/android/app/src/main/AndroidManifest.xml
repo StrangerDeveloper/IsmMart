@@ -49,7 +49,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="http" />
                 <data android:scheme="https" />
-                <data  android:host="ismmart-api.com" />
+                <data  android:host="ismmart.com" />
                 <data  android:host="ismmart-backend.com" />
 
             </intent-filter>

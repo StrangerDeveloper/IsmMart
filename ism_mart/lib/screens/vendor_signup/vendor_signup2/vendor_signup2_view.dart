@@ -220,7 +220,7 @@ class VendorSignUp2View extends StatelessWidget {
     return CustomTextField3(
       keyboardType: TextInputType.text,
       title: langKey.shopName.tr,
-      hintText: langKey.youShopName.tr,
+      hintText: langKey.enterShopName.tr,
       controller: viewModel.shopNameController,
       autoValidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
@@ -314,7 +314,7 @@ class VendorSignUp2View extends StatelessWidget {
     return CustomTextField3(
       keyboardType: TextInputType.text,
       title: langKey.shopAddress.tr,
-      hintText: langKey.youShopAddress.tr,
+      hintText: langKey.enterShopAddress.tr,
       controller: viewModel.shopAddressController,
       autoValidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
@@ -534,7 +534,7 @@ class VendorSignUp2View extends StatelessWidget {
         FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]+|\s')),
       ],
       title: langKey.ownerName.tr,
-      hintText: langKey.yourOwnerName.tr,
+      hintText: langKey.enterOwnerName.tr,
       controller: viewModel.ownerNameController,
       autoValidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
@@ -567,7 +567,7 @@ class VendorSignUp2View extends StatelessWidget {
     return CustomTextField3(
       required: false,
       title: 'NTN (${langKey.ifAvailable.tr})',
-      hintText: langKey.yourShopNTNNumber.tr,
+      hintText: langKey.enterNTNNumber.tr,
       controller: viewModel.ntnController,
       autoValidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {

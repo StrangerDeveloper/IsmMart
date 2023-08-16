@@ -7,9 +7,14 @@ import 'package:ism_mart/exports/exports_model.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 
-class SellerDashBoardViewModel extends GetxController {
+class SellerDashBoardViewModel extends GetxController with GetTickerProviderStateMixin{
   ScrollController scrollController = ScrollController();
   int pageNo = 0;
+  late AnimationController animationController1 = AnimationController(vsync: this, duration: Duration(milliseconds: 500));
+  late Animation<Offset> animation1 = Tween<Offset>(begin: const Offset(0, 0.3), end: Offset.zero).animate(animationController1);
+  late AnimationController animationController2 = AnimationController(vsync: this, duration: Duration(seconds: 2));
+  late Animation<double> animation2 = CurvedAnimation(parent: animationController2, curve: Curves.ease);
+  RxBool announcementVisibility = true.obs;
   RxBool showLoader = false.obs;
   Rx<VendorStats> vendorStats = VendorStats().obs;
   List<VendorOrder> ordersList = <VendorOrder>[].obs;
@@ -20,6 +25,16 @@ class SellerDashBoardViewModel extends GetxController {
     getOrders();
     scrollController.addListener(() {
       getOrders();
+    });
+    animationController1.forward();
+    animationController1.addListener(() {
+      animation1.value;
+      if(animationController1.isCompleted) {
+        animationController2.forward();
+        animationController2.addListener(() {
+          animation2.value;
+        });
+      }
     });
     super.onReady();
   }

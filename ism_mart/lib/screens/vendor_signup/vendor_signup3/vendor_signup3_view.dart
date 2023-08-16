@@ -190,7 +190,7 @@ class VendorSignUp3View extends StatelessWidget {
   Widget bankNameTextField() {
     return CustomTextField3(
       title: langKey.bankName.tr,
-      hintText: langKey.yourBankName.tr,
+      hintText: langKey.enterBankName.tr,
       controller: viewModel.bankNameController,
       autoValidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
@@ -205,7 +205,7 @@ class VendorSignUp3View extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: CustomTextField3(
         title: langKey.accountTitle.tr,
-        hintText: langKey.yourAccountTitle.tr,
+        hintText: langKey.enterAccountTitle.tr,
         controller: viewModel.bankAccTitleController,
         autoValidateMode: AutovalidateMode.onUserInteraction,
         validator: (value) {
@@ -219,7 +219,7 @@ class VendorSignUp3View extends StatelessWidget {
   Widget bankAccountNumberTextField() {
     return CustomTextField3(
       title: langKey.bankAccountNumber.tr,
-      hintText: langKey.yourAccountNumber.tr,
+      hintText: langKey.enterAccountNumberOrIban.tr,
       controller: viewModel.bankAccNumberController,
       autoValidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
@@ -240,7 +240,7 @@ class VendorSignUp3View extends StatelessWidget {
             FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
             FilteringTextInputFormatter.digitsOnly,
           ],
-          hintText: langKey.yourBranchCode.tr,
+          hintText: langKey.enterBranchCode.tr,
           controller: viewModel.branchCodeController,
           autoValidateMode: AutovalidateMode.onUserInteraction,
           validator: (value) {
@@ -267,5 +267,4 @@ class VendorSignUp3View extends StatelessWidget {
       ),
     );
   }
-
 }

@@ -46,12 +46,18 @@ class CustomSearchBar extends StatelessWidget {
             Icon(Icons.search, color: kPrimaryColor),
             Padding(
               padding: EdgeInsets.only(left: 4.0),
-              child: Text(
-                searchText != "" ? searchText! : langKey.searchIn.tr,
-                style: TextStyle(
-                  color: kLightColor,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 13.0,
+              child: SizedBox(
+                width: Get.width *.6,
+                child: Expanded(
+                  child: Text(
+                  overflow:  TextOverflow.ellipsis,
+                    searchText != "" ? searchText! : langKey.searchIn.tr,
+                    style: TextStyle(
+                      color: kLightColor,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 13.0,
+                    ),
+                  ),
                 ),
               ),
             ),

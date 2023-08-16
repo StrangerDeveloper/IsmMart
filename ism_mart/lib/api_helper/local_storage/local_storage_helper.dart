@@ -42,6 +42,7 @@ class LocalStorageHelper {
 
   static Future<UserModel> getStoredUser() async {
     if (localStorage.read(currentUserKey) != null) {
+      print(localStorage.read(currentUserKey));
       return UserModel.fromJson(localStorage.read(currentUserKey));
     } else {
       return UserModel();

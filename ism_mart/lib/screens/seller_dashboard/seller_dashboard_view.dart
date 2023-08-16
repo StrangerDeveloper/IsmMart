@@ -50,6 +50,60 @@ class SellerDashboardView extends StatelessWidget {
                 ),
               ],
             ),
+            Obx(() => Visibility(
+              visible: viewModel.announcementVisibility.value,
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                color: Colors.black54,
+                child: SlideTransition(
+                  position: viewModel.animation1,
+                  child: AlertDialog(
+                    title: FadeTransition(
+                      opacity: viewModel.animation2,
+                        child: Center(child: Text(langKey.updateInfo.tr, style: headline1,))),
+                    contentPadding: EdgeInsets.symmetric(horizontal: 25, vertical: 30),
+                    content: FadeTransition(
+                      opacity: viewModel.animation2,
+                      child: Text(
+                        langKey.updateInfoAlertMsg.tr,
+                        style: bodyText1,
+                      ),
+                    ),
+                    actions: [
+                      FadeTransition(
+                        opacity: viewModel.animation2,
+                        child: TextButton(
+                            onPressed: (){
+                              viewModel.animationController1.reverse().whenComplete(() {
+                                viewModel.announcementVisibility.value = false;
+                              });
+                              viewModel.animationController1.addListener(() {
+                                viewModel.animation1.value;
+                              });
+                              },
+                            child: Text(
+                                langKey.skip.tr,
+                              style: headline4,
+                            ),
+                        ),
+                      ),
+                      FadeTransition(
+                          opacity: viewModel.animation2,
+                          child: TextButton(
+                              onPressed: (){
+                                viewModel.announcementVisibility.value = false;
+                                Get.toNamed(Routes.vendorSignUp2);
+                              },
+                              child: Text(langKey.proceed.tr, style: headline4,),
+                          ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            ),
             NoInternetView(
               onPressed: () {
                 viewModel.getStats();

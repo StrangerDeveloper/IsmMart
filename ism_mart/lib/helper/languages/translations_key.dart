@@ -384,6 +384,7 @@ const profile = "profile",
     deActivateMsg = "deActivateMsg",
     FirstNameReq = "FirstNameReq",
     LastNameReq = "LastNameReq",
+    legalDocument = "legalDocument",
     incorrectAccOrIbanNo = 'incorrectAccNo',
     incorrectBranchCode = 'incorrectBranchCode',
     enterBranchCode = 'enterBranchCode';
@@ -446,11 +447,11 @@ const login = "login",
     vendorBankAccount = 'vendorBankAccount',
     profileStatus = 'profileStatus',
     shopName = 'shopName',
-    youShopName = 'youShopName',
+    enterShopName = 'enterShopName',
     shopAddress = 'shopAddress',
-    youShopAddress = 'youShopAddress',
+    enterShopAddress = 'youShopAddress',
     ifAvailable = 'ifAvailable',
-    yourShopNTNNumber = 'yourShopNTNNumber',
+    enterNTNNumber = 'enterShopNTNNumber',
     shopNumber = 'shopNumber',
     lessThanMb = 'lessThanMb',
     chooseFile = 'chooseFile',
@@ -467,25 +468,24 @@ const login = "login",
     descriptionOfBoostYourBusiness = 'descriptionOfBoostYourBusiness',
     shopCountry = 'shopCountry',
     shopCity = 'shopCity',
-    yourOwnerName = 'yourOwnerName',
+    enterOwnerName = 'enterOwnerName',
     vendorCNIC = 'vendorCNIC',
-    yourOwnerCNIC = 'yourOwnerCNIC',
     enterCNIC = 'enterCNIC',
     shopCategory = 'shopCategory',
     yourShopCategory = 'yourShopCategory',
     shopDescription = 'shopDescription',
     shopDescReq = 'shopDescReq',
     enterShopDescription = 'enterShopDescription',
-    // shopImage = 'shopImage',
-    // shopCoverImage = 'shopCoverImage',
-    yourBankName = 'yourBankName',
-    yourAccountTitle = 'yourAccountTitle',
+    shopImage = 'shopImage',
+    shopCoverImage = 'shopCoverImage',
+    enterBankName = 'enterBankName',
+    enterAccountTitle = 'enterAccountTitle',
     accountTitle = 'accountTitle',
     bankAccountNumber = 'bankAccountNumber',
-    yourAccountNumber = 'yourAccountNumber',
-    yourBranchCode = 'yourBranchCode',
+    enterAccountNumberOrIban = 'enterAccountNumberOrIban',
     ibanReq = 'ibanReq',
-    chequeImageNote = 'This cheque image should have the same bank details visible as you mentioned above';
+    chequeImageNote =
+        'This cheque image should have the same bank details visible as you mentioned above';
 
 /**
  * Form Validations
@@ -661,6 +661,12 @@ const errorTitle = "error",
 ///error messages
 const plzSelectSubCategory = "plzSelectSubCategory",
     someThingWentWrong = "someThingWentWrong";
+
+/// Alert Message
+const updateInfoAlertMsg = 'updateInfoAlertDetails',
+    skip = 'skip',
+    updateInfoToProceed = 'updateInfoToProceed',
+    updateInfo = "updateInfo";
 
 /// AboutUS Text
 

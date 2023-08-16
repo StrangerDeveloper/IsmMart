@@ -69,19 +69,20 @@ class SearchDetailsView extends GetView<CustomSearchController> {
             appBar: _appBar(),
             body: Obx(
               () => controller.noProductsFound.value
-                  ? NoInternetView()
-                  // Center(
-                  //     child: NoDataFoundWithIcon(
-                  //       title: langKey.emptyProductSearch.tr,
-                  //       subTitle: langKey.emptyProductSearchMsg.tr,
-                  //     ),
-                  //   )
+                  ?
+              //NoInternetView()
+                  Center(
+                      child: NoDataFoundWithIcon(
+                        title: langKey.emptyProductSearch.tr,
+                        subTitle: langKey.emptyProductSearchMsg.tr,
+                      ),
+                    )
                   : Stack(
                       children: [
                         _body(),
-                        NoInternetView(
-                          onPressed: () => controller.applyFilter(),
-                        )
+                        // NoInternetView(
+                        //   onPressed: () => controller.applyFilter(),
+                        // )
                       ],
                     ),
             )),
@@ -108,15 +109,15 @@ class SearchDetailsView extends GetView<CustomSearchController> {
     return Obx(() => controller.isLoading.isTrue
         ? CustomLoading(isItForWidget: true, color: kPrimaryColor)
         : controller.productList.isEmpty
-            ? NoInternetView(
-                onPressed: () => controller.applyFilter(),
-              )
-            //  Center(
-            //     child: NoDataFoundWithIcon(
-            //       title: langKey.emptyProductSearch.tr,
-            //       subTitle: langKey.emptyProductSearchMsg.tr,
-            //     ),
+            // ? NoInternetView(
+            //     onPressed: () => controller.applyFilter(),
             //   )
+           ?  Center(
+                child: NoDataFoundWithIcon(
+                  title: langKey.emptyProductSearch.tr,
+                  subTitle: langKey.emptyProductSearchMsg.tr,
+                ),
+              )
             : _buildProductView(controller.productList));
   }
 

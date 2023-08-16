@@ -62,7 +62,7 @@ class VendorSignUp1ViewModel extends GetxController{
             'firstName': firstNameController.text,
             'lastName': lastNameController.text,
             'email': emailController.text,
-            'phoneNumber': countryCode.value + phoneNumberController.text,
+            'phone': countryCode.value + phoneNumberController.text,
             'password': passwordController.text,
             'countryId': countryID.value,
             'cityId': cityID.value,

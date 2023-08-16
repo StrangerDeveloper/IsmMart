@@ -41,6 +41,7 @@ class CustomSearchController extends GetxController {
     scrollController.addListener(() {
       loadMoreFilteredProducts();
     });
+    applyFilter();
     super.onReady();
   }
 
@@ -91,6 +92,7 @@ class CustomSearchController extends GetxController {
   var stopLoadMore = false.obs;
 
   applyFilter() async {
+
     GlobalVariable.internetErr(false);
     int? categoryId = selectedCategoryId.value;
     num? minPrice = num.parse(minPriceController.text.isNotEmpty
@@ -120,17 +122,20 @@ class CustomSearchController extends GetxController {
     isLoading.value = true;
     print(filters);
     await _apiProvider.filterSearch(appliedFilters: filters).then((products) {
+    //  print("search filter print-----=>> $products");
       if (products.length == 0) {
         noProductsFound.value = true;
       }
       noProductsFound.value = false;
       productList.clear();
       productList.addAll(products);
-      productList.isEmpty
-          ? GlobalVariable.internetErr(true)
-          : GlobalVariable.internetErr(false);
+      print("search filter print-----=>> ${productList[0]}");
+   //   productList.isEmpty
+          // ? GlobalVariable.internetErr(true)
+          // : GlobalVariable.internetErr(false);
       isLoading.value = false;
     }).catchError((onError) {
+      GlobalVariable.internetErr(true);
       isLoading.value = false;
       debugPrint("searchFilter: $onError");
     });

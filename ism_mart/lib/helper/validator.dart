@@ -87,7 +87,7 @@ class Validator {
   String? validateNTN(String? value){
     if(GetUtils.isBlank(value)!){
       return null;
-    } else if(value?.length != 7){
+    } else if(value!.length < 7 || value.length > 9){
       return langKey.incorrectNTN.tr;
     } else {
       return null;
@@ -111,7 +111,7 @@ class Validator {
       return langKey.bankAccountReq.tr;
     } else {
       VendorSignUp3ViewModel vendorSignUp3ViewModel = Get.find();
-      if(value!.length < 16 || value.length > 33){
+      if(value!.length < 14 || value.length > 33){
 
         Future.delayed(Duration(milliseconds: 500), (){
           vendorSignUp3ViewModel.enableBranchCode.value = false;
@@ -138,8 +138,10 @@ class Validator {
     if (GetUtils.isBlank(value)!) {
       if(bankAcc.isEmpty || bankAcc == ''){
         return null;
-      } else {
-        return langKey.enterBranchCode.tr;
+      } else if(RegExp(r'^-?(([0-9]*)|(([0-9]*)\.([0-9]*)))$').hasMatch(bankAcc)){
+          return langKey.enterBranchCode.tr;
+      } else{
+        return null;
       }
     } else if (value?.length != 4) {
       return langKey.incorrectBranchCode.tr;
