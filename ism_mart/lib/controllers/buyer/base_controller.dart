@@ -17,7 +17,7 @@ class BaseController extends GetxController {
   var searchController = TextEditingController();
   var cartCount = 0.obs;
 
-  getAllApiFucnc() {
+  getAllApiFunc() {
     fetchSliderImages();
     runSliderTimer();
     fetchSliderDiscountProducts();
@@ -29,7 +29,7 @@ class BaseController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    getAllApiFucnc();
+    getAllApiFunc();
     LocalStorageHelper.localStorage.listenKey(LocalStorageHelper.cartItemKey,
         (value) {
       setCartItemCount();

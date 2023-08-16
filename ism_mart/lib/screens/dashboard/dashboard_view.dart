@@ -63,7 +63,7 @@ class DashboardView extends GetView<BaseController> {
           ),
           NoInternetView(
             onPressed: () {
-              controller.getAllApiFucnc();
+              controller.getAllApiFunc();
               GlobalVariable.btnPress(true);
             },
           ),
