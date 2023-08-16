@@ -749,5 +749,10 @@ class Urdu {
         key.currentPassword: 'موجودہ پاس ورڈ کی ضرورت ہے',
         key.updateShippingAdd: 'شپنگ ایڈریس کو اپ ڈیٹ کریں',
         key.addShippingAdd: 'شپنگ ایڈریس شامل کریں',
+        key.updateInfoToProceed: 'آگے بڑھنے کے لئے معلومات کو اپ ڈیٹ کریں',
+        key.updateInfoAlertMsg:
+            'ہمارے شرائط و ضوابط کو اپ ڈیٹ کردیا گیا ہے۔ بغیر کسی ہموار کاروباری تعلقات کو یقینی بنانے کے لئے ، براہ کرم آگے بڑھنے پر ٹیپ کریں',
+        key.skip: 'چھوڑ دو',
+        key.updateInfo: 'معلومات کو اپ ڈیٹ کریں',
       };
 }

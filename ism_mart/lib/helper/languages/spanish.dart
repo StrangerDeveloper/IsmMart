@@ -741,5 +741,10 @@ class Spanish {
         key.currentPassword: 'Se requiere una contraseña actual',
         key.updateShippingAdd: 'Actualizar la dirección de envío',
         key.addShippingAdd: 'Agregar dirección de envío',
+        key.updateInfoToProceed: 'Actualizar información para continuar',
+        key.updateInfoAlertMsg:
+            'Nuestros términos y condiciones se han actualizado. Para garantizar una relación comercial perfecta, toque amablemente en proceder',
+        key.skip: 'Saltar',
+        key.updateInfo: 'Actualizar información',
       };
 }

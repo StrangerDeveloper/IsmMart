@@ -749,5 +749,11 @@ class French {
         key.currentPassword: 'Le mot de passe actuel est requis',
         key.updateShippingAdd: 'Mettre à jour l\'adresse d\'expédition',
         key.addShippingAdd: 'Ajouter l\'adresse d\'expédition',
+        key.updateInfoToProceed:
+            'Mettre à jour les informations pour continuer',
+        key.updateInfoAlertMsg:
+            'Nos termes et conditions ont été mis à jour. Pour assurer une relation commerciale transparente, veuillez appuyer sur Procéder',
+        key.skip: 'Sauter',
+        key.updateInfo: 'Mettre à jour les informations',
       };
 }

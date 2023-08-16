@@ -745,5 +745,10 @@ class Russian {
         key.currentPassword: 'Требуется текущий пароль',
         key.updateShippingAdd: 'Обновите адрес доставки',
         key.addShippingAdd: 'Добавить адрес доставки',
+        key.updateInfoToProceed: 'Обновить информацию для продолжения',
+        key.updateInfoAlertMsg:
+            'Наши условия были обновлены. Чтобы обеспечить бесшовные деловые отношения, любезно нажмите на продолжение',
+        key.skip: 'Пропускать',
+        key.updateInfo: 'Обновить информацию',
       };
 }

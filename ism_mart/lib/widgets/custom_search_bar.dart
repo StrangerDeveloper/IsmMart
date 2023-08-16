@@ -32,8 +32,8 @@ class CustomSearchBar extends StatelessWidget {
       }
       },
       child: Container(
-        height: 34.0,
-        width: double.infinity,
+        height: 34,
+        //width: double.infinity,
         alignment: Alignment.center,
         padding: const EdgeInsets.symmetric(horizontal: kFixPadding),
         decoration: BoxDecoration(
@@ -44,20 +44,15 @@ class CustomSearchBar extends StatelessWidget {
         child: Row(
           children: [
             Icon(Icons.search, color: kPrimaryColor),
-            Padding(
-              padding: EdgeInsets.only(left: 4.0),
-              child: SizedBox(
-                width: Get.width *.6,
-                child: Expanded(
-                  child: Text(
-                  overflow:  TextOverflow.ellipsis,
-                    searchText != "" ? searchText! : langKey.searchIn.tr,
-                    style: TextStyle(
-                      color: kLightColor,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 13.0,
-                    ),
-                  ),
+            SizedBox(width: 4),
+            Expanded(
+              child: Text(
+              overflow:  TextOverflow.ellipsis,
+                searchText != "" ? searchText! : langKey.searchIn.tr,
+                style: TextStyle(
+                  color: kLightColor,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 13.0,
                 ),
               ),
             ),
