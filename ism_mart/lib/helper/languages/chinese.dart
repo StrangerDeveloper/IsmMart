@@ -706,5 +706,9 @@ class Chinese {
         key.currentPassword: '需要当前密码',
         key.updateShippingAdd: '更新运输地址',
         key.addShippingAdd: '添加运输地址',
+        key.updateInfoToProceed: '更新信息继续',
+        key.updateInfoAlertMsg: '我们的条款和条件已更新。为了确保建立无缝的业务关系，请点击继续',
+        key.skip: '跳过',
+        key.updateInfo: '更新信息',
       };
 }

@@ -703,5 +703,10 @@ class Korean {
         key.currentPassword: '현재 비밀번호가 필요합니다',
         key.updateShippingAdd: '배송 주소를 업데이트하십시오',
         key.addShippingAdd: '배송 주소를 추가하십시오',
+        key.updateInfoToProceed: '진행하려면 정보를 업데이트하십시오',
+        key.updateInfoAlertMsg:
+            '이용 약관이 업데이트되었습니다. 원활한 비즈니스 관계를 보장하려면 친절하게 진행하십시오.',
+        key.skip: '건너뛰다',
+        key.updateInfo: '정보 업데이트',
       };
 }
