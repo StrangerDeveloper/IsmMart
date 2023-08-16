@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/exports/export_controllers.dart';
-import 'package:ism_mart/helper/no_internet_view.dart';
 import 'package:ism_mart/exports/exports_model.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
@@ -19,8 +18,7 @@ class SearchDetailsView extends GetView<CustomSearchController> {
       this.calledToGoBackOnce})
       : super(key: key);
 
-  final bool? isCalledForLatestAndBestSeller,
-      calledToGoBackOnce;
+  final bool? isCalledForLatestAndBestSeller, calledToGoBackOnce;
   final String? searchQuery, productTypeKey;
   final int? categoryID, subCategoryID;
 
@@ -70,7 +68,7 @@ class SearchDetailsView extends GetView<CustomSearchController> {
             body: Obx(
               () => controller.noProductsFound.value
                   ?
-              //NoInternetView()
+                  //NoInternetView()
                   Center(
                       child: NoDataFoundWithIcon(
                         title: langKey.emptyProductSearch.tr,
@@ -92,7 +90,7 @@ class SearchDetailsView extends GetView<CustomSearchController> {
 
   CustomAppBar _appBar() {
     return CustomAppBar(
-      onTap: (){
+      onTap: () {
         controller.clearFilters();
         Get.back();
       },
@@ -112,7 +110,7 @@ class SearchDetailsView extends GetView<CustomSearchController> {
             // ? NoInternetView(
             //     onPressed: () => controller.applyFilter(),
             //   )
-           ?  Center(
+            ? Center(
                 child: NoDataFoundWithIcon(
                   title: langKey.emptyProductSearch.tr,
                   subTitle: langKey.emptyProductSearchMsg.tr,
