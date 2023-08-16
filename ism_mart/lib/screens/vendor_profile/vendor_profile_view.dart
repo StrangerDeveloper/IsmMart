@@ -32,8 +32,7 @@ class VendorProfileView extends StatelessWidget {
               CustomTextBtn(
                 width: Get.width * 0.5,
                 onPressed: () {
-                  Get.toNamed(Routes.updateVendor,
-                      arguments: {'isRegisterScreen': false});
+                  Get.toNamed(Routes.vendorSignUp2);
                 },
                 title: langKey.updateBtn.tr,
               ),
