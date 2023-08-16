@@ -80,9 +80,9 @@ class SearchDetailsView extends GetView<CustomSearchController> {
                   : Stack(
                       children: [
                         _body(),
-                        NoInternetView(
-                          onPressed: () => controller.applyFilter(),
-                        )
+                        // NoInternetView(
+                        //   onPressed: () => controller.applyFilter(),
+                        // )
                       ],
                     ),
             )),
