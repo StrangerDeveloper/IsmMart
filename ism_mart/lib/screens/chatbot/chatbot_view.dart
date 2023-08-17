@@ -2,14 +2,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ism_mart/screens/chatbot/chatbot_viewmodel.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
 import 'package:ism_mart/widgets/no_internet_view.dart';
+
+import 'chatbot_viewmodel.dart';
 
 class ChatBotView extends StatelessWidget {
   ChatBotView({super.key});
 
-  final ChatBotViewModel viewModel = Get.put(ChatBotViewModel());
+  final ChatViewModel viewModel = Get.put(ChatViewModel());
 
   @override
   Widget build(BuildContext context) {
@@ -52,27 +53,27 @@ class ChatBotView extends StatelessWidget {
               },
               icon: const Icon(CupertinoIcons.chevron_back),
             ),
-            CachedNetworkImage(
-              height: 45,
-              width: 45,
-              imageUrl: '',
-              imageBuilder: (context, imageProvider) {
-                return CircleAvatar(radius: 20, backgroundImage: imageProvider);
-              },
-              errorWidget: (context, url, error) {
-                return CircleAvatar(
-                  radius: 20,
-                  backgroundImage: AssetImage(
-                    'assets/images/profile.png',
-                  ),
-                );
-              },
-              placeholder: (context, url) {
-                return const Center(
-                  child: CircularProgressIndicator(strokeWidth: 2.0),
-                );
-              },
-            ),
+            // CachedNetworkImage(
+            //   height: 45,
+            //   width: 45,
+            //   imageUrl: '',
+            //   imageBuilder: (context, imageProvider) {
+            //     return CircleAvatar(radius: 20, backgroundImage: imageProvider);
+            //   },
+            //   errorWidget: (context, url, error) {
+            //     return CircleAvatar(
+            //       radius: 20,
+            //       backgroundImage: AssetImage(
+            //         'assets/images/profile.png',
+            //       ),
+            //     );
+            //   },
+            //   placeholder: (context, url) {
+            //     return const Center(
+            //       child: CircularProgressIndicator(strokeWidth: 2.0),
+            //     );
+            //   },
+            // ),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -111,9 +112,9 @@ class ChatBotView extends StatelessWidget {
     return Obx(
       () => Flexible(
         child: ListView.builder(
-          reverse: true,
+          // reverse: true,
           controller: viewModel.scrollController,
-          itemCount: viewModel.messagesList.length,
+          itemCount: viewModel.messages.length,
           padding: EdgeInsets.only(top: 8, bottom: 8),
           itemBuilder: (context, index) {
             return messageListViewItem(index);
@@ -126,18 +127,17 @@ class ChatBotView extends StatelessWidget {
   Widget messageListViewItem(int index) {
     return Container(
       padding: EdgeInsets.only(
-        left: viewModel.messagesList[index].msgAction == "received" ? 14 : 0,
-        right: viewModel.messagesList[index].msgAction == "received" ? 0 : 14,
+        left: viewModel.messages[index].isUser ? 0 : 14,
+        right: viewModel.messages[index].isUser ? 14 : 0,
         top: 12,
       ),
       child: Column(
         crossAxisAlignment:
-            viewModel.messagesList[index].msgAction == "received"
-                ? CrossAxisAlignment.start
-                : CrossAxisAlignment.end,
+            viewModel.messages[index].isUser ? CrossAxisAlignment.end
+                : CrossAxisAlignment.start,
         children: [
           messageContainer(index),
-          dateTimeContainers(index),
+          // dateTimeContainers(index),
         ],
       ),
     );
@@ -149,53 +149,46 @@ class ChatBotView extends StatelessWidget {
       padding: EdgeInsets.only(left: 14, right: 14, bottom: 12, top: 12),
       constraints: BoxConstraints(
         maxWidth: Get.width * 0.85,
-        minWidth: Get.width * 0.3,
+        minWidth: Get.width * 0.03,
       ),
       decoration: BoxDecoration(
-        color: (viewModel.messagesList[index].msgAction == "received"
-            ? Colors.black.withOpacity(0.1)
-            : Colors.black),
+        color: (viewModel.messages[index].isUser
+            ? Colors.black
+            : Colors.black.withOpacity(0.3)),
         borderRadius: BorderRadius.only(
-          topRight: viewModel.messagesList[index].msgAction == "received"
+          topRight: viewModel.messages[index].isUser ? Radius.zero
+              : Radius.circular(18),
+          topLeft: viewModel.messages[index].isUser
               ? Radius.circular(18)
               : Radius.zero,
-          topLeft: viewModel.messagesList[index].msgAction == "received"
-              ? Radius.zero
-              : Radius.circular(18),
           bottomRight: Radius.circular(18),
           bottomLeft: Radius.circular(18),
         ),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          (viewModel.messagesList[index].msgBody != null &&
-                  viewModel.messagesList[index].msgBody != '')
-              ? Text(
-                  viewModel.messagesList[index].msgBody ?? '',
-                  style: TextStyle(
-                    color: viewModel.messagesList[index].msgAction == "received"
-                        ? Colors.black
-                        : Colors.white,
-                  ),
-                )
-              : SizedBox(),
-        ],
+      child: viewModel.messages[index].message?.text != null &&
+          viewModel.messages[index].message?.text?.text?[0] != ''
+        ? Text(
+      viewModel.messages[index].message?.text?.text?.first ?? '',
+      textAlign: viewModel.messages[index].isUser ? TextAlign.end : TextAlign.start,
+      style: TextStyle(
+        color: Colors.white,
       ),
+    )
+        : SizedBox(),
     );
   }
 
-  Widget dateTimeContainers(int index) {
-    return Text(
-      (viewModel.messagesList[index].msgDate ?? '') +
-          ' ' +
-          (viewModel.messagesList[index].msgTime ?? ''),
-      style: TextStyle(
-        fontSize: 10.5,
-        color: Colors.grey,
-      ),
-    );
-  }
+  // Widget dateTimeContainers(int index) {
+  //   return Text(
+  //     (viewModel.messagesList[index].msgDate ?? '') +
+  //         ' ' +
+  //         (viewModel.messagesList[index].msgTime ?? ''),
+  //     style: TextStyle(
+  //       fontSize: 10.5,
+  //       color: Colors.grey,
+  //     ),
+  //   );
+  // }
 
   Widget writeMessage(BuildContext context) {
     return Container(
@@ -205,7 +198,7 @@ class ChatBotView extends StatelessWidget {
         children: [
           Expanded(
             child: TextFormField(
-              controller: viewModel.messageController,
+              controller: viewModel.textController,
               textInputAction: TextInputAction.send,
               maxLines: 3,
               minLines: 1,
@@ -229,15 +222,12 @@ class ChatBotView extends StatelessWidget {
             margin: EdgeInsets.only(right: 5),
             child: FloatingActionButton(
               onPressed: () {
-                //viewModel.sendMessage();
+                viewModel.sendMessage(viewModel.textController.text);
               },
-              child: Transform.rotate(
-                angle: -19.5,
-                child: Icon(
-                  Icons.send,
-                  color: Colors.grey.shade700,
-                  size: 30,
-                ),
+              child: Icon(
+                Icons.send,
+                color: Colors.grey.shade700,
+                size: 30,
               ),
               backgroundColor: Colors.transparent,
               elevation: 0,

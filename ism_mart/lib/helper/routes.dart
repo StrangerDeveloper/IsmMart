@@ -7,6 +7,7 @@ import 'package:ism_mart/screens/buyer_orders/buyer_order_view.dart';
 import 'package:ism_mart/screens/buyer_profile/buyer_profile_view.dart';
 import 'package:ism_mart/screens/change_address/change_address_view.dart';
 import 'package:ism_mart/screens/change_password/change_password_view.dart';
+import 'package:ism_mart/screens/chatbot/chatbot_view.dart';
 import 'package:ism_mart/screens/dispute_detail/dispute_detail_view.dart';
 import 'package:ism_mart/screens/email_verification/email_verification_view.dart';
 import 'package:ism_mart/screens/forgot_password/forgot_password_view.dart';
@@ -54,6 +55,7 @@ class Routes {
   static const checkOutRoute = "/checkout";
   static const contactUs = "/contactUs";
   static const dashboard = "/dashboard";
+  static const chatScreen = "/chatScreen";
   static const disputeDetail = "/disputeDetail";
   static const emailVerificationLinkRoute = "/emailVerificationLink";
   static const emailVerified = "/api/auth/verifyEmail";
@@ -167,6 +169,10 @@ class Routes {
     GetPage(
       name: dashboard,
       page: () => DashboardView(),
+    ),
+    GetPage(
+      name: chatScreen,
+      page: () => ChatBotView(),
     ),
     GetPage(
       name: disputeDetail,

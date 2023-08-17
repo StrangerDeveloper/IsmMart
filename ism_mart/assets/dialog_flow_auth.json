@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "ismmart-chatbot-tqxn",
+  "private_key_id": "a5e2e21a2d7bf5784352c88e1f141cf56971480b",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCf6+wwORN0A9l7\nMQOXP/SeFU6RJEyPJa/QwkpHE1tBrh6LuravAmJajfBfhwSdR3gaaZoV5XHmNwhP\nUxJf5ei/pER7s/ejEjkHipk8omv3dYo2sxTzgYN+qogGPjZQFPbCsocfjg+MZxh/\nLne3Im7NGdZQCDtmp238cl01NY2h0kNSxF8vYNQpI3n/icFszksPFZKhzJ8M7xv4\n5rBaijxc+YtdLcXBTvc5Xr3gM/KTv4HcP6d0HoR3QfHD5L/iG7vN0oG52sIsfroz\nWtN2Yl/EYtqqYFY6mtS3Nj5Pls8Ic0U1fH7zEcPEc96zFB80gaww7b/Xc91fnE2F\nQ6hbmLphAgMBAAECggEAA1yPmPQGr3/mFzKslr4aEqV70sWHp9PG4UtnuXyv1Kqj\n5wvTO6yYD9trYs0rKtGP/eVjzx91Cm3kRntWc9JIxyg9NajW0QhczzadxexbutJv\nV8rx8xRJJOlBkajGrk5SAW3EdQyA0XqgbVo3G1AJomVfW7xgEAZfg6StZpUmEXlq\nFTLPsCsv1EqzL/81W/HHN12lLLUeiVf595npXeIYZFCGvkmQwNJJ7F/d7EqggETa\n/VGmaIfLi3zokFJG2L0klAvneTUWprWZyz49AmayTq9/tCjS1pjyZg52dD3TyuUW\nFpgf+rBoQOIlrebVpS+q/d8cZaNaCVwO+i2yI16/wQKBgQDPnpV2S6tW1eSyUvQ0\npZtiayU8zueOblyCuOBF1cKa+hWSVheisOJCZ3vW7dFD1+HBWy35bU2QpdgXA6jF\nSOXN5crqScdwTxf4a6Jfs+aIB2EbLrAAdic6GJ/nlauOjlM7AqDVystdLul7+XyN\nPlA0ier3cH9Qa8zdqfzRgH6HIQKBgQDFL/L6GxesN3m3L4oAu02pbNkgu4M1XOJ7\nsEE81iVoG+Oej/4X44tdGDdLqUHkkZrLBgRbPvOkdMSSOmtA23Mo7MQLQncyDjpr\nDJgTkOvlI9wb0tC75XcGcQ+mWJWAd1w2LxQd2POy9YSFMv7R2tFdiSd+H0Jtit+b\nBK3aWGoLQQKBgHuYZlVjun4ZGunlZCcrJxMxwZsveL1biYrwT+KC3DSyB8FzquJY\n9nidbiWGsXr3uxcGFppTrUcc00TwErpPKS6nS2KpxSZgj159hM4AJI56Bh7Obkv4\nCmYVXqvYd6aHp5iLef+LmADC+o+o97KFk+2S5OOkfsX7Rpv2o+B749bBAoGAJFu2\n/Y7JSqPf+Xr2gzQGGdtMHdD1XH2H9S6GmOUTeKLL0YzTWSxHoh6482Z+E9sVI6I0\nY260FfrB1ASZihfsn/soGrtipwQgmWR1FgZ+uH1oNGkmu76Pt8xZCl8DEfDwO71q\nhCZgqPrEOJsyiRdDy29irMquwOv+VuMB+2SaCQECgYEArikg+qohX9w4OiQunB5T\nqLHlb4lWi1FiGVJf4Bd5hhxLn58zZ3prBcJu9B5WUryAybzixgNgszPhHdycYWRP\nQR81hGlSt4FScvcvHiwEyMWOQq0R3tIynQyB70bHcIYyIRm24fAglLju6BYcWJqc\nBI0AENvaFRm9LR2tvBltSvU=\n-----END PRIVATE KEY-----\n",
+  "client_email": "ismmart@ismmart-chatbot-tqxn.iam.gserviceaccount.com",
+  "client_id": "106054478623627775925",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/ismmart%40ismmart-chatbot-tqxn.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

@@ -222,7 +222,7 @@ class BaseController extends GetxController {
   //TOO: Start Bottom Navigation setup
   var bottomNavPageController = PageController(initialPage: 0);
   List<Widget> bottomNavScreens = [
-    const DashboardView(),
+    DashboardView(),
     const CategoriesView(),
     DealsView(),
     CartView(),
