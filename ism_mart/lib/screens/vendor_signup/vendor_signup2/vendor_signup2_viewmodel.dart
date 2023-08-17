@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ism_mart/controllers/controllers.dart';
 import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import '../../../helper/api_base_helper.dart';
@@ -34,8 +35,9 @@ class VendorSignUp2ViewModel extends GetxController{
   RxBool categoryErrorVisibility = false.obs;
 
   @override
-  void onInit() {
+  void onInit() async{
     fetchCategories();
+    await authController.getCountries();
     super.onInit();
   }
 

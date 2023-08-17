@@ -37,6 +37,12 @@ class SignUpViewModel extends GetxController {
   }
 
   @override
+  void onInit() async{
+    await authController.getCountries();
+    super.onInit();
+  }
+
+  @override
   void onClose() {
     firstNameController.dispose();
     emailController.dispose();
