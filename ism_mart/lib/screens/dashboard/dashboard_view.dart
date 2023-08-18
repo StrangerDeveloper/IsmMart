@@ -10,6 +10,7 @@ import 'package:ism_mart/screens/dashboard/dashboard_viewmodel.dart';
 import 'package:ism_mart/screens/top_vendors/top_vendors_model.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/widgets/loader_view.dart';
 import '../../helper/global_variables.dart';
 import '../../widgets/custom_grey_border_container.dart';
 import '../../widgets/custom_loading.dart';
@@ -71,6 +72,7 @@ class DashboardView extends GetView<BaseController> {
               GlobalVariable.btnPress(true);
             },
           ),
+          LoaderView(),
         ],
       ),
     );

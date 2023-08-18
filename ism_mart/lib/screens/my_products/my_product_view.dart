@@ -34,11 +34,11 @@ class MyProductView extends StatelessWidget {
           backgroundColor: kPrimaryColor,
           icon: Icon(Icons.add),
           onPressed: () {
-            if(GlobalVariable.userModel?.infoCompleted == 1){
+            // if(GlobalVariable.userModel?.infoCompleted == 1){
               Get.toNamed(Routes.addProduct);
-            } else{
-              AppConstant.displaySnackBar(langKey.errorTitle.tr, langKey.updateInfoToProceed.tr);
-            }
+            // } else{
+            //   AppConstant.displaySnackBar(langKey.errorTitle.tr, langKey.updateInfoToProceed.tr);
+            // }
           },
           label: Text(langKey.addProduct.tr),
         ),
@@ -101,13 +101,13 @@ class MyProductView extends StatelessWidget {
       aspectRatio: 0.75,
       child: GestureDetector(
         onTap: () {
-          if(GlobalVariable.userModel?.infoCompleted == 1) {
+          // if(GlobalVariable.userModel?.infoCompleted == 1) {
             Get.toNamed(Routes.singleProductDetails, arguments: [
               {"calledFor": "seller", "productID": "${model.id}"}
             ]);
-          } else{
-            AppConstant.displaySnackBar(langKey.errorTitle.tr, langKey.updateInfoToProceed.tr);
-          }
+          // } else{
+          //   AppConstant.displaySnackBar(langKey.errorTitle.tr, langKey.updateInfoToProceed.tr);
+          // }
         },
         child: Container(
           clipBehavior: Clip.hardEdge,
@@ -213,7 +213,7 @@ class MyProductView extends StatelessWidget {
                     AppConstant.spaceWidget(width: 5),
                     CustomActionIcon(
                       onTap: () {
-                        if(GlobalVariable.userModel?.infoCompleted == 1) {
+                        // if(GlobalVariable.userModel?.infoCompleted == 1) {
                           AppConstant.showConfirmDeleteDialog(
                             ontap: () {
                               viewModel.deleteProduct(model.id.toString(),
@@ -222,9 +222,9 @@ class MyProductView extends StatelessWidget {
                             passedHeadingLangKey: langKey.areYouSure.tr,
                             passedBodyLangKey: langKey.deletionProcessDetail.tr,
                           );
-                        } else{
-                          AppConstant.displaySnackBar(langKey.errorTitle.tr, langKey.updateInfoToProceed.tr);
-                        }
+                        // } else{
+                        //   AppConstant.displaySnackBar(langKey.errorTitle.tr, langKey.updateInfoToProceed.tr);
+                        // }
                       },
                       icon: Icons.delete_rounded,
                       bgColor: kRedColor,

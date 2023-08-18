@@ -70,6 +70,7 @@ class AddProductView extends StatelessWidget {
                           stockField(),
                           discountField(),
                           descriptionField(),
+                          weightAndDimensionsSection(),
                           SizedBox(height: 40),
                           CustomTextBtn(
                             onPressed: () {
@@ -454,4 +455,31 @@ class AddProductView extends StatelessWidget {
       ),
     );
   }
+
+  Widget weightAndDimensionsSection(){
+    return Padding(
+      padding: const EdgeInsets.only(top: 30.0),
+      child: Column(
+        children: [
+          Text(
+            'Weight & Dimensions',
+            style: headline3,
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          CustomTextField2(
+            controller: viewModel.prodWeightController,
+            label: 'Weight',
+            prefixImage: Image.asset('assets/icons/weight_icon.png'),
+            autoValidateMode: AutovalidateMode.onUserInteraction,
+            validator: (value){
+              return Validator().validateWeightField(value!);
+            },
+          )
+        ],
+      ),
+    );
+  }
+
 }

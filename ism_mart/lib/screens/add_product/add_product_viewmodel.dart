@@ -21,6 +21,10 @@ class AddProductViewModel extends GetxController {
   TextEditingController prodDescriptionController = TextEditingController();
   TextEditingController prodSKUController = TextEditingController();
   TextEditingController prodPriceController = TextEditingController();
+  TextEditingController prodWeightController = TextEditingController();
+  TextEditingController prodLengthController = TextEditingController();
+  TextEditingController prodWidthController = TextEditingController();
+  TextEditingController prodHeightController = TextEditingController();
 
   RxInt priceAfterCommission = 1.obs;
   RxString chooseCategory = "Select Category".obs;
