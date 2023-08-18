@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,96 +13,102 @@ class ProductDetailView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        systemNavigationBarColor: Colors.transparent,
-      ),
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Stack(
-                children: [
-                  carousel(),
-                  Container(
-                    padding: EdgeInsets.only(top: 50, right: 20, left: 20),
-                    child: Row(
-                      children: [
-                        roundButton(
-                          icon: Icons.arrow_back_ios_new_rounded,
-                          onTap: () {},
-                        ),
-                        Spacer(),
-                        roundButton(
-                          icon: Icons.reply_outlined,
-                          onTap: () {},
-                        ),
-                        SizedBox(width: 10),
-                        roundButton(
-                          icon: Icons.shopping_cart_outlined,
-                          onTap: () {},
-                        ),
-                      ],
-                    ),
-                  ),
-                  heart(),
-                ],
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            leadingWidth: 50,
+            leading: Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: roundButton(
+                icon: Icons.arrow_back_ios_new_rounded,
+                onTap: () {},
               ),
-              Container(
-                padding:
-                    const EdgeInsets.fromLTRB(16, 16, 16, 16),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(35)),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    headingAndCounter(),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 5),
-                      child: Text(
-                        'Vado Odelle Dress',
-                        style: GoogleFonts.dmSans(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 12,
-                          color: Color(0xff929AAB),
-                        ),
-                      ),
-                    ),
-                    reviewsAndStockStatus(),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 26, bottom: 18),
-                      child: Row(
-                        children: [
-                          sizeList(),
-                          SizedBox(width: 20),
-                          colorList(),
-                        ],
-                      ),
-                    ),
-                    Divider(color: Color(0xffEEEEEE)),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10, bottom: 12),
-                      child: heading('Description'),
-                    ),
-                    Text(
-                      'The speaker unit contains a diaphragm that is precision-grown from NAC Audio bio-cellulose, making it stiffer, lighter and stronger than regular PET speaker units, and allowing the sound-producing diaphragm to vibrate without the levels of distortion found in other speakers. ',
-                      style: GoogleFonts.dmSans(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 12,
-                        height: 1.7,
-                        color: Color(0xff24282D),
-                      ),
-                    ),
-                    priceAndCartBtn(),
-                  ],
+            ),
+            actions: [
+              roundButton(
+                icon: Icons.share_outlined,
+                onTap: () {},
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 10, right: 15),
+                child: roundButton(
+                  icon: Icons.shopping_cart_outlined,
+                  onTap: () {},
                 ),
               ),
             ],
+            backgroundColor: Colors.white,
+            flexibleSpace: FlexibleSpaceBar(
+              background: Stack(
+                children: [
+                  carousel(),
+                  heart(),
+                ],
+              ),
+            ),
+            expandedHeight: Get.height * 0.4,
+            pinned: true,
           ),
-        ),
+          SliverToBoxAdapter(
+            child: Column(
+              children: [
+                Container(
+                  padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+                  decoration: BoxDecoration(
+                    borderRadius:
+                        BorderRadius.vertical(top: Radius.circular(35)),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      headingAndCounter(),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        child: Text(
+                          'Vado Odelle Dress',
+                          style: GoogleFonts.dmSans(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 12,
+                            color: Color(0xff929AAB),
+                          ),
+                        ),
+                      ),
+                      reviewsAndStockStatus(),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 26, bottom: 18),
+                        child: Row(
+                          children: [
+                            sizeList(),
+                            SizedBox(width: 20),
+                            colorList(),
+                          ],
+                        ),
+                      ),
+                      Divider(color: Color(0xffEEEEEE)),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10, bottom: 12),
+                        child: heading('Description'),
+                      ),
+                      Text(
+                        'The speaker unit contains a diaphragm that is precision-grown from NAC Audio bio-cellulose, making it stiffer, lighter and stronger than regular PET speaker units, and allowing the sound-producing diaphragm to vibrate without the levels of distortion found in other speakers. ',
+                        style: GoogleFonts.dmSans(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 12,
+                          height: 1.7,
+                          color: Color(0xff24282D),
+                        ),
+                      ),
+                      priceAndCartBtn(),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 500),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -111,46 +116,43 @@ class ProductDetailView extends StatelessWidget {
   Widget carousel() {
     return Obx(
       () => (viewModel.imageList.isNotEmpty)
-          ? SizedBox(
-              height: Get.height * 0.45,
-              child: Stack(
-                alignment: Alignment.bottomCenter,
-                children: [
-                  PageView(
-                    onPageChanged: (index) {
-                      viewModel.indicatorIndex.value = index;
-                    },
-                    children: List.generate(
-                      viewModel.imageList.length,
-                      (index) => mainImage(index),
-                    ),
+          ? Stack(
+              alignment: Alignment.bottomCenter,
+              children: [
+                PageView(
+                  onPageChanged: (index) {
+                    viewModel.indicatorIndex.value = index;
+                  },
+                  children: List.generate(
+                    viewModel.imageList.length,
+                    (index) => mainImage(index),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 15),
-                    child: AnimatedSmoothIndicator(
-                      activeIndex: viewModel.indicatorIndex.value,
-                      count: viewModel.imageList.length,
-                      effect: CustomizableEffect(
-                        spacing: 12,
-                        dotDecoration: DotDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          width: 6,
-                          height: 6,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 15),
+                  child: AnimatedSmoothIndicator(
+                    activeIndex: viewModel.indicatorIndex.value,
+                    count: viewModel.imageList.length,
+                    effect: CustomizableEffect(
+                      spacing: 12,
+                      dotDecoration: DotDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        width: 6,
+                        height: 6,
+                      ),
+                      activeDotDecoration: DotDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        dotBorder: DotBorder(
+                          padding: 3.2,
+                          color: Colors.white,
                         ),
-                        activeDotDecoration: DotDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          dotBorder: DotBorder(
-                            padding: 3.2,
-                            color: Colors.white,
-                          ),
-                          width: 6,
-                          height: 6,
-                        ),
+                        width: 6,
+                        height: 6,
                       ),
                     ),
-                  )
-                ],
-              ),
+                  ),
+                )
+              ],
             )
           : Image(
               width: double.infinity,
@@ -197,15 +199,16 @@ class ProductDetailView extends StatelessWidget {
     );
   }
 
-  Widget roundButton(
-      {required void Function()? onTap,
-      required IconData icon,
-      Color color = Colors.white,
-      pa}) {
+  Widget roundButton({
+    required void Function()? onTap,
+    required IconData icon,
+  }) {
     return InkWell(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.all(9),
+        height: 30,
+        width: 30,
+        padding: EdgeInsets.all(8),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: Colors.white,
@@ -218,9 +221,10 @@ class ProductDetailView extends StatelessWidget {
             )
           ],
         ),
-        child: Icon(
-          icon,
-          size: 15,
+        child: FittedBox(
+          child: Icon(
+            icon,
+          ),
         ),
       ),
     );

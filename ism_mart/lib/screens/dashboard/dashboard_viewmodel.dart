@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -5,8 +6,7 @@ import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 
-class DashboardViewModel extends GetxController{
-
+class DashboardViewModel extends GetxController {
   RxString currentAddress = ''.obs;
   Position? currentPosition;
 
@@ -41,11 +41,13 @@ class DashboardViewModel extends GetxController{
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        AppConstant.displaySnackBar(langKey.errorTitle.tr, 'Location access denied');
+        AppConstant.displaySnackBar(
+            langKey.errorTitle.tr, 'Location access denied');
         return false;
       }
     } else if (permission == LocationPermission.deniedForever) {
-      AppConstant.displaySnackBar(langKey.errorTitle.tr, 'Location access permanently denied');
+      AppConstant.displaySnackBar(
+          langKey.errorTitle.tr, 'Location access permanently denied');
       return false;
     }
     return true;
