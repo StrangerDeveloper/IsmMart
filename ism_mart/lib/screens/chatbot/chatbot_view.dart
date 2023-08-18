@@ -77,12 +77,12 @@ class ChatBotView extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       maxLines: 1,
-                      'Muhammad Hayat',
+                      'ISMBot',
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         fontSize: 16,
@@ -90,13 +90,13 @@ class ChatBotView extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 3),
-                    Text(
-                      "Online",
-                      style: TextStyle(
-                        fontSize: 12.5,
-                        color: Colors.black,
-                      ),
-                    ),
+                    // Text(
+                    //   "Online",
+                    //   style: TextStyle(
+                    //     fontSize: 12.5,
+                    //     color: Colors.black,
+                    //   ),
+                    // ),
                   ],
                 ),
               ),

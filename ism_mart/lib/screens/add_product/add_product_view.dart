@@ -463,23 +463,81 @@ class AddProductView extends StatelessWidget {
         children: [
           Text(
             'Weight & Dimensions',
-            style: headline3,
+            style: headline2,
           ),
           SizedBox(
             height: 15,
           ),
-          CustomTextField2(
-            controller: viewModel.prodWeightController,
-            label: 'Weight',
-            prefixImage: Image.asset('assets/icons/weight_icon.png'),
-            autoValidateMode: AutovalidateMode.onUserInteraction,
-            validator: (value){
-              return Validator().validateWeightField(value!);
-            },
-          )
+          weightField(),
+          lengthField(),
+          widthField(),
+          heightField()
         ],
       ),
     );
   }
 
+  Widget weightField(){
+    return Padding(
+      padding: const EdgeInsets.only(top: 12.0),
+      child: CustomTextField2(
+        controller: viewModel.prodWeightController,
+        label: langKey.weight.tr,
+        prefixIcon: Icons.scale_outlined,
+        autoValidateMode: AutovalidateMode.onUserInteraction,
+        validator: (value){
+          return Validator().validateWeightField(value!);
+        },
+        keyboardType: TextInputType.number,
+        inputFormatters: [
+          FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
+        ],
+      ),
+    );
+  }
+
+  Widget lengthField(){
+    return Padding(
+      padding: const EdgeInsets.only(top: 12.0),
+      child: CustomTextField2(
+        controller: viewModel.prodLengthController,
+        label: langKey.length.tr,
+        prefixIcon: Icons.numbers,
+        keyboardType: TextInputType.number,
+        inputFormatters: [
+          FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
+        ],
+      ),
+    );
+  }
+
+  Widget widthField(){
+    return Padding(
+      padding: const EdgeInsets.only(top: 12.0),
+      child: CustomTextField2(
+        controller: viewModel.prodWidthController,
+        label: langKey.width.tr,
+        prefixIcon: Icons.numbers,
+        keyboardType: TextInputType.number,
+        inputFormatters: [
+          FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
+        ],
+      ),
+    );
+  }
+
+  Widget heightField(){
+    return Padding(
+      padding: const EdgeInsets.only(top: 12.0),
+      child: CustomTextField2(
+        controller: viewModel.prodHeightController,
+        label: langKey.height.tr,
+        prefixIcon: Icons.numbers,
+        keyboardType: TextInputType.number,
+        inputFormatters: [
+          FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
+        ],
+      ),
+    );
+  }
 }

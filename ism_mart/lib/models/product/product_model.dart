@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/api_service.dart';
 import 'package:ism_mart/exports/exports_model.dart';
@@ -27,6 +26,9 @@ class ProductModel {
       this.brand,
       this.model,
       this.weight,
+        this.height,
+        this.length,
+        this.width,
       this.sku,
       this.category,
       this.subCategory,
@@ -42,8 +44,9 @@ class ProductModel {
 
   int? id, stock, sold, vendorId, categoryId, subCategoryId;
   num? price, discountPrice, discount, rating, totalPrice;
+  double? weight, length, width, height;
   String? name, thumbnail, description, status;
-  String? brand, model, weight, sku;
+  String? brand, model, sku;
   CategoryModel? category;
   SubCategory? subCategory;
   SellerModel? sellerModel; //Vendor
@@ -92,6 +95,10 @@ class ProductModel {
         description: json?['description'] ?? "",
         discountPrice: json?["discountPrice"] ?? json?["discountedPrice"],
         totalPrice: json?["totalPrice"],
+        weight: json?['weight'],
+        length: json?['length'] == null ? null : json?['length'],
+        width: json?['width'] == null ? null : json?['width'],
+        height: json?['height'] == null ? null : json?['height'],
         images: productImages,
         sellerModel: json?['Vendor'] == null
             ? null
@@ -114,6 +121,10 @@ class ProductModel {
         "sku": sku ?? name,
         "stock": stock,
         "discountPrice": discountPrice,
+        "weight": weight,
+        "length": length,
+        "width": width,
+        "height": height,
         "price": price,
         "discount": discount,
         "brand": brand ?? "SGMC",

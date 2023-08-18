@@ -36,6 +36,10 @@ class UpdateProductViewModel extends GetxController {
     prodDiscountController.dispose();
     prodSKUController.dispose();
     prodPriceController.dispose();
+    prodWeightController.dispose();
+    prodLengthController.dispose();
+    prodWidthController.dispose();
+    prodHeightController.dispose();
     priceAfterCommission(0);
     imagesSize(0.0);
     super.onClose();
@@ -49,6 +53,11 @@ class UpdateProductViewModel extends GetxController {
   TextEditingController prodDescriptionController = TextEditingController();
   TextEditingController prodSKUController = TextEditingController();
   TextEditingController prodPriceController = TextEditingController();
+  TextEditingController prodWeightController = TextEditingController();
+  TextEditingController prodLengthController = TextEditingController();
+  TextEditingController prodWidthController = TextEditingController();
+  TextEditingController prodHeightController = TextEditingController();
+
   RxString userToken = ''.obs;
   RxBool thumbnailNotAvailable = false.obs;
   RxDouble thumbnailImageSizeInMb = 0.0.obs;
@@ -107,6 +116,11 @@ class UpdateProductViewModel extends GetxController {
       prodDescriptionController.text = productModel!.description!;
       priceAfterCommission(productModel!.price!.toInt());
       thumbnailUrl.value = productModel!.thumbnail.toString();
+      prodWeightController.text = productModel!.weight == null ? '' : productModel!.weight.toString();
+      prodHeightController.text = productModel!.height == null ? '' : productModel!.height.toString();
+      prodWidthController.text = productModel!.width == null ? '' : productModel!.width.toString();
+      prodLengthController.text = productModel!.length == null ? '' : productModel!.length.toString();
+
       if (productModel!.images!.isNotEmpty) {
         productImages.addAll(productModel!.images!);
       }
@@ -181,6 +195,10 @@ class UpdateProductViewModel extends GetxController {
             : int.parse(prodDiscountController.text);
     model.description = prodDescriptionController.text;
     model.stock = int.parse("${prodStockController.text}");
+    model.weight = double.parse(prodWeightController.text);
+    model.length = prodLengthController.text.isEmpty ? null : double.parse(prodLengthController.text);
+    model.height = prodHeightController.text.isEmpty ? null : double.parse(prodHeightController.text);
+    model.width = prodWidthController.text.isEmpty ? null : double.parse(prodWidthController.text);
 
     Map<String, String> body = {
       'name': '${model.name}',
@@ -195,7 +213,14 @@ class UpdateProductViewModel extends GetxController {
         'discount': '${model.discount}',
       if (imagesToDelete != [])
         for (int i = 0; i < imagesToDelete.length; i++)
-          'deleteImages[$i]': "${imagesToDelete[i]}"
+          'deleteImages[$i]': "${imagesToDelete[i]}",
+
+      if(model.length != null)
+        'length': model.length.toString(),
+      if(model.width != null)
+        'length': model.width.toString(),
+      if(model.height != null)
+        'length': model.height.toString(),
     };
 
     List<http.MultipartFile> fileList = [];

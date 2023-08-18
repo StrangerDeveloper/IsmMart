@@ -487,7 +487,11 @@ const login = "login",
     chequeImageNote =
         'This cheque image should have the same bank details visible as you mentioned above',
     weightIsReq = 'weightIsReq',
-    enterCorrectWeight = 'enterCorrectWeight';
+    enterCorrectWeight = 'enterCorrectWeight',
+    weight = 'weight',
+    length = 'length',
+    width = 'width',
+    height = 'height';
 
 /**
  * Form Validations

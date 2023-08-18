@@ -41,7 +41,7 @@ class CustomSearchController extends GetxController {
     scrollController.addListener(() {
       loadMoreFilteredProducts();
     });
-    applyFilter();
+    // applyFilter();
     super.onReady();
   }
 

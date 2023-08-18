@@ -154,7 +154,6 @@ class CustomTextField2 extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final TextInputType? keyboardType;
   final void Function(String)? onChanged;
-  final Widget? prefixImage;
 
   CustomTextField2({
     Key? key,
@@ -174,7 +173,6 @@ class CustomTextField2 extends StatelessWidget {
     this.validator,
     this.inputFormatters,
     this.keyboardType,
-    this.prefixImage,
   }) : super(key: key);
 
   @override
@@ -223,7 +221,7 @@ class CustomTextField2 extends StatelessWidget {
                     color: kPrimaryColor,
                     size: 22,
                   )
-                : prefixImage != null ? prefixImage : null,
+                : null,
             contentPadding: contentPadding,
             suffixIcon: suffixIcon,
 
