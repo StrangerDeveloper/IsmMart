@@ -116,7 +116,7 @@ class SearchView extends GetView<SearchViewModel> {
                   title: langKey.noDataFound.tr,
                   icon: Icons.search,
                 )
-              : ListView.builder(
+              : ListView.builder( 
                   shrinkWrap: true,
                   physics: const BouncingScrollPhysics(),
                   itemCount: controller.historyList.length,

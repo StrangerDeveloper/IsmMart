@@ -50,10 +50,10 @@ class SignUpView extends StatelessWidget {
                               style: newFontStyle2.copyWith(
                                 fontSize: 20,
                                 color: newColorDarkBlack2,
-                              ),
-                            ),
                           ),
-                          Padding(
+                            ),
+                    ),
+                   Padding(
                             padding: const EdgeInsets.only(bottom: 25),
                             child: Text(
                               langKey.getOnboardUser.tr,
@@ -511,4 +511,5 @@ class SignUpView extends StatelessWidget {
       ),
     );
   }
+
 }

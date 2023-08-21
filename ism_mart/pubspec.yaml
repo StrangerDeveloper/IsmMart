@@ -38,6 +38,9 @@ dependencies:
   dialog_flowtter: ^0.3.3
   google_fonts: ^4.0.4
   firebase_core: ^2.15.1
+  firebase_auth: ^4.7.3
+  sign_in_with_apple: ^5.0.0
+  crypto: ^3.0.3
 
 
 dev_dependencies:

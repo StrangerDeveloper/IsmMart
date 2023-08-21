@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/controllers/controllers.dart';
@@ -7,6 +8,7 @@ import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/urls.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUpViewModel extends GetxController {
   GlobalKey<FormState> signUpFormKey = GlobalKey<FormState>();
@@ -118,4 +120,6 @@ class SignUpViewModel extends GetxController {
       }
     }
   }
+
+
 }
