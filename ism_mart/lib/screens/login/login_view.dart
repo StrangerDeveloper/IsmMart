@@ -34,7 +34,7 @@ class LogInView extends StatelessWidget {
                   Spacer(),
                   Padding(
                     padding:
-                        const EdgeInsets.only(top: 20, bottom: 10, left: 20),
+                    const EdgeInsets.only(top: 20, bottom: 10, left: 20),
                     child: CustomText(
                       title: langKey.welcome.tr + '!',
                       style: newFontStyle2.copyWith(
@@ -45,7 +45,7 @@ class LogInView extends StatelessWidget {
                   ),
                   Padding(
                     padding:
-                        const EdgeInsets.only(left: 20, right: 20, bottom: 25),
+                    const EdgeInsets.only(left: 20, right: 20, bottom: 25),
                     child: Text(
                       langKey.seamlessShopping.tr,
                       style: newFontStyle0.copyWith(
@@ -58,6 +58,8 @@ class LogInView extends StatelessWidget {
                   forgotPassword(),
                   logInBtn(),
                   or(),
+                  googlelogInBtn(),
+                  facebooklogInBtn(),
                   applelogInBtn(),
                   Spacer(),
                   doNotHaveAnAccount(),
@@ -118,7 +120,7 @@ class LogInView extends StatelessWidget {
 
   Widget passwordTextField() {
     return Obx(
-      () => Padding(
+          () => Padding(
         padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
         child: CustomTextField3(
           controller: viewModel.passwordController,
@@ -133,7 +135,7 @@ class LogInView extends StatelessWidget {
             isObscured: viewModel.obscurePassword.value ? true : false,
             onPressed: () {
               viewModel.obscurePassword.value =
-                  !viewModel.obscurePassword.value;
+              !viewModel.obscurePassword.value;
             },
           ),
         ),
@@ -141,70 +143,221 @@ class LogInView extends StatelessWidget {
     );
   }
 
+
+//Google Button
+  Widget googlelogInBtn() { return Padding(
+    padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+    child:    CustomRoundedTextBtn(
+      borderSide:  BorderSide(
+        color: newColorDarkBlack, // your color here
+        width: 1,
+      ),
+      backgroundColor: kWhiteColor,
+      foregroundColor: newColorDarkBlack,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ClipRRect(
+            child: Image.asset(
+              'assets/logo/google_logo.png',
+              width: 36,
+              height: 36,
+            ),
+            borderRadius: BorderRadius.circular(50.0),
+          ),
+          SizedBox(
+            width:5,
+          ),
+          Text(
+            "Continue in with Google",
+            style: newFontStyle3,
+          ),
+        ],),
+      onPressed: () {
+        viewModel.signInWithApple();
+      },
+    ),
+
+
+
+    // Obx(
+    //       () => GlobalVariable.showLoader.value
+    //       ? CustomLoading(isItBtn: true)
+    //       :
+    //
+    //       CustomRoundedTextBtn(
+    //     borderSide:  BorderSide(
+    //       color: newColorDarkBlack, // your color here
+    //       width: 1,
+    //     ),
+    //     backgroundColor: kWhiteColor,
+    //     foregroundColor: newColorDarkBlack,
+    //     child: Row(
+    //       mainAxisAlignment: MainAxisAlignment.center,
+    //       children: [
+    //         ClipRRect(
+    //           child: Image.asset(
+    //             'assets/logo/google_logo.png',
+    //             width: 36,
+    //             height: 36,
+    //           ),
+    //           borderRadius: BorderRadius.circular(50.0),
+    //         ),
+    //         SizedBox(
+    //           width:5,
+    //         ),
+    //         Text(
+    //           "Continue in with Google",
+    //           style: newFontStyle3,
+    //         ),
+    //       ],),
+    //     onPressed: () {
+    //       viewModel.signInWithApple();
+    //     },
+    //   ),
+    //
+    // ),
+    //
+  );
+  }
+
+  //Facebook Button
+  Widget facebooklogInBtn() { return Padding(
+    padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+    child: CustomRoundedTextBtn(
+      borderSide:  BorderSide(
+        color: newColorDarkBlack, // your color here
+        width: 1,
+      ),
+      backgroundColor: kWhiteColor,
+      foregroundColor: newColorDarkBlack,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ClipRRect(
+            child: Image.asset(
+              'assets/logo/fb_logo.png',
+              width: 36,
+              height: 36,
+            ),
+            borderRadius: BorderRadius.circular(50.0),
+          ),
+          SizedBox(
+            width:5,
+          ),
+          Text(
+            "Continue in with Facebok",
+            style: newFontStyle3,
+          ),
+        ],),
+      onPressed: () {
+        viewModel.signInWithApple();
+      },
+    ),
+
+    // Obx(
+    //       () => GlobalVariable.showLoader.value
+    //       ? CustomLoading(isItBtn: true)
+    //       :
+    //       CustomRoundedTextBtn(
+    //     borderSide:  BorderSide(
+    //       color: newColorDarkBlack, // your color here
+    //       width: 1,
+    //     ),
+    //     backgroundColor: kWhiteColor,
+    //     foregroundColor: newColorDarkBlack,
+    //     child: Row(
+    //       mainAxisAlignment: MainAxisAlignment.center,
+    //       children: [
+    //         ClipRRect(
+    //           child: Image.asset(
+    //             'assets/logo/fb_logo.png',
+    //             width: 36,
+    //             height: 36,
+    //           ),
+    //           borderRadius: BorderRadius.circular(50.0),
+    //         ),
+    //         SizedBox(
+    //           width:5,
+    //         ),
+    //         Text(
+    //           "Continue in with Facebok",
+    //           style: newFontStyle3,
+    //         ),
+    //       ],),
+    //     onPressed: () {
+    //       viewModel.signInWithApple();
+    //     },
+    //   ),
+    //
+    // ),
+
+  );
+  }
+
 //Apple Button
   Widget applelogInBtn() { return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 20, 20, 25),
-      child: Obx(
-            () => GlobalVariable.showLoader.value
-            ? CustomLoading(isItBtn: true)
-            : CustomRoundedTextBtn(
-              borderSide:  BorderSide(
-                color: newColorDarkBlack, // your color here
-                width: 1,
+    padding: const EdgeInsets.fromLTRB(20, 10, 20, 25),
+    child: Obx(
+          () =>viewModel.applelLoader.value
+          ? CustomLoading(isItBtn: true)
+          : CustomRoundedTextBtn(
+        borderSide:  BorderSide(
+          color: newColorDarkBlack, // your color here
+          width: 1,
+        ),
+        backgroundColor: kWhiteColor,
+        foregroundColor: newColorDarkBlack,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ClipRRect(
+              child: Image.asset(
+                'assets/logo/apple_logo.png',
+                width: 36,
+                height: 36,
               ),
-              backgroundColor: kWhiteColor,
-              foregroundColor: newColorDarkBlack,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-          ClipRRect(
-          child: Image.asset(
-          'assets/logo/apple_logo.png',
-            width: 36,
-            height: 36,
-          ),
               borderRadius: BorderRadius.circular(50.0),
             ),
-              SizedBox(
-                width:5,
-              ),
-              Text(
-              langKey.login.tr,
+            SizedBox(
+              width:5,
+            ),
+            Text(
+              "Continue with Apple ID",
               style: newFontStyle3,
             ),
           ],),
-          onPressed: () {
-            viewModel.signInWithApple();
-          },
-        ),
+        onPressed: () {
+          viewModel.signInWithApple();
+        },
       ),
-    );
-}
-
+    ),
+  );
+  }
 
   Widget logInBtn() {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 20, 20, 25),
       child: Obx(
-        () => GlobalVariable.showLoader.value
+            () => GlobalVariable.showLoader.value
             ? CustomLoading(isItBtn: true)
             : CustomRoundedTextBtn(
-                backgroundColor: newColorDarkBlack,
-                child: Text(
-                  langKey.login.tr,
-                  style: newFontStyle3,
-                ),
-                onPressed: () {
-                  viewModel.signIn();
-                },
-              ),
+          backgroundColor: newColorDarkBlack,
+          child: Text(
+            langKey.login.tr,
+            style: newFontStyle3,
+          ),
+          onPressed: () {
+            viewModel.signIn();
+          },
+        ),
       ),
     );
   }
 
   Widget forgotPassword() {
     return Container(
-      margin: EdgeInsets.only(bottom: 20, right: 20, top: 10),
+      margin: EdgeInsets.only(bottom: 20, right: 10, top: 10),
       alignment: Alignment.centerRight,
       child: InkWell(
         onTap: () {

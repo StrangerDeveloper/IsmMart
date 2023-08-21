@@ -109,17 +109,11 @@ class LogInViewModel extends GetxController {
     final digest = sha256.convert(bytes);
     return digest.toString();
   }
-
-  Future<UserCredential> signInWithApple() async {
-    print("hhhhhh ----- ");
-    // To prevent replay attacks with the credential returned from Apple, we
-    // include a nonce in the credential request. When signing in with
-    // Firebase, the nonce in the id token returned by Apple, is expected to
-    // match the sha256 hash of `rawNonce`.
+RxBool applelLoader = false.obs;
+  Future<UserCredential> signInWithAppleFun() async {
+    applelLoader.value=true;
     final rawNonce = generateNonce();
     final nonce = sha256ofString(rawNonce);
-
-    // Request credential for the currently signed in Apple account.
     final appleCredential = await SignInWithApple.getAppleIDCredential(
       scopes: [
         AppleIDAuthorizationScopes.email,
@@ -131,22 +125,29 @@ class LogInViewModel extends GetxController {
     print("hhhhhh f name----- ${appleCredential.familyName}");
     print("hhhhhh given ----- ${appleCredential.givenName}");
     print("hhhhhh  code ----- ${appleCredential.authorizationCode}");
-
-
-
     // Create an `OAuthCredential` from the credential returned by Apple.
     final oauthCredential = OAuthProvider("apple.com").credential(
       idToken: appleCredential.identityToken,
       rawNonce: rawNonce,
     );
-    print("hhhhhh RawNo----- ${oauthCredential.rawNonce}");
-    print("hhhhhh Token----- ${oauthCredential.idToken}");
+    var _auth= await FirebaseAuth.instance.signInWithCredential(oauthCredential);
+  var email=  _auth.user!.email.toString()??"";
+    var name = _auth.user!.photoURL.toString()??"";
+    var uid = _auth.user!.uid??"";
+    var mobileNo = _auth.user!.phoneNumber.toString()??"";
+    var fullname = _auth.user!.displayName.toString()??"";
 
-    // Sign in the user with Firebase. If the nonce we generated earlier does
-    // not match the nonce in `appleCredential.identityToken`, sign in will fail.
-    return await FirebaseAuth.instance.signInWithCredential(oauthCredential);
+    print("hhhhhh email ----- $email $name $uid $mobileNo $fullname");
+if(uid =""){
+    return _auth;
   }
 
 
+  signInWithApple(){
+    try{
+      signInWithAppleFun();
+    }catch(e){}
+
+  }
 
 }
