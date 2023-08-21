@@ -73,7 +73,6 @@ class SignUpView extends StatelessWidget {
                           checkBoxTermCondition(),
                           signUpBtn(),
                           alreadyHaveAnAccount(),
-                          appleSignUpBtn(),
                         ],
                       ),
                     ),
@@ -463,20 +462,6 @@ class SignUpView extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
-  }
-  //apple sign button
-  Widget appleSignUpBtn() {
-    return Obx(
-          () => GlobalVariable.showLoader.value
-          ? CustomLoading(isItBtn: true)
-          : CustomRoundedTextBtn(
-        title: "Apple Signin",
-        onPressed: () {
-          print('Sign Up Button Pressed');
-          viewModel.signInWithApple();
-        },
       ),
     );
   }

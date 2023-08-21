@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/exports/export_widgets.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
@@ -57,6 +58,7 @@ class LogInView extends StatelessWidget {
                   forgotPassword(),
                   logInBtn(),
                   or(),
+                  applelogInBtn(),
                   Spacer(),
                   doNotHaveAnAccount(),
                   BecomeVendor(),
@@ -139,6 +141,47 @@ class LogInView extends StatelessWidget {
     );
   }
 
+//Apple Button
+  Widget applelogInBtn() { return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 20, 20, 25),
+      child: Obx(
+            () => GlobalVariable.showLoader.value
+            ? CustomLoading(isItBtn: true)
+            : CustomRoundedTextBtn(
+              borderSide:  BorderSide(
+                color: newColorDarkBlack, // your color here
+                width: 1,
+              ),
+              backgroundColor: kWhiteColor,
+              foregroundColor: newColorDarkBlack,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+          ClipRRect(
+          child: Image.asset(
+          'assets/logo/apple_logo.png',
+            width: 36,
+            height: 36,
+          ),
+              borderRadius: BorderRadius.circular(50.0),
+            ),
+              SizedBox(
+                width:5,
+              ),
+              Text(
+              langKey.login.tr,
+              style: newFontStyle3,
+            ),
+          ],),
+          onPressed: () {
+            viewModel.signInWithApple();
+          },
+        ),
+      ),
+    );
+}
+
+
   Widget logInBtn() {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 20, 20, 25),
@@ -192,6 +235,7 @@ class LogInView extends StatelessWidget {
             style: newFontStyle4,
           ),
         ),
+
         Expanded(
           child: Divider(
             color: newColorLightGrey,
