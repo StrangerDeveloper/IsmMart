@@ -454,4 +454,5 @@ class AddProductView extends StatelessWidget {
       ),
     );
   }
+
 }

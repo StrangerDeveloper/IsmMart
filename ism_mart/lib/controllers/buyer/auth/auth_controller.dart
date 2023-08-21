@@ -72,6 +72,7 @@ class AuthController extends GetxController {
           }
         }
       }).catchError((error) {
+        GlobalVariable.showLoader.value = false;
         print(">>>FetchUserCoins: $error");
       });
     }

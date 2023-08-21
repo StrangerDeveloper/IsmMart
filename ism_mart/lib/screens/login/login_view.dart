@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/exports/export_widgets.dart';
 import 'package:ism_mart/exports/exports_utils.dart';

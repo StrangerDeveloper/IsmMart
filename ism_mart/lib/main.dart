@@ -45,7 +45,7 @@ void main() async {
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(statusBarColor: Colors.grey[300]!));
+      SystemUiOverlayStyle(statusBarColor: Colors.transparent));
 
   //firebase integration for crashlytics
   //

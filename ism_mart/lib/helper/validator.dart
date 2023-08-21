@@ -172,4 +172,14 @@ class Validator {
       return null;
     }
   }
+
+  ///Weight
+  String? validateWeightField(String value){
+    if(GetUtils.isBlank(value)!){
+      return langKey.weightIsReq.tr;
+    } else{
+      return null;
+    }
+  }
+
 }

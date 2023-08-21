@@ -23,15 +23,17 @@ class CartIcon extends StatelessWidget {
         onTap: onTap,
         child: Stack(
           children: [
-           iconWidget?? Icon(
-             IconlyLight.buy,
-              color: baseController.currentPage == 2 ? kPrimaryColor : kLightColor,
-              size: 25,
-            ),
+           Center(
+             child: iconWidget?? Icon(
+               IconlyLight.buy,
+                color: baseController.currentPage == 2 ? kPrimaryColor : kLightColor,
+                size: 25,
+              ),
+           ),
             Obx(() => baseController.cartCount.value <= 0
                   ? Container()
                   : Positioned(
-                      top: 0,
+                      top: 15,
                       right: 0,
                       child: Container(
                         alignment: Alignment.center,

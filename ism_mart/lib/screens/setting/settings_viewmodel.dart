@@ -59,7 +59,7 @@ class SettingViewModel extends GetxController {
   }
 
   whatsapp() async {
-    String contact = "923331157046";
+    String contact = "923331832356";
     String text = '';
     String androidUrl = "whatsapp://send?phone=$contact&text=$text";
     String iosUrl = "https://wa.me/$contact?text=${Uri.parse(text)}";

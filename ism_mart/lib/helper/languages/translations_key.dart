@@ -485,7 +485,22 @@ const login = "login",
     enterAccountNumberOrIban = 'enterAccountNumberOrIban',
     ibanReq = 'ibanReq',
     chequeImageNote =
-        'This cheque image should have the same bank details visible as you mentioned above';
+        'This cheque image should have the same bank details visible as you mentioned above',
+    weightIsReq = 'weightIsReq',
+    enterCorrectWeight = 'enterCorrectWeight',
+    weight = 'weight',
+    length = 'length',
+    width = 'width',
+    height = 'height';
+
+///Chatbot
+
+    const connectionError = 'connectionError',
+    enableLocation = 'enableLocation',
+    locationAccessDenied = 'locationAccessDenied',
+    locationAccessPermanentlyDenied = 'locationAccessPermanentlyDenied',
+    couldNotGetLocation = 'couldNotGetLocation';
+
 
 /**
  * Form Validations

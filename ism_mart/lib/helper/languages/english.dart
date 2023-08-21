@@ -533,6 +533,19 @@ class English {
         key.ibanReq: 'Enter correct IBAN',
         key.chequeImageNote:
             'This cheque image should have the same bank details visible as you mentioned above',
+        key.weightIsReq: 'Weight is required',
+        key.enterCorrectWeight: 'Invalid value. Enter correct weight',
+        key.weight: 'Weight',
+        key.length: 'Length',
+        key.width: 'Width',
+        key.height: 'Height',
+
+        ///Chatbot
+        key.connectionError: 'Error establishing connection. Try again.',
+        key.enableLocation: 'Enable Location.',
+        key.locationAccessDenied: 'Location access denied',
+        key.locationAccessPermanentlyDenied: 'Location access permanently denied',
+        key.couldNotGetLocation: 'Could not get location. Try again.',
 
         ///contact us
         key.subject: 'Subject',
