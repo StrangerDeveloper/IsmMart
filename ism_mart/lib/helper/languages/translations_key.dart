@@ -493,6 +493,15 @@ const login = "login",
     width = 'width',
     height = 'height';
 
+///Chatbot
+
+    const connectionError = 'connectionError',
+    enableLocation = 'enableLocation',
+    locationAccessDenied = 'locationAccessDenied',
+    locationAccessPermanentlyDenied = 'locationAccessPermanentlyDenied',
+    couldNotGetLocation = 'couldNotGetLocation';
+
+
 /**
  * Form Validations
  *

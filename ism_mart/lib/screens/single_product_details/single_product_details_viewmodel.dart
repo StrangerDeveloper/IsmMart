@@ -22,6 +22,7 @@ class SingleProductDetailsViewModel extends GetxController {
   var quantityController = TextEditingController();
   final count = RxInt(1);
   final reviewResponse = ReviewModelResponse().obs;
+  List<CartModel> cartList = <CartModel>[];
 
   @override
   void onInit() {
@@ -121,10 +122,19 @@ class SingleProductDetailsViewModel extends GetxController {
       onQuantityClicked: false,
     );
 
-    await LocalStorageHelper.addItemToCart(cartModel: cart).then((value) {
-      Get.back();
-      count(1);
-    });
+    cartList = await LocalStorageHelper.fetchCartItems();
+    print('>>>Cart: $cartList');
+    final index = cartList.indexWhere((element) => element.productId == productID.value);
+    print(index);
+    if(index != -1){
+      AppConstant.displaySnackBar(langKey.errorTitle.tr, 'Product already exists');
+    }
+    else {
+      await LocalStorageHelper.addItemToCart(cartModel: cart).then((value) {
+        Get.back();
+        count(1);
+      });
+    }
   }
 
   fetchProduct() async {

@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/screens/update_products/update_product_viewmodel.dart';
@@ -9,7 +8,6 @@ import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/custom_appbar.dart';
 import 'package:ism_mart/widgets/pick_image.dart';
-import '../../helper/validator.dart';
 import '../../widgets/loader_view.dart';
 import '../../widgets/single_image_view.dart';
 
@@ -52,7 +50,6 @@ class UpdateProductView extends StatelessWidget {
                         productStockField(),
                         productDiscountField(),
                         productDescriptionField(),
-                        weightAndDimensionsSection(),
                         imagesUpdateSection(),
                         CustomTextBtn(
                           onPressed: () {
@@ -152,91 +149,6 @@ class UpdateProductView extends StatelessWidget {
               ),
             ),
           )
-        ],
-      ),
-    );
-  }
-
-  Widget weightAndDimensionsSection(){
-    return Padding(
-      padding: const EdgeInsets.only(top: 30.0),
-      child: Column(
-        children: [
-          Text(
-            'Weight & Dimensions',
-            style: headline2,
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          weightField(),
-          lengthField(),
-          widthField(),
-          heightField()
-        ],
-      ),
-    );
-  }
-
-  Widget weightField(){
-    return Padding(
-      padding: const EdgeInsets.only(top: 12.0),
-      child: CustomTextField2(
-        controller: viewModel.prodWeightController,
-        label: langKey.weight.tr,
-        prefixIcon: Icons.scale_outlined,
-        autoValidateMode: AutovalidateMode.onUserInteraction,
-        validator: (value){
-          return Validator().validateWeightField(value!);
-        },
-        keyboardType: TextInputType.number,
-        inputFormatters: [
-          FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
-        ],
-      ),
-    );
-  }
-
-  Widget lengthField(){
-    return Padding(
-      padding: const EdgeInsets.only(top: 12.0),
-      child: CustomTextField2(
-        controller: viewModel.prodLengthController,
-        label: langKey.length.tr,
-        prefixIcon: Icons.numbers,
-        keyboardType: TextInputType.number,
-        inputFormatters: [
-          FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
-        ],
-      ),
-    );
-  }
-
-  Widget widthField(){
-    return Padding(
-      padding: const EdgeInsets.only(top: 12.0),
-      child: CustomTextField2(
-        controller: viewModel.prodWidthController,
-        label: langKey.width.tr,
-        prefixIcon: Icons.numbers,
-        keyboardType: TextInputType.number,
-        inputFormatters: [
-          FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
-        ],
-      ),
-    );
-  }
-
-  Widget heightField(){
-    return Padding(
-      padding: const EdgeInsets.only(top: 12.0),
-      child: CustomTextField2(
-        controller: viewModel.prodHeightController,
-        label: langKey.height.tr,
-        prefixIcon: Icons.numbers,
-        keyboardType: TextInputType.number,
-        inputFormatters: [
-          FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
         ],
       ),
     );

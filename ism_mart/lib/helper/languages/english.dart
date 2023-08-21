@@ -540,6 +540,13 @@ class English {
         key.width: 'Width',
         key.height: 'Height',
 
+        ///Chatbot
+        key.connectionError: 'Error establishing connection. Try again.',
+        key.enableLocation: 'Enable Location.',
+        key.locationAccessDenied: 'Location access denied',
+        key.locationAccessPermanentlyDenied: 'Location access permanently denied',
+        key.couldNotGetLocation: 'Could not get location. Try again.',
+
         ///contact us
         key.subject: 'Subject',
         key.subjectReq: 'Subject is required',

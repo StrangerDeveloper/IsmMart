@@ -51,7 +51,7 @@ class ChatViewModel extends GetxController with GetTickerProviderStateMixin{
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       tryAgain.value = true;
-      AppConstant.displaySnackBar(langKey.errorTitle.tr, 'Enable location');
+      AppConstant.displaySnackBar(langKey.errorTitle.tr, langKey.enableLocation.tr);
       return false;
     }
 
@@ -60,13 +60,13 @@ class ChatViewModel extends GetxController with GetTickerProviderStateMixin{
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
         AppConstant.displaySnackBar(
-            langKey.errorTitle.tr, 'Location access denied');
+            langKey.errorTitle.tr, langKey.locationAccessDenied.tr);
         tryAgain.value = true;
         return false;
       }
     } else if (permission == LocationPermission.deniedForever) {
       AppConstant.displaySnackBar(
-          langKey.errorTitle.tr, 'Location access permanently denied');
+          langKey.errorTitle.tr, langKey.locationAccessPermanentlyDenied.tr);
       tryAgain.value = true;
       return false;
     }
@@ -92,7 +92,7 @@ class ChatViewModel extends GetxController with GetTickerProviderStateMixin{
       } else{
         tryAgain.value = true;
         AppConstant.displaySnackBar(
-            langKey.errorTitle.tr, 'Could not get location, Try again.');
+            langKey.errorTitle.tr, langKey.couldNotGetLocation.tr);
       }
     }).catchError((e) {
       tryAgain.value = true;
