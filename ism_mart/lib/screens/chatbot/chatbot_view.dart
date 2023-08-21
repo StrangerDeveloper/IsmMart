@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
-import 'package:ism_mart/widgets/no_internet_view.dart';
-
 import 'chatbot_viewmodel.dart';
 
 class ChatBotView extends StatelessWidget {
@@ -16,7 +15,30 @@ class ChatBotView extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: appBar(context),
-        body: Stack(
+        body: Obx(() => viewModel.tryAgain.value == true ? Column(
+          children: [
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  IconButton(
+                      onPressed: ()async{
+                            await viewModel.getCurrentLocation();
+                        }, icon: Icon(Icons.refresh, size: 35, color: Colors.black,)
+                  ),
+                  SizedBox(
+                    height: 18,
+                  ),
+                  Text(
+                    'Error establishing connection, Try Again.',
+                    style: bodyText2,
+                  )
+                ],
+              ),
+            )
+          ],
+        ) : Stack(
           children: [
             Column(
               children: [
@@ -24,16 +46,11 @@ class ChatBotView extends StatelessWidget {
                 writeMessage(context),
               ],
             ),
-            NoInternetView(
-              onPressed: () {
-                // GlobalVariable.showNoInternet.value = false;
-                //viewModel.loadInitialData();
-              },
-            ),
             LoaderView(),
           ],
         ),
       ),
+    )
     );
   }
 
@@ -41,6 +58,13 @@ class ChatBotView extends StatelessWidget {
     return PreferredSize(
       preferredSize: Size.fromHeight(65),
       child: AppBar(
+        title: Text(
+          maxLines: 1,
+          'ISMBot',
+          overflow: TextOverflow.ellipsis,
+          style: headline1,
+        ),
+        centerTitle: true,
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         elevation: 3,
@@ -52,27 +76,6 @@ class ChatBotView extends StatelessWidget {
               },
               icon: const Icon(CupertinoIcons.chevron_back),
             ),
-            // CachedNetworkImage(
-            //   height: 45,
-            //   width: 45,
-            //   imageUrl: '',
-            //   imageBuilder: (context, imageProvider) {
-            //     return CircleAvatar(radius: 20, backgroundImage: imageProvider);
-            //   },
-            //   errorWidget: (context, url, error) {
-            //     return CircleAvatar(
-            //       radius: 20,
-            //       backgroundImage: AssetImage(
-            //         'assets/images/profile.png',
-            //       ),
-            //     );
-            //   },
-            //   placeholder: (context, url) {
-            //     return const Center(
-            //       child: CircularProgressIndicator(strokeWidth: 2.0),
-            //     );
-            //   },
-            // ),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -80,15 +83,7 @@ class ChatBotView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      maxLines: 1,
-                      'ISMBot',
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
+
                     SizedBox(height: 3),
                     // Text(
                     //   "Online",
@@ -109,15 +104,17 @@ class ChatBotView extends StatelessWidget {
 
   Widget messageBody() {
     return Obx(
-      () => Flexible(
-        child: ListView.builder(
-          // reverse: true,
-          controller: viewModel.scrollController,
-          itemCount: viewModel.messages.length,
-          padding: EdgeInsets.only(top: 8, bottom: 8),
-          itemBuilder: (context, index) {
-            return messageListViewItem(index);
-          },
+      () => Expanded(
+        child: Container(
+          child: ListView.builder(
+            // reverse: true,
+            controller: viewModel.scrollController,
+            itemCount: viewModel.messages.length,
+            padding: EdgeInsets.symmetric(vertical: 8),
+            itemBuilder: (context, index) {
+              return messageListViewItem(index);
+            },
+          ),
         ),
       ),
     );
@@ -131,49 +128,12 @@ class ChatBotView extends StatelessWidget {
         top: 12,
       ),
       child: Column(
-        crossAxisAlignment:
-            viewModel.messages[index].isUser ? CrossAxisAlignment.end
-                : CrossAxisAlignment.start,
+        crossAxisAlignment: viewModel.messages[index].isUser ? CrossAxisAlignment.start : CrossAxisAlignment.end,
         children: [
-          messageContainer(index),
+          viewModel.messageContainer(index),
           // dateTimeContainers(index),
         ],
       ),
-    );
-  }
-
-  Widget messageContainer(int index) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 6),
-      padding: EdgeInsets.only(left: 14, right: 14, bottom: 12, top: 12),
-      constraints: BoxConstraints(
-        maxWidth: Get.width * 0.85,
-        minWidth: Get.width * 0.03,
-      ),
-      decoration: BoxDecoration(
-        color: (viewModel.messages[index].isUser
-            ? Colors.black
-            : Colors.black.withOpacity(0.3)),
-        borderRadius: BorderRadius.only(
-          topRight: viewModel.messages[index].isUser ? Radius.zero
-              : Radius.circular(18),
-          topLeft: viewModel.messages[index].isUser
-              ? Radius.circular(18)
-              : Radius.zero,
-          bottomRight: Radius.circular(18),
-          bottomLeft: Radius.circular(18),
-        ),
-      ),
-      child: viewModel.messages[index].message?.text != null &&
-          viewModel.messages[index].message?.text?.text?[0] != ''
-        ? Text(
-      viewModel.messages[index].message?.text?.text?.first ?? '',
-      textAlign: viewModel.messages[index].isUser ? TextAlign.end : TextAlign.start,
-      style: TextStyle(
-        color: Colors.white,
-      ),
-    )
-        : SizedBox(),
     );
   }
 

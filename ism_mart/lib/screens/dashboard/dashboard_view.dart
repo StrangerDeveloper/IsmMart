@@ -535,52 +535,67 @@ class DashboardView extends GetView<BaseController> {
     );
   }
 
-  Positioned chatWidget(){
+  Widget chatWidget(){
     return Positioned(
       bottom: 12,
       right: 10,
-      child: GestureDetector(
-        onTap: ()async{
-          await viewModel.getCurrentLocation();
-        },
-        child: Container(
-          width: MediaQuery.of(Get.context!).size.width/3,
-          height: 55,
-          decoration: BoxDecoration(
-              color: Color(0xffefda37),
-              borderRadius: BorderRadius.all(Radius.circular(12)),
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.grey.withOpacity(0.2),
-                    offset: Offset(0, 3),
-                    blurRadius: 1,
-                    spreadRadius: 1
-                )
-              ]
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 13.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.chat_outlined,
-                  size: 30,
-                  color: Colors.black,
-                ),
-                Expanded(
-                  child: Center(
-                    child: Text(
-                      'Chat',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 18
+      child: SlideTransition(
+        position: viewModel.animation1,
+        child: GestureDetector(
+          onTap: ()async{
+            Get.toNamed(Routes.chatScreen);
+            // await viewModel.getCurrentLocation();
+          },
+          child: Obx(() => AnimatedContainer(
+              width: viewModel.containerWidth.value,
+              height: 50,
+              decoration: BoxDecoration(
+                  color: Color(0xff3769CA),
+                  borderRadius: BorderRadius.all(Radius.circular(28)),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.grey.withOpacity(0.2),
+                        offset: Offset(0, 3),
+                        blurRadius: 1,
+                        spreadRadius: 1
+                    )
+                  ]
+              ),
+              duration: Duration.zero,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 13.0),
+                child: FadeTransition(
+                  opacity: viewModel.animation3,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Center(
+                          child: Text(
+                            'Chat Now',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 14
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 4.0),
+                        child: Icon(
+                            Icons.chat_outlined,
+                            size: 18,
+                            color: Colors.white
+                          ),
+                      ),
+                    ],
                   ),
-                )
-              ],
+                ),
+              ),
             ),
           ),
         ),

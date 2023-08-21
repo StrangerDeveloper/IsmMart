@@ -9,6 +9,8 @@ import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/loader_view.dart';
 
+import '../../helper/global_variables.dart';
+
 class MyProductView extends StatelessWidget {
   MyProductView({super.key});
 
@@ -33,11 +35,11 @@ class MyProductView extends StatelessWidget {
           backgroundColor: kPrimaryColor,
           icon: Icon(Icons.add),
           onPressed: () {
-            // if(GlobalVariable.userModel?.infoCompleted == 1){
+            if(GlobalVariable.userModel?.infoCompleted == 1){
               Get.toNamed(Routes.addProduct);
-            // } else{
-            //   AppConstant.displaySnackBar(langKey.errorTitle.tr, langKey.updateInfoToProceed.tr);
-            // }
+            } else{
+              AppConstant.displaySnackBar(langKey.errorTitle.tr, langKey.updateInfoToProceed.tr);
+            }
           },
           label: Text(langKey.addProduct.tr),
         ),
@@ -100,13 +102,13 @@ class MyProductView extends StatelessWidget {
       aspectRatio: 0.75,
       child: GestureDetector(
         onTap: () {
-          // if(GlobalVariable.userModel?.infoCompleted == 1) {
+          if(GlobalVariable.userModel?.infoCompleted == 1) {
             Get.toNamed(Routes.singleProductDetails, arguments: [
               {"calledFor": "seller", "productID": "${model.id}"}
             ]);
-          // } else{
-          //   AppConstant.displaySnackBar(langKey.errorTitle.tr, langKey.updateInfoToProceed.tr);
-          // }
+          } else{
+            AppConstant.displaySnackBar(langKey.errorTitle.tr, langKey.updateInfoToProceed.tr);
+          }
         },
         child: Container(
           clipBehavior: Clip.hardEdge,
@@ -196,16 +198,16 @@ class MyProductView extends StatelessWidget {
                   children: [
                     CustomActionIcon(
                         onTap: () {
-                          // if(GlobalVariable.userModel?.infoCompleted == 1){
+                          if(GlobalVariable.userModel?.infoCompleted == 1){
                             Get.toNamed(Routes.updateProduct, arguments: [
                               {'productId': '${model.id}'}
                             ]);
-                          // } else{
-                          //   AppConstant.displaySnackBar(
-                          //   langKey.errorTitle.tr,
-                          //       langKey.updateInfoToProceed.tr
-                          //   );
-                          // }
+                          } else{
+                            AppConstant.displaySnackBar(
+                            langKey.errorTitle.tr,
+                                langKey.updateInfoToProceed.tr
+                            );
+                          }
                         },
                         icon: Icons.edit_rounded,
                         bgColor: kPrimaryColor),
