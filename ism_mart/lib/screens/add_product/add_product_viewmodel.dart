@@ -22,26 +22,39 @@ class AddProductViewModel extends GetxController {
   TextEditingController prodSKUController = TextEditingController();
   TextEditingController prodPriceController = TextEditingController();
 
+  TextEditingController prodWeightController = TextEditingController();
+  TextEditingController prodLengthController = TextEditingController();
+  TextEditingController prodWidthController = TextEditingController();
+  TextEditingController prodHeightController = TextEditingController();
+
   RxInt priceAfterCommission = 1.obs;
+  RxInt selectedCategoryID = 0.obs;
+  RxInt selectedSubCategoryID = 1.obs;
+
   RxString chooseCategory = "Select Category".obs;
   RxString chooseSubCategory = "Select sub categories".obs;
-  List<File> productImages = <File>[].obs;
+
   Rx<SubCategory> selectedSubCategory = SubCategory().obs;
-  RxInt selectedSubCategoryID = 1.obs;
-  List<SubCategory> subCategoriesList = <SubCategory>[].obs;
   Rx<CategoryModel> selectedCategory = CategoryModel().obs;
-  RxInt selectedCategoryID = 0.obs;
+
+  List<SubCategory> subCategoriesList = <SubCategory>[].obs;
+  List<File> productImages = <File>[].obs;
   List<CategoryModel> categoriesList = <CategoryModel>[].obs;
-  RxMap<String, dynamic> dynamicFieldsValuesList = Map<String, dynamic>().obs;
-  List<ProductVariantsModel> productVariantsFieldsList =
+  RxList<ProductVariantsModel> productVariantsFieldsList =
       <ProductVariantsModel>[].obs;
+
+  RxMap<String, dynamic> dynamicFieldsValuesList = Map<String, dynamic>().obs;
+
   Map<String, String>? categoryFieldList;
+
   var formKey = GlobalKey<FormState>();
+  var formKeyCategoryField = GlobalKey<FormState>();
 
   RxString discountMessage = "".obs;
   RxDouble imagesSizeInMb = 0.0.obs;
   RxBool uploadImagesError = false.obs;
   double fieldsPaddingSpace = 12.0;
+  RxBool isStockContainsInVariants = false.obs;
 
   @override
   void onReady() {
@@ -50,14 +63,13 @@ class AddProductViewModel extends GetxController {
   }
 
   void onPriceFieldChange(String value) {
-  if (value.isNotEmpty) {
-    int amount = int.parse(value);
-    priceAfterCommission(amount); // Updating priceAfterCommission directly
-  } else {
-    priceAfterCommission(0);
+    if (value.isNotEmpty) {
+      int amount = int.parse(value);
+      priceAfterCommission(amount); // Updating priceAfterCommission directly
+    } else {
+      priceAfterCommission(0);
+    }
   }
-}
-
 
   // void onPriceFieldChange(String value) {
   //   if (value.isNotEmpty) {
@@ -141,6 +153,7 @@ class AddProductViewModel extends GetxController {
   }
 
   void getVariantsFields() async {
+    GlobalVariable.showLoader.value = true;
     ApiBaseHelper()
         .getMethod(
             url:
@@ -153,6 +166,7 @@ class AddProductViewModel extends GetxController {
         productVariantsFieldsList.addAll(parsedJsonData
             .map((e) => ProductVariantsModel.fromJson(e))
             .toList());
+        checkStockFieldInVariantList();
       }
     }).catchError((e) {
       GlobalVariable.internetErr(true);
@@ -160,16 +174,34 @@ class AddProductViewModel extends GetxController {
     });
   }
 
+  checkStockFieldInVariantList() {
+    isStockContainsInVariants.value = false;
+    if (productVariantsFieldsList.isNotEmpty) {
+      productVariantsFieldsList.forEach((element) {
+        if (element.categoryFieldOptions!.isNotEmpty) {
+          element.categoryFieldOptions!.forEach((fieldOptionObj) {
+            if (fieldOptionObj.name!.toLowerCase().contains("stock")) {
+              isStockContainsInVariants.value = true;
+            }
+          });
+        }
+      });
+    }
+    GlobalVariable.showLoader.value = false;
+  }
+
   void onDynamicFieldsValueChanged(String? value, ProductVariantsModel? model) {
-    if (dynamicFieldsValuesList.containsValue(value))
-      dynamicFieldsValuesList.removeWhere((key, v) => v == value);
+    //if (dynamicFieldsValuesList.containsValue(value))
+    //dynamicFieldsValuesList.removeWhere((key, v) => v == value);
     dynamicFieldsValuesList.addIf(
         !dynamicFieldsValuesList.containsValue(value), "${model!.id}", value);
+
+    print("dynamicValue: ${dynamicFieldsValuesList.toJson()}");
   }
 
   void addProdBtnPress() {
     GlobalVariable.internetErr(false);
-    if (formKey.currentState!.validate()) {
+    if (formKeyCategoryField.currentState!.validate()) {
       if (subCategoriesList.isNotEmpty) {
         if (discountMessage.isEmpty) {
           if (!uploadImagesError.value) {
@@ -220,7 +252,8 @@ class AddProductViewModel extends GetxController {
     if (dynamicFieldsValuesList.isNotEmpty) {
       for (int i = 0; i < dynamicFieldsValuesList.entries.length; i++) {
         body.addAll({
-          'features[$i][id]': "${dynamicFieldsValuesList.entries.elementAt(i).key}",
+          'features[$i][id]':
+              "${dynamicFieldsValuesList.entries.elementAt(i).key}",
           'features[$i][value]':
               "${dynamicFieldsValuesList.entries.elementAt(i).value}"
         });

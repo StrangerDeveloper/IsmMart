@@ -746,5 +746,20 @@ class Italian {
             'I nostri termini e condizioni sono stati aggiornati. Per garantire una relazione commerciale senza soluzione di continuità, tocca gentilmente procedere',
         key.skip: 'Saltare',
         key.updateInfo: 'Aggiorna informazioni',
+        key.weightIsReq: 'È richiesto il peso',
+        key.enterCorrectWeight: 'Immettere il peso corretto',
+        key.weight: 'Peso',
+        key.length: 'Lunghezza',
+        key.width: 'Larghezza',
+        key.height: 'Altezza',
+        key.connectionError: 'Errore che stabilisce la connessione. Riprova.',
+        key.enableLocation: 'Abilita posizione.',
+        key.locationAccessDenied: 'Accesso alla posizione negata',
+        key.locationAccessPermanentlyDenied:
+            'Accesso alla posizione negata in modo permanente',
+        key.couldNotGetLocation: 'Impossibile ottenere la posizione. Riprova.',
+        key.productExists: 'Il prodotto esiste già',
+        key.productVariant: 'Varianti del prodotto',
+        key.weightAndDimension: 'Peso e dimensioni',
       };
 }

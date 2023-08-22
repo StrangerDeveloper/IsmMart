@@ -741,5 +741,20 @@ class Turkish {
             'Şartlar ve koşullarımız güncellendi. Kesintisiz bir iş ilişkisi sağlamak için lütfen devam edin',
         key.skip: 'Atlamak',
         key.updateInfo: 'Bilgileri Güncelle',
+        key.weightIsReq: 'Ağırlık gereklidir',
+        key.enterCorrectWeight: 'Doğru Kilo Girin',
+        key.weight: 'Ağırlık',
+        key.length: 'Uzunluk',
+        key.width: 'Genişlik',
+        key.height: 'Yükseklik',
+        key.connectionError: 'Bağlantı kurma hatası. Tekrar deneyin.',
+        key.enableLocation: 'Yeri etkinleştir.',
+        key.locationAccessDenied: 'Konum erişimi reddedildi',
+        key.locationAccessPermanentlyDenied:
+            'Konum erişimi kalıcı olarak reddedildi',
+        key.couldNotGetLocation: 'Konumu alamadım. Tekrar deneyin.',
+        key.productExists: 'Ürün zaten var',
+        key.productVariant: 'Ürün varyantları',
+        key.weightAndDimension: 'Ağırlık ve Boyutlar',
       };
 }

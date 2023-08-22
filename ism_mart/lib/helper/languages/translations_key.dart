@@ -161,6 +161,7 @@ const addToCart = 'addToCart',
     outOfStock = 'outOfStock',
     productNotFound = 'productNotFound',
     uploadImageLessThan = 'uploadImageLessThan',
+    weightAndDimension = "weightAndDimension",
     productVariant = 'productVariant';
 
 ///my_orders
@@ -485,7 +486,21 @@ const login = "login",
     enterAccountNumberOrIban = 'enterAccountNumberOrIban',
     ibanReq = 'ibanReq',
     chequeImageNote =
-        'This cheque image should have the same bank details visible as you mentioned above';
+        'This cheque image should have the same bank details visible as you mentioned above',
+    weightIsReq = 'weightIsReq',
+    enterCorrectWeight = 'enterCorrectWeight',
+    weight = 'weight',
+    length = 'length',
+    width = 'width',
+    height = 'height';
+
+///Chatbot
+
+const connectionError = 'connectionError',
+    enableLocation = 'enableLocation',
+    locationAccessDenied = 'locationAccessDenied',
+    locationAccessPermanentlyDenied = 'locationAccessPermanentlyDenied',
+    couldNotGetLocation = 'couldNotGetLocation';
 
 /**
  * Form Validations
@@ -543,6 +558,7 @@ final productName = "productName",
     prodSku = "prodSku",
     prodSkuReq = "prodSkuReq",
     selectCategory = "selectCategory",
+    productExists = "productExists",
     selectSubCategory = "selectSubCategory";
 
 ///Update Product

@@ -34,8 +34,9 @@ class English {
             'Are you sure you want to delete question?',
         key.question: 'Question',
         key.topVendors: 'Top Vendors',
-        key.productVariant: 'Product Variant',
+        key.productVariant: 'Product Variants',
         key.productDetails: 'Product Details',
+        key.weightAndDimension: 'Weight & Dimensions',
 
         ///errors
         key.serverUnableToHandle: 'server is unable to handle request',
@@ -189,6 +190,11 @@ class English {
         key.uploadImageLessThan: 'Upload images less than',
         key.outOfStock: 'Out of stock',
         key.productNotFound: 'Product Not Found',
+        key.height: 'Height',
+        key.weight: 'Weight',
+        key.width: 'Width',
+        key.length: 'Length',
+        key.weightIsReq: 'Weight is required',
 
         ///update_product
         key.productImageSection: 'Update Product Images',
@@ -656,7 +662,8 @@ class English {
 
         ///Alert Message
         key.updateInfo: 'Update Information',
-        key.updateInfoAlertMsg: 'Our terms and conditions have been updated. To ensure a seamless business relationship, kindly tap on proceed',
+        key.updateInfoAlertMsg:
+            'Our terms and conditions have been updated. To ensure a seamless business relationship, kindly tap on proceed',
         key.skip: 'Skip',
 
         ///About US
