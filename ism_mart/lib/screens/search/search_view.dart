@@ -52,8 +52,17 @@ class SearchView extends GetView<SearchViewModel> {
         height: 36,
         child: TextField(
           controller: controller.searchTextController,
-          onSubmitted: (value){
-            controller.searchProducts(value);
+          onSubmitted: (value) {
+            controller.addHistory(
+                search: controller.searchTextController.text);
+
+            CustomSearchController customSearchController = Get.find();
+            customSearchController.productList.clear();
+            customSearchController.filters.clear();
+            Get.to(() => SearchDetailsView(searchQuery: value),
+            );
+            controller.searchTextController.clear();
+            controller.suggestionList.clear();
           },
           textInputAction: TextInputAction.search,
           onChanged: (value) {

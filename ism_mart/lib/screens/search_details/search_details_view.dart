@@ -61,30 +61,28 @@ class SearchDetailsView extends GetView<CustomSearchController> {
 
         return controller.clearFilters();
       },
-      child: SafeArea(
-        child: Scaffold(
-            backgroundColor: Colors.grey[100]!,
-            appBar: _appBar(),
-            body: Obx(
-              () => controller.noProductsFound.value
-                  ?
-                  //NoInternetView()
-                  Center(
-                      child: NoDataFoundWithIcon(
-                        title: langKey.emptyProductSearch.tr,
-                        subTitle: langKey.emptyProductSearchMsg.tr,
-                      ),
-                    )
-                  : Stack(
-                      children: [
-                        _body(),
-                        // NoInternetView(
-                        //   onPressed: () => controller.applyFilter(),
-                        // )
-                      ],
+      child: Scaffold(
+          backgroundColor: Colors.grey[100]!,
+          appBar: _appBar(),
+          body: Obx(
+            () => controller.noProductsFound.value
+                ?
+                //NoInternetView()
+                Center(
+                    child: NoDataFoundWithIcon(
+                      title: langKey.emptyProductSearch.tr,
+                      subTitle: langKey.emptyProductSearchMsg.tr,
                     ),
-            )),
-      ),
+                  )
+                : Stack(
+                    children: [
+                      _body(),
+                      // NoInternetView(
+                      //   onPressed: () => controller.applyFilter(),
+                      // )
+                    ],
+                  ),
+          )),
     );
   }
 
