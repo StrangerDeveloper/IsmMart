@@ -5,6 +5,7 @@ import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/models/product/product_model.dart';
 import 'package:ism_mart/screens/cart/cart_viewmodel.dart';
+
 import '../../api_helper/local_storage/local_storage_helper.dart';
 import '../../helper/constants.dart';
 import '../../helper/routes.dart';
@@ -43,7 +44,6 @@ class ProductDetailViewModel extends GetxController {
 
   @override
   void onInit() {
-
     productID.value = Get.arguments['productID'];
     isBuyer = Get.arguments['isBuyer'];
     super.onInit();
@@ -113,7 +113,8 @@ class ProductDetailViewModel extends GetxController {
   // }
 
   addUpdateItemToLocalCart() async {
-    productModel.value.totalPrice = productQuantity.value * productModel.value.discountPrice!.toDouble();
+    productModel.value.totalPrice =
+        productQuantity.value * productModel.value.discountPrice!.toDouble();
     productModel.value.vendorId = productModel.value.sellerModel!.id;
 
     CartModel cart = CartModel(
@@ -143,15 +144,20 @@ class ProductDetailViewModel extends GetxController {
         productModel.value = ProductModel.fromJson(response['data']);
 
         //Moving thumbnail at zero index...
-        productModel.value.images?.forEach((e) {
-          if (e.url != null) {
-            if (e.url == productModel.value.thumbnail) {
-              imageList.insert(0, productModel.value.thumbnail!);
-            } else {
-              imageList.add(e.url!);
+
+        if (productModel.value.images?.isEmpty ?? false) {
+          imageList.add(productModel.value.thumbnail ?? '');
+        } else {
+          productModel.value.images?.forEach((e) {
+            if (e.url != null) {
+              if (e.url == productModel.value.thumbnail) {
+                imageList.insert(0, productModel.value.thumbnail!);
+              } else {
+                imageList.add(e.url!);
+              }
             }
-          }
-        });
+          });
+        }
 
         await getProductQuestions();
         GlobalVariable.showLoader.value = false;
