@@ -66,7 +66,7 @@ class ProductDetailView extends StatelessWidget {
                       ],
                     ),
                   ),
-                  expandedHeight: Get.height * 0.4,
+                  expandedHeight: Get.height * 0.43,
                   pinned: false,
                 ),
                 SliverToBoxAdapter(
