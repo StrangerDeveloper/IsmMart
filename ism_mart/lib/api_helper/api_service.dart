@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:get/get.dart';
 import 'package:ism_mart/exports/export_api_helper.dart';
+
+import '../helper/global_variables.dart';
 
 typedef JSON = Map<String, dynamic>;
 
@@ -15,7 +19,8 @@ class ApiService {
     String? token,
     bool requiresAuthToken = false,
   }) async {
-    //try {
+    var response;
+    try {
     var customHeaders = {
       'Accept': 'application/json',
       //requiresAuthToken?'authorization' : '':'',
@@ -27,15 +32,17 @@ class ApiService {
     }
 
     // _baseProvider.httpClient.baseUrl = ApiConstant.baseUrl;
-    final response =
+     response =
         await _baseProvider.get(endpoint, headers: customHeaders, query: query);
 
     return response;
-    // } on SocketException catch (error) {
-    //   print("ApiService: $error");
-    //   AppConstant.displaySnackBar("error", Errors.noInternetError);
-    //   throw Errors.noInternetError;
-    // }
+    } on SocketException catch (error) {
+      GlobalVariable.internetErr(true);
+      print("ApiService: $error");
+    //  AppConstant.displaySnackBar("error", Errors.noInternetError);
+    //  throw Errors.noInternetError;
+    }
+    return response;
   }
 
   Future<Response> post<T>({
