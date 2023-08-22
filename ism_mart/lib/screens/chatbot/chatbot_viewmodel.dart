@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
 import '../../helper/constants.dart';
 import '../../helper/global_variables.dart';
 import 'chat_model.dart';
@@ -28,6 +29,8 @@ class ChatViewModel extends GetxController with GetTickerProviderStateMixin{
     GlobalVariable.showLoader.value = true;
     tryAgain.value = false;
     final hasPermissions = await handleLocationPermission();
+    await Permission.locationWhenInUse.serviceStatus.isEnabled;
+
     if(!hasPermissions){
       tryAgain.value = true;
       GlobalVariable.showLoader.value = false;
