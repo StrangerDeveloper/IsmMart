@@ -559,7 +559,6 @@ final productName = "productName",
     prodSku = "prodSku",
     prodSkuReq = "prodSkuReq",
     selectCategory = "selectCategory",
-    productExists = "productExists",
     selectSubCategory = "selectSubCategory";
 
 ///Update Product

@@ -5,7 +5,6 @@ import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/screens/login/login_viewmodel.dart';
-import 'package:ism_mart/screens/product_detail/product_detail_view.dart';
 import 'package:ism_mart/widgets/back_button.dart';
 import 'package:ism_mart/widgets/become_vendor.dart';
 import 'package:ism_mart/widgets/no_internet_view.dart';
@@ -20,58 +19,56 @@ class LogInView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: Stack(
-          children: [
-            Form(
-              key: viewModel.signInFormKey,
-              child: ScrollableColumn(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  titleAndBackBtn(),
-                  Spacer(),
-                  Padding(
-                    padding:
-                    const EdgeInsets.only(top: 20, bottom: 10, left: 20),
-                    child: CustomText(
-                      title: langKey.welcome.tr + '!',
-                      style: newFontStyle2.copyWith(
-                        fontSize: 20,
-                        color: newColorDarkBlack2,
-                      ),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Stack(
+        children: [
+          Form(
+            key: viewModel.signInFormKey,
+            child: ScrollableColumn(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                titleAndBackBtn(),
+                Spacer(),
+                Padding(
+                  padding:
+                  const EdgeInsets.only(top: 20, bottom: 10, left: 20),
+                  child: CustomText(
+                    title: langKey.welcome.tr + '!',
+                    style: newFontStyle2.copyWith(
+                      fontSize: 20,
+                      color: newColorDarkBlack2,
                     ),
                   ),
-                  Padding(
-                    padding:
-                    const EdgeInsets.only(left: 20, right: 20, bottom: 25),
-                    child: Text(
-                      langKey.seamlessShopping.tr,
-                      style: newFontStyle0.copyWith(
-                        color: newColorLightGrey2,
-                      ),
+                ),
+                Padding(
+                  padding:
+                  const EdgeInsets.only(left: 20, right: 20, bottom: 25),
+                  child: Text(
+                    langKey.seamlessShopping.tr,
+                    style: newFontStyle0.copyWith(
+                      color: newColorLightGrey2,
                     ),
                   ),
-                  emailTextField(),
-                  passwordTextField(),
-                  forgotPassword(),
-                  logInBtn(),
-                  or(),
-                  googlelogInBtn(),
-                  facebooklogInBtn(),
-                  applelogInBtn(),
-                  Spacer(),
-                  doNotHaveAnAccount(),
-                  BecomeVendor(),
-                ],
-              ),
+                ),
+                emailTextField(),
+                passwordTextField(),
+                forgotPassword(),
+                logInBtn(),
+                or(),
+                googlelogInBtn(),
+                facebooklogInBtn(),
+                applelogInBtn(),
+                Spacer(),
+                doNotHaveAnAccount(),
+                BecomeVendor(),
+              ],
             ),
-            NoInternetView(
-              onPressed: () => viewModel.signIn(),
-            ),
-          ],
-        ),
+          ),
+          NoInternetView(
+            onPressed: () => viewModel.signIn(),
+          ),
+        ],
       ),
     );
   }

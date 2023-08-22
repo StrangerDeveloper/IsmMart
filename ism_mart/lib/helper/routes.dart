@@ -28,7 +28,6 @@ import '../screens/onboard/onboard_view.dart';
 import '../screens/seller_store_detail/seller_store_detail_view.dart';
 import '../screens/setting/settings_view.dart';
 import '../screens/signup/sign_up_view.dart';
-import '../screens/single_product_details/single_product_details_view.dart';
 import '../screens/static_info/static_info_view.dart';
 import '../screens/update_buyer_profile/update_buyer_profile_view.dart';
 import '../screens/update_vendor_profile/update_vendor_profile_view.dart';

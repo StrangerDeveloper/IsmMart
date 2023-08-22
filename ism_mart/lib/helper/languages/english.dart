@@ -539,12 +539,12 @@ class English {
         key.ibanReq: 'Enter correct IBAN',
         key.chequeImageNote:
             'This cheque image should have the same bank details visible as you mentioned above',
-        key.weightIsReq: 'Weight is required',
+        // key.weightIsReq: 'Weight is required',
         key.enterCorrectWeight: 'Invalid value. Enter correct weight',
-        key.weight: 'Weight',
-        key.length: 'Length',
-        key.width: 'Width',
-        key.height: 'Height',
+        // key.weight: 'Weight',
+        // key.length: 'Length',
+        // key.width: 'Width',
+        // key.height: 'Height',
 
         ///Chatbot
         key.connectionError: 'Error establishing connection. Try again.',
