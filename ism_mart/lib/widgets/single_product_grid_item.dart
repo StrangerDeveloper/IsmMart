@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ism_mart/exports/exports_model.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
+import 'package:ism_mart/exports/exports_model.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
+
+import '../screens/product_detail/product_detail_view.dart';
 
 class SingleProductItems extends StatelessWidget {
   const SingleProductItems({
@@ -16,6 +18,7 @@ class SingleProductItems extends StatelessWidget {
   final ProductModel? productModel;
   final bool? isCategoryProducts;
   final GestureTapCallback? onTap;
+
   // final AllProductsModel? allProductsModel;
 
   @override
@@ -32,9 +35,9 @@ class SingleProductItems extends StatelessWidget {
         padding: const EdgeInsets.all(5.0),
         child: GestureDetector(
           onTap: () {
-            Get.toNamed(Routes.singleProductDetails, arguments: [
-              {"calledFor": "customer", "productID": "${model.id}"}
-            ]);
+            Get.to(() =>ProductDetailView(), arguments:
+              {"isBuyer": true, "productID": model.id}
+            );
           },
           child: Container(
             clipBehavior: Clip.hardEdge,
@@ -57,7 +60,8 @@ class SingleProductItems extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                        height: AppResponsiveness.getHeight90_140( buildContext!),
+                        height:
+                            AppResponsiveness.getHeight90_140(buildContext!),
                         width: double.infinity,
                         child: Center(
                           child: Stack(
@@ -119,9 +123,14 @@ class SingleProductItems extends StatelessWidget {
         child: GestureDetector(
           onTap: onTap ??
               () {
-                Get.toNamed(Routes.singleProductDetails, arguments: [
-                  {"calledFor": "customer", "productID": "${model!.id}"}
-                ]);
+                // Get.toNamed(Routes.singleProductDetails, arguments: [
+                //   {"calledFor": "customer", "productID": "${model!.id}"}
+                // ]);
+                Get.to(
+                  () => ProductDetailView(),
+                  arguments: {'productID': model!.id, 'isBuyer': true},
+                );
+
                 // showModalBottomSheet(
                 //     //isDismissible: false,
                 //     isScrollControlled: true,
@@ -156,7 +165,8 @@ class SingleProductItems extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                        height: AppResponsiveness.getHeight90_140( buildContext!),
+                        height:
+                            AppResponsiveness.getHeight90_140(buildContext!),
                         //width: double.infinity,
                         child: Center(
                           child: Stack(

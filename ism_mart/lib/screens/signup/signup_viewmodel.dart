@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/controllers/controllers.dart';
@@ -8,7 +7,6 @@ import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/urls.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
-import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUpViewModel extends GetxController {
   GlobalKey<FormState> signUpFormKey = GlobalKey<FormState>();
@@ -39,7 +37,7 @@ class SignUpViewModel extends GetxController {
   }
 
   @override
-  void onInit() async{
+  void onInit() async {
     await authController.getCountries();
     super.onInit();
   }
@@ -58,7 +56,7 @@ class SignUpViewModel extends GetxController {
     GlobalVariable.internetErr(false);
     if (signUpFormKey.currentState?.validate() ?? false) {
       if (countryID.value != 0 && cityID.value != 0) {
-        if(termAndCondition.value == true) {
+        if (termAndCondition.value == true) {
           GlobalVariable.showLoader.value = true;
           String? phoneNumber = countryCode.value + phoneNumberController.text;
 
@@ -96,12 +94,13 @@ class SignUpViewModel extends GetxController {
               );
             }
           }).catchError((e) {
-         //   GlobalVariable.internetErr(true);
+            //   GlobalVariable.internetErr(true);
             print(e);
             GlobalVariable.showLoader.value = false;
           });
-        } else{
-          AppConstant.displaySnackBar(langKey.errorTitle.tr, 'Accept terms and conditions to proceed');
+        } else {
+          AppConstant.displaySnackBar(
+              langKey.errorTitle.tr, 'Accept terms and conditions to proceed');
         }
       } else {
         if (countryID.value == 0) {
@@ -111,7 +110,7 @@ class SignUpViewModel extends GetxController {
           cityErrorVisibility.value = true;
         }
       }
-    } else{
+    } else {
       if (countryID.value == 0) {
         countryErrorVisibility.value = true;
       }
@@ -120,6 +119,4 @@ class SignUpViewModel extends GetxController {
       }
     }
   }
-
-
 }

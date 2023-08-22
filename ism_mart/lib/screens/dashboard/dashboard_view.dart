@@ -4,13 +4,13 @@ import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/api_helper/api_service.dart';
 import 'package:ism_mart/exports/export_controllers.dart';
-import 'package:ism_mart/helper/no_internet_view.dart';
 import 'package:ism_mart/exports/exports_model.dart';
-import 'package:ism_mart/screens/dashboard/dashboard_viewmodel.dart';
-import 'package:ism_mart/screens/top_vendors/top_vendors_model.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
-import 'package:ism_mart/widgets/loader_view.dart';
+import 'package:ism_mart/helper/no_internet_view.dart';
+import 'package:ism_mart/screens/dashboard/dashboard_viewmodel.dart';
+import 'package:ism_mart/screens/top_vendors/top_vendors_model.dart';
+
 import '../../helper/global_variables.dart';
 import '../../widgets/custom_grey_border_container.dart';
 import '../../widgets/custom_loading.dart';
@@ -22,6 +22,7 @@ import '../../widgets/single_category_item.dart';
 import '../../widgets/single_product_grid_item.dart';
 import '../../widgets/sticky_label_with_view_more.dart';
 import '../../widgets/sticky_labels.dart';
+import '../product_detail/product_detail_view.dart';
 import '../search_details/search_details_view.dart';
 
 class DashboardView extends GetView<BaseController> {
@@ -72,7 +73,6 @@ class DashboardView extends GetView<BaseController> {
               GlobalVariable.btnPress(true);
             },
           ),
-          LoaderView(),
         ],
       ),
     );
@@ -165,9 +165,13 @@ class DashboardView extends GetView<BaseController> {
         DateTime.now().add(const Duration(hours: 17)).millisecondsSinceEpoch;
     return InkWell(
       onTap: () {
-        Get.toNamed(Routes.singleProductDetails, arguments: [
-          {"calledFor": "customer", "productID": "${model.id}"}
-        ]);
+        // Get.toNamed(Routes.singleProductDetails, arguments: [
+        //   {"calledFor": "customer", "productID": "${model.id}"}
+        // ]);
+        Get.to(
+          () => ProductDetailView(),
+          arguments: {'productID': model.id, 'isBuyer' : true},
+        );
       },
       child: Stack(
         fit: StackFit.loose,
@@ -535,18 +539,19 @@ class DashboardView extends GetView<BaseController> {
     );
   }
 
-  Widget chatWidget(){
+  Widget chatWidget() {
     return Positioned(
       bottom: 12,
       right: 10,
       child: SlideTransition(
         position: viewModel.animation1,
         child: GestureDetector(
-          onTap: ()async{
+          onTap: () async {
             Get.toNamed(Routes.chatScreen);
             // await viewModel.getCurrentLocation();
           },
-          child: Obx(() => AnimatedContainer(
+          child: Obx(
+            () => AnimatedContainer(
               width: viewModel.containerWidth.value,
               height: 50,
               decoration: BoxDecoration(
@@ -557,10 +562,8 @@ class DashboardView extends GetView<BaseController> {
                         color: Colors.grey.withOpacity(0.2),
                         offset: Offset(0, 3),
                         blurRadius: 1,
-                        spreadRadius: 1
-                    )
-                  ]
-              ),
+                        spreadRadius: 1)
+                  ]),
               duration: Duration.zero,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 13.0),
@@ -576,8 +579,7 @@ class DashboardView extends GetView<BaseController> {
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w600,
-                                fontSize: 14
-                            ),
+                                fontSize: 14),
                           ),
                         ),
                       ),
@@ -586,11 +588,8 @@ class DashboardView extends GetView<BaseController> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(right: 4.0),
-                        child: Icon(
-                            Icons.chat_outlined,
-                            size: 18,
-                            color: Colors.white
-                          ),
+                        child: Icon(Icons.chat_outlined,
+                            size: 18, color: Colors.white),
                       ),
                     ],
                   ),

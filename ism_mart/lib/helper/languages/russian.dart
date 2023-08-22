@@ -750,5 +750,22 @@ class Russian {
             'Наши условия были обновлены. Чтобы обеспечить бесшовные деловые отношения, любезно нажмите на продолжение',
         key.skip: 'Пропускать',
         key.updateInfo: 'Обновить информацию',
+        key.weightIsReq: 'Вес требуется',
+        key.enterCorrectWeight: 'Введите правильный вес',
+        key.weight: 'Масса',
+        key.length: 'Длина',
+        key.width: 'Ширина',
+        key.height: 'Высота',
+        key.connectionError:
+            'Ошибка установления соединения. Попробуйте еще раз.',
+        key.enableLocation: 'Включить местоположение.',
+        key.locationAccessDenied: 'Доступ к месту отрицается',
+        key.locationAccessPermanentlyDenied:
+            'Доступ к месту навсегда отрицается',
+        key.couldNotGetLocation:
+            'Не мог получить местоположение. Попробуйте еще раз.',
+        key.productExists: 'Продукт уже существует',
+        key.productVariant: 'Варианты продукта',
+        key.weightAndDimension: 'Вес и размеры',
       };
 }

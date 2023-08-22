@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
+import 'package:ism_mart/screens/product_detail/product_detail_view.dart';
 import 'package:ism_mart/screens/vendor_question/vendor_question_viewmodel.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
@@ -264,13 +265,13 @@ class VendorQuestionView extends StatelessWidget {
                     print(
                         'Product ID: ${viewModel.productQuestionsList[index].product?.id}');
 
-                    Get.toNamed(Routes.singleProductDetails, arguments: [
+                    Get.to(() =>ProductDetailView(), arguments:
                       {
-                        "calledFor": "seller",
+                        "isBuyer": false,
                         "productID":
-                            "${viewModel.productQuestionsList[index].product?.id}"
+                            viewModel.productQuestionsList[index].product?.id
                       }
-                    ]);
+                    );
                   }
                 },
               ),

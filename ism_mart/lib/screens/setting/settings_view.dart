@@ -55,7 +55,8 @@ class SettingsView extends StatelessWidget {
   Widget _accountSetup() {
     return Obx(
       () => viewModel.userDetails.value?.email == null &&
-              viewModel.userDetails.value?.token == null
+              viewModel.userDetails.value?.token == null &&
+              authController.isSessionExpired!
           ? Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: Column(
@@ -185,22 +186,24 @@ class SettingsView extends StatelessWidget {
         singleSettingsItem(
           onTap: () async {
             if (viewModel.checkVendorAccountStatus()!) {
-                if(viewModel.userDetails.value?.vendor?.status == 'pending'){
-                  Get.toNamed(Routes.vendorSignUp4, arguments: {
-                    'fromSettings': true,
-                  });
-                } else if(viewModel.userDetails.value?.vendor?.status == 'false'){
-                    Get.toNamed(Routes.chooseEmail);
-                } else if(viewModel.userDetails.value?.vendor?.status == 'approved'){
-                  Get.toNamed(Routes.sellerHomeRoute);
-                }
-              } else {
+              if (viewModel.userDetails.value?.vendor?.status == 'pending') {
+                Get.toNamed(Routes.vendorSignUp4, arguments: {
+                  'fromSettings': true,
+                });
+              } else if (viewModel.userDetails.value?.vendor?.status ==
+                  'false') {
+                Get.toNamed(Routes.chooseEmail);
+              } else if (viewModel.userDetails.value?.vendor?.status ==
+                  'approved') {
+                Get.toNamed(Routes.sellerHomeRoute);
+              }
+            } else {
               AppConstant.displaySnackBar(
                 langKey.errorTitle.tr,
                 langKey.youStoreHas.tr,
               );
             }
-            },
+          },
           icon: Icons.dashboard_rounded,
           color: kPrimaryColor,
           title: langKey.vendorDashboard.tr,
@@ -309,9 +312,19 @@ class SettingsView extends StatelessWidget {
           color: Colors.purple,
           title: langKey.faqs.tr,
         ),
+        singleSettingsItem(
+          onTap: () {
+            viewModel.whatsapp();
+          },
+          isIcon: false,
+          svgIcons: 'assets/svg/whatsapp.svg',
+          color: Color(0xff25D366),
+          title: langKey.helpCenter.tr,
+        ),
         Obx(
           () => viewModel.userDetails.value?.email != null &&
                   viewModel.userDetails.value?.token != null
+              // && !authController.isSessionExpired!
               ? singleSettingsItem(
                   onTap: () async {
                     await LocalStorageHelper.deleteUserData();
@@ -322,15 +335,6 @@ class SettingsView extends StatelessWidget {
                   title: langKey.logout.tr,
                 )
               : Container(),
-        ),
-        singleSettingsItem(
-          onTap: () {
-            viewModel.whatsapp();
-          },
-          isIcon: false,
-          svgIcons: 'assets/svg/whatsapp.svg',
-          color: Color(0xff25D366),
-          title: langKey.helpCenter.tr,
         ),
       ],
     );
@@ -509,7 +513,7 @@ class SettingsView extends StatelessWidget {
                       padding: const EdgeInsets.all(10),
                       child: SvgPicture.asset(
                         svgIcons!,
-                        color: color,
+                        //color: color,
                       ),
                     ),
             ),

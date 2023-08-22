@@ -15,9 +15,9 @@ class Validator {
   ///EmptyField
   String? validateDefaultTxtField(String? value, {String? errorPrompt}) {
     if (GetUtils.isBlank(value)!) {
-      if(errorPrompt == null) {
+      if (errorPrompt == null) {
         return langKey.fieldIsRequired.tr;
-      } else{
+      } else {
         return errorPrompt;
       }
     } else {
@@ -26,40 +26,40 @@ class Validator {
   }
 
   ///Address
-  String? validateAddress(String? value){
+  String? validateAddress(String? value) {
     RegExp regex = RegExp(r'^[#.0-9a-zA-Z\s,-]+$');
-    if(GetUtils.isBlank(value)!){
+    if (GetUtils.isBlank(value)!) {
       return langKey.shopAddressReq.tr;
-    } else if(!regex.hasMatch(value!)){
+    } else if (!regex.hasMatch(value!)) {
       return langKey.incorrectAddress.tr;
-    } else{
+    } else {
       return null;
     }
   }
 
   ///CNIC
-  String? validateCNIC(String? value){
-    if(GetUtils.isBlank(value)!){
+  String? validateCNIC(String? value) {
+    if (GetUtils.isBlank(value)!) {
       return langKey.cnicReq.tr;
-    } else if(value!.length < 11 || value.length > 18){
+    } else if (value!.length < 11 || value.length > 18) {
       return langKey.incorrectCNIC.tr;
     } else {
       return null;
     }
   }
-  
+
   ///Name
   String? validateName(String? value, {String? errorToPrompt}) {
-  RegExp regex = RegExp(r'^[a-zA-Z0-9 -]+$');
-  if (GetUtils.isBlank(value)!) {
-    // Using errorToPrompt parameter to construct the error message dynamically
-    return errorToPrompt;
-  } else if (!regex.hasMatch(value!)) {
-    return langKey.nameAlphabaticReq.tr;
-  } else {
-    return null;
+    RegExp regex = RegExp(r'^[a-zA-Z0-9 -]+$');
+    if (GetUtils.isBlank(value)!) {
+      // Using errorToPrompt parameter to construct the error message dynamically
+      return errorToPrompt;
+    } else if (!regex.hasMatch(value!)) {
+      return langKey.nameAlphabaticReq.tr;
+    } else {
+      return null;
+    }
   }
-}
 
   // String? validateName(String? value) {
   //   RegExp regex = RegExp(r'^[a-zA-Z -]+$');
@@ -84,10 +84,10 @@ class Validator {
   }
 
   ///NTN
-  String? validateNTN(String? value){
-    if(GetUtils.isBlank(value)!){
+  String? validateNTN(String? value) {
+    if (GetUtils.isBlank(value)!) {
       return null;
-    } else if(value!.length < 7 || value.length > 9){
+    } else if (value!.length < 7 || value.length > 9) {
       return langKey.incorrectNTN.tr;
     } else {
       return null;
@@ -106,25 +106,24 @@ class Validator {
   }
 
   ///Bank Account
-  String? validateBankAcc(String? value){
-    if(GetUtils.isBlank(value)!){
+  String? validateBankAcc(String? value) {
+    if (GetUtils.isBlank(value)!) {
       return langKey.bankAccountReq.tr;
     } else {
       VendorSignUp3ViewModel vendorSignUp3ViewModel = Get.find();
-      if(value!.length < 14 || value.length > 33){
-
-        Future.delayed(Duration(milliseconds: 500), (){
+      if (value!.length < 14 || value.length > 33) {
+        Future.delayed(Duration(milliseconds: 500), () {
           vendorSignUp3ViewModel.enableBranchCode.value = false;
         });
-      return langKey.incorrectAccOrIbanNo.tr;
-    } else{
-        if(RegExp(r'^-?(([0-9]*)|(([0-9]*)\.([0-9]*)))$').hasMatch(value)){
-        Future.delayed(Duration(milliseconds: 500), (){
-          vendorSignUp3ViewModel.enableBranchCode.value = true;
-        });
-        return null;
-        } else{
-          Future.delayed(Duration(milliseconds: 500), (){
+        return langKey.incorrectAccOrIbanNo.tr;
+      } else {
+        if (RegExp(r'^-?(([0-9]*)|(([0-9]*)\.([0-9]*)))$').hasMatch(value)) {
+          Future.delayed(Duration(milliseconds: 500), () {
+            vendorSignUp3ViewModel.enableBranchCode.value = true;
+          });
+          return null;
+        } else {
+          Future.delayed(Duration(milliseconds: 500), () {
             vendorSignUp3ViewModel.enableBranchCode.value = false;
           });
           return null;
@@ -136,17 +135,17 @@ class Validator {
   ///Branch Code
   String? validateBranchCode(String? value, String bankAcc) {
     if (GetUtils.isBlank(value)!) {
-      if(bankAcc.isEmpty || bankAcc == ''){
+      if (bankAcc.isEmpty || bankAcc == '') {
         return null;
-      } else if(RegExp(r'^-?(([0-9]*)|(([0-9]*)\.([0-9]*)))$').hasMatch(bankAcc)){
-          return langKey.enterBranchCode.tr;
-      } else{
+      } else if (RegExp(r'^-?(([0-9]*)|(([0-9]*)\.([0-9]*)))$')
+          .hasMatch(bankAcc)) {
+        return langKey.enterBranchCode.tr;
+      } else {
         return null;
       }
     } else if (value?.length != 4) {
       return langKey.incorrectBranchCode.tr;
-    }
-    else {
+    } else {
       return null;
     }
   }
@@ -163,23 +162,22 @@ class Validator {
   }
 
   ///Confirm Password
-  String? validateConfirmPassword(String? value1, String? value2){
-    if(GetUtils.isBlank(value1)!){
+  String? validateConfirmPassword(String? value1, String? value2) {
+    if (GetUtils.isBlank(value1)!) {
       return langKey.passwordConfirmIsRequired.tr;
-    } else if(value1 != value2){
+    } else if (value1 != value2) {
       return langKey.passwordNotMatched.tr;
-    } else{
+    } else {
       return null;
     }
   }
 
   ///Weight
-  String? validateWeightField(String value){
-    if(GetUtils.isBlank(value)!){
+  String? validateWeightField(String value) {
+    if (GetUtils.isBlank(value)!) {
       return langKey.weightIsReq.tr;
-    } else{
+    } else {
       return null;
     }
   }
-
 }

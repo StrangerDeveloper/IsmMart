@@ -754,5 +754,20 @@ class Urdu {
             'ہمارے شرائط و ضوابط کو اپ ڈیٹ کردیا گیا ہے۔ بغیر کسی ہموار کاروباری تعلقات کو یقینی بنانے کے لئے ، براہ کرم آگے بڑھنے پر ٹیپ کریں',
         key.skip: 'چھوڑ دو',
         key.updateInfo: 'معلومات کو اپ ڈیٹ کریں',
+        key.weightIsReq: 'وزن کی ضرورت ہے',
+        key.enterCorrectWeight: 'صحیح وزن درج کریں',
+        key.weight: 'وزن',
+        key.length: 'لمبائی',
+        key.width: 'چوڑائی',
+        key.height: 'اونچائی',
+        key.connectionError: 'کنکشن قائم کرنے میں خرابی۔ دوبارہ کوشش کریں.',
+        key.enableLocation: 'مقام کو فعال کریں۔',
+        key.locationAccessDenied: 'مقام تک رسائی سے انکار',
+        key.locationAccessPermanentlyDenied:
+            'محل وقوع تک رسائی مستقل طور پر تردید کی',
+        key.couldNotGetLocation: 'مقام نہیں مل سکا۔ دوبارہ کوشش کریں.',
+        key.productExists: 'پروڈکٹ پہلے ہی موجود ہے',
+        key.productVariant: 'مصنوعات کی مختلف حالتیں',
+        key.weightAndDimension: 'وزن اور طول و عرض',
       };
 }

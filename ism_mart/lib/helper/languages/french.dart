@@ -755,5 +755,22 @@ class French {
             'Nos termes et conditions ont été mis à jour. Pour assurer une relation commerciale transparente, veuillez appuyer sur Procéder',
         key.skip: 'Sauter',
         key.updateInfo: 'Mettre à jour les informations',
+        key.weightIsReq: 'Le poids est requis',
+        key.enterCorrectWeight: 'Entrez le poids correct',
+        key.weight: 'Poids',
+        key.length: 'Longueur',
+        key.width: 'Largeur',
+        key.height: 'Hauteur',
+        key.connectionError:
+            'Erreur d\'établissement de la connexion. Essayer à nouveau.',
+        key.enableLocation: 'Location disponible.',
+        key.locationAccessDenied: 'Accès de l\'emplacement refusé',
+        key.locationAccessPermanentlyDenied:
+            'Accès de l\'emplacement refusé de façon permanente',
+        key.couldNotGetLocation:
+            'Impossible d\'obtenir l\'emplacement. Essayer à nouveau.',
+        key.productExists: 'Le produit existe déjà',
+        key.productVariant: 'Variantes de produits',
+        key.weightAndDimension: 'Poids et dimensions',
       };
 }

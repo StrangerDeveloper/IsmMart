@@ -1,20 +1,21 @@
 import 'package:ism_mart/exports/exports_model.dart';
 
 class ProductVariantsModel {
-  ProductVariantsModel({
-    this.id,
-    this.name,
-    this.label,
-    this.placeholder,
-    this.required,
-    this.multiple,
-    this.isNewField = false,
-    this.type,
-    this.createdAt,
-    this.updatedAt,
-    this.category,
-    this.subCategory,
-  });
+  ProductVariantsModel(
+      {this.id,
+      this.name,
+      this.label,
+      this.placeholder,
+      this.required,
+      this.multiple,
+      this.isNewField = false,
+      this.type,
+      this.createdAt,
+      this.updatedAt,
+      this.category,
+      this.subCategory,
+      this.categoryFieldOptions,
+      this.moreFieldOptionList});
 
   int? id;
   String? name, label, placeholder, type;
@@ -23,6 +24,9 @@ class ProductVariantsModel {
   DateTime? updatedAt;
   CategoryModel? category;
   SubCategory? subCategory;
+  List<ProductVariantsModel>? categoryFieldOptions;
+  List<ProductVariantsModel>?
+      moreFieldOptionList; // used for when users press on add/remove btn
 
   factory ProductVariantsModel.fromJson(Map<String, dynamic> json) =>
       ProductVariantsModel(
@@ -40,6 +44,11 @@ class ProductVariantsModel {
         subCategory: json["SubCategory"] == null
             ? null
             : SubCategory.fromJson(json["SubCategory"]),
+        moreFieldOptionList: [],
+        categoryFieldOptions: json["CategoryFieldOptions"] == null
+            ? []
+            : List<ProductVariantsModel>.from(json["CategoryFieldOptions"]!
+                .map((x) => ProductVariantsModel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -54,5 +63,16 @@ class ProductVariantsModel {
         "updatedAt": updatedAt?.toIso8601String(),
         "Category": category!.toJson(),
         "SubCategory": subCategory!.toJson(),
+        "CategoryFieldOptions": categoryFieldOptions == null
+            ? []
+            : List<dynamic>.from(categoryFieldOptions!.map((x) => x.toJson())),
+      };
+
+  Map<String, dynamic> toJsonPrint() => {
+        "id": id,
+        "name": name,
+        "label": label,
+        "type": type,
+        "isNew": isNewField
       };
 }

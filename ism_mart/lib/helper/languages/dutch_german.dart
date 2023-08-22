@@ -746,5 +746,22 @@ class DutchGerman {
             'Unsere Allgemeinen Geschäftsbedingungen wurden aktualisiert. Um eine nahtlose Geschäftsbeziehung zu gewährleisten, tippen Sie bitte auf fortfahren',
         key.skip: 'Überspringen',
         key.updateInfo: 'Informationen aktualisieren',
+        key.weightIsReq: 'Gewicht ist erforderlich',
+        key.enterCorrectWeight: 'Geben Sie das richtige Gewicht ein',
+        key.weight: 'Gewicht',
+        key.length: 'Länge',
+        key.width: 'Breite',
+        key.height: 'Höhe',
+        key.connectionError:
+            'Fehler festlegen, die Verbindung hergestellt werden. Versuchen Sie es erneut.',
+        key.enableLocation: 'Aktiviere Standort.',
+        key.locationAccessDenied: 'Standortzugang verweigert',
+        key.locationAccessPermanentlyDenied:
+            'Standortzugang dauerhaft abgelehnt',
+        key.couldNotGetLocation:
+            'Konnte keinen Ort bekommen. Versuchen Sie es erneut.',
+        key.productExists: 'Produkt existiert bereits',
+        key.productVariant: 'Produktvarianten',
+        key.weightAndDimension: 'Gewicht & Abmessungen',
       };
 }

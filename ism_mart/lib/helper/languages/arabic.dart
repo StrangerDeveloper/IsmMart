@@ -743,5 +743,20 @@ class Arabic {
             'تم تحديث شروطنا وأحكامنا. لضمان وجود علاقة تجارية سلسة ، يرجى النقر على المتابعة',
         key.skip: 'يتخطى',
         key.updateInfo: 'تحديث المعلومات',
+        key.weightIsReq: 'الوزن مطلوب',
+        key.enterCorrectWeight: 'أدخل الوزن الصحيح',
+        key.weight: 'وزن',
+        key.length: 'طول',
+        key.width: 'عرض',
+        key.height: 'ارتفاع',
+        key.connectionError: 'خطأ في إنشاء اتصال. حاول ثانية.',
+        key.enableLocation: 'تمكن موقع.',
+        key.locationAccessDenied: 'تم رفض الوصول إلى الموقع',
+        key.locationAccessPermanentlyDenied:
+            'تم رفض الوصول إلى الموقع بشكل دائم',
+        key.couldNotGetLocation: 'لا يمكن الحصول على الموقع. حاول ثانية.',
+        key.productExists: 'المنتج موجود بالفعل',
+        key.productVariant: 'متغيرات المنتج',
+        key.weightAndDimension: 'الوزن والأبعاد',
       };
 }

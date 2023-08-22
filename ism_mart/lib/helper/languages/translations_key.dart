@@ -161,6 +161,7 @@ const addToCart = 'addToCart',
     outOfStock = 'outOfStock',
     productNotFound = 'productNotFound',
     uploadImageLessThan = 'uploadImageLessThan',
+    weightAndDimension = "weightAndDimension",
     productVariant = 'productVariant';
 
 ///my_orders
@@ -495,7 +496,7 @@ const login = "login",
 
 ///Chatbot
 
-    const connectionError = 'connectionError',
+const connectionError = 'connectionError',
     enableLocation = 'enableLocation',
     locationAccessDenied = 'locationAccessDenied',
     locationAccessPermanentlyDenied = 'locationAccessPermanentlyDenied',
@@ -558,6 +559,7 @@ final productName = "productName",
     prodSku = "prodSku",
     prodSkuReq = "prodSkuReq",
     selectCategory = "selectCategory",
+    productExists = "productExists",
     selectSubCategory = "selectSubCategory";
 
 ///Update Product
