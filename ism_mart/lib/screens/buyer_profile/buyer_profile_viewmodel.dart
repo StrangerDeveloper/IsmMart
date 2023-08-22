@@ -35,7 +35,7 @@ class BuyerProfileViewModel extends GetxController {
             langKey.errorTitle.tr, langKey.recordDoNotExist.tr);
       }
     }).catchError((e) {
-      GlobalVariable.internetErr(true);
+     // GlobalVariable.internetErr(true);
       print(e);
       GlobalVariable.showLoader.value = false;
     });

@@ -53,7 +53,8 @@ class ApiService {
     Map<String, String>? headers,
     bool requiresAuthToken = false,
   }) async {
-    //try {
+    var response;
+    try {
     var customHeaders = {
       'Accept': 'application/json',
       //requiresAuthToken ? 'Authorization' : '': '',
@@ -65,7 +66,7 @@ class ApiService {
     }
     // _baseProvider.httpClient.baseUrl = ApiConstant.baseUrl;
 
-    final response = await _baseProvider.post(
+     response = await _baseProvider.post(
       endpoint,
       body,
       headers: customHeaders,
@@ -78,11 +79,13 @@ class ApiService {
         " Error ${response.hasError}"
         "ApiService: ${response.status.isForbidden}");*/
     return response;
-    // } on SocketException catch (error) {
-    //   print("ApiService: $error");
-    //   AppConstant.displaySnackBar("error", Errors.noInternetError);
-    //   throw Errors.noInternetError;
-    // }
+    } on SocketException catch (error) {
+      GlobalVariable.internetErr(true);
+      print("ApiService: $error");
+      //  AppConstant.displaySnackBar("error", Errors.noInternetError);
+      //  throw Errors.noInternetError;
+    }
+    return response;
   }
 
   Future<Response> postImage<T>({
@@ -132,19 +135,28 @@ class ApiService {
     String? token,
     bool requiresAuthToken = false,
   }) async {
-    var customHeaders = {
-      'Accept': 'application/json',
-    };
+    var response;
+    try {
+      var customHeaders = {
+        'Accept': 'application/json',
+      };
 
-    customHeaders.addIf(requiresAuthToken, "Authorization", "$token");
+      customHeaders.addIf(requiresAuthToken, "Authorization", "$token");
 
-    if (headers != null) {
-      customHeaders.addAll(headers);
+      if (headers != null) {
+        customHeaders.addAll(headers);
+      }
+
+      final response = await _baseProvider.put(endpoint, body,
+          headers: customHeaders, query: query);
+
+      return response;
+    } on SocketException catch (error) {
+      GlobalVariable.internetErr(true);
+      print("ApiService: $error");
+      //  AppConstant.displaySnackBar("error", Errors.noInternetError);
+      //  throw Errors.noInternetError;
     }
-
-    final response = await _baseProvider.put(endpoint, body,
-        headers: customHeaders, query: query);
-
     return response;
   }
 
@@ -156,6 +168,9 @@ class ApiService {
     String? token,
     bool requiresAuthToken = false,
   }) async {
+    var response;
+    try{
+
     var customHeaders = {
       'Accept': 'application/json',
     };
@@ -166,10 +181,17 @@ class ApiService {
       customHeaders.addAll(headers);
     }
     // _baseProvider.httpClient.baseUrl = ApiConstant.baseUrl;
-    final response = await _baseProvider.patch(endpoint, body,
+     response = await _baseProvider.patch(endpoint, body,
         headers: customHeaders, query: query);
 
     return response;
+  } on SocketException catch (error) {
+  GlobalVariable.internetErr(true);
+  print("ApiService: $error");
+  //  AppConstant.displaySnackBar("error", Errors.noInternetError);
+  //  throw Errors.noInternetError;
+  }
+  return response;
   }
 
   Future<Response> delete<T>({
