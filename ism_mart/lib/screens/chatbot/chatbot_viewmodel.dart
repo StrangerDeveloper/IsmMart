@@ -19,9 +19,19 @@ class ChatViewModel extends GetxController with GetTickerProviderStateMixin{
   Position? currentPosition;
   RxBool tryAgain = false.obs;
 
-  @override
-  void onInit() async {
+
+  locationPermission()async{
     await getCurrentLocation();
+  }
+  @override
+  void onReady() {
+    locationPermission();
+    // TODO: implement onReady
+    super.onReady();
+  }
+  @override
+  void onInit()  {
+
       super.onInit();
   }
 
@@ -29,13 +39,14 @@ class ChatViewModel extends GetxController with GetTickerProviderStateMixin{
     GlobalVariable.showLoader.value = true;
     tryAgain.value = false;
     final hasPermissions = await handleLocationPermission();
-    await Permission.locationWhenInUse.serviceStatus.isEnabled;
+
 
     if(!hasPermissions){
       tryAgain.value = true;
       GlobalVariable.showLoader.value = false;
       return;
     } else{
+      await Permission.locationWhenInUse.serviceStatus.isEnabled;
       await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high).then((Position position) {
         currentPosition = position;
         getAddressFromPosition(currentPosition!);
