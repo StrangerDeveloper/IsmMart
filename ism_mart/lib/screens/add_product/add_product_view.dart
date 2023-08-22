@@ -18,63 +18,61 @@ class AddProductView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: CustomAppBar(
-          title: langKey.addProduct.tr,
-          leading: InkWell(
-            onTap: () {
-              Get.back();
-            },
-            child: Icon(
-              Icons.arrow_back_ios,
-              color: kPrimaryColor,
-              size: 18,
-            ),
+    return Scaffold(
+      appBar: CustomAppBar(
+        title: langKey.addProduct.tr,
+        leading: InkWell(
+          onTap: () {
+            Get.back();
+          },
+          child: Icon(
+            Icons.arrow_back_ios,
+            color: kPrimaryColor,
+            size: 18,
           ),
         ),
-        body: Stack(
-          children: [
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  Form(
-                    key: viewModel.formKey,
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          ///Upload Images Section
-                          _buildImageSection(),
+      ),
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                Form(
+                  key: viewModel.formKey,
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ///Upload Images Section
+                        _buildImageSection(),
 
-                          ///Product Basic Details
-                          nameField(),
-                          priceField(),
-                          discountField(),
-                          descriptionField(),
-                          weightAndDimensionsSection(),
+                        ///Product Basic Details
+                        nameField(),
+                        priceField(),
+                        discountField(),
+                        descriptionField(),
+                        weightAndDimensionsSection(),
 
-                          SizedBox(height: 40),
-                          CustomTextBtn(
-                            onPressed: () {
-                              //Get.to(() => AddProductCategoryFieldsView());
-                              if (viewModel.formKey.currentState!.validate())
-                                Get.toNamed(Routes.addProductCategoryFields);
-                              //viewModel.addProdBtnPress();
-                            },
-                            title: langKey.next.tr,
-                          ),
-                        ],
-                      ),
+                        SizedBox(height: 40),
+                        CustomTextBtn(
+                          onPressed: () {
+                            //Get.to(() => AddProductCategoryFieldsView());
+                            if (viewModel.formKey.currentState!.validate())
+                              Get.toNamed(Routes.addProductCategoryFields);
+                            //viewModel.addProdBtnPress();
+                          },
+                          title: langKey.next.tr,
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

@@ -18,32 +18,30 @@ class MyProductView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Stack(
-          children: [
-            _buildProductBody(),
-            NoInternetView(
-              onPressed: () {
-                viewModel.loadInitialProducts();
-              },
-            ),
-            LoaderView()
-          ],
-        ),
-        floatingActionButton: FloatingActionButton.extended(
-          backgroundColor: kPrimaryColor,
-          icon: Icon(Icons.add),
-          onPressed: () {
-            if (GlobalVariable.userModel?.infoCompleted == 1) {
-              Get.toNamed(Routes.addProduct);
-            } else {
-              AppConstant.displaySnackBar(
-                  langKey.errorTitle.tr, langKey.updateInfoToProceed.tr);
-            }
-          },
-          label: Text(langKey.addProduct.tr),
-        ),
+    return Scaffold(
+      body: Stack(
+        children: [
+          _buildProductBody(),
+          NoInternetView(
+            onPressed: () {
+              viewModel.loadInitialProducts();
+            },
+          ),
+          LoaderView()
+        ],
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: kPrimaryColor,
+        icon: Icon(Icons.add),
+        onPressed: () {
+          if (GlobalVariable.userModel?.infoCompleted == 1) {
+            Get.toNamed(Routes.addProduct);
+          } else {
+            AppConstant.displaySnackBar(
+                langKey.errorTitle.tr, langKey.updateInfoToProceed.tr);
+          }
+        },
+        label: Text(langKey.addProduct.tr),
       ),
     );
   }
