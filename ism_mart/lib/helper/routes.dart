@@ -81,7 +81,7 @@ class Routes {
   static const vendorOrders = "/vendorOrders";
   static const vendorQuestion = "/vendorQuestion";
   static const chooseEmail = "/chooseEmail";
-  static const singleProductDetails = "/singleProductDetails";
+  //static const singleProductDetails = "/singleProductDetails";
   static const singleProductFullImage = "/singleProductFullImage";
 
   //static const aboutUsRoute = "/aboutUs";
@@ -290,10 +290,10 @@ class Routes {
         name: sellerHomeRoute,
         page: () => const SellerHomeView(),
         binding: SellerBindings()),
-    GetPage(
-      name: singleProductDetails,
-      page: () => SingleProductDetailsView(),
-    ),
+    // GetPage(
+    //   name: singleProductDetails,
+    //   page: () => SingleProductDetailsView(),
+    // ),
     GetPage(
       name: '/orderDetails/:id',
       page: () => const SingleOrderDetailsUI(),
