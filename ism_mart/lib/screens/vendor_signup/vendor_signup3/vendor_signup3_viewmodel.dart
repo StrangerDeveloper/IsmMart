@@ -100,7 +100,7 @@ class VendorSignUp3ViewModel extends GetxController{
         }).catchError((e){
           GlobalVariable.showLoader.value = false;
           AppConstant.displaySnackBar(langKey.errorTitle.tr, e);
-          GlobalVariable.internetErr(true);
+      //    GlobalVariable.internetErr(true);
         });
 
       } else{

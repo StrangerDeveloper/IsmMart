@@ -28,12 +28,14 @@
 //   }
 // }
 import 'package:dialog_flowtter/dialog_flowtter.dart';
+import 'package:flutter/animation.dart';
 
 class ChatModel {
 
   Message? message;
   bool isUser;
+  late AnimationController? animationController;
 
-  ChatModel({this.message, this.isUser = false});
+  ChatModel({this.message, this.isUser = false, this.animationController});
 
 }

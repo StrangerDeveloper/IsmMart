@@ -52,7 +52,7 @@ class VendorSignUp2ViewModel extends GetxController{
             .addAll(parsedJsonData.map((e) => CategoryModel.fromJson(e)));
       }
     }).catchError((e) {
-      GlobalVariable.internetErr(true);
+    //  GlobalVariable.internetErr(true);
       print(e);
     });
   }

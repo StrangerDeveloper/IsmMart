@@ -21,6 +21,10 @@ class AddProductViewModel extends GetxController {
   TextEditingController prodDescriptionController = TextEditingController();
   TextEditingController prodSKUController = TextEditingController();
   TextEditingController prodPriceController = TextEditingController();
+  TextEditingController prodWeightController = TextEditingController();
+  TextEditingController prodLengthController = TextEditingController();
+  TextEditingController prodWidthController = TextEditingController();
+  TextEditingController prodHeightController = TextEditingController();
 
   TextEditingController prodWeightController = TextEditingController();
   TextEditingController prodLengthController = TextEditingController();
@@ -98,7 +102,7 @@ class AddProductViewModel extends GetxController {
             .addAll(parsedJsonData.map((e) => CategoryModel.fromJson(e)));
       }
     }).catchError((e) {
-      GlobalVariable.internetErr(true);
+   //   GlobalVariable.internetErr(true);
       print(e);
     });
   }
@@ -117,7 +121,7 @@ class AddProductViewModel extends GetxController {
             .addAll(parsesJsonData.map((e) => SubCategory.fromJson(e)));
       }
     }).catchError((e) {
-      GlobalVariable.internetErr(true);
+     // GlobalVariable.internetErr(true);
 
       print(e);
     });
@@ -169,7 +173,7 @@ class AddProductViewModel extends GetxController {
         checkStockFieldInVariantList();
       }
     }).catchError((e) {
-      GlobalVariable.internetErr(true);
+    //  GlobalVariable.internetErr(true);
       print(e);
     });
   }
@@ -234,6 +238,10 @@ class AddProductViewModel extends GetxController {
         categoryId: selectedCategoryID.value,
         subCategoryId: selectedSubCategoryID.value,
         description: prodDescriptionController.text,
+        weight: double.parse(prodWeightController.text),
+        length: prodLengthController.text.isNotEmpty ? double.parse(prodLengthController.text) : null,
+        width: prodWidthController.text.isNotEmpty ? double.parse(prodWidthController.text) : null,
+        height: prodHeightController.text.isNotEmpty ? double.parse(prodHeightController.text) : null,
         discount: discount);
 
     Map<String, String> body = {
@@ -247,6 +255,13 @@ class AddProductViewModel extends GetxController {
           newProduct.discount! <= 90)
         'discount': newProduct.discount.toString(),
       'description': newProduct.description.toString(),
+      'weight': newProduct.weight.toString(),
+      if(newProduct.width != null)
+        'width': newProduct.width.toString(),
+      if(newProduct.length != null)
+        'length': newProduct.length.toString(),
+      if(newProduct.height != null)
+        'height': newProduct.height.toString(),
     };
 
     if (dynamicFieldsValuesList.isNotEmpty) {
@@ -299,7 +314,7 @@ class AddProductViewModel extends GetxController {
         );
       }
     }).catchError((e) {
-      GlobalVariable.internetErr(true);
+    //  GlobalVariable.internetErr(true);
       debugPrint('Error: ${e.toString()}');
       //   AppConstant.displaySnackBar(langKey.errorTitle, "${e.message}");
     });

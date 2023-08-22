@@ -60,8 +60,8 @@ class AddProductView extends StatelessWidget {
                           CustomTextBtn(
                             onPressed: () {
                               //Get.to(() => AddProductCategoryFieldsView());
-                              //if (viewModel.formKey.currentState!.validate())
-                              Get.toNamed(Routes.addProductCategoryFields);
+                              if (viewModel.formKey.currentState!.validate())
+                                Get.toNamed(Routes.addProductCategoryFields);
                               //viewModel.addProdBtnPress();
                             },
                             title: langKey.next.tr,

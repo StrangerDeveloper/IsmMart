@@ -37,7 +37,7 @@ class BuyerOrderViewModel extends GetxController {
         statsModel.value = OrderStats.fromJson(parsedJson['data']);
       }
     }).catchError((e) {
-      GlobalVariable.internetErr(true);
+     // GlobalVariable.internetErr(true);
       print(e);
       GlobalVariable.showLoader.value = false;
     });

@@ -72,14 +72,6 @@ class Validator {
   //   }
   // }
 
-  String? validateWeightField(String value) {
-    if (GetUtils.isBlank(value)!) {
-      return langKey.weightIsReq.tr;
-    } else {
-      return null;
-    }
-  }
-
   ///Phone Number : that should NOT start from + sign...
   String? validatePhoneNumber(String? value) {
     if (GetUtils.isBlank(value)!) {
@@ -175,6 +167,15 @@ class Validator {
       return langKey.passwordConfirmIsRequired.tr;
     } else if (value1 != value2) {
       return langKey.passwordNotMatched.tr;
+    } else {
+      return null;
+    }
+  }
+
+  ///Weight
+  String? validateWeightField(String value) {
+    if (GetUtils.isBlank(value)!) {
+      return langKey.weightIsReq.tr;
     } else {
       return null;
     }

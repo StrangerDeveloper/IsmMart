@@ -62,7 +62,7 @@ class BaseController extends GetxController {
     isSliderLoading(true);
     await _apiProvider.fetchSliderImages().then((data) {
       if (data.length == 0) {
-        GlobalVariable.internetErr(true);
+       // GlobalVariable.internetErr(true);
         GlobalVariable.btnPress(false);
       } else {
         GlobalVariable.internetErr(false);
@@ -81,7 +81,7 @@ class BaseController extends GetxController {
       isSliderLoading(false);
       //runSliderTimer(value);
     }).catchError((error) {
-      GlobalVariable.internetErr(true);
+     // GlobalVariable.internetErr(true);
       print(" hhh  images err ${GlobalVariable.internetErr.value}");
       isSliderLoading(false);
       debugPrint(">>>>FetchSliderImageError $error");
@@ -117,7 +117,7 @@ class BaseController extends GetxController {
       discountSliderProductsList.addAll(data);
       isProductsLoading(false);
     }).catchError((error) {
-      GlobalVariable.internetErr(true);
+     // GlobalVariable.internetErr(true);
       print(" hhh  slider disc err ${GlobalVariable.internetErr.value}");
       isProductsLoading(false);
       debugPrint(">>>fetchSliderDiscountProducts: $error");
@@ -139,12 +139,12 @@ class BaseController extends GetxController {
       categories.addAll(data);
       isCategoriesLoading(false);
     }).catchError((error) {
-      GlobalVariable.internetErr(true);
+    //  GlobalVariable.internetErr(true);
       if (_minNoOfCategoriesRequest != 0) {
         _minNoOfCategoriesRequest--;
         fetchCategories();
       } else {
-        GlobalVariable.internetErr(true);
+      //  GlobalVariable.internetErr(true);
         print(" hhh  categories err ${GlobalVariable.internetErr.value}");
 
         debugPrint("FetchCategoriesError $error");
@@ -182,7 +182,7 @@ class BaseController extends GetxController {
         isProductsLoading(false);
         productsWithTypesMap.putIfAbsent(element['value'], () => value);
       }).catchError((error) {
-        GlobalVariable.internetErr(true);
+      //  GlobalVariable.internetErr(true);
         isProductsLoading(false);
         debugPrint(">>>FetchProductsByType $error");
       });

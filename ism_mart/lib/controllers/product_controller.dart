@@ -114,7 +114,7 @@ class ProductController extends GetxController with StateMixin {
       page = 1;
       getVendorProducts(vendorId: sellerModelResponse.vendorStore!.id!);
     }).catchError((error) {
-      GlobalVariable.internetErr(true);
+    //  GlobalVariable.internetErr(true);
 
       //change(null, status: RxStatus.empty());
       isLoading(false);

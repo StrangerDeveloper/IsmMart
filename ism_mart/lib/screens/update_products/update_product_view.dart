@@ -165,7 +165,7 @@ class UpdateProductView extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: CustomText(
                 title: langKey.productImageSection.tr,
-                style: headline1,
+                style: headline2,
               ),
             ),
           ),
@@ -174,7 +174,7 @@ class UpdateProductView extends StatelessWidget {
             alignment: Alignment.topCenter,
             child: CustomText(
               title: langKey.productThumbnail.tr,
-              style: headline2,
+              style: headline3,
             ),
           ),
           AppConstant.spaceWidget(height: 7),

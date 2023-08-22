@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
-import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/widgets/no_internet_view.dart';
 import 'package:ism_mart/screens/my_products/my_products_viewmodel.dart';
 import 'package:ism_mart/screens/my_products/vendor_product_model.dart';
@@ -9,6 +8,8 @@ import 'package:ism_mart/exports/export_widgets.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/widgets/loader_view.dart';
+
+import '../../helper/global_variables.dart';
 
 class MyProductView extends StatelessWidget {
   MyProductView({super.key});

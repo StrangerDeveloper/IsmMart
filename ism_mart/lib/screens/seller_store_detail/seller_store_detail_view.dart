@@ -25,52 +25,50 @@ class SellerStoreDetailView extends GetView<ProductController> {
   }
 
   Widget _build() {
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: true,
-        backgroundColor: Colors.grey[100]!,
-        body: Stack(
-          children: [
-            Obx(
-              () => controller.isLoading.isTrue
-                  ? CustomLoading(
-                      isItForWidget: true,
-                      color: kPrimaryColor,
-                    )
-                  : controller.sellerStoreResponse.value.vendorStore == null
-                      ? Center(
-                          child: NoDataFoundWithIcon(
-                          icon: Icons.dataset_linked_rounded,
-                          title: langKey.noDataFound.tr,
-                        ))
-                      : CustomScrollView(
-                          slivers: [
-                            CustomSliverAppBar(
-                              title: langKey.storeDetail.tr,
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      backgroundColor: Colors.grey[100]!,
+      body: Stack(
+        children: [
+          Obx(
+            () => controller.isLoading.isTrue
+                ? CustomLoading(
+                    isItForWidget: true,
+                    color: kPrimaryColor,
+                  )
+                : controller.sellerStoreResponse.value.vendorStore == null
+                    ? Center(
+                        child: NoDataFoundWithIcon(
+                        icon: Icons.dataset_linked_rounded,
+                        title: langKey.noDataFound.tr,
+                      ))
+                    : CustomScrollView(
+                        slivers: [
+                          CustomSliverAppBar(
+                            title: langKey.storeDetail.tr,
+                          ),
+                          SliverList(
+                            delegate: SliverChildListDelegate(
+                              [
+                                _storeBasicDetails(
+                                    model: controller.sellerStoreResponse
+                                        .value.vendorStore),
+                                _storeRatingAndCustomerCard(
+                                    modelResponse:
+                                        controller.sellerStoreResponse.value),
+                                _buildTopProducts(
+                                    controller.vendorProductList),
+                              ],
                             ),
-                            SliverList(
-                              delegate: SliverChildListDelegate(
-                                [
-                                  _storeBasicDetails(
-                                      model: controller.sellerStoreResponse
-                                          .value.vendorStore),
-                                  _storeRatingAndCustomerCard(
-                                      modelResponse:
-                                          controller.sellerStoreResponse.value),
-                                  _buildTopProducts(
-                                      controller.vendorProductList),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-            ),
-            NoInternetView(
-              onPressed: () => controller.fetchStoreDetailsByID(
-                  storeID: int.parse(Get.parameters['storeId']!)),
-            )
-          ],
-        ),
+                          ),
+                        ],
+                      ),
+          ),
+          NoInternetView(
+            onPressed: () => controller.fetchStoreDetailsByID(
+                storeID: int.parse(Get.parameters['storeId']!)),
+          )
+        ],
       ),
     );
   }
