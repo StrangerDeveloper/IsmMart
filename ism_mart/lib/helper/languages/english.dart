@@ -546,6 +546,7 @@ class English {
         key.locationAccessDenied: 'Location access denied',
         key.locationAccessPermanentlyDenied: 'Location access permanently denied',
         key.couldNotGetLocation: 'Could not get location. Try again.',
+        key.productExists: 'Product already exists',
 
         ///contact us
         key.subject: 'Subject',

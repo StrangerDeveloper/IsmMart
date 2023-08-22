@@ -173,7 +173,7 @@ class LogInView extends StatelessWidget {
           ),
         ],),
       onPressed: () {
-        viewModel.signInWithApple();
+        // viewModel.signInWithApple();
       },
     ),
 
@@ -250,7 +250,7 @@ class LogInView extends StatelessWidget {
           ),
         ],),
       onPressed: () {
-        viewModel.signInWithApple();
+        // viewModel.signInWithApple();
       },
     ),
 
@@ -327,7 +327,7 @@ class LogInView extends StatelessWidget {
             ),
           ],),
         onPressed: () {
-          viewModel.signInWithApple();
+          // viewModel.signInWithApple();
         },
       ),
     ),

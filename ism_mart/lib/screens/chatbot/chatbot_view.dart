@@ -12,46 +12,42 @@ class ChatBotView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: appBar(context),
-        body: Obx(() => viewModel.tryAgain.value == true ? Column(
+    return Scaffold(
+      appBar: appBar(context),
+      body: Obx(() => viewModel.tryAgain.value ? Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  IconButton(
-                      onPressed: ()async{
-                            await viewModel.getCurrentLocation();
-                        }, icon: Icon(Icons.refresh, size: 35, color: Colors.black,)
-                  ),
-                  SizedBox(
-                    height: 18,
-                  ),
-                  Text(
-                    'Error establishing connection, Try Again.',
-                    style: bodyText2,
-                  )
-                ],
-              ),
+            IconButton(
+                onPressed: ()async{
+                  viewModel.tryAgain.value = false;
+                      await viewModel.getCurrentLocation();
+                  }, icon: Icon(Icons.refresh, size: 35, color: Colors.black,)
+            ),
+            SizedBox(
+              height: 18,
+            ),
+            Text(
+              'Error establishing connection, Try Again.',
+              style: bodyText2,
             )
           ],
-        ) : Stack(
-          children: [
-            Column(
-              children: [
-                messageBody(),
-                writeMessage(context),
-              ],
-            ),
-            LoaderView(),
-          ],
         ),
+      ) : Stack(
+        children: [
+          Column(
+            children: [
+              messageBody(),
+              writeMessage(context),
+            ],
+          ),
+          LoaderView(),
+        ],
       ),
     )
     );
+    // );
   }
 
   PreferredSizeWidget appBar(BuildContext context) {
@@ -116,7 +112,7 @@ class ChatBotView extends StatelessWidget {
             },
           ),
         ),
-      ),
+      )
     );
   }
 

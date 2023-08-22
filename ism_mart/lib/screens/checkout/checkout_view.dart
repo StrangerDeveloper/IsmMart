@@ -512,11 +512,12 @@ class CheckoutView extends StatelessWidget {
             // paymentviewModel.orderId.value = viewModel.orderId.value;
             // paymentviewModel.amount.value = viewModel.totalAmount.value;
 
-            Get.to(PaymentView(
-              orderId: viewModel.orderId.value,
-              amount: viewModel.totalAmount.value,
-              currencyCode: currencyController.currency.value,
-            ));
+            AppConstant.displaySnackBar(langKey.errorTitle.tr, 'Currently, we\'re facing problems with our payment methods. We apologize for any inconvenience');
+            // Get.to(PaymentView(
+            //   orderId: viewModel.orderId.value,
+            //   amount: viewModel.totalAmount.value,
+            //   currencyCode: currencyController.currency.value,
+            // ));
           }
         },
       ),

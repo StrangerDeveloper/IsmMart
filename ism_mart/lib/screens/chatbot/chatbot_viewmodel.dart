@@ -19,94 +19,75 @@ class ChatViewModel extends GetxController with GetTickerProviderStateMixin{
   Position? currentPosition;
   RxBool tryAgain = false.obs;
 
-
-  locationPermission()async{
-    await getCurrentLocation();
-  }
   @override
   void onReady() {
     locationPermission();
-    // TODO: implement onReady
     super.onReady();
   }
-  @override
-  void onInit()  {
 
-      super.onInit();
+  locationPermission()async{
+    await getCurrentLocation();
   }
 
   Future<void> getCurrentLocation()async{
     GlobalVariable.showLoader.value = true;
     tryAgain.value = false;
-    final hasPermissions = await handleLocationPermission();
-
-
-    if(!hasPermissions){
-      tryAgain.value = true;
-      GlobalVariable.showLoader.value = false;
-      return;
-    } else{
-      await Permission.locationWhenInUse.serviceStatus.isEnabled;
-      await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high).then((Position position) {
-        currentPosition = position;
-        getAddressFromPosition(currentPosition!);
-      }).catchError((e){
+    if(await Permission.location.serviceStatus.isEnabled){
+      if (await Permission.location.request().isGranted) {
+        await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high).then((Position position) {
+          currentPosition = position;
+          getAddressFromPosition(currentPosition!);
+        }).catchError((e) {
+          GlobalVariable.showLoader.value = false;
+          tryAgain.value = true;
+          AppConstant.displaySnackBar(langKey.errorTitle.tr, e);
+        });
+      } else if(await Permission.location.isDenied){
         GlobalVariable.showLoader.value = false;
         tryAgain.value = true;
-        AppConstant.displaySnackBar(langKey.errorTitle.tr, e);
-      });
-    }
-  }
-
-  Future<bool> handleLocationPermission()async {
-    bool serviceEnabled = false;
-    LocationPermission permission;
-
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
+        AppConstant.displaySnackBar(langKey.errorTitle.tr, langKey.locationAccessDenied.tr);
+        await Permission.location.request();
+      } else if(await Permission.location.isPermanentlyDenied){
+        GlobalVariable.showLoader.value = false;
+        tryAgain.value = true;
+        AppConstant.displaySnackBar(
+            langKey.errorTitle.tr, langKey.locationAccessPermanentlyDenied.tr);
+        tryAgain.value = false;
+      } else{
+        GlobalVariable.showLoader.value = false;
+        return;
+      }
+    } else {
+      GlobalVariable.showLoader.value = false;
       tryAgain.value = true;
       AppConstant.displaySnackBar(langKey.errorTitle.tr, langKey.enableLocation.tr);
-      return false;
+      return ;
     }
-
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        AppConstant.displaySnackBar(
-            langKey.errorTitle.tr, langKey.locationAccessDenied.tr);
-        tryAgain.value = true;
-        return false;
-      }
-    } else if (permission == LocationPermission.deniedForever) {
-      AppConstant.displaySnackBar(
-          langKey.errorTitle.tr, langKey.locationAccessPermanentlyDenied.tr);
-      tryAgain.value = true;
-      return false;
-    }
-    return true;
   }
 
   getAddressFromPosition(Position position) async{
     await placemarkFromCoordinates(currentPosition!.latitude, currentPosition!.longitude).then((List<Placemark> placemarks) async {
       Placemark place = placemarks[0];
       currentAddress.value = "${place.locality}, " + "${place.country}";
-      GlobalVariable.showLoader.value = false;
       if(currentAddress.value.isNotEmpty) {
-        await DialogFlowtter.fromFile().then((instance) => dialogFlowtter = instance);
+        await DialogFlowtter.fromFile().then((instance) {
+          dialogFlowtter = instance;
+        });
         DetectIntentResponse response = await dialogFlowtter.detectIntent(
             queryInput: QueryInput(
                 text: TextInput(text: 'Location: ${currentAddress.value}')));
-        if (response.message == null)
+        if (response.message == null) {
           return;
+        }
         else {
+          GlobalVariable.showLoader.value = false;
           addMessage(response.message!, AnimationController(
               vsync: this, duration: Duration(milliseconds: 400)));
         }
       } else{
+        GlobalVariable.showLoader.value = false;
         tryAgain.value = true;
-        AppConstant.displaySnackBar(
-            langKey.errorTitle.tr, langKey.couldNotGetLocation.tr);
+        AppConstant.displaySnackBar(langKey.errorTitle.tr, langKey.couldNotGetLocation.tr);
       }
     }).catchError((e) {
       tryAgain.value = true;

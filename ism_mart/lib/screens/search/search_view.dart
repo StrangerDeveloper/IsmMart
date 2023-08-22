@@ -15,22 +15,20 @@ class SearchView extends GetView<SearchViewModel> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.grey[50]!,
-        appBar: _appBar(),
-        body: Obx(
-          () => Stack(
-            children: [
-              _body(),
-              controller.isSearchingStarted.isTrue
-                  ? Positioned(
-                      top: 1,
-                      child: _suggestionList(controller.suggestionList),
-                    )
-                  : Container()
-            ],
-          ),
+    return Scaffold(
+      backgroundColor: Colors.grey[50]!,
+      appBar: _appBar(),
+      body: Obx(
+        () => Stack(
+          children: [
+            _body(),
+            controller.isSearchingStarted.isTrue
+                ? Positioned(
+                    top: 1,
+                    child: _suggestionList(controller.suggestionList),
+                  )
+                : Container()
+          ],
         ),
       ),
     );
@@ -54,6 +52,10 @@ class SearchView extends GetView<SearchViewModel> {
         height: 36,
         child: TextField(
           controller: controller.searchTextController,
+          onSubmitted: (value){
+            controller.searchProducts(value);
+          },
+          textInputAction: TextInputAction.search,
           onChanged: (value) {
             controller.isSearchingStarted(false);
             if (value.isNotEmpty && value.length >= 2) {

@@ -123,11 +123,11 @@ class SingleProductDetailsViewModel extends GetxController {
     );
 
     cartList = await LocalStorageHelper.fetchCartItems();
-    print('>>>Cart: $cartList');
+
     final index = cartList.indexWhere((element) => element.productId == productID.value);
     print(index);
     if(index != -1){
-      AppConstant.displaySnackBar(langKey.errorTitle.tr, 'Product already exists');
+      AppConstant.displaySnackBar(langKey.errorTitle.tr, '');
     }
     else {
       await LocalStorageHelper.addItemToCart(cartModel: cart).then((value) {

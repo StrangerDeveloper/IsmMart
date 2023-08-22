@@ -499,8 +499,8 @@ const login = "login",
     enableLocation = 'enableLocation',
     locationAccessDenied = 'locationAccessDenied',
     locationAccessPermanentlyDenied = 'locationAccessPermanentlyDenied',
-    couldNotGetLocation = 'couldNotGetLocation';
-
+    couldNotGetLocation = 'couldNotGetLocation',
+    productExists = 'productExists';
 
 /**
  * Form Validations
