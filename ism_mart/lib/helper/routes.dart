@@ -117,10 +117,10 @@ class Routes {
       page: () => AddProductView(),
     ),
 
-    GetPage(
-      name: addProductCategoryFields,
-      page: () => AddProductCategoryFieldsView(),
-    ),
+    // GetPage(
+    //   name: addProductCategoryFields,
+    //   page: () => AddProductCategoryFieldsView(),
+    // ),
     GetPage(
       name: allDispute,
       page: () => AllDisputeView(),

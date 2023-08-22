@@ -34,12 +34,12 @@ class MyProductView extends StatelessWidget {
         backgroundColor: kPrimaryColor,
         icon: Icon(Icons.add),
         onPressed: () {
-          if (GlobalVariable.userModel?.infoCompleted == 1) {
+          // if (GlobalVariable.userModel?.infoCompleted == 1) {
             Get.toNamed(Routes.addProduct);
-          } else {
-            AppConstant.displaySnackBar(
-                langKey.errorTitle.tr, langKey.updateInfoToProceed.tr);
-          }
+          // } else {
+          //   AppConstant.displaySnackBar(
+          //       langKey.errorTitle.tr, langKey.updateInfoToProceed.tr);
+          // }
         },
         label: Text(langKey.addProduct.tr),
       ),
