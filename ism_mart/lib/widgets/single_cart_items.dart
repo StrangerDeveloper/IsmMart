@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ism_mart/screens/cart/cart_viewmodel.dart';
 import 'package:ism_mart/exports/export_widgets.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
+import 'package:ism_mart/screens/cart/cart_viewmodel.dart';
+import 'package:ism_mart/screens/product_detail/product_detail_view.dart';
 
 class SingleCartItems extends StatelessWidget {
-  SingleCartItems({
-    this.index,
-    this.calledFromCheckout = false
-  });
+  SingleCartItems({this.index, this.calledFromCheckout = false});
 
   final int? index;
   final bool? calledFromCheckout;
@@ -20,10 +18,11 @@ class SingleCartItems extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.toNamed(Routes.singleProductDetails, arguments: [{
-          "calledFor": "seller",
-          "productID": "${viewModel.cartItemsList[index!].productId}"
-        }]);
+        print(viewModel.cartItemsList[index!].productId);
+        Get.to(() => ProductDetailView(), arguments: {
+          "productID": viewModel.cartItemsList[index!].productId,
+          "isBuyer": true,
+        });
       },
       child: _singleCartItem(),
     );
@@ -38,33 +37,34 @@ class SingleCartItems extends StatelessWidget {
             borderColor: kWhiteColor,
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: CircleAvatar(
-                            radius: 40,
-                            backgroundImage: NetworkImage(
-                                viewModel.cartItemsList[index!].productModel!.thumbnail
-                                    ?? AppConstant.defaultImgUrl)),
-                      ),
-                      AppConstant.spaceWidget(width: 5),
-                      productDetailsAndPrice(),
-                    ],
-                  ),
-                  productQuantityWidget(),
-                  AppConstant.spaceWidget(height: 5),
-                ],
-              ),
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: CircleAvatar(
+                          radius: 40,
+                          backgroundImage: NetworkImage(viewModel
+                                  .cartItemsList[index!]
+                                  .productModel!
+                                  .thumbnail ??
+                              AppConstant.defaultImgUrl)),
+                    ),
+                    AppConstant.spaceWidget(width: 5),
+                    productDetailsAndPrice(),
+                  ],
+                ),
+                productQuantityWidget(),
+                AppConstant.spaceWidget(height: 5),
+              ],
             ),
-          if (!calledFromCheckout!)
-            deleteItemIcon(),
+          ),
+          if (!calledFromCheckout!) deleteItemIcon(),
         ],
       ),
     );
   }
 
-  Expanded productDetailsAndPrice(){
+  Expanded productDetailsAndPrice() {
     return Expanded(
       flex: 5,
       child: Padding(
@@ -83,7 +83,8 @@ class SingleCartItems extends StatelessWidget {
             ),
             AppConstant.spaceWidget(height: 2),
             CustomText(
-              title: "${langKey.availableStock.tr}: ${viewModel.cartItemsList[index!].productModel!.stock}",
+              title:
+                  "${langKey.availableStock.tr}: ${viewModel.cartItemsList[index!].productModel!.stock}",
               size: 10,
             ),
             itemPriceText(),
@@ -98,7 +99,7 @@ class SingleCartItems extends StatelessWidget {
     );
   }
 
-  Row productFeaturesList(){
+  Row productFeaturesList() {
     return Row(
       children: [
         CustomText(
@@ -113,20 +114,19 @@ class SingleCartItems extends StatelessWidget {
               shrinkWrap: true,
               itemCount: viewModel.cartItemsList[index!].featuresName?.length,
               itemBuilder: (_, index) {
-                String name = viewModel.cartItemsList[index].featuresName![index];
+                String name =
+                    viewModel.cartItemsList[index].featuresName![index];
                 return Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 3.0, vertical: 5),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 3.0, vertical: 5),
                   child: CustomGreyBorderContainer(
                       hasShadow: false,
                       //borderColor: kWhiteColor,
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 5,
-                          vertical: 2),
+                          horizontal: 5, vertical: 2),
                       child: CustomText(
                         title: name,
-                        style: caption.copyWith(
-                            color: kPrimaryColor),
+                        style: caption.copyWith(color: kPrimaryColor),
                       )),
                 );
               }),
@@ -135,54 +135,56 @@ class SingleCartItems extends StatelessWidget {
     );
   }
 
-  productQuantityWidget(){
-    return Obx(() => Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        calledFromCheckout!
-            ? Align(
-          alignment: Alignment.bottomRight,
-          child: InkWell(
-            onTap: () {
-              viewModel.cartItemsList[index!].onQuantityClicked =
-              !viewModel.cartItemsList[index!].onQuantityClicked!;
-              viewModel.cartItemsList.refresh();
-            },
-            child: Container(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 12.0, vertical: 5),
-              decoration: BoxDecoration(
-                color: kWhiteColor,
-                border: Border.all(
-                    color: viewModel.cartItemsList[index!].onQuantityClicked!
-                        ? kDarkColor
-                        : kLightColor),
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-              child: CustomText(
-                title: viewModel.cartItemsList[index!].quantity!,
-                size: 16,
-                color: kDarkColor,
-                weight: FontWeight.bold,
-              ),
-            ),
-          ),
-        )
-            : ProductQuantityCounter(
-          quantity: viewModel.cartItemsList[index!].quantity,
-          onIncrementPress: () async {
-            await viewModel.incrementQuantity(index!);
-          },
-          onDecrementPress: () async {
-            await viewModel.decrementQuantity(index!);
-          },
-        ),
-      ],
-    ),
+  productQuantityWidget() {
+    return Obx(
+      () => Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          calledFromCheckout!
+              ? Align(
+                  alignment: Alignment.bottomRight,
+                  child: InkWell(
+                    onTap: () {
+                      viewModel.cartItemsList[index!].onQuantityClicked =
+                          !viewModel.cartItemsList[index!].onQuantityClicked!;
+                      viewModel.cartItemsList.refresh();
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12.0, vertical: 5),
+                      decoration: BoxDecoration(
+                        color: kWhiteColor,
+                        border: Border.all(
+                            color: viewModel
+                                    .cartItemsList[index!].onQuantityClicked!
+                                ? kDarkColor
+                                : kLightColor),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      child: CustomText(
+                        title: viewModel.cartItemsList[index!].quantity!,
+                        size: 16,
+                        color: kDarkColor,
+                        weight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                )
+              : ProductQuantityCounter(
+                  quantity: viewModel.cartItemsList[index!].quantity,
+                  onIncrementPress: () async {
+                    await viewModel.incrementQuantity(index!);
+                  },
+                  onDecrementPress: () async {
+                    await viewModel.decrementQuantity(index!);
+                  },
+                ),
+        ],
+      ),
     );
   }
 
-  Positioned deleteItemIcon(){
+  Positioned deleteItemIcon() {
     return Positioned(
       right: 5,
       top: 5,
@@ -199,7 +201,7 @@ class SingleCartItems extends StatelessWidget {
     );
   }
 
-  Padding itemPriceText(){
+  Padding itemPriceText() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: Row(
@@ -209,7 +211,8 @@ class SingleCartItems extends StatelessWidget {
             style: bodyText2.copyWith(color: kLightColor),
           ),
           CustomPriceWidget(
-            title: "${viewModel.cartItemsList[index!].productModel!.discountPrice}",
+            title:
+                "${viewModel.cartItemsList[index!].productModel!.discountPrice}",
             style: bodyText2.copyWith(color: kLightColor),
           ),
         ],
@@ -217,11 +220,11 @@ class SingleCartItems extends StatelessWidget {
     );
   }
 
-  Row productTotalPriceText(){
+  Row productTotalPriceText() {
     return Row(
       children: [
         CustomText(
-            title: 'Total: ',
+          title: 'Total: ',
           style: bodyText1,
         ),
         CustomPriceWidget(

@@ -5,6 +5,7 @@ import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/screens/login/login_viewmodel.dart';
+import 'package:ism_mart/screens/product_detail/product_detail_view.dart';
 import 'package:ism_mart/widgets/back_button.dart';
 import 'package:ism_mart/widgets/become_vendor.dart';
 import 'package:ism_mart/widgets/no_internet_view.dart';
@@ -127,7 +128,8 @@ class LogInView extends StatelessWidget {
           hintText: '● ● ● ● ● ● ● ● ● ●',
           autoValidateMode: AutovalidateMode.onUserInteraction,
           validator: (value) {
-            return Validator().validateDefaultTxtField(value, errorPrompt: langKey.passwordIsRequired.tr);
+            return Validator().validateDefaultTxtField(value,
+                errorPrompt: langKey.passwordIsRequired.tr);
           },
           obscureText: viewModel.obscurePassword.value ? true : false,
           suffixIcon: ObscureSuffixIcon(
