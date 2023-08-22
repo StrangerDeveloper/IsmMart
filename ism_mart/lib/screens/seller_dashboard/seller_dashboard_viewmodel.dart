@@ -50,7 +50,7 @@ class SellerDashBoardViewModel extends GetxController with GetTickerProviderStat
         vendorStats.value = VendorStats.fromJson(parsedJson['data']);
       }
     }).catchError((e) {
-      GlobalVariable.internetErr(true);
+     // GlobalVariable.internetErr(true);
       print(e);
       GlobalVariable.showLoader.value = false;
     });

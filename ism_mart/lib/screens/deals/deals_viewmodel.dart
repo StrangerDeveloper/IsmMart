@@ -54,7 +54,7 @@ class DealsViewModel extends GetxController {
         print('>>>No Products Value: ${noProductsFound.value}');
       }
     }).catchError((e) {
-      GlobalVariable.internetErr(true);
+    //  GlobalVariable.internetErr(true);
       print(e);
       GlobalVariable.showLoader.value = false;
     });

@@ -87,7 +87,7 @@ class ContactUsViewModel extends GetxController {
           );
         }
       }).catchError((e) {
-        GlobalVariable.internetErr(true);
+      //  GlobalVariable.internetErr(true);
         print(e);
         GlobalVariable.showLoader.value = false;
       });

@@ -135,7 +135,7 @@ class CustomSearchController extends GetxController {
           // : GlobalVariable.internetErr(false);
       isLoading.value = false;
     }).catchError((onError) {
-      GlobalVariable.internetErr(true);
+     // GlobalVariable.internetErr(true);
       isLoading.value = false;
       debugPrint("searchFilter: $onError");
     });

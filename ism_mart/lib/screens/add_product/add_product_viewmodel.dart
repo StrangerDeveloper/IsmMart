@@ -90,7 +90,7 @@ class AddProductViewModel extends GetxController {
             .addAll(parsedJsonData.map((e) => CategoryModel.fromJson(e)));
       }
     }).catchError((e) {
-      GlobalVariable.internetErr(true);
+   //   GlobalVariable.internetErr(true);
       print(e);
     });
   }
@@ -109,7 +109,7 @@ class AddProductViewModel extends GetxController {
             .addAll(parsesJsonData.map((e) => SubCategory.fromJson(e)));
       }
     }).catchError((e) {
-      GlobalVariable.internetErr(true);
+     // GlobalVariable.internetErr(true);
 
       print(e);
     });
@@ -159,7 +159,7 @@ class AddProductViewModel extends GetxController {
             .toList());
       }
     }).catchError((e) {
-      GlobalVariable.internetErr(true);
+    //  GlobalVariable.internetErr(true);
       print(e);
     });
   }
@@ -281,7 +281,7 @@ class AddProductViewModel extends GetxController {
         );
       }
     }).catchError((e) {
-      GlobalVariable.internetErr(true);
+    //  GlobalVariable.internetErr(true);
       debugPrint('Error: ${e.toString()}');
       //   AppConstant.displaySnackBar(langKey.errorTitle, "${e.message}");
     });

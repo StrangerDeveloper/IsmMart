@@ -152,7 +152,7 @@ class SingleProductDetailsViewModel extends GetxController {
         // AppConstant.displaySnackBar(langKey.errorTitle.tr, langKey.errorMsg.tr);
       }
     }).catchError((error) {
-      GlobalVariable.internetErr(true);
+     // GlobalVariable.internetErr(true);
       productFoundCheck.value = false;
       // AppConstant.displaySnackBar(langKey.errorTitle.tr, langKey.errorMsg.tr);
       viewCheck.value = false;
