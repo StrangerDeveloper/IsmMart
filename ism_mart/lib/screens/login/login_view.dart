@@ -299,7 +299,7 @@ class LogInView extends StatelessWidget {
     padding: const EdgeInsets.fromLTRB(20, 10, 20, 25),
     child: Obx(
           () =>viewModel.applelLoader.value
-          ? CustomLoading(isItBtn: true)
+          ? CustomLoading(isItBtn: viewModel.applelLoader.value)
           : CustomRoundedTextBtn(
         borderSide:  BorderSide(
           color: newColorDarkBlack, // your color here

@@ -138,9 +138,11 @@ RxBool applelLoader = false.obs;
     var fullname = _auth.user!.displayName.toString()??"";
 
     print("hhhhhh email ----- $email $name $uid $mobileNo $fullname");
-if(uid =""){
-    return _auth;
-  }
+ if(uid !=""){
+   applelLoader.value =false;
+ }
+     return _auth;
+   }
 
 
   signInWithApple(){
