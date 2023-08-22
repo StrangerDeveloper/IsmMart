@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:ism_mart/exports/export_controllers.dart';
 import 'package:ism_mart/exports/exports_ui.dart';
+import 'package:ism_mart/screens/add_product/add_product_category_fields_view.dart';
 import 'package:ism_mart/screens/add_update_address/add_update_address_view.dart';
 import 'package:ism_mart/screens/all_dispute/all_dispute_view.dart';
 import 'package:ism_mart/screens/buyer_orders/buyer_order_view.dart';
@@ -43,6 +44,7 @@ class Routes {
   static const onBoard = "/onBoard";
   static const bottomNavigation = "/bottomNavigation";
   static const addProduct = "/addProduct";
+  static const addProductCategoryFields = "/addProductCategoryFields";
   static const allDispute = "/allDispute";
   static const buyerOrdersRoute = "/buyerOrders";
   static const buyerProfile = "/buyerProfile";
@@ -114,6 +116,11 @@ class Routes {
     GetPage(
       name: addProduct,
       page: () => AddProductView(),
+    ),
+
+    GetPage(
+      name: addProductCategoryFields,
+      page: () => AddProductCategoryFieldsView(),
     ),
     GetPage(
       name: allDispute,
@@ -258,8 +265,8 @@ class Routes {
       page: () => VendorProfileView(),
     ),
     GetPage(
-        name: vendorSignUp1,
-        page: () => VendorSignUp1View(),
+      name: vendorSignUp1,
+      page: () => VendorSignUp1View(),
     ),
     GetPage(
       name: vendorSignUp2,

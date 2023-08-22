@@ -1,18 +1,14 @@
 import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 import 'package:ism_mart/widgets/custom_appbar.dart';
-import 'package:ism_mart/widgets/no_internet_view.dart';
-import 'package:ism_mart/exports/exports_model.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
 import 'package:ism_mart/screens/add_product/add_product_viewmodel.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
-import 'package:ism_mart/widgets/loader_view.dart';
 import 'package:ism_mart/widgets/pick_image.dart';
 import '../../helper/validator.dart';
 
@@ -27,7 +23,7 @@ class AddProductView extends StatelessWidget {
         appBar: CustomAppBar(
           title: langKey.addProduct.tr,
           leading: InkWell(
-            onTap:() {
+            onTap: () {
               Get.back();
             },
             child: Icon(
@@ -53,29 +49,22 @@ class AddProductView extends StatelessWidget {
                           ///Upload Images Section
                           _buildImageSection(),
 
-                          ///Product Category Field
-                          Obx(() => selectCategoryField()),
-
-                          ///Product Sub Category Dropdown Field
-                          Obx(() => viewModel.subCategoriesList.isEmpty
-                              ? Container()
-                              : selectSubCategoryField()),
-
-                          ///Product Category fields or variants or features
-                          productVariantsAndFeaturesField(),
-
                           ///Product Basic Details
                           nameField(),
                           priceField(),
-                          stockField(),
                           discountField(),
                           descriptionField(),
+                          weightAndDimensionsSection(),
+
                           SizedBox(height: 40),
                           CustomTextBtn(
                             onPressed: () {
-                              viewModel.addProdBtnPress();
+                              //Get.to(() => AddProductCategoryFieldsView());
+                              //if (viewModel.formKey.currentState!.validate())
+                              Get.toNamed(Routes.addProductCategoryFields);
+                              //viewModel.addProdBtnPress();
                             },
-                            title: langKey.addProduct.tr,
+                            title: langKey.next.tr,
                           ),
                         ],
                       ),
@@ -84,48 +73,7 @@ class AddProductView extends StatelessWidget {
                 ],
               ),
             ),
-            NoInternetView(
-              onPressed: () => viewModel.addProdBtnPress(),
-            ),
-            LoaderView(),
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget _createDynamicFormFields(ProductVariantsModel model) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: TextFormField(
-        style: bodyText1,
-        cursorColor: kPrimaryColor,
-        keyboardType: TextInputType.text,
-        onChanged: (value) =>
-            viewModel.onDynamicFieldsValueChanged(value, model),
-        decoration: InputDecoration(
-          labelText: model.label,
-          labelStyle: bodyText1,
-          prefixIcon: Icon(
-            IconlyLight.discovery,
-            color: kPrimaryColor,
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.black,
-              width: 1,
-              style: BorderStyle.solid,
-            ), //B
-            borderRadius: BorderRadius.circular(8),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.black,
-              width: 1,
-              style: BorderStyle.solid,
-            ),
-            borderRadius: BorderRadius.circular(8),
-          ),
         ),
       ),
     );
@@ -240,80 +188,6 @@ class AddProductView extends StatelessWidget {
     );
   }
 
-  Widget selectCategoryField() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 20.0, bottom: 15),
-      child: DropdownSearch<CategoryModel>(
-        popupProps: PopupProps.dialog(
-          showSearchBox: true,
-          dialogProps: DialogProps(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-          ),
-          searchDelay: const Duration(milliseconds: 0),
-          searchFieldProps: AppConstant.searchFieldProp(),
-        ),
-        items: viewModel.categoriesList,
-        itemAsString: (model) => model.name ?? "",
-        dropdownDecoratorProps: DropDownDecoratorProps(
-          baseStyle: bodyText1,
-          dropdownSearchDecoration: InputDecoration(
-            labelText: langKey.selectCategory.tr,
-            labelStyle: headline3,
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Colors.black,
-                width: 1,
-                style: BorderStyle.solid,
-              ), //B
-              borderRadius: BorderRadius.circular(8),
-            ),
-          ),
-        ),
-        onChanged: (CategoryModel? newValue) {
-          viewModel.setSelectedCategory(category: newValue!);
-        },
-        selectedItem: viewModel.selectedCategory.value,
-      ),
-    );
-  }
-
-  selectSubCategoryField() {
-    return DropdownSearch<SubCategory>(
-      popupProps: PopupProps.dialog(
-        showSearchBox: true,
-        dialogProps: DialogProps(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
-        searchFieldProps: AppConstant.searchFieldProp(),
-      ),
-      items: viewModel.subCategoriesList,
-      itemAsString: (model) => model.name ?? "",
-      dropdownDecoratorProps: DropDownDecoratorProps(
-        baseStyle: bodyText1,
-        dropdownSearchDecoration: InputDecoration(
-          labelText: langKey.selectSubCategory.tr,
-          labelStyle: headline3,
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.black,
-              width: 1,
-              style: BorderStyle.solid,
-            ),
-            borderRadius: BorderRadius.circular(8),
-          ),
-        ),
-      ),
-      onChanged: (SubCategory? newValue) {
-        viewModel.setSelectedSubCategory(subCategory: newValue!);
-      },
-      selectedItem: viewModel.selectedSubCategory.value,
-    );
-  }
-
   Widget nameField() {
     return Padding(
       padding: const EdgeInsets.only(top: 12.0),
@@ -370,42 +244,6 @@ class AddProductView extends StatelessWidget {
     );
   }
 
-  Widget productVariantsAndFeaturesField() {
-    return Obx(
-      () => viewModel.productVariantsFieldsList.isEmpty
-          ? Container()
-          : Padding(
-              padding: const EdgeInsets.symmetric(vertical: 15.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: viewModel.productVariantsFieldsList
-                    .map((element) => _createDynamicFormFields(element))
-                    .toList(),
-              ),
-            ),
-    );
-  }
-
-  Widget stockField() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 12.0),
-      child: CustomTextField2(
-        inputFormatters: [
-          FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-          FilteringTextInputFormatter.digitsOnly
-        ],
-        controller: viewModel.prodStockController,
-        prefixIcon: Icons.inventory_outlined,
-        label: langKey.prodStock.tr,
-        autoValidateMode: AutovalidateMode.onUserInteraction,
-        validator: (value) {
-          return Validator().validateDefaultTxtField(value);
-        },
-        keyboardType: TextInputType.number,
-      ),
-    );
-  }
-
   Widget discountField() {
     return Padding(
       padding: const EdgeInsets.only(top: 12.0),
@@ -451,6 +289,91 @@ class AddProductView extends StatelessWidget {
           return Validator().validateDefaultTxtField(value);
         },
         keyboardType: TextInputType.text,
+      ),
+    );
+  }
+
+  Widget weightAndDimensionsSection() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 30.0),
+      child: Column(
+        children: [
+          CustomText(
+            title: langKey.weightAndDimension.tr,
+            style: headline2,
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          weightField(),
+          lengthField(),
+          widthField(),
+          heightField()
+        ],
+      ),
+    );
+  }
+
+  Widget weightField() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 12.0),
+      child: CustomTextField2(
+        controller: viewModel.prodWeightController,
+        label: langKey.weight.tr,
+        prefixIcon: Icons.scale_outlined,
+        autoValidateMode: AutovalidateMode.onUserInteraction,
+        validator: (value) {
+          return Validator().validateWeightField(value!);
+        },
+        keyboardType: TextInputType.number,
+        inputFormatters: [
+          FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
+        ],
+      ),
+    );
+  }
+
+  Widget lengthField() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 12.0),
+      child: CustomTextField2(
+        controller: viewModel.prodLengthController,
+        label: langKey.length.tr,
+        prefixIcon: Icons.numbers,
+        keyboardType: TextInputType.number,
+        inputFormatters: [
+          FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
+        ],
+      ),
+    );
+  }
+
+  Widget widthField() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 12.0),
+      child: CustomTextField2(
+        controller: viewModel.prodWidthController,
+        label: langKey.width.tr,
+        prefixIcon: Icons.numbers,
+        keyboardType: TextInputType.number,
+        inputFormatters: [
+          FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
+        ],
+      ),
+    );
+  }
+
+  Widget heightField() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 12.0),
+      child: CustomTextField2(
+        controller: viewModel.prodHeightController,
+        label: langKey.height.tr,
+        prefixIcon: Icons.numbers,
+        keyboardType: TextInputType.number,
+        inputFormatters: [
+          FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
+        ],
       ),
     );
   }

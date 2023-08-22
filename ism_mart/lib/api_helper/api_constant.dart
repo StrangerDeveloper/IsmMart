@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 class ApiConstant {
   ApiConstant._();
 
@@ -50,7 +52,7 @@ class ApiConstant {
 
   // static const baseUrl = testBaseUrl;
 
-  static const baseUrl = liveBaseUrl;
+  static const baseUrl = kDebugMode ? testBaseUrl : liveBaseUrl;
   //static const PUBLISHABLE_KEY = test_pk;
   //static const SECRET_KEY = test_sk;
   // static const CURRENCY_EXCHANGE_API_KEY = test_currency_exchange_api_key;
