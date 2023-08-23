@@ -10,6 +10,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/screens/live_match/live_match_viewmodel.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
@@ -21,7 +22,8 @@ class LiveMatchView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final LiveMatchViewModel viewModel = Get.put(LiveMatchViewModel());
-    return Scaffold(
+
+    return Obx(()=> viewModel.liveUrl.value.isNotEmpty? Scaffold(
         body:Center(
           child: SizedBox(
             height: MediaQuery.of(context).size.height * .9,
@@ -48,8 +50,9 @@ class LiveMatchView extends StatelessWidget {
 
             ),
           ),
-        )  );
-  }
+        )  ):Scaffold(body: Center(child: CircularProgressIndicator(color: newColorDarkBlack,),)
+      ,),
+    );}
 
   Widget profileImage() {
     return Expanded(

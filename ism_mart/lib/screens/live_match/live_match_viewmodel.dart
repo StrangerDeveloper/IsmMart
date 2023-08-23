@@ -9,19 +9,20 @@ import '../../helper/urls.dart';
 
 class LiveMatchViewModel extends GetxController{
 RxString liveUrl = ''.obs;
- String a='qSldLOVjrYw';
 
-final YoutubePlayerController controller = YoutubePlayerController(
-  initialVideoId:'qSldLOVjrYw',
-  flags: YoutubePlayerFlags(
-    isLive: true,
-  ),
-);
+
+ late YoutubePlayerController controller ;
+ @override
+  void onReady() {
+    // TODO: implement onReady
+    super.onReady();
+  }
   @override
   void onInit() {
-    print('initialized');
     getData();
-    a=liveUrl.value;
+
+    print('initialized');
+
     super.onInit();
   }
 
@@ -37,8 +38,15 @@ final YoutubePlayerController controller = YoutubePlayerController(
       if (parsedJson['success'] == true) {
         var data = parsedJson['data'] as List;
 
-        liveUrl.value=data[0]['url'];
+        liveUrl.value= "qSldLOVjrYw";
+        //data[0]['url'];
         print(" live Url --------  ${liveUrl.value}");
+        controller= YoutubePlayerController(
+          initialVideoId:liveUrl.value.isEmpty? 'hgfhjf':liveUrl.value,
+          flags: YoutubePlayerFlags(
+            isLive: true,
+          ),
+        );
       }
     }).catchError((e) {
       print(e);
