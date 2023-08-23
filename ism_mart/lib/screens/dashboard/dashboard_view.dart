@@ -34,48 +34,46 @@ class DashboardView extends GetView<BaseController> {
   @override
   Widget build(BuildContext context) {
     /// Update Alert used for display update dialog of the app Updates
-    return SafeArea(
-      child: Stack(
-        children: [
-          CustomScrollView(
-            slivers: [
-              SliverList(
-                delegate: SliverChildListDelegate(
-                  [
-                    _slider(controller.sliderImages),
-                    StickyLabel(text: langKey.topCategories.tr),
-                    _topCategoriesGrid(controller.categories),
-                    //Top Vendors List
-                    StickyLabel(text: langKey.topVendors.tr),
-                    _topVendors(),
-                    StickyLabel(text: langKey.discountDeals.tr),
-                    _displayDiscountProducts(),
-                    Obx(
-                      () => _displayProducts(
-                        productMap: controller.productsWithTypesMap,
-                      ),
+    return Stack(
+      children: [
+        CustomScrollView(
+          slivers: [
+            SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  _slider(controller.sliderImages),
+                  StickyLabel(text: langKey.topCategories.tr),
+                  _topCategoriesGrid(controller.categories),
+                  //Top Vendors List
+                  StickyLabel(text: langKey.topVendors.tr),
+                  _topVendors(),
+                  StickyLabel(text: langKey.discountDeals.tr),
+                  _displayDiscountProducts(),
+                  Obx(
+                    () => _displayProducts(
+                      productMap: controller.productsWithTypesMap,
                     ),
-                    kDivider,
-                    Obx(
-                      () => _displayProducts(
-                        productMap: controller.productsMap,
-                        calledForCategoryProducts: true,
-                      ),
+                  ),
+                  kDivider,
+                  Obx(
+                    () => _displayProducts(
+                      productMap: controller.productsMap,
+                      calledForCategoryProducts: true,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
-          chatWidget(),
-          NoInternetView(
-            onPressed: () {
-              controller.getAllApiFunc();
-              GlobalVariable.btnPress(true);
-            },
-          ),
-        ],
-      ),
+            ),
+          ],
+        ),
+        chatWidget(),
+        NoInternetView(
+          onPressed: () {
+            controller.getAllApiFunc();
+            GlobalVariable.btnPress(true);
+          },
+        ),
+      ],
     );
   }
 
@@ -557,7 +555,12 @@ class DashboardView extends GetView<BaseController> {
               width: viewModel.containerWidth.value,
               height: 50,
               decoration: BoxDecoration(
-                  color: Color(0xff3769CA),
+                border: Border.all(
+                  width: 1.5,
+                  color: Colors.red
+                ),
+                  color: Colors.white,
+                  // color: Color(0xff3769CA),
                   borderRadius: BorderRadius.all(Radius.circular(28)),
                   boxShadow: [
                     BoxShadow(
@@ -571,29 +574,27 @@ class DashboardView extends GetView<BaseController> {
                 padding: const EdgeInsets.symmetric(horizontal: 13.0),
                 child: FadeTransition(
                   opacity: viewModel.animation3,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: Center(
-                          child: Text(
-                            'Live Cricket Match ',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 14),
-                          ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Image.asset('assets/images/qpl_logo.png', width: 35, height: 35,),
+                        Text(
+                          'Live',
+                          style: TextStyle(
+                              color: Colors.red,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 14),
                         ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      // Padding(
-                      //   padding: const EdgeInsets.only(right: 4.0),
-                      //   child: Icon(Icons.chat_outlined,
-                      //       size: 18, color: Colors.white),
-                      // ),
-                    ],
+                        FadeTransition(
+                          opacity: viewModel.animation4,
+                          child: Icon(Icons.circle,
+                              size: 15, color: Colors.red),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
