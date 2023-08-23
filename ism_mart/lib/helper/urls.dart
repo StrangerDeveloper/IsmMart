@@ -39,7 +39,7 @@ class Urls {
   //ProductQuestionsViewModel
   static String getQuestionByProductId = "product/questions/";
   static String getVendorQuestions = "product/questions/vendorQuestions";
-
+static String liveMatch ="admin/livestream";
   //BuyerProfileViewModel
   static String deleteAccount = "user/deactivate";
   static String getVendorAccountData = "user/profile";

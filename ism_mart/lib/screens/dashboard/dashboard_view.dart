@@ -22,6 +22,7 @@ import '../../widgets/single_category_item.dart';
 import '../../widgets/single_product_grid_item.dart';
 import '../../widgets/sticky_label_with_view_more.dart';
 import '../../widgets/sticky_labels.dart';
+import '../live_match/live_match_view.dart';
 import '../product_detail/product_detail_view.dart';
 import '../search_details/search_details_view.dart';
 
@@ -547,7 +548,8 @@ class DashboardView extends GetView<BaseController> {
         position: viewModel.animation1,
         child: GestureDetector(
           onTap: () async {
-            Get.toNamed(Routes.chatScreen);
+            Get.to( ()=> LiveMatchView());
+          //  Get.toNamed(Routes.chatScreen);
             // await viewModel.getCurrentLocation();
           },
           child: Obx(
@@ -575,7 +577,7 @@ class DashboardView extends GetView<BaseController> {
                       Expanded(
                         child: Center(
                           child: Text(
-                            'Chat Now',
+                            'Live Cricket Match ',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w600,
@@ -586,11 +588,11 @@ class DashboardView extends GetView<BaseController> {
                       SizedBox(
                         width: 10,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 4.0),
-                        child: Icon(Icons.chat_outlined,
-                            size: 18, color: Colors.white),
-                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.only(right: 4.0),
+                      //   child: Icon(Icons.chat_outlined,
+                      //       size: 18, color: Colors.white),
+                      // ),
                     ],
                   ),
                 ),

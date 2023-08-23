@@ -50,21 +50,26 @@ class LogInView extends StatelessWidget {
                       color: newColorLightGrey2,
                     ),
                   ),
+
                 ),
                 emailTextField(),
                 passwordTextField(),
                 forgotPassword(),
                 logInBtn(),
                 or(),
-                googlelogInBtn(),
-                facebooklogInBtn(),
-                applelogInBtn(),
+                // googlelogInBtn(),
+                // facebooklogInBtn(),
+                // applelogInBtn(),
                 Spacer(),
                 doNotHaveAnAccount(),
                 BecomeVendor(),
               ],
+
+
+              ),
+
             ),
-          ),
+
           NoInternetView(
             onPressed: () => viewModel.signIn(),
           ),

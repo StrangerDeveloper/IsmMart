@@ -20,7 +20,7 @@ class DashboardViewModel extends GetxController with GetTickerProviderStateMixin
         if(animationController1.isCompleted){
           animationController2.forward();
           animationController2.addListener(() {
-            containerWidth.value = 50 + (animation2.value * 80);
+            containerWidth.value = 100 + (animation2.value * 80);
             if(animationController2.isCompleted){
               animationController3.forward();
               animationController3.addListener(() {
