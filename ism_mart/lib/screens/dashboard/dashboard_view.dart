@@ -67,6 +67,7 @@ class DashboardView extends GetView<BaseController> {
               ),
             ],
           ),
+
           chatWidget(),
 
           NoInternetView(
@@ -75,6 +76,7 @@ class DashboardView extends GetView<BaseController> {
               GlobalVariable.btnPress(true);
             },
           ),
+        banner(),
         ],
       ),
     );
@@ -542,15 +544,44 @@ class DashboardView extends GetView<BaseController> {
   }
 
   Widget banner(){
-    return Container(
-      width: MediaQuery.of(Get.context!).size.width,
-      height: MediaQuery.of(Get.context!).size.height,
-      child: Stack(
-        children: [
-
-        ],
-      ),
-    );
+    return Obx(() => Visibility(
+        visible: viewModel.bannerVisibility.value,
+        child: Container(
+          color: Colors.black54,
+          width: MediaQuery.of(Get.context!).size.width,
+          height: MediaQuery.of(Get.context!).size.height,
+          child: Center(
+            child: Stack(
+              fit: StackFit.loose,
+              children: [
+                GestureDetector(
+                  onTap: (){
+                    Get.to(()=> LiveMatchView());
+                    viewModel.bannerVisibility.value = false;
+                  },
+                  child: Stack(
+                    children: [
+                      Image.asset('assets/images/qpl_banner.png',
+                        width: MediaQuery.of(Get.context!).size.width/1.2,
+                        height: MediaQuery.of(Get.context!).size.height/1.8,),
+                    ],
+                  ),
+                ),
+                Positioned(
+                  top: -5,
+                  right: -10,
+                  child: IconButton(
+                      onPressed: (){
+                        viewModel.bannerVisibility.value = false;
+                      },
+                      icon: Icon(Icons.highlight_remove, size: 30, color: Colors.white,)),
+                )
+              ],
+            ),
+            ),
+          ),
+        ),
+      );
   }
 
   Widget chatWidget() {
@@ -590,29 +621,24 @@ class DashboardView extends GetView<BaseController> {
                 child: FadeTransition(
                   opacity: viewModel.animation3,
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: viewModel.isLive.value ? 10.0 : 0),
+                    padding: EdgeInsets.symmetric(horizontal: 10.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Image.asset('assets/images/qpl_logo.png', width: 35, height: 35,),
-                        Obx(() => Text(
-                            viewModel.isLive.value ? 'Live' : 'Previous Match',
+                    Text(
+                          'Live',
                             style: TextStyle(
                                 color: Colors.red,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 14),
                           ),
-                        ),
-                        Obx(() => Visibility(
-                          visible: viewModel.isLive.value,
-                          child: FadeTransition(
-                              opacity: viewModel.animation4,
-                              child: Icon(Icons.circle,
-                                  size: 15, color: Colors.red),
-                            ),
-                        ),
-                        ),
+                        FadeTransition(
+                            opacity: viewModel.animation4,
+                            child: Icon(Icons.circle,
+                                size: 15, color: Colors.red),
+                          ),
                       ],
                     ),
                   ),
