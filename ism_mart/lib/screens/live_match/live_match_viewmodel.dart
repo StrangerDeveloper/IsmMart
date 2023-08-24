@@ -1,17 +1,15 @@
-
-
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-
 import '../../helper/api_base_helper.dart';
 import '../../helper/global_variables.dart';
 import '../../helper/urls.dart';
 
 class LiveMatchViewModel extends GetxController{
-RxString liveUrl = ''.obs;
 
-
+  RxString liveUrl = ''.obs;
  late YoutubePlayerController controller ;
+
  @override
   void onReady() {
     // TODO: implement onReady
@@ -20,10 +18,13 @@ RxString liveUrl = ''.obs;
   @override
   void onInit() {
     getData();
-
-    print('initialized');
-
     super.onInit();
+  }
+
+  @override
+  void onClose() {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
+    super.onClose();
   }
 
   getData() async{
@@ -63,5 +64,4 @@ RxString liveUrl = ''.obs;
       GlobalVariable.showLoader.value = false;
     });
   }
-
 }

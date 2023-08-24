@@ -15,7 +15,7 @@ class DashboardViewModel extends GetxController with GetTickerProviderStateMixin
 
   @override
   void onReady(){
-    Future.delayed(Duration(seconds: 2), (){
+    Future.delayed(Duration(seconds: 1), (){
       animationController1.forward();
       animationController1.addListener(() {
         animation1.value;
