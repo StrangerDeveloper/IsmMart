@@ -19,6 +19,7 @@ class LiveMatchView extends StatelessWidget {
             width: double.infinity,
             child: YoutubePlayerBuilder(
                 player: YoutubePlayer(
+                  showVideoProgressIndicator: false,
                   controller:viewModel. controller,
                 ),
                 builder: (context, player){
@@ -27,6 +28,7 @@ class LiveMatchView extends StatelessWidget {
                     children: [
                       // some widgets
                       YoutubePlayer(
+                        showVideoProgressIndicator: false,
                         controller:viewModel .controller,
                         liveUIColor: Colors.amber,
                       ),

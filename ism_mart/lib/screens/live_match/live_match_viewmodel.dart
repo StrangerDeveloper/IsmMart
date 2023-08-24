@@ -48,6 +48,7 @@ class LiveMatchViewModel extends GetxController{
         controller= YoutubePlayerController(
           initialVideoId:liveUrl.value,
           flags: YoutubePlayerFlags(
+
             isLive: true,
           ),
         );
@@ -55,6 +56,7 @@ class LiveMatchViewModel extends GetxController{
         controller= YoutubePlayerController(
           initialVideoId:"3ed3bLXkqoA",
           flags: YoutubePlayerFlags(
+            loop: true,
             isLive: true,
           ),
         );
