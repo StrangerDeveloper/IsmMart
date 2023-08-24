@@ -38,11 +38,21 @@ RxString liveUrl = ''.obs;
       if (parsedJson['success'] == true) {
         var data = parsedJson['data'] as List;
 
-        liveUrl.value= "qSldLOVjrYw";
-        //data[0]['url'];
+        liveUrl.value= data[0]['url'];
+        String videoId;
+        videoId = YoutubePlayer.convertUrlToId("${liveUrl.value}")!;
+        print("filtered ------$videoId"); // BBAyRBTfsOU
+        liveUrl.value=videoId;
         print(" live Url --------  ${liveUrl.value}");
         controller= YoutubePlayerController(
-          initialVideoId:liveUrl.value.isEmpty? 'hgfhjf':liveUrl.value,
+          initialVideoId:liveUrl.value,
+          flags: YoutubePlayerFlags(
+            isLive: true,
+          ),
+        );
+      } else if (parsedJson['success'] == false){
+        controller= YoutubePlayerController(
+          initialVideoId:"3ed3bLXkqoA",
           flags: YoutubePlayerFlags(
             isLive: true,
           ),
