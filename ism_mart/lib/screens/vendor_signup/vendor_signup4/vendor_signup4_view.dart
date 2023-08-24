@@ -13,55 +13,53 @@ class VendorSignUp4View extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: Padding(
-          padding: const EdgeInsets.only(top: 30, left: 20, right: 20),
-          child: Column(
-            children: [
-              titleAndBackBtn(),
-              subtitle(),
-              progress(),
-              SizedBox(height: 35),
-              Text(
-                langKey.waitForVerification.tr + '...',
-                style: newFontStyle3.copyWith(
-                  color: newColorDarkBlack,
-                ),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Padding(
+        padding: const EdgeInsets.only(top: 30, left: 20, right: 20),
+        child: Column(
+          children: [
+            titleAndBackBtn(),
+            subtitle(),
+            progress(),
+            SizedBox(height: 35),
+            Text(
+              langKey.waitForVerification.tr + '...',
+              style: newFontStyle3.copyWith(
+                color: newColorDarkBlack,
               ),
-              RichText(
-                textAlign: TextAlign.center,
-                text: TextSpan(
-                  style: newFontStyle0.copyWith(
-                    color: Color(0xff667085),
-                    height: 1.5,
+            ),
+            RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                style: newFontStyle0.copyWith(
+                  color: Color(0xff667085),
+                  height: 1.5,
+                ),
+                children: [
+                  TextSpan(text: 'Our'),
+                  TextSpan(
+                    text: ' Vendor Management Team ',
+                    style: newFontStyle2.copyWith(
+                      fontWeight: FontWeight.w700,
+                      color: Color(0xff0E1216),
+                    ),
                   ),
-                  children: [
-                    TextSpan(text: 'Our'),
-                    TextSpan(
-                      text: ' Vendor Management Team ',
-                      style: newFontStyle2.copyWith(
-                        fontWeight: FontWeight.w700,
-                        color: Color(0xff0E1216),
-                      ),
+                  TextSpan(
+                    text:
+                        'will review your profile and after approval you will receive a confirmation email of your',
+                  ),
+                  TextSpan(
+                    text: ' seller account',
+                    style: newFontStyle2.copyWith(
+                      fontWeight: FontWeight.w700,
+                      color: newColorBlue2,
                     ),
-                    TextSpan(
-                      text:
-                          'will review your profile and after approval you will receive a confirmation email of your',
-                    ),
-                    TextSpan(
-                      text: ' seller account',
-                      style: newFontStyle2.copyWith(
-                        fontWeight: FontWeight.w700,
-                        color: newColorBlue2,
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

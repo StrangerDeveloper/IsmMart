@@ -21,21 +21,24 @@ class SellerDashBoardViewModel extends GetxController with GetTickerProviderStat
 
   @override
   void onReady() {
+    print('>>>Global Value: ${GlobalVariable.userModel?.infoCompleted}');
     getStats();
     getOrders();
     scrollController.addListener(() {
       getOrders();
     });
-    animationController1.forward();
-    animationController1.addListener(() {
-      animation1.value;
-      if(animationController1.isCompleted) {
-        animationController2.forward();
-        animationController2.addListener(() {
-          animation2.value;
-        });
-      }
-    });
+    if(GlobalVariable.userModel?.infoCompleted == 0) {
+      animationController1.forward();
+      animationController1.addListener(() {
+        animation1.value;
+        if (animationController1.isCompleted) {
+          animationController2.forward();
+          animationController2.addListener(() {
+            animation2.value;
+          });
+        }
+      });
+    }
     super.onReady();
   }
 
@@ -48,6 +51,7 @@ class SellerDashBoardViewModel extends GetxController with GetTickerProviderStat
       GlobalVariable.showLoader.value = false;
       if (parsedJson['success'] == true) {
         vendorStats.value = VendorStats.fromJson(parsedJson['data']);
+
       }
     }).catchError((e) {
      // GlobalVariable.internetErr(true);

@@ -321,6 +321,15 @@ class SettingsView extends StatelessWidget {
           color: Color(0xff25D366),
           title: langKey.helpCenter.tr,
         ),
+        singleSettingsItem(
+            onTap: (){
+              Get.toNamed(Routes.chatScreen);
+              },
+            color: Color(0xff70d2f9),
+            isIcon: true,
+            icon: Icons.chat_outlined,
+            title: 'ISMBot'
+        ),
         Obx(
           () => viewModel.userDetails.value?.email != null &&
                   viewModel.userDetails.value?.token != null

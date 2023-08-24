@@ -48,7 +48,7 @@ class LiveMatchViewModel extends GetxController{
         controller= YoutubePlayerController(
           initialVideoId:liveUrl.value,
           flags: YoutubePlayerFlags(
-
+            useHybridComposition: false,
             isLive: true,
           ),
         );
@@ -56,6 +56,7 @@ class LiveMatchViewModel extends GetxController{
         controller= YoutubePlayerController(
           initialVideoId:"3ed3bLXkqoA",
           flags: YoutubePlayerFlags(
+            useHybridComposition: false,
             loop: true,
             isLive: true,
           ),

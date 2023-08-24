@@ -19,52 +19,50 @@ class VendorSignUp3View extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: Stack(
-          children: [
-            SingleChildScrollView(
-              child: Form(
-                key: viewModel.vendorSignUp3FormKey,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 30, left: 20, right: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      titleAndBackBtn(),
-                      createAVendorAccount(),
-                      progress(),
-                      bankNameTextField(),
-                      bankAccountTitleTextField(),
-                      bankAccountNumberTextField(),
-                      Obx(() => branchCodeTextField()),
-                      SizedBox(height: 20),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Form(
+              key: viewModel.vendorSignUp3FormKey,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 30, left: 20, right: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    titleAndBackBtn(),
+                    createAVendorAccount(),
+                    progress(),
+                    bankNameTextField(),
+                    bankAccountTitleTextField(),
+                    bankAccountNumberTextField(),
+                    Obx(() => branchCodeTextField()),
+                    SizedBox(height: 20),
 
-                      Obx(() => ImageLayoutContainer(
-                        description: true,
-                          title: langKey.chequeImage.tr,
-                          filePath: viewModel.bankChequeImage.value == '' ? '' : basename(viewModel.bankChequeImage.value),
-                          onTap: ()async{
-                            await viewModel.selectImage(viewModel.bankChequeImage, viewModel.chequeImageErrorVisibility);
-                          },
-                          errorVisibility: viewModel.chequeImageErrorVisibility.value,
-                          errorPrompt: langKey.chequeImageReq.tr
-                        ),
+                    Obx(() => ImageLayoutContainer(
+                      description: true,
+                        title: langKey.chequeImage.tr,
+                        filePath: viewModel.bankChequeImage.value == '' ? '' : basename(viewModel.bankChequeImage.value),
+                        onTap: ()async{
+                          await viewModel.selectImage(viewModel.bankChequeImage, viewModel.chequeImageErrorVisibility);
+                        },
+                        errorVisibility: viewModel.chequeImageErrorVisibility.value,
+                        errorPrompt: langKey.chequeImageReq.tr
                       ),
-                      submitBtn(),
-                    ],
-                  ),
+                    ),
+                    submitBtn(),
+                  ],
                 ),
               ),
             ),
-            // NoInternetView(
-            //   onPressed: () {
-            //     viewModel.signUp();
-            //   },
-            // ),
-          ],
-        ),
+          ),
+          // NoInternetView(
+          //   onPressed: () {
+          //     viewModel.signUp();
+          //   },
+          // ),
+        ],
       ),
     );
   }
