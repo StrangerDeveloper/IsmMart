@@ -12,9 +12,16 @@ class DashboardViewModel extends GetxController with GetTickerProviderStateMixin
   late AnimationController animationController4 = AnimationController(vsync: this, duration: Duration(milliseconds: 600));
   late Animation<double> animation4 = CurvedAnimation(parent: animationController4, curve: Curves.ease);
   RxDouble containerWidth = 50.0.obs;
+  RxBool bannerVisibility = true.obs;
 
   @override
   void onReady(){
+    initializeAnimations();
+    super.onReady();
+
+  }
+
+  initializeAnimations(){
     Future.delayed(Duration(seconds: 1), (){
       animationController1.forward();
       animationController1.addListener(() {
@@ -47,8 +54,6 @@ class DashboardViewModel extends GetxController with GetTickerProviderStateMixin
         }
       });
     });
-    super.onReady();
-
   }
-
+  
 }

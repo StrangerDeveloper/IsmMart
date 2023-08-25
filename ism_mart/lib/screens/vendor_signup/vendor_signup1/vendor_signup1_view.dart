@@ -26,63 +26,61 @@ class VendorSignUp1View extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: Stack(
-          children: [
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  Form(
-                    key: viewModel.vendorSignUpFormKey,
-                    child: Padding(
-                      padding:
-                          const EdgeInsets.only(top: 30, left: 20, right: 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          titleAndBackBtn(),
-                          createAVendorAccount(),
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 25),
-                            child: Text(
-                              'Unleash great opportunities as a vendor here',
-                              style: newFontStyle0.copyWith(
-                                color: newColorLightGrey2,
-                              ),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                Form(
+                  key: viewModel.vendorSignUpFormKey,
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.only(top: 30, left: 20, right: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        titleAndBackBtn(),
+                        createAVendorAccount(),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 25),
+                          child: Text(
+                            'Unleash great opportunities as a vendor here',
+                            style: newFontStyle0.copyWith(
+                              color: newColorLightGrey2,
                             ),
                           ),
-                          firstNameField(),
-                          lastNameField(),
-                          emailTextField(),
-                          phoneNumberTextField(),
-                          passwordTextField(),
-                          confirmPasswordTextField(),
-                          countryPicker(),
-                          cityPicker(),
-                          checkBoxTermCondition(),
-                          signUpBtn(),
-                          alreadyHaveAnAccount(),
-                        ],
-                      ),
+                        ),
+                        firstNameField(),
+                        lastNameField(),
+                        emailTextField(),
+                        phoneNumberTextField(),
+                        passwordTextField(),
+                        confirmPasswordTextField(),
+                        countryPicker(),
+                        cityPicker(),
+                        checkBoxTermCondition(),
+                        signUpBtn(),
+                        alreadyHaveAnAccount(),
+                      ],
                     ),
                   ),
-                  BecomeVendor(
-                    buttonText: 'Become a user',
-                    text:
-                        'Unlock limitless shopping possibilities and join our ISMMART family today.',
-                  ),
-                ],
-              ),
+                ),
+                BecomeVendor(
+                  buttonText: 'Become a user',
+                  text:
+                      'Unlock limitless shopping possibilities and join our ISMMART family today.',
+                ),
+              ],
             ),
-            NoInternetView(
-              onPressed: () async {
-                await viewModel.signUp();
-              },
-            ),
-          ],
-        ),
+          ),
+          NoInternetView(
+            onPressed: () async {
+              await viewModel.signUp();
+            },
+          ),
+        ],
       ),
     );
   }

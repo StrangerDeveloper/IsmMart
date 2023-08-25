@@ -34,46 +34,51 @@ class DashboardView extends GetView<BaseController> {
   @override
   Widget build(BuildContext context) {
     /// Update Alert used for display update dialog of the app Updates
-    return Stack(
-      children: [
-        CustomScrollView(
-          slivers: [
-            SliverList(
-              delegate: SliverChildListDelegate(
-                [
-                  _slider(controller.sliderImages),
-                  StickyLabel(text: langKey.topCategories.tr),
-                  _topCategoriesGrid(controller.categories),
-                  //Top Vendors List
-                  StickyLabel(text: langKey.topVendors.tr),
-                  _topVendors(),
-                  StickyLabel(text: langKey.discountDeals.tr),
-                  _displayDiscountProducts(),
-                  Obx(
-                    () => _displayProducts(
-                      productMap: controller.productsWithTypesMap,
+    return SafeArea(
+      child: Stack(
+        children: [
+          CustomScrollView(
+            slivers: [
+              SliverList(
+                delegate: SliverChildListDelegate(
+                  [
+                    _slider(controller.sliderImages),
+                    StickyLabel(text: langKey.topCategories.tr),
+                    _topCategoriesGrid(controller.categories),
+                    //Top Vendors List
+                    StickyLabel(text: langKey.topVendors.tr),
+                    _topVendors(),
+                    StickyLabel(text: langKey.discountDeals.tr),
+                    _displayDiscountProducts(),
+                    Obx(
+                      () => _displayProducts(
+                        productMap: controller.productsWithTypesMap,
+                      ),
                     ),
-                  ),
-                  kDivider,
-                  Obx(
-                    () => _displayProducts(
-                      productMap: controller.productsMap,
-                      calledForCategoryProducts: true,
+                    kDivider,
+                    Obx(
+                      () => _displayProducts(
+                        productMap: controller.productsMap,
+                        calledForCategoryProducts: true,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
-        ),
-        chatWidget(),
-        NoInternetView(
-          onPressed: () {
-            controller.getAllApiFunc();
-            GlobalVariable.btnPress(true);
-          },
-        ),
-      ],
+            ],
+          ),
+
+          chatWidget(),
+
+          NoInternetView(
+            onPressed: () {
+              controller.getAllApiFunc();
+              GlobalVariable.btnPress(true);
+            },
+          ),
+        banner(),
+        ],
+      ),
     );
   }
 
@@ -538,6 +543,47 @@ class DashboardView extends GetView<BaseController> {
     );
   }
 
+  Widget banner(){
+    return Obx(() => Visibility(
+        visible: viewModel.bannerVisibility.value,
+        child: Container(
+          color: Colors.black54,
+          width: MediaQuery.of(Get.context!).size.width,
+          height: MediaQuery.of(Get.context!).size.height,
+          child: Center(
+            child: Stack(
+              fit: StackFit.loose,
+              children: [
+                GestureDetector(
+                  onTap: (){
+                    Get.to(()=> LiveMatchView());
+                    viewModel.bannerVisibility.value = false;
+                  },
+                  child: Stack(
+                    children: [
+                      Image.asset('assets/images/qpl_banner.png',
+                        width: MediaQuery.of(Get.context!).size.width/1.2,
+                        height: MediaQuery.of(Get.context!).size.height/1.8,),
+                    ],
+                  ),
+                ),
+                Positioned(
+                  top: -5,
+                  right: -10,
+                  child: IconButton(
+                      onPressed: (){
+                        viewModel.bannerVisibility.value = false;
+                      },
+                      icon: Icon(Icons.highlight_remove, size: 30, color: Colors.white,)),
+                )
+              ],
+            ),
+            ),
+          ),
+        ),
+      );
+  }
+
   Widget chatWidget() {
     return Positioned(
       bottom: 12,
@@ -546,7 +592,7 @@ class DashboardView extends GetView<BaseController> {
         position: viewModel.animation1,
         child: GestureDetector(
           onTap: () async {
-            Get.to( ()=> LiveMatchView());
+            Get.to(()=> LiveMatchView());
           //  Get.toNamed(Routes.chatScreen);
             // await viewModel.getCurrentLocation();
           },
@@ -575,24 +621,24 @@ class DashboardView extends GetView<BaseController> {
                 child: FadeTransition(
                   opacity: viewModel.animation3,
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    padding: EdgeInsets.symmetric(horizontal: 10.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Image.asset('assets/images/qpl_logo.png', width: 35, height: 35,),
-                        Text(
+                    Text(
                           'Live',
-                          style: TextStyle(
-                              color: Colors.red,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 14),
-                        ),
+                            style: TextStyle(
+                                color: Colors.red,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 14),
+                          ),
                         FadeTransition(
-                          opacity: viewModel.animation4,
-                          child: Icon(Icons.circle,
-                              size: 15, color: Colors.red),
-                        ),
+                            opacity: viewModel.animation4,
+                            child: Icon(Icons.circle,
+                                size: 15, color: Colors.red),
+                          ),
                       ],
                     ),
                   ),

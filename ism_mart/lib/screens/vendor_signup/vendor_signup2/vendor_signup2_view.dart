@@ -24,76 +24,74 @@ class VendorSignUp2View extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: Stack(
-          children: [
-            SingleChildScrollView(
-              child: Form(
-                key: viewModel.vendorSignUp2FormKey,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 30, left: 20, right: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      titleAndBackBtn(),
-                      createAVendorAccount(),
-                      progress(),
-                      shopNameField(),
-                      shopCategoryField(),
-                      shopAddressField(),
-                      shopDescriptionTextField(),
-                      ntnTextField(),
-                      shopPhoneNoTextField(),
-                      ownerCNICField(),
-                      countryPicker(),
-                      cityPicker(),
-                      Obx(() => ImageLayoutContainer(
-                          title: 'CNIC',
-                          subTitle: langKey.frontSide.tr,
-                          filePath: viewModel.cnicFrontImage.value == '' ? '' : basename(viewModel.cnicFrontImage.value),
-                          onTap: () async{
-                            await viewModel.selectImage(viewModel.cnicFrontImage, viewModel.cnicFrontErrorVisibility);
-                          },
-                          errorVisibility: viewModel.cnicFrontErrorVisibility.value,
-                          errorPrompt: langKey.frontSideReq.tr
-                      ),
-                      ),
-                      Obx(()
-                      => ImageLayoutContainer(
-                          title: 'CNIC',
-                          subTitle: langKey.backSide.tr,
-                          filePath: viewModel.cnicBackImage.value == '' ? '' : basename(viewModel.cnicBackImage.value),
-                          onTap: () async{
-                            await viewModel.selectImage(viewModel.cnicBackImage, viewModel.cnicBackErrorVisibility);
-                          },
-                          errorVisibility: viewModel.cnicBackErrorVisibility.value,
-                          errorPrompt: langKey.backSideReq.tr
-                      )),
-                      Obx(() => ImageLayoutContainer(
-                          title: langKey.shopLogoImage.tr,
-                          filePath: viewModel.shopLogoImage.value == '' ? '' : basename(viewModel.shopLogoImage.value),
-                          onTap: () async{
-                            await viewModel.selectImage(viewModel.shopLogoImage, viewModel.shopImageErrorVisibility);
-                          },
-                          errorVisibility: viewModel.shopImageErrorVisibility.value,
-                          errorPrompt: langKey.shopLogoImageReq.tr
-                      ),
-                      ),
-                      submitBtn(),
-                    ],
-                  ),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Form(
+              key: viewModel.vendorSignUp2FormKey,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 30, left: 20, right: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    titleAndBackBtn(),
+                    createAVendorAccount(),
+                    progress(),
+                    shopNameField(),
+                    shopCategoryField(),
+                    shopAddressField(),
+                    shopDescriptionTextField(),
+                    ntnTextField(),
+                    shopPhoneNoTextField(),
+                    ownerCNICField(),
+                    countryPicker(),
+                    cityPicker(),
+                    Obx(() => ImageLayoutContainer(
+                        title: 'CNIC',
+                        subTitle: langKey.frontSide.tr,
+                        filePath: viewModel.cnicFrontImage.value == '' ? '' : basename(viewModel.cnicFrontImage.value),
+                        onTap: () async{
+                          await viewModel.selectImage(viewModel.cnicFrontImage, viewModel.cnicFrontErrorVisibility);
+                        },
+                        errorVisibility: viewModel.cnicFrontErrorVisibility.value,
+                        errorPrompt: langKey.frontSideReq.tr
+                    ),
+                    ),
+                    Obx(()
+                    => ImageLayoutContainer(
+                        title: 'CNIC',
+                        subTitle: langKey.backSide.tr,
+                        filePath: viewModel.cnicBackImage.value == '' ? '' : basename(viewModel.cnicBackImage.value),
+                        onTap: () async{
+                          await viewModel.selectImage(viewModel.cnicBackImage, viewModel.cnicBackErrorVisibility);
+                        },
+                        errorVisibility: viewModel.cnicBackErrorVisibility.value,
+                        errorPrompt: langKey.backSideReq.tr
+                    )),
+                    Obx(() => ImageLayoutContainer(
+                        title: langKey.shopLogoImage.tr,
+                        filePath: viewModel.shopLogoImage.value == '' ? '' : basename(viewModel.shopLogoImage.value),
+                        onTap: () async{
+                          await viewModel.selectImage(viewModel.shopLogoImage, viewModel.shopImageErrorVisibility);
+                        },
+                        errorVisibility: viewModel.shopImageErrorVisibility.value,
+                        errorPrompt: langKey.shopLogoImageReq.tr
+                    ),
+                    ),
+                    submitBtn(),
+                  ],
                 ),
               ),
             ),
-            NoInternetView(
-              onPressed: () {
-                viewModel.proceed();
-              },
-            ),
-          ],
-        ),
+          ),
+          NoInternetView(
+            onPressed: () {
+              viewModel.proceed();
+            },
+          ),
+        ],
       ),
     );
   }
