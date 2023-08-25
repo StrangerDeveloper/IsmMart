@@ -644,7 +644,7 @@ class Japanese {
         key.storeCategory: 'ショップカテゴリ',
         key.yourStoreCategory: 'あなたの店のカテゴリー',
         key.storeDescription: 'ショップの説明',
-        key.enterShopDescription: 'ショップの説明を入力してください',
+        key.enterStoreDescription: 'ショップの説明を入力してください',
         key.storeImage: 'ショップの画像',
         key.storeCoverImage: 'カバー画像を買いました',
         key.enterBankName: '銀行名を入力します',

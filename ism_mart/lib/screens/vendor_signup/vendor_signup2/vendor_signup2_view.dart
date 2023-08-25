@@ -580,7 +580,7 @@ class VendorSignUp2View extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: CustomTextField3(
         title: langKey.storeDescription.tr,
-        hintText: langKey.enterShopDescription.tr,
+        hintText: langKey.enterStoreDescription.tr,
         controller: viewModel.shopDescController,
         autoValidateMode: AutovalidateMode.onUserInteraction,
         validator: (value) {

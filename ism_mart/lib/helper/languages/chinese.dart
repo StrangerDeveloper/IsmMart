@@ -648,7 +648,7 @@ class Chinese {
         key.storeCategory: '商店类别',
         key.yourStoreCategory: '您的商店类别',
         key.storeDescription: '店描述',
-        key.enterShopDescription: '输入商店描述',
+        key.enterStoreDescription: '输入商店描述',
         key.storeImage: '商店图像',
         key.storeCoverImage: '商店封面图像',
         key.enterBankName: '输入银行名称',

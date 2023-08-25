@@ -683,7 +683,7 @@ class Russian {
         key.storeCategory: 'Категория магазина',
         key.yourStoreCategory: 'Ваша категория магазина',
         key.storeDescription: 'Магазин Описание',
-        key.enterShopDescription: 'Введите описание магазина',
+        key.enterStoreDescription: 'Введите описание магазина',
         key.storeImage: 'Магазин изображение',
         key.storeCoverImage: 'Магазин обложки изображение',
         key.enterBankName: 'Введите имя банка',

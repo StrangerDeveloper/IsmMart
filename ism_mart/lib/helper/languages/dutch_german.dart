@@ -679,7 +679,7 @@ class DutchGerman {
         key.storeCategory: 'Ladenkategorie',
         key.yourStoreCategory: 'Ihre Shop -Kategorie',
         key.storeDescription: 'Ladenbeschreibung',
-        key.enterShopDescription: 'Geben Sie die Ladenbeschreibung ein',
+        key.enterStoreDescription: 'Geben Sie die Ladenbeschreibung ein',
         key.storeImage: 'Shop -Bild',
         key.storeCoverImage: 'Shop Coverbild',
         key.enterBankName: 'Geben Sie den Banknamen ein',

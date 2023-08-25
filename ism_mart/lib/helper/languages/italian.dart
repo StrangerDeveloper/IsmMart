@@ -678,7 +678,7 @@ class Italian {
         key.storeCategory: 'Categoria del negozio',
         key.yourStoreCategory: 'La tua categoria del negozio',
         key.storeDescription: 'Descrizione del negozio',
-        key.enterShopDescription: 'Inserisci la descrizione del negozio',
+        key.enterStoreDescription: 'Inserisci la descrizione del negozio',
         key.storeImage: 'Immagine del negozio',
         key.storeCoverImage: 'Immagine di copertina del negozio',
         key.enterBankName: 'Immettere il nome della banca',

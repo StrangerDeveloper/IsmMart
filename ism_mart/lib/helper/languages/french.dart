@@ -686,7 +686,7 @@ class French {
         key.storeCategory: 'Catégorie d\'atelier',
         key.yourStoreCategory: 'Votre catégorie de boutique',
         key.storeDescription: 'Description de l\'atelier',
-        key.enterShopDescription: 'Entrez la description de la boutique',
+        key.enterStoreDescription: 'Entrez la description de la boutique',
         key.storeImage: 'Image',
         key.storeCoverImage: 'Image de couverture de magasin',
         key.enterBankName: 'Entrez le nom de la banque',

@@ -687,7 +687,7 @@ class Urdu {
         key.storeCategory: 'دکان کیٹیگری',
         key.yourStoreCategory: 'آپ کی دکان کا زمرہ',
         key.storeDescription: 'دکان کی تفصیل',
-        key.enterShopDescription: 'دکان کی تفصیل درج کریں',
+        key.enterStoreDescription: 'دکان کی تفصیل درج کریں',
         key.storeImage: 'دکان کی تصویر',
         key.storeCoverImage: 'شاپ کور امیج',
         key.enterBankName: 'بینک کا نام درج کریں',

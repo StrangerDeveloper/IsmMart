@@ -646,7 +646,7 @@ class Korean {
         key.storeCategory: '상점 카테고리',
         key.yourStoreCategory: '상점 카테고리',
         key.storeDescription: '상점 설명',
-        key.enterShopDescription: '상점 설명을 입력하십시오',
+        key.enterStoreDescription: '상점 설명을 입력하십시오',
         key.storeImage: '쇼핑 이미지',
         key.storeCoverImage: '상점 표지 이미지',
         key.enterBankName: '은행 이름을 입력하십시오',

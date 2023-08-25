@@ -675,7 +675,7 @@ class Turkish {
         key.storeCategory: 'Mağaza kategorisi',
         key.yourStoreCategory: 'Mağazanız kategoriniz',
         key.storeDescription: 'Mağaza Tanımı',
-        key.enterShopDescription: 'Mağaza Tanımına Girin',
+        key.enterStoreDescription: 'Mağaza Tanımına Girin',
         key.storeImage: 'Mağaza görüntüsü',
         key.storeCoverImage: 'Mağaza örtüsü görüntüsü',
         key.enterBankName: 'Banka İsmini Girin',

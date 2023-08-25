@@ -677,7 +677,7 @@ class Arabic {
         key.storeCategory: 'فئة المتجر',
         key.yourStoreCategory: 'فئة متجرك',
         key.storeDescription: 'وصف المتجر',
-        key.enterShopDescription: 'أدخل وصف المتجر',
+        key.enterStoreDescription: 'أدخل وصف المتجر',
         key.storeImage: 'تسوق صورة',
         key.storeCoverImage: 'صورة غلاف المتجر',
         key.enterBankName: 'أدخل الاسم المصرفي',

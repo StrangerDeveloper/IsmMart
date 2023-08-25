@@ -679,7 +679,7 @@ class Spanish {
         key.storeCategory: 'Categoría de tiendas',
         key.yourStoreCategory: 'Su categoría de tienda',
         key.storeDescription: 'Descripción de la tienda',
-        key.enterShopDescription: 'Ingrese la descripción de la tienda',
+        key.enterStoreDescription: 'Ingrese la descripción de la tienda',
         key.storeImage: 'Imagen de la tienda',
         key.storeCoverImage: 'Imagen de portada de la tienda',
         key.enterBankName: 'Ingrese el nombre del banco',
