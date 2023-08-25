@@ -41,7 +41,7 @@ class Validator {
   String? validateCNIC(String? value) {
     if (GetUtils.isBlank(value)!) {
       return langKey.cnicReq.tr;
-    } else if (value!.length < 11 || value.length > 18) {
+    } else if (value!.length != 13) {
       return langKey.incorrectCNIC.tr;
     } else {
       return null;

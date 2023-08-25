@@ -162,7 +162,6 @@ class VendorSignUp1ViewModel extends GetxController{
       {'header': langKey.vendorHeader21.tr, 'body': langKey.vendorBody21.tr},
       {'header': langKey.vendorHeader22.tr, 'body': langKey.vendorBody22.tr},
       {'header': langKey.vendorHeader23.tr, 'body': langKey.vendorBody23.tr},
-      {'header': langKey.vendorHeader24.tr, 'body': langKey.vendorBody24.tr},
       {'header': langKey.vendorHeader25.tr, 'body': langKey.vendorBody25.tr},
       {'header': langKey.vendorHeader26.tr, 'body': langKey.vendorBody26.tr},
       {'header': langKey.vendorHeader27.tr, 'body': langKey.vendorBody27.tr},

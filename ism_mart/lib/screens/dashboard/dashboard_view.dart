@@ -546,40 +546,75 @@ class DashboardView extends GetView<BaseController> {
   Widget banner(){
     return Obx(() => Visibility(
         visible: viewModel.bannerVisibility.value,
-        child: Container(
-          color: Colors.black54,
-          width: MediaQuery.of(Get.context!).size.width,
-          height: MediaQuery.of(Get.context!).size.height,
-          child: Center(
+        child: FadeTransition(
+          opacity: viewModel.animation5,
+          child: Container(
+            color: Colors.black54,
+            width: MediaQuery.of(Get.context!).size.width,
+            height: MediaQuery.of(Get.context!).size.height,
             child: Stack(
               fit: StackFit.loose,
               children: [
-                GestureDetector(
-                  onTap: (){
-                    Get.to(()=> LiveMatchView());
-                    viewModel.bannerVisibility.value = false;
-                  },
-                  child: Stack(
-                    children: [
-                      Image.asset('assets/images/qpl_banner.png',
-                        width: MediaQuery.of(Get.context!).size.width/1.2,
-                        height: MediaQuery.of(Get.context!).size.height/1.8,),
-                    ],
+                SlideTransition(
+                  position: viewModel.animation6,
+                  child: Center(
+                    child: GestureDetector(
+                      onTap: (){
+                        Get.to(()=> LiveMatchView());
+                        viewModel.bannerVisibility.value = false;
+                      },
+                      child: SlideTransition(
+                        position: viewModel.animation1,
+                        child: Stack(
+                          children: [
+                            Image.asset('assets/images/qpl_banner.png',
+                              width: MediaQuery.of(Get.context!).size.width/1.2,
+                              height: MediaQuery.of(Get.context!).size.height/1.8,),
+                            FadeTransition(
+                              opacity: viewModel.animation7,
+                              child: Container(
+                                color: Colors.white,
+                                width: MediaQuery.of(Get.context!).size.width/1.2,
+                                height: MediaQuery.of(Get.context!).size.height/1.8,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
                 ),
+
                 Positioned(
-                  top: -5,
-                  right: -10,
+                  top: 2,
+                  right: -2,
                   child: IconButton(
                       onPressed: (){
-                        viewModel.bannerVisibility.value = false;
+                        viewModel.animationController6.forward();
+                        viewModel.animationController6.addListener(() {
+                          viewModel.animation6.value;
+                          if(viewModel.animationController6.value > 0.3) {
+                            viewModel.animationController7.forward();
+                            viewModel.animationController7.addListener(() {
+                              viewModel.animation7.value;
+                            });
+                            viewModel.animationController5.reverse();
+                            viewModel.animationController5.addListener(() {
+                              viewModel.animation5.value;
+                            });
+                          }
+                          if(viewModel.animationController6.isCompleted){
+                            viewModel.bannerVisibility.value = false;
+                            viewModel.disposeAnimations();
+                          }
+                        });
                       },
                       icon: Icon(Icons.highlight_remove, size: 30, color: Colors.white,)),
                 )
               ],
             ),
             ),
-          ),
+        ),
         ),
       );
   }

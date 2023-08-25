@@ -474,12 +474,7 @@ class VendorSignUp1View extends StatelessWidget {
                           decoration: TextDecoration.underline,
                           color: newColorLightGrey2,
                         ),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            Get.toNamed(Routes.staticInfo, arguments: {
-                              'title': langKey.termsAndConditions.tr
-                            });
-                          }),
+                    ),
                     TextSpan(
                       text:
                           ' and for my personal data to be processed according to',

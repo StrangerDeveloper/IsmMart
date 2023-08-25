@@ -71,13 +71,13 @@ class VendorSignUp2View extends StatelessWidget {
                         errorPrompt: langKey.backSideReq.tr
                     )),
                     Obx(() => ImageLayoutContainer(
-                        title: langKey.shopLogoImage.tr,
+                        title: langKey.storeLogoImage.tr,
                         filePath: viewModel.shopLogoImage.value == '' ? '' : basename(viewModel.shopLogoImage.value),
                         onTap: () async{
                           await viewModel.selectImage(viewModel.shopLogoImage, viewModel.shopImageErrorVisibility);
                         },
                         errorVisibility: viewModel.shopImageErrorVisibility.value,
-                        errorPrompt: langKey.shopLogoImageReq.tr
+                        errorPrompt: langKey.storeLogoImageReq.tr
                     ),
                     ),
                     submitBtn(),
@@ -217,12 +217,12 @@ class VendorSignUp2View extends StatelessWidget {
   Widget shopNameField() {
     return CustomTextField3(
       keyboardType: TextInputType.text,
-      title: langKey.shopName.tr,
-      hintText: langKey.enterShopName.tr,
+      title: langKey.storeName.tr,
+      hintText: langKey.enterStoreName.tr,
       controller: viewModel.shopNameController,
       autoValidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
-        return Validator().validateName(value, errorToPrompt: langKey.shopNameReq.tr);
+        return Validator().validateName(value, errorToPrompt: langKey.storeNameReq.tr);
       },
     );
   }
@@ -239,7 +239,7 @@ class VendorSignUp2View extends StatelessWidget {
                   padding: const EdgeInsets.only(bottom: 3),
                   child: RichText(
                     text: TextSpan(
-                        text: langKey.shopCategory.tr,
+                        text: langKey.storeCategory.tr,
                         style: GoogleFonts.dmSans(
                           fontSize: 14,
                           fontWeight: FontWeight.w700,
@@ -311,7 +311,7 @@ class VendorSignUp2View extends StatelessWidget {
   Widget shopAddressField() {
     return CustomTextField3(
       keyboardType: TextInputType.text,
-      title: langKey.shopAddress.tr,
+      title: langKey.storeAddress.tr,
       hintText: langKey.enterShopAddress.tr,
       controller: viewModel.shopAddressController,
       autoValidateMode: AutovalidateMode.onUserInteraction,
@@ -329,7 +329,7 @@ class VendorSignUp2View extends StatelessWidget {
           validator: (value){
             return Validator().validatePhoneNumber(value);
           },
-          title: langKey.shopNumber.tr,
+          title: langKey.storeNumber.tr,
           hintText: '336 5563138',
           keyboardType: TextInputType.number,
           autoValidateMode: AutovalidateMode.onUserInteraction,
@@ -364,7 +364,7 @@ class VendorSignUp2View extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 3),
             child: RichText(
               text: TextSpan(
-                text: langKey.shopCountry.tr,
+                text: langKey.storeCountry.tr,
                 style: GoogleFonts.dmSans(
                   fontSize: 14,
                   fontWeight: FontWeight.w700,
@@ -455,7 +455,7 @@ class VendorSignUp2View extends StatelessWidget {
                         padding: const EdgeInsets.only(bottom: 3),
                         child: RichText(
                           text: TextSpan(
-                            text: langKey.shopCity.tr,
+                            text: langKey.storeCity.tr,
                             style: GoogleFonts.dmSans(
                               fontSize: 14,
                               fontWeight: FontWeight.w700,
@@ -579,12 +579,12 @@ class VendorSignUp2View extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: CustomTextField3(
-        title: langKey.shopDescription.tr,
+        title: langKey.storeDescription.tr,
         hintText: langKey.enterShopDescription.tr,
         controller: viewModel.shopDescController,
         autoValidateMode: AutovalidateMode.onUserInteraction,
         validator: (value) {
-          return Validator().validateDefaultTxtField(value, errorPrompt: langKey.shopDescReq.tr);
+          return Validator().validateDefaultTxtField(value, errorPrompt: langKey.storeDescReq.tr);
         },
         keyboardType: TextInputType.text,
       ),

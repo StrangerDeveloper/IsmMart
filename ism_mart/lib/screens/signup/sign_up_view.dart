@@ -26,66 +26,64 @@ class SignUpView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: Stack(
-          children: [
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  Form(
-                    key: viewModel.signUpFormKey,
-                    child: Padding(
-                      padding:
-                          const EdgeInsets.only(top: 30, left: 20, right: 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          titleAndBackBtn(),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 20, bottom: 10),
-                            child: CustomText(
-                              title: langKey.createAnAccount.tr,
-                              style: newFontStyle2.copyWith(
-                                fontSize: 20,
-                                color: newColorDarkBlack2,
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                Form(
+                  key: viewModel.signUpFormKey,
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.only(top: 30, left: 20, right: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        titleAndBackBtn(),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20, bottom: 10),
+                          child: CustomText(
+                            title: langKey.createAnAccount.tr,
+                            style: newFontStyle2.copyWith(
+                              fontSize: 20,
+                              color: newColorDarkBlack2,
+                        ),
                           ),
-                            ),
-                    ),
-                   Padding(
-                            padding: const EdgeInsets.only(bottom: 25),
-                            child: Text(
-                              langKey.getOnboardUser.tr,
-                              style: newFontStyle0.copyWith(
-                                color: newColorLightGrey2,
-                              ),
+                  ),
+                 Padding(
+                          padding: const EdgeInsets.only(bottom: 25),
+                          child: Text(
+                            langKey.getOnboardUser.tr,
+                            style: newFontStyle0.copyWith(
+                              color: newColorLightGrey2,
                             ),
                           ),
-                          firstNameField(),
-                          lastNameField(),
-                          emailTextField(),
-                          phoneNumberTextField(),
-                          passwordTextField(),
-                          confirmPasswordTextField(),
-                          countryPicker(),
-                          cityPicker(),
-                          checkBoxTermCondition(),
-                          signUpBtn(),
-                          alreadyHaveAnAccount(),
-                        ],
-                      ),
+                        ),
+                        firstNameField(),
+                        lastNameField(),
+                        emailTextField(),
+                        phoneNumberTextField(),
+                        passwordTextField(),
+                        confirmPasswordTextField(),
+                        countryPicker(),
+                        cityPicker(),
+                        checkBoxTermCondition(),
+                        signUpBtn(),
+                        alreadyHaveAnAccount(),
+                      ],
                     ),
                   ),
-                  BecomeVendor(),
-                ],
-              ),
+                ),
+                BecomeVendor(),
+              ],
             ),
-            NoInternetView(
-              onPressed: () => viewModel.signUp(),
-            ),
-          ],
-        ),
+          ),
+          NoInternetView(
+            onPressed: () => viewModel.signUp(),
+          ),
+        ],
       ),
     );
   }
