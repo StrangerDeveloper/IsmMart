@@ -743,7 +743,9 @@ const tCHeader1 = "key.tCHeader1",
     tCHeader20 = 'key.tCHeader20',
     tCBody20 = 'key.tCBody20',
     tCHeader21 = 'key.tCHeader21',
-    tCBody21 = 'key.tCBody21';
+    tCBody21 = 'key.tCBody21',
+    tCHeader22 = 'key.tCHeader22',
+    tCBody22 = 'key.tCBody22';
 
 const vendorHeader0 = 'vendorHeader0',
     vendorBody0 = 'vendorBody0',
