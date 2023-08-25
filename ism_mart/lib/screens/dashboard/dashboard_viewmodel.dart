@@ -34,27 +34,25 @@ class DashboardViewModel extends GetxController with GetTickerProviderStateMixin
       animationController5.addListener(() {
         animation5.value;
         if (animationController5.isCompleted) {
-              animationController1.forward();
-              animationController1.addListener(() {
-                animation1.value;
-                if(animationController1.isCompleted){
-                  animationController2.forward();
-                  animationController2.addListener(() {
-                    containerWidth.value = 60 + (animation2.value * 80);
-                    if(animationController2.isCompleted){
-                      animationController3.forward();
-                      animationController3.addListener(() {
-                        animation3.value;
-                        if(animationController3.isCompleted){
+          animationController1.forward();
+          animationController1.addListener(() {
+            animation1.value;
+            if(animationController1.isCompleted){
+              animationController2.forward();
+              animationController2.addListener(() {
+                containerWidth.value = 60 + (animation2.value * 80);
+                if(animationController2.isCompleted){
+                  animationController3.forward();
+                  animationController3.addListener(() {
+                    animation3.value;
+                    if(animationController3.isCompleted){
+                      animationController4.forward();
+                      animationController4.addListener(() {
+                        if(animationController4.isCompleted){
+                          animationController4.reverse();
+                        }
+                        if(animationController4.isDismissed){
                           animationController4.forward();
-                          animationController4.addListener(() {
-                            if(animationController4.isCompleted){
-                              animationController4.reverse();
-                            }
-                            if(animationController4.isDismissed){
-                              animationController4.forward();
-                            }
-                          });
                         }
                       });
                     }
@@ -63,6 +61,8 @@ class DashboardViewModel extends GetxController with GetTickerProviderStateMixin
               });
             }
           });
+        }
+      });
     });
   }
 
