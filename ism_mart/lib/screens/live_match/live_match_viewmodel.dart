@@ -12,6 +12,7 @@ import '../../helper/urls.dart';
 
 class LiveMatchViewModel extends GetxController{
   RxString liveUrl = ''.obs;
+  RxBool isFullScreen = false.obs;
 
 
   late YoutubePlayerController controller ;
