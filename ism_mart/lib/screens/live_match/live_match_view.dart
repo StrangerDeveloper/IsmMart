@@ -1,24 +1,11 @@
-
-
-
-
-
-
-
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/screens/dashboard/dashboard_viewmodel.dart';
 import 'package:ism_mart/screens/live_match/live_match_viewmodel.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-
-import '../../widgets/custom_loading.dart';
-import '../../widgets/custom_network_image.dart';
 
 class LiveMatchView extends StatelessWidget {
    LiveMatchView({super.key});
@@ -27,47 +14,56 @@ class LiveMatchView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    var h = MediaQuery.of(context).size.height;
+    var w = MediaQuery.of(context).size.width;
     return Obx(
       () => viewModel.liveUrl.value.isNotEmpty
           ? SafeArea(
               child: Scaffold(
                   backgroundColor: Colors.black,
-                  body: YoutubePlayerBuilder(
-                      onEnterFullScreen: () {
-                        viewModel.isFullScreen.value = true;
-                      },
-                      onExitFullScreen: () {
-                        viewModel.isFullScreen.value = false;
-                      },
-                      player: YoutubePlayer(
-                        controller: viewModel.controller,
-                      ),
-                      builder: (context, player) {
-                        return Obx(() => viewModel.isFullScreen.value
-                            ? player
-                            : Stack(
-                          children: [
-                            Column(
-                              children: [
-                                Expanded(
-                                  child: player,
-                                ),
-                                alertMsg(),
-                                Expanded(
-                                  child: carousel(),
-                                ),
-                              ],
+                  body: Center(
+                    child: Obx(() => SizedBox(
+                        width: viewModel.isFullScreen.value ? w*0.9 : double.infinity,
+                        height: viewModel.isFullScreen.value ? h*0.8 : double.infinity,
+                        child: YoutubePlayerBuilder(
+                            onEnterFullScreen: () {
+                              viewModel.isFullScreen.value = true;
+                            },
+                            onExitFullScreen: () {
+                              viewModel.isFullScreen.value = false;
+                            },
+                            player: YoutubePlayer(
+                              controller: viewModel.controller,
                             ),
-                            backButton(),
-                          ],
-                        ),);
-                      })),
+                            builder: (context, player) {
+                              return Obx(() => viewModel.isFullScreen.value
+                                  ? player
+                                  : Stack(
+                                children: [
+                                  Column(
+                                    children: [
+                                      Expanded(
+                                        child: player,
+                                      ),
+                                      alertMsg(),
+                                      Expanded(
+                                        child: carousel(),
+                                      ),
+                                    ],
+                                  ),
+                                  backButton(),
+                                ],
+                              ),);
+                            }),
+                      ),
+                    ),
+                  )),
             )
           : Scaffold(
+        backgroundColor: Colors.black,
               body: Center(
                 child: CircularProgressIndicator(
-                  color: newColorDarkBlack,
+                  color: Colors.white,
                 ),
               ),
             ),
@@ -78,12 +74,9 @@ class LiveMatchView extends StatelessWidget {
   Widget backButton() {
     return IconButton(onPressed: (){
       Get.back();
-    }, icon: Icon(Icons.arrow_back_ios,color: Colors.white,size: 25,));
+      },
+        icon: Icon(Icons.arrow_back_ios,color: Colors.white,size: 25,));
   }
-
-
-
-
 
   //chat
   Widget alertMsg() {
@@ -136,9 +129,6 @@ class LiveMatchView extends StatelessWidget {
   }
 
    //slider
-
-
-
    Widget carousel() {
      return Obx(
            () => (viewModel.imageList.isNotEmpty)
@@ -189,7 +179,6 @@ class LiveMatchView extends StatelessWidget {
      );
    }
 
-
    Widget mainImage(String url) {
      return CachedNetworkImage(
        width: double.infinity,
@@ -221,7 +210,4 @@ class LiveMatchView extends StatelessWidget {
        },
      );
    }
-
-
-
 }
