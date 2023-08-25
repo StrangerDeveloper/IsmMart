@@ -650,4 +650,6 @@ class DashboardView extends GetView<BaseController> {
       ),
     );
   }
+
+
 }

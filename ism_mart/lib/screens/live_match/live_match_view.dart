@@ -1,22 +1,32 @@
+
+
+
+
+
+
+
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/screens/dashboard/dashboard_viewmodel.dart';
 import 'package:ism_mart/screens/live_match/live_match_viewmodel.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../../widgets/custom_loading.dart';
+import '../../widgets/custom_network_image.dart';
 
 class LiveMatchView extends StatelessWidget {
-  LiveMatchView({super.key});
-
+   LiveMatchView({super.key});
   final LiveMatchViewModel viewModel = Get.put(LiveMatchViewModel());
   final DashboardViewModel viewModelD = Get.put(DashboardViewModel());
 
   @override
   Widget build(BuildContext context) {
-    // var h = MediaQuery.of(context).size.height;
-    // var w = MediaQuery.of(context).size.width;
 
     return Obx(
       () => viewModel.liveUrl.value.isNotEmpty
@@ -26,10 +36,8 @@ class LiveMatchView extends StatelessWidget {
                   body: YoutubePlayerBuilder(
                       onEnterFullScreen: () {
                         viewModel.isFullScreen.value = true;
-                        print('hayat');
                       },
                       onExitFullScreen: () {
-                        print('hayat');
                         viewModel.isFullScreen.value = false;
                       },
                       player: YoutubePlayer(
@@ -45,9 +53,9 @@ class LiveMatchView extends StatelessWidget {
                                 Expanded(
                                   child: player,
                                 ),
-                                chatWidget1(),
+                                alertMsg(),
                                 Expanded(
-                                  child: _slider(),
+                                  child: carousel(),
                                 ),
                               ],
                             ),
@@ -68,119 +76,152 @@ class LiveMatchView extends StatelessWidget {
 
   //icon button
   Widget backButton() {
-    return IconButton(
-      onPressed: () {
-        Get.back();
-      },
-      icon: Icon(
-        Icons.arrow_back_ios,
-        color: Colors.white,
-        size: 25,
-      ),
-    );
+    return IconButton(onPressed: (){
+      Get.back();
+    }, icon: Icon(Icons.arrow_back_ios,color: Colors.white,size: 25,));
   }
 
+
+
+
+
   //chat
-  Widget chatWidget1() {
-    return Positioned(
-      bottom: 12,
-      right: 10,
+  Widget alertMsg() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5),
       child: SlideTransition(
         position: viewModelD.animation1,
-        child: GestureDetector(
-          onTap: () async {
-            Get.to(() => LiveMatchView());
-            //  Get.toNamed(Routes.chatScreen);
-            // await viewModel.getCurrentLocation();
-          },
-          child: Obx(
-            () => viewModel.islive.value == false
-                ? AnimatedContainer(
-                    width: 250,
-                    height: 40,
-                    decoration: BoxDecoration(
-                        border: Border.all(width: 1.5, color: Colors.red),
-                        color: Colors.white,
-                        // color: Color(0xff3769CA),
-                        borderRadius: BorderRadius.all(Radius.circular(28)),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.grey.withOpacity(0.2),
-                              offset: Offset(0, 3),
-                              blurRadius: 1,
-                              spreadRadius: 1)
-                        ]),
-                    duration: Duration.zero,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 13.0),
-                      child: FadeTransition(
-                        opacity: viewModelD.animation4,
-                        child: SizedBox(
-                          height: 50,
-                          width: 250,
-                          child: Text(
-                            textAlign: TextAlign.center,
-                            maxLines: 2,
-                            "We get back with live-stream ones, The Match Starts",
-                            style: TextStyle(
-                                color: Colors.red,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 14),
-                          ),
+        child: Obx(
+          () => viewModel.islive.value == false
+              ? AnimatedContainer(
+                  width: 250,
+                  height: 40,
+                  decoration: BoxDecoration(
+                      border: Border.all(width: 1.5, color: Colors.red),
+                      color: Colors.white,
+                      // color: Color(0xff3769CA),
+                      borderRadius: BorderRadius.all(Radius.circular(28)),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey.withOpacity(0.2),
+                            offset: Offset(0, 3),
+                            blurRadius: 1,
+                            spreadRadius: 1)
+                      ]),
+                  duration: Duration.zero,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 13.0),
+                    child: FadeTransition(
+                      opacity: viewModelD.animation4,
+                      child: SizedBox(
+                        height: 50,
+                        width: 250,
+                        child: Text(
+                          textAlign: TextAlign.center,
+                          maxLines: 2,
+                          "We'll be back with the live stream once the match starts.",
+                          style: TextStyle(
+                              color: Colors.red,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 14),
                         ),
                       ),
                     ),
-                  )
-                : SizedBox(),
-          ),
+                  ),
+                )
+              : SizedBox(),
         ),
       ),
     );
   }
 
-  //slider
+   //slider
 
-  Widget _slider() {
-    return Obx(
-      () => viewModel.isSliderLoading.isTrue
-          ? CustomLoading(isItForWidget: true)
-          : Stack(
-              alignment: Alignment.bottomCenter,
-              children: [
-                PageView.builder(
-                  controller: viewModel.sliderPageController,
-                  onPageChanged: (value) {
-                    viewModel.sliderIndex(value);
-                  },
-                  itemCount: viewModel.sliderImages.length,
-                  itemBuilder: (context, index) {
-                    return Image.asset(
-                        viewModel.sliderImages[index].toString());
-                  },
-                ),
-                Padding(
-                  padding: EdgeInsets.only(bottom: 6),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: List.generate(
-                      viewModel.sliderImages.length,
-                      (index) => AnimatedContainer(
-                        duration: const Duration(milliseconds: 400),
-                        height: 6.0,
-                        width: viewModel.sliderIndex.value == index ? 14 : 6,
-                        margin: const EdgeInsets.only(right: 3),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: viewModel.sliderIndex.value == index
-                              ? Colors.black
-                              : Colors.grey,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-    );
-  }
+
+
+   Widget carousel() {
+     return Obx(
+           () => (viewModel.imageList.isNotEmpty)
+           ? Stack(
+         alignment: Alignment.bottomCenter,
+         children: [
+           Obx(
+                 () =>
+                     PageView.builder(
+                       controller: viewModel.sliderPageController,
+                       onPageChanged: (value) {
+                         viewModel.indicatorIndex(value);
+                       },
+                       itemCount:viewModel .imageList.length,
+                       itemBuilder: (context, index) {
+
+                         return mainImage(viewModel .imageList[index]);
+                       },
+                     ),
+           ),
+           Padding(
+             padding: EdgeInsets.only(bottom: 15),
+             child: AnimatedSmoothIndicator(
+               activeIndex: viewModel.indicatorIndex.value,
+               count: viewModel.imageList.length,
+               effect: CustomizableEffect(
+                 spacing: 12,
+                 dotDecoration: DotDecoration(
+                   borderRadius: BorderRadius.circular(30),
+                   width: 6,
+                   height: 6,
+                 ),
+                 activeDotDecoration: DotDecoration(
+                   borderRadius: BorderRadius.circular(30),
+                   dotBorder: DotBorder(
+                     padding: 3.2,
+                     color: Colors.white,
+                   ),
+                   width: 6,
+                   height: 6,
+                 ),
+               ),
+             ),
+           )
+         ],
+       )
+           : SizedBox(),
+     );
+   }
+
+
+   Widget mainImage(String url) {
+     return CachedNetworkImage(
+       width: double.infinity,
+       imageUrl: url,
+       imageBuilder: (context, imageProvider) {
+         return Container(
+           decoration: BoxDecoration(
+             image: DecorationImage(
+               image: imageProvider,
+               fit: BoxFit.cover,
+             ),
+           ),
+         );
+       },
+       errorWidget: (context, url, error) {
+         return Container(
+           decoration: BoxDecoration(
+             image: DecorationImage(
+               image: AssetImage('assets/images/no_image_found.jpg'),
+               fit: BoxFit.cover,
+             ),
+           ),
+         );
+       },
+       placeholder: (context, url) {
+         return const Center(
+           child: CircularProgressIndicator(strokeWidth: 0.5),
+         );
+       },
+     );
+   }
+
+
+
 }
