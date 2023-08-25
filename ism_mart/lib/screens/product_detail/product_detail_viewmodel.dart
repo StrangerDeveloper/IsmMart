@@ -101,7 +101,9 @@ class ProductDetailViewModel extends GetxController {
     Get.toNamed(Routes.singleProductFullImage, arguments: [
       {
         "initialImage": index,
-        "productImages": productModel.value.images,
+        "productImages": (productModel.value.images?.isNotEmpty ?? false)
+            ? productModel.value.images
+            : [ProductImages(url: productModel.value.thumbnail)],
       }
     ]);
   }
