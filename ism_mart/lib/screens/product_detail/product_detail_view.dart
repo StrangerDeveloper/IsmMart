@@ -17,7 +17,8 @@ import '../../widgets/custom_text.dart';
 class ProductDetailView extends StatelessWidget {
   ProductDetailView({super.key});
 
-  final ProductDetailViewModel viewModel = Get.put(ProductDetailViewModel());
+  final controllerTwo = Get.create<ProductDetailViewModel>(() => ProductDetailViewModel());
+  ProductDetailViewModel viewModel = Get.put(ProductDetailViewModel());
 
   @override
   Widget build(BuildContext context) {
