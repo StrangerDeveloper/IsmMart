@@ -55,8 +55,8 @@ class SettingsView extends StatelessWidget {
   Widget _accountSetup() {
     return Obx(
       () => viewModel.userDetails.value?.email == null &&
-              viewModel.userDetails.value?.token == null &&
-              authController.isSessionExpired!
+              viewModel.userDetails.value?.token == null
+              // authController.isSessionExpired!
           ? Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: Column(
