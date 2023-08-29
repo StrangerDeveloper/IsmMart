@@ -170,7 +170,9 @@ class ProductDetailViewModel extends GetxController {
         // AppConstant.displaySnackBar(langKey.errorTitle.tr, langKey.errorMsg.tr);
       }
 
-      checkCartForThisItem();
+      if(isBuyer == true){
+        checkCartForThisItem();
+      }
     }).catchError((error) {
       GlobalVariable.showLoader.value = false;
       GlobalVariable.internetErr(true);

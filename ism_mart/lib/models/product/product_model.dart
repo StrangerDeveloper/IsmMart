@@ -95,10 +95,10 @@ class ProductModel {
         description: json?['description'] ?? "",
         discountPrice: json?["discountPrice"] ?? json?["discountedPrice"],
         totalPrice: json?["totalPrice"],
-        weight: json?['weight'],
-        length: json?['length'] == null ? null : json?['length'],
-        width: json?['width'] == null ? null : json?['width'],
-        height: json?['height'] == null ? null : json?['height'],
+        weight: json?['weight'] == null ? null : json?['weight'].toDouble(),
+        length: json?['length'] == null ? null : json?['length'].toDouble(),
+        width: json?['width'] == null ? null : json?['width'].toDouble(),
+        height: json?['height'] == null ? null : json?['height'].toDouble(),
         images: productImages,
         sellerModel: json?['Vendor'] == null
             ? null

@@ -20,8 +20,13 @@ class SellerDashBoardViewModel extends GetxController with GetTickerProviderStat
   List<VendorOrder> ordersList = <VendorOrder>[].obs;
 
   @override
+  void onInit() {
+    announcementVisibility.value = GlobalVariable.userModel?.infoCompleted == 0 ? true : false;
+    super.onInit();
+  }
+
+  @override
   void onReady() {
-    print('>>>Global Value: ${GlobalVariable.userModel?.infoCompleted}');
     getStats();
     getOrders();
     scrollController.addListener(() {

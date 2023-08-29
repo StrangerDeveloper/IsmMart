@@ -48,7 +48,7 @@ class BottomNavigationView extends GetView<BaseController> {
     return CustomAppBar(
       centerTitle: false,
       leading: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 6),
+        padding: EdgeInsets.only(left: 10),
         child: buildSvgLogo(),
       ),
       searchBar: CustomSearchBar(

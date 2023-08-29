@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
-import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/no_internet_view.dart';
 import 'package:ism_mart/screens/seller_dashboard/seller_dashboard_viewmodel.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
@@ -49,55 +48,57 @@ class SellerDashboardView extends StatelessWidget {
               ),
             ],
           ),
-          Visibility(
-            visible: GlobalVariable.userModel?.infoCompleted == 0 ? true : false,
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              color: Colors.black54,
-              child: SlideTransition(
-                position: viewModel.animation1,
-                child: AlertDialog(
-                  title: FadeTransition(
-                    opacity: viewModel.animation2,
-                      child: Center(child: Text(langKey.updateInfo.tr, style: headline1,))),
-                  contentPadding: EdgeInsets.symmetric(horizontal: 25, vertical: 30),
-                  content: FadeTransition(
-                    opacity: viewModel.animation2,
-                    child: Text(
-                      langKey.updateInfoAlertMsg.tr,
-                      style: bodyText1,
-                    ),
-                  ),
-                  actions: [
-                    FadeTransition(
+          Obx(() => Visibility(
+              visible: viewModel.announcementVisibility.value,
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                color: Colors.black54,
+                child: SlideTransition(
+                  position: viewModel.animation1,
+                  child: AlertDialog(
+                    title: FadeTransition(
                       opacity: viewModel.animation2,
-                      child: TextButton(
-                          onPressed: (){
-                            viewModel.animationController1.reverse().whenComplete(() {
-                              viewModel.announcementVisibility.value = false;
-                            });
-                            viewModel.animationController1.addListener(() {
-                              viewModel.animation1.value;
-                            });
-                            },
-                          child: Text(
-                              langKey.skip.tr,
-                            style: headline4,
-                          ),
+                        child: Center(child: Text(langKey.updateInfo.tr, style: headline1,))),
+                    contentPadding: EdgeInsets.symmetric(horizontal: 25, vertical: 30),
+                    content: FadeTransition(
+                      opacity: viewModel.animation2,
+                      child: Text(
+                        langKey.updateInfoAlertMsg.tr,
+                        style: bodyText1,
                       ),
                     ),
-                    FadeTransition(
+                    actions: [
+                      FadeTransition(
                         opacity: viewModel.animation2,
                         child: TextButton(
                             onPressed: (){
-                              viewModel.announcementVisibility.value = false;
-                              Get.toNamed(Routes.vendorSignUp2);
-                            },
-                            child: Text(langKey.proceed.tr, style: headline4,),
+                              viewModel.animationController1.reverse().whenComplete(() {
+                                print('Completed');
+                                viewModel.announcementVisibility.value = false;
+                              });
+                              viewModel.animationController1.addListener(() {
+                                viewModel.animation1.value;
+                              });
+                              },
+                            child: Text(
+                                langKey.skip.tr,
+                              style: headline4,
+                            ),
                         ),
-                    ),
-                  ],
+                      ),
+                      FadeTransition(
+                          opacity: viewModel.animation2,
+                          child: TextButton(
+                              onPressed: (){
+                                viewModel.announcementVisibility.value = false;
+                                Get.toNamed(Routes.vendorSignUp2);
+                              },
+                              child: Text(langKey.proceed.tr, style: headline4,),
+                          ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
