@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ism_mart/controllers/controllers.dart';
+import 'package:ism_mart/exports/export_buyers.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/screens/vendor_signup/vendor_signup4/vendor_signup4_viewmodel.dart';
@@ -13,53 +15,56 @@ class VendorSignUp4View extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Padding(
-        padding: const EdgeInsets.only(top: 30, left: 20, right: 20),
-        child: Column(
-          children: [
-            titleAndBackBtn(),
-            subtitle(),
-            progress(),
-            SizedBox(height: 35),
-            Text(
-              langKey.waitForVerification.tr + '...',
-              style: newFontStyle3.copyWith(
-                color: newColorDarkBlack,
-              ),
-            ),
-            RichText(
-              textAlign: TextAlign.center,
-              text: TextSpan(
-                style: newFontStyle0.copyWith(
-                  color: Color(0xff667085),
-                  height: 1.5,
+    return SafeArea(
+      top: false,
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: Padding(
+          padding: const EdgeInsets.only(top: 30, left: 20, right: 20),
+          child: Column(
+            children: [
+              titleAndBackBtn(),
+              subtitle(),
+              progress(),
+              SizedBox(height: 35),
+              Text(
+                langKey.waitForVerification.tr + '...',
+                style: newFontStyle3.copyWith(
+                  color: newColorDarkBlack,
                 ),
-                children: [
-                  TextSpan(text: 'Our'),
-                  TextSpan(
-                    text: ' Vendor Management Team ',
-                    style: newFontStyle2.copyWith(
-                      fontWeight: FontWeight.w700,
-                      color: Color(0xff0E1216),
-                    ),
-                  ),
-                  TextSpan(
-                    text:
-                        'will review your profile and after approval you will receive a confirmation email of your',
-                  ),
-                  TextSpan(
-                    text: ' seller account',
-                    style: newFontStyle2.copyWith(
-                      fontWeight: FontWeight.w700,
-                      color: newColorBlue2,
-                    ),
-                  ),
-                ],
               ),
-            ),
-          ],
+              RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  style: newFontStyle0.copyWith(
+                    color: Color(0xff667085),
+                    height: 1.5,
+                  ),
+                  children: [
+                    TextSpan(text: 'Our'),
+                    TextSpan(
+                      text: ' Vendor Management Team ',
+                      style: newFontStyle2.copyWith(
+                        fontWeight: FontWeight.w700,
+                        color: Color(0xff0E1216),
+                      ),
+                    ),
+                    TextSpan(
+                      text:
+                          'will review your profile and after approval you will receive a confirmation email of your',
+                    ),
+                    TextSpan(
+                      text: ' seller account',
+                      style: newFontStyle2.copyWith(
+                        fontWeight: FontWeight.w700,
+                        color: newColorBlue2,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -84,7 +89,14 @@ class VendorSignUp4View extends StatelessWidget {
           ),
           CustomBackButton(
             onTap: () {
+              if(viewModel.fromSettings.value){
                 Get.back();
+              } else {
+                baseController.changePage(0);
+                int count = 0;
+                Get.until((route) => count++ >= 2);
+                // Get.offNamedUntil(Routes.bottomNavigation, (route) => false);
+              }
             },
           ),
         ],
@@ -108,7 +120,7 @@ class VendorSignUp4View extends StatelessWidget {
                 ),
               ),
               TextSpan(
-                text: ' ${langKey.vendor.tr} ',
+                text: ' ${langKey.profile.tr} ',
                 style: newFontStyle2.copyWith(
                   fontSize: 20,
                   color: newColorBlue,

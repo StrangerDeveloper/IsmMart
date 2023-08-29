@@ -401,6 +401,7 @@ class AddProductView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      top: false,
       child: Scaffold(
         appBar: CustomAppBar(
           title: langKey.addProduct.tr,
@@ -622,44 +623,69 @@ class AddProductView extends StatelessWidget {
   Widget selectCategoryField() {
     return Padding(
       padding: const EdgeInsets.only(top: 20.0, bottom: 15),
-      child: DropdownSearch<CategoryModel>(
-        popupProps: PopupProps.dialog(
-          showSearchBox: true,
-          dialogProps: DialogProps(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 20.0, bottom: 15),
+        child: DropdownSearch<CategoryModel>(
+          popupProps: PopupProps.dialog(
+            showSearchBox: true,
+            dialogProps: DialogProps(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+            searchDelay: const Duration(milliseconds: 0),
+            searchFieldProps: AppConstant.searchFieldProp(),
+          ),
+          items: viewModel.categoriesList,
+          itemAsString: (model) => model.name ?? "",
+          dropdownDecoratorProps: DropDownDecoratorProps(
+            baseStyle: bodyText1,
+            dropdownSearchDecoration: InputDecoration(
+              labelText: langKey.selectCategory.tr,
+              labelStyle: headline3,
+              errorBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.red.shade700,
+                  width: 1,
+                  style: BorderStyle.solid,
+                ), //B
+                borderRadius: BorderRadius.circular(8),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.black,
+                  width: 1,
+                  style: BorderStyle.solid,
+                ), //B
+                borderRadius: BorderRadius.circular(8),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.black,
+                  width: 1,
+                  style: BorderStyle.solid,
+                ), //B
+                borderRadius: BorderRadius.circular(8),
+              ),
             ),
           ),
-          searchDelay: const Duration(milliseconds: 0),
-          searchFieldProps: AppConstant.searchFieldProp(),
+          onChanged: (CategoryModel? newValue) {
+            viewModel.setSelectedCategory(category: newValue!);
+          },
+          selectedItem: viewModel.selectedCategory.value,
+          validator: (value){
+            return Validator().validateCategoryField(viewModel.selectedCategory.value);
+          },
         ),
-        items: viewModel.categoriesList,
-        itemAsString: (model) => model.name ?? "",
-        dropdownDecoratorProps: DropDownDecoratorProps(
-          baseStyle: bodyText1,
-          dropdownSearchDecoration: InputDecoration(
-            labelText: langKey.selectCategory.tr,
-            labelStyle: headline3,
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Colors.black,
-                width: 1,
-                style: BorderStyle.solid,
-              ), //B
-              borderRadius: BorderRadius.circular(8),
-            ),
-          ),
-        ),
-        onChanged: (CategoryModel? newValue) {
-          viewModel.setSelectedCategory(category: newValue!);
-        },
-        selectedItem: viewModel.selectedCategory.value,
       ),
     );
   }
 
   selectSubCategoryField() {
     return DropdownSearch<SubCategory>(
+      validator: (value){
+        return Validator().validateSubCategoryField(viewModel.selectedSubCategory.value);
+      },
       popupProps: PopupProps.dialog(
         showSearchBox: true,
         dialogProps: DialogProps(
@@ -702,7 +728,7 @@ class AddProductView extends StatelessWidget {
         label: langKey.productName.tr,
         autoValidateMode: AutovalidateMode.onUserInteraction,
         validator: (value) {
-          return Validator().validateDefaultTxtField(value);
+          return Validator().validateName(value, errorToPrompt: langKey.productNameReq.tr);
         },
         keyboardType: TextInputType.name,
       ),
@@ -724,7 +750,7 @@ class AddProductView extends StatelessWidget {
             label: langKey.prodPrice.tr,
             autoValidateMode: AutovalidateMode.onUserInteraction,
             validator: (value) {
-              return Validator().validateDefaultTxtField(value);
+              return Validator().validateDefaultTxtField(value, errorPrompt: langKey.prodPriceReq.tr);
             },
             onChanged: (value) {
               viewModel.onPriceFieldChange(value);
@@ -778,7 +804,7 @@ class AddProductView extends StatelessWidget {
         label: langKey.prodStock.tr,
         autoValidateMode: AutovalidateMode.onUserInteraction,
         validator: (value) {
-          return Validator().validateDefaultTxtField(value);
+          return Validator().validateDefaultTxtField(value, errorPrompt: prodStockReq.tr);
         },
         keyboardType: TextInputType.number,
       ),
@@ -827,7 +853,7 @@ class AddProductView extends StatelessWidget {
         prefixIcon: IconlyLight.document,
         autoValidateMode: AutovalidateMode.onUserInteraction,
         validator: (value) {
-          return Validator().validateDefaultTxtField(value);
+          return Validator().validateDefaultTxtField(value, errorPrompt: langKey.descriptionReq.tr);
         },
         keyboardType: TextInputType.text,
       ),

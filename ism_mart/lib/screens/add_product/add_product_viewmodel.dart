@@ -370,6 +370,7 @@ class AddProductViewModel extends GetxController {
   @override
   void onReady() {
     fetchCategories();
+    print('>>>Selected Category: ${selectedCategory.value.id}');
     super.onReady();
   }
 

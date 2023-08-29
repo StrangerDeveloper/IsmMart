@@ -618,7 +618,7 @@ class English {
         key.categoryReq: 'Select Category',
 
         key.productName: 'Product Name',
-        key.productNameReq: 'Product name required',
+        key.productNameReq: 'Name is required',
         key.prodPrice: 'Product Price',
         key.prodPriceReq: 'Price is required',
         key.prodStock: 'Product Stock',

@@ -1,6 +1,7 @@
 import 'dart:core';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:ism_mart/exports/exports_model.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/screens/vendor_signup/vendor_signup3/vendor_signup3_viewmodel.dart';
 
@@ -21,6 +22,24 @@ class Validator {
         return errorPrompt;
       }
     } else {
+      return null;
+    }
+  }
+
+  ///Category Field
+  String? validateCategoryField(CategoryModel category){
+    if(category.id == null || category.id == 0){
+      return langKey.categoryReq.tr;
+    } else{
+      return null;
+    }
+  }
+
+  ///Sub-Category Field
+  String? validateSubCategoryField(SubCategory subCategory){
+    if(subCategory.id == null || subCategory.id == 0){
+      return langKey.selectSubCategory.tr;
+    } else{
       return null;
     }
   }

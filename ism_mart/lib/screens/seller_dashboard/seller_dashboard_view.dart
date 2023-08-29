@@ -14,102 +14,105 @@ class SellerDashboardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          CustomScrollView(
-            controller: viewModel.scrollController,
-            slivers: [
-              SliverList(
-                delegate: SliverChildListDelegate(
-                  [
-                    orderStats(),
-                    StickyLabel(text: langKey.recentOrders.tr),
-                    kSmallDivider,
-                    listView(),
-                  ],
+    return SafeArea(
+      top: false,
+      child: Scaffold(
+        body: Stack(
+          children: [
+            CustomScrollView(
+              controller: viewModel.scrollController,
+              slivers: [
+                SliverList(
+                  delegate: SliverChildListDelegate(
+                    [
+                      orderStats(),
+                      StickyLabel(text: langKey.recentOrders.tr),
+                      kSmallDivider,
+                      listView(),
+                    ],
+                  ),
                 ),
-              ),
-              Obx(
-                () => (viewModel.showLoader.value)
-                    ? SliverFillRemaining(
-                        hasScrollBody: false,
-                        child: Container(
-                          padding: EdgeInsets.all(14),
-                          alignment: Alignment.center,
-                          child: CircularProgressIndicator(strokeWidth: 2),
+                Obx(
+                  () => (viewModel.showLoader.value)
+                      ? SliverFillRemaining(
+                          hasScrollBody: false,
+                          child: Container(
+                            padding: EdgeInsets.all(14),
+                            alignment: Alignment.center,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          ),
+                        )
+                      : SliverToBoxAdapter(
+                          child: Container(
+                            height: 50,
+                          ), // Empty container
                         ),
-                      )
-                    : SliverToBoxAdapter(
-                        child: Container(
-                          height: 50,
-                        ), // Empty container
-                      ),
-              ),
-            ],
-          ),
-          Obx(() => Visibility(
-              visible: viewModel.announcementVisibility.value,
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                color: Colors.black54,
-                child: SlideTransition(
-                  position: viewModel.animation1,
-                  child: AlertDialog(
-                    title: FadeTransition(
-                      opacity: viewModel.animation2,
-                        child: Center(child: Text(langKey.updateInfo.tr, style: headline1,))),
-                    contentPadding: EdgeInsets.symmetric(horizontal: 25, vertical: 30),
-                    content: FadeTransition(
-                      opacity: viewModel.animation2,
-                      child: Text(
-                        langKey.updateInfoAlertMsg.tr,
-                        style: bodyText1,
-                      ),
-                    ),
-                    actions: [
-                      FadeTransition(
+                ),
+              ],
+            ),
+            Obx(() => Visibility(
+                visible: viewModel.announcementVisibility.value,
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                  color: Colors.black54,
+                  child: SlideTransition(
+                    position: viewModel.animation1,
+                    child: AlertDialog(
+                      title: FadeTransition(
                         opacity: viewModel.animation2,
-                        child: TextButton(
-                            onPressed: (){
-                              viewModel.animationController1.reverse().whenComplete(() {
-                                print('Completed');
-                                viewModel.announcementVisibility.value = false;
-                              });
-                              viewModel.animationController1.addListener(() {
-                                viewModel.animation1.value;
-                              });
-                              },
-                            child: Text(
-                                langKey.skip.tr,
-                              style: headline4,
-                            ),
+                          child: Center(child: Text(langKey.updateInfo.tr, style: headline1,))),
+                      contentPadding: EdgeInsets.symmetric(horizontal: 25, vertical: 30),
+                      content: FadeTransition(
+                        opacity: viewModel.animation2,
+                        child: Text(
+                          langKey.updateInfoAlertMsg.tr,
+                          style: bodyText1,
                         ),
                       ),
-                      FadeTransition(
+                      actions: [
+                        FadeTransition(
                           opacity: viewModel.animation2,
                           child: TextButton(
                               onPressed: (){
-                                viewModel.announcementVisibility.value = false;
-                                Get.toNamed(Routes.vendorSignUp2);
-                              },
-                              child: Text(langKey.proceed.tr, style: headline4,),
+                                viewModel.animationController1.reverse().whenComplete(() {
+                                  print('Completed');
+                                  viewModel.announcementVisibility.value = false;
+                                });
+                                viewModel.animationController1.addListener(() {
+                                  viewModel.animation1.value;
+                                });
+                                },
+                              child: Text(
+                                  langKey.skip.tr,
+                                style: headline4,
+                              ),
                           ),
-                      ),
-                    ],
+                        ),
+                        FadeTransition(
+                            opacity: viewModel.animation2,
+                            child: TextButton(
+                                onPressed: (){
+                                  viewModel.announcementVisibility.value = false;
+                                  Get.toNamed(Routes.vendorSignUp2);
+                                },
+                                child: Text(langKey.proceed.tr, style: headline4,),
+                            ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-          NoInternetView(
-            onPressed: () {
-              viewModel.getStats();
-              viewModel.getOrders();
-            },
-          ),
-        ],
+            NoInternetView(
+              onPressed: () {
+                viewModel.getStats();
+                viewModel.getOrders();
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

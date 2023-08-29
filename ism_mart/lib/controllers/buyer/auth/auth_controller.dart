@@ -52,7 +52,7 @@ class AuthController extends GetxController {
     LocalStorageHelper.localStorage.listenKey(LocalStorageHelper.currentUserKey,
         (value) {
       print(">>>Listening... currentUserKey");
-      getToken();
+      // getToken();
     });
   }
 
@@ -136,14 +136,17 @@ class AuthController extends GetxController {
           var a = apiResponse.userModel!.imageUrl;
           print("image from current user $a");
           setSession(true);
-        } else
+        } else {
           setSession(false);
-
+        }
         if (apiResponse.errors != null && apiResponse.errors!.isNotEmpty) {
           setUserModel(UserModel(error: apiResponse.errors!.first));
         } else {
           setUserModel(apiResponse.userModel!);
           GlobalVariable.userModel = apiResponse.userModel;
+          GlobalVariable.userModel?.token = userToken;
+          apiResponse.userModel?.token = userToken;
+          await LocalStorageHelper.storeUser(userModel: apiResponse.userModel);
         }
       }).catchError((error) {
         isLoading(false);

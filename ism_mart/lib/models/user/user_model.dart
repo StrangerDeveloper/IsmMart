@@ -67,7 +67,7 @@ class UserModel {
         password: json["password"],
         role: json["role"],
         emailVerified: json["email_verified"],
-        infoCompleted: json['infoCompleted'],
+        infoCompleted: json["infoCompleted"],
         city: json["City"] == null ? null : CountryModel.fromJson(json["City"]),
         country: json["Country"] == null
             ? null

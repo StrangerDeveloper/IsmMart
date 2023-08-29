@@ -19,61 +19,64 @@ class LogInView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Stack(
-        children: [
-          Form(
-            key: viewModel.signInFormKey,
-            child: ScrollableColumn(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                titleAndBackBtn(),
-                Spacer(),
-                Padding(
-                  padding:
-                  const EdgeInsets.only(top: 20, bottom: 10, left: 20),
-                  child: CustomText(
-                    title: langKey.welcome.tr + '!',
-                    style: newFontStyle2.copyWith(
-                      fontSize: 20,
-                      color: newColorDarkBlack2,
+    return SafeArea(
+      top: false,
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: Stack(
+          children: [
+            Form(
+              key: viewModel.signInFormKey,
+              child: ScrollableColumn(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  titleAndBackBtn(),
+                  Spacer(),
+                  Padding(
+                    padding:
+                    const EdgeInsets.only(top: 20, bottom: 10, left: 20),
+                    child: CustomText(
+                      title: langKey.welcome.tr + '!',
+                      style: newFontStyle2.copyWith(
+                        fontSize: 20,
+                        color: newColorDarkBlack2,
+                      ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding:
-                  const EdgeInsets.only(left: 20, right: 20, bottom: 25),
-                  child: Text(
-                    langKey.seamlessShopping.tr,
-                    style: newFontStyle0.copyWith(
-                      color: newColorLightGrey2,
+                  Padding(
+                    padding:
+                    const EdgeInsets.only(left: 20, right: 20, bottom: 25),
+                    child: Text(
+                      langKey.seamlessShopping.tr,
+                      style: newFontStyle0.copyWith(
+                        color: newColorLightGrey2,
+                      ),
                     ),
+
                   ),
+                  emailTextField(),
+                  passwordTextField(),
+                  forgotPassword(),
+                  logInBtn(),
+                  or(),
+                  // googlelogInBtn(),
+                  // facebooklogInBtn(),
+                  // applelogInBtn(),
+                  Spacer(),
+                  doNotHaveAnAccount(),
+                  BecomeVendor(),
+                ],
+
 
                 ),
-                emailTextField(),
-                passwordTextField(),
-                forgotPassword(),
-                logInBtn(),
-                or(),
-                // googlelogInBtn(),
-                // facebooklogInBtn(),
-                // applelogInBtn(),
-                Spacer(),
-                doNotHaveAnAccount(),
-                BecomeVendor(),
-              ],
-
 
               ),
 
+            NoInternetView(
+              onPressed: () => viewModel.signIn(),
             ),
-
-          NoInternetView(
-            onPressed: () => viewModel.signIn(),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
