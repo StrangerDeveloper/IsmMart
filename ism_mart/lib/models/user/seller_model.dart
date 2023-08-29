@@ -29,7 +29,7 @@ class SellerModelResponse {
 }
 
 class SellerModel {
-  int? id, userId, cityId, countryId;
+  int? id, userId, cityId, countryId,category,ownerCnic;
   String? storeName, storeDesc, storeUrl, cityName;
   String? ownerName, status, visibility, address;
   num? rating;
@@ -67,11 +67,17 @@ class SellerModel {
     this.storeImage,
     this.address,
     this.user,
-    this.totalSold});
+    this.totalSold,
+    this.category,
+    this.ownerCnic,
+
+  });
 
   factory SellerModel.fromJson(JSON json) => SellerModel(
         id: json["id"],
         storeName: json["storeName"] == null ? null : json["storeName"],
+      category: json["category"] == null ? null : json["category"],
+      ownerCnic: json["ownerCnic"] == null ? null : json["ownerCnic"],
         cityName: json["cityName"] == null ? null : json["cityName"],
         cityId: json["city"] == null ? null : json["city"],
         countryId: json['country'] == null ? null : json['country'],

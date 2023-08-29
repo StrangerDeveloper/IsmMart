@@ -7,6 +7,8 @@ import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/screens/vendor_profile/vendor_profile_viewmodel.dart';
 
+import '../update_vendor_profile/update_vendor_profile_view.dart';
+
 class VendorProfileView extends StatelessWidget {
   VendorProfileView({Key? key}) : super(key: key);
   final VendorProfileViewModel viewModel = Get.put(VendorProfileViewModel());
@@ -32,7 +34,8 @@ class VendorProfileView extends StatelessWidget {
               CustomTextBtn(
                 width: Get.width * 0.5,
                 onPressed: () {
-                  Get.toNamed(Routes.vendorSignUp2);
+                  //Get.toNamed(Routes.vendorSignUp2);
+                  Get.to(() =>UpdateVendorProfileView());
                 },
                 title: langKey.updateBtn.tr,
               ),
