@@ -283,9 +283,9 @@ class English {
             '\n\t• Identify you as a user in our system through your account/personal profile or other means.'
             '\n\t• Conduct automated decision-making processes in accordance with any of these purposes.'
             '\n\t• Verify and carry out financial transactions in relation to payments you make and audit the downloading of data from our site.'
-            '\n\t\t\t We may store and process your personal information on servers located in various locations. We may also create anonymous data records from your personal information by completely excluding information that would otherwise make the data personally identifiable to you. We use this anonymous data to analyze request and usage patterns so that we may improve the content of our services and optimize site functionality.'
-            '\n\t\t\t In addition to this, we reserve the right to share anonymous data with third parties and may use it for any purpose. Users who have had good experiences with our products and services may provide us with testimonials and remarks. We might publish such material. We may use our users’ first and last names to identify them when we post such content. Prior to publishing this data along with the testimonial, we will obtain the user’s consent.'
-            '\n\t\t\t We will use this information for any other purpose to which your consent has been obtained; and to conduct automated decision-making processes in accordance with any of these purposes',
+            '\n\t\t\tWe may store and process your personal information on servers located in various locations. We may also create anonymous data records from your personal information by completely excluding information that would otherwise make the data personally identifiable to you. We use this anonymous data to analyze request and usage patterns so that we may improve the content of our services and optimize site functionality.'
+            '\n\t\t\tIn addition to this, we reserve the right to share anonymous data with third parties and may use it for any purpose. Users who have had good experiences with our products and services may provide us with testimonials and remarks. We might publish such material. We may use our users’ first and last names to identify them when we post such content. Prior to publishing this data along with the testimonial, we will obtain the user’s consent.'
+            '\n\t\t\tWe will use this information for any other purpose to which your consent has been obtained; and to conduct automated decision-making processes in accordance with any of these purposes',
         key.privacyBody3: '',
         key.privacyBody4:
             'ISMMART Stores receive and store data you give us through your account profile when using our services.',
@@ -550,7 +550,8 @@ class English {
         key.connectionError: 'Error establishing connection. Try again.',
         key.enableLocation: 'Enable Location.',
         key.locationAccessDenied: 'Location access denied',
-        key.locationAccessPermanentlyDenied: 'Location access permanently denied',
+        key.locationAccessPermanentlyDenied:
+            'Location access permanently denied',
         key.couldNotGetLocation: 'Could not get location. Try again.',
         key.productExists: 'Product already exists',
 
@@ -701,115 +702,164 @@ class English {
             'ISMMART is a unique platform which offers 100 percent security to both the buyer and the vendor. \nIt provides a virtual space to display, market and sell your products or services under one platform unlike stores that offer only products selling.\nFor buyers, it is an exclusive forum where they can shop with confident that their money will not be wasted. Our unique return policy ensures that no fraudulent activity happens with the buyer or seller. We have devised different subscription/membership offers for vendors of different categories.',
 
         ///Terms And Conditions
-        key.tCHeader1: '1. Introduction',
-        key.tCBody1:
-            'Welcome to ISMMART Stores, also hereby known as “we” and “us”. These terms and conditions govern your access to and use of our online platform/site, as well as any associated websites, apps, services, or resources. You acknowledge that you have read, understand, and agree to the terms and conditions listed below before using the ISMMART Stores. These terms and conditions may be changed, modified, added, or removed at any moment without previous notice by ISMMART Stores. If no further notification is given, changes become effective when they are posted on the website.',
-        key.tCHeader2:
-            '2. How the contract is formed between you and ISMMART Stores?',
-        key.tCBody2:
-            '• After placing an order, you will receive online notification from us acknowledging that we have received your order. Please note that this does not mean that your order has been accepted. Your order constitutes an offer to us to buy a product. All orders are subject to acceptance by us. The contract will only be formed when you receive the products ordered via this platform. \n • The contract will relate only to those Products which you receive. A contract for any other products which may have been part of your order will be formed when you receive those other.',
-        key.tCHeader3: '3. Your account',
-        key.tCBody3:
-            '• To access certain services offered by the platform, we may require that you create an account with us or provide personal information to complete the creation of an account.'
-                '\n• You are responsible for maintaining the confidentiality of your user identification, password, account details and related private information. You acknowledge that you have this obligation to maintain the security of your account at all times and to take all reasonable precautions to prevent unauthorized use of your account. You should inform us immediately if you have any reason to believe that your password has become known to anyone else, or if the password is being, or is likely to be, used in an unauthorized manner. You understand and agree that any use of the website, any related services provided, and/or any access to confidential data, information, or communications made possible through the use of your account and password shall be deemed to have been made by you, or as the case may be, to have been made by someone authorized by you.'
-                '\n• In case of breach or any serious violation of these terms and conditions, we reserve the right to invalidate the username and/or password after serving notice and providing reasonable time to rectify the same or make amends as per terms of this contract.',
-        key.tCHeader4: '4. Your status',
-        key.tCBody4:
-            'By placing an order through our site/platform, you warrant that:'
-                '\n• You are legally capable of entering into binding contracts.'
-                '\n• You are at least 18 years old.'
-                '\n• You are not resident in a country where making a payment to our site, in line with these terms and conditions would breach any law.',
-        key.tCHeader5: '5. Delivery of Products',
+        key.tCHeader1: '',
+        key.tCBody1: 'All of the references, forms, policies, and regulations detailed in these Terms, or available via the Platform or any connected hyperlink (collectively the "Terms"), govern your utilization of ISMMART Group of Industries (Private) Limited websites and mobile applications (hereafter referred to as the “Platform”). The "Services" our Platform provides include, but are not limited to, the Platform itself and all services provided by the Platform or by ISMMART which are accessible via the Platform. Additionally, all newly-added features included with the Services shall be subject to these Terms. They dictate the conditions for your utilization of the Services given by ISMMART.'
+            '\nIt is important to give careful consideration to the terms of this agreement. Should you decide to access and utilize the platform, it will be understood that you have read, understood, and accepted the terms of this agreement as well as agreeing to the handling of your personal data in accordance with the terms set out in the Privacy Policy (https://ismmart.com/privacypolicy). Should you disagree with the conditions of the agreement, we kindly ask that you refrain from accessing or using the platform or its services.'
+            '\nIndividuals who have attained the age of eighteen are authorized to utilize the Platform, as well as any existing corporate entities, such as companies. In instances where it is applicable, these Terms must be in accordance with local laws.'
+            '\nAnyone under the age of 18 must get consent from their parent or legal guardian before they can use the Platform. By agreeing to these Terms, the parent or legal guardian will take responsibility for the actions and payments of the user. If consent has not been obtained, the user must cease using the Platform without delay.'
+            '\nISMMART has the right to engage third parties to do ongoing Background Checks on you, and these can include investigations of any sanctions, legal disputes, or adverse news connected to you. If ISMMART does not approve of the Background Check results, your account may be cancelled and you may no longer be able to use the Platform.'
+            '\nThe ISMMART retains the ability to amend these Terms (as well as any additional regulations or policies included on the Platform) at any given moment. It is suggested that you regularly look over the Terms, and by carrying on your utilization of the Platform after the date of the revised Terms being uploaded, you are assumed to have given consent to them, regardless of whether or not you have read them.'
+            '\nPictures and visuals of the items exhibited on the Platform are exclusively for reference and may be diverse from the actual Goods.',
+        key.tCHeader2: '1. ISMMART',
+        key.tCBody2: '1.1. Who we are?'
+            '\nDepending on the region of the world from which this Platform is utilized, the Terms of Agreement between you and ISMMART may vary.'
+            '\n1.2. What we do?'
+            '\nThrough our platform, ISMMART offers a link to different vendors so that customers may purchase a selection of goods, including ready-made meals, catering, beverages, raw ingredients, and various non-food items. When you make a purchase (referred to as an “order”), ISMMART works as an agent for the vendor, assisting in the order and subsequent delivery. Our vendors can either be third-party vendors, affiliates, or part of our own company. Where the vendor is third-party, we are licensed to receive payment and GST (if applicable to GST-registered vendors) on their behalf.'
+            '\n1.3. How to contact us?'
+            '\nOur customer support team is available to assist you through our customer support number or via the support@ismmartindustries.com email.',
+        key.tCHeader3: '2. Use of the Platform and ISMMART Account',
+        key.tCBody3: '2.1. In order to use ISMMART, you must create an account. During registration, you will be asked to enter some of your personal details, such as an email address, mobile number, and a private password. To buy something from the platform, you might be asked to provide your credit card details, depending on your payment method. It is essential that you keep your password a secret and that you are solely responsible for its safety. Unless the cause of fraud or abuse can be traced to something else, you are held accountable for all transactions made on your ISMMART account.'
+            '\n2.2. ISMMART will not take responsibility for any Orders that have issues in delivery resulting from any incorrect, missing, or incomplete data provided by you. It is essential that all details be precise, authentic, and accurate for the efficient handling of the Order, particularly your delivery address and contact information.'
+            '\n2.3. To remove your ISMMART account, please send us an email to ask for it. We may need to restrict, suspend, or end your account or using the Platform if we believe it is necessary.'
+            '\n\t\t2.3.1. It appears that somebody other than you is utilizing your ISMMART account.'
+            '\n\t\t2.3.2. If we suspect or find that you have participated in any actions or practices which go against these Terms, our policies and instructions, or are involved in something which we individually judge as misusing the Platform, then it shall be considered a violation.'
+            '\n\t\t2.3.3. The continual failure to meet the standards of the Background Checks cannot be tolerated.',
+        key.tCHeader4: '3. Restrictions',
+        key.tCBody4: '3.1. Activities Prohibited on the Platform'
+            '\nBelow is a short collection of activities that are either against the law or disallowed by ISMMART on its Platform. In case someone partakes in any of these disallowed activities, as determined solely by ISMMART, an inquiry will be conducted and legal action may be taken. Examples of the forbidden practices include, but are not limited to the following:'
+            '\n\t\t3.1.1. The Platform cannot be used for any activity that goes against the local, state, or federal regulations, particularly any intention that is deceptive, fraudulent, or deceptive in nature.'
+            '\n\t\t3.1.2. Posting any material that breaches the proprietary rights, private liberties, exposure rights, trade secret entitlements, or any other privileges of anyone.'
+            '\n\t\t3.1.3. Posting any content that is viewed as unlawful, crude, slanderous, menacing, hostile, offensive, libelous, detestable, or mortifying to any individual or organization, as determined solely by ISMMART or in keeping with local norms.'
+            '\n\t\t3.1.4. Publishing material that ISMMART has identified as cyberbullying, using their sole judgement.'
+            '\n\t\t3.1.5. Posting of material that portrays risky and potentially life-threatening behavior is strictly prohibited.'
+            '\n\t\t3.1.6. Refrain from sharing any individuals telephone numbers, street addresses, or last names.'
+            '\n\t\t3.1.7. Submitting web links to external sites, as well as any kind of HTML or programming code, is not allowed.'
+            '\n\t\t3.1.8. Posting anything that ISMMART views as "spam", as is solely determined by the company.'
+            '\n\t\t3.1.9. Impersonating someone else while putting out content online.'
+            '\n\t\t3.1.10. Obtaining information such as email addresses from others without authorization is not permitted.'
+            '\n\t\t3.1.11 Not permitting any individual or entity to employ your authentication for displaying or viewing comments.'
+            '\n\t\t3.1.12. harassing, threatening, stalking, or abusing any person on the Platform.'
+            '\n\t\t3.1.13. Doing anything that would impede someone else from using or taking advantage of the Platform, or putting ISMMART, its clients, suppliers, or other parties in harms way, either in the opinion of ISMMART or otherwise, is strictly prohibited.'
+            '\n\t\t3.1.14 Discouraging anyone from taking part in activities that are forbidden by these guidelines.'
+            '\n3.2. ISMMART possesses the authority, although not obliged, to do one or more of the following'
+            '\n\t\t3.2.1. Upon being made aware of any claim that any content on the Platform is not in accordance with these Terms, it shall be within the exclusive purview of the Platform to probe into the allegation and make the decision to either delete the content or demand that the content be taken down.'
+            '\n\t\t3.2.2. All content which violates the Terms must be removed, including any content which is illegal, disruptive, or abusive.'
+            '\n\t\t3.2.3. In the event of any violation of these Terms, we reserve the right to suspend or terminate a users access to the Platform or their ISMMART account.'
+            '\n\t\t3.2.4. supervise, revise, or make public any material present on the Platform;'
+            '\n\t\t3.2.5. The Platform has the right to edit or erase any content shared, regardless of whether it abides by these guidelines.',
+        key.tCHeader5: '4. Intellectual Property',
         key.tCBody5:
-            'In the case of products, your order will be fulfilled/made ready for receipt (as applicable) within a reasonable time of the date indicated at the time of ordering, unless there are exceptional circumstances.',
-        key.tCHeader6: '6. Warranty',
-        key.tCBody6:
-            'We warrant to you that any product purchased from us through our site will, on delivery, conform to its description, be of satisfactory quality, and be reasonably fit for all the purposes for which products of that kind are commonly supplied. All other warranties, conditions or terms relating to fitness for purpose, merchantability, satisfactory quality or condition whether implied by stature or common law are excluded in so far as permitted by law.',
-        key.tCHeader7: '7. Cancellation rights',
-        key.tCBody7:
-            '• In the case of products, if you are contracting as a consumer, you have a right to cancel your product order for any reason and receive a full refund. You will receive a full refund of the price paid for the products (excluding shipping costs). Your right to cancel a contract relating to the purchase of a product starts from the date when you receive the Product (when the contract is formed). If the products have been delivered to you, you may cancel at any time as per the Return Policy. In the event that you received a product that is damaged on delivery then please inform us in writing as soon as possible. If a product is returned to us damaged and you have not informed us that the product was damaged when you received it then we may refuse your right to cancel or receive.'
-                '\n• You will not have any right to cancel a contract for the supply of any made-to-order or personalized products, periodicals or magazines, perishable goods, or software, DVDs or CDs which have had their security seal opened.'
-                '\n• In the case of products, to cancel a contract, you must inform us in writing. If the products have been delivered to you, you must also return the products to us as soon as reasonably practicable, and at your own cost. You have a legal obligation to take reasonable care of the products while they are in your hands.',
-        key.tCHeader8: '8. Transfer of rights and obligations',
-        key.tCBody8:
-            '• We may transfer our rights and obligations under these terms and conditions to another organization, but that will not affect your rights or our obligations under the contract.'
-                '\n• You may only transfer your rights and obligations under your contract with us if we agree to this in writing.',
-        key.tCHeader9: '9. Price',
-        key.tCBody9:
-            '• Price of the products and our delivery charges will be as quoted on our platform/site from time to time, except in cases of obvious.'
-                '\n• Product prices include GST/FED/VAT, where applicable. However, if the rate of GST/FED/VAT changes between the date of your order and the date of delivery, we will adjust the price accordingly.'
-                '\n• Product prices and delivery charges are liable to change at any time, but changes will not affect orders for products which you then take steps to fulfil/receive within a reasonable time.',
-        key.tCHeader10: '10. Refunds',
-        key.tCBody10:
-            'If an order is cancelled in accordance with paragraph 6 above, then we will refund the amounts owed in accordance with our Refund Policy.',
-        key.tCHeader11: '11. How we use your information?',
-        key.tCBody11:
-            'Please read the Privacy Policy for details on how we will use your information. By agreeing and accepting these terms and conditions you hereby agree and accept the terms of our Privacy Policy.',
-        key.tCHeader12: '12. Our liability to a Business',
+            'All trademarks, logos, images, and service marks, including these Terms as displayed on the Platform or in our marketing material, whether registered or unregistered, are the intellectual property of ISMMART and/or third parties who have authorized us with their use (collectively, the “Trademarks”). You may not use, copy, reproduce, republish, upload, post, transmit, distribute, or modify these trademarks in any way without our prior express written consent. The use of the trademarks on any other website not approved by us is strictly prohibited. ISMMART will aggressively enforce its intellectual property rights to the fullest extent of the law, including criminal prosecution. ISMMART neither warrants nor represents that your use of materials displayed on the Platform will not infringe the rights of third parties not owned by or affiliated with ISMMART. Use of any materials on the platform is at your own risk.',
+        key.tCHeader6: '5. Restrictions on Goods',
+        key.tCBody6: '5.1. Our platform sells a range of products, a few of which are restricted by laws and regulations of the country from which they are bought. This may include an age restriction for cigarettes, tobacco, and other items which we can decline to provide based on the statutory standards active at that time. When you purchase these goods, you are confirming that you satisfy the legal qualifications to buy them.'
+            '\n5.2 Cigarettes/Tobacco Products (“Tobacco”)'
+            '\nWe may, where permitted by law, supply Tobacco on some of our Platforms. We are not trying to advance, support, or persuade the purchase or utilization of Tobacco in any capacity. Only people of the lawfully established age can buy Tobacco. ISMMART, the Vendor, and the delivery personnel have the authority to reject an order in their exclusive discretion.'
+            '\n\t\t5.2.1. Before dispensing Tobacco, it is necessary to obtain proper documentation to verify age, such as an identification card.'
+            '\n\t\t5.2.2. Proof of legal age must be presented in order to accept the delivery; failure to do so will result in refusal of delivery.'
+            '\n\t\t5.2.3. No individual will be granted the delivery of any items, regardless of the rationale.'
+            '\n\t\t5.2.4. Any proposal for Tobacco on the Platform will be deemed invalid in the event that it is illegal.',
+        key.tCHeader7: '6. Orders',
+        key.tCBody7: '6.1. Once an Order is placed through ISMMART, you will be provided with a confirmation email containing the Order receipt. This receipt will also cover any relevant delivery fees or taxes such as GST.'
+            '\n6.2. Our Vendors require a set minimum order value to be reached before an Order can be completed and shipped to you. If an Order fails to meet the set minimum order value, you may choose to pay the remaining amount needed to fulfill the minimum order value, or add additional Goods to the Order.'
+            '\n6.3. ISMMART and the Vendor will make every effort to honor your special instructions for an Order. Nonetheless, in situations where it is not feasible, plausible, or practical, ISMMART and/or the Vendor will proceed with creating the Order according to typical practices. Neither ISMMART nor the Vendor shall be obligated to compensate for or replace an Order that fails to meet the individual requests specified by you.'
+            '\n6.4. ISMMART has no obligation to disclose the ingredients or allergens used in the Goods featured on the Platform. We do not ensure the Goods are allergen-free unless the law states otherwise. Therefore, those with allergies, adverse reactions to certain foods, or particular dietary needs must consult with the Vendor before making a purchase on our Platform.'
+            '\n6.5. It is imperative to remember that your Order could be subjected to extra stipulations given by the Vendor.'
+            '\n6.6. Prior to placing the Order'
+            '\n\t\t6.6.1. To be able to view Vendors available for delivery in your area, it is essential for you to provide the delivery address.'
+            '\n\t\t6.6.2. After you choose a Vendor, you will be guided to their menu page, from which you can choose and add the desired products to the cart.'
+            '\n6.7. Placing the Order'
+            '\n\t\tTo successfully place an Order, kindly observe the prompts displayed when you press "Checkout". You might have to offer extra information in order for us to conclude the Order. Ensure that all the information given, including the costs, delivery particulars, personal particulars, payment data, and voucher codes (if pertinent) are precise, accurate, and finished before you hit “PLACE ORDER”. When you get an email acknowledgment having your Order receipt from us, you will have successfully placed your Order.'
+            '\n6.8. Cancelling an Order'
+            '\n\t\tTo withdraw your Order once it has been submitted, visit the Assistance Centre on the Platform. If the Vendor has not yet accepted the Order, you may still exercise your right to cancel.'
+            '\n6.9. Refunds'
+            '\n\t 6.9.1. Online Payment Orders'
+            '\n\t\tYou may be granted a refund if you cancel your Order before it has been accepted by the Vendor; yet, if the Vendor has already accepted your Order and you decide to cancel, you will not receive a refund in whole or in part and you will forfeit the delivery of your cancelled Order.'
+            '\n\t 6.9.2. Cash-on-Delivery Orders'
+            '\n\t\tYour ability to cancel your Order is limited to those orders that have not been accepted by a Vendor. If you opt to withdraw an Order that has been approved, you are not eligible for any cash-on-delivery reimbursements and delivery of your cancelled Order is also forfeited. This particular refund option does not apply when working with our affiliate delivery partners.'
+            '\n\t\tBefore processing any type of refund, we may need to request extra information or documents that serve as proof of a physical receipt of accepted Orders. Should you fail to provide us with the asked details or records, we have the right to reject the request for the refund.'
+            '\n\t\tIn the event that you do not get the refund, we recommend that you double-check your bank account, get in touch with your bank or credit card company, as it can take some time for the amount to be refunded. If the previously mentioned methods are followed and you still do not get the refund, please get in touch with our customer support team using one of the communication methods in Clause 1.3.'
+            '\n6.10. If ISMMART has a good faith belief that there has been fraudulent activity connected to your ISMMART account, your Order, or both, it reserves the right to cancel any Order, suspend, deactivate, or terminate your ISMMART account.',
+        key.tCHeader8: '7. Prices and Payments',
+        key.tCBody8: '7.1. The rates stated on the Platform shall be given in local money, with any required tax included. You acknowledge that the charges and proposals on the Platform could be distinct from the costs and deals available from our Suppliers in other locations (like their own websites, mobile apps, or physical stores).'
+            '\n7.2. The prices of the Goods that we show on our Platform can fluctuate contingent on the Vendor, and, if required by applicable legislation, they can also differ.'
+            '\n\t\t7.2.1. Vendors who are registered with the Goods and Services Tax shall be required to include such tax, or any other applicable equivalent.'
+            '\n\t\t7.2.2 For Vendors who have not registered for the Goods and Services Tax, no such taxes are to be included.'
+            '\n7.3. For every Order placed, a delivery fee will be incurred unless the following conditions are met'
+            '\n\t\t7.3.1. you have a valid promotional or discount voucher and apply it at checkout; or'
+            '\n\t\t7.3.2. it is stated otherwise.'
+            '\n7.4.  At the time of placing each order, the prices and other fees (such as delivery, minimum order or service fees) as displayed on the Platform may be subject to variation.'
+            '\n7.5. Before confirming the checkout, you will be given an overview of the prices, delivery fees, and other related costs. Once you place the order, you agree to the totals as well as the extra fees, all of which have been provided for you.'
+            '\n7.6. You are given the choice of several payment options when paying for an Order through the Platform, such as Master Card, Visa Card, or Cash-on-Delivery.'
+            '\n7.7. Your ISMMART account can provide a way to cover some or all of the expenses for your order, should there be any available credits or valid promotional or discount vouchers.'
+            '\n7.8. After an Order is successfully placed, you will receive an email confirmation from us with your Order receipt.'
+            '\n7.9. Payment Methods: ISMMART holds the authority to present more payment methods and/or withdraw current payment systems whenever it decides. When you opt to pay via a web payment system, the remittance will be managed by our third-party payment supplier(s). Upon your agreement, your credit card / payment information will be kept with our third-party payment supplier(s) for potential transactions. ISMMART does not store any of your credit card or payment information.'
+            '\n7.10 To ensure a successful payment of your Order, please make sure that you have enough money available on your debit or credit card. If needed, ISMMART is responsible for all payments on our Platform, including returns, chargebacks, annulments, and resolving any disputes as long as they are fair and in line with the terms and conditions of our website.',
+        key.tCHeader9: '8. Delivery and Partner Delivery',
+        key.tCBody9: '8.1. Delivery Areas'
+            '\n\t It is clear that our Vendors range of Goods is specific to each delivery area, and they differ from area to area. If you enter your delivery address in the Platform, you can check out the Vendors that are available to you then. Note that delivery areas are subject to change due to the effects of weather, traffic, and force majeure.'
+            '\n8.2. Delivery Time'
+            '\n\t ISMMART shall deliver your Order to the given address. We will send an approximate delivery date to your email; however, due to external factors that we are unable to control (e.g. quantity of order, location, time of day, weather conditions, traffic conditions, etc.), the actual delivery time may differ from the estimate. We recommend that either you or someone you trust is present at the delivery location when the Order arrives. In the event that the Order contains Tobacco (if applicable) and the recipient is below the legal age or fails to provide proper identification, ISMMART has the right to refuse delivery.'
+            '\n8.3. Unsuccessful or Failed Deliveries'
+            '\n\t 8.3.1. Despite any other stipulations present in these Terms, in the event that we make an effort to furnish an Order, yet, are unsuccessful due to conditions induced by you, for example, but not restricted to:'
+            '\n\t\t(i) no one was present or available to receive the Order;'
+            '\n\t\t(ii) customer was uncontactable despite attempts to reach the customer via the phone number provided;'
+            '\n\t\t(iii) lack of appropriate or sufficient access to deliver the Order successfully;'
+            '\n\t\t(iv) lack of a suitable or secure location to leave the Order; or'
+            '\n\t\t(v) in the case of Restricted Goods, customer did not meet the statutory age requirements or delivery did not deem it safe or appropriate for the customer to receive the Restricted Goods.'
+            '\n\t\tISMMART holds the privilege of canceling the order without granting you a reimbursement or solution if contact with you is unsuccessful via means such as a call, message, or email to inform of delivery issues and the following measures.'
+            '\n\t 8.3.2. No-show Cancellations'
+            '\n\t\tIn the event of your unavailability or incapability of receiving the Order within a span of 10 minutes of it arriving at the delivery address, ISMMART will be authorized to cancel the Order without offering any reimbursement or alternative.'
+            '\n8.4. Wrong Order, Missing Items, Defective Goods'
+            '\n\t If after receiving your Order, it is found that there are issues (e.g., incorrect order, defective order, or missing items), kindly reach out to our customer support using one of the available communication methods mentioned in Clause 1.3 of our policy. On some occasions, ISMMART may require photographic evidence and further details to completely analyze the issue with your order. Should it be established that the order and/or products delivered are of subpar condition or quality, we will give compensation for the order or some of its elements.'
+            '\n8.5. Partner Delivery'
+            '\n\t At times, orders may be delivered to you through one of our partners (“Partner Delivery”). Although we do our best to give you prior warning regarding partner delivery, that might not always be achievable. When partner delivery is utilized, you might be requested to get in touch with the partner directly if there are issues or hold-ups with your delivery. ISMMART will not be liable in any way for orders or products delivered by partners.',
+        key.tCHeader10: '9. Vouchers, Discounts and Promotions',
+        key.tCBody10: '9.1. ISMMART occasionally launches marketing and promotional activities featuring voucher codes, discounts, and other offers for the Platform (referred to as "Vouchers"). Vouchers come with time limits, redemption windows, use limits, availability, and other criteria.'
+            '\n9.2. Vouchers cannot be combined with other deals, discounts, or coupons for use.'
+            '\n9.3. Unless there is a stipulation that suggests otherwise, Vouchers may only be used within our Platform.'
+            '\n9.4. Vouchers are neither transferrable nor exchangeable, non-refundable, and can not be exchanged for any type of monetary compensation.'
+            '\n9.5. ISMMART reserves the right to make changes to any relevant conditions regarding the Vouchers without prior warning. They may even revoke, discontinue, or decline the use of a Voucher without advance notice.'
+            '\n9.6. At any point in time, ISMMART may, completely at their discretion, choose to void, reject, and/or bar you or particular Vendors from using Vouchers without previous notification.',
+        key.tCHeader11:
+            '10. Representations, Warranties and Limitation of Liabilities',
+        key.tCBody11: '10.1 Representations and Warranties'
+            '\n\t You agree that all content on the Platform is "as is" and "as available" and you understand that any access or utilization of the Platform and any associated products, goods, and services is at your own risk.'
+            '\n\t Furthermore, all product images are just for representation and could look differently than the actual product. ISMMART makes every effort to keep the Platform accessible and functioning, however, they cannot guarantee the service is secure, timely, without errors, technical issues, or viruses. Temporary service outages can be expected due to system maintenance or force majeure events'
+            '\n10.2 Limitation of Liability'
+            '\n\t As stipulated by the law, ISMMART (along with its staff, supervisors, representatives, associates, and mother or father firm) disclaims all responsibility (regardless of whether developing from an arrangement, in carelessness or otherwise) for misfortune or harm that you or some other individual may go through in association with our Platform, Services, and any connected sites, alongside any substance or material posted there. Your exclusive choice in regards to the utilization of the Platform is to stop such use. The ISMMART organizations, their operators, representatives, and service suppliers wont be answerable for any circuitous, extraordinary, coincidental, backhanded, or incredible harms emerging from your utilization of the Platform or for any other claim in any capacity identified with your utilization of the Platform.These dismissals of circuitous, uncommon, backhanded, and extraordinary harms incorporate, without limitation, harms for lost benefits, lost information, misfortune of benevolence, work interruption, PC disappointment, or deficiency, or some other business harms or misfortunes, regardless of whether the ISMMART substances, their operators, representatives, and service suppliers had been educated regarding the probability thereof and independent of the lawful or equivalent theory on which the claim depends.Since certain states or purviews do not permit the preclusion or the impediment of risk for backhanded or accidental harms, in such states or purviews, ISMMART, the ISMMART elements, its operators, delegates and service suppliers risk shall be limited to the degree allowed by the law.'
+            '\n10.3 Vendor’s representations'
+            '\n\t ISMMART shall not be held responsible for either your or the Vendors actions in regards to the Goods delivered; furthermore, they do not take responsibility for the quality, condition or any other attribute of the Goods or services, or guarantee the accuracy of any menu information, photos, and/or images displayed on the Vendors listing/offering. It is to be noted, however, that no clauses within these Terms of Service absolve the Vendor from liability in cases of death or personal injury resulting from their own negligence or malicious behavior.',
+        key.tCHeader12: '11. Vendor Liability',
         key.tCBody12:
-            '• If we fail to comply with these terms and conditions, we shall only be liable to you for the purchase price of the products and not any losses that you will suffer as a result of our failure to comply (whether arising in contract, delict (including negligence), breach of statutory duty or otherwise).'
-                '\n• We will not be liable for losses that result from our failure to comply with these terms and conditions that fall into the following categories even if such losses were in our contemplation as at the date that the contract constituted by these terms and conditions was formed between us of being a foreseeable consequence of our breach.'
-                '\n• Loss of income or revenue.'
-                '\n• Loss of business. '
-                '\n• Loss of profits.'
-                '\n• Loss of anticipated savings'
-                '\n• Loss of data'
-                '\n• Waste of management or office'
-                '\nNote: This paragraph does not apply if you are contracting as a consumer.',
-        key.tCHeader13: '13. Our liability to a Consumer',
+            'The vendors have the complete accountability for the preparedness, condition, and caliber of the products sold to you. In the case of third-party deliveries, these partners are in charge of transporting the items and/or orders. ISMMART has no duty for any deficit, harm, expenditure, charge, or penalty that may come from the contractual bond with the partner.',
+        key.tCHeader13: '12. Personal Data (Personal Information) Protection',
         key.tCBody13:
-            '• If we fail to comply with these terms and conditions, we are responsible for loss or damage you suffer that is a foreseeable result of our breach of the terms and conditions or our negligence. Loss or damage is foreseeable if it was an obvious consequence of our breach or it was otherwise contemplated by you and us at the time we entered into the relevant.'
-                '\n• We only supply the products to you for domestic and private use. You agree not to use the product for any commercial, business or re-sale purposes, and we have no liability to you for any loss of profit, loss of business, business interruption, or loss of business.'
-                '\nNote: This paragraph does not apply if you are contracting as a business.',
-        key.tCHeader14: '14. Our contract with you if you are a Business',
-        key.tCBody14: '• These terms and conditions and any document expressly referred to in them constitute the whole agreement between us and supersede all previous discussions, correspondence, negotiations, previous arrangement, understanding or agreement between us relating to the subject matter hereof.'
-            '\n• We each acknowledge that, in entering into a contract, neither of us relies on, or will have any remedies in respect of, any representation or warranty (whether made innocently or negligently) that is not set out in these terms and conditions.'
-            '\n• Each of us agrees that our only liability in respect of those representations and warranties that are set out in this agreement (whether made innocently or negligently) will be for breach of contract.'
-            '\n• Nothing in this paragraph limits or excludes any liability.'
-            '\nIf you are contracting as a consumer, this paragraph does not apply',
-        key.tCHeader15: '15. Our contract with you if you are a consumer',
+            'By accepting these Terms, you are giving your express approval for ISMMART and its related companies to gather, use, process and divulge your Personal Data, as specified in our Privacy Policy. This document is attached as part of these Terms and is available for viewing at (https://ismmart.com/privacypolicy) or from the links on our Platform.',
+        key.tCHeader14: '13. Indemnity',
+        key.tCBody14: '13.1 use of the Platform;'
+            '\n13.2 use of the Services; or'
+            '\n13.3 breach of these Terms.',
+        key.tCHeader15: '14. Third Party Links and Websites',
         key.tCBody15:
-            'If you are contracting as a consumer, we intend to rely upon these terms and conditions and any document expressly referred to in them in relation to the subject matter of any contract. While we accept responsibility for statements and representations made by our duly authorized agents, please make sure you ask for any variations from these terms and conditions to be confirmed in writing.'
-                '\nNote: If you are contracting in the course of business, this paragraph does not apply.',
-        key.tCHeader16: '16. Notices',
+            'We cannot take responsibility for any damage or loss you may incur from clicking on third party links that are included on the Platform. These links may take you to products, websites, services and offers not owned or managed by us. We cannot vouch for the content, functionality, security, services, privacy policies, or any other aspect of these third party websites. Thus, we cannot be held liable for any loss or damage related to your access and use of these third party links.',
+        key.tCHeader16: '15. Termination',
         key.tCBody16:
-            '• Any notice to be sent by you or by us in connection with these terms and condition can be sent by letter or by email. Notices to us should be sent to one of the following addresses:'
-                '\n > 2nd Floor, Emirates Tower, F7 Markaz, Islamabad.'
-                '\n > Email: businesses@shaukatmarwatgroup.com'
-                '\n• We will send notices to you by email to the email address that you supplied at the time of signing up to our platform'
-                '\n• Either of us can change the address for notices by telling the other in writing the new address, but the previous address will continue to remain valid for 7 days after the change is made.',
-        key.tCHeader17: '17. Third party rights',
+            'ISMMART holds the authority to deactivate, suspend, or cancel your account and also to forbid your access to or use of the Platform, which also encompasses any type of delivery service given to you regarding an Order. This can be due to any number of reasons, such as, but not restricted to, if ISMMART deems your usage to be inadequate, or the results of Background Checks to be unsatisfactory, or perceives or finds out that you are associated with any kind of activity or conduct that contravenes the Terms. ISMMART might, but is not required to, alert you in advance of restricting your use of the Platform.',
+        key.tCHeader17: '16. Amendments',
         key.tCBody17:
-            'A person who is not party to these terms and conditions or a contract shall not have any rights under or in connection with them.',
-        key.tCHeader18: '18. Waiver',
+            'At any point in time, ISMMART reserves the right to revise the present Terms at its discretion. Such amendments come into effect as soon as they are published on the website, within the boundaries of applicable legislation. Consequently, it is your duty to ensure that you are familiar with the current version of the Terms. If you are unhappy with the amendments, whether in full or in part, you must refrain from using the Platform immediately.',
+        key.tCHeader18: '17. Severability',
         key.tCBody18:
-            'The failure of either party to exercise or enforce any right conferred on that party by these terms and conditions shall not be deemed to be a waiver of any such right or operate to bar the exercise or enforcement thereof at any time or times thereafter. No waiver by us of any of these terms and conditions will be effective unless it is expressly stated to be a waiver and is communicated to you in writing in accordance with paragraph 16 above.',
-        key.tCHeader19: '19. Severability',
+            'Should any portion of these Terms be deemed unlawful by any competent court of jurisdiction, the remaining stipulations shall remain intact. Furthermore, a waiver of any provision of these Terms shall not be construed as a subsequent or continuing waiver of the said or any other provision.',
+        key.tCHeader19: '18. Governing Law',
         key.tCBody19:
-            'If any court or competent authority decides that any of the provisions of these terms and conditions or any provisions of a contract are invalid, unlawful or unenforceable to any extent, the term will, to that extent only, be severed from the remaining terms, which will continue to be valid to the fullest extent permitted by law.',
-        key.tCHeader20: '20. Force majeure',
+            'The legislation of the nation wherein the applicable ISMMART establishment is established shall have authority over and shape the understanding of these Terms.',
+        key.tCHeader20: '19. Contact US',
         key.tCBody20:
-            'We reserve the right to defer the date of delivery or to cancel a contract for all circumstances beyond its reasonable control, including but not limited to any strike, lockout, disorder, fire, explosion, accident or stoppage of or affecting our business or work and which prevents or hinders the delivery of the goods or the performance of service.',
-        key.tCHeader21: '21. Law and jurisdiction',
-        key.tCBody21: 'These terms and conditions and any dispute or claim arising out of or in connection with them or their subject matter or formation (including non-contractual disputes or claims) will be governed by Pakistan law. You should understand that by ordering any of our product, you agree to be bound by these terms and conditions.'
-            '\nCategories for Registration:'
-            '\n 1- Basic Membership- Free of Cost: Can be registered as free members.'
-            '\n  • Cannot sell anything on ISMMART platform.'
-            '\n  • Will have only access to the products and stores to visit that are opened by default or kept opened by the Vendors & Businesses to visit.'
-            '\n  • They can buy anything at their own as a direct customers with mutual understanding with the seller; ISMMART will not be responsible or back up in case of any issues in such deal.'
-            '\n 2- Premium Membership – Paid Membership:'
-            '\n  • 5 USD per month with a free one month trial. Yearly subscription charges are 99.5 USD.'
-            '\n  • Can sell anything on ISMMART platform. '
-            '\n  • Will have access to all products and stores to visit.'
-            '\n  • All deals by Premium Members on ISMMART will be backed up by ISMMART. We will be responsible for smooth transactions and delivery of products. ISMMART will guarantee to honor the mutual understanding that both Seller and Buyer have agreed upon.'
-            '\n  • Premium Members will have worry less access to all businesses worldwide, both as a Seller & Buyer as ISMMART will be directly guaranteeing and verifying such members and any deals they do.'
-            '\n  • As all Premium Members are scrutinized and are verified through ISMMART verification process, so all such members can do worry less trade with each other, anywhere in the World.'
-            '\n  • Unlimited deliveries on eligible items.\n'
-            '\nNote: All members (Sellers & Buyers) are requested to follow all trading rules and procedures mentioned by ISMMART to avoid any kind of inconvenience in payment or delivery. Commission Fee Structure Transaction value below PKR100,000/- ~ 0.5% Commission Transaction value above PKR100,000/- and below PKR250,00,00/- ~ 1.00% Commission Transaction value above PKR250,00,00/- but below PKR250,00,000/- ~ 1.75% Commission Transaction value above PKR250,00,000/- flat 2.25% Commission For any wholesale transaction a flat 3.5% Commission will be charged.'
-            '\nNote: Transaction value excludes shipping and insurance cost.',
-        key.tCHeader22: '5. Your Privacy',
-        key.tCBody22: 'Please read Privacy Policy',
-
+            'If you have any queries or opinions that you would like to share with us, kindly call our support number as stated on the website.',
+        key.tCHeader21: '20.Prevailing Language',
+        key.tCBody21:
+            'In the case of any discrepancy between the terms, the English version will be binding. The English language edition of these terms shall be deemed supreme and any differences in comparison to the translated versions shall be disregarded.',
 
         ///Vendor Terms&Conditions
         key.vendorHeader0: '',

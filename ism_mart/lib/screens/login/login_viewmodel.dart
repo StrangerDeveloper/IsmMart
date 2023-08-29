@@ -63,7 +63,7 @@ class LogInViewModel extends GetxController {
           GlobalVariable.showLoader.value = false;
         }
       }).catchError((e) {
-      //  GlobalVariable.internetErr(true);
+        //  GlobalVariable.internetErr(true);
         print(e);
         GlobalVariable.showLoader.value = false;
       });
@@ -93,7 +93,6 @@ class LogInViewModel extends GetxController {
     });
   }
 
-
   //Apple Signin
   String generateNonce([int length = 32]) {
     final charset =
@@ -109,9 +108,10 @@ class LogInViewModel extends GetxController {
     final digest = sha256.convert(bytes);
     return digest.toString();
   }
-RxBool applelLoader = false.obs;
+
+  RxBool applelLoader = false.obs;
   Future<UserCredential> signInWithAppleFun() async {
-    applelLoader.value=true;
+    applelLoader.value = true;
     final rawNonce = generateNonce();
     final nonce = sha256ofString(rawNonce);
     final appleCredential = await SignInWithApple.getAppleIDCredential(
@@ -130,26 +130,24 @@ RxBool applelLoader = false.obs;
       idToken: appleCredential.identityToken,
       rawNonce: rawNonce,
     );
-    var _auth= await FirebaseAuth.instance.signInWithCredential(oauthCredential);
-  var email=  _auth.user!.email.toString()??"";
-    var name = _auth.user!.photoURL.toString()??"";
-    var uid = _auth.user!.uid??"";
-    var mobileNo = _auth.user!.phoneNumber.toString()??"";
-    var fullname = _auth.user!.displayName.toString()??"";
+    var _auth =
+        await FirebaseAuth.instance.signInWithCredential(oauthCredential);
+    var email = _auth.user!.email.toString() ?? "";
+    var name = _auth.user!.photoURL.toString() ?? "";
+    var uid = _auth.user!.uid ?? "";
+    var mobileNo = _auth.user!.phoneNumber.toString() ?? "";
+    var fullname = _auth.user!.displayName.toString() ?? "";
 
     print("hhhhhh email ----- $email $name $uid $mobileNo $fullname");
- if(uid !=""){
-   applelLoader.value =false;
- }
-     return _auth;
-   }
-
-
-  signInWithApple(){
-    try{
-      signInWithAppleFun();
-    }catch(e){}
-
+    if (uid != "") {
+      applelLoader.value = false;
+    }
+    return _auth;
   }
 
+  signInWithApple() {
+    try {
+      signInWithAppleFun();
+    } catch (e) {}
+  }
 }

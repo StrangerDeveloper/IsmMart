@@ -58,7 +58,6 @@ class StaticInfoViewModel extends GetxController {
       {'header': langKey.tCHeader2.tr, 'body': langKey.tCBody2.tr},
       {'header': langKey.tCHeader3.tr, 'body': langKey.tCBody3.tr},
       {'header': langKey.tCHeader4.tr, 'body': langKey.tCBody4.tr},
-      {'header': langKey.tCHeader22.tr, 'body': langKey.tCBody22.tr},
       {'header': langKey.tCHeader5.tr, 'body': langKey.tCBody5.tr},
       {'header': langKey.tCHeader6.tr, 'body': langKey.tCBody6.tr},
       {'header': langKey.tCHeader7.tr, 'body': langKey.tCBody7.tr},

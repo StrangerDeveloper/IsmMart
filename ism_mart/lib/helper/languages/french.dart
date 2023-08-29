@@ -331,111 +331,6 @@ class French {
             'Les magasins Ismmart traitent généralement les rendements dans les 3 jours ouvrables une fois que le Courier renvert l\'article à notre centre de retour. Notre équipe de service à la clientèle fournira l\'étiquette d\'expédition dès qu\'il obtiendra votre plainte écrite conformément à la politique de retour. L\'article sera reçu et le contrôle de qualité approprié sera effectué, avant la fin du remboursement. Veuillez noter que selon le mode de paiement, les temps de remboursement peuvent varier. Cela peut prendre trois à quatorze jours ouvrables. Avec l\'argent que vous avez payé pour le produit retourné, le coût d\'expédition est également remboursé. Par exemple, lorsque Ayesha reçoit le produit, elle le trouve défectueux. Elle déposera une plainte à notre centre de plaintes, où nous contacterons avec le vendeur pour résolution. Si sa réclamation est prouvée, elle renverra l\'article défectueux au vendeur, et son paiement (qui a été suspendu par Ismmart sera récupéré vers elle. Certains produits / services seront non remboursables et seront définis dans la description de la description du produit / service.',
         key.aboutBody6:
             'Ismmart est une plate-forme unique qui offre une sécurité à 100% à l\'acheteur et au fournisseur. Il fournit un espace virtuel pour afficher, commercialiser et vendre vos produits ou services sous une seule plate-forme, contrairement aux magasins qui n\'offrent que des produits qui vendent. Pour les acheteurs, c\'est un forum exclusif où ils peuvent acheter avec confiance que leur argent ne sera pas gaspillé. Notre politique de retour unique garantit qu\'aucune activité frauduleuse ne se produit avec l\'acheteur ou le vendeur. Nous avons conçu différentes offres d\'abonnement / abonnement pour les fournisseurs de différentes catégories.',
-        key.tCHeader1: 'Introduction',
-        key.tCBody1:
-            'Bienvenue dans les magasins Ismmart, également connue sous le nom de «nous» et «nous». Ces termes et conditions régissent votre accès et votre utilisation de notre plateforme / site en ligne, ainsi que tous les sites Web, applications, services ou ressources associés. Vous reconnaissez que vous avez lu, compris et accepté les termes et conditions ci-dessous avant d\'utiliser les magasins Ismmart. Ces termes et conditions peuvent être modifiés, modifiés, ajoutés ou supprimés à tout moment sans préavis précédent par les magasins Ismmart. Si aucune autre notification n\'est donnée, les changements deviennent efficaces lorsqu\'ils sont affichés sur le site Web.',
-        key.tCHeader2:
-            'Comment le contrat est formé entre vous et les magasins Ismmart?',
-        key.tCBody2:
-            '• Après avoir passé une commande, vous recevrez la notification en ligne de nous reconnaître que nous avons reçu votre commande. Veuillez noter que cela ne signifie pas que votre commande a été acceptée. Votre commande nous constitue une offre pour acheter un produit. Toutes les commandes sont soumises à l\'acceptation par nous. Le contrat ne sera formé que lorsque vous recevrez les produits commandés via cette plate-forme. • Le contrat ne se rapportera qu\'aux produits que vous recevez. Un contrat pour tout autre produit qui pourrait avoir fait partie de votre commande sera formé lorsque vous recevrez ces autres.',
-        key.tCHeader3: 'Votre compte',
-        key.tCBody3:
-            '• Pour accéder à certains services offerts par la plate-forme, nous pouvons exiger que vous créiez un compte avec nous ou fournissez des informations personnelles pour compléter la création d\'un compte. • Vous êtes responsable de la maintenance de la confidentialité de votre identification d\'utilisateur, de votre mot de passe, des détails du compte et des informations privées connexes. Vous reconnaissez que vous avez cette obligation de maintenir la sécurité de votre compte à tout moment et de prendre toutes les précautions raisonnables pour empêcher l\'utilisation non autorisée de votre compte. Vous devez nous informer immédiatement si vous avez une raison de croire que votre mot de passe est devenu connu de quelqu\'un d\'autre, ou si le mot de passe est ou est susceptible d\'être utilisé de manière non autorisée. Vous comprenez et acceptez que toute utilisation du site Web, tous les services connexes fournis et / ou tout accès à des données, des informations ou des communications confidentiels rendues possibles via l\'utilisation de votre compte et de votre mot de passe sera considéré comme fait par vous, ou selon le cas, avoir été fait par une personne autorisée par vous.'
-                '• En cas de violation ou toute violation grave de ces termes et conditions, nous nous réservons le droit d\'invalider le nom d\'utilisateur et / ou le mot de passe après avoir purgé un avis et en fournissant un délai raisonnable pour rectifier le même ou faire amende honorable selon les conditions de ce contrat.',
-        key.tCHeader4: 'Votre statut',
-        key.tCBody4:
-            'En passant une commande via notre site / plate-forme, vous garantissez que:'
-                '• Vous êtes légalement capable de conclure des contrats contraignants.'
-                '• Vous avez au moins 18 ans.'
-                '• Vous ne résidez pas dans un pays où effectuer un paiement à notre site, conformément aux présentes conditions générales, enfreindre toute loi.',
-        key.tCHeader5: 'Livraison de produits',
-        key.tCBody5:
-            'Dans le cas des produits, votre commande sera remplie / préparée pour la réception (le cas échéant) dans le délai raisonnable de la date indiquée au moment de la commande, sauf s\'il y a des circonstances exceptionnelles.',
-        key.tCHeader6: 'garantie',
-        key.tCBody6:
-            'Nous vous garantissons que tout produit que nous avons acheté via notre site sera, à la livraison, sera conforme à sa description, sera de qualité satisfaisante et sera raisonnablement adapté à toutes les fins pour lesquelles les produits de ce type sont couramment fournis. Toutes les autres garanties, conditions ou termes relatives à l\'aptitude à l\'objet, à la qualité marchande, à la qualité ou à la condition satisfaisante, que ce soit implicite par la stature ou la common law est exclue en ce qui concerne la loi.',
-        key.tCHeader7: 'Droits d\'annulation',
-        key.tCBody7:
-            '• Dans le cas des produits, si vous contractez en tant que consommateur, vous avez le droit d\'annuler votre commande de produit pour une raison quelconque et de recevoir un remboursement complet. Vous recevrez un remboursement complet du prix payé pour les produits (hors frais d\'expédition). Votre droit d\'annuler un contrat relatif à l\'achat d\'un produit commence à partir de la date à laquelle vous recevez le produit (lorsque le contrat est formé). Si les produits vous ont été livrés, vous pouvez annuler à tout moment conformément à la politique de retour. Dans le cas où vous avez reçu un produit endommagé à la livraison, veuillez nous informer par écrit dès que possible. Si un produit nous est renvoyé endommagé et que vous ne nous avez pas informé que le produit a été endommagé lorsque vous l\'avez reçu, nous pouvons refuser votre droit d\'annuler ou de recevoir.'
-                '• Vous n\'aurez pas le droit d\'annuler un contrat pour la fourniture de produits, périodiques ou magazines personnalisés fabriqués ou personnalisés, marchandises périssables ou logiciels, DVD ou CD qui ont fait ouvert leur sceau de sécurité.'
-                '• Dans le cas des produits, pour annuler un contrat, vous devez nous informer par écrit. Si les produits vous ont été livrés, vous devez également nous retourner les produits dès que raisonnablement possible et à vos frais. Vous avez l\'obligation légale de prendre soin des produits raisonnables pendant qu\'ils sont entre vos mains.',
-        key.tCHeader8: 'Transfert des droits et obligations',
-        key.tCBody8:
-            '• Nous pouvons transférer nos droits et obligations en vertu de ces termes et conditions à une autre organisation, mais cela n\'affectera pas vos droits ou nos obligations en vertu du contrat.'
-                '• Vous ne pouvez transférer vos droits et obligations en vertu de votre contrat avec nous si nous acceptons cela par écrit.',
-        key.tCHeader9: 'Prix',
-        key.tCBody9:
-            '• Le prix des produits et de nos frais de livraison sera cité de temps à autre sur notre plateforme / site, sauf en cas d\'évidence.'
-                '• Les prix des produits incluent la TPS / Fed / TVA, le cas échéant. Cependant, si le taux de TPS / Fed / TVA change entre la date de votre commande et la date de livraison, nous ajusterons le prix en conséquence.'
-                '• Les prix des produits et les frais de livraison sont susceptibles de changer à tout moment, mais les modifications n\'affecteront pas les commandes de produits que vous prenez ensuite des mesures pour effectuer / recevoir dans un délai raisonnable.',
-        key.tCHeader10: 'Remboursement',
-        key.tCBody10:
-            'Si une ordonnance est annulée conformément au paragraphe 6 ci-dessus, nous rembourserons les montants dus conformément à notre politique de remboursement.',
-        key.tCHeader11: 'Comment utilisons-nous vos informations?',
-        key.tCBody11:
-            'Veuillez lire la politique de confidentialité pour plus de détails sur la façon dont nous utiliserons vos informations. En acceptant et en acceptant ces termes et conditions, vous acceptez et acceptez par la présente les termes de notre politique de confidentialité.',
-        key.tCHeader12: 'Notre responsabilité envers une entreprise',
-        key.tCBody12:
-            '• Si nous ne respectons pas ces termes et conditions, nous ne serons responsables envers vous que pour le prix d\'achat des produits et non les pertes que vous subirez en raison de notre non-respect (que ce soit dans le contrat, le délit (délicieux ( y compris la négligence), la violation de l\'obligation statutaire ou autrement).'
-                '• Nous ne serons pas responsables des pertes résultant de notre non-respect de ces termes et conditions qui entrent dans les catégories suivantes, même si de telles pertes étaient dans notre contemplation comme à la date à laquelle le contrat constitué par ces termes et conditions a été formé entre nous d\'être une conséquence prévisible de notre violation.'
-                '• Perte de revenus ou de revenus.'
-                '• Perte d\'activité.'
-                '• Perte de bénéfices.'
-                '• Perte d\'économies prévues'
-                '• Perte de données'
-                '• gaspillage de gestion ou de bureau'
-                'Remarque: Ce paragraphe ne s\'applique pas si vous contractez en tant que consommateur.',
-        key.tCHeader13: 'Notre responsabilité envers un consommateur',
-        key.tCBody13:
-            '• Si nous ne respectons pas ces termes et conditions, nous sommes responsables de la perte ou des dommages que vous souffrez qui sont un résultat prévisible de notre violation des termes et conditions ou de notre négligence. La perte ou les dommages est prévisible s\'il s\'agissait d\'une conséquence évidente de notre violation ou si vous avons été envisagés par vous et nous au moment où nous sommes entrés dans le pertinent.'
-                '• Nous vous fournissons les produits uniquement à usage domestique et privé. Vous acceptez de ne pas utiliser le produit à des fins commerciales, commerciales ou de ré-ateaux, et nous n\'avons aucune responsabilité envers vous pour toute perte de profit, perte d\'activité, interruption commerciale ou perte d\'activité.'
-                'Remarque: Ce paragraphe ne s\'applique pas si vous contractez en tant qu\'entreprise.',
-        key.tCHeader14: 'Notre contrat avec vous si vous êtes une entreprise',
-        key.tCBody14: '• Ces termes et conditions et tout document expressément mentionné constituent l\'ensemble de l\'accord entre nous et remplacent toutes les discussions précédentes, la correspondance, les négociations, l\'arrangement, la compréhension ou l\'accord antérieurs entre nous concernant le sujet.'
-            '• Nous reconnaissons chacun que, en concluant un contrat, aucun de nous ne s\'appuie ou n\'aura aucun remède à l\'égard de toute représentation ou garantie (faite innocemment ou par négligence) qui n\'est pas énoncée dans ces termes et conditions.'
-            '• Chacun de nous convient que notre seule responsabilité à l\'égard de ces représentations et garanties qui sont énoncées dans le présent accord (faites innocemment ou par négligence) pour une rupture de contrat.'
-            '• Rien dans ce paragraphe limite ou exclut toute responsabilité.'
-            'Si vous vous contractez en tant que consommateur, ce paragraphe ne s\'applique pas',
-        key.tCHeader15: 'Notre contrat avec vous si vous êtes consommateur',
-        key.tCBody15:
-            'Si vous vous contractez en tant que consommateur, nous avons l\'intention de compter sur ces termes et conditions et tout document expressément mentionné en ce qui concerne l\'objet de tout contrat. Bien que nous acceptions la responsabilité des déclarations et des représentations faites par nos agents dûment autorisés, assurez-vous de demander par écrit toute variation de ces termes et conditions.'
-                'Remarque: Si vous vous contractez au cours des affaires, ce paragraphe ne s\'applique pas.',
-        key.tCHeader16: 'Avis',
-        key.tCBody16: '• Tout avis à envoyer par vous ou par nous dans le cadre de ces conditions et conditions peut être envoyé par lettre ou par e-mail. Les avis doivent nous être envoyés à l\'une des adresses suivantes:'
-            '> Plot no, 60 Street 12, G-8/1, Islamabad Capital Territory 44080 Pakistan.'
-            '> Tour 42, 25 Old Broad St, Cornhill, Londres, Royaume-Uni'
-            '> Courriel: bouseses@shaukatmarwatgroup.com'
-            '• Nous vous enverrons des avis par e-mail à l\'adresse e-mail que vous avez fournie au moment de l\'inscription à notre plateforme'
-            '• L\'un ou l\'autre de nous pouvons modifier l\'adresse des avis en disant à l\'autre par écrit la nouvelle adresse, mais l\'adresse précédente continuera de rester valable 7 jours après la modification.',
-        key.tCHeader17: 'Droits de tiers',
-        key.tCBody17:
-            'Une personne qui n\'est pas partie à ces termes et conditions ou un contrat n\'a aucun droit en vertu ou en lien avec elle.',
-        key.tCHeader18: 'Renoncer',
-        key.tCBody18:
-            'L\'une des parties de l\'une ou l\'autre partie à exercer ou à appliquer tout droit conféré à cette partie par ces termes et conditions ne sera pas considéré comme une renonciation à un tel droit ou à opérer pour interdire l\'exercice ou l\'application de ceux-ci à tout moment ou à des moments par la suite. Aucune dérogation par nous de ces termes et conditions ne sera efficace à moins qu\'elle ne soit expressément déclarée comme une renonciation et vous est communiquée par écrit conformément au paragraphe 16 ci-dessus.',
-        key.tCHeader19: 'Semettabilité',
-        key.tCBody19:
-            'Si un tribunal ou une autorité compétente décide que l\'une des dispositions de ces termes et conditions ou des dispositions d\'un contrat n\'est pas valide, illégale ou inapplicable dans une certaine mesure, le terme sera, dans cette mesure seulement, se séparer des conditions restantes qui continuera d\'être valide dans toute la mesure permise par la loi.',
-        key.tCHeader20: 'Force majeure',
-        key.tCBody20:
-            'Nous nous réservons le droit de reporter la date de livraison ou d\'annuler un contrat pour toutes les circonstances indépendamment de son contrôle raisonnable, y compris, mais sans s\'y limiter, une grève, un verrouillage, un trouble, un incendie, un accident ou un arrêt de notre entreprise ou notre travail et qui empêche ou entrave la livraison des marchandises ou la performance du service.',
-        key.tCHeader21: 'Droit et juridiction',
-        key.tCBody21: 'Ces termes et conditions et tout différend ou réclamation découlant de ou en relation avec eux ou leur sujet ou leur formation (y compris les litiges ou les réclamations non contractuels) seront régis par la loi pakistanaise. Vous devez comprendre qu\'en commandant l\'un de nos produits, vous acceptez d\'être lié par ces termes et conditions.'
-            'Catégories d\'inscription:'
-            '1. Adhésion de base - GRATUIT COST: peut être enregistré comme membres gratuits.'
-            '* Impossible de vendre quoi que ce soit sur la plate-forme Ismmart.'
-            '* N\'aura accès qu\'aux produits et magasins à visiter qui sont ouverts par défaut ou conservés par les vendeurs et les entreprises à visiter.'
-            '* Ils peuvent acheter n\'importe quoi en tant que clients directs avec une compréhension mutuelle avec le vendeur; Ismmart ne sera pas responsable ou sauvegardé en cas de problèmes dans un tel accord.'
-            '2.Premium Adhésion - Adhésion payante:'
-            '* 5 USD par mois avec un essai gratuit d\'un mois. Les frais d\'abonnement annuels sont de 99,5 USD.'
-            '* Peut vendre n\'importe quoi sur la plate-forme Ismmart.'
-            '* Aura accès à tous les produits et magasins à visiter.'
-            '* Toutes les transactions par des membres Premium sur Ismmart seront sauvegardées par Ismmart. Nous serons responsables des transactions en douceur et de la livraison des produits. Ismmart garantira d\'honorer la compréhension mutuelle que le vendeur et l\'acheteur ont convenu.'
-            '* Les membres Premium auront moins d\'accès à toutes les entreprises du monde entier, à la fois en tant que vendeur et acheteur, car Ismmart garantira et vérifiera directement ces membres et toutes les offres qu\'ils font.'
-            '* Comme tous les membres premium sont examinés et sont vérifiés par le biais du processus de vérification ISMMart, de sorte que tous ces membres peuvent s\'inquiéter moins de commerce les uns avec les autres, partout dans le monde.'
-            '* Livraisons illimitées sur les articles éligibles.'
-            'Remarque: Tous les membres (vendeurs et acheteurs) sont priés de suivre toutes les règles et procédures de négociation mentionnées par Ismmart pour éviter tout type de désagrément en paiement ou en livraison. Valeur de transaction de la structure des frais de commission inférieure à 100 000 PKR / - ~ 0,5% Valeur de transaction de commission supérieure à 100 000 PKR / - et en dessous de PKR250,00,00 / - ~ 1,00% Valeur de transaction de commission supérieure à PKR250,00,00 / - mais en dessous de PKR250, 00,000 / - ~ 1,75% Valeur de transaction de commission supérieure à 250,00 000 / - Commission plate de 2,25% pour toute transaction en gros, une commission plate de 3,5% sera facturée.'
-            'Remarque: La valeur de la transaction exclut les frais d\'expédition et d\'assurance.',
         key.exchangeHeader1: '',
         key.exchangeHeader2: 'Comment revenir?',
         key.exchangeBody1: 'La satisfaction du client est garantie! Nous garantissons la qualité des produits vendus dans les magasins Ismmart, et si vous n\'êtes pas satisfait de votre achat, nous ferons les choses correctement. À l\'exception de quelques conditions énumérées ci-dessous, tout article acheté dans les magasins Ismmart peut être retourné dans les 14 jours civils à compter de la date de l\'envoi.'
@@ -772,5 +667,167 @@ class French {
         key.productExists: 'Le produit existe déjà',
         key.productVariant: 'Variantes de produits',
         key.weightAndDimension: 'Poids et dimensions',
+
+        ///Terms And Conditions
+        key.tCHeader1: '',
+        key.tCBody1: '\n Toutes les références, formulaires, politiques et réglementations détaillées dans les présentes Conditions, ou disponibles via la plate\nforme ou tout hyperlien connecté (collectivement les termes), régissent votre utilisation du groupe Ismmart Industries (privé) sites Web limitées et applications mobiles (ci\naprès appelé la plate\nforme). Les services fournis par notre plateforme incluent, mais sans s\'y limiter, la plate\nforme elle\nmême et tous les services fournis par la plate\nforme ou par Ismmart qui sont accessibles via la plate\nforme. De plus, toutes les fonctionnalités nouvellement ajoutées incluses avec les services doivent être soumises à ces conditions. Ils dictent les conditions de votre utilisation des services donnés par Ismmart.'
+            '\n Il est important de tenir compte des termes du présent accord. Si vous décidez d\'accéder et d\'utiliser la plate\nforme, il vous sera compris que vous avez lu, compris et accepté les termes de cet accord et accepter la gestion de vos données personnelles conformément aux termes énoncés dans la politique de confidentialité (https://ismmart.com/privacypolicy). Si vous n\'êtes pas d\'accord avec les conditions de l\'accord, nous vous demandons de vous abstenir d\'accès ou d\'utilisation de la plate\nforme ou de ses services.'
+            '\n Les personnes qui ont atteint l\'âge de dix\nhuit ans sont autorisées à utiliser la plate\nforme, ainsi que toutes les entités d\'entreprise existantes, telles que les entreprises. Dans les cas où il est applicable, ces conditions doivent être conformes aux lois locales.'
+            '\n Quiconque de moins de 18 ans doit obtenir le consentement de son parent ou de son tuteur légal avant de pouvoir utiliser la plate\nforme. En acceptant ces conditions, le parent ou le tuteur légal assumera la responsabilité des actions et des paiements de l\'utilisateur. Si le consentement n\'a pas été obtenu, l\'utilisateur doit cesser d\'utiliser la plate\nforme sans délai.'
+            '\n Ismmart a le droit d\'engager des tiers pour effectuer des vérifications des antécédents en cours, et celles\nci peuvent inclure des enquêtes sur toutes les sanctions, les litiges juridiques ou les nouvelles défavorables liées à vous. Si Ismmart n\'approuve pas les résultats de la vérification des antécédents, votre compte peut être annulé et vous ne pourrez peut\nêtre plus utiliser la plate\nforme.'
+            '\n L\'Ismmart conserve la possibilité de modifier ces conditions (ainsi que toutes les réglementations ou politiques supplémentaires incluses sur la plate\nforme) à un moment donné. Il est suggéré de regarder régulièrement les termes, et en continuant votre utilisation de la plate\nforme après la date des conditions révisées, vous êtes supposé leur avoir donné son consentement, que vous les aies ou non. '
+            '\n Les images et les visuels des articles présentés sur la plate\nforme sont exclusivement à la référence et peuvent être divers des marchandises réelles.',
+        key.tCHeader2: '1. Ismmart',
+        key.tCBody2: '1.1. Qui nous sommes?'
+            '\n Selon la région du monde à partir de laquelle cette plate\nforme est utilisée, les termes de l\'accord entre vous et Ismmart peuvent varier.'
+            '\n 1.2. Que faisons\nnous?'
+            '\n Grâce à notre plateforme, Ismmart offre un lien vers différents fournisseurs afin que les clients puissent acheter une sélection de marchandises, y compris des repas prêts à l\'emploi, la restauration, les boissons, les ingrédients bruts et divers articles non alimentaires. Lorsque vous effectuez un achat (appelé commande), Ismmart fonctionne en tant qu\'agent pour le vendeur, aidant à la commande et à la livraison ultérieure. Nos fournisseurs peuvent être soit des fournisseurs, des affiliés ou une partie de notre propre entreprise. Lorsque le vendeur est tiers, nous sommes autorisés à recevoir le paiement et la TPS (le cas échéant aux fournisseurs enregistrés par la TPS) en leur nom.'
+            '\n1,3. Comment nous contacter?'
+            '\n Notre équipe d\'assistance client est disponible pour vous aider via notre numéro de support client ou via l\'e\nmail support@ismmartindustries.com. ',
+        key.tCHeader3: '2. Utilisation de la plate\nforme et du compte ismmart',
+        key.tCBody3: '2.1. Pour utiliser Ismmart, vous devez créer un compte. Lors de l\'inscription, il vous sera demandé de saisir certaines de vos informations personnelles, telles qu\'une adresse e\nmail, un numéro de mobile et un mot de passe privé. Pour acheter quelque chose sur la plate\nforme, il pourrait vous être demandé de fournir les détails de votre carte de crédit, en fonction de votre mode de paiement. Il est essentiel que vous gardiez votre mot de passe secret et que vous soyez seul responsable de sa sécurité. À moins que la cause de fraude ou d\'abus ne puisse être attribuée à autre chose, vous êtes tenu responsable de toutes les transactions effectuées sur votre compte Ismmart.'
+            '\n 2.2. Ismmart ne prendra pas la responsabilité des commandes qui ont des problèmes de livraison résultant de toute données incorrectes, manquantes ou incomplètes que vous avez fournies. Il est essentiel que tous les détails soient précis, authentiques et précis pour le traitement efficace de la commande, en particulier votre adresse de livraison et vos coordonnées.'
+            '\n 2.3. Pour supprimer votre compte ismmart, veuillez nous envoyer un e\nmail pour le demander. Nous devrons peut\nêtre restreindre, suspendre ou mettre fin à votre compte ou utiliser la plate\nforme si nous pensons que c\'est nécessaire.'
+            '\n \n 2.3.1. Il semble que quelqu\'un d\'autre que vous utilise votre compte ismmart.'
+            '\n \n 2.3.2. Si nous soupçonnons ou constatons que vous avez participé à des actions ou des pratiques qui vont à l\'encontre de ces termes, de nos politiques et instructions, ou êtes impliqués dans quelque chose que nous jugeons individuellement comme abusant la plate\nforme, il sera alors considéré comme une violation.'
+            '\n \n 2.3.3. L\'incapacité continue de respecter les normes des vérifications des antécédents ne peut être tolérée.',
+        key.tCHeader4: '3. Restrictions',
+        key.tCBody4: '3.1. Activités interdites sur la plate\nforme '
+            '\nBelow est une courte collection d\'activités qui sont soit contre la loi, soit interdites par Ismmart sur sa plate\nforme. Dans le cas où quelqu\'un participe à l\'une de ces activités interdites, telles que déterminées uniquement par Ismmart, une enquête sera menée et une action en justice peut être prise. Les exemples des pratiques interdites comprennent, mais sans s\'y limiter: '
+            '\n \n 3.1.1. La plate\nforme ne peut être utilisée pour aucune activité qui va à l\'encontre des réglementations locales, étatiques ou fédérales, en particulier toute intention qui est de nature trompeuse, frauduleuse ou trompeuse.'
+            '\n \n 3.1.2. Publier tout matériel qui enfreint les droits de propriété, les libertés privées, les droits d\'exposition, les droits des secteurs commerciaux ou tout autre privilège de quiconque.'
+            '\n \n 3.1.3. Publier tout contenu considéré comme illégal, brut, calomnieux, menaçant, hostile, offensant, diffamatoire, détestable ou mortifiant pour tout individu ou organisation, déterminé uniquement par Ismmart ou en accord avec les normes locales.'
+            '\n \n 3.1.4. Le matériel de publication qui est ISMMart a identifié comme cyberintimidation, en utilisant leur seul jugement.'
+            '\n \n 3.1.5. La publication de matériel qui dépeint un comportement risqué et potentiellement mortel est strictement interdite.'
+            '\n \n 3.1.6. Évitez de partager les numéros de téléphone, les adresses de la rue ou les noms de famille.'
+            '\n \n 3.1.7. La soumission des liens Web vers des sites externes, ainsi que tout type de code HTML ou de programmation, n\'est pas autorisé.'
+            '\n \n 3.1.8. Publier tout ce que Ismmart considère comme "spam", comme cela est uniquement déterminé par l\'entreprise.'
+            '\n \n 3.1.9. Imiter quelqu\'un d\'autre tout en mettant du contenu en ligne.'
+            '\n \n 3.1.10. L\'obtention d\'informations telles que les adresses e\nmail des autres sans autorisation n\'est pas autorisée.'
+            '\n \n 3.1.11 Ne permettant à aucune personne ou entité d\'utiliser votre authentification pour afficher ou afficher les commentaires. '
+            '\n \n 3.1.12. harceler, menacer, traque ou abuser de toute personne sur la plate\nforme.'
+            '\n \n 3.1.13. Faire tout ce qui empêcherait quelqu\'un d\'autre d\'utiliser ou de profiter de la plate\nforme, ou de mettre Ismmart, ses clients, fournisseurs ou autres parties en danger, soit dans l\'avis d\'Ismmart, soit autrement, est strictement interdit.'
+            '\n \n 3.1.14 décourageant quiconque de participer à des activités interdites par ces directives.'
+            '\n 3.2. Ismmart possède l\'autorité, bien que non obligée, de faire un ou plusieurs des éléments suivants '
+            '\n \n 3.2.1. Après avoir été informé de toute affirmation selon laquelle tout contenu sur la plate\nforme n\'est pas conforme aux présentes Conditions, il doit être dans le domaine exclusif de la plate\nforme pour sonder l\'allégation et prendre la décision de supprimer le contenu ou d\'exiger que le contenu être abattu.'
+            '\n \n 3.2.2. Tout le contenu qui viole les termes doit être supprimé, y compris tout contenu illégal, perturbateur ou abusif.'
+            '\n \n 3.2.3. En cas de violation de ces conditions, nous nous réservons le droit de suspendre ou de résilier un accès aux utilisateurs à la plate\nforme ou à leur compte Ismmart.'
+            '\n \n 3.2.4. superviser, réviser ou rendre public tout matériel présent sur la plate\nforme;'
+            '\n \n 3.2.5. La plate\nforme a le droit de modifier ou d\'effacer tout contenu partagé, qu\'il respecte ces directives.',
+        key.tCHeader5: '4. Propriété intellectuelle',
+        key.tCBody5:
+            'Toutes les marques, logos, images et marques de service, y compris ces termes affichés sur la plate\nforme ou dans notre matériel marketing, qu\'ils soient enregistrés ou non enregistrés, sont la propriété intellectuelle d\'Ismmart et / ou de tiers qui nous ont autorisés avec leur utilisation (collectivement , les «marques»). Vous ne pouvez pas utiliser, copier, reproduire, republier, télécharger, publier, transmettre, distribuer ou modifier ces marques de quelque manière que ce soit sans notre consentement écrit express préalable. L\'utilisation des marques sur tout autre site Web non approuvé par nous est strictement interdite. Ismmart appliquera agressivement ses droits de propriété intellectuelle dans toute la mesure de la loi, y compris les poursuites pénales. Ismmart ne garantit ni ne représente que votre utilisation de matériaux affichés sur la plate\nforme n\'envolera pas les droits des tiers qui n\'appartiennent pas ou affilié à Ismmart. L\'utilisation de tout matériel sur la plate\nforme est à vos propres risques.',
+        key.tCHeader6: '5. Restrictions sur les marchandises',
+        key.tCBody6: '5.1. Notre plateforme vend une gamme de produits, dont quelques\nuns sont limités par les lois et réglementations du pays dont ils sont achetés. Cela peut inclure une restriction d\'âge pour les cigarettes, le tabac et d\'autres articles que nous pouvons refuser pour fournir en fonction des normes statutaires actives à ce moment\nlà. Lorsque vous achetez ces marchandises, vous confirmez que vous satisfaire les qualifications juridiques pour les acheter.'
+            '\n 5.2 Cigarettes / produits du tabac («Tabac»)'
+            '\n \n Nous pouvons, lorsqu\'il est autorisé par la loi, fournir du tabac sur certaines de nos plateformes. Nous n\'essayons pas d\'avancer, de soutenir ou de persuader l\'achat ou l\'utilisation du tabac à quelque titre que ce soit. Seules les personnes de l\'âge légalement établi peuvent acheter du tabac. Ismmart, le vendeur et le personnel de livraison ont le pouvoir de rejeter une ordonnance à leur discrétion exclusive.'
+            '\n \n 5.2.1. Avant de dispenser du tabac, il est nécessaire d\'obtenir une documentation appropriée pour vérifier l\'âge, comme une carte d\'identité.'
+            '\n \n 5.2.2. La preuve de l\'âge légal doit être présentée afin d\'accepter la livraison; Ne pas le faire entraînera un refus de livraison.'
+            '\n \n 5.2.3. Aucun individu ne recevra la livraison des articles, quelle que soit la justification.'
+            '\n \n 5.2.4. Toute proposition de tabac sur la plate\nforme sera jugée invalide dans le cas où elle serait illégale.',
+        key.tCHeader7: '6. commandes',
+        key.tCBody7: '6.1. Une fois qu\'une commande est passée via Ismmart, vous recevrez un e\nmail de confirmation contenant le reçu de commande. Ce reçu couvrira également tous les frais de livraison ou taxes pertinents tels que la TPS.'
+            '\n 6.2. Nos fournisseurs ont besoin d\'une valeur de commande minimale définie à atteindre avant qu\'une commande puisse être terminée et expédiée. Si une commande ne respecte pas la valeur de commande minimale définie, vous pouvez choisir de payer le montant restant nécessaire pour remplir la valeur de commande minimale ou ajouter des marchandises supplémentaires à la commande.'
+            '\n 6.3. Ismmart et le vendeur feront tout leur possible pour honorer vos instructions spéciales pour une commande. Néanmoins, dans des situations où il n\'est pas possible, plausible ou pratique, Ismmart et / ou le vendeur procédera à la création de l\'ordre en fonction des pratiques typiques. Ni Ismmart ni le vendeur ne seront obligés de compenser ou de remplacer une ordonnance qui ne répond pas aux demandes individuelles spécifiées par vous.'
+            '\n 6.4. Ismmart n'
+            'a aucune obligation de divulguer les ingrédients ou allergènes utilisés dans les marchandises présentées sur la plate\nforme. Nous ne nous assurons pas que les marchandises soient sans allergènes, sauf si la loi stipule autrement. Par conséquent, ceux qui souffrent d\'allergies, les effets indésirables à certains aliments ou les besoins alimentaires particuliers doivent consulter le vendeur avant d\'effectuer un achat sur notre plateforme.'
+            '\n 6.5. Il est impératif de se rappeler que votre commande pourrait être soumise à des stipulations supplémentaires données par le vendeur.'
+            '\n 6.6. Avant de passer la commande '
+            '\n \n 6.6.1. Pour pouvoir voir les vendeurs disponibles pour la livraison dans votre région, il est essentiel pour vous de fournir l\'adresse de livraison.'
+            '\n \n 6.6.2. Après avoir choisi un vendeur, vous serez guidé vers leur page de menu, à partir de laquelle vous pouvez choisir et ajouter les produits souhaités au panier.'
+            '\n 6.7. Passant la commande '
+            '\n \n pour passer avec succès une commande, veuillez observer les invites affichées lorsque vous appuyez sur "Checkout". Vous pourriez avoir à offrir des informations supplémentaires pour que nous puissions conclure la commande. Assurez\nvous que toutes les informations fournies, y compris les coûts, les détails de livraison, les détails personnels, les données de paiement et les codes de bon (si pertinent) sont précis, exacts et terminés avant de frapper «Place Order». Lorsque vous recevez un accusé de réception par e\nmail avec votre réception de commande, vous aurez réussi à passer votre commande.'
+            '\n 6.8. Annulation d\'une commande '
+            '\n \n Pour retirer votre commande une fois qu\'il a été soumis, visitez le centre d\'assistance sur la plate\nforme. Si le vendeur n\'a pas encore accepté la commande, vous pouvez toujours exercer votre droit d\'annuler.'
+            '\n 6.9. Remboursements'
+            '\n \n 6.9.1. Commandes de paiement en ligne '
+            '\n \n Vous pouvez vous faire rembourser si vous annulez votre commande avant qu\'elle ne soit acceptée par le vendeur; Pourtant, si le vendeur a déjà accepté votre commande et que vous décidez d\'annuler, vous ne recevrez pas de remboursement en tout ou en partie et vous perdrez la livraison de votre commande annulée.'
+            '\n \n 6.9.2. Commandes de trésorerie'
+            '\n \n Votre capacité à annuler votre commande est limitée aux commandes qui n\'ont pas été acceptées par un vendeur. Si vous choisissez de retirer une commande qui a été approuvée, vous n\'êtes pas éligible à des remboursements de trésorerie à la livraison et la livraison de votre commande annulée est également perdue. Cette option de remboursement particulière ne s\'applique pas lorsque vous travaillez avec nos partenaires de livraison d\'affiliation. '
+            '\n \n Avant de traiter tout type de remboursement, nous devrons peut\nêtre demander des informations supplémentaires ou des documents qui servent de preuve de réception physique des commandes acceptées. Si vous ne nous fournissez pas les détails ou les dossiers demandés, nous avons le droit de rejeter la demande de remboursement.'
+            '\n \n Si vous n\'obtenez pas le remboursement, nous vous recommandons de revérifier votre compte bancaire, de contacter votre banque ou une société de carte de crédit, car il peut prendre un certain temps pour que le montant soit remboursé. Si les méthodes mentionnées précédemment sont suivies et que vous n\'obtenez toujours pas le remboursement, veuillez contacter notre équipe de support client en utilisant l\'une des méthodes de communication de la clause 1.3.'
+            '\n 6.10. Si Ismmart a une conviction de bonne foi qu\'il y a eu des activités frauduleuses liées à votre compte Ismart, à votre commande ou aux deux, il se réserve le droit d\'annuler toute commande, de suspendre, de désactiver ou de résilier votre compte Ismmart.',
+        key.tCHeader8: '7. Prix et paiements',
+        key.tCBody8: '7.1. Les tarifs indiqués sur la plate\nforme doivent être donnés en argent local, avec toute taxe requise incluse. Vous reconnaissez que les frais et propositions sur la plate\nforme pourraient être distincts des coûts et des offres disponibles auprès de nos fournisseurs dans d\'autres endroits (comme leurs propres sites Web, applications mobiles ou magasins physiques).'
+            '\n 7.2. Les prix des marchandises que nous montrons sur notre plateforme peuvent fluctuer subordonnés au fournisseur et, si exigeant par une législation applicable, ils peuvent également différer.'
+            '\n \n 7.2.1. Les vendeurs enregistrés auprès de la taxe sur les biens et services doivent inclure cette taxe ou tout autre équivalent applicable.'
+            '\n \n 7.2.2 Pour les vendeurs qui ne se sont pas inscrits à la taxe sur les biens et services, aucune taxe de ce type ne doit être incluse. '
+            '\n 7.3. Pour chaque commande passée, des frais de livraison seront encourus à moins que les conditions suivantes ne soient remplies '
+            '\n \n 7.3.1. Vous avez un bon promotionnel ou à prix réduit valide et l\'appliquez à la caisse; ou'
+            '\n \n 7.3.2. il est indiqué autrement.'
+            '\n 7.4. Au moment de passer chaque commande, les prix et autres frais (tels que la livraison, la commande minimale ou les frais de service), comme affiché sur la plate\nforme, peuvent être soumis à des variations.'
+            '\n 7.5. Avant de confirmer le paiement, vous recevrez un aperçu des prix, des frais de livraison et d\'autres coûts connexes. Une fois que vous avez passé la commande, vous acceptez les totaux ainsi que les frais supplémentaires, qui vous ont tous été fournis.'
+            '\n 7.6. Vous avez le choix de plusieurs options de paiement lorsque vous payez une commande via la plate\nforme, telle que Master Card, Visa Card ou Cash\non\nDredivery.'
+            '\n 7.7. Votre compte Ismmart peut fournir un moyen de couvrir certaines ou la totalité des dépenses de votre commande, s\'il y a des crédits disponibles ou des bons promotionnels ou à prix réduits valides.'
+            '\n 7.8. Une fois qu\'une commande est passée avec succès, vous recevrez une confirmation par e\nmail de notre part avec votre reçu de commande.'
+            '\n 7.9. Méthodes de paiement: Ismmart détient le pouvoir de présenter davantage de méthodes de paiement et / ou de retirer les systèmes de paiement actuels chaque fois qu\'il décide. Lorsque vous choisissez de payer via un système de paiement Web, le remises sera gérée par nos fournisseurs de paiement tiers. Au cours de votre accord, vos informations de carte de crédit / paiement seront conservées avec notre ou nos fournisseurs de paiement tiers pour les transactions potentielles. Ismmart ne stocke aucune de vos informations de carte de crédit ou de paiement.'
+            '\n 7.10. Pour assurer un paiement réussi de votre commande, assurez\nvous d\'avoir suffisamment d\'argent disponible sur votre carte de débit ou de crédit. Si nécessaire, Ismmart est responsable de tous les paiements sur notre plate\nforme, y compris les rendements, les rétrofacturation, les annulations et la résolution des différends tant qu\'ils sont équitables et conformes aux termes et conditions de notre site Web.',
+        key.tCHeader9: '8. Livraison et livraison du partenaire',
+        key.tCBody9: '8.1. Zones de livraison '
+            '\n \n Il est clair que la gamme de marchandises de nos vendeurs est spécifique à chaque zone de livraison, et elles diffèrent d\'une zone à l\'autre. Si vous entrez votre adresse de livraison dans la plate\nforme, vous pouvez consulter les fournisseurs qui vous sont à votre disposition. Notez que les zones de livraison sont susceptibles de changer en raison des effets de la météo, du trafic et de la force majeure.'
+            '\n 8.2. Délai de livraison'
+            '\n \n Ismmart doit livrer votre commande à l\'adresse donnée. Nous enverrons une date de livraison approximative à votre e\nmail; Cependant, en raison des facteurs externes que nous ne sommes pas en mesure de contrôler (par exemple la quantité de commande, l\'emplacement, l\'heure de la journée, les conditions météorologiques, les conditions de circulation, etc.), le délai de livraison réel peut différer de l\'estimation. Nous vous recommandons que vous ou quelqu\'un en qui vous avez confiance soit présent au lieu de livraison à l\'arrivée de la commande. Dans le cas où la commande contient du tabac (le cas échéant) et que le destinataire est inférieur à l\'âge légal ou ne fournit pas une identification appropriée, Ismmart a le droit de refuser la livraison.'
+            '\n 8.3. Livraisons infructueuses ou ratées'
+            '\n \n 8.3.1. Malgré toutes les autres stipulations présentes dans ces termes, dans le cas où nous nous efforçons de fournir un ordre, mais, ne pas redevable en raison des conditions induites par vous, par exemple, mais non limitées à: '
+            '\n \n (i) Personne n\'était présent ou disponible pour recevoir la commande;'
+            '\n \n (ii) Le client était incontestable malgré les tentatives d\'atteindre le client via le numéro de téléphone fourni;'
+            '\n \n (iii) manque d\'accès approprié ou suffisant pour livrer avec succès la commande;'
+            '\n \n (iv) Manque d\'un emplacement approprié ou sécurisé pour quitter la commande; ou'
+            '\n \n (v) Dans le cas de biens restreints, le client n\'a pas répondu aux exigences ou la livraison de l\'âge statutaire ne le jugeait pas sûr ou approprié pour que le client reçoive les marchandises restreintes.'
+            '\n \n Ismmart détient le privilège d\'annuler la commande sans vous accorder un remboursement ou une solution si le contact avec vous est échoué via des moyens tels qu\'un appel, un message ou un e\nmail pour informer les problèmes de livraison et les mesures suivantes. '
+            '\n \n 8.3.2. Annulations de non\nprésentation '
+            '\n \n En cas d\'indisponibilité ou d\'incapacité de recevoir la commande dans un espace de 10 minutes après l\'arrivée à l\'adresse de livraison, Ismmart sera autorisé à annuler la commande sans offrir de remboursement ou d\'alternative.'
+            '\n 8.4. Mauvaise commande, articles manquants, marchandises défectueuses '
+            '\n \n Si après avoir reçu votre commande, il est constaté qu\'il existe des problèmes (par exemple, une commande incorrecte, une commande défectueuse ou des articles manquants), veuillez contacter notre assistance client en utilisant l\'une des méthodes de communication disponibles mentionnées dans la clause 1.3 de notre politique. À certaines occasions, Ismmart peut nécessiter des preuves photographiques et plus de détails pour analyser complètement le problème avec votre commande. Si il est établi que la commande et / ou les produits livrés sont de sous\nassociation ou de qualité, nous donnerons une compensation pour la commande ou certains de ses éléments.'
+            '\n 8.5. Livraison de partenaire '
+            '\n \n Parfois, les commandes peuvent vous être livrées par le biais de l\'un de nos partenaires («livraison de partenaire»). Bien que nous fassions de notre mieux pour vous donner un avertissement préalable concernant la livraison des partenaires, cela pourrait ne pas toujours être réalisable. Lorsque la livraison du partenaire est utilisée, il pourrait être demandé de contacter directement le partenaire s\'il y a des problèmes ou des conservations avec votre livraison. Ismmart ne sera pas responsable des commandes ou des produits livrés par des partenaires.',
+        key.tCHeader10: '9. bons, remises et promotions',
+        key.tCBody10: '9.1. Ismmart lance occasionnellement des activités marketing et promotionnelles avec des codes de bons, des remises et d\'autres offres pour la plate\nforme (appelés «bons»). Les bons viennent avec des limites de temps, des fenêtres de rachat, des limites d\'utilisation, de la disponibilité et d\'autres critères.'
+            '\n 9.2. Les bons ne peuvent pas être combinés avec d\'autres offres, remises ou coupons à utiliser.'
+            '\n 9.3. À moins qu\'il n\'y ait une stipulation qui suggère le contraire, les bons ne peuvent être utilisés que dans notre plate\nforme.'
+            '\n 9.4. Les bons ne sont ni transférables ni échangeables, non remboursables et ne peuvent être échangés contre un type de compensation monétaire.'
+            '\n 9.5. Ismmart se réserve le droit d\'apporter des modifications à toutes les conditions pertinentes concernant les bons sans avertissement préalable. Ils peuvent même révoquer, interrompre ou refuser l\'utilisation d\'un bon sans préavis.'
+            '\n 9.6. À tout moment, Ismmart peut, complètement à leur discrétion, choisir de vider, de rejeter et / ou de vous interdire ou de vendeurs particuliers d\'utiliser des bons sans notification précédente.',
+        key.tCHeader11:
+            '10. Représentations, garanties et limitation des responsabilités',
+        key.tCBody11: '10.1 représentations et garanties '
+            '\n \n Vous acceptez que tout le contenu sur la plate\nforme est "tel quel" et "comme disponible" et que vous comprenez que tout accès ou utilisation de la plate\nforme et des produits, produits et services associés est à vos propres risques. '
+            '\n \n De plus, toutes les images de produits sont juste pour la représentation et pourraient sembler différemment du produit réel. Ismmart fait tout son possible pour garder la plate\nforme accessible et fonctionner, cependant, ils ne peuvent garantir que le service est sécurisé, en temps opportun, sans erreurs, problèmes techniques ou virus. Des pannes de service temporaires peuvent être attendues en raison de la maintenance du système ou des événements de force majeure'
+            '\n 10.2 Limitation de responsabilité'
+            '\n \n comme stipulé par la loi, Ismmart (avec son personnel, superviseurs, représentants, associés et firme mère ou père) décline toute responsabilité (que ce soit à partir d\'un arrangement, de négligence ou autre) pour le malheur ou le préjudice que cela Vous ou une autre personne pouvez passer en association avec notre plateforme, nos services et tous les sites connectés, ainsi que toute substance ou matériel qui y est affiché. Votre choix exclusif en ce qui concerne l\'utilisation de la plate\nforme consiste à arrêter une telle utilisation. Les organisations Ismmart, leurs opérateurs, représentants et fournisseurs de services ne seront pas responsables de tout dommage en circuit, extraordinaire, coïncidenté, en revers ou incroyable émergeant de votre utilisation de la plate\nforme ou pour toute autre réclamation à tout titre identifié avec votre utilisation de la plate\nforme . Ces licenciements de préjudices circuits, rares, en revers et extraordinaires incorporent, sans limitation, les préjudices pour les avantages perdus, les informations perdues, le malheur de la bienveillance, l\'interruption de travail, la déception ou la carence en PC, ou d\'autres méfaits commerciaux ou malhuétistes, que ce soit ou moins si Les substances Ismmart, leurs opérateurs, représentants et fournisseurs de services avaient été informés de sa probabilité et indépendamment de la théorie légitime ou équivalente sur laquelle la réclamation dépend., car certains États ou compétences ne permettent pas la préclusion ou l\'obstruction du risque de revers ou des préjudices accidentels, dans ces États ou des compétences, Ismmart, les éléments Ismmart, ses opérateurs, délégués et fournisseurs de services doivent être limités au degré accordé par la loi.'
+            '\n 10.3 Représentations du vendeur'
+            '\n \n Ismmart ne sera pas tenu responsable de vos actions ou des actions des vendeurs en ce qui concerne les marchandises livrées; En outre, ils ne prennent pas la responsabilité de la qualité, de l\'état ou de tout autre attribut des biens ou services, ou garantissent l\'exactitude des informations, des photos et / ou des images de menu affichées sur la liste / l\'offre des fournisseurs. Il convient de noter, cependant, qu\'aucune clause au sein de ces conditions d\'utilisation, abonde le fournisseur de responsabilité en cas de décès ou de blessures corporelles résultant de leur propre négligence ou d\'un comportement malveillant.',
+        key.tCHeader12: '11. Responsabilité des fournisseurs',
+        key.tCBody12:
+            'Les vendeurs ont la responsabilité complète de la préparation, de l\'état et du calibre des produits qui vous sont vendus. Dans le cas des livraisons tierces, ces partenaires sont chargés de transporter les articles et / ou les commandes. Ismmart n\'a aucun devoir de déficit, de préjudice, de dépenses, de frais ou de pénalité qui peuvent provenir de la caution contractuelle avec le partenaire.',
+        key.tCHeader13:
+            '12. Protection de données personnelles (informations personnelles)',
+        key.tCBody13:
+            'En acceptant ces termes, vous donnez votre approbation expresse à Ismmart et à ses entreprises connexes pour recueillir, utiliser, traiter et divulguer vos données personnelles, comme spécifié dans notre politique de confidentialité. Ce document est joint dans le cadre de ces termes et est disponible pour consulter (https://ismmart.com/privacypolicy) ou à partir des liens de notre plateforme.',
+        key.tCHeader14: '13. Indemnité',
+        key.tCBody14: '13.1 Utilisation de la plate\nforme;'
+            '\n 13.2 Utilisation des services; ou'
+            '\n 13.3 BRESSE DE CES CONDITIONS.',
+        key.tCHeader15: '14. Liens et sites Web tiers',
+        key.tCBody15:
+            'Nous ne pouvons pas assumer la responsabilité de tout dommage ou perte que vous pouvez subir en cliquant sur des liens tiers inclus sur la plate\nforme. Ces liens peuvent vous emmener vers des produits, des sites Web, des services et des offres non détenues ou gérées par nous. Nous ne pouvons pas garantir le contenu, les fonctionnalités, la sécurité, les services, les politiques de confidentialité ou tout autre aspect de ces sites Web tiers. Ainsi, nous ne pouvons être tenus responsables de toute perte ou dommage lié à votre accès et à votre utilisation de ces liens tiers.',
+        key.tCHeader16: '15. résiliation',
+        key.tCBody16:
+            'Ismmart détient le pouvoir de désactiver, de suspendre ou d\'annuler votre compte et également d\'interdire votre accès ou votre utilisation de la plate\nforme, qui englobe également tout type de service de livraison qui vous est donné concernant une commande. Cela peut être dû à un certain nombre de raisons, telles que, mais non limitées, si Ismmart estime que votre utilisation est inadéquate, ou que les résultats des vérifications des antécédents sont insatisfaisants, ou perçoivent ou découvrent que vous êtes associé à tout type de activité ou conduite qui contrevient aux termes. Ismmart pourrait, mais n\'est pas nécessaire, vous alerter avant de restreindre votre utilisation de la plate\nforme.',
+        key.tCHeader17: '16. Amendements',
+        key.tCBody17:
+            'À tout moment, Ismmart se réserve le droit de réviser les conditions actuelles à sa discrétion. Ces modifications entrent en vigueur dès leur publication sur le site Web, dans les limites de la législation applicable. Par conséquent, il est de votre devoir de vous assurer que vous connaissez la version actuelle des termes. Si vous n\'êtes pas satisfait des modifications, que ce soit en totalité ou en partie, vous devez vous abstenir d\'utiliser immédiatement la plate\nforme.',
+        key.tCHeader18: '17. Sevesse',
+        key.tCBody18:
+            'Si une partie des présentes Conditions était jugée illégale par un tribunal compétent de compétence, les stipulations restantes resteront intactes. En outre, une renonciation à toute disposition des présentes Conditions ne doit pas être interprétée comme une renonciation ultérieure ou continue de ladite ou toute autre disposition.',
+        key.tCHeader19: '18. Loi gouvernante',
+        key.tCBody19:
+            'La législation de la nation, dans laquelle l\'establishment Ismmart applicable est établie, aura une autorité sur et façonner la compréhension de ces termes.',
+        key.tCHeader20: '19. Contactez\nnous',
+        key.tCBody20:
+            'Si vous avez des questions ou des opinions que vous souhaitez partager avec nous, veuillez appeler notre numéro de support comme indiqué sur le site Web.',
+        key.tCHeader21: '20. langue dominante',
+        key.tCBody21:
+            'Dans le cas de toute différence entre les termes, la version anglaise sera contraignante. L\'édition en langue anglaise de ces conditions sera considérée comme suprême et toute différence par rapport aux versions traduites sera ignorée.',
       };
 }

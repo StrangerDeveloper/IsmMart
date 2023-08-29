@@ -328,111 +328,6 @@ class DutchGerman {
             'ISMMART -Stores verarbeiten in der Regel die Rückgaben innerhalb von 3 Werktagen, sobald der Kurier den Artikel in unser Rückkehrzentrum zurückgibt. Unser Kundendienstteam wird das Versandetikett zur Verfügung stellen, sobald Ihre schriftliche Beschwerde gemäß den Rückgabebedingungen erhalten wird. Der Artikel wird empfangen und die entsprechende Qualitätsprüfung erfolgt, bevor die Rückerstattung abgeschlossen ist. Bitte beachten Sie, dass die Rückerstattungszeiten abhängig von der Zahlungsmethode variieren können. Es kann drei bis vierzehn Werktage dauern. Zusammen mit dem Geld, das Sie für das zurückgegebene Produkt bezahlt haben, werden auch die Versandkosten zurückgezahlt. Wenn Ayesha beispielsweise das Produkt erhält, findet sie es fehlerhaft. Sie wird eine Beschwerde in unserem Beschwerdezentrum einreichen, in dem wir uns zur Beschließung mit dem Verkäufer wenden. Wenn sich ihre Behauptung als richtig erwiesen hat, wird sie den fehlerhaften Gegenstand wieder an den Verkäufer zurückgeben, und ihre Zahlung (die von IsMmart aufbewahrt wurde des Produkts/der Dienstleistung.',
         key.aboutBody6:
             'IsMmart ist eine einzigartige Plattform, die sowohl dem Käufer als auch dem Verkäufer 100 -prozentige Sicherheit bietet. Es bietet einen virtuellen Raum, um Ihre Produkte oder Dienstleistungen unter einer Plattform zu zeigen, zu vermarkten und zu verkaufen, im Gegensatz zu Geschäften, in denen nur Produkte verkauft werden. Für Käufer ist es ein exklusives Forum, in dem es zuversichtlich einkaufen kann, dass ihr Geld nicht verschwendet wird. Unsere einzigartige Rückgaberichtlinie stellt sicher, dass beim Käufer oder Verkäufer keine betrügerische Aktivität stattfindet. Wir haben verschiedene Abonnement-/Mitgliedschaftsangebote für Anbieter verschiedener Kategorien entwickelt.',
-        key.tCHeader1: 'Einführung',
-        key.tCBody1:
-            'Willkommen in Ismmart Stores, auch hiermit als "wir" und "uns" bekannt. Diese Allgemeinen Geschäftsbedingungen regeln Ihren Zugriff auf und die Nutzung unserer Online -Plattform/-Seite sowie alle zugehörigen Websites, Apps, Dienste oder Ressourcen. Sie erkennen an, dass Sie die unten aufgeführten Bedingungen gelesen, verstehen und zustimmen, bevor Sie die ISMMART -Stores verwenden. Diese Allgemeinen Geschäftsbedingungen können jederzeit ohne vorherige Ankündigung durch IsMmart -Stores geändert, geändert, hinzugefügt oder entfernt werden. Wenn keine weitere Benachrichtigung vorliegt, werden Änderungen wirksam, wenn sie auf der Website veröffentlicht werden.',
-        key.tCHeader2:
-            'Wie wird der Vertrag zwischen Ihnen und Ismmart -Läden gebildet?',
-        key.tCBody2:
-            '• Nach dem Aufgeben einer Bestellung erhalten Sie eine Online -Benachrichtigung von uns und bestätigen, dass wir Ihre Bestellung erhalten haben. Bitte beachten Sie, dass dies nicht bedeutet, dass Ihre Bestellung angenommen wurde. Ihre Bestellung stellt uns ein Angebot für den Kauf eines Produkts dar. Alle Bestellungen unterliegen uns von uns. Der Vertrag wird nur dann gebildet, wenn Sie die über diese Plattform bestellten Produkte erhalten. • Der Vertrag bezieht sich nur auf die von Ihnen erhaltenen Produkte. Ein Vertrag für andere Produkte, die möglicherweise Teil Ihrer Bestellung waren, wird gebildet, wenn Sie diese erhalten.',
-        key.tCHeader3: 'Ihr Konto',
-        key.tCBody3:
-            '• Um auf bestimmte Dienste zuzugreifen, die von der Plattform angeboten werden, müssen Sie möglicherweise ein Konto bei uns erstellen oder persönliche Daten zur Verfügung stellen, um die Erstellung eines Kontos abzuschließen. • Sie sind dafür verantwortlich, die Vertraulichkeit Ihrer Benutzeridentifikation, Kennwort, Kontodaten und zugehörigen privaten Informationen aufrechtzuerhalten. Sie erkennen an, dass Sie diese Verpflichtung haben, die Sicherheit Ihres Kontos jederzeit zu erhalten und alle angemessenen Vorkehrungen zu treffen, um die unbefugte Verwendung Ihres Kontos zu verhindern. Sie sollten uns sofort informieren, ob Sie Grund zu der Annahme haben, dass Ihr Passwort jemand anderem bekannt geworden ist oder ob das Passwort auf nicht autorisierte Weise verwendet wird oder wahrscheinlich ist. Sie verstehen und stimmen zu, dass jede Nutzung der Website, der damit verbundenen zuständigen Dienste und/oder eines Zugriffs auf vertrauliche Daten, Informationen oder Mitteilungen durch die Verwendung Ihres Kontos und Passwort halls von jemandem gemacht worden, der von Ihnen autorisiert wurde.'
-                '• Im Falle eines Verstoßes oder eines schwerwiegenden Verstoßes gegen diese Allgemeinen Geschäftsbedingungen behalten wir uns das Recht vor, den Benutzernamen und/oder das Passwort zu ungültig zu machen, nachdem wir eine Kündigung erbracht haben und angemessene Zeit für die Behebung desselben oder die Vorbereitung von Änderungen gemäß den Bedingungen dieses Vertrags geben.',
-        key.tCHeader4: 'Dein Status',
-        key.tCBody4:
-            'Durch die Bestellung über unsere Website/Plattform garantieren Sie dies:'
-                '• Sie können rechtlich verbindliche Verträge abschließen.'
-                '• Sie sind mindestens 18 Jahre alt.'
-                '• Sie sind nicht in einem Land ansässig, in dem eine Zahlung an unserer Website entsprechend diesen Bedingungen gegen das Gesetz verstoßen würde.',
-        key.tCHeader5: 'Lieferung von Produkten',
-        key.tCBody5:
-            'Bei Produkten wird Ihre Bestellung innerhalb einer angemessenen Zeit nach dem zum Zeitpunkt der Bestellung angegebenen Datum erfüllt/zur Verfügung gestellt, es sei denn, es gibt außergewöhnliche Umstände.',
-        key.tCHeader6: 'Garantie',
-        key.tCBody6:
-            'Wir garantieren Ihnen, dass jedes von uns über unsere Website gekaufte Produkt bei der Lieferung seiner Beschreibung von zufriedenstellender Qualität entspricht und für alle Zwecke, für die Produkte dieser Art gewöhnlich geliefert werden, vernünftigerweise geeignet sind. Alle anderen Garantien, Bedingungen oder Begriffe in Bezug auf die Fitness, Handelsfähigkeit, zufriedenstellende Qualität oder Bedingung, unabhängig davon, ob sie durch Statur oder Common Law impliziert sind, sind nach gesetzlich zulässigem zulässig.',
-        key.tCHeader7: 'Stornierungsrechte',
-        key.tCBody7:
-            '• Bei Produkten haben Sie das Recht, Ihre Produktbestellung aus irgendeinem Grund zu stornieren und eine vollständige Rückerstattung zu erhalten, wenn Sie sich als Verbraucher zusammenschließen. Sie erhalten eine vollständige Rückerstattung des für die Produkte gezahlten Preis (ohne Versandkosten). Ihr Recht, einen Vertrag über den Kauf eines Produkts zu kündigen, beginnt ab dem Datum, an dem Sie das Produkt erhalten (wenn der Vertrag gebildet wird). Wenn die Produkte an Sie geliefert wurden, können Sie jederzeit gemäß der Rückgaberichtlinie stornieren. Wenn Sie ein Produkt erhalten haben, das bei der Lieferung beschädigt wird, informieren Sie uns bitte so schnell wie möglich schriftlich. Wenn ein Produkt an uns beschädigt zurückgegeben wird und Sie uns nicht darüber informiert haben, dass das Produkt beschädigt wurde, als Sie es erhalten haben, können wir Ihr Recht abweisen, zu stornieren oder zu empfangen.'
-                '• Sie haben kein Recht, einen Vertrag über die Versorgung mit maßgeschneiderten oder personalisierten Produkten, Zeitschriften oder Zeitschriften, verderblichen Waren oder Software, DVDs oder CDs zu kündigen, bei denen ihr Sicherheitssiegel geöffnet wurde.'
-                '• Im Falle von Produkten müssen Sie uns schriftlich informieren, um einen Vertrag zu stornieren. Wenn die Produkte an Sie geliefert wurden, müssen Sie uns auch die Produkte so schnell wie möglich und zu Ihren eigenen Kosten an uns zurückgeben. Sie haben die gesetzliche Verpflichtung, die Produkte angemessen zu kümmern, während sie in Ihren Händen sind.',
-        key.tCHeader8: 'Übertragung von Rechten und Verpflichtungen',
-        key.tCBody8:
-            '• Wir können unsere Rechte und Pflichten gemäß diesen Bedingungen auf eine andere Organisation übertragen, dies wird jedoch nicht Ihre Rechte oder unsere Verpflichtungen aus dem Vertrag beeinflussen.'
-                '• Sie können Ihre Rechte und Pflichten nur im Rahmen Ihres Vertrags mit uns übertragen, wenn wir dem schriftlich zustimmen.',
-        key.tCHeader9: 'Preis',
-        key.tCBody9:
-            '• Der Preis der Produkte und unsere Lieferkosten werden von Zeit zu Zeit auf unserer Plattform/Website angegeben, außer in Fällen von offensichtlichen Fällen.'
-                '• Die Produktpreise umfassen gegebenenfalls GST/Fed/MwSt. Wenn sich jedoch die Rate der GST/FED/VAT zwischen dem Datum Ihrer Bestellung und dem Datum der Lieferung ändert, passen wir den Preis entsprechend an.'
-                '• Die Produktpreise und Lieferkosten können sich jederzeit ändern. Änderungen wirken sich jedoch nicht auf Bestellungen für Produkte aus, die Sie dann innerhalb einer angemessenen Zeit Maßnahmen ergreifen/erhalten können.',
-        key.tCHeader10: 'Rückerstattungen',
-        key.tCBody10:
-            'Wenn eine Bestellung gemäß Absatz 6 oben storniert wird, erstatten wir die gemäß unserer Rückerstattungsrichtlinie geschuldeten Beträge.',
-        key.tCHeader11: 'Wie verwenden wir Ihre Informationen?',
-        key.tCBody11:
-            'Bitte lesen Sie die Datenschutzrichtlinien, um Einzelheiten darüber zu erhalten, wie wir Ihre Informationen verwenden. Durch die Zustimmung und Akzeptanz dieser Bedingungen stimmen Sie hiermit zu und akzeptieren die Bedingungen unserer Datenschutzrichtlinie.',
-        key.tCHeader12: 'Unsere Haftung gegenüber einem Unternehmen',
-        key.tCBody12:
-            '• Wenn wir diesen Geschäftsbedingungen nicht einhalten, haften wir Ihnen nur für den Kaufpreis der Produkte und nicht für Verluste, die Sie aufgrund unserer Nichteinhaltung des Vertrags, delict (Delict (Delict (Delict) (Delict (Delict (Delict)). einschließlich Fahrlässigkeit), Verstoß gegen die gesetzliche Pflicht oder auf andere Weise).'
-                '• Wir haften nicht für Verluste, die sich aus unserer Nichteinhaltung dieser Bedingungen und Bedingungen ergeben, die in die folgenden Kategorien fallen Wir sind eine absehbare Folge unserer Verstoß.'
-                '• Einkommens- oder Umsatzverlust.'
-                '• Geschäftsverlust.'
-                '• Gewinnverlust.'
-                '• Verlust erwarteter Einsparungen'
-                '• Datenverlust'
-                '• Verwaltung oder Büroverschwendung'
-                'Hinweis: Dieser Absatz gilt nicht, wenn Sie sich als Verbraucher zusammenschließen.',
-        key.tCHeader13: 'Unsere Verbraucher haftet für einen Verbraucher',
-        key.tCBody13:
-            '• Wenn wir diese Bedingungen nicht einhalten, sind wir für den Verlust oder die Beschädigungen verantwortlich, die ein vorhersehbares Ergebnis unserer Verstöße gegen die Bedingungen oder unserer Fahrlässigkeit sind. Verlust oder Schaden sind vorhersehbar, wenn es sich um eine offensichtliche Folge unseres Verstoßes handelte oder von Ihnen und uns zu dem Zeitpunkt, als wir in die Relevanten eingetreten sind, von Ihnen und uns in Betracht gezogen wurde.'
-                '• Wir liefern Ihnen nur die Produkte für den häuslichen und privaten Gebrauch. Sie erklären sich damit einverstanden, das Produkt nicht für kommerzielle, geschäftliche oder erneute Verkaufszwecke zu verwenden, und wir haben keine Haftung für Sie für einen Gewinnverlust, den Verlust der Geschäftsabläufe, die Unterbrechung des Geschäfts oder den Verlust des Geschäfts.'
-                'Hinweis: Dieser Absatz gilt nicht, wenn Sie sich als Unternehmen abschließen.',
-        key.tCHeader14: 'Unser Vertrag mit Ihnen, wenn Sie ein Geschäft sind',
-        key.tCBody14: '• Diese Allgemeinen Geschäftsbedingungen und jedes in ihnen genannte Dokument stellt die gesamte Vereinbarung zwischen uns und ersetzt alle früheren Diskussionen, Korrespondenz, Verhandlungen, frühere Vereinbarung, Verständnis oder Vereinbarung zwischen uns im Zusammenhang mit dem Gegenstand hierfür.'
-            '• Wir erkennen jeweils an, dass bei Abschluss eines Vertrags keiner von uns auf eine Vertretung oder Garantie (unabhängig von unschuldig oder fahrlässig gemacht wird), die nicht in diesen Geschäftsbedingungen dargelegt sind, auf einen Vertrag abgeschlossen wird.'
-            '• Jeder von uns stimmt zu, dass unsere einzige Haftung für diese Zusicherungen und Gewährleistungen, die in dieser Vereinbarung festgelegt sind (unabhängig davon, ob er unabhängig oder fahrlässig gemacht wurde), wegen Vertragsverletzung dienen.'
-            '• Nichts in diesem Absatz begrenzt oder schließt eine Haftung aus.'
-            'Wenn Sie sich als Verbraucher zusammenschließen, gilt dieser Absatz nicht',
-        key.tCHeader15: 'Unser Vertrag mit Ihnen, wenn Sie Verbraucher sind',
-        key.tCBody15:
-            'Wenn Sie sich als Verbraucher zusammenschließen, beabsichtigen wir, uns auf diese Bedingungen und alle Dokumente zu verlassen, die ausdrücklich in ihnen in Bezug auf den Gegenstand eines Vertrags bezeichnet werden. Während wir die Verantwortung für Aussagen und Zusicherungen unserer ordnungsgemäß autorisierten Agenten übernehmen, stellen Sie bitte sicher, dass Sie nach Abweichungen von diesen Bedingungen, die schriftlich bestätigt werden sollen, nach Variationen von diesen Allgemeinen Geschäftsbedingungen bitten.'
-                'Hinweis: Wenn Sie sich im Geschäftsverlauf abschließen, gilt dieser Absatz nicht.',
-        key.tCHeader16: 'Mitteilungen',
-        key.tCBody16: '• Jede Benachrichtigung, die von Ihnen oder uns in Verbindung mit diesen Bedingungen und Bedingungen gesendet werden soll, kann per Brief oder per E -Mail gesendet werden. Mitteilungen an uns sollten an eine der folgenden Adressen gesendet werden:'
-            '> Grundstück Nr. 60 Street 12, G-8/1, Islamabad Capital Territory 44080 Pakistan.'
-            '> Tower 42, 25 Old Broad St, Cornhill, London, Großbritannien'
-            '> E -Mail: bunschafts@shaukatmarwatgroup.com'
-            '• Wir senden Ihnen Mitteilungen per E -Mail an die E -Mail -Adresse, die Sie zum Zeitpunkt der Anmeldung an unsere Plattform angegeben haben'
-            '• Beide von uns kann die Adresse für Mitteilungen ändern, indem sie dem anderen schriftlich die neue Adresse schriftlich mitteilt. Die vorherige Adresse bleibt jedoch 7 Tage nach der Änderung weiterhin gültig.',
-        key.tCHeader17: 'Rechte Dritter',
-        key.tCBody17:
-            'Eine Person, die nicht an diesen Geschäftsbedingungen oder einem Vertrag teilnimmt, hat keine Rechte im Zusammenhang mit ihnen oder im Zusammenhang mit ihnen.',
-        key.tCHeader18: 'Verzicht',
-        key.tCBody18:
-            'Das Versäumnis einer Partei, ein Recht zu üben oder durchzusetzen, das dieser Partei durch diese Allgemeinen Geschäftsbedingungen verliehen wird, gilt nicht als Verzicht auf ein solches Recht oder operiert, um die Ausübung oder Durchsetzung zu irgendeiner Zeit oder Zeiten danach zu verbieten. Kein Verzicht dieser Geschäftsbedingungen ist wirksam, es sei denn, es wird ausdrücklich als Verzicht bezeichnet und wird Ihnen in Übereinstimmung mit Absatz 16 schriftlich mitgeteilt.',
-        key.tCHeader19: 'Trennbarkeit',
-        key.tCBody19:
-            'Wenn ein Gericht oder eine zuständige Behörde entscheidet, dass eine der Bestimmungen dieser Bedingungen oder Bestimmungen eines Vertrags in irgendeinem Umfang ungültig, rechtswidrig oder nicht durchsetzbar ist, wird die Laufzeit in diesem Umfang nur von den verbleibenden Bedingungen abgetrennt, welche wird weiterhin in vollem Umfang gesetzlich zulässig sein.',
-        key.tCHeader20: 'höhere Gewalt',
-        key.tCBody20:
-            'Wir behalten uns das Recht vor, das Datum der Lieferung aufzuschieben oder einen Vertrag für alle Umstände zu kündigen, die über die angemessene Kontrolle hinausgehen, einschließlich, aber nicht beschränkt auf Streik, Sperrung, Störung, Feuer, Explosion, Unfall oder Unterbrechung oder Auswirkungen unseres Geschäfts oder unserer Arbeit und unseres Dies verhindert oder behindert die Lieferung der Waren oder die Leistung des Dienstes.',
-        key.tCHeader21: 'Recht und Gerichtsbarkeit',
-        key.tCBody21: 'Diese Allgemeinen Geschäftsbedingungen und alle Streitigkeiten oder Ansprüche, die sich aus oder im Zusammenhang mit ihnen oder ihrem Gegenstand oder Bildung (einschließlich nicht vertraglicher Streitigkeiten oder Ansprüche) ergeben, unterliegen dem pakistanischen Recht. Sie sollten verstehen, dass Sie durch die Bestellung eines unserer Produkte einverstanden sind, an diese Allgemeinen Geschäftsbedingungen gebunden zu sein.'
-            'Kategorien für die Registrierung:'
-            '1. Grundlegende Mitgliedschaft- Kostenfrei: Kann als kostenlose Mitglieder registriert werden.'
-            '* Kann nichts auf der ISMMART -Plattform verkaufen.'
-            '* Sie haben nur Zugriff auf die Produkte und Geschäfte, die standardmäßig eröffnet oder von den Anbietern und Unternehmen geöffnet werden können, um sie zu besuchen.'
-            '* Sie können alles selbst als direkte Kunden mit gegenseitigem Verständnis mit dem Verkäufer kaufen. IsMmart ist bei Fragen in einem solchen Deal nicht verantwortlich oder sichern.'
-            '2. Premium -Mitgliedschaft - Bezahlte Mitgliedschaft:'
-            '* 5 USD pro Monat mit einer kostenlosen Testversion in einem Monat. Jährliche Abonnementgebühren betragen 99,5 USD.'
-            '* Kann alles auf der Ismmart -Plattform verkaufen.'
-            '* Sie haben Zugang zu allen Produkten und Geschäften, die Sie besuchen können.'
-            '* Alle Angebote von Premium -Mitgliedern auf IsMmart werden von IsMmart gesichert. Wir werden für reibungslose Transaktionen und die Lieferung von Produkten verantwortlich sein. IsMmart wird garantieren, das gegenseitige Verständnis zu ehren, das sowohl Verkäufer als auch Käufer zugestimmt haben.'
-            '* Premium -Mitglieder haben weniger Zugang zu allen Unternehmen weltweit, sowohl als Verkäufer als auch als Käufer, da IsMmart diese Mitglieder direkt garantieren und überprüft, und alle Angebote, die sie abgeben.'
-            '* Da alle Premium -Mitglieder überprüft werden und durch den ISMMART -Überprüfungsprozess verifiziert werden, können sich alle dieser Mitglieder weniger Sorgen machen, überall auf der Welt.'
-            '* Unbegrenzte Lieferungen für förderfähige Gegenstände.'
-            'Hinweis: Alle Mitglieder (Verkäufer und Käufer) werden gebeten, alle von ISMmart genannten Handelsregeln und -verfahren zu befolgen, um jegliche Art von Unannehmlichkeiten bei der Zahlung oder Lieferung zu vermeiden. Der Transaktionswert der Provision Gebührenstruktur unter pkR100.000/- ~ 0,5% Provisionstransaktionswert über PKR 100.000/- und unter pkr250,00,00/- ~ 1,00% Provisionstransaktionswert über PKR250,00,00/- jedoch unter PKR250, Transaktionswert über PKR250,00/- 00.000/- ~ 1,75% Provisionstransaktionswert über PKR250,00.000/- Flat 2,25% Provision für jede Großhandelstransaktion wird eine flache Provision von 3,5% berechnet.'
-            'Hinweis: Der Transaktionswert schließt die Versand- und Versicherungskosten aus.',
         key.exchangeHeader1: '',
         key.exchangeHeader2: 'Wie kehre ich zurück?',
         key.exchangeBody1: 'Kundenzufriedenheit ist garantiert! Wir garantieren die Qualität der Produkte, die über ISMMART -Läden verkauft werden, und wenn Sie mit Ihrem Kauf nicht zufrieden sind, werden wir es richtig machen. Mit Ausnahme einiger unten aufgeführter Bedingungen kann jeder von ISMMART -Stores gekaufte Artikel innerhalb von 14 Kalendertagen nach dem Eingang des Datums zurückgegeben werden.'
@@ -763,5 +658,164 @@ class DutchGerman {
         key.productExists: 'Produkt existiert bereits',
         key.productVariant: 'Produktvarianten',
         key.weightAndDimension: 'Gewicht & Abmessungen',
+        key.tCHeader1: '',
+        key.tCBody1: '\n Alle Referenzen, Formulare, Richtlinien und Vorschriften, die in diesen Begriffen detaillierten oder über die Plattform oder einen verbundenen Verbindungshyperlink (zusammen die Begriffe) verfügbar sind als Plattform bezeichnet). Die Dienste, die unsere Plattform bietet, umfassen unter anderem die Plattform selbst und alle Dienste, die von der Plattform oder von ISMmart bereitgestellt werden und über die Plattform zugänglich sind. Darüber hinaus unterliegen alle neu in den Diensten enthaltenen Funktionen diesen Bedingungen. Sie bestimmen die Bedingungen für Ihre Nutzung der von IsMmart erbrachten Dienste. '
+            '\n Es ist wichtig, die Bedingungen dieser Vereinbarung sorgfältig zu berücksichtigen. Wenn Sie sich entscheiden, auf die Plattform zuzugreifen und sie zu nutzen, wird es verstanden, dass Sie die Bedingungen dieser Vereinbarung gelesen, verstanden und akzeptiert haben sowie der Behandlung Ihrer persönlichen Daten gemäß den in der Datenschutzbestimmungen festgelegten Bedingungen zuzustimmen (https://ismmart.com/privacypolicy). Sollten Sie den Bedingungen der Vereinbarung nicht einverstanden sind, bitten wir Ihnen freundlich, dass Sie auf die Plattform oder ihre Dienste zugreifen oder sie nutzen. '
+            '\n Personen, die das Alter von achtzehn Jahren erreicht haben, sind befugt, die Plattform sowie bestehende Unternehmensunternehmen wie Unternehmen zu nutzen. In Fällen, in denen es anwendbar ist, müssen diese Bedingungen den örtlichen Gesetzen entsprechen. '
+            '\n Jeder unter 18 Jahren muss die Zustimmung seiner Eltern oder Erziehungsberechtigten einholen, bevor er die Plattform nutzen kann. Durch die Zustimmung dieser Bedingungen übernimmt der Elternteil oder der Erziehungsberechtigte Verantwortung für die Handlungen und Zahlungen des Benutzers. Wenn keine Einwilligung eingeholt wurde, muss der Benutzer die Plattform unverzüglich einstellen. '
+            '\n Ismmart hat das Recht, Dritte dazu zu bringen, laufende Hintergrundprüfungen für Sie durchzuführen, und diese können Untersuchungen zu Sanktionen, rechtlichen Streitigkeiten oder negativen Nachrichten umfassen, die mit Ihnen verbunden sind. Wenn ISMMART die Ergebnisse der Hintergrundprüfung nicht genehmigt, kann Ihr Konto möglicherweise storniert und Sie können die Plattform möglicherweise nicht mehr nutzen. '
+            '\n Der IsMmart behält die Fähigkeit bei, diese Begriffe (sowie zusätzliche Vorschriften oder Richtlinien, die auf der Plattform enthalten sind) zu einem bestimmten Zeitpunkt zu ändern. Es wird vermutet, dass Sie regelmäßig über die Bedingungen suchen und Ihre Nutzung der Plattform nach dem Datum der hochgeladenen überarbeiteten Begriffe durchführen, von denen Sie angenommen haben, dass sie ihnen die Zustimmung erteilt haben, unabhängig davon, ob Sie sie gelesen haben oder nicht. '
+            '\n Bilder und Bilder der auf der Plattform ausgestellten Elemente dienen ausschließlich als Referenz und können sich von den tatsächlichen Waren abweichend ausgeben."',
+        key.tCHeader2: '1. Ismmart',
+        key.tCBody2: '1.1. Wer wir sind?'
+            '\n Abhängig von der Region der Welt, aus der diese Plattform genutzt wird, können die Bedingungen der Vereinbarung zwischen Ihnen und Ismmart variieren.'
+            '\n 1.2. Was wir tun?'
+            '\nÜber unsere Plattform bietet IsMmart einen Link zu verschiedenen Anbietern, damit Kunden eine Auswahl an Waren erwerben können, darunter fertige Mahlzeiten, Catering, Getränke, rohe Zutaten und verschiedene Nicht\nLebensmittel\nArtikel. Wenn Sie einen Kauf tätigen (bezeichnet als Bestellung), arbeitet ISMMART als Agent für den Verkäufer und unterstützt die Bestellung und die anschließende Lieferung. Unsere Anbieter können entweder Drittanbieter, Partner oder Teil unseres eigenen Unternehmens sein. Wenn der Verkäufer Dritter ist, werden wir in ihrem Namen für die Zahlung und GST (falls zutreffend für GST\nregistrierte Anbieter) lizenziert. '
+            '\n1.3. Wie Sie uns erreichen?'
+            '\n Unser Kundendienstteam steht Ihnen zur Verfügung, um Sie über unsere Kundensupportnummer oder über die E\nMail von Support@ismsmartindustries.com zu unterstützen.',
+        key.tCHeader3: '2. Nutzung der Plattform und des ISMMART \nKontos',
+        key.tCBody3: '2.1. Um ISMmart zu verwenden, müssen Sie ein Konto erstellen. Während der Registrierung werden Sie aufgefordert, einige Ihrer persönlichen Daten einzugeben, z. B. eine E \nMail \nAdresse, eine Handynummer und ein privates Passwort. Um etwas von der Plattform zu kaufen, werden Sie möglicherweise aufgefordert, Ihre Kreditkartendaten abhängig von Ihrer Zahlungsmethode anzugeben. Es ist wichtig, dass Sie Ihr Passwort geheim halten und ausschließlich für seine Sicherheit verantwortlich sind. Wenn die Ursache von Betrug oder Missbrauch nicht auf etwas anderes zurückzuführen ist, werden Sie für alle auf Ihrem ISMMART \nKonto durchgeführten Transaktionen zur Rechenschaft gezogen. '
+            '\n 2.2. IsMmart übernimmt keine Verantwortung für Bestellungen, die Probleme bei der Zustellung haben, die sich aus falschen, fehlenden oder unvollständigen Daten ergibt, die von Ihnen bereitgestellt werden. Es ist wichtig, dass alle Details genau, authentisch und genau für die effiziente Behandlung der Bestellung, insbesondere Ihre Lieferadresse und Kontaktinformationen, genau sind. '
+            '\n 2.3. Um Ihr ISMMART \nKonto zu entfernen, senden Sie uns bitte eine E \nMail, um es zu fragen. Möglicherweise müssen wir Ihr Konto einschränken, suspendieren oder beenden oder die Plattform verwenden, wenn wir glauben, dass dies notwendig ist. '
+            '\n\t\t 2.3.1. Es scheint, dass jemand anderes als Sie Ihr isMmart \nKonto verwendet. '
+            '\n\t\t 2.3.2. Wenn wir vermuten oder feststellen, dass Sie an Handlungen oder Praktiken teilgenommen haben, die gegen diese Bedingungen, unsere Richtlinien und Anweisungen verstoßen oder an etwas beteiligt sind, das wir individuell als Missbrauch der Plattform beurteilen, wird dies als Verstoß angesehen. '
+            '\n\t\t 2.3.3. Das ständige Versäumnis, die Standards der Hintergrundüberprüfungen zu erfüllen, kann nicht toleriert werden. ',
+        key.tCHeader4: '3. Einschränkungen',
+        key.tCBody4: '3.1. Aktivitäten auf der Plattform verboten '
+            '\nBelow ist eine kurze Sammlung von Aktivitäten, die entweder gegen das Gesetz sind oder von IsMmart auf seiner Plattform nicht zugelassen werden. Wenn jemand an einer dieser nicht zugelassenen Aktivitäten teilnimmt, wird ausschließlich von IsMmart festgelegt, wird eine Untersuchung durchgeführt und rechtliche Schritte ergriffen. Beispiele für die verbotenen Praktiken sind, sind jedoch nicht auf Folgendes beschränkt: '
+            '\n\t\t 3.1.1. Die Plattform kann nicht für Aktivitäten verwendet werden, die gegen die lokalen, staatlichen oder föderalen Vorschriften verstoßen, insbesondere für die Absicht, die täuschend, betrügerisch oder täuschend ist. '
+            '\n\t\t 3.1.2. Veröffentlichen von Material, das gegen die Eigentumsrechte, private Freiheiten, Expositionsrechte, Handelsgeheimnisse oder andere Privilegien von irgendjemandem verstößt. '
+            '\n\t\t 3.1.3. Veröffentlichen Sie Inhalte, die als rechtswidrig, grob, verleumdet, bedrohlich, feindlich, beleidigend, verleumdet, verabscheuungsfähig oder für eine Person oder Organisation verunreinigt werden, wie ausschließlich durch ISMMart oder entsprechend den lokalen Normen festgelegt. '
+            '\n\t\t 3.1.4. Veröffentlichungsmaterial, das IsMmart als Cybermobbing identifiziert hat, unter Verwendung ihres alleinigen Urteils. '
+            '\n\t\t 3.1.5. Die Veröffentlichung von Material, das riskantes und potenziell lebensbedrohliches Verhalten darstellt, ist strengstens untersagt. '
+            '\n\t\t 3.1.6. Teilen Sie Einzelpersonen Telefonnummern, Straßenadressen oder Nachnamen nicht. '
+            '\n\t\t 3.1.7. Das Senden von Weblinks an externe Websites sowie jede Art von HTML\n oder Programmiercode ist nicht zulässig. '
+            '\n\t\t 3.1.8. Veröffentlichen Sie alles, was sich als "Spam" ansieht, wie ausschließlich vom Unternehmen bestimmt wird. '
+            '\n\t\t 3.1.9. Jemanden auszugeben, während ich Inhalte online ausstecke. '
+            '\n\t\t 3.1.10. Das Erhalten von Informationen wie E \nMail \nAdressen von anderen ohne Genehmigung ist nicht zulässig. '
+            '\n\t\t 3.1.11, dass es keinem Einzelnen oder Unternehmen erlaubt, deine Authentifizierung zum Anzeigen oder Ansehen von Kommentaren anzuwenden.'
+            '\n\t\t 3.1.12. Belästigung, Bedrohung, Stalking oder Missbrauch einer Person auf der Plattform. '
+            '\n\t\t 3.1.13. Es ist strengstens verboten, etwas anderes zu nutzen oder zu nutzen oder zu nutzen oder IsMmart, seine Kunden, Lieferanten oder andere Parteien in Gefahr, IsMmart, seine Kunden, Lieferanten oder andere Parteien in Gefahr zu bringen.'
+            '\n\t\t 3.1.14 entmutigen jeden davon, an Aktivitäten teilzunehmen, die durch diese Richtlinien verboten sind.'
+            '\n 3.2. Ismmart besitzt die Autorität, obwohl nicht verpflichtet, einen oder mehrere der folgenden zu tun.'
+            '\n\t\t 3.2.1. Wenn Sie auf die Behauptung informiert werden, dass Inhalte auf der Plattform nicht mit diesen Bedingungen entsprechen, liegt er innerhalb des ausschließlichen Zuständigkeitsbereichs der Plattform, um in die Vorwürfe zu untersuchen und die Entscheidung zu treffen, entweder den Inhalt zu löschen oder den Inhalt zu fordern abgenommen werden. '
+            '\n\t\t 3.2.2. Alle Inhalte, die gegen die Begriffe verstoßen, müssen entfernt werden, einschließlich aller Inhalte, die illegal, disruptiv oder missbräuchlich sind. '
+            '\n\t\t 3.2.3. Im Falle eines Verstoßes gegen diese Bedingungen behalten wir uns das Recht vor, einen Benutzerzugriff auf die Plattform oder ihr ISMMART \nKonto auszusetzen oder zu beenden. '
+            '\n\t\t 3.2.4. Überwachen, überarbeiten oder öffentlich zu einem auf der Plattform vorhandenen Material machen. '
+            '\n\t\t 3.2.5. Die Plattform hat das Recht, alle gemeinsam genutzten Inhalte zu bearbeiten oder zu löschen, unabhängig davon, ob sie sich diesen Richtlinien widersetzt.',
+        key.tCHeader5: '4. geistiges Eigentum',
+        key.tCBody5:
+            'Alle Marken, Logos, Bilder und Servicemarken, einschließlich dieser Begriffe, die auf der Plattform oder in unserem Marketingmaterial angezeigt werden, ob registriert oder nicht registriert, sind das geistige Eigentum von ISMmart und/oder Dritten, die uns mit ihrer Verwendung autorisiert haben (gemeinsam die „Marken“). Sie dürfen diese Marken nicht verwenden, kopieren, reproduzieren, veröffentlichen, hochladen, veröffentlichen, übertragen, verteilen oder ändern. Die Nutzung der Marken auf einer anderen von uns nicht genehmigten Website ist strengstens untersagt. Ismmart wird seine Rechte an geistigem Eigentum in vollem Umfang des Gesetzes, einschließlich der strafrechtlichen Verfolgung, aggressiv durchsetzen. Ismmart weder Haftbefehle noch stellt fest, dass Ihre Verwendung von Materialien, die auf der Plattform angezeigt werden, die Rechte Dritter nicht verletzt, die nicht im Besitz von Ismmart sind oder mit IsMmart verbunden sind. Die Verwendung von Materialien auf der Plattform ist auf eigenes Risiko.',
+        key.tCHeader6: '5. Warenbeschränkungen',
+        key.tCBody6: '5.1. Unsere Plattform verkauft eine Reihe von Produkten, von denen einige durch Gesetze und Vorschriften des Landes beschränkt sind, aus dem sie gekauft werden. Dies kann eine Altersbeschränkung für Zigaretten, Tabak und andere Gegenstände beinhalten, die wir aufgrund der zu diesem Zeitpunkt aktiven gesetzlichen Standards ablehnen können. Wenn Sie diese Waren kaufen, bestätigen Sie, dass Sie die gesetzlichen Qualifikationen zum Kauf erfüllen. '
+            '\n 5.2 Zigaretten/Tabakprodukte („Tabak“)'
+            '\n \n Wir können auf einigen unserer Plattformen, die gesetzlich zulässig sind, Tabak zugelassen. Wir versuchen nicht, den Kauf oder die Nutzung von Tabak in irgendeiner Funktion voranzutreiben, zu unterstützen oder zu überzeugen. Nur Menschen im rechtmäßig etablierten Alter können Tabak kaufen. Ismmart, der Verkäufer und das Lieferpersonal haben die Befugnis, eine Anordnung nach ausschließlichen Ermessen abzulehnen. '
+            '\n\t\t 5.2.1. Vor dem Abgeben von Tabak müssen die ordnungsgemäßen Dokumentation zur Überprüfung des Alters wie z. B. eine Identifikationskarte erhalten. '
+            '\n\t\t 5.2.2. Der Nachweis des Rechtsalters muss vorgelegt werden, um die Lieferung zu akzeptieren. Andernfalls führt dies zu einer Ablehnung der Lieferung. '
+            '\n\t\t 5.2.3. Unabhängig von der Begründung wird keiner Person die Lieferung von Gegenständen gewährt. '
+            '\n\t\t 5.2.4. Jeder Vorschlag für Tabak auf der Plattform wird für ungültig als illegal eingestuft.',
+        key.tCHeader7: '6. Bestellungen',
+        key.tCBody7: '6.1. Sobald eine Bestellung über IsMmart aufgegeben wurde, erhalten Sie eine Bestätigungs \nE \nMail mit der Bestellbelegung. Diese Quittung deckt auch alle relevanten Liefergebühren oder Steuern wie GST ab. '
+            '\n 6.2. Unsere Anbieter verlangen, dass ein festgelegter Mindestbestellwert erreicht wird, bevor eine Bestellung abgeschlossen und an Sie versendet werden kann. Wenn eine Bestellung den festgelegten Mindestbestellwert nicht erfüllt, können Sie den verbleibenden Betrag zahlen, der zur Erfüllung des Mindestbestellwerts erforderlich ist, oder zusätzliche Waren zur Bestellung hinzufügen. '
+            '\n 6.3. Ismmart und der Verkäufer werden alle Anstrengungen unternehmen, um Ihre besonderen Anweisungen für eine Bestellung zu ehren. In Situationen, in denen es nicht machbar, plausibel oder praktisch ist, werden ISMMART und/oder der Anbieter mit der Erstellung der Reihenfolge nach typischen Praktiken fortgesetzt. Weder ISMmart noch der Anbieter sind verpflichtet, eine Bestellung zu kompensieren oder zu ersetzen, die die von Ihnen angegebenen einzelnen Anfragen nicht erfüllt. '
+            '\n 6.4. Ismmart ist nicht verpflichtet, die Zutaten oder Allergene in den auf der Plattform vorgestellten Waren offenzulegen. Wir stellen nicht sicher, dass die Waren allergenfrei sind, es sei denn, das Gesetz gibt anders an. Daher müssen diejenigen mit Allergien, nachteiligen Reaktionen auf bestimmte Lebensmittel oder bestimmte Ernährungsbedürfnisse den Anbieter konsultieren, bevor sie auf unserer Plattform einen Kauf tätigen. '
+            '\n 6.5. Es ist unerlässlich, sich daran zu erinnern, dass Ihre Bestellung zusätzlicher Bestimmungen des Verkäufers ausgesetzt sein könnte. '
+            '\n 6.6. Vor der Bestellung aufgeben '
+            '\n\t\t 6.6.1. Um Anbieter anzuzeigen, die für die Lieferung in Ihrer Region zur Verfügung stehen, ist es für Sie wichtig, die Lieferadresse anzugeben. '
+            '\n\t\t 6.6.2. Nachdem Sie einen Anbieter ausgewählt haben, werden Sie zu ihrer Menüseite geführt, von der Sie die gewünschten Produkte in den Wagen auswählen und hinzufügen können. '
+            '\n 6.7. Die Bestellung aufgeben'
+            '\n\t\t Um eine Bestellung erfolgreich aufzugeben, beobachten Sie bitte die angezeigten Eingabeaufforderungen, die angezeigt werden, wenn Sie "Checkout" drücken. Möglicherweise müssen Sie zusätzliche Informationen anbieten, damit wir die Bestellung abschließen können. Stellen Sie sicher, dass alle angegebenen Informationen, einschließlich der Kosten, Lieferung von Angaben, persönlichen Angaben, Zahlungsdaten und Gutscheincodes (fundiert) präzise, ​​genau und fertiggestellt sind, bevor Sie auf „Platzieren“ klicken. Wenn Sie eine E \nMail \nBestätigung erhalten, die Ihre Bestellbeleg bei uns hat, haben Sie Ihre Bestellung erfolgreich aufgegeben. '
+            '\n 6.8. Stornierung einer Bestellung '
+            '\n\t\t Besuchen Sie das Assistenzzentrum auf der Plattform, um Ihre Bestellung zurückzuziehen. Wenn der Verkäufer die Bestellung noch nicht akzeptiert hat, können Sie Ihr Recht auf Stornierung möglicherweise trotzdem ausüben. '
+            '\n 6.9. Rückerstattungen '
+            '\n \n 6.9.1. Online \nZahlungsbestellungen '
+            '\n\t\t Sie können eine Rückerstattung erhalten, wenn Sie Ihre Bestellung kündigen, bevor sie vom Verkäufer akzeptiert wurde. Wenn der Anbieter jedoch Ihre Bestellung bereits angenommen hat und Sie sich für die Absage entscheiden, erhalten Sie keine ganz oder teilweise eine Rückerstattung und verfallen die Lieferung Ihrer stornierten Bestellung. '
+            ' \n \n 6.9.2. Cash\non\nDelivery\nBestellungen '
+            '\n\t\t Ihre Fähigkeit, Ihre Bestellung zu stornieren, beschränkt sich auf die Bestellungen, die von einem Anbieter nicht akzeptiert wurden. Wenn Sie sich dafür entscheiden, eine genehmigte Bestellung abzuheben, können Sie keine Erstattungen für die Zahlung von Cash\non\nDelivery und die Lieferung Ihrer stornierten Bestellung verfallen. Diese spezielle Rückerstattungsoption gilt nicht bei der Arbeit mit unseren Affiliate \nLieferpartnern. '
+            '\n\t\t Vor der Bearbeitung einer Rückerstattung müssen wir möglicherweise zusätzliche Informationen oder Dokumente anfordern, die als Nachweis eines physischen Erhalts von anerkannten Bestellungen dienen. Wenn Sie uns die angefragten Details oder Aufzeichnungen nicht zur Verfügung stellen, haben wir das Recht, die Anfrage für die Rückerstattung abzulehnen. '
+            '\n\t\t Für den Fall, dass Sie die Rückerstattung nicht erhalten, empfehlen wir Ihnen, Ihr Bankkonto zu überprüfen, sich mit Ihrer Bank oder Ihrer Kreditkartenfirma in Verbindung zu setzen, da es einige Zeit in Anspruch nehmen kann, bis der zu erstattete Betrag erstattet wird. Wenn die zuvor erwähnten Methoden befolgt werden und Sie die Rückerstattung immer noch nicht erhalten, wenden Sie sich bitte an unser Kundendienstteam mit einer der Kommunikationsmethoden in Abschnitt 1.3. '
+            '\n 6.10. Wenn IsMmart die Überzeugung hat, dass es betrügerische Aktivitäten mit Ihrem ISMMART \nKonto, Ihrer Bestellung oder beides in Verbindung gebracht wurden, behält sich das Recht vor, eine Bestellung zu stornieren, auszusetzen, zu deaktivieren oder Ihr ISMMART \nKonto zu beenden. ',
+        key.tCHeader8: '7. Preise und Zahlungen',
+        key.tCBody8: '7.1. Die auf der Plattform angegebenen Preise werden in lokalem Geld angegeben, wobei alle erforderlichen Steuer enthalten sind. Sie erkennen an, dass sich die Gebühren und Vorschläge auf der Plattform von den Kosten und Angeboten unterscheiden können, die von unseren Lieferanten an anderen Standorten verfügbar sind (wie ihre eigenen Websites, mobilen Apps oder physischen Geschäfte). '
+            '\n 7.2. Die Preise für die Waren, die wir auf unserer Plattform zeigen, können das Eventualverband auf den Verkäufer hin abhängig machen, und wenn sie nach geltenden Rechtsvorschriften erforderlich sind, können sie sich auch unterscheiden. '
+            '\n\t\t 7.2.1. Anbieter, die bei der Güter\n und Dienstleistungssteuer registriert sind, müssen diese Steuer oder ein anderes geltendes Äquivalent einbeziehen. '
+            '\n\t\t 7.2.2 für Anbieter, die sich nicht für die Steuer\n und Dienstleistungssteuer registriert haben, sind keine derartigen Steuern aufzunehmen.'
+            '\n 7.3. Für jede Bestellung wird eine Liefergebühr anfallen, sofern die folgenden Bedingungen nicht erfüllt sind. '
+            '\n\t\t 7.3.1. Sie haben einen gültigen Werbe\n oder Rabattgutschein und bewerben Sie ihn an der Kasse. oder'
+            '\n\t\t 7.3.2. es wird sonst angegeben. '
+            '\n 7.4. Zum Zeitpunkt der Aufgabe jeder Bestellung können die Preise und andere Gebühren (z. B. Lieferung, Mindestbestell\n oder Servicegebühren), wie auf der Plattform angezeigt, einer Variation unterliegen. '
+            '\n 7,5. Vor der Bestätigung der Kasse erhalten Sie einen Überblick über die Preise, Liefergebühren und andere damit verbundene Kosten. Sobald Sie die Bestellung aufgeben, stimmen Sie den Summen sowie den zusätzlichen Gebühren zu, die alle für Sie zur Verfügung gestellt wurden. '
+            '\n 7.6. Sie erhalten die Auswahl mehrerer Zahlungsoptionen, wenn Sie eine Bestellung über die Plattform bezahlt, z. B. Master\nKarte, Visa\nKarte oder Cash\non\nDelivery. '
+            '\n 7.7. Ihr ISMMART \nKonto kann eine Möglichkeit bieten, einige oder alle Ausgaben für Ihre Bestellung abzudecken. Sollten Sie verfügbare Credits oder gültige Werbe\n oder Rabattgutscheine geben. '
+            '\n 7.8. Nachdem eine Bestellung erfolgreich aufgegeben wurde, erhalten Sie eine E \nMail \nBestätigung von uns mit Ihrem Bestellbeleg. '
+            '\n 7.9. Zahlungsmethoden: IsMmart hält die Befugnis, mehr Zahlungsmethoden vorzulegen und/oder aktuelle Zahlungssysteme abzuheben, wenn es entscheidet. Wenn Sie sich für ein Web\nZahlungssystem entscheiden, wird die Überweisung von unseren Zahlungsanbietern von Drittanbietern verwaltet. Nach Ihrer Vereinbarung werden Ihre Kreditkarten\n / Zahlungsinformationen für potenzielle Transaktionen mit unseren Zahlungslieferanten von Drittanbietern für potenzielle Transaktionen aufbewahrt. IsMmart speichert keine Ihrer Kreditkarten\n oder Zahlungsinformationen. '
+            '\n 7.10 Um eine erfolgreiche Zahlung Ihrer Bestellung zu gewährleisten, stellen Sie bitte sicher, dass Sie über genügend Geld auf Ihrer Belastung oder Ihrer Kreditkarte verfügbar sind. Bei Bedarf ist ISMMART für alle Zahlungen auf unserer Plattform verantwortlich, einschließlich Rückgaben, Rückbuchungen, Annitur und Streitigkeiten, solange sie fair sind und den Bedingungen unserer Website entsprechen.',
+        key.tCHeader9: '8. Liefer\n und Partnerzustellung',
+        key.tCBody9: '8.1. Lieferbereiche '
+            ' \n \n Es ist klar, dass unsere Anbieter \nWarenbereiche spezifisch für jede Lieferfläche sind und sich von Fläche zu Gebiet unterscheiden. Wenn Sie Ihre Lieferadresse in die Plattform eingeben, können Sie die Anbieter, die Ihnen dann zur Verfügung stehen, überprüfen. Beachten Sie, dass sich die Abbietungsbereiche aufgrund der Auswirkungen von Wetter, Verkehr und zwanger Majeur ändern können. '
+            '\n 8.2. Lieferzeit'
+            ' \n \n ismmart muss Ihre Bestellung an die angegebene Adresse liefern. Wir senden einen ungefähren Liefertermin an Ihre E \nMail. Aufgrund externer Faktoren, die wir jedoch nicht kontrollieren können (z. B. Reihenfolge, Ort, Tageszeit, Wetterbedingungen, Verkehrsbedingungen usw.), kann die tatsächliche Lieferzeit von der Schätzung abweichen. Wir empfehlen, dass entweder Sie oder jemand, dem Sie vertrauen, an dem Lieferort anwesend ist, wenn die Bestellung eintrifft. Für den Fall, dass die Bestellung Tabak enthält (falls zutreffend) und der Empfänger unter dem gesetzlichen Alter liegt oder nicht ordnungsgemäß identifiziert wird, hat ISMMART das Recht, die Lieferung abzulehnen. '
+            '\n 8.3. Erfolglose oder fehlgeschlagene Lieferungen '
+            ' \n \n 8.3.1. Trotz anderer Bestimmungen, die in diesen Begriffen vorhanden sind, bemühen wir uns, eine Bestellung zu erteilen, doch aufgrund von Bedingungen, die von Ihnen verursacht wurden, beispielsweise, aber nicht beschränkt auf: '
+            '\n\t\t (i) niemand war anwesend oder verfügbar, um die Bestellung zu erhalten;'
+            '\n\t\t (ii) der Kunde war trotz der Versuche, den Kunden über die bereitgestellte Telefonnummer zu erreichen, uneingeschränkt.'
+            '\n\t\t (iii) Mangel an angemessenem oder ausreichendem Zugang, um die Bestellung erfolgreich zu liefern;'
+            '\n\t\t (iv) Fehlen eines geeigneten oder sicheren Ortes, um die Bestellung zu verlassen; oder'
+            '\n\t\t (v) Bei eingeschränkten Waren erfüllte der Kunde nicht die gesetzlichen Altersanforderungen oder die Lieferung für den Kunden nicht sicher oder angemessen, um die eingeschränkten Waren zu erhalten.'
+            '\n\t\t ismmart hält das Privileg, die Bestellung zu stornieren, ohne Ihnen eine Erstattung oder Lösung zu erteilen, wenn der Kontakt mit Ihnen über Mittel wie ein Anruf, eine Nachricht oder eine E\nMail nicht mehr über die Lieferprobleme und die folgenden Maßnahmen informiert wird.'
+            ' \n \n 8.3.2. No\nShow\nStornierungen '
+            '\n\t\t Im Falle Ihrer Nichtverfügbarkeit oder Unfähigkeit, die Bestellung innerhalb von 10 Minuten nach der Ankunft der Lieferadresse zu erhalten, wird ISMMART berechtigt, die Bestellung zu stornieren, ohne eine Erstattung oder Alternative anzubieten.'
+            '\n 8.4. Falsche Bestellung, fehlende Artikel, defekte Waren '
+            ' \n \n Wenn nach Erhalt Ihrer Bestellung herausgegeben wird, dass es Probleme gibt (z. Politik. In einigen Gelegenheiten benötigt ISMmart möglicherweise fotografische Beweise und weitere Details, um das Problem vollständig mit Ihrer Bestellung zu analysieren. Sollte festgestellt werden, dass die Reihenfolge und/oder Produkte unterdurchschnittlich unterdurchschnittlich eine unterdurchschnittliche Bedingung oder Qualität sind, geben wir eine Entschädigung für die Bestellung oder einige seiner Elemente. '
+            '\n 8.5. Partnerzustellung '
+            ' \n \n Manchmal können Bestellungen über einen unserer Partner an Sie geliefert werden („Partnerabgabe“). Obwohl wir unser Bestes geben, um Ihnen vorherige Warnung in Bezug auf die Lieferung von Partnern zu geben, ist dies möglicherweise nicht immer erreichbar. Wenn die Partnerzustellung verwendet wird, werden Sie möglicherweise aufgefordert, sich direkt mit dem Partner in Verbindung zu setzen, wenn Probleme oder Hold\nups mit Ihrer Lieferung vorhanden sind. IsMmart haftet in keiner Weise für Bestellungen oder Produkte, die von Partnern geliefert werden. ',
+        key.tCHeader10: '9. Gutscheine, Rabatte und Werbeaktionen',
+        key.tCBody10: '9.1. IsMmart startet gelegentlich Marketing\n und Werbeaktivitäten mit Gutscheincodes, Rabatten und anderen Angeboten für die Plattform (als "Gutscheine" bezeichnet). Gutscheine sind Zeitlimits, Einlösungsfenster, Verwendung von Grenzen, Verfügbarkeit und anderen Kriterien ausgestattet. '
+            '\n 9.2. Gutscheine können nicht mit anderen Angeboten, Rabatten oder Gutscheinen für die Verwendung kombiniert werden. '
+            '\n 9.3. Sofern keine Bestimmung vorliegt, die etwas anderes vorschlägt, dürfen Gutscheine nur in unserer Plattform verwendet werden. '
+            '\n 9.4. Gutscheine sind weder übertragbar noch austauschbar, nicht erstattungsfähig und können nicht gegen eine Art Geldkompensation ausgetauscht werden. '
+            '\n 9,5. IsMmart behält sich das Recht vor, Änderungen an relevanten Bedingungen in Bezug auf die Gutscheine ohne vorherige Warnung vorzunehmen. Sie können sogar die Verwendung eines Gutscheins ohne Vorankündigung widerrufen, absetzen oder ablehnen. '
+            '\n 9.6. Zu jedem Zeitpunkt kann IsMmart, vollständig nach eigenem Ermessen, entscheiden, Sie oder bestimmte Anbieter ohne vorherige Benachrichtigung zu entlasten, abzulehnen und/oder bestimmte Anbieter zu verwenden.',
+        key.tCHeader11:
+            '10. Zusicherungen, Garantien und Einschränkung der Verbindlichkeiten',
+        key.tCBody11: '10.1 Zusicherungen und Garantien '
+            ' \n \n Sie stimmen zu, dass alle Inhalte auf der Plattform "wie es ist" und "wie verfügbar" sind, und Sie verstehen, dass jeder Zugriff oder jede Nutzung der Plattform und alle zugehörigen Produkte, Waren und Dienstleistungen auf eigenes Risiko sind.'
+            ' \n \n Darüber hinaus dienen alle Produktbilder nur zur Darstellung und könnten anders aussehen als das tatsächliche Produkt. IsMmart bemüht sich, die Plattform zugänglich und funktionsfähig zu halten. Sie können jedoch nicht garantieren, dass der Service sicher, zeitnah, ohne Fehler, technische Probleme oder Viren ist. Temporäre Serviceausfälle sind aufgrund der Systemwartung oder der Erkrankung von Ereignissen der Stadtrolle zu erwarten.'
+            '\n 10.2 Haftungsbeschränkung'
+            ' \n \n Wie gesetzlich festgelegt, lehnt Ismmart (zusammen mit seinen Mitarbeitern, Vorgesetzten, Vertretern, Mitarbeitern und Mutter oder Vaterfirma) alle Verantwortung ab (unabhängig davon, ob die Entwicklung einer Vereinbarung, in Nachlässigkeit oder auf andere Weise) wegen Unglücks oder Schadens das ist Sie oder eine andere Person können in Verbindung mit unserer Plattform, unseren Diensten und allen angeschlossenen Standorten neben jedem dort veröffentlichten Substanz oder Material durchlaufen. Ihre exklusive Wahl in Bezug auf die Nutzung der Plattform besteht darin, diese Verwendung zu stoppen. Die ISMMART \nOrganisationen, ihre Betreiber, Vertreter und Servicelieferanten werden nicht für umständliche, außergewöhnliche, zufällige, zurückhaltte oder unglaubliche Schäden verantwortlich Diese Entlassungen von Umschad\n, ungewöhnlichen, zurückhaltenden und außergewöhnlichen Schäden beinhalten ohne Einschränkung, Schäden für verlorene Vorteile, verlorene Informationen, Unglück der Wohlwollen, Arbeitsunterbrechung, PC \nEnttäuschung oder Mangel oder andere geschäftliche Schäden oder Unglück Die IsMmart \nSubstanzen, ihre Betreiber, Vertreter und Servicelieferanten waren über die Wahrscheinlichkeit und unabhängig von der rechtmäßigen oder gleichwertigen Theorie ausgebildet worden, von der die Behauptung abhängig ist. oder zufällige Schäden, in solchen Zuständen oder Zuständigkeiten, Ismmart, den IsMmart \nElementen, seinen Betreibern, Delegierten und Servicelieferanten ist auf das gesetzlich zulässige Grad begrenzt. '
+            '\n 10.3 Vertretungen des Anbieters'
+            ' \n \n ismmart ist weder für die Handlungen für Ihre gelieferten Waren verantwortlich gemacht. Darüber hinaus übernehmen sie keine Verantwortung für die Qualität, den Zustand oder ein anderes Attribut der Waren oder Dienstleistungen oder garantieren die Genauigkeit von Menüinformationen, Fotos und/oder Bildern, die auf den Anbietern angezeigt werden, die auflisten/angeboten werden. Es ist jedoch zu beachten, dass keine Klauseln innerhalb dieser Nutzungsbedingungen den Anbieter von der Haftung in Fällen von Tod oder Personenverletzungen infolge ihrer eigenen Fahrlässigkeit oder ihres böswilligen Verhaltens befreien.',
+        key.tCHeader12: '11. Haftung der Verkäufer',
+        key.tCBody12:
+            'Die Anbieter haben die vollständige Rechenschaftspflicht für die Bereitschaft, den Zustand und das Kaliber der an Sie verkauften Produkte. Bei Lieferungen von Drittanbietern sind diese Partner für den Transport der Artikel und/oder Bestellungen verantwortlich. IsMmart hat keine Pflicht für Defizit, Schaden, Ausgaben, Anklage oder Strafe, die aus der vertraglichen Anleihe mit dem Partner stammen können.',
+        key.tCHeader13:
+            '12. Schutz für personenbezogene Daten (persönliche Informationen)',
+        key.tCBody13:
+            'Indem Sie diese Bedingungen akzeptieren, geben Sie Ihre ausdrückliche Genehmigung für ISMMT und die damit verbundenen Unternehmen aus, Ihre persönlichen Daten zu sammeln, zu verwenden, zu verarbeiten und zu preisenden, wie in unseren Datenschutzrichtlinien angegeben. Dieses Dokument ist als Teil dieser Begriffe beigefügt und kann sich unter (https://ismmart.com/privacypolicy) oder unter den Links auf unserer Plattform anzeigen.',
+        key.tCHeader14: '13. Entschädigung',
+        key.tCBody14: '13.1 Nutzung der Plattform; '
+            '\n 13.2 Nutzung der Dienste; oder'
+            '\n 13.3 Verstoß gegen diese Begriffe.',
+        key.tCHeader15: '14. Links und Websites von Drittanbietern',
+        key.tCBody15:
+            'Wir können keine Verantwortung für Schäden oder Verluste übernehmen, die Ihnen durch Klicken auf Links Dritter entstehen können, die auf der Plattform enthalten sind. Diese Links führen Sie möglicherweise zu Produkten, Websites, Dienstleistungen und Angeboten, die uns nicht besitzen oder von uns verwaltet werden. Wir können nicht für Inhalte, Funktionen, Sicherheit, Dienste, Datenschutzrichtlinien oder andere Aspekte dieser Websites Dritter bürgen. Daher können wir nicht für Verluste oder Schäden im Zusammenhang mit Ihrem Zugang und der Verwendung dieser Links Dritter haftbar gemacht werden.',
+        key.tCHeader16: '15. Kündigung',
+        key.tCBody16:
+            'IsMmart ist die Befugnis, Ihr Konto zu deaktivieren, auszusetzen oder zu kündigen und Ihren Zugriff auf oder die Verwendung der Plattform zu verbieten, die auch jede Art von Lieferservice umfasst, die Ihnen in Bezug auf eine Bestellung gegeben werden. Dies kann auf eine beliebige Anzahl von Gründen zurückzuführen sein, z. Aktivität oder Verhalten, die gegen die Begriffe verstoßen. IsMmart könnte, aber nicht verpflichtet, Sie vor der Einschränkung Ihrer Nutzung der Plattform aufmerksam zu machen.',
+        key.tCHeader17: '16. Änderungen',
+        key.tCBody17:
+            'Zu jedem Zeitpunkt behält sich ISMmart das Recht vor, die gegenwärtigen Bedingungen nach eigenem Ermessen zu überarbeiten. Solche Änderungen treten in Kraft, sobald sie auf der Website im Rahmen der geltenden Gesetzgebung veröffentlicht werden. Infolgedessen ist es Ihre Pflicht, sicherzustellen, dass Sie mit der aktuellen Version der Begriffe vertraut sind. Wenn Sie mit den Änderungen, ob vollständig oder teilweise, unzufrieden sind, müssen Sie die Plattform sofort verwenden.',
+        key.tCHeader18: '17. Trennbarkeit',
+        key.tCBody18:
+            'Sollte ein Teil dieser Begriffe von einem zuständigen Gerichtshof als rechtswidrig eingestuft werden, bleiben die verbleibenden Bestimmungen intakt. Darüber hinaus darf ein Verzicht auf eine Bestimmung dieser Begriffe nicht als nachfolgende oder anhaltende Verzicht auf die genannte oder andere Bestimmung ausgelegt werden.',
+        key.tCHeader19: '18. Leitungsrecht',
+        key.tCBody19:
+            'Die Gesetzgebung der Nation, in der die anwendbare ISMMART \nEinrichtung festgelegt wird, hat die Autorität und formt das Verständnis dieser Begriffe.',
+        key.tCHeader20: '19. Kontaktieren Sie uns',
+        key.tCBody20:
+            'Wenn Sie Fragen oder Meinungen haben, die Sie mit uns teilen möchten, rufen Sie bitte unsere Support \nNummer wie auf der Website angegeben.',
+        key.tCHeader21: '20. vorherrschende Sprache',
+        key.tCBody21:
+            'Im Falle einer Diskrepanz zwischen den Begriffen ist die englische Version verbindlich. Die englischsprachige Ausgabe dieser Begriffe gilt als oberste und jegliche Unterschiede im Vergleich zu den übersetzten Versionen werden nicht berücksichtigt.',
       };
 }

@@ -1,5 +1,4 @@
 import 'package:dropdown_search/dropdown_search.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -469,11 +468,11 @@ class VendorSignUp1View extends StatelessWidget {
                           'By clicking ‘Create Account’, you’ve read and agreed to our ',
                     ),
                     TextSpan(
-                        text: langKey.termsAndConditions.tr,
-                        style: newFontStyle0.copyWith(
-                          decoration: TextDecoration.underline,
-                          color: newColorLightGrey2,
-                        ),
+                      text: langKey.termsAndConditions.tr,
+                      style: newFontStyle0.copyWith(
+                        decoration: TextDecoration.underline,
+                        color: newColorLightGrey2,
+                      ),
                     ),
                     TextSpan(
                       text:
