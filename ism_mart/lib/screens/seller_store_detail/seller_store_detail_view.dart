@@ -285,7 +285,7 @@ class SellerStoreDetailView extends GetView<ProductController> {
                                   productModel: productModel,
                                   onTap: () {
                                     Get.to(() => ProductDetailView(), arguments: {
-                                      'isBuyer': false,
+                                      'isBuyer': true,
                                       'productID': productModel.id
                                     });
                                   },
