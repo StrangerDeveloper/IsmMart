@@ -17,8 +17,9 @@ import '../../widgets/custom_text.dart';
 class ProductDetailView extends StatelessWidget {
   ProductDetailView({super.key});
 
-  final controllerTwo = Get.create<ProductDetailViewModel>(() => ProductDetailViewModel());
-  ProductDetailViewModel viewModel = Get.put(ProductDetailViewModel());
+  final controllerTwo =
+      Get.create<ProductDetailViewModel>(() => ProductDetailViewModel());
+  final ProductDetailViewModel viewModel = Get.put(ProductDetailViewModel());
 
   @override
   Widget build(BuildContext context) {
@@ -124,9 +125,9 @@ class ProductDetailView extends StatelessWidget {
                             ),
                           ),
                         ),
+                        SizedBox(height: 10),
                         customDivider(),
                         sellerStore(),
-                        customDivider(),
                       ],
                     ),
                   ),
@@ -644,96 +645,104 @@ class ProductDetailView extends StatelessWidget {
   }
 
   Widget sellerStore() {
-    return InkWell(
-      onTap: () {
-        Get.toNamed(
-            '/storeDetails/${viewModel.productModel.value.sellerModel!.id}');
-      },
-      child: Padding(
-        padding: const EdgeInsets.only(top: 10, bottom: 10, right: 10),
-        child: Row(
-          children: [
-            Obx(
-              () => CachedNetworkImage(
-                height: 45,
-                width: 45,
-                imageUrl:
-                    viewModel.productModel.value.sellerModel?.storeImage ?? '',
-                imageBuilder: (context, imageProvider) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                        image: imageProvider,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  );
-                },
-                errorWidget: (context, url, error) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                        image: AssetImage('assets/images/no_image_found.jpg'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  );
-                },
-                placeholder: (context, url) {
-                  return const Center(
-                    child: CircularProgressIndicator(strokeWidth: 0.5),
-                  );
-                },
-              ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 12, right: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Obx(
-                      () => Text(
-                        "${viewModel.productModel.value.sellerModel?.storeName ?? viewModel.productModel.value.sellerModel?.user?.firstName ?? viewModel.productModel.value.sellerModel?.user?.name ?? ""}",
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: GoogleFonts.dmSans(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14,
-                          color: Color(0xff24282D),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 7),
-                    Row(
-                      children: [
-                        Text(
-                          'Official Store',
-                          style: GoogleFonts.dmSans(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 12,
-                            color: Color(0xff24282D),
+    return viewModel.isBuyer ? Column(
+      children: [
+        Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: () {
+              Get.toNamed(
+                  '/storeDetails/${viewModel.productModel.value.sellerModel!.id}');
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(top: 15, bottom: 15, right: 10),
+              child: Row(
+                children: [
+                  Obx(
+                    () => CachedNetworkImage(
+                      height: 45,
+                      width: 45,
+                      imageUrl:
+                          viewModel.productModel.value.sellerModel?.storeImage ?? '',
+                      imageBuilder: (context, imageProvider) {
+                        return Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                              image: imageProvider,
+                              fit: BoxFit.cover,
+                            ),
                           ),
-                        ),
-                        SizedBox(width: 5),
-                        SvgPicture.asset('assets/svg/shield_done.svg')
-                      ],
-                    )
-                  ],
-                ),
+                        );
+                      },
+                      errorWidget: (context, url, error) {
+                        return Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                              image: AssetImage('assets/images/no_image_found.jpg'),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        );
+                      },
+                      placeholder: (context, url) {
+                        return const Center(
+                          child: CircularProgressIndicator(strokeWidth: 0.5),
+                        );
+                      },
+                    ),
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 12, right: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Obx(
+                            () => Text(
+                              "${viewModel.productModel.value.sellerModel?.storeName ?? viewModel.productModel.value.sellerModel?.user?.firstName ?? viewModel.productModel.value.sellerModel?.user?.name ?? ""}",
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: GoogleFonts.dmSans(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14,
+                                color: Color(0xff24282D),
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 7),
+                          Row(
+                            children: [
+                              Text(
+                                'Official Store',
+                                style: GoogleFonts.dmSans(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 12,
+                                  color: Color(0xff24282D),
+                                ),
+                              ),
+                              SizedBox(width: 5),
+                              SvgPicture.asset('assets/svg/shield_done.svg')
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  Icon(
+                    CupertinoIcons.chevron_right,
+                    color: Color(0xff929AAB),
+                    size: 20,
+                  )
+                ],
               ),
             ),
-            Icon(
-              CupertinoIcons.chevron_right,
-              color: Color(0xff929AAB),
-              size: 20,
-            )
-          ],
+          ),
         ),
-      ),
-    );
+        customDivider(),
+      ],
+    ) : SizedBox();
   }
 
   Widget priceAndCartBtn() {
@@ -845,6 +854,7 @@ class ProductDetailView extends StatelessWidget {
 
   Widget customDivider() {
     return Divider(
+      height: 0,
       color: Color(0xffEEEEEE),
     );
   }

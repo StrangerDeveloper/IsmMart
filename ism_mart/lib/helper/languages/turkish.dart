@@ -325,111 +325,6 @@ class Turkish {
             'ISMMART mağazaları, kurye öğeyi iade merkezimize geri döndürdüğünde genellikle 3 iş günü içinde işlem iadeleri. Müşteri hizmetleri ekibimiz, yazılı şikayetinizi iade politikasına uygun olarak alır almaz nakliye etiketini sağlayacaktır. Öğe alınır ve geri ödeme tamamlanmadan önce uygun kalite kontrolü yapılacaktır. Ödeme yöntemine bağlı olarak geri ödeme sürelerinin değişebileceğini lütfen unutmayın. Üç ila on dört iş günü sürebilir. İade edilen ürün için ödediğiniz parayla birlikte nakliye maliyeti de geri ödenir. Örneğin, Ayesha ürünü aldığında, hatalı bulur. Çözüm için satıcı ile temasa geçeceğimiz şikayet merkezimize bir şikayette bulunacak. İddiası doğru kanıtlanmışsa, hatalı öğeyi satıcıya geri döndürecek ve ödemesi (Ismmart tarafından beklemede tutulan, kendisine geri alınacak. Bazı ürünler/hizmetler iade edilemez ve açıklamada tanımlanacaktır. ürün/hizmet.',
         key.aboutBody6:
             'Ismmart, hem alıcıya hem de satıcıya yüzde 100 güvenlik sunan benzersiz bir platformdur. Ürün veya hizmetlerinizi sadece ürünler sunan mağazaların aksine tek bir platform altında sergilemek, pazarlamak ve satmak için sanal bir alan sağlar. Alıcılar için, paralarının boşa gitmeyeceğinden emin olarak alışveriş yapabilecekleri özel bir forum. Benzersiz iade politikamız, alıcı veya satıcı ile hiçbir hileli faaliyetin gerçekleşmesini sağlar. Farklı kategorilerdeki satıcılar için farklı abonelik/üyelik teklifleri tasarladık.',
-        key.tCHeader1: 'giriiş',
-        key.tCBody1:
-            '“Biz” ve “biz” olarak da bilinen Ismmart mağazalarına hoş geldiniz. Bu Şartlar ve Koşullar, çevrimiçi platformumuza/sitemize ve ilgili web sitelerine, uygulamalara, hizmetlere veya kaynaklara erişiminizi ve kullanımınızı yönetir. Ismmart mağazalarını kullanmadan önce aşağıda listelenen hüküm ve koşulları okuduğunuzu, anladığınızı ve kabul ettiğinizi kabul edersiniz. Bu şartlar ve koşullar, ISMMART mağazaları tarafından daha önce bildirimde bulunmaksızın herhangi bir zamanda değiştirilebilir, değiştirilebilir, eklenebilir veya kaldırılabilir. Daha fazla bildirim verilmezse, web sitesinde yayınlandıklarında değişiklikler yürürlüğe girer.',
-        key.tCHeader2:
-            'Siz ve Ismmart mağazaları arasında sözleşme nasıl kurulur?',
-        key.tCBody2:
-            '• Sipariş verdikten sonra, siparişinizi aldığımızı kabul ederek bizden çevrimiçi bildirim alacaksınız. Lütfen bunun siparişinizin kabul edildiği anlamına gelmediğini unutmayın. Siparişiniz bize bir ürün satın almamız için bir teklif oluşturur. Tüm siparişler bizim tarafımızdan kabul edilebilir. Sözleşme yalnızca bu platform üzerinden sipariş edilen ürünleri aldığınızda oluşturulacaktır • Sözleşme yalnızca aldığınız ürünlerle ilgili olacaktır. Siparişinizin bir parçası olabilecek diğer ürünler için bir sözleşme, diğerleri aldığınızda oluşturulacaktır.',
-        key.tCHeader3: 'Hesabınız',
-        key.tCBody3:
-            '• Platform tarafından sunulan belirli hizmetlere erişmek için, bizimle bir hesap oluşturmanızı veya bir hesabın oluşturulmasını tamamlamak için kişisel bilgiler vermenizi isteyebiliriz. • Kullanıcı kimliğinizin, şifrenizin, hesap bilgilerinizin ve ilgili özel bilgilerinizin gizliliğini korumaktan sorumlusunuz. Hesabınızın güvenliğini her zaman koruma ve hesabınızın yetkisiz kullanımını önlemek için tüm makul önlemleri alma yükümlülüğüne sahip olduğunuzu kabul edersiniz. Parolanızın başkaları tarafından bilindiği veya şifrenin yetkisiz bir şekilde kullanılması veya olması muhtemel olup olmadığına inanmak için herhangi bir nedeniniz varsa derhal bizi bilgilendirmelisiniz. Web sitesinin herhangi bir kullanımının, sağlanan ilgili hizmetlerin ve/veya hesabınızın ve şifrenizin kullanımı yoluyla mümkün kılan gizli verilere, bilgilere veya iletişimlere erişimin sizin tarafınızdan yapıldığı kabul edileceğini anlar ve kabul edersiniz. Durum olabileceğiniz gibi, sizin tarafınızdan yetkilendirilmiş biri tarafından yapılmıştır.'
-                '• İhlal veya bu Hüküm ve Koşulların ciddi ihlali durumunda, bildirimde bulunduktan ve aynı şeyi düzeltmek veya bu sözleşmenin şartlarına göre değişiklik yapmak için makul zaman sağladıktan sonra kullanıcı adını ve/veya şifreyi geçersiz kılma hakkını saklı tutarız.',
-        key.tCHeader4: 'Durumun',
-        key.tCBody4:
-            'Sitemiz/platformumuz aracılığıyla bir sipariş vererek şunları garanti edersiniz:'
-                '• Yasal olarak bağlayıcı sözleşmelere girebilirsiniz.'
-                '• En az 18 yaşındasınız.'
-                '• Bu hüküm ve koşullara uygun olarak sitemize ödeme yapmanın herhangi bir yasayı ihlal edeceği bir ülkede ikamet edemezsiniz.',
-        key.tCHeader5: 'Ürün Teslimi',
-        key.tCBody5:
-            'Ürünler söz konusu olduğunda, siparişiniz, istisnai koşullar olmadığı sürece, sipariş sırasında belirtilen tarihin makul bir süresinde (uygulanabilir olduğu gibi) yerine getirilecek/hazırlanacaktır.',
-        key.tCHeader6: 'Garanti',
-        key.tCBody6:
-            'Sitemiz aracılığıyla bizden satın alınan herhangi bir ürünün teslimatta, açıklamasına uygun olacağını ve bu tür ürünlerin yaygın olarak sağlandığı tüm amaçlara makul bir şekilde uygun olacağını garanti ediyoruz. Boyun veya ortak yasa ile ima edilen amaç, satılabilirlik, tatmin edici kalite veya koşulla ilgili diğer tüm garantiler, koşullar veya şartlar, yasaların izin verdiği şekilde hariç tutulur.',
-        key.tCHeader7: 'İptal hakları',
-        key.tCBody7:
-            '• Ürünler söz konusu olduğunda, tüketici olarak sözleşme yapıyorsanız, ürün siparişinizi herhangi bir nedenle iptal etme ve tam bir geri ödeme alma hakkınız vardır. Ürünler için ödenen fiyatın (nakliye masrafları hariç) tam bir iadesini alacaksınız. Bir ürünün satın alınmasıyla ilgili bir sözleşmeyi iptal etme hakkınız, ürünü aldığınız tarihten (sözleşme oluşturulduğunda) başlar. Ürünler size teslim edilmişse, iade politikasına göre istediğiniz zaman iptal edebilirsiniz. Teslimatta hasar gören bir ürün almanız durumunda lütfen en kısa sürede bizi yazılı olarak bilgilendirin. Bir ürün bize hasar görmüşse ve onu aldığınızda ürünün hasar gördüğünü bildirmediyseniz, iptal etme veya alma hakkınızı reddedebiliriz.'
-                '• Sipariş üzerine yapılmış veya kişiselleştirilmiş ürünlerin, süreli yayınların veya dergilerin, bozulabilir malların veya yazılımın, DVD\'lerin veya güvenlik mührü açılan DVD\'lerin veya CD\'lerin tedariki için bir sözleşmeyi iptal etme hakkınız olmayacaktır.'
-                '• Ürünler durumunda, bir sözleşmeyi iptal etmek için bizi yazılı olarak bilgilendirmelisiniz. Ürünler size teslim edilmişse, ürünleri makul bir şekilde mümkün olan en kısa sürede ve kendi pahasına bize iade etmelisiniz. Ürünlere makul bir şekilde bakım yapmak için yasal bir yükümlülüğünüz var.',
-        key.tCHeader8: 'Hak ve yükümlülüklerin devri',
-        key.tCBody8:
-            '• Bu hüküm ve koşullar altında hak ve yükümlülüklerimizi başka bir kuruluşa aktarabiliriz, ancak bu, haklarınızı veya sözleşme kapsamındaki yükümlülüklerimizi etkilemez.'
-                '• Haklarınızı ve yükümlülüklerinizi sadece yazılı olarak kabul edersek bizimle olan sözleşmeniz kapsamındaki aktarabilirsiniz.',
-        key.tCHeader9: 'Fiyat',
-        key.tCBody9:
-            '• Ürünlerin fiyatı ve teslimat ücretlerimiz, bariz durumlar dışında, zaman zaman platformumuzda/sitemizde alıntılanmıştır.'
-                '• Ürün fiyatları, uygulanabilir olduğunda GST/Fed/KDV\'dir. Ancak, GST/Fed/KDV oranı siparişiniz tarihi ile teslimat tarihi arasında değişirse, fiyatı buna göre ayarlayacağız.'
-                '• Ürün fiyatları ve teslimat ücretleri herhangi bir zamanda değişmekle yükümlüdür, ancak değişiklikler, makul bir süre içinde yerine getirmek/almak için adımlar attığınız ürünler için siparişleri etkilemez.',
-        key.tCHeader10: 'Geri ödemeler',
-        key.tCBody10:
-            'Yukarıdaki paragraf 6 uyarınca bir sipariş iptal edilirse, geri ödeme politikamıza uygun olarak borçlu olan tutarları iade edeceğiz.',
-        key.tCHeader11: 'Bilgilerinizi nasıl kullanıyoruz?',
-        key.tCBody11:
-            'Bilgilerinizi nasıl kullanacağımızla ilgili ayrıntılar için lütfen Gizlilik Politikasını okuyun. Bu hüküm ve koşulları kabul ederek ve kabul ederek, Gizlilik Politikamızın şartlarını kabul eder ve kabul edersiniz.',
-        key.tCHeader12: 'Bir işletmeye karşı sorumluluğumuz',
-        key.tCBody12:
-            '• Bu hüküm ve koşullara uymazsak, size yalnızca ürünlerin satın alma fiyatı için sorumlu olacağız ve uymamızın bir sonucu olarak acı çekeceğiniz kayıplar değil (sözleşmede ortaya çıkan, Delict ( ihmal dahil), yasal görevin ihlali veya başka türlü).'
-                '• Bu şartlar ve koşullar tarafından oluşturulan sözleşmenin oluşturulduğu tarihte, bu tür kayıplarımızda olsa bile, aşağıdaki kategorilere giren bu hüküm ve koşullara uymamamızdan kaynaklanan kayıplardan sorumlu olmayacağız. Bizim ihlalimizin öngörülebilir bir sonucu olduğumuz için. '
-                '• Gelir veya gelir kaybı.'
-                '• İş kaybı.'
-                '• Kâr kaybı.'
-                '• Beklenen tasarruf kaybı'
-                '• Veri kaybı'
-                '• Yönetim veya ofis israfı'
-                'Not: Tüketici olarak sözleşme yapıyorsanız bu paragraf uygulanmaz.',
-        key.tCHeader13: 'Bir tüketiciye karşı sorumluluğumuz',
-        key.tCBody13:
-            '• Bu hüküm ve koşullara uymazsak, şart ve koşulları ihlal etmenin veya ihmalimizin öngörülebilir bir sonucu olan acı çektiğiniz kayıp veya hasardan sorumluyuz. İhlalimizin bariz bir sonucu ise, kayıp veya hasar öngörülebilir veya ilgili olana girdiğimiz sırada sizin ve bizim tarafından başka türlü düşünülüyorsa.'
-                '• Ürünleri yalnızca iç ve özel kullanım için size tedarik ediyoruz. Ürünü herhangi bir ticari, iş veya yeniden satış amacıyla kullanmamayı kabul edersiniz ve herhangi bir kar kaybı, iş kaybı, iş kesintisi veya iş kaybı için size sorumluluğumuz yoktur.'
-                'Not: Bir iş olarak sözleşme yapıyorsanız bu paragraf uygulanmaz.',
-        key.tCHeader14: 'Eğer bir işseniz sizinle olan sözleşmemiz',
-        key.tCBody14: '• Bu şartlar ve koşullar ve bunlarda açıkça belirtilen herhangi bir belge, aramızdaki tüm tartışmaları, yazışmaları, müzakereleri, önceki düzenlemeyi, anlayışını, anlayışını veya anlaşmayı bu konuyla ilgili olarak yerine getirir.'
-            '• Her birimiz, bir sözleşmeye girerken, ikimizin bu hüküm ve koşullarda belirtilmeyen herhangi bir temsil veya garanti (masum veya ihmal edilmiş olsun) ile ilgili herhangi bir çareye güvenmediğini veya bunlara güvenmediğini kabul ediyoruz.'
-            '• Her birimiz, bu Sözleşmede belirtilen temsil ve garantilerle ilgili tek sorumluluğumuzun (masum ya da ihmal edilmiş olsun) sözleşmenin ihlali için olacağını kabul ediyoruz.'
-            '• Bu paragraftaki hiçbir şey herhangi bir yükümlülüğü sınırlamaz veya hariç tutmaz.'
-            'Tüketici olarak sözleşme yapıyorsanız, bu paragraf geçerli değildir',
-        key.tCHeader15: 'Tüketiciyseniz sizinle olan sözleşmemiz',
-        key.tCBody15:
-            'Tüketici olarak sözleşme yapıyorsanız, bu hüküm ve koşullara ve herhangi bir sözleşmenin konusuna ilişkin olarak açıkça belirtilen herhangi bir belgeye güvenmeyi planlıyoruz. Usulüne uygun şekilde yetkili temsilcilerimiz tarafından yapılan ifadeler ve temsiller için sorumluluk kabul ederken, lütfen bu hüküm ve koşullardan herhangi bir varyasyonun yazılı olarak onaylanmasını istediğinizden emin olun.'
-                'Not: İşletme sırasında sözleşme yapıyorsanız, bu paragraf geçerli değildir.',
-        key.tCHeader16: 'Bildirimler',
-        key.tCBody16: '• Bu şartlar ve koşullarla bağlantılı olarak sizin tarafınızdan veya bizim tarafımızdan gönderilecek herhangi bir bildirim mektup veya e -posta ile gönderilebilir. Bize bildirimler aşağıdaki adreslerden birine gönderilmelidir:'
-            '> Arsa No, 60 Sokak 12, G-8/1, İslamabad Başkent Bölgesi 44080 Pakistan.'
-            '> Kule 42, 25 Old Broad St, Cornhill, Londra, Birleşik Krallık'
-            '> E -posta: Business@sukatmarwatgroup.com'
-            '• Platformumuza kaydolurken sağladığınız e -posta adresine e -posta yoluyla bildirimler göndereceğiz.'
-            '• İkimiz de yeni adresi yazarken diğerine söyleyerek bildirimler için adresi değiştirebiliriz, ancak önceki adres değişiklik yapıldıktan sonra 7 gün boyunca geçerli kalmaya devam edecektir.',
-        key.tCHeader17: 'Üçüncü taraf hakları',
-        key.tCBody17:
-            'Bu Hüküm ve Koşullara taraf olmayan veya bir sözleşmeye taraf olmayan bir kişinin, onlarla bağlantılı veya bunlarla bağlantılı herhangi bir hakları olmayacaktır.',
-        key.tCHeader18: 'Feragat',
-        key.tCBody18:
-            'Her iki tarafın bu tarafa bu hüküm ve koşullara göre verilen herhangi bir hakkı egzersiz yapamaması veya uygulanmaması, herhangi bir haktan feragat olarak kabul edilmeyecektir veya herhangi bir zamanda veya daha sonra egzersizi veya uygulanmasını engellemek için faaliyet göstermeyecektir. Açıkça feragat olduğu belirtilmedikçe ve yukarıdaki paragraf 16\'ya uygun olarak size yazılı olarak iletilmediği sürece, bu hüküm ve koşullardan hiçbirinden feragat etmemiz.',
-        key.tCHeader19: 'Koparılabilirlik',
-        key.tCBody19:
-            'Herhangi bir mahkeme veya yetkili makam, bu hüküm ve koşulların hükümlerinden herhangi birinin veya bir sözleşmenin herhangi bir hükümlerinin geçersiz, yasadışı veya uygulanamaz olduğuna karar verirse, terim sadece bu kapsamda, sadece kalan terimlerden koparılacaktır. yasaların izin verdiği son derece geçerli olmaya devam edecektir.',
-        key.tCHeader20: 'Güç',
-        key.tCBody20:
-            'Teslimat tarihini erteleme veya herhangi bir grev, kilitleme, bozukluk, yangın, patlama, kaza veya işimizin veya işimizin durdurulması dahil ancak bunlarla sınırlı olmamak üzere, makul kontrolünün ötesindeki tüm koşullar için bir sözleşmeyi iptal etme hakkını saklı tutarız ve bu da malların teslimini veya hizmetin performansını önler veya engeller.',
-        key.tCHeader21: 'Hukuk ve yargı yetkisi',
-        key.tCBody21: 'Bu şartlar ve koşullar ve kendilerinden veya onlarla bağlantılı olan veya bunlarla bağlantılı olan herhangi bir anlaşmazlık veya talep (konuyla ilgili veya oluşum (sözleşme dışı anlaşmazlıklar veya talepler dahil) Pakistan yasası tarafından yönetilecektir. Ürünümüzden herhangi birini sipariş ederek, bu hüküm ve koşullara bağlı olmayı kabul ettiğinizi anlamalısınız.'
-            'Kayıt kategorileri:'
-            '1. Temel Üyelik- Maliyetsiz: Ücretsiz üyeler olarak kaydedilebilir.'
-            '* Ismmart platformunda hiçbir şey satamıyor.'
-            '* Yalnızca Varsayılan olarak açılan veya satıcılar ve işletmeler tarafından ziyaret edilecek olan ürünlere ve mağazalara erişime sahip olacaktır.'
-            '* Satıcıyla karşılıklı anlayışla doğrudan müşteriler olarak kendi başlarına her şeyi satın alabilirler; Ismmart, bu tür konularda herhangi bir sorun olması durumunda sorumlu veya yedeklemeyecektir. '
-            '2.Premium Üyelik - Ücretli Üyelik:'
-            '* Ücretsiz bir aylık deneme ile ayda 5 USD. Yıllık abonelik ücretleri 99.5 USD\'dir.'
-            '* Ismmart platformunda her şeyi satabilir.'
-            '* Ziyaret etmek için tüm ürünlere ve mağazalara erişecektir.'
-            '* Ismmart\'taki premium üyelerin tüm anlaşmaları Ismmart tarafından desteklenecek. Yumuşak işlemlerden ve ürünlerin teslimatından sorumlu olacağız. Ismmart, hem satıcının hem de alıcının üzerinde anlaştığı karşılıklı anlayışı onurlandırmayı garanti edecek.'
-            '* Premium üyeler, hem satıcı hem de alıcı olarak, bu tür üyeleri ve yaptıkları anlaşmaları doğrudan garanti edip doğrulayacak şekilde dünya çapındaki tüm işletmelere daha az erişimden endişe duyacaktır. '
-            '* Tüm premium üyeler incelendiğinden ve ISMMART doğrulama süreci ile doğrulandığından, bu tür tüm üyeler dünyanın herhangi bir yerinde birbirleriyle daha az ticaret endişelenebilirler.'
-            '* Uygun öğelerde sınırsız teslimatlar.'
-            'Not: Tüm üyelerinden (satıcılar ve alıcılar) ödeme veya teslimatta herhangi bir rahatsızlıktan kaçınmak için Ismmart tarafından belirtilen tüm ticaret kurallarına ve prosedürlerine uymaları istenir. Komisyon Ücret Yapısı İşlem Değeri PKR100.000/- ~% 0,5 PKR100.000/-- PKR250,00,00/-- ~% 1.00 PKR250,00,00/- üzerindeki ancak PKR250\'nin altında komisyon işlem değeri, PKR250, 00,000/- ~% 1.75 PKR 2550,00.000/- düz% 2.25 komisyon herhangi bir toptan işlem için komisyon% 3,5\'lik düz bir komisyon tahsil edilecektir.'
-            'Not: İşlem değeri nakliye ve sigorta maliyetini hariç tutar.',
         key.exchangeHeader1: '',
         key.exchangeHeader2: 'Nasıl Geri Döner?',
         key.exchangeBody1: 'Müşteri memnuniyeti garanti edilir! Ismmart mağazaları aracılığıyla satılan ürünlerin kalitesini garanti ediyoruz ve satın alma işleminizden memnun değilseniz, doğru yapacağız. Aşağıda listelenen birkaç koşul hariç, ISMMART mağazalarından satın alınan herhangi bir ürün, sevkiyatın alınmasından itibaren 14 takvim günü içinde iade edilebilir.'
@@ -756,5 +651,165 @@ class Turkish {
         key.productExists: 'Ürün zaten var',
         key.productVariant: 'Ürün varyantları',
         key.weightAndDimension: 'Ağırlık ve Boyutlar',
+
+        ///Terms And Conditions
+        key.tCHeader1: '',
+        key.tCBody1: '\n Tüm referanslar, formlar, politikalar ve düzenlemeler, bu terimlerle detaylandırılan veya platform veya herhangi bir bağlı köprü (toplu olarak terimler) aracılığıyla elde edilebilir, ISMMART Grubu (özel) sınırlı web siteleri ve mobil uygulamaları kullanmanızı yönetin (bundan sonra. platform olarak adlandırılır). Platformumuzun sağladığı hizmetler, bunlarla sınırlı olmamak üzere, platformun kendisi ve platform veya platform üzerinden erişilebilen Ismmart tarafından sağlanan tüm hizmetleri içerir. Ayrıca, hizmetlere dahil edilen tüm yeni eklenen özellikler bu Şartlara tabi olacaktır. Ismmart tarafından verilen hizmetleri kullanmanız için koşulları dikte ediyorlar. '
+            '\n Bu Sözleşmenin şartlarına dikkat etmek önemlidir. Platforma erişmeye ve kullanmaya karar verirseniz, bu Sözleşmenin şartlarını okuduğunuz, anladığınız ve kabul ettiğiniz ve kişisel verilerinizin Gizlilik Politikasında belirtilen şartlara uygun olarak ele alınmasını kabul ettiğiniz anlaşılacaktır. (https://ismmart.com/privacypolicy). Anlaşmanın koşullarına katılmıyorsanız, platforma veya hizmetlerini kullanmaktan veya kullanmaktan kaçınmanızı istiyoruz. '
+            '\n On sekiz yaşına ulaşan bireylerin platformu ve şirketler gibi mevcut kurumsal kuruluşları kullanma yetkisi vardır. Uygulanabilir olduğu durumlarda, bu şartlar yerel yasalara uygun olmalıdır. '
+            '\n 18 yaşın altındaki herkes, platformu kullanmadan önce ebeveynlerinden veya yasal vasiyetlerinden rıza göstermelidir. Bu şartları kabul ederek, ebeveyn veya yasal vasi, kullanıcının eylemleri ve ödemeleri için sorumluluk alacaktır. Onay alınmamışsa, kullanıcı platformu gecikmeden kullanmayı bırakmalıdır. '
+            '\n Ismmart, size devam eden arka plan kontrolleri yapmak için üçüncü taraflarla ilgilenme hakkına sahiptir ve bunlar, yaptırımların, yasal anlaşmazlıkların veya size bağlı olumsuz haberlerin soruşturmalarını içerebilir. Ismmart arka plan kontrol sonuçlarını onaylamazsa, hesabınız iptal edilebilir ve artık platformu kullanamayabilirsiniz. '
+            '\n ISMMART, herhangi bir anda bu terimleri (ve platformda yer alan ek düzenlemeleri veya politikaları) değiştirme yeteneğini korur. Terimleri düzenli olarak incelediğiniz ve revize edilmiş terimlerin yüklendiği tarihten sonra platformu kullanmanızı sağlayarak, onları okuyup okumadığınıza bakılmaksızın onlara onay verdiğiniz varsayılır. '
+            '\n Platformda sergilenen öğelerin resimleri ve görselleri sadece referans içindir ve gerçek mallardan farklı olabilir.',
+        key.tCHeader2: '1. Ismmart',
+        key.tCBody2: '1.1. Biz Kimiz?'
+            '\n Bu platformun kullanıldığı dünyanın bölgesine bağlı olarak, sizinle Ismmart arasındaki anlaşma şartları değişebilir.'
+            '\n 1.2. Ne yapıyoruz? '
+            '\nPlatformumuz aracılığıyla Ismmart, müşterilerin hazır yemekler, catering, içecekler, ham malzemeler ve çeşitli gıda dışı ürünler de dahil olmak üzere bir dizi mal satın alabilmeleri için farklı satıcılara bir bağlantı sunar. Bir satın alma işlemi yaptığınızda (sipariş olarak adlandırılır), Ismmart satıcı için bir ajan olarak çalışır, siparişte yardımcı olur ve daha sonra teslimat yapar. Satıcılarımız üçüncü taraf satıcılar, bağlı kuruluşlar veya kendi şirketimizin bir parçası olabilir. Satıcının üçüncü taraf olduğu yerlerde, onların adına ödeme ve GST (GST kayıtlı satıcılar için varsa) alma lisanslıyız. '
+            '\n1.3. Bizimle nasıl iletişime geçilir?'
+            '\n Müşteri Destek Ekibimiz, müşteri destek numaramız veya support@ismmartindustries.com e\nposta aracılığıyla size yardımcı olmak için kullanılabilir.',
+        key.tCHeader3: '2. Platform ve Ismmart hesabının kullanımı',
+        key.tCBody3: '2.1. Ismmart kullanmak için bir hesap oluşturmalısınız. Kayıt sırasında, e \nposta adresi, cep telefonu numarası ve özel şifre gibi bazı kişisel bilgilerinizden girmeniz istenecektir. Platformdan bir şey satın almak için, ödeme yönteminize bağlı olarak kredi kartı bilgilerinizi vermeniz istenebilir. Şifrenizi bir sır olarak saklamanız ve güvenliğinden yalnızca sorumlu olmanız önemlidir. Dolandırıcılık veya istismarın nedeni başka bir şeye kadar izlenemedikçe, Ismmart hesabınızda yapılan tüm işlemlerden sorumlu tutuluyorsunuz. '
+            '\n 2.2. ISMMART, teslimatta, sizin tarafınızdan sağlanan herhangi bir yanlış, eksik veya eksik verilerden kaynaklanan sorunları olan herhangi bir sipariş için sorumluluk almayacaktır. Tüm detayların, özellikle teslimat adresiniz ve iletişim bilgileriniz, siparişin verimli bir şekilde ele alınması için kesin, otantik ve doğru olması önemlidir. '
+            '\n 2.3. Ismmart hesabınızı kaldırmak için lütfen bize istemek için bir e \nposta gönderin. Gerekli olduğuna inanırsak hesabınızı kısıtlamamız, askıya almamız veya bitirmemiz veya platformu kullanmamız gerekebilir. '
+            '\n\t\t 2.3.1. Görünüşe göre sizden başka biri Ismmart hesabınızı kullanıyor. '
+            '\n\t\t 2.3.2. Bu terimlere, politikalarımıza ve talimatlarımıza aykırı herhangi bir eylem veya uygulamaya katıldığınızdan veya platformu kötüye kullandığını bireysel olarak yargıladığımız bir şeye katıldığınızdan şüphelenir veya bulursak, bir ihlal olarak kabul edilir. '
+            '\n\t\t 2.3.3. Arka plan kontrollerinin standartlarını karşılamadığı sürekli başarısızlık tolere edilemez.',
+        key.tCHeader4: '3. Kısıtlamalar',
+        key.tCBody4: '3.1. Platformda yasak faaliyetler '
+            '\nBelow, yasalara aykırı veya Platformunda Ismmart tarafından izin verilmeyen kısa bir faaliyet koleksiyonudur. Birinin bu izin verilmeyen faaliyetlerden herhangi birine katılması durumunda, yalnızca Ismmart tarafından belirlendiği gibi, bir soruşturma yürütülecek ve yasal işlem yapılabilir. Yasak uygulamaların örnekleri aşağıdakilerle sınırlı değildir, ancak bunlarla sınırlı değildir: '
+            '\n\t\t 3.1.1. Platform, yerel, eyalet veya federal düzenlemelere karşı, özellikle de doğada aldatıcı, hileli veya aldatıcı olan herhangi bir niyet için kullanılamaz. '
+            '\n\t\t 3.1.2. Mülkiyet haklarını, özel özgürlükleri, maruz kalma haklarını, ticari sır haklarını veya herkesin diğer ayrıcalıklarını ihlal eden herhangi bir materyalin yayınlanması. '
+            '\n\t\t 3.1.3. Yalnızca Ismmart tarafından veya yerel normlara uygun olarak belirlendiği gibi, herhangi bir bireye veya kuruluşa yasadışı, kaba, iftira, tehditkar, düşman, saldırgan, saldırgan, algılanabilir veya ipotek olarak görülen herhangi bir içeriği yayınlamak. '
+            '\n\t\t 3.1.4. Ismmart\'ın tek yargılarını kullanarak siber zorbalık olarak tanımladığı materyal. '
+            '\n\t\t 3.1.5. Riskli ve potansiyel olarak hayatı tehdit eden davranışları tasvir eden malzemenin yayınlanması kesinlikle yasaktır. '
+            '\n\t\t 3.1.6. Bireylerin telefon numaralarını, sokak adreslerini veya soyadlarını paylaşmaktan kaçının. '
+            '\n\t\t 3.1.7. Web bağlantılarının harici sitelere ve her türlü HTML veya programlama koduna gönderilmesine izin verilmez. '
+            '\n\t\t 3.1.8. Ismmart\'ın yalnızca şirket tarafından belirlendiği gibi "spam" olarak görüntülenen her şeyi yayınlamak.'
+            '\n\t\t 3.1.9. Çevrimiçi içerik çıkarırken başka birinin taklit edilmesi. '
+            '\n\t\t 3.1.10. Yetkilendirilmeden diğerlerinden e \nposta adresleri gibi bilgiler alınmasına izin verilmez. '
+            '\n\t\t 3.1.11 Herhangi bir bireyin veya kuruluşun yorum görüntüleme veya görüntüleme için kimlik doğrulamanızı kullanmasına izin vermemek.'
+            '\n\t\t 3.1.12. Platformdaki herhangi bir kişiyi taciz etmek, tehdit etmek, takip etmek veya kötüye kullanmak. '
+            '\n\t\t 3.1.13. Bir başkasının platformu kullanmasını veya yararlanmasını engelleyecek veya Ismmart\'ı, müşterilerini, tedarikçilerini veya diğer tarafları Ismmart\'ın görüşüne göre ya da başka bir şekilde koymasını engelleyecek her şeyi yapmak kesinlikle yasaktır. '
+            '\n\t\t 3.1.14 Bu yönergeler tarafından yasaklanan faaliyetlere katılmasını engellemek.'
+            '\n 3.2. Ismmart, yükümlü olmasa da, aşağıdakilerden birini veya daha fazlasını yapma yetkisine sahiptir.'
+            '\n\t\t 3.2.1. Platformdaki herhangi bir içeriğin bu terimlere uygun olmadığı iddiasından haberdar edildikten sonra, platformun iddiaya girmesi ve içeriği silme veya içeriğin silmesini veya talep etmesini talep etmek için münhasır bir bakış açısı dahilinde olacaktır. indirilecek. '
+            '\n\t\t 3.2.2. Yasadışı, yıkıcı veya küfürlü herhangi bir içerik de dahil olmak üzere, şartları ihlal eden tüm içerikler kaldırılmalıdır. '
+            '\n\t\t 3.2.3. Bu şartların ihlali durumunda, bir kullanıcının platforma veya ISMMART hesaplarına erişimini askıya alma veya feshetme hakkını saklı tutarız. '
+            '\n\t\t 3.2.4. Platformda mevcut olan herhangi bir materyali denetleyin, gözden geçirin veya kamuoyuna getirin; '
+            '\n\t\t 3.2.5. Platform, bu yönergelere uyup uymadığına bakılmaksızın paylaşılan içeriği düzenleme veya silme hakkına sahiptir.',
+        key.tCHeader5: '4. Fikri Mülkiyet',
+        key.tCBody5:
+            'Platformda görüntülenen veya pazarlama materyallerimizde, kayıtlı veya kayıt dışı pazarlama materyallerimizde görüntülenen bu terimler de dahil olmak üzere tüm ticari markalar, logolar, görüntüler ve hizmet markaları, iSmmart ve/veya kullanımı ile bize izin veren üçüncü tarafların fikri mülkiyetidir (toplu olarak ( , “ticari markalar”). Önceki açık yazılı iznimiz olmadan bu ticari markaları hiçbir şekilde kullanamaz, kopyalayamaz, yeniden yayınlayamaz, yeniden yayınlayamaz, yükleyemez, yayınlayamaz, iletemez, dağıtamaz veya değiştiremezsiniz. Ticari markaların bizim tarafımızdan onaylanmamış başka bir web sitesinde kullanılması kesinlikle yasaktır. Ismmart, fikri mülkiyet haklarını cezai kovuşturma da dahil olmak üzere yasanın en sonuna kadar agresif bir şekilde uygulayacaktır. ISMMART, platformda gösterilen malzeme kullanımınızın, Ismmart\'a ait olmayan veya bunlara bağlı olmayan üçüncü tarafların haklarını ihlal etmeyeceğini garanti ne de temsil etmez. Platformda herhangi bir malzemenin kullanılması kendi sorumluluğunuzdadır.',
+        key.tCHeader6: '5. Mallar üzerindeki kısıtlamalar',
+        key.tCBody6: '5.1. Platformumuz, bazıları satın alındıkları ülkenin yasaları ve düzenlemeleri ile kısıtlanan bir dizi ürün satmaktadır. Bu, sigara, tütün ve o zaman aktif olan yasal standartlara göre sağlayabileceğimiz diğer eşyalar için bir yaş kısıtlaması içerebilir. Bu malları satın aldığınızda, bunları satın almak için yasal nitelikleri karşıladığınızı teyit ediyorsunuz. '
+            '\n 5.2 Sigara/Tütün Ürünleri (“Tütün”)'
+            '\n \n Yasaya izin verildiğinde, bazı platformlarımızda tütün tedarik edebiliriz. Tütünün satın alınmasını veya kullanılmasını herhangi bir kapasitede ilerletmeye, desteklemeye veya ikna etmeye çalışmıyoruz. Sadece yasal olarak kurulmuş yaştaki insanlar tütün satın alabilir. Ismmart, satıcı ve teslimat personeli, münhasır takdirlerine bağlı olarak bir emri reddetme yetkisine sahiptir. '
+            '\n\t\t 5.2.1. Tütün dağıtmadan önce, bir kimlik kartı gibi yaşları doğrulamak için uygun belgelerin elde edilmesi gerekir. '
+            '\n\t\t 5.2.2. Teslimat kabul etmek için yasal yaş kanıtı sunulmalıdır; Bunun yapılmaması teslimatın reddedilmesine neden olacaktır. '
+            '\n\t\t 5.2.3. Gerekçeye bakılmaksızın hiçbir eşyanın teslim edilmesi verilmeyecektir. '
+            '\n\t\t 5.2.4. Platformdaki tütün önerisi, yasadışı olması durumunda geçersiz kabul edilecektir.',
+        key.tCHeader7: '6. Siparişler',
+        key.tCBody7: '6.1. Ismmart aracılığıyla bir sipariş verildikten sonra, sipariş makbuzunu içeren bir onay e \npostası verilecektir. Bu makbuz ayrıca GST gibi ilgili teslimat ücretlerini veya vergileri de kapsayacaktır. '
+            '\n 6.2. Tedarikçilerimiz, bir siparişin tamamlanması ve size gönderilebilmesi için belirli bir asgari sipariş değerine ulaşılmasını gerektirir. Bir sipariş, ayarlanan asgari sipariş değerini karşılayamazsa, asgari sipariş değerini yerine getirmek için gereken kalan tutarı ödemeyi veya siparişe ek mal eklemeyi seçebilirsiniz. '
+            '\n 6.3. Ismmart ve satıcı, özel talimatlarınızı bir sipariş için onurlandırmak için her türlü çabayı gösterecektir. Bununla birlikte, uygulanabilir, makul veya pratik olmadığı durumlarda, ISMMART ve/veya satıcı tipik uygulamalara göre sipariş oluşturmaya devam edecektir. Ne ISMMart ne de satıcı, sizin tarafınızdan belirtilen bireysel talepleri karşılamayan bir siparişi telafi etmek veya değiştirmek zorunda kalmaz. '
+            '\n 6.4. Ismmart\'ın platformda yer alan mallarda kullanılan bileşenleri veya alerjenleri ifşa etme yükümlülüğü yoktur. Yasa aksi belirtilmedikçe malların alerji içermediğinden emin olmayız. Bu nedenle, alerjisi olanlar, belirli gıdalara olumsuz reaksiyonlar veya belirli diyet ihtiyaçları, platformumuzda bir satın alma işlemi yapmadan önce satıcıya danışmalıdır. '
+            '\n 6.5. Siparişinizin satıcı tarafından verilen ekstra şartlara tabi tutulabileceğini hatırlamak zorunludur. '
+            '\n 6.6. Sipariş vermeden önce '
+            '\n\t\t 6.6.1. Bölgenizde teslimat için mevcut satıcıları görüntüleyebilmek için, teslimat adresini sağlamanız çok önemlidir. '
+            '\n\t\t 6.6.2. Bir satıcı seçtikten sonra, istenen ürünleri seçebileceğiniz ve sepete ekleyebileceğiniz menü sayfalarına yönlendirileceksiniz. '
+            '\n 6.7. Sipariş vermek '
+            '\n\t\t Başarılı bir sipariş vermek için, "Checkout" a bastığınızda görüntülenen istemleri gözlemleyin. Siparişi sonuçlandırabilmemiz için ekstra bilgi sunmanız gerekebilir. Maliyetler, teslimat özellikleri, kişisel özellikler, ödeme verileri ve kupon kodları (uygunsa) dahil olmak üzere verilen tüm bilgilerin kesin, doğru ve “yer siparişi” ni vurmadan önce bittiğinden emin olun. Bizden sipariş makbuzunuz olan bir e \nposta onay aldığınızda, siparişinizi başarıyla yerleştirmiş olacaksınız. '
+            '\n 6.8. Bir siparişi iptal etmek '
+            '\n\t\t Siparişinizi gönderildikten sonra geri çekmek için platformdaki Yardım Merkezi\'ni ziyaret edin. Satıcı henüz siparişi kabul etmediyse, yine de iptal etme hakkınızı kullanabilirsiniz. '
+            '\n 6.9. Geri ödemeler '
+            ' \n \n 6.9.1. Çevrimiçi Ödeme Siparişleri '
+            '\n\t\t Siparişinizi satıcı tarafından kabul edilmeden önce iptal ederseniz geri ödeme yapılabilir; Yine de, satıcı siparişinizi zaten kabul etmiş ve iptal etmeye karar verirseniz, kısmen veya kısmen geri ödeme almayacaksınız ve iptal edilen siparişinizin teslimatını kaybedeceksiniz. '
+            '\n \n 6.9.2. Teslimatta Nakit Siparişleri '
+            '\n\t\t Siparişinizi iptal etme yeteneğiniz, bir satıcı tarafından kabul edilmeyen siparişlerle sınırlıdır. Onaylanmış bir siparişi geri çekmeyi tercih ederseniz, teslimatta nakit ödemeleri için uygun değilsiniz ve iptal edilen siparişinizin teslimatı da kaybedilir. Bu özel geri ödeme seçeneği, bağlı kuruluş ortaklarımızla çalışırken geçerli değildir. '
+            '\n\t\t Herhangi bir geri ödeme işleminden önce, kabul edilen siparişlerin fiziksel bir makbuzunun kanıtı olarak hizmet veren ekstra bilgi veya belge talep etmemiz gerekebilir. Bize sorulan detayları veya kayıtları veremezseniz, geri ödeme talebini reddetme hakkımız var. '
+            '\n\t\t Geri ödemeyi alamamanız durumunda, banka hesabınızı iki kez kontrol etmenizi, bankanızla veya kredi kartı şirketinizle iletişime geçmenizi öneririz, çünkü tutarın iade edilmesi biraz zaman alabilir. Daha önce bahsedilen yöntemler takip edilirse ve yine de geri ödeme almazsanız, lütfen 1.3 maddesindeki iletişim yöntemlerinden birini kullanarak müşteri destek ekibimizle iletişime geçin. '
+            '\n 6.10. Ismmart, ISMMART hesabınıza, siparişinize veya her ikisine bağlı hileli faaliyet olduğuna dair iyi bir inanç varsa, herhangi bir siparişi iptal etme, askıya alma, devre dışı bırakma veya sonlandırma hesabınızı feshetme hakkını saklı tutar. ',
+        key.tCHeader8: '7. Fiyatlar ve Ödemeler',
+        key.tCBody8: '7.1. Platformda belirtilen oranlar, gerekli vergi dahil olmak üzere yerel parayla verilecektir. Platformdaki ücretlerin ve tekliflerin, diğer yerlerdeki (kendi web siteleri, mobil uygulamalar veya fiziksel mağazalar gibi) tedarikçilerimizden elde edilen maliyetlerden ve anlaşmalardan farklı olabileceğini kabul edersiniz. '
+            '\n 7.2. Platformumuzda gösterdiğimiz malların fiyatları satıcıya bağlı olarak dalgalanabilir ve yürürlükteki mevzuatın gerektirdiği takdirde de farklı olabilirler. '
+            '\n\t\t 7.2.1. Mal ve hizmet vergisine kayıtlı olan satıcıların bu vergiyi veya yürürlükteki diğer eşdeğeri dahil etmeleri gerekir. '
+            '\n\t\t 7.2.2 Mal ve hizmet vergisi için kayıtlı olmayan satıcılar için bu tür vergiler dahil edilmeyecektir.'
+            '\n 7.3. Yerleştirilen her sipariş için, aşağıdaki koşullar yerine getirilmedikçe bir teslimat ücreti karşılanacaktır '
+            '\n\t\t 7.3.1. Geçerli bir promosyon veya indirim kuponunuz var ve ödeme sırasında uygulayın; veya'
+            '\n\t\t 7.3.2. Aksi belirtilmiştir. '
+            '\n 7.4. Her siparişi yerleştirirken, platformda görüntülenen fiyatlar ve diğer ücretler (teslimat, asgari sipariş veya hizmet ücretleri gibi) varyasyona tabi olabilir. '
+            '\n 7.5. Ödeme onaylamadan önce, fiyatlara, teslimat ücretlerine ve diğer ilgili maliyetlere genel bir bakış verilecektir. Siparişi verdikten sonra, hepsi sizin için sağlanan toplamları ve ekstra ücretleri kabul edersiniz. '
+            '\n 7.6. Platform aracılığıyla bir sipariş için ödeme yaparken, ana kart, vize kartı veya teslimatta nakit gibi çeşitli ödeme seçeneği seçilir. '
+            '\n 7.7. ISMMART hesabınız, mevcut krediler veya geçerli promosyon veya indirim kuponları olması durumunda siparişiniz için masrafların bir kısmını veya tamamını karşılamanın bir yolunu sağlayabilir. '
+            '\n 7.8. Bir sipariş başarıyla yerleştirildikten sonra, sipariş makbuzunuzla bizden bir e \nposta onayı alacaksınız. '
+            '\n 7.9. Ödeme Yöntemleri: Ismmart, karar verildiğinde daha fazla ödeme yöntemi sunma ve/veya mevcut ödeme sistemlerini geri çekme yetkisine sahiptir. Bir web ödeme sistemi aracılığıyla ödeme yapmayı tercih ettiğinizde, havale üçüncü taraf ödeme tedarikçilerimiz tarafından yönetilecektir. Sözleşmeniz üzerine, potansiyel işlemler için kredi kartı / ödeme bilgileriniz üçüncü taraf ödeme tedarikçilerimizle birlikte tutulacaktır. Ismmart, kredi kartınızı veya ödeme bilgilerinizi saklamaz. '
+            '\n 7.10 Siparişinizin başarılı bir şekilde ödenmesini sağlamak için, lütfen banka veya kredi kartınızda yeterli paranız olduğundan emin olun. Gerekirse, Ismmart, platformumuzdaki iadeler, ters ibrazlar, iptaller ve anlaşmazlıkların adil ve web sitemizin hüküm ve koşullarına uygun olduğu sürece çözülmesi de dahil olmak üzere tüm ödemelerden sorumludur.',
+        key.tCHeader9: '8. Teslimat ve Ortak Teslimat',
+        key.tCBody9: '8.1. Teslimat alanları '
+            '\n \n Satıcılarımızın her teslimat alanına özgü olduğu ve alandan alana farklı olduğu açıktır. Teslimat adresinizi platformda girerseniz, kullanabileceğiniz satıcıları kontrol edebilirsiniz. Hava, trafiğin ve kuvvet ana dallarının etkileri nedeniyle teslimat alanlarının değişebileceğini unutmayın. '
+            '\n 8.2. Teslimat süresi'
+            '\n \n ISMMART, siparişinizi verilen adrese teslim edecektir. E \npostanıza yaklaşık bir teslimat tarihi göndereceğiz; Bununla birlikte, kontrol edemediğimiz dış faktörler (örneğin, sipariş miktarı, konum, günün saati, hava koşulları, trafik koşulları, vb.), Gerçek teslim süresi tahminden farklı olabilir. Siparişin geldiğinde siz veya güvendiğiniz birinin teslimat yerinde bulunmasını öneririz. Siparişin tütün (varsa) ve alıcının yasal yaşın altında olması veya uygun kimlik sağlayamaması durumunda, Ismmart\'ın teslimatı reddetme hakkı vardır. '
+            '\n 8.3. Başarısız veya başarısız teslimatlar '
+            '\n \n 8.3.1. Bu terimlerle mevcut olan diğer şartlara rağmen, bir emir vermek için çaba göstermemiz durumunda, örneğin sizin tarafınızdan indüklenen koşullar nedeniyle başarısız olur, ancak aşağıdakilerle sınırlı değildir: '
+            '\n\t\t (i) Siparişi almak için kimse mevcut veya müsait değildi;'
+            '\n\t\t (ii) Müşteri, verilen telefon numarası ile müşteriye ulaşma girişimlerine rağmen sınırsızdı;'
+            '\n\t\t (iii) Siparişi başarıyla sunmak için uygun veya yeterli erişim eksikliği;'
+            '\n\t\t (iv) siparişten ayrılmak için uygun veya güvenli bir konum eksikliği; veya'
+            '\n\t\t (v) Kısıtlı mallar söz konusu olduğunda, müşteri yasal yaş gereksinimlerini karşılamamıştır veya teslimat, müşterinin kısıtlı malları almasını güvenli veya uygun görmemiştir.'
+            '\n\t\t Ismmart, sizinle temasa, teslimat sorunlarını ve aşağıdaki önlemleri bildirmek için bir çağrı, mesaj veya e\nposta gibi araçlarla başarısız olursa, size bir geri ödeme veya çözüm vermeden siparişi iptal etme ayrıcalığına sahiptir.'
+            '\n \n 8.3.2. Gösteri olmayan iptaller '
+            '\n\t\t Teslimat adresine gelen 10 dakikalık bir süre içinde siparişi almanın kullanılamaması veya yetersiz olması durumunda, ISMMART herhangi bir geri ödeme veya alternatif sunmadan siparişi iptal etme yetkisi verilecektir.'
+            '\n 8.4. Yanlış Düzen, Eksik Ürünler, Arızalı Mallar '
+            '\n \n Siparişinizi aldıktan sonra, sorunlar (örneğin, yanlış sipariş, kusurlu sipariş veya eksik öğeler) olduğu tespit edilirse, lütfen 1.3.3.3 te belirtilen mevcut iletişim yöntemlerinden birini kullanarak müşteri desteğimize ulaşın. politika. Bazı durumlarda, ISMMART, sorunu siparişinizle tamamen analiz etmek için fotoğrafik kanıt ve daha fazla ayrıntı gerektirebilir. Teslim edilen sipariş ve/veya ürünlerin subpar koşul veya kalitede olduğu tespit edilirse, sipariş veya bazı unsurları için tazminat vereceğiz. '
+            '\n 8.5. Ortak Teslimat '
+            '\n \n Bazen siparişler size ortaklarımızdan biri aracılığıyla (“Ortak Teslimat”) teslim edilebilir. Ortak teslimatla ilgili önceden uyarı vermek için elimizden geleni yapsak da, bu her zaman ulaşılamayabilir. Ortak teslimat kullanıldığında, teslimatınızla ilgili sorunlar veya beklemeler varsa, doğrudan ortakla iletişime geçmeniz istenebilir. Ismmart, ortaklar tarafından sunulan sipariş veya ürünlerden hiçbir şekilde sorumlu olmayacak. ',
+        key.tCHeader10: '9. Kuponlar, indirimler ve promosyonlar',
+        key.tCBody10: '9.1. Ismmart zaman zaman kupon kodları, indirimler ve platform için diğer teklifler ("kuponlar" olarak adlandırılır) içeren pazarlama ve tanıtım faaliyetlerini başlatır. Kuponlar zaman sınırları, itfa pencereleri, kullanım sınırları, kullanılabilirlik ve diğer kriterlerle birlikte gelir. '
+            '\n 9.2. Kuponlar, kullanım için diğer fırsatlar, indirimler veya kuponlarla birleştirilemez. '
+            '\n 9.3. Aksi halde öneren bir şart yoksa, kuponlar sadece platformumuzda kullanılabilir. '
+            '\n 9.4. Kuponlar ne aktarılabilir ne de değiştirilebilir, iade edilemez ve herhangi bir parasal tazminat için değiştirilemez. '
+            '\n 9.5. Ismmart, önceden uyarı yapmadan kuponlarla ilgili herhangi bir koşulda değişiklik yapma hakkını saklı tutar. Hatta önceden haber vermeden bir kupon kullanımını iptal edebilir, durdurabilir veya reddedebilirler. '
+            '\n 9.6. Herhangi bir zamanda, Ismmart, tamamen kendi takdirlerine bağlı olarak, daha önce bildirim olmadan kupon kullanmalarını veya belirli satıcıları geçersiz kılmayı, reddetmeyi ve/veya engellemeyi seçebilir.',
+        key.tCHeader11:
+            '10. Yükümlülüklerin temsilleri, garantileri ve sınırlandırılması',
+        key.tCBody11: '10.1 Temsiller ve Garantiler '
+            '\n \n Platformdaki tüm içeriğin "olduğu gibi" ve "mevcut olduğu gibi" olduğunu kabul edersiniz ve platformun ve ilgili ürünlerin, malların ve hizmetlerin herhangi bir erişiminin veya kullanımının kendi sorumluluğunuzda olduğunu anlarsınız.'
+            '\n \n Ayrıca, tüm ürün görüntüleri sadece temsil içindir ve gerçek üründen farklı görünebilir. Ismmart, platformu erişilebilir ve işlevsel tutmak için her türlü çabayı gösterir, ancak hizmetin zamanında, hatalar, teknik sorunlar veya virüsler olmadan güvenli olduğunu garanti edemezler. Sistem bakımı veya güç etkinlikleri nedeniyle geçici hizmet kesintileri beklenebilir '
+            '\n 10.2 Sorumluluk Sınırlaması'
+            '\n \n Yasa tarafından öngörüldüğü gibi, Ismmart (personeli, amirleri, temsilcileri, ortakları ve anne veya baba firması ile birlikte) tüm sorumluluğu (bir düzenlemeden, dikkatsizlikten veya başka türlü gelişmenin) talihsizlik veya zarar için reddeder. Siz veya başka bir kişi, orada yayınlanan herhangi bir madde veya materyalin yanı sıra platformumuz, hizmetlerimiz ve bağlantılı sitelerimizle birlikte geçebilirsiniz. Platformun kullanımı ile ilgili özel seçiminiz bu kullanımı durdurmaktır. ISMMART kuruluşları, operatörleri, temsilcileri ve hizmet tedarikçileri, platformu kullanmanızdan veya platformu kullanmanızla özdeşleştirilen herhangi bir kapasitede herhangi bir kapasitede ortaya çıkan herhangi bir dolambaçlı, olağanüstü, tesadüfi, backhand veya inanılmaz zararlar için sorumlu olmayacaktır. Bu ikiz, nadir, backhand ve olağanüstü zararların işten çıkarılmaları, sınırlama olmaksızın, kayıp faydalar, kayıp bilgiler, hayırseverlik talihsizliği, iş kesintisi, PC hayal kırıklığı veya eksikliği veya diğer bazı iş zararları veya talihsizlikleri içeriyor. ISMMART maddeleri, operatörleri, temsilcileri ve hizmet tedarikçileri, olasılığı konusunda ve iddianın bağlı olduğu yasal veya eşdeğer teoriden bağımsız olarak eğitilmişlerdir. Bazı devletlerin veya açıklamaların önlenmeye veya geri çekilme riskinin engellenmesine izin vermemesi nedeniyle veya kazara zararlar, bu eyaletlerde veya açıklamalarda, Ismmart, Ismmart unsurları, operatörleri, delegeleri ve hizmet tedarikçileri riski yasanın izin verdiği dereceyle sınırlı olacaktır. '
+            '\n 10.3 satıcının temsilleri'
+            '\n \n ISMMART, teslim edilen mallarla ilgili olarak sizin veya satıcıların eylemlerinden sorumlu tutulamaz; Ayrıca, malların veya hizmetlerin kalitesi, koşul veya diğer nitelikleri için sorumluluk almazlar veya satıcıların listelemesinde/teklifinde görüntülenen herhangi bir menü bilgilerinin, fotoğrafların ve/veya görüntülerin doğruluğunu garanti etmezler. Bununla birlikte, bu Hizmet Şartları\'ndaki hiçbir maddenin, kendi ihmallerinden veya kötü niyetli davranışlarından kaynaklanan ölüm veya kişisel yaralanma durumlarında satıcıyı sorumluluktan kurtarmadığına dikkat edilmelidir.',
+        key.tCHeader12: '11. Satıcı Sorumluluğu',
+        key.tCBody12:
+            'Satıcılar, size satılan ürünlerin hazırlığı, durumu ve kalibresi için tam bir hesap verebilirliğe sahiptir. Üçüncü taraf teslimatlar söz konusu olduğunda, bu ortaklar öğeleri ve/veya siparişleri taşımaktan sorumludur. Ismmart\'ın ortakla sözleşmeye bağlı tahvilden gelebilecek herhangi bir açık, zarar, harcama, suçlama veya ceza için bir görevi yoktur.',
+        key.tCHeader13: '12. Kişisel Veriler (Kişisel Bilgiler) Koruması',
+        key.tCBody13:
+            'Bu terimleri kabul ederek, Gizlilik Politikamızda belirtildiği gibi, ISMMART ve ilgili şirketlerine kişisel verilerinizi toplamaya, kullanmaya, işleme, işleme ve ifşa etmesi için açık onayınızı veriyorsunuz. Bu belge bu terimlerin bir parçası olarak eklenmiştir ve (https://ismmart.com/privacypolicy) veya platformumuzdaki bağlantıları görüntülemek için kullanılabilir.',
+        key.tCHeader14: '13. Tazminat',
+        key.tCBody14: '13.1 Platformun kullanımı; '
+            '\n 13.2 Hizmetlerin kullanımı; veya'
+            '\n 13.3 Bu terimlerin ihlali.',
+        key.tCHeader15: '14. Üçüncü taraf bağlantıları ve web siteleri',
+        key.tCBody15:
+            'Platformda yer alan üçüncü taraf bağlantılarını tıklamaktan kaçınabileceğiniz herhangi bir hasar veya kayıp için sorumluluk alamayız. Bu bağlantılar sizi ürünlere, web sitelerine, hizmetlere ve tarafımızdan yönetilmeyen veya yönetilmeyen tekliflere götürebilir. İçerik, işlevsellik, güvenlik, hizmetler, gizlilik politikaları veya bu üçüncü taraf web sitelerinin diğer yönlerini kefil olamayız. Bu nedenle, bu üçüncü taraf bağlantılarına erişim ve kullanımınızla ilgili herhangi bir kayıp veya hasardan sorumlu tutulamayız.',
+        key.tCHeader16: '15. Fesih',
+        key.tCBody16:
+            'Ismmart, hesabınızı devre dışı bırakma, askıya alma veya iptal etme ve ayrıca bir siparişle ilgili olarak size verilen her türlü teslimat hizmetini de kapsayan platforma erişiminizi veya kullanımınızı yasaklama yetkisine sahiptir. Bunun nedeni, ancak ISMMART kullanımınızın yetersiz olduğunu veya arka plan kontrollerinin sonuçlarının tatmin edici olmadığını veya herhangi bir tür ile ilişkili olduğunuzu algıladığınızı veya bulursa, herhangi bir sayıda nedenden kaynaklanabilir. terimlere aykırı olan faaliyet veya davranış. Ismmart, platform kullanımınızı kısıtlamadan önce sizi uyarabilir, ancak gerekli değildir.',
+        key.tCHeader17: '16. Değişiklikler',
+        key.tCBody17:
+            'Herhangi bir zamanda, Ismmart mevcut şartları kendi takdirine bağlı olarak revize etme hakkını saklı tutar. Bu tür değişiklikler, Web Sitesinde yayınlanır, geçerli mevzuat sınırları dahilinde yürürlüğe girer. Sonuç olarak, terimlerin mevcut sürümüne aşina olduğunuzdan emin olmak sizin görevinizdir. Değişikliklerden memnun değilseniz, tam veya kısmen, platformu hemen kullanmaktan kaçınmalısınız.',
+        key.tCHeader18: '17. Terk edilebilirlik',
+        key.tCBody18:
+            'Bu şartların herhangi bir kısmı herhangi bir yetkili yargı mahkemesi tarafından yasadışı kabul edilirse, kalan şartlar bozulmadan kalacaktır. Ayrıca, bu Koşulların herhangi bir hükmünden feragat, söz konusu veya başka bir hükmün müteakip veya sürekli feragati olarak yorumlanamaz.',
+        key.tCHeader19: '18. Yönetim Yasası',
+        key.tCBody19:
+            'Geçerli ISMMART kuruluşunun kurulduğu ulusun mevzuatı, bu şartların üzerinde yetki ve şekillendirilmelidir.',
+        key.tCHeader20: '19. Bize Ulaşın',
+        key.tCBody20:
+            'Bizimle paylaşmak istediğiniz herhangi bir sorunuz veya görüşünüz varsa, lütfen web sitesinde belirtildiği gibi destek numaramızı arayın.',
+        key.tCHeader21: '20. Hakim Dil',
+        key.tCBody21:
+            'Terimler arasında herhangi bir tutarsızlık olması durumunda, İngilizce sürümü bağlayıcı olacaktır. Bu terimlerin İngilizce sürümü yüce kabul edilecek ve tercüme edilen sürümlere kıyasla herhangi bir farklılık göz ardı edilecektir.',
       };
 }
