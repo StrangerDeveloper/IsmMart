@@ -78,6 +78,7 @@ class LogInViewModel extends GetxController {
         UserResponse userResponse = UserResponse.fromResponse(value);
         userResponse.userModel!.token = json['data']['token'];
         GlobalVariable.userModel = userResponse.userModel;
+        authController.setUserModel(userResponse.userModel);
         SettingViewModel settingViewModel = Get.find();
         settingViewModel.setUserModel(userResponse.userModel);
         baseController.changePage(0);
