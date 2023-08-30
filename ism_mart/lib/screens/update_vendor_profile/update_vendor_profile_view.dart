@@ -2,6 +2,7 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ism_mart/controllers/controllers.dart';
 import 'package:ism_mart/exports/export_widgets.dart';
@@ -35,7 +36,7 @@ class UpdateVendorProfileView extends StatelessWidget {
         children: [
           SingleChildScrollView(
             child: Form(
-              key: viewModel.vendorSignUp2FormKey,
+              key: viewModel.vendorUpdateProfileFormKey,
               child: Padding(
                 padding: const EdgeInsets.only(top: 30, left: 20, right: 20),
                 child: Column(
@@ -55,7 +56,13 @@ class UpdateVendorProfileView extends StatelessWidget {
                         child: cnicFunctionlaity(
                             )),
                     //   ntnTextField(),
-                    shopPhoneNoTextField(),
+                    Obx(() => viewModel.clickOnPhoneField.value?shopPhoneNoTextField(): GestureDetector(
+                        onTap: (){
+                          viewModel.clickOnPhoneField.value=true;
+                        },
+                        child: phoneFunctionlaity()),),
+
+
 
                     //  ownerCNICField(),
                     countryPicker(),
@@ -103,12 +110,26 @@ class UpdateVendorProfileView extends StatelessWidget {
           ),
           NoInternetView(
             onPressed: () {
-              viewModel.proceed();
+              viewModel.updateData();
             },
           ),
           LoaderView(),
         ],
       ),
+    );
+  }
+  Widget phoneFunctionlaity() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        cnicText(langKey.storeNumber.tr, 16.0),
+        SizedBox(height: 10,),
+        Obx(() => cnicText(viewModel.phone.value.toString(), 14.0, style: newFontStyle0.copyWith(
+          color: newColorLightGrey2,
+        ))),
+        SizedBox(height: 20,)
+      ],
+
     );
   }
 
@@ -161,7 +182,7 @@ class UpdateVendorProfileView extends StatelessWidget {
         text: TextSpan(
           children: [
             TextSpan(
-              text: langKey.add.tr,
+              text: "Update",
               style: newFontStyle2.copyWith(
                 fontSize: 20,
                 color: newColorDarkBlack2,
@@ -197,7 +218,7 @@ class UpdateVendorProfileView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  langKey.vendorAccountCreation.tr,
+                  "Vendor Account Updation",
                   style: newFontStyle1.copyWith(
                     color: newColorBlue2,
                   ),
@@ -319,10 +340,11 @@ class UpdateVendorProfileView extends StatelessWidget {
                     ),
                   ),
                   onChanged: (CategoryModel? newValue) {
-                    newValue!.id = viewModel.shopCategoryId.value;
+                  //  newValue!.id = viewModel.shopCategoryId.value;
                     viewModel.selectedCategory.value = newValue!;
-                    // viewModel.shopCategoryId.value = newValue.id!.toInt();
+                     viewModel.shopCategoryId.value = newValue.id!.toInt();
                     viewModel.categoryErrorVisibility.value = false;
+                    print("cat--==---${ viewModel.shopCategoryId.value}");
                   },
                   selectedItem: viewModel.selectedCategory.value,
                 ),
@@ -450,9 +472,10 @@ class UpdateVendorProfileView extends StatelessWidget {
                   cityViewModel.cityId.value = 0;
                   viewModel.selectedCountry(newValue!);
                   viewModel.countryID.value = newValue.id!;
-                  viewModel.countryID.value = newValue.id!;
                   viewModel.getCitiesByCountry(countryId: newValue.id!);
                   viewModel.countryErrorVisibility.value = false;
+                  viewModel.countryID.value=newValue.id!;
+                  print("country id ${newValue.id!} = ${ viewModel.countryID.value}");
                 },
                 selectedItem: viewModel.selectedCountry.value,
               ),
@@ -535,11 +558,10 @@ class UpdateVendorProfileView extends StatelessWidget {
                 ),
               ),
               onChanged: (CountryModel? newValue) {
-                // viewModel.selectedcity.value =
-                //     newValue!.name ?? "";
-                viewModel.selectedCity(newValue);
-                // viewModel.cityID.value = newValue.id!;
+                viewModel.selectedCity(newValue!);
                 viewModel.cityErrorVisibility.value = false;
+               viewModel. cityID.value=newValue.id!;
+               print("selected city ${  viewModel. cityID.value} = ${newValue.id!}");
               },
               selectedItem: viewModel.selectedCity.value,
             ),
@@ -645,7 +667,7 @@ class UpdateVendorProfileView extends StatelessWidget {
             : CustomRoundedTextBtn(
           title: langKey.submit.tr,
           onPressed: () async {
-            await viewModel.proceed();
+            await viewModel.updateData();
             // Get.to(() => VendorSignUp3View());
           },
         ),

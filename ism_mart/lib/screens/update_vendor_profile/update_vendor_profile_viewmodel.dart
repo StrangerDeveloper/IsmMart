@@ -1,4 +1,7 @@
 
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -12,8 +15,13 @@ import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 
+import '../../api_helper/api_constant.dart';
+import '../../api_helper/local_storage/local_storage_helper.dart';
 import '../../api_helper/providers/auth_provider.dart';
+import '../../helper/errors.dart';
 import '../../widgets/pick_image.dart';
+import '../login/login_viewmodel.dart';
+import '../setting/settings_viewmodel.dart';
 import '../vendor_profile/vendor_profile_viewmodel.dart';
 
 class UpdateVendorProfileViewModel extends GetxController {
@@ -21,7 +29,7 @@ class UpdateVendorProfileViewModel extends GetxController {
   UpdateVendorProfileViewModel(this.authProvider);
   Rx<UserModel?> userModel1 = UserModel().obs;
   RxInt shopCategoryId = 0.obs;
-  GlobalKey<FormState> vendorSignUp2FormKey = GlobalKey<FormState>();
+  GlobalKey<FormState> vendorUpdateProfileFormKey = GlobalKey<FormState>();
   TextEditingController shopNameController = TextEditingController();
   TextEditingController shopAddressController = TextEditingController();
   TextEditingController ownerNameController = TextEditingController();
@@ -43,6 +51,8 @@ class UpdateVendorProfileViewModel extends GetxController {
   Rxn phoneErrorText = Rxn<String>();
   RxString countryCode = '+92'.obs;
   RxString cnic = "".obs;
+  RxString phone = "".obs;
+  RxBool clickOnPhoneField =false.obs;
   Rx<CategoryModel> selectedCategory = CategoryModel().obs;
   RxBool categoryErrorVisibility = false.obs;
 
@@ -51,49 +61,38 @@ class UpdateVendorProfileViewModel extends GetxController {
 
   getData1() async{
     userModel1.value = GlobalVariable.userModel;
+  await  getCurrentUser();
 
-    if(userModel1.value ==null || userModel1.value!.vendor!.storeName!.isEmpty){
-      GlobalVariable.showLoader.value=true;
-    }else{
-
+      GlobalVariable.showLoader.value=false;
       await fetchCategories();
       await getCountries();
       shopNameController.text =
           userModel1.value!.vendor!.storeName.toString() ?? "";
-      shopCategoryId.value =
-          int.parse(userModel1.value!.vendor!.category.toString() ?? "");
-
-
       //we will call api of categories and assign this list to current index by get current user category
-      // selectedCategory.value.id=shopCategoryId.value;
+    int _catid = shopCategoryId.value;
       selectedCategory.value.id=shopCategoryId.value;
-      selectedCategory.value.name=categoriesList[shopCategoryId.value].name;
-      shopAddressController.text =
-          userModel1.value!.vendor!.address.toString() ?? "Empity";
-      shopDescController.text =
-          userModel1.value!.vendor!.storeDesc.toString() ?? "";
-      phoneNumberController.text =
-          userModel1.value!.vendor!.phone.toString() ?? "";
-      ownerCnicController.text =
-          userModel1.value!.vendor!.ownerCnic.toString() ?? "";
+      selectedCategory.value.name=categoriesList[_catid].name;
       cnic.value=  userModel1.value!.vendor!.ownerCnic.toString();
 
       //country value assign
-      countryID.value= userModel1.value!.vendor!.countryId?? 0;
+    int _cid=countryID.value;
       selectedCountry.value.id=countryID.value;
-      selectedCountry.value.name=countries[countryID.value].name;
-      await  getCitiesByCountry(countryId: countryID.value);
-      cityID.value= userModel1.value!.vendor!.cityId?? 0;
-      selectedCity.value.id=userModel1.value!.vendor!.cityId;
+      selectedCountry.value.name=countries[_cid].name;
+
+      int _cityid =  countryID.value;
+      await  getCitiesByCountry(countryId:_cityid);
       var cityNameById =cities.where((id) => (id.id  == cityID.value)).toList();
+    selectedCity.value.id=cityNameById[0].id;
       selectedCity.value.name=cityNameById[0].name;
-      cityViewModel.selectedCity.value = CountryModel();
+    print("city id ===== $_cityid   ${selectedCity.value.id} ${ selectedCity.value.name}");
+
+    //cityViewModel.selectedCity.value = CountryModel();
 
       print("curent user cityyy ----- ${    selectedCity.value.name} ");
       print("curent user cityyy   ${cityID.value}----- ${selectedCity.value.id}");
 
-      GlobalVariable.showLoader.value=false;
-    }
+
+
 
 
   }
@@ -102,7 +101,7 @@ class UpdateVendorProfileViewModel extends GetxController {
 
   @override
   void onInit() async{
-    GlobalVariable.showLoader(true);
+  //  GlobalVariable.showLoader(true);
     getData1();
     await authController.getCountries();
     super.onInit();
@@ -156,17 +155,6 @@ class UpdateVendorProfileViewModel extends GetxController {
   }
 
 
-
-
-
-  selectImage(RxString imageVar, RxBool imageVisibilityVar)async{
-    final image = await PickImage().pickSingleImage();
-    if(image != null){
-      imageVar.value = image.path;
-      imageVisibilityVar.value = false;
-    }
-  }
-
   validatorPhoneNumber(String? value) {
     if (GetUtils.isBlank(value)!) {
       phoneErrorText.value = langKey.fieldIsRequired.tr;
@@ -177,128 +165,98 @@ class UpdateVendorProfileViewModel extends GetxController {
     }
   }
 
-  Future<void> proceed() async{
-    if (vendorSignUp2FormKey.currentState?.validate() ?? false) {
-      if(checkImages() == true && checkDropDowns() == true){
-        GlobalVariable.showLoader.value = false;
 
-        Map<String, String> details = {
-          "storeName": shopNameController.text,
-          "category": "${shopCategoryId.value}",
-          "phone": countryCode.value + phoneNumberController.text,
-          "country": "${countryID.value}",
-          "city": "${cityID.value}",
-          "ownerCnic": ownerCnicController.text,
-          "storeDesc": shopDescController.text,
-          'cnicFront': cnicFrontImage.value,
-          'cnicBack': cnicBackImage.value,
-          'storeImage': shopLogoImage.value,
-          'address': shopAddressController.text,
-        };
 
-        if(ntnController.text.isNotEmpty){
-          details.addAll({
-            'storeNtn': ntnController.text,
-          });
-        }
-        Get.toNamed(Routes.vendorSignUp3, arguments: {
-          'shopDetails': details
-        });
+  updateData() async {
+    print("cat id ------${shopAddressController.text} ");
+    print("cat id ------${shopNameController.text} ");
+    print("cat id ------${shopCategoryId.value} ");
+    print("cat id ------${countryCode.value + phoneNumberController.text} ");
+    print("cat id ------${countryID.value} ");
+    print("cat id ------${cityID.value} ");
+    print("cat id ------${shopDescController.text} ");
+    print("cat id ------${shopAddressController.text} ");
+    GlobalVariable.showLoader(true);
+    print("${GlobalVariable.userModel?.token}");
+    // if (vendorUpdateProfileFormKey.currentState?.validate() ?? false) {
+    //   GlobalVariable.showLoader.value=true;
+    //
+    //
+      Map<String, String> param ={
+        "storeName": shopNameController.text,
+        "category": "${shopCategoryId.value}",
+        "phone": countryCode.value + phoneNumberController.text,
+        "country": "${countryID.value}",
+        "city": "${cityID.value}",
+        "storeDesc": shopDescController.text,
+        'storeAddress':shopAddressController.text.toString(),
+      };
+
+
+    var headers = {
+      'authorization': '${GlobalVariable.userModel!.token}',
+      'Cookie': 'XSRF-token=${GlobalVariable.userModel!.token}'
+    };
+    var request = http.MultipartRequest('POST', Uri.parse('${ApiConstant.baseUrl}/auth/vendor/register'));
+    request.fields.addAll(param);
+
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode < 201) {
+      AppConstant.displaySnackBar(
+        langKey.successTitle.tr,
+        "Data Updated",
+      );
+      var data =await http.Response.fromStream(response);
+      var a = jsonDecode(data.body);
+      print("data-------------$a");
+      GlobalVariable.showLoader.value=false;
+      print(await response.stream.bytesToString());
+    }
+    else {
+      GlobalVariable.showLoader.value=false;
+      print(response.reasonPhrase);
+    }
+    }
+
+
+
+
+//current user
+    getCurrentUser() async {
+      GlobalVariable.showLoader.value=true;
+    await ApiBaseHelper()
+        .getMethod(url: 'user/profile', withAuthorization: true)
+        .then((value) async {
+      GlobalVariable.showLoader.value=false;
+      if (value['success'] == true) {
+        UserResponse userResponse = UserResponse.fromResponse(value);
+        userResponse.userModel!.token = GlobalVariable.userModel!.token;
+        shopAddressController.text=  value['data']['Vendor']['storeAddress'];
+        shopDescController.text=  value['data']['Vendor']['storeDesc'];
+        shopCategoryId.value=  value['data']['Vendor']['category'];
+        cnic.value=  value['data']['Vendor']['ownerCnic'].toString();
+        phoneNumberController.text=  value['data']['Vendor']['phone'];
+        phone.value=value['data']['Vendor']['phone'];
+        countryID.value=value['data']['Vendor']['country'];
+        cityID.value=  value['data']['Vendor']['city'];
+       print("cat id------------ ${ cityID.value} ==  ${value['data']['Vendor']['city']}");
+
+        GlobalVariable.userModel = userResponse.userModel;
+        authController.setUserModel(userResponse.userModel);
+       SettingViewModel settingViewModel = Get.find();
+        settingViewModel.setUserModel(userResponse.userModel);
+        baseController.changePage(0);
+
+        await LocalStorageHelper.storeUser(userModel: userResponse.userModel)
+            .then((value) {});
+
       }
-    } else{
-      checkImages();
-      checkDropDowns();
-    }
-  }
-
-  checkDropDowns(){
-    bool proceed1 = true;
-    if(countryID.value == 0){
-      countryErrorVisibility.value = true;
-      proceed1 = false;
-    }
-    if(cityID.value == 0){
-      cityErrorVisibility.value = true;
-      proceed1 = false;
-    }
-    if(shopCategoryId.value == 0){
-      categoryErrorVisibility.value = true;
-      proceed1 = false;
-    }
-    return proceed1;
-  }
-
-  bool checkImages(){
-    bool proceed2 = true;
-    if(cnicFrontImage.value == ''){
-      cnicFrontErrorVisibility.value = true;
-      proceed2 = false;
-    }
-    if(cnicBackImage.value == ''){
-      cnicBackErrorVisibility.value = true;
-      proceed2 = false;
-    }
-    if(shopLogoImage.value == ''){
-      shopImageErrorVisibility.value = true;
-      proceed2 = false;
-    }
-    return proceed2;
+    });
   }
 
 
-
-
-
-  // updateData() async {
-  //   if (buyerProfileFormKey.currentState?.validate() ?? false) {
-  //     GlobalVariable.showLoader.value = true;
-  //
-  //     Map<String, String> param = {
-  //       "firstName": firstNameController.text,
-  //       "lastName": lastNameController.text,
-  //       "address": addressController.text,
-  //       "phone": phoneController.text,
-  //     };
-  //
-  //     List<http.MultipartFile> fileList = [];
-  //     if (imageFile.value?.path != '') {
-  //       fileList.add(
-  //         await http.MultipartFile.fromPath(
-  //           'image',
-  //           imageFile.value!.path,
-  //           contentType: MediaType.parse('image/jpeg'),
-  //         ),
-  //       );
-  //     }
-  //
-  //     ApiBaseHelper()
-  //         .patchMethodForImage(
-  //         url: Urls.updateVendorData,
-  //         withAuthorization: true,
-  //         files: fileList,
-  //         fields: param)
-  //         .then((parsedJson) {
-  //       GlobalVariable.showLoader.value = false;
-  //       if (parsedJson['message'] == "User updated successfully") {
-  //         Get.back();
-  //         BuyerProfileViewModel viewModel = Get.find();
-  //         viewModel.getData();
-  //         AppConstant.displaySnackBar(
-  //             langKey.success.tr, parsedJson['message']);
-  //       } else {
-  //         AppConstant.displaySnackBar(
-  //             langKey.errorTitle.tr, parsedJson['message']);
-  //       }
-  //     }).catchError((e) {
-  //       if (e == Errors.noInternetError) {
-  //         GetxHelper.showSnackBar(
-  //             title: 'Error', message: Errors.noInternetError);
-  //       }
-  //       GlobalVariable.showLoader.value = false;
-  //       print(e);
-  //     });
-  //   }
-  // }
-  //
 
 }
