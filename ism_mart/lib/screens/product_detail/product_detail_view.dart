@@ -54,7 +54,7 @@ class ProductDetailView extends StatelessWidget {
                               showBadge: true,
                               icon: Icons.shopping_cart_outlined,
                               onTap: () {
-                                Get.off(() => CartView());
+                                Get.to(() => CartView());
                               },
                             ),
                           )
