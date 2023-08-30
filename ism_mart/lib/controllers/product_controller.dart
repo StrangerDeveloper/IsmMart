@@ -199,29 +199,28 @@ class ProductController extends GetxController with StateMixin {
   var selectedFeatureNamesList = <String>[].obs;
 
   //TOO: Add item to cart
-  addItemLocalCart({ProductModel? product}) async {
-    product!.totalPrice = int.parse(
-            quantityController.text.isEmpty ? "1" : quantityController.text) *
-        product.discountPrice!.toDouble();
-    product.vendorId = product.sellerModel!.id;
-    CartModel cart = CartModel(
-      productId: product.id!,
-      productModel: product,
-      itemPrice: product.totalPrice,
-      quantity: quantityController.text,
-      featuresID: selectedFeatureIDsList,
-      featuresName: selectedFeatureNamesList,
-      onQuantityClicked: false,
-    );
-
-    await LocalStorageHelper.addItemToCart(cartModel: cart).then((value) {
-      Get.back();
-      // AppConstant.displaySnackBar(
-      //     langKey.successTitle.tr, langKey.addToCart.tr);
-      clearControllers();
-      count(1);
-    });
-  }
+  // addItemLocalCart({ProductModel? product}) async {
+  //   product!.totalPrice = int.parse(quantityController.text.isEmpty ? "1" : quantityController.text) * product.discountPrice!.toDouble();
+  //   product.vendorId = product.sellerModel!.id;
+  //
+  //   CartModel cart = CartModel(
+  //     productId: product.id!,
+  //     productModel: product,
+  //     itemPrice: product.totalPrice,
+  //     quantity: quantityController.text,
+  //     featuresID: selectedFeatureIDsList,
+  //     featuresName: selectedFeatureNamesList,
+  //     onQuantityClicked: false,
+  //   );
+  //
+  //   await LocalStorageHelper.addItemToCart(cartModel: cart).then((value) {
+  //     Get.back();
+  //     // AppConstant.displaySnackBar(
+  //     //     langKey.successTitle.tr, langKey.addToCart.tr);
+  //     clearControllers();
+  //     count(1);
+  //   });
+  // }
 
   ///Product Full Image View Variables
   var imageChange = false.obs;
@@ -255,43 +254,43 @@ class ProductController extends GetxController with StateMixin {
     }
   }
 
-  addItemToCart({ProductModel? product}) async {
-    CartModel cart = CartModel(
-      productModel: product,
-      quantity: quantityController.text,
-      //size: size.value,
-      onQuantityClicked: false,
-    );
-
-    if (authController.isSessionExpired! && authController.userToken == null) {
-      await LocalStorageHelper.addItemToCart(cartModel: cart).then((value) {
-        AppConstant.displaySnackBar(langKey.added.tr, langKey.addToCart.tr,
-            position: SnackPosition.TOP);
-        clearControllers();
-        count(1);
-      });
-    } else {
-      var cartData = {"productId": product!.id, "quantity": cart.quantity};
-      print("");
-      await _apiProvider
-          .addCart(token: authController.userToken, data: cartData)
-          .then((ApiResponse? response) {
-        if (response != null) {
-          if (response.success!) {
-            clearControllers();
-            count(1);
-            showSnackBar(langKey.success.tr, response.message);
-          } else
-            showSnackBar(langKey.errorTitle.tr, response.message);
-        } else
-          showSnackBar(langKey.errorTitle.tr, langKey.someThingWentWrong.tr);
-      }).catchError((error) {
-        debugPrint(">>>>addItemToCart $error");
-      });
-    }
-
-    baseController.setCartItemCount();
-  }
+  // addItemToCart({ProductModel? product}) async {
+  //   CartModel cart = CartModel(
+  //     productModel: product,
+  //     quantity: quantityController.text,
+  //     //size: size.value,
+  //     onQuantityClicked: false,
+  //   );
+  //
+  //   if (authController.isSessionExpired! && authController.userToken == null) {
+  //     await LocalStorageHelper.addItemToCart(cartModel: cart).then((value) {
+  //       AppConstant.displaySnackBar(langKey.added.tr, langKey.addToCart.tr,
+  //           position: SnackPosition.TOP);
+  //       clearControllers();
+  //       count(1);
+  //     });
+  //   } else {
+  //     var cartData = {"productId": product!.id, "quantity": cart.quantity};
+  //     print("");
+  //     await _apiProvider
+  //         .addCart(token: authController.userToken, data: cartData)
+  //         .then((ApiResponse? response) {
+  //       if (response != null) {
+  //         if (response.success!) {
+  //           clearControllers();
+  //           count(1);
+  //           showSnackBar(langKey.success.tr, response.message);
+  //         } else
+  //           showSnackBar(langKey.errorTitle.tr, response.message);
+  //       } else
+  //         showSnackBar(langKey.errorTitle.tr, langKey.someThingWentWrong.tr);
+  //     }).catchError((error) {
+  //       debugPrint(">>>>addItemToCart $error");
+  //     });
+  //   }
+  //
+  //   baseController.setCartItemCount();
+  // }
 
   showSnackBar(title, message) {
     AppConstant.displaySnackBar(title, message);

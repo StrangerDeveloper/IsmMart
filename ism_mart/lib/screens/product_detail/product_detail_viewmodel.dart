@@ -14,33 +14,25 @@ import '../../models/questions/questions_model.dart';
 import '../../models/reviews/review_model.dart';
 
 class ProductDetailViewModel extends GetxController {
+
+  PageController pageController = PageController(initialPage: 0);
+  RxInt productID = 0.obs;
   bool isBuyer = true;
+  Rx<ProductModel> productModel = ProductModel().obs;
   List<String> imageList = <String>[].obs;
   RxInt indicatorIndex = 0.obs;
-  RxInt selectedSize = 0.obs;
-  List<String> sizeList =
-      <String>['S', 'M', 'L', 'XL', 'S', 'M', 'L', 'XL'].obs;
-  RxInt selectedColor = 0.obs;
-  List<String> colorList = <String>['FFFFFF', '000000', 'CADCA7', 'F79F1F'].obs;
-  RxInt productQuantity = 1.obs;
-  RxBool productAlreadyAdded = false.obs;
-
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-
+  // RxInt selectedSize = 0.obs;
+  // List<String> sizeList = <String>['S', 'M', 'L', 'XL', 'S', 'M', 'L', 'XL'].obs;
+  // RxInt selectedColor = 0.obs;
+  // List<String> colorList = <String>['FFFFFF', '000000', 'CADCA7', 'F79F1F'].obs;
+  // RxInt productQuantity = 1.obs;
+  // RxBool productAlreadyAdded = false.obs;
   List<int> selectedFeatureIDsList = <int>[].obs;
   List<String> selectedFeatureNamesList = <String>[].obs;
-  RxInt productID = 0.obs;
-  Rx<ProductModel> productModel = ProductModel().obs;
-
   //RxBool viewCheck = true.obs;
-  RxBool productFoundCheck = true.obs;
-  PageController pageController = PageController(initialPage: 0);
-  List<QuestionModel> productQuestions = <QuestionModel>[].obs;
-
-  //TextEditingController quantityController = TextEditingController();
+  // List<QuestionModel> productQuestions = <QuestionModel>[].obs;
   //RxInt count = 1.obs;
-  Rx<ReviewModelResponse> reviewResponse = ReviewModelResponse().obs;
+  // Rx<ReviewModelResponse> reviewResponse = ReviewModelResponse().obs;
 
   @override
   void onInit() {
@@ -62,41 +54,39 @@ class ProductDetailViewModel extends GetxController {
     //pageIndex.value = 0;
     // imageIndex.value = 0;
     //viewCheck.value = true;
-    productQuestions.clear();
+    // productQuestions.clear();
     //quantityController.clear();
     //count.value = 1;
     selectedFeatureIDsList.clear();
     selectedFeatureNamesList.clear();
-    reviewResponse.value = ReviewModelResponse();
+    // reviewResponse.value = ReviewModelResponse();
     super.onClose();
   }
 
-  checkCartForThisItem() {
-    CartViewModel cartViewModel = Get.find();
+  // checkCartForThisItem() {
+  //   CartViewModel cartViewModel = Get.find();
+  //
+  //   int index = cartViewModel.cartItemsList.indexWhere((e) => e.productId == productModel.value.id);
+  //   if (index != -1) {
+  //     productAlreadyAdded.value = true;
+  //     productQuantity.value = int.parse(cartViewModel.cartItemsList[index].quantity ?? '1');
+  //   }
+  // }
 
-    int index = cartViewModel.cartItemsList
-        .indexWhere((e) => e.productId == productModel.value.id);
-    if (index != -1) {
-      productAlreadyAdded.value = true;
-      productQuantity.value =
-          int.parse(cartViewModel.cartItemsList[index].quantity ?? '1');
-    }
-  }
+  // increment() {
+  //   if (int.parse(productModel.value.stock.toString()) >
+  //       productQuantity.value) {
+  //     productQuantity.value++;
+  //   }
+  // }
 
-  increment() {
-    if (int.parse(productModel.value.stock.toString()) >
-        productQuantity.value) {
-      productQuantity.value++;
-    }
-  }
+  // decrement() {
+  //   if (productQuantity.value > 1) {
+  //     productQuantity.value--;
+  //   }
+  // }
 
-  decrement() {
-    if (productQuantity.value > 1) {
-      productQuantity.value--;
-    }
-  }
-
-  void moveToProductImageView(int index) {
+  void viewImageEnlarge(int index) {
     //imageIndex(index);
     Get.toNamed(Routes.singleProductFullImage, arguments: [
       {
@@ -115,15 +105,15 @@ class ProductDetailViewModel extends GetxController {
   // }
 
   addUpdateItemToLocalCart() async {
-    productModel.value.totalPrice =
-        productQuantity.value * productModel.value.discountPrice!.toDouble();
-    productModel.value.vendorId = productModel.value.sellerModel!.id;
+    // productModel.value.totalPrice = productQuantity.value * productModel.value.discountPrice!.toDouble();
+    productModel.value.totalPrice = productModel.value.discountPrice?.toDouble();
+    productModel.value.vendorId = productModel.value.sellerModel?.id;
 
     CartModel cart = CartModel(
       productId: productModel.value.id,
       productModel: productModel.value,
       itemPrice: productModel.value.totalPrice,
-      quantity: productQuantity.value.toString(),
+      quantity: '1',
       featuresID: selectedFeatureIDsList,
       featuresName: selectedFeatureNamesList,
       onQuantityClicked: false,
@@ -132,7 +122,7 @@ class ProductDetailViewModel extends GetxController {
     await LocalStorageHelper.addItemToCart(cartModel: cart).then((value) {
       CartViewModel cartModel = Get.find();
       cartModel.fetchCartItemsFromLocal();
-      productAlreadyAdded.value = true;
+      //productAlreadyAdded.value = true;
     });
   }
 
@@ -142,6 +132,7 @@ class ProductDetailViewModel extends GetxController {
     await ApiBaseHelper()
         .getMethod(url: 'products/${productID.value}')
         .then((response) async {
+      GlobalVariable.showLoader.value = false;
       if (response['success'] == true && response['data'] != null) {
         productModel.value = ProductModel.fromJson(response['data']);
 
@@ -161,40 +152,36 @@ class ProductDetailViewModel extends GetxController {
           });
         }
 
-        await getProductQuestions();
-        GlobalVariable.showLoader.value = false;
-      } else if (response['success'] == false) {
-        productFoundCheck.value = false;
+        // await getProductQuestions();
       } else {
-        productFoundCheck.value = false;
-        // AppConstant.displaySnackBar(langKey.errorTitle.tr, langKey.errorMsg.tr);
+        Get.back();
+        AppConstant.displaySnackBar(langKey.errorTitle.tr, 'Your product has been rejected, Update Product Info!');
       }
 
-      if(isBuyer == true){
-        checkCartForThisItem();
-      }
+      // if(isBuyer == true){
+      //   checkCartForThisItem();
+      // }
     }).catchError((error) {
       GlobalVariable.showLoader.value = false;
       GlobalVariable.internetErr(true);
-      productFoundCheck.value = false;
       // AppConstant.displaySnackBar(langKey.errorTitle.tr, langKey.errorMsg.tr);
       //viewCheck.value = false;
     });
   }
 
-  getProductQuestions() async {
-    await ApiBaseHelper()
-        .getMethod(url: 'product/questions/${productModel.value.id}')
-        .then((value) {
-      if (value['success'] == true && value['data'] != null) {
-        productQuestions.clear();
-        var data = value['data'] as List;
-        productQuestions.addAll(data.map((e) => QuestionModel.fromJson(e)));
-      }
-    }).catchError((e) {
-      AppConstant.displaySnackBar(langKey.errorTitle.tr, e.toString());
-    });
-  }
+  // getProductQuestions() async {
+  //   await ApiBaseHelper()
+  //       .getMethod(url: 'product/questions/${productModel.value.id}')
+  //       .then((value) {
+  //     if (value['success'] == true && value['data'] != null) {
+  //       productQuestions.clear();
+  //       var data = value['data'] as List;
+  //       productQuestions.addAll(data.map((e) => QuestionModel.fromJson(e)));
+  //     }
+  //   }).catchError((e) {
+  //     AppConstant.displaySnackBar(langKey.errorTitle.tr, e.toString());
+  //   });
+  // }
 
 // popSingleProductView() {
 //   pageIndex(0);

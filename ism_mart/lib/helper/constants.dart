@@ -209,6 +209,7 @@ class AppConstant {
     }
 
     Get.snackbar(titleNew.capitalizeFirst!.toString(), messageNew.toString(),
+        duration: Duration(milliseconds: 600),
         snackPosition: position ?? SnackPosition.TOP,
         backgroundColor: bgColor,
         icon: Icon(

@@ -1,7 +1,12 @@
 import 'dart:convert';
+
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/exports/exports_model.dart';
+import 'package:ism_mart/exports/exports_utils.dart';
+import 'package:ism_mart/helper/global_variables.dart';
+import 'package:ism_mart/widgets/getx_helper.dart';
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 
 class LocalStorageHelper {
   LocalStorageHelper._();
@@ -49,6 +54,7 @@ class LocalStorageHelper {
       return UserModel();
     }
   }
+
 ////////////////// Search History ////////////////////////////////////////////////
 
   static Future<void> saveHistory({String? history}) async {
@@ -73,21 +79,29 @@ class LocalStorageHelper {
   }
 
 ///////////////// Cart Section //////////////////////////////////////////////////
-  static Future<void> addItemToCart({CartModel? cartModel}) async {
-    var list = <CartModel>[];
 
-    if (localStorage.read(cartItemKey) != null) {
-      list = getCartItems();
+  static Future<void> addItemToCart({CartModel? cartModel}) async {
+    List<CartModel> cartList = <CartModel>[];
+
+    if (GetStorage().read(cartItemKey) != null) {
+      cartList = getCartItems();
 
       if (isItemExistsInCart(cartModel)) {
-        print('I am coing');
-        list.removeWhere((element) => element.productId! == cartModel!.productId);
+        int itemIndex = cartList.indexWhere((element) => element.productId! == cartModel!.productId);
+        int itemQuantity = int.parse(cartList[itemIndex].quantity!);
+
+        if (itemQuantity < cartModel!.productModel!.stock!) {
+          cartList[itemIndex].quantity = (itemQuantity + 1).toString();
+          cartList[itemIndex].itemPrice = cartList[itemIndex].productModel!.discountPrice! * (itemQuantity + 1);
+          AppConstant.displaySnackBar(langKey.success.tr,  langKey.addToCart.tr);
+        } else {
+          AppConstant.displaySnackBar(langKey.errorTitle.tr,  'Stock limit reached');
+        }
+      } else {
+        cartList.add(cartModel!);
       }
-
     }
-
-    list.add(cartModel!);
-    String carts = cartModelToJson(list);
+    String carts = cartModelToJson(cartList);
     await saveCart(carts);
   }
 
@@ -96,8 +110,8 @@ class LocalStorageHelper {
     await saveCart(carts);
   }
 
-  static saveCart(cartItems) {
-    localStorage.write(cartItemKey, cartItems).then((value) {});
+  static saveCart(cart) {
+    localStorage.write(cartItemKey, cart).then((value) {});
   }
 
   static updateCartItems({CartModel? cartModel}) async {
@@ -119,8 +133,8 @@ class LocalStorageHelper {
   }
 
   static List<CartModel> getCartItems() {
-    if (localStorage.read(cartItemKey) == null) return [];
-    String data = localStorage.read(cartItemKey);
+    if (GetStorage().read(cartItemKey) == null) return [];
+    String data = GetStorage().read(cartItemKey);
     return cartModelFromJson(data);
   }
 
@@ -145,7 +159,6 @@ class LocalStorageHelper {
   static deleteUserData() {
     localStorage.remove(currentUserKey);
     GlobalVariable.userModel = null;
-
   }
 
   static storeEmailVerificationDetails() {
