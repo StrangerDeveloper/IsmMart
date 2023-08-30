@@ -71,15 +71,16 @@ class SettingViewModel extends GetxController {
 
     try {
       if (Platform.isIOS) {
-        if (await launchUrl(Uri.parse(iosUrl))) {
+        if (await canLaunchUrl(Uri.parse(iosUrl))) {
           await launchUrl(Uri.parse(iosUrl));
         }
       } else {
-        if (await launchUrl(Uri.parse(androidUrl))) {
+        if (await canLaunchUrl(Uri.parse(androidUrl))) {
           await launchUrl(Uri.parse(androidUrl));
         }
       }
-    } on Exception {
+    } catch(e) {
+      print('object');
       await launchUrl(Uri.parse(webUrl), mode: LaunchMode.externalApplication);
     }
   }

@@ -523,7 +523,7 @@ class SettingsView extends StatelessWidget {
                       padding: const EdgeInsets.all(10),
                       child: SvgPicture.asset(
                         svgIcons!,
-                        //color: color,
+                        color: color,
                       ),
                     ),
             ),
