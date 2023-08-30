@@ -602,6 +602,7 @@ class VendorSignUp1View extends StatelessWidget {
                   ],
                 ),
               ),
+
               IconButton(
                 onPressed: () {
                   Get.back();
