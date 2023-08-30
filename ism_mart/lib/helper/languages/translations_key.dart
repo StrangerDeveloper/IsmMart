@@ -322,8 +322,10 @@ const topCategories = "topCategories",
     viewMore = "viewMore",
     viewAll = "viewAll";
 
-///View Product
-const productDetails = "productDetails";
+///ProductDetail
+const productDetails = "productDetails",
+    productRejected = "productRejected",
+    stockLimitReached = "stockLimitReached", availableInStock = "availableInStock" , addToCartText = 'addToCartText';
 
 /// buyer Check out
 const shipping = "shipping",

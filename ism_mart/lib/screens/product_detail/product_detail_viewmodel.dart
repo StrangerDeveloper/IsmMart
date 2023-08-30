@@ -10,17 +10,15 @@ import '../../api_helper/local_storage/local_storage_helper.dart';
 import '../../helper/constants.dart';
 import '../../helper/routes.dart';
 import '../../models/order/cart/cart_model.dart';
-import '../../models/questions/questions_model.dart';
-import '../../models/reviews/review_model.dart';
 
 class ProductDetailViewModel extends GetxController {
-
   PageController pageController = PageController(initialPage: 0);
   RxInt productID = 0.obs;
   bool isBuyer = true;
   Rx<ProductModel> productModel = ProductModel().obs;
   List<String> imageList = <String>[].obs;
   RxInt indicatorIndex = 0.obs;
+
   // RxInt selectedSize = 0.obs;
   // List<String> sizeList = <String>['S', 'M', 'L', 'XL', 'S', 'M', 'L', 'XL'].obs;
   // RxInt selectedColor = 0.obs;
@@ -29,6 +27,7 @@ class ProductDetailViewModel extends GetxController {
   // RxBool productAlreadyAdded = false.obs;
   List<int> selectedFeatureIDsList = <int>[].obs;
   List<String> selectedFeatureNamesList = <String>[].obs;
+
   //RxBool viewCheck = true.obs;
   // List<QuestionModel> productQuestions = <QuestionModel>[].obs;
   //RxInt count = 1.obs;
@@ -106,7 +105,8 @@ class ProductDetailViewModel extends GetxController {
 
   addUpdateItemToLocalCart() async {
     // productModel.value.totalPrice = productQuantity.value * productModel.value.discountPrice!.toDouble();
-    productModel.value.totalPrice = productModel.value.discountPrice?.toDouble();
+    productModel.value.totalPrice =
+        productModel.value.discountPrice?.toDouble();
     productModel.value.vendorId = productModel.value.sellerModel?.id;
 
     CartModel cart = CartModel(
@@ -155,7 +155,8 @@ class ProductDetailViewModel extends GetxController {
         // await getProductQuestions();
       } else {
         Get.back();
-        AppConstant.displaySnackBar(langKey.errorTitle.tr, 'Your product has been rejected, Update Product Info!');
+        AppConstant.displaySnackBar(
+            langKey.errorTitle.tr, langKey.productRejected.tr);
       }
 
       // if(isBuyer == true){
@@ -169,19 +170,19 @@ class ProductDetailViewModel extends GetxController {
     });
   }
 
-  // getProductQuestions() async {
-  //   await ApiBaseHelper()
-  //       .getMethod(url: 'product/questions/${productModel.value.id}')
-  //       .then((value) {
-  //     if (value['success'] == true && value['data'] != null) {
-  //       productQuestions.clear();
-  //       var data = value['data'] as List;
-  //       productQuestions.addAll(data.map((e) => QuestionModel.fromJson(e)));
-  //     }
-  //   }).catchError((e) {
-  //     AppConstant.displaySnackBar(langKey.errorTitle.tr, e.toString());
-  //   });
-  // }
+// getProductQuestions() async {
+//   await ApiBaseHelper()
+//       .getMethod(url: 'product/questions/${productModel.value.id}')
+//       .then((value) {
+//     if (value['success'] == true && value['data'] != null) {
+//       productQuestions.clear();
+//       var data = value['data'] as List;
+//       productQuestions.addAll(data.map((e) => QuestionModel.fromJson(e)));
+//     }
+//   }).catchError((e) {
+//     AppConstant.displaySnackBar(langKey.errorTitle.tr, e.toString());
+//   });
+// }
 
 // popSingleProductView() {
 //   pageIndex(0);

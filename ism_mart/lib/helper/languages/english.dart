@@ -26,7 +26,7 @@ class English {
         ///product_questions_view
         key.addQuestion: 'Add Question',
 
-        ///single_product_view
+        ///ProductDetail
         key.questions: 'Questions',
         key.updateQuestion: 'Update Question',
         key.deleteQuestion: 'Delete Question',
@@ -37,6 +37,10 @@ class English {
         key.productVariant: 'Product Variants',
         key.productDetails: 'Product Details',
         key.weightAndDimension: 'Weight & Dimensions',
+        key.productRejected : 'Your product has been rejected, Update Product Info!',
+        key.stockLimitReached : 'Stock limit reached',
+        key.availableInStock : 'Available in stock',
+        key.addToCartText : 'Add to cart',
 
         ///errors
         key.serverUnableToHandle: 'server is unable to handle request',

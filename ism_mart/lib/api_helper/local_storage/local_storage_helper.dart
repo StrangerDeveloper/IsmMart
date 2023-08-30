@@ -5,7 +5,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:ism_mart/exports/exports_model.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/helper/global_variables.dart';
-import 'package:ism_mart/widgets/getx_helper.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 
 class LocalStorageHelper {
@@ -87,15 +86,19 @@ class LocalStorageHelper {
       cartList = getCartItems();
 
       if (isItemExistsInCart(cartModel)) {
-        int itemIndex = cartList.indexWhere((element) => element.productId! == cartModel!.productId);
+        int itemIndex = cartList.indexWhere(
+            (element) => element.productId! == cartModel!.productId);
         int itemQuantity = int.parse(cartList[itemIndex].quantity!);
 
         if (itemQuantity < cartModel!.productModel!.stock!) {
           cartList[itemIndex].quantity = (itemQuantity + 1).toString();
-          cartList[itemIndex].itemPrice = cartList[itemIndex].productModel!.discountPrice! * (itemQuantity + 1);
-          AppConstant.displaySnackBar(langKey.success.tr,  langKey.addToCart.tr);
+          cartList[itemIndex].itemPrice =
+              cartList[itemIndex].productModel!.discountPrice! *
+                  (itemQuantity + 1);
+          AppConstant.displaySnackBar(langKey.success.tr, langKey.addToCart.tr);
         } else {
-          AppConstant.displaySnackBar(langKey.errorTitle.tr,  'Stock limit reached');
+          AppConstant.displaySnackBar(
+              langKey.errorTitle.tr, langKey.stockLimitReached.tr);
         }
       } else {
         cartList.add(cartModel!);

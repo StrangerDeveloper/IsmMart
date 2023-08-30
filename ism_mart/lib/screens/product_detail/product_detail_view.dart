@@ -8,7 +8,7 @@ import 'package:ism_mart/exports/export_buyers.dart';
 import 'package:ism_mart/screens/product_detail/product_detail_viewmodel.dart';
 import 'package:ism_mart/widgets/loader_view.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import '../../controllers/controllers.dart';
 import '../../helper/constants.dart';
 import '../../widgets/custom_price_widget.dart';
@@ -112,7 +112,7 @@ class ProductDetailView extends StatelessWidget {
                         //customDivider(),
                         Padding(
                           padding: const EdgeInsets.only(top: 10, bottom: 12),
-                          child: heading('Description'),
+                          child: heading(langKey.description.tr),
                         ),
                         Obx(
                           () => Text(
@@ -502,7 +502,7 @@ class ProductDetailView extends StatelessWidget {
                 color: Color(0xffFCECEF),
               ),
               child: Text(
-                'Out of Stock',
+                langKey.outOfStock.tr,
                 style: GoogleFonts.dmSans(
                   fontWeight: FontWeight.w500,
                   fontSize: 12,
@@ -517,7 +517,7 @@ class ProductDetailView extends StatelessWidget {
                 color: Color(0xffEEFAF6),
               ),
               child: Text(
-                'Available in stock',
+                langKey.availableInStock.tr,
                 style: GoogleFonts.dmSans(
                   fontWeight: FontWeight.w500,
                   fontSize: 12,
@@ -790,7 +790,7 @@ class ProductDetailView extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      'Total Price',
+                      langKey.totalPrice.tr,
                       style: GoogleFonts.dmSans(
                         fontWeight: FontWeight.w400,
                         fontSize: 15,
@@ -887,7 +887,7 @@ class ProductDetailView extends StatelessWidget {
             SvgPicture.asset('assets/svg/cart.svg'),
             SizedBox(width: 10),
             Text(
-              'Add to cart',
+              langKey.addToCartText.tr,
               style: GoogleFonts.dmSans(
                 fontWeight: FontWeight.w700,
                 fontSize: 16,
