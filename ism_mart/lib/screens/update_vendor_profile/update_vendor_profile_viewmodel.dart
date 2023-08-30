@@ -42,6 +42,7 @@ class UpdateVendorProfileViewModel extends GetxController {
   RxBool cityErrorVisibility = false.obs;
   Rxn phoneErrorText = Rxn<String>();
   RxString countryCode = '+92'.obs;
+  RxString cnic = "".obs;
   Rx<CategoryModel> selectedCategory = CategoryModel().obs;
   RxBool categoryErrorVisibility = false.obs;
 
@@ -50,41 +51,49 @@ class UpdateVendorProfileViewModel extends GetxController {
 
   getData1() async{
     userModel1.value = GlobalVariable.userModel;
-   await fetchCategories();
-   await getCountries();
-    shopNameController.text =
-        userModel1.value!.vendor!.storeName.toString() ?? "";
-    shopCategoryId.value =
-        int.parse(userModel1.value!.vendor!.category.toString() ?? "");
+
+    if(userModel1.value ==null || userModel1.value!.vendor!.storeName!.isEmpty){
+      GlobalVariable.showLoader.value=true;
+    }else{
+
+      await fetchCategories();
+      await getCountries();
+      shopNameController.text =
+          userModel1.value!.vendor!.storeName.toString() ?? "";
+      shopCategoryId.value =
+          int.parse(userModel1.value!.vendor!.category.toString() ?? "");
 
 
-    //we will call api of categories and assign this list to current index by get current user category
-   // selectedCategory.value.id=shopCategoryId.value;
-    selectedCategory.value.id=shopCategoryId.value;
-    selectedCategory.value.name=categoriesList[shopCategoryId.value].name;
-    shopAddressController.text =
-        userModel1.value!.vendor!.address.toString() ?? "Empity";
-    shopDescController.text =
-        userModel1.value!.vendor!.storeDesc.toString() ?? "";
-    phoneNumberController.text =
-        userModel1.value!.vendor!.phone.toString() ?? "";
-    ownerCnicController.text =
-        userModel1.value!.vendor!.ownerCnic.toString() ?? "";
+      //we will call api of categories and assign this list to current index by get current user category
+      // selectedCategory.value.id=shopCategoryId.value;
+      selectedCategory.value.id=shopCategoryId.value;
+      selectedCategory.value.name=categoriesList[shopCategoryId.value].name;
+      shopAddressController.text =
+          userModel1.value!.vendor!.address.toString() ?? "Empity";
+      shopDescController.text =
+          userModel1.value!.vendor!.storeDesc.toString() ?? "";
+      phoneNumberController.text =
+          userModel1.value!.vendor!.phone.toString() ?? "";
+      ownerCnicController.text =
+          userModel1.value!.vendor!.ownerCnic.toString() ?? "";
+      cnic.value=  userModel1.value!.vendor!.ownerCnic.toString();
 
-    //country value assign
-    countryID.value= userModel1.value!.vendor!.countryId?? 0;
-    selectedCountry.value.id=countryID.value;
-    selectedCountry.value.name=countries[countryID.value].name;
-    await  getCitiesByCountry(countryId: countryID.value);
-    cityID.value= userModel1.value!.vendor!.cityId?? 0;
-    selectedCity.value.id=userModel1.value!.vendor!.cityId;
-var cityNameById =cities.where((id) => (id.id  == cityID.value)).toList();
-    selectedCity.value.name=cityNameById[0].name;
-    cityViewModel.selectedCity.value = CountryModel();
+      //country value assign
+      countryID.value= userModel1.value!.vendor!.countryId?? 0;
+      selectedCountry.value.id=countryID.value;
+      selectedCountry.value.name=countries[countryID.value].name;
+      await  getCitiesByCountry(countryId: countryID.value);
+      cityID.value= userModel1.value!.vendor!.cityId?? 0;
+      selectedCity.value.id=userModel1.value!.vendor!.cityId;
+      var cityNameById =cities.where((id) => (id.id  == cityID.value)).toList();
+      selectedCity.value.name=cityNameById[0].name;
+      cityViewModel.selectedCity.value = CountryModel();
 
-    print("curent user cityyy ----- ${    selectedCity.value.name} ");
-    print("curent user cityyy   ${cityID.value}----- ${selectedCity.value.id}");
+      print("curent user cityyy ----- ${    selectedCity.value.name} ");
+      print("curent user cityyy   ${cityID.value}----- ${selectedCity.value.id}");
 
+      GlobalVariable.showLoader.value=false;
+    }
 
 
   }
@@ -93,6 +102,7 @@ var cityNameById =cities.where((id) => (id.id  == cityID.value)).toList();
 
   @override
   void onInit() async{
+    GlobalVariable.showLoader(true);
     getData1();
     await authController.getCountries();
     super.onInit();
@@ -234,4 +244,61 @@ var cityNameById =cities.where((id) => (id.id  == cityID.value)).toList();
     }
     return proceed2;
   }
+
+
+
+
+
+  // updateData() async {
+  //   if (buyerProfileFormKey.currentState?.validate() ?? false) {
+  //     GlobalVariable.showLoader.value = true;
+  //
+  //     Map<String, String> param = {
+  //       "firstName": firstNameController.text,
+  //       "lastName": lastNameController.text,
+  //       "address": addressController.text,
+  //       "phone": phoneController.text,
+  //     };
+  //
+  //     List<http.MultipartFile> fileList = [];
+  //     if (imageFile.value?.path != '') {
+  //       fileList.add(
+  //         await http.MultipartFile.fromPath(
+  //           'image',
+  //           imageFile.value!.path,
+  //           contentType: MediaType.parse('image/jpeg'),
+  //         ),
+  //       );
+  //     }
+  //
+  //     ApiBaseHelper()
+  //         .patchMethodForImage(
+  //         url: Urls.updateVendorData,
+  //         withAuthorization: true,
+  //         files: fileList,
+  //         fields: param)
+  //         .then((parsedJson) {
+  //       GlobalVariable.showLoader.value = false;
+  //       if (parsedJson['message'] == "User updated successfully") {
+  //         Get.back();
+  //         BuyerProfileViewModel viewModel = Get.find();
+  //         viewModel.getData();
+  //         AppConstant.displaySnackBar(
+  //             langKey.success.tr, parsedJson['message']);
+  //       } else {
+  //         AppConstant.displaySnackBar(
+  //             langKey.errorTitle.tr, parsedJson['message']);
+  //       }
+  //     }).catchError((e) {
+  //       if (e == Errors.noInternetError) {
+  //         GetxHelper.showSnackBar(
+  //             title: 'Error', message: Errors.noInternetError);
+  //       }
+  //       GlobalVariable.showLoader.value = false;
+  //       print(e);
+  //     });
+  //   }
+  // }
+  //
+
 }

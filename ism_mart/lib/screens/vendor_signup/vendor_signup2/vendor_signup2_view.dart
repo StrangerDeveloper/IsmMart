@@ -417,6 +417,8 @@ class VendorSignUp2View extends StatelessWidget {
               cityViewModel.selectedCity.value = CountryModel();
               cityViewModel.cityId.value = 0;
               cityViewModel.authController.selectedCity.value = CountryModel();
+
+
               viewModel.countryErrorVisibility.value = false;
             },
             selectedItem: authController.newAcc.value == true
@@ -540,6 +542,7 @@ class VendorSignUp2View extends StatelessWidget {
       },
     );
   }
+
 
   Widget ownerCNICField() {
     return Padding(

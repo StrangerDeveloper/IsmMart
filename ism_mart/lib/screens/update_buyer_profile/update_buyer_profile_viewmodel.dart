@@ -98,4 +98,5 @@ class UpdateBuyerProfileViewModel extends GetxController {
       });
     }
   }
+
 }
