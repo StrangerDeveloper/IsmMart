@@ -108,7 +108,7 @@ class SellerModel {
         userId: json["userId"] == null ? null : json["userId"],
         updatedAt:
         json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
-        address: json["address"] == null ? null : json["updatedAt"],
+        address: json["storeAddress"] == null ? null : json["updatedAt"],
         bankName: json["bankName"],
         branchCode: json['branchCode'],
         accountTitle: json["accountTitle"],

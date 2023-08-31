@@ -46,7 +46,7 @@ class LogInViewModel extends GetxController {
         if (parsedJson['success'] == true) {
           GlobalVariable.internetErr(false);
           authController.currUserToken.value = parsedJson['data']['token'];
-          getCurrentUser(parsedJson);
+          getCurrentUser(json: parsedJson);
         } else if (parsedJson['message'] == 'Invalid credentials') {
           AppConstant.displaySnackBar(
             langKey.errorTitle.tr,
@@ -70,13 +70,15 @@ class LogInViewModel extends GetxController {
     }
   }
 
-  void getCurrentUser(Map<String, dynamic> json) async {
+ static void getCurrentUser({Map<String, dynamic>? json}) async {
     await ApiBaseHelper()
         .getMethod(url: 'user/profile', withAuthorization: true)
         .then((value) async {
       if (value['success'] == true) {
         UserResponse userResponse = UserResponse.fromResponse(value);
-        userResponse.userModel!.token = json['data']['token'];
+        userResponse.userModel!.token = json?['data']['token'];
+
+
         GlobalVariable.userModel = userResponse.userModel;
         authController.setUserModel(userResponse.userModel);
         SettingViewModel settingViewModel = Get.find();
@@ -88,7 +90,7 @@ class LogInViewModel extends GetxController {
         // print('>>User Model: ${userResponse.userModel}');
         AppConstant.displaySnackBar(
           langKey.successTitle.tr,
-          json['message'],
+          json?['message'],
         );
       }
     });
