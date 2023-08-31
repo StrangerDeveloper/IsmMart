@@ -43,8 +43,8 @@ class ApiConstant {
 
   // static const PUBLISHABLE_KEY = live_pk;
   // static const SECRET_KEY = live_sk;
-  static const baseUrl =liveBaseUrl;
-  //kDebugMode ? testBaseUrl : liveBaseUrl;
+  static const baseUrl =
+  kDebugMode ? testBaseUrl : liveBaseUrl;
   // static const CURRENCY_EXCHANGE_API_KEY = live_currency_exchange_api_key;
 
   //static const baseUrl = kDebugMode ? testBaseUrl : liveBaseUrl;

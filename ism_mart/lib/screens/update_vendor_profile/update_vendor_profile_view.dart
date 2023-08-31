@@ -35,7 +35,7 @@ class UpdateVendorProfileView extends StatelessWidget {
         children: [
           SingleChildScrollView(
             child: Form(
-              key: viewModel.vendorSignUp2FormKey,
+              key: viewModel.vendorUpdateProfileFormKey,
               child: Padding(
                 padding: const EdgeInsets.only(top: 30, left: 20, right: 20),
                 child: Column(
@@ -376,13 +376,13 @@ class UpdateVendorProfileView extends StatelessWidget {
               errorText: viewModel.phoneErrorText.value,
               onPhoneFieldChange: (value) {
                 String newPhoneValue = viewModel.countryCode.value + value;
-                viewModel.validatorPhoneNumber(newPhoneValue);
+                Validator().validatePhoneNumber(newPhoneValue);
               },
               onChanged: (value) {
                 viewModel.countryCode.value = value.dialCode ?? '+92';
                 String newPhoneValue = viewModel.countryCode.value +
                     viewModel.phoneNumberController.text;
-                viewModel.validatorPhoneNumber(newPhoneValue);
+                Validator().validatePhoneNumber(newPhoneValue);
               },
             ),
           ),

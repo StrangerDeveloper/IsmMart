@@ -18,6 +18,7 @@ class BuyerProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      top: false,
       child: Scaffold(
         appBar: CustomAppBar(title: langKey.profile.tr),
         body: Stack(
@@ -122,6 +123,18 @@ class BuyerProfileView extends StatelessWidget {
             Obx(
               () => valueItem(
                 viewModel.buyerProfileModel.value.address ?? 'N/A',
+              ),
+            ),
+            titleItem(langKey.country.tr),
+            Obx(
+                  () => valueItem(
+                viewModel.buyerProfileModel.value.country?.name ?? 'N/A',
+              ),
+            ),
+            titleItem(langKey.city.tr),
+            Obx(
+                  () => valueItem(
+                viewModel.buyerProfileModel.value.city?.name ?? 'N/A',
               ),
             ),
           ],

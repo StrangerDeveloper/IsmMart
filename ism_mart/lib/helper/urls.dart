@@ -42,7 +42,7 @@ class Urls {
 static String liveMatch ="admin/livestream";
   //BuyerProfileViewModel
   static String deleteAccount = "user/deactivate";
-  static String getVendorAccountData = "user/profile";
+  static String getAccountData = "user/profile";
   static String updateVendorData = "user/update";
 
   //ChangePasswordViewModel

@@ -21,7 +21,7 @@ class UpdateVendorProfileViewModel extends GetxController {
   UpdateVendorProfileViewModel(this.authProvider);
   Rx<UserModel?> userModel1 = UserModel().obs;
   RxInt shopCategoryId = 0.obs;
-  GlobalKey<FormState> vendorSignUp2FormKey = GlobalKey<FormState>();
+  GlobalKey<FormState> vendorUpdateProfileFormKey = GlobalKey<FormState>();
   TextEditingController shopNameController = TextEditingController();
   TextEditingController shopAddressController = TextEditingController();
   TextEditingController ownerNameController = TextEditingController();
@@ -45,17 +45,26 @@ class UpdateVendorProfileViewModel extends GetxController {
   RxString cnic = "".obs;
   Rx<CategoryModel> selectedCategory = CategoryModel().obs;
   RxBool categoryErrorVisibility = false.obs;
+  
+  //TOO: getCountries and Cities
+  var countries = <CountryModel>[].obs;
+  var cities = <CountryModel>[].obs;
+  var selectedCountry = CountryModel().obs;
+  var selectedCity = CountryModel().obs;
 
-
-
-
-  getData1() async{
+  @override
+  void onInit() async{
+    GlobalVariable.showLoader(true);
+    getData();
+    await authController.getCountries();
+    super.onInit();
+  }
+  
+  getData() async{
     userModel1.value = GlobalVariable.userModel;
-
     if(userModel1.value ==null || userModel1.value!.vendor!.storeName!.isEmpty){
       GlobalVariable.showLoader.value=true;
-    }else{
-
+    } else {
       await fetchCategories();
       await getCountries();
       shopNameController.text =
@@ -94,23 +103,8 @@ class UpdateVendorProfileViewModel extends GetxController {
 
       GlobalVariable.showLoader.value=false;
     }
-
-
   }
-
-
-
-  @override
-  void onInit() async{
-    GlobalVariable.showLoader(true);
-    getData1();
-    await authController.getCountries();
-    super.onInit();
-  }
-
-
-
-
+  
    fetchCategories() async {
     categoriesList.clear();
     categoriesList.insert(0, CategoryModel(name: 'Select Category', id: 0));
@@ -126,13 +120,6 @@ class UpdateVendorProfileViewModel extends GetxController {
       print(e);
     });
   }
-
-  //TOO: getCountries and Cities
-  var countries = <CountryModel>[].obs;
-  var cities = <CountryModel>[].obs;
-  var selectedCountry = CountryModel().obs;
-  var selectedCity = CountryModel().obs;
-
 
   getCountries() async {
     countries.clear();
@@ -154,11 +141,7 @@ class UpdateVendorProfileViewModel extends GetxController {
       debugPrint(">>>>Cities: $error");
     });
   }
-
-
-
-
-
+  
   selectImage(RxString imageVar, RxBool imageVisibilityVar)async{
     final image = await PickImage().pickSingleImage();
     if(image != null){
@@ -167,19 +150,9 @@ class UpdateVendorProfileViewModel extends GetxController {
     }
   }
 
-  validatorPhoneNumber(String? value) {
-    if (GetUtils.isBlank(value)!) {
-      phoneErrorText.value = langKey.fieldIsRequired.tr;
-    } else if (value!.length > 16 || value.length < 7) {
-      phoneErrorText.value = langKey.phoneValidate.tr;
-    } else {
-      phoneErrorText.value = null;
-    }
-  }
-
   Future<void> proceed() async{
-    if (vendorSignUp2FormKey.currentState?.validate() ?? false) {
-      if(checkImages() == true && checkDropDowns() == true){
+    if (vendorUpdateProfileFormKey.currentState?.validate() ?? false) {
+      if(checkImages() == true){
         GlobalVariable.showLoader.value = false;
 
         Map<String, String> details = {
@@ -207,25 +180,7 @@ class UpdateVendorProfileViewModel extends GetxController {
       }
     } else{
       checkImages();
-      checkDropDowns();
     }
-  }
-
-  checkDropDowns(){
-    bool proceed1 = true;
-    if(countryID.value == 0){
-      countryErrorVisibility.value = true;
-      proceed1 = false;
-    }
-    if(cityID.value == 0){
-      cityErrorVisibility.value = true;
-      proceed1 = false;
-    }
-    if(shopCategoryId.value == 0){
-      categoryErrorVisibility.value = true;
-      proceed1 = false;
-    }
-    return proceed1;
   }
 
   bool checkImages(){

@@ -23,7 +23,7 @@ class BuyerProfileViewModel extends GetxController {
     GlobalVariable.showLoader.value = true;
 
     ApiBaseHelper()
-        .getMethod(url: Urls.getVendorAccountData, withAuthorization: true)
+        .getMethod(url: Urls.getAccountData, withAuthorization: true)
         .then((parsedJson) {
       GlobalVariable.internetErr(false);
       GlobalVariable.showLoader.value = false;

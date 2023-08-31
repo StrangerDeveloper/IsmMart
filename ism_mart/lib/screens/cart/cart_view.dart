@@ -18,6 +18,7 @@ class CartView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      top: false,
       child: Scaffold(
         backgroundColor: Colors.grey[100]!,
         appBar: _appBar(),

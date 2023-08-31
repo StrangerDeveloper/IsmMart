@@ -44,6 +44,24 @@ class Validator {
     }
   }
 
+  ///Country
+  String? validateCountry(CountryModel country){
+    if(country.id == null || country.id == 0){
+      return langKey.countryReq.tr;
+    } else{
+      return null;
+    }
+  }
+
+  ///City
+  String? validateCity(CountryModel city){
+    if(city.id == null || city.id == 0){
+      return langKey.cityReq.tr;
+    } else{
+      return null;
+    }
+  }
+
   ///Address
   String? validateAddress(String? value) {
     RegExp regex = RegExp(r'^[#.0-9a-zA-Z\s,-]+$');

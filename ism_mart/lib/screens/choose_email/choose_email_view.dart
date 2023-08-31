@@ -22,6 +22,7 @@ class ChooseEmail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      top: false,
       child: Scaffold(
         backgroundColor: Colors.white,
         body: SingleChildScrollView(

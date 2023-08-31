@@ -1,3 +1,7 @@
+import 'package:ism_mart/exports/exports_model.dart';
+
+import '../../api_helper/api_service.dart';
+
 class BuyerProfileModel {
   // int? id;
   // String? email;
@@ -9,8 +13,8 @@ class BuyerProfileModel {
   // String? role;
   // bool? emailVerified;
   // Vendor? vendor;
-  // Country? country;
-  // Country? city;
+  CountryModel? country;
+  CountryModel? city;
 
   BuyerProfileModel(
       {
@@ -24,8 +28,8 @@ class BuyerProfileModel {
         // this.role,
         // this.emailVerified,
         // this.vendor,
-        // this.country,
-        // this.city
+        this.country,
+        this.city
       });
 
   BuyerProfileModel.fromJson(Map<String, dynamic> json) {
@@ -40,20 +44,18 @@ class BuyerProfileModel {
     // emailVerified = json['email_verified'];
     // vendor =
     // json['Vendor'] != null ? new Vendor.fromJson(json['Vendor']) : null;
-    // country =
-    // json['Country'] != null ? new Country.fromJson(json['Country']) : null;
-    // city = json['City'] != null ? new Country.fromJson(json['City']) : null;
+    city = json["City"] == null ? null : CountryModel.fromJson(json["City"]);
+    country = json["Country"] == null ? null : CountryModel.fromJson(json["Country"]);
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    // data['id'] = this.id;
-    // data['email'] = this.email;
-    data['firstName'] = this.firstName;
-    data['lastName'] = this.lastName;
-    data['phone'] = this.phone;
-    data['image'] = this.image;
-    data['address'] = this.address;
+  JSON toJson() => {
+    'firstName': firstName,
+    'lastName': lastName,
+    'phone': phone,
+    'image': image,
+    'address' : address,
+    'country': country,
+    'city': city,
     // data['role'] = this.role;
     // data['email_verified'] = this.emailVerified;
     // if (this.vendor != null) {
@@ -65,8 +67,7 @@ class BuyerProfileModel {
     // if (this.city != null) {
     //   data['City'] = this.city!.toJson();
     // }
-    return data;
-  }
+  };
 }
 
 // class Vendor {
