@@ -4,25 +4,17 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:ism_mart/helper/api_base_helper.dart';
 import 'package:ism_mart/helper/global_variables.dart';
-import 'package:ism_mart/helper/urls.dart';
 import 'package:ism_mart/exports/export_controllers.dart';
 import 'package:ism_mart/exports/exports_model.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:http/http.dart' as http;
-import 'package:http_parser/http_parser.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
-
 import '../../api_helper/api_constant.dart';
 import '../../api_helper/local_storage/local_storage_helper.dart';
 import '../../api_helper/providers/auth_provider.dart';
-import '../../helper/errors.dart';
-import '../../widgets/pick_image.dart';
-import '../login/login_viewmodel.dart';
 import '../setting/settings_viewmodel.dart';
-import '../vendor_profile/vendor_profile_viewmodel.dart';
 
 class UpdateVendorProfileViewModel extends GetxController {
   final AuthProvider authProvider;
@@ -90,11 +82,6 @@ class UpdateVendorProfileViewModel extends GetxController {
 
       print("curent user cityyy ----- ${    selectedCity.value.name} ");
       print("curent user cityyy   ${cityID.value}----- ${selectedCity.value.id}");
-
-
-
-
-
   }
 
 
@@ -168,20 +155,11 @@ class UpdateVendorProfileViewModel extends GetxController {
 
 
   updateData() async {
-    print("cat id ------${shopAddressController.text} ");
-    print("cat id ------${shopNameController.text} ");
-    print("cat id ------${shopCategoryId.value} ");
-    print("cat id ------${countryCode.value + phoneNumberController.text} ");
-    print("cat id ------${countryID.value} ");
-    print("cat id ------${cityID.value} ");
-    print("cat id ------${shopDescController.text} ");
-    print("cat id ------${shopAddressController.text} ");
     GlobalVariable.showLoader(true);
     print("${GlobalVariable.userModel?.token}");
-    // if (vendorUpdateProfileFormKey.currentState?.validate() ?? false) {
-    //   GlobalVariable.showLoader.value=true;
-    //
-    //
+    if (vendorUpdateProfileFormKey.currentState?.validate() ?? false) {
+      GlobalVariable.showLoader.value=true;
+
       Map<String, String> param ={
         "storeName": shopNameController.text,
         "category": "${shopCategoryId.value}",
@@ -199,9 +177,7 @@ class UpdateVendorProfileViewModel extends GetxController {
     };
     var request = http.MultipartRequest('POST', Uri.parse('${ApiConstant.baseUrl}/auth/vendor/register'));
     request.fields.addAll(param);
-
     request.headers.addAll(headers);
-
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode < 201) {
@@ -211,15 +187,18 @@ class UpdateVendorProfileViewModel extends GetxController {
       );
       var data =await http.Response.fromStream(response);
       var a = jsonDecode(data.body);
-      print("data-------------$a");
       GlobalVariable.showLoader.value=false;
       print(await response.stream.bytesToString());
     }
     else {
+      AppConstant.displaySnackBar(
+        langKey.errorMsg.tr,
+        "Data Failed To Update",
+      );
       GlobalVariable.showLoader.value=false;
       print(response.reasonPhrase);
     }
-    }
+    }}
 
 
 
