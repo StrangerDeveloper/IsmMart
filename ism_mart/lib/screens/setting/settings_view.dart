@@ -187,10 +187,10 @@ class SettingsView extends StatelessWidget {
           onTap: () async {
             if (viewModel.checkVendorAccountStatus()!) {
               if (viewModel.userDetails.value?.vendor?.status == 'pending') {
-                // Get.toNamed(Routes.vendorSignUp4, arguments: {
-                //   'fromSettings': true,
-                // });
-                Get.toNamed(Routes.sellerHomeRoute);
+                Get.toNamed(Routes.vendorSignUp4, arguments: {
+                  'fromSettings': true,
+                });
+               // Get.toNamed(Routes.sellerHomeRoute);
               } else if (viewModel.userDetails.value?.vendor?.status ==
                   'false') {
                 Get.toNamed(Routes.chooseEmail);
