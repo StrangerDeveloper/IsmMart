@@ -166,15 +166,14 @@ class SingleProductItems extends StatelessWidget {
                   children: [
                     SizedBox(
                         height:
-                            AppResponsiveness.getHeight90_140(buildContext!),
+                            AppResponsiveness.getHeight100_120(),
                         //width: double.infinity,
                         child: Center(
                           child: Stack(
                             fit: StackFit.expand,
                             children: [
                               CustomNetworkImage(
-                                imageUrl: model!.thumbnail,
-                                //fit: BoxFit.cover,
+                                imageUrl: model!.thumbnail, fit: BoxFit.cover,
                               ),
                               if (model.stock! == 0)
                                 _buildOutOfStockStack(buildContext),
@@ -191,8 +190,8 @@ class SingleProductItems extends StatelessWidget {
                           //CustomText(title: "Sold: ${model.sold!}"),
                           CustomText(
                             title: model.name!,
-                            size: 16,
-                            weight: FontWeight.w600,
+                            size: 13,
+                           // weight: FontWeight.w600,
                           ),
                           AppConstant.spaceWidget(height: 5),
                           CustomPriceWidget(title: "${model.discountPrice!}"),
