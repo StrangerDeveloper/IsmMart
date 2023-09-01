@@ -43,25 +43,25 @@ class DashboardView extends GetView<BaseController> {
                 delegate: SliverChildListDelegate(
                   [
                     _slider(controller.sliderImages),
-                    StickyLabel(text: langKey.topCategories.tr),
-                    _topCategoriesGrid(controller.categories),
-                    //Top Vendors List
-                    StickyLabel(text: langKey.topVendors.tr),
-                    _topVendors(),
-                    StickyLabel(text: langKey.discountDeals.tr),
-                    _displayDiscountProducts(),
+                    // StickyLabel(text: langKey.topCategories.tr),
+                    // _topCategoriesGrid(controller.categories),
+                    // //Top Vendors List
+                    // StickyLabel(text: langKey.topVendors.tr),
+                    // _topVendors(),
+                    // StickyLabel(text: langKey.discountDeals.tr),
+                     _displayDiscountProducts(),
                     Obx(
                       () => _displayProducts(
                         productMap: controller.productsWithTypesMap,
                       ),
                     ),
-                    kDivider,
-                    Obx(
-                      () => _displayProducts(
-                        productMap: controller.productsMap,
-                        calledForCategoryProducts: true,
-                      ),
-                    ),
+                    // kDivider,
+                    // Obx(
+                    //   () => _displayProducts(
+                    //     productMap: controller.productsMap,
+                    //     calledForCategoryProducts: true,
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
@@ -321,7 +321,7 @@ class DashboardView extends GetView<BaseController> {
       List list = e.value;
       if (list.isNotEmpty && list.length > 1) {
         if (e.key.toLowerCase().contains("popular"))
-          isPopular = true;
+          isPopular = false;
         else
           isPopular = false;
         return Column(
@@ -361,7 +361,7 @@ class DashboardView extends GetView<BaseController> {
     bool? isPopular,
     bool? isCategoryProducts,
   ) {
-    if (isPopular!)
+    //if (!isPopular!)
       return Padding(
         padding: const EdgeInsets.all(6.0),
         child: SizedBox(
@@ -393,54 +393,54 @@ class DashboardView extends GetView<BaseController> {
         ),
       );
 
-    if (isCategoryProducts!)
-      return GridView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-          //crossAxisCount: AppResponsiveness.getGridItemCount(),
-          maxCrossAxisExtent: 170,
-          // Maximum width of each item
-          childAspectRatio: 0.8,
-          // Aspect ratio of each item (width / height)
-          mainAxisSpacing: 5,
-          // Spacing between rows
-          crossAxisSpacing: 5, // Spacing between columns
-        ),
-        itemCount: list.length,
-        itemBuilder: (context, index) {
-          ProductModel productModel = list[index];
-          return SingleProductItems(
-            productModel: productModel,
-            isCategoryProducts: isCategoryProducts,
-          );
-        },
-      );
-
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: SizedBox(
-        height: isCategoryProducts ? 170 : 190,
-        // height: AppResponsiveness.height *
-        //     (!isCategoryProducts!
-        //         ? 0.28
-        //         : 0.22), //AppResponsiveness.getBoxHeightPoint25(),
-        child: ListView.builder(
-          ///Reducing memory consumption
-          addAutomaticKeepAlives: false,
-          addRepaintBoundaries: false,
-          scrollDirection: Axis.horizontal,
-          itemCount: list.length,
-          itemBuilder: (context, index) {
-            ProductModel productModel = list[index];
-            return SingleProductItems(
-              productModel: productModel,
-              isCategoryProducts: isCategoryProducts,
-            );
-          },
-        ),
-      ),
-    );
+    // if (isCategoryProducts!)
+    //   return GridView.builder(
+    //     shrinkWrap: true,
+    //     physics: const NeverScrollableScrollPhysics(),
+    //     gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+    //       //crossAxisCount: AppResponsiveness.getGridItemCount(),
+    //       maxCrossAxisExtent: 170,
+    //       // Maximum width of each item
+    //       childAspectRatio: 0.8,
+    //       // Aspect ratio of each item (width / height)
+    //       mainAxisSpacing: 5,
+    //       // Spacing between rows
+    //       crossAxisSpacing: 5, // Spacing between columns
+    //     ),
+    //     itemCount: list.length,
+    //     itemBuilder: (context, index) {
+    //       ProductModel productModel = list[index];
+    //       return SingleProductItems(
+    //         productModel: productModel,
+    //         isCategoryProducts: isCategoryProducts,
+    //       );
+    //     },
+    //   );
+    //
+    // return Padding(
+    //   padding: const EdgeInsets.all(8.0),
+    //   child: SizedBox(
+    //     height: isCategoryProducts ? 170 : 190,
+    //     // height: AppResponsiveness.height *
+    //     //     (!isCategoryProducts!
+    //     //         ? 0.28
+    //     //         : 0.22), //AppResponsiveness.getBoxHeightPoint25(),
+    //     child: ListView.builder(
+    //       ///Reducing memory consumption
+    //       addAutomaticKeepAlives: false,
+    //       addRepaintBoundaries: false,
+    //       scrollDirection: Axis.horizontal,
+    //       itemCount: list.length,
+    //       itemBuilder: (context, index) {
+    //         ProductModel productModel = list[index];
+    //         return SingleProductItems(
+    //           productModel: productModel,
+    //           isCategoryProducts: isCategoryProducts,
+    //         );
+    //       },
+    //     ),
+    //   ),
+    // );
   }
 
   Widget _topCategoriesGrid(List<CategoryModel> list) {

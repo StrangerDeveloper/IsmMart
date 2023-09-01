@@ -4,13 +4,14 @@ import 'package:ism_mart/helper/api_base_helper.dart';
 import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/constants.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
+import 'package:http/http.dart' as http;
 import '../../models/product/product_model.dart';
 
 class DealsViewModel extends GetxController {
   final productList = <ProductModel>[].obs;
   var limit = 15.obs;
   var page = 1;
-  var url = 'filter?type=Discounts&';
+  var url = 'filter?type=IsmmartOriginal&';
   ScrollController scrollController = ScrollController();
   var isLoadingMore = false.obs;
   RxBool noProductsFound = false.obs;
@@ -65,7 +66,7 @@ class DealsViewModel extends GetxController {
         isLoadingMore.isFalse &&
         scrollController.position.maxScrollExtent == scrollController.offset) {
       page++;
-      url = 'filter?type=Discounts&limit=$limit&page=$page';
+      url = 'filter?type=IsmmartOriginal&limit=$limit&page=$page';
       isLoadingMore(true);
       await ApiBaseHelper().getMethod(url: url).then((response) {
         if (response['success'] == true && response['data'] != null) {
@@ -80,4 +81,26 @@ class DealsViewModel extends GetxController {
       });
     }
   }
+
+
+  //
+  // getDataIsmartOrig()async{
+  //
+  //   var headers = {
+  //     'Cookie': 'XSRF-token=${GlobalVariable.userModel!.token}'
+  //   };
+  //   var request = http.MultipartRequest('GET', Uri.parse('https://ismmart-api.com/api/products/?type=IsmmartOriginal'));
+  //   request.headers.addAll(headers);
+  //   http.StreamedResponse response = await request.send();
+  //   if (response.statusCode <201 ) {
+  //     print(await response.stream.bytesToString());
+  //   }
+  //   else {
+  //   print(response.reasonPhrase);
+  //   }
+  //
+  // }
+
+
+
 }

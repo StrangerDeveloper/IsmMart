@@ -191,10 +191,10 @@ class BaseController extends GetxController {
 
   List _getProductsType() {
     return [
-      {"key": "Latest", "value": "Popular Products"},
-      {"key": "Featured", "value": "Featured Products"},
+      //{"key": "Latest", "value": "Popular Products"},
+      //{"key": "Featured", "value": "Featured Products"},
       {"key": "IsmmartOriginal", "value": "ISMMART Originals"},
-      {"key": "Best Seller", "value": "Best Seller"},
+      //{"key": "Best Seller", "value": "Best Seller"},
       //{"key": "Valentines", "value": "Valentines"},
     ];
   }
