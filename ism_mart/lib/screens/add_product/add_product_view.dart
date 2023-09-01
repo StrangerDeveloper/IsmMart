@@ -475,42 +475,42 @@ class AddProductView extends StatelessWidget {
     );
   }
 
-  Widget _createDynamicFormFields(ProductVariantsModel model) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: TextFormField(
-        style: bodyText1,
-        cursorColor: kPrimaryColor,
-        keyboardType: TextInputType.text,
-        onChanged: (value) =>
-            viewModel.onDynamicFieldsValueChanged(value, model),
-        decoration: InputDecoration(
-          labelText: model.label,
-          labelStyle: bodyText1,
-          prefixIcon: Icon(
-            IconlyLight.discovery,
-            color: kPrimaryColor,
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.black,
-              width: 1,
-              style: BorderStyle.solid,
-            ), //B
-            borderRadius: BorderRadius.circular(8),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.black,
-              width: 1,
-              style: BorderStyle.solid,
-            ),
-            borderRadius: BorderRadius.circular(8),
-          ),
-        ),
-      ),
-    );
-  }
+  // Widget _createDynamicFormFields(ProductVariantsModel model) {
+  //   return Padding(
+  //     padding: const EdgeInsets.symmetric(vertical: 8.0),
+  //     child: TextFormField(
+  //       style: bodyText1,
+  //       cursorColor: kPrimaryColor,
+  //       keyboardType: TextInputType.text,
+  //       onChanged: (value) =>
+  //           viewModel.onDynamicFieldsValueChanged(value, model),
+  //       decoration: InputDecoration(
+  //         labelText: model.label,
+  //         labelStyle: bodyText1,
+  //         prefixIcon: Icon(
+  //           IconlyLight.discovery,
+  //           color: kPrimaryColor,
+  //         ),
+  //         enabledBorder: OutlineInputBorder(
+  //           borderSide: BorderSide(
+  //             color: Colors.black,
+  //             width: 1,
+  //             style: BorderStyle.solid,
+  //           ), //B
+  //           borderRadius: BorderRadius.circular(8),
+  //         ),
+  //         focusedBorder: OutlineInputBorder(
+  //           borderSide: BorderSide(
+  //             color: Colors.black,
+  //             width: 1,
+  //             style: BorderStyle.solid,
+  //           ),
+  //           borderRadius: BorderRadius.circular(8),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  //}
 
   Widget _showImages() {
     return ListView.builder(
