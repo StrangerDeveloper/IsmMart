@@ -64,6 +64,10 @@ class LogInViewModel extends GetxController {
         }
       }).catchError((e) {
         //  GlobalVariable.internetErr(true);
+        AppConstant.displaySnackBar(
+          langKey.errorTitle.tr,
+          e,
+        );
         print(e);
         GlobalVariable.showLoader.value = false;
       });

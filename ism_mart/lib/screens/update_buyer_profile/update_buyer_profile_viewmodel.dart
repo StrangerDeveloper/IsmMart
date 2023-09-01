@@ -12,7 +12,6 @@ import 'package:ism_mart/screens/buyer_profile/buyer_profile_model.dart';
 import '../../controllers/controllers.dart';
 import '../../helper/errors.dart';
 import '../../models/user/country_city_model.dart';
-import '../../widgets/getx_helper.dart';
 import '../buyer_profile/buyer_profile_viewmodel.dart';
 
 class UpdateBuyerProfileViewModel extends GetxController {
@@ -29,7 +28,7 @@ class UpdateBuyerProfileViewModel extends GetxController {
   Rx<File?> imageFile = File('').obs;
 
   @override
-  void onInit() {
+  void onInit() async{
     setData();
     super.onInit();
   }
@@ -53,70 +52,80 @@ class UpdateBuyerProfileViewModel extends GetxController {
     if(buyerProfileNewModel.value.country != null){
       selectedCountry.value = buyerProfileNewModel.value.country!;
       countryID.value = buyerProfileNewModel.value.country!.id!;
-      await cityViewModel.authController.getCitiesByCountry(countryId: countryID.value);
     }
     if(buyerProfileNewModel.value.city != null){
       selectedCity.value = buyerProfileNewModel.value.city!;
-      cityID.value = buyerProfileNewModel.value.city!.id!;
+      cityID.value = selectedCity.value.id!;
+      await cityViewModel.authController.getCitiesByCountry(countryId: countryID.value);
+      print(selectedCity.value);
     }
   }
 
   updateData() async {
-    if (buyerProfileFormKey.currentState?.validate() ?? false) {
-      GlobalVariable.showLoader.value = true;
+    if (firstNameController.text == buyerProfileNewModel.value.firstName &&
+        lastNameController.text == buyerProfileNewModel.value.lastName &&
+        addressController.text == buyerProfileNewModel.value.address &&
+        phoneController.text == buyerProfileNewModel.value.phone &&
+        countryID.value == buyerProfileNewModel.value.country?.id &&
+        cityID.value == buyerProfileNewModel.value.city?.id
+    ) {
+      AppConstant.displaySnackBar(langKey.errorTitle.tr, 'No information to update');
+    } else {
+      if (buyerProfileFormKey.currentState?.validate() ?? false) {
+        GlobalVariable.showLoader.value = true;
 
-      Map<String, String> param = {
-        "firstName": firstNameController.text,
-        "lastName": lastNameController.text,
-        "address": addressController.text,
-        "phone": phoneController.text,
-        "country": "${countryID.value}",
-        "city": "${cityID.value}",
-      };
+        Map<String, String> param = {
+          "firstName": firstNameController.text,
+          "lastName": lastNameController.text,
+          "address": addressController.text,
+          "phone": phoneController.text,
+          "countryId": "${countryID.value}",
+          "cityId": "${cityID.value}",
+        };
 
-      List<http.MultipartFile> fileList = [];
-      if (imageFile.value?.path != '') {
-        fileList.add(
-          await http.MultipartFile.fromPath(
-            'image',
-            imageFile.value!.path,
-            contentType: MediaType.parse('image/jpeg'),
-          ),
-        );
+        List<http.MultipartFile> fileList = [];
+        if (imageFile.value?.path != '') {
+          fileList.add(
+            await http.MultipartFile.fromPath(
+              'image',
+              imageFile.value!.path,
+              contentType: MediaType.parse('image/jpeg'),
+            ),
+          );
+        }
+
+        await ApiBaseHelper().patchMethodForImage(
+            url: Urls.updateVendorData,
+            withAuthorization: true,
+            files: fileList,
+            fields: param)
+            .then((parsedJson) async {
+          GlobalVariable.showLoader.value = false;
+          if (parsedJson['message'] == "User updated successfully") {
+            cityViewModel.selectedCountry.value = CountryModel();
+            cityViewModel.countryId.value = 0;
+            cityViewModel.selectedCity.value = CountryModel();
+            cityViewModel.cityId.value = 0;
+            cityViewModel.authController.selectedCity.value = CountryModel();
+            cityViewModel.authController.selectedCountry.value = CountryModel();
+            Get.back();
+            BuyerProfileViewModel viewModel = Get.find();
+            await viewModel.getData();
+            AppConstant.displaySnackBar(
+                langKey.success.tr, parsedJson['message']);
+          } else {
+            AppConstant.displaySnackBar(
+                langKey.errorTitle.tr, parsedJson['message']);
+          }
+        }).catchError((e) {
+          if (e == Errors.noInternetError) {
+            AppConstant.displaySnackBar(
+                langKey.errorTitle.tr, Errors.noInternetError);
+          }
+          GlobalVariable.showLoader.value = false;
+          print(e);
+        });
       }
-
-      await ApiBaseHelper().patchMethodForImage(
-              url: Urls.updateVendorData,
-              withAuthorization: true,
-              files: fileList,
-              fields: param)
-          .then((parsedJson) {
-        GlobalVariable.showLoader.value = false;
-        if (parsedJson['message'] == "User updated successfully") {
-          cityViewModel.selectedCountry.value = CountryModel();
-          cityViewModel.countryId.value = 0;
-          cityViewModel.selectedCity.value = CountryModel();
-          cityViewModel.cityId.value = 0;
-          cityViewModel.authController.selectedCity.value = CountryModel();
-          cityViewModel.authController.selectedCountry.value = CountryModel();
-          Get.back();
-          BuyerProfileViewModel viewModel = Get.find();
-          viewModel.getData();
-          AppConstant.displaySnackBar(
-              langKey.success.tr, parsedJson['message']);
-        } else {
-          AppConstant.displaySnackBar(
-              langKey.errorTitle.tr, parsedJson['message']);
-        }
-      }).catchError((e) {
-        if (e == Errors.noInternetError) {
-          GetxHelper.showSnackBar(
-              title: 'Error', message: Errors.noInternetError);
-        }
-        GlobalVariable.showLoader.value = false;
-        print(e);
-      });
     }
   }
-
 }

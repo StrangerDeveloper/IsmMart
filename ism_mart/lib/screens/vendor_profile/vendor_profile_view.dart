@@ -34,7 +34,7 @@ class VendorProfileView extends StatelessWidget {
                 width: Get.width * 0.5,
                 onPressed: () {
                   //Get.toNamed(Routes.vendorSignUp2);
-                  Get.to(() => UpdateVendorProfileView());
+                  Get.to(() =>UpdateVendorProfileView(), arguments: {'model': viewModel.userModel.value});
                 },
                 title: langKey.updateBtn.tr,
               ),

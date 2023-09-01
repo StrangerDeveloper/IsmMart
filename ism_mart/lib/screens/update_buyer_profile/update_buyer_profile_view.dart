@@ -193,6 +193,7 @@ class UpdateBuyerProfileView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 20.0, bottom: 15),
       child: DropdownSearch<CountryModel>(
+        autoValidateMode: AutovalidateMode.onUserInteraction,
         popupProps: PopupProps.dialog(
           showSearchBox: true,
           dialogProps: DialogProps(
@@ -244,6 +245,7 @@ class UpdateBuyerProfileView extends StatelessWidget {
           viewModel.cityID.value = 0;
           viewModel.selectedCountry.value = newValue;
           cityViewModel.authController.selectedCity.value = CountryModel();
+          viewModel.selectedCity.value = CountryModel();
         },
         selectedItem: viewModel.selectedCountry.value,
         validator: (value){
@@ -256,61 +258,63 @@ class UpdateBuyerProfileView extends StatelessWidget {
   Widget selectCity() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
-      child: DropdownSearch<CountryModel>(
-        popupProps: PopupProps.dialog(
-          showSearchBox: true,
-          dialogProps: DialogProps(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
+      child: Obx(() => DropdownSearch<CountryModel>(
+          autoValidateMode: AutovalidateMode.onUserInteraction,
+          popupProps: PopupProps.dialog(
+            showSearchBox: true,
+            dialogProps: DialogProps(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+            searchDelay: const Duration(milliseconds: 0),
+            searchFieldProps: AppConstant.searchFieldProp(),
+          ),
+          items: cityViewModel.authController.cities,
+          itemAsString: (model) => model.name ?? "",
+          dropdownDecoratorProps: DropDownDecoratorProps(
+            baseStyle: bodyText1,
+            dropdownSearchDecoration: InputDecoration(
+              labelText: langKey.selectCity.tr,
+              labelStyle: headline3,
+              errorBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.red.shade700,
+                  width: 1,
+                  style: BorderStyle.solid,
+                ), //B
+                borderRadius: BorderRadius.circular(8),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.black,
+                  width: 1,
+                  style: BorderStyle.solid,
+                ), //B
+                borderRadius: BorderRadius.circular(8),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.black,
+                  width: 1,
+                  style: BorderStyle.solid,
+                ), //B
+                borderRadius: BorderRadius.circular(8),
+              ),
             ),
           ),
-          searchDelay: const Duration(milliseconds: 0),
-          searchFieldProps: AppConstant.searchFieldProp(),
+          onChanged: (CountryModel? newValue) {
+            cityViewModel.selectedcity.value =
+                newValue!.name ?? "";
+            viewModel.selectedCity.value = newValue;
+            cityViewModel.setSelectedCity(newValue);
+            viewModel.cityID.value = newValue.id!;
+          },
+          selectedItem: viewModel.selectedCity.value,
+          validator: (value){
+            return Validator().validateCountry(viewModel.selectedCountry.value);
+          },
         ),
-        items: cityViewModel.authController.cities,
-        itemAsString: (model) => model.name ?? "",
-        dropdownDecoratorProps: DropDownDecoratorProps(
-          baseStyle: bodyText1,
-          dropdownSearchDecoration: InputDecoration(
-            labelText: langKey.selectCity.tr,
-            labelStyle: headline3,
-            errorBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Colors.red.shade700,
-                width: 1,
-                style: BorderStyle.solid,
-              ), //B
-              borderRadius: BorderRadius.circular(8),
-            ),
-            focusedErrorBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Colors.black,
-                width: 1,
-                style: BorderStyle.solid,
-              ), //B
-              borderRadius: BorderRadius.circular(8),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Colors.black,
-                width: 1,
-                style: BorderStyle.solid,
-              ), //B
-              borderRadius: BorderRadius.circular(8),
-            ),
-          ),
-        ),
-        onChanged: (CountryModel? newValue) {
-          cityViewModel.selectedcity.value =
-              newValue!.name ?? "";
-          viewModel.selectedCity.value = newValue;
-          cityViewModel.setSelectedCity(newValue);
-          viewModel.cityID.value = newValue.id!;
-        },
-        selectedItem: viewModel.selectedCity.value,
-        validator: (value){
-          return Validator().validateCountry(viewModel.selectedCountry.value);
-        },
       ),
     );
   }

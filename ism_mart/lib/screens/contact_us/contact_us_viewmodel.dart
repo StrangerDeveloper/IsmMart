@@ -5,7 +5,6 @@ import 'package:ism_mart/helper/api_base_helper.dart';
 import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/urls.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
-import 'package:ism_mart/widgets/getx_helper.dart';
 
 import '../../helper/constants.dart';
 
@@ -81,9 +80,9 @@ class ContactUsViewModel extends GetxController {
           parsedJson['message'],
           );
         } else {
-          GetxHelper.showSnackBar(
-            title: langKey.errorTitle.tr,
-            message: parsedJson['message'],
+          AppConstant.displaySnackBar(
+            langKey.errorTitle.tr,
+            parsedJson['message'],
           );
         }
       }).catchError((e) {

@@ -2,7 +2,6 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ism_mart/controllers/controllers.dart';
 import 'package:ism_mart/exports/export_widgets.dart';
@@ -11,13 +10,9 @@ import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/models/user/country_city_model.dart';
 import 'package:ism_mart/screens/update_vendor_profile/update_vendor_profile_viewmodel.dart';
-import 'package:ism_mart/screens/vendor_signup/vendor_signup2/vendor_signup2_viewmodel.dart';
 import 'package:ism_mart/widgets/back_button.dart';
 import 'package:ism_mart/widgets/no_internet_view.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:path/path.dart';
 import '../../../helper/validator.dart';
-import '../../../widgets/image_layout_container.dart';
 import '../../widgets/loader_view.dart';
 import '../categories/model/category_model.dart';
 
@@ -50,20 +45,13 @@ class UpdateVendorProfileView extends StatelessWidget {
                     shopAddressField(),
                     shopDescriptionTextField(),
 
-                    GestureDetector(
-                        onTap: () => showTermsAndConditionDialog(),
-                            //_showMyDialog(context),
-                        child: cnicFunctionlaity(
-                            )),
+                    // GestureDetector(
+                    //     onTap: () => showTermsAndConditionDialog(),
+                    //         //_showMyDialog(context),
+                    //     child: cnicFunctionlaity(
+                    //         )),
                     //   ntnTextField(),
-                    Obx(() => viewModel.clickOnPhoneField.value?shopPhoneNoTextField(): GestureDetector(
-                        onTap: (){
-                          viewModel.clickOnPhoneField.value=true;
-                        },
-                        child: phoneFunctionlaity()),),
-
-
-
+                    shopPhoneNoTextField(),
                     //  ownerCNICField(),
                     countryPicker(),
                     cityPicker(),
@@ -100,8 +88,6 @@ class UpdateVendorProfileView extends StatelessWidget {
                     // ),
                     // ),
                     //
-
-
                     submitBtn(),
                   ],
                 ),
@@ -124,29 +110,29 @@ class UpdateVendorProfileView extends StatelessWidget {
       children: [
         cnicText(langKey.storeNumber.tr, 16.0),
         SizedBox(height: 10,),
-        Obx(() => cnicText(viewModel.phone.value.toString(), 14.0, style: newFontStyle0.copyWith(
+        Obx(() => cnicText(viewModel.phoneNumberController.text, 14.0, style: newFontStyle0.copyWith(
           color: newColorLightGrey2,
-        ))),
-        SizedBox(height: 20,)
+        ),
+        ),
+        ),
       ],
-
     );
   }
 
-  Widget cnicFunctionlaity() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        cnicText("CNIC", 16.0),
-        SizedBox(height: 10,),
-      Obx(() => cnicText(viewModel.cnic.value, 14.0, style: newFontStyle0.copyWith(
-          color: newColorLightGrey2,
-        ))),
-        SizedBox(height: 20,)
-      ],
-
-    );
-  }
+  // Widget cnicFunctionlaity() {
+  //   return Column(
+  //     crossAxisAlignment: CrossAxisAlignment.start,
+  //     children: [
+  //       cnicText("CNIC", 16.0),
+  //       SizedBox(height: 10,),
+  //     Obx(() => cnicText("${viewModel.cnic.value}", 14.0, style: newFontStyle0.copyWith(
+  //         color: newColorLightGrey2,
+  //       ))),
+  //       SizedBox(height: 20,)
+  //     ],
+  //
+  //   );
+  // }
 
   Widget titleAndBackBtn() {
     return Container(
@@ -224,43 +210,43 @@ class UpdateVendorProfileView extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 6),
-                RichText(
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                        text: langKey.next.tr + '  ',
-                        style: newFontStyle1.copyWith(
-                          fontSize: 12,
-                          color: newColorBlue4,
-                        ),
-                      ),
-                      TextSpan(
-                        text: langKey.bankDetails.tr,
-                        style: newFontStyle1.copyWith(
-                          fontSize: 12,
-                          color: newColorBlue3,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                // RichText(
+                //   text: TextSpan(
+                //     children: [
+                //       TextSpan(
+                //         text: langKey.next.tr + '  ',
+                //         style: newFontStyle1.copyWith(
+                //           fontSize: 12,
+                //           color: newColorBlue4,
+                //         ),
+                //       ),
+                //       TextSpan(
+                //         text: langKey.bankDetails.tr,
+                //         style: newFontStyle1.copyWith(
+                //           fontSize: 12,
+                //           color: newColorBlue3,
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
               ],
             ),
           ),
-          CircularPercentIndicator(
-            circularStrokeCap: CircularStrokeCap.round,
-            radius: 33,
-            lineWidth: 6,
-            percent: 0.5,
-            backgroundColor: Color(0xffEBEFF3),
-            progressColor: Color(0xff0CBC8B),
-            center: new Text(
-              "2 of 4",
-              style: poppinsH2.copyWith(
-                color: newColorBlue2,
-              ),
-            ),
-          ),
+          // CircularPercentIndicator(
+          //   circularStrokeCap: CircularStrokeCap.round,
+          //   radius: 33,
+          //   lineWidth: 6,
+          //   percent: 0.5,
+          //   backgroundColor: Color(0xffEBEFF3),
+          //   progressColor: Color(0xff0CBC8B),
+          //   center: new Text(
+          //     "2 of 4",
+          //     style: poppinsH2.copyWith(
+          //       color: newColorBlue2,
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );
@@ -281,86 +267,79 @@ class UpdateVendorProfileView extends StatelessWidget {
   }
 
   Widget shopCategoryField() {
-    return Obx(
-          () =>
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 3),
-                  child: RichText(
-                    text: TextSpan(
-                        text: langKey.storeCategory.tr,
-                        style: GoogleFonts.dmSans(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w700,
-                          color: newColorDarkBlack2,
+    return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 3),
+                    child: RichText(
+                      text: TextSpan(
+                          text: langKey.storeCategory.tr,
+                          style: GoogleFonts.dmSans(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w700,
+                            color: newColorDarkBlack2,
+                          ),
+                          children: [
+                            TextSpan(
+                              text: ' *',
+                              style: TextStyle(color: Colors.red),
+                            )
+                          ]
+                      ),
+                    ),
+                  ),
+                  Obx(() => DropdownSearch<CategoryModel>(
+                    autoValidateMode: AutovalidateMode.onUserInteraction,
+                      popupProps: PopupProps.dialog(
+                        showSearchBox: true,
+                        dialogProps: DialogProps(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                         ),
-                        children: [
-                          TextSpan(
-                            text: '*',
-                            style: TextStyle(color: Colors.red),
-                          )
-                        ]
-                    ),
-                  ),
-                ),
-                DropdownSearch<CategoryModel>(
-                  popupProps: PopupProps.dialog(
-                    showSearchBox: true,
-                    dialogProps: DialogProps(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                        searchDelay: const Duration(milliseconds: 0),
+                        searchFieldProps: AppConstant.searchFieldProp(),
                       ),
-                    ),
-                    searchDelay: const Duration(milliseconds: 0),
-                    searchFieldProps: AppConstant.searchFieldProp(),
-                  ),
-                  items: viewModel.categoriesList,
-                  itemAsString: (model) => model.name ?? "",
-                  dropdownDecoratorProps: DropDownDecoratorProps(
-                    baseStyle: newFontStyle0.copyWith(
-                      color: newColorDarkBlack2,
-                      fontSize: 15,
-                    ),
-                    dropdownSearchDecoration: InputDecoration(
-                      contentPadding: EdgeInsets.only(top: 13.5),
-                      suffixIconColor: Color(0xffADBCCB),
-                      isDense: true,
-                      hintText: langKey.chooseCountry.tr,
-                      hintStyle: TextStyle(color: Colors.black),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xffEEEEEE)),
+                      items: viewModel.categoriesList,
+                      itemAsString: (model) => model.name ?? "",
+                      dropdownDecoratorProps: DropDownDecoratorProps(
+                        baseStyle: newFontStyle0.copyWith(
+                          color: newColorDarkBlack2,
+                          fontSize: 15,
+                        ),
+                        dropdownSearchDecoration: InputDecoration(
+                          contentPadding: EdgeInsets.only(top: 13.5),
+                          suffixIconColor: Color(0xffADBCCB),
+                          isDense: true,
+                          hintText: langKey.selectCategory.tr,
+                          hintStyle: TextStyle(color: Colors.black),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xffEEEEEE)),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xff929AAB)),
+                          ),
+                        ),
                       ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xff929AAB)),
-                      ),
+                      onChanged: (CategoryModel? newValue) {
+                      //  newValue!.id = viewModel.shopCategoryId.value;
+                        viewModel.selectedCategory.value = newValue!;
+                         viewModel.shopCategoryId.value = newValue.id!.toInt();
+                        viewModel.categoryErrorVisibility.value = false;
+                        print("cat--==---${ viewModel.shopCategoryId.value}");
+                      },
+                      selectedItem: viewModel.selectedCategory.value,
+                      validator: (value){
+                        return Validator().validateCategoryField(viewModel.selectedCategory.value);
+                      },
                     ),
                   ),
-                  onChanged: (CategoryModel? newValue) {
-                  //  newValue!.id = viewModel.shopCategoryId.value;
-                    viewModel.selectedCategory.value = newValue!;
-                     viewModel.shopCategoryId.value = newValue.id!.toInt();
-                    viewModel.categoryErrorVisibility.value = false;
-                    print("cat--==---${ viewModel.shopCategoryId.value}");
-                  },
-                  selectedItem: viewModel.selectedCategory.value,
-                ),
-                Visibility(
-                  visible: viewModel.categoryErrorVisibility.value,
-                  child: Text(
-                    langKey.categoryReq.tr,
-                    style: GoogleFonts.dmSans(
-                      color: Colors.red.shade700,
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
-    );
+                ],
+              ),
+            );
   }
 
   Widget shopAddressField() {
@@ -377,44 +356,26 @@ class UpdateVendorProfileView extends StatelessWidget {
   }
 
   Widget shopPhoneNoTextField() {
-    return Obx(
-          () =>
-          Padding(
-            padding: const EdgeInsets.only(top: 20, bottom: 20),
-            child: CountryCodePickerTextField2(
-              validator: (value) {
-                return Validator().validatePhoneNumber(value);
-              },
-              title: langKey.storeNumber.tr,
-              hintText: '336 5563138',
-              keyboardType: TextInputType.number,
-              autoValidateMode: AutovalidateMode.onUserInteraction,
-              controller: viewModel.phoneNumberController,
-              initialValue: viewModel.countryCode.value,
-              textStyle: bodyText1,
-              inputFormatters: [
-                FilteringTextInputFormatter.allow(RegExp(r'^\d+?\d*')),
-              ],
-              errorText: viewModel.phoneErrorText.value,
-              onPhoneFieldChange: (value) {
-                String newPhoneValue = viewModel.countryCode.value + value;
-                Validator().validatePhoneNumber(newPhoneValue);
-              },
-              onChanged: (value) {
-                viewModel.countryCode.value = value.dialCode ?? '+92';
-                String newPhoneValue = viewModel.countryCode.value +
-                    viewModel.phoneNumberController.text;
-                Validator().validatePhoneNumber(newPhoneValue);
-              },
-            ),
-          ),
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 15.0),
+      child: CustomTextField3(
+        title: langKey.storeNumber.tr,
+        hintText: '+92 336 5563138',
+        keyboardType: TextInputType.number,
+        autoValidateMode: AutovalidateMode.onUserInteraction,
+        controller: viewModel.phoneNumberController,
+        inputFormatters: [
+          FilteringTextInputFormatter.allow(RegExp(r'^\d+?\d*')),
+        ],
+        validator: (value){
+          return Validator().validatePhoneNumber(value);
+        },
+      ),
     );
   }
 
   Widget countryPicker() {
-    return Obx(
-          () =>
-          Column(
+    return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
@@ -436,61 +397,61 @@ class UpdateVendorProfileView extends StatelessWidget {
                   ),
                 ),
               ),
-              DropdownSearch<CountryModel>(
-                popupProps: PopupProps.dialog(
-                  showSearchBox: true,
-                  dialogProps: DialogProps(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+              Obx(() => DropdownSearch<CountryModel>(
+                autoValidateMode: AutovalidateMode.onUserInteraction,
+                  popupProps: PopupProps.dialog(
+                    showSearchBox: true,
+                    dialogProps: DialogProps(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    searchFieldProps: AppConstant.searchFieldProp(),
+                  ),
+                  items: viewModel.countries,
+                  itemAsString: (model) => model.name ?? "",
+                  dropdownDecoratorProps: DropDownDecoratorProps(
+                    baseStyle: newFontStyle0.copyWith(
+                      color: newColorDarkBlack2,
+                      fontSize: 15,
+                    ),
+                    dropdownSearchDecoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(top: 13.5),
+                      suffixIconColor: Color(0xffADBCCB),
+                      isDense: true,
+                      hintText: langKey.chooseCountry.tr,
+                      hintStyle: TextStyle(color: Colors.black),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xffEEEEEE)),
+                      ),
+                      errorBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.red),
+                      ),
+                      focusedErrorBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xff929AAB)),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xff929AAB)),
+                      ),
                     ),
                   ),
-                  searchFieldProps: AppConstant.searchFieldProp(),
+                  onChanged: (CountryModel? newValue) async{
+                    cityViewModel.selectedCity.value = CountryModel();
+                    cityViewModel.cityId.value = 0;
+                    viewModel.selectedCity.value = CountryModel();
+                    viewModel.selectedCountry(newValue!);
+                    viewModel.countryID.value = newValue.id!;
+                    await viewModel.getCitiesByCountry(countryId: newValue.id!);
+                    viewModel.countryErrorVisibility.value = false;
+                  },
+                  selectedItem: viewModel.selectedCountry.value,
+                  validator: (value){
+                    return Validator().validateCountry(viewModel.selectedCountry.value);
+                  },
                 ),
-                items: viewModel.countries,
-                itemAsString: (model) => model.name ?? "",
-                dropdownDecoratorProps: DropDownDecoratorProps(
-                  baseStyle: newFontStyle0.copyWith(
-                    color: newColorDarkBlack2,
-                    fontSize: 15,
-                  ),
-                  dropdownSearchDecoration: InputDecoration(
-                    contentPadding: EdgeInsets.only(top: 13.5),
-                    suffixIconColor: Color(0xffADBCCB),
-                    isDense: true,
-                    hintText: langKey.chooseCountry.tr,
-                    hintStyle: TextStyle(color: Colors.black),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Color(0xffEEEEEE)),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Color(0xff929AAB)),
-                    ),
-                  ),
-                ),
-                onChanged: (CountryModel? newValue) {
-                  cityViewModel.selectedCity.value = CountryModel();
-                  cityViewModel.cityId.value = 0;
-                  viewModel.selectedCountry(newValue!);
-                  viewModel.countryID.value = newValue.id!;
-                  viewModel.getCitiesByCountry(countryId: newValue.id!);
-                  viewModel.countryErrorVisibility.value = false;
-                  viewModel.countryID.value=newValue.id!;
-                  print("country id ${newValue.id!} = ${ viewModel.countryID.value}");
-                },
-                selectedItem: viewModel.selectedCountry.value,
               ),
-              Visibility(
-                visible: viewModel.countryErrorVisibility.value,
-                child: Text(
-                  langKey.countryReq.tr,
-                  style: GoogleFonts.dmSans(
-                    color: Colors.red.shade700,
-                  ),
-                ),
-              )
             ],
-          ),
-    );
+          );
   }
 
   Widget cityPicker() {
@@ -527,53 +488,54 @@ class UpdateVendorProfileView extends StatelessWidget {
                 ),
               ),
             ),
-            DropdownSearch<CountryModel>(
-              popupProps: PopupProps.dialog(
-                showSearchBox: true,
-                dialogProps: DialogProps(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+            Obx(() => DropdownSearch<CountryModel>(
+              autoValidateMode: AutovalidateMode.onUserInteraction,
+                popupProps: PopupProps.dialog(
+                  showSearchBox: true,
+                  dialogProps: DialogProps(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  searchFieldProps: AppConstant.searchFieldProp(),
+                ),
+                items: viewModel.cities,
+                itemAsString: (model) => model.name ?? "",
+                dropdownDecoratorProps: DropDownDecoratorProps(
+                  baseStyle: newFontStyle0.copyWith(
+                    color: newColorDarkBlack2,
+                    fontSize: 15,
+                  ),
+                  dropdownSearchDecoration: InputDecoration(
+                    contentPadding: EdgeInsets.only(top: 13.5),
+                    suffixIconColor: Color(0xffADBCCB),
+                    isDense: true,
+                    hintText: langKey.chooseCountry.tr,
+                    errorBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.red),
+                    ),
+                    focusedErrorBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xff929AAB)),
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xffEEEEEE)),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xff929AAB)),
+                    ),
                   ),
                 ),
-                searchFieldProps: AppConstant.searchFieldProp(),
+                onChanged: (CountryModel? newValue) {
+                  viewModel.selectedCity(newValue!);
+                  viewModel.cityErrorVisibility.value = false;
+                 viewModel. cityID.value=newValue.id!;
+                },
+                selectedItem: viewModel.selectedCity.value,
+                validator: (value){
+                  return Validator().validateCity(viewModel.selectedCity.value);
+                },
               ),
-              items: viewModel.cities,
-              itemAsString: (model) => model.name ?? "",
-              dropdownDecoratorProps: DropDownDecoratorProps(
-                baseStyle: newFontStyle0.copyWith(
-                  color: newColorDarkBlack2,
-                  fontSize: 15,
-                ),
-                dropdownSearchDecoration: InputDecoration(
-                  contentPadding: EdgeInsets.only(top: 13.5),
-                  suffixIconColor: Color(0xffADBCCB),
-                  isDense: true,
-                  hintText: langKey.chooseCountry.tr,
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Color(0xffEEEEEE)),
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Color(0xff929AAB)),
-                  ),
-                ),
-              ),
-              onChanged: (CountryModel? newValue) {
-                viewModel.selectedCity(newValue!);
-                viewModel.cityErrorVisibility.value = false;
-               viewModel. cityID.value=newValue.id!;
-               print("selected city ${  viewModel. cityID.value} = ${newValue.id!}");
-              },
-              selectedItem: viewModel.selectedCity.value,
             ),
-            Visibility(
-              visible: viewModel.cityErrorVisibility.value,
-              child: Text(
-                langKey.cityReq.tr,
-                style: GoogleFonts.dmSans(
-                  color: Colors.red.shade700,
-                ),
-              ),
-            )
           ],
         ),
       ),
@@ -609,7 +571,7 @@ class UpdateVendorProfileView extends StatelessWidget {
   Widget ownerCNICField() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
-      child: CustomTextField3(
+      child: CustomTextField2(
         keyboardType: TextInputType.number,
         inputFormatters: [
           FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
@@ -681,7 +643,7 @@ class UpdateVendorProfileView extends StatelessWidget {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title:  Text('AlertDialog Title', style: GoogleFonts.dmSans(
+          title:  Text('Sensitive Information', style: GoogleFonts.dmSans(
             fontSize: 16,
             fontWeight: FontWeight.w700,
             color: Colors.red,
@@ -689,7 +651,7 @@ class UpdateVendorProfileView extends StatelessWidget {
           content:  SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text('You can email us for Change your CNIC NO Photos and anyother senstive Information.',
+                Text('You can email us for a change of your CNIC number, CNIC Photos and any other sensitive information.',
                   style:newFontStyle0.copyWith(
                     color: newColorLightGrey2,
                   ),),

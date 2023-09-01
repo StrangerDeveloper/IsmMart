@@ -29,7 +29,7 @@ class SellerModelResponse {
 }
 
 class SellerModel {
-  int? id, userId, cityId, countryId,category,ownerCnic;
+  int? id, userId, cityId, countryId,category, ownerCnic;
   String? storeName, storeDesc, storeUrl, cityName;
   String? ownerName, status, visibility, address;
   num? rating;
@@ -40,6 +40,7 @@ class SellerModel {
   String? bankName, accountTitle, accountNumber, branchCode;
   String? storeImage, coverImage, totalSold;
   List <VendorImages>? vendorImages;
+  Category? categoryName;
 
   SellerModel({
     this.id,
@@ -69,6 +70,7 @@ class SellerModel {
     this.address,
     this.user,
     this.totalSold,
+    this.categoryName,
     this.category,
     this.ownerCnic,
     this.vendorImages,
@@ -108,7 +110,7 @@ class SellerModel {
         userId: json["userId"] == null ? null : json["userId"],
         updatedAt:
         json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
-        address: json["storeAddress"] == null ? null : json["updatedAt"],
+        address: json["storeAddress"] == null ? null : json["storeAddress"],
         bankName: json["bankName"],
         branchCode: json['branchCode'],
         accountTitle: json["accountTitle"],
@@ -117,6 +119,7 @@ class SellerModel {
         coverImage: json["coverImage"],
         totalSold: json["totalSold"],
         vendorImages: vendImages,
+        categoryName: json['Category'] == null ? null : Category.fromJson(json['Category'])
         // user: json['User'] != null ? UserModel.fromJson(json['User']) : null,
     );
   }
@@ -144,9 +147,26 @@ class SellerModel {
       "branchCode": branchCode,
       "storeImage": storeImage,
       "coverImage": coverImage,
+      "categoryName": categoryName == null ? null : categoryName?.toJson(),
       "updatedAt": updatedAt == null ? null : updatedAt!.toIso8601String(),
       "vendorImages": vendorImages?.map((e) => e.toJson()).toList(),
     };
+}
+
+class Category {
+  String? name;
+
+  Category({this.name});
+
+  Category.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['name'] = this.name;
+    return data;
+  }
 }
 
 class VendorImages {

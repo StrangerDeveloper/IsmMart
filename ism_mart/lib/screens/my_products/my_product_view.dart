@@ -140,10 +140,10 @@ class MyProductView extends StatelessWidget {
                             CustomText(
                               title: "${langKey.id.tr}: ${model.id!}",
                             ),
-                            CustomText(
-                              title: "${langKey.stock.tr}: ${model.stock!}",
-                              color: kLimeGreenColor,
-                            ),
+                            // CustomText(
+                            //   title: "${langKey.stock.tr}: ${model.stock!}",
+                            //   color: kLimeGreenColor,
+                            // ),
                           ],
                         ),
                         CustomText(

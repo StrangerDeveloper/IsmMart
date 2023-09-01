@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 class ApiConstant {
   ApiConstant._();
 
@@ -5,7 +7,7 @@ class ApiConstant {
   //static const baseUrl = "http://3.83.164.216:5000/api/";
   ///API-BASE-URL
   //static const baseUrl = "http://18.212.34.27:5000/api/";
-  //static const testBaseUrl = "https://ismmart-api.com/api/";
+  static const testBaseUrl = "https://ismmart-api.com/api/";
   static const liveBaseUrl = "https://ismmart-backend.com/api/";
 
   ///Production

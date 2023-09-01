@@ -8,7 +8,6 @@ import 'package:ism_mart/helper/errors.dart';
 import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/controllers/controllers.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
-import 'package:ism_mart/widgets/getx_helper.dart';
 import 'constants.dart';
 
 class ApiBaseHelper {
@@ -49,20 +48,23 @@ class ApiBaseHelper {
       return parsedJSON;
     } on SocketException catch (_) {
       GlobalVariable.showLoader.value = false;
-      // GetxHelper.showSnackBar(title: 'Error', message: Errors.noInternetError);
+      // AppConstant.displaySnackBar(titlege)(title, message: Errors.noInternetError);
     //  throw Errors.noInternetError;
       GlobalVariable.internetErr(true);
     } on TimeoutException catch (_) {
+      print('TimeOut');
       GlobalVariable.showLoader.value = false;
-      GetxHelper.showSnackBar(title: 'Error', message: Errors.timeOutException);
+      AppConstant.displaySnackBar('Error', Errors.timeOutException);
       throw Errors.timeOutException;
     } on FormatException catch (_) {
+      print('Format Exception');
       GlobalVariable.showLoader.value = false;
-      GetxHelper.showSnackBar(title: 'Error', message: Errors.formatException);
+      AppConstant.displaySnackBar('Error', Errors.formatException);
       throw Errors.formatException;
     } catch (e) {
+      print('General Error');
       GlobalVariable.showLoader.value = false;
-      GetxHelper.showSnackBar(title: 'Error', message: Errors.generalApiError);
+      AppConstant.displaySnackBar('Error', Errors.generalApiError);
       throw e.toString();
     }
   }
@@ -101,20 +103,20 @@ class ApiBaseHelper {
       return parsedJSON;
     } on SocketException catch (_) {
       GlobalVariable.showLoader.value = false;
-      // GetxHelper.showSnackBar(title: 'Error', message: Errors.noInternetError);
+      // AppConstant.displaySnackBar(titlege)(title, message: Errors.noInternetError);
       GlobalVariable.internetErr(true);
       //throw Errors.noInternetError;
     } on TimeoutException catch (_) {
       GlobalVariable.showLoader.value = false;
-      GetxHelper.showSnackBar(title: 'Error', message: Errors.timeOutException);
+      AppConstant.displaySnackBar('Error', Errors.timeOutException);
       throw Errors.timeOutException;
     } on FormatException catch (_) {
       GlobalVariable.showLoader.value = false;
-      GetxHelper.showSnackBar(title: 'Error', message: Errors.formatException);
+      AppConstant.displaySnackBar('Error', Errors.formatException);
       throw Errors.formatException;
     } catch (e) {
       GlobalVariable.showLoader.value = false;
-      GetxHelper.showSnackBar(title: 'Error', message: Errors.generalApiError);
+      AppConstant.displaySnackBar('Error', Errors.generalApiError);
       throw e.toString();
     }
   }
@@ -154,19 +156,19 @@ class ApiBaseHelper {
     } on SocketException catch (_) {
       GlobalVariable.showLoader.value = false;
       GlobalVariable.internetErr(true);
-      //  GetxHelper.showSnackBar(title: 'Error', message: Errors.noInternetError);
+      //  AppConstant.displaySnackBar(titlege)(title, message: Errors.noInternetError);
     //  throw Errors.noInternetError;
     } on TimeoutException catch (_) {
       GlobalVariable.showLoader.value = false;
-      GetxHelper.showSnackBar(title: 'Error', message: Errors.timeOutException);
+      AppConstant.displaySnackBar('Error', Errors.timeOutException);
       throw Errors.timeOutException;
     } on FormatException catch (_) {
       GlobalVariable.showLoader.value = false;
-      GetxHelper.showSnackBar(title: 'Error', message: Errors.formatException);
+      AppConstant.displaySnackBar('Error', Errors.formatException);
       throw Errors.formatException;
     } catch (e) {
       GlobalVariable.showLoader.value = false;
-      GetxHelper.showSnackBar(title: 'Error', message: Errors.generalApiError);
+      AppConstant.displaySnackBar('Error', Errors.generalApiError);
       throw e.toString();
     }
   }
@@ -204,18 +206,16 @@ class ApiBaseHelper {
     } on SocketException {
       GlobalVariable.showLoader.value = false;
       GlobalVariable.internetErr(true);
-      //  GetxHelper.showSnackBar(title: langKey.errorTitle.tr, message: Errors.noInternetError);
+      //  AppConstant.displaySnackBar(titlege)(title.errorTitle.tr, message: Errors.noInternetError);
     //  throw Errors.noInternetError;
     } on TimeoutException {
       GlobalVariable.showLoader.value = false;
-      GetxHelper.showSnackBar(
-          title: langKey.errorTitle.tr, message: Errors.timeOutException);
+      AppConstant.displaySnackBar(langKey.errorTitle.tr, Errors.timeOutException);
       throw Errors.timeOutException + url;
     } catch (e) {
       GlobalVariable.showLoader.value = false;
       print(e);
-      GetxHelper.showSnackBar(
-          title: langKey.errorTitle.tr, message: e.toString());
+      AppConstant.displaySnackBar(langKey.errorTitle.tr, e.toString());
       throw e.toString();
     }
   }
@@ -249,18 +249,15 @@ class ApiBaseHelper {
     } on SocketException {
       GlobalVariable.showLoader.value = false;
       GlobalVariable.internetErr(true);
-      // GetxHelper.showSnackBar(title: langKey.errorTitle.tr, message: Errors.noInternetError);
       throw Errors.noInternetError;
     } on TimeoutException {
       GlobalVariable.showLoader.value = false;
-      GetxHelper.showSnackBar(
-          title: langKey.errorTitle.tr, message: Errors.timeOutException);
+      AppConstant.displaySnackBar(langKey.errorTitle.tr, Errors.timeOutException);
       throw Errors.timeOutException + url;
     } catch (e) {
       GlobalVariable.showLoader.value = false;
       print(e);
-      GetxHelper.showSnackBar(
-          title: langKey.errorTitle.tr, message: e.toString());
+      AppConstant.displaySnackBar(langKey.errorTitle.tr, e.toString());
       throw e.toString();
     }
   }
@@ -299,19 +296,19 @@ class ApiBaseHelper {
     } on SocketException catch (_) {
       GlobalVariable.showLoader.value = false;
       GlobalVariable.internetErr(true);
-      //GetxHelper.showSnackBar(title: 'Error', message: Errors.noInternetError);
+      //AppConstant.displaySnackBar(titlege)(title, message: Errors.noInternetError);
       throw Errors.noInternetError;
     } on TimeoutException catch (_) {
       GlobalVariable.showLoader.value = false;
-      GetxHelper.showSnackBar(title: 'Error', message: Errors.timeOutException);
+      AppConstant.displaySnackBar('Error', Errors.timeOutException);
       throw Errors.timeOutException;
     } on FormatException catch (_) {
       GlobalVariable.showLoader.value = false;
-      GetxHelper.showSnackBar(title: 'Error', message: Errors.formatException);
+      AppConstant.displaySnackBar('Error', Errors.formatException);
       throw Errors.formatException;
     } catch (e) {
       GlobalVariable.showLoader.value = false;
-      GetxHelper.showSnackBar(title: 'Error', message: Errors.generalApiError);
+      AppConstant.displaySnackBar('Error', Errors.generalApiError);
       throw e.toString();
     }
   }
@@ -352,19 +349,19 @@ class ApiBaseHelper {
     } on SocketException catch (_) {
       GlobalVariable.showLoader.value = false;
       GlobalVariable.internetErr(true);
-      //GetxHelper.showSnackBar(title: 'Error', message: Errors.noInternetError);
+      //AppConstant.displaySnackBar(titlege)(title, message: Errors.noInternetError);
      // throw Errors.noInternetError;
     } on TimeoutException catch (_) {
       GlobalVariable.showLoader.value = false;
-      GetxHelper.showSnackBar(title: 'Error', message: Errors.timeOutException);
+      AppConstant.displaySnackBar('Error', Errors.timeOutException);
       throw Errors.timeOutException;
     } on FormatException catch (_) {
       GlobalVariable.showLoader.value = false;
-      GetxHelper.showSnackBar(title: 'Error', message: Errors.formatException);
+      AppConstant.displaySnackBar('Error', Errors.formatException);
       throw Errors.formatException;
     } catch (e) {
       GlobalVariable.showLoader.value = false;
-      GetxHelper.showSnackBar(title: 'Error', message: Errors.generalApiError);
+      AppConstant.displaySnackBar('Error', Errors.generalApiError);
       throw e.toString();
     }
   }
