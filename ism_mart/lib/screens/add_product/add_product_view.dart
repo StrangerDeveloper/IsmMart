@@ -406,7 +406,7 @@ class AddProductView extends StatelessWidget {
         appBar: CustomAppBar(
           title: langKey.addProduct.tr,
           leading: InkWell(
-            onTap:() {
+            onTap: () {
               Get.back();
             },
             child: Icon(
@@ -536,7 +536,7 @@ class AddProductView extends StatelessWidget {
                   height: 25,
                   onTap: () {
                     viewModel.imagesSizeInMb.value -=
-                    (file.lengthSync() * 0.000001);
+                        (file.lengthSync() * 0.000001);
                     viewModel.productImages.removeAt(index);
                     if (viewModel.productImages.length == 0) {
                       viewModel.uploadImagesError.value = true;
@@ -564,7 +564,7 @@ class AddProductView extends StatelessWidget {
         }
       },
       child: Obx(
-            () => Column(
+        () => Column(
           children: [
             DottedBorder(
               borderType: BorderType.RRect,
@@ -583,19 +583,19 @@ class AddProductView extends StatelessWidget {
                 child: viewModel.productImages.isNotEmpty
                     ? _showImages()
                     : Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(
-                      Icons.cloud_upload_rounded,
-                      size: 30,
-                    ),
-                    const SizedBox(height: 5),
-                    CustomText(
-                      title: langKey.clickHereToUpload.tr,
-                      color: kLightColor,
-                    ),
-                  ],
-                ),
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.cloud_upload_rounded,
+                            size: 30,
+                          ),
+                          const SizedBox(height: 5),
+                          CustomText(
+                            title: langKey.clickHereToUpload.tr,
+                            color: kLightColor,
+                          ),
+                        ],
+                      ),
               ),
             ),
             Padding(
@@ -673,8 +673,9 @@ class AddProductView extends StatelessWidget {
             viewModel.setSelectedCategory(category: newValue!);
           },
           selectedItem: viewModel.selectedCategory.value,
-          validator: (value){
-            return Validator().validateCategoryField(viewModel.selectedCategory.value);
+          validator: (value) {
+            return Validator()
+                .validateCategoryField(viewModel.selectedCategory.value);
           },
         ),
       ),
@@ -683,8 +684,9 @@ class AddProductView extends StatelessWidget {
 
   selectSubCategoryField() {
     return DropdownSearch<SubCategory>(
-      validator: (value){
-        return Validator().validateSubCategoryField(viewModel.selectedSubCategory.value);
+      validator: (value) {
+        return Validator()
+            .validateSubCategoryField(viewModel.selectedSubCategory.value);
       },
       popupProps: PopupProps.dialog(
         showSearchBox: true,
@@ -728,7 +730,8 @@ class AddProductView extends StatelessWidget {
         label: langKey.productName.tr,
         autoValidateMode: AutovalidateMode.onUserInteraction,
         validator: (value) {
-          return Validator().validateName(value, errorToPrompt: langKey.productNameReq.tr);
+          return Validator()
+              .validateName(value, errorToPrompt: langKey.productNameReq.tr);
         },
         keyboardType: TextInputType.name,
       ),
@@ -750,7 +753,8 @@ class AddProductView extends StatelessWidget {
             label: langKey.prodPrice.tr,
             autoValidateMode: AutovalidateMode.onUserInteraction,
             validator: (value) {
-              return Validator().validateDefaultTxtField(value, errorPrompt: langKey.prodPriceReq.tr);
+              return Validator().validateDefaultTxtField(value,
+                  errorPrompt: langKey.prodPriceReq.tr);
             },
             onChanged: (value) {
               viewModel.onPriceFieldChange(value);
@@ -777,17 +781,106 @@ class AddProductView extends StatelessWidget {
 
   Widget productVariantsAndFeaturesField() {
     return Obx(
-          () => viewModel.productVariantsFieldsList.isEmpty
+      () => viewModel.productVariantsFieldsList.isEmpty
           ? Container()
           : Padding(
-        padding: const EdgeInsets.symmetric(vertical: 15.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: viewModel.productVariantsFieldsList
-              .map((element) => _createDynamicFormFields(element))
-              .toList(),
-        ),
+              padding: const EdgeInsets.symmetric(vertical: 15.0),
+              child: Column(
+                children: [
+                  CustomText(
+                    title: langKey.productVariant.tr,
+                    style: headline2,
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: viewModel.productVariantsFieldsList
+                        .map((variantsModel) {
+                      return Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          //displaying the parent one
+                          _singleProductVariantListItem(variantsModel,
+                              icon: Icons.add_circle_outline, onTap: () {
+                            variantsModel.isNewField = true;
+                            variantsModel.moreFieldOptionList!
+                                .add(variantsModel);
+                            viewModel.productVariantsFieldsList.refresh();
+                          }),
+
+                          /// after pressing AddICon more fields would be generated
+                          if (variantsModel.moreFieldOptionList!.isNotEmpty)
+                            Column(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: variantsModel.moreFieldOptionList!
+                                  .map((element) =>
+                                      _singleProductVariantListItem(
+                                          variantsModel,
+                                          icon: Icons.remove_circle_outline,
+                                          onTap: () {
+                                        variantsModel.isNewField = false;
+                                        variantsModel.moreFieldOptionList!
+                                            .remove(variantsModel);
+                                        viewModel.productVariantsFieldsList
+                                            .refresh();
+                                      }))
+                                  .toList(),
+                            ),
+                        ],
+                      );
+                    }).toList(),
+                  ),
+                ],
+              ),
+            ),
+    );
+  }
+
+  Widget _singleProductVariantListItem(ProductVariantsModel model,
+      {onTap, icon}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              children: [
+                _categoryOptionField(model: model),
+                // SizedBox(height: 10),
+                // if (model.categoryFieldOptions!.isNotEmpty)
+                //   Column(
+                //     mainAxisSize: MainAxisSize.min,
+                //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //     children: model.categoryFieldOptions!
+                //         .map((element) => _categoryOptionField(
+                //             model: element, icon: Icons.inventory_2_outlined))
+                //         .toList(),
+                //   ),
+              ],
+            ),
+          ),
+          IconButton(
+            onPressed: onTap,
+            icon: Icon(icon),
+          ),
+        ],
       ),
+    );
+  }
+
+  Widget _categoryOptionField({ProductVariantsModel? model, icon}) {
+    return CustomTextField2(
+      prefixIcon: icon ?? IconlyLight.discovery,
+      keyboardType: TextInputType.text,
+      onChanged: (value) => viewModel.onDynamicFieldsValueChanged(value, model),
+      label: model!.label,
+      autoValidateMode: AutovalidateMode.onUserInteraction,
+      validator: (value) {
+        return Validator().validateDefaultTxtField(value);
+      },
     );
   }
 
@@ -804,7 +897,8 @@ class AddProductView extends StatelessWidget {
         label: langKey.prodStock.tr,
         autoValidateMode: AutovalidateMode.onUserInteraction,
         validator: (value) {
-          return Validator().validateDefaultTxtField(value, errorPrompt: prodStockReq.tr);
+          return Validator()
+              .validateDefaultTxtField(value, errorPrompt: prodStockReq.tr);
         },
         keyboardType: TextInputType.number,
       ),
@@ -831,7 +925,7 @@ class AddProductView extends StatelessWidget {
             ],
           ),
           Obx(
-                () => Visibility(
+            () => Visibility(
               visible: viewModel.prodDiscountController.text.isNotEmpty,
               child: CustomText(
                 title: viewModel.discountMessage.value,
@@ -853,7 +947,8 @@ class AddProductView extends StatelessWidget {
         prefixIcon: IconlyLight.document,
         autoValidateMode: AutovalidateMode.onUserInteraction,
         validator: (value) {
-          return Validator().validateDefaultTxtField(value, errorPrompt: langKey.descriptionReq.tr);
+          return Validator().validateDefaultTxtField(value,
+              errorPrompt: langKey.descriptionReq.tr);
         },
         keyboardType: TextInputType.text,
       ),

@@ -56,7 +56,7 @@ class SettingsView extends StatelessWidget {
     return Obx(
       () => viewModel.userDetails.value?.email == null &&
               viewModel.userDetails.value?.token == null
-              // authController.isSessionExpired!
+          // authController.isSessionExpired!
           ? Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: Column(
@@ -190,7 +190,7 @@ class SettingsView extends StatelessWidget {
                 Get.toNamed(Routes.vendorSignUp4, arguments: {
                   'fromSettings': true,
                 });
-               // Get.toNamed(Routes.sellerHomeRoute);
+                // Get.toNamed(Routes.sellerHomeRoute);
               } else if (viewModel.userDetails.value?.vendor?.status ==
                   'false') {
                 Get.toNamed(Routes.chooseEmail);
@@ -323,14 +323,13 @@ class SettingsView extends StatelessWidget {
           title: langKey.helpCenter.tr,
         ),
         singleSettingsItem(
-            onTap: (){
+            onTap: () {
               Get.toNamed(Routes.chatScreen);
-              },
+            },
             color: Color(0xff70d2f9),
             isIcon: true,
             icon: Icons.chat_outlined,
-            title: 'ISMBot'
-        ),
+            title: 'ISMBot'),
         Obx(
           () => viewModel.userDetails.value?.email != null &&
                   viewModel.userDetails.value?.token != null
@@ -523,7 +522,7 @@ class SettingsView extends StatelessWidget {
                       padding: const EdgeInsets.all(10),
                       child: SvgPicture.asset(
                         svgIcons!,
-                        color: color,
+                        //color: color,
                       ),
                     ),
             ),

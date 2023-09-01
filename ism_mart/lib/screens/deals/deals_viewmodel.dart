@@ -4,7 +4,6 @@ import 'package:ism_mart/helper/api_base_helper.dart';
 import 'package:ism_mart/helper/global_variables.dart';
 import 'package:ism_mart/helper/constants.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
-import 'package:http/http.dart' as http;
 import '../../models/product/product_model.dart';
 
 class DealsViewModel extends GetxController {
@@ -37,14 +36,13 @@ class DealsViewModel extends GetxController {
     noProductsFound.value = false;
     productList.clear();
     await ApiBaseHelper().getMethod(url: url).then((response) {
-      if(response['success'] == true && response['data'] != []){
+      if (response['success'] == true && response['data'] != []) {
         productList.clear();
         var data = response['data'] as List;
-        if(data.isEmpty){
+        if (data.isEmpty) {
           noProductsFound.value = true;
           GlobalVariable.showLoader.value = false;
-        }
-        else {
+        } else {
           productList.addAll(data.map((e) => ProductModel.fromJson(e)));
           GlobalVariable.showLoader.value = false;
         }
@@ -55,7 +53,7 @@ class DealsViewModel extends GetxController {
         print('>>>No Products Value: ${noProductsFound.value}');
       }
     }).catchError((e) {
-    //  GlobalVariable.internetErr(true);
+      //  GlobalVariable.internetErr(true);
       print(e);
       GlobalVariable.showLoader.value = false;
     });
@@ -82,7 +80,6 @@ class DealsViewModel extends GetxController {
     }
   }
 
-
   //
   // getDataIsmartOrig()async{
   //
@@ -100,7 +97,4 @@ class DealsViewModel extends GetxController {
   //   }
   //
   // }
-
-
-
 }

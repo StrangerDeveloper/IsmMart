@@ -159,7 +159,7 @@ class ProductDetailView extends StatelessWidget {
                         onTap: () {
                           viewModel.viewImageEnlarge(index);
                         },
-                        child: mainImage(viewModel.imageList[index] ?? ''),
+                        child: mainImage(viewModel.imageList[index]),
                       ),
                     ),
                   ),

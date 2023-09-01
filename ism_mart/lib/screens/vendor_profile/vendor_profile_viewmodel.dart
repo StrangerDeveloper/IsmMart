@@ -12,6 +12,6 @@ class VendorProfileViewModel extends GetxController {
   }
 
   getData() {
-    userModel.value = GlobalVariable.userModel;
+    userModel.value = GlobalVariable.userModel ?? null;
   }
 }

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ism_mart/exports/export_presentation.dart';
-import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/screens/vendor_profile/vendor_profile_viewmodel.dart';
 
@@ -35,7 +34,7 @@ class VendorProfileView extends StatelessWidget {
                 width: Get.width * 0.5,
                 onPressed: () {
                   //Get.toNamed(Routes.vendorSignUp2);
-                  Get.to(() =>UpdateVendorProfileView());
+                  Get.to(() => UpdateVendorProfileView());
                 },
                 title: langKey.updateBtn.tr,
               ),

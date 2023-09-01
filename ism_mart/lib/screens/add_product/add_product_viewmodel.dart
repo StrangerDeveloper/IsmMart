@@ -342,30 +342,38 @@ class AddProductViewModel extends GetxController {
   TextEditingController prodSKUController = TextEditingController();
   TextEditingController prodPriceController = TextEditingController();
   TextEditingController prodWeightController = TextEditingController();
-  TextEditingController prodHeightController = TextEditingController();
-  TextEditingController prodWidthController = TextEditingController();
   TextEditingController prodLengthController = TextEditingController();
+  TextEditingController prodWidthController = TextEditingController();
+  TextEditingController prodHeightController = TextEditingController();
 
   RxInt priceAfterCommission = 1.obs;
+  RxInt selectedCategoryID = 0.obs;
+  RxInt selectedSubCategoryID = 1.obs;
+
   RxString chooseCategory = "Select Category".obs;
   RxString chooseSubCategory = "Select sub categories".obs;
-  List<File> productImages = <File>[].obs;
+
   Rx<SubCategory> selectedSubCategory = SubCategory().obs;
-  RxInt selectedSubCategoryID = 1.obs;
-  List<SubCategory> subCategoriesList = <SubCategory>[].obs;
   Rx<CategoryModel> selectedCategory = CategoryModel().obs;
-  RxInt selectedCategoryID = 0.obs;
+
+  List<SubCategory> subCategoriesList = <SubCategory>[].obs;
+  List<File> productImages = <File>[].obs;
   List<CategoryModel> categoriesList = <CategoryModel>[].obs;
-  RxMap<String, dynamic> dynamicFieldsValuesList = Map<String, dynamic>().obs;
-  List<ProductVariantsModel> productVariantsFieldsList =
+  RxList<ProductVariantsModel> productVariantsFieldsList =
       <ProductVariantsModel>[].obs;
+
+  RxMap<String, dynamic> dynamicFieldsValuesList = Map<String, dynamic>().obs;
+
   Map<String, String>? categoryFieldList;
+
   var formKey = GlobalKey<FormState>();
+  var formKeyCategoryField = GlobalKey<FormState>();
 
   RxString discountMessage = "".obs;
   RxDouble imagesSizeInMb = 0.0.obs;
   RxBool uploadImagesError = false.obs;
   double fieldsPaddingSpace = 12.0;
+  RxBool isStockContainsInVariants = false.obs;
 
   @override
   void onReady() {
@@ -467,8 +475,8 @@ class AddProductViewModel extends GetxController {
   void getVariantsFields() async {
     ApiBaseHelper()
         .getMethod(
-        url:
-        'categoryFields?categoryId=$selectedCategoryID&subcategoryId=$selectedSubCategoryID')
+            url:
+                'categoryFields?categoryId=$selectedCategoryID&subcategoryId=$selectedSubCategoryID')
         .then((parsedJson) {
       if (parsedJson['success'] == true) {
         GlobalVariable.internetErr(false);
@@ -553,15 +561,15 @@ class AddProductViewModel extends GetxController {
       if (newProduct.length != null) 'length': newProduct.length.toString(),
       if (newProduct.height != null) 'height': newProduct.height.toString(),
       'description': newProduct.description.toString(),
-
     };
 
     if (dynamicFieldsValuesList.isNotEmpty) {
       for (int i = 0; i < dynamicFieldsValuesList.entries.length; i++) {
         body.addAll({
-          'features[$i][id]': "${dynamicFieldsValuesList.entries.elementAt(i).key}",
+          'features[$i][id]':
+              "${dynamicFieldsValuesList.entries.elementAt(i).key}",
           'features[$i][value]':
-          "${dynamicFieldsValuesList.entries.elementAt(i).value}"
+              "${dynamicFieldsValuesList.entries.elementAt(i).value}"
         });
       }
     } else {

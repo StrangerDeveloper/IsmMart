@@ -6,8 +6,6 @@ import 'package:ism_mart/exports/export_controllers.dart';
 import 'package:ism_mart/exports/exports_model.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
 
-import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
-
 class ProductController extends GetxController with StateMixin {
   final ApiProvider _apiProvider;
 
@@ -114,7 +112,7 @@ class ProductController extends GetxController with StateMixin {
       page = 1;
       getVendorProducts(vendorId: sellerModelResponse.vendorStore!.id!);
     }).catchError((error) {
-    //  GlobalVariable.internetErr(true);
+      //  GlobalVariable.internetErr(true);
 
       //change(null, status: RxStatus.empty());
       isLoading(false);
