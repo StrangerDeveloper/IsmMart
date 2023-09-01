@@ -379,6 +379,7 @@
 import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -803,7 +804,8 @@ class AddProductView extends StatelessWidget {
                         children: [
                           //displaying the parent one
                           _singleProductVariantListItem(variantsModel,
-                              icon: Icons.add_circle_outline, onTap: () {
+                              icon: CupertinoIcons.add_circled_solid,
+                              onTap: () {
                             variantsModel.isNewField = true;
                             variantsModel.moreFieldOptionList!
                                 .add(variantsModel);
@@ -819,7 +821,7 @@ class AddProductView extends StatelessWidget {
                                   .map((element) =>
                                       _singleProductVariantListItem(
                                           variantsModel,
-                                          icon: Icons.remove_circle_outline,
+                                          icon: CupertinoIcons.clear_circled,
                                           onTap: () {
                                         variantsModel.isNewField = false;
                                         variantsModel.moreFieldOptionList!
