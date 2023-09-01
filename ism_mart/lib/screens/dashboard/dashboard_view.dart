@@ -21,7 +21,6 @@ import '../../widgets/no_data_found.dart';
 import '../../widgets/single_category_item.dart';
 import '../../widgets/single_product_grid_item.dart';
 import '../../widgets/sticky_label_with_view_more.dart';
-import '../../widgets/sticky_labels.dart';
 import '../live_match/live_match_view.dart';
 import '../product_detail/product_detail_view.dart';
 import '../search_details/search_details_view.dart';
@@ -49,7 +48,7 @@ class DashboardView extends GetView<BaseController> {
                     // StickyLabel(text: langKey.topVendors.tr),
                     // _topVendors(),
                     // StickyLabel(text: langKey.discountDeals.tr),
-                     _displayDiscountProducts(),
+                    _displayDiscountProducts(),
                     Obx(
                       () => _displayProducts(
                         productMap: controller.productsWithTypesMap,
@@ -67,16 +66,14 @@ class DashboardView extends GetView<BaseController> {
               ),
             ],
           ),
-
           chatWidget(),
-
           NoInternetView(
             onPressed: () {
               controller.getAllApiFunc();
               GlobalVariable.btnPress(true);
             },
           ),
-        banner(),
+          banner(),
         ],
       ),
     );
@@ -174,7 +171,7 @@ class DashboardView extends GetView<BaseController> {
         // ]);
         Get.to(
           () => ProductDetailView(),
-          arguments: {'productID': model.id, 'isBuyer' : true},
+          arguments: {'productID': model.id, 'isBuyer': true},
         );
       },
       child: Stack(
@@ -362,36 +359,36 @@ class DashboardView extends GetView<BaseController> {
     bool? isCategoryProducts,
   ) {
     //if (!isPopular!)
-      return Padding(
-        padding: const EdgeInsets.all(6.0),
-        child: SizedBox(
-          //height: AppConstant.getSize().height * 0.5,
-          child: GridView.builder(
-              shrinkWrap: true,
+    return Padding(
+      padding: const EdgeInsets.all(6.0),
+      child: SizedBox(
+        //height: AppConstant.getSize().height * 0.5,
+        child: GridView.builder(
+            shrinkWrap: true,
 
-              ///Reducing memory consumption
-              addAutomaticKeepAlives: false,
-              addRepaintBoundaries: false,
-              physics: const NeverScrollableScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 200,
-                // Maximum width of each item
-                childAspectRatio: 0.92,
-                // Aspect ratio of each item (width / height)
-                mainAxisSpacing: 10,
-                // Spacing between rows
-                crossAxisSpacing: 10, // Spacing between columns
-              ),
-              itemCount: list.length,
-              itemBuilder: (_, index) {
-                ProductModel productModel = list[index];
-                return SingleProductItems(
-                  productModel: productModel,
-                  isCategoryProducts: isCategoryProducts,
-                );
-              }),
-        ),
-      );
+            ///Reducing memory consumption
+            addAutomaticKeepAlives: false,
+            addRepaintBoundaries: false,
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 200,
+              // Maximum width of each item
+              childAspectRatio: 0.92,
+              // Aspect ratio of each item (width / height)
+              mainAxisSpacing: 10,
+              // Spacing between rows
+              crossAxisSpacing: 10, // Spacing between columns
+            ),
+            itemCount: list.length,
+            itemBuilder: (_, index) {
+              ProductModel productModel = list[index];
+              return SingleProductItems(
+                productModel: productModel,
+                isCategoryProducts: isCategoryProducts,
+              );
+            }),
+      ),
+    );
 
     // if (isCategoryProducts!)
     //   return GridView.builder(
@@ -543,8 +540,9 @@ class DashboardView extends GetView<BaseController> {
     );
   }
 
-  Widget banner(){
-    return Obx(() => Visibility(
+  Widget banner() {
+    return Obx(
+      () => Visibility(
         visible: viewModel.bannerVisibility.value,
         child: FadeTransition(
           opacity: viewModel.animation5,
@@ -559,23 +557,30 @@ class DashboardView extends GetView<BaseController> {
                   position: viewModel.animation6,
                   child: Center(
                     child: GestureDetector(
-                      onTap: (){
-                        Get.to(()=> LiveMatchView());
+                      onTap: () {
+                        Get.to(() => LiveMatchView());
                         viewModel.bannerVisibility.value = false;
                       },
                       child: SlideTransition(
                         position: viewModel.animation1,
                         child: Stack(
                           children: [
-                            Image.asset('assets/images/qpl_banner.png',
-                              width: MediaQuery.of(Get.context!).size.width/1.2,
-                              height: MediaQuery.of(Get.context!).size.height/1.8,),
+                            Image.asset(
+                              'assets/images/qpl_banner.png',
+                              width:
+                                  MediaQuery.of(Get.context!).size.width / 1.2,
+                              height:
+                                  MediaQuery.of(Get.context!).size.height / 1.8,
+                            ),
                             FadeTransition(
                               opacity: viewModel.animation7,
                               child: Container(
                                 color: Colors.white,
-                                width: MediaQuery.of(Get.context!).size.width/1.2,
-                                height: MediaQuery.of(Get.context!).size.height/1.8,
+                                width: MediaQuery.of(Get.context!).size.width /
+                                    1.2,
+                                height:
+                                    MediaQuery.of(Get.context!).size.height /
+                                        1.8,
                               ),
                             )
                           ],
@@ -584,16 +589,15 @@ class DashboardView extends GetView<BaseController> {
                     ),
                   ),
                 ),
-
                 Positioned(
                   top: 2,
                   right: -2,
                   child: IconButton(
-                      onPressed: (){
+                      onPressed: () {
                         viewModel.animationController6.forward();
                         viewModel.animationController6.addListener(() {
                           viewModel.animation6.value;
-                          if(viewModel.animationController6.value > 0.3) {
+                          if (viewModel.animationController6.value > 0.3) {
                             viewModel.animationController7.forward();
                             viewModel.animationController7.addListener(() {
                               viewModel.animation7.value;
@@ -603,20 +607,24 @@ class DashboardView extends GetView<BaseController> {
                               viewModel.animation5.value;
                             });
                           }
-                          if(viewModel.animationController6.isCompleted){
+                          if (viewModel.animationController6.isCompleted) {
                             viewModel.bannerVisibility.value = false;
                             viewModel.disposeAnimations();
                           }
                         });
                       },
-                      icon: Icon(Icons.highlight_remove, size: 30, color: Colors.white,)),
+                      icon: Icon(
+                        Icons.highlight_remove,
+                        size: 30,
+                        color: Colors.white,
+                      )),
                 )
               ],
             ),
-            ),
+          ),
         ),
-        ),
-      );
+      ),
+    );
   }
 
   Widget chatWidget() {
@@ -627,8 +635,8 @@ class DashboardView extends GetView<BaseController> {
         position: viewModel.animation1,
         child: GestureDetector(
           onTap: () async {
-            Get.to(()=> LiveMatchView());
-          //  Get.toNamed(Routes.chatScreen);
+            Get.to(() => LiveMatchView());
+            //  Get.toNamed(Routes.chatScreen);
             // await viewModel.getCurrentLocation();
           },
           child: Obx(
@@ -636,10 +644,7 @@ class DashboardView extends GetView<BaseController> {
               width: viewModel.containerWidth.value,
               height: 50,
               decoration: BoxDecoration(
-                border: Border.all(
-                  width: 1.5,
-                  color: Colors.red
-                ),
+                  border: Border.all(width: 1.5, color: Colors.red),
                   color: Colors.white,
                   // color: Color(0xff3769CA),
                   borderRadius: BorderRadius.all(Radius.circular(28)),
@@ -661,19 +666,23 @@ class DashboardView extends GetView<BaseController> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Image.asset('assets/images/qpl_logo.png', width: 35, height: 35,),
-                    Text(
+                        Image.asset(
+                          'assets/images/qpl_logo.png',
+                          width: 35,
+                          height: 35,
+                        ),
+                        Text(
                           'Live',
-                            style: TextStyle(
-                                color: Colors.red,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 14),
-                          ),
+                          style: TextStyle(
+                              color: Colors.red,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 14),
+                        ),
                         FadeTransition(
-                            opacity: viewModel.animation4,
-                            child: Icon(Icons.circle,
-                                size: 15, color: Colors.red),
-                          ),
+                          opacity: viewModel.animation4,
+                          child:
+                              Icon(Icons.circle, size: 15, color: Colors.red),
+                        ),
                       ],
                     ),
                   ),
@@ -685,6 +694,4 @@ class DashboardView extends GetView<BaseController> {
       ),
     );
   }
-
-
 }
