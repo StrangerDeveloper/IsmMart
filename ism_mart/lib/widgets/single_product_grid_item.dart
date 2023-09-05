@@ -69,7 +69,7 @@ class SingleProductItems extends StatelessWidget {
                             children: [
                               CustomNetworkImage(
                                 imageUrl: model!.thumbnail,
-                                //fit: BoxFit.cover,
+                                fit: BoxFit.fitHeight,
                               ),
                               if (model.stock! == 0)
                                 _buildOutOfStockStack(buildContext),
@@ -119,6 +119,7 @@ class SingleProductItems extends StatelessWidget {
   _buildProductItemNew({ProductModel? model, BuildContext? buildContext}) {
     //print("This one is called>>>>>>>>>>>>>>>>>>");
     return AspectRatio(
+
         aspectRatio: 0.8,
         child: GestureDetector(
           onTap: onTap ??
@@ -150,9 +151,10 @@ class SingleProductItems extends StatelessWidget {
                 //     });
               },
           child: Container(
+
             clipBehavior: Clip.hardEdge,
             margin: const EdgeInsets.symmetric(horizontal: 5),
-            //padding: const EdgeInsets.all(1),
+            padding: const EdgeInsets.only(top:10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
               color: Colors.white,
@@ -166,14 +168,14 @@ class SingleProductItems extends StatelessWidget {
                   children: [
                     SizedBox(
                         height:
-                            AppResponsiveness.getHeight100_120(),
+                            AppResponsiveness.getHeightWRTPoint(points: .15),
                         //width: double.infinity,
                         child: Center(
                           child: Stack(
                             fit: StackFit.expand,
                             children: [
                               CustomNetworkImage(
-                                imageUrl: model!.thumbnail, fit: BoxFit.cover,
+                                imageUrl: model!.thumbnail, fit: BoxFit.fitHeight,
                               ),
                               if (model.stock! == 0)
                                 _buildOutOfStockStack(buildContext),
@@ -189,8 +191,9 @@ class SingleProductItems extends StatelessWidget {
                         children: [
                           //CustomText(title: "Sold: ${model.sold!}"),
                           CustomText(
+
                             title: model.name!,
-                            size: 13,
+                            size: 10,
                            // weight: FontWeight.w600,
                           ),
                           AppConstant.spaceWidget(height: 5),

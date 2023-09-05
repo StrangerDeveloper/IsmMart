@@ -8,6 +8,7 @@ import 'package:ism_mart/exports/exports_model.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/helper/no_internet_view.dart';
+import 'package:ism_mart/screens/chatbot/chatbot_view.dart';
 import 'package:ism_mart/screens/dashboard/dashboard_viewmodel.dart';
 import 'package:ism_mart/screens/top_vendors/top_vendors_model.dart';
 
@@ -21,6 +22,8 @@ import '../../widgets/no_data_found.dart';
 import '../../widgets/single_category_item.dart';
 import '../../widgets/single_product_grid_item.dart';
 import '../../widgets/sticky_label_with_view_more.dart';
+import '../../widgets/sticky_labels.dart';
+import '../chatbot/chatbot_viewmodel.dart';
 import '../live_match/live_match_view.dart';
 import '../product_detail/product_detail_view.dart';
 import '../search_details/search_details_view.dart';
@@ -29,6 +32,7 @@ class DashboardView extends GetView<BaseController> {
   DashboardView({Key? key}) : super(key: key);
 
   final DashboardViewModel viewModel = Get.put(DashboardViewModel());
+  final ChatViewModel viewModelChat = Get.put(ChatViewModel());
 
   @override
   Widget build(BuildContext context) {
@@ -42,38 +46,40 @@ class DashboardView extends GetView<BaseController> {
                 delegate: SliverChildListDelegate(
                   [
                     _slider(controller.sliderImages),
-                    // StickyLabel(text: langKey.topCategories.tr),
-                    // _topCategoriesGrid(controller.categories),
-                    // //Top Vendors List
-                    // StickyLabel(text: langKey.topVendors.tr),
-                    // _topVendors(),
-                    // StickyLabel(text: langKey.discountDeals.tr),
+                    StickyLabel(text: langKey.topCategories.tr),
+                    _topCategoriesGrid(controller.categories),
+                    //Top Vendors List
+                    StickyLabel(text: langKey.topVendors.tr),
+                    _topVendors(),
+                    StickyLabel(text: langKey.discountDeals.tr),
                     _displayDiscountProducts(),
                     Obx(
-                      () => _displayProducts(
+                          () => _displayProducts(
                         productMap: controller.productsWithTypesMap,
                       ),
                     ),
-                    // kDivider,
-                    // Obx(
-                    //   () => _displayProducts(
-                    //     productMap: controller.productsMap,
-                    //     calledForCategoryProducts: true,
-                    //   ),
-                    // ),
+                    kDivider,
+                    Obx(
+                          () => _displayProducts(
+                        productMap: controller.productsMap,
+                        calledForCategoryProducts: true,
+                      ),
+                    ),
                   ],
                 ),
               ),
             ],
           ),
+
           chatWidget(),
+
           NoInternetView(
             onPressed: () {
               controller.getAllApiFunc();
               GlobalVariable.btnPress(true);
             },
           ),
-          banner(),
+         // banner(),
         ],
       ),
     );
@@ -81,58 +87,58 @@ class DashboardView extends GetView<BaseController> {
 
   Widget _slider(List<SliderModel> list) {
     return Obx(
-      () => controller.isSliderLoading.isTrue
+          () => controller.isSliderLoading.isTrue
           ? CustomLoading(isItForWidget: true)
           : Stack(
-              alignment: Alignment.bottomCenter,
-              children: [
-                SizedBox(
-                  height: AppResponsiveness.getBoxHeightPoint15(),
-                  child: PageView.builder(
-                    controller: controller.sliderPageController,
-                    onPageChanged: (value) {
-                      controller.sliderIndex(value);
-                    },
-                    itemCount: list.length,
-                    itemBuilder: (context, index) {
-                      SliderModel model = list[index];
-                      return CustomNetworkImage(
-                        imageUrl: model.image!,
-                        fit: BoxFit.fill,
-                        width: AppConstant.getSize().width,
-                      );
-                    },
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(bottom: 6),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: List.generate(
-                      list.length,
-                      (index) => AnimatedContainer(
-                        duration: const Duration(milliseconds: 400),
-                        height: 6.0,
-                        width: controller.sliderIndex.value == index ? 14 : 6,
-                        margin: const EdgeInsets.only(right: 3),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: controller.sliderIndex.value == index
-                              ? Colors.black
-                              : Colors.grey,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+        alignment: Alignment.bottomCenter,
+        children: [
+          SizedBox(
+            height: AppResponsiveness.getBoxHeightPoint15(),
+            child: PageView.builder(
+              controller: controller.sliderPageController,
+              onPageChanged: (value) {
+                controller.sliderIndex(value);
+              },
+              itemCount: list.length,
+              itemBuilder: (context, index) {
+                SliderModel model = list[index];
+                return CustomNetworkImage(
+                  imageUrl: model.image!,
+                  fit: BoxFit.fill,
+                  width: AppConstant.getSize().width,
+                );
+              },
             ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(bottom: 6),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(
+                list.length,
+                    (index) => AnimatedContainer(
+                  duration: const Duration(milliseconds: 400),
+                  height: 6.0,
+                  width: controller.sliderIndex.value == index ? 14 : 6,
+                  margin: const EdgeInsets.only(right: 3),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: controller.sliderIndex.value == index
+                        ? Colors.black
+                        : Colors.grey,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
   Widget _displayDiscountProducts() {
     return Obx(
-      () => Container(
+          () => Container(
         margin: const EdgeInsets.only(top: 10),
         color: kWhiteColor,
         height: AppResponsiveness.getBoxHeightPoint32(),
@@ -142,19 +148,19 @@ class DashboardView extends GetView<BaseController> {
             controller.discountSliderProductsList.isEmpty
                 ? NoDataFound()
                 : SizedBox(
-                    width: AppConstant.getSize().width * 0.9,
-                    height: AppResponsiveness.height * 0.24,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: controller.discountSliderProductsList.length,
-                      itemBuilder: (_, index) {
-                        ProductModel model =
-                            controller.discountSliderProductsList[index];
-                        return _singleDiscountProductItem(model);
-                      },
-                    ),
-                  ),
+              width: AppConstant.getSize().width * 0.9,
+              height: AppResponsiveness.height * 0.24,
+              child: ListView.builder(
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemCount: controller.discountSliderProductsList.length,
+                itemBuilder: (_, index) {
+                  ProductModel model =
+                  controller.discountSliderProductsList[index];
+                  return _singleDiscountProductItem(model);
+                },
+              ),
+            ),
           ],
         ),
       ),
@@ -170,8 +176,8 @@ class DashboardView extends GetView<BaseController> {
         //   {"calledFor": "customer", "productID": "${model.id}"}
         // ]);
         Get.to(
-          () => ProductDetailView(),
-          arguments: {'productID': model.id, 'isBuyer': true},
+              () => ProductDetailView(),
+          arguments: {'productID': model.id, 'isBuyer' : true},
         );
       },
       child: Stack(
@@ -315,180 +321,180 @@ class DashboardView extends GetView<BaseController> {
     var isPopular = false;
     return Column(
         children: productMap!.entries.map((e) {
-      List list = e.value;
-      if (list.isNotEmpty && list.length > 1) {
-        if (e.key.toLowerCase().contains("popular"))
-          isPopular = false;
-        else
-          isPopular = false;
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            StickyLabelWithViewMoreOption(
-              title: e.key,
-              textSize: 20,
-              onTap: () {
-                Get.find<CustomSearchController>().filters.clear();
-                Get.to(
-                  () => SearchDetailsView(
-                    isCalledForLatestAndBestSeller:
+          List list = e.value;
+          if (list.isNotEmpty && list.length > 1) {
+            if (e.key.toLowerCase().contains("popular"))
+              isPopular = true;
+            else
+              isPopular = false;
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                StickyLabelWithViewMoreOption(
+                  title: e.key,
+                  textSize: 20,
+                  onTap: () {
+                    Get.find<CustomSearchController>().filters.clear();
+                    Get.to(
+                          () => SearchDetailsView(
+                        isCalledForLatestAndBestSeller:
                         e.key == 'Best Seller' || e.key == 'Popular Products'
                             ? true
                             : false,
-                    searchQuery: "",
-                    productTypeKey: "${e.key}",
-                    calledToGoBackOnce: true,
-                  ),
-                );
-              },
-            ),
-            AppConstant.spaceWidget(height: 10),
-            _trendingProducts(list as List<ProductModel>, isPopular,
-                calledForCategoryProducts)
-          ],
-        );
-      }
+                        searchQuery: "",
+                        productTypeKey: "${e.key}",
+                        calledToGoBackOnce: true,
+                      ),
+                    );
+                  },
+                ),
+                AppConstant.spaceWidget(height: 10),
+                _trendingProducts(list as List<ProductModel>, isPopular,
+                    calledForCategoryProducts)
+              ],
+            );
+          }
 
-      return Container();
-    }).toList());
+          return Container();
+        }).toList());
   }
 
   Widget _trendingProducts(
-    List<ProductModel> list,
-    bool? isPopular,
-    bool? isCategoryProducts,
-  ) {
-    //if (!isPopular!)
-    return Padding(
-      padding: const EdgeInsets.all(6.0),
-      child: SizedBox(
-        //height: AppConstant.getSize().height * 0.5,
-        child: GridView.builder(
-            shrinkWrap: true,
+      List<ProductModel> list,
+      bool? isPopular,
+      bool? isCategoryProducts,
+      ) {
+    if (isPopular!)
+      return Padding(
+        padding: const EdgeInsets.all(6.0),
+        child: SizedBox(
+          //height: AppConstant.getSize().height * 0.5,
+          child: GridView.builder(
+              shrinkWrap: true,
 
-            ///Reducing memory consumption
-            addAutomaticKeepAlives: false,
-            addRepaintBoundaries: false,
-            physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 200,
-              // Maximum width of each item
-              childAspectRatio: 0.92,
-              // Aspect ratio of each item (width / height)
-              mainAxisSpacing: 10,
-              // Spacing between rows
-              crossAxisSpacing: 10, // Spacing between columns
-            ),
-            itemCount: list.length,
-            itemBuilder: (_, index) {
-              ProductModel productModel = list[index];
-              return SingleProductItems(
-                productModel: productModel,
-                isCategoryProducts: isCategoryProducts,
-              );
-            }),
+              ///Reducing memory consumption
+              addAutomaticKeepAlives: false,
+              addRepaintBoundaries: false,
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 200,
+                // Maximum width of each item
+                childAspectRatio: 0.92,
+                // Aspect ratio of each item (width / height)
+                mainAxisSpacing: 10,
+                // Spacing between rows
+                crossAxisSpacing: 10, // Spacing between columns
+              ),
+              itemCount: list.length,
+              itemBuilder: (_, index) {
+                ProductModel productModel = list[index];
+                return SingleProductItems(
+                  productModel: productModel,
+                  isCategoryProducts: isCategoryProducts,
+                );
+              }),
+        ),
+      );
+
+    if (isCategoryProducts!)
+      return GridView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+          //crossAxisCount: AppResponsiveness.getGridItemCount(),
+          maxCrossAxisExtent: 170,
+          // Maximum width of each item
+          childAspectRatio: 0.8,
+          // Aspect ratio of each item (width / height)
+          mainAxisSpacing: 15,
+          // Spacing between rows
+          crossAxisSpacing: 5, // Spacing between columns
+        ),
+        itemCount: list.length,
+        itemBuilder: (context, index) {
+          ProductModel productModel = list[index];
+          return SingleProductItems(
+            productModel: productModel,
+            isCategoryProducts: isCategoryProducts,
+          );
+        },
+      );
+
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: SizedBox(
+        height: isCategoryProducts ? 170 : 190,
+        // height: AppResponsiveness.height *
+        //     (!isCategoryProducts!
+        //         ? 0.28
+        //         : 0.22), //AppResponsiveness.getBoxHeightPoint25(),
+        child: ListView.builder(
+          ///Reducing memory consumption
+          addAutomaticKeepAlives: false,
+          addRepaintBoundaries: false,
+          scrollDirection: Axis.horizontal,
+          itemCount: list.length,
+          itemBuilder: (context, index) {
+            ProductModel productModel = list[index];
+            return SingleProductItems(
+              productModel: productModel,
+              isCategoryProducts: isCategoryProducts,
+            );
+          },
+        ),
       ),
     );
-
-    // if (isCategoryProducts!)
-    //   return GridView.builder(
-    //     shrinkWrap: true,
-    //     physics: const NeverScrollableScrollPhysics(),
-    //     gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-    //       //crossAxisCount: AppResponsiveness.getGridItemCount(),
-    //       maxCrossAxisExtent: 170,
-    //       // Maximum width of each item
-    //       childAspectRatio: 0.8,
-    //       // Aspect ratio of each item (width / height)
-    //       mainAxisSpacing: 5,
-    //       // Spacing between rows
-    //       crossAxisSpacing: 5, // Spacing between columns
-    //     ),
-    //     itemCount: list.length,
-    //     itemBuilder: (context, index) {
-    //       ProductModel productModel = list[index];
-    //       return SingleProductItems(
-    //         productModel: productModel,
-    //         isCategoryProducts: isCategoryProducts,
-    //       );
-    //     },
-    //   );
-    //
-    // return Padding(
-    //   padding: const EdgeInsets.all(8.0),
-    //   child: SizedBox(
-    //     height: isCategoryProducts ? 170 : 190,
-    //     // height: AppResponsiveness.height *
-    //     //     (!isCategoryProducts!
-    //     //         ? 0.28
-    //     //         : 0.22), //AppResponsiveness.getBoxHeightPoint25(),
-    //     child: ListView.builder(
-    //       ///Reducing memory consumption
-    //       addAutomaticKeepAlives: false,
-    //       addRepaintBoundaries: false,
-    //       scrollDirection: Axis.horizontal,
-    //       itemCount: list.length,
-    //       itemBuilder: (context, index) {
-    //         ProductModel productModel = list[index];
-    //         return SingleProductItems(
-    //           productModel: productModel,
-    //           isCategoryProducts: isCategoryProducts,
-    //         );
-    //       },
-    //     ),
-    //   ),
-    // );
   }
 
   Widget _topCategoriesGrid(List<CategoryModel> list) {
     return Obx(
-      () => controller.isCategoriesLoading.isTrue
+          () => controller.isCategoriesLoading.isTrue
           ? CustomLoading(isItForWidget: true)
           : Padding(
-              padding: const EdgeInsets.fromLTRB(10, 8, 10, 5),
-              child: SizedBox(
-                height: AppResponsiveness.getBoxHeightPoint25(),
-                child: list.isEmpty
-                    ? NoDataFound(text: langKey.noCategoryFound.tr)
-                    : GridView.builder(
-                        physics: BouncingScrollPhysics(),
-                        scrollDirection: Axis.horizontal,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          //maxCrossAxisExtent: 150,
-                          crossAxisCount: 2,
-                          //childAspectRatio: 1,
-                          mainAxisSpacing: 5,
-                          crossAxisSpacing: 5,
-                        ),
-                        itemCount: list.length,
-                        itemBuilder: (context, index) {
-                          CategoryModel model = list[index];
-                          return SingleCategoryItem(categoryModel: model);
-                        },
-                      ),
-              ),
+        padding: const EdgeInsets.fromLTRB(10, 8, 10, 5),
+        child: SizedBox(
+          height: AppResponsiveness.getBoxHeightPoint25(),
+          child: list.isEmpty
+              ? NoDataFound(text: langKey.noCategoryFound.tr)
+              : GridView.builder(
+            physics: BouncingScrollPhysics(),
+            scrollDirection: Axis.horizontal,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              //maxCrossAxisExtent: 150,
+              crossAxisCount: 2,
+              //childAspectRatio: 1,
+              mainAxisSpacing: 5,
+              crossAxisSpacing: 5,
             ),
+            itemCount: list.length,
+            itemBuilder: (context, index) {
+              CategoryModel model = list[index];
+              return SingleCategoryItem(categoryModel: model);
+            },
+          ),
+        ),
+      ),
     );
   }
 
   Widget _topVendors() {
     return Obx(
-      () => Padding(
+          () => Padding(
         padding: const EdgeInsets.fromLTRB(10, 8, 10, 5),
         child: SizedBox(
           height: 120,
           child: topVendorsViewModel.topVendorList.isEmpty
               ? NoDataFound()
               : ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: topVendorsViewModel.topVendorList.length,
-                  itemBuilder: (context, index) {
-                    TopVendorsModel vendorsModel =
-                        topVendorsViewModel.topVendorList[index];
-                    return topVendorsListViewItem(vendorsModel: vendorsModel);
-                  },
-                ),
+            scrollDirection: Axis.horizontal,
+            physics: const BouncingScrollPhysics(),
+            itemCount: topVendorsViewModel.topVendorList.length,
+            itemBuilder: (context, index) {
+              TopVendorsModel vendorsModel =
+              topVendorsViewModel.topVendorList[index];
+              return topVendorsListViewItem(vendorsModel: vendorsModel);
+            },
+          ),
         ),
       ),
     );
@@ -540,90 +546,79 @@ class DashboardView extends GetView<BaseController> {
     );
   }
 
-  Widget banner() {
-    return Obx(
-      () => Visibility(
-        visible: viewModel.bannerVisibility.value,
-        child: FadeTransition(
-          opacity: viewModel.animation5,
-          child: Container(
-            color: Colors.black54,
-            width: MediaQuery.of(Get.context!).size.width,
-            height: MediaQuery.of(Get.context!).size.height,
-            child: Stack(
-              fit: StackFit.loose,
-              children: [
-                SlideTransition(
-                  position: viewModel.animation6,
-                  child: Center(
-                    child: GestureDetector(
-                      onTap: () {
-                        Get.to(() => LiveMatchView());
-                        viewModel.bannerVisibility.value = false;
-                      },
-                      child: SlideTransition(
-                        position: viewModel.animation1,
-                        child: Stack(
-                          children: [
-                            Image.asset(
-                              'assets/images/qpl_banner.png',
-                              width:
-                                  MediaQuery.of(Get.context!).size.width / 1.2,
-                              height:
-                                  MediaQuery.of(Get.context!).size.height / 1.8,
+  Widget banner(){
+    return Obx(() => Visibility(
+      visible: viewModel.bannerVisibility.value,
+      child: FadeTransition(
+        opacity: viewModel.animation5,
+        child: Container(
+          color: Colors.black54,
+          width: MediaQuery.of(Get.context!).size.width,
+          height: MediaQuery.of(Get.context!).size.height,
+          child: Stack(
+            fit: StackFit.loose,
+            children: [
+              SlideTransition(
+                position: viewModel.animation6,
+                child: Center(
+                  child: GestureDetector(
+                    onTap: (){
+                      Get.to(()=> ChatBotView());
+                      viewModel.bannerVisibility.value = false;
+                    },
+                    child: SlideTransition(
+                      position: viewModel.animation1,
+                      child: Stack(
+                        children: [
+                          Image.asset('assets/images/qpl_banner2.png',
+                            width: MediaQuery.of(Get.context!).size.width/1.2,
+                            height: MediaQuery.of(Get.context!).size.height/1.8,),
+                          FadeTransition(
+                            opacity: viewModel.animation7,
+                            child: Container(
+                              color: Colors.white,
+                              width: MediaQuery.of(Get.context!).size.width/1.2,
+                              height: MediaQuery.of(Get.context!).size.height/1.8,
                             ),
-                            FadeTransition(
-                              opacity: viewModel.animation7,
-                              child: Container(
-                                color: Colors.white,
-                                width: MediaQuery.of(Get.context!).size.width /
-                                    1.2,
-                                height:
-                                    MediaQuery.of(Get.context!).size.height /
-                                        1.8,
-                              ),
-                            )
-                          ],
-                        ),
+                          )
+                        ],
                       ),
                     ),
                   ),
                 ),
-                Positioned(
-                  top: 2,
-                  right: -2,
-                  child: IconButton(
-                      onPressed: () {
-                        viewModel.animationController6.forward();
-                        viewModel.animationController6.addListener(() {
-                          viewModel.animation6.value;
-                          if (viewModel.animationController6.value > 0.3) {
-                            viewModel.animationController7.forward();
-                            viewModel.animationController7.addListener(() {
-                              viewModel.animation7.value;
-                            });
-                            viewModel.animationController5.reverse();
-                            viewModel.animationController5.addListener(() {
-                              viewModel.animation5.value;
-                            });
-                          }
-                          if (viewModel.animationController6.isCompleted) {
-                            viewModel.bannerVisibility.value = false;
-                            viewModel.disposeAnimations();
-                          }
-                        });
-                      },
-                      icon: Icon(
-                        Icons.highlight_remove,
-                        size: 30,
-                        color: Colors.white,
-                      )),
-                )
-              ],
-            ),
+              ),
+
+              Positioned(
+                top: 2,
+                right: -2,
+                child: IconButton(
+                    onPressed: (){
+                      viewModel.animationController6.forward();
+                      viewModel.animationController6.addListener(() {
+                        viewModel.animation6.value;
+                        if(viewModel.animationController6.value > 0.3) {
+                          viewModel.animationController7.forward();
+                          viewModel.animationController7.addListener(() {
+                            viewModel.animation7.value;
+                          });
+                          viewModel.animationController5.reverse();
+                          viewModel.animationController5.addListener(() {
+                            viewModel.animation5.value;
+                          });
+                        }
+                        if(viewModel.animationController6.isCompleted){
+                          viewModel.bannerVisibility.value = false;
+                          viewModel.disposeAnimations();
+                        }
+                      });
+                    },
+                    icon: Icon(Icons.highlight_remove, size: 30, color: Colors.white,)),
+              )
+            ],
           ),
         ),
       ),
+    ),
     );
   }
 
@@ -635,18 +630,21 @@ class DashboardView extends GetView<BaseController> {
         position: viewModel.animation1,
         child: GestureDetector(
           onTap: () async {
-            Get.to(() => LiveMatchView());
-            //  Get.toNamed(Routes.chatScreen);
-            // await viewModel.getCurrentLocation();
+           // Get.to(()=> LiveMatchView());
+             Get.toNamed(Routes.chatScreen);
+            await viewModelChat.getCurrentLocation();
           },
           child: Obx(
-            () => AnimatedContainer(
+                () => AnimatedContainer(
               width: viewModel.containerWidth.value,
               height: 50,
               decoration: BoxDecoration(
-                  border: Border.all(width: 1.5, color: Colors.red),
-                  color: Colors.white,
-                  // color: Color(0xff3769CA),
+                  border: Border.all(
+                      width: 1.5,
+                      color: Colors.green
+                  ),
+                // color: Colors.white,
+                  color: Color(0xff3769CA),
                   borderRadius: BorderRadius.all(Radius.circular(28)),
                   boxShadow: [
                     BoxShadow(
@@ -657,7 +655,7 @@ class DashboardView extends GetView<BaseController> {
                   ]),
               duration: Duration.zero,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 13.0),
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: FadeTransition(
                   opacity: viewModel.animation3,
                   child: Padding(
@@ -666,23 +664,21 @@ class DashboardView extends GetView<BaseController> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Image.asset(
-                          'assets/images/qpl_logo.png',
-                          width: 35,
-                          height: 35,
-                        ),
+                       // Image.asset('assets/images/ASIA-LOGO-COLOR.png', width: 50, height: 35,),
                         Text(
-                          'Live',
+                          'Lets Chat',
                           style: TextStyle(
-                              color: Colors.red,
+                              color: Colors.white,
                               fontWeight: FontWeight.w600,
                               fontSize: 14),
                         ),
-                        FadeTransition(
-                          opacity: viewModel.animation4,
-                          child:
-                              Icon(Icons.circle, size: 15, color: Colors.red),
-                        ),
+                        Icon(Icons.chat_outlined,
+                                 size: 15, color: Colors.white)
+                        // FadeTransition(
+                        //   opacity: viewModel.animation4,
+                        //   child: Icon(Icons.circle,
+                        //       size: 15, color: Colors.red),
+                        // ),
                       ],
                     ),
                   ),
@@ -694,4 +690,6 @@ class DashboardView extends GetView<BaseController> {
       ),
     );
   }
+
+
 }
