@@ -32,7 +32,6 @@ class DashboardView extends GetView<BaseController> {
   DashboardView({Key? key}) : super(key: key);
 
   final DashboardViewModel viewModel = Get.put(DashboardViewModel());
-  final ChatViewModel viewModelChat = Get.put(ChatViewModel());
 
   @override
   Widget build(BuildContext context) {
@@ -632,19 +631,13 @@ class DashboardView extends GetView<BaseController> {
           onTap: () async {
            // Get.to(()=> LiveMatchView());
              Get.toNamed(Routes.chatScreen);
-            await viewModelChat.getCurrentLocation();
           },
           child: Obx(
                 () => AnimatedContainer(
               width: viewModel.containerWidth.value,
               height: 50,
               decoration: BoxDecoration(
-                  border: Border.all(
-                      width: 1.5,
-                      color: Colors.green
-                  ),
-                // color: Colors.white,
-                  color: Color(0xff3769CA),
+                 color: Color(0xff3769CA),
                   borderRadius: BorderRadius.all(Radius.circular(28)),
                   boxShadow: [
                     BoxShadow(
@@ -666,14 +659,14 @@ class DashboardView extends GetView<BaseController> {
                       children: [
                        // Image.asset('assets/images/ASIA-LOGO-COLOR.png', width: 50, height: 35,),
                         Text(
-                          'Lets Chat',
+                          'Chat Now',
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w600,
                               fontSize: 14),
                         ),
                         Icon(Icons.chat_outlined,
-                                 size: 15, color: Colors.white)
+                                 size: 20, color: Colors.white)
                         // FadeTransition(
                         //   opacity: viewModel.animation4,
                         //   child: Icon(Icons.circle,
