@@ -10,6 +10,7 @@ import '../../helper/routes.dart';
 import '../../models/user/user_model.dart';
 
 class SettingViewModel extends GetxController {
+
   Rx<UserModel?> userDetails = UserModel().obs;
 
   @override

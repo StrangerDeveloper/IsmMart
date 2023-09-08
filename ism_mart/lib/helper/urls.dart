@@ -5,6 +5,9 @@ class Urls {
   //SignUpViewModel
   static String signUp = "auth/register";
 
+  //Shopify changeView
+  static String changeView = "admin/livestream/changeView/false";
+
   //ForgotPasswordViewModel
   static String forgetPassword = "auth/forgetPassword";
 

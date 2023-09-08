@@ -36,11 +36,13 @@ import '../screens/vendor_signup/vendor_signup2/vendor_signup2_view.dart';
 import '../screens/vendor_signup/vendor_signup3/vendor_signup3_view.dart';
 import '../screens/vendor_signup/vendor_signup4/vendor_signup4_view.dart';
 import '../screens/choose_email/choose_email_view.dart';
+import '../shopify/shopify_web_view.dart';
 
 class Routes {
   static const initRoute = "/";
   static const onBoard = "/onBoard";
   static const bottomNavigation = "/bottomNavigation";
+  static const shopifyWebView = "/shopifyWebView";
   static const addProduct = "/addProduct";
   static const addProductCategoryFields = "/addProductCategoryFields";
   static const allDispute = "/allDispute";
@@ -100,6 +102,11 @@ class Routes {
       name: onBoard,
       page: () => OnBoardView(),
       //binding: BaseBindings(),
+    ),
+    GetPage(
+      name: shopifyWebView,
+      page: () =>  ShopifyWebView(),
+      binding: BaseBindings(),
     ),
     GetPage(
       name: bottomNavigation,

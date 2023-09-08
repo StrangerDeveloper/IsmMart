@@ -12,6 +12,8 @@ import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/screens/setting/settings_viewmodel.dart';
 import 'package:ism_mart/widgets/custom_sliver_appbar.dart';
 
+import '../dashboard/dashboard_viewmodel.dart';
+
 class SettingsView extends StatelessWidget {
   SettingsView({Key? key}) : super(key: key);
   final SettingViewModel viewModel = Get.put(SettingViewModel());
@@ -38,14 +40,21 @@ class SettingsView extends StatelessWidget {
                 ),
               ),
             ),
+
+
           ];
         },
-        body: ListView(
-          physics: const NeverScrollableScrollPhysics(),
+        body: Stack(
           children: [
-            _accountSetup(),
-            SizedBox(height: 15),
-            generalSettings(),
+            ListView(
+              physics: const NeverScrollableScrollPhysics(),
+              children: [
+                _accountSetup(),
+                SizedBox(height: 15),
+                generalSettings(),
+
+              ],
+            ),
           ],
         ),
       ),
@@ -592,4 +601,71 @@ class SettingsView extends StatelessWidget {
       ),
     );
   }
+
+  //
+  // Widget chatWidget() {
+  //   return Positioned(
+  //     bottom: 12,
+  //     right: 10,
+  //     child: SlideTransition(
+  //       position: viewModel.animation1,
+  //       child: GestureDetector(
+  //         onTap: () async {
+  //           // Get.to(()=> LiveMatchView());
+  //           Get.toNamed(Routes.chatScreen);
+  //         },
+  //         child: Obx(
+  //               () => AnimatedContainer(
+  //             width: viewModel.containerWidth.value,
+  //             height: 50,
+  //             decoration: BoxDecoration(
+  //                 color: Color(0xff3769CA),
+  //                 borderRadius: BorderRadius.all(Radius.circular(28)),
+  //                 boxShadow: [
+  //                   BoxShadow(
+  //                       color: Colors.grey.withOpacity(0.2),
+  //                       offset: Offset(0, 3),
+  //                       blurRadius: 1,
+  //                       spreadRadius: 1)
+  //                 ]),
+  //             duration: Duration.zero,
+  //             child: Padding(
+  //               padding: const EdgeInsets.symmetric(horizontal: 10.0),
+  //               child: FadeTransition(
+  //                 opacity: viewModel.animation3,
+  //                 child: Padding(
+  //                   padding: EdgeInsets.symmetric(horizontal: 10.0),
+  //                   child: Row(
+  //                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                     crossAxisAlignment: CrossAxisAlignment.center,
+  //                     children: [
+  //                       // Image.asset('assets/images/ASIA-LOGO-COLOR.png', width: 50, height: 35,),
+  //                       Text(
+  //                         'Chat Now',
+  //                         style: TextStyle(
+  //                             color: Colors.white,
+  //                             fontWeight: FontWeight.w600,
+  //                             fontSize: 14),
+  //                       ),
+  //                       Icon(Icons.chat_outlined,
+  //                           size: 20, color: Colors.white)
+  //                       // FadeTransition(
+  //                       //   opacity: viewModel.animation4,
+  //                       //   child: Icon(Icons.circle,
+  //                       //       size: 15, color: Colors.red),
+  //                       // ),
+  //                     ],
+  //                   ),
+  //                 ),
+  //               ),
+  //             ),
+  //           ),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
+  //
+
+
 }
