@@ -33,4 +33,6 @@ class DisputeListViewModel extends GetxController {
       GlobalVariable.showLoader.value = false;
     });
   }
+
+
 }

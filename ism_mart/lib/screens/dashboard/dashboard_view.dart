@@ -70,7 +70,8 @@ class DashboardView extends GetView<BaseController> {
             ],
           ),
 
-          chatWidget(),
+          liveWidget(),
+          // chatWidget(),
 
           NoInternetView(
             onPressed: () {
@@ -78,7 +79,7 @@ class DashboardView extends GetView<BaseController> {
               GlobalVariable.btnPress(true);
             },
           ),
-         // banner(),
+          banner(),
         ],
       ),
     );
@@ -547,7 +548,8 @@ class DashboardView extends GetView<BaseController> {
 
   Widget banner(){
     return Obx(() => Visibility(
-      visible: viewModel.bannerVisibility.value,
+      visible:
+      viewModel.bannerVisibility.value,
       child: FadeTransition(
         opacity: viewModel.animation5,
         child: Container(
@@ -562,14 +564,14 @@ class DashboardView extends GetView<BaseController> {
                 child: Center(
                   child: GestureDetector(
                     onTap: (){
-                      Get.to(()=> ChatBotView());
+                      Get.to(() => LiveMatchView());
                       viewModel.bannerVisibility.value = false;
                     },
                     child: SlideTransition(
                       position: viewModel.animation1,
                       child: Stack(
                         children: [
-                          Image.asset('assets/images/qpl_banner2.png',
+                          Image.asset('assets/images/dashboard_banner.jpg',
                             width: MediaQuery.of(Get.context!).size.width/1.2,
                             height: MediaQuery.of(Get.context!).size.height/1.8,),
                           FadeTransition(
@@ -618,6 +620,75 @@ class DashboardView extends GetView<BaseController> {
         ),
       ),
     ),
+    );
+  }
+
+  //live match button
+  Widget liveWidget() {
+    return Positioned(
+      bottom: 12,
+      right: 10,
+      child: SlideTransition(
+        position: viewModel.animation1,
+        child: GestureDetector(
+          onTap: () async {
+            Get.to(() => LiveMatchView());
+            //  Get.toNamed(Routes.chatScreen);
+            // await viewModel.getCurrentLocation();
+          },
+          child: Obx(
+                () => AnimatedContainer(
+              width: viewModel.containerWidth.value,
+              height: 50,
+              decoration: BoxDecoration(
+                  border: Border.all(width: 1.5, color: Colors.red),
+                  color: Colors.white,
+                  // color: Color(0xff3769CA),
+                  borderRadius: BorderRadius.all(Radius.circular(28)),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.grey.withOpacity(0.2),
+                        offset: Offset(0, 3),
+                        blurRadius: 1,
+                        spreadRadius: 1)
+                  ]),
+              duration: Duration.zero,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 13.0),
+                child: FadeTransition(
+                  opacity: viewModel.animation3,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          'assets/images/live_icon.png',
+                          width: 35,
+                          height: 50,
+                        ),
+                        Text(
+                          'Live',
+                          style: TextStyle(
+                              color: Colors.red,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 14),
+                        ),
+                        FadeTransition(
+                          opacity: viewModel.animation4,
+                          child:
+                          Icon(Icons.circle, size: 15, color: Colors.red),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 
@@ -683,6 +754,8 @@ class DashboardView extends GetView<BaseController> {
       ),
     );
   }
+
+
 
 
 }
