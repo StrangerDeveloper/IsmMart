@@ -30,4 +30,14 @@ class ShopifyWebViewModel extends GetxController {
 
     super.onInit();
   }
+
+  //This function will get executed when back button is pressed in webview and it will check if webview can go back or not
+  Future<bool> onWillPop() async {
+    if (await controller.canGoBack()) {
+      controller.goBack();
+      return false;
+    } else {
+      return true;
+    }
+  }
 }

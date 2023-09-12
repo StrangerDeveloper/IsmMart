@@ -35,16 +35,18 @@ class SplashViewModel extends GetxController
   }
 
   //Get screen view check Shopify or Custom
-  RxString isChangeView  = "".obs;
-  getData() async{
+  RxString isChangeView = "".obs;
+  getData() async {
     GlobalVariable.showLoader.value = true;
-  await  ApiBaseHelper().getMethod(url: Urls.changeView, withAuthorization: true).then((parsedJson) {
+    await ApiBaseHelper()
+        .getMethod(url: Urls.changeView, withAuthorization: true)
+        .then((parsedJson) {
       GlobalVariable.showLoader.value = false;
       print("shopify view ---- $parsedJson");
       if (parsedJson['success'] == true) {
-        isChangeView.value=  parsedJson['data']['changeview'];
-        print("shopify view ---- ${  isChangeView.value}");
-       // allDisputeList.addAll(data.map((e) => AllDisputeModel.fromJson(e)));
+        isChangeView.value = parsedJson['data']['changeview'];
+        print("shopify view ---- ${isChangeView.value}");
+        // allDisputeList.addAll(data.map((e) => AllDisputeModel.fromJson(e)));
       }
     }).catchError((e) {
       print(e);
@@ -52,19 +54,18 @@ class SplashViewModel extends GetxController
     });
   }
 
-
-
   loadScreen() {
-    Future.delayed(const Duration(seconds: 3), () { 
-      bool onboardingCompleted = GetStorage().read('onboarding_completed')??false;
-      if (onboardingCompleted ) {
-        if( isChangeView.value =="true"){
+    Future.delayed(const Duration(seconds: 3), () {
+      bool onboardingCompleted =
+          GetStorage().read('onboarding_completed') ?? false;
+      if (onboardingCompleted) {
+        if (isChangeView.value != "true") {
           Get.offNamed(Routes.shopifyWebView);
-        }else{
-
+        } else {
           Get.offNamed(Routes.bottomNavigation);
         }
       } else
-      Get.offNamed(Routes.onBoard);});
+        Get.offNamed(Routes.onBoard);
+    });
   }
 }

@@ -10,8 +10,11 @@ class ShopifyWebView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        body: WebViewWidget(controller: viewModel.controller),
+      child: WillPopScope(
+        onWillPop: viewModel.onWillPop, //callback when back button is pressed
+        child: Scaffold(
+          body: WebViewWidget(controller: viewModel.controller),
+        ),
       ),
     );
   }
