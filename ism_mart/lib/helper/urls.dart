@@ -6,7 +6,7 @@ class Urls {
   static String signUp = "auth/register";
 
   //Shopify changeView
-  static String changeView = "admin/livestream/changeView/false";
+  static String changeView = "admin/getView";
 
   //ForgotPasswordViewModel
   static String forgetPassword = "auth/forgetPassword";
@@ -42,7 +42,7 @@ class Urls {
   //ProductQuestionsViewModel
   static String getQuestionByProductId = "product/questions/";
   static String getVendorQuestions = "product/questions/vendorQuestions";
-static String liveMatch ="admin/livestream";
+  static String liveMatch = "admin/livestream";
   //BuyerProfileViewModel
   static String deleteAccount = "user/deactivate";
   static String getAccountData = "user/profile";

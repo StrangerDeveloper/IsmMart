@@ -35,16 +35,16 @@ class SplashViewModel extends GetxController
   }
 
   //Get screen view check Shopify or Custom
-  RxString isChangeView = "".obs;
+  RxBool isChangeView = false.obs;
   getData() async {
     GlobalVariable.showLoader.value = true;
     await ApiBaseHelper()
-        .getMethod(url: Urls.changeView, withAuthorization: true)
+        .getMethod(url: "admin/getView", withAuthorization: true)
         .then((parsedJson) {
       GlobalVariable.showLoader.value = false;
       print("shopify view ---- $parsedJson");
       if (parsedJson['success'] == true) {
-        isChangeView.value = parsedJson['data']['changeview'];
+        isChangeView.value = parsedJson['data']['view'];
         print("shopify view ---- ${isChangeView.value}");
         // allDisputeList.addAll(data.map((e) => AllDisputeModel.fromJson(e)));
       }
@@ -59,7 +59,7 @@ class SplashViewModel extends GetxController
       bool onboardingCompleted =
           GetStorage().read('onboarding_completed') ?? false;
       if (onboardingCompleted) {
-        if (isChangeView.value == "true") {
+        if (isChangeView.value == true) {
           Get.offNamed(Routes.shopifyWebView);
         } else {
           Get.offNamed(Routes.bottomNavigation);
