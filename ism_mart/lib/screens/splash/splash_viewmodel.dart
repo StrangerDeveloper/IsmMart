@@ -59,7 +59,7 @@ class SplashViewModel extends GetxController
       bool onboardingCompleted =
           GetStorage().read('onboarding_completed') ?? false;
       if (onboardingCompleted) {
-        if (isChangeView.value == true) {
+        if (isChangeView.value == false) {
           Get.offNamed(Routes.shopifyWebView);
         } else {
           Get.offNamed(Routes.bottomNavigation);
