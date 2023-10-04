@@ -39,6 +39,6 @@ class OnBoardViewModel extends GetxController {
   }
 
   void goToDashboard() {
-    Get.offNamed(Routes.bottomNavigation);
+    Get.offNamed(Routes.shopifyWebView);
   }
 }

@@ -13,7 +13,7 @@ class SplashViewModel extends GetxController
 
   @override
   void onInit() {
-    getData();
+    // getData();
     animationController = AnimationController(
       duration: const Duration(milliseconds: 7000),
       vsync: this,
@@ -35,35 +35,36 @@ class SplashViewModel extends GetxController
   }
 
   //Get screen view check Shopify or Custom
-  RxBool isChangeView = false.obs;
-  getData() async {
-    GlobalVariable.showLoader.value = true;
-    await ApiBaseHelper()
-        .getMethod(url: "admin/getView", withAuthorization: true)
-        .then((parsedJson) {
-      GlobalVariable.showLoader.value = false;
-      print("shopify view ---- $parsedJson");
-      if (parsedJson['success'] == true) {
-        isChangeView.value = parsedJson['data']['view'];
-        print("shopify view ---- ${isChangeView.value}");
-        // allDisputeList.addAll(data.map((e) => AllDisputeModel.fromJson(e)));
-      }
-    }).catchError((e) {
-      print(e);
-      GlobalVariable.showLoader.value = false;
-    });
-  }
+  //RxBool isChangeView = false.obs;
+  // getData() async {
+  //   GlobalVariable.showLoader.value = true;
+  //   await ApiBaseHelper()
+  //       .getMethod(url: "admin/getView", withAuthorization: true)
+  //       .then((parsedJson) {
+  //     GlobalVariable.showLoader.value = false;
+  //     print("shopify view ---- $parsedJson");
+  //     if (parsedJson['success'] == true) {
+  //       isChangeView.value = parsedJson['data']['view'];
+  //       print("shopify view ---- ${isChangeView.value}");
+  //       // allDisputeList.addAll(data.map((e) => AllDisputeModel.fromJson(e)));
+  //     }
+  //   }).catchError((e) {
+  //     print(e);
+  //     GlobalVariable.showLoader.value = false;
+  //   });
+  // }
 
   loadScreen() {
     Future.delayed(const Duration(seconds: 3), () {
       bool onboardingCompleted =
           GetStorage().read('onboarding_completed') ?? false;
       if (onboardingCompleted) {
-        if (isChangeView.value == false) {
-          Get.offNamed(Routes.shopifyWebView);
-        } else {
-          Get.offNamed(Routes.bottomNavigation);
-        }
+        Get.offNamed(Routes.shopifyWebView);
+        // if (isChangeView.value == false) {
+        //   Get.offNamed(Routes.shopifyWebView);
+        // } else {
+        //   Get.offNamed(Routes.bottomNavigation);
+        // }
       } else
         Get.offNamed(Routes.onBoard);
     });
