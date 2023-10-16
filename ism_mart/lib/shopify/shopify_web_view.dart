@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/shopify/shopify_web_viewmodel.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 
 class ShopifyWebView extends StatelessWidget {
   ShopifyWebView({super.key});
@@ -80,6 +80,12 @@ class ShopifyWebView extends StatelessWidget {
           body: Stack(
             children: [
               WebViewWidget(controller: viewModel.controller),
+              Obx(() => viewModel.loadingPercentage.value < 100
+                  ? LinearProgressIndicator(
+                      value: viewModel.loadingPercentage.value / 100.0,
+                      //color: Colors.black54,
+                    )
+                  : Container()),
             ],
           ),
         ),

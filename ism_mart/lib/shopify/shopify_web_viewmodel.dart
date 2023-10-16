@@ -1,26 +1,29 @@
-import 'dart:ui';
-
-import 'package:flutter/cupertino.dart';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
+import 'package:webview_flutter_android/webview_flutter_android.dart';
+
 
 class ShopifyWebViewModel extends GetxController {
   RxBool backBtn = false.obs;
   RxBool appExit = false.obs;
-  var controller;
+ late WebViewController controller;
+var loadingPercentage = 0.obs;
   @override
   void onInit() {
-    controller = WebViewController()
+    controller = WebViewController(onPermissionRequest: )
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(const Color(0x00000000))
       ..setNavigationDelegate(
         NavigationDelegate(
           onProgress: (int progress) {
             // Update loading bar.
+            loadingPercentage.value = progress;
           },
           onPageStarted: (String url) {
+            loadingPercentage.value = 0;
             print("home---------- $url");
 
             if (url == "https://ismmart.com/") {
@@ -29,7 +32,9 @@ class ShopifyWebViewModel extends GetxController {
               backBtn.value = false;
             }
           },
-          onPageFinished: (String url) {},
+          onPageFinished: (String url) {
+            loadingPercentage.value = 100;
+          },
           onWebResourceError: (WebResourceError error) {},
           onNavigationRequest: (NavigationRequest request) {
             // if (request.url.startsWith('https://www.youtube.com/')) {
@@ -42,6 +47,37 @@ class ShopifyWebViewModel extends GetxController {
       ..loadRequest(Uri.parse('https://ismmart.com/'));
 
     super.onInit();
+  }
+
+  /// handle attachments
+  initFilePicker() async {
+    if (Platform.isAndroid) {
+      final androidController = (controller.platform as AndroidWebViewController);
+      await androidController.setOnShowFileSelector(_androidFilePicker);
+    }
+  }
+
+  Future<List<String>> _androidFilePicker(
+      FileSelectorParams params) async {
+    try {
+      if (params.mode == FileSelectorMode.openMultiple) {
+        final attachments =
+        await FilePicker.platform.pickFiles(allowMultiple: true);
+        if (attachments == null) return [];
+
+        return attachments.files
+            .where((element) => element.path != null)
+            .map((e) => File(e.path!).uri.toString())
+            .toList();
+      } else {
+        final attachment = await FilePicker.platform.pickFiles();
+        if (attachment == null) return [];
+        File file = File(attachment.files.single.path!);
+        return [file.uri.toString()];
+      }
+    } catch (e) {
+      return [];
+    }
   }
 
   //This function will get executed when back button is pressed in webview and it will check if webview can go back or not

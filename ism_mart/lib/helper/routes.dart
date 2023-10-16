@@ -106,7 +106,7 @@ class Routes {
     GetPage(
       name: shopifyWebView,
       page: () =>  ShopifyWebView(),
-      binding: BaseBindings(),
+      //binding: BaseBindings(),
     ),
     GetPage(
       name: bottomNavigation,
