@@ -12,8 +12,6 @@ import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/screens/setting/settings_viewmodel.dart';
 import 'package:ism_mart/widgets/custom_sliver_appbar.dart';
 
-import '../dashboard/dashboard_viewmodel.dart';
-
 class SettingsView extends StatelessWidget {
   SettingsView({Key? key}) : super(key: key);
   final SettingViewModel viewModel = Get.put(SettingViewModel());
@@ -40,8 +38,6 @@ class SettingsView extends StatelessWidget {
                 ),
               ),
             ),
-
-
           ];
         },
         body: Stack(
@@ -52,7 +48,6 @@ class SettingsView extends StatelessWidget {
                 _accountSetup(),
                 SizedBox(height: 15),
                 generalSettings(),
-
               ],
             ),
           ],
@@ -666,6 +661,4 @@ class SettingsView extends StatelessWidget {
   //   );
   // }
   //
-
-
 }

@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-import '../../helper/api_base_helper.dart';
-import '../../helper/global_variables.dart';
 import '../../helper/routes.dart';
-import '../../helper/urls.dart';
 
 class SplashViewModel extends GetxController
     with GetSingleTickerProviderStateMixin {

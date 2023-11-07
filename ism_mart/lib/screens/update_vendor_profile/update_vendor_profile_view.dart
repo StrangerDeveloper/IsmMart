@@ -637,50 +637,50 @@ class UpdateVendorProfileView extends StatelessWidget {
     );
   }
 
-  Future<void> _showMyDialog(context) async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title:  Text('Sensitive Information', style: GoogleFonts.dmSans(
-            fontSize: 16,
-            fontWeight: FontWeight.w700,
-            color: Colors.red,
-          ),),
-          content:  SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text('You can email us for a change of your CNIC number, CNIC Photos and any other sensitive information.',
-                  style:newFontStyle0.copyWith(
-                    color: newColorLightGrey2,
-                  ),),
-                SizedBox(height: 10,),
-                Text('support@ismmart.com', style: GoogleFonts.dmSans(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w700,
-                  color: newColorDarkBlack2,
-                ),),
-              ],
+  // Future<void> _showMyDialog(context) async {
+  //   return showDialog<void>(
+  //     context: context,
+  //     barrierDismissible: false, // user must tap button!
+  //     builder: (BuildContext context) {
+  //       return AlertDialog(
+  //         title:  Text('Sensitive Information', style: GoogleFonts.dmSans(
+  //           fontSize: 16,
+  //           fontWeight: FontWeight.w700,
+  //           color: Colors.red,
+  //         ),),
+  //         content:  SingleChildScrollView(
+  //           child: ListBody(
+  //             children: <Widget>[
+  //               Text('You can email us for a change of your CNIC number, CNIC Photos and any other sensitive information.',
+  //                 style:newFontStyle0.copyWith(
+  //                   color: newColorLightGrey2,
+  //                 ),),
+  //               SizedBox(height: 10,),
+  //               Text('support@ismmart.com', style: GoogleFonts.dmSans(
+  //                 fontSize: 14,
+  //                 fontWeight: FontWeight.w700,
+  //                 color: newColorDarkBlack2,
+  //               ),),
+  //             ],
 
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child:  Text("ok",style: GoogleFonts.dmSans(
-                fontSize: 14,
-                fontWeight: FontWeight.w700,
-                color: Colors.green,
-              ) ),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
+  //           ),
+  //         ),
+  //         actions: <Widget>[
+  //           TextButton(
+  //             child:  Text("ok",style: GoogleFonts.dmSans(
+  //               fontSize: 14,
+  //               fontWeight: FontWeight.w700,
+  //               color: Colors.green,
+  //             ) ),
+  //             onPressed: () {
+  //               Navigator.of(context).pop();
+  //             },
+  //           ),
+  //         ],
+  //       );
+  //     },
+  //   );
+  // }
 
 
   //dilaog box

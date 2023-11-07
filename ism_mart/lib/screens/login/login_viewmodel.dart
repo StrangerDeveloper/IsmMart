@@ -74,14 +74,13 @@ class LogInViewModel extends GetxController {
     }
   }
 
- static void getCurrentUser({Map<String, dynamic>? json}) async {
+  static void getCurrentUser({Map<String, dynamic>? json}) async {
     await ApiBaseHelper()
         .getMethod(url: 'user/profile', withAuthorization: true)
         .then((value) async {
       if (value['success'] == true) {
         UserResponse userResponse = UserResponse.fromResponse(value);
         userResponse.userModel!.token = json?['data']['token'];
-
 
         GlobalVariable.userModel = userResponse.userModel;
         authController.setUserModel(userResponse.userModel);
@@ -139,13 +138,13 @@ class LogInViewModel extends GetxController {
     );
     var _auth =
         await FirebaseAuth.instance.signInWithCredential(oauthCredential);
-    var email = _auth.user!.email.toString() ?? "";
-    var name = _auth.user!.photoURL.toString() ?? "";
-    var uid = _auth.user!.uid ?? "";
-    var mobileNo = _auth.user!.phoneNumber.toString() ?? "";
-    var fullname = _auth.user!.displayName.toString() ?? "";
+    //var email = _auth.user!.email.toString();
+    //var name = _auth.user!.photoURL.toString();
+    var uid = _auth.user!.uid;
+    // var mobileNo = _auth.user!.phoneNumber.toString();
+    // var fullname = _auth.user!.displayName.toString();
 
-    print("hhhhhh email ----- $email $name $uid $mobileNo $fullname");
+    //print("hhhhhh email ----- $email $name $uid $mobileNo $fullname");
     if (uid != "") {
       applelLoader.value = false;
     }

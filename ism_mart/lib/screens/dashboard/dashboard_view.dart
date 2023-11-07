@@ -8,7 +8,6 @@ import 'package:ism_mart/exports/exports_model.dart';
 import 'package:ism_mart/exports/exports_utils.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:ism_mart/helper/no_internet_view.dart';
-import 'package:ism_mart/screens/chatbot/chatbot_view.dart';
 import 'package:ism_mart/screens/dashboard/dashboard_viewmodel.dart';
 import 'package:ism_mart/screens/top_vendors/top_vendors_model.dart';
 
@@ -23,7 +22,6 @@ import '../../widgets/single_category_item.dart';
 import '../../widgets/single_product_grid_item.dart';
 import '../../widgets/sticky_label_with_view_more.dart';
 import '../../widgets/sticky_labels.dart';
-import '../chatbot/chatbot_viewmodel.dart';
 import '../live_match/live_match_view.dart';
 import '../product_detail/product_detail_view.dart';
 import '../search_details/search_details_view.dart';

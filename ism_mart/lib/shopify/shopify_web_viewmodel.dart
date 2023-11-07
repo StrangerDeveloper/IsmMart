@@ -93,7 +93,6 @@ class ShopifyWebViewModel extends GetxController {
     if (await controller.canGoBack()) {
       controller.goBack();
       return true;
-      ;
     } else {
       return false;
     }
@@ -102,7 +101,7 @@ class ShopifyWebViewModel extends GetxController {
   Future<bool> onBackPressed(BuildContext context) async {
     if (await controller.canGoBack()) {
       controller.goBack();
-      final value = await showDialog<bool>(
+      await showDialog<bool>(
         context: context,
         builder: (context) {
           return AlertDialog(

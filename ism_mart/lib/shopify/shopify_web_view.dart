@@ -18,7 +18,7 @@ class ShopifyWebView extends StatelessWidget {
 
             return false;
           } else if (viewModel.backBtn.value == true) {
-            final value = await showDialog<bool>(
+            await showDialog<bool>(
               context: context,
               builder: (context) {
                 return AlertDialog(
