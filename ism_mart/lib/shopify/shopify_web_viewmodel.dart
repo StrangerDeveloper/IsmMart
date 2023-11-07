@@ -8,6 +8,7 @@ import 'package:webview_flutter_android/webview_flutter_android.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 
 import '../helper/permission_handler_services.dart';
+import 'notifications/notification_helper.dart';
 
 class ShopifyWebViewModel extends GetxController {
   RxBool backBtn = false.obs;
@@ -19,6 +20,8 @@ class ShopifyWebViewModel extends GetxController {
 
   @override
   void onInit() {
+    NotificationHelper().checkIfNotifAllowed();
+
     analytics.setAnalyticsCollectionEnabled(true);
     controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)

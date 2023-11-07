@@ -11,6 +11,7 @@ import '../widgets/custom_button.dart';
 import '../widgets/custom_text.dart';
 
 const kLimeGreenColor = Color(0xFFACC254);
+const kPurpleColor = Color(0xFF9D50DD);
 const kPrimaryColor = kDarkColor;
 const kAppBarColor = kWhiteColor;
 const kLightGreenColor = Color(0xFFDCEDC2);
