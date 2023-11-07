@@ -12,7 +12,20 @@
           "package_name": "com.ismmartgroup.ism_mart"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "702705477596-6nrnhpfs0qpl1ji48de6nq2njt7vb6h9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ismmartgroup.ism_mart",
+            "certificate_hash": "22f5254cf068449f29caaa52f0a8488203143e33"
+          }
+        },
+        {
+          "client_id": "702705477596-s8g6us8t271br6l8ndcs12p1unqseifc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCkHmPWpH2qDCdNFGAF2SNxV4s9LBexffc"
@@ -21,6 +34,10 @@
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
+            {
+              "client_id": "702705477596-s8g6us8t271br6l8ndcs12p1unqseifc.apps.googleusercontent.com",
+              "client_type": 3
+            },
             {
               "client_id": "702705477596-ltta753tha71njtdfee9p1tgs3orc5pt.apps.googleusercontent.com",
               "client_type": 2,

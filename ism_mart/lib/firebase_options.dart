@@ -63,6 +63,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '702705477596',
     projectId: 'ismmart-659b8',
     storageBucket: 'ismmart-659b8.appspot.com',
+    androidClientId: '702705477596-6nrnhpfs0qpl1ji48de6nq2njt7vb6h9.apps.googleusercontent.com',
     iosClientId: '702705477596-ltta753tha71njtdfee9p1tgs3orc5pt.apps.googleusercontent.com',
     iosBundleId: 'com.ismmartgroup.ismMart',
   );
