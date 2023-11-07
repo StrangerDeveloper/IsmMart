@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:webview_flutter_android/webview_flutter_android.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 
 import '../helper/permission_handler_services.dart';
 
@@ -14,8 +15,11 @@ class ShopifyWebViewModel extends GetxController {
   late WebViewController controller;
   var loadingPercentage = 0.obs;
 
+  final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+
   @override
   void onInit() {
+    analytics.setAnalyticsCollectionEnabled(true);
     controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(const Color(0x00000000))
@@ -25,10 +29,14 @@ class ShopifyWebViewModel extends GetxController {
             // Update loading bar.
             loadingPercentage.value = progress;
           },
-          onPageStarted: (String url) {
-            loadingPercentage.value = 0;
-            print("home---------- $url");
+          onPageStarted: (String url) async {
+            //custom events for analytics of page visits
+            final uri = Uri.parse(url);
+            print(uri.path);
+            await analytics.logEvent(
+                name: 'pages_tracked', parameters: {"page_name": uri.path});
 
+            loadingPercentage.value = 0;
             if (url == "https://ismmart.com/") {
               backBtn.value = true;
             } else {
