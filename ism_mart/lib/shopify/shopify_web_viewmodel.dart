@@ -1,19 +1,22 @@
 import 'dart:io';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:ism_mart/helper/languages/translations_key.dart' as langKey;
 import 'package:webview_flutter_android/webview_flutter_android.dart';
 
+import '../helper/permission_handler_services.dart';
 
 class ShopifyWebViewModel extends GetxController {
   RxBool backBtn = false.obs;
   RxBool appExit = false.obs;
- late WebViewController controller;
-var loadingPercentage = 0.obs;
+  late WebViewController controller;
+  var loadingPercentage = 0.obs;
+
   @override
   void onInit() {
-    controller = WebViewController(onPermissionRequest: )
+    controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(const Color(0x00000000))
       ..setNavigationDelegate(
@@ -45,6 +48,7 @@ var loadingPercentage = 0.obs;
         ),
       )
       ..loadRequest(Uri.parse('https://ismmart.com/'));
+    initFilePicker();
 
     super.onInit();
   }
@@ -52,17 +56,21 @@ var loadingPercentage = 0.obs;
   /// handle attachments
   initFilePicker() async {
     if (Platform.isAndroid) {
-      final androidController = (controller.platform as AndroidWebViewController);
+      final androidController =
+          (controller.platform as AndroidWebViewController);
       await androidController.setOnShowFileSelector(_androidFilePicker);
     }
+
+// You can can also directly ask the permission about its status.
   }
 
-  Future<List<String>> _androidFilePicker(
-      FileSelectorParams params) async {
+  Future<List<String>> _androidFilePicker(FileSelectorParams params) async {
+    await PermissionHandlerPermissionService()
+        .handleCameraPermission(Get.context!);
     try {
       if (params.mode == FileSelectorMode.openMultiple) {
         final attachments =
-        await FilePicker.platform.pickFiles(allowMultiple: true);
+            await FilePicker.platform.pickFiles(allowMultiple: true);
         if (attachments == null) return [];
 
         return attachments.files

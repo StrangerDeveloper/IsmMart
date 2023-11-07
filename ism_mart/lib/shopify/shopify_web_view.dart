@@ -79,7 +79,9 @@ class ShopifyWebView extends StatelessWidget {
         child: Scaffold(
           body: Stack(
             children: [
-              WebViewWidget(controller: viewModel.controller),
+              WebViewWidget(
+                controller: viewModel.controller,
+              ),
               Obx(() => viewModel.loadingPercentage.value < 100
                   ? LinearProgressIndicator(
                       value: viewModel.loadingPercentage.value / 100.0,

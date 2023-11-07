@@ -4,6 +4,10 @@ import 'package:ism_mart/exports/exports_utils.dart';
 
 class ThemeHelper {
   static ThemeData lightTheme = ThemeData(
+      pageTransitionsTheme: PageTransitionsTheme(builders: {
+        TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+        TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+      }),
       primarySwatch: Colors.green,
       brightness: Brightness.light,
       appBarTheme: AppBarTheme(

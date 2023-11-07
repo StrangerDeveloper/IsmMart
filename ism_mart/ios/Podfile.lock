@@ -1,4 +1,38 @@
 PODS:
+  - DKImagePickerController/Core (4.3.4):
+    - DKImagePickerController/ImageDataManager
+    - DKImagePickerController/Resource
+  - DKImagePickerController/ImageDataManager (4.3.4)
+  - DKImagePickerController/PhotoGallery (4.3.4):
+    - DKImagePickerController/Core
+    - DKPhotoGallery
+  - DKImagePickerController/Resource (4.3.4)
+  - DKPhotoGallery (0.0.17):
+    - DKPhotoGallery/Core (= 0.0.17)
+    - DKPhotoGallery/Model (= 0.0.17)
+    - DKPhotoGallery/Preview (= 0.0.17)
+    - DKPhotoGallery/Resource (= 0.0.17)
+    - SDWebImage
+    - SwiftyGif
+  - DKPhotoGallery/Core (0.0.17):
+    - DKPhotoGallery/Model
+    - DKPhotoGallery/Preview
+    - SDWebImage
+    - SwiftyGif
+  - DKPhotoGallery/Model (0.0.17):
+    - SDWebImage
+    - SwiftyGif
+  - DKPhotoGallery/Preview (0.0.17):
+    - DKPhotoGallery/Model
+    - DKPhotoGallery/Resource
+    - SDWebImage
+    - SwiftyGif
+  - DKPhotoGallery/Resource (0.0.17):
+    - SDWebImage
+    - SwiftyGif
+  - file_picker (0.0.1):
+    - DKImagePickerController/PhotoGallery
+    - Flutter
   - Firebase/Auth (10.15.0):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 10.15.0)
@@ -86,10 +120,10 @@ PODS:
     - Flutter
   - PromisesObjC (2.3.1)
   - RecaptchaInterop (100.0.0)
-  - SDWebImage (5.18.2):
-    - SDWebImage/Core (= 5.18.2)
-  - SDWebImage/Core (5.18.2)
-  - SDWebImageWebPCoder (0.13.0):
+  - SDWebImage (5.18.3):
+    - SDWebImage/Core (= 5.18.3)
+  - SDWebImage/Core (5.18.3)
+  - SDWebImageWebPCoder (0.14.0):
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.17)
   - sign_in_with_apple (0.0.1):
@@ -97,12 +131,14 @@ PODS:
   - sqflite (0.0.3):
     - Flutter
     - FMDB (>= 2.7.5)
+  - SwiftyGif (5.4.4)
   - url_launcher_ios (0.0.1):
     - Flutter
   - webview_flutter_wkwebview (0.0.1):
     - Flutter
 
 DEPENDENCIES:
+  - file_picker (from `.symlinks/plugins/file_picker/ios`)
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - Flutter (from `Flutter`)
@@ -120,6 +156,8 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - DKImagePickerController
+    - DKPhotoGallery
     - Firebase
     - FirebaseAppCheckInterop
     - FirebaseAuth
@@ -135,8 +173,11 @@ SPEC REPOS:
     - RecaptchaInterop
     - SDWebImage
     - SDWebImageWebPCoder
+    - SwiftyGif
 
 EXTERNAL SOURCES:
+  file_picker:
+    :path: ".symlinks/plugins/file_picker/ios"
   firebase_auth:
     :path: ".symlinks/plugins/firebase_auth/ios"
   firebase_core:
@@ -167,6 +208,9 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/webview_flutter_wkwebview/ios"
 
 SPEC CHECKSUMS:
+  DKImagePickerController: b512c28220a2b8ac7419f21c491fc8534b7601ac
+  DKPhotoGallery: fdfad5125a9fdda9cc57df834d49df790dbb4179
+  file_picker: 15fd9539e4eb735dc54bae8c0534a7a9511a03de
   Firebase: 66043bd4579e5b73811f96829c694c7af8d67435
   firebase_auth: b62e99e6ece589afe88ebe8919eb9563b52c384c
   firebase_core: 28e84c2a4fcf6a50ef83f47b145ded8c1fa331e4
@@ -190,10 +234,11 @@ SPEC CHECKSUMS:
   permission_handler_apple: e76247795d700c14ea09e3a2d8855d41ee80a2e6
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
-  SDWebImage: c0de394d7cf7f9838aed1fd6bb6037654a4572e4
-  SDWebImageWebPCoder: af09429398d99d524cae2fe00f6f0f6e491ed102
+  SDWebImage: 96e0c18ef14010b7485210e92fac888587ebb958
+  SDWebImageWebPCoder: 3027af94522d94df79c21c070894c8a2128927ff
   sign_in_with_apple: f3bf75217ea4c2c8b91823f225d70230119b8440
   sqflite: 31f7eba61e3074736dff8807a9b41581e4f7f15a
+  SwiftyGif: 93a1cc87bf3a51916001cf8f3d63835fb64c819f
   url_launcher_ios: 08a3dfac5fb39e8759aeb0abbd5d9480f30fc8b4
   webview_flutter_wkwebview: 2e2d318f21a5e036e2c3f26171342e95908bd60a
 
