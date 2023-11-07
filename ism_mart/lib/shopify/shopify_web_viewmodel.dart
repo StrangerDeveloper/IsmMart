@@ -32,7 +32,7 @@ class ShopifyWebViewModel extends GetxController {
           onPageStarted: (String url) async {
             //custom events for analytics of page visits
             final uri = Uri.parse(url);
-            print(uri.path);
+            print("!----! URIPath: ${uri.path}");
             await analytics.logEvent(
                 name: 'pages_tracked', parameters: {"page_name": uri.path});
 
