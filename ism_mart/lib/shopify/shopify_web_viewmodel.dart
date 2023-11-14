@@ -18,9 +18,12 @@ class ShopifyWebViewModel extends GetxController {
 
   final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 
+
   @override
   void onInit() {
-    NotificationHelper().checkIfNotifAllowed();
+    //NotificationHelper().checkIfNotifAllowed();
+
+    NotificationHelper().onFirebaseMessaging();
 
     analytics.setAnalyticsCollectionEnabled(true);
     controller = WebViewController()
