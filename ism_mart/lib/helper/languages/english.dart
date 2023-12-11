@@ -37,10 +37,11 @@ class English {
         key.productVariant: 'Product Variants',
         key.productDetails: 'Product Details',
         key.weightAndDimension: 'Weight & Dimensions',
-        key.productRejected : 'Your product has been rejected, Update Product Info!',
-        key.stockLimitReached : 'Stock limit reached',
-        key.availableInStock : 'Available in stock',
-        key.addToCartText : 'Add to cart',
+        key.productRejected:
+            'Your product has been rejected, Update Product Info!',
+        key.stockLimitReached: 'Stock limit reached',
+        key.availableInStock: 'Available in stock',
+        key.addToCartText: 'Add to cart',
 
         ///errors
         key.serverUnableToHandle: 'server is unable to handle request',
@@ -461,14 +462,13 @@ class English {
         key.enterAccountNumberOrIban: 'Enter Account Number / IBAN',
 
         //onboard screen
-        key.availAmazingDiscount: 'Avail amazing discounts',
-        key.descriptionOfDiscount: 'Save big with 30% off on all our products!',
-        key.celebrateFreedomAndSavings: 'Celebrate freedom and savings',
+        key.availAmazingDiscount: 'ISMMART Affiliate Marketing',
+        key.descriptionOfDiscount: 'Join now and start earning!',
+        key.celebrateFreedomAndSavings: 'Get 10% Profit Share On Each Sale!',
         key.descriptionOfFreedomAndSavings:
             'Exclusive offers for Independence Day!',
-        key.boostYourBusiness: 'Boost your business with ISMMART',
-        key.descriptionOfBoostYourBusiness:
-            'Zero platform registration fee for vendors!',
+        key.boostYourBusiness: 'Register as AFFILIATE!',
+        key.descriptionOfBoostYourBusiness: 'Bring vendor and earn money!',
 
         ///bottom bar
         key.home: 'Home',

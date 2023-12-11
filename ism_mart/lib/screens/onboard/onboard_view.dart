@@ -20,28 +20,28 @@ class OnBoardView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   //SvgPicture.asset(viewModel.list[index].image, height: 447, width: 347,),
-                 
+
                   Image.asset(
                     viewModel.list[index].image,
                     height: 449,
-                    width: 346.5,),
+                    width: 346.5,
+                  ),
                   // SvgPicture.asset(
                   //   viewModel.list[index].image,
                   //   height: 350,
                   // ),
-                  SizedBox(height: 15),
+                  SizedBox(height: 20),
                   Container(
                     width: 346,
                     child: Text(
                       viewModel.list[index].title,
                       style: GoogleFonts.dmSans(
-                        fontSize: 32,
-                        fontWeight: FontWeight.w700,
-                        color: Color(0xFF24282D)
-                      ),
+                          fontSize: 32,
+                          fontWeight: FontWeight.w700,
+                          color: Color(0xFF24282D)),
                     ),
-                  ),  
-                  SizedBox(height: 15),
+                  ),
+                  SizedBox(height: 10),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Container(
@@ -50,11 +50,10 @@ class OnBoardView extends StatelessWidget {
                         viewModel.list[index].description,
                         textAlign: TextAlign.left,
                         style: GoogleFonts.dmSans(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xFF929AAB),
-                        
-                      ),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          color: Color(0xFF929AAB),
+                        ),
                       ),
                     ),
                   ),

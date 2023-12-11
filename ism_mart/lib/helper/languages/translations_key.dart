@@ -325,7 +325,9 @@ const topCategories = "topCategories",
 ///ProductDetail
 const productDetails = "productDetails",
     productRejected = "productRejected",
-    stockLimitReached = "stockLimitReached", availableInStock = "availableInStock" , addToCartText = 'addToCartText';
+    stockLimitReached = "stockLimitReached",
+    availableInStock = "availableInStock",
+    addToCartText = 'addToCartText';
 
 /// buyer Check out
 const shipping = "shipping",
