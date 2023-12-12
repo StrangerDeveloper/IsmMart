@@ -113,7 +113,6 @@ class MyApp extends StatelessWidget {
   }
 
   Locale getLocale(String languageKey) {
-    // Locale? locale = Get.locale!;
     return Locale(
         languageController.optionsLocales[languageKey]['languageCode'],
         languageController.optionsLocales[languageKey]['countryCode']);

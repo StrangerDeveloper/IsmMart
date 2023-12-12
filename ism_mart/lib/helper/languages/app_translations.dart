@@ -13,6 +13,8 @@ import 'turkish.dart';
 import 'urdu.dart';
 
 class AppTranslations extends Translations {
+
+
   @override
   Map<String, Map<String, String>> get keys => {
         'en_US': English().translations,
