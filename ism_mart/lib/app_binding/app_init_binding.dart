@@ -26,3 +26,11 @@ class AppInitBinding extends Bindings {
     Get.put(CityViewModel(Get.find()));
   }
 }
+
+class A extends Bindings {
+  @override
+  void dependencies() {
+    // TODO: implement dependencies
+  }
+
+}
